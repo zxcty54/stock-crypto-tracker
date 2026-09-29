@@ -3,10 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
-import 'screens/strategy_builder_screen.dart'; // <-- Replaced crypto with Strategy Builder
+import 'screens/strategy_builder_screen.dart';
 import 'screens/scanner_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const StockPulseApp());
 }
 
@@ -17,7 +18,7 @@ class StockPulseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'StockPulse: Dalal Street Update',
+      title: 'StockPulse: Institutional Terminal',
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: const Color(0xFF090D16),
@@ -38,18 +39,19 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 2; // Strategy Builder default tab
 
   final List<Widget> _pages = const [
     NewsScreen(),
     CorporateAnnouncementsScreen(),
-    StrategyBuilderScreen(), // <-- 3rd Tab: Build Strategy
+    StrategyBuilderScreen(),
     ScannerScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF090D16),
       body: Stack(
         children: [
           IndexedStack(
@@ -76,7 +78,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         border: Border.all(color: const Color(0xFF202C42), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withOpacity(0.45),
             blurRadius: 18,
             offset: const Offset(0, 6),
           ),
@@ -87,7 +89,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           _navItem(0, Icons.newspaper_rounded, 'News'),
           _navItem(1, Icons.campaign_rounded, 'Filings'),
-          _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'), // <-- Strategy Tab
+          _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'),
           _navItem(3, Icons.radar_rounded, 'Radar'),
         ],
       ),
@@ -97,10 +99,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget _navItem(int index, IconData icon, String label) {
     final isSelected = _currentIndex == index;
     return GestureDetector(
-      onTap: () => setState(() => _currentIndex = index),
+      onTap: () {
+        HapticFeedback.selectionClick();
+        setState(() => _currentIndex = index);
+      },
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 220),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected
