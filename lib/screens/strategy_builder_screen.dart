@@ -35,6 +35,7 @@ class ReplayCandle {
     );
   }
 
+  // Exact JSON Array: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -111,7 +112,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
   // Controlled Smooth Zoom & Pan Engine
   double _visibleCandlesCount = 42.0;
-  double _baseCandlesCountOnScaleStart = 42.0; // Anchor for pinch
+  double _baseCandlesCountOnScaleStart = 42.0;
   double _scrollOffset = 0.0;
   double _verticalScaleMultiplier = 1.0;
   Offset? _crosshairPosition;
@@ -676,13 +677,39 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     return _positionSide == 'LONG' ? (diff * _orderQty) : (-diff * _orderQty);
   }
 
-  String _formatVolume(int vol) {
-    if (vol >= 1000000) {
-      return '${(vol / 1000000).toStringAsFixed(1)}M';
+  // Exact Indian Comma Formatter for Real Volume Quantity
+  String _formatExactVolume(int vol) {
+    return vol.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]},',
+    );
+  }
+
+  String _formatCompactVolume(num vol) {
+    if (vol >= 10000000) {
+      return '${(vol / 10000000).toStringAsFixed(2)}Cr';
+    } else if (vol >= 1000000) {
+      return '${(vol / 1000000).toStringAsFixed(2)}M';
+    } else if (vol >= 100000) {
+      return '${(vol / 100000).toStringAsFixed(2)}L';
     } else if (vol >= 1000) {
-      return '${(vol / 1000).toStringAsFixed(0)}K';
+      return '${(vol / 1000).toStringAsFixed(1)}K';
     }
-    return vol.toString();
+    return vol.toStringAsFixed(0);
+  }
+
+  // 20-Period Volume EMA calculation helper
+  List<double> _calculateVolumeEma(List<ReplayCandle> list, int period) {
+    if (list.isEmpty) return [];
+    final List<double> ema = List.filled(list.length, 0.0);
+    final double k = 2.0 / (period + 1);
+    double running = list.first.volume.toDouble();
+    ema[0] = running;
+    for (int i = 1; i < list.length; i++) {
+      running = (list[i].volume * k) + (running * (1.0 - k));
+      ema[i] = running;
+    }
+    return ema;
   }
 
   @override
@@ -725,6 +752,31 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     final currentLtp = currentCandle.close;
     final unrealized = _getUnrealizedPnl(currentLtp);
 
+    final count = min(_visibleCandlesCount.toInt(), visibleSlice.length);
+    final displayCandles = visibleSlice.sublist(visibleSlice.length - count);
+
+    // Calculate Volume 20 EMA series
+    final volumeEmaSeries = _calculateVolumeEma(visibleSlice, 20);
+
+    // Dynamic Hovered Candle detection (When finger touches chart)
+    ReplayCandle activeCandle = currentCandle;
+    double activeVolEma = volumeEmaSeries.isNotEmpty ? volumeEmaSeries.last : 0.0;
+
+    if (_crosshairPosition != null) {
+      final screenWidth = MediaQuery.of(context).size.width;
+      final chartWidth = max(screenWidth - 75.0, 100.0);
+      final candleWidth = chartWidth / displayCandles.length;
+      final hoveredIndex = ((_crosshairPosition!.dx - _scrollOffset) / candleWidth).floor();
+
+      if (hoveredIndex >= 0 && hoveredIndex < displayCandles.length) {
+        activeCandle = displayCandles[hoveredIndex];
+        final globalIndex = visibleSlice.length - count + hoveredIndex;
+        if (globalIndex >= 0 && globalIndex < volumeEmaSeries.length) {
+          activeVolEma = volumeEmaSeries[globalIndex];
+        }
+      }
+    }
+
     final wins = _tradeHistory.where((t) => t.isWin).length;
     final winRate = _tradeHistory.isNotEmpty
         ? ((wins / _tradeHistory.length) * 100).toStringAsFixed(0)
@@ -737,7 +789,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
         child: Column(
           children: [
             _buildTopBar(winRate),
-            _buildOHLCVHud(currentCandle),
+            _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
             // High-Contrast Interactive Viewport with Calibrated Zoom
             Expanded(
@@ -746,13 +798,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                   Positioned.fill(
                     right: 75,
                     child: GestureDetector(
-                      // Pinch-zoom calibration anchor
                       onScaleStart: (_) {
                         _baseCandlesCountOnScaleStart = _visibleCandlesCount;
                       },
                       onScaleUpdate: (details) {
                         setState(() {
-                          // Damped controlled scaling
                           if (details.scale != 1.0) {
                             const double dampingFactor = 0.45;
                             final double deltaScale = (details.scale - 1.0) * dampingFactor;
@@ -763,8 +813,12 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                                   (_baseCandlesCountOnScaleStart / effectiveScale).clamp(18.0, 90.0);
                             }
                           } else if (details.focalPointDelta.dx != 0) {
-                            _scrollOffset += details.focalPointDelta.dx * 0.45;
-                            _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
+                            if (_crosshairPosition != null) {
+                              _crosshairPosition = details.localFocalPoint;
+                            } else {
+                              _scrollOffset += details.focalPointDelta.dx * 0.45;
+                              _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
+                            }
                           }
                         });
                       },
@@ -782,6 +836,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                           size: Size.infinite,
                           painter: TradingViewProPainter(
                             candles: visibleSlice,
+                            volumeEmaSeries: volumeEmaSeries,
                             visibleCount: _visibleCandlesCount.toInt(),
                             scrollOffset: _scrollOffset,
                             verticalScaleMultiplier: _verticalScaleMultiplier,
@@ -904,10 +959,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  Widget _buildOHLCVHud(ReplayCandle c) {
+  // Dynamic Inspector HUD with exact Volume + 20 EMA
+  Widget _buildOHLCVHud(ReplayCandle c, double volEma, {bool isInspecting = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-      color: const Color(0xFF0A0F1A),
+      color: isInspecting ? const Color(0xFF141F33) : const Color(0xFF0A0F1A),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -921,15 +977,27 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                   _hudLabel('L', c.low.toStringAsFixed(1)),
                   _hudLabel('C', c.close.toStringAsFixed(1),
                       color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
-                  _hudLabel('Vol', _formatVolume(c.volume), color: const Color(0xFF00F0FF)),
-                  if (_verticalScaleMultiplier != 1.0)
-                    Text(' [Zoom: ${_verticalScaleMultiplier.toStringAsFixed(1)}x]',
-                        style: const TextStyle(fontSize: 9, color: Colors.amberAccent)),
+                  _hudLabel(
+                    'Vol',
+                    '${_formatCompactVolume(c.volume)} (${_formatExactVolume(c.volume)})',
+                    color: const Color(0xFF00F0FF),
+                  ),
+                  _hudLabel('V-EMA20', _formatCompactVolume(volEma), color: const Color(0xFFFF9800)),
+                  if (isInspecting)
+                    Container(
+                      margin: const EdgeInsets.only(left: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF00F0FF).withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text('CURSOR', style: TextStyle(color: Color(0xFF00F0FF), fontSize: 8, fontWeight: FontWeight.w900)),
+                    ),
                 ],
               ),
             ),
           ),
-          Text(c.date, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7A99))),
+          Text(c.date, style: GoogleFonts.robotoMono(fontSize: 10, color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -1179,9 +1247,10 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   }
 }
 
-// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER ----------------
+// ---------------- TRADINGVIEW PRO CUSTOM PAINTER (WITH REAL VOLUME & 20 EMA) ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
+  final List<double> volumeEmaSeries;
   final int visibleCount;
   final double scrollOffset;
   final double verticalScaleMultiplier;
@@ -1193,6 +1262,7 @@ class TradingViewProPainter extends CustomPainter {
 
   TradingViewProPainter({
     required this.candles,
+    required this.volumeEmaSeries,
     required this.visibleCount,
     required this.scrollOffset,
     required this.verticalScaleMultiplier,
@@ -1215,6 +1285,9 @@ class TradingViewProPainter extends CustomPainter {
 
     final count = min(visibleCount, candles.length);
     final displayCandles = candles.sublist(candles.length - count);
+    final displayEma = volumeEmaSeries.length >= count
+        ? volumeEmaSeries.sublist(volumeEmaSeries.length - count)
+        : List.filled(displayCandles.length, 0.0);
 
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
@@ -1267,12 +1340,18 @@ class TradingViewProPainter extends CustomPainter {
       tp.paint(canvas, Offset(chartWidth + 6, y - 7));
     }
 
-    // 2. Volume Sub-panel Separator
+    // 2. Volume Sub-panel Separator & Legend
     canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth + priceAxisWidth, chartHeight), gridPaint);
     final volLabelPainter = TextPainter(
       text: TextSpan(
-        text: 'Vol Max ${_formatVolume(maxVol)}',
+        text: 'Vol Max ${_formatCompactVol(maxVol)}  ',
         style: const TextStyle(color: Color(0xFF475569), fontSize: 9, fontWeight: FontWeight.bold),
+        children: const [
+          TextSpan(
+            text: '● Vol EMA 20',
+            style: TextStyle(color: Color(0xFFFF9800), fontSize: 9, fontWeight: FontWeight.w800),
+          ),
+        ],
       ),
       textDirection: TextDirection.ltr,
     )..layout();
@@ -1283,7 +1362,7 @@ class TradingViewProPainter extends CustomPainter {
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.3;
 
-    // 3. Render Candlesticks & Volume
+    // 3. Render Candlesticks & Volume Histogram
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -1316,7 +1395,7 @@ class TradingViewProPainter extends CustomPainter {
         bodyPaint,
       );
 
-      // Volume
+      // Volume Bar
       final double normalizedVol = (c.volume / maxVol).clamp(0.0, 1.0);
       final double vHeight = normalizedVol * (volumeHeight - 12);
 
@@ -1333,7 +1412,33 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
-    // 4. Live Current Price Marker
+    // 4. Render Volume 20 EMA Curve
+    if (displayEma.isNotEmpty) {
+      final emaPaint = Paint()
+        ..color = const Color(0xFFFF9800)
+        ..strokeWidth = 1.5
+        ..style = PaintingStyle.stroke;
+
+      final emaPath = Path();
+      bool first = true;
+
+      for (int i = 0; i < displayCandles.length; i++) {
+        final double emaVal = displayEma[i];
+        final double x = i * candleWidth + (candleWidth / 2) + scrollOffset;
+        final double normalizedEma = (emaVal / maxVol).clamp(0.0, 1.2);
+        final double emaY = size.height - (normalizedEma * (volumeHeight - 12));
+
+        if (first) {
+          emaPath.moveTo(x, emaY);
+          first = false;
+        } else {
+          emaPath.lineTo(x, emaY);
+        }
+      }
+      canvas.drawPath(emaPath, emaPaint);
+    }
+
+    // 5. Live Current Price Marker (LTP Tag on Scale)
     final latestCandle = displayCandles.last;
     final ltpY = chartHeight - ((latestCandle.close - minPrice) / range) * chartHeight;
     final ltpColor = latestCandle.isBull ? bullColor : bearColor;
@@ -1361,7 +1466,7 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     ltpText.paint(canvas, Offset(chartWidth + 8, ltpY - 6));
 
-    // 5. Bracket Zones (SL/TP Glow lines)
+    // 6. Bracket Zones (SL/TP Glow lines)
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
@@ -1377,7 +1482,7 @@ class TradingViewProPainter extends CustomPainter {
       }
     }
 
-    // 6. Interactive Crosshair HUD
+    // 7. Interactive Crosshair HUD
     if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
       final chPaint = Paint()
         ..color = Colors.white38
@@ -1405,7 +1510,7 @@ class TradingViewProPainter extends CustomPainter {
         ),
         textDirection: TextDirection.ltr,
       )..layout();
-      badgeText.paint(canvas, Offset(chartWidth + 6, crosshair!.dy - 6));
+      badgeText.paint(canvas, Offset(chartWidth + 8, crosshair!.dy - 6));
     }
   }
 
@@ -1438,13 +1543,17 @@ class TradingViewProPainter extends CustomPainter {
     tp.paint(canvas, Offset(chartWidth + 6, y - 5));
   }
 
-  String _formatVolume(int vol) {
-    if (vol >= 1000000) {
+  String _formatCompactVol(num vol) {
+    if (vol >= 10000000) {
+      return '${(vol / 10000000).toStringAsFixed(1)}Cr';
+    } else if (vol >= 1000000) {
       return '${(vol / 1000000).toStringAsFixed(1)}M';
+    } else if (vol >= 100000) {
+      return '${(vol / 100000).toStringAsFixed(1)}L';
     } else if (vol >= 1000) {
       return '${(vol / 1000).toStringAsFixed(0)}K';
     }
-    return vol.toString();
+    return vol.toStringAsFixed(0);
   }
 
   @override
