@@ -1,0 +1,67 @@
+name: Execute Daily Stock Strategy Scanner
+
+on:
+  schedule:
+    # Monday to Friday shaam 7:15 PM IST (13:45 UTC)
+    - cron: '45 13 * * 1-5'
+  workflow_dispatch: # Manual trigger button
+
+jobs:
+  scan-and-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Backend Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Squeeze & Breakout Strategy
+        run: |
+          python run_strategy.py
+
+      - name: Commit scanner_output.json to Backend Repo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add scanner_output.json
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes in scanner output."
+          else
+            git commit -m "📊 Auto-update strategy scanner output [$(date +'%d-%b-%Y')]"
+            git push
+          fi
+
+      - name: Push Output to Flutter App Repo
+        env:
+          TARGET_PAT: ${{ secrets.TARGET_REPO_PAT }}
+        run: |
+          if [ -z "$TARGET_PAT" ]; then
+            echo "⚠️ TARGET_REPO_PAT secret nahi mila. App repo sync skip kar rahe hain."
+            exit 0
+          fi
+
+          # 1. Clone target app repo
+          git clone https://x-access-token:${TARGET_PAT}@github.com/zxcty54/stock-crypto-tracker.git app_repo
+
+          # 2. Copy the scanned output file
+          cp scanner_output.json app_repo/scanner_output.json
+
+          # 3. Commit and push directly to target app repository
+          cd app_repo
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add scanner_output.json
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Target app repo already up-to-date."
+          else
+            git commit -m "🚀 Feed Sync: Squeeze Watchlist & Triggers [$(date +'%d-%b-%Y')]"
+            git push origin main
+            echo "✅ Successfully pushed scanner_output.json to zxcty54/stock-crypto-tracker"
+          fi
