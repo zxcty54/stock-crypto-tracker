@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Stock & Crypto Hub',
+      title: 'StockPulse: Dalal Street Update',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF121212),
         cardColor: const Color(0xFF1E1E1E),
@@ -38,8 +38,8 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    CryptoScreen(),
     NewsScreen(),
+    CryptoScreen(),
   ];
 
   @override
@@ -50,115 +50,24 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         backgroundColor: const Color(0xFF1E1E1E),
-        selectedItemColor: Colors.greenAccent,
+        selectedItemColor: Colors.amberAccent,
         unselectedItemColor: Colors.grey,
         items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.trending_up),
+            label: 'Dalal Street News',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.currency_bitcoin),
             label: 'Crypto Prices',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
-            label: 'Market News',
-          ),
         ],
       ),
     );
   }
 }
 
-// ---------------------- CRYPTO SCREEN ----------------------
-class CryptoScreen extends StatefulWidget {
-  const CryptoScreen({super.key});
-
-  @override
-  State<CryptoScreen> createState() => _CryptoScreenState();
-}
-
-class _CryptoScreenState extends State<CryptoScreen> {
-  Map<String, dynamic> prices = {};
-  bool isLoading = true;
-
-  Future<void> fetchCryptoPrices() async {
-    setState(() => isLoading = true);
-    final url = Uri.parse(
-        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,cardano&vs_currencies=usd,inr');
-    try {
-      final res = await http.get(url);
-      if (res.statusCode == 200) {
-        setState(() {
-          prices = jsonDecode(res.body);
-          isLoading = false;
-        });
-      } else {
-        setState(() => isLoading = false);
-      }
-    } catch (e) {
-      setState(() => isLoading = false);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchCryptoPrices();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Crypto Live Prices'),
-        backgroundColor: const Color(0xFF1E1E1E),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: fetchCryptoPrices,
-          ),
-        ],
-      ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.greenAccent))
-          : RefreshIndicator(
-              onRefresh: fetchCryptoPrices,
-              child: ListView(
-                padding: const EdgeInsets.all(12),
-                children: prices.entries.map((entry) {
-                  return Card(
-                    elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.greenAccent.withOpacity(0.2),
-                        child: const Icon(Icons.currency_bitcoin, color: Colors.greenAccent),
-                      ),
-                      title: Text(
-                        entry.key.toUpperCase(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                      subtitle: Text(
-                        '₹ ${entry.value['inr']}',
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                      trailing: Text(
-                        '\$${entry.value['usd']}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.greenAccent,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-    );
-  }
-}
-
-// ---------------------- STOCK NEWS SCREEN ----------------------
+// ---------------------- DALAL STREET / MARKET NEWS SCREEN ----------------------
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -199,7 +108,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Market News'),
+        title: const Text('Dalal Street Updates'),
         backgroundColor: const Color(0xFF1E1E1E),
         actions: [
           IconButton(
@@ -255,6 +164,97 @@ class _NewsScreenState extends State<NewsScreen> {
                     ),
                   );
                 },
+              ),
+            ),
+    );
+  }
+}
+
+// ---------------------- CRYPTO SCREEN ----------------------
+class CryptoScreen extends StatefulWidget {
+  const CryptoScreen({super.key});
+
+  @override
+  State<CryptoScreen> createState() => _CryptoScreenState();
+}
+
+class _CryptoScreenState extends State<CryptoScreen> {
+  Map<String, dynamic> prices = {};
+  bool isLoading = true;
+
+  Future<void> fetchCryptoPrices() async {
+    setState(() => isLoading = true);
+    final url = Uri.parse(
+        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,cardano&vs_currencies=usd,inr');
+    try {
+      final res = await http.get(url);
+      if (res.statusCode == 200) {
+        setState(() {
+          prices = jsonDecode(res.body);
+          isLoading = false;
+        });
+      } else {
+        setState(() => isLoading = false);
+      }
+    } catch (e) {
+      setState(() => isLoading = false);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCryptoPrices();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Live Crypto Tracker'),
+        backgroundColor: const Color(0xFF1E1E1E),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: fetchCryptoPrices,
+          ),
+        ],
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator(color: Colors.greenAccent))
+          : RefreshIndicator(
+              onRefresh: fetchCryptoPrices,
+              child: ListView(
+                padding: const EdgeInsets.all(12),
+                children: prices.entries.map((entry) {
+                  return Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.greenAccent.withOpacity(0.2),
+                        child: const Icon(Icons.currency_bitcoin, color: Colors.greenAccent),
+                      ),
+                      title: Text(
+                        entry.key.toUpperCase(),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      subtitle: Text(
+                        '₹ ${entry.value['inr']}',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      trailing: Text(
+                        '\$${entry.value['usd']}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             ),
     );
