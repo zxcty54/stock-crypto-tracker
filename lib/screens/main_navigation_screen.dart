@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/floating_nav_bar.dart';
 import 'news_screen.dart';
+import 'corporate_announcements_screen.dart';
 import 'crypto_screen.dart';
 import 'scanner_screen.dart';
 
@@ -16,6 +17,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   final List<Widget> _pages = const [
     NewsScreen(),
+    CorporateAnnouncementsScreen(), // <-- New corporate filings tab
     CryptoScreen(),
     ScannerScreen(),
   ];
@@ -30,8 +32,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             children: _pages,
           ),
           Positioned(
-            left: 16,
-            right: 16,
+            left: 14,
+            right: 14,
             bottom: 20,
             child: FloatingNavBar(
               currentIndex: _currentIndex,
