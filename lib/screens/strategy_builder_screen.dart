@@ -35,6 +35,7 @@ class ReplayCandle {
     );
   }
 
+  // Exact JSON Array: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -117,7 +118,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   Offset? _crosshairPosition;
 
   // Drag-to-Adjust SL / Target Tracking
-  String? _draggingHandle; // 'SL' or 'TP'
+  String? _draggingHandle;
 
   // Account Ledger
   double _virtualCapital = 500000.0;
@@ -343,7 +344,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     }
   }
 
-  // Instant 1-Tap Execution with Drag-Ready Brackets
   void _executeQuickTrade(String side) {
     if (_positionSide != null || _activeSeries.isEmpty) return;
 
@@ -363,7 +363,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       return;
     }
 
-    // Default room: 4% SL & 8% Target (1:2 R:R)
     final double sl = side == 'LONG' ? ltp * 0.96 : ltp * 1.04;
     final double tp = side == 'LONG' ? ltp * 1.08 : ltp * 0.92;
 
@@ -541,22 +540,22 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
-            // High-Contrast Interactive Viewport with Floating Orders + Draggable Handles
+            // High-Contrast Interactive Viewport
             Expanded(
               child: Stack(
+                clipBehavior: Clip.none,
                 children: [
                   Positioned.fill(
                     right: 75,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        final chartHeight = constraints.maxHeight - 95.0; // 95px volume panel
+                        final chartHeight = constraints.maxHeight - 95.0;
                         final painterBounds = _calculateChartBounds(displayCandles);
 
                         return GestureDetector(
                           onScaleStart: (details) {
                             final touchY = details.localFocalPoint.dy;
 
-                            // Detect if user touched near the Stop Loss or Take Profit line
                             if (_positionSide != null && _entryPrice != null) {
                               if (_stopLoss != null) {
                                 final slY = _priceToY(_stopLoss!, painterBounds.minPrice, painterBounds.range, chartHeight);
@@ -581,7 +580,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                           },
                           onScaleUpdate: (details) {
                             setState(() {
-                              // If dragging Stop Loss line directly on chart
                               if (_draggingHandle == 'SL') {
                                 final newPrice = _yToPrice(details.localFocalPoint.dy, painterBounds.minPrice, painterBounds.range, chartHeight);
                                 if (_positionSide == 'LONG') {
@@ -592,7 +590,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                                 return;
                               }
 
-                              // If dragging Take Profit line directly on chart
                               if (_draggingHandle == 'TP') {
                                 final newPrice = _yToPrice(details.localFocalPoint.dy, painterBounds.minPrice, painterBounds.range, chartHeight);
                                 if (_positionSide == 'LONG') {
@@ -603,7 +600,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                                 return;
                               }
 
-                              // Damped controlled zoom
                               if (details.scale != 1.0) {
                                 const double dampingFactor = 0.45;
                                 final double deltaScale = (details.scale - 1.0) * dampingFactor;
@@ -660,14 +656,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                     ),
                   ),
 
-                  // TradingView Floating Screen Order Dock (Top-Left overlay)
-                  if (_positionSide == null)
-                    Positioned(
-                      top: 10,
-                      left: 12,
-                      child: _buildFloatingTradingViewOrderDock(currentLtp),
-                    ),
-
                   // Right Scale Drag Zoomer Layer
                   Positioned(
                     top: 0,
@@ -691,6 +679,13 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                       ),
                     ),
                   ),
+
+                  // Always-On Top Floating Buy/Sell Dock
+                  Positioned(
+                    top: 12,
+                    left: 14,
+                    child: _buildFloatingTradingViewOrderDock(currentLtp),
+                  ),
                 ],
               ),
             ),
@@ -705,39 +700,55 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
   // Floating On-Chart Instant Order Dock
   Widget _buildFloatingTradingViewOrderDock(double ltp) {
+    final bool hasActivePosition = _positionSide != null;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFF131B2A).withOpacity(0.92),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFF25334A)),
+        color: const Color(0xFF131B2A).withOpacity(0.95),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF2B3A52), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
-            onTap: () => _executeQuickTrade('SHORT'),
-            borderRadius: BorderRadius.circular(6),
-            child: Container(
+            onTap: hasActivePosition ? null : () => _executeQuickTrade('SHORT'),
+            borderRadius: BorderRadius.circular(8),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFFF2A6D).withOpacity(0.18),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.5)),
+                color: hasActivePosition ? const Color(0xFF1A2230) : const Color(0xFFFF2A6D),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('SELL', style: TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w900, fontSize: 10)),
-                  Text('₹${ltp.toStringAsFixed(1)}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11)),
+                  Text(
+                    'SELL',
+                    style: TextStyle(
+                      color: hasActivePosition ? Colors.white30 : Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 10,
+                    ),
+                  ),
+                  Text(
+                    '₹${ltp.toStringAsFixed(1)}',
+                    style: GoogleFonts.robotoMono(
+                      color: hasActivePosition ? Colors.white38 : Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -747,27 +758,51 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('${_orderQty.toInt()}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 12)),
-                const Text('QTY', style: TextStyle(color: Color(0xFF6B7A99), fontSize: 8, fontWeight: FontWeight.bold)),
+                Text(
+                  '${_orderQty.toInt()}',
+                  style: GoogleFonts.robotoMono(
+                    color: const Color(0xFF00F0FF),
+                    fontWeight: FontWeight.w900,
+                    fontSize: 12,
+                  ),
+                ),
+                const Text(
+                  'QTY',
+                  style: TextStyle(color: Color(0xFF8896AB), fontSize: 8, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
           InkWell(
-            onTap: () => _executeQuickTrade('LONG'),
-            borderRadius: BorderRadius.circular(6),
-            child: Container(
+            onTap: hasActivePosition ? null : () => _executeQuickTrade('LONG'),
+            borderRadius: BorderRadius.circular(8),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFF00F5A0).withOpacity(0.18),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFF00F5A0).withOpacity(0.5)),
+                color: hasActivePosition ? const Color(0xFF1A2230) : const Color(0xFF00F5A0),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('BUY', style: TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.w900, fontSize: 10)),
-                  Text('₹${ltp.toStringAsFixed(1)}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11)),
+                  Text(
+                    'BUY',
+                    style: TextStyle(
+                      color: hasActivePosition ? Colors.white30 : Colors.black,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 10,
+                    ),
+                  ),
+                  Text(
+                    '₹${ltp.toStringAsFixed(1)}',
+                    style: GoogleFonts.robotoMono(
+                      color: hasActivePosition ? Colors.white38 : Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -777,19 +812,18 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // Helper bounds calculations for accurate Drag-To-Price conversions
   _PainterBounds _calculateChartBounds(List<ReplayCandle> displayCandles) {
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
 
     if (_entryPrice != null) {
       if (_stopLoss != null) {
-        maxPrice = max(maxPrice, _stopLoss!);
-        minPrice = min(minPrice, _stopLoss!);
+        maxPrice = max(maxPrice, stopLoss!);
+        minPrice = min(minPrice, stopLoss!);
       }
       if (_takeProfit != null) {
-        maxPrice = max(maxPrice, _takeProfit!);
-        minPrice = min(minPrice, _takeProfit!);
+        maxPrice = max(maxPrice, takeProfit!);
+        minPrice = min(minPrice, takeProfit!);
       }
     }
 
@@ -981,9 +1015,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                 children: [
                   Text('Entry: ₹${_entryPrice!.toStringAsFixed(1)}',
                       style: const TextStyle(color: Colors.white70, fontSize: 11)),
-                  Text(
+                  const Text(
                     'Drag SL & TP lines on chart',
-                    style: const TextStyle(color: Color(0xFF00F0FF), fontSize: 9, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Color(0xFF00F0FF), fontSize: 9, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -1304,7 +1338,7 @@ class TradingViewProPainter extends CustomPainter {
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.3;
 
-    // 3. Render Shaded Position Zones (TradingView Style Green & Red Shading)
+    // 3. Render Shaded Position Zones
     if (entryPrice != null) {
       final entryY = chartHeight - ((entryPrice! - minPrice) / range) * chartHeight;
 
@@ -1422,7 +1456,7 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     ltpText.paint(canvas, Offset(chartWidth + 8, ltpY - 6));
 
-    // 7. Interactive Draggable Bracket Handles (TradingView Position Tool)
+    // 7. Interactive Draggable Bracket Handles
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
@@ -1505,14 +1539,13 @@ class TradingViewProPainter extends CustomPainter {
       double range, double chartHeight, Color color, String label, String pnlTag) {
     final y = chartHeight - ((price - minPrice) / range) * chartHeight;
 
-    // Dashed TradingView Bracket Line
     final linePaint = Paint()
       ..color = color
       ..strokeWidth = 1.5;
 
     canvas.drawLine(Offset(0, y), Offset(chartWidth, y), linePaint);
 
-    // Draggable Handle Pill on the Left of the line
+    // Draggable Handle Pill on the Left
     final handleBg = Paint()..color = color;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
