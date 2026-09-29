@@ -1,1 +1,301 @@
-
+{
+  "last_updated": "2026-09-29 12:57:30",
+  "tracked_dates": [
+    "2026-09-29"
+  ],
+  "latest": {
+    "date": "2026-09-29",
+    "triggers_count": 10,
+    "watchlist_count": 13,
+    "triggers": [
+      {
+        "symbol": "ADANIPORTS",
+        "close": 1822.0,
+        "volume_spike": "3.6x",
+        "base_squeeze": "4.4%"
+      },
+      {
+        "symbol": "AXISCADES",
+        "close": 2067.4,
+        "volume_spike": "4.0x",
+        "base_squeeze": "8.4%"
+      },
+      {
+        "symbol": "AZAD",
+        "close": 2914.2,
+        "volume_spike": "17.4x",
+        "base_squeeze": "5.7%"
+      },
+      {
+        "symbol": "DRREDDY",
+        "close": 1251.9,
+        "volume_spike": "2.6x",
+        "base_squeeze": "3.1%"
+      },
+      {
+        "symbol": "GLAND",
+        "close": 2989.7,
+        "volume_spike": "4.6x",
+        "base_squeeze": "3.2%"
+      },
+      {
+        "symbol": "INDOCO",
+        "close": 269.15,
+        "volume_spike": "165.1x",
+        "base_squeeze": "7.7%"
+      },
+      {
+        "symbol": "KIRLOSENG",
+        "close": 2402.0,
+        "volume_spike": "18.1x",
+        "base_squeeze": "8.0%"
+      },
+      {
+        "symbol": "MANKIND",
+        "close": 2545.0,
+        "volume_spike": "4.5x",
+        "base_squeeze": "3.1%"
+      },
+      {
+        "symbol": "POWERICA",
+        "close": 599.75,
+        "volume_spike": "5.7x",
+        "base_squeeze": "8.1%"
+      },
+      {
+        "symbol": "SGMART",
+        "close": 755.95,
+        "volume_spike": "3.7x",
+        "base_squeeze": "5.1%"
+      }
+    ],
+    "watchlist": [
+      {
+        "symbol": "AKUMS",
+        "close": 819.55,
+        "trigger_level": 838.8,
+        "squeeze": "5.1%"
+      },
+      {
+        "symbol": "AURUM",
+        "close": 220.31,
+        "trigger_level": 225.5,
+        "squeeze": "4.9%"
+      },
+      {
+        "symbol": "CAMPUS",
+        "close": 209.76,
+        "trigger_level": 214.2,
+        "squeeze": "3.4%"
+      },
+      {
+        "symbol": "GAEL",
+        "close": 161.75,
+        "trigger_level": 165.0,
+        "squeeze": "5.7%"
+      },
+      {
+        "symbol": "HSCL",
+        "close": 667.6,
+        "trigger_level": 684.95,
+        "squeeze": "3.8%"
+      },
+      {
+        "symbol": "ICICIB22",
+        "close": 110.35,
+        "trigger_level": 113.62,
+        "squeeze": "3.4%"
+      },
+      {
+        "symbol": "IPL",
+        "close": 133.12,
+        "trigger_level": 135.9,
+        "squeeze": "3.7%"
+      },
+      {
+        "symbol": "MANYAVAR",
+        "close": 531.7,
+        "trigger_level": 543.25,
+        "squeeze": "6.2%"
+      },
+      {
+        "symbol": "NEOGEN",
+        "close": 2435.3,
+        "trigger_level": 2436.2,
+        "squeeze": "6.1%"
+      },
+      {
+        "symbol": "SANDHAR",
+        "close": 582.7,
+        "trigger_level": 599.8,
+        "squeeze": "6.8%"
+      },
+      {
+        "symbol": "SARDAEN",
+        "close": 500.35,
+        "trigger_level": 511.0,
+        "squeeze": "5.3%"
+      },
+      {
+        "symbol": "SOMANYCERA",
+        "close": 613.85,
+        "trigger_level": 627.3,
+        "squeeze": "7.9%"
+      },
+      {
+        "symbol": "UDS",
+        "close": 207.79,
+        "trigger_level": 209.24,
+        "squeeze": "6.8%"
+      }
+    ]
+  },
+  "history": {
+    "2026-09-29": {
+      "triggers_count": 10,
+      "watchlist_count": 13,
+      "triggers": [
+        {
+          "symbol": "ADANIPORTS",
+          "close": 1822.0,
+          "volume_spike": "3.6x",
+          "base_squeeze": "4.4%"
+        },
+        {
+          "symbol": "AXISCADES",
+          "close": 2067.4,
+          "volume_spike": "4.0x",
+          "base_squeeze": "8.4%"
+        },
+        {
+          "symbol": "AZAD",
+          "close": 2914.2,
+          "volume_spike": "17.4x",
+          "base_squeeze": "5.7%"
+        },
+        {
+          "symbol": "DRREDDY",
+          "close": 1251.9,
+          "volume_spike": "2.6x",
+          "base_squeeze": "3.1%"
+        },
+        {
+          "symbol": "GLAND",
+          "close": 2989.7,
+          "volume_spike": "4.6x",
+          "base_squeeze": "3.2%"
+        },
+        {
+          "symbol": "INDOCO",
+          "close": 269.15,
+          "volume_spike": "165.1x",
+          "base_squeeze": "7.7%"
+        },
+        {
+          "symbol": "KIRLOSENG",
+          "close": 2402.0,
+          "volume_spike": "18.1x",
+          "base_squeeze": "8.0%"
+        },
+        {
+          "symbol": "MANKIND",
+          "close": 2545.0,
+          "volume_spike": "4.5x",
+          "base_squeeze": "3.1%"
+        },
+        {
+          "symbol": "POWERICA",
+          "close": 599.75,
+          "volume_spike": "5.7x",
+          "base_squeeze": "8.1%"
+        },
+        {
+          "symbol": "SGMART",
+          "close": 755.95,
+          "volume_spike": "3.7x",
+          "base_squeeze": "5.1%"
+        }
+      ],
+      "watchlist": [
+        {
+          "symbol": "AKUMS",
+          "close": 819.55,
+          "trigger_level": 838.8,
+          "squeeze": "5.1%"
+        },
+        {
+          "symbol": "AURUM",
+          "close": 220.31,
+          "trigger_level": 225.5,
+          "squeeze": "4.9%"
+        },
+        {
+          "symbol": "CAMPUS",
+          "close": 209.76,
+          "trigger_level": 214.2,
+          "squeeze": "3.4%"
+        },
+        {
+          "symbol": "GAEL",
+          "close": 161.75,
+          "trigger_level": 165.0,
+          "squeeze": "5.7%"
+        },
+        {
+          "symbol": "HSCL",
+          "close": 667.6,
+          "trigger_level": 684.95,
+          "squeeze": "3.8%"
+        },
+        {
+          "symbol": "ICICIB22",
+          "close": 110.35,
+          "trigger_level": 113.62,
+          "squeeze": "3.4%"
+        },
+        {
+          "symbol": "IPL",
+          "close": 133.12,
+          "trigger_level": 135.9,
+          "squeeze": "3.7%"
+        },
+        {
+          "symbol": "MANYAVAR",
+          "close": 531.7,
+          "trigger_level": 543.25,
+          "squeeze": "6.2%"
+        },
+        {
+          "symbol": "NEOGEN",
+          "close": 2435.3,
+          "trigger_level": 2436.2,
+          "squeeze": "6.1%"
+        },
+        {
+          "symbol": "SANDHAR",
+          "close": 582.7,
+          "trigger_level": 599.8,
+          "squeeze": "6.8%"
+        },
+        {
+          "symbol": "SARDAEN",
+          "close": 500.35,
+          "trigger_level": 511.0,
+          "squeeze": "5.3%"
+        },
+        {
+          "symbol": "SOMANYCERA",
+          "close": 613.85,
+          "trigger_level": 627.3,
+          "squeeze": "7.9%"
+        },
+        {
+          "symbol": "UDS",
+          "close": 207.79,
+          "trigger_level": 209.24,
+          "squeeze": "6.8%"
+        }
+      ]
+    }
+  }
+}
