@@ -1,0 +1,38 @@
+name: Universal Fastly CDN Purge
+
+on:
+  push:
+    paths:
+      - '**.json'   # Repo ke kisi bhi folder me koi bhi JSON file update hone par trigger hoga
+  workflow_dispatch:
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Last commit ka diff nikalne ke liye
+
+      - name: Detect Changed JSON Files & Purge Fastly Cache
+        run: |
+          # Last commit me kaun-kaun si JSON files change hui hain unhe nikalna
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.json$' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No JSON files modified in this commit."
+            exit 0
+          fi
+
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+
+          for FILE in $CHANGED_FILES; do
+            echo "Purging Fastly CDN cache for: $FILE on branch $BRANCH..."
+            PURGE_URL="https://purge.jsdelivr.net/gh/${REPO}@${BRANCH}/${FILE}"
+            RESPONSE=$(curl -s -X POST "$PURGE_URL")
+            echo "Response: $RESPONSE"
+          done
+
+          echo "All modified JSON files successfully purged from Fastly CDN!"
