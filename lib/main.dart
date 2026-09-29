@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // <-- HapticFeedback fix
 import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/news_screen.dart';
