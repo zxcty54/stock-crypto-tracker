@@ -7,6 +7,7 @@ import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
 import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
+import 'widgets/legal_disclaimer_dialog.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -236,14 +237,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
             ),
 
-            // 🎯 Main Item: Delivery & OHLC History
+            // Main Item: Delivery & OHLC History
             _drawerTile(
               icon: Icons.pie_chart_rounded,
               title: 'Delivery & OHLC History',
               subtitle: '20-Day Qty, Del %, High/Low filters',
               isHighlight: true,
               onTap: () {
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -273,7 +274,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               },
             ),
 
-            const Divider(color: Color(0xFF1E2B3E), height: 24),
+            const Divider(color: Color(0xFF1E2B3E), height: 20),
 
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
@@ -300,6 +301,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               onTap: () {
                 Navigator.pop(context);
                 setState(() => _currentIndex = 0);
+              },
+            ),
+
+            const Divider(color: Color(0xFF1E2B3E), height: 20),
+
+            // Play Store Regulatory Disclaimer Trigger
+            _drawerTile(
+              icon: Icons.shield_outlined,
+              title: 'Regulatory & Risk Disclaimer',
+              subtitle: 'Paper trading & SEBI advisory notice',
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (_) => const LegalDisclaimerDialog(),
+                );
               },
             ),
 
