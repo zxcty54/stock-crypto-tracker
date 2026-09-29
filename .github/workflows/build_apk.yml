@@ -29,7 +29,7 @@ jobs:
       - name: Generate Android Skeleton & Dependencies
         run: |
           # Package name com.stockmarket set karne ke liye
-          flutter create . --project-name StockPulse --org com --platforms=android
+          flutter create . --project-name stockpulse --org com --platforms=android
           flutter pub get
 
       - name: Build Release APK
