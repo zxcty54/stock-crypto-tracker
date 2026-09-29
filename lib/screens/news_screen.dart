@@ -75,13 +75,13 @@ class _NewsScreenState extends State<NewsScreen> {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(
                 height: 86,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  children: [
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  children: const [
                     MarketIndexCard(title: 'NIFTY 50', points: '24,315.95', change: '+0.68%', isBullish: true),
                     MarketIndexCard(title: 'SENSEX', points: '79,942.18', change: '+0.54%', isBullish: true),
                     MarketIndexCard(title: 'BANK NIFTY', points: '52,180.40', change: '-0.21%', isBullish: false),
