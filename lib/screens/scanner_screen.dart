@@ -11,18 +11,18 @@ class ScannerScreen extends StatefulWidget {
   State<ScannerScreen> createState() => _ScannerScreenState();
 }
 
-class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProviderStateMixin {
+class _ScannerScreenState extends State<ScannerScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   StrategyScannerPayload? _payload;
   String? _selectedDate;
   bool _isLoading = true;
   String? _errorMessage;
 
-  // Fastly jsDelivr CDN Endpoint (Indian ISP DNS block resistant)
+  // Fastly CDN URL (Bypasses Indian ISP raw GitHub blocks)
   final String _endpointUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/scanner_output.json';
 
-  // Institutional Design Palette
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
   static const Color borderSubtle = Color(0xFF202C42);
@@ -42,8 +42,8 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   Future<void> _fetchScannerData() async {
     HapticFeedback.lightImpact();
     try {
-      // Dynamic Timestamp + No-Cache Headers to bypass CDN and ISP cache
-      final uri = Uri.parse('$_endpointUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
+      final uri =
+          Uri.parse('$_endpointUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
       final response = await http.get(
         uri,
         headers: {
@@ -59,7 +59,11 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
 
         setState(() {
           _payload = payload;
-          _selectedDate = payload.trackedDates.isNotEmpty ? payload.trackedDates.first : null;
+          if (_selectedDate == null ||
+              !payload.trackedDates.contains(_selectedDate)) {
+            _selectedDate =
+                payload.trackedDates.isNotEmpty ? payload.trackedDates.first : null;
+          }
           _isLoading = false;
           _errorMessage = null;
         });
@@ -98,14 +102,17 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverToBoxAdapter(child: _buildHeader()),
+            if (_payload != null && _payload!.trackedDates.isNotEmpty)
+              SliverToBoxAdapter(child: _buildDateTimelineStrip()),
             SliverPersistentHeader(
               pinned: true,
               delegate: _SliverAppBarDelegate(
-                minHeight: 58.0,
-                maxHeight: 58.0,
+                minHeight: 56.0,
+                maxHeight: 56.0,
                 child: Container(
                   color: bgDark,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
                   child: _buildSegmentedTabBar(currentRecord),
                 ),
               ),
@@ -118,26 +125,48 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   }
 
   Widget _buildHeader() {
+    final isLatest = _selectedDate == _payload?.latestDate;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18, 16, 18, 12),
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'QUANT INTELLIGENCE',
-                style: TextStyle(
-                  fontSize: 11,
-                  letterSpacing: 1.4,
-                  fontWeight: FontWeight.w700,
-                  color: accentCyan,
-                ),
+              Row(
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: isLatest ? accentNeonGreen : Colors.amberAccent,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: (isLatest ? accentNeonGreen : Colors.amberAccent)
+                              .withOpacity(0.6),
+                          blurRadius: 6,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    isLatest ? 'LIVE MARKET SCAN' : 'HISTORICAL BACKTEST AUDIT',
+                    style: TextStyle(
+                      fontSize: 11,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w700,
+                      color: isLatest ? accentCyan : Colors.amberAccent,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 5),
-              Text(
-                'Volume & Squeeze Hub',
+              const SizedBox(height: 4),
+              const Text(
+                'Squeeze & Breakouts',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
@@ -147,47 +176,94 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
               ),
             ],
           ),
-          if (_payload != null && _payload!.trackedDates.isNotEmpty) _buildDateSelectorPill(),
+          IconButton(
+            onPressed: () {
+              setState(() => _isLoading = true);
+              _fetchScannerData();
+            },
+            icon: const Icon(Icons.refresh_rounded, color: accentCyan, size: 22),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDateSelectorPill() {
+  Widget _buildDateTimelineStrip() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      decoration: BoxDecoration(
-        color: surfaceCard,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderSubtle, width: 1.2),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          dropdownColor: surfaceCard,
-          value: _selectedDate,
-          isDense: true,
-          icon: const Icon(Icons.keyboard_arrow_down_rounded, color: accentCyan, size: 18),
-          items: _payload!.trackedDates.map((String date) {
-            final isLatest = date == _payload!.latestDate;
-            return DropdownMenuItem<String>(
-              value: date,
-              child: Text(
-                isLatest ? '$date • Latest' : date,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: isLatest ? accentNeonGreen : Colors.white70,
+      height: 46,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        itemCount: _payload!.trackedDates.length,
+        itemBuilder: (context, index) {
+          final date = _payload!.trackedDates[index];
+          final isSelected = date == _selectedDate;
+          final isLatest = date == _payload!.latestDate;
+          final record = _payload!.history[date];
+          final triggerHits = record?.triggersCount ?? 0;
+
+          return GestureDetector(
+            onTap: () {
+              HapticFeedback.selectionClick();
+              setState(() => _selectedDate = date);
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: isSelected ? const Color(0xFF223048) : surfaceCard,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isSelected
+                      ? (isLatest ? accentNeonGreen : accentCyan)
+                      : borderSubtle,
+                  width: isSelected ? 1.5 : 1.0,
                 ),
               ),
-            );
-          }).toList(),
-          onChanged: (newDate) {
-            if (newDate != null) {
-              HapticFeedback.selectionClick();
-              setState(() => _selectedDate = newDate);
-            }
-          },
-        ),
+              child: Row(
+                children: [
+                  Icon(
+                    isLatest ? Icons.flash_on : Icons.history_rounded,
+                    size: 14,
+                    color: isSelected
+                        ? (isLatest ? accentNeonGreen : accentCyan)
+                        : textMuted,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    date,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight:
+                          isSelected ? FontWeight.w700 : FontWeight.w500,
+                      color: isSelected ? Colors.white : textMuted,
+                    ),
+                  ),
+                  if (triggerHits > 0) ...[
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                      decoration: BoxDecoration(
+                        color: accentFlame.withOpacity(0.25),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        '$triggerHits',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          color: accentFlame,
+                        ),
+                      ),
+                    ),
+                  ]
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -196,15 +272,15 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
     return Container(
       decoration: BoxDecoration(
         color: surfaceCard,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: borderSubtle),
       ),
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(3),
       child: TabBar(
         controller: _tabController,
         indicator: BoxDecoration(
           color: const Color(0xFF223048),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(9),
           border: Border.all(color: accentCyan.withOpacity(0.3)),
         ),
         indicatorSize: TabBarIndicatorSize.tab,
@@ -213,29 +289,29 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
         unselectedLabelColor: textMuted,
         tabs: [
           Tab(
-            height: 38,
+            height: 36,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.bolt_rounded, size: 17, color: accentFlame),
+                const Icon(Icons.bolt_rounded, size: 16, color: accentFlame),
                 const SizedBox(width: 6),
                 Text(
                   'Breakouts (${record?.triggersCount ?? 0})',
-                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
                 ),
               ],
             ),
           ),
           Tab(
-            height: 38,
+            height: 36,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.grain_rounded, size: 17, color: accentCyan),
+                const Icon(Icons.grain_rounded, size: 16, color: accentCyan),
                 const SizedBox(width: 6),
                 Text(
                   'Watchlist (${record?.watchlistCount ?? 0})',
-                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
                 ),
               ],
             ),
@@ -247,7 +323,8 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
 
   Widget _buildContent(DayScanRecord? currentRecord) {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator(color: accentCyan, strokeWidth: 2.5));
+      return const Center(
+          child: CircularProgressIndicator(color: accentCyan, strokeWidth: 2.5));
     }
 
     if (_errorMessage != null) {
@@ -265,7 +342,8 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
                 _fetchScannerData();
               },
               icon: const Icon(Icons.refresh, color: accentCyan),
-              label: const Text('Retry Connection', style: TextStyle(color: accentCyan)),
+              label: const Text('Retry Connection',
+                  style: TextStyle(color: accentCyan)),
             ),
           ],
         ),
@@ -288,55 +366,83 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
 
   Widget _buildTriggersTab(List<ScannerTrigger> list) {
     if (list.isEmpty) {
-      return _buildEmptyState('No Confirmed Breakouts', 'No stock qualified with 2.0x volume expansion today.');
+      return _buildEmptyState(
+        'No Breakouts on $_selectedDate',
+        'None of the stocks satisfied the 2x volume expansion and base high breakout criteria on this trading session.',
+      );
     }
+
     return ListView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 90),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];
         return Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
             color: surfaceCard,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: borderSubtle, width: 1.2),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: borderSubtle),
           ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            item.symbol,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          _buildBadge(
+                            label: item.volumeSpike,
+                            bg: accentFlame.withOpacity(0.18),
+                            textClr: accentFlame,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Coil Range: ${item.baseSqueeze} (5-day base)',
+                        style: const TextStyle(fontSize: 11, color: textMuted),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          item.symbol,
-                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
-                        ),
-                        const SizedBox(width: 8),
-                        _badge(item.volumeSpike, accentFlame.withOpacity(0.15), accentFlame),
-                      ],
+                    Text(
+                      '₹${item.close.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                        color: accentNeonGreen,
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    Text('Base: ${item.baseSqueeze}', style: const TextStyle(fontSize: 12, color: textMuted)),
+                    const SizedBox(height: 3),
+                    const Text(
+                      'TRIGGER ENTRY',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: accentNeonGreen,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '₹${item.close.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: accentNeonGreen),
-                  ),
-                  const SizedBox(height: 4),
-                  _badge('TRIGGER', accentNeonGreen.withOpacity(0.15), accentNeonGreen),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -345,84 +451,153 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
 
   Widget _buildWatchlistTab(List<ScannerWatchlist> list) {
     if (list.isEmpty) {
-      return _buildEmptyState('No Coiling Setups', 'No stock identified in dry-volume compression.');
+      return _buildEmptyState(
+        'No Squeeze Setups on $_selectedDate',
+        'No stocks were in dry-volume compression within 3% of trigger pivot on this trading day.',
+      );
     }
+
     return ListView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 90),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];
         return Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
             color: surfaceCard,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: borderSubtle, width: 1.2),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: borderSubtle),
           ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          item.symbol,
-                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            item.symbol,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          _buildBadge(
+                            label: '${item.squeeze} Squeeze',
+                            bg: accentCyan.withOpacity(0.12),
+                            textClr: accentCyan,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Pivot Level: ₹${item.triggerLevel.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white70,
                         ),
-                        const SizedBox(width: 8),
-                        _badge('${item.squeeze} Squeeze', accentCyan.withOpacity(0.12), accentCyan),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
                     Text(
-                      'Pivot: ₹${item.triggerLevel.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 12, color: textMuted),
+                      '₹${item.close.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    const Text(
+                      'COILING BASE',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: textMuted,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Text(
-                '₹${item.close.toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _badge(String label, Color bg, Color textClr) {
+  Widget _buildBadge(
+      {required String label, required Color bg, required Color textClr}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: textClr.withOpacity(0.3), width: 0.8),
       ),
-      child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: textClr)),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w800,
+          color: textClr,
+        ),
+      ),
     );
   }
 
   Widget _buildEmptyState(String title, String subtitle) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.radar_rounded, size: 40, color: textMuted),
-          const SizedBox(height: 12),
-          Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
-          const SizedBox(height: 6),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 38),
-            child: Text(subtitle, textAlign: TextAlign.center, style: const TextStyle(color: textMuted, fontSize: 12)),
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: [
+        SizedBox(height: MediaQuery.of(context).size.height * 0.18),
+        Center(
+          child: Column(
+            children: [
+              Container(
+                width: 54,
+                height: 54,
+                decoration: const BoxDecoration(
+                  color: surfaceCard,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.radar_rounded, size: 26, color: textMuted),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 36),
+                child: Text(
+                  subtitle,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: textMuted, fontSize: 12, height: 1.4),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -432,15 +607,27 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final Widget child;
 
-  _SliverAppBarDelegate({required this.minHeight, required this.maxHeight, required this.child});
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
 
   @override
   double get minExtent => minHeight;
   @override
   double get maxExtent => maxHeight;
+
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SizedBox.expand(child: child);
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
   @override
-  bool shouldRebuild(_SliverAppBarDelegate old) =>
-      maxHeight != old.maxHeight || minHeight != old.minHeight || child != old.child;
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
+  }
 }
