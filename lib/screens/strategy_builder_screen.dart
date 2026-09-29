@@ -105,12 +105,13 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   int _cursor = 50;
   Timer? _timer;
   bool _isPlaying = false;
-  int _speedMs = 1200; // Default: 1.2s per bar (Slow & Realistic)
+  int _speedMs = 1200;
   double _selectedSpeedMultiplier = 1.0;
   bool _isLandscape = false;
 
-  // Viewport Scale & Pan
+  // Controlled Smooth Zoom & Pan Engine
   double _visibleCandlesCount = 42.0;
+  double _baseCandlesCountOnScaleStart = 42.0; // Anchor for pinch
   double _scrollOffset = 0.0;
   double _verticalScaleMultiplier = 1.0;
   Offset? _crosshairPosition;
@@ -216,6 +217,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       _cursor = randomStart;
       _scrollOffset = 0.0;
       _verticalScaleMultiplier = 1.0;
+      _visibleCandlesCount = 42.0;
       _entryPrice = null;
       _positionSide = null;
       _stopLoss = null;
@@ -273,20 +275,20 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     setState(() {
       if (_selectedSpeedMultiplier == 0.5) {
         _selectedSpeedMultiplier = 1.0;
-        _speedMs = 1200; // 1.2s
+        _speedMs = 1200;
       } else if (_selectedSpeedMultiplier == 1.0) {
         _selectedSpeedMultiplier = 2.0;
-        _speedMs = 700; // 0.7s
+        _speedMs = 700;
       } else if (_selectedSpeedMultiplier == 2.0) {
         _selectedSpeedMultiplier = 3.0;
-        _speedMs = 400; // 0.4s
+        _speedMs = 400;
       } else {
         _selectedSpeedMultiplier = 0.5;
-        _speedMs = 2000; // 2s (Slow motion)
+        _speedMs = 2000;
       }
 
       if (_isPlaying) {
-        _startEngine(); // Restart with new speed
+        _startEngine();
       }
     });
   }
@@ -346,7 +348,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
     final ltp = _activeSeries[_cursor].close;
 
-    // Realistic Daily Swing Defaults (3.5% SL, 7.0% TP)
     double initialSl = side == 'LONG' ? ltp * 0.965 : ltp * 1.035;
     double initialTp = side == 'LONG' ? ltp * 1.070 : ltp * 0.930;
 
@@ -621,10 +622,10 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Position active! Replay is paused. Tap Play (▶) or Step (⏭) to advance.'),
-        backgroundColor: const Color(0xFF131B2A),
-        duration: const Duration(seconds: 3),
+        backgroundColor: Color(0xFF131B2A),
+        duration: Duration(seconds: 3),
       ),
     );
   }
@@ -738,20 +739,31 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(currentCandle),
 
-            // High-Contrast Interactive Viewport
+            // High-Contrast Interactive Viewport with Calibrated Zoom
             Expanded(
               child: Stack(
                 children: [
                   Positioned.fill(
-                    right: 75, // Generous price scale width
+                    right: 75,
                     child: GestureDetector(
+                      // Pinch-zoom calibration anchor
+                      onScaleStart: (_) {
+                        _baseCandlesCountOnScaleStart = _visibleCandlesCount;
+                      },
                       onScaleUpdate: (details) {
                         setState(() {
+                          // Damped controlled scaling
                           if (details.scale != 1.0) {
-                            _visibleCandlesCount =
-                                (_visibleCandlesCount / details.scale).clamp(15.0, 95.0);
+                            const double dampingFactor = 0.45;
+                            final double deltaScale = (details.scale - 1.0) * dampingFactor;
+                            final double effectiveScale = 1.0 + deltaScale;
+
+                            if (effectiveScale > 0.1) {
+                              _visibleCandlesCount =
+                                  (_baseCandlesCountOnScaleStart / effectiveScale).clamp(18.0, 90.0);
+                            }
                           } else if (details.focalPointDelta.dx != 0) {
-                            _scrollOffset += details.focalPointDelta.dx * 0.5;
+                            _scrollOffset += details.focalPointDelta.dx * 0.45;
                             _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
                           }
                         });
@@ -910,6 +922,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                   _hudLabel('C', c.close.toStringAsFixed(1),
                       color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
                   _hudLabel('Vol', _formatVolume(c.volume), color: const Color(0xFF00F0FF)),
+                  if (_verticalScaleMultiplier != 1.0)
+                    Text(' [Zoom: ${_verticalScaleMultiplier.toStringAsFixed(1)}x]',
+                        style: const TextStyle(fontSize: 9, color: Colors.amberAccent)),
                 ],
               ),
             ),
@@ -998,7 +1013,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // Bottom Controls with Speed Selector
   Widget _buildBottomControls() {
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 92),
@@ -1010,7 +1024,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
         children: [
           Row(
             children: [
-              // Speed Controller Button (0.5x, 1x, 2x, 3x)
               InkWell(
                 onTap: _cycleSpeed,
                 borderRadius: BorderRadius.circular(8),
@@ -1194,7 +1207,7 @@ class TradingViewProPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (candles.isEmpty) return;
 
-    const double priceAxisWidth = 75.0; // Broad clear axis
+    const double priceAxisWidth = 75.0;
     const double volumeHeight = 65.0;
 
     final chartWidth = size.width;
@@ -1244,7 +1257,7 @@ class TradingViewProPainter extends CustomPainter {
         text: TextSpan(
           text: p.toStringAsFixed(1),
           style: GoogleFonts.robotoMono(
-            color: const Color(0xFF94A3B8), // Bright clean slate
+            color: const Color(0xFF94A3B8),
             fontSize: 10.5,
             fontWeight: FontWeight.w700,
           ),
@@ -1320,18 +1333,16 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
-    // 4. Live Current Price Marker (LTP Tag on Scale)
+    // 4. Live Current Price Marker
     final latestCandle = displayCandles.last;
     final ltpY = chartHeight - ((latestCandle.close - minPrice) / range) * chartHeight;
     final ltpColor = latestCandle.isBull ? bullColor : bearColor;
 
-    // Horizontal dashed current price line
     final currentPriceLine = Paint()
       ..color = ltpColor.withOpacity(0.4)
       ..strokeWidth = 1.0;
     canvas.drawLine(Offset(0, ltpY), Offset(chartWidth, ltpY), currentPriceLine);
 
-    // Glowing Live Price Badge on Axis
     final ltpBg = Paint()..color = ltpColor;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
