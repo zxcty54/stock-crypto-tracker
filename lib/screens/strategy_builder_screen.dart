@@ -36,7 +36,6 @@ class ReplayCandle {
     );
   }
 
-  // Parses exact JSON array format: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -120,7 +119,7 @@ class StrategyBuilderScreen extends StatefulWidget {
 class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     with AutomaticKeepAliveClientMixin {
   @override
-  bool get wantKeepAlive => true; // Tab switch hone par candle cursor aur running trade retain rahega
+  bool get wantKeepAlive => true;
 
   final String _jsonUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/historical_3yr_ohlc.json';
@@ -130,7 +129,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   bool _isLoading = true;
   String? _errorMessage;
 
-  // Replay State
   List<ReplayCandle> _activeSeries = [];
   int _cursor = 50;
   Timer? _timer;
@@ -138,17 +136,14 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   final int _speedMs = 600;
   bool _isLandscape = false;
 
-  // Viewport Scale & Pan
   double _visibleCandlesCount = 42.0;
   double _scrollOffset = 0.0;
   double _verticalScaleMultiplier = 1.0;
   Offset? _crosshairPosition;
 
-  // Account Ledger
   double _virtualCapital = 500000.0;
   final double _orderQty = 50.0;
 
-  // Position State
   String? _positionSide;
   double? _entryPrice;
   double? _stopLoss;
@@ -160,7 +155,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   @override
   void initState() {
     super.initState();
-    _loadSavedJournal();
+    _loadStoredData();
     _fetchDataset();
   }
 
@@ -174,28 +169,28 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     super.dispose();
   }
 
-  Future<void> _loadSavedJournal() async {
+  Future<void> _loadStoredData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final savedData = prefs.getString('trade_journal_cache');
-      final savedCap = prefs.getDouble('virtual_capital_cache');
-      if (savedData != null) {
-        final List list = jsonDecode(savedData);
+      final historyStr = prefs.getString('sp_journal_history');
+      final cap = prefs.getDouble('sp_virtual_capital');
+      if (historyStr != null) {
+        final List list = jsonDecode(historyStr);
         setState(() {
           _tradeHistory.clear();
           _tradeHistory.addAll(list.map((e) => ClosedTrade.fromMap(e)).toList());
-          if (savedCap != null) _virtualCapital = savedCap;
+          if (cap != null) _virtualCapital = cap;
         });
       }
     } catch (_) {}
   }
 
-  Future<void> _saveJournalToDisk() async {
+  Future<void> _persistData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final encoded = jsonEncode(_tradeHistory.map((e) => e.toMap()).toList());
-      await prefs.setString('trade_journal_cache', encoded);
-      await prefs.setDouble('virtual_capital_cache', _virtualCapital);
+      final data = jsonEncode(_tradeHistory.map((e) => e.toMap()).toList());
+      await prefs.setString('sp_journal_history', data);
+      await prefs.setDouble('sp_virtual_capital', _virtualCapital);
     } catch (_) {}
   }
 
@@ -394,7 +389,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       _entryDate = null;
     });
 
-    _saveJournalToDisk();
+    _persistData();
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -474,11 +469,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(currentCandle),
 
-            // Main Interactive Trading Viewport
             Expanded(
               child: Stack(
                 children: [
-                  // 1. Chart Body Area (Horizontal Drag & Pinch Zoom)
                   Positioned.fill(
                     right: 65,
                     child: GestureDetector(
@@ -521,7 +514,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                     ),
                   ),
 
-                  // 2. Right Price Scale Drag Zoomer
                   Positioned(
                     top: 0,
                     bottom: 0,
@@ -738,7 +730,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // 92px bottom margin to clear floating pill overlap
   Widget _buildBottomControls() {
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 92),
@@ -884,7 +875,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   }
 }
 
-// ---------------- TRADINGVIEW PRO CUSTOM PAINTER (WITH SCALE ZOOMING) ----------------
+// ---------------- TRADINGVIEW PRO CUSTOM PAINTER ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
   final int visibleCount;
@@ -947,7 +938,6 @@ class TradingViewProPainter extends CustomPainter {
     minPrice = midPrice - (adjustedRange / 2);
     double range = maxPrice - minPrice;
 
-    // 1. Grid Lines & Price Labels
     final gridPaint = Paint()
       ..color = const Color(0xFF141C2B)
       ..strokeWidth = 0.8;
@@ -968,7 +958,6 @@ class TradingViewProPainter extends CustomPainter {
       tp.paint(canvas, Offset(chartWidth + 6, y - 6));
     }
 
-    // 2. Volume Sub-panel Separator
     canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth + priceAxisWidth, chartHeight), gridPaint);
     final volLabelPainter = TextPainter(
       text: TextSpan(
@@ -984,7 +973,6 @@ class TradingViewProPainter extends CustomPainter {
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.2;
 
-    // 3. Render Candlesticks & Volume Histogram
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -998,10 +986,8 @@ class TradingViewProPainter extends CustomPainter {
       final highY = chartHeight - ((c.high - minPrice) / range) * chartHeight;
       final lowY = chartHeight - ((c.low - minPrice) / range) * chartHeight;
 
-      // Wick
       canvas.drawLine(Offset(x, highY), Offset(x, lowY), wickPaint);
 
-      // Rounded Body
       final topY = min(openY, closeY);
       final bodyHeight = max((openY - closeY).abs(), 2.0);
 
@@ -1017,7 +1003,6 @@ class TradingViewProPainter extends CustomPainter {
         bodyPaint,
       );
 
-      // Volume Bar
       final double normalizedVol = (c.volume / maxVol).clamp(0.0, 1.0);
       final double vHeight = normalizedVol * (volumeHeight - 12);
 
@@ -1034,7 +1019,6 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
-    // 4. Bracket Zones & Levels (SL/TP Glow lines)
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
@@ -1050,7 +1034,6 @@ class TradingViewProPainter extends CustomPainter {
       }
     }
 
-    // 5. Interactive Crosshair HUD
     if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
       final chPaint = Paint()
         ..color = Colors.white38
