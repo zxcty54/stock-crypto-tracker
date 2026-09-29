@@ -812,18 +812,19 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
+  // ✅ Fixed with correct variable names (_stopLoss and _takeProfit)
   _PainterBounds _calculateChartBounds(List<ReplayCandle> displayCandles) {
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
 
     if (_entryPrice != null) {
       if (_stopLoss != null) {
-        maxPrice = max(maxPrice, stopLoss!);
-        minPrice = min(minPrice, stopLoss!);
+        maxPrice = max(maxPrice, _stopLoss!);
+        minPrice = min(minPrice, _stopLoss!);
       }
       if (_takeProfit != null) {
-        maxPrice = max(maxPrice, takeProfit!);
-        minPrice = min(minPrice, takeProfit!);
+        maxPrice = max(maxPrice, _takeProfit!);
+        minPrice = min(minPrice, _takeProfit!);
       }
     }
 
@@ -1545,7 +1546,6 @@ class TradingViewProPainter extends CustomPainter {
 
     canvas.drawLine(Offset(0, y), Offset(chartWidth, y), linePaint);
 
-    // Draggable Handle Pill on the Left
     final handleBg = Paint()..color = color;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -1564,7 +1564,6 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     handleText.paint(canvas, Offset(14, y - 6));
 
-    // Price Pill on Axis
     final axisBg = Paint()..color = color;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
