@@ -28,7 +28,8 @@ jobs:
 
       - name: Generate Android Skeleton & Dependencies
         run: |
-          flutter create . --platforms=android --org com.example.tracker
+          # Package name com.stockmarket set karne ke liye
+          flutter create . --project-name stockmarket --org com --platforms=android
           flutter pub get
 
       - name: Build Release APK
@@ -37,13 +38,13 @@ jobs:
       - name: Compress APK to ZIP
         run: |
           cd build/app/outputs/flutter-apk/
-          zip crypto-stock-app.zip app-release.apk
+          zip stockmarket-app.zip app-release.apk
 
       - name: Upload ZIP to GitHub Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: crypto-stock-zip
-          path: build/app/outputs/flutter-apk/crypto-stock-app.zip
+          name: stockmarket-app-zip
+          path: build/app/outputs/flutter-apk/stockmarket-app.zip
 
       - name: Send ZIP to Telegram
         env:
@@ -51,6 +52,6 @@ jobs:
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           curl -F chat_id="$CHAT_ID" \
-               -F document=@"build/app/outputs/flutter-apk/crypto-stock-app.zip" \
-               -F caption="Stock & Crypto Tracker App - ZIP File Ready! 📦" \
+               -F document=@"build/app/outputs/flutter-apk/stockmarket-app.zip" \
+               -F caption="Stock Market App (com.stockmarket) - Ready! 🚀" \
                https://api.telegram.org/bot$BOT_TOKEN/sendDocument
