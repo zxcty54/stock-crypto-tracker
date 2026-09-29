@@ -1,16 +1,18 @@
 import os
 import json
 import time
+import base64
 from datetime import datetime
 import requests
 
 OUTPUT_FILE = "historical_3yr_ohlc.json"
 
-# Jin stocks par aapko backtesting karni hai
-SYMBOLS = [
-    "RELIANCE", "TCS", "INFY", "HDFCBANK", "ICICIBANK",
-    "TATAMOTORS", "SBIN", "BHARTIARTL", "ITC", "LT"
-]
+TARGET_REPO = "zxcty54/stock-crypto-tracker"
+TARGET_FILE_PATH = "historical_3yr_ohlc.json"
+TARGET_BRANCH = "main"
+
+# Aapke specific IT Stocks
+SYMBOLS = ["TCS", "INFY", "HCLTECH"]
 
 def fetch_3year_ohlc():
     master_store = {}
@@ -19,7 +21,8 @@ def fetch_3year_ohlc():
     }
 
     print("=" * 70)
-    print("⏳ Downloading 3-Year Historical OHLCV Data...")
+    print("⏳ Fetching 3-Year Daily OHLCV Data for IT Majors...")
+    print(f"🎯 Symbols: {', '.join(SYMBOLS)}")
     print("=" * 70)
 
     for symbol in SYMBOLS:
@@ -27,14 +30,14 @@ def fetch_3year_ohlc():
         url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=3y&interval=1d"
 
         try:
-            res = requests.get(url, headers=headers, timeout=10)
+            res = requests.get(url, headers=headers, timeout=12)
             if res.status_code != 200:
                 print(f"⚠️ Failed for {symbol} (HTTP {res.status_code})")
                 continue
 
             data = res.json()
             result = data.get("chart", {}).get("result", [])[0]
-            
+
             timestamps = result.get("timestamp", [])
             indicators = result.get("indicators", {}).get("quote", [])[0]
 
@@ -46,7 +49,6 @@ def fetch_3year_ohlc():
 
             stock_candles = []
             for i in range(len(timestamps)):
-                # Null values ko filter karein
                 if None in (opens[i], highs[i], lows[i], closes[i]):
                     continue
 
@@ -61,20 +63,75 @@ def fetch_3year_ohlc():
                 ])
 
             master_store[symbol] = stock_candles
-            print(f"✅ {symbol}: {len(stock_candles)} trading days loaded (~3 years)")
+            print(f"✅ {symbol}: {len(stock_candles)} sessions fetched (~3 years)")
             time.sleep(0.5)
 
         except Exception as e:
-            print(f"❌ Error loading {symbol}: {e}")
+            print(f"❌ Error fetching {symbol}: {e}")
 
-    # Save to local file
+    # Local Save
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(master_store, f, ensure_ascii=False)
 
     print("=" * 70)
-    print(f"🎉 Saved complete 3-year historical dataset to '{OUTPUT_FILE}'")
-    print(f"📦 Total Stocks Saved: {len(master_store)}")
+    print(f"💾 File Saved Locally: '{OUTPUT_FILE}'")
     print("=" * 70)
+
+    # Sync to remote repo via API
+    push_to_target_repo()
+
+
+def push_to_target_repo():
+    token = os.environ.get("GH_PAT_TOKEN", "").strip()
+    if not token:
+        print("⚠️ GH_PAT_TOKEN not found. Skipping remote push.")
+        return
+
+    if not os.path.exists(OUTPUT_FILE):
+        print(f"⚠️ {OUTPUT_FILE} not found. Nothing to push.")
+        return
+
+    print(f"\n🚀 Direct-Pushing '{OUTPUT_FILE}' to '{TARGET_REPO}'...")
+
+    with open(OUTPUT_FILE, "rb") as f:
+        file_bytes = f.read()
+
+    b64_content = base64.b64encode(file_bytes).decode("utf-8")
+    api_url = f"https://api.github.com/repos/{TARGET_REPO}/contents/{TARGET_FILE_PATH}"
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "IT-OHLC-Sync-Engine"
+    }
+
+    # 1. Fetch current blob SHA
+    sha = None
+    try:
+        check_res = requests.get(api_url, headers=headers, params={"ref": TARGET_BRANCH}, timeout=15)
+        if check_res.status_code == 200:
+            sha = check_res.json().get("sha")
+    except Exception as e:
+        print(f"⚠️ Notice while fetching SHA: {e}")
+
+    # 2. Overwrite / Commit
+    payload = {
+        "message": f"📊 Auto-Update: 3Y OHLCV for TCS, INFY, HCLTECH [{datetime.now().strftime('%d-%b-%Y')}]",
+        "content": b64_content,
+        "branch": TARGET_BRANCH
+    }
+    if sha:
+        payload["sha"] = sha
+
+    try:
+        put_res = requests.put(api_url, headers=headers, json=payload, timeout=25)
+        if put_res.status_code in [200, 201]:
+            print(f"✅ Target repo updated: https://github.com/{TARGET_REPO}/blob/{TARGET_BRANCH}/{TARGET_FILE_PATH}")
+        else:
+            print(f"❌ Target repo push failed ({put_res.status_code}): {put_res.text}")
+    except Exception as e:
+        print(f"❌ Error during remote sync: {e}")
+
 
 if __name__ == "__main__":
     fetch_3year_ohlc()
