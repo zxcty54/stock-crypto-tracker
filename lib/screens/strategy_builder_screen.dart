@@ -35,6 +35,7 @@ class ReplayCandle {
     );
   }
 
+  // Exact JSON Array Parser: [Date, Open, High, Low, Close, Volume]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -42,7 +43,11 @@ class ReplayCandle {
       high: (dynamicList[2] as num).toDouble(),
       low: (dynamicList[3] as num).toDouble(),
       close: (dynamicList[4] as num).toDouble(),
-      volume: (dynamicList[5] as num).toInt(),
+      volume: dynamicList.length > 5
+          ? (dynamicList[5] is num
+              ? (dynamicList[5] as num).toInt()
+              : int.tryParse(dynamicList[5].toString()) ?? 0)
+          : 0,
     );
   }
 
@@ -100,14 +105,13 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
   final int _speedMs = 600;
   bool _isLandscape = false;
 
-  // Interactive Viewport (Smooth Zoom & Pan)
+  // Interactive Viewport
   double _visibleCandlesCount = 42.0;
   double _scrollOffset = 0.0;
   Offset? _crosshairPosition;
 
   // Account Ledger
   double _virtualCapital = 500000.0;
-  final double _startingCapital = 500000.0;
   final double _orderQty = 50.0;
 
   // Position State
@@ -188,7 +192,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'Network issue: $e';
+        _errorMessage = 'Network connection issue: $e';
         _isLoading = false;
       });
     }
@@ -344,6 +348,15 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     return _positionSide == 'LONG' ? (diff * _orderQty) : (-diff * _orderQty);
   }
 
+  String _formatVolume(int vol) {
+    if (vol >= 1000000) {
+      return '${(vol / 1000000).toStringAsFixed(2)}M';
+    } else if (vol >= 1000) {
+      return '${(vol / 1000).toStringAsFixed(1)}K';
+    }
+    return vol.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
@@ -396,7 +409,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
             _buildTopBar(winRate),
             _buildOHLCVHud(currentCandle),
 
-            // Ultra-Smooth Canvas Viewport with Touch Drag & Pinch
+            // Ultra-Smooth Chart Viewport with Integrated Volume
             Expanded(
               child: GestureDetector(
                 onScaleUpdate: (details) {
@@ -525,14 +538,20 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              _hudLabel('O', c.open.toStringAsFixed(1)),
-              _hudLabel('H', c.high.toStringAsFixed(1)),
-              _hudLabel('L', c.low.toStringAsFixed(1)),
-              _hudLabel('C', c.close.toStringAsFixed(1),
-                  color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
-            ],
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _hudLabel('O', c.open.toStringAsFixed(1)),
+                  _hudLabel('H', c.high.toStringAsFixed(1)),
+                  _hudLabel('L', c.low.toStringAsFixed(1)),
+                  _hudLabel('C', c.close.toStringAsFixed(1),
+                      color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
+                  _hudLabel('Vol', _formatVolume(c.volume), color: const Color(0xFF00F0FF)),
+                ],
+              ),
+            ),
           ),
           Text(c.date, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7A99))),
         ],
@@ -763,7 +782,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
   }
 }
 
-// ---------------- TRADINGVIEW PRO CUSTOM PAINTER ----------------
+// ---------------- TRADINGVIEW PRO CUSTOM PAINTER (WITH REAL VOLUME) ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
   final int visibleCount;
@@ -790,7 +809,7 @@ class TradingViewProPainter extends CustomPainter {
     if (candles.isEmpty) return;
 
     const double priceAxisWidth = 60.0;
-    const double volumeHeight = 55.0;
+    const double volumeHeight = 65.0; // Dedicated lower volume area
 
     final chartWidth = size.width - priceAxisWidth;
     final chartHeight = size.height - volumeHeight;
@@ -804,7 +823,7 @@ class TradingViewProPainter extends CustomPainter {
     int maxVol = displayCandles.map((c) => c.volume).reduce(max);
     if (maxVol <= 0) maxVol = 1;
 
-    // Bracket level expansions
+    // Bracket expansions
     if (entryPrice != null) {
       if (stopLoss != null) {
         maxPrice = max(maxPrice, stopLoss!);
@@ -822,7 +841,7 @@ class TradingViewProPainter extends CustomPainter {
     minPrice -= range * 0.08;
     range = maxPrice - minPrice;
 
-    // 1. Sleek Grid Lines & Price Labels
+    // 1. Grid Lines & Price Labels
     final gridPaint = Paint()
       ..color = const Color(0xFF141C2B)
       ..strokeWidth = 0.8;
@@ -843,15 +862,23 @@ class TradingViewProPainter extends CustomPainter {
       tp.paint(canvas, Offset(chartWidth + 6, y - 6));
     }
 
-    // 2. Volume Sub-panel Separator
+    // 2. Volume Sub-panel Separator & Scale Label
     canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth, chartHeight), gridPaint);
+    final volLabelPainter = TextPainter(
+      text: TextSpan(
+        text: 'Vol Max ${_formatVolume(maxVol)}',
+        style: const TextStyle(color: Color(0xFF3B4860), fontSize: 8, fontWeight: FontWeight.bold),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    volLabelPainter.paint(canvas, Offset(4, chartHeight + 2));
 
     final candleWidth = chartWidth / displayCandles.length;
     final bullColor = const Color(0xFF00F5A0);
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.2;
 
-    // 3. Render Candlesticks & Volume Bars
+    // 3. Render Candlesticks & Real Volume Histogram
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -860,13 +887,13 @@ class TradingViewProPainter extends CustomPainter {
 
       final x = i * candleWidth + (candleWidth / 2) + scrollOffset;
 
-      // Candlestick Y coordinates
+      // Candle Coordinates
       final openY = chartHeight - ((c.open - minPrice) / range) * chartHeight;
       final closeY = chartHeight - ((c.close - minPrice) / range) * chartHeight;
       final highY = chartHeight - ((c.high - minPrice) / range) * chartHeight;
       final lowY = chartHeight - ((c.low - minPrice) / range) * chartHeight;
 
-      // Wicks
+      // Wick
       canvas.drawLine(Offset(x, highY), Offset(x, lowY), wickPaint);
 
       // Rounded Candle Body
@@ -885,14 +912,19 @@ class TradingViewProPainter extends CustomPainter {
         bodyPaint,
       );
 
-      // Volume Bars
-      final vHeight = (c.volume / maxVol) * (volumeHeight - 8);
+      // Volume Bar (Calculated from real json volume integer)
+      final double normalizedVol = (c.volume / maxVol).clamp(0.0, 1.0);
+      final double vHeight = normalizedVol * (volumeHeight - 12);
+
       final vPaint = Paint()
-        ..color = color.withOpacity(0.25)
+        ..color = color.withOpacity(0.35)
         ..style = PaintingStyle.fill;
 
-      canvas.drawRect(
-        Rect.fromLTWH(x - (candleWidth * 0.32), size.height - vHeight, candleWidth * 0.64, vHeight),
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(x - (candleWidth * 0.30), size.height - vHeight, candleWidth * 0.60, vHeight),
+          const Radius.circular(1.0),
+        ),
         vPaint,
       );
     }
@@ -925,7 +957,6 @@ class TradingViewProPainter extends CustomPainter {
 
       final hoverPrice = maxPrice - ((crosshair!.dy / chartHeight) * range);
 
-      // Floating Price Badge
       final badgePaint = Paint()..color = const Color(0xFF00F0FF);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -973,6 +1004,15 @@ class TradingViewProPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
     )..layout();
     tp.paint(canvas, Offset(chartWidth + 5, y - 5));
+  }
+
+  String _formatVolume(int vol) {
+    if (vol >= 1000000) {
+      return '${(vol / 1000000).toStringAsFixed(1)}M';
+    } else if (vol >= 1000) {
+      return '${(vol / 1000).toStringAsFixed(0)}K';
+    }
+    return vol.toString();
   }
 
   @override
