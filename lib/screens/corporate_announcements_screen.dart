@@ -3,8 +3,80 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import '../models/corporate_announcement_model.dart';
 
+// ---------------- MODELS ----------------
+class CorporateAnnouncement {
+  final String hash;
+  final String symbol;
+  final String companyName;
+  final String category;
+  final String eventType;
+  final String broadcastDate;
+  final String pdfLink;
+  final String headline;
+  final bool contentWorthy;
+  final String worthinessReason;
+  final String analyzedAt;
+
+  CorporateAnnouncement({
+    required this.hash,
+    required this.symbol,
+    required this.companyName,
+    required this.category,
+    required this.eventType,
+    required this.broadcastDate,
+    required this.pdfLink,
+    required this.headline,
+    required this.contentWorthy,
+    required this.worthinessReason,
+    required this.analyzedAt,
+  });
+
+  factory CorporateAnnouncement.fromJson(Map<String, dynamic> json) {
+    return CorporateAnnouncement(
+      hash: json['hash'] ?? '',
+      symbol: json['symbol'] ?? '',
+      companyName: json['company_name'] ?? '',
+      category: json['category'] ?? 'GENERAL',
+      eventType: json['event_type'] ?? '',
+      broadcastDate: json['broadcast_date'] ?? '',
+      pdfLink: json['pdf_link'] ?? '',
+      headline: json['headline'] ?? '',
+      contentWorthy: json['content_worthy'] ?? true,
+      worthinessReason: json['worthiness_reason'] ?? '',
+      analyzedAt: json['analyzed_at'] ?? '',
+    );
+  }
+}
+
+class CorporateFeedPayload {
+  final String generatedAt;
+  final int worthyCount;
+  final int skippedCount;
+  final List<CorporateAnnouncement> feed;
+
+  CorporateFeedPayload({
+    required this.generatedAt,
+    required this.worthyCount,
+    required this.skippedCount,
+    required this.feed,
+  });
+
+  factory CorporateFeedPayload.fromJson(Map<String, dynamic> json) {
+    final list = (json['content_feed'] as List? ?? [])
+        .map((e) => CorporateAnnouncement.fromJson(e))
+        .toList();
+
+    return CorporateFeedPayload(
+      generatedAt: json['generated_at'] ?? '',
+      worthyCount: json['worthy_count'] ?? list.length,
+      skippedCount: json['skipped_count'] ?? 0,
+      feed: list,
+    );
+  }
+}
+
+// ---------------- UI SCREEN ----------------
 class CorporateAnnouncementsScreen extends StatefulWidget {
   const CorporateAnnouncementsScreen({super.key});
 
@@ -20,11 +92,9 @@ class _CorporateAnnouncementsScreenState
   String? _errorMessage;
   String _selectedCategory = 'ALL';
 
-  // Fastly CDN URL to bypass Indian ISP raw GitHub blocks
   final String _endpointUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/nse_content_feed.json';
 
-  // Theme Constants
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
   static const Color borderSubtle = Color(0xFF202C42);
@@ -48,6 +118,7 @@ class _CorporateAnnouncementsScreenState
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
+          'Expires': '0',
         },
       );
 
@@ -272,7 +343,7 @@ class _CorporateAnnouncementsScreenState
   }
 }
 
-// ---------------- PREMIUM CARD WIDGET ----------------
+// ---------------- CARD ITEM ----------------
 class AnnouncementCard extends StatelessWidget {
   final CorporateAnnouncement item;
   const AnnouncementCard({super.key, required this.item});
@@ -280,22 +351,22 @@ class AnnouncementCard extends StatelessWidget {
   Color _getCategoryColor(String cat) {
     switch (cat.toUpperCase()) {
       case 'BUYBACK':
-        return const Color(0xFFFFD700); // Gold
+        return const Color(0xFFFFD700);
       case 'ORDER':
       case 'ORDER_WIN':
-        return const Color(0xFF00E5FF); // Cyan
+        return const Color(0xFF00E5FF);
       case 'BONUS':
-        return const Color(0xFFD500F9); // Neon Purple
+        return const Color(0xFFD500F9);
       case 'COMMERCIAL_PRODUCTION':
-        return const Color(0xFFFF9100); // Amber Flame
+        return const Color(0xFFFF9100);
       case 'CAPACITY_EXPANSION':
       case 'CAPEX':
-        return const Color(0xFF00E676); // Emerald Green
+        return const Color(0xFF00E676);
       case 'JV':
       case 'JOINT_VENTURE':
-        return const Color(0xFF2979FF); // Electric Blue
+        return const Color(0xFF2979FF);
       case 'NEW_PRODUCT':
-        return const Color(0xFFFF5252); // Coral Red
+        return const Color(0xFFFF5252);
       default:
         return const Color(0xFF00E5FF);
     }
@@ -348,7 +419,6 @@ class AnnouncementCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Row: Category Badge + Stock Symbol
             Row(
               children: [
                 Container(
@@ -398,10 +468,7 @@ class AnnouncementCard extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 10),
-
-            // Company Full Name
             Text(
               item.companyName,
               style: GoogleFonts.plusJakartaSans(
@@ -411,8 +478,6 @@ class AnnouncementCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5),
-
-            // Material Headline
             Text(
               item.headline,
               style: GoogleFonts.plusJakartaSans(
@@ -422,10 +487,7 @@ class AnnouncementCard extends StatelessWidget {
                 height: 1.35,
               ),
             ),
-
             const SizedBox(height: 10),
-
-            // Rationale Strip
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -453,10 +515,7 @@ class AnnouncementCard extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(height: 12),
-
-            // Footer: Broadcast Time + NSE Source Link Button
             Row(
               children: [
                 const Icon(Icons.access_time_rounded,
