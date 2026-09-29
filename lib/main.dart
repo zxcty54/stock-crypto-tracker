@@ -6,6 +6,7 @@ import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
 import 'screens/scanner_screen.dart';
+import 'screens/stock_delivery_history_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 2; // Strategy Builder default tab
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> _pages = const [
     NewsScreen(),
@@ -49,23 +51,322 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ScannerScreen(),
   ];
 
+  final List<String> _titles = const [
+    'MARKET NEWS WIRE',
+    'CORPORATE FILINGS',
+    'STRATEGY BUILDER',
+    'RADAR & SCANNERS',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: const Color(0xFF090D16),
-      body: Stack(
+      drawer: _buildInstitutionalDrawer(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                _buildTerminalHeader(),
+                Expanded(
+                  child: IndexedStack(
+                    index: _currentIndex,
+                    children: _pages,
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              left: 14,
+              right: 14,
+              bottom: 20,
+              child: _buildFloatingNavBar(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Header with Menu Button to open Drawer
+  Widget _buildTerminalHeader() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: const BoxDecoration(
+        color: Color(0xFF0F1726),
+        border: Border(bottom: BorderSide(color: Color(0xFF1E2B3E))),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IndexedStack(
-            index: _currentIndex,
-            children: _pages,
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.menu_rounded, color: Color(0xFF00E5FF), size: 24),
+                tooltip: 'Open Terminal Menu',
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  _scaffoldKey.currentState?.openDrawer();
+                },
+              ),
+              const SizedBox(width: 4),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'STOCKPULSE',
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  Text(
+                    _titles[_currentIndex],
+                    style: const TextStyle(
+                      color: Color(0xFF00E5FF),
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          Positioned(
-            left: 14,
-            right: 14,
-            bottom: 20,
-            child: _buildFloatingNavBar(),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF162032),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: const Color(0xFF25334A)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF00F5A0),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    const Text(
+                      'LIVE FEED',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  // Institutional Left Drawer
+  Widget _buildInstitutionalDrawer() {
+    return Drawer(
+      backgroundColor: const Color(0xFF0A0F1A),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(18, 20, 18, 16),
+              decoration: const BoxDecoration(
+                color: Color(0xFF0F1726),
+                border: Border(bottom: BorderSide(color: Color(0xFF1E2B3E))),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF00E5FF).withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.4)),
+                        ),
+                        child: const Icon(Icons.terminal_rounded, color: Color(0xFF00E5FF), size: 22),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'StockPulse Pro',
+                            style: GoogleFonts.plusJakartaSans(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const Text(
+                            'Institutional Terminal v1.0',
+                            style: TextStyle(color: Color(0xFF6B7A99), fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 12),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+              child: Text(
+                'ANALYTICS & ENGINES',
+                style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
+              ),
+            ),
+
+            // 🎯 Main Item: Delivery & OHLC History
+            _drawerTile(
+              icon: Icons.pie_chart_rounded,
+              title: 'Delivery & OHLC History',
+              subtitle: '20-Day Qty, Del %, High/Low filters',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const StockDeliveryHistoryScreen(),
+                  ),
+                );
+              },
+            ),
+
+            _drawerTile(
+              icon: Icons.candlestick_chart_rounded,
+              title: 'Strategy Replay Builder',
+              subtitle: 'Bar-by-bar backtest & SL/TP tools',
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => _currentIndex = 2);
+              },
+            ),
+
+            _drawerTile(
+              icon: Icons.radar_rounded,
+              title: 'Market Radar & Scanner',
+              subtitle: 'Consolidation squeeze & breakouts',
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => _currentIndex = 3);
+              },
+            ),
+
+            const Divider(color: Color(0xFF1E2B3E), height: 24),
+
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+              child: Text(
+                'FEEDS & ARCHIVES',
+                style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
+              ),
+            ),
+
+            _drawerTile(
+              icon: Icons.campaign_rounded,
+              title: 'Corporate Filings & Orders',
+              subtitle: 'BSE/NSE exchange disclosures',
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => _currentIndex = 1);
+              },
+            ),
+
+            _drawerTile(
+              icon: Icons.newspaper_rounded,
+              title: 'Financial News Wire',
+              subtitle: 'Real-time market press updates',
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => _currentIndex = 0);
+              },
+            ),
+
+            const Spacer(),
+
+            // Footer
+            Container(
+              padding: const EdgeInsets.all(16),
+              color: const Color(0xFF0F1726),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Fastly CDN Synced', style: TextStyle(color: Color(0xFF6B7A99), fontSize: 10)),
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF00F5A0),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _drawerTile({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+    bool isHighlight = false,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      decoration: BoxDecoration(
+        color: isHighlight ? const Color(0xFF00E5FF).withOpacity(0.08) : Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        border: isHighlight ? Border.all(color: const Color(0xFF00E5FF).withOpacity(0.3)) : null,
+      ),
+      child: ListTile(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          onTap();
+        },
+        leading: Icon(
+          icon,
+          color: isHighlight ? const Color(0xFF00E5FF) : const Color(0xFF8896AB),
+          size: 22,
+        ),
+        title: Text(
+          title,
+          style: GoogleFonts.plusJakartaSans(
+            color: isHighlight ? const Color(0xFF00E5FF) : Colors.white,
+            fontWeight: isHighlight ? FontWeight.w800 : FontWeight.w600,
+            fontSize: 13,
+          ),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 10),
+        ),
+        trailing: const Icon(Icons.chevron_right_rounded, color: Colors.white24, size: 18),
       ),
     );
   }
