@@ -14,9 +14,9 @@ class FloatingNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF131B2A).withOpacity(0.95),
+        color: const Color(0xFF131B2A).withOpacity(0.96),
         borderRadius: BorderRadius.circular(32),
         border: Border.all(color: const Color(0xFF202C42), width: 1.2),
         boxShadow: [
@@ -30,9 +30,10 @@ class FloatingNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _navItem(0, Icons.candlestick_chart_rounded, 'News'),
-          _navItem(1, Icons.currency_bitcoin_rounded, 'Crypto'),
-          _navItem(2, Icons.radar_rounded, 'Radar'),
+          _navItem(0, Icons.newspaper_rounded, 'News'),
+          _navItem(1, Icons.campaign_rounded, 'Filings'),
+          _navItem(2, Icons.currency_bitcoin_rounded, 'Crypto'),
+          _navItem(3, Icons.radar_rounded, 'Radar'),
         ],
       ),
     );
@@ -45,7 +46,7 @@ class FloatingNavBar extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.15) : Colors.transparent,
           borderRadius: BorderRadius.circular(24),
@@ -54,17 +55,17 @@ class FloatingNavBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 19,
+              size: 18,
               color: isSelected ? const Color(0xFF00E5FF) : const Color(0xFF8896AB),
             ),
             if (isSelected) ...[
-              const SizedBox(width: 6),
+              const SizedBox(width: 5),
               Text(
                 label,
                 style: GoogleFonts.plusJakartaSans(
                   color: const Color(0xFF00E5FF),
                   fontWeight: FontWeight.w700,
-                  fontSize: 12,
+                  fontSize: 11,
                 ),
               ),
             ]
