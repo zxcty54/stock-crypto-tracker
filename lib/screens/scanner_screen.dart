@@ -19,7 +19,7 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   String? _errorMessage;
 
   final String _endpointUrl =
-      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/refs/heads/main/scanner_output.json';
+      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/scanner_output.json';
 
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
