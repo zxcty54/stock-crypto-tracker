@@ -28,15 +28,29 @@ jobs:
 
       - name: Generate Android Skeleton & Dependencies
         run: |
-          # Agar android folder nahi hai toh auto-generate karega
           flutter create . --platforms=android --org com.example.tracker
           flutter pub get
 
       - name: Build Release APK
         run: flutter build apk --release
 
-      - name: Upload APK
+      - name: Compress APK to ZIP
+        run: |
+          cd build/app/outputs/flutter-apk/
+          zip crypto-stock-app.zip app-release.apk
+
+      - name: Upload ZIP to GitHub Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: crypto-stock-app
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: crypto-stock-zip
+          path: build/app/outputs/flutter-apk/crypto-stock-app.zip
+
+      - name: Send ZIP to Telegram
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -F chat_id="$CHAT_ID" \
+               -F document=@"build/app/outputs/flutter-apk/crypto-stock-app.zip" \
+               -F caption="Stock & Crypto Tracker App - ZIP File Ready! 📦" \
+               https://api.telegram.org/bot$BOT_TOKEN/sendDocument
