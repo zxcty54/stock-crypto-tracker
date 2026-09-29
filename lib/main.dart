@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
-import 'screens/crypto_screen.dart';
+import 'screens/strategy_builder_screen.dart'; // <-- Replaced crypto with Strategy Builder
 import 'screens/scanner_screen.dart';
 
 void main() {
@@ -43,7 +43,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<Widget> _pages = const [
     NewsScreen(),
     CorporateAnnouncementsScreen(),
-    CryptoScreen(),
+    StrategyBuilderScreen(), // <-- 3rd Tab: Build Strategy
     ScannerScreen(),
   ];
 
@@ -87,7 +87,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           _navItem(0, Icons.newspaper_rounded, 'News'),
           _navItem(1, Icons.campaign_rounded, 'Filings'),
-          _navItem(2, Icons.currency_bitcoin_rounded, 'Crypto'),
+          _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'), // <-- Strategy Tab
           _navItem(3, Icons.radar_rounded, 'Radar'),
         ],
       ),
