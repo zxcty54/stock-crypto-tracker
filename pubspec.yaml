@@ -1,4 +1,4 @@
-name: stock_crypto_tracker
+name: stockmarket
 description: Stock and Crypto Tracker App
 publish_to: 'none'
 version: 1.0.0+1
