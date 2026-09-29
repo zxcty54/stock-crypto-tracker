@@ -18,9 +18,11 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   bool _isLoading = true;
   String? _errorMessage;
 
+  // Fastly jsDelivr CDN Endpoint (Indian ISP DNS block resistant)
   final String _endpointUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/scanner_output.json';
 
+  // Institutional Design Palette
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
   static const Color borderSubtle = Color(0xFF202C42);
@@ -40,8 +42,16 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   Future<void> _fetchScannerData() async {
     HapticFeedback.lightImpact();
     try {
+      // Dynamic Timestamp + No-Cache Headers to bypass CDN and ISP cache
       final uri = Uri.parse('$_endpointUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
-      final response = await http.get(uri);
+      final response = await http.get(
+        uri,
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      );
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body);
@@ -116,11 +126,25 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('QUANT INTELLIGENCE',
-                  style: TextStyle(fontSize: 11, letterSpacing: 1.4, fontWeight: FontWeight.w700, color: accentCyan)),
+              Text(
+                'QUANT INTELLIGENCE',
+                style: TextStyle(
+                  fontSize: 11,
+                  letterSpacing: 1.4,
+                  fontWeight: FontWeight.w700,
+                  color: accentCyan,
+                ),
+              ),
               SizedBox(height: 5),
-              Text('Volume & Squeeze Hub',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -0.5)),
+              Text(
+                'Volume & Squeeze Hub',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  letterSpacing: -0.5,
+                ),
+              ),
             ],
           ),
           if (_payload != null && _payload!.trackedDates.isNotEmpty) _buildDateSelectorPill(),
@@ -147,9 +171,14 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
             final isLatest = date == _payload!.latestDate;
             return DropdownMenuItem<String>(
               value: date,
-              child: Text(isLatest ? '$date • Latest' : date,
-                  style: TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w600, color: isLatest ? accentNeonGreen : Colors.white70)),
+              child: Text(
+                isLatest ? '$date • Latest' : date,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: isLatest ? accentNeonGreen : Colors.white70,
+                ),
+              ),
             );
           }).toList(),
           onChanged: (newDate) {
@@ -190,8 +219,10 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
               children: [
                 const Icon(Icons.bolt_rounded, size: 17, color: accentFlame),
                 const SizedBox(width: 6),
-                Text('Breakouts (${record?.triggersCount ?? 0})',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                Text(
+                  'Breakouts (${record?.triggersCount ?? 0})',
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                ),
               ],
             ),
           ),
@@ -202,8 +233,10 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
               children: [
                 const Icon(Icons.grain_rounded, size: 17, color: accentCyan),
                 const SizedBox(width: 6),
-                Text('Watchlist (${record?.watchlistCount ?? 0})',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                Text(
+                  'Watchlist (${record?.watchlistCount ?? 0})',
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                ),
               ],
             ),
           ),
@@ -213,7 +246,10 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
   }
 
   Widget _buildContent(DayScanRecord? currentRecord) {
-    if (_isLoading) return const Center(child: CircularProgressIndicator(color: accentCyan, strokeWidth: 2.5));
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator(color: accentCyan, strokeWidth: 2.5));
+    }
+
     if (_errorMessage != null) {
       return Center(
         child: Column(
@@ -276,8 +312,10 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
                   children: [
                     Row(
                       children: [
-                        Text(item.symbol,
-                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
+                        Text(
+                          item.symbol,
+                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+                        ),
                         const SizedBox(width: 8),
                         _badge(item.volumeSpike, accentFlame.withOpacity(0.15), accentFlame),
                       ],
@@ -290,8 +328,10 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('₹${item.close.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: accentNeonGreen)),
+                  Text(
+                    '₹${item.close.toStringAsFixed(2)}',
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: accentNeonGreen),
+                  ),
                   const SizedBox(height: 4),
                   _badge('TRIGGER', accentNeonGreen.withOpacity(0.15), accentNeonGreen),
                 ],
@@ -329,20 +369,26 @@ class _ScannerScreenState extends State<ScannerScreen> with SingleTickerProvider
                   children: [
                     Row(
                       children: [
-                        Text(item.symbol,
-                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
+                        Text(
+                          item.symbol,
+                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+                        ),
                         const SizedBox(width: 8),
                         _badge('${item.squeeze} Squeeze', accentCyan.withOpacity(0.12), accentCyan),
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Text('Pivot: ₹${item.triggerLevel.toStringAsFixed(2)}',
-                        style: const TextStyle(fontSize: 12, color: textMuted)),
+                    Text(
+                      'Pivot: ₹${item.triggerLevel.toStringAsFixed(2)}',
+                      style: const TextStyle(fontSize: 12, color: textMuted),
+                    ),
                   ],
                 ),
               ),
-              Text('₹${item.close.toStringAsFixed(2)}',
-                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
+              Text(
+                '₹${item.close.toStringAsFixed(2)}',
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+              ),
             ],
           ),
         );
