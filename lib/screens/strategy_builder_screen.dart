@@ -110,7 +110,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   double _selectedSpeedMultiplier = 1.0;
   bool _isLandscape = false;
 
-  // Controlled Smooth Zoom & Pan Engine
+  // Viewport Scale & Pan Engine
   double _visibleCandlesCount = 42.0;
   double _baseCandlesCountOnScaleStart = 42.0;
   double _scrollOffset = 0.0;
@@ -677,7 +677,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     return _positionSide == 'LONG' ? (diff * _orderQty) : (-diff * _orderQty);
   }
 
-  // Exact Indian Comma Formatter for Real Volume Quantity
   String _formatExactVolume(int vol) {
     return vol.toString().replaceAllMapped(
       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
@@ -698,7 +697,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     return vol.toStringAsFixed(0);
   }
 
-  // 20-Period Volume EMA calculation helper
   List<double> _calculateVolumeEma(List<ReplayCandle> list, int period) {
     if (list.isEmpty) return [];
     final List<double> ema = List.filled(list.length, 0.0);
@@ -755,10 +753,8 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     final count = min(_visibleCandlesCount.toInt(), visibleSlice.length);
     final displayCandles = visibleSlice.sublist(visibleSlice.length - count);
 
-    // Calculate Volume 20 EMA series
     final volumeEmaSeries = _calculateVolumeEma(visibleSlice, 20);
 
-    // Dynamic Hovered Candle detection (When finger touches chart)
     ReplayCandle activeCandle = currentCandle;
     double activeVolEma = volumeEmaSeries.isNotEmpty ? volumeEmaSeries.last : 0.0;
 
@@ -791,7 +787,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
-            // High-Contrast Interactive Viewport with Calibrated Zoom
+            // High-Contrast Interactive Viewport with Prominent Volume
             Expanded(
               child: Stack(
                 children: [
@@ -959,7 +955,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // Dynamic Inspector HUD with exact Volume + 20 EMA
   Widget _buildOHLCVHud(ReplayCandle c, double volEma, {bool isInspecting = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
@@ -991,13 +986,15 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                         color: const Color(0xFF00F0FF).withOpacity(0.2),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Text('CURSOR', style: TextStyle(color: Color(0xFF00F0FF), fontSize: 8, fontWeight: FontWeight.w900)),
+                      child: const Text('CURSOR',
+                          style: TextStyle(color: Color(0xFF00F0FF), fontSize: 8, fontWeight: FontWeight.w900)),
                     ),
                 ],
               ),
             ),
           ),
-          Text(c.date, style: GoogleFonts.robotoMono(fontSize: 10, color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
+          Text(c.date,
+              style: GoogleFonts.robotoMono(fontSize: 10, color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -1247,7 +1244,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   }
 }
 
-// ---------------- TRADINGVIEW PRO CUSTOM PAINTER (WITH REAL VOLUME & 20 EMA) ----------------
+// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER (WITH BALANCED VOLUME) ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
   final List<double> volumeEmaSeries;
@@ -1278,7 +1275,7 @@ class TradingViewProPainter extends CustomPainter {
     if (candles.isEmpty) return;
 
     const double priceAxisWidth = 75.0;
-    const double volumeHeight = 65.0;
+    const double volumeHeight = 95.0; // Expanded to 95px for impactful volume visibility
 
     final chartWidth = size.width;
     final chartHeight = size.height - volumeHeight;
@@ -1291,8 +1288,12 @@ class TradingViewProPainter extends CustomPainter {
 
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
-    int maxVol = displayCandles.map((c) => c.volume).reduce(max);
-    if (maxVol <= 0) maxVol = 1;
+
+    // Realistic Volume Normalization: Avoid outlier spikes squashing normal candles
+    final sortedVolumes = displayCandles.map((c) => c.volume.toDouble()).toList()..sort();
+    final double medianVol = sortedVolumes[(sortedVolumes.length * 0.5).floor()];
+    final double p90Vol = sortedVolumes[(sortedVolumes.length * 0.9).floor()];
+    final double benchmarkVol = max(p90Vol, medianVol * 2.2);
 
     if (entryPrice != null) {
       if (stopLoss != null) {
@@ -1344,25 +1345,25 @@ class TradingViewProPainter extends CustomPainter {
     canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth + priceAxisWidth, chartHeight), gridPaint);
     final volLabelPainter = TextPainter(
       text: TextSpan(
-        text: 'Vol Max ${_formatCompactVol(maxVol)}  ',
-        style: const TextStyle(color: Color(0xFF475569), fontSize: 9, fontWeight: FontWeight.bold),
+        text: 'Volume Panel (${_formatCompactVol(benchmarkVol)})  ',
+        style: const TextStyle(color: Color(0xFF475569), fontSize: 9.5, fontWeight: FontWeight.bold),
         children: const [
           TextSpan(
-            text: '● Vol EMA 20',
-            style: TextStyle(color: Color(0xFFFF9800), fontSize: 9, fontWeight: FontWeight.w800),
+            text: '● 20 EMA',
+            style: TextStyle(color: Color(0xFFFF9800), fontSize: 9.5, fontWeight: FontWeight.w900),
           ),
         ],
       ),
       textDirection: TextDirection.ltr,
     )..layout();
-    volLabelPainter.paint(canvas, Offset(4, chartHeight + 2));
+    volLabelPainter.paint(canvas, Offset(6, chartHeight + 3));
 
     final candleWidth = chartWidth / displayCandles.length;
     final bullColor = const Color(0xFF00F5A0);
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.3;
 
-    // 3. Render Candlesticks & Volume Histogram
+    // 3. Render Candlesticks & Volume Histogram (Prominent Height & Opacity)
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -1395,18 +1396,18 @@ class TradingViewProPainter extends CustomPainter {
         bodyPaint,
       );
 
-      // Volume Bar
-      final double normalizedVol = (c.volume / maxVol).clamp(0.0, 1.0);
-      final double vHeight = normalizedVol * (volumeHeight - 12);
+      // Balanced Volume Bar (Dynamic Normalization for visible contrast)
+      final double volFraction = (c.volume / benchmarkVol).clamp(0.06, 1.0);
+      final double vHeight = volFraction * (volumeHeight - 16);
 
       final vPaint = Paint()
-        ..color = color.withOpacity(0.35)
+        ..color = color.withOpacity(0.80) // 0.80 solid opacity for punchy visuals
         ..style = PaintingStyle.fill;
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(
-          Rect.fromLTWH(x - (candleWidth * 0.30), size.height - vHeight, candleWidth * 0.60, vHeight),
-          const Radius.circular(1.0),
+          Rect.fromLTWH(x - (candleWidth * 0.32), size.height - vHeight, candleWidth * 0.64, vHeight),
+          const Radius.circular(1.5),
         ),
         vPaint,
       );
@@ -1416,7 +1417,7 @@ class TradingViewProPainter extends CustomPainter {
     if (displayEma.isNotEmpty) {
       final emaPaint = Paint()
         ..color = const Color(0xFFFF9800)
-        ..strokeWidth = 1.5
+        ..strokeWidth = 1.6
         ..style = PaintingStyle.stroke;
 
       final emaPath = Path();
@@ -1425,8 +1426,8 @@ class TradingViewProPainter extends CustomPainter {
       for (int i = 0; i < displayCandles.length; i++) {
         final double emaVal = displayEma[i];
         final double x = i * candleWidth + (candleWidth / 2) + scrollOffset;
-        final double normalizedEma = (emaVal / maxVol).clamp(0.0, 1.2);
-        final double emaY = size.height - (normalizedEma * (volumeHeight - 12));
+        final double volFraction = (emaVal / benchmarkVol).clamp(0.06, 1.0);
+        final double emaY = size.height - (volFraction * (volumeHeight - 16));
 
         if (first) {
           emaPath.moveTo(x, emaY);
@@ -1438,7 +1439,7 @@ class TradingViewProPainter extends CustomPainter {
       canvas.drawPath(emaPath, emaPaint);
     }
 
-    // 5. Live Current Price Marker (LTP Tag on Scale)
+    // 5. Live Current Price Marker
     final latestCandle = displayCandles.last;
     final ltpY = chartHeight - ((latestCandle.close - minPrice) / range) * chartHeight;
     final ltpColor = latestCandle.isBull ? bullColor : bearColor;
@@ -1466,7 +1467,7 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     ltpText.paint(canvas, Offset(chartWidth + 8, ltpY - 6));
 
-    // 6. Bracket Zones (SL/TP Glow lines)
+    // 6. Bracket Zones
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
