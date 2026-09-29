@@ -1,4 +1,4 @@
-name: Execute Daily Stock Strategy Scanner
+name: Execute Daily Stock  Scanner
 
 on:
   schedule:
