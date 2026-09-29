@@ -26,10 +26,10 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Generate Android Skeleton & Dependencies
+      - name: Generate Android Skeleton & Add Permissions
         run: |
-          # Package name com.stockmarket set karne ke liye
           flutter create . --project-name stockpulse --org com --platforms=android
+          sed -i '/<application/i <uses-permission android:name="android.permission.INTERNET"/>' android/app/src/main/AndroidManifest.xml
           flutter pub get
 
       - name: Build Release APK
@@ -38,13 +38,13 @@ jobs:
       - name: Compress APK to ZIP
         run: |
           cd build/app/outputs/flutter-apk/
-          zip stockmarket-app.zip app-release.apk
+          zip stockpulse-app.zip app-release.apk
 
       - name: Upload ZIP to GitHub Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: stockmarket-app-zip
-          path: build/app/outputs/flutter-apk/stockmarket-app.zip
+          name: stockpulse-app-zip
+          path: build/app/outputs/flutter-apk/stockpulse-app.zip
 
       - name: Send ZIP to Telegram
         env:
@@ -52,6 +52,6 @@ jobs:
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           curl -F chat_id="$CHAT_ID" \
-               -F document=@"build/app/outputs/flutter-apk/stockmarket-app.zip" \
-               -F caption="Stock Market App (com.stockmarket) - Ready! 🚀" \
+               -F document=@"build/app/outputs/flutter-apk/stockpulse-app.zip" \
+               -F caption="StockPulse (Dalal Street Update) - App Ready! 🚀" \
                https://api.telegram.org/bot$BOT_TOKEN/sendDocument
