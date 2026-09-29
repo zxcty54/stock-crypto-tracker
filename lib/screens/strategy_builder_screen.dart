@@ -94,25 +94,29 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
 
   // Replay State
   List<ReplayCandle> _activeSeries = [];
-  int _cursor = 45;
+  int _cursor = 50;
   Timer? _timer;
   bool _isPlaying = false;
-  final int _speedMs = 650;
+  final int _speedMs = 600;
   bool _isLandscape = false;
+
+  // Interactive Viewport (Smooth Zoom & Pan)
+  double _visibleCandlesCount = 42.0;
+  double _scrollOffset = 0.0;
+  Offset? _crosshairPosition;
 
   // Account Ledger
   double _virtualCapital = 500000.0;
-  double _startingCapital = 500000.0;
-  double _orderQty = 50.0;
+  final double _startingCapital = 500000.0;
+  final double _orderQty = 50.0;
 
-  // Active Position State
-  String? _positionSide; // 'LONG' or 'SHORT'
+  // Position State
+  String? _positionSide;
   double? _entryPrice;
   double? _stopLoss;
   double? _takeProfit;
   String? _entryDate;
 
-  // History Journal
   final List<ClosedTrade> _tradeHistory = [];
 
   @override
@@ -184,7 +188,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'Network connection issue: $e';
+        _errorMessage = 'Network issue: $e';
         _isLoading = false;
       });
     }
@@ -199,10 +203,12 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     setState(() {
       _activeSeries = candles;
       _cursor = randomStart;
+      _scrollOffset = 0.0;
       _entryPrice = null;
       _positionSide = null;
       _stopLoss = null;
       _takeProfit = null;
+      _crosshairPosition = null;
       _stopEngine();
     });
   }
@@ -246,7 +252,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     setState(() => _isPlaying = false);
   }
 
-  // Bracket Auto-Execution (SL / TP Hit)
   void _evaluateAutoBrackets() {
     if (_positionSide == null || _entryPrice == null) return;
     final bar = _activeSeries[_cursor];
@@ -276,14 +281,13 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     if (_virtualCapital < marginRequired) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Insufficient capital margin for this trade size!'),
+          content: Text('Margin unavailable for this trade size!'),
           backgroundColor: Colors.redAccent,
         ),
       );
       return;
     }
 
-    // Default 1.5% SL and 3.0% Target
     final slDelta = ltp * 0.015;
     final tpDelta = ltp * 0.030;
 
@@ -328,7 +332,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$reason: ${pnl >= 0 ? "+" : ""}₹${pnl.toStringAsFixed(1)}'),
-        backgroundColor: pnl >= 0 ? const Color(0xFF00E676) : const Color(0xFFFF3366),
+        backgroundColor: pnl >= 0 ? const Color(0xFF00F0FF) : const Color(0xFFFF2A6D),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -344,14 +348,14 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return const Scaffold(
-        backgroundColor: Color(0xFF090D16),
-        body: Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF))),
+        backgroundColor: Color(0xFF070B12),
+        body: Center(child: CircularProgressIndicator(color: Color(0xFF00F0FF), strokeWidth: 2)),
       );
     }
 
     if (_errorMessage != null || _activeSeries.isEmpty) {
       return Scaffold(
-        backgroundColor: const Color(0xFF090D16),
+        backgroundColor: const Color(0xFF070B12),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -365,7 +369,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                   setState(() => _isLoading = true);
                   _fetchDataset();
                 },
-                child: const Text('Retry Connection', style: TextStyle(color: Color(0xFF00E5FF))),
+                child: const Text('Retry Connection', style: TextStyle(color: Color(0xFF00F0FF))),
               ),
             ],
           ),
@@ -384,28 +388,55 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
         : "0";
 
     return Scaffold(
-      backgroundColor: const Color(0xFF090D16),
+      backgroundColor: const Color(0xFF070B12),
       endDrawer: _buildHistoryDrawer(),
       body: SafeArea(
         child: Column(
           children: [
             _buildTopBar(winRate),
-            _buildMetricsBar(currentLtp),
+            _buildOHLCVHud(currentCandle),
+
+            // Ultra-Smooth Canvas Viewport with Touch Drag & Pinch
             Expanded(
-              child: Container(
-                color: const Color(0xFF0B101D),
-                child: CustomPaint(
-                  size: Size.infinite,
-                  painter: RealisticChartPainter(
-                    candles: visibleSlice,
-                    entryPrice: _entryPrice,
-                    stopLoss: _stopLoss,
-                    takeProfit: _takeProfit,
-                    positionSide: _positionSide,
+              child: GestureDetector(
+                onScaleUpdate: (details) {
+                  setState(() {
+                    if (details.scale != 1.0) {
+                      _visibleCandlesCount =
+                          (_visibleCandlesCount / details.scale).clamp(18.0, 95.0);
+                    } else if (details.focalPointDelta.dx != 0) {
+                      _scrollOffset += details.focalPointDelta.dx * 0.5;
+                      _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
+                    }
+                  });
+                },
+                onScaleEnd: (_) => setState(() => _scrollOffset = 0.0),
+                onLongPressStart: (e) {
+                  HapticFeedback.selectionClick();
+                  setState(() => _crosshairPosition = e.localPosition);
+                },
+                onLongPressMoveUpdate: (e) =>
+                    setState(() => _crosshairPosition = e.localPosition),
+                onLongPressEnd: (_) => setState(() => _crosshairPosition = null),
+                child: Container(
+                  color: const Color(0xFF070B12),
+                  child: CustomPaint(
+                    size: Size.infinite,
+                    painter: TradingViewProPainter(
+                      candles: visibleSlice,
+                      visibleCount: _visibleCandlesCount.toInt(),
+                      scrollOffset: _scrollOffset,
+                      crosshair: _crosshairPosition,
+                      entryPrice: _entryPrice,
+                      stopLoss: _stopLoss,
+                      takeProfit: _takeProfit,
+                      positionSide: _positionSide,
+                    ),
                   ),
                 ),
               ),
             ),
+
             if (_positionSide != null) _buildActivePositionBanner(currentLtp, unrealized),
             _buildBottomControls(),
           ],
@@ -417,22 +448,22 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
   Widget _buildTopBar(String winRate) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      color: const Color(0xFF131B2A),
+      color: const Color(0xFF0F1726),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B),
+              color: const Color(0xFF162032),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF334155)),
+              border: Border.all(color: const Color(0xFF25334A)),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: _selectedSymbol,
-                dropdownColor: const Color(0xFF131B2A),
+                dropdownColor: const Color(0xFF0F1726),
                 style: GoogleFonts.plusJakartaSans(
-                  color: const Color(0xFF00E5FF),
+                  color: const Color(0xFF00F0FF),
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                 ),
@@ -455,8 +486,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
             onPressed: () => _initSession(_selectedSymbol),
           ),
           IconButton(
-            icon: Icon(_isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded,
-                color: Colors.white70, size: 20),
+            icon: Icon(
+              _isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded,
+              color: Colors.white70,
+              size: 20,
+            ),
             tooltip: 'Rotate View',
             onPressed: _toggleOrientation,
           ),
@@ -464,11 +498,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
           Builder(
             builder: (ctx) => TextButton.icon(
               style: TextButton.styleFrom(
-                backgroundColor: const Color(0xFF1E293B),
+                backgroundColor: const Color(0xFF162032),
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               ),
               onPressed: () => Scaffold.of(ctx).openEndDrawer(),
-              icon: const Icon(Icons.history_edu_rounded, size: 16, color: Color(0xFF00E5FF)),
+              icon: const Icon(Icons.history_edu_rounded, size: 16, color: Color(0xFF00F0FF)),
               label: Text(
                 'Journal (${_tradeHistory.length})',
                 style: GoogleFonts.plusJakartaSans(
@@ -484,51 +518,46 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     );
   }
 
-  Widget _buildMetricsBar(double ltp) {
-    final double netReturn = _virtualCapital - _startingCapital;
-    final bool isUp = netReturn >= 0;
-
+  Widget _buildOHLCVHud(ReplayCandle c) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      color: const Color(0xFF0E1626),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+      color: const Color(0xFF0A0F1A),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('ACCOUNT CAPITAL', style: TextStyle(fontSize: 10, color: Colors.white54)),
-              Row(
-                children: [
-                  Text('₹${_virtualCapital.toStringAsFixed(0)}',
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-                  const SizedBox(width: 6),
-                  Text('${isUp ? "+" : ""}₹${netReturn.toStringAsFixed(0)}',
-                      style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          color: isUp ? const Color(0xFF00E676) : const Color(0xFFFF3366))),
-                ],
-              ),
-            ],
-          ),
           Row(
             children: [
-              Text('Qty: ${_orderQty.toInt()} | ',
-                  style: const TextStyle(fontSize: 11, color: Colors.white70)),
-              Text(
-                'LTP: ₹${ltp.toStringAsFixed(2)}',
-                style: TextStyle(
-                  color: _activeSeries[_cursor].isBull
-                      ? const Color(0xFF00E676)
-                      : const Color(0xFFFF3366),
-                  fontWeight: FontWeight.w800,
-                  fontSize: 13,
-                ),
-              ),
+              _hudLabel('O', c.open.toStringAsFixed(1)),
+              _hudLabel('H', c.high.toStringAsFixed(1)),
+              _hudLabel('L', c.low.toStringAsFixed(1)),
+              _hudLabel('C', c.close.toStringAsFixed(1),
+                  color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
             ],
-          )
+          ),
+          Text(c.date, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7A99))),
         ],
+      ),
+    );
+  }
+
+  Widget _hudLabel(String tag, String val, {Color? color}) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: RichText(
+        text: TextSpan(
+          text: '$tag ',
+          style: const TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.bold),
+          children: [
+            TextSpan(
+              text: val,
+              style: TextStyle(
+                color: color ?? Colors.white70,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -537,7 +566,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     final isProfit = unrealized >= 0;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      color: const Color(0xFF1E293B),
+      color: const Color(0xFF141D2D),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -546,7 +575,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: _positionSide == 'LONG' ? const Color(0xFF00E676) : const Color(0xFFFF3366),
+                  color: _positionSide == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -560,8 +589,10 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                 children: [
                   Text('Entry: ₹${_entryPrice!.toStringAsFixed(1)}',
                       style: const TextStyle(color: Colors.white70, fontSize: 11)),
-                  Text('SL: ₹${_stopLoss?.toStringAsFixed(1) ?? "-"} | TP: ₹${_takeProfit?.toStringAsFixed(1) ?? "-"}',
-                      style: const TextStyle(color: Colors.white38, fontSize: 9)),
+                  Text(
+                    'SL: ₹${_stopLoss?.toStringAsFixed(1) ?? "-"} | TP: ₹${_takeProfit?.toStringAsFixed(1) ?? "-"}',
+                    style: const TextStyle(color: Colors.white38, fontSize: 9),
+                  ),
                 ],
               ),
             ],
@@ -569,14 +600,14 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
           Text(
             '${isProfit ? "+" : ""}₹${unrealized.toStringAsFixed(1)}',
             style: TextStyle(
-              color: isProfit ? const Color(0xFF00E676) : const Color(0xFFFF3366),
+              color: isProfit ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
               fontWeight: FontWeight.w800,
               fontSize: 15,
             ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.redAccent,
+              backgroundColor: const Color(0xFFFF2A6D),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             ),
             onPressed: () => _closeTrade(currentLtp, 'MANUAL EXIT'),
@@ -591,12 +622,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 8, 14, 18),
       decoration: const BoxDecoration(
-        color: Color(0xFF131B2A),
-        border: Border(top: BorderSide(color: Color(0xFF202C42))),
+        color: Color(0xFF0F1726),
+        border: Border(top: BorderSide(color: Color(0xFF1E2B3E))),
       ),
       child: Row(
         children: [
-          // Replay Bar Stepper
           Row(
             children: [
               IconButton(
@@ -606,22 +636,21 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                 },
               ),
               FloatingActionButton.small(
-                backgroundColor: const Color(0xFF00E5FF),
+                backgroundColor: const Color(0xFF00F0FF),
                 onPressed: _togglePlay,
                 child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.black),
               ),
               IconButton(
-                icon: const Icon(Icons.skip_next_rounded, color: Color(0xFF00E5FF), size: 28),
+                icon: const Icon(Icons.skip_next_rounded, color: Color(0xFF00F0FF), size: 28),
                 onPressed: _stepOneBar,
               ),
             ],
           ),
           const SizedBox(width: 8),
-          // Strategy Actions
           Expanded(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF00E676),
+                backgroundColor: const Color(0xFF00F5A0),
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
@@ -634,7 +663,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
           Expanded(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF3366),
+                backgroundColor: const Color(0xFFFF2A6D),
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
@@ -650,7 +679,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
 
   Widget _buildHistoryDrawer() {
     return Drawer(
-      backgroundColor: const Color(0xFF0E1626),
+      backgroundColor: const Color(0xFF0A0F1A),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -662,7 +691,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                 children: [
                   Text('TRADE AUDIT LOG',
                       style: GoogleFonts.plusJakartaSans(
-                          fontWeight: FontWeight.w800, fontSize: 15, color: const Color(0xFF00E5FF))),
+                          fontWeight: FontWeight.w800, fontSize: 15, color: const Color(0xFF00F0FF))),
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.white70),
                     onPressed: () => Navigator.of(context).pop(),
@@ -670,7 +699,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                 ],
               ),
             ),
-            const Divider(color: Color(0xFF202C42), height: 1),
+            const Divider(color: Color(0xFF1E2B3E), height: 1),
             if (_tradeHistory.isEmpty)
               const Expanded(
                 child: Center(
@@ -686,15 +715,15 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
                   itemBuilder: (context, index) {
                     final item = _tradeHistory[index];
                     final isWin = item.isWin;
-                    final color = isWin ? const Color(0xFF00E676) : const Color(0xFFFF3366);
+                    final color = isWin ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D);
 
                     return Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF131B2A),
+                        color: const Color(0xFF111927),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: const Color(0xFF202C42)),
+                        border: Border.all(color: const Color(0xFF1E2B3E)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -734,16 +763,22 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen> {
   }
 }
 
-// ---------------- CANDLESTICK + BRACKET LEVELS PAINTER ----------------
-class RealisticChartPainter extends CustomPainter {
+// ---------------- TRADINGVIEW PRO CUSTOM PAINTER ----------------
+class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
+  final int visibleCount;
+  final double scrollOffset;
+  final Offset? crosshair;
   final double? entryPrice;
   final double? stopLoss;
   final double? takeProfit;
   final String? positionSide;
 
-  RealisticChartPainter({
+  TradingViewProPainter({
     required this.candles,
+    required this.visibleCount,
+    required this.scrollOffset,
+    required this.crosshair,
     required this.entryPrice,
     required this.stopLoss,
     required this.takeProfit,
@@ -754,16 +789,22 @@ class RealisticChartPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (candles.isEmpty) return;
 
-    const double priceAxisWidth = 55.0;
-    final chartWidth = size.width - priceAxisWidth;
+    const double priceAxisWidth = 60.0;
+    const double volumeHeight = 55.0;
 
-    // Viewport window: Last 45 candles
-    final displayCandles = candles.length > 45 ? candles.sublist(candles.length - 45) : candles;
+    final chartWidth = size.width - priceAxisWidth;
+    final chartHeight = size.height - volumeHeight;
+
+    // Viewport Slice
+    final count = min(visibleCount, candles.length);
+    final displayCandles = candles.sublist(candles.length - count);
 
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
+    int maxVol = displayCandles.map((c) => c.volume).reduce(max);
+    if (maxVol <= 0) maxVol = 1;
 
-    // Expand range to include SL/TP lines if active
+    // Bracket level expansions
     if (entryPrice != null) {
       if (stopLoss != null) {
         maxPrice = max(maxPrice, stopLoss!);
@@ -777,56 +818,58 @@ class RealisticChartPainter extends CustomPainter {
 
     double range = maxPrice - minPrice;
     if (range <= 0) range = 1.0;
-
     maxPrice += range * 0.08;
     minPrice -= range * 0.08;
     range = maxPrice - minPrice;
 
-    // 1. Grid Lines & Right Price Scale
+    // 1. Sleek Grid Lines & Price Labels
     final gridPaint = Paint()
-      ..color = const Color(0xFF1E283A)
+      ..color = const Color(0xFF141C2B)
       ..strokeWidth = 0.8;
 
     const int gridDivisions = 5;
     for (int i = 0; i <= gridDivisions; i++) {
-      final y = size.height * (i / gridDivisions);
+      final y = chartHeight * (i / gridDivisions);
       canvas.drawLine(Offset(0, y), Offset(chartWidth, y), gridPaint);
 
-      final priceAtLine = maxPrice - (range * (i / gridDivisions));
-      final textSpan = TextSpan(
-        text: priceAtLine.toStringAsFixed(1),
-        style: const TextStyle(color: Color(0xFF64748B), fontSize: 9),
-      );
-      final textPainter = TextPainter(
-        text: textSpan,
+      final p = maxPrice - (range * (i / gridDivisions));
+      final tp = TextPainter(
+        text: TextSpan(
+          text: p.toStringAsFixed(1),
+          style: const TextStyle(color: Color(0xFF4B5B75), fontSize: 9, fontWeight: FontWeight.bold),
+        ),
         textDirection: TextDirection.ltr,
       )..layout();
-      textPainter.paint(canvas, Offset(chartWidth + 6, y - 6));
+      tp.paint(canvas, Offset(chartWidth + 6, y - 6));
     }
 
-    // 2. Candlesticks
-    final candleWidth = chartWidth / displayCandles.length;
-    final bullColor = const Color(0xFF00E676);
-    final bearColor = const Color(0xFFFF3366);
-    final linePaint = Paint()..strokeWidth = 1.2;
+    // 2. Volume Sub-panel Separator
+    canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth, chartHeight), gridPaint);
 
+    final candleWidth = chartWidth / displayCandles.length;
+    final bullColor = const Color(0xFF00F5A0);
+    final bearColor = const Color(0xFFFF2A6D);
+    final wickPaint = Paint()..strokeWidth = 1.2;
+
+    // 3. Render Candlesticks & Volume Bars
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
       final color = isBull ? bullColor : bearColor;
-      linePaint.color = color;
+      wickPaint.color = color;
 
-      final x = i * candleWidth + (candleWidth / 2);
+      final x = i * candleWidth + (candleWidth / 2) + scrollOffset;
 
-      final openY = size.height - ((c.open - minPrice) / range) * size.height;
-      final closeY = size.height - ((c.close - minPrice) / range) * size.height;
-      final highY = size.height - ((c.high - minPrice) / range) * size.height;
-      final lowY = size.height - ((c.low - minPrice) / range) * size.height;
+      // Candlestick Y coordinates
+      final openY = chartHeight - ((c.open - minPrice) / range) * chartHeight;
+      final closeY = chartHeight - ((c.close - minPrice) / range) * chartHeight;
+      final highY = chartHeight - ((c.high - minPrice) / range) * chartHeight;
+      final lowY = chartHeight - ((c.low - minPrice) / range) * chartHeight;
 
-      // Wick
-      canvas.drawLine(Offset(x, highY), Offset(x, lowY), linePaint);
+      // Wicks
+      canvas.drawLine(Offset(x, highY), Offset(x, lowY), wickPaint);
 
-      // Body
+      // Rounded Candle Body
       final topY = min(openY, closeY);
       final bodyHeight = max((openY - closeY).abs(), 2.0);
 
@@ -836,51 +879,102 @@ class RealisticChartPainter extends CustomPainter {
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(
-          Rect.fromLTWH(x - (candleWidth * 0.35), topY, candleWidth * 0.7, bodyHeight),
-          const Radius.circular(1.5),
+          Rect.fromLTWH(x - (candleWidth * 0.36), topY, candleWidth * 0.72, bodyHeight),
+          const Radius.circular(2.0),
         ),
         bodyPaint,
       );
+
+      // Volume Bars
+      final vHeight = (c.volume / maxVol) * (volumeHeight - 8);
+      final vPaint = Paint()
+        ..color = color.withOpacity(0.25)
+        ..style = PaintingStyle.fill;
+
+      canvas.drawRect(
+        Rect.fromLTWH(x - (candleWidth * 0.32), size.height - vHeight, candleWidth * 0.64, vHeight),
+        vPaint,
+      );
     }
 
-    // 3. Trade Entry, SL, and TP Lines
+    // 4. Bracket Zones & Levels (SL/TP Glow lines)
     if (entryPrice != null) {
-      _drawLevelLine(canvas, size, chartWidth, entryPrice!, minPrice, range,
+      _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
 
       if (stopLoss != null) {
-        _drawLevelLine(canvas, size, chartWidth, stopLoss!, minPrice, range,
-            const Color(0xFFFF3366), 'SL');
+        _drawGlowLine(canvas, chartWidth, stopLoss!, minPrice, range, chartHeight,
+            const Color(0xFFFF2A6D), 'SL');
       }
 
       if (takeProfit != null) {
-        _drawLevelLine(canvas, size, chartWidth, takeProfit!, minPrice, range,
-            const Color(0xFF00E676), 'TARGET');
+        _drawGlowLine(canvas, chartWidth, takeProfit!, minPrice, range, chartHeight,
+            const Color(0xFF00F5A0), 'TP');
       }
+    }
+
+    // 5. Interactive Crosshair HUD
+    if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
+      final chPaint = Paint()
+        ..color = Colors.white38
+        ..strokeWidth = 0.8
+        ..style = PaintingStyle.stroke;
+
+      canvas.drawLine(Offset(0, crosshair!.dy), Offset(chartWidth, crosshair!.dy), chPaint);
+      canvas.drawLine(Offset(crosshair!.dx, 0), Offset(crosshair!.dx, size.height), chPaint);
+
+      final hoverPrice = maxPrice - ((crosshair!.dy / chartHeight) * range);
+
+      // Floating Price Badge
+      final badgePaint = Paint()..color = const Color(0xFF00F0FF);
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(chartWidth + 2, crosshair!.dy - 9, priceAxisWidth - 4, 18),
+          const Radius.circular(4),
+        ),
+        badgePaint,
+      );
+
+      final badgeText = TextPainter(
+        text: TextSpan(
+          text: hoverPrice.toStringAsFixed(1),
+          style: const TextStyle(color: Colors.black, fontSize: 9, fontWeight: FontWeight.bold),
+        ),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      badgeText.paint(canvas, Offset(chartWidth + 8, crosshair!.dy - 5));
     }
   }
 
-  void _drawLevelLine(Canvas canvas, Size size, double chartWidth, double price,
-      double minPrice, double range, Color color, String label) {
-    final y = size.height - ((price - minPrice) / range) * size.height;
+  void _drawGlowLine(Canvas canvas, double chartWidth, double price, double minPrice,
+      double range, double chartHeight, Color color, String label) {
+    final y = chartHeight - ((price - minPrice) / range) * chartHeight;
+
     final linePaint = Paint()
       ..color = color
-      ..strokeWidth = 1.2
-      ..style = PaintingStyle.stroke;
+      ..strokeWidth = 1.4;
 
     canvas.drawLine(Offset(0, y), Offset(chartWidth, y), linePaint);
 
-    final textSpan = TextSpan(
-      text: '$label: ${price.toStringAsFixed(1)}',
-      style: TextStyle(color: color, fontSize: 8, fontWeight: FontWeight.bold),
+    final bgPaint = Paint()..color = color;
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(chartWidth + 2, y - 8, 48, 16),
+        const Radius.circular(3),
+      ),
+      bgPaint,
     );
-    final textPainter = TextPainter(
-      text: textSpan,
+
+    final tp = TextPainter(
+      text: TextSpan(
+        text: '$label ${price.toStringAsFixed(0)}',
+        style: const TextStyle(color: Colors.black, fontSize: 8, fontWeight: FontWeight.w900),
+      ),
       textDirection: TextDirection.ltr,
     )..layout();
-    textPainter.paint(canvas, Offset(4, y - 11));
+    tp.paint(canvas, Offset(chartWidth + 5, y - 5));
   }
 
   @override
-  bool shouldRepaint(covariant RealisticChartPainter oldDelegate) => true;
+  bool shouldRepaint(covariant TradingViewProPainter oldDelegate) => true;
 }
