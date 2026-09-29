@@ -1,0 +1,39 @@
+name: Bootstrap 10-Day Stock History
+
+on:
+  workflow_dispatch: # GitHub Actions tab se manual 'Run workflow' button activate karega
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      - name: Run 10-Day Bootstrap Script
+        run: |
+          python bootstrap_10d_history.py
+
+      - name: Commit and Push 10-Day History JSON
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add stock_history_20d.json
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes detected in stock_history_20d.json."
+          else
+            git commit -m "🚀 Initialized 10-Day Bhavcopy History [$(date +'%d-%b-%Y')]"
+            git push origin main
+          fi
