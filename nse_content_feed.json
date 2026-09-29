@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-09-29 20:07:08 IST",
-  "worthy_count": 15,
-  "skipped_count": 8,
+  "generated_at": "2026-09-29 22:06:38 IST",
+  "worthy_count": 17,
+  "skipped_count": 9,
   "content_feed": [
+    {
+      "hash": "3902b994cc98",
+      "symbol": "PRESTIGE",
+      "company_name": "Prestige Estates Projects Limited",
+      "category": "STRATEGIC_PARTNERSHIP",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "29-Sep-2026 21:20:33",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PRESTIGE_29092026212001_PEPLInitmation290926.pdf",
+      "headline": "Prestige Estates Projects signs strategic partnership with CPPIB for up to INR 30,000 crore investment in Prestige Hospitality Ventures",
+      "content_worthy": true,
+      "worthiness_reason": "Strategic partnership involving a large CPPIB investment in subsidiary, material commercial development.",
+      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Prestige Estates Projects Limited (NSE: PRESTIGE)</b>\n\n<b>Prestige signs strategic partnership with CPPIB for up to INR 30,000 crore investment in PHVL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Investor:</b> CPPIB (CPP Investment Board Private Holdings)\n- <b>Target:</b> Prestige Hospitality Ventures Ltd (PHVL), wholly owned subsidiary\n- <b>Investment Amount:</b> Up to INR 30,000,00,00,000 (₹30,000 crore)\n- <b>Stake:</b> Approx. 27% of PHVL\n- <b>Structure:</b> Primary infusion and secondary purchase in three tranches\n- <b>Status:</b> Subject to regulatory approvals, including Competition Commission of India\n\n📌 <b>What happened:</b>\n↳ The board approved a securities subscription and purchase agreement whereby CPPIB will invest up to ₹30,000 crore in PHVL, acquiring around 27% ownership, pending approvals.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PRESTIGE_29092026212001_PEPLInitmation290926.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-09-29 22:06:16 IST"
+    },
+    {
+      "hash": "b11c9d686b0f",
+      "symbol": "LASERPOWER",
+      "company_name": "Laser Power & Infra Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "29-Sep-2026 21:27:20",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/LASERPOWER_29092026212708_Intimation_of_CESC_letter_29-09-2026.pdf",
+      "headline": "Laser Power & Infra Secures ₹44 Crore EPC Order from CESC Limited",
+      "content_worthy": true,
+      "worthiness_reason": "Material order win disclosed.",
+      "telegram_post": "📜 <b>ORDER_WIN</b> | <b>Laser Power & Infra Limited (NSE: LASERPOWER)</b>\n\n<b>Laser Power & Infra Secures ₹44 Crore EPC Order from CESC Limited</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> ₹44 crore (incl. GST)\n- <b>Counterparty:</b> CESC Limited\n- <b>Scope:</b> EPC works for Kabitirtha Distribution Station, 33kV & 220kV UG Cabling\n- <b>Execution Period:</b> Within March 2027\n- <b>Domestic:</b> Yes\n\n📌 <b>What happened:</b>\n↳ Laser Power & Infra Limited received a Letter of Intent from CESC Limited to execute EPC works for a distribution station, with a total consideration of ₹44 crore, to be completed by March 2027.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/LASERPOWER_29092026212708_Intimation_of_CESC_letter_29-09-2026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-09-29 22:05:48 IST"
+    },
     {
       "hash": "982418ffd731",
       "symbol": "SERVOTECH",
@@ -216,6 +244,48 @@
   ],
   "skipped_archive": [
     {
+      "hash": "ecab2dd07076",
+      "symbol": "MOMSBELIEF",
+      "company_name": "Rays of Belief Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "28-Sep-2026 19:45:56",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ROBL_28092026194244_Outcome.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results lack disclosed profit after tax (PAT) figure.",
+      "telegram_post": "",
+      "analyzed_at": "2026-09-29 22:06:38 IST"
+    },
+    {
+      "hash": "625017f116c1",
+      "symbol": "PRASOLCHEM",
+      "company_name": "Prasol Chemicals Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "28-Sep-2026 21:39:59",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/8591996826_28092026213438_BMOUTCOME28092026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Only approval of unaudited results without disclosed revenue or profit figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-09-29 22:06:16 IST"
+    },
+    {
+      "hash": "317562b7869d",
+      "symbol": "VIPULLTD",
+      "company_name": "Vipul Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "29-Sep-2026 21:35:33",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VIPULLTD_29092026211947_OUTCOME290926.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Revenue and PAT not disclosed in filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-09-29 22:05:48 IST"
+    },
+    {
       "hash": "24da1492c26f",
       "symbol": "ANSALAPI",
       "company_name": "Ansal Properties & Infrastructure Limited",
@@ -298,34 +368,6 @@
       "worthiness_reason": "Non‑binding MoU, no material development.",
       "telegram_post": "",
       "analyzed_at": "2026-09-29 15:32:53 IST"
-    },
-    {
-      "hash": "ecab2dd07076",
-      "symbol": "MOMSBELIEF",
-      "company_name": "Rays of Belief Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "28-Sep-2026 19:45:56",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ROBL_28092026194244_Outcome.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "PAT not disclosed in filing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-09-28 22:01:44 IST"
-    },
-    {
-      "hash": "625017f116c1",
-      "symbol": "PRASOLCHEM",
-      "company_name": "Prasol Chemicals Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "28-Sep-2026 21:39:59",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/8591996826_28092026213438_BMOUTCOME28092026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "No numeric revenue or PAT disclosed in filing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-09-28 22:01:44 IST"
     }
   ]
 }
