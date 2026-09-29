@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 // ---------------- DATA MODELS ----------------
 class ReplayCandle {
@@ -36,6 +35,7 @@ class ReplayCandle {
     );
   }
 
+  // Exact JSON Array: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -78,34 +78,6 @@ class ClosedTrade {
   });
 
   bool get isWin => pnl > 0;
-
-  Map<String, dynamic> toMap() {
-    return {
-      'symbol': symbol,
-      'side': side,
-      'entryPrice': entryPrice,
-      'exitPrice': exitPrice,
-      'qty': qty,
-      'pnl': pnl,
-      'entryDate': entryDate,
-      'exitDate': exitDate,
-      'reason': reason,
-    };
-  }
-
-  factory ClosedTrade.fromMap(Map<String, dynamic> map) {
-    return ClosedTrade(
-      symbol: map['symbol'] ?? '',
-      side: map['side'] ?? 'LONG',
-      entryPrice: (map['entryPrice'] as num?)?.toDouble() ?? 0.0,
-      exitPrice: (map['exitPrice'] as num?)?.toDouble() ?? 0.0,
-      qty: (map['qty'] as num?)?.toDouble() ?? 0.0,
-      pnl: (map['pnl'] as num?)?.toDouble() ?? 0.0,
-      entryDate: map['entryDate'] ?? '',
-      exitDate: map['exitDate'] ?? '',
-      reason: map['reason'] ?? '',
-    );
-  }
 }
 
 // ---------------- MAIN TERMINAL SCREEN ----------------
@@ -129,6 +101,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   bool _isLoading = true;
   String? _errorMessage;
 
+  // Replay State
   List<ReplayCandle> _activeSeries = [];
   int _cursor = 50;
   Timer? _timer;
@@ -136,26 +109,29 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   final int _speedMs = 600;
   bool _isLandscape = false;
 
+  // Viewport Scale & Pan
   double _visibleCandlesCount = 42.0;
   double _scrollOffset = 0.0;
   double _verticalScaleMultiplier = 1.0;
   Offset? _crosshairPosition;
 
+  // Account Ledger
   double _virtualCapital = 500000.0;
   final double _orderQty = 50.0;
 
+  // Position State
   String? _positionSide;
   double? _entryPrice;
   double? _stopLoss;
   double? _takeProfit;
   String? _entryDate;
+  int? _entryCursorIndex; // Entry candle ka track rakhne ke liye
 
   final List<ClosedTrade> _tradeHistory = [];
 
   @override
   void initState() {
     super.initState();
-    _loadStoredData();
     _fetchDataset();
   }
 
@@ -167,31 +143,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       DeviceOrientation.portraitDown,
     ]);
     super.dispose();
-  }
-
-  Future<void> _loadStoredData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final historyStr = prefs.getString('sp_journal_history');
-      final cap = prefs.getDouble('sp_virtual_capital');
-      if (historyStr != null) {
-        final List list = jsonDecode(historyStr);
-        setState(() {
-          _tradeHistory.clear();
-          _tradeHistory.addAll(list.map((e) => ClosedTrade.fromMap(e)).toList());
-          if (cap != null) _virtualCapital = cap;
-        });
-      }
-    } catch (_) {}
-  }
-
-  Future<void> _persistData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final data = jsonEncode(_tradeHistory.map((e) => e.toMap()).toList());
-      await prefs.setString('sp_journal_history', data);
-      await prefs.setDouble('sp_virtual_capital', _virtualCapital);
-    } catch (_) {}
   }
 
   void _toggleOrientation() {
@@ -268,6 +219,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       _positionSide = null;
       _stopLoss = null;
       _takeProfit = null;
+      _entryCursorIndex = null;
       _crosshairPosition = null;
       _stopEngine();
     });
@@ -309,11 +261,16 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
   void _stopEngine() {
     _timer?.cancel();
-    setState(() => _isPlaying = false);
+    if (_isPlaying) {
+      setState(() => _isPlaying = false);
+    }
   }
 
+  // Bracket Auto-Execution (Sirf nayi candles par trigger hoga)
   void _evaluateAutoBrackets() {
-    if (_positionSide == null || _entryPrice == null) return;
+    if (_positionSide == null || _entryPrice == null || _entryCursorIndex == null) return;
+    if (_cursor <= _entryCursorIndex!) return; // Entry candle par execute nahi hoga
+
     final bar = _activeSeries[_cursor];
 
     if (_positionSide == 'LONG') {
@@ -331,13 +288,252 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     }
   }
 
-  void _openPosition(String side) {
+  // Order Placement Modal (Auto-pause + Custom SL/TP Setup)
+  void _openOrderDialog(String side) {
     if (_positionSide != null || _activeSeries.isEmpty) return;
-    HapticFeedback.heavyImpact();
+
+    // 1. Sabse pehle running engine ko PAUSE karein
+    _stopEngine();
+    HapticFeedback.mediumImpact();
 
     final ltp = _activeSeries[_cursor].close;
-    final double marginRequired = ltp * _orderQty;
+    final lastLow = _activeSeries[_cursor].low;
+    final lastHigh = _activeSeries[_cursor].high;
 
+    // Realistic Default SL: Technical swing low/high or min 2.5%
+    double initialSl;
+    double initialTp;
+
+    if (side == 'LONG') {
+      final swingSl = lastLow * 0.995;
+      initialSl = min(swingSl, ltp * 0.975); // At least 2.5% room
+      final risk = ltp - initialSl;
+      initialTp = ltp + (risk * 2.0); // 1:2 R:R default
+    } else {
+      final swingSl = lastHigh * 1.005;
+      initialSl = max(swingSl, ltp * 1.025);
+      final risk = initialSl - ltp;
+      initialTp = ltp - (risk * 2.0);
+    }
+
+    double tempSl = initialSl;
+    double tempTp = initialTp;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF131B2A),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final riskPerShare = (ltp - tempSl).abs();
+            final rewardPerShare = (tempTp - ltp).abs();
+            final totalRisk = riskPerShare * _orderQty;
+            final totalReward = rewardPerShare * _orderQty;
+            final rrRatio = riskPerShare > 0 ? (rewardPerShare / riskPerShare).toStringAsFixed(1) : "0";
+
+            return Padding(
+              padding: EdgeInsets.fromLTRB(18, 16, 18, MediaQuery.of(ctx).viewInsets.bottom + 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: side == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              side == 'LONG' ? 'BUY ORDER' : 'SELL ORDER',
+                              style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.black, fontSize: 11),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '$_selectedSymbol @ ₹${ltp.toStringAsFixed(2)}',
+                            style: GoogleFonts.plusJakartaSans(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white60),
+                        onPressed: () => Navigator.pop(ctx),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Color(0xFF25334A), height: 16),
+
+                  // Risk-Reward Summary Chip
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0A0F1A),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: const Color(0xFF1E2B3E)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Risk: -₹${totalRisk.toStringAsFixed(0)}',
+                            style: const TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.bold, fontSize: 12)),
+                        Text('R:R 1:$rrRatio',
+                            style: const TextStyle(color: Color(0xFF00F0FF), fontWeight: FontWeight.w800, fontSize: 12)),
+                        Text('Target: +₹${totalReward.toStringAsFixed(0)}',
+                            style: const TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.bold, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  // Stop Loss Controller
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('STOP LOSS',
+                          style: TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w800, fontSize: 12)),
+                      Text('₹${tempSl.toStringAsFixed(1)}',
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      _stepperBtn(Icons.remove, () {
+                        setModalState(() {
+                          tempSl = side == 'LONG' ? tempSl - (ltp * 0.005) : tempSl - (ltp * 0.005);
+                        });
+                      }),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: const Color(0xFFFF2A6D),
+                            thumbColor: const Color(0xFFFF2A6D),
+                            trackHeight: 3,
+                          ),
+                          child: Slider(
+                            value: tempSl,
+                            min: side == 'LONG' ? ltp * 0.90 : ltp * 1.005,
+                            max: side == 'LONG' ? ltp * 0.995 : ltp * 1.10,
+                            onChanged: (v) => setModalState(() => tempSl = v),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      _stepperBtn(Icons.add, () {
+                        setModalState(() {
+                          tempSl = side == 'LONG' ? tempSl + (ltp * 0.005) : tempSl + (ltp * 0.005);
+                        });
+                      }),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Target Controller
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('TARGET / TAKE PROFIT',
+                          style: TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.w800, fontSize: 12)),
+                      Text('₹${tempTp.toStringAsFixed(1)}',
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      _stepperBtn(Icons.remove, () {
+                        setModalState(() {
+                          tempTp = side == 'LONG' ? tempTp - (ltp * 0.005) : tempTp - (ltp * 0.005);
+                        });
+                      }),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: const Color(0xFF00F5A0),
+                            thumbColor: const Color(0xFF00F5A0),
+                            trackHeight: 3,
+                          ),
+                          child: Slider(
+                            value: tempTp,
+                            min: side == 'LONG' ? ltp * 1.005 : ltp * 0.85,
+                            max: side == 'LONG' ? ltp * 1.15 : ltp * 0.995,
+                            onChanged: (v) => setModalState(() => tempTp = v),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      _stepperBtn(Icons.add, () {
+                        setModalState(() {
+                          tempTp = side == 'LONG' ? tempTp + (ltp * 0.005) : tempTp + (ltp * 0.005);
+                        });
+                      }),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  // Execute Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: side == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        _executeTrade(side, ltp, tempSl, tempTp);
+                      },
+                      child: Text(
+                        'CONFIRM ${side == 'LONG' ? 'BUY' : 'SHORT'} ORDER',
+                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _stepperBtn(IconData icon, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E2B3E),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(icon, color: Colors.white, size: 16),
+      ),
+    );
+  }
+
+  void _executeTrade(String side, double ltp, double sl, double tp) {
+    final double marginRequired = ltp * _orderQty;
     if (_virtualCapital < marginRequired) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -348,16 +544,23 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       return;
     }
 
-    final slDelta = ltp * 0.015;
-    final tpDelta = ltp * 0.030;
-
+    HapticFeedback.heavyImpact();
     setState(() {
       _positionSide = side;
       _entryPrice = ltp;
       _entryDate = _activeSeries[_cursor].date;
-      _stopLoss = side == 'LONG' ? (ltp - slDelta) : (ltp + slDelta);
-      _takeProfit = side == 'LONG' ? (ltp + tpDelta) : (ltp - tpDelta);
+      _entryCursorIndex = _cursor; // Abhi ki candle mark kar li
+      _stopLoss = sl;
+      _takeProfit = tp;
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Position active! Replay paused. Step forward bar-by-bar when ready.'),
+        backgroundColor: const Color(0xFF131B2A),
+        duration: const Duration(seconds: 3),
+      ),
+    );
   }
 
   void _closeTrade(double exitPrice, String reason) {
@@ -387,9 +590,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       _stopLoss = null;
       _takeProfit = null;
       _entryDate = null;
+      _entryCursorIndex = null;
+      _stopEngine(); // Trade end hone par pause kar diya
     });
-
-    _persistData();
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -469,6 +672,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(currentCandle),
 
+            // Interactive Viewport
             Expanded(
               child: Stack(
                 children: [
@@ -514,6 +718,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                     ),
                   ),
 
+                  // Right Scale Drag Zoomer
                   Positioned(
                     top: 0,
                     bottom: 0,
@@ -766,7 +971,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              onPressed: _positionSide == null ? () => _openPosition('LONG') : null,
+              onPressed: _positionSide == null ? () => _openOrderDialog('LONG') : null,
               child: const Text('BUY / LONG',
                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 12)),
             ),
@@ -779,7 +984,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              onPressed: _positionSide == null ? () => _openPosition('SHORT') : null,
+              onPressed: _positionSide == null ? () => _openOrderDialog('SHORT') : null,
               child: const Text('SELL / SHORT',
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12)),
             ),
@@ -1019,6 +1224,7 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
+    // Bracket Levels
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
@@ -1034,6 +1240,7 @@ class TradingViewProPainter extends CustomPainter {
       }
     }
 
+    // Interactive Crosshair HUD
     if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
       final chPaint = Paint()
         ..color = Colors.white38
