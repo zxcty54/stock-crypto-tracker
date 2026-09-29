@@ -35,7 +35,6 @@ class ReplayCandle {
     );
   }
 
-  // Exact JSON Array: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -117,9 +116,12 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   double _verticalScaleMultiplier = 1.0;
   Offset? _crosshairPosition;
 
+  // Drag-to-Adjust SL / Target Tracking
+  String? _draggingHandle; // 'SL' or 'TP'
+
   // Account Ledger
   double _virtualCapital = 500000.0;
-  final double _orderQty = 50.0;
+  double _orderQty = 50.0;
 
   // Position State
   String? _positionSide;
@@ -341,267 +343,16 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     }
   }
 
-  void _openOrderDialog(String side) {
+  // Instant 1-Tap Execution with Drag-Ready Brackets
+  void _executeQuickTrade(String side) {
     if (_positionSide != null || _activeSeries.isEmpty) return;
 
     _stopEngine();
-    HapticFeedback.mediumImpact();
+    HapticFeedback.heavyImpact();
 
     final ltp = _activeSeries[_cursor].close;
-
-    double initialSl = side == 'LONG' ? ltp * 0.965 : ltp * 1.035;
-    double initialTp = side == 'LONG' ? ltp * 1.070 : ltp * 0.930;
-
-    double tempSl = initialSl;
-    double tempTp = initialTp;
-    bool modalClosingBasis = _useClosingBasis;
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: const Color(0xFF131B2A),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) {
-        return StatefulBuilder(
-          builder: (context, setModalState) {
-            final riskPerShare = (ltp - tempSl).abs();
-            final rewardPerShare = (tempTp - ltp).abs();
-            final totalRisk = riskPerShare * _orderQty;
-            final totalReward = rewardPerShare * _orderQty;
-            final rrRatio = riskPerShare > 0 ? (rewardPerShare / riskPerShare).toStringAsFixed(1) : "0";
-            final slPercent = ((riskPerShare / ltp) * 100).toStringAsFixed(1);
-            final tpPercent = ((rewardPerShare / ltp) * 100).toStringAsFixed(1);
-
-            return Padding(
-              padding: EdgeInsets.fromLTRB(18, 16, 18, MediaQuery.of(ctx).viewInsets.bottom + 24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: side == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              side == 'LONG' ? 'SWING BUY' : 'SWING SHORT',
-                              style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.black, fontSize: 11),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            '$_selectedSymbol @ ₹${ltp.toStringAsFixed(2)}',
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close, color: Colors.white60),
-                        onPressed: () => Navigator.pop(ctx),
-                      ),
-                    ],
-                  ),
-                  const Divider(color: Color(0xFF25334A), height: 14),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0A0F1A),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xFF1E2B3E)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Risk: -₹${totalRisk.toStringAsFixed(0)} ($slPercent%)',
-                            style: const TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.bold, fontSize: 11)),
-                        Text('R:R 1:$rrRatio',
-                            style: const TextStyle(color: Color(0xFF00F0FF), fontWeight: FontWeight.w800, fontSize: 12)),
-                        Text('Target: +₹${totalReward.toStringAsFixed(0)} ($tpPercent%)',
-                            style: const TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.bold, fontSize: 11)),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('STOP LOSS LEVEL',
-                          style: TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w800, fontSize: 12)),
-                      Text('₹${tempSl.toStringAsFixed(1)} (-$slPercent%)',
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13)),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      _stepperBtn(Icons.remove, () {
-                        setModalState(() {
-                          tempSl = side == 'LONG' ? tempSl - (ltp * 0.005) : tempSl + (ltp * 0.005);
-                        });
-                      }),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: const Color(0xFFFF2A6D),
-                            thumbColor: const Color(0xFFFF2A6D),
-                            trackHeight: 3,
-                          ),
-                          child: Slider(
-                            value: tempSl,
-                            min: side == 'LONG' ? ltp * 0.88 : ltp * 1.01,
-                            max: side == 'LONG' ? ltp * 0.99 : ltp * 1.12,
-                            onChanged: (v) => setModalState(() => tempSl = v),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      _stepperBtn(Icons.add, () {
-                        setModalState(() {
-                          tempSl = side == 'LONG' ? tempSl + (ltp * 0.005) : tempSl - (ltp * 0.005);
-                        });
-                      }),
-                    ],
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('TARGET TAKE-PROFIT',
-                          style: TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.w800, fontSize: 12)),
-                      Text('₹${tempTp.toStringAsFixed(1)} (+$tpPercent%)',
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13)),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      _stepperBtn(Icons.remove, () {
-                        setModalState(() {
-                          tempTp = side == 'LONG' ? tempTp - (ltp * 0.005) : tempTp + (ltp * 0.005);
-                        });
-                      }),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: const Color(0xFF00F5A0),
-                            thumbColor: const Color(0xFF00F5A0),
-                            trackHeight: 3,
-                          ),
-                          child: Slider(
-                            value: tempTp,
-                            min: side == 'LONG' ? ltp * 1.01 : ltp * 0.85,
-                            max: side == 'LONG' ? ltp * 1.20 : ltp * 0.99,
-                            onChanged: (v) => setModalState(() => tempTp = v),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      _stepperBtn(Icons.add, () {
-                        setModalState(() {
-                          tempTp = side == 'LONG' ? tempTp + (ltp * 0.005) : tempTp - (ltp * 0.005);
-                        });
-                      }),
-                    ],
-                  ),
-
-                  const SizedBox(height: 8),
-
-                  InkWell(
-                    onTap: () {
-                      setModalState(() => modalClosingBasis = !modalClosingBasis);
-                    },
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1A2333),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            modalClosingBasis ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
-                            size: 18,
-                            color: const Color(0xFF00F0FF),
-                          ),
-                          const SizedBox(width: 8),
-                          const Expanded(
-                            child: Text(
-                              'SL on Daily Candle Close (Avoids intraday wick hunts)',
-                              style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 46,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: side == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(ctx);
-                        setState(() => _useClosingBasis = modalClosingBasis);
-                        _executeTrade(side, ltp, tempSl, tempTp);
-                      },
-                      child: Text(
-                        'PLACE ${side == 'LONG' ? 'BUY' : 'SHORT'} ORDER',
-                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 13),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  Widget _stepperBtn(IconData icon, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: const Color(0xFF1E2B3E),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(icon, color: Colors.white, size: 16),
-      ),
-    );
-  }
-
-  void _executeTrade(String side, double ltp, double sl, double tp) {
     final double marginRequired = ltp * _orderQty;
+
     if (_virtualCapital < marginRequired) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -612,7 +363,10 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       return;
     }
 
-    HapticFeedback.heavyImpact();
+    // Default room: 4% SL & 8% Target (1:2 R:R)
+    final double sl = side == 'LONG' ? ltp * 0.96 : ltp * 1.04;
+    final double tp = side == 'LONG' ? ltp * 1.08 : ltp * 0.92;
+
     setState(() {
       _positionSide = side;
       _entryPrice = ltp;
@@ -624,9 +378,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Position active! Replay is paused. Tap Play (▶) or Step (⏭) to advance.'),
+        content: Text('⚡ Order Active! Drag the Green/Red handle lines on the chart to adjust TP & SL.'),
         backgroundColor: Color(0xFF131B2A),
-        duration: Duration(seconds: 3),
+        duration: Duration(seconds: 4),
       ),
     );
   }
@@ -787,65 +541,132 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
-            // High-Contrast Interactive Viewport with Prominent Volume
+            // High-Contrast Interactive Viewport with Floating Orders + Draggable Handles
             Expanded(
               child: Stack(
                 children: [
                   Positioned.fill(
                     right: 75,
-                    child: GestureDetector(
-                      onScaleStart: (_) {
-                        _baseCandlesCountOnScaleStart = _visibleCandlesCount;
-                      },
-                      onScaleUpdate: (details) {
-                        setState(() {
-                          if (details.scale != 1.0) {
-                            const double dampingFactor = 0.45;
-                            final double deltaScale = (details.scale - 1.0) * dampingFactor;
-                            final double effectiveScale = 1.0 + deltaScale;
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final chartHeight = constraints.maxHeight - 95.0; // 95px volume panel
+                        final painterBounds = _calculateChartBounds(displayCandles);
 
-                            if (effectiveScale > 0.1) {
-                              _visibleCandlesCount =
-                                  (_baseCandlesCountOnScaleStart / effectiveScale).clamp(18.0, 90.0);
+                        return GestureDetector(
+                          onScaleStart: (details) {
+                            final touchY = details.localFocalPoint.dy;
+
+                            // Detect if user touched near the Stop Loss or Take Profit line
+                            if (_positionSide != null && _entryPrice != null) {
+                              if (_stopLoss != null) {
+                                final slY = _priceToY(_stopLoss!, painterBounds.minPrice, painterBounds.range, chartHeight);
+                                if ((touchY - slY).abs() <= 28) {
+                                  _draggingHandle = 'SL';
+                                  HapticFeedback.selectionClick();
+                                  return;
+                                }
+                              }
+                              if (_takeProfit != null) {
+                                final tpY = _priceToY(_takeProfit!, painterBounds.minPrice, painterBounds.range, chartHeight);
+                                if ((touchY - tpY).abs() <= 28) {
+                                  _draggingHandle = 'TP';
+                                  HapticFeedback.selectionClick();
+                                  return;
+                                }
+                              }
                             }
-                          } else if (details.focalPointDelta.dx != 0) {
-                            if (_crosshairPosition != null) {
-                              _crosshairPosition = details.localFocalPoint;
-                            } else {
-                              _scrollOffset += details.focalPointDelta.dx * 0.45;
-                              _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
-                            }
-                          }
-                        });
-                      },
-                      onScaleEnd: (_) => setState(() => _scrollOffset = 0.0),
-                      onLongPressStart: (e) {
-                        HapticFeedback.selectionClick();
-                        setState(() => _crosshairPosition = e.localPosition);
-                      },
-                      onLongPressMoveUpdate: (e) =>
-                          setState(() => _crosshairPosition = e.localPosition),
-                      onLongPressEnd: (_) => setState(() => _crosshairPosition = null),
-                      child: Container(
-                        color: const Color(0xFF070B12),
-                        child: CustomPaint(
-                          size: Size.infinite,
-                          painter: TradingViewProPainter(
-                            candles: visibleSlice,
-                            volumeEmaSeries: volumeEmaSeries,
-                            visibleCount: _visibleCandlesCount.toInt(),
-                            scrollOffset: _scrollOffset,
-                            verticalScaleMultiplier: _verticalScaleMultiplier,
-                            crosshair: _crosshairPosition,
-                            entryPrice: _entryPrice,
-                            stopLoss: _stopLoss,
-                            takeProfit: _takeProfit,
-                            positionSide: _positionSide,
+
+                            _draggingHandle = null;
+                            _baseCandlesCountOnScaleStart = _visibleCandlesCount;
+                          },
+                          onScaleUpdate: (details) {
+                            setState(() {
+                              // If dragging Stop Loss line directly on chart
+                              if (_draggingHandle == 'SL') {
+                                final newPrice = _yToPrice(details.localFocalPoint.dy, painterBounds.minPrice, painterBounds.range, chartHeight);
+                                if (_positionSide == 'LONG') {
+                                  _stopLoss = min(newPrice, _entryPrice! * 0.998);
+                                } else {
+                                  _stopLoss = max(newPrice, _entryPrice! * 1.002);
+                                }
+                                return;
+                              }
+
+                              // If dragging Take Profit line directly on chart
+                              if (_draggingHandle == 'TP') {
+                                final newPrice = _yToPrice(details.localFocalPoint.dy, painterBounds.minPrice, painterBounds.range, chartHeight);
+                                if (_positionSide == 'LONG') {
+                                  _takeProfit = max(newPrice, _entryPrice! * 1.002);
+                                } else {
+                                  _takeProfit = min(newPrice, _entryPrice! * 0.998);
+                                }
+                                return;
+                              }
+
+                              // Damped controlled zoom
+                              if (details.scale != 1.0) {
+                                const double dampingFactor = 0.45;
+                                final double deltaScale = (details.scale - 1.0) * dampingFactor;
+                                final double effectiveScale = 1.0 + deltaScale;
+
+                                if (effectiveScale > 0.1) {
+                                  _visibleCandlesCount =
+                                      (_baseCandlesCountOnScaleStart / effectiveScale).clamp(18.0, 90.0);
+                                }
+                              } else if (details.focalPointDelta.dx != 0) {
+                                if (_crosshairPosition != null) {
+                                  _crosshairPosition = details.localFocalPoint;
+                                } else {
+                                  _scrollOffset += details.focalPointDelta.dx * 0.45;
+                                  _scrollOffset = _scrollOffset.clamp(-150.0, 150.0);
+                                }
+                              }
+                            });
+                          },
+                          onScaleEnd: (_) {
+                            setState(() {
+                              _draggingHandle = null;
+                              _scrollOffset = 0.0;
+                            });
+                          },
+                          onLongPressStart: (e) {
+                            HapticFeedback.selectionClick();
+                            setState(() => _crosshairPosition = e.localPosition);
+                          },
+                          onLongPressMoveUpdate: (e) =>
+                              setState(() => _crosshairPosition = e.localPosition),
+                          onLongPressEnd: (_) => setState(() => _crosshairPosition = null),
+                          child: Container(
+                            color: const Color(0xFF070B12),
+                            child: CustomPaint(
+                              size: Size.infinite,
+                              painter: TradingViewProPainter(
+                                candles: visibleSlice,
+                                volumeEmaSeries: volumeEmaSeries,
+                                visibleCount: _visibleCandlesCount.toInt(),
+                                scrollOffset: _scrollOffset,
+                                verticalScaleMultiplier: _verticalScaleMultiplier,
+                                crosshair: _crosshairPosition,
+                                entryPrice: _entryPrice,
+                                stopLoss: _stopLoss,
+                                takeProfit: _takeProfit,
+                                positionSide: _positionSide,
+                                orderQty: _orderQty,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
+
+                  // TradingView Floating Screen Order Dock (Top-Left overlay)
+                  if (_positionSide == null)
+                    Positioned(
+                      top: 10,
+                      left: 12,
+                      child: _buildFloatingTradingViewOrderDock(currentLtp),
+                    ),
 
                   // Right Scale Drag Zoomer Layer
                   Positioned(
@@ -880,6 +701,117 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
         ),
       ),
     );
+  }
+
+  // Floating On-Chart Instant Order Dock
+  Widget _buildFloatingTradingViewOrderDock(double ltp) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A).withOpacity(0.92),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFF25334A)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            onTap: () => _executeQuickTrade('SHORT'),
+            borderRadius: BorderRadius.circular(6),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFF2A6D).withOpacity(0.18),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.5)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('SELL', style: TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w900, fontSize: 10)),
+                  Text('₹${ltp.toStringAsFixed(1)}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11)),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${_orderQty.toInt()}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 12)),
+                const Text('QTY', style: TextStyle(color: Color(0xFF6B7A99), fontSize: 8, fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () => _executeQuickTrade('LONG'),
+            borderRadius: BorderRadius.circular(6),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF00F5A0).withOpacity(0.18),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF00F5A0).withOpacity(0.5)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('BUY', style: TextStyle(color: Color(0xFF00F5A0), fontWeight: FontWeight.w900, fontSize: 10)),
+                  Text('₹${ltp.toStringAsFixed(1)}', style: GoogleFonts.robotoMono(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper bounds calculations for accurate Drag-To-Price conversions
+  _PainterBounds _calculateChartBounds(List<ReplayCandle> displayCandles) {
+    double maxPrice = displayCandles.map((c) => c.high).reduce(max);
+    double minPrice = displayCandles.map((c) => c.low).reduce(min);
+
+    if (_entryPrice != null) {
+      if (_stopLoss != null) {
+        maxPrice = max(maxPrice, _stopLoss!);
+        minPrice = min(minPrice, _stopLoss!);
+      }
+      if (_takeProfit != null) {
+        maxPrice = max(maxPrice, _takeProfit!);
+        minPrice = min(minPrice, _takeProfit!);
+      }
+    }
+
+    double baseRange = maxPrice - minPrice;
+    if (baseRange <= 0) baseRange = 1.0;
+
+    final double midPrice = (maxPrice + minPrice) / 2;
+    final double adjustedRange = (baseRange / _verticalScaleMultiplier);
+
+    maxPrice = midPrice + (adjustedRange / 2);
+    minPrice = midPrice - (adjustedRange / 2);
+
+    return _PainterBounds(minPrice: minPrice, maxPrice: maxPrice, range: maxPrice - minPrice);
+  }
+
+  double _priceToY(double price, double minPrice, double range, double chartHeight) {
+    return chartHeight - ((price - minPrice) / range) * chartHeight;
+  }
+
+  double _yToPrice(double y, double minPrice, double range, double chartHeight) {
+    final fraction = (chartHeight - y) / chartHeight;
+    return minPrice + (fraction * range);
   }
 
   Widget _buildTopBar(String winRate) {
@@ -1050,8 +982,8 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                   Text('Entry: ₹${_entryPrice!.toStringAsFixed(1)}',
                       style: const TextStyle(color: Colors.white70, fontSize: 11)),
                   Text(
-                    'SL: ₹${_stopLoss?.toStringAsFixed(1) ?? "-"} | TP: ₹${_takeProfit?.toStringAsFixed(1) ?? "-"}',
-                    style: const TextStyle(color: Colors.white38, fontSize: 9),
+                    'Drag SL & TP lines on chart',
+                    style: const TextStyle(color: Color(0xFF00F0FF), fontSize: 9, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -1135,7 +1067,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              onPressed: _positionSide == null ? () => _openOrderDialog('LONG') : null,
+              onPressed: _positionSide == null ? () => _executeQuickTrade('LONG') : null,
               child: const Text('BUY / LONG',
                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 12)),
             ),
@@ -1148,7 +1080,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              onPressed: _positionSide == null ? () => _openOrderDialog('SHORT') : null,
+              onPressed: _positionSide == null ? () => _executeQuickTrade('SHORT') : null,
               child: const Text('SELL / SHORT',
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12)),
             ),
@@ -1244,7 +1176,15 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   }
 }
 
-// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER (WITH BALANCED VOLUME) ----------------
+class _PainterBounds {
+  final double minPrice;
+  final double maxPrice;
+  final double range;
+
+  _PainterBounds({required this.minPrice, required this.maxPrice, required this.range});
+}
+
+// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER (WITH DRAGGABLE BRACKETS) ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
   final List<double> volumeEmaSeries;
@@ -1256,6 +1196,7 @@ class TradingViewProPainter extends CustomPainter {
   final double? stopLoss;
   final double? takeProfit;
   final String? positionSide;
+  final double orderQty;
 
   TradingViewProPainter({
     required this.candles,
@@ -1268,6 +1209,7 @@ class TradingViewProPainter extends CustomPainter {
     required this.stopLoss,
     required this.takeProfit,
     required this.positionSide,
+    this.orderQty = 50.0,
   });
 
   @override
@@ -1275,7 +1217,7 @@ class TradingViewProPainter extends CustomPainter {
     if (candles.isEmpty) return;
 
     const double priceAxisWidth = 75.0;
-    const double volumeHeight = 95.0; // Expanded to 95px for impactful volume visibility
+    const double volumeHeight = 95.0;
 
     final chartWidth = size.width;
     final chartHeight = size.height - volumeHeight;
@@ -1289,7 +1231,6 @@ class TradingViewProPainter extends CustomPainter {
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
 
-    // Realistic Volume Normalization: Avoid outlier spikes squashing normal candles
     final sortedVolumes = displayCandles.map((c) => c.volume.toDouble()).toList()..sort();
     final double medianVol = sortedVolumes[(sortedVolumes.length * 0.5).floor()];
     final double p90Vol = sortedVolumes[(sortedVolumes.length * 0.9).floor()];
@@ -1363,7 +1304,24 @@ class TradingViewProPainter extends CustomPainter {
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.3;
 
-    // 3. Render Candlesticks & Volume Histogram (Prominent Height & Opacity)
+    // 3. Render Shaded Position Zones (TradingView Style Green & Red Shading)
+    if (entryPrice != null) {
+      final entryY = chartHeight - ((entryPrice! - minPrice) / range) * chartHeight;
+
+      if (takeProfit != null) {
+        final tpY = chartHeight - ((takeProfit! - minPrice) / range) * chartHeight;
+        final targetRect = Rect.fromLTRB(0, min(entryY, tpY), chartWidth, max(entryY, tpY));
+        canvas.drawRect(targetRect, Paint()..color = bullColor.withOpacity(0.06));
+      }
+
+      if (stopLoss != null) {
+        final slY = chartHeight - ((stopLoss! - minPrice) / range) * chartHeight;
+        final slRect = Rect.fromLTRB(0, min(entryY, slY), chartWidth, max(entryY, slY));
+        canvas.drawRect(slRect, Paint()..color = bearColor.withOpacity(0.06));
+      }
+    }
+
+    // 4. Render Candlesticks & Volume Histogram
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -1377,10 +1335,8 @@ class TradingViewProPainter extends CustomPainter {
       final highY = chartHeight - ((c.high - minPrice) / range) * chartHeight;
       final lowY = chartHeight - ((c.low - minPrice) / range) * chartHeight;
 
-      // Wick
       canvas.drawLine(Offset(x, highY), Offset(x, lowY), wickPaint);
 
-      // Body
       final topY = min(openY, closeY);
       final bodyHeight = max((openY - closeY).abs(), 2.0);
 
@@ -1396,12 +1352,11 @@ class TradingViewProPainter extends CustomPainter {
         bodyPaint,
       );
 
-      // Balanced Volume Bar (Dynamic Normalization for visible contrast)
       final double volFraction = (c.volume / benchmarkVol).clamp(0.06, 1.0);
       final double vHeight = volFraction * (volumeHeight - 16);
 
       final vPaint = Paint()
-        ..color = color.withOpacity(0.80) // 0.80 solid opacity for punchy visuals
+        ..color = color.withOpacity(0.80)
         ..style = PaintingStyle.fill;
 
       canvas.drawRRect(
@@ -1413,7 +1368,7 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
-    // 4. Render Volume 20 EMA Curve
+    // 5. Render Volume 20 EMA Curve
     if (displayEma.isNotEmpty) {
       final emaPaint = Paint()
         ..color = const Color(0xFFFF9800)
@@ -1439,7 +1394,7 @@ class TradingViewProPainter extends CustomPainter {
       canvas.drawPath(emaPath, emaPaint);
     }
 
-    // 5. Live Current Price Marker
+    // 6. Live Current Price Marker
     final latestCandle = displayCandles.last;
     final ltpY = chartHeight - ((latestCandle.close - minPrice) / range) * chartHeight;
     final ltpColor = latestCandle.isBull ? bullColor : bearColor;
@@ -1467,23 +1422,25 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     ltpText.paint(canvas, Offset(chartWidth + 8, ltpY - 6));
 
-    // 6. Bracket Zones
+    // 7. Interactive Draggable Bracket Handles (TradingView Position Tool)
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
 
       if (stopLoss != null) {
-        _drawGlowLine(canvas, chartWidth, stopLoss!, minPrice, range, chartHeight,
-            const Color(0xFFFF2A6D), 'SL');
+        final risk = (entryPrice! - stopLoss!).abs() * orderQty;
+        _drawDraggableHandleLine(canvas, chartWidth, stopLoss!, minPrice, range, chartHeight,
+            const Color(0xFFFF2A6D), '⠿ SL (Drag)', '-₹${risk.toStringAsFixed(0)}');
       }
 
       if (takeProfit != null) {
-        _drawGlowLine(canvas, chartWidth, takeProfit!, minPrice, range, chartHeight,
-            const Color(0xFF00F5A0), 'TP');
+        final reward = (takeProfit! - entryPrice!).abs() * orderQty;
+        _drawDraggableHandleLine(canvas, chartWidth, takeProfit!, minPrice, range, chartHeight,
+            const Color(0xFF00F5A0), '⠿ TP (Drag)', '+₹${reward.toStringAsFixed(0)}');
       }
     }
 
-    // 7. Interactive Crosshair HUD
+    // 8. Interactive Crosshair HUD
     if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
       final chPaint = Paint()
         ..color = Colors.white38
@@ -1511,7 +1468,7 @@ class TradingViewProPainter extends CustomPainter {
         ),
         textDirection: TextDirection.ltr,
       )..layout();
-      badgeText.paint(canvas, Offset(chartWidth + 8, crosshair!.dy - 6));
+      badgeText.paint(canvas, Offset(chartWidth + 6, crosshair!.dy - 6));
     }
   }
 
@@ -1542,6 +1499,56 @@ class TradingViewProPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
     )..layout();
     tp.paint(canvas, Offset(chartWidth + 6, y - 5));
+  }
+
+  void _drawDraggableHandleLine(Canvas canvas, double chartWidth, double price, double minPrice,
+      double range, double chartHeight, Color color, String label, String pnlTag) {
+    final y = chartHeight - ((price - minPrice) / range) * chartHeight;
+
+    // Dashed TradingView Bracket Line
+    final linePaint = Paint()
+      ..color = color
+      ..strokeWidth = 1.5;
+
+    canvas.drawLine(Offset(0, y), Offset(chartWidth, y), linePaint);
+
+    // Draggable Handle Pill on the Left of the line
+    final handleBg = Paint()..color = color;
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(8, y - 11, 115, 22),
+        const Radius.circular(5),
+      ),
+      handleBg,
+    );
+
+    final handleText = TextPainter(
+      text: TextSpan(
+        text: '$label  $pnlTag',
+        style: const TextStyle(color: Colors.black, fontSize: 9.5, fontWeight: FontWeight.w900),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    handleText.paint(canvas, Offset(14, y - 6));
+
+    // Price Pill on Axis
+    final axisBg = Paint()..color = color;
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(chartWidth + 3, y - 8, 62, 16),
+        const Radius.circular(3),
+      ),
+      axisBg,
+    );
+
+    final axisText = TextPainter(
+      text: TextSpan(
+        text: price.toStringAsFixed(1),
+        style: const TextStyle(color: Colors.black, fontSize: 8.5, fontWeight: FontWeight.w900),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    axisText.paint(canvas, Offset(chartWidth + 6, y - 5));
   }
 
   String _formatCompactVol(num vol) {
