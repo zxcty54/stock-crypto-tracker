@@ -11,7 +11,7 @@ TARGET_REPO = "zxcty54/stock-crypto-tracker"
 TARGET_FILE_PATH = "historical_3yr_ohlc.json"
 TARGET_BRANCH = "main"
 
-# Aapke specific IT Stocks
+# IT Majors
 SYMBOLS = ["TCS", "INFY", "HCLTECH"]
 
 def fetch_3year_ohlc():
@@ -69,15 +69,14 @@ def fetch_3year_ohlc():
         except Exception as e:
             print(f"❌ Error fetching {symbol}: {e}")
 
-    # Local Save
+    # Local Save with clean indentation (Fixes "Line too large" error)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(master_store, f, ensure_ascii=False)
+        json.dump(master_store, f, ensure_ascii=False, indent=2)
 
     print("=" * 70)
-    print(f"💾 File Saved Locally: '{OUTPUT_FILE}'")
+    print(f"💾 File Saved Locally with indent=2: '{OUTPUT_FILE}'")
     print("=" * 70)
 
-    # Sync to remote repo via API
     push_to_target_repo()
 
 
@@ -105,7 +104,6 @@ def push_to_target_repo():
         "User-Agent": "IT-OHLC-Sync-Engine"
     }
 
-    # 1. Fetch current blob SHA
     sha = None
     try:
         check_res = requests.get(api_url, headers=headers, params={"ref": TARGET_BRANCH}, timeout=15)
@@ -114,7 +112,6 @@ def push_to_target_repo():
     except Exception as e:
         print(f"⚠️ Notice while fetching SHA: {e}")
 
-    # 2. Overwrite / Commit
     payload = {
         "message": f"📊 Auto-Update: 3Y OHLCV for TCS, INFY, HCLTECH [{datetime.now().strftime('%d-%b-%Y')}]",
         "content": b64_content,
