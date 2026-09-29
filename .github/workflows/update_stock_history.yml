@@ -1,0 +1,52 @@
+name: Daily NSE Stock History Updater
+
+on:
+  schedule:
+    # Monday to Friday: 7:00 PM IST (13:30 UTC)
+    - cron: '30 13 * * 1-5'
+  
+  # Manual run button GitHub Actions UI se
+  workflow_dispatch:
+
+jobs:
+  update-history:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Execute History Updater
+        run: |
+          python update_stock_history.py
+
+      - name: Commit and Push Updated History
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -f stock_history_20d.json ]; then
+            git add stock_history_20d.json
+          fi
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Koi naya data add nahi hua ya market holiday thi. Skipping commit."
+          else
+            git commit -m "📊 Update 20-Day NSE Stock History [$(date +'%d-%b-%Y')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
