@@ -1,613 +1,1006 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-class BullionTrendData {
-  final double current24k;
-  final double current22k;
-  final double current18k;
-  final double silverPerKg;
-  final double ago1y24k;
-  final double ago6m24k;
-  final double cpiInflation;
-  final double niftyReturn;
-  final String updatedAt;
-  final String source;
+// ---------------- DATA MODELS ----------------
+class ImpactedStock {
+  final String symbol;
+  final String companyName;
+  final String sector;
+  final String impactType; // POSITIVE / NEGATIVE
+  final String marginImpactBps;
+  final int baselineBpsValue;
+  final String rationale;
+  final String businessImpact;
 
-  BullionTrendData({
-    required this.current24k,
-    required this.current22k,
-    required this.current18k,
-    required this.silverPerKg,
-    required this.ago1y24k,
-    required this.ago6m24k,
-    required this.cpiInflation,
-    required this.niftyReturn,
-    required this.updatedAt,
-    required this.source,
+  const ImpactedStock({
+    required this.symbol,
+    required this.companyName,
+    required this.sector,
+    required this.impactType,
+    required this.marginImpactBps,
+    required this.baselineBpsValue,
+    required this.rationale,
+    required this.businessImpact,
   });
 
-  factory BullionTrendData.fromJson(Map<String, dynamic> json) {
-    final rates = json['rates_per_10g'] as Map<String, dynamic>? ?? {};
-    final trend = json['trend_1y'] as Map<String, dynamic>? ?? {};
+  factory ImpactedStock.fromJson(Map<String, dynamic> json) {
+    final rawBpsString = json['margin_impact_bps']?.toString() ?? '0';
+    final cleaned = rawBpsString.replaceAll(RegExp(r'[^0-9\-]'), '');
+    final parsedBps = int.tryParse(cleaned) ?? 0;
 
-    return BullionTrendData(
-      current24k: (rates['24k'] as num?)?.toDouble() ?? 76150.0,
-      current22k: (rates['22k'] as num?)?.toDouble() ?? 69804.17,
-      current18k: (rates['18k'] as num?)?.toDouble() ?? 57112.5,
-      silverPerKg: (rates['silver_per_kg'] as num?)?.toDouble() ?? 92400.0,
-      ago1y24k: (trend['rate_1y_ago_24k'] as num?)?.toDouble() ?? 60029.42,
-      ago6m24k: (trend['rate_6m_ago_24k'] as num?)?.toDouble() ?? 68535.0,
-      cpiInflation: (trend['cpi_inflation_1y'] as num?)?.toDouble() ?? 5.4,
-      niftyReturn: (trend['nifty_1y_return'] as num?)?.toDouble() ?? -8.09,
-      updatedAt: json['updated_at']?.toString() ?? 'Latest Benchmark',
-      source: json['source']?.toString() ?? 'IBJA Official & Market Benchmark',
+    return ImpactedStock(
+      symbol: json['symbol'] ?? '',
+      companyName: json['company_name'] ?? '',
+      sector: json['sector'] ?? '',
+      impactType: (json['impact_type'] ?? 'POSITIVE').toString().toUpperCase(),
+      marginImpactBps: rawBpsString,
+      baselineBpsValue: parsedBps,
+      rationale: json['rationale'] ?? '',
+      businessImpact: json['business_impact'] ?? '',
     );
   }
 }
 
-class RetailGoldTrendCardProV2 extends StatefulWidget {
-  final bool isDarkMode;
-  const RetailGoldTrendCardProV2({super.key, this.isDarkMode = true});
+class MacroReportItem {
+  final String commodityName;
+  final String unit;
+  final double currentPrice;
+  final Map<String, dynamic> periodChanges;
+  final String marginTrajectory;
+  final String retailBadge;
+  final String macroHeadline;
+  final String forwardThesis;
+  final String importContext;
+  final String keyRisk;
+  final List<ImpactedStock> impactedStocks;
+  final double fiftyTwoWeekLow;
+  final double fiftyTwoWeekHigh;
+  final int transmissionLagDays;
 
-  @override
-  State<RetailGoldTrendCardProV2> createState() => _RetailGoldTrendCardProV2State();
+  const MacroReportItem({
+    required this.commodityName,
+    required this.unit,
+    required this.currentPrice,
+    required this.periodChanges,
+    required this.marginTrajectory,
+    required this.retailBadge,
+    required this.macroHeadline,
+    required this.forwardThesis,
+    required this.importContext,
+    required this.keyRisk,
+    required this.impactedStocks,
+    required this.fiftyTwoWeekLow,
+    required this.fiftyTwoWeekHigh,
+    this.transmissionLagDays = 60,
+  });
+
+  factory MacroReportItem.fromJson(Map<String, dynamic> json) {
+    final price = (json['current_price'] as num?)?.toDouble() ?? 0.0;
+    return MacroReportItem(
+      commodityName: json['commodity_name'] ?? '',
+      unit: json['unit'] ?? '',
+      currentPrice: price,
+      periodChanges: json['period_changes'] ?? {},
+      marginTrajectory: json['margin_trajectory'] ?? 'NEUTRAL',
+      retailBadge: json['retail_badge'] ?? '',
+      macroHeadline: json['macro_headline'] ?? '',
+      forwardThesis: json['forward_thesis'] ?? '',
+      importContext: json['import_context'] ?? '',
+      keyRisk: json['key_risk'] ?? '',
+      fiftyTwoWeekLow: (json['fifty_two_week_low'] as num?)?.toDouble() ?? (price * 0.78),
+      fiftyTwoWeekHigh: (json['fifty_two_week_high'] as num?)?.toDouble() ?? (price * 1.22),
+      transmissionLagDays: json['transmission_lag_days'] ?? 60,
+      impactedStocks: (json['impacted_stocks'] as List? ?? [])
+          .map((e) => ImpactedStock.fromJson(e))
+          .toList(),
+    );
+  }
 }
 
-class _RetailGoldTrendCardProV2State extends State<RetailGoldTrendCardProV2> {
-  final String _dataUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/ibja_rates.json';
+// ---------------- MAIN WIDGET SCREEN ----------------
+class MacroResearchDeskView extends StatefulWidget {
+  final bool isDarkMode;
+  const MacroResearchDeskView({super.key, this.isDarkMode = true});
 
-  BullionTrendData _data = BullionTrendData(
-    current24k: 76150.0,
-    current22k: 69804.17,
-    current18k: 57112.5,
-    silverPerKg: 92400.0,
-    ago1y24k: 60029.42,
-    ago6m24k: 68535.0,
-    cpiInflation: 5.4,
-    niftyReturn: -8.09,
-    updatedAt: 'Live',
-    source: 'IBJA Official',
-  );
+  @override
+  State<MacroResearchDeskView> createState() => _MacroResearchDeskViewState();
+}
 
+class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
+  final String _jsonUrl =
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/refs/heads/main/macro_research_report.json';
+
+  List<MacroReportItem> _reports = [];
+  String _lastUpdatedAt = '';
+  int _selectedCommodityIndex = 0;
   bool _isLoading = true;
-  int _selectedAssetType = 0; // 0: 22K Jewelry, 1: 24K Coin/Bar, 2: Gold ETF (BeES)
-  double _weightGrams = 10.0;
-  double _makingChargePct = 14.0;
+  String? _errorMessage;
 
-  // 🎨 Pro V2 Theme Palette
-  static const Color bgDark = Color(0xFF0F1726);
+  // Screener & Live Simulator State
+  String _searchQuery = '';
+  String _impactFilter = 'ALL'; // ALL, POSITIVE, NEGATIVE
+  double _priceSimulationOffset = 0.0; // -20% to +20%
+
+  // High-Contrast Terminal Styling
+  static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
-  static const Color borderSubtle = Color(0xFF1E2B3E);
-  static const Color borderCard = Color(0xFF25334A);
-  static const Color accentNeon = Color(0xFF00F5A0);
-  static const Color accentGold = Color(0xFFFFD700);
-  static const Color accentCyan = Color(0xFF00F0FF);
-  static const Color accentRose = Color(0xFFFF2A6D);
-  static const Color textMuted = Color(0xFF6B7A99);
-  static const Color darkPillBg = Color(0xFF0A0F1A);
+  static const Color borderSubtle = Color(0xFF202C42);
+  static const Color accentNeonGreen = Color(0xFF00E676);
+  static const Color accentCyan = Color(0xFF00E5FF);
+  static const Color accentFlame = Color(0xFFFF9100);
+  static const Color textMuted = Color(0xFF94A3B8);
 
   @override
   void initState() {
     super.initState();
-    _fetchTrendData();
+    _fetchAiResearchData();
   }
 
-  Future<void> _fetchTrendData() async {
-    try {
-      final res = await http.get(
-        Uri.parse('$_dataUrl?ts=${DateTime.now().millisecondsSinceEpoch}'),
-        headers: {'Cache-Control': 'no-cache'},
-      ).timeout(const Duration(seconds: 8));
+  Future<void> _fetchAiResearchData() async {
+    if (!mounted) return;
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
 
-      if (res.statusCode == 200) {
-        final parsed = jsonDecode(res.body);
+    try {
+      final urlWithTs = '$_jsonUrl?ts=${DateTime.now().millisecondsSinceEpoch}';
+      final response = await http.get(Uri.parse(urlWithTs)).timeout(const Duration(seconds: 12));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> decoded = jsonDecode(response.body);
+        final List<dynamic> reportsList = decoded['reports'] ?? [];
+
         if (mounted) {
           setState(() {
-            _data = BullionTrendData.fromJson(parsed);
+            _lastUpdatedAt = decoded['updated_at'] ?? '';
+            _reports = reportsList.map((e) => MacroReportItem.fromJson(e)).toList();
+            if (_selectedCommodityIndex >= _reports.length) {
+              _selectedCommodityIndex = 0;
+            }
             _isLoading = false;
           });
         }
       } else {
-        if (mounted) setState(() => _isLoading = false);
+        if (mounted) {
+          setState(() {
+            _errorMessage = 'Failed to load report (HTTP ${response.statusCode})';
+            _isLoading = false;
+          });
+        }
       }
-    } catch (_) {
-      if (mounted) setState(() => _isLoading = false);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _errorMessage = 'Network Error: Check internet connection or JSON sync';
+          _isLoading = false;
+        });
+      }
     }
-  }
-
-  String _formatInr(num val) {
-    return val.round().toString().replaceAllMapped(
-      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-      (Match m) => '${m[1]},',
-    );
-  }
-
-  void _onAssetTypeSelected(int index) {
-    HapticFeedback.selectionClick();
-    setState(() {
-      _selectedAssetType = index;
-      if (index == 0) {
-        _makingChargePct = 14.0;
-      } else if (index == 1) {
-        _makingChargePct = 3.0;
-      } else {
-        _makingChargePct = 0.0;
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // 1. Raw Gold Return
-    final double rawGoldReturnPercent =
-        ((_data.current24k - _data.ago1y24k) / _data.ago1y24k) * 100;
+    if (_isLoading) {
+      return const Scaffold(
+        backgroundColor: bgDark,
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(color: accentCyan),
+              SizedBox(height: 16),
+              Text(
+                "Syncing Institutional Macro Radar...",
+                style: TextStyle(color: textMuted, fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
-    // 2. Direct JSON Rate Matching (22k rate directly used from JSON)
-    final double currentRatePer10g =
-        _selectedAssetType == 0 ? _data.current22k : _data.current24k;
-    final double rate1yAgoPer10g = _selectedAssetType == 0
-        ? (_data.ago1y24k * (22 / 24))
-        : _data.ago1y24k;
+    if (_errorMessage != null || _reports.isEmpty) {
+      return Scaffold(
+        backgroundColor: bgDark,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 48),
+                const SizedBox(height: 12),
+                Text(
+                  _errorMessage ?? "No research reports available",
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: surfaceCard),
+                  onPressed: _fetchAiResearchData,
+                  child: const Text("Retry Sync", style: TextStyle(color: accentCyan)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
-    final double unitFactor = _weightGrams / 10.0;
+    final activeItem = _reports[_selectedCommodityIndex];
 
-    // 3. Purchase Cost breakdown
-    final double baseMetalCost1y = rate1yAgoPer10g * unitFactor;
-    final double makingChargeAmt =
-        _selectedAssetType == 2 ? 0.0 : baseMetalCost1y * (_makingChargePct / 100.0);
-    final double gstAmt =
-        _selectedAssetType == 2 ? 0.0 : (baseMetalCost1y + makingChargeAmt) * 0.03;
-    final double totalBoughtCost1y = baseMetalCost1y + makingChargeAmt + gstAmt;
+    final filteredStocks = activeItem.impactedStocks.where((s) {
+      final matchesSearch = _searchQuery.isEmpty ||
+          s.symbol.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          s.companyName.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          s.sector.toLowerCase().contains(_searchQuery.toLowerCase());
+      final matchesImpact = _impactFilter == 'ALL' || s.impactType == _impactFilter;
+      return matchesSearch && matchesImpact;
+    }).toList();
 
-    // 4. Liquidation in-hand cash
-    final double liquidationCashToday = currentRatePer10g * unitFactor;
-    final double netGainAmount = liquidationCashToday - totalBoughtCost1y;
-    final double netReturnPercent = (netGainAmount / totalBoughtCost1y) * 100;
-
-    // 5. Alpha calculations
-    final double vsInflationAlpha = netReturnPercent - _data.cpiInflation;
-    final double vsNiftyAlpha = netReturnPercent - _data.niftyReturn;
-    final double breakEvenRallyRequired =
-        ((1 + _makingChargePct / 100.0) * 1.03 - 1) * 100;
-    final double goldSilverRatio =
-        (_data.current24k * 100) / (_data.silverPerKg > 0 ? _data.silverPerKg : 1.0);
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: bgDark,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderSubtle, width: 1.2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.4),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
+    return Scaffold(
+      backgroundColor: bgDark,
+      appBar: AppBar(
+        backgroundColor: surfaceCard,
+        elevation: 0,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "MACRO MARGIN RADAR",
+              style: TextStyle(
+                fontSize: 12,
+                letterSpacing: 1.5,
+                color: accentCyan,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              _lastUpdatedAt.isNotEmpty ? "Synced: $_lastUpdatedAt" : "Corporate Input Cost Transmission",
+              style: const TextStyle(fontSize: 11, color: textMuted),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded, color: Colors.white70, size: 22),
+            onPressed: _fetchAiResearchData,
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 1. Header Bar (V2 Gold Dot & Stylized typography)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: RefreshIndicator(
+        color: accentCyan,
+        backgroundColor: surfaceCard,
+        onRefresh: _fetchAiResearchData,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              _buildCommodityRibbon(),
+              const SizedBox(height: 16),
+              _buildHeroPriceAndRangeCard(activeItem),
+              const SizedBox(height: 14),
+              _buildTransmissionPipeline(activeItem),
+              if (activeItem.importContext.isNotEmpty) ...[
+                const SizedBox(height: 14),
+                _buildSourcingGeopoliticalCard(activeItem),
+              ],
+              const SizedBox(height: 14),
+              _buildAiForecastDeck(activeItem),
+              const SizedBox(height: 14),
+              _buildSensitivitySimulator(activeItem),
+              const SizedBox(height: 22),
+              _buildScreenerHeader(filteredStocks.length),
+              const SizedBox(height: 12),
+              _buildScreenerControls(),
+              const SizedBox(height: 14),
+              _buildEquitiesList(filteredStocks),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 1. Commodity Selector Ribbon
+  Widget _buildCommodityRibbon() {
+    return SizedBox(
+      height: 44,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _reports.length,
+        itemBuilder: (context, idx) {
+          final isSelected = idx == _selectedCommodityIndex;
+          final item = _reports[idx];
+          final delta1M = (item.periodChanges['1M'] as num?)?.toDouble() ?? 0.0;
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedCommodityIndex = idx;
+                _priceSimulationOffset = 0.0;
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: isSelected ? const Color(0xFF223048) : surfaceCard,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(
+                  color: isSelected ? accentCyan : borderSubtle,
+                  width: isSelected ? 1.5 : 1.0,
+                ),
+              ),
+              child: Row(
                 children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(color: accentGold, shape: BoxShape.circle),
+                  Text(
+                    item.commodityName,
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : textMuted,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                      fontSize: 13,
+                    ),
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    'RETAIL GOLD ALPHA & SELLBACK RADAR',
-                    style: GoogleFonts.plusJakartaSans(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.6,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: (delta1M >= 0 ? accentNeonGreen : Colors.redAccent).withAlpha(40),
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                  ),
-                ],
-              ),
-              InkWell(
-                onTap: () {
-                  HapticFeedback.selectionClick();
-                  setState(() => _isLoading = true);
-                  _fetchTrendData();
-                },
-                child: Row(
-                  children: [
-                    if (_isLoading)
-                      const SizedBox(
-                        width: 10,
-                        height: 10,
-                        child: CircularProgressIndicator(strokeWidth: 1.5, color: accentGold),
-                      )
-                    else
-                      const Icon(Icons.sync_rounded, color: accentGold, size: 14),
-                    const SizedBox(width: 4),
-                    Text(
-                      _data.updatedAt.contains('IST') ? 'Synced' : 'Live',
-                      style: const TextStyle(color: accentGold, fontSize: 9.5, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          // 2. Asset Selector Chips (V2 Gold-accent theme)
-          Row(
-            children: [
-              _assetChip(0, '22K JEWELRY'),
-              const SizedBox(width: 6),
-              _assetChip(1, '24K COIN / BAR'),
-              const SizedBox(width: 6),
-              _assetChip(2, 'GOLD ETF (BEES)'),
-            ],
-          ),
-
-          const SizedBox(height: 10),
-
-          // 3. Weight Customizer Strip (V2 Card Style)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            decoration: BoxDecoration(
-              color: surfaceCard,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: borderSubtle),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Weight:', style: TextStyle(color: textMuted, fontSize: 10, fontWeight: FontWeight.bold)),
-                Row(
-                  children: [
-                    _weightPreset(8.0, '8g (1 Sov)'),
-                    const SizedBox(width: 4),
-                    _weightPreset(10.0, '10g (Std)'),
-                    const SizedBox(width: 4),
-                    _weightPreset(11.66, '11.66g (Tola)'),
-                    const SizedBox(width: 4),
-                    _weightPreset(50.0, '50g (Set)'),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // 4. Interactive Making Charge Slider
-          if (_selectedAssetType != 2) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: surfaceCard,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: borderSubtle),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    'Making: ${_makingChargePct.toInt()}%',
-                    style: const TextStyle(color: accentGold, fontSize: 10, fontWeight: FontWeight.bold),
-                  ),
-                  Expanded(
-                    child: Slider(
-                      min: 2,
-                      max: 25,
-                      divisions: 23,
-                      value: _makingChargePct,
-                      activeColor: accentGold,
-                      inactiveColor: const Color(0xFF1E2B3E),
-                      onChanged: (val) => setState(() => _makingChargePct = val),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-
-          const SizedBox(height: 12),
-
-          // 5. Core Comparison Card (V2 High-Contrast Card Style)
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: surfaceCard,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: borderCard),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Bought 1Y Ago (${_weightGrams.toStringAsFixed(1)}g Total Cost)',
-                          style: const TextStyle(color: textMuted, fontSize: 9.5),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          '₹${_formatInr(totalBoughtCost1y)}',
-                          style: GoogleFonts.robotoMono(
-                            color: Colors.white70,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Icon(Icons.arrow_forward_rounded, color: Colors.white24, size: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const Text('Cash In-Hand Today (Sellback)', style: TextStyle(color: textMuted, fontSize: 9.5)),
-                        const SizedBox(height: 2),
-                        Text(
-                          '₹${_formatInr(liquidationCashToday)}',
-                          style: GoogleFonts.robotoMono(
-                            color: accentNeon,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const Divider(color: borderSubtle, height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Net Liquidation Gain (${_weightGrams.toStringAsFixed(1)}g):',
-                      style: const TextStyle(color: Colors.white70, fontSize: 11),
-                    ),
-                    Text(
-                      '${netGainAmount >= 0 ? '+' : ''}₹${_formatInr(netGainAmount)} (${netReturnPercent.toStringAsFixed(1)}%)',
-                      style: GoogleFonts.robotoMono(
-                        color: netGainAmount >= 0 ? accentNeon : accentRose,
-                        fontSize: 13,
+                    child: Text(
+                      "${delta1M >= 0 ? '+' : ''}${delta1M.toStringAsFixed(1)}%",
+                      style: TextStyle(
+                        fontSize: 10.5,
                         fontWeight: FontWeight.w900,
+                        color: delta1M >= 0 ? accentNeonGreen : Colors.redAccent,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // 6. Educational Break-Even Warning (Jewelry)
-          if (_selectedAssetType == 0) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF2A101A),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: accentRose.withOpacity(0.4)),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.warning_amber_rounded, color: accentRose, size: 16),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      'Jewellery Break-even: Gold spot must rise +${breakEvenRallyRequired.toStringAsFixed(1)}% just to recover ${_makingChargePct.toInt()}% making charges + 3% GST.',
-                      style: const TextStyle(color: Color(0xFFFFB4C9), fontSize: 9.5, height: 1.25),
-                    ),
                   ),
                 ],
               ),
             ),
-          ],
-
-          const SizedBox(height: 10),
-
-          // 7. Triple Alpha Badges (V2 Card Style)
-          Row(
-            children: [
-              Expanded(child: _metricBadge('PAPER GAIN', '+${rawGoldReturnPercent.toStringAsFixed(1)}%', '24K Base Spot', accentCyan)),
-              const SizedBox(width: 6),
-              Expanded(child: _metricBadge('VS INFLATION', '${vsInflationAlpha >= 0 ? '+' : ''}${vsInflationAlpha.toStringAsFixed(1)}%', 'Real Alpha', vsInflationAlpha >= 0 ? accentNeon : Colors.amber)),
-              const SizedBox(width: 6),
-              Expanded(child: _metricBadge('VS NIFTY 50', '${vsNiftyAlpha >= 0 ? '+' : ''}${vsNiftyAlpha.toStringAsFixed(1)}%', 'Equity Alpha', vsNiftyAlpha >= 0 ? accentNeon : accentRose)),
-            ],
-          ),
-
-          const SizedBox(height: 10),
-
-          // 8. Existing Takeaway Insight Box (Styled with V2 Neon/Amber borders)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-            decoration: BoxDecoration(
-              color: const Color(0xFF141C2B),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: vsNiftyAlpha >= 0
-                    ? accentNeon.withOpacity(0.25)
-                    : Colors.amber.withOpacity(0.25),
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  vsNiftyAlpha >= 0 ? Icons.trending_up_rounded : Icons.info_outline,
-                  color: vsNiftyAlpha >= 0 ? accentNeon : Colors.amber,
-                  size: 16,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    _selectedAssetType == 0
-                        ? 'Due to ${_makingChargePct.toInt()}% making charges + 3% GST, 22K jewelry gives ${netReturnPercent.toStringAsFixed(1)}% cash return vs +${rawGoldReturnPercent.toStringAsFixed(1)}% paper gain.'
-                        : 'Gold generated ${vsNiftyAlpha >= 0 ? '+' : ''}${vsNiftyAlpha.toStringAsFixed(1)}% alpha over Nifty 50 in the last 1 year, preserving capital against stock market drawdowns.',
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.85),
-                      fontSize: 10,
-                      height: 1.25,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          // 9. Live Gold / Silver Ratio Strip
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-            decoration: BoxDecoration(
-              color: darkPillBg,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: borderSubtle),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Gold/Silver Ratio: ${goldSilverRatio.toStringAsFixed(1)}x',
-                  style: const TextStyle(color: accentGold, fontSize: 9.5, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Silver: ₹${_formatInr(_data.silverPerKg)}/kg',
-                  style: GoogleFonts.robotoMono(color: Colors.white70, fontSize: 9.5),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          // 10. Existing Timeline Stepper Strip (1Y Ago -> 6M Ago -> Today 24K)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            decoration: BoxDecoration(
-              color: darkPillBg,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: borderSubtle),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _milestoneItem('1Y Ago', '₹${_formatInr(_data.ago1y24k)}'),
-                const Icon(Icons.chevron_right_rounded, color: Colors.white24, size: 14),
-                _milestoneItem('6M Ago', '₹${_formatInr(_data.ago6m24k)}'),
-                const Icon(Icons.chevron_right_rounded, color: Colors.white24, size: 14),
-                _milestoneItem(
-                  'Today (24K)',
-                  '₹${_formatInr(_data.current24k)}',
-                  color: accentGold,
-                ),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
 
-  Widget _assetChip(int index, String label) {
-    final isSelected = _selectedAssetType == index;
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onAssetTypeSelected(index),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          decoration: BoxDecoration(
-            color: isSelected ? accentGold.withOpacity(0.2) : surfaceCard,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: isSelected ? accentGold : borderSubtle),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? accentGold : Colors.white60,
-              fontSize: 9.5,
-              fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  /// 2. Hero Price + Range Card
+  Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
+    final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
+    final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
 
-  Widget _weightPreset(double g, String text) {
-    final isSelected = _weightGrams == g;
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.selectionClick();
-        setState(() => _weightGrams = g);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-        decoration: BoxDecoration(
-          color: isSelected ? accentGold : bgDark,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: isSelected ? Colors.black : Colors.white70,
-            fontSize: 9,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
+    final effectivePrice = item.currentPrice * (1 + (_priceSimulationOffset / 100));
+    final range = item.fiftyTwoWeekHigh - item.fiftyTwoWeekLow;
+    final position = range > 0
+        ? ((effectivePrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0)
+        : 0.5;
 
-  Widget _metricBadge(String title, String val, String sub, Color col) {
     return Container(
-      padding: const EdgeInsets.all(7),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF101724),
-        borderRadius: BorderRadius.circular(8),
+        color: surfaceCard,
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: borderSubtle),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: textMuted, fontSize: 8, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 2),
-          Text(val, style: GoogleFonts.robotoMono(color: col, fontSize: 12, fontWeight: FontWeight.w900)),
-          Text(sub, style: const TextStyle(color: Colors.white30, fontSize: 7)),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.commodityName,
+                      style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      item.retailBadge.isNotEmpty ? item.retailBadge : "Corporate Input Cost Radar",
+                      style: TextStyle(
+                        color: isContracting ? const Color(0xFFFCA5A5) : const Color(0xFF86EFAC),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: badgeColor.withAlpha(40),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: badgeColor.withAlpha(80)),
+                ),
+                child: Text(
+                  "MARGINS: ${item.marginTrajectory}",
+                  style: TextStyle(color: badgeColor, fontSize: 10.5, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                "${effectivePrice.toStringAsFixed(2)} ${item.unit}",
+                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: accentCyan),
+              ),
+              if (_priceSimulationOffset != 0.0) ...[
+                const SizedBox(width: 8),
+                Text(
+                  "(${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}% What-If)",
+                  style: const TextStyle(fontSize: 12, color: Colors.amberAccent, fontWeight: FontWeight.bold),
+                ),
+              ]
+            ],
+          ),
+          const SizedBox(height: 14),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("52W Low: \$${item.fiftyTwoWeekLow.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
+                  Text(
+                    "Position: ${(position * 100).toInt()}%",
+                    style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
+                  Text("52W High: \$${item.fiftyTwoWeekHigh.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
+                ],
+              ),
+              const SizedBox(height: 6),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: LinearProgressIndicator(
+                  value: position,
+                  minHeight: 7,
+                  backgroundColor: const Color(0xFF1E293B),
+                  valueColor: AlwaysStoppedAnimation<Color>(isContracting ? Colors.amber : accentNeonGreen),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          const Divider(color: borderSubtle, height: 1),
+          const SizedBox(height: 14),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _deltaPill("1M Spike", item.periodChanges["1M"]),
+              _deltaPill("6M Trend", item.periodChanges["6M"]),
+              _deltaPill("1Y YoY", item.periodChanges["1Y"]),
+              _deltaPill("3Y Cycle", item.periodChanges["3Y"]),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _milestoneItem(String label, String value, {Color color = Colors.white70}) {
+  Widget _deltaPill(String label, dynamic val) {
+    final double value = (val as num?)?.toDouble() ?? 0.0;
+    final isNegative = value < 0;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: textMuted, fontSize: 8.5)),
-        const SizedBox(height: 1),
+        Text(label, style: const TextStyle(color: textMuted, fontSize: 12, fontWeight: FontWeight.w500)),
+        const SizedBox(height: 4),
         Text(
-          value,
-          style: GoogleFonts.robotoMono(
-            color: color,
-            fontSize: 11,
-            fontWeight: FontWeight.w800,
+          "${isNegative ? '' : '+'}${value.toStringAsFixed(1)}%",
+          style: TextStyle(
+            fontSize: 13.5,
+            fontWeight: FontWeight.bold,
+            color: isNegative ? Colors.redAccent : accentNeonGreen,
           ),
         ),
       ],
+    );
+  }
+
+  /// 3. Visual Transmission Pipeline (Zero Overlap & Zero Text Cutoff)
+  Widget _buildTransmissionPipeline(MacroReportItem item) {
+    final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
+    final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
+    final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: accentCyan.withAlpha(76)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Expanded(
+                child: Text(
+                  "INPUT COST TRANSMISSION",
+                  style: TextStyle(
+                    color: accentCyan,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Est. Cycle: ~${item.transmissionLagDays}d",
+                style: const TextStyle(color: textMuted, fontSize: 11),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _pipelineStepCard(
+            "1. RAW MATERIAL SHOCK",
+            shockText,
+            Colors.amber,
+            Icons.bolt_rounded,
+          ),
+          const SizedBox(height: 8),
+          _pipelineStepCard(
+            "2. INVENTORY LAG",
+            "${item.transmissionLagDays} Days Inventory Buffer Depletion",
+            Colors.purpleAccent,
+            Icons.hourglass_bottom_rounded,
+          ),
+          const SizedBox(height: 8),
+          _pipelineStepCard(
+            "3. EBITDA TRAJECTORY",
+            "Operating Margins: ${item.marginTrajectory}",
+            isContracting ? Colors.redAccent : accentNeonGreen,
+            isContracting ? Icons.trending_down_rounded : Icons.trending_up_rounded,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _pipelineStepCard(String title, String desc, Color col, IconData icon) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: col.withAlpha(70)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(icon, color: col, size: 20),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: col,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 🌍 Independent Full-Width Sourcing Card
+  Widget _buildSourcingGeopoliticalCard(MacroReportItem item) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.lightBlueAccent.withAlpha(70)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.public_rounded, color: Colors.lightBlueAccent, size: 20),
+              SizedBox(width: 8),
+              Text(
+                "SOURCING & GEOPOLITICAL CONTEXT",
+                style: TextStyle(
+                  color: Colors.lightBlueAccent,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            item.importContext,
+            style: const TextStyle(
+              color: Color(0xFFE2E8F0),
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              height: 1.55,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 4. AI Forecast Deck
+  Widget _buildAiForecastDeck(MacroReportItem item) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: surfaceCard,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: borderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.psychology, color: accentCyan, size: 22),
+              SizedBox(width: 8),
+              Text("AI STRATEGIST FORWARD THESIS", style: TextStyle(color: accentCyan, fontSize: 12.5, fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(item.macroHeadline, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold, height: 1.4)),
+          const SizedBox(height: 8),
+          Text(item.forwardThesis, style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 13.5, height: 1.55)),
+          if (item.keyRisk.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.black.withAlpha(76),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: accentFlame.withAlpha(76)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.warning_amber_rounded, color: accentFlame, size: 18),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Key Catalyst Risk: ${item.keyRisk}",
+                      style: const TextStyle(color: Color(0xFFCBD5E1), fontSize: 12.5, height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ]
+        ],
+      ),
+    );
+  }
+
+  /// 5. Live Interactive Sensitivity Simulator
+  Widget _buildSensitivitySimulator(MacroReportItem item) {
+    final simulatedPrice = item.currentPrice * (1 + _priceSimulationOffset / 100);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1B4B).withAlpha(76),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: _priceSimulationOffset != 0 ? Colors.amberAccent : Colors.indigoAccent.withAlpha(100),
+          width: _priceSimulationOffset != 0 ? 1.5 : 1.0,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.tune_rounded,
+                    size: 16,
+                    color: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
+                  ),
+                  const SizedBox(width: 6),
+                  const Text(
+                    "SENSITIVITY SIMULATOR (WHAT-IF)",
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Text(
+                "\$${simulatedPrice.toStringAsFixed(1)} (${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}%)",
+                style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            "Slide to stress-test stock margins against commodity shocks in real-time:",
+            style: TextStyle(color: textMuted, fontSize: 11),
+          ),
+          Slider(
+            min: -20,
+            max: 20,
+            divisions: 8,
+            value: _priceSimulationOffset,
+            activeColor: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
+            inactiveColor: const Color(0xFF1E293B),
+            onChanged: (val) => setState(() => _priceSimulationOffset = val),
+          ),
+          if (_priceSimulationOffset != 0.0) ...[
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () => setState(() => _priceSimulationOffset = 0.0),
+                child: const Text(
+                  "Reset to Baseline (0%)",
+                  style: TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ]
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScreenerHeader(int count) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          "IMPACTED EQUITIES AUDIT",
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: textMuted),
+        ),
+        Text("$count Stocks Screened", style: const TextStyle(fontSize: 13, color: accentCyan, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+
+  /// 6. Screener Controls
+  Widget _buildScreenerControls() {
+    return Column(
+      children: [
+        Container(
+          height: 42,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: surfaceCard,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: borderSubtle),
+          ),
+          child: TextField(
+            style: const TextStyle(color: Colors.white, fontSize: 13),
+            decoration: const InputDecoration(
+              hintText: "Search ticker (e.g. ASIANPAINT, ONGC)...",
+              hintStyle: TextStyle(color: textMuted, fontSize: 13),
+              border: InputBorder.none,
+              icon: Icon(Icons.search, size: 18, color: textMuted),
+            ),
+            onChanged: (val) => setState(() => _searchQuery = val),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            _impactFilterChip("ALL", "All Stocks"),
+            const SizedBox(width: 8),
+            _impactFilterChip("NEGATIVE", "🔴 Margin Drag"),
+            const SizedBox(width: 8),
+            _impactFilterChip("POSITIVE", "🟢 Beneficiary"),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _impactFilterChip(String val, String label) {
+    final isSelected = _impactFilter == val;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => setState(() => _impactFilter = val),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? accentCyan : surfaceCard,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: isSelected ? accentCyan : borderSubtle),
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.black : Colors.white70,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 7. Equities List
+  Widget _buildEquitiesList(List<ImpactedStock> list) {
+    if (list.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(24),
+        alignment: Alignment.center,
+        child: const Text("No stocks match your filter criteria", style: TextStyle(color: textMuted, fontSize: 13)),
+      );
+    }
+
+    final isSimulating = _priceSimulationOffset != 0.0;
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: list.length,
+      itemBuilder: (context, idx) {
+        final stock = list[idx];
+
+        final int simulatedBps = (stock.baselineBpsValue * (1 + (_priceSimulationOffset / 100))).round();
+        final isPositive = simulatedBps >= 0;
+        final displayBpsText = "${isPositive ? '+' : ''}$simulatedBps bps";
+
+        return Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: surfaceCard,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: isSimulating ? Colors.amberAccent.withAlpha(50) : borderSubtle,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              stock.symbol,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF1E293B),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  stock.sector,
+                                  style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          stock.companyName,
+                          style: const TextStyle(color: textMuted, fontSize: 12),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: (isPositive ? accentNeonGreen : Colors.redAccent).withAlpha(40),
+                          borderRadius: BorderRadius.circular(8),
+                          border: isSimulating ? Border.all(color: Colors.amberAccent.withAlpha(120)) : null,
+                        ),
+                        child: Text(
+                          displayBpsText,
+                          style: TextStyle(
+                            color: isPositive ? accentNeonGreen : Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      if (isSimulating) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          "Base: ${stock.marginImpactBps}",
+                          style: const TextStyle(color: Colors.amberAccent, fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                      ]
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                stock.rationale,
+                style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 13, height: 1.45),
+              ),
+              if (stock.businessImpact.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withAlpha(50),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: borderSubtle),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.insights, size: 14, color: accentCyan),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          stock.businessImpact,
+                          style: const TextStyle(color: textMuted, fontSize: 11.5, height: 1.35),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ],
+          ),
+        );
+      },
     );
   }
 }
