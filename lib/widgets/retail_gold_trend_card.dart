@@ -113,41 +113,33 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Nominal 24K Paper Growth
     final double rawGoldReturnPercent =
         ((_data.current24k - _data.ago1y24k) / _data.ago1y24k) * 100;
 
-    // 2. Asset Specific Math
     double purityMultiplier = 1.0;
     double buyMakingChargePercent = 0.0;
 
     if (_selectedAssetType == 0) {
-      // 22K Jewelry
       purityMultiplier = 22 / 24;
-      buyMakingChargePercent = 14.0; // Standard 14% making charges
+      buyMakingChargePercent = 14.0;
     } else if (_selectedAssetType == 1) {
-      // 24K Coin
       purityMultiplier = 1.0;
-      buyMakingChargePercent = 3.0; // 3% minting markup
+      buyMakingChargePercent = 3.0;
     } else {
-      // Gold ETF (BeES)
       purityMultiplier = 1.0;
-      buyMakingChargePercent = 0.0; // Zero making/minting
+      buyMakingChargePercent = 0.0;
     }
 
-    // Purchase Price 1-Year Ago = (Base * Purity) + Making + 3% GST
     final double cost1yAgo = (_data.ago1y24k * purityMultiplier) *
         (1 + (buyMakingChargePercent / 100)) *
         1.03;
 
-    // Cash Realization Today (Jeweler deducts GST & making charges on liquidation)
     final double liquidationCashToday = _data.current24k * purityMultiplier;
 
     final double netReturnPercent =
         ((liquidationCashToday - cost1yAgo) / cost1yAgo) * 100;
     final double netGainAmount = liquidationCashToday - cost1yAgo;
 
-    // Relative Alphas
     final double vsInflationAlpha = netReturnPercent - _data.cpiInflation;
     final double vsNiftyAlpha = netReturnPercent - _data.niftyReturn;
 
@@ -169,7 +161,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header with Benchmark Info
+          // Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -231,7 +223,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 12),
 
-          // 1-Tap Asset Selector Chips
+          // Asset Selector Chips
           Row(
             children: [
               _filterTab(0, '22K JEWELRY'),
@@ -244,7 +236,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 12),
 
-          // Core Cost vs Liquidation Value Card
+          // Comparison Card
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -297,8 +289,6 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                   ],
                 ),
                 const Divider(color: Color(0xFF1E2B3E), height: 16),
-
-                // Absolute Net Gain
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -324,7 +314,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 10),
 
-          // 3 Distinct Alpha Badges
+          // 3 Alpha Badges
           Row(
             children: [
               Expanded(
@@ -362,7 +352,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 10),
 
-          // Actionable Decision Takeaway Banner
+          // Takeaway Insight
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             decoration: BoxDecoration(
@@ -400,7 +390,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 10),
 
-          // Milestone Stepper Strip (1Y -> 6M -> Today)
+          // Stepper Strip
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             decoration: BoxDecoration(
@@ -436,7 +426,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
             color: isSelected
-                ? const Color(0xFF00E5FF).withOpacity(0.18)
+                ? const Color(0xFF00F0FF).withOpacity(0.18)
                 : const Color(0xFF131B2A),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
