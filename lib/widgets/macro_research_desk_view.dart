@@ -9,6 +9,7 @@ class ImpactedStock {
   final String sector;
   final String impactType; // POSITIVE / NEGATIVE
   final String marginImpactBps;
+  final int baselineBpsValue;
   final String rationale;
   final String? businessImpact;
   final int directExposurePct;
@@ -19,18 +20,25 @@ class ImpactedStock {
     required this.sector,
     required this.impactType,
     required this.marginImpactBps,
+    required this.baselineBpsValue,
     required this.rationale,
     this.businessImpact,
     this.directExposurePct = 50,
   });
 
   factory ImpactedStock.fromJson(Map<String, dynamic> json) {
+    final rawBpsString = json['margin_impact_bps']?.toString() ?? '0';
+    // Clean numeric parse (+120 bps -> 120, -250 bps -> -250)
+    final cleaned = rawBpsString.replaceAll(RegExp(r'[^0-9\-]'), '');
+    final parsedBps = int.tryParse(cleaned) ?? 0;
+
     return ImpactedStock(
       symbol: json['symbol'] ?? '',
       companyName: json['company_name'] ?? '',
       sector: json['sector'] ?? '',
-      impactType: (json['impact_type'] ?? 'POSITIVE').toUpperCase(),
-      marginImpactBps: json['margin_impact_bps'] ?? '',
+      impactType: (json['impact_type'] ?? 'POSITIVE').toString().toUpperCase(),
+      marginImpactBps: rawBpsString,
+      baselineBpsValue: parsedBps,
       rationale: json['rationale'] ?? '',
       businessImpact: json['business_impact'],
       directExposurePct: json['direct_exposure_pct'] ?? (json['impact_type'] == 'POSITIVE' ? 75 : 50),
@@ -81,8 +89,8 @@ class MacroReportItem {
       marginTrajectory: json['margin_trajectory'] ?? 'NEUTRAL',
       importContext: json['import_context'] ?? '',
       keyRisk: json['key_risk'] ?? '',
-      fiftyTwoWeekLow: (json['fifty_two_week_low'] as num?)?.toDouble() ?? price * 0.75,
-      fiftyTwoWeekHigh: (json['fifty_two_week_high'] as num?)?.toDouble() ?? price * 1.25,
+      fiftyTwoWeekLow: (json['fifty_two_week_low'] as num?)?.toDouble() ?? (price * 0.78),
+      fiftyTwoWeekHigh: (json['fifty_two_week_high'] as num?)?.toDouble() ?? (price * 1.22),
       transmissionLagDays: json['transmission_lag_days'] ?? 60,
       impactedStocks: (json['impacted_stocks'] as List? ?? [])
           .map((e) => ImpactedStock.fromJson(e))
@@ -92,7 +100,6 @@ class MacroReportItem {
 }
 
 // ---------------- MAIN WIDGET SCREEN ----------------
-// Class name NewsScreen ke mutabiq MacroResearchDeskView rakha gaya hai
 class MacroResearchDeskView extends StatefulWidget {
   final bool isDarkMode;
   const MacroResearchDeskView({super.key, this.isDarkMode = true});
@@ -111,12 +118,12 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   bool _isLoading = true;
   String? _errorMessage;
 
-  // Screener Filters
+  // Screener & Live Simulator State
   String _searchQuery = '';
   String _impactFilter = 'ALL'; // ALL, POSITIVE, NEGATIVE
   double _priceSimulationOffset = 0.0; // -20% to +20%
 
-  // Theme Constants
+  // High-Contrast Terminal Styling
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
   static const Color borderSubtle = Color(0xFF202C42);
@@ -185,7 +192,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             children: [
               CircularProgressIndicator(color: accentCyan),
               SizedBox(height: 16),
-              Text("Syncing Institutional Macro Radar...", style: TextStyle(color: textMuted, fontSize: 13)),
+              Text(
+                "Syncing Institutional Macro Radar...",
+                style: TextStyle(color: textMuted, fontSize: 13),
+              ),
             ],
           ),
         ),
@@ -203,7 +213,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               children: [
                 const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 48),
                 const SizedBox(height: 12),
-                Text(_errorMessage ?? "No research reports available", style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                Text(
+                  _errorMessage ?? "No research reports available",
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: surfaceCard),
@@ -219,7 +232,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
 
     final activeItem = _reports[_selectedCommodityIndex];
 
-    // Filter stocks
+    // Filter stocks list based on search & tab selection
     final filteredStocks = activeItem.impactedStocks.where((s) {
       final matchesSearch = _searchQuery.isEmpty ||
           s.symbol.toLowerCase().contains(_searchQuery.toLowerCase()) ||
@@ -239,9 +252,24 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           children: [
             const Row(
               children: [
-                Text("MACRO MARGIN RADAR", style: TextStyle(fontSize: 12, letterSpacing: 1.5, color: accentCyan, fontWeight: FontWeight.bold)),
+                Text(
+                  "MACRO MARGIN RADAR",
+                  style: TextStyle(
+                    fontSize: 12,
+                    letterSpacing: 1.5,
+                    color: accentCyan,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 SizedBox(width: 6),
-                Text("PRO V2", style: TextStyle(fontSize: 9, color: accentNeonGreen, fontWeight: FontWeight.w900)),
+                Text(
+                  "PRO V2",
+                  style: TextStyle(
+                    fontSize: 9,
+                    color: accentNeonGreen,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ],
             ),
             Text(
@@ -304,7 +332,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             onTap: () {
               setState(() {
                 _selectedCommodityIndex = idx;
-                _priceSimulationOffset = 0.0;
+                _priceSimulationOffset = 0.0; // Reset simulator on switch
               });
             },
             child: Container(
@@ -313,7 +341,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               decoration: BoxDecoration(
                 color: isSelected ? const Color(0xFF223048) : surfaceCard,
                 borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: isSelected ? accentCyan : borderSubtle, width: isSelected ? 1.5 : 1.0),
+                border: Border.all(
+                  color: isSelected ? accentCyan : borderSubtle,
+                  width: isSelected ? 1.5 : 1.0,
+                ),
               ),
               child: Row(
                 children: [
@@ -350,13 +381,19 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 2. Hero Price + 52-Week Range Card
+  /// 2. Hero Price + Real Dynamic 52-Week Range Card
   Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
     final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
     final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
 
+    // Real dynamic simulated spot calculation
+    final effectivePrice = item.currentPrice * (1 + (_priceSimulationOffset / 100));
+
+    // Dynamic 52-Week position calculation
     final range = item.fiftyTwoWeekHigh - item.fiftyTwoWeekLow;
-    final position = range > 0 ? ((item.currentPrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0) : 0.5;
+    final position = range > 0
+        ? ((effectivePrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0)
+        : 0.5;
 
     return Container(
       padding: const EdgeInsets.all(18),
@@ -374,7 +411,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(item.commodityName, style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold)),
+                  Text(
+                    item.commodityName,
+                    style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 2),
                   const Text("Direct Corporate Input Cost Radar", style: TextStyle(color: textMuted, fontSize: 12)),
                 ],
@@ -394,11 +434,25 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             ],
           ),
           const SizedBox(height: 10),
-          Text(
-            "${item.currentPrice.toStringAsFixed(2)} ${item.unit}",
-            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: accentCyan),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                "${effectivePrice.toStringAsFixed(2)} ${item.unit}",
+                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: accentCyan),
+              ),
+              if (_priceSimulationOffset != 0.0) ...[
+                const SizedBox(width: 8),
+                Text(
+                  "(${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}% What-If)",
+                  style: const TextStyle(fontSize: 12, color: Colors.amberAccent, fontWeight: FontWeight.bold),
+                ),
+              ]
+            ],
           ),
           const SizedBox(height: 14),
+          // 52-Week Range Bar
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -406,7 +460,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("52W Low: \$${item.fiftyTwoWeekLow.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
-                  const Text("52-Week Range Position", style: TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold)),
+                  Text(
+                    "Position: ${(position * 100).toInt()}%",
+                    style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
                   Text("52W High: \$${item.fiftyTwoWeekHigh.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
                 ],
               ),
@@ -458,8 +515,11 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Card Grid)
+  /// 3. Visual Transmission Pipeline (Dynamic Stepper Cards)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
+    final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
+    final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -484,11 +544,15 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           Row(
             children: [
               Expanded(
-                child: _pipelineCard("1. Raw Shock", "${item.commodityName} rallies", Colors.amber),
+                child: _pipelineCard("1. Raw Shock", shockText, Colors.amber),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _pipelineCard("2. Sourcing", item.importContext.isNotEmpty ? item.importContext : "Global Sourced", Colors.lightBlueAccent),
+                child: _pipelineCard(
+                  "2. Sourcing Context",
+                  item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
+                  Colors.lightBlueAccent,
+                ),
               ),
             ],
           ),
@@ -496,11 +560,11 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           Row(
             children: [
               Expanded(
-                child: _pipelineCard("3. Inventory Lag", "${item.transmissionLagDays}d Inventory exhausts", Colors.purpleAccent),
+                child: _pipelineCard("3. Inventory Lag", "${item.transmissionLagDays}d Inventory cycle", Colors.purpleAccent),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: _pipelineCard("4. EBITDA Impact", "Margin: ${item.marginTrajectory}", Colors.redAccent),
+                child: _pipelineCard("4. Corporate Margin", "Trajectory: ${item.marginTrajectory}", Colors.redAccent),
               ),
             ],
           ),
@@ -585,15 +649,19 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 5. Sensitivity Simulator
+  /// 5. Live Interactive Sensitivity Simulator (Scales stocks in real-time)
   Widget _buildSensitivitySimulator(MacroReportItem item) {
     final simulatedPrice = item.currentPrice * (1 + _priceSimulationOffset / 100);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFF1E1B4B).withAlpha(76),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.indigoAccent.withAlpha(100)),
+        border: Border.all(
+          color: _priceSimulationOffset != 0 ? Colors.amberAccent : Colors.indigoAccent.withAlpha(100),
+          width: _priceSimulationOffset != 0 ? 1.5 : 1.0,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -601,22 +669,52 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("SENSITIVITY SIMULATOR (WHAT-IF)", style: TextStyle(color: Colors.amberAccent, fontSize: 12, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Icon(
+                    Icons.tune_rounded,
+                    size: 16,
+                    color: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
+                  ),
+                  const SizedBox(width: 6),
+                  const Text(
+                    "SENSITIVITY SIMULATOR (WHAT-IF)",
+                    style: TextStyle(color: Colors.amberAccent, fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
               Text(
                 "\$${simulatedPrice.toStringAsFixed(1)} (${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}%)",
                 style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
               ),
             ],
           ),
+          const SizedBox(height: 4),
+          const Text(
+            "Slide to stress-test stock margins against commodity shocks in real-time:",
+            style: TextStyle(color: textMuted, fontSize: 11),
+          ),
           Slider(
             min: -20,
             max: 20,
             divisions: 8,
             value: _priceSimulationOffset,
-            activeColor: accentCyan,
+            activeColor: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
             inactiveColor: const Color(0xFF1E293B),
             onChanged: (val) => setState(() => _priceSimulationOffset = val),
           ),
+          if (_priceSimulationOffset != 0.0) ...[
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () => setState(() => _priceSimulationOffset = 0.0),
+                child: const Text(
+                  "Reset to Baseline (0%)",
+                  style: TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ]
         ],
       ),
     );
@@ -626,7 +724,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text("IMPACTED EQUITIES AUDIT", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: textMuted)),
+        const Text(
+          "IMPACTED EQUITIES AUDIT",
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: textMuted),
+        ),
         Text("$count Stocks Screened", style: const TextStyle(fontSize: 13, color: accentCyan, fontWeight: FontWeight.bold)),
       ],
     );
@@ -695,7 +796,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 7. Equities List
+  /// 7. Equities List with Live Scaled BPS Math
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
@@ -705,13 +806,20 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       );
     }
 
+    final isSimulating = _priceSimulationOffset != 0.0;
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: list.length,
       itemBuilder: (context, idx) {
         final stock = list[idx];
-        final isPos = stock.impactType == 'POSITIVE';
+
+        // 🧠 Real Linear Elasticity Math:
+        // Stock margin scales proportional to commodity price delta
+        final int simulatedBps = (stock.baselineBpsValue * (1 + (_priceSimulationOffset / 100))).round();
+        final isPositive = simulatedBps >= 0;
+        final displayBpsText = "${isPositive ? '+' : ''}$simulatedBps bps";
 
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
@@ -719,7 +827,9 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           decoration: BoxDecoration(
             color: surfaceCard,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: borderSubtle),
+            border: Border.all(
+              color: isSimulating ? Colors.amberAccent.withAlpha(50) : borderSubtle,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -733,7 +843,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                       children: [
                         Row(
                           children: [
-                            Text(stock.symbol, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16)),
+                            Text(
+                              stock.symbol,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+                            ),
                             const SizedBox(width: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
@@ -741,7 +854,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                                 color: const Color(0xFF1E293B),
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              child: Text(stock.sector, style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500)),
+                              child: Text(
+                                stock.sector,
+                                style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),
@@ -750,16 +866,33 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: (isPos ? accentNeonGreen : Colors.redAccent).withAlpha(40),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      stock.marginImpactBps,
-                      style: TextStyle(color: isPos ? accentNeonGreen : Colors.redAccent, fontWeight: FontWeight.bold, fontSize: 13),
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: (isPositive ? accentNeonGreen : Colors.redAccent).withAlpha(40),
+                          borderRadius: BorderRadius.circular(8),
+                          border: isSimulating ? Border.all(color: Colors.amberAccent.withAlpha(120)) : null,
+                        ),
+                        child: Text(
+                          displayBpsText,
+                          style: TextStyle(
+                            color: isPositive ? accentNeonGreen : Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      if (isSimulating) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          "Base: ${stock.marginImpactBps}",
+                          style: const TextStyle(color: Colors.amberAccent, fontSize: 10, fontWeight: FontWeight.bold),
+                        ),
+                      ]
+                    ],
                   ),
                 ],
               ),
