@@ -11,8 +11,7 @@ class ImpactedStock {
   final String marginImpactBps;
   final int baselineBpsValue;
   final String rationale;
-  final String? businessImpact;
-  final int directExposurePct;
+  final String businessImpact;
 
   const ImpactedStock({
     required this.symbol,
@@ -22,8 +21,7 @@ class ImpactedStock {
     required this.marginImpactBps,
     required this.baselineBpsValue,
     required this.rationale,
-    this.businessImpact,
-    this.directExposurePct = 50,
+    required this.businessImpact,
   });
 
   factory ImpactedStock.fromJson(Map<String, dynamic> json) {
@@ -39,8 +37,7 @@ class ImpactedStock {
       marginImpactBps: rawBpsString,
       baselineBpsValue: parsedBps,
       rationale: json['rationale'] ?? '',
-      businessImpact: json['business_impact'],
-      directExposurePct: json['direct_exposure_pct'] ?? (json['impact_type'] == 'POSITIVE' ? 75 : 50),
+      businessImpact: json['business_impact'] ?? '',
     );
   }
 }
@@ -50,9 +47,10 @@ class MacroReportItem {
   final String unit;
   final double currentPrice;
   final Map<String, dynamic> periodChanges;
+  final String marginTrajectory;
+  final String retailBadge;
   final String macroHeadline;
   final String forwardThesis;
-  final String marginTrajectory;
   final String importContext;
   final String keyRisk;
   final List<ImpactedStock> impactedStocks;
@@ -65,9 +63,10 @@ class MacroReportItem {
     required this.unit,
     required this.currentPrice,
     required this.periodChanges,
+    required this.marginTrajectory,
+    required this.retailBadge,
     required this.macroHeadline,
     required this.forwardThesis,
-    required this.marginTrajectory,
     required this.importContext,
     required this.keyRisk,
     required this.impactedStocks,
@@ -83,9 +82,10 @@ class MacroReportItem {
       unit: json['unit'] ?? '',
       currentPrice: price,
       periodChanges: json['period_changes'] ?? {},
+      marginTrajectory: json['margin_trajectory'] ?? 'NEUTRAL',
+      retailBadge: json['retail_badge'] ?? '',
       macroHeadline: json['macro_headline'] ?? '',
       forwardThesis: json['forward_thesis'] ?? '',
-      marginTrajectory: json['margin_trajectory'] ?? 'NEUTRAL',
       importContext: json['import_context'] ?? '',
       keyRisk: json['key_risk'] ?? '',
       fiftyTwoWeekLow: (json['fifty_two_week_low'] as num?)?.toDouble() ?? (price * 0.78),
@@ -122,7 +122,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   String _impactFilter = 'ALL'; // ALL, POSITIVE, NEGATIVE
   double _priceSimulationOffset = 0.0; // -20% to +20%
 
-  // High-Contrast Terminal Styling
+  // High-Contrast Terminal Colors
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
   static const Color borderSubtle = Color(0xFF202C42);
@@ -379,7 +379,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 2. Hero Price + Real Dynamic 52-Week Range Card (Overlap-Proof)
+  /// 2. Hero Price + Range Card (Supports retail_badge from JSON)
   Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
     final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
     final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
@@ -412,7 +412,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                       style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 2),
-                    const Text("Direct Corporate Input Cost Radar", style: TextStyle(color: textMuted, fontSize: 12)),
+                    Text(
+                      item.retailBadge.isNotEmpty ? item.retailBadge : "Corporate Input Cost Radar",
+                      style: TextStyle(
+                        color: isContracting ? const Color(0xFFFCA5A5) : const Color(0xFF86EFAC),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -512,7 +519,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Expanded Multi-Line - No Cutoff)
+  /// 3. Visual Transmission Pipeline (Zero-Cutoff Full Context Layout)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
     final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
@@ -532,41 +539,59 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             children: [
               const Text(
                 "INPUT COST TRANSMISSION",
-                style: TextStyle(color: accentCyan, fontSize: 12, fontWeight: FontWeight.w900, letterSpacing: 1.1),
+                style: TextStyle(
+                  color: accentCyan,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.1,
+                ),
               ),
-              Text("Est. Lag: ~${item.transmissionLagDays} Days", style: const TextStyle(color: textMuted, fontSize: 11)),
+              Text(
+                "Est. Lag: ~${item.transmissionLagDays} Days",
+                style: const TextStyle(color: textMuted, fontSize: 11),
+              ),
             ],
           ),
           const SizedBox(height: 12),
+
+          // 1. Raw Shock
+          _pipelineCard(
+            "1. Raw Shock",
+            shockText,
+            Colors.amber,
+            isFullWidth: true,
+          ),
+          const SizedBox(height: 8),
+
+          // 2. Full-Width Sourcing Context (Zero Cutoff)
+          _pipelineCard(
+            "2. Sourcing & Geopolitical Context",
+            item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
+            Colors.lightBlueAccent,
+            isFullWidth: true,
+            allowMultiLine: true,
+          ),
+          const SizedBox(height: 8),
+
+          // 3 & 4. Inventory Lag & Margin Trajectory
           IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: _pipelineCard("1. Raw Shock", shockText, Colors.amber),
+                  child: _pipelineCard(
+                    "3. Inventory Lag",
+                    "${item.transmissionLagDays}d Inventory cycle",
+                    Colors.purpleAccent,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: _pipelineCard(
-                    "2. Sourcing Context",
-                    item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
-                    Colors.lightBlueAccent,
+                    "4. Corporate Margin",
+                    "Trajectory: ${item.marginTrajectory}",
+                    item.marginTrajectory.toUpperCase() == 'CONTRACTING' ? Colors.redAccent : accentNeonGreen,
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 8),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _pipelineCard("3. Inventory Lag", "${item.transmissionLagDays}d Inventory cycle", Colors.purpleAccent),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _pipelineCard("4. Corporate Margin", "Trajectory: ${item.marginTrajectory}", Colors.redAccent),
                 ),
               ],
             ),
@@ -576,9 +601,16 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  Widget _pipelineCard(String title, String desc, Color col) {
+  Widget _pipelineCard(
+    String title,
+    String desc,
+    Color col, {
+    bool isFullWidth = false,
+    bool allowMultiLine = false,
+  }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      width: isFullWidth ? double.infinity : null,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF131B2A),
         borderRadius: BorderRadius.circular(10),
@@ -588,13 +620,21 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title, style: TextStyle(color: col, fontSize: 11, fontWeight: FontWeight.bold)),
+          Text(
+            title,
+            style: TextStyle(color: col, fontSize: 11, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 4),
           Text(
             desc,
-            style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w500, height: 1.3),
-            maxLines: 3, // Cutoff issue fixed
-            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              height: 1.35,
+            ),
+            maxLines: allowMultiLine ? 8 : 2,
+            overflow: allowMultiLine ? TextOverflow.visible : TextOverflow.ellipsis,
           ),
         ],
       ),
@@ -800,7 +840,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 7. Equities List with Zero-Overlap Layout
+  /// 7. Equities List with Rationale + Business Impact
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
@@ -839,7 +879,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Ticker & Sector (Guaranteed safe boundary)
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -851,7 +890,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
                             ),
                             const SizedBox(width: 8),
-                            // Flexible sector tag to avoid overlapping BPS badge
                             Flexible(
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
@@ -880,7 +918,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // Margin Impact Pill (Never gets pushed out)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -911,11 +948,35 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Text(
                 stock.rationale,
                 style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 13, height: 1.45),
               ),
+              if (stock.businessImpact.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withAlpha(50),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: borderSubtle),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.insights, size: 14, color: accentCyan),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          stock.businessImpact,
+                          style: const TextStyle(color: textMuted, fontSize: 11.5, height: 1.35),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ],
           ),
         );
