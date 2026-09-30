@@ -6,6 +6,18 @@ import requests
 
 OUTPUT_FILE = "macro_research_report.json"
 
+# ==============================================================================
+# 🎯 AI MODELS LIST (Fallback Architecture)
+# Aap yahan model ka naam priority-wise add/edit/change kar sakte hain.
+# Agar pehla fail hoga, toh code automatic doosre par switch karega.
+# ==============================================================================
+CANDIDATE_MODELS = [
+    "gemini-2.5-flash",        # 1st Priority (Fastest & Accurate)
+    "gemini-2.5-pro",          # 2nd Priority (Deep Analysis)
+    "gemini-2.0-flash",        # 3rd Priority (Stable Fallback)
+    "gemini-1.5-flash"         # 4th Priority (Legacy Fallback)
+]
+
 COMMODITIES = [
     {
         "id": "crude_oil",
@@ -61,9 +73,9 @@ def fetch_commodity_metrics():
     headers = {"User-Agent": "Mozilla/5.0"}
     gathered = []
 
-    print("=" * 70)
+    print("=" * 75)
     print("⏳ Step 1: Gathering Raw Commodity Multi-Period Data...")
-    print("=" * 70)
+    print("=" * 75)
 
     for item in COMMODITIES:
         ticker = item["ticker"]
@@ -99,7 +111,7 @@ def fetch_commodity_metrics():
                 "3Y": pct(current_price, p_3y)
             }
             gathered.append(item)
-            print(f"✅ {item['name']:<20}: {current_price:>8} {item['unit']:<8} | 1Y(YoY): {item['deltas']['1Y']:>6}%")
+            print(f"✅ {item['name']:<22}: {current_price:>8} {item['unit']:<8} | 1Y(YoY): {item['deltas']['1Y']:>6}%")
             time.sleep(0.3)
 
         except Exception as e:
@@ -107,18 +119,48 @@ def fetch_commodity_metrics():
 
     return gathered
 
+def call_gemini_with_fallback(prompt, api_key):
+    """
+    Iterates through CANDIDATE_MODELS list.
+    If a model fails, it tries the next fallback model.
+    """
+    for model_name in CANDIDATE_MODELS:
+        endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0.2,
+                "responseMimeType": "application/json"
+            }
+        }
+
+        try:
+            res = requests.post(endpoint, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
+            if res.status_code == 200:
+                raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                report_obj = json.loads(raw_text)
+                return report_obj, model_name
+            else:
+                print(f"⚠️ Model '{model_name}' failed with HTTP {res.status_code}. Trying next model...")
+                time.sleep(0.5)
+        except Exception as e:
+            print(f"⚠️ Model '{model_name}' encountered error: {e}. Trying next model...")
+            time.sleep(0.5)
+
+    return None, None
+
 def generate_ai_research_analysis(dataset):
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         print("⚠️ GEMINI_API_KEY missing. Please add it to repo Secrets.")
         return []
 
-    print("\n" + "=" * 70)
-    print("🧠 Step 2: Triggering Gemini AI for Brokerage-Grade Sector Analysis...")
-    print("=" * 70)
+    print("\n" + "=" * 75)
+    print("🧠 Step 2: Triggering Gemini AI with Model Fallbacks...")
+    print(f"📋 Fallback Pipeline: {' -> '.join(CANDIDATE_MODELS)}")
+    print("=" * 75)
 
     ai_reports = []
-    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
 
     for item in dataset:
         prompt = f"""
@@ -158,29 +200,18 @@ Respond ONLY with a valid JSON object matching this exact schema:
     }}
   ]
 }}
+Ensure the impacted_stocks array contains EXACTLY 8 to 10 listed Indian companies.
 Do NOT output markdown backticks like ```json. Output ONLY raw parseable JSON.
 """
 
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "temperature": 0.2,
-                "responseMimeType": "application/json"
-            }
-        }
+        report_obj, used_model = call_gemini_with_fallback(prompt, api_key)
+        if report_obj:
+            ai_reports.append(report_obj)
+            print(f"✨ AI Analysis compiled for {item['name']} using [{used_model}] ({len(report_obj.get('impacted_stocks', []))} stocks)")
+        else:
+            print(f"❌ All fallback models failed for {item['name']}")
 
-        try:
-            res = requests.post(endpoint, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
-            if res.status_code == 200:
-                raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                report_obj = json.loads(raw_text)
-                ai_reports.append(report_obj)
-                print(f"✨ AI Analysis compiled: {item['name']} ({len(report_obj.get('impacted_stocks', []))} stocks)")
-            else:
-                print(f"⚠️ AI call failed for {item['name']}: {res.status_code}")
-            time.sleep(1.0)
-        except Exception as e:
-            print(f"❌ Exception in AI processing for {item['name']}: {e}")
+        time.sleep(1.0)
 
     return ai_reports
 
