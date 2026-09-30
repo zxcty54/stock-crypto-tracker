@@ -248,28 +248,16 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              children: [
-                Text(
-                  "MACRO MARGIN RADAR",
-                  style: TextStyle(
-                    fontSize: 12,
-                    letterSpacing: 1.5,
-                    color: accentCyan,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 6),
-                Text(
-                  "PRO V2",
-                  style: TextStyle(
-                    fontSize: 9,
-                    color: accentNeonGreen,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
+            const Text(
+              "MACRO MARGIN RADAR",
+              style: TextStyle(
+                fontSize: 12,
+                letterSpacing: 1.5,
+                color: accentCyan,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+            const SizedBox(height: 2),
             Text(
               _lastUpdatedAt.isNotEmpty ? "Synced: $_lastUpdatedAt" : "Corporate Input Cost Transmission",
               style: const TextStyle(fontSize: 11, color: textMuted),
@@ -299,7 +287,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               _buildTransmissionPipeline(activeItem),
               if (activeItem.importContext.isNotEmpty) ...[
                 const SizedBox(height: 14),
-                _buildSourcingGeopoliticalCard(activeItem), // 🌍 Independent Card
+                _buildSourcingGeopoliticalCard(activeItem),
               ],
               const SizedBox(height: 14),
               _buildAiForecastDeck(activeItem),
@@ -523,7 +511,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Clean 3-Step Streamlined Flow)
+  /// 3. Visual Transmission Pipeline
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
     final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
@@ -558,7 +546,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             ],
           ),
           const SizedBox(height: 12),
-          // Step 1: Raw Shock
           _pipelineStepCard(
             "1. RAW MATERIAL SHOCK",
             shockText,
@@ -566,7 +553,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             Icons.bolt_rounded,
           ),
           const SizedBox(height: 8),
-          // Step 2 & 3: Side-by-Side Lag and Trajectory
           IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -636,7 +622,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 🌍 Independent Full-Width Sourcing & Geopolitical Context Card (Never Cuts Text)
+  /// 🌍 Independent Full-Width Sourcing Card
   Widget _buildSourcingGeopoliticalCard(MacroReportItem item) {
     return Container(
       width: double.infinity,
@@ -878,7 +864,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 7. Equities List with Rationale + Business Impact + Zero Overlap
+  /// 7. Equities List
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
