@@ -1,7 +1,7 @@
 name: Build & Release Flutter APK
 
 on:
-  workflow_dispatch: # Actions tab se button click karke run karne ke liye
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -41,7 +41,6 @@ jobs:
             exit 1
           fi
 
-          # Decode Base64 string into JKS file
           echo "$KEYSTORE_BASE64" | tr -d '\r\n ' | base64 --decode > android/app/keystore/upload-keystore.jks
 
           if [ ! -s android/app/keystore/upload-keystore.jks ]; then
@@ -49,14 +48,10 @@ jobs:
             exit 1
           fi
 
-          echo "Keystore successfully restored:"
-          ls -lh android/app/keystore/upload-keystore.jks
+          echo "Keystore successfully restored."
 
       - name: Get Dependencies
         run: flutter pub get
-
-      - name: Analyze Project
-        run: flutter analyze || true
 
       - name: Build Release APK
         env:
@@ -67,14 +62,22 @@ jobs:
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
             --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
 
-      - name: Verify Signature
+      - name: Compress APK to ZIP
         run: |
-          echo "=== VERIFYING RELEASE SIGNATURE ==="
-          $ANDROID_HOME/build-tools/34.0.0/apksigner verify --print-certs build/app/outputs/flutter-apk/app-release.apk
+          cd build/app/outputs/flutter-apk/
+          zip stockpulse-app.zip app-release.apk
 
-      - name: Upload APK as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: stock-crypto-tracker-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 14
+      - name: Send ZIP to Telegram
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$BOT_TOKEN" ] || [ -z "$CHAT_ID" ]; then
+            echo "::error::TELEGRAM_BOT_TOKEN ya TELEGRAM_CHAT_ID secret missing hai!"
+            exit 1
+          fi
+
+          curl -F chat_id="$CHAT_ID" \
+               -F document=@"build/app/outputs/flutter-apk/stockpulse-app.zip" \
+               -F caption="StockPulse (Latest Signed APK Build) 🚀" \
+               https://api.telegram.org/bot$BOT_TOKEN/sendDocument
