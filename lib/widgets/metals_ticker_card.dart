@@ -20,9 +20,9 @@ class CommodityItem {
 
   factory CommodityItem.fromJson(Map<String, dynamic> json, String name, String unitUsd) {
     return CommodityItem(
-      symbol: json['symbol'] ?? '',
+      symbol: json['symbol']?.toString() ?? '',
       name: name,
-      priceUsd: (json['price'] as num).toDouble(),
+      priceUsd: (json['price'] as num?)?.toDouble() ?? 0.0,
       unitUsd: unitUsd,
     );
   }
@@ -50,21 +50,21 @@ class MetalsTickerCard extends StatefulWidget {
 }
 
 class _MetalsTickerCardState extends State<MetalsTickerCard> {
-  int _selectedTabIndex = 0; // 0: Metals & Copper, 1: Forex Rates
+  int _selectedTabIndex = 0; // 0: Metals, 1: Forex
   bool _isLoading = true;
   String? _error;
   Timer? _refreshTimer;
 
-  // Commodity Spot Items
+  // Commodities
   CommodityItem? _gold;
   CommodityItem? _silver;
   CommodityItem? _copper;
   CommodityItem? _platinum;
 
   // Live USD-INR Benchmark Rate
-  double _usdInrRate = 83.50;
+  final double _usdInrRate = 83.54;
 
-  // Forex List vs INR
+  // Forex List
   List<ForexRate> _forexList = [];
 
   @override
@@ -80,45 +80,57 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     super.dispose();
   }
 
+  // Safe fetch helper function
+  Future<dynamic> _safeGet(String url) async {
+    try {
+      final res = await http.get(
+        Uri.parse(url),
+        headers: {'Accept': 'application/json'},
+      ).timeout(const Duration(seconds: 7));
+      if (res.statusCode == 200) {
+        return jsonDecode(res.body);
+      }
+    } catch (_) {}
+    return null;
+  }
+
   Future<void> _fetchMarketData() async {
     try {
-      final futures = [
-        http.get(Uri.parse('https://api.gold-api.com/price/XAU')),
-        http.get(Uri.parse('https://api.gold-api.com/price/XAG')),
-        http.get(Uri.parse('https://api.gold-api.com/price/HG')),  // Copper
-        http.get(Uri.parse('https://api.gold-api.com/price/XPT')), // Platinum
-      ];
+      // 1. Fetch Gold & Silver directly
+      final goldData = await _safeGet('https://api.gold-api.com/price/XAU');
+      final silverData = await _safeGet('https://api.gold-api.com/price/XAG');
 
-      final responses = await Future.wait(futures);
+      // 2. Fetch Optional: Platinum & Copper safely
+      final platData = await _safeGet('https://api.gold-api.com/price/XPT');
+      final copperData = await _safeGet('https://api.gold-api.com/price/HG');
 
-      if (responses[0].statusCode == 200 && responses[1].statusCode == 200) {
-        final goldJson = jsonDecode(responses[0].body);
-        final silverJson = jsonDecode(responses[1].body);
-        final copperJson = responses[2].statusCode == 200 ? jsonDecode(responses[2].body) : null;
-        final platJson = responses[3].statusCode == 200 ? jsonDecode(responses[3].body) : null;
-
-        // Forex Benchmark (Gold-api gives prices in USD. We calculate INR pairs accurately)
-        final double baseUsdInr = 83.54;
-
+      if (goldData != null && silverData != null) {
         final List<ForexRate> forex = [
-          ForexRate(code: 'USD', name: 'US Dollar', flag: '🇺🇸', inrRate: baseUsdInr),
-          ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: baseUsdInr * 1.085),
-          ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: baseUsdInr * 1.282),
-          ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: baseUsdInr / 3.6725),
-          ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (baseUsdInr / 155.2) * 100),
-          ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: baseUsdInr * 0.732),
-          ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: baseUsdInr * 0.665),
-          ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: baseUsdInr * 0.745),
+          ForexRate(code: 'USD', name: 'US Dollar', flag: '🇺🇸', inrRate: _usdInrRate),
+          ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: _usdInrRate * 1.085),
+          ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: _usdInrRate * 1.282),
+          ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: _usdInrRate / 3.6725),
+          ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (_usdInrRate / 155.2) * 100),
+          ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: _usdInrRate * 0.732),
+          ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: _usdInrRate * 0.665),
+          ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: _usdInrRate * 0.745),
         ];
 
         if (mounted) {
           setState(() {
-            _gold = CommodityItem.fromJson(goldJson, 'GOLD 24K', '/ oz');
-            _silver = CommodityItem.fromJson(silverJson, 'SILVER', '/ oz');
-            _copper = copperJson != null ? CommodityItem.fromJson(copperJson, 'COPPER', '/ lb') : null;
-            _platinum = platJson != null ? CommodityItem.fromJson(platJson, 'PLATINUM', '/ oz') : null;
+            _gold = CommodityItem.fromJson(goldData, 'GOLD 24K', '/ oz');
+            _silver = CommodityItem.fromJson(silverData, 'SILVER', '/ oz');
 
-            _usdInrRate = baseUsdInr;
+            // Agar Platinum API chali toh real data, warna fallback
+            _platinum = platData != null
+                ? CommodityItem.fromJson(platData, 'PLATINUM', '/ oz')
+                : CommodityItem(symbol: 'XPT', name: 'PLATINUM', priceUsd: 985.0, unitUsd: '/ oz');
+
+            // Copper fallback ya API data
+            _copper = copperData != null
+                ? CommodityItem.fromJson(copperData, 'COPPER', '/ lb')
+                : CommodityItem(symbol: 'HG', name: 'COPPER', priceUsd: 4.45, unitUsd: '/ lb');
+
             _forexList = forex;
             _isLoading = false;
             _error = null;
@@ -127,7 +139,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
       } else {
         if (mounted) {
           setState(() {
-            _error = 'HTTP sync error';
+            _error = 'Unable to reach bullion server';
             _isLoading = false;
           });
         }
@@ -142,7 +154,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     }
   }
 
-  // Unit Converters for Indian Retail Metrics
+  // Unit Calculations
   double _calcGoldPer10g(double usdOz) => ((usdOz / 31.1035) * 10) * _usdInrRate;
   double _calcSilverPerKg(double usdOz) => ((usdOz / 31.1035) * 1000) * _usdInrRate;
   double _calcCopperPerKg(double usdLb) => (usdLb * 2.20462) * _usdInrRate;
@@ -177,7 +189,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
               ),
               SizedBox(width: 8),
               Text(
-                'Syncing Live Bullion & Forex Rates...',
+                'Syncing Bullion & Forex Rates...',
                 style: TextStyle(color: Colors.white54, fontSize: 11),
               ),
             ],
@@ -193,6 +205,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
         decoration: BoxDecoration(
           color: const Color(0xFF131B2A),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFF1E2B3E)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,7 +241,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Navigation Switcher (Metals vs Forex)
+          // 1. Selector Chips (Metals vs Forex)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -260,7 +273,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
 
           const SizedBox(height: 12),
 
-          // 2. Active Tab Content
+          // 2. Active Tab Grid
           if (_selectedTabIndex == 0) _buildMetalsGrid() else _buildForexGrid(),
         ],
       ),
@@ -296,11 +309,9 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     );
   }
 
-  // 🪙 Metals View (Gold, Silver, Copper, Platinum)
   Widget _buildMetalsGrid() {
     return Column(
       children: [
-        // Row 1: Gold & Silver
         Row(
           children: [
             Expanded(
@@ -329,7 +340,6 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
           ],
         ),
         const SizedBox(height: 8),
-        // Row 2: Copper & Platinum
         Row(
           children: [
             Expanded(
@@ -340,7 +350,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
                 unitUsd: '/ lb',
                 inrPrice: _copper != null ? _calcCopperPerKg(_copper!.priceUsd) : _calcCopperPerKg(4.45),
                 inrUnit: '/ 1 Kg (Est)',
-                accentColor: const Color(0xFFFF7A45), // Copper Red/Orange
+                accentColor: const Color(0xFFFF7A45),
               ),
             ),
             const SizedBox(width: 8),
@@ -348,9 +358,9 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
               child: _metalCard(
                 name: 'PLATINUM',
                 symbol: 'XPT',
-                usdPrice: _platinum?.priceUsd ?? 995.0,
+                usdPrice: _platinum?.priceUsd ?? 985.0,
                 unitUsd: '/ oz',
-                inrPrice: _platinum != null ? _calcPlatPer10g(_platinum!.priceUsd) : _calcPlatPer10g(995.0),
+                inrPrice: _platinum != null ? _calcPlatPer10g(_platinum!.priceUsd) : _calcPlatPer10g(985.0),
                 inrUnit: '/ 10g (Est)',
                 accentColor: const Color(0xFF00E5FF),
               ),
@@ -411,7 +421,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
                 '\$${usdPrice.toStringAsFixed(2)}',
                 style: GoogleFonts.robotoMono(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 13.5,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -431,7 +441,13 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
                 ),
               ),
               const SizedBox(width: 4),
-              Text(inrUnit, style: const TextStyle(color: Colors.white54, fontSize: 8)),
+              Expanded(
+                child: Text(
+                  inrUnit,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.white54, fontSize: 8),
+                ),
+              ),
             ],
           ),
         ],
@@ -439,7 +455,6 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     );
   }
 
-  // 💱 Global Forex View (Currencies to INR)
   Widget _buildForexGrid() {
     return Column(
       children: [
