@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-30 10:23 AM IST",
+  "updated_at": "2026-09-30 06:56 PM IST",
   "source": "IBJA Official & Market Benchmark",
   "rates_per_10g": {
     "24k": 76150.0,
@@ -8,9 +8,9 @@
     "silver_per_kg": 92400.0
   },
   "trend_1y": {
-    "rate_1y_ago_24k": 60049.17,
+    "rate_1y_ago_24k": 60029.42,
     "rate_6m_ago_24k": 68535.0,
     "cpi_inflation_1y": 5.4,
-    "nifty_1y_return": -7.49
+    "nifty_1y_return": -8.09
   }
 }
