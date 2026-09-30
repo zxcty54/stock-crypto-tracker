@@ -34,6 +34,7 @@ android {
             isShrinkResources = false
         }
         debug {
+            // Debug mode me bhi release key point karega taaki updates me signature mismatch na aaye
             signingConfig = signingConfigs.getByName("release")
         }
     }
