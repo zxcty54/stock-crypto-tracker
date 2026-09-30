@@ -53,12 +53,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   void _openCreatePostFlow() {
     HapticFeedback.mediumImpact();
-    if (!AuthService.isLoggedIn()) {
+    // Agar already logged in hai toh direct post bottomsheet open karein
+    if (AuthService.isLoggedIn()) {
+      _openCreatePostBottomSheet();
+    } else {
       _showHandlePromptDialog(context, () {
         _openCreatePostBottomSheet();
       });
-    } else {
-      _openCreatePostBottomSheet();
     }
   }
 
@@ -77,79 +78,112 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   void _showHandlePromptDialog(BuildContext context, VoidCallback onSuccess) {
     final nameCtrl = TextEditingController();
+    bool isSubmitting = false;
+
     showDialog(
       context: context,
       barrierDismissible: true,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF0F1726),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Color(0xFF1E2B3E)),
-        ),
-        title: Text(
-          'CREATE TRADER HANDLE',
-          style: GoogleFonts.plusJakartaSans(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0.6,
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Enter your name to share chart setups and participate in community votes.',
-              style: TextStyle(color: Color(0xFF8896AB), fontSize: 11, height: 1.3),
+      builder: (ctx) => StatefulBuilder(
+        builder: (dialogCtx, setDialogState) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFF0F1726),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: const BorderSide(color: Color(0xFF1E2B3E)),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: nameCtrl,
-              autofocus: true,
-              style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
-              decoration: InputDecoration(
-                hintText: 'e.g. Rahul Trader',
-                hintStyle: const TextStyle(color: Colors.white24, fontSize: 12),
-                filled: true,
-                fillColor: const Color(0xFF141C2B),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xFF1E2B3E)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xFF00E5FF)),
-                ),
+            title: Text(
+              'CREATE TRADER HANDLE',
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.6,
               ),
             ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel', style: TextStyle(color: Colors.white38, fontSize: 12)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E5FF),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Enter your name to share chart setups and participate in community votes.',
+                  style: TextStyle(color: Color(0xFF8896AB), fontSize: 11, height: 1.3),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: nameCtrl,
+                  autofocus: true,
+                  style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                    hintText: 'e.g. Rahul Trader',
+                    hintStyle: const TextStyle(color: Colors.white24, fontSize: 12),
+                    filled: true,
+                    fillColor: const Color(0xFF141C2B),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Color(0xFF1E2B3E)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Color(0xFF00E5FF)),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            onPressed: () async {
-              final name = nameCtrl.text.trim();
-              if (name.isNotEmpty) {
-                Navigator.pop(ctx);
-                final ok = await AuthService.startAnonymousSession(name);
-                if (ok) onSuccess();
-              }
-            },
-            child: const Text(
-              'Continue',
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 12),
-            ),
-          ),
-        ],
+            actions: [
+              TextButton(
+                onPressed: isSubmitting ? null : () => Navigator.pop(dialogCtx),
+                child: const Text('Cancel', style: TextStyle(color: Colors.white38, fontSize: 12)),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF00E5FF),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                onPressed: isSubmitting
+                    ? null
+                    : () async {
+                        final name = nameCtrl.text.trim();
+                        if (name.isEmpty) return;
+
+                        setDialogState(() => isSubmitting = true);
+
+                        final ok = await AuthService.startAnonymousSession(name);
+
+                        if (!dialogCtx.mounted) return;
+                        Navigator.pop(dialogCtx);
+
+                        if (ok) {
+                          onSuccess();
+                        } else {
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Color(0xFFFF2A6D),
+                                content: Text(
+                                  'Auth Failed: Supabase Dashboard > Authentication > Providers > Anonymous ko Enable karein.',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                child: isSubmitting
+                    ? const SizedBox(
+                        width: 14,
+                        height: 14,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                      )
+                    : const Text(
+                        'Continue',
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 12),
+                      ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -209,8 +243,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
             ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2))
             : _postsError != null
                 ? Center(
-                    child: Text('Unable to connect: $_postsError',
-                        style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text('Unable to connect: $_postsError',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11)),
+                    ),
                   )
                 : _communityPosts.isEmpty
                     ? Center(
