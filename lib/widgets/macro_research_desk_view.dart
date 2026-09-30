@@ -13,7 +13,7 @@ class ImpactedStock {
   final String? businessImpact;
   final int directExposurePct;
 
-  ImpactedStock({
+  const ImpactedStock({
     required this.symbol,
     required this.companyName,
     required this.sector,
@@ -53,7 +53,7 @@ class MacroReportItem {
   final double fiftyTwoWeekHigh;
   final int transmissionLagDays;
 
-  MacroReportItem({
+  const MacroReportItem({
     required this.commodityName,
     required this.unit,
     required this.currentPrice,
@@ -92,15 +92,16 @@ class MacroReportItem {
 }
 
 // ---------------- MAIN WIDGET SCREEN ----------------
-class MacroMarginRadarProV2 extends StatefulWidget {
+// Class name NewsScreen ke mutabiq MacroResearchDeskView rakha gaya hai
+class MacroResearchDeskView extends StatefulWidget {
   final bool isDarkMode;
-  const MacroMarginRadarProV2({super.key, this.isDarkMode = true});
+  const MacroResearchDeskView({super.key, this.isDarkMode = true});
 
   @override
-  State<MacroMarginRadarProV2> createState() => _MacroMarginRadarProV2State();
+  State<MacroResearchDeskView> createState() => _MacroResearchDeskViewState();
 }
 
-class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
+class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   final String _jsonUrl =
       'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/refs/heads/main/macro_research_report.json';
 
@@ -354,7 +355,6 @@ class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
     final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
     final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
 
-    // Dynamic 52W range calculation
     final range = item.fiftyTwoWeekHigh - item.fiftyTwoWeekLow;
     final position = range > 0 ? ((item.currentPrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0) : 0.5;
 
@@ -399,7 +399,6 @@ class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
             style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: accentCyan),
           ),
           const SizedBox(height: 14),
-          // 52-Week Range Bar
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -459,7 +458,7 @@ class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Card Grid - No Overflow)
+  /// 3. Visual Transmission Pipeline (Card Grid)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -633,7 +632,7 @@ class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
     );
   }
 
-  /// 6. Clean Screener Controls (Vertical Stack: Search -> Filter Chips)
+  /// 6. Screener Controls
   Widget _buildScreenerControls() {
     return Column(
       children: [
@@ -696,6 +695,7 @@ class _MacroMarginRadarProV2State extends State<MacroMarginRadarProV2> {
     );
   }
 
+  /// 7. Equities List
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
