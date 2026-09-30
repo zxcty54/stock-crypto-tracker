@@ -4,8 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-// 🪙 Metals & Forex Ticker Card Import
+// 🪙 Bullion & Trend Widgets Import
 import '../widgets/metals_ticker_card.dart';
+import '../widgets/ibja_retail_calculator_card.dart';
+import '../widgets/retail_gold_trend_card.dart';
+import '../widgets/news_card.dart';
 
 class NewsItem {
   final String title;
@@ -28,7 +31,7 @@ class NewsItem {
       source: json['source'] ?? 'Financial Wire',
       time: json['time'] ?? 'Just now',
       url: json['url'],
-      summary: json['summary'],
+      summary: json['summary'] ?? json['body'],
     );
   }
 }
@@ -62,7 +65,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
       final res = await http.get(
         Uri.parse('$_newsUrl?ts=${DateTime.now().millisecondsSinceEpoch}'),
         headers: {'Cache-Control': 'no-cache'},
-      );
+      ).timeout(const Duration(seconds: 10));
 
       if (res.statusCode == 200) {
         final dynamic raw = jsonDecode(res.body);
@@ -112,7 +115,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
-            // 🪙 1. LIVE BULLION, COPPER & FOREX TICKER CARD (Top Position)
+            // 🪙 1. LIVE SPOT METALS, COPPER & FOREX TICKER
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(top: 8.0),
@@ -120,10 +123,20 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               ),
             ),
 
-            // 📰 2. Section Header: Wire News
+            // 🏬 2. IBJA GROUND REALITY RETAIL CALCULATOR (City + Making + GST)
+            const SliverToBoxAdapter(
+              child: IbjaRetailCalculatorCard(),
+            ),
+
+            // 📈 3. 1-YEAR RETAIL ALPHA, NET LIQUIDATION & INFLATION TREND ENGINE
+            const SliverToBoxAdapter(
+              child: RetailGoldTrendCard(),
+            ),
+
+            // 📰 4. Section Header: Market News Wire
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -151,6 +164,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                     ),
                     IconButton(
                       icon: const Icon(Icons.refresh_rounded, size: 18, color: Color(0xFF00E5FF)),
+                      tooltip: 'Refresh Feed',
                       onPressed: () {
                         HapticFeedback.selectionClick();
                         setState(() => _isLoading = true);
@@ -162,7 +176,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               ),
             ),
 
-            // 📑 3. News Feed Content
+            // 📑 5. News Feed Content (With Upgraded NewsCard)
             if (_isLoading && _newsList.isEmpty)
               const SliverFillRemaining(
                 hasScrollBody: false,
@@ -193,67 +207,19 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               )
             else
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(14, 0, 14, 100), // Bottom padding for navbar dock
+                padding: const EdgeInsets.fromLTRB(14, 0, 14, 110), // Bottom padding for navigation dock
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final item = _newsList[index];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF0F1726),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFF1E2B3E)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF1A2436),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: Text(
-                                    item.source.toUpperCase(),
-                                    style: const TextStyle(
-                                      color: Color(0xFF00E5FF),
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  item.time,
-                                  style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 10),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              item.title,
-                              style: GoogleFonts.plusJakartaSans(
-                                color: Colors.white,
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w700,
-                                height: 1.35,
-                              ),
-                            ),
-                            if (item.summary != null && item.summary!.isNotEmpty) ...[
-                              const SizedBox(height: 6),
-                              Text(
-                                item.summary!,
-                                style: const TextStyle(color: Colors.white60, fontSize: 11, height: 1.3),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ],
-                        ),
+                      return NewsCard(
+                        item: {
+                          'title': item.title,
+                          'source': item.source,
+                          'time': item.time,
+                          'body': item.summary,
+                          'url': item.url,
+                        },
                       );
                     },
                     childCount: _newsList.length,
