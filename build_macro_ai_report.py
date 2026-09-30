@@ -6,7 +6,6 @@ import requests
 
 OUTPUT_FILE = "macro_research_report.json"
 
-# Fallback models to attempt
 CANDIDATE_MODELS = [
     "gemini-2.0-flash",
     "gemini-1.5-flash",
@@ -65,9 +64,6 @@ COMMODITIES = [
     }
 ]
 
-# ==============================================================================
-# 🔍 STEP 0: DIAGNOSTIC PING TO GOOGLE GEMINI API
-# ==============================================================================
 def run_api_diagnostics(api_key):
     print("=" * 75)
     print("🔍 DIAGNOSTIC MODE: Checking Gemini API Key & Connection...")
@@ -75,12 +71,10 @@ def run_api_diagnostics(api_key):
 
     if not api_key:
         print("❌ CRITICAL ERROR: 'GEMINI_API_KEY' is EMPTY!")
-        print("👉 Action Required: Add 'GEMINI_API_KEY' to GitHub Repo -> Settings -> Secrets and variables -> Actions")
         return False
 
     print(f"🔑 Key Detected: {api_key[:6]}...{api_key[-4:]} (Length: {len(api_key)} chars)")
 
-    # 1. Test Query: List Models available for this key
     list_url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
     try:
         res = requests.get(list_url, timeout=15)
@@ -89,11 +83,11 @@ def run_api_diagnostics(api_key):
         if res.status_code == 200:
             models_data = res.json().get("models", [])
             gen_models = [m["name"].replace("models/", "") for m in models_data if "generateContent" in m.get("supportedGenerationMethods", [])]
-            print(f"✅ API Key is 100% VALID! Active Models available for this key:")
+            print("✅ API Key is 100% VALID! Active Models available:")
             print(f"   {', '.join(gen_models[:6])}")
             return True
         else:
-            print(f"❌ Google Gateway Rejected Request! Raw Response:")
+            print("❌ Google Gateway Rejected Request! Raw Response:")
             print(f"   Status Code: {res.status_code}")
             print(f"   Response Body: {res.text}")
             return False
@@ -101,7 +95,6 @@ def run_api_diagnostics(api_key):
     except Exception as e:
         print(f"❌ Network/Connection Exception during diagnostic: {e}")
         return False
-
 
 def fetch_commodity_metrics():
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
@@ -153,7 +146,6 @@ def fetch_commodity_metrics():
 
     return gathered
 
-
 def call_gemini_with_fallback(prompt, api_key):
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
@@ -164,7 +156,6 @@ def call_gemini_with_fallback(prompt, api_key):
     }
 
     for model_name in CANDIDATE_MODELS:
-        # Both v1beta and v1 test
         for version in ["v1beta", "v1"]:
             url = f"https://generativelanguage.googleapis.com/{version}/models/{model_name}:generateContent?key={api_key}"
             headers = {"Content-Type": "application/json"}
@@ -183,9 +174,8 @@ def call_gemini_with_fallback(prompt, api_key):
 
                     return json.loads(raw_text.strip()), f"{model_name} [{version}]"
                 else:
-                    # 🔍 PRINT EXACT ERROR TO CONSOLE
                     error_detail = res.text[:220].replace("\n", " ")
-                    print(f"   ⚠️️ [{version}] {model_name} -> HTTP {res.status_code} | Details: {error_detail}")
+                    print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code} | Details: {error_detail}")
                     time.sleep(0.5)
 
             except Exception as e:
@@ -194,7 +184,6 @@ def call_gemini_with_fallback(prompt, api_key):
 
     return None, None
 
-
 def generate_ai_research_analysis(dataset, api_key):
     print("\n" + "=" * 75)
     print("🧠 Step 2: Triggering Gemini AI with Model Fallbacks...")
@@ -202,8 +191,90 @@ def generate_ai_research_analysis(dataset, api_key):
 
     ai_reports = []
 
+    # Safe Schema Definition without string interpolation bugs
+    schema_template = """{
+  "commodity_name": "__COMMODITY__",
+  "unit": "__UNIT__",
+  "current_price": __PRICE__,
+  "period_changes": {
+    "1M": __D1M__,
+    "6M": __D6M__,
+    "1Y": __D1Y__,
+    "3Y": __D3Y__
+  },
+  "margin_trajectory": "EXPANDING or CONTRACTING or NEUTRAL",
+  "macro_headline": "A punchy single-line institutional takeaway",
+  "forward_thesis": "2 to 3 sentences explaining the 45-90 days inventory lag and corporate EBITDA impact",
+  "import_context": "__IMPORT__",
+  "key_risk": "One primary risk factor",
+  "impacted_stocks": [
+    {
+      "symbol": "NSE_SYMBOL (e.g. ASIANPAINT)",
+      "company_name": "Full Company Name",
+      "sector": "Sub-Sector",
+      "impact_type": "POSITIVE or NEGATIVE",
+      "margin_impact_bps": "+180 bps or -120 bps",
+      "rationale": "One-line explanation of raw material exposure"
+    }
+  ]
+}"""
+
     for item in dataset:
         print(f"\n📡 Requesting AI Analysis for: {item['name']}...")
-        prompt = f"""
-You are the Head of Equity Research & Macro Strategist at a premier Indian Institutional Brokerage.
-Analyze the following raw material price dynamics for Indian manufacturing and listed
+
+        prompt = (
+            "You are the Head of Equity Research & Macro Strategist at a premier Indian Institutional Brokerage.\n"
+            "Analyze the following raw material price dynamics for Indian manufacturing and listed equities:\n\n"
+            f"COMMODITY: {item['name']}\n"
+            f"CURRENT PRICE: {item['current_price']} {item['unit']}\n"
+            f"MULTI-PERIOD DELTAS: 1-Month: {item['deltas']['1M']}%, 6-Month: {item['deltas']['6M']}%, "
+            f"1-Year (YoY): {item['deltas']['1Y']}%, 3-Year: {item['deltas']['3Y']}%\n"
+            f"RELEVANT SECTORS: {item['sector_relevance']}\n"
+            f"SOURCING CONTEXT: {item['import_profile']}\n\n"
+            "Respond ONLY with a valid JSON object matching this exact schema template:\n"
+            + schema_template.replace("__COMMODITY__", item['name'])
+                             .replace("__UNIT__", item['unit'])
+                             .replace("__PRICE__", str(item['current_price']))
+                             .replace("__D1M__", str(item['deltas']['1M']))
+                             .replace("__D6M__", str(item['deltas']['6M']))
+                             .replace("__D1Y__", str(item['deltas']['1Y']))
+                             .replace("__D3Y__", str(item['deltas']['3Y']))
+                             .replace("__IMPORT__", item['import_profile'])
+            + "\n\nEnsure the impacted_stocks array contains EXACTLY 8 to 10 listed Indian companies.\n"
+            "Do NOT output markdown backticks like ```json. Output ONLY raw parseable JSON."
+        )
+
+        report_obj, engine = call_gemini_with_fallback(prompt, api_key)
+        if report_obj:
+            ai_reports.append(report_obj)
+            print(f"✨ AI Analysis Success: {item['name']} via {engine} ({len(report_obj.get('impacted_stocks', []))} stocks)")
+        else:
+            print(f"❌ Failed to generate report for {item['name']}")
+
+        time.sleep(1.2)
+
+    return ai_reports
+
+if __name__ == "__main__":
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+
+    is_api_ready = run_api_diagnostics(api_key)
+
+    if not is_api_ready:
+        print("\n🛑 Pipeline Aborted: Fix the API Key issue above to continue.")
+        exit(1)
+
+    dataset = fetch_commodity_metrics()
+    if dataset:
+        reports = generate_ai_research_analysis(dataset, api_key)
+        if reports:
+            final_data = {
+                "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
+                "total_reports": len(reports),
+                "reports": reports
+            }
+            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+                json.dump(final_data, f, ensure_ascii=False, indent=2)
+            print(f"\n🎉 Successfully created '{OUTPUT_FILE}' locally in repo!")
+        else:
+            print("\n⚠️ No reports were generated.")
