@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-09-29 22:06:38 IST",
-  "worthy_count": 17,
-  "skipped_count": 9,
+  "generated_at": "2026-09-30 15:26:03 IST",
+  "worthy_count": 18,
+  "skipped_count": 11,
   "content_feed": [
+    {
+      "hash": "9c8247b7e012",
+      "symbol": "SYMBIOTEC",
+      "company_name": "Symbiotec Pharmalab Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "REGULATORY_APPROVAL",
+      "broadcast_date": "29-Sep-2026 10:57:51",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SYMBIOTEC_29092026105720_SymbiotecUSFDAApprovalSEZ.pdf",
+      "headline": "Symbiotec Pharmalab Limited receives U.S. FDA Establishment Inspection Report for Pithampur facility",
+      "content_worthy": true,
+      "worthiness_reason": "Received U.S. FDA Establishment Inspection Report indicating compliance for its Pithampur facility.",
+      "telegram_post": "✅ <b>#REGULATORY_APPROVAL</b> | <b>Symbiotec Pharmalab Limited (NSE: SYMBIOTEC)</b>\n\n<b>Symbiotec Pharmalab Limited receives U.S. FDA Establishment Inspection Report for Pithampur facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility:</b> Pithampur SEZ, Madhya Pradesh\n- <b>Inspection Period:</b> 10‑14 Aug 2026\n- <b>USFDA Status:</b> Voluntary Action Indicated (VAI)\n\n📌 <b>What happened:</b>\n↳ Symbiotec Pharmalab Limited received an Establishment Inspection Report from the U.S. FDA for its Pithampur facility, confirming compliance with U.S. regulatory standards.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SYMBIOTEC_29092026105720_SymbiotecUSFDAApprovalSEZ.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-09-30 15:26:03 IST"
+    },
+    {
+      "hash": "02c0555dbc6e",
+      "symbol": "CEIGALL",
+      "company_name": "Ceigall India Limited",
+      "category": "ORDER",
+      "event_type": "ORDER",
+      "broadcast_date": "30-Sep-2026 12:06:04",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ceigall_30092026120556_Intimation.pdf",
+      "headline": "Ceigall India Limited receives Letter of Intent for stone block project in Nawada District",
+      "content_worthy": true,
+      "worthiness_reason": "Received a significant government Letter of Intent for a stone block project worth ₹214.52 Cr.",
+      "telegram_post": "💰 <b>#ORDER</b> | <b>Ceigall India Limited (NSE: CEIGALL)</b>\n\n<b>Ceigall India Limited receives Letter of Intent for stone block project in Nawada District</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Project:</b> नवादा जिला के पत्थर भूखण्ड ोंकी बोंदडबस्ती हेतु (Allotment/Leasing of Stone Blocks)\n- <b>Location:</b> Nawada District, Bhadokhara, Block-D\n- <b>Contract Value:</b> ₹214.52 Cr cumulative (₹28.82 Cr per annum)\n- <b>Duration:</b> 5 years\n\n📌 <b>What happened:</b>\n↳ Ceigall India Limited received a Letter of Intent from the Government of Bihar for the above project, marking a significant government contract.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ceigall_30092026120556_Intimation.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-09-30 15:26:03 IST"
+    },
     {
       "hash": "3902b994cc98",
       "symbol": "PRESTIGE",
@@ -226,23 +254,37 @@
       "worthiness_reason": "Order win for a large solar EPC project.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>KPI Green Energy Limited (NSE: KPIGREEN)</b>\n\n<b>KPI Green Energy Secures ₹2,025 Cr Solar EPC Order from NACOF Oorja</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n• <b>Order Value:</b> ₹2,025 crore\n• <b>Project Capacity:</b> 500 MW / 550 MWp\n• <b>Client:</b> NACOF Oorja Private Limited\n• <b>Location:</b> Village Dantoor, Bikaner, Rajasthan\n• <b>Completion:</b> 12 months from site handover\n\n📌 <b>What happened:</b>\n↳ The order adds to KPI Green’s EPC order book and provides revenue visibility for the coming year.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KPIGLOBAL_29092026152717_7_KPI_Green_Reg30_NACOF_500MW_Order_29092026_Signed.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-09-29 15:32:53 IST"
-    },
-    {
-      "hash": "9c8247b7e012",
-      "symbol": "SYMBIOTEC",
-      "company_name": "Symbiotec Pharmalab Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "REGULATORY_APPROVAL",
-      "broadcast_date": "29-Sep-2026 10:57:51",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SYMBIOTEC_29092026105720_SymbiotecUSFDAApprovalSEZ.pdf",
-      "headline": "Symbiotec Pharmalab Receives US FDA Establishment Inspection Report for Pithampur Facility",
-      "content_worthy": true,
-      "worthiness_reason": "Received US FDA Establishment Inspection Report for manufacturing facility.",
-      "telegram_post": "✅ <b>REGULATORY_APPROVAL</b> | <b>Symbiotec Pharmalab Limited (NSE: SYMBIOTEC)</b>\n\n<b>Symbiotec Pharmalab Receives US FDA Establishment Inspection Report for Pithampur Facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n• <b>Facility:</b> Pithampur SEZ, Madhya Pradesh\n• <b>Inspection Period:</b> Aug 10‑14, 2026\n• <b>Classification:</b> Voluntary Action Indicated (VAI)\n• <b>Report:</b> Establishment Inspection Report (EIR)\n\n📌 <b>What happened:</b>\n↳ The company has been granted an EIR by the U.S. FDA for its manufacturing plant, indicating compliance with regulatory standards.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SYMBIOTEC_29092026105720_SymbiotecUSFDAApprovalSEZ.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-09-29 11:09:26 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "7a3d9be4f9fc",
+      "symbol": "VIPULLTD",
+      "company_name": "Vipul Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "30-Sep-2026 12:34:35",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VIPULLTD_30092026122612_OUTCOME290926.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results not fully disclosed; revenue or PAT missing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-09-30 15:25:40 IST"
+    },
+    {
+      "hash": "c197c1e5d025",
+      "symbol": "DIXON",
+      "company_name": "Dixon Technologies (India) Limited",
+      "category": "JV",
+      "event_type": "OTHER",
+      "broadcast_date": "30-Sep-2026 14:45:57",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/DIXON_30092026144453_AnnouncementAviat30092026.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Routine administrative notice with no material development.",
+      "telegram_post": "",
+      "analyzed_at": "2026-09-30 15:25:40 IST"
+    },
     {
       "hash": "ecab2dd07076",
       "symbol": "MOMSBELIEF",
