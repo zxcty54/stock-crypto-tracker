@@ -49,16 +49,74 @@ jobs:
         run: |
           mkdir -p android/app/keystore
           if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 -d > android/app/keystore/upload-keystore.jks
+            # Clean spaces/newlines and decode safely
+            echo "$KEYSTORE_BASE64" | tr -d '\r\n ' | base64 --decode > android/app/keystore/upload-keystore.jks
             
+            # key.properties create karein
             cat <<EOF > android/key.properties
           storePassword=stockpulse@123
           keyPassword=stockpulse@123
           keyAlias=stockpulse-key
           storeFile=keystore/upload-keystore.jks
           EOF
-            sed -i 's/signingConfig = signingConfigs.debug/signingConfig = signingConfigs.release/g' android/app/build.gradle 2>/dev/null || true
-            sed -i 's/signingConfig = signingConfigs.getByName("debug")/signingConfig = signingConfigs.getByName("release")/g' android/app/build.gradle.kts 2>/dev/null || true
+
+            # Kotlin DSL (build.gradle.kts) & Groovy me release signingConfig inject karein
+            python3 -c '
+          import os
+
+          gradle_kts = "android/app/build.gradle.kts"
+          gradle_groovy = "android/app/build.gradle"
+
+          signing_code_kts = """
+              signingConfigs {
+                  create("release") {
+                      storeFile = file("keystore/upload-keystore.jks")
+                      storePassword = "stockpulse@123"
+                      keyAlias = "stockpulse-key"
+                      keyPassword = "stockpulse@123"
+                  }
+              }
+              buildTypes {
+                  release {
+                      signingConfig = signingConfigs.getByName("release")
+                  }
+              }
+          """
+
+          signing_code_groovy = """
+              signingConfigs {
+                  release {
+                      storeFile file("keystore/upload-keystore.jks")
+                      storePassword "stockpulse@123"
+                      keyAlias "stockpulse-key"
+                      keyPassword "stockpulse@123"
+                  }
+              }
+              buildTypes {
+                  release {
+                      signingConfig signingConfigs.release
+                  }
+              }
+          """
+
+          if os.path.exists(gradle_kts):
+              with open(gradle_kts, "r") as f:
+                  content = f.read()
+              if "android {" in content:
+                  content = content.replace("android {", "android {\n" + signing_code_kts, 1)
+                  with open(gradle_kts, "w") as f:
+                      f.write(content)
+                  print("Injected release signing into build.gradle.kts")
+
+          elif os.path.exists(gradle_groovy):
+              with open(gradle_groovy, "r") as f:
+                  content = f.read()
+              if "android {" in content:
+                  content = content.replace("android {", "android {\n" + signing_code_groovy, 1)
+                  with open(gradle_groovy, "w") as f:
+                      f.write(content)
+                  print("Injected release signing into build.gradle")
+          '
           fi
 
       - name: Build Release APK
