@@ -6,11 +6,15 @@ import requests
 
 OUTPUT_FILE = "macro_research_report.json"
 
+# ==============================================================================
+# 🎯 AI CANDIDATE MODELS LIST (Priority Fallback)
+# ==============================================================================
 CANDIDATE_MODELS = [
     "gemini-3.5-flash-lite",
     "gemini-3.1-flash-lite",
     "gemini-2.5-flash",
-    "gemini-1.5-pro"
+    "gemini-2.0-flash",
+    "gemini-1.5-flash"
 ]
 
 COMMODITIES = [
@@ -147,10 +151,15 @@ def fetch_commodity_metrics():
     return gathered
 
 def call_gemini_with_fallback(prompt, api_key):
+    """
+    Max output token window set to 8192 tokens so the model can write exhaustive,
+    untruncated, rich rationales without any keyword limits.
+    """
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 0.2,
+            "temperature": 0.25,
+            "maxOutputTokens": 8192,
             "responseMimeType": "application/json"
         }
     }
@@ -161,7 +170,7 @@ def call_gemini_with_fallback(prompt, api_key):
             headers = {"Content-Type": "application/json"}
 
             try:
-                res = requests.post(url, json=payload, headers=headers, timeout=25)
+                res = requests.post(url, json=payload, headers=headers, timeout=40)
 
                 if res.status_code == 200:
                     raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
@@ -175,7 +184,8 @@ def call_gemini_with_fallback(prompt, api_key):
                     return json.loads(raw_text.strip()), f"{model_name} [{version}]"
                 else:
                     error_detail = res.text[:220].replace("\n", " ")
-                    print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code} | Details: {error_detail}")
+                    if res.status_code != 404:
+                        print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code} | Details: {error_detail}")
                     time.sleep(0.5)
 
             except Exception as e:
@@ -186,12 +196,12 @@ def call_gemini_with_fallback(prompt, api_key):
 
 def generate_ai_research_analysis(dataset, api_key):
     print("\n" + "=" * 75)
-    print("🧠 Step 2: Triggering Gemini AI with Model Fallbacks...")
+    print("🧠 Step 2: Dedicated 1-Commodity-Per-Batch Engine (20s Cooldown)")
+    print("⚡ Full 8,192 token window enabled for exhaustive Hinglish breakdown")
     print("=" * 75)
 
     ai_reports = []
 
-    # Safe Schema Definition without string interpolation bugs
     schema_template = """{
   "commodity_name": "__COMMODITY__",
   "unit": "__UNIT__",
@@ -203,28 +213,38 @@ def generate_ai_research_analysis(dataset, api_key):
     "3Y": __D3Y__
   },
   "margin_trajectory": "EXPANDING or CONTRACTING or NEUTRAL",
-  "macro_headline": "A punchy single-line institutional takeaway",
-  "forward_thesis": "2 to 3 sentences explaining the 45-90 days inventory lag and corporate EBITDA impact",
-  "import_context": "__IMPORT__",
-  "key_risk": "One primary risk factor",
+  "retail_badge": "🔴 Lagat Badhegi (Margin Pressure) or 🟢 Lagat Ghategi (Margin Rahat) or ⚪ Neutral (Santulit)",
+  "macro_headline": "Comprehensive single-line institutional summary in conversational Hinglish explaining price trend and affected manufacturing sectors",
+  "forward_thesis": "In-depth 3 to 4 sentences in clean Hinglish explaining the exact 45 to 90 days inventory lag, cost pass-through limitations, and how input costs will specifically impact upcoming quarterly EBITDA results (Q3/Q4)",
+  "import_context": "Detailed explanation in Hinglish covering India import dependence percentage, shipping routes, currency sensitivity (USD-INR), and global supply choke points",
+  "key_risk": "Deep explanation of the single largest macro or geopolitical risk factor that could disrupt this thesis",
   "impacted_stocks": [
     {
       "symbol": "NSE_SYMBOL (e.g. ASIANPAINT)",
       "company_name": "Full Company Name",
       "sector": "Sub-Sector",
       "impact_type": "POSITIVE or NEGATIVE",
-      "margin_impact_bps": "+180 bps or -120 bps",
-      "rationale": "One-line explanation of raw material exposure"
+      "margin_impact_bps": "-2.5% (-250 bps) or +1.8% (+180 bps)",
+      "rationale": "Exhaustive multi-sentence Hinglish breakdown explaining the company's precise raw material exposure, estimated percentage share in total COGS, and why profit margins face headwinds or tailwinds",
+      "business_impact": "Direct operational business reality (e.g. Raw material mahanga hone se gross margin par dabaav aayega, passing on price hikes to end-users will be delayed by 2 quarters)"
     }
   ]
 }"""
 
-    for item in dataset:
-        print(f"\n📡 Requesting AI Analysis for: {item['name']}...")
+    total_items = len(dataset)
+
+    for index, item in enumerate(dataset, 1):
+        print(f"\n📦 [Batch {index}/{total_items}] Running deep research for: {item['name']}...")
 
         prompt = (
-            "You are the Head of Equity Research & Macro Strategist at a premier Indian Institutional Brokerage.\n"
-            "Analyze the following raw material price dynamics for Indian manufacturing and listed equities:\n\n"
+            "You are a Senior Equity Research & Macro Strategist analyzing raw materials for Indian retail investors.\n"
+            "Provide an EXHAUSTIVE, UNTRUNCATED, AND THOROUGH deep-dive analysis in conversational business HINGLISH (English script).\n\n"
+            "IMPORTANT DEPTH & CONTENT RULES:\n"
+            "1. DO NOT SHORTEN OR SUMMARIZE. Write full, complete, high-quality sentences for every field. You have a massive token allowance—use it to provide maximum educational value.\n"
+            "2. EXACTLY 8 TO 10 LISTED INDIAN STOCKS: For each stock, provide detailed rationale mentioning the specific raw material derivative and its approximate percentage in cost of goods sold (COGS).\n"
+            "3. NO DIRECT INVESTMENT ADVICE: Strictly avoid words like 'Buy', 'Sell', 'Hold', 'Accumulate', 'Avoid', or 'Dip ka wait karein'. Focus 100% on operational business reality, lagat (costs), and quarterly profit margin dynamics.\n"
+            "4. CLEAR HINGLISH EXPLANATION: Replace complex Wall-Street jargon with intuitive explanations (e.g., lagat badhna, purana stock inventory, quarterly results par dabaav, operating cash flow support).\n"
+            "5. EXPLAIN INVENTORY LAG CLEARLY: Clarify how 45-90 days of inventory holding creates a delay between raw material price spikes and the eventual quarterly balance sheet impact.\n\n"
             f"COMMODITY: {item['name']}\n"
             f"CURRENT PRICE: {item['current_price']} {item['unit']}\n"
             f"MULTI-PERIOD DELTAS: 1-Month: {item['deltas']['1M']}%, 6-Month: {item['deltas']['6M']}%, "
@@ -239,19 +259,21 @@ def generate_ai_research_analysis(dataset, api_key):
                              .replace("__D6M__", str(item['deltas']['6M']))
                              .replace("__D1Y__", str(item['deltas']['1Y']))
                              .replace("__D3Y__", str(item['deltas']['3Y']))
-                             .replace("__IMPORT__", item['import_profile'])
-            + "\n\nEnsure the impacted_stocks array contains EXACTLY 8 to 10 listed Indian companies.\n"
-            "Do NOT output markdown backticks like ```json. Output ONLY raw parseable JSON."
+            + "\n\nDo NOT output markdown backticks like ```json. Output ONLY raw parseable JSON."
         )
 
         report_obj, engine = call_gemini_with_fallback(prompt, api_key)
         if report_obj:
             ai_reports.append(report_obj)
-            print(f"✨ AI Analysis Success: {item['name']} via {engine} ({len(report_obj.get('impacted_stocks', []))} stocks)")
+            stock_count = len(report_obj.get('impacted_stocks', []))
+            print(f"   ✨ Success! Compiled full-depth report ({stock_count} stocks) using [{engine}]")
         else:
-            print(f"❌ Failed to generate report for {item['name']}")
+            print(f"   ❌ Failed to generate report for {item['name']}")
 
-        time.sleep(1.2)
+        # ⏳ 20-Second Cooldown applied after each batch (except the last one)
+        if index < total_items:
+            print(f"   ⏳ Batch cooldown active: Sleeping for 20 seconds to guarantee full rate-limit headroom...")
+            time.sleep(20)
 
     return ai_reports
 
@@ -275,6 +297,6 @@ if __name__ == "__main__":
             }
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
                 json.dump(final_data, f, ensure_ascii=False, indent=2)
-            print(f"\n🎉 Successfully created '{OUTPUT_FILE}' locally in repo!")
+            print(f"\n🎉 Successfully created '{OUTPUT_FILE}' with comprehensive full-token analysis!")
         else:
             print("\n⚠️ No reports were generated.")
