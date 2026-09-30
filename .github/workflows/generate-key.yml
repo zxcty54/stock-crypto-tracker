@@ -1,7 +1,7 @@
 name: ONE TIME - Generate & Send Keystore to Telegram
 
 on:
-  workflow_dispatch: # Sirf manual run hoga
+  workflow_dispatch:
 
 jobs:
   generate_and_send:
@@ -9,17 +9,14 @@ jobs:
     steps:
       - name: Generate Permanent Keystore & Prepare Files
         run: |
-          # 1. JKS Keystore generate karein
           keytool -genkey -v -keystore stockpulse-release.jks \
             -alias stockpulse-key \
             -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass stockpulse@123 -keypass stockpulse@123 \
             -dname "CN=StockPulse, OU=Terminal, O=StockPulse, L=Mumbai, ST=Maharashtra, C=IN"
 
-          # 2. Base64 format mein encode karein
           base64 -w 0 stockpulse-release.jks > keystore_base64.txt
 
-          # 3. Log mein bhi display karein (backup ke liye)
           echo "==================== BASE64 KEY ===================="
           cat keystore_base64.txt
           echo ""
@@ -30,17 +27,12 @@ jobs:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          # Step A: Asli .jks Keystore file bhejein
-          curl -F chat_id="$CHAT_ID" \
+          curl -s -F chat_id="$CHAT_ID" \
                -F document=@"stockpulse-release.jks" \
-               -F caption="🔐 StockPulse Permanent Keystore File (.jks)
-Alias: stockpulse-key
-Password: stockpulse@123" \
+               -F caption="StockPulse Keystore (.jks) | Alias: stockpulse-key | Pass: stockpulse@123" \
                https://api.telegram.org/bot$BOT_TOKEN/sendDocument
 
-          # Step B: Base64 Text file bhejein (jise direct GitHub Secrets me paste kar sakein)
-          curl -F chat_id="$CHAT_ID" \
+          curl -s -F chat_id="$CHAT_ID" \
                -F document=@"keystore_base64.txt" \
-               -F caption="📋 StockPulse Keystore Base64 String
-(Is file ka text copy karke GitHub Secret STOCKPULSE_KEYSTORE_BASE64 me paste karein)" \
+               -F caption="StockPulse Keystore Base64 (Secret: STOCKPULSE_KEYSTORE_BASE64)" \
                https://api.telegram.org/bot$BOT_TOKEN/sendDocument
