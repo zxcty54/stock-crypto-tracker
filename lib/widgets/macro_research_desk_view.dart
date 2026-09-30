@@ -511,7 +511,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline
+  /// 3. Visual Transmission Pipeline (Zero Overlap & Zero Text Cutoff)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
     final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
@@ -527,25 +527,29 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Header with Expanded to prevent text collision
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "INPUT COST TRANSMISSION PIPELINE",
-                style: TextStyle(
-                  color: accentCyan,
-                  fontSize: 11.5,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.1,
+              const Expanded(
+                child: Text(
+                  "INPUT COST TRANSMISSION",
+                  style: TextStyle(
+                    color: accentCyan,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.1,
+                  ),
                 ),
               ),
+              const SizedBox(width: 8),
               Text(
-                "Est. Cycle: ~${item.transmissionLagDays} Days",
+                "Est. Cycle: ~${item.transmissionLagDays}d",
                 style: const TextStyle(color: textMuted, fontSize: 11),
               ),
             ],
           ),
           const SizedBox(height: 12),
+          // Step 1: Raw Shock
           _pipelineStepCard(
             "1. RAW MATERIAL SHOCK",
             shockText,
@@ -553,29 +557,20 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             Icons.bolt_rounded,
           ),
           const SizedBox(height: 8),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _pipelineStepCard(
-                    "2. INVENTORY LAG",
-                    "${item.transmissionLagDays}d Buffer Depletion",
-                    Colors.purpleAccent,
-                    Icons.hourglass_bottom_rounded,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _pipelineStepCard(
-                    "3. EBITDA TRAJECTORY",
-                    "Margins: ${item.marginTrajectory}",
-                    isContracting ? Colors.redAccent : accentNeonGreen,
-                    Icons.trending_down_rounded,
-                  ),
-                ),
-              ],
-            ),
+          // Step 2: Full Width Inventory Lag to eliminate truncation
+          _pipelineStepCard(
+            "2. INVENTORY LAG",
+            "${item.transmissionLagDays} Days Inventory Buffer Depletion",
+            Colors.purpleAccent,
+            Icons.hourglass_bottom_rounded,
+          ),
+          const SizedBox(height: 8),
+          // Step 3: Full Width EBITDA Trajectory (Never cuts off CONTRACTING)
+          _pipelineStepCard(
+            "3. EBITDA TRAJECTORY",
+            "Operating Margins: ${item.marginTrajectory}",
+            isContracting ? Colors.redAccent : accentNeonGreen,
+            isContracting ? Icons.trending_down_rounded : Icons.trending_up_rounded,
           ),
         ],
       ),
@@ -584,6 +579,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
 
   Widget _pipelineStepCard(String title, String desc, Color col, IconData icon) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF131B2A),
@@ -591,9 +587,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
         border: Border.all(color: col.withAlpha(70)),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(icon, color: col, size: 18),
-          const SizedBox(width: 8),
+          Icon(icon, color: col, size: 20),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -601,18 +598,21 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: col, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.8),
+                  style: TextStyle(
+                    color: col,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   desc,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: 12.5,
                     fontWeight: FontWeight.w600,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
