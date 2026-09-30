@@ -6,7 +6,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CreateChartPostSheet extends StatefulWidget {
   final VoidCallback onPostCreated;
-  const CreateChartPostSheet({super.key, required this.onPostCreated});
+  final File? initialImage; // 👈 Gallery share se direct aayi hui image
+
+  const CreateChartPostSheet({
+    super.key,
+    required this.onPostCreated,
+    this.initialImage,
+  });
 
   @override
   State<CreateChartPostSheet> createState() => _CreateChartPostSheetState();
@@ -21,6 +27,22 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
   bool _isUploading = false;
 
   final List<String> _timeframes = ['1m', '5m', '15m', '1h', '1D'];
+
+  @override
+  void initState() {
+    super.initState();
+    // 📸 Agar gallery share ke through image pass hui hai toh direct set karein
+    if (widget.initialImage != null) {
+      _pickedImage = widget.initialImage;
+    }
+  }
+
+  @override
+  void dispose() {
+    _noteController.dispose();
+    _assetController.dispose();
+    super.dispose();
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -114,29 +136,51 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
             ),
             const SizedBox(height: 12),
 
-            // Image Picker Box
+            // Image Picker & Preview Box
             InkWell(
               onTap: _pickImage,
               child: Container(
-                height: 160,
+                height: 170,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: const Color(0xFF141C2B),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF25334A), style: BorderStyle.solid),
+                  border: Border.all(color: const Color(0xFF25334A)),
                 ),
                 child: _pickedImage != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.file(_pickedImage!, fit: BoxFit.cover),
+                    ? Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.file(_pickedImage!, fit: BoxFit.cover),
+                          ),
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: InkWell(
+                              onTap: () => setState(() => _pickedImage = null),
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: Colors.black87,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.close, color: Colors.white, size: 16),
+                              ),
+                            ),
+                          ),
+                        ],
                       )
                     : const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.add_photo_alternate_outlined, color: Color(0xFF00E5FF), size: 32),
                           SizedBox(height: 8),
-                          Text('Attach TradingView / Chart Screenshot',
-                              style: TextStyle(color: Colors.white54, fontSize: 11)),
+                          Text(
+                            'Attach TradingView / Chart Screenshot',
+                            style: TextStyle(color: Colors.white54, fontSize: 11),
+                          ),
                         ],
                       ),
               ),
@@ -224,10 +268,17 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 child: _isUploading
-                    ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                      )
                     : Text(
                         'PUBLISH SETUP',
-                        style: GoogleFonts.plusJakartaSans(color: Colors.black, fontWeight: FontWeight.w900),
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
               ),
             ),
