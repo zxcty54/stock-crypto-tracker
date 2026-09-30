@@ -6,18 +6,21 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
-import 'screens/community_screen.dart'; // 👥 Scanner/Radar ki jagah Community screen import
-import 'screens/scanner_screen.dart';   // Drawer ke liye scanner/radar
+import 'screens/community_screen.dart';
+import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
 import 'widgets/legal_disclaimer_dialog.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🌐 Supabase Initialization
+  // 🌐 GitHub Secrets se inject hone wale variables
+  const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
+
   await Supabase.initialize(
-    url: 'https://dgoyecicznflkbaznrng.supabase.co',
-    anonKey: const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: 'YOUR_SUPABASE_ANON_KEY'),
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
   );
 
   runApp(const StockPulseApp());
@@ -51,21 +54,21 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0; // Default tab News/Bullion
+  int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> _pages = const [
     NewsScreen(),
     CorporateAnnouncementsScreen(),
     StrategyBuilderScreen(),
-    CommunityScreen(), // 👥 4th slot par Community Wire load hoga
+    CommunityScreen(),
   ];
 
   final List<String> _titles = const [
     'MARKET NEWS WIRE',
     'CORPORATE FILINGS',
     'STRATEGY BUILDER',
-    'TRADER COMMUNITY WIRE', // 👥 Updated Header Title
+    'TRADER COMMUNITY WIRE',
   ];
 
   @override
@@ -100,7 +103,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
-  // Header with Menu Button to open Drawer
   Widget _buildTerminalHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -185,7 +187,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
-  // Institutional Left Drawer
   Widget _buildInstitutionalDrawer() {
     return Drawer(
       backgroundColor: const Color(0xFF0A0F1A),
@@ -236,7 +237,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 ],
               ),
             ),
-
             const SizedBox(height: 12),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
@@ -245,7 +245,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ),
-
             _drawerTile(
               icon: Icons.pie_chart_rounded,
               title: 'Delivery & OHLC History',
@@ -261,7 +260,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 );
               },
             ),
-
             _drawerTile(
               icon: Icons.candlestick_chart_rounded,
               title: 'Strategy Replay Builder',
@@ -271,8 +269,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 setState(() => _currentIndex = 2);
               },
             ),
-
-            // 🎯 Radar drawer se direct khulega
             _drawerTile(
               icon: Icons.radar_rounded,
               title: 'Market Radar & Scanner',
@@ -287,9 +283,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 );
               },
             ),
-
             const Divider(color: Color(0xFF1E2B3E), height: 20),
-
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
               child: Text(
@@ -297,7 +291,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ),
-
             _drawerTile(
               icon: Icons.hub_rounded,
               title: 'Trader Wire Community',
@@ -307,7 +300,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 setState(() => _currentIndex = 3);
               },
             ),
-
             _drawerTile(
               icon: Icons.campaign_rounded,
               title: 'Corporate Filings & Orders',
@@ -317,7 +309,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 setState(() => _currentIndex = 1);
               },
             ),
-
             _drawerTile(
               icon: Icons.newspaper_rounded,
               title: 'Financial News Wire',
@@ -327,9 +318,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 setState(() => _currentIndex = 0);
               },
             ),
-
             const Divider(color: Color(0xFF1E2B3E), height: 20),
-
             _drawerTile(
               icon: Icons.shield_outlined,
               title: 'Regulatory & Risk Disclaimer',
@@ -342,9 +331,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 );
               },
             ),
-
             const Spacer(),
-
             Container(
               padding: const EdgeInsets.all(16),
               color: const Color(0xFF0F1726),
@@ -410,7 +397,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
-  // 🚀 Floating Navigation Bar (Ab 4th item Community Wire hai)
   Widget _buildFloatingNavBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -432,7 +418,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           _navItem(0, Icons.newspaper_rounded, 'News'),
           _navItem(1, Icons.campaign_rounded, 'Filings'),
           _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'),
-          _navItem(3, Icons.hub_rounded, 'Community'), // 👈 Radar replaced with Community
+          _navItem(3, Icons.hub_rounded, 'Community'),
         ],
       ),
     );
