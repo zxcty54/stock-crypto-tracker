@@ -1,0 +1,52 @@
+name: Generate Macro Margin AI Research Report
+
+on:
+  schedule:
+    # Tuesday & Friday ko market close ke baad 6:30 PM IST (13:00 UTC)
+    - cron: '0 13 * * 2,5'
+  workflow_dispatch:
+
+jobs:
+  run-ai-research:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Native permission to push to the same repo
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run Macro Research Engine
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python build_macro_ai_report.py
+
+      - name: Direct Commit & Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -f macro_research_report.json ]; then
+            git add macro_research_report.json
+            if git diff --staged --quiet; then
+              echo "ℹ️ No changes in report."
+            else
+              git commit -m "📊 Auto-Update: Macro AI Research Report [$(date +'%d-%b-%Y')]"
+              git pull --rebase origin main
+              git push origin main
+              echo "✅ Pushed directly to main branch!"
+            fi
+          fi
