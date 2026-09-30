@@ -12,6 +12,7 @@ dependencies:
 
   # 📡 Networking & CDN JSON Fetching
   http: ^1.2.0
+  receive_sharing_intent: ^1.8.1
 
   # 🎨 Google Fonts & Icons
   google_fonts: ^6.2.1
