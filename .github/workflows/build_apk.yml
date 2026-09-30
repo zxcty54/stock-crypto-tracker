@@ -26,10 +26,16 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Generate Android Skeleton & Add Permissions
+      - name: Generate Android Skeleton, Permissions & Share Intent
         run: |
           flutter create . --project-name stockpulse --org com --platforms=android
+          
+          # 1. Storage & Internet Permissions inject karein
           sed -i '/<application/i <uses-permission android:name="android.permission.INTERNET"/>\n<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>\n<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>' android/app/src/main/AndroidManifest.xml
+          
+          # 2. Gallery se direct image share accept karne ke liye Intent Filter inject karein
+          sed -i '/<\/activity>/i <intent-filter>\n    <action android:name="android.intent.action.SEND" />\n    <category android:name="android.intent.category.DEFAULT" />\n    <data android:mimeType="image/*" />\n</intent-filter>' android/app/src/main/AndroidManifest.xml
+          
           flutter pub get
 
       - name: Build Release APK
