@@ -33,7 +33,7 @@ class FloatingNavBar extends StatelessWidget {
           _navItem(0, Icons.newspaper_rounded, 'News'),
           _navItem(1, Icons.campaign_rounded, 'Filings'),
           _navItem(2, Icons.currency_bitcoin_rounded, 'Crypto'),
-          _navItem(3, Icons.radar_rounded, 'Radar'),
+          _navItem(3, Icons.hub_rounded, 'Community'), // 👈 Replaced Radar with Community
         ],
       ),
     );
