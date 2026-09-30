@@ -1,7 +1,7 @@
 name: stockpulse
 description: Dalal Street Updates, Retail Bullion Terminal & Trader Community Platform
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+10
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
