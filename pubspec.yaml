@@ -17,6 +17,7 @@ dependencies:
   # 🎨 Google Fonts & Icons
   google_fonts: ^6.2.1
   cupertino_icons: ^1.0.8
+  flutter_image_compress: ^2.3.0
 
   # 💾 Local Storage (Trade Journal & Capital)
   shared_preferences: ^2.2.2
