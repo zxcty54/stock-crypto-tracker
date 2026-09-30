@@ -2,8 +2,8 @@ name: Generate Macro Margin AI Research Report
 
 on:
   schedule:
-    # Runs Tuesday & Friday at 1:00 PM UTC (6:30 PM IST after market close)
-    - cron: '0 13 * * 2,5'
+    # Monday to Friday har shaam 6:30 PM IST (13:00 UTC) par market close ke baad
+    - cron: '0 13 * * 1-5'
   workflow_dispatch:
 
 jobs:
