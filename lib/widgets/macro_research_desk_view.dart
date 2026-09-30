@@ -297,6 +297,10 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               _buildHeroPriceAndRangeCard(activeItem),
               const SizedBox(height: 14),
               _buildTransmissionPipeline(activeItem),
+              if (activeItem.importContext.isNotEmpty) ...[
+                const SizedBox(height: 14),
+                _buildSourcingGeopoliticalCard(activeItem), // 🌍 Independent Card
+              ],
               const SizedBox(height: 14),
               _buildAiForecastDeck(activeItem),
               const SizedBox(height: 14),
@@ -379,7 +383,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 2. Hero Price + Range Card (Supports retail_badge from JSON)
+  /// 2. Hero Price + Range Card
   Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
     final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
     final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
@@ -519,10 +523,11 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Zero-Cutoff Full Context Layout)
+  /// 3. Visual Transmission Pipeline (Clean 3-Step Streamlined Flow)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
     final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
+    final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -538,59 +543,49 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "INPUT COST TRANSMISSION",
+                "INPUT COST TRANSMISSION PIPELINE",
                 style: TextStyle(
                   color: accentCyan,
-                  fontSize: 12,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.1,
                 ),
               ),
               Text(
-                "Est. Lag: ~${item.transmissionLagDays} Days",
+                "Est. Cycle: ~${item.transmissionLagDays} Days",
                 style: const TextStyle(color: textMuted, fontSize: 11),
               ),
             ],
           ),
           const SizedBox(height: 12),
-
-          // 1. Raw Shock
-          _pipelineCard(
-            "1. Raw Shock",
+          // Step 1: Raw Shock
+          _pipelineStepCard(
+            "1. RAW MATERIAL SHOCK",
             shockText,
             Colors.amber,
-            isFullWidth: true,
+            Icons.bolt_rounded,
           ),
           const SizedBox(height: 8),
-
-          // 2. Full-Width Sourcing Context (Zero Cutoff)
-          _pipelineCard(
-            "2. Sourcing & Geopolitical Context",
-            item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
-            Colors.lightBlueAccent,
-            isFullWidth: true,
-            allowMultiLine: true,
-          ),
-          const SizedBox(height: 8),
-
-          // 3 & 4. Inventory Lag & Margin Trajectory
+          // Step 2 & 3: Side-by-Side Lag and Trajectory
           IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: _pipelineCard(
-                    "3. Inventory Lag",
-                    "${item.transmissionLagDays}d Inventory cycle",
+                  child: _pipelineStepCard(
+                    "2. INVENTORY LAG",
+                    "${item.transmissionLagDays}d Buffer Depletion",
                     Colors.purpleAccent,
+                    Icons.hourglass_bottom_rounded,
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: _pipelineCard(
-                    "4. Corporate Margin",
-                    "Trajectory: ${item.marginTrajectory}",
-                    item.marginTrajectory.toUpperCase() == 'CONTRACTING' ? Colors.redAccent : accentNeonGreen,
+                  child: _pipelineStepCard(
+                    "3. EBITDA TRAJECTORY",
+                    "Margins: ${item.marginTrajectory}",
+                    isContracting ? Colors.redAccent : accentNeonGreen,
+                    Icons.trending_down_rounded,
                   ),
                 ),
               ],
@@ -601,40 +596,83 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  Widget _pipelineCard(
-    String title,
-    String desc,
-    Color col, {
-    bool isFullWidth = false,
-    bool allowMultiLine = false,
-  }) {
+  Widget _pipelineStepCard(String title, String desc, Color col, IconData icon) {
     return Container(
-      width: isFullWidth ? double.infinity : null,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF131B2A),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: col.withAlpha(70)),
       ),
+      child: Row(
+        children: [
+          Icon(icon, color: col, size: 18),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(color: col, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.8),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 🌍 Independent Full-Width Sourcing & Geopolitical Context Card (Never Cuts Text)
+  Widget _buildSourcingGeopoliticalCard(MacroReportItem item) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.lightBlueAccent.withAlpha(70)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            title,
-            style: TextStyle(color: col, fontSize: 11, fontWeight: FontWeight.bold),
+          const Row(
+            children: [
+              Icon(Icons.public_rounded, color: Colors.lightBlueAccent, size: 20),
+              SizedBox(width: 8),
+              Text(
+                "SOURCING & GEOPOLITICAL CONTEXT",
+                style: TextStyle(
+                  color: Colors.lightBlueAccent,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 10),
           Text(
-            desc,
+            item.importContext,
             style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              height: 1.35,
+              color: Color(0xFFE2E8F0),
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              height: 1.55,
             ),
-            maxLines: allowMultiLine ? 8 : 2,
-            overflow: allowMultiLine ? TextOverflow.visible : TextOverflow.ellipsis,
           ),
         ],
       ),
@@ -840,7 +878,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 7. Equities List with Rationale + Business Impact
+  /// 7. Equities List with Rationale + Business Impact + Zero Overlap
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
@@ -956,7 +994,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               if (stock.businessImpact.isNotEmpty) ...[
                 const SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.black.withAlpha(50),
                     borderRadius: BorderRadius.circular(8),
