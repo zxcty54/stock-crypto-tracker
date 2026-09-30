@@ -1,152 +1,243 @@
 {
-  "last_updated": "2026-09-30 12:04:49",
+  "last_updated": "2026-09-30 12:05:45",
   "tracked_dates": [
-    "2026-09-29"
+    "2026-09-29",
+    "2026-09-30"
   ],
   "latest": {
-    "date": "2026-09-29",
-    "triggers_count": 10,
-    "watchlist_count": 13,
+    "date": "2026-09-30",
+    "triggers_count": 8,
+    "watchlist_count": 30,
     "triggers": [
       {
-        "symbol": "ADANIPORTS",
-        "close": 1822.0,
-        "volume_spike": "3.6x",
-        "base_squeeze": "4.4%"
+        "symbol": "AURUM",
+        "close": 232.37,
+        "volume_spike": "6.2x",
+        "base_squeeze": "4.7%"
       },
       {
-        "symbol": "AXISCADES",
-        "close": 2067.4,
-        "volume_spike": "4.0x",
-        "base_squeeze": "8.4%"
+        "symbol": "EMIL",
+        "close": 205.36,
+        "volume_spike": "3.5x",
+        "base_squeeze": "9.8%"
       },
       {
-        "symbol": "AZAD",
-        "close": 2914.2,
-        "volume_spike": "17.4x",
-        "base_squeeze": "5.7%"
+        "symbol": "HUBTOWN",
+        "close": 182.28,
+        "volume_spike": "5.5x",
+        "base_squeeze": "9.0%"
       },
       {
-        "symbol": "DRREDDY",
-        "close": 1251.9,
-        "volume_spike": "2.6x",
-        "base_squeeze": "3.1%"
+        "symbol": "KSB",
+        "close": 856.1,
+        "volume_spike": "20.3x",
+        "base_squeeze": "7.3%"
       },
       {
-        "symbol": "GLAND",
-        "close": 2989.7,
-        "volume_spike": "4.6x",
-        "base_squeeze": "3.2%"
+        "symbol": "MAHSEAMLES",
+        "close": 737.65,
+        "volume_spike": "4.8x",
+        "base_squeeze": "4.8%"
       },
       {
-        "symbol": "INDOCO",
-        "close": 269.15,
-        "volume_spike": "165.1x",
-        "base_squeeze": "7.7%"
+        "symbol": "RITES",
+        "close": 209.05,
+        "volume_spike": "141.6x",
+        "base_squeeze": "7.8%"
       },
       {
-        "symbol": "KIRLOSENG",
-        "close": 2402.0,
-        "volume_spike": "18.1x",
-        "base_squeeze": "8.0%"
+        "symbol": "RPTECH",
+        "close": 953.5,
+        "volume_spike": "5.2x",
+        "base_squeeze": "7.9%"
       },
       {
-        "symbol": "MANKIND",
-        "close": 2545.0,
-        "volume_spike": "4.5x",
-        "base_squeeze": "3.1%"
-      },
-      {
-        "symbol": "POWERICA",
-        "close": 599.75,
-        "volume_spike": "5.7x",
-        "base_squeeze": "8.1%"
-      },
-      {
-        "symbol": "SGMART",
-        "close": 755.95,
-        "volume_spike": "3.7x",
-        "base_squeeze": "5.1%"
+        "symbol": "THELEELA",
+        "close": 573.8,
+        "volume_spike": "2.9x",
+        "base_squeeze": "9.6%"
       }
     ],
     "watchlist": [
       {
         "symbol": "AKUMS",
-        "close": 819.55,
+        "close": 818.5,
         "trigger_level": 838.8,
         "squeeze": "5.1%"
       },
       {
-        "symbol": "AURUM",
-        "close": 220.31,
-        "trigger_level": 225.5,
-        "squeeze": "4.9%"
+        "symbol": "ANURAS",
+        "close": 1181.0,
+        "trigger_level": 1214.8,
+        "squeeze": "4.3%"
+      },
+      {
+        "symbol": "ASTRAL",
+        "close": 1370.4,
+        "trigger_level": 1404.0,
+        "squeeze": "4.3%"
+      },
+      {
+        "symbol": "BERGEPAINT",
+        "close": 455.45,
+        "trigger_level": 462.0,
+        "squeeze": "4.7%"
       },
       {
         "symbol": "CAMPUS",
-        "close": 209.76,
-        "trigger_level": 214.2,
-        "squeeze": "3.4%"
+        "close": 208.83,
+        "trigger_level": 213.19,
+        "squeeze": "2.9%"
+      },
+      {
+        "symbol": "CASTROLIND",
+        "close": 200.52,
+        "trigger_level": 203.4,
+        "squeeze": "7.0%"
+      },
+      {
+        "symbol": "CPPLUS",
+        "close": 3846.5,
+        "trigger_level": 3943.0,
+        "squeeze": "7.6%"
+      },
+      {
+        "symbol": "FINPIPE",
+        "close": 151.48,
+        "trigger_level": 155.95,
+        "squeeze": "4.2%"
       },
       {
         "symbol": "GAEL",
-        "close": 161.75,
+        "close": 160.21,
         "trigger_level": 165.0,
-        "squeeze": "5.7%"
+        "squeeze": "5.0%"
       },
       {
-        "symbol": "HSCL",
-        "close": 667.6,
-        "trigger_level": 684.95,
-        "squeeze": "3.8%"
+        "symbol": "GPTINFRA",
+        "close": 118.34,
+        "trigger_level": 119.94,
+        "squeeze": "6.6%"
       },
       {
-        "symbol": "ICICIB22",
-        "close": 110.35,
-        "trigger_level": 113.62,
-        "squeeze": "3.4%"
+        "symbol": "GROWWLIQID",
+        "close": 110.95,
+        "trigger_level": 110.95,
+        "squeeze": "0.4%"
+      },
+      {
+        "symbol": "GUJENERGY",
+        "close": 237.58,
+        "trigger_level": 241.02,
+        "squeeze": "5.1%"
       },
       {
         "symbol": "IPL",
-        "close": 133.12,
-        "trigger_level": 135.9,
-        "squeeze": "3.7%"
+        "close": 132.72,
+        "trigger_level": 134.85,
+        "squeeze": "5.3%"
+      },
+      {
+        "symbol": "JASH",
+        "close": 591.65,
+        "trigger_level": 602.8,
+        "squeeze": "5.4%"
+      },
+      {
+        "symbol": "JSL",
+        "close": 747.4,
+        "trigger_level": 766.85,
+        "squeeze": "5.6%"
+      },
+      {
+        "symbol": "KLBRENG-B",
+        "close": 523.95,
+        "trigger_level": 535.0,
+        "squeeze": "6.9%"
+      },
+      {
+        "symbol": "KRN",
+        "close": 1436.5,
+        "trigger_level": 1458.0,
+        "squeeze": "7.0%"
+      },
+      {
+        "symbol": "LENSKART",
+        "close": 685.05,
+        "trigger_level": 692.4,
+        "squeeze": "6.8%"
+      },
+      {
+        "symbol": "LGEINDIA",
+        "close": 1723.5,
+        "trigger_level": 1743.9,
+        "squeeze": "4.8%"
+      },
+      {
+        "symbol": "LIQUIDPLUS",
+        "close": 1105.38,
+        "trigger_level": 1110.62,
+        "squeeze": "0.6%"
+      },
+      {
+        "symbol": "MAFANG",
+        "close": 240.79,
+        "trigger_level": 243.7,
+        "squeeze": "6.8%"
       },
       {
         "symbol": "MANYAVAR",
-        "close": 531.7,
+        "close": 535.1,
         "trigger_level": 543.25,
         "squeeze": "6.2%"
       },
       {
-        "symbol": "NEOGEN",
-        "close": 2435.3,
-        "trigger_level": 2436.2,
-        "squeeze": "6.1%"
+        "symbol": "NAVNETEDUL",
+        "close": 122.52,
+        "trigger_level": 125.9,
+        "squeeze": "4.6%"
       },
       {
-        "symbol": "SANDHAR",
-        "close": 582.7,
-        "trigger_level": 599.8,
-        "squeeze": "6.8%"
+        "symbol": "NEOGEN",
+        "close": 2451.6,
+        "trigger_level": 2458.5,
+        "squeeze": "7.0%"
+      },
+      {
+        "symbol": "ORIENTHOT",
+        "close": 142.36,
+        "trigger_level": 144.38,
+        "squeeze": "5.8%"
       },
       {
         "symbol": "SARDAEN",
-        "close": 500.35,
+        "close": 497.3,
         "trigger_level": 511.0,
         "squeeze": "5.3%"
       },
       {
         "symbol": "SOMANYCERA",
-        "close": 613.85,
+        "close": 617.75,
         "trigger_level": 627.3,
         "squeeze": "7.9%"
       },
       {
+        "symbol": "SUNSHINE",
+        "close": 453.65,
+        "trigger_level": 459.2,
+        "squeeze": "6.9%"
+      },
+      {
+        "symbol": "TVSSCS",
+        "close": 130.57,
+        "trigger_level": 134.45,
+        "squeeze": "6.9%"
+      },
+      {
         "symbol": "UDS",
-        "close": 207.79,
+        "close": 208.57,
         "trigger_level": 209.24,
-        "squeeze": "6.8%"
+        "squeeze": "5.6%"
       }
     ]
   },
@@ -294,6 +385,242 @@
           "close": 207.79,
           "trigger_level": 209.24,
           "squeeze": "6.8%"
+        }
+      ]
+    },
+    "2026-09-30": {
+      "triggers_count": 8,
+      "watchlist_count": 30,
+      "triggers": [
+        {
+          "symbol": "AURUM",
+          "close": 232.37,
+          "volume_spike": "6.2x",
+          "base_squeeze": "4.7%"
+        },
+        {
+          "symbol": "EMIL",
+          "close": 205.36,
+          "volume_spike": "3.5x",
+          "base_squeeze": "9.8%"
+        },
+        {
+          "symbol": "HUBTOWN",
+          "close": 182.28,
+          "volume_spike": "5.5x",
+          "base_squeeze": "9.0%"
+        },
+        {
+          "symbol": "KSB",
+          "close": 856.1,
+          "volume_spike": "20.3x",
+          "base_squeeze": "7.3%"
+        },
+        {
+          "symbol": "MAHSEAMLES",
+          "close": 737.65,
+          "volume_spike": "4.8x",
+          "base_squeeze": "4.8%"
+        },
+        {
+          "symbol": "RITES",
+          "close": 209.05,
+          "volume_spike": "141.6x",
+          "base_squeeze": "7.8%"
+        },
+        {
+          "symbol": "RPTECH",
+          "close": 953.5,
+          "volume_spike": "5.2x",
+          "base_squeeze": "7.9%"
+        },
+        {
+          "symbol": "THELEELA",
+          "close": 573.8,
+          "volume_spike": "2.9x",
+          "base_squeeze": "9.6%"
+        }
+      ],
+      "watchlist": [
+        {
+          "symbol": "AKUMS",
+          "close": 818.5,
+          "trigger_level": 838.8,
+          "squeeze": "5.1%"
+        },
+        {
+          "symbol": "ANURAS",
+          "close": 1181.0,
+          "trigger_level": 1214.8,
+          "squeeze": "4.3%"
+        },
+        {
+          "symbol": "ASTRAL",
+          "close": 1370.4,
+          "trigger_level": 1404.0,
+          "squeeze": "4.3%"
+        },
+        {
+          "symbol": "BERGEPAINT",
+          "close": 455.45,
+          "trigger_level": 462.0,
+          "squeeze": "4.7%"
+        },
+        {
+          "symbol": "CAMPUS",
+          "close": 208.83,
+          "trigger_level": 213.19,
+          "squeeze": "2.9%"
+        },
+        {
+          "symbol": "CASTROLIND",
+          "close": 200.52,
+          "trigger_level": 203.4,
+          "squeeze": "7.0%"
+        },
+        {
+          "symbol": "CPPLUS",
+          "close": 3846.5,
+          "trigger_level": 3943.0,
+          "squeeze": "7.6%"
+        },
+        {
+          "symbol": "FINPIPE",
+          "close": 151.48,
+          "trigger_level": 155.95,
+          "squeeze": "4.2%"
+        },
+        {
+          "symbol": "GAEL",
+          "close": 160.21,
+          "trigger_level": 165.0,
+          "squeeze": "5.0%"
+        },
+        {
+          "symbol": "GPTINFRA",
+          "close": 118.34,
+          "trigger_level": 119.94,
+          "squeeze": "6.6%"
+        },
+        {
+          "symbol": "GROWWLIQID",
+          "close": 110.95,
+          "trigger_level": 110.95,
+          "squeeze": "0.4%"
+        },
+        {
+          "symbol": "GUJENERGY",
+          "close": 237.58,
+          "trigger_level": 241.02,
+          "squeeze": "5.1%"
+        },
+        {
+          "symbol": "IPL",
+          "close": 132.72,
+          "trigger_level": 134.85,
+          "squeeze": "5.3%"
+        },
+        {
+          "symbol": "JASH",
+          "close": 591.65,
+          "trigger_level": 602.8,
+          "squeeze": "5.4%"
+        },
+        {
+          "symbol": "JSL",
+          "close": 747.4,
+          "trigger_level": 766.85,
+          "squeeze": "5.6%"
+        },
+        {
+          "symbol": "KLBRENG-B",
+          "close": 523.95,
+          "trigger_level": 535.0,
+          "squeeze": "6.9%"
+        },
+        {
+          "symbol": "KRN",
+          "close": 1436.5,
+          "trigger_level": 1458.0,
+          "squeeze": "7.0%"
+        },
+        {
+          "symbol": "LENSKART",
+          "close": 685.05,
+          "trigger_level": 692.4,
+          "squeeze": "6.8%"
+        },
+        {
+          "symbol": "LGEINDIA",
+          "close": 1723.5,
+          "trigger_level": 1743.9,
+          "squeeze": "4.8%"
+        },
+        {
+          "symbol": "LIQUIDPLUS",
+          "close": 1105.38,
+          "trigger_level": 1110.62,
+          "squeeze": "0.6%"
+        },
+        {
+          "symbol": "MAFANG",
+          "close": 240.79,
+          "trigger_level": 243.7,
+          "squeeze": "6.8%"
+        },
+        {
+          "symbol": "MANYAVAR",
+          "close": 535.1,
+          "trigger_level": 543.25,
+          "squeeze": "6.2%"
+        },
+        {
+          "symbol": "NAVNETEDUL",
+          "close": 122.52,
+          "trigger_level": 125.9,
+          "squeeze": "4.6%"
+        },
+        {
+          "symbol": "NEOGEN",
+          "close": 2451.6,
+          "trigger_level": 2458.5,
+          "squeeze": "7.0%"
+        },
+        {
+          "symbol": "ORIENTHOT",
+          "close": 142.36,
+          "trigger_level": 144.38,
+          "squeeze": "5.8%"
+        },
+        {
+          "symbol": "SARDAEN",
+          "close": 497.3,
+          "trigger_level": 511.0,
+          "squeeze": "5.3%"
+        },
+        {
+          "symbol": "SOMANYCERA",
+          "close": 617.75,
+          "trigger_level": 627.3,
+          "squeeze": "7.9%"
+        },
+        {
+          "symbol": "SUNSHINE",
+          "close": 453.65,
+          "trigger_level": 459.2,
+          "squeeze": "6.9%"
+        },
+        {
+          "symbol": "TVSSCS",
+          "close": 130.57,
+          "trigger_level": 134.45,
+          "squeeze": "6.9%"
+        },
+        {
+          "symbol": "UDS",
+          "close": 208.57,
+          "trigger_level": 209.24,
+          "squeeze": "5.6%"
         }
       ]
     }
