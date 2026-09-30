@@ -7,12 +7,11 @@ import requests
 OUTPUT_FILE = "macro_research_report.json"
 
 # ==============================================================================
-# 🎯 AI CANDIDATE MODELS LIST (Priority Fallback)
+# 🎯 ACTIVE VALIDATED MODELS ONLY (No 404 Errors)
 # ==============================================================================
 CANDIDATE_MODELS = [
     "gemini-2.5-flash",
-    "gemini-2.0-flash",
-    "gemini-1.5-flash"
+    "gemini-2.5-pro"
 ]
 
 COMMODITIES = [
@@ -133,7 +132,7 @@ def fetch_commodity_metrics():
             p_1y = closes[-252] if len(closes) >= 252 else closes[0]
             p_3y = closes[0]
 
-            # 🎯 Real 52-Week Range Calculation (~252 trading sessions = 1 Year)
+            # 🎯 100% Real 52-Week Range (~252 trading sessions = 1 year)
             past_1y_highs = highs[-252:] if len(highs) >= 252 else highs
             past_1y_lows = lows[-252:] if len(lows) >= 252 else lows
 
@@ -172,38 +171,37 @@ def call_gemini_with_fallback(prompt, api_key):
     }
 
     for model_name in CANDIDATE_MODELS:
-        for version in ["v1beta", "v1"]:
-            url = f"https://generativelanguage.googleapis.com/{version}/models/{model_name}:generateContent?key={api_key}"
-            headers = {"Content-Type": "application/json"}
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        headers = {"Content-Type": "application/json"}
 
-            try:
-                res = requests.post(url, json=payload, headers=headers, timeout=40)
+        try:
+            res = requests.post(url, json=payload, headers=headers, timeout=45)
 
-                if res.status_code == 200:
-                    raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                    if raw_text.startswith("```json"):
-                        raw_text = raw_text[7:]
-                    elif raw_text.startswith("```"):
-                        raw_text = raw_text[3:]
-                    if raw_text.endswith("```"):
-                        raw_text = raw_text[:-3]
+            if res.status_code == 200:
+                data = res.json()
+                raw_text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                if raw_text.startswith("```json"):
+                    raw_text = raw_text[7:]
+                elif raw_text.startswith("```"):
+                    raw_text = raw_text[3:]
+                if raw_text.endswith("```"):
+                    raw_text = raw_text[:-3]
 
-                    return json.loads(raw_text.strip()), f"{model_name} [{version}]"
-                else:
-                    error_detail = res.text[:220].replace("\n", " ")
-                    if res.status_code != 404:
-                        print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code} | Details: {error_detail}")
-                    time.sleep(0.5)
+                return json.loads(raw_text.strip()), f"{model_name} [v1beta]"
+            else:
+                error_detail = res.text[:220].replace("\n", " ")
+                print(f"   ⚠️ HTTP {res.status_code} on {model_name} -> {error_detail}")
+                time.sleep(1)
 
-            except Exception as e:
-                print(f"   ⚠️ [{version}] {model_name} Exception: {e}")
-                time.sleep(0.5)
+        except Exception as e:
+            print(f"   ⚠️ Exception on {model_name}: {e}")
+            time.sleep(1)
 
     return None, None
 
 def generate_ai_research_analysis(dataset, api_key):
     print("\n" + "=" * 75)
-    print("🧠 Step 2: Dedicated 1-Commodity-Per-Batch Engine (20s Cooldown)")
+    print("🧠 Step 2: Dedicated 1-Commodity-Per-Batch Engine (15s Cooldown)")
     print("⚡ Full 8,192 token window enabled for exhaustive Hinglish breakdown")
     print("=" * 75)
 
@@ -253,41 +251,41 @@ def generate_ai_research_analysis(dataset, api_key):
             "2. EXACTLY 8 TO 10 LISTED INDIAN STOCKS: For each stock, provide detailed rationale mentioning the specific raw material derivative and its approximate percentage in cost of goods sold (COGS).\n"
             "3. NO DIRECT INVESTMENT ADVICE: Strictly avoid words like 'Buy', 'Sell', 'Hold'. Focus 100% on operational business reality, lagat (costs), and quarterly profit margin dynamics.\n"
             "4. CLEAR HINGLISH EXPLANATION: Replace complex jargon with intuitive explanations (e.g., lagat badhna, purana stock inventory, quarterly results par dabaav).\n"
-            "5. PRESERVE 52-WEEK VALUES: Directly reflect the provided fifty_two_week_low and fifty_two_week_high values into the final JSON.\n\n"
+            "5. PRESERVE 52-WEEK VALUES: Directly preserve the provided fifty_two_week_low and fifty_two_week_high values into the final JSON.\n\n"
             f"COMMODITY: {item['name']}\n"
-            f"CURRENT PRICE: {item['current_price']} {item['unit']}\n"
-            f"52-WEEK RANGE: Low: {item['fifty_two_week_low']}, High: {item['fifty_two_week_high']}\n"
-            f"MULTI-PERIOD DELTAS: 1-Month: {item['deltas']['1M']}%, 6-Month: {item['deltas']['6M']}%, "
-            f"1-Year (YoY): {item['deltas']['1Y']}%, 3-Year: {item['deltas']['3Y']}%\n"
+            f"CURRENT PRICE: {float(item['current_price'])} {item['unit']}\n"
+            f"52-WEEK RANGE: Low: {float(item['fifty_two_week_low'])}, High: {float(item['fifty_two_week_high'])}\n"
+            f"MULTI-PERIOD DELTAS: 1M: {float(item['deltas']['1M'])}%, 6M: {float(item['deltas']['6M'])}%, "
+            f"1Y: {float(item['deltas']['1Y'])}%, 3Y: {float(item['deltas']['3Y'])}%\n"
             f"RELEVANT SECTORS: {item['sector_relevance']}\n"
             f"SOURCING CONTEXT: {item['import_profile']}\n\n"
             "Respond ONLY with a valid JSON object matching this exact schema template:\n"
-            + schema_template.replace("__COMMODITY__", item['name'])
-                             .replace("__UNIT__", item['unit'])
-                             .replace("__PRICE__", str(item['current_price']))
-                             .replace("__52W_LOW__", str(item['fifty_two_week_low']))
-                             .replace("__52W_HIGH__", str(item['fifty_two_week_high']))
-                             .replace("__D1M__", str(item['deltas']['1M']))
-                             .replace("__D6M__", str(item['deltas']['6M']))
-                             .replace("__D1Y__", str(item['deltas']['1Y']))
-                             .replace("__D3Y__", str(item['deltas']['3Y']))
+            + schema_template.replace("__COMMODITY__", str(item['name']))
+                             .replace("__UNIT__", str(item['unit']))
+                             .replace("__PRICE__", str(float(item['current_price'])))
+                             .replace("__52W_LOW__", str(float(item['fifty_two_week_low'])))
+                             .replace("__52W_HIGH__", str(float(item['fifty_two_week_high'])))
+                             .replace("__D1M__", str(float(item['deltas']['1M'])))
+                             .replace("__D6M__", str(float(item['deltas']['6M'])))
+                             .replace("__D1Y__", str(float(item['deltas']['1Y'])))
+                             .replace("__D3Y__", str(float(item['deltas']['3Y'])))
             + "\n\nDo NOT output markdown backticks like ```json. Output ONLY raw parseable JSON."
         )
 
         report_obj, engine = call_gemini_with_fallback(prompt, api_key)
         if report_obj:
-            # Guarantee 52W numbers are present even if LLM missed them
-            report_obj["fifty_two_week_low"] = item["fifty_two_week_low"]
-            report_obj["fifty_two_week_high"] = item["fifty_two_week_high"]
+            # Guarantee 52W numbers are present
+            report_obj["fifty_two_week_low"] = float(item["fifty_two_week_low"])
+            report_obj["fifty_two_week_high"] = float(item["fifty_two_week_high"])
             ai_reports.append(report_obj)
             stock_count = len(report_obj.get('impacted_stocks', []))
-            print(f"   ✨ Success! Compiled full-depth report ({stock_count} stocks) using [{engine}]")
+            print(f"   ✨ Success! Compiled report ({stock_count} stocks) using [{engine}]")
         else:
             print(f"   ❌ Failed to generate report for {item['name']}")
 
         if index < total_items:
-            print(f"   ⏳ Batch cooldown active: Sleeping for 20 seconds...")
-            time.sleep(20)
+            print(f"   ⏳ Batch cooldown active: Sleeping for 15 seconds...")
+            time.sleep(15)
 
     return ai_reports
 
