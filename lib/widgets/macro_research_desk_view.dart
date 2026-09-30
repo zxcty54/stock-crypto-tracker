@@ -28,7 +28,6 @@ class ImpactedStock {
 
   factory ImpactedStock.fromJson(Map<String, dynamic> json) {
     final rawBpsString = json['margin_impact_bps']?.toString() ?? '0';
-    // Clean numeric parse (+120 bps -> 120, -250 bps -> -250)
     final cleaned = rawBpsString.replaceAll(RegExp(r'[^0-9\-]'), '');
     final parsedBps = int.tryParse(cleaned) ?? 0;
 
@@ -232,7 +231,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
 
     final activeItem = _reports[_selectedCommodityIndex];
 
-    // Filter stocks list based on search & tab selection
     final filteredStocks = activeItem.impactedStocks.where((s) {
       final matchesSearch = _searchQuery.isEmpty ||
           s.symbol.toLowerCase().contains(_searchQuery.toLowerCase()) ||
@@ -332,7 +330,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             onTap: () {
               setState(() {
                 _selectedCommodityIndex = idx;
-                _priceSimulationOffset = 0.0; // Reset simulator on switch
+                _priceSimulationOffset = 0.0;
               });
             },
             child: Container(
@@ -381,15 +379,12 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 2. Hero Price + Real Dynamic 52-Week Range Card
+  /// 2. Hero Price + Real Dynamic 52-Week Range Card (Overlap-Proof)
   Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
     final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
     final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
 
-    // Real dynamic simulated spot calculation
     final effectivePrice = item.currentPrice * (1 + (_priceSimulationOffset / 100));
-
-    // Dynamic 52-Week position calculation
     final range = item.fiftyTwoWeekHigh - item.fiftyTwoWeekLow;
     final position = range > 0
         ? ((effectivePrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0)
@@ -406,21 +401,24 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.commodityName,
-                    style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 2),
-                  const Text("Direct Corporate Input Cost Radar", style: TextStyle(color: textMuted, fontSize: 12)),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.commodityName,
+                      style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 2),
+                    const Text("Direct Corporate Input Cost Radar", style: TextStyle(color: textMuted, fontSize: 12)),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: badgeColor.withAlpha(40),
                   borderRadius: BorderRadius.circular(8),
@@ -428,7 +426,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 ),
                 child: Text(
                   "MARGINS: ${item.marginTrajectory}",
-                  style: TextStyle(color: badgeColor, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: badgeColor, fontSize: 10.5, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -452,7 +450,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             ],
           ),
           const SizedBox(height: 14),
-          // 52-Week Range Bar
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -515,7 +512,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 3. Visual Transmission Pipeline (Dynamic Stepper Cards)
+  /// 3. Visual Transmission Pipeline (Expanded Multi-Line - No Cutoff)
   Widget _buildTransmissionPipeline(MacroReportItem item) {
     final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
     final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
@@ -541,32 +538,38 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             ],
           ),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: _pipelineCard("1. Raw Shock", shockText, Colors.amber),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _pipelineCard(
-                  "2. Sourcing Context",
-                  item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
-                  Colors.lightBlueAccent,
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: _pipelineCard("1. Raw Shock", shockText, Colors.amber),
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _pipelineCard(
+                    "2. Sourcing Context",
+                    item.importContext.isNotEmpty ? item.importContext : "Foreign Import Reliant",
+                    Colors.lightBlueAccent,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: _pipelineCard("3. Inventory Lag", "${item.transmissionLagDays}d Inventory cycle", Colors.purpleAccent),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _pipelineCard("4. Corporate Margin", "Trajectory: ${item.marginTrajectory}", Colors.redAccent),
-              ),
-            ],
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: _pipelineCard("3. Inventory Lag", "${item.transmissionLagDays}d Inventory cycle", Colors.purpleAccent),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _pipelineCard("4. Corporate Margin", "Trajectory: ${item.marginTrajectory}", Colors.redAccent),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -575,7 +578,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
 
   Widget _pipelineCard(String title, String desc, Color col) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: const Color(0xFF131B2A),
         borderRadius: BorderRadius.circular(10),
@@ -583,13 +586,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(title, style: TextStyle(color: col, fontSize: 11, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 2),
+          const SizedBox(height: 4),
           Text(
             desc,
-            style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
-            maxLines: 2,
+            style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w500, height: 1.3),
+            maxLines: 3, // Cutoff issue fixed
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -649,7 +653,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 5. Live Interactive Sensitivity Simulator (Scales stocks in real-time)
+  /// 5. Live Interactive Sensitivity Simulator
   Widget _buildSensitivitySimulator(MacroReportItem item) {
     final simulatedPrice = item.currentPrice * (1 + _priceSimulationOffset / 100);
 
@@ -796,7 +800,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     );
   }
 
-  /// 7. Equities List with Live Scaled BPS Math
+  /// 7. Equities List with Zero-Overlap Layout
   Widget _buildEquitiesList(List<ImpactedStock> list) {
     if (list.isEmpty) {
       return Container(
@@ -815,8 +819,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       itemBuilder: (context, idx) {
         final stock = list[idx];
 
-        // 🧠 Real Linear Elasticity Math:
-        // Stock margin scales proportional to commodity price delta
         final int simulatedBps = (stock.baselineBpsValue * (1 + (_priceSimulationOffset / 100))).round();
         final isPositive = simulatedBps >= 0;
         final displayBpsText = "${isPositive ? '+' : ''}$simulatedBps bps";
@@ -835,8 +837,9 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Ticker & Sector (Guaranteed safe boundary)
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -848,24 +851,36 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
                             ),
                             const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF1E293B),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                stock.sector,
-                                style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500),
+                            // Flexible sector tag to avoid overlapping BPS badge
+                            Flexible(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF1E293B),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  stock.sector,
+                                  style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 2),
-                        Text(stock.companyName, style: const TextStyle(color: textMuted, fontSize: 12)),
+                        Text(
+                          stock.companyName,
+                          style: const TextStyle(color: textMuted, fontSize: 12),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ],
                     ),
                   ),
+                  const SizedBox(width: 8),
+                  // Margin Impact Pill (Never gets pushed out)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
