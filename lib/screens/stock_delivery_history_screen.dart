@@ -24,8 +24,6 @@ class StockDayRecord {
     required this.deliveryPercent,
   });
 
-  // Exactly parses aapka JSON structure:
-  // ["2026-09-29", 212.16, 216.45, 209.02, 212.8, 54062, 44.52]
   factory StockDayRecord.fromList(List<dynamic> list) {
     return StockDayRecord(
       date: list[0].toString(),
@@ -67,7 +65,6 @@ class StockDeliveryHistoryScreen extends StatefulWidget {
 
 class _StockDeliveryHistoryScreenState
     extends State<StockDeliveryHistoryScreen> {
-  // Aapke repository ka JSON endpoint (ya fallback local/fastly cdn)
   final String _dataUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/stock_history_20d.json';
 
@@ -157,6 +154,222 @@ class _StockDeliveryHistoryScreenState
     );
   }
 
+  // 🔍 Interactive Stock Search Modal Bottom Sheet
+  void _openStockSearchModal() {
+    HapticFeedback.selectionClick();
+    final allSymbols = _stockDatabase.keys.toList()..sort();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF0F1726),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        String searchQuery = '';
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final filteredSymbols = allSymbols.where((s) {
+              return s.toLowerCase().contains(searchQuery.toLowerCase().trim());
+            }).toList();
+
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.72,
+              padding: EdgeInsets.fromLTRB(
+                16,
+                14,
+                16,
+                MediaQuery.of(context).viewInsets.bottom + 16,
+              ),
+              child: Column(
+                children: [
+                  // Handle
+                  Container(
+                    width: 36,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Search Bar Input
+                  Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF162032),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF25334A)),
+                    ),
+                    child: TextField(
+                      autofocus: true,
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      cursorColor: const Color(0xFF00F0FF),
+                      decoration: InputDecoration(
+                        hintText: 'Search stock name (e.g. TCS, 360ONE, INFY)...',
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF6B7A99),
+                          fontSize: 13,
+                        ),
+                        prefixIcon: const Icon(
+                          Icons.search_rounded,
+                          color: Color(0xFF00F0FF),
+                          size: 20,
+                        ),
+                        suffixIcon: searchQuery.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear, color: Colors.white54, size: 18),
+                                onPressed: () {
+                                  setModalState(() => searchQuery = '');
+                                },
+                              )
+                            : null,
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      ),
+                      onChanged: (val) {
+                        setModalState(() => searchQuery = val);
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Results Count
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'STOCKS (${filteredSymbols.length})',
+                        style: const TextStyle(
+                          color: Color(0xFF5A6882),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                      const Text(
+                        'Tap to analyze history',
+                        style: TextStyle(color: Colors.white24, fontSize: 10),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  // Filtered List
+                  Expanded(
+                    child: filteredSymbols.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.search_off_rounded, color: Colors.white30, size: 36),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'No stock matching "$searchQuery"',
+                                  style: const TextStyle(color: Colors.white54, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: filteredSymbols.length,
+                            itemBuilder: (context, idx) {
+                              final sym = filteredSymbols[idx];
+                              final isCurrent = sym == _selectedSymbol;
+                              final records = _stockDatabase[sym] ?? [];
+                              final latestRecord = records.isNotEmpty ? records.last : null;
+
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 6),
+                                decoration: BoxDecoration(
+                                  color: isCurrent
+                                      ? const Color(0xFF00F0FF).withOpacity(0.12)
+                                      : const Color(0xFF131B2A),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: isCurrent
+                                        ? const Color(0xFF00F0FF).withOpacity(0.4)
+                                        : const Color(0xFF1E2B3E),
+                                  ),
+                                ),
+                                child: ListTile(
+                                  dense: true,
+                                  onTap: () {
+                                    HapticFeedback.selectionClick();
+                                    Navigator.pop(ctx);
+                                    setState(() => _selectedSymbol = sym);
+                                  },
+                                  leading: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF1C273C),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      '${records.length}D',
+                                      style: const TextStyle(
+                                        color: Color(0xFF00F0FF),
+                                        fontSize: 9.5,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    sym,
+                                    style: GoogleFonts.plusJakartaSans(
+                                      color: isCurrent ? const Color(0xFF00F0FF) : Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13.5,
+                                    ),
+                                  ),
+                                  subtitle: latestRecord != null
+                                      ? Text(
+                                          'Last: ₹${latestRecord.close.toStringAsFixed(1)} • Vol: ${_formatCompact(latestRecord.tradedQty)}',
+                                          style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 10),
+                                        )
+                                      : null,
+                                  trailing: latestRecord != null
+                                      ? Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                                          decoration: BoxDecoration(
+                                            color: latestRecord.deliveryPercent >= 50
+                                                ? const Color(0xFF00F5A0).withOpacity(0.15)
+                                                : const Color(0xFFFF9800).withOpacity(0.15),
+                                            borderRadius: BorderRadius.circular(4),
+                                          ),
+                                          child: Text(
+                                            '${latestRecord.deliveryPercent.toStringAsFixed(1)}% Del',
+                                            style: TextStyle(
+                                              color: latestRecord.deliveryPercent >= 50
+                                                  ? const Color(0xFF00F5A0)
+                                                  : const Color(0xFFFF9800),
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                        )
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,6 +387,11 @@ class _StockDeliveryHistoryScreenState
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.search_rounded, color: Color(0xFF00F0FF)),
+            tooltip: 'Search Stock',
+            onPressed: _openStockSearchModal,
+          ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: Colors.white70),
             onPressed: () {
@@ -221,68 +439,61 @@ class _StockDeliveryHistoryScreenState
     );
   }
 
-  // 1. Top Stock Selector & Filter Chips
+  // 1. Top Stock Selector (Tappable Search) & Filter Chips
   Widget _buildSelectorAndFilterBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       color: const Color(0xFF0F1726),
-      child: Column(
+      child: Row(
         children: [
-          Row(
-            children: [
-              // Stock Picker Dropdown
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF162032),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFF25334A)),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _selectedSymbol,
-                    dropdownColor: const Color(0xFF0F1726),
+          // 🔎 1-Tap Search Trigger Button
+          InkWell(
+            onTap: _openStockSearchModal,
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF162032),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFF00F0FF).withOpacity(0.5)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.search_rounded, color: Color(0xFF00F0FF), size: 16),
+                  const SizedBox(width: 6),
+                  Text(
+                    _selectedSymbol,
                     style: GoogleFonts.plusJakartaSans(
                       color: const Color(0xFF00F0FF),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 13,
                     ),
-                    items: _stockDatabase.keys
-                        .map((sym) => DropdownMenuItem(
-                              value: sym,
-                              child: Text(sym),
-                            ))
-                        .toList(),
-                    onChanged: (val) {
-                      if (val != null) {
-                        HapticFeedback.selectionClick();
-                        setState(() => _selectedSymbol = val);
-                      }
-                    },
                   ),
-                ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.arrow_drop_down, color: Color(0xFF00F0FF), size: 18),
+                ],
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      _filterChip('📅 Date', DeliveryFilterMode.latestDate),
-                      const SizedBox(width: 6),
-                      _filterChip('🔥 Highest Del %',
-                          DeliveryFilterMode.highestDelivery),
-                      const SizedBox(width: 6),
-                      _filterChip(
-                          '❄️ Lowest Del %', DeliveryFilterMode.lowestDelivery),
-                      const SizedBox(width: 6),
-                      _filterChip(
-                          '📊 Max Vol', DeliveryFilterMode.highestVolume),
-                    ],
-                  ),
-                ),
+            ),
+          ),
+          const SizedBox(width: 8),
+
+          // Horizontal Filter Chips
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _filterChip('📅 Date', DeliveryFilterMode.latestDate),
+                  const SizedBox(width: 6),
+                  _filterChip('🔥 Highest Del %', DeliveryFilterMode.highestDelivery),
+                  const SizedBox(width: 6),
+                  _filterChip('❄️ Lowest Del %', DeliveryFilterMode.lowestDelivery),
+                  const SizedBox(width: 6),
+                  _filterChip('📊 Max Vol', DeliveryFilterMode.highestVolume),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),
@@ -322,7 +533,7 @@ class _StockDeliveryHistoryScreenState
     );
   }
 
-  // 2. High-Level Delivery Summary Bar for Selected Stock
+  // 2. High-Level Delivery Summary Bar
   Widget _buildSummaryBar() {
     final records = _stockDatabase[_selectedSymbol] ?? [];
     if (records.isEmpty) return const SizedBox.shrink();
@@ -354,11 +565,14 @@ class _StockDeliveryHistoryScreenState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: const TextStyle(
-                color: Color(0xFF6B7A99),
-                fontSize: 9.5,
-                fontWeight: FontWeight.bold)),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Color(0xFF6B7A99),
+            fontSize: 9.5,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 2),
         Text(
           value,
@@ -408,15 +622,13 @@ class _StockDeliveryHistoryScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Date, Close Price, and High Accumulation Badge
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: const Color(0xFF1A2436),
                           borderRadius: BorderRadius.circular(4),
@@ -433,17 +645,19 @@ class _StockDeliveryHistoryScreenState
                       if (row.deliveryPercent >= 60.0) ...[
                         const SizedBox(width: 6),
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 1),
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                           decoration: BoxDecoration(
                             color: const Color(0xFF00F5A0).withOpacity(0.15),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text('STRONG DELIVERY',
-                              style: TextStyle(
-                                  color: Color(0xFF00F5A0),
-                                  fontSize: 8.5,
-                                  fontWeight: FontWeight.w900)),
+                          child: const Text(
+                            'STRONG DELIVERY',
+                            style: TextStyle(
+                              color: Color(0xFF00F5A0),
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
                         ),
                       ]
                     ],
@@ -458,7 +672,6 @@ class _StockDeliveryHistoryScreenState
                   ),
                 ],
               ),
-
               const SizedBox(height: 8),
 
               // OHLC Matrix
@@ -481,7 +694,7 @@ class _StockDeliveryHistoryScreenState
 
               const SizedBox(height: 10),
 
-              // Delivery % Progress Bar & Exact Quantity
+              // Delivery & Traded Volume Breakdown
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -499,8 +712,7 @@ class _StockDeliveryHistoryScreenState
                         ),
                         TextSpan(
                           text: ' (${_formatExact(row.tradedQty)})',
-                          style: const TextStyle(
-                              color: Colors.white30, fontSize: 8.5),
+                          style: const TextStyle(color: Colors.white30, fontSize: 8.5),
                         ),
                       ],
                     ),
@@ -525,7 +737,7 @@ class _StockDeliveryHistoryScreenState
 
               const SizedBox(height: 6),
 
-              // Progress Bar with Delivery %
+              // Progress Bar
               Row(
                 children: [
                   Expanded(
@@ -566,7 +778,10 @@ class _StockDeliveryHistoryScreenState
       text: TextSpan(
         text: '$label: ',
         style: const TextStyle(
-            color: Colors.white38, fontSize: 9.5, fontWeight: FontWeight.bold),
+          color: Colors.white38,
+          fontSize: 9.5,
+          fontWeight: FontWeight.bold,
+        ),
         children: [
           TextSpan(
             text: value,
