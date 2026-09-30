@@ -8,6 +8,16 @@ android {
     namespace = "com.stockpulse.app"
     compileSdk = 37
 
+    // ☕ Force Java & Kotlin to target JVM 17
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     defaultConfig {
         applicationId = "com.stockpulse.app"
         minSdk = 24
@@ -34,7 +44,6 @@ android {
             isShrinkResources = false
         }
         debug {
-            // Debug mode me bhi release key point karega taaki updates me signature mismatch na aaye
             signingConfig = signingConfigs.getByName("release")
         }
     }
