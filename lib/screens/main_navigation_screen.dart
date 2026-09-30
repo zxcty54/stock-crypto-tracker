@@ -3,7 +3,7 @@ import '../widgets/floating_nav_bar.dart';
 import 'news_screen.dart';
 import 'corporate_announcements_screen.dart';
 import 'crypto_screen.dart';
-import 'scanner_screen.dart';
+import 'community_screen.dart'; // 👥 Scanner ki jagah Community screen import ki gayi
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -17,9 +17,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   final List<Widget> _pages = const [
     NewsScreen(),
-    CorporateAnnouncementsScreen(), // <-- New corporate filings tab
+    CorporateAnnouncementsScreen(),
     CryptoScreen(),
-    ScannerScreen(),
+    CommunityScreen(), // 👥 4th slot par Community screen set ho gayi
   ];
 
   @override
