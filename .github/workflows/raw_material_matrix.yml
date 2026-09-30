@@ -1,0 +1,51 @@
+name: Update Raw Material Macro Matrix
+
+on:
+  schedule:
+    # Tuesday & Friday ko market close ke baad 6:00 PM IST (12:30 UTC)
+    - cron: '30 12 * * 2,5'
+  # Actions tab se manual run karne ke liye
+  workflow_dispatch:
+
+jobs:
+  build-and-commit-matrix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Native write permission to push in same repo
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run Raw Material Matrix Generator
+        run: |
+          python raw_material_margin_pipeline.py
+
+      - name: Commit & Push Directly to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -f raw_material_macro_matrix.json ]; then
+            git add raw_material_macro_matrix.json
+            if git diff --staged --quiet; then
+              echo "ℹ️ No changes in raw material matrix."
+            else
+              git commit -m "🏭 Update: Raw Material Macro Matrix [$(date +'%d-%b-%Y')]"
+              git pull --rebase origin main
+              git push origin main
+              echo "✅ Successfully updated raw_material_macro_matrix.json on main branch!"
+            fi
+          fi
