@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
-import 'screens/scanner_screen.dart';
+import 'screens/community_screen.dart'; // 👥 Scanner/Radar ki jagah Community screen import
+import 'screens/scanner_screen.dart';   // Drawer ke liye scanner/radar
 import 'screens/stock_delivery_history_screen.dart';
 import 'widgets/legal_disclaimer_dialog.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 🌐 Supabase Initialization
+  await Supabase.initialize(
+    url: 'https://dgoyecicznflkbaznrng.supabase.co',
+    anonKey: const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: 'YOUR_SUPABASE_ANON_KEY'),
+  );
+
   runApp(const StockPulseApp());
 }
 
@@ -42,21 +51,21 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 2; // Strategy Builder default tab
+  int _currentIndex = 0; // Default tab News/Bullion
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> _pages = const [
     NewsScreen(),
     CorporateAnnouncementsScreen(),
     StrategyBuilderScreen(),
-    ScannerScreen(),
+    CommunityScreen(), // 👥 4th slot par Community Wire load hoga
   ];
 
   final List<String> _titles = const [
     'MARKET NEWS WIRE',
     'CORPORATE FILINGS',
     'STRATEGY BUILDER',
-    'RADAR & SCANNERS',
+    'TRADER COMMUNITY WIRE', // 👥 Updated Header Title
   ];
 
   @override
@@ -237,7 +246,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
             ),
 
-            // Main Item: Delivery & OHLC History
             _drawerTile(
               icon: Icons.pie_chart_rounded,
               title: 'Delivery & OHLC History',
@@ -264,13 +272,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               },
             ),
 
+            // 🎯 Radar drawer se direct khulega
             _drawerTile(
               icon: Icons.radar_rounded,
               title: 'Market Radar & Scanner',
               subtitle: 'Consolidation squeeze & breakouts',
               onTap: () {
                 Navigator.pop(context);
-                setState(() => _currentIndex = 3);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const Scaffold(body: ScannerScreen()),
+                  ),
+                );
               },
             ),
 
@@ -282,6 +296,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 'FEEDS & ARCHIVES',
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
+            ),
+
+            _drawerTile(
+              icon: Icons.hub_rounded,
+              title: 'Trader Wire Community',
+              subtitle: 'Share chart setups & market bias',
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => _currentIndex = 3);
+              },
             ),
 
             _drawerTile(
@@ -306,7 +330,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
             const Divider(color: Color(0xFF1E2B3E), height: 20),
 
-            // Play Store Regulatory Disclaimer Trigger
             _drawerTile(
               icon: Icons.shield_outlined,
               title: 'Regulatory & Risk Disclaimer',
@@ -322,7 +345,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
             const Spacer(),
 
-            // Footer
             Container(
               padding: const EdgeInsets.all(16),
               color: const Color(0xFF0F1726),
@@ -388,6 +410,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
+  // 🚀 Floating Navigation Bar (Ab 4th item Community Wire hai)
   Widget _buildFloatingNavBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -409,7 +432,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           _navItem(0, Icons.newspaper_rounded, 'News'),
           _navItem(1, Icons.campaign_rounded, 'Filings'),
           _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'),
-          _navItem(3, Icons.radar_rounded, 'Radar'),
+          _navItem(3, Icons.hub_rounded, 'Community'), // 👈 Radar replaced with Community
         ],
       ),
     );
