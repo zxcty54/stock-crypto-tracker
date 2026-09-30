@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate Android Skeleton, Permissions, Share Intent & SDK 37
         run: |
-          flutter create . --project-name stockpulse --org com.stockpulse.app --platforms=android
+          flutter create . --project-name stockpulse --org com.stockpulse --platforms=android
           
           # 1. Storage & Internet Permissions inject karein
           sed -i '/<application/i <uses-permission android:name="android.permission.INTERNET"/>\n<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>\n<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>' android/app/src/main/AndroidManifest.xml
@@ -43,13 +43,13 @@ jobs:
           
           flutter pub get
 
-      - name: Restore Permanent Keystore from Secret
+      - name: Restore Permanent Keystore & Inject Signing
         env:
           KEYSTORE_BASE64: ${{ secrets.STOCKPULSE_KEYSTORE_BASE64 }}
         run: |
           mkdir -p android/app/keystore
           if [ -n "$KEYSTORE_BASE64" ]; then
-            # Clean spaces/newlines and decode safely
+            # Clean spaces/newlines aur safely decode
             echo "$KEYSTORE_BASE64" | tr -d '\r\n ' | base64 --decode > android/app/keystore/upload-keystore.jks
             
             # key.properties create karein
@@ -60,7 +60,7 @@ jobs:
           storeFile=keystore/upload-keystore.jks
           EOF
 
-            # Kotlin DSL (build.gradle.kts) & Groovy me release signingConfig inject karein
+            # Kotlin DSL (build.gradle.kts) & Groovy me V1 & V2 signed release block inject karein
             python3 -c '
           import os
 
@@ -70,15 +70,19 @@ jobs:
           signing_code_kts = """
               signingConfigs {
                   create("release") {
-                      storeFile = file("keystore/upload-keystore.jks")
+                      storeFile = file("${project.projectDir}/keystore/upload-keystore.jks")
                       storePassword = "stockpulse@123"
                       keyAlias = "stockpulse-key"
                       keyPassword = "stockpulse@123"
+                      enableV1Signing = true
+                      enableV2Signing = true
                   }
               }
               buildTypes {
                   release {
                       signingConfig = signingConfigs.getByName("release")
+                      isMinifyEnabled = false
+                      isShrinkResources = false
                   }
               }
           """
@@ -86,15 +90,19 @@ jobs:
           signing_code_groovy = """
               signingConfigs {
                   release {
-                      storeFile file("keystore/upload-keystore.jks")
+                      storeFile file("${project.projectDir}/keystore/upload-keystore.jks")
                       storePassword "stockpulse@123"
                       keyAlias "stockpulse-key"
                       keyPassword "stockpulse@123"
+                      v1SigningEnabled true
+                      v2SigningEnabled true
                   }
               }
               buildTypes {
                   release {
                       signingConfig signingConfigs.release
+                      minifyEnabled false
+                      shrinkResources false
                   }
               }
           """
@@ -106,7 +114,7 @@ jobs:
                   content = content.replace("android {", "android {\n" + signing_code_kts, 1)
                   with open(gradle_kts, "w") as f:
                       f.write(content)
-                  print("Injected release signing into build.gradle.kts")
+                  print("Injected V1+V2 release signing into build.gradle.kts")
 
           elif os.path.exists(gradle_groovy):
               with open(gradle_groovy, "r") as f:
@@ -115,8 +123,11 @@ jobs:
                   content = content.replace("android {", "android {\n" + signing_code_groovy, 1)
                   with open(gradle_groovy, "w") as f:
                       f.write(content)
-                  print("Injected release signing into build.gradle")
+                  print("Injected V1+V2 release signing into build.gradle")
           '
+          else
+            echo "ERROR: Keystore secret is empty!"
+            exit 1
           fi
 
       - name: Build Release APK
@@ -146,5 +157,5 @@ jobs:
         run: |
           curl -F chat_id="$CHAT_ID" \
                -F document=@"build/app/outputs/flutter-apk/stockpulse-app.zip" \
-               -F caption="StockPulse (Signed & Direct Updatable APK) 🚀" \
+               -F caption="StockPulse (Signed V1+V2 & Updatable APK) 🚀" \
                https://api.telegram.org/bot$BOT_TOKEN/sendDocument
