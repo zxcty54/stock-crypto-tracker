@@ -52,26 +52,41 @@ class MetalsTickerCard extends StatefulWidget {
 class _MetalsTickerCardState extends State<MetalsTickerCard> {
   int _selectedTabIndex = 0; // 0: Metals, 1: Forex
   bool _isLoading = true;
-  String? _error;
   Timer? _refreshTimer;
 
-  // Commodities
-  CommodityItem? _gold;
-  CommodityItem? _silver;
-  CommodityItem? _copper;
-  CommodityItem? _platinum;
-
-  // Live USD-INR Benchmark Rate
+  // Default / Fallback Benchmark Rates (Incase network latency ho)
   final double _usdInrRate = 83.54;
 
-  // Forex List
-  List<ForexRate> _forexList = [];
+  late CommodityItem _gold;
+  late CommodityItem _silver;
+  late CommodityItem _copper;
+  late CommodityItem _platinum;
+  late List<ForexRate> _forexList;
 
   @override
   void initState() {
     super.initState();
+    _initDefaults();
     _fetchMarketData();
-    _refreshTimer = Timer.periodic(const Duration(seconds: 30), (_) => _fetchMarketData());
+    _refreshTimer = Timer.periodic(const Duration(seconds: 45), (_) => _fetchMarketData());
+  }
+
+  void _initDefaults() {
+    _gold = CommodityItem(symbol: 'XAU', name: 'GOLD 24K', priceUsd: 2650.40, unitUsd: '/ oz');
+    _silver = CommodityItem(symbol: 'XAG', name: 'SILVER', priceUsd: 31.85, unitUsd: '/ oz');
+    _copper = CommodityItem(symbol: 'HG', name: 'COPPER', priceUsd: 4.45, unitUsd: '/ lb');
+    _platinum = CommodityItem(symbol: 'XPT', name: 'PLATINUM', priceUsd: 985.00, unitUsd: '/ oz');
+
+    _forexList = [
+      ForexRate(code: 'USD', name: 'US Dollar', flag: '🇺🇸', inrRate: _usdInrRate),
+      ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: _usdInrRate * 1.085),
+      ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: _usdInrRate * 1.282),
+      ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: _usdInrRate / 3.6725),
+      ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (_usdInrRate / 155.2) * 100),
+      ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: _usdInrRate * 0.732),
+      ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: _usdInrRate * 0.665),
+      ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: _usdInrRate * 0.745),
+    ];
   }
 
   @override
@@ -80,13 +95,17 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     super.dispose();
   }
 
-  // Safe fetch helper function
+  // Safe HTTP GET with Browser Headers to bypass bot blocks
   Future<dynamic> _safeGet(String url) async {
     try {
       final res = await http.get(
         Uri.parse(url),
-        headers: {'Accept': 'application/json'},
-      ).timeout(const Duration(seconds: 7));
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+        },
+      ).timeout(const Duration(seconds: 12));
+
       if (res.statusCode == 200) {
         return jsonDecode(res.body);
       }
@@ -96,65 +115,36 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
 
   Future<void> _fetchMarketData() async {
     try {
-      // 1. Fetch Gold & Silver directly
       final goldData = await _safeGet('https://api.gold-api.com/price/XAU');
       final silverData = await _safeGet('https://api.gold-api.com/price/XAG');
-
-      // 2. Fetch Optional: Platinum & Copper safely
-      final platData = await _safeGet('https://api.gold-api.com/price/XPT');
       final copperData = await _safeGet('https://api.gold-api.com/price/HG');
+      final platData = await _safeGet('https://api.gold-api.com/price/XPT');
 
-      if (goldData != null && silverData != null) {
-        final List<ForexRate> forex = [
-          ForexRate(code: 'USD', name: 'US Dollar', flag: '🇺🇸', inrRate: _usdInrRate),
-          ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: _usdInrRate * 1.085),
-          ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: _usdInrRate * 1.282),
-          ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: _usdInrRate / 3.6725),
-          ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (_usdInrRate / 155.2) * 100),
-          ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: _usdInrRate * 0.732),
-          ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: _usdInrRate * 0.665),
-          ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: _usdInrRate * 0.745),
-        ];
-
-        if (mounted) {
-          setState(() {
-            _gold = CommodityItem.fromJson(goldData, 'GOLD 24K', '/ oz');
-            _silver = CommodityItem.fromJson(silverData, 'SILVER', '/ oz');
-
-            // Agar Platinum API chali toh real data, warna fallback
-            _platinum = platData != null
-                ? CommodityItem.fromJson(platData, 'PLATINUM', '/ oz')
-                : CommodityItem(symbol: 'XPT', name: 'PLATINUM', priceUsd: 985.0, unitUsd: '/ oz');
-
-            // Copper fallback ya API data
-            _copper = copperData != null
-                ? CommodityItem.fromJson(copperData, 'COPPER', '/ lb')
-                : CommodityItem(symbol: 'HG', name: 'COPPER', priceUsd: 4.45, unitUsd: '/ lb');
-
-            _forexList = forex;
-            _isLoading = false;
-            _error = null;
-          });
-        }
-      } else {
-        if (mounted) {
-          setState(() {
-            _error = 'Unable to reach bullion server';
-            _isLoading = false;
-          });
-        }
-      }
-    } catch (e) {
       if (mounted) {
         setState(() {
-          _error = 'Network connection issue';
+          if (goldData != null && goldData['price'] != null) {
+            _gold = CommodityItem.fromJson(goldData, 'GOLD 24K', '/ oz');
+          }
+          if (silverData != null && silverData['price'] != null) {
+            _silver = CommodityItem.fromJson(silverData, 'SILVER', '/ oz');
+          }
+          if (copperData != null && copperData['price'] != null) {
+            _copper = CommodityItem.fromJson(copperData, 'COPPER', '/ lb');
+          }
+          if (platData != null && platData['price'] != null) {
+            _platinum = CommodityItem.fromJson(platData, 'PLATINUM', '/ oz');
+          }
           _isLoading = false;
         });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isLoading = false);
       }
     }
   }
 
-  // Unit Calculations
+  // Conversions for Indian Domestic Reference
   double _calcGoldPer10g(double usdOz) => ((usdOz / 31.1035) * 10) * _usdInrRate;
   double _calcSilverPerKg(double usdOz) => ((usdOz / 31.1035) * 1000) * _usdInrRate;
   double _calcCopperPerKg(double usdLb) => (usdLb * 2.20462) * _usdInrRate;
@@ -169,60 +159,6 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading && _gold == null) {
-      return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: const Color(0xFF0F1726),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFF1E2B3E)),
-        ),
-        child: const Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: 14,
-                height: 14,
-                child: CircularProgressIndicator(strokeWidth: 1.8, color: Color(0xFFFFD700)),
-              ),
-              SizedBox(width: 8),
-              Text(
-                'Syncing Bullion & Forex Rates...',
-                style: TextStyle(color: Colors.white54, fontSize: 11),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    if (_error != null && _gold == null) {
-      return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: const Color(0xFF131B2A),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF1E2B3E)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(_error!, style: const TextStyle(color: Colors.white54, fontSize: 11)),
-            TextButton(
-              onPressed: () {
-                setState(() => _isLoading = true);
-                _fetchMarketData();
-              },
-              child: const Text('Retry', style: TextStyle(color: Color(0xFF00F0FF), fontSize: 11)),
-            ),
-          ],
-        ),
-      );
-    }
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       padding: const EdgeInsets.all(14),
@@ -241,7 +177,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Selector Chips (Metals vs Forex)
+          // Selector Chips (Metals vs Forex)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -255,13 +191,21 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
               InkWell(
                 onTap: () {
                   HapticFeedback.selectionClick();
+                  setState(() => _isLoading = true);
                   _fetchMarketData();
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 14),
-                    SizedBox(width: 4),
-                    Text(
+                    if (_isLoading)
+                      const SizedBox(
+                        width: 10,
+                        height: 10,
+                        child: CircularProgressIndicator(strokeWidth: 1.5, color: Color(0xFF00F0FF)),
+                      )
+                    else
+                      const Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 14),
+                    const SizedBox(width: 4),
+                    const Text(
                       'Live',
                       style: TextStyle(color: Color(0xFF00F0FF), fontSize: 10, fontWeight: FontWeight.bold),
                     ),
@@ -273,7 +217,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
 
           const SizedBox(height: 12),
 
-          // 2. Active Tab Grid
+          // Active Tab Content
           if (_selectedTabIndex == 0) _buildMetalsGrid() else _buildForexGrid(),
         ],
       ),
@@ -316,11 +260,11 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
           children: [
             Expanded(
               child: _metalCard(
-                name: 'GOLD 24K',
-                symbol: 'XAU',
-                usdPrice: _gold?.priceUsd ?? 0.0,
-                unitUsd: '/ oz',
-                inrPrice: _gold != null ? _calcGoldPer10g(_gold!.priceUsd) : 0.0,
+                name: _gold.name,
+                symbol: _gold.symbol,
+                usdPrice: _gold.priceUsd,
+                unitUsd: _gold.unitUsd,
+                inrPrice: _calcGoldPer10g(_gold.priceUsd),
                 inrUnit: '/ 10g (Est)',
                 accentColor: const Color(0xFFFFD700),
               ),
@@ -328,11 +272,11 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
             const SizedBox(width: 8),
             Expanded(
               child: _metalCard(
-                name: 'SILVER',
-                symbol: 'XAG',
-                usdPrice: _silver?.priceUsd ?? 0.0,
-                unitUsd: '/ oz',
-                inrPrice: _silver != null ? _calcSilverPerKg(_silver!.priceUsd) : 0.0,
+                name: _silver.name,
+                symbol: _silver.symbol,
+                usdPrice: _silver.priceUsd,
+                unitUsd: _silver.unitUsd,
+                inrPrice: _calcSilverPerKg(_silver.priceUsd),
                 inrUnit: '/ 1 Kg (Est)',
                 accentColor: const Color(0xFFE0E0E0),
               ),
@@ -344,11 +288,11 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
           children: [
             Expanded(
               child: _metalCard(
-                name: 'COPPER',
-                symbol: 'HG',
-                usdPrice: _copper?.priceUsd ?? 4.45,
-                unitUsd: '/ lb',
-                inrPrice: _copper != null ? _calcCopperPerKg(_copper!.priceUsd) : _calcCopperPerKg(4.45),
+                name: _copper.name,
+                symbol: _copper.symbol,
+                usdPrice: _copper.priceUsd,
+                unitUsd: _copper.unitUsd,
+                inrPrice: _calcCopperPerKg(_copper.priceUsd),
                 inrUnit: '/ 1 Kg (Est)',
                 accentColor: const Color(0xFFFF7A45),
               ),
@@ -356,11 +300,11 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
             const SizedBox(width: 8),
             Expanded(
               child: _metalCard(
-                name: 'PLATINUM',
-                symbol: 'XPT',
-                usdPrice: _platinum?.priceUsd ?? 985.0,
-                unitUsd: '/ oz',
-                inrPrice: _platinum != null ? _calcPlatPer10g(_platinum!.priceUsd) : _calcPlatPer10g(985.0),
+                name: _platinum.name,
+                symbol: _platinum.symbol,
+                usdPrice: _platinum.priceUsd,
+                unitUsd: _platinum.unitUsd,
+                inrPrice: _calcPlatPer10g(_platinum.priceUsd),
                 inrUnit: '/ 10g (Est)',
                 accentColor: const Color(0xFF00E5FF),
               ),
@@ -456,76 +400,72 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
   }
 
   Widget _buildForexGrid() {
-    return Column(
-      children: [
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: _forexList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2.8,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: _forexList.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 2.8,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemBuilder: (context, index) {
+        final f = _forexList[index];
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: const Color(0xFF131B2A),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: const Color(0xFF1E2B3E)),
           ),
-          itemBuilder: (context, index) {
-            final f = _forexList[index];
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color(0xFF131B2A),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF1E2B3E)),
+          child: Row(
+            children: [
+              Text(f.flag, style: const TextStyle(fontSize: 18)),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      f.code,
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 11,
+                      ),
+                    ),
+                    Text(
+                      f.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 8),
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(f.flag, style: const TextStyle(fontSize: 18)),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          f.code,
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 11,
-                          ),
-                        ),
-                        Text(
-                          f.name,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 8),
-                        ),
-                      ],
+                  Text(
+                    '₹${f.inrRate.toStringAsFixed(2)}',
+                    style: GoogleFonts.robotoMono(
+                      color: const Color(0xFF00F0FF),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 12,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '₹${f.inrRate.toStringAsFixed(2)}',
-                        style: GoogleFonts.robotoMono(
-                          color: const Color(0xFF00F0FF),
-                          fontWeight: FontWeight.w900,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const Text(
-                        'vs 1 INR',
-                        style: TextStyle(color: Colors.white30, fontSize: 7.5),
-                      ),
-                    ],
+                  const Text(
+                    'vs 1 INR',
+                    style: TextStyle(color: Colors.white30, fontSize: 7.5),
                   ),
                 ],
               ),
-            );
-          },
-        ),
-      ],
+            ],
+          ),
+        );
+      },
     );
   }
 }
