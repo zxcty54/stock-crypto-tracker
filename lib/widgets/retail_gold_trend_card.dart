@@ -38,24 +38,25 @@ class BullionTrendData {
       current22k: (rates['22k'] as num?)?.toDouble() ?? 69804.17,
       current18k: (rates['18k'] as num?)?.toDouble() ?? 57112.5,
       silverPerKg: (rates['silver_per_kg'] as num?)?.toDouble() ?? 92400.0,
-      ago1y24k: (trend['rate_1y_ago_24k'] as num?)?.toDouble() ?? 60049.17,
+      ago1y24k: (trend['rate_1y_ago_24k'] as num?)?.toDouble() ?? 60029.42,
       ago6m24k: (trend['rate_6m_ago_24k'] as num?)?.toDouble() ?? 68535.0,
       cpiInflation: (trend['cpi_inflation_1y'] as num?)?.toDouble() ?? 5.4,
-      niftyReturn: (trend['nifty_1y_return'] as num?)?.toDouble() ?? -7.49,
+      niftyReturn: (trend['nifty_1y_return'] as num?)?.toDouble() ?? -8.09,
       updatedAt: json['updated_at']?.toString() ?? 'Latest Benchmark',
-      source: json['source']?.toString() ?? 'IBJA Benchmark',
+      source: json['source']?.toString() ?? 'IBJA Official & Market Benchmark',
     );
   }
 }
 
-class RetailGoldTrendCard extends StatefulWidget {
-  const RetailGoldTrendCard({super.key});
+class RetailGoldTrendCardProV2 extends StatefulWidget {
+  final bool isDarkMode;
+  const RetailGoldTrendCardProV2({super.key, this.isDarkMode = true});
 
   @override
-  State<RetailGoldTrendCard> createState() => _RetailGoldTrendCardState();
+  State<RetailGoldTrendCardProV2> createState() => _RetailGoldTrendCardProV2State();
 }
 
-class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
+class _RetailGoldTrendCardProV2State extends State<RetailGoldTrendCardProV2> {
   final String _dataUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/ibja_rates.json';
 
@@ -64,16 +65,30 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
     current22k: 69804.17,
     current18k: 57112.5,
     silverPerKg: 92400.0,
-    ago1y24k: 60049.17,
+    ago1y24k: 60029.42,
     ago6m24k: 68535.0,
     cpiInflation: 5.4,
-    niftyReturn: -7.49,
+    niftyReturn: -8.09,
     updatedAt: 'Live',
     source: 'IBJA Official',
   );
 
   bool _isLoading = true;
   int _selectedAssetType = 0; // 0: 22K Jewelry, 1: 24K Coin/Bar, 2: Gold ETF (BeES)
+  double _weightGrams = 10.0;
+  double _makingChargePct = 14.0;
+
+  // 🎨 Pro V2 Theme Palette
+  static const Color bgDark = Color(0xFF0F1726);
+  static const Color surfaceCard = Color(0xFF131B2A);
+  static const Color borderSubtle = Color(0xFF1E2B3E);
+  static const Color borderCard = Color(0xFF25334A);
+  static const Color accentNeon = Color(0xFF00F5A0);
+  static const Color accentGold = Color(0xFFFFD700);
+  static const Color accentCyan = Color(0xFF00F0FF);
+  static const Color accentRose = Color(0xFFFF2A6D);
+  static const Color textMuted = Color(0xFF6B7A99);
+  static const Color darkPillBg = Color(0xFF0A0F1A);
 
   @override
   void initState() {
@@ -111,49 +126,67 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
     );
   }
 
+  void _onAssetTypeSelected(int index) {
+    HapticFeedback.selectionClick();
+    setState(() {
+      _selectedAssetType = index;
+      if (index == 0) {
+        _makingChargePct = 14.0;
+      } else if (index == 1) {
+        _makingChargePct = 3.0;
+      } else {
+        _makingChargePct = 0.0;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // 1. Raw Gold Return
     final double rawGoldReturnPercent =
         ((_data.current24k - _data.ago1y24k) / _data.ago1y24k) * 100;
 
-    double purityMultiplier = 1.0;
-    double buyMakingChargePercent = 0.0;
+    // 2. Direct JSON Rate Matching (22k rate directly used from JSON)
+    final double currentRatePer10g =
+        _selectedAssetType == 0 ? _data.current22k : _data.current24k;
+    final double rate1yAgoPer10g = _selectedAssetType == 0
+        ? (_data.ago1y24k * (22 / 24))
+        : _data.ago1y24k;
 
-    if (_selectedAssetType == 0) {
-      purityMultiplier = 22 / 24;
-      buyMakingChargePercent = 14.0;
-    } else if (_selectedAssetType == 1) {
-      purityMultiplier = 1.0;
-      buyMakingChargePercent = 3.0;
-    } else {
-      purityMultiplier = 1.0;
-      buyMakingChargePercent = 0.0;
-    }
+    final double unitFactor = _weightGrams / 10.0;
 
-    final double cost1yAgo = (_data.ago1y24k * purityMultiplier) *
-        (1 + (buyMakingChargePercent / 100)) *
-        1.03;
+    // 3. Purchase Cost breakdown
+    final double baseMetalCost1y = rate1yAgoPer10g * unitFactor;
+    final double makingChargeAmt =
+        _selectedAssetType == 2 ? 0.0 : baseMetalCost1y * (_makingChargePct / 100.0);
+    final double gstAmt =
+        _selectedAssetType == 2 ? 0.0 : (baseMetalCost1y + makingChargeAmt) * 0.03;
+    final double totalBoughtCost1y = baseMetalCost1y + makingChargeAmt + gstAmt;
 
-    final double liquidationCashToday = _data.current24k * purityMultiplier;
+    // 4. Liquidation in-hand cash
+    final double liquidationCashToday = currentRatePer10g * unitFactor;
+    final double netGainAmount = liquidationCashToday - totalBoughtCost1y;
+    final double netReturnPercent = (netGainAmount / totalBoughtCost1y) * 100;
 
-    final double netReturnPercent =
-        ((liquidationCashToday - cost1yAgo) / cost1yAgo) * 100;
-    final double netGainAmount = liquidationCashToday - cost1yAgo;
-
+    // 5. Alpha calculations
     final double vsInflationAlpha = netReturnPercent - _data.cpiInflation;
     final double vsNiftyAlpha = netReturnPercent - _data.niftyReturn;
+    final double breakEvenRallyRequired =
+        ((1 + _makingChargePct / 100.0) * 1.03 - 1) * 100;
+    final double goldSilverRatio =
+        (_data.current24k * 100) / (_data.silverPerKg > 0 ? _data.silverPerKg : 1.0);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF1E2B3E), width: 1.2),
+        color: bgDark,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: borderSubtle, width: 1.2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.4),
-            blurRadius: 14,
+            blurRadius: 16,
             offset: const Offset(0, 4),
           ),
         ],
@@ -161,23 +194,20 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
+          // 1. Header Bar (V2 Gold Dot & Stylized typography)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   Container(
-                    width: 7,
-                    height: 7,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF00F5A0),
-                      shape: BoxShape.circle,
-                    ),
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(color: accentGold, shape: BoxShape.circle),
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    '1-YEAR RETAIL ALPHA & TREND',
+                    'RETAIL GOLD ALPHA & SELLBACK RADAR',
                     style: GoogleFonts.plusJakartaSans(
                       color: Colors.white,
                       fontSize: 11,
@@ -199,21 +229,14 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                       const SizedBox(
                         width: 10,
                         height: 10,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1.5,
-                          color: Color(0xFF00F0FF),
-                        ),
+                        child: CircularProgressIndicator(strokeWidth: 1.5, color: accentGold),
                       )
                     else
-                      const Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 14),
+                      const Icon(Icons.sync_rounded, color: accentGold, size: 14),
                     const SizedBox(width: 4),
                     Text(
                       _data.updatedAt.contains('IST') ? 'Synced' : 'Live',
-                      style: const TextStyle(
-                        color: Color(0xFF00F0FF),
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(color: accentGold, fontSize: 9.5, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -223,26 +246,87 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 12),
 
-          // Asset Selector Chips
+          // 2. Asset Selector Chips (V2 Gold-accent theme)
           Row(
             children: [
-              _filterTab(0, '22K JEWELRY'),
+              _assetChip(0, '22K JEWELRY'),
               const SizedBox(width: 6),
-              _filterTab(1, '24K COIN / BAR'),
+              _assetChip(1, '24K COIN / BAR'),
               const SizedBox(width: 6),
-              _filterTab(2, 'GOLD ETF (BEES)'),
+              _assetChip(2, 'GOLD ETF (BEES)'),
             ],
           ),
 
+          const SizedBox(height: 10),
+
+          // 3. Weight Customizer Strip (V2 Card Style)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: surfaceCard,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: borderSubtle),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Weight:', style: TextStyle(color: textMuted, fontSize: 10, fontWeight: FontWeight.bold)),
+                Row(
+                  children: [
+                    _weightPreset(8.0, '8g (1 Sov)'),
+                    const SizedBox(width: 4),
+                    _weightPreset(10.0, '10g (Std)'),
+                    const SizedBox(width: 4),
+                    _weightPreset(11.66, '11.66g (Tola)'),
+                    const SizedBox(width: 4),
+                    _weightPreset(50.0, '50g (Set)'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // 4. Interactive Making Charge Slider
+          if (_selectedAssetType != 2) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: surfaceCard,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: borderSubtle),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    'Making: ${_makingChargePct.toInt()}%',
+                    style: const TextStyle(color: accentGold, fontSize: 10, fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(
+                    child: Slider(
+                      min: 2,
+                      max: 25,
+                      divisions: 23,
+                      value: _makingChargePct,
+                      activeColor: accentGold,
+                      inactiveColor: const Color(0xFF1E2B3E),
+                      onChanged: (val) => setState(() => _makingChargePct = val),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           const SizedBox(height: 12),
 
-          // Comparison Card
+          // 5. Core Comparison Card (V2 High-Contrast Card Style)
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF131B2A),
+              color: surfaceCard,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF25334A)),
+              border: Border.all(color: borderCard),
             ),
             child: Column(
               children: [
@@ -252,13 +336,13 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Bought 1-Yr Ago (Cost + Tax)',
-                          style: TextStyle(color: Color(0xFF6B7A99), fontSize: 9.5),
-                        ),
-                        const SizedBox(height: 3),
                         Text(
-                          '₹${_formatInr(cost1yAgo)}',
+                          'Bought 1Y Ago (${_weightGrams.toStringAsFixed(1)}g Total Cost)',
+                          style: const TextStyle(color: textMuted, fontSize: 9.5),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          '₹${_formatInr(totalBoughtCost1y)}',
                           style: GoogleFonts.robotoMono(
                             color: Colors.white70,
                             fontSize: 14,
@@ -271,15 +355,12 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Text(
-                          'Cash In-Hand Today (Sell-Back)',
-                          style: TextStyle(color: Color(0xFF6B7A99), fontSize: 9.5),
-                        ),
-                        const SizedBox(height: 3),
+                        const Text('Cash In-Hand Today (Sellback)', style: TextStyle(color: textMuted, fontSize: 9.5)),
+                        const SizedBox(height: 2),
                         Text(
                           '₹${_formatInr(liquidationCashToday)}',
                           style: GoogleFonts.robotoMono(
-                            color: const Color(0xFF00F5A0),
+                            color: accentNeon,
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
                           ),
@@ -288,20 +369,18 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                     ),
                   ],
                 ),
-                const Divider(color: Color(0xFF1E2B3E), height: 16),
+                const Divider(color: borderSubtle, height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Net Liquidation Gain per 10g:',
-                      style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11),
+                      'Net Liquidation Gain (${_weightGrams.toStringAsFixed(1)}g):',
+                      style: const TextStyle(color: Colors.white70, fontSize: 11),
                     ),
                     Text(
                       '${netGainAmount >= 0 ? '+' : ''}₹${_formatInr(netGainAmount)} (${netReturnPercent.toStringAsFixed(1)}%)',
                       style: GoogleFonts.robotoMono(
-                        color: netReturnPercent >= 0
-                            ? const Color(0xFF00F5A0)
-                            : const Color(0xFFFF2A6D),
+                        color: netGainAmount >= 0 ? accentNeon : accentRose,
                         fontSize: 13,
                         fontWeight: FontWeight.w900,
                       ),
@@ -312,47 +391,47 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
             ),
           ),
 
+          // 6. Educational Break-Even Warning (Jewelry)
+          if (_selectedAssetType == 0) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2A101A),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: accentRose.withOpacity(0.4)),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.warning_amber_rounded, color: accentRose, size: 16),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      'Jewellery Break-even: Gold spot must rise +${breakEvenRallyRequired.toStringAsFixed(1)}% just to recover ${_makingChargePct.toInt()}% making charges + 3% GST.',
+                      style: const TextStyle(color: Color(0xFFFFB4C9), fontSize: 9.5, height: 1.25),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           const SizedBox(height: 10),
 
-          // 3 Alpha Badges
+          // 7. Triple Alpha Badges (V2 Card Style)
           Row(
             children: [
-              Expanded(
-                child: _metricBadge(
-                  title: 'PAPER GAIN',
-                  value: '+${rawGoldReturnPercent.toStringAsFixed(1)}%',
-                  subtitle: '24K Base Spot',
-                  color: const Color(0xFF00F0FF),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _metricBadge(
-                  title: 'VS INFLATION',
-                  value: '${vsInflationAlpha >= 0 ? '+' : ''}${vsInflationAlpha.toStringAsFixed(1)}%',
-                  subtitle: 'Real Wealth Alpha',
-                  color: vsInflationAlpha >= 0
-                      ? const Color(0xFF00F5A0)
-                      : const Color(0xFFFF9800),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _metricBadge(
-                  title: 'VS NIFTY 50',
-                  value: '${vsNiftyAlpha >= 0 ? '+' : ''}${vsNiftyAlpha.toStringAsFixed(1)}%',
-                  subtitle: 'Equity Alpha',
-                  color: vsNiftyAlpha >= 0
-                      ? const Color(0xFF00F5A0)
-                      : const Color(0xFFFF2A6D),
-                ),
-              ),
+              Expanded(child: _metricBadge('PAPER GAIN', '+${rawGoldReturnPercent.toStringAsFixed(1)}%', '24K Base Spot', accentCyan)),
+              const SizedBox(width: 6),
+              Expanded(child: _metricBadge('VS INFLATION', '${vsInflationAlpha >= 0 ? '+' : ''}${vsInflationAlpha.toStringAsFixed(1)}%', 'Real Alpha', vsInflationAlpha >= 0 ? accentNeon : Colors.amber)),
+              const SizedBox(width: 6),
+              Expanded(child: _metricBadge('VS NIFTY 50', '${vsNiftyAlpha >= 0 ? '+' : ''}${vsNiftyAlpha.toStringAsFixed(1)}%', 'Equity Alpha', vsNiftyAlpha >= 0 ? accentNeon : accentRose)),
             ],
           ),
 
           const SizedBox(height: 10),
 
-          // Takeaway Insight
+          // 8. Existing Takeaway Insight Box (Styled with V2 Neon/Amber borders)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             decoration: BoxDecoration(
@@ -360,23 +439,23 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: vsNiftyAlpha >= 0
-                    ? const Color(0xFF00F5A0).withOpacity(0.25)
-                    : const Color(0xFFFF9800).withOpacity(0.25),
+                    ? accentNeon.withOpacity(0.25)
+                    : Colors.amber.withOpacity(0.25),
               ),
             ),
             child: Row(
               children: [
                 Icon(
                   vsNiftyAlpha >= 0 ? Icons.trending_up_rounded : Icons.info_outline,
-                  color: vsNiftyAlpha >= 0 ? const Color(0xFF00F5A0) : const Color(0xFFFF9800),
+                  color: vsNiftyAlpha >= 0 ? accentNeon : Colors.amber,
                   size: 16,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     _selectedAssetType == 0
-                        ? 'Due to 14% making charges + 3% GST, 22K jewelry gives ${netReturnPercent.toStringAsFixed(1)}% cash return vs +${rawGoldReturnPercent.toStringAsFixed(1)}% paper gain.'
-                        : 'Gold outperformed Nifty 50 by +${vsNiftyAlpha.toStringAsFixed(1)}% in the last 1 year, preserving capital against stock market drawdowns.',
+                        ? 'Due to ${_makingChargePct.toInt()}% making charges + 3% GST, 22K jewelry gives ${netReturnPercent.toStringAsFixed(1)}% cash return vs +${rawGoldReturnPercent.toStringAsFixed(1)}% paper gain.'
+                        : 'Gold generated ${vsNiftyAlpha >= 0 ? '+' : ''}${vsNiftyAlpha.toStringAsFixed(1)}% alpha over Nifty 50 in the last 1 year, preserving capital against stock market drawdowns.',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.85),
                       fontSize: 10,
@@ -390,12 +469,38 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
 
           const SizedBox(height: 10),
 
-          // Stepper Strip
+          // 9. Live Gold / Silver Ratio Strip
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            decoration: BoxDecoration(
+              color: darkPillBg,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: borderSubtle),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Gold/Silver Ratio: ${goldSilverRatio.toStringAsFixed(1)}x',
+                  style: const TextStyle(color: accentGold, fontSize: 9.5, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Silver: ₹${_formatInr(_data.silverPerKg)}/kg',
+                  style: GoogleFonts.robotoMono(color: Colors.white70, fontSize: 9.5),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          // 10. Existing Timeline Stepper Strip (1Y Ago -> 6M Ago -> Today 24K)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFF0A0F1A),
+              color: darkPillBg,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: borderSubtle),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -404,8 +509,11 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
                 const Icon(Icons.chevron_right_rounded, color: Colors.white24, size: 14),
                 _milestoneItem('6M Ago', '₹${_formatInr(_data.ago6m24k)}'),
                 const Icon(Icons.chevron_right_rounded, color: Colors.white24, size: 14),
-                _milestoneItem('Today (24K)', '₹${_formatInr(_data.current24k)}',
-                    color: const Color(0xFFFFD700)),
+                _milestoneItem(
+                  'Today (24K)',
+                  '₹${_formatInr(_data.current24k)}',
+                  color: accentGold,
+                ),
               ],
             ),
           ),
@@ -414,30 +522,23 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
     );
   }
 
-  Widget _filterTab(int index, String label) {
+  Widget _assetChip(int index, String label) {
     final isSelected = _selectedAssetType == index;
     return Expanded(
       child: InkWell(
-        onTap: () {
-          HapticFeedback.selectionClick();
-          setState(() => _selectedAssetType = index);
-        },
+        onTap: () => _onAssetTypeSelected(index),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected
-                ? const Color(0xFF00F0FF).withOpacity(0.18)
-                : const Color(0xFF131B2A),
+            color: isSelected ? accentGold.withOpacity(0.2) : surfaceCard,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: isSelected ? const Color(0xFF00F0FF) : const Color(0xFF1E2B3E),
-            ),
+            border: Border.all(color: isSelected ? accentGold : borderSubtle),
           ),
           alignment: Alignment.center,
           child: Text(
             label,
             style: TextStyle(
-              color: isSelected ? const Color(0xFF00F0FF) : Colors.white60,
+              color: isSelected ? accentGold : Colors.white60,
               fontSize: 9.5,
               fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
             ),
@@ -447,41 +548,46 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
     );
   }
 
-  Widget _metricBadge({
-    required String title,
-    required String value,
-    required String subtitle,
-    required Color color,
-  }) {
+  Widget _weightPreset(double g, String text) {
+    final isSelected = _weightGrams == g;
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        setState(() => _weightGrams = g);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+        decoration: BoxDecoration(
+          color: isSelected ? accentGold : bgDark,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: isSelected ? Colors.black : Colors.white70,
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _metricBadge(String title, String val, String sub, Color col) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(7),
       decoration: BoxDecoration(
         color: const Color(0xFF101724),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFF1E2B3E)),
+        border: Border.all(color: borderSubtle),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Color(0xFF6B7A99),
-              fontSize: 8.5,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            value,
-            style: GoogleFonts.robotoMono(
-              color: color,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(subtitle, style: const TextStyle(color: Colors.white30, fontSize: 7.5)),
+          Text(title, style: const TextStyle(color: textMuted, fontSize: 8, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 2),
+          Text(val, style: GoogleFonts.robotoMono(color: col, fontSize: 12, fontWeight: FontWeight.w900)),
+          Text(sub, style: const TextStyle(color: Colors.white30, fontSize: 7)),
         ],
       ),
     );
@@ -491,7 +597,7 @@ class _RetailGoldTrendCardState extends State<RetailGoldTrendCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 8.5)),
+        Text(label, style: const TextStyle(color: textMuted, fontSize: 8.5)),
         const SizedBox(height: 1),
         Text(
           value,
