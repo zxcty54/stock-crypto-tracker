@@ -8,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CreateChartPostSheet extends StatefulWidget {
   final VoidCallback onPostCreated;
-  final File? initialImage; // Gallery se direct aayi hui image
+  final File? initialImage;
 
   const CreateChartPostSheet({
     super.key,
@@ -46,44 +46,144 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     super.dispose();
   }
 
-  // 🖼️ Gallery Picker
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final picked = await picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 100, // Original quality pick karein, compression niche custom method handle karega
+      imageQuality: 100,
     );
-    if (picked != null) {
+    if (picked != null && mounted) {
       setState(() => _selectedImage = File(picked.path));
     }
   }
 
-  // ⚡ Non-blocking Native Compression
+  // ⚡ Non-blocking Native Compression with safe fallback
   Future<File> _compressImage(File originalFile) async {
-    final tempDir = await getTemporaryDirectory();
-    final targetPath = '${tempDir.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg';
+    try {
+      final tempDir = await getTemporaryDirectory();
+      final targetPath = '${tempDir.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
-    final XFile? compressedXFile = await FlutterImageCompress.compressAndGetFile(
-      originalFile.absolute.path,
-      targetPath,
-      minWidth: 1280,
-      minHeight: 1280,
-      quality: 70, // 5-8 MB screenshot ko ~150-200 KB me convert karta hai
-      format: CompressFormat.jpeg,
+      final XFile? compressedXFile = await FlutterImageCompress.compressAndGetFile(
+        originalFile.absolute.path,
+        targetPath,
+        minWidth: 1280,
+        minHeight: 1280,
+        quality: 70, // 5-8 MB screenshot becomes ~150-200 KB
+        format: CompressFormat.jpeg,
+      );
+
+      if (compressedXFile != null) {
+        return File(compressedXFile.path);
+      }
+    } catch (_) {}
+    return originalFile;
+  }
+
+  // 👤 Ensure User has a proper Trader Profile (No Anonymous ghost posts)
+  Future<bool> _verifyTraderProfile(String userId) async {
+    final supabase = Supabase.instance.client;
+    try {
+      final profile = await supabase
+          .from('profiles')
+          .select('username')
+          .eq('id', userId)
+          .maybeSingle();
+
+      if (profile == null || (profile['username'] ?? '').toString().isEmpty) {
+        if (!mounted) return false;
+        return await _showProfileSetupPrompt(userId);
+      }
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> _showProfileSetupPrompt(String userId) async {
+    final nameCtrl = TextEditingController();
+    final handleCtrl = TextEditingController();
+
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF0F1726),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Color(0xFF1E2B3E)),
+        ),
+        title: Text(
+          'CREATE TRADER PROFILE',
+          style: GoogleFonts.plusJakartaSans(
+            color: Colors.white,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameCtrl,
+              style: const TextStyle(color: Colors.white, fontSize: 13),
+              decoration: InputDecoration(
+                labelText: 'Full Name',
+                labelStyle: const TextStyle(color: Colors.white54, fontSize: 11),
+                filled: true,
+                fillColor: const Color(0xFF141C2B),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: handleCtrl,
+              style: const TextStyle(color: Colors.white, fontSize: 13),
+              decoration: InputDecoration(
+                labelText: 'Trader Handle (e.g. rohit_trader)',
+                labelStyle: const TextStyle(color: Colors.white54, fontSize: 11),
+                filled: true,
+                fillColor: const Color(0xFF141C2B),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel', style: TextStyle(color: Colors.white38)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00E5FF)),
+            onPressed: () async {
+              final name = nameCtrl.text.trim();
+              final handle = handleCtrl.text.trim();
+              if (name.isEmpty || handle.isEmpty) return;
+
+              await Supabase.instance.client.from('profiles').upsert({
+                'id': userId,
+                'full_name': name,
+                'username': handle.replaceAll('@', ''),
+              });
+              if (ctx.mounted) Navigator.pop(ctx, true);
+            },
+            child: const Text('Save Profile', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
     );
 
-    if (compressedXFile != null) {
-      return File(compressedXFile.path);
-    }
-    return originalFile;
+    return result ?? false;
   }
 
   // 🚀 Publish Setup
   Future<void> _submitPost() async {
-    final user = Supabase.instance.client.auth.currentUser;
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please log in or create a handle first!')),
+        const SnackBar(content: Text('Please log in first to share your chart setup!')),
       );
       return;
     }
@@ -95,21 +195,24 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
       return;
     }
 
+    // Verify trader handle
+    final hasProfile = await _verifyTraderProfile(user.id);
+    if (!hasProfile) return;
+
     setState(() {
       _isProcessing = true;
       _statusMessage = 'Optimizing chart image...';
     });
 
     try {
-      // 1. Background Compression (Smooth & lag-free)
+      // 1. Background Compression
       final File uploadReadyFile = await _compressImage(_selectedImage!);
 
       if (mounted) {
-        setState(() => _statusMessage = 'Uploading to terminal wire...');
+        setState(() => _statusMessage = 'Uploading chart to terminal wire...');
       }
 
       // 2. Supabase Storage Upload
-      final supabase = Supabase.instance.client;
       final fileExt = uploadReadyFile.path.split('.').last;
       final fileName = '${user.id}_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
 
@@ -339,7 +442,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
             ),
           ),
 
-          // 🔄 Smooth Loading Overlay (Jab compress & upload chal raha ho)
+          // Loading Overlay
           if (_isProcessing)
             Positioned.fill(
               child: Container(
