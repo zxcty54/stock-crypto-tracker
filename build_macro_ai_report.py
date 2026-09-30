@@ -8,14 +8,13 @@ OUTPUT_FILE = "macro_research_report.json"
 
 # ==============================================================================
 # 🎯 AI MODELS LIST (Fallback Architecture)
-# Aap yahan model ka naam priority-wise add/edit/change kar sakte hain.
-# Agar pehla fail hoga, toh code automatic doosre par switch karega.
+# Yahan se aap models add, remove ya reorder kar sakte hain.
 # ==============================================================================
 CANDIDATE_MODELS = [
-    "gemini-2.5-flash",        # 1st Priority (Fastest & Accurate)
-    "gemini-2.5-pro",          # 2nd Priority (Deep Analysis)
-    "gemini-2.0-flash",        # 3rd Priority (Stable Fallback)
-    "gemini-1.5-flash"         # 4th Priority (Legacy Fallback)
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
+    "gemini-2.5-flash",
+    "gemini-1.5-pro"
 ]
 
 COMMODITIES = [
@@ -70,7 +69,7 @@ COMMODITIES = [
 ]
 
 def fetch_commodity_metrics():
-    headers = {"User-Agent": "Mozilla/5.0"}
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     gathered = []
 
     print("=" * 75)
@@ -121,31 +120,62 @@ def fetch_commodity_metrics():
 
 def call_gemini_with_fallback(prompt, api_key):
     """
-    Iterates through CANDIDATE_MODELS list.
-    If a model fails, it tries the next fallback model.
+    Tries candidate models across both v1 and v1beta API versions
+    using proper header-based authentication to eliminate 404 gateway errors.
     """
-    for model_name in CANDIDATE_MODELS:
-        endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "temperature": 0.2,
-                "responseMimeType": "application/json"
-            }
-        }
+    # Dono versions test honge (v1 standard stable hai, v1beta newer features ke liye)
+    api_versions = ["v1", "v1beta"]
 
-        try:
-            res = requests.post(endpoint, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
-            if res.status_code == 200:
-                raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                report_obj = json.loads(raw_text)
-                return report_obj, model_name
-            else:
-                print(f"⚠️ Model '{model_name}' failed with HTTP {res.status_code}. Trying next model...")
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": api_key.strip()
+    }
+
+    payload = {
+        "contents": [
+            {
+                "parts": [{"text": prompt}]
+            }
+        ],
+        "generationConfig": {
+            "temperature": 0.2
+        }
+    }
+
+    for model_name in CANDIDATE_MODELS:
+        for version in api_versions:
+            endpoint = f"https://generativelanguage.googleapis.com/{version}/models/{model_name}:generateContent"
+
+            try:
+                res = requests.post(endpoint, json=payload, headers=headers, timeout=30)
+
+                if res.status_code == 200:
+                    raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    
+                    # Markdown backticks safety clean
+                    if raw_text.startswith("```json"):
+                        raw_text = raw_text[7:]
+                    elif raw_text.startswith("```"):
+                        raw_text = raw_text[3:]
+                    if raw_text.endswith("```"):
+                        raw_text = raw_text[:-3]
+
+                    report_obj = json.loads(raw_text.strip())
+                    return report_obj, f"{model_name} ({version})"
+
+                elif res.status_code == 429:
+                    print(f"⚠️ Rate limited (429) on {model_name} [{version}]. Cooling down 3s...")
+                    time.sleep(3.0)
+                else:
+                    # Detailed error message for transparent debugging
+                    err_msg = res.json().get("error", {}).get("message", res.text[:80])
+                    # Sirf non-404 par verbose log dikhayein
+                    if res.status_code != 404:
+                        print(f"⚠️ Model '{model_name}' [{version}] HTTP {res.status_code}: {err_msg}")
+
+            except Exception as e:
+                print(f"⚠️ Exception on '{model_name}' [{version}]: {e}")
                 time.sleep(0.5)
-        except Exception as e:
-            print(f"⚠️ Model '{model_name}' encountered error: {e}. Trying next model...")
-            time.sleep(0.5)
 
     return None, None
 
@@ -157,7 +187,7 @@ def generate_ai_research_analysis(dataset):
 
     print("\n" + "=" * 75)
     print("🧠 Step 2: Triggering Gemini AI with Model Fallbacks...")
-    print(f"📋 Fallback Pipeline: {' -> '.join(CANDIDATE_MODELS)}")
+    print(f"📋 Candidate Models: {', '.join(CANDIDATE_MODELS)}")
     print("=" * 75)
 
     ai_reports = []
@@ -204,14 +234,14 @@ Ensure the impacted_stocks array contains EXACTLY 8 to 10 listed Indian companie
 Do NOT output markdown backticks like ```json. Output ONLY raw parseable JSON.
 """
 
-        report_obj, used_model = call_gemini_with_fallback(prompt, api_key)
+        report_obj, used_engine = call_gemini_with_fallback(prompt, api_key)
         if report_obj:
             ai_reports.append(report_obj)
-            print(f"✨ AI Analysis compiled for {item['name']} using [{used_model}] ({len(report_obj.get('impacted_stocks', []))} stocks)")
+            print(f"✨ AI Analysis compiled for {item['name']} using [{used_engine}] ({len(report_obj.get('impacted_stocks', []))} stocks)")
         else:
-            print(f"❌ All fallback models failed for {item['name']}")
+            print(f"❌ All fallback models & API versions failed for {item['name']}")
 
-        time.sleep(1.0)
+        time.sleep(1.5)
 
     return ai_reports
 
