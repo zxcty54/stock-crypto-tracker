@@ -1,6 +1,9 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'screens/news_screen.dart';
@@ -10,6 +13,8 @@ import 'screens/community_screen.dart';
 import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
 import 'widgets/legal_disclaimer_dialog.dart';
+import 'widgets/create_chart_post_sheet.dart';
+import 'services/auth_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +61,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  StreamSubscription? _intentSub;
 
   final List<Widget> _pages = const [
     NewsScreen(),
@@ -70,6 +76,78 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     'STRATEGY BUILDER',
     'TRADER COMMUNITY WIRE',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _listenToSharedMedia();
+  }
+
+  /// 📸 Phone Gallery se share ki hui image ko listen aur handle karein
+  void _listenToSharedMedia() {
+    // Scenario 1: App background / memory mein chal rahi ho
+    _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
+      (List<SharedMediaFile> value) {
+        if (value.isNotEmpty) {
+          _handleSharedImage(File(value.first.path));
+        }
+      },
+      onError: (err) {
+        debugPrint("getMediaStream error: $err");
+      },
+    );
+
+    // Scenario 2: App completely closed ho aur user ne gallery se khola ho
+    ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> value) {
+      if (value.isNotEmpty) {
+        _handleSharedImage(File(value.first.path));
+        ReceiveSharingIntent.instance.reset(); // Intent consume hone ke baad clear karein
+      }
+    });
+  }
+
+  void _handleSharedImage(File imageFile) {
+    // 🔒 Pehle Auth Check: User registered/logged-in hona mandatory hai
+    if (!AuthService.isLoggedIn()) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Color(0xFFFF2A6D),
+            behavior: SnackBarBehavior.floating,
+            content: Text(
+              'Access Denied: Pehle app ke Community tab me jakar Trader Handle create karein tabhi chart share hoga.',
+              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      }
+      return;
+    }
+
+    // 1. Bottom navigation tab ko 'Community' (Index 3) par switch karein
+    setState(() => _currentIndex = 3);
+
+    // 2. Direct Create Post bottom sheet open karein jisme image already loaded hogi
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (ctx) => CreateChartPostSheet(
+          initialImage: imageFile,
+          onPostCreated: () {
+            // Post successfully create ho gaya
+          },
+        ),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _intentSub?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
