@@ -94,6 +94,88 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     } catch (_) {}
   }
 
+  // 🚩 Report Post Flow (10 distinct reports pe trigger delete karega)
+  Future<void> _reportPost() async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pehle trader profile create karein.')),
+      );
+      return;
+    }
+
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF0F1726),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Color(0xFF1E2B3E)),
+        ),
+        title: Text(
+          'REPORT SETUP?',
+          style: GoogleFonts.plusJakartaSans(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.5,
+          ),
+        ),
+        content: const Text(
+          'Kya aap is setup ko spam, abusive ya fake mark karna chahte hain? Agar 10 traders is post ko report karte hain, toh yeh wire se automatically delete ho jayegi.',
+          style: TextStyle(color: Color(0xFF8896AB), fontSize: 11, height: 1.4),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel', style: TextStyle(color: Colors.white38, fontSize: 12)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFF2A6D),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Report', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true) return;
+
+    try {
+      await supabase.from('post_reports').insert({
+        'post_id': widget.post['id'],
+        'reporter_id': user.id,
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Color(0xFF141C2B),
+            content: Text('Setup reported. Trader Wire ko clean rakhne ke liye shukriya.'),
+          ),
+        );
+      }
+      // Check agar 10th report ke baad delete ho gaya toh feed refresh ho jaye
+      widget.onPostDeleted();
+    } on PostgrestException catch (e) {
+      if (mounted) {
+        if (e.code == '23505') {
+          // Unique key violation
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Aap is setup ko pehle hi report kar chuke hain.')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Report failed: ${e.message}')),
+          );
+        }
+      }
+    } catch (_) {}
+  }
+
   String _formatTimestamp(String? iso) {
     if (iso == null) return 'Live';
     try {
@@ -126,7 +208,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Post Header (User + Tags)
+          // 1. Post Header (User + Tags + Options Menu)
           Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
@@ -172,22 +254,45 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                         style: TextStyle(color: biasColor, fontSize: 9.5, fontWeight: FontWeight.w900),
                       ),
                     ),
-                    if (isMyPost) ...[
-                      const SizedBox(width: 4),
-                      PopupMenuButton<String>(
-                        icon: const Icon(Icons.more_vert, color: Colors.white54, size: 18),
-                        color: const Color(0xFF141C2B),
-                        onSelected: (val) {
-                          if (val == 'delete') _deletePost();
-                        },
-                        itemBuilder: (ctx) => [
+                    const SizedBox(width: 4),
+                    // ⚙️ 3-Dots Menu (Delete ya Report)
+                    PopupMenuButton<String>(
+                      icon: const Icon(Icons.more_vert, color: Colors.white54, size: 18),
+                      color: const Color(0xFF141C2B),
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(color: Color(0xFF1E2B3E)),
+                      ),
+                      onSelected: (val) {
+                        if (val == 'delete') _deletePost();
+                        if (val == 'report') _reportPost();
+                      },
+                      itemBuilder: (ctx) => [
+                        if (isMyPost)
                           const PopupMenuItem(
                             value: 'delete',
-                            child: Text('Delete Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete_outline, color: Color(0xFFFF2A6D), size: 16),
+                                SizedBox(width: 8),
+                                Text('Delete Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
+                              ],
+                            ),
+                          )
+                        else
+                          const PopupMenuItem(
+                            value: 'report',
+                            child: Row(
+                              children: [
+                                Icon(Icons.flag_outlined, color: Color(0xFFFF2A6D), size: 16),
+                                SizedBox(width: 8),
+                                Text('Report Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ],
                 ),
               ],
