@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -8,14 +10,9 @@ android {
     namespace = "com.stockpulse.app"
     compileSdk = 37
 
-    // ☕ Force Java & Kotlin to target JVM 17
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -46,6 +43,13 @@ android {
         debug {
             signingConfig = signingConfigs.getByName("release")
         }
+    }
+}
+
+// Modern Kotlin JVM Target DSL (Java 17 sync)
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
