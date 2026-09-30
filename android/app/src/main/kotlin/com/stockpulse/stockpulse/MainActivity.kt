@@ -1,4 +1,4 @@
-package com.stockpulse.stockpulse
+package com.stockpulse.app
 
 import io.flutter.embedding.android.FlutterActivity
 
