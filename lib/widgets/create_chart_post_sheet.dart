@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,13 +24,32 @@ class CreateChartPostSheet extends StatefulWidget {
 class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
   final _noteController = TextEditingController();
   final _assetController = TextEditingController(text: 'NIFTY');
+  final _entryController = TextEditingController();
+  final _slController = TextEditingController();
+  final _targetController = TextEditingController();
+
   File? _selectedImage;
   String _selectedTimeframe = '5m';
   String _selectedBias = 'BULLISH';
+  bool _enableLevels = true;
   bool _isProcessing = false;
   String _statusMessage = '';
 
-  final List<String> _timeframes = ['1m', '5m', '15m', '1h', '1D'];
+  final List<String> _quickTickers = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'RELIANCE', 'CRUDEOIL', 'BTCUSD'];
+  final List<String> _timeframes = ['1m', '3m', '5m', '15m', '1h', '4h', '1D', '1W'];
+  final List<String> _availableTags = ['#Breakout', '#PriceAction', '#SupplyZone', '#SMC/FVG', '#Divergence'];
+  final List<String> _selectedTags = ['#Breakout', '#PriceAction'];
+
+  // Terminal Theme Constants
+  static const Color bgSheet = Color(0xFF090D16);
+  static const Color surfaceCard = Color(0xFF131B2A);
+  static const Color innerCard = Color(0xFF0F172A);
+  static const Color borderSubtle = Color(0xFF202C42);
+  static const Color accentCyan = Color(0xFF00E5FF);
+  static const Color accentNeon = Color(0xFF00E676);
+  static const Color accentRose = Color(0xFFFF5252);
+  static const Color accentGold = Color(0xFFFFB300);
+  static const Color textMuted = Color(0xFF94A3B8);
 
   @override
   void initState() {
@@ -43,32 +63,32 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
   void dispose() {
     _noteController.dispose();
     _assetController.dispose();
+    _entryController.dispose();
+    _slController.dispose();
+    _targetController.dispose();
     super.dispose();
   }
 
   Future<void> _pickImage() async {
+    HapticFeedback.selectionClick();
     final picker = ImagePicker();
-    final picked = await picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 100,
-    );
+    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (picked != null && mounted) {
       setState(() => _selectedImage = File(picked.path));
     }
   }
 
-  // ⚡ Non-blocking Native Compression with safe fallback
   Future<File> _compressImage(File originalFile) async {
     try {
       final tempDir = await getTemporaryDirectory();
-      final targetPath = '${tempDir.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final targetPath = '${tempDir.path}/chart_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
       final XFile? compressedXFile = await FlutterImageCompress.compressAndGetFile(
         originalFile.absolute.path,
         targetPath,
-        minWidth: 1280,
-        minHeight: 1280,
-        quality: 70, // 5-8 MB screenshot becomes ~150-200 KB
+        minWidth: 1440,
+        minHeight: 1440,
+        quality: 72,
         format: CompressFormat.jpeg,
       );
 
@@ -79,7 +99,21 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     return originalFile;
   }
 
-  // 👤 Ensure User has a proper Trader Profile (No Anonymous ghost posts)
+  // 🎯 Live Risk:Reward Ratio Calculation
+  String _calculateRiskReward() {
+    final entry = double.tryParse(_entryController.text.trim()) ?? 0.0;
+    final sl = double.tryParse(_slController.text.trim()) ?? 0.0;
+    final tp = double.tryParse(_targetController.text.trim()) ?? 0.0;
+
+    if (entry == 0.0 || sl == 0.0 || tp == 0.0) return 'Set levels';
+    final risk = (entry - sl).abs();
+    final reward = (tp - entry).abs();
+    if (risk == 0) return 'Invalid SL';
+
+    final ratio = reward / risk;
+    return '1 : ${ratio.toStringAsFixed(2)} R:R';
+  }
+
   Future<bool> _verifyTraderProfile(String userId) async {
     final supabase = Supabase.instance.client;
     try {
@@ -107,10 +141,10 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF0F1726),
+        backgroundColor: innerCard,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Color(0xFF1E2B3E)),
+          side: const BorderSide(color: borderSubtle),
         ),
         title: Text(
           'CREATE TRADER PROFILE',
@@ -128,10 +162,17 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
               style: const TextStyle(color: Colors.white, fontSize: 13),
               decoration: InputDecoration(
                 labelText: 'Full Name',
-                labelStyle: const TextStyle(color: Colors.white54, fontSize: 11),
+                labelStyle: const TextStyle(color: textMuted, fontSize: 11),
                 filled: true,
-                fillColor: const Color(0xFF141C2B),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                fillColor: surfaceCard,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: borderSubtle),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: accentCyan),
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -140,10 +181,17 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
               style: const TextStyle(color: Colors.white, fontSize: 13),
               decoration: InputDecoration(
                 labelText: 'Trader Handle (e.g. rohit_trader)',
-                labelStyle: const TextStyle(color: Colors.white54, fontSize: 11),
+                labelStyle: const TextStyle(color: textMuted, fontSize: 11),
                 filled: true,
-                fillColor: const Color(0xFF141C2B),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                fillColor: surfaceCard,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: borderSubtle),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: accentCyan),
+                ),
               ),
             ),
           ],
@@ -154,7 +202,10 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
             child: const Text('Cancel', style: TextStyle(color: Colors.white38)),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00E5FF)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: accentCyan,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
             onPressed: () async {
               final name = nameCtrl.text.trim();
               final handle = handleCtrl.text.trim();
@@ -176,7 +227,6 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     return result ?? false;
   }
 
-  // 🚀 Publish Setup
   Future<void> _submitPost() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
@@ -195,7 +245,6 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
       return;
     }
 
-    // Verify trader handle
     final hasProfile = await _verifyTraderProfile(user.id);
     if (!hasProfile) return;
 
@@ -205,14 +254,10 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     });
 
     try {
-      // 1. Background Compression
       final File uploadReadyFile = await _compressImage(_selectedImage!);
 
-      if (mounted) {
-        setState(() => _statusMessage = 'Uploading chart to terminal wire...');
-      }
+      if (mounted) setState(() => _statusMessage = 'Uploading to terminal wire...');
 
-      // 2. Supabase Storage Upload
       final fileExt = uploadReadyFile.path.split('.').last;
       final fileName = '${user.id}_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
 
@@ -224,15 +269,28 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
 
       final imageUrl = supabase.storage.from('charts').getPublicUrl(fileName);
 
-      // 3. Database Post Insert
-      await supabase.from('trader_posts').insert({
+      // Safe Map Payload (Execution levels optionality)
+      final Map<String, dynamic> payload = {
         'user_id': user.id,
         'chart_url': imageUrl,
         'asset_symbol': _assetController.text.trim().toUpperCase(),
         'timeframe': _selectedTimeframe,
         'bias': _selectedBias,
+        'tags': _selectedTags,
         'analysis_note': _noteController.text.trim(),
-      });
+      };
+
+      if (_enableLevels && _entryController.text.isNotEmpty) {
+        payload['entry_price'] = double.tryParse(_entryController.text.trim());
+      }
+      if (_enableLevels && _slController.text.isNotEmpty) {
+        payload['stop_loss'] = double.tryParse(_slController.text.trim());
+      }
+      if (_enableLevels && _targetController.text.isNotEmpty) {
+        payload['target_price'] = double.tryParse(_targetController.text.trim());
+      }
+
+      await supabase.from('trader_posts').insert(payload);
 
       if (mounted) {
         Navigator.pop(context);
@@ -240,9 +298,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Upload failed: $e')),
-        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Upload failed: $e')));
       }
     } finally {
       if (mounted) {
@@ -259,14 +315,14 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     return Container(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-        top: 20,
+        top: 10,
         left: 16,
         right: 16,
       ),
       decoration: const BoxDecoration(
-        color: Color(0xFF0F1726),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        border: Border(top: BorderSide(color: Color(0xFF1E2B3E))),
+        color: bgSheet,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        border: Border(top: BorderSide(color: borderSubtle, width: 1.2)),
       ),
       child: Stack(
         children: [
@@ -275,36 +331,103 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                // 1. Terminal Drag Handle
+                Center(
+                  child: Container(
+                    width: 36,
+                    height: 4,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+
+                // 2. Header Bar
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'SHARE CHART SETUP',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 0.8,
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: accentCyan.withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.add_chart_rounded, color: accentCyan, size: 16),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'SHARE CHART SETUP',
+                          style: GoogleFonts.plusJakartaSans(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.8,
+                          ),
+                        ),
+                      ],
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white54, size: 20),
+                      icon: const Icon(Icons.close_rounded, color: textMuted, size: 20),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
 
-                // Image Picker / Preview Container
+                // 3. Quick Ticker Selector Ribbon
+                SizedBox(
+                  height: 30,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _quickTickers.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 6),
+                    itemBuilder: (ctx, i) {
+                      final t = _quickTickers[i];
+                      final isSelected = _assetController.text.toUpperCase() == t;
+                      return GestureDetector(
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          setState(() => _assetController.text = t);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: isSelected ? accentCyan.withOpacity(0.2) : surfaceCard,
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: isSelected ? accentCyan : borderSubtle),
+                          ),
+                          child: Text(
+                            t,
+                            style: TextStyle(
+                              color: isSelected ? accentCyan : Colors.white70,
+                              fontSize: 10.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                // 4. Uncropped Viewport (BoxFit.contain so price ladder is 100% visible)
                 InkWell(
                   onTap: _isProcessing ? null : _pickImage,
+                  borderRadius: BorderRadius.circular(12),
                   child: Container(
-                    height: 165,
+                    height: 160,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF141C2B),
+                      color: const Color(0xFF070B12),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF25334A)),
+                      border: Border.all(
+                        color: _selectedImage != null ? accentCyan.withOpacity(0.5) : borderSubtle,
+                      ),
                     ),
                     child: _selectedImage != null
                         ? Stack(
@@ -312,7 +435,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
-                                child: Image.file(_selectedImage!, fit: BoxFit.cover),
+                                child: Image.file(_selectedImage!, fit: BoxFit.contain), // ⚡ Uncropped!
                               ),
                               Positioned(
                                 top: 8,
@@ -334,106 +457,221 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                         : const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.add_photo_alternate_outlined, color: Color(0xFF00E5FF), size: 30),
-                              SizedBox(height: 8),
+                              Icon(Icons.add_photo_alternate_outlined, color: accentCyan, size: 28),
+                              SizedBox(height: 6),
                               Text(
                                 'Select or Drop TradingView Screenshot',
-                                style: TextStyle(color: Colors.white54, fontSize: 11),
+                                style: TextStyle(color: textMuted, fontSize: 11, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
 
-                // Asset Symbol & Timeframe
+                // 5. Symbol & Timeframe Row
                 Row(
                   children: [
                     Expanded(
-                      child: TextField(
-                        controller: _assetController,
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
-                        textCapitalization: TextCapitalization.characters,
-                        decoration: InputDecoration(
-                          labelText: 'Symbol',
-                          labelStyle: const TextStyle(color: Colors.white54, fontSize: 11),
-                          filled: true,
-                          fillColor: const Color(0xFF141C2B),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                      flex: 6,
+                      child: Container(
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: surfaceCard,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: borderSubtle),
+                        ),
+                        child: TextField(
+                          controller: _assetController,
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13),
+                          textCapitalization: TextCapitalization.characters,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.tag_rounded, color: accentCyan, size: 16),
+                            hintText: 'SYMBOL',
+                            hintStyle: TextStyle(color: Colors.white24, fontSize: 12),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF141C2B),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _selectedTimeframe,
-                          dropdownColor: const Color(0xFF141C2B),
-                          style: const TextStyle(color: Color(0xFF00E5FF), fontWeight: FontWeight.bold, fontSize: 12),
-                          items: _timeframes.map((tf) => DropdownMenuItem(value: tf, child: Text(tf))).toList(),
-                          onChanged: (v) => setState(() => _selectedTimeframe = v!),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        height: 42,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: surfaceCard,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: borderSubtle),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: _selectedTimeframe,
+                            dropdownColor: surfaceCard,
+                            icon: const Icon(Icons.expand_more_rounded, color: textMuted, size: 18),
+                            style: const TextStyle(color: accentCyan, fontWeight: FontWeight.bold, fontSize: 12),
+                            items: _timeframes.map((tf) => DropdownMenuItem(value: tf, child: Text(tf))).toList(),
+                            onChanged: (v) => setState(() => _selectedTimeframe = v!),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: 10),
 
-                const SizedBox(height: 12),
-
-                // Bias Selector (Bullish, Bearish, Neutral)
+                // 6. Bias Selector (Bullish, Bearish, Neutral)
                 Row(
                   children: [
-                    _biasOption('BULLISH', const Color(0xFF00F5A0)),
+                    _biasOption('BULLISH', accentNeon),
                     const SizedBox(width: 8),
-                    _biasOption('BEARISH', const Color(0xFFFF2A6D)),
+                    _biasOption('BEARISH', accentRose),
                     const SizedBox(width: 8),
-                    _biasOption('NEUTRAL', const Color(0xFFFFD700)),
+                    _biasOption('NEUTRAL', accentGold),
                   ],
                 ),
+                const SizedBox(height: 10),
 
-                const SizedBox(height: 12),
-
-                // Note Field
-                TextField(
-                  controller: _noteController,
-                  maxLines: 2,
-                  style: const TextStyle(color: Colors.white, fontSize: 12),
-                  decoration: InputDecoration(
-                    hintText: 'Add reasoning (e.g. Breakout retest with heavy volume)...',
-                    hintStyle: const TextStyle(color: Colors.white24, fontSize: 11),
-                    filled: true,
-                    fillColor: const Color(0xFF141C2B),
-                    contentPadding: const EdgeInsets.all(12),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                // 7. Actionable Execution Levels (Entry, SL, Target with Live R:R)
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: innerCard,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: borderSubtle),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () => setState(() => _enableLevels = !_enableLevels),
+                                child: Icon(
+                                  _enableLevels ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
+                                  color: _enableLevels ? accentCyan : textMuted,
+                                  size: 18,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              const Text(
+                                'EXECUTION LEVELS',
+                                style: TextStyle(color: Colors.white70, fontSize: 10.5, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: accentCyan.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              _calculateRiskReward(),
+                              style: const TextStyle(color: accentCyan, fontSize: 10.5, fontWeight: FontWeight.w900),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_enableLevels) ...[
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(child: _levelField(_entryController, 'Entry Price', Colors.white, Colors.white24)),
+                            const SizedBox(width: 6),
+                            Expanded(child: _levelField(_slController, 'Stop Loss', accentRose, accentRose.withOpacity(0.3))),
+                            const SizedBox(width: 6),
+                            Expanded(child: _levelField(_targetController, 'Target', accentNeon, accentNeon.withOpacity(0.3))),
+                          ],
+                        ),
+                      ],
+                    ],
                   ),
                 ),
+                const SizedBox(height: 10),
 
+                // 8. Tag Selector Ribbon
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: _availableTags.map((tag) {
+                    final isSelected = _selectedTags.contains(tag);
+                    return GestureDetector(
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        setState(() {
+                          if (isSelected) {
+                            _selectedTags.remove(tag);
+                          } else {
+                            _selectedTags.add(tag);
+                          }
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: isSelected ? accentCyan.withOpacity(0.15) : surfaceCard,
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: isSelected ? accentCyan : borderSubtle),
+                        ),
+                        child: Text(
+                          tag,
+                          style: TextStyle(
+                            color: isSelected ? accentCyan : textMuted,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 10),
+
+                // 9. Analysis Note Field
+                Container(
+                  decoration: BoxDecoration(
+                    color: surfaceCard,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: borderSubtle),
+                  ),
+                  child: TextField(
+                    controller: _noteController,
+                    maxLines: 2,
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                    decoration: const InputDecoration(
+                      hintText: 'Add triggers: e.g. Retest of demand zone, RSI divergence...',
+                      hintStyle: TextStyle(color: Colors.white24, fontSize: 11),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(10),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 14),
 
-                // Publish Button
+                // 10. Publish CTA Button
                 SizedBox(
                   width: double.infinity,
                   height: 44,
                   child: ElevatedButton(
                     onPressed: _isProcessing ? null : _submitPost,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00E5FF),
+                      backgroundColor: accentCyan,
+                      disabledBackgroundColor: accentCyan.withOpacity(0.3),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      elevation: 0,
                     ),
                     child: Text(
-                      'PUBLISH SETUP',
+                      'PUBLISH WIRE SETUP',
                       style: GoogleFonts.plusJakartaSans(
                         color: Colors.black,
                         fontWeight: FontWeight.w900,
                         fontSize: 12,
-                        letterSpacing: 0.5,
+                        letterSpacing: 0.8,
                       ),
                     ),
                   ),
@@ -442,27 +680,23 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
             ),
           ),
 
-          // Loading Overlay
+          // Integrated Progress Overlay
           if (_isProcessing)
             Positioned.fill(
               child: Container(
-                color: const Color(0xFF0F1726).withOpacity(0.85),
+                decoration: BoxDecoration(
+                  color: bgSheet.withOpacity(0.92),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                ),
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const CircularProgressIndicator(
-                        strokeWidth: 2.5,
-                        color: Color(0xFF00E5FF),
-                      ),
-                      const SizedBox(height: 14),
+                      const CircularProgressIndicator(strokeWidth: 2.5, color: accentCyan),
+                      const SizedBox(height: 12),
                       Text(
                         _statusMessage,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -474,25 +708,55 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     );
   }
 
+  Widget _levelField(TextEditingController ctrl, String label, Color textColor, Color borderCol) {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: surfaceCard,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: borderCol),
+      ),
+      child: TextField(
+        controller: ctrl,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+        style: TextStyle(color: textColor, fontSize: 11, fontWeight: FontWeight.bold),
+        decoration: InputDecoration(
+          hintText: label,
+          hintStyle: const TextStyle(color: Colors.white30, fontSize: 10),
+          border: InputBorder.none,
+          isDense: true,
+          contentPadding: const EdgeInsets.symmetric(vertical: 10),
+        ),
+        onChanged: (_) => setState(() {}),
+      ),
+    );
+  }
+
   Widget _biasOption(String bias, Color color) {
     final isSelected = _selectedBias == bias;
     return Expanded(
       child: InkWell(
-        onTap: () => setState(() => _selectedBias = bias),
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() => _selectedBias = bias);
+        },
+        borderRadius: BorderRadius.circular(8),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: isSelected ? color.withOpacity(0.2) : const Color(0xFF141C2B),
+            color: isSelected ? color.withOpacity(0.18) : surfaceCard,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: isSelected ? color : Colors.transparent),
+            border: Border.all(color: isSelected ? color : borderSubtle),
           ),
           alignment: Alignment.center,
           child: Text(
             bias,
             style: TextStyle(
-              color: isSelected ? color : Colors.white54,
+              color: isSelected ? color : textMuted,
               fontSize: 10,
               fontWeight: FontWeight.w900,
+              letterSpacing: 0.5,
             ),
           ),
         ),
