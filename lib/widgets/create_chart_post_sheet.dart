@@ -37,8 +37,6 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
 
   final List<String> _quickTickers = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'RELIANCE', 'CRUDEOIL', 'BTCUSD'];
   final List<String> _timeframes = ['1m', '3m', '5m', '15m', '1h', '4h', '1D', '1W'];
-  final List<String> _availableTags = ['#Breakout', '#PriceAction', '#SupplyZone', '#SMC/FVG', '#Divergence'];
-  final List<String> _selectedTags = ['#Breakout', '#PriceAction'];
 
   // Terminal Theme Constants
   static const Color bgSheet = Color(0xFF090D16);
@@ -269,14 +267,13 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
 
       final imageUrl = supabase.storage.from('charts').getPublicUrl(fileName);
 
-      // Safe Map Payload (Execution levels optionality)
+      // Safe Map Payload: 'tags' completely removed to prevent DB schema mismatch
       final Map<String, dynamic> payload = {
         'user_id': user.id,
         'chart_url': imageUrl,
         'asset_symbol': _assetController.text.trim().toUpperCase(),
         'timeframe': _selectedTimeframe,
         'bias': _selectedBias,
-        'tags': _selectedTags,
         'analysis_note': _noteController.text.trim(),
       };
 
@@ -415,7 +412,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                 ),
                 const SizedBox(height: 10),
 
-                // 4. Uncropped Viewport (BoxFit.contain so price ladder is 100% visible)
+                // 4. Uncropped Viewport (BoxFit.contain preserves price ladder)
                 InkWell(
                   onTap: _isProcessing ? null : _pickImage,
                   borderRadius: BorderRadius.circular(12),
@@ -435,7 +432,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
-                                child: Image.file(_selectedImage!, fit: BoxFit.contain), // ⚡ Uncropped!
+                                child: Image.file(_selectedImage!, fit: BoxFit.contain),
                               ),
                               Positioned(
                                 top: 8,
@@ -594,45 +591,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                 ),
                 const SizedBox(height: 10),
 
-                // 8. Tag Selector Ribbon
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: _availableTags.map((tag) {
-                    final isSelected = _selectedTags.contains(tag);
-                    return GestureDetector(
-                      onTap: () {
-                        HapticFeedback.selectionClick();
-                        setState(() {
-                          if (isSelected) {
-                            _selectedTags.remove(tag);
-                          } else {
-                            _selectedTags.add(tag);
-                          }
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: isSelected ? accentCyan.withOpacity(0.15) : surfaceCard,
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: isSelected ? accentCyan : borderSubtle),
-                        ),
-                        child: Text(
-                          tag,
-                          style: TextStyle(
-                            color: isSelected ? accentCyan : textMuted,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 10),
-
-                // 9. Analysis Note Field
+                // 8. Analysis Note Field
                 Container(
                   decoration: BoxDecoration(
                     color: surfaceCard,
@@ -653,7 +612,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                 ),
                 const SizedBox(height: 14),
 
-                // 10. Publish CTA Button
+                // 9. Publish CTA Button
                 SizedBox(
                   width: double.infinity,
                   height: 44,
