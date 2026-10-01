@@ -1,5 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../models/backtest_candle.dart';
 import '../models/backtest_engine.dart';
 import '../models/price_action_strategy.dart';
@@ -21,6 +24,7 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
 
   double _stopLossPct = 2.0;
   double _targetPct = 5.0;
+  bool _requireVolumeSurge = false; // 👈 Institutional 1.5x 20-MA Filter
 
   final List<PriceActionRule> _rules = [
     PriceActionRule(
@@ -56,9 +60,8 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
 
   void _runBacktest() {
     final candles = _allStockData[_selectedStock] ?? [];
-    if (candles.isEmpty) return;
+    if (candles.isEmpty || candles.length < 35) return;
 
-    // Simulation logic using _rules
     List<TradeLog> trades = [];
     double capital = 100000;
     double currentCapital = capital;
@@ -66,15 +69,33 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
     double maxDD = 0.0;
     double grossProfit = 0.0;
     double grossLoss = 0.0;
+    int inTradeUntilIndex = -1;
 
     int maxLookback = 20;
     for (var r in _rules) {
       if (r.lookbackPeriod > maxLookback) maxLookback = r.lookbackPeriod;
     }
 
-    int i = maxLookback + 1;
+    int i = max(maxLookback + 1, 20);
     while (i < candles.length - 1) {
-      bool allTriggered = _rules.isNotEmpty;
+      // Overlapping trade avoid karein
+      if (i <= inTradeUntilIndex) {
+        i++;
+        continue;
+      }
+
+      // Volume surge check (20-bar Volume MA)
+      bool volumePassed = true;
+      if (_requireVolumeSurge) {
+        double volSum = 0;
+        for (int v = i - 20; v < i; v++) {
+          volSum += candles[v].volume;
+        }
+        final double volMA = volSum / 20;
+        volumePassed = candles[i].volume >= (volMA * 1.5);
+      }
+
+      bool allTriggered = _rules.isNotEmpty && volumePassed;
       for (var rule in _rules) {
         if (!rule.evaluate(candles, i)) {
           allTriggered = false;
@@ -82,7 +103,7 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
         }
       }
 
-      if (allTriggered) {
+      if (allTriggered && i + 1 < candles.length) {
         final entryBar = candles[i + 1];
         final entryPrice = entryBar.open;
         final targetPrice = entryPrice * (1 + (_targetPct / 100));
@@ -91,8 +112,11 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
         bool closed = false;
         int exitIdx = i + 1;
 
-        for (int j = i + 1; j < candles.length; j++) {
+        // Forward trade simulation (Max 30 days holding period)
+        for (int j = i + 1; j < min(i + 31, candles.length); j++) {
           final bar = candles[j];
+
+          // Check SL
           if (bar.low <= slPrice) {
             final pnlAmt = currentCapital * (-_stopLossPct / 100);
             currentCapital += pnlAmt;
@@ -105,12 +129,14 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
               isWin: false,
               pnlPercent: -_stopLossPct,
               pnlAmount: pnlAmt,
-              exitReason: 'SL_HIT',
+              exitReason: 'STOP LOSS',
             ));
             exitIdx = j;
             closed = true;
             break;
           }
+
+          // Check Target
           if (bar.high >= targetPrice) {
             final pnlAmt = currentCapital * (_targetPct / 100);
             currentCapital += pnlAmt;
@@ -123,17 +149,40 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
               isWin: true,
               pnlPercent: _targetPct,
               pnlAmount: pnlAmt,
-              exitReason: 'TP_HIT',
+              exitReason: 'TARGET HIT',
             ));
             exitIdx = j;
             closed = true;
             break;
           }
         }
+
+        // Holding timeout exit (Agar 30 din tak SL/TP na lage)
+        if (!closed && (i + 30) < candles.length) {
+          final exitBar = candles[i + 30];
+          final pnlPct = ((exitBar.close - entryPrice) / entryPrice) * 100;
+          final pnlAmt = currentCapital * (pnlPct / 100);
+          currentCapital += pnlAmt;
+          if (pnlAmt >= 0) grossProfit += pnlAmt; else grossLoss += pnlAmt.abs();
+
+          trades.add(TradeLog(
+            entryDate: entryBar.date,
+            exitDate: exitBar.date,
+            entryPrice: entryPrice,
+            exitPrice: exitBar.close,
+            isWin: pnlPct > 0,
+            pnlPercent: pnlPct,
+            pnlAmount: pnlAmt,
+            exitReason: 'TIME DECAY EXIT',
+          ));
+          exitIdx = i + 30;
+          closed = true;
+        }
+
         if (currentCapital > peakCapital) peakCapital = currentCapital;
         final dd = ((peakCapital - currentCapital) / peakCapital) * 100;
         if (dd > maxDD) maxDD = dd;
-        if (closed) i = exitIdx;
+        if (closed) inTradeUntilIndex = exitIdx;
       }
       i++;
     }
@@ -147,7 +196,7 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
         winRate: trades.isEmpty ? 0 : (winCount / trades.length) * 100,
         totalPnlPercent: ((currentCapital - capital) / capital) * 100,
         maxDrawdownPercent: maxDD,
-        profitFactor: grossLoss == 0 ? 99.0 : grossProfit / grossLoss,
+        profitFactor: grossLoss == 0 ? (grossProfit > 0 ? 99.0 : 0.0) : (grossProfit / grossLoss),
         trades: trades.reversed.toList(),
       );
     });
@@ -173,14 +222,27 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF090D16),
         elevation: 0,
-        title: const Text('CUSTOM STRATEGY BUILDER', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900)),
+        title: Text(
+          'CUSTOM STRATEGY BUILDER',
+          style: GoogleFonts.plusJakartaSans(
+            color: Colors.white,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.8,
+          ),
+        ),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF)))
           : ListView(
-              padding: const EdgeInsets.all(14),
+              padding: const EdgeInsets.fromLTRB(14, 10, 14, 30),
               children: [
-                // Stock Selector
+                // 1. Stock Selector Ribbon
+                const Text(
+                  'SELECT ASSET (FROM ASSETS/DATA/BACTEST.JSON)',
+                  style: TextStyle(color: Color(0xFF8896AB), fontSize: 9.5, fontWeight: FontWeight.bold, letterSpacing: 0.8),
+                ),
+                const SizedBox(height: 6),
                 SizedBox(
                   height: 32,
                   child: ListView(
@@ -189,17 +251,26 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
                       final isSel = _selectedStock == s;
                       return GestureDetector(
                         onTap: () {
+                          HapticFeedback.selectionClick();
                           setState(() => _selectedStock = s);
                           _runBacktest();
                         },
                         child: Container(
                           margin: const EdgeInsets.only(right: 6),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                           decoration: BoxDecoration(
                             color: isSel ? const Color(0xFF00E5FF) : const Color(0xFF131B2A),
                             borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: isSel ? const Color(0xFF00E5FF) : const Color(0xFF202C42)),
                           ),
-                          child: Text(s, style: TextStyle(color: isSel ? Colors.black : Colors.white70, fontWeight: FontWeight.bold, fontSize: 11)),
+                          child: Text(
+                            s,
+                            style: TextStyle(
+                              color: isSel ? Colors.black : Colors.white70,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
                         ),
                       );
                     }).toList(),
@@ -207,7 +278,7 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
                 ),
                 const SizedBox(height: 14),
 
-                // Rule Cards List
+                // 2. Dynamic Rule Cards List
                 ..._rules.asMap().entries.map((entry) {
                   return RuleCardWidget(
                     rule: entry.value,
@@ -221,70 +292,182 @@ class _CustomStrategyScreenState extends State<CustomStrategyScreen> {
                   );
                 }),
 
-                // Add Condition Button
+                // 3. Add Condition Button
                 OutlinedButton.icon(
                   onPressed: _addRule,
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Color(0xFF00E5FF)),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
-                  icon: const Icon(Icons.add, size: 16, color: Color(0xFF00E5FF)),
-                  label: const Text('ADD CONDITION (AND)', style: TextStyle(color: Color(0xFF00E5FF), fontSize: 11, fontWeight: FontWeight.bold)),
+                  icon: const Icon(Icons.add_rounded, size: 16, color: Color(0xFF00E5FF)),
+                  label: const Text(
+                    'ADD CONDITION (AND LOGIC)',
+                    style: TextStyle(color: Color(0xFF00E5FF), fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(height: 14),
 
-                // SL & TP Sliders
+                // 4. Risk & Filters Control Box
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: const Color(0xFF131B2A),
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFF202C42)),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('SL: -${_stopLossPct.toStringAsFixed(1)}%', style: const TextStyle(color: Color(0xFFFF5252), fontSize: 11, fontWeight: FontWeight.bold)),
-                            Slider(
-                              min: 0.5,
-                              max: 8.0,
-                              value: _stopLossPct,
-                              activeColor: const Color(0xFFFF5252),
-                              onChanged: (v) {
-                                setState(() => _stopLossPct = v);
-                                _runBacktest();
-                              },
-                            ),
-                          ],
-                        ),
+                      // Volume Surge Toggle
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.bar_chart_rounded, color: Color(0xFF00E5FF), size: 16),
+                              SizedBox(width: 6),
+                              Text('1.5x Volume Expansion Filter', style: TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          Switch(
+                            value: _requireVolumeSurge,
+                            activeColor: const Color(0xFF00E5FF),
+                            onChanged: (val) {
+                              setState(() => _requireVolumeSurge = val);
+                              _runBacktest();
+                            },
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('TP: +${_targetPct.toStringAsFixed(1)}%', style: const TextStyle(color: Color(0xFF00E676), fontSize: 11, fontWeight: FontWeight.bold)),
-                            Slider(
-                              min: 1.0,
-                              max: 20.0,
-                              value: _targetPct,
-                              activeColor: const Color(0xFF00E676),
-                              onChanged: (v) {
-                                setState(() => _targetPct = v);
-                                _runBacktest();
-                              },
+                      const Divider(color: Color(0xFF202C42), height: 16),
+                      // SL & TP Sliders
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Stop Loss: -${_stopLossPct.toStringAsFixed(1)}%', style: const TextStyle(color: Color(0xFFFF5252), fontSize: 11, fontWeight: FontWeight.bold)),
+                                Slider(
+                                  min: 0.5,
+                                  max: 8.0,
+                                  value: _stopLossPct,
+                                  activeColor: const Color(0xFFFF5252),
+                                  inactiveColor: const Color(0xFF202C42),
+                                  onChanged: (v) {
+                                    setState(() => _stopLossPct = v);
+                                    _runBacktest();
+                                  },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Target: +${_targetPct.toStringAsFixed(1)}%', style: const TextStyle(color: Color(0xFF00E676), fontSize: 11, fontWeight: FontWeight.bold)),
+                                Slider(
+                                  min: 1.0,
+                                  max: 20.0,
+                                  value: _targetPct,
+                                  activeColor: const Color(0xFF00E676),
+                                  inactiveColor: const Color(0xFF202C42),
+                                  onChanged: (v) {
+                                    setState(() => _targetPct = v);
+                                    _runBacktest();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 14),
 
-                // Performance Output
-                if (_summary != null) PerformanceMetricsCard(summary: _summary!),
+                // 5. Performance Metrics Summary Card
+                if (_summary != null) ...[
+                  PerformanceMetricsCard(summary: _summary!),
+                  const SizedBox(height: 14),
+
+                  // 6. Executed Trades Audit Ledger
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF202C42)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'SIMULATED TRADES LEDGER (${_summary!.trades.length})',
+                              style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900),
+                            ),
+                            Text(
+                              'Wins: ${_summary!.winningTrades} | Losses: ${_summary!.losingTrades}',
+                              style: const TextStyle(color: Color(0xFF8896AB), fontSize: 10),
+                            ),
+                          ],
+                        ),
+                        const Divider(color: Color(0xFF202C42), height: 16),
+                        if (_summary!.trades.isEmpty)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 18),
+                            child: Center(
+                              child: Text(
+                                'No setups met the criteria across 3 years.',
+                                style: TextStyle(color: Colors.white38, fontSize: 11),
+                              ),
+                            ),
+                          )
+                        else
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: min(_summary!.trades.length, 12),
+                            separatorBuilder: (_, __) => const Divider(color: Color(0xFF182235), height: 12),
+                            itemBuilder: (ctx, idx) {
+                              final t = _summary!.trades[idx];
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${t.entryDate.toString().split(' ')[0]} ➔ ${t.exitDate.toString().split(' ')[0]}',
+                                        style: const TextStyle(color: Colors.white70, fontSize: 10.5, fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '₹${t.entryPrice.toStringAsFixed(1)} ➔ ₹${t.exitPrice.toStringAsFixed(1)} (${t.exitReason})',
+                                        style: const TextStyle(color: Color(0xFF8896AB), fontSize: 9.5),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    '${t.pnlPercent >= 0 ? '+' : ''}${t.pnlPercent.toStringAsFixed(1)}%',
+                                    style: GoogleFonts.robotoMono(
+                                      color: t.isWin ? const Color(0xFF00E676) : const Color(0xFFFF5252),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
     );
