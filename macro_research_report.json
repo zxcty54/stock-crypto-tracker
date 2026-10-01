@@ -1,95 +1,95 @@
 {
-  "updated_at": "2026-09-30 18:16:30 IST",
+  "updated_at": "2026-10-01 18:41:27 IST",
   "total_reports": 6,
   "reports": [
     {
       "commodity_name": "Crude Oil (Brent)",
       "unit": "USD/bbl",
-      "current_price": 98.25,
+      "current_price": 102.28,
       "period_changes": {
-        "1M": 8.58,
-        "6M": -2.88,
-        "1Y": 46.6,
-        "3Y": 8.31
+        "1M": 8.06,
+        "6M": -6.19,
+        "1Y": 56.51,
+        "3Y": 12.75
       },
       "margin_trajectory": "CONTRACTING",
       "retail_badge": "🔴 Lagat Badhegi (Margin Pressure)",
-      "macro_headline": "Crude Oil ke 98.25 USD/bbl par chalne aur 1-month mein 8.58% jump aane se paints, tyres, aur aviation jaise sectors ki lagat (manufacturing cost) tezi se badhegi, jisse unke quarterly profit margins par dabav aayega.",
-      "forward_thesis": "Jab bhi international market mein crude oil ki keemat badhti hai, toh Indian companies ke upar turant asar nahi padta kyunki unke paas 45 se 90 din ka purana raw material ka inventory stock hota hai. Is inventory lag ki wajah se, is price spike ka asli negative impact aane wale Q3 aur Q4 ke financial results mein dikhega jab companies ko mehge daamo par naya kaccha maal kharidna padega. Kyunki market mein competition bahut tough hai, yeh companies raw material ki badhi hui lagat ko aasani se aur turant end-customers par pass-on nahi kar paati hain, jisse inke operating profit aur gross margins mein 150 se 300 basis points tak ki giravat dekhne ko mil sakti hai.",
-      "import_context": "India apni oil requirement ka lagbhag 87% hissa import karta hai, jisse hamari economy global crude price aur USD-INR currency exchange rate ke fluctuations ke prati behad sensitive ho jaati hai. Jab crude oil ke daam badhte hain aur sath hi dollar majboot hota hai, toh hamara import bill bahut jyada badh jata hai. Middle East ki geopolitics, jaise Red Sea ya Strait of Hormuz ke shipping routes mein rukawat aane se freight cost aur transit time dono badh jate hain, jo Indian manufacturing companies ke liye raw material sourcing ko aur zyada mehga aur challenging bana dete hain.",
-      "key_risk": "Is thesis ke liye sabse bada macro risk yeh hai ki agar global central banks unexpected tarike se interest rates aur badha dete hain ya global recession ki wajah se crude oil ki demand achanak se dharashayi ho jati hai, toh prices mein sharp correction aa sakta hai. Iske alawa, agar Middle East mein koi bada military escalation nahi hota aur OPEC+ countries achanak se apna oil production badha deti hain, toh yeh bullish trend reverse ho sakta hai.",
+      "macro_headline": "Brent crude 102.28 dollar par pahunchne se paints, tyres aur aviation jaise domestic sectors ki lagat tezi se badhegi, jisse upcoming quarterly results par margin ka dabaav saaf dikhega.",
+      "forward_thesis": "Jab bhi crude oil ke daam badhte hain, toh manufacturing companies par turant asar nahi padta kyunki unke paas lagbhag 45 se 90 din ka purana raw material ka inventory stock rakha hota hai. Jaise hi ye sasta ya purana stock khatam hota hai aur naye mehnge rates par chemical derivatives ya petroleum fractions kharidne padte hain, tab real lagat (COGS) balance sheet mein reflect hoti hai. Competitive market ki wajah se companies ek baar mein saari mehangai retail customers par pass-on nahi kar paati hain, jiske chalte aane wale Q3 aur Q4 ke quarterly results mein gross margins aur EBITDA par kafi dabav dekhne ko milega.",
+      "import_context": "India apni oil requirement ka lagbhag 87% hissa import karta hai, jiska matlab hai ki hum global price volatility ke liye seedhe taur parexposed hain. Middle East ki geopolitics, Red Sea shipping routes mein rukawat, aur Suez Canal ke aas-paas ke supply choke points freight cost ko aur badha dete hain. Saath hi, crude dollar mein kharida jata hai, isliye agar USD-INR exchange rate mein rupee kamzor hota hai, toh Indian refineries aur manufacturers ke liye import bill aur bhi jyada mehanga ho jata hai.",
+      "key_risk": "Sabse bada macro risk yeh hai ki agar Middle East mein conflict aur badhta hai ya OPEC+ countries production cuts ko aur lamba khinchte hain, toh crude oil 120+ USD/bbl ke level ko touch kar sakta hai. Isse na sirf import bill inflate hoga, balki India ka current account deficit (CAD) aur retail inflation bhi badh jayegi, jisse RBI ko interest rates high rakhne pad sakte hain.",
       "impacted_stocks": [
         {
           "symbol": "ASIANPAINT",
           "company_name": "Asian Paints Limited",
           "sector": "Paints & Coatings",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-220 bps",
-          "rationale": "Asian Paints ke business model mein crude oil derivatives jaise ki Monomers, Solvents, aur Emulsions total Cost of Goods Sold (COGS) ka lagbhag 50% se 55% hissa banate hain. Crude ke 98.25 USD/bbl par hone aur 1-month mein 8.58% badhne se company ki raw material lagat mein kafi tezi aayegi. Halanki 45 se 60 din ka purana inventory stock hone ki wajah se margin par dabaav thoda late shuru hoga, lekin aane waale quarters mein gross margins par lagbhag 220 basis points tak ka negative impact pad sakta hai kyunki rural demand kam hone ki wajah se price hikes turant pass-on nahi ki ja sakti.",
-          "business_impact": "Raw material mehnga hone se gross margin par dabaav aayega, aur demand slow hone ki wajah se finished goods ke daam badhane mein delay karna padega."
-        },
-        {
-          "symbol": "MRF",
-          "company_name": "MRF Limited",
-          "sector": "Tyres & Rubber",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-180 bps",
-          "rationale": "Tyre manufacturing industry mein Synthetic Rubber, Carbon Black, aur Nylon Tyre Cord jaise crude oil derivatives ka istemal bade paimane par hota hai, jo ki total COGS ka lagbhag 40% se 45% cover karte hain. Jab crude oil ke daam badhte hain, toh in petrochemical-based raw materials ki keemat bhi turant badh jati hai. MRF ke paas inventory lag ki wajah se thoda buffer hota hai, lekin high input costs aane waale quarters mein company ke operating profit margins ko lagbhag 180 basis points tak compress kar dengi, jise OEM aur replacement market mein aani wali demand pressure aur mushkil bana degi.",
-          "business_impact": "Petrochemical-based inputs mehge hone se production cost badhegi, aur commercial vehicle segment mein price negotiation tough hone se margins compress honge."
-        },
-        {
-          "symbol": "PIDILITIND",
-          "company_name": "Pidilite Industries Limited",
-          "sector": "Specialty Chemicals & Adhesives",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-150 bps",
-          "rationale": "Pidilite ki flagship products jaise Fevicol aur waterproofing ranges mein Vinyl Acetate Monomer (VAM) aur anya petroleum derivatives ka bada yogdan hota hai, jo ki unke total COGS ka lagbhag 45% tak hissa rakhte hain. Crude oil ke 98 USD/bbl ke upar trade karne se VAM ki import costs tezi se upar jayengi. Company strong brand pricing power rakhti hai, isliye yeh lagat badhne par daam badha sakti hai, lekin inventory lag aur market competition ki wajah se short-term mein 150 basis points tak ka margin contraction dekhne ko mil sakta hai.",
-          "business_impact": "VAM aur core chemical imports mehge hone se operating margins par temporary dabaav aayega, jise baad mein gradual price hikes se recover kiya jayega."
-        },
-        {
-          "symbol": "APOLLOTYRE",
-          "company_name": "Apollo Tyres Ltd",
-          "sector": "Tyres & Rubber",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-200 bps",
-          "rationale": "Apollo Tyres ke cost structure mein synthetic rubber aur petrochemical chemicals ka share lagbhag 38% se 42% ke beech mein hai. Global crude oil ke prices mein 1-year mein 46.6% ki tezi aur recent 1-month spike ka matlab hai ki company ko abhi mehge raw material contracts par sign karna padega. Europe aur India dono markets mein operating hone ki wajah se, high input costs aur wage inflation milkar company ke EBITDA margins par lagbhag 200 basis points ka dabav dalenge, kyunki replacement market mein margins protect karna ek badi chunauti hogi.",
-          "business_impact": "Global input costs badhne aur supply chain volatility ki wajah से EBITDA margins par severe negative pressure aayega."
+          "margin_impact_bps": "-3.2% (-320 bps)",
+          "rationale": "Asian Paints ke total Cost of Goods Sold (COGS) mein crude oil derivatives jaise ki solvents, monomers, aur emulsions ka hissa lagbhag 50% se 55% tak hota hai. Brent crude ke 102 dollar hone se in key petrochemical inputs ke daam mehnge ho jayenge, aur purana inventory stock khatam hote hi gross margins par gehra dabaav aayega.",
+          "business_impact": "Raw material mehanga hone se gross margin par dabaav aayega, aur demand sust hone ki wajah se end-consumers par price hikes pass karna kafi mushkil hoga."
         },
         {
           "symbol": "BERGEPAINT",
           "company_name": "Berger Paints India Limited",
           "sector": "Paints & Coatings",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-190 bps",
-          "rationale": "Berger Paints ke manufacturing process mein crude derivatives aur solvents total COGS ka lagbhag 50% hissa rakhte hain. Jaise ki 45-90 days ka inventory buffer khatam hoga, company ko current high crude prices par naya stock lena padega. Decorative paints segment mein market share ki fierce ladai chal rahi hai, jiske chalte company raw material cost badhne par bhi turant aur poori tarah se price hikes nahi le pa rahi hai, aur iska seedha asar quarterly net profit margins par padega jismein kareeb 190 bps ki giravat sambhav hai.",
-          "business_impact": "Competitive intensity high hone ki wajah se raw material inflation ko end-users par poori tarah pass-on karna mushkil hoga."
+          "margin_impact_bps": "-2.8% (-280 bps)",
+          "rationale": "Berger Paints bhi crude-derived raw materials jaise binders aur titanium dioxide ke transportation aur manufacturing costs par heavily reliant hai, jo unke total COGS ka taqriban 48% banta hai. Jaise hi high-cost crude ka asar chemical supply chain mein filter down hoga, company ki operating profitability me kami aane ki puri sambhavna hai.",
+          "business_impact": "Input cost badhne ke bawajud market competition ki wajah se prices turant nahi badhayi ja sakengi, jisse operating margins compress honge."
+        },
+        {
+          "symbol": "MRF",
+          "company_name": "MRF Limited",
+          "sector": "Tyres & Rubber",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-2.5% (-250 bps)",
+          "rationale": "Tyre manufacturing industry mein synthetic rubber aur carbon black jaise crucial ingredients direct crude oil ki refining se nikalte hain, jo ki total tyre COGS ka lagbhag 40% se 45% hissa banate hain. Crude price badhne se in raw materials ki lagat badh jati hai, jise tyre makers ko apni balance sheet mein absorb karna padta hai.",
+          "business_impact": "Lagat badhne se EBITDA per tyre kam hoga, aur OEM aur replacement market mein pricing pressure banaya rahega."
+        },
+        {
+          "symbol": "APOLLOTYRE",
+          "company_name": "Apollo Tyres Ltd",
+          "sector": "Tyres & Rubber",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-2.2% (-220 bps)",
+          "rationale": "Apollo Tyres ke cost structure mein crude derivatives aur petrochemical inputs ka contribution kareeb 38% tak hai. Global crude mehanga hone se na sirf chemical lagat badhti hai, balki logistics aur power costs bhi badh jaati hain, jiska asar quarterly profitability par saaf dikhta hai.",
+          "business_impact": "Operating cash flow par temporary dabav aayega kyunki mehnge raw material ke liye working capital ki requirement badh jayegi."
         },
         {
           "symbol": "INDIGO",
           "company_name": "InterGlobe Aviation Ltd",
           "sector": "Aviation",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-250 bps",
-          "rationale": "Airlines business mein Aviation Turbine Fuel (ATF), jo ki directly crude oil ka refine kiya hua product hai, total operating expenses (COGS/OpEx equivalent) ka sabse bada hissa yaani lagbhag 35% se 40% tak banata hai. Crude oil ke 98.25 USD/bbl par hone aur high USD-INR exchange rate ki wajah se ATF prices aasmaan chu rahi hain. Airlines ke liye fuel costs ko hedge karna mushkil hota hai, isliye yeh badhi hui lagat seedhe quarterly financial performance ko dabayegi, jisse EBITDAR margins mein lagbhag 250 basis points tak ki heavy decline aa sakti hai agar airfares badhane par passenger demand kam ho jaye.",
-          "business_impact": "ATF prices achanak badhne se airline ki operating cost tezi se upar jayegi, jisse bottom-line profitability par direct maar padegi."
+          "margin_impact_bps": "-4.5% (-450 bps)",
+          "rationale": "Aviation Turbine Fuel (ATF), jo ki seedhe crude oil ka refined product hai, kisi bhi airline company ke total operational expenses ya COGS ka lagbhag 35% se 40% hissa hota hai. Crude 102 USD hone ki wajah se ATF prices skyrocket kar jayengi, jisse airline operations ki sabse badi variable cost direct hit hogi.",
+          "business_impact": "Fuel cost badhne se airline ki bottom line negative territory mein ja sakti hai jab tak airfares proportionally na badhaye jayein."
+        },
+        {
+          "symbol": "PIDILITIND",
+          "company_name": "Pidilite Industries Limited",
+          "sector": "Specialty Chemicals & Adhesives",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-1.8% (-180 bps)",
+          "rationale": "Pidilite ke flagship products jaise adhesives, sealants, aur construction chemicals mein VAE emulsions aur other petrochemical derivatives ka use hota hai, jo total COGS ka kareeb 40% cover karte hain. Crude prices mein sharp uptick aane se in specialty chemical inputs ki procurement cost tezi se badh jati hai.",
+          "business_impact": "Pehle se stock ki hui inventory chalne ki wajah se lagat ka asar 2 mahine ke lag ban ke baad quarterly financials mein dikhega."
         },
         {
           "symbol": "SUPREMEIND",
           "company_name": "Supreme Industries Limited",
           "sector": "PVC Pipes & Plastics",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-170 bps",
-          "rationale": "Supreme Industries plastic piping aur packaging products banati hai jiske liye Polyvinyl Chloride (PVC), HDPE, aur LDPE mukhya raw materials hain, jo ki petroleum derivatives hain aur total COGS ka lagbhag 60% se 65% hissa banate hain. Crude oil ke badhte daamo ki wajah se polymer resins ki import prices mehgi ho chuki hain. Halanki company ke paas inventory holding period ki wajah se lagat ka asar thoda delay se aata hai, lekin aane waale quarters mein inventory losses aur margin compression lagbhag 170 bps tak dekhne ko mil sakta hai.",
-          "business_impact": "Polymer resin ki lagat badhne se product manufacturing cost upar jayegi, aur real estate aur infrastructure demand par margin pass-through dependent rahega."
+          "margin_impact_bps": "-2.0% (-200 bps)",
+          "rationale": "Supreme Industries plastic piping systems aur polymers banati hai, jiske liye PVC resin aur polyethylene jaise raw materials crude oil aur natural gas se derive hote hain. Yeh petrochemical inputs unke total COGS ka lagbhag 60% se 65% hissa banate hain, jisse crude price volatility unke margins ke liye sabse critical factor ban jaati hai.",
+          "business_impact": "Polymer prices volatile hone se inventory holding gains ya losses hote hain, aur mehnge raw material se working capital block hoti hai."
         },
         {
-          "symbol": "ONGC",
-          "company_name": "Oil and Natural Gas Corporation Ltd",
-          "sector": "Upstream Oil & Gas",
+          "symbol": "RELIANCE",
+          "company_name": "Reliance Industries Limited",
+          "sector": "Oil to Chemicals (O2C) & Energy",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+300 bps",
-          "rationale": "ONGC ek upstream oil producer hai, isliye iske liye crude oil ka mehga hona ek direct operational tailwind hai kyunki company crude ko khud extract karke market mein bechti hai. Total realization per barrel badhne se company ki top-line aur operating cash flows mein jabardast sudhaar hota hai, jahan crude ke 98 USD/bbl par chalne se EBITDA margins mein lagbhag 300 basis points tak ki expansion dekhne ko mil sakti hai. Halanki government dwara lagaye jaane wale windfall tax aur domestic gas pricing caps iska thoda sa upside limit kar dete hain, phir bhi overall financial health ke liye yeh high price environment kaafi favorable hai.",
-          "business_impact": "Realizations badhne se revenue aur operating cash flow strong honge, halanki windfall tax ka factor thoda upside cap karega."
+          "margin_impact_bps": "+1.5% (+150 bps)",
+          "rationale": "Reliance ka O2C (Oil-to-Chemicals) segment crude oil refining aur petrochemical production par chalta hai, jo company ke revenue aur EBITDA ka ek bahut bada stambh hai. Jab crude prices high aur stable hote hain, toh complex refiners ko inventory gains aur strong Gross Refining Margins (GRM) ka fayda milta hai, jo downstream retail aur telecom business ko support deta hai.",
+          "business_impact": "Refining margins aur petchem product spreads behtar hone se upstream aur refining divisions mein strong cash generation hoga."
         }
       ],
       "fifty_two_week_low": 58.72,
@@ -98,19 +98,19 @@
     {
       "commodity_name": "Refined Copper",
       "unit": "USD/lb",
-      "current_price": 6.61,
+      "current_price": 6.57,
       "period_changes": {
-        "1M": 0.25,
-        "6M": 17.53,
-        "1Y": 37.57,
-        "3Y": 81.99
+        "1M": 0.98,
+        "6M": 18.1,
+        "1Y": 36.01,
+        "3Y": 80.89
       },
       "margin_trajectory": "CONTRACTING",
       "retail_badge": "🔴 Lagat Badhegi (Margin Pressure)",
-      "macro_headline": "Refined copper ki kimatein 6.61 USD/lb par high hain aur 1-year mein 37.57% ki tez tezi dikh rahi hai, jisse cables, transformers, aur consumer durables manufacturers ki lagat badh rahi hai.",
-      "forward_thesis": "Refined copper prices mein jo 6-month mein 17.53% aur 1-year mein 37.57% ki sharp tezi aayi hai, uska seedha asar companies ke quarterly balance sheet par thoda ruk kar padega. Manufacturing companies ke paas aamtaur par 45 se 90 din ka purana inventory stock hota hai, jiska matlab hai ki mahange daam par kharida gaya naya copper thode delay ke baad actual production cost mein reflect hoga. Jab yeh mahanga raw material factories mein use hoga, tab companies ke EBITDA margins par dabav aayega kyuki retail demand kam hone ki wajah se poori ki poori cost hike end-customers par turant pass-on karna mushkil hota hai.",
-      "import_context": "Bharat mein refined copper ki total demand ka lagbhag 92% hissa imports par nirbhar karta hai, khaaskar Tuticorin mein Vedanta plant ke band hone ke baad se. LME (London Metal Exchange) benchmarks aur global supply choke points se copper ki pricing direct tay hoti hai, aur USD-INR exchange rate mein halki si bhi utaar-chadhaw import bill ko aur mehanga kar deti hai.",
-      "key_risk": "Sabse bada macro risk yeh hai ki agar global green energy transition ki demand aur badh gayi ya major mines mein supply disruption hua, toh copper prices aur upar ja sakte hain, jisse Indian manufacturing companies ke operating cash flows aur profit margins aur zyada compress ho jayenge.",
+      "macro_headline": "Refined copper ki kimatein 6.57 USD/lb ke high level par bani hui hain, jisse cables, transformers, aur consumer durables banane wali Indian companies ki manufacturing lagat (COGS) par severe dabaav aa raha hai.",
+      "forward_thesis": "Refined copper ki kimaton mein pichhle ek saal mein 36% ki zordar tezi aayi hai, jiska asar Indian manufacturing sector par padna shuru ho gaya hai. Kyunki companies ke paas aamtaur par 45 se 90 din ka purana inventory stock hota hai, isliye raw material ke yeh price spikes lagbhag 1 ya 2 quarters ki deri se quarterly balance sheet aur EBITDA margins mein reflect hote hain. Jab tak yeh companies apne finished products (jaise wires, ACs, aur transformers) ke daam nahi badhati hain, tab tak unke operating margins par bhaari dabaav bana rahega. Demand competitive hone ki wajah se poori cost customer par pass-on karna bhi aasan nahi hota, jisse upcoming quarterly results mein profitability compromise hone ka khatra hai.",
+      "import_context": "India apni domestic refined copper demand ka lagbhag 92% hissa import karta hai, khaaskar 2018 mein Tuticorin smelter plant band hone ke baad se hamari dependency global LME (London Metal Exchange) benchmarks aur international suppliers par bahut zyada badh gayi hai. Yeh import dynamic USD-INR currency exchange rate ke prati behad sensitive hai, yaani agar rupaiya kamzor hota hai, toh copper aur bhi zyada mehanga padta hai. Global supply chain mein Chilean aur Peruvian mines par operational disruptions, logistics bottlenecks, aur energy crisis ki wajah se processing costs badh chuki hain, jisse Indian manufacturers ke liye raw material ki nirantar aur sasti uplabdhata ek bada challenge ban gayi hai.",
+      "key_risk": "Is thesis ke liye sabse bada macro risk global economic slowdown aur China ki industrial demand mein achanak girawat hai, jo copper prices ko rapidly correct kar sakti hai, ya fir global supply chains mein koi unexpected geopolitical conflict jo ocean freight aur shipping routes ko disrupt kar de aur import premiums ko aasmaan par pahuncha de.",
       "impacted_stocks": [
         {
           "symbol": "POLYCAB",
@@ -118,8 +118,8 @@
           "sector": "Cables & Wires",
           "impact_type": "NEGATIVE",
           "margin_impact_bps": "-1.8% (-180 bps)",
-          "rationale": "Polycab ke business mein refined copper primary raw material hai aur iski total COGS mein copper ki bhagidari lagbhag 55% se 60% tak hoti hai. Itni badi exposure ki wajah se, jab bhi global LME copper prices badhte hain, company ko raw material ke liye zyada cash lagana padta hai. Quki cable market mein competition bahut tight hai, isliye customers se high prices turant recover nahi kiye ja sakte, jisse gross margins par negative asar padta hai.",
-          "business_impact": "Raw material mahanga hone se gross margin par dabaav aayega, passing on price hikes to end-users will be delayed by 2 quarters."
+          "rationale": "Polycab ke business model mein refined copper sabse bada aur primary raw material hai, jiska total Cost of Goods Sold (COGS) mein lagbhag 60% se 65% tak ka hissa hota hai. Jaise-jaise copper ki kimatein 6.57 USD/lb ke upar bani hui hain, company ki lagat mein direct uchhal aa raha hai. Halanki b2b aur b2c segments mein daam badhane ki gunjaish hoti hai, lekin inventory lag ki wajah se purane saste contracts khatam hone aur naye mehnge raw material par shift hone ke beech ke dauran gross margins compress ho jate hain.",
+          "business_impact": "Copper mahanga hone se gross margin par dabaav aayega, aur retail aur institutional customers ko price hikes pass karne mein 45 se 60 din ka lag aayega, jisse short-term EBITDA mein volatility dekhne ko milegi."
         },
         {
           "symbol": "KEI",
@@ -127,8 +127,8 @@
           "sector": "Cables & Wires",
           "impact_type": "NEGATIVE",
           "margin_impact_bps": "-1.5% (-150 bps)",
-          "rationale": "KEI Industries ke manufacturing process mein bhi copper ki khapat sabse zyada hai, jiska COGS contribution kareeb 50% tak maana jata hai. Jab tak company purane saste inventory par kaam kar rahi thi tab tak margins safe the, lekin ab naye 6.61 USD/lb ke high daam par copper procure karne se lagat badh jayegi. Institutional aur retail orders ke contracts fixed hone ki wajah se badhi hui lagat ko turant pass on karna asaan nahi hota.",
-          "business_impact": "Inventory lag khatam hote hi quarterly numbers par cost inflation ka pressure saaf dikhai dega."
+          "rationale": "KEI Industries bhi high-tension aur low-tension power cables ke manufacturing ke liye heavily copper par nirbhar hai, jahan copper ka COGS contribution kareeb 55% tak hota hai. 1-year mein 36% ki tezi aur 3-year mein 80% ki badhotri ne company ke working capital requirement ko bada diya hai kyunki ab utne hi volume ke liye zyada fund block karna padta hai. Government infrastructure orders mein price-variation clauses hote hain, lekin retail aur private orders mein margin pressure absorb karna padta hai.",
+          "business_impact": "Working capital cycle stretch hogi aur high input costs ki wajah se operating cash flow par temporary dabaav padega jab tak naye higher-priced orders execute nahi hote."
         },
         {
           "symbol": "HAVELLS",
@@ -136,8 +136,8 @@
           "sector": "Consumer Durables & Electricals",
           "impact_type": "NEGATIVE",
           "margin_impact_bps": "-1.2% (-120 bps)",
-          "rationale": "Havells ke portfolio mein fans, air conditioners, aur consumer appliances shamil hain jahan copper winding aur internal wiring ke liye essential hota hai. Company ke overall COGS mein copper aur aluminium ka combined share lagbhag 30% to 35% hai, jisme copper ka major hissa hai. Copper ki 1-year mein 37.57% ki tezi se consumer durable segment ke operating margins dabav mein aa rahe hain, kyuki festive ya summer demand season se pehle prices badhana sales volume ko slow kar sakta hai.",
-          "business_impact": "Input cost inflation ki wajah se operating margins compress honge aur volume growth par bhi thoda asar pad sakta hai."
+          "rationale": "Havells ke portfolio mein wires, cables, fans, aur air conditioners jaise products shaamil hain, jahan copper core component ke roop mein istemal hota hai. Inke total COGS mein copper aur aluminium ka milakar lagbhag 35% se 40% ka contribution hai, jismein copper kaafi bada segment hai. Consumer durable segment mein aisi competitive pricing hoti hai ki achanak se ACs ya fans ke daam badhana demand ko nuksan pahuncha sakta hai, isliye company ko apni pocket se margin absorption karna padta hai.",
+          "business_impact": "Consumer durables aur appliances division mein margin dilution hoga kyunki badhe hue input costs ko turant end-consumers par dalna market competition ki wajah se sambhav nahi ho pata."
         },
         {
           "symbol": "VOLTAS",
@@ -145,44 +145,44 @@
           "sector": "Consumer Durables (ACs)",
           "impact_type": "NEGATIVE",
           "margin_impact_bps": "-1.0% (-100 bps)",
-          "rationale": "Voltas ke room air conditioners aur commercial refrigeration units mein copper tubing aur heat exchangers core components hain. Total manufacturing cost mein copper ka contribution kareeb 25% to 30% tak hota hai. Global market mein copper mehanga hone se AC units ki manufacturing cost badh jati hai, aur highly competitive consumer appliance market mein immediate price hike lene se demand hurt hone ka risk rehta hai.",
-          "business_impact": "Higher raw material cost ki vajah se upcoming quarters mein product gross margins tight rahenge."
+          "rationale": "Voltas ke Unitary Cooling Products (UCPs) jaise ki room air conditioners mein copper tubing aur heat exchangers ka extensive use hota hai, jiska product-level COGS mein lagbhag 20% to 25% share hota hai. Copper ki unchi kimatein aur unfavorable USD-INR exchange rate import karte waqt double hit dete hain. Seasonal demand patterns ke chalte agar summer season se pehle copper prices high rehte hain, toh manufacturing lagat badh jati hai aur gross margins target se niche chale jate hain.",
+          "business_impact": "Air conditioner manufacturing mein copper tubing cost badhne se EBIT margins par severe compression aayega, aur promotional discounts kam karne pad sakte hain."
+        },
+        {
+          "symbol": "WHIRLPOOL",
+          "company_name": "Whirlpool of India Limited",
+          "sector": "Consumer Durables",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-0.8% (-80 bps)",
+          "rationale": "Whirlpool ke refrigerators aur washing machines mein compressors aur internal wiring ke liye refined copper ka significant upyog hota hai, jo ki overall COGS ka lagbhag 15% banta hai. Halanki yeh steel par zyada dependent hain, lekin copper ki double-digit yearly tezi ne component suppliers ko prices badhane par majboor kiya hai. Component suppliers apne inputs mehnge hone par direct price hikes pass karte hain, jisse Whirlpool jaisi assembling and manufacturing companies ki lagat badh jati hai.",
+          "business_impact": "Component level par inflation aane se gross margins tight honge aur overhead costs manage karne ke liye operational efficiencies par zor dena padega."
+        },
+        {
+          "symbol": "AMBER",
+          "company_name": "Amber Enterprises India Limited",
+          "sector": "EMS / Consumer Durables Components",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-1.1% (-110 bps)",
+          "rationale": "Amber Enterprises ek contract manufacturer hai jo AC components aur complete units banata hai, jahan copper tubing aur heat exchangers major raw materials hain (COGS share ~25%). Contract manufacturing business model aamtaur par pass-through mechanisms par chalta hai, lekin ismein bhi ek time-lag (quarterly reset) hota hai. Iska matlab yeh hai ki jab tak naye quarterly pricing agreements finalize hote hain, tab tak badhi hui copper cost ko company ko khud bear karna padta hai.",
+          "business_impact": "Contract manufacturing margins pass-through delay ki wajah se temporarily soften honge, jisse short-term quarterly EBITDA performance par asar padega."
         },
         {
           "symbol": "CROMPTON",
-          "company_name": "Crompton Greaves Consumer Electricals Limited",
+          "company_name": "Crompton Greaves Consumer Electricals Ltd",
           "sector": "Consumer Durables",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.1% (-110 bps)",
-          "rationale": "Crompton ke fans, pumps, aur appliances mein electric motors ke liye refined copper wire ka use sabse zyada hota hai, jo ki unke total COGS ka lagbhag 30% hissa banata hai. Copper prices mein continuous tezi aane se company ki input lagat badh chuki hai, aur inventory lag ke chalaye yeh cost ab balance sheet mein puri tarah reflect ho rahi hai. Retail segment mein price competition high hone ki wajah se margins par persistent pressure bana hua hai.",
-          "business_impact": "Purana sasta inventory exhaust hone ke baad naye mahange copper par production karne se margins contract honge."
+          "margin_impact_bps": "-0.9% (-90 bps)",
+          "rationale": "Crompton ke fans, pumps, aur appliances portfolio mein copper windings aur motor components core role play karte hain, jiska COGS mein 20% tak ka contribution hai. Copper prices ki 36% ki YoY tezi ka direct impact inke motor manufacturing costs par padta hai. Mass-market consumer segment mein hone ke karan yeh log apne products ke daam ek sath nahi badha sakte, warna volume market share competitors ke paas ja sakta hai.",
+          "business_impact": "Product pricing power limited hone ke chalte, badhi hui lagat ka bojh margins par padega aur profitability mein temporary dip dekhne ko milega."
         },
         {
-          "symbol": "BLUESTARCO",
-          "company_name": "Blue Star Limited",
-          "sector": "Consumer Durables & HVAC",
+          "symbol": "VGUARD",
+          "company_name": "V-Guard Industries Limited",
+          "sector": "Consumer Durables & Electricals",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.3% (-130 bps)",
-          "rationale": "Blue Star commercial ACs, central air conditioning plants, aur residential cooling systems banata hai jisme copper tubes aur coils ka massive use hota hai. Copper ki lagat company ke total COGS mein kareeb 25% se 28% tak yogdaan deti hai. International copper prices ke badhne aur USD-INR ke fluctuate hone se import cost badh gayi hai, jise large institutional projects mein turant recover karna mushkil hota hai.",
-          "business_impact": "Project execution cost badhne se EBITDA margins par adverse impact aayega."
-        },
-        {
-          "symbol": "RRKABEL",
-          "company_name": "R R Kabel Limited",
-          "sector": "Cables & Wires",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.6% (-160 bps)",
-          "rationale": "R R Kabel ka core revenue wires aur cables ki manufacturing se aata hai, jahan refined copper sabse critical raw material hai aur yeh total COGS ka lagbhag 60% hissa rakhta hai. 37.57% ki 1-year price rally ki wajah se company ko working capital requirement mein bhi izafa karna pada hai. Raw material ki high cost ko end-users tak pass karne mein lagbhag 1 se 2 quarters ka lag hota hai, tab tak margins dabav mein rehte hain.",
-          "business_impact": "Working capital ki zaroorat badhegi aur high input cost ki vajah se quarterly net profits par temporary pressure rahega."
-        },
-        {
-          "symbol": "APOLLO",
-          "company_name": "APOLLO",
-          "sector": "Industrial Transformers & Electricals",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.4% (-140 bps)",
-          "rationale": "Industrial transformers aur electrical equipment manufacturers mein copper windings ka use heavy scale par hota hai, jo ki COGS ka kareeb 45% to 50% hissa banta hai. Global copper prices mein lagataar tezi ki wajah se heavy electrical equipment ki production lagat tezi se upar gayi hai. Long-term supply contracts fix hone ke karan yeh companies badhe hue daam turant apne clients par nahi daal sakti, jisse profitability temporary roop se ghat ti hai.",
-          "business_impact": "Fixed price orders execute karte waqt high raw material cost ki vajah se profit margins squeeze ho jayenge."
+          "margin_impact_bps": "-1.0% (-100 bps)",
+          "rationale": "V-Guard ke stabilizers, water heaters, pumps, aur cables mein copper ka kafi bada istemal hota hai, jo total raw material cost ka lagbhag 25% se 30% hissa banata hai. Company ko apne regional supply chain aur inventory management mein kafi tight control rakhna padta hai taki purane saste stock aur naye mehnge stock ke transition ko smooth banaya ja sake. Phir bhi, itni tezi se badhte hue copper prices ko fully offset karna operational level par kafi kathin hota hai.",
+          "business_impact": "Gross margins par upward pricing pressure aayega aur retail demand maintain rakhne ke liye promotional expenses ko optimize karna padega."
         }
       ],
       "fifty_two_week_low": 4.78,
@@ -191,91 +191,91 @@
     {
       "commodity_name": "Natural Gas",
       "unit": "USD/MMBtu",
-      "current_price": 3.02,
+      "current_price": 2.97,
       "period_changes": {
-        "1M": 2.9,
-        "6M": 7.13,
-        "1Y": -8.57,
-        "3Y": 6.34
+        "1M": 2.27,
+        "6M": 6.07,
+        "1Y": -14.56,
+        "3Y": 4.58
       },
       "margin_trajectory": "EXPANDING",
       "retail_badge": "🟢 Lagat Ghategi (Margin Rahat)",
-      "macro_headline": "Natural Gas prices me saal-dar-saal (-8.57%) ki girawat se Ceramic Tiles, Fertilizers aur City Gas Distribution companies ki lagat ghategi aur profit margins me sudhar aayega.",
-      "forward_thesis": "Natural gas ki keemat me jo saal-dar-saal (-8.57%) ki kami aayi hai, uska fayda companies ko turant quarterly results me nahi dikhta hai. Iske peeche 45 se 90 din ka 'inventory lag' hota hai, jiska matlab hai ki factories pehle se mehenge raw material ka purana stock khatam karti hain. Jaise hi ye purana stock consume ho jata hai aur sasta natural gas process me aata hai, waise hi upcoming quarters (Q3/Q4) ke EBITDA me sudhar dikhne lagta hai. Halanki, agar demand market me weak ho toh companies apni cost savings ko end-consumers tak pass-on karne ke liye prices thoda ghata sakti hain, jisse ultimate margin expansion thoda balanced ho jata hai.",
-      "import_context": "India apni total natural gas requirement ka lagbhag 52% import karta hai, jisme long-term LNG contracts aur spot LNG markets dono shamil hain. Global supply me jab bhi disruption hoti hai, jaise ki Middle East tensions ya European demand spike, toh spot LNG ke daam tezi se bhadte hain. Kyunki import USD me hota hai, isliye USD-INR exchange rate ka utaar-chadhaw bhi domestic manufacturers ki final gas landing cost ko sidhe taur par prabhavit karta hai.",
-      "key_risk": "Sabse bada macro risk geopolitical conflicts (jaise Middle East ya Russia-Ukraine crisis) ki wajah se supply chain choke points ka band hona hai, jisse spot LNG ki keematein raaton-raat uchal sakti hain aur domestic margins fir se dabaav me aa sakte hain.",
+      "macro_headline": "Natural Gas ki keemat pichle ek saal mein 14.56% kam hui hai, jisse ceramic, fertilizer aur city gas distribution sectors ke gross margins mein badi rahat dekhne ko mil rahi hai.",
+      "forward_thesis": "Jab bhi raw material ki keemat kam hoti hai, to companies ke balance sheet par uska asar turant nahi dikhta kyunki unke paas 45 se 90 din ka purana inventory stock hota hai jo mehenge daamo par kharida gaya tha. Ab jab ye mehanga purana stock khatam ho raha hai aur sasta Natural Gas production lines mein use ho raha hai, toh aane wale quarterly results (Q3/Q4) mein EBITDA margins aur operating cash flows mein achhi badhotri (expansion) hone ki ummeed hai. Kyunki market mein demand stable hai aur companies apni product pricing maintain kar pa rahi hain, iska seedha fayda unke quarterly profits par padega.",
+      "import_context": "India apni total Natural Gas ki requirement ka lagbhag 52% hissa import karta hai, jismein long-term LNG contracts aur spot LNG markets ka bada yogdaan hai. Jab global shipping routes mein koi rukawat aati hai ya USD-INR exchange rate mein utaar-chadhav hota hai, toh import cost par thoda dabaav aa sakta hai. Halanki, current global supply-demand balance thoda comfortable hone ki wajah se Indian importers ko spot market mein competitive pricing mil rahi hai, jo domestic manufacturing ke liye ek positive factor hai.",
+      "key_risk": "Sabse bada macro risk yeh hai ki agar winter season mein global weather conditions harsh ho gayi ya geopolitical tensions ki wajah se Red Sea ya Suez Canal shipping routes par supply disrupt hui, toh LNG ke spot prices achanak spike kar sakte hain aur import bill badh sakta hai.",
       "impacted_stocks": [
+        {
+          "symbol": "IGL",
+          "company_name": "Indraprastha Gas Limited",
+          "sector": "City Gas Distribution",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+150 bps",
+          "rationale": "IGL ke business mein Natural Gas unka sabse bada input raw material hai, jiska COGS mein hissa lagbhag 75% se 80% tak hota hai. Natural Gas ki keemat mein saal-dar-saal (YoY) 14.56% ki kami aane se company ki gas procurement cost kam ho gayi hai, jisse unke CNG aur PNG segments ke gross margins improve ho rahe hain.",
+          "business_impact": "Gas sourcing cost kam hone se per SCM margin badhega aur operating profit mein sudhar aayega, jisse quarterly financial results strong rahenge."
+        },
+        {
+          "symbol": "MGL",
+          "company_name": "Mahanagar Gas Limited",
+          "sector": "City Gas Distribution",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+140 bps",
+          "rationale": "Mahanagar Gas ke operations ke liye bhi Natural Gas core raw material hai, jo total cost of goods sold ka kareeb 70%-75% hissa banata hai. International gas prices mein softness ki wajah se company ko sasti gas mil rahi hai, jo unke bottom line ko support kar rahi hai.",
+          "business_impact": "Lower input costs ki wajah se EBITDA per SCM expand hoga aur company ke cash flows mein achhi growth dekhne ko milegi."
+        },
+        {
+          "symbol": "GUJGASLTD",
+          "company_name": "Gujarat Gas Limited",
+          "sector": "City Gas Distribution",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+180 bps",
+          "rationale": "Gujarat Gas industrial aur commercial customers ko zyada gas supply karti hai, jahan gas cost COGS ka 80%-85% tak hota hai. Global natural gas prices mein correction aane se industrial customers ko competitive rates par gas mil rahi hai, jisse volume growth aur margin expansion dono mein madad mil rahi hai.",
+          "business_impact": "Industrial volume offtake badhega aur margin profile strong hoga kyunki input lagat kam hone se pricing pressure neutralize ho gaya hai."
+        },
+        {
+          "symbol": "ATGL",
+          "company_name": "Adani Total Gas Limited",
+          "sector": "City Gas Distribution",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+130 bps",
+          "rationale": "ATGL ke city gas distribution network mein Natural Gas ka share COGS ka lagbhag 70% hai. Global market mein prices thande rehne se company ke procurement margins improve hue hain, jiska asar unke quarterly operating margins par pad raha hai.",
+          "business_impact": "Lower gas lagat se operational profitability improve hogi aur expansion projects ke liye internal cash generation strong hoga."
+        },
         {
           "symbol": "CERA",
           "company_name": "Cera Sanitaryware Limited",
-          "sector": "Ceramic Tiles & Sanitaryware",
+          "sector": "Ceramic Sanitaryware",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+150 bps",
-          "rationale": "Cera sanitaryware aur tiles banane ke liye natural gas ka bhari upyog karti hai, jahan total COGS me gas ka hissa lagbhag 22% tak hota hai. Natural gas prices me YoY (-8.57%) ki girawat aane se inki kilns ko chalane ki lagat me seedhi bachat hogi. Is raw material cost reduction se company ke gross margins aur operating profitability me achhi badhotari dekhne ko milegi.",
-          "business_impact": "Gas sasti hone se manufacturing cost kam hogi, jisse company ko apne operational margins sudharne me madad milegi aur quarterly profit growth behtar hogi."
+          "margin_impact_bps": "+90 bps",
+          "rationale": "Sanitaryware aur ceramic manufacturing mein kilns ko chalane ke liye Natural Gas ek major thermal energy input hai, jiska total manufacturing COGS mein lagbhag 18% se 22% hissa hota hai. Gas prices mein 1-year ki decline se manufacturing ki energy cost kam ho gayi hai.",
+          "business_impact": "Energy cost ghatne se gross margins expand honge aur demand revival ke chalte profitability mein achhi growth aayegi."
         },
         {
           "symbol": "KAJARIACER",
           "company_name": "Kajaria Ceramics Limited",
           "sector": "Ceramic Tiles",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+180 bps",
-          "rationale": "Kajaria Ceramics ke manufacturing process me natural gas ka istemaal tiles ko high-temperature furnaces me bake karne ke liye hota hai, jo ki total Cost of Goods Sold (COGS) ka karib 25% to 28% hissa banata hai. Natural gas ke daam kam hone se inki energy lagat me kafi rahat milegi. Kyunki tile industry me competition kafi high hai, yeh cost benefit margins ko expand karne me madad karega.",
-          "business_impact": "Raw material aur energy cost ghatne se EBITDA margin me safalta-purvak sudhar aayega, halanki demand ke anusar pricing pressure ko handle karna padega."
-        },
-        {
-          "symbol": "COROMANDEL",
-          "company_name": "Coromandel International Limited",
-          "sector": "Urea & Nitrogen Fertilizers",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+120 bps",
-          "rationale": "Coromandel complex fertilizers aur phosphoric acid derivatives ke production me natural gas aur uske derivatives ka prayog karti hai, jahan COGS me iska contribution lagbhag 18% hota hai. Natural gas ke daam naram rehne se input cost kam hoti hai, jisse fertilizer segment me operating efficiency badhti hai. Government subsidies aur regulated pricing ke chalte, iska direct benefit margins par thoda offset hota hai par overall lagat me rahat milti hai.",
-          "business_impact": "Gas ki lagat kam hone se working capital requirement aur manufacturing cost dono par sakaratmak asar padega."
+          "margin_impact_bps": "+110 bps",
+          "rationale": "Tile manufacturing plants mein gas firing furnaces ka use hota hai, aur Natural Gas total COGS ka lagbhag 25% to 30% hissa banata hai. Gas prices soft hone se tile makers ko energy cost mein badi rahat mili hai, jo pehle unke margins par bada weight dalti thi.",
+          "business_impact": "Production cost kam hone se EBITDA margin improve hoga, aur real estate sector ki strong demand ka pura fayda company ko milega."
         },
         {
           "symbol": "CHAMBALFERT",
           "company_name": "Chambal Fertilisers and Chemicals Limited",
           "sector": "Urea & Nitrogen Fertilizers",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+140 bps",
-          "rationale": "Chambal Fertilisers desh ki pramukh urea producers me se ek hai, aur natural gas yahan primary feed-stock hai jo total COGS ka lagbhag 65% se 70% tak hissa rakhti hai. Gas ke daam me saal-dar-saal girawat aane se company ke energy consumption norms improve hote hain aur subsidy realization ke baad cash flows me mazbooti aati hai. Inventory lag ke chalte yeh fayda agle quarterly results me fully reflect hoga.",
-          "business_impact": "Feedstock ki lagat me kami aane se company ki bottom line aur operating cash flow support ko badi rahat milegi."
+          "impact_type": "NEUTRAL",
+          "margin_impact_bps": "+20 bps",
+          "rationale": "Urea manufacturing mein Natural Gas primary feedstock hai jo COGS ka 70%-75% hissa hai. Halanki, fertilizer sector mein Government ki subsidised pricing policy (NPS-III) ki wajah se raw material price changes ka direct impact margins par nahi padta kyunki input cost variations government subsidies ke through absorb ho jati hain.",
+          "business_impact": "Subsidy mechanism ke chalte margins stable rahenge, lekin lower gas prices se government ka subsidy bill kam hoga aur working capital cycle improve hogi."
         },
         {
           "symbol": "GNFC",
           "company_name": "Gujarat Narmada Valley Fertilizers & Chemicals Limited",
-          "sector": "Fertilizers & Chemicals",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+130 bps",
-          "rationale": "GNFC fertilizer ke sath-sath industrial chemicals jaise ki acetic acid aur formic acid bhi banati hai, jiske liye natural gas ek mukhya raw material hai aur COGS ka lagbhag 30% cover karta hai. Gas ke daam stable aur kam rehne se chemical division ke margins ko support milta hai jo ki pichle quarters me cyclical downturn ki wajah se dabav me the. Isse overall profitability me sudhar hoga.",
-          "business_impact": "Chemical aur fertilizer dono segments me energy input cost kam hone se operating margin par pada purana dabaav kam hoga."
-        },
-        {
-          "symbol": "GSFC",
-          "company_name": "Gujarat State Fertilizers & Chemicals Limited",
-          "sector": "Fertilizers & Chemicals",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+110 bps",
-          "rationale": "GSFC ki manufacturing operations me bhi natural gas ka upyog ammonia aur urea production ke liye hota hai, jo inke total COGS ka lagbhag 35% banta hai. Natural gas ke pricing me soft trends hone ki wajah se company ki input cost pressure me kami aati hai. Inventory cycle ki wajah se, purane mehenge contracts expire hone ke baad naye saste gas contracts ka pure financial benefit milna shuru ho jayega.",
-          "business_impact": "Production cost ghatne se company ki quarterly financial performance me margin expansion saaf taur par dikhai degi."
-        },
-        {
-          "symbol": "IGL",
-          "company_name": "Indraprastha Gas Limited",
-          "sector": "City Gas Distribution (CGD)",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+160 bps",
-          "rationale": "IGL Delhi aur uske aas-paas ke ilako me CNG aur PNG ki supply karti hai, jahan gas cost unke total COGS ka lagbhag 75% se 80% hissa hoti hai. Domestic allocation ke alawa jab ye spot ya imported gas ka upyog karte hain, toh international prices me girawat inke gross margins ko expand karne me madad karti hai. Lower gas cost se inka per unit gross margin (EBIDTA perscm) improve hota hai.",
-          "business_impact": "Gas sourcing ki lagat kam hone se company ke operating margins me tezi aayegi aur cash generation strong hoga."
-        },
-        {
-          "symbol": "MGL",
-          "company_name": "Mahanagar Gas Limited",
-          "sector": "City Gas Distribution (CGD)",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+150 bps",
-          "rationale": "MGL Mumbai aur uske surrounding regions me city gas distribution ka business chalati hai, jahan natural gas ki procurement cost total COGS ka lagbhag 70% to 75% hoti hai. Natural gas ke global prices me soft trends rehne se company ko high margin wale CNG aur domestic PNG segments me behtar profitability milti hai. Inventory lag khatam hone ke baad yeh lower input cost quarterly balance sheet par positive impact daalegi.",
-          "business_impact": "Input gas ki lagat kam hone se margins expand honge aur company ke financial results par positive asar padega."
+          "sector": "Urea & Chemicals",
+          "impact_type": "NEUTRAL",
+          "margin_impact_bps": "+40 bps",
+          "rationale": "GNFC urea ke sath-sath industrial chemicals bhi banata hai jahan Natural Gas key input hai (COGS ka kareeb 45%-50%). Urea segment mein government pricing structure ki wajah se margins fixed rehte hain, jabki chemical segment mein sasti gas milne se kuch operational cost benefit mil sakta hai.",
+          "business_impact": "Chemicals business mein cost reduction se margins ko thoda support milega, jabki core fertilizer segment government regulations ke daayre mein neutral rahega."
         }
       ],
       "fifty_two_week_low": 2.48,
@@ -284,184 +284,184 @@
     {
       "commodity_name": "Aluminium",
       "unit": "USD/MT",
-      "current_price": 3298.25,
+      "current_price": 3218.0,
       "period_changes": {
-        "1M": -2.32,
-        "6M": -4.46,
-        "1Y": 27.15,
-        "3Y": 42.77
+        "1M": -5.73,
+        "6M": -5.66,
+        "1Y": 23.89,
+        "3Y": 39.29
       },
       "margin_trajectory": "CONTRACTING",
       "retail_badge": "🔴 Lagat Badhegi (Margin Pressure)",
-      "macro_headline": "Aluminium ki current price 3298.25 USD/MT par chal rahi hai, jahan pichle 1 saal mein 27.15% ki tezi aur 3 saal mein 42.77% ki zabardast long-term badhotari dekhne ko mili hai, jiska seedha dabaav auto ancillary, packaging, aur white goods sector ki companies par padega.",
-      "forward_thesis": "Jab bhi raw material ke daam mein aise bade utaar-chadhaw aate hain, toh manufacturing companies par turant asar nahi padta kyunki unke paas 45 se 90 din ka purana inventory stock rakha hota hai jise inventory lag kehte hain. Iska matlab yeh hai ki aaj jo high prices chal rahe hain, unka asli financial impact aane wale quarters (jaise Q3 ya Q4) ki balance sheet aur EBITDA margins par nazar aayega. Companies chahti hain ki woh badhi hui lagat ko end-customers par pass-on karein, lekin retail market mein competition itna zyada hota hai ki woh turant price hikes nahi kar paati hain, jiski wajah se gross margins par temporary dabaav banta hai.",
-      "import_context": "India mein aluminium ka production toh kaafi achha khasa hota hai aur hum export surplus category mein aate hain, lekin domestic prices global London Metal Exchange (LME) par puri tarah dependent hain. Isliye jab international market mein bauxite mining issues, energy crises ya smelting cost badhti hai, toh Bharat ke andar bhi raw metal mehenga milta hai. Saath hi, USD-INR exchange rate ka utaar-chadhaw import hone wale raw materials aur global pricing ko directly affect karta hai, jisse supply chain par extra financial burden aata hai.",
-      "key_risk": "Is thesis ke liye sabse bada macro risk global energy costs (jaise coal aur natural gas ke daam) mein achanak se hone wala spike hai, kyunki aluminium smelting ek energy-intensive process hai aur electricity cost total manufacturing expense ka ek bada hissa hoti hai.",
+      "macro_headline": "Aluminium prices 3218 USD/MT par chal rahe hain, jiska pichle 1 saal mein 23.89% jump auto ancillary, packaging aur white goods sectors ki lagat ko badha raha hai.",
+      "forward_thesis": "Manufacturing companies ke paas aam taur par 45 se 90 din ka purana stock inventory hota hai, isiliye LME par aluminium ke daam badhne ka asar turant quarterly results mein nahi dikhta. Jab ye purana sasta stock khatam hota hai aur mahanga raw material balance sheet mein aata hai, tab EBITDA margins par dabav saaf nazar aata hai. Aane wale quarters mein agar companies ne yeh badhi hui lagat end consumers par pass on nahi ki, toh operating profit margins aur cash flows par lamba dabav banega.",
+      "import_context": "India mein primary aluminium ka production toh accha khasa hai kyunki yahan Vedanta aur Hindalco jaise bade domestic producers hain, lekin global LME pricing ke sath domestic prices directly linked hote hain. Iska matlab yeh hai ki international market mein price volatility ka seedha asar Indian manufacturers ki raw material cost par padta hai. USD-INR exchange rate bhi ek bada factor hai kyunki imports aur dollar-denominated contracts ke chalte currency fluctuations cost structure ko aur complex bana deti hain.",
+      "key_risk": "Sabse bada macro risk global geopolitical tensions aur major smelting hubs mein energy costs (jaise electricity aur coal shortages) ka badhna hai, jisse sudden supply chain disruptions aa sakti hain aur prices fir se upar ja sakte hain.",
       "impacted_stocks": [
         {
           "symbol": "HINDALCO",
           "company_name": "Hindalco Industries Limited",
-          "sector": "Metals - Non-Ferrous",
+          "sector": "Non-Ferrous Metals / Aluminium",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+2.5% (+250 bps)",
-          "rationale": "Hindalco khud ek primary aluminium producer hai, isliye global prices high rehne se inke realization aur top-line revenue mein direct fayda milta hai. Total cost of goods mein inka mining aur energy ka apna internal cost structure hota hai jo high selling prices ke samne kaafi profitable rehta hai. Jab bhi LME prices badhte hain, inke upstream business ka EBITDA margin expand hota hai.",
-          "business_impact": "High global aluminium prices se company ki realization per tonne badh jayegi, jisse operating cash flow strong hoga aur quarterly results mein revenue growth dekhne ko milegi."
+          "margin_impact_bps": "+150 bps",
+          "rationale": "Hindalco khud primary aluminium ka global producer hai, jiska COGS ka lagbhag 50% bauxite aur energy costs se juda hai. Unhe high LME prices ka direct benefit milta hai kyunki unka realization badhta hai aur domestic operations mein top-line growth strong rehti hai.",
+          "business_impact": "Global aluminium prices high rehne se company ke top-line revenue aur EBITDA margins mein expand hone ki poori ummeed hai, jisse operating cash flows strong rahenge."
         },
         {
-          "symbol": "NALCO",
-          "company_name": "National Aluminium Company Limited",
-          "sector": "Metals - Non-Ferrous",
+          "symbol": "VEDL",
+          "company_name": "Vedanta Limited",
+          "sector": "Diversified Metals & Mining",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+2.0% (+200 bps)",
-          "rationale": "Nalco ek government-backed integrated aluminium producer hai jiske paas khud ki bauxite mines aur captive power plants hain. Aluminium ke 3298.25 USD/MT ke high price level hone ki wajah se inke metal segment ka contribution COGS aur revenue balance mein bohot strong margin generate karta hai. Low cost of production hone ki vajah se international price tezi ka inhein seedha financial benefit milta hai.",
-          "business_impact": "Lower captive production cost aur high market realization milne se net profit margins aur operating margins mein achhi badhotari darj ki jayegi."
+          "margin_impact_bps": "+120 bps",
+          "rationale": "Vedanta ek major low-cost aluminium producer hai. Aluminium unke overall revenue ka ek bahut bada hissa hai aur inka COGS metal extraction aur captive power generation par depend karta hai. High prices se unke margins expand hote hain.",
+          "business_impact": "Aluminium prices ke uchaal ki wajah se company ki profitability badhegi, jo unhe debt reduction aur capital expenditure funding mein madad karegi."
         },
         {
           "symbol": "MOTHERSON",
           "company_name": "Samvardhana Motherson International Limited",
           "sector": "Auto Ancillary",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.8% (-180 bps)",
-          "rationale": "Motherson jaise auto component manufacturers ke COGS mein aluminium aur uske alloys ka hissa lagbhag 20% se 25% tak hota hai jo ki engine parts, wiring harnesses aur structural components mein use hota hai. 45-90 days ke inventory lag ke chalte, jab purana sasta stock khatam hota hai aur mehenga raw material floor par aata hai, toh gross margins par dabav banta hai. OEM auto companies ke sath long-term contracts hone ki wajah se yeh raw material hike turant pass-on nahi kar paate.",
-          "business_impact": "Raw material mehenga hone ke bawajud auto manufacturers se price revision milne mein 1-2 quarters ki deri hoti hai, jisse short-term operating profit margins contract ho jate hain."
+          "margin_impact_bps": "-180 bps",
+          "rationale": "Motherson ki manufacturing mein aluminium die-cast components aur wiring harnesses kaafi use hote hain, jahan aluminium raw material unke total COGS ka lagbhag 30% tak banata hai. Mahange aluminium se gross margins par dabav aayega.",
+          "business_impact": "Raw material ki badhi hui lagat ko OEM automobile clients se negotiate karke recover karne mein 1 se 2 quarters ka lag lag sakta hai, jisse short-term quarterly results par asar padega."
         },
         {
-          "symbol": "UNOMINDA",
-          "company_name": "Minda Corporation Limited",
-          "sector": "Auto Ancillary",
+          "symbol": "BALKRISIND",
+          "company_name": "Balkrishna Industries Limited",
+          "sector": "Auto Ancillary / Tyres",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.5% (-150 bps)",
-          "rationale": "Minda Corp aur similar auto ancillaries die-casting aur aluminium components ke liye global metal prices par nirbhar hain, jahan aluminium ka COGS contribution kareeb 18% tak hota hai. Jab commodity prices YoY 27.15% upar hote hain, toh working capital requirement badh jati hai kyunki same quantity kharidne ke liye zyada cash block hota hai. Isse financial cost aur margin dono par pressure aata hai.",
-          "business_impact": "Working capital bloat hone aur input cost badhne se net margin par asar padega, aur quarterly EBITDA mein temporary dips dekhne ko mil sakte hain."
-        },
-        {
-          "symbol": "UPL",
-          "company_name": "UPL Limited",
-          "sector": "Agro-Chemicals & Packaging",
-          "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.2% (-120 bps)",
-          "rationale": "Halanki UPL ek chemical company hai, lekin agro-chemicals ki global packaging, foil manufacturing aur container production mein aluminium foil kaafi bade paimane par use hota hai jiska total packaging cost mein lagbhag 30% hissa hota hai. Jab aluminium foils aur sheets ke daam badhte hain, toh packaging lagat (cost) seedhi upar chali jati hai. Isse company ke overall operating expenses badh jate hain.",
-          "business_impact": "Packaging material mahanga hone ki wajah se finished agrochemical products ki delivery cost badh jayegi, jisse operating margin par minor negative pressure aayega."
+          "margin_impact_bps": "-90 bps",
+          "rationale": "Tyre moulds, machinery parts aur packaging material mein aluminium ka use hota hai, jo inke total COGS ka lagbhag 15% hissa banata hai. Aluminium prices ki tezi se lagat badh rahi hai.",
+          "business_impact": "Input cost inflation ki wajah se company ke operating margins par thoda dabav rahega kyunki tyre industry mein intense competition ke chalte price hikes jaldi pass nahi kiye ja sakte."
         },
         {
           "symbol": "HAVELLS",
           "company_name": "Havells India Limited",
-          "sector": "Consumer Durables / White Goods",
+          "sector": "White Goods / Consumer Durables",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.6% (-160 bps)",
-          "rationale": "Havells jaise white goods aur electrical appliances makers ke liye aluminium ek critical input hai jo ki fans ki winding, air conditioners ki heat exchanger fins aur lighting fixtures mein use hota hai, jiska COGS mein share lagbhag 15% se 18% hai. High commodity prices ka asar direct manufacturing cost par padta hai. Retail consumer market mein fierce competition hone ki wajah se daam badhana mushkil hota hai.",
-          "business_impact": "Consumer segment mein price hikes late pass-on hone ki vajah se gross margins compress honge aur quarterly earnings report mein cost pressure saaf dikhai dega."
+          "margin_impact_bps": "-150 bps",
+          "rationale": "Havells ke products jaise ki cables, wires, fans aur air conditioners mein aluminium ek key raw material hai, jo unke total COGS ka lagbhag 25% se 30% contain karta hai. Mahanga aluminium lagat ko seedha upar khinchta hai.",
+          "business_impact": "Inventory lag period khatam hone ke baad, jab naya mahanga aluminium balance sheet mein reflect hoga, tab gross margins contract honge aur discretionary demand weak hone par price pass-through mushkil hoga."
         },
         {
           "symbol": "VOLTAS",
           "company_name": "Voltas Limited",
-          "sector": "White Goods - AC & Cooling",
+          "sector": "White Goods / ACs",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.7% (-170 bps)",
-          "rationale": "Air conditioners aur refrigeration units ke manufacturing mein aluminium fins aur tubes ka use core material ke roop mein hota hai, jiska total material cost mein kareeb 22% ka contribution hai. Jaise-jaise 3298.25 USD/MT ka pricing trend chal raha hai, company ke raw material procurement bills heavy ho rahe hain. Inventory lag ki wajah se purane saste contracts khatam hone par naye orders high cost par book ho rahe hain.",
-          "business_impact": "Seasonal demand aur high input cost ke double whammy ki wajah से operating profit aur EBITDA margins par severe quarterly quarter dabaav banega."
+          "margin_impact_bps": "-130 bps",
+          "rationale": "Air conditioners mein aluminium fins aur heat exchangers ka extensive use hota hai, jiska total COGS mein share lagbhag 20% hai. Aluminium ki badhi hui keematein manufacturing cost ko seedha prabhavit karti hain.",
+          "business_impact": "Seasonal demand aur pricing pressure ke beech raw material ki badhi hui lagat ko absorb karna padega, jisse quarterly EBITDA margins par dabav dekhne ko milega."
         },
         {
-          "symbol": "BALMLAWRIE",
-          "company_name": "Balmer Lawrie & Company Limited",
-          "sector": "Industrial Packaging & Logistics",
+          "symbol": "UPL",
+          "company_name": "UPL Limited",
+          "sector": "Agrochem / Packaging",
           "impact_type": "NEGATIVE",
-          "margin_impact_bps": "-1.4% (-140 bps)",
-          "rationale": "Balmer Lawrie industrial packaging, steel and aluminium containers, aur barrels banati hai jahan high-grade metal sheets ka use hota hai. Raw aluminium ki high lagat inke total COGS ka lagbhag 25% hissa banati hai. Metal prices badhne se inke manufacturing input expenses turant badh jate hain, jabki industrial clients ke sath long-term supply agreements hone ke karan prices ko turant revise karna asaan nahi hota.",
-          "business_impact": "Industrial packaging division ke profit margins contract honge kyunki raw material cost ka badha hua hissa customer par shift karne mein time lagta hai."
+          "margin_impact_bps": "-70 bps",
+          "rationale": "Agrochemicals ki packaging, aluminium foil seals aur specialized containers mein aluminium ka use hota hai, jo total packaging COGS ka lagbhag 15% hai. Uche daamon se overall packaging expenditure badhta hai.",
+          "business_impact": "Packaging cost badhne se operating expenditure thoda expand hoga, halanki ye core chemical business ke samne ek chota component hai lekin margin calculation ko zaroor affect karta hai."
+        },
+        {
+          "symbol": "JINDALSAW",
+          "company_name": "Jindal Saw Limited",
+          "sector": "Metal Pipes & Sheet Metal",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-110 bps",
+          "rationale": "Sheet metal aur specialized coating applications mein aluminium alloys ka use hota hai, jo inke total COGS ka lagbhag 18% banta hai. Global aluminium rate fluctuation ka seedha asar inke input costs par padta hai.",
+          "business_impact": "Industrial orders mein fixed-price contracts ke hone ki wajah se, jab tak naye higher prices par contracts renew nahi hote, tab tak operating margins dabav mein rehte hain."
         }
       ],
-      "fifty_two_week_low": 2594.0,
+      "fifty_two_week_low": 2596.5,
       "fifty_two_week_high": 4195.0
     },
     {
       "commodity_name": "Cotton",
       "unit": "USc/lb",
-      "current_price": 79.33,
+      "current_price": 77.26,
       "period_changes": {
-        "1M": -13.49,
-        "6M": 12.11,
-        "1Y": 25.28,
-        "3Y": -9.3
+        "1M": -14.17,
+        "6M": 8.94,
+        "1Y": 22.34,
+        "3Y": -11.66
       },
       "margin_trajectory": "EXPANDING",
       "retail_badge": "🟢 Lagat Ghategi (Margin Rahat)",
-      "macro_headline": "Cotton prices me 1-month correction (-13.49%) ki wajah se textile aur garment companies ki raw material lagat ghatne ki umeed hai, jisse unke gross margins par se dabaav kam hoga.",
-      "forward_thesis": "Cotton ki keemat me jo pichle ek mahine me lagbhag 13.5% ki girawat aayi hai, uska seedha asar companies ke balance sheet par turant nahi dikhega. Kyunki har textile manufacturer ke paas aam taur par 45 se 90 din ka purana inventory stock rakha hota hai, isliye saste cotton ka fayda aane wale 1 ya 2 quarters (Q3/Q4) ke financial results me dheere-dheere reflect hoga. Jab purana mehanga maal khatam hoga aur ye sasta cotton manufacturing process me use hoga, tab companies ke operating profit margins me expansion dekhne ko milega.",
-      "import_context": "India me cotton ka lagbhag 95% sroat domestic (gharelu) kheti hai, jisme monsoon aur MSP (Minimum Support Price) ka bahut bada hath hota hai. Hume cotton import karne ki zaroorat bahut kam padti hai, isliye global shipping routes ya Red Sea crisis ka direct asar Indian cotton mills par nahi padta. Halanki, USD-INR currency exchange rate fluctuations thoda bahut import-export parity ko affect karte hain, par primary driver desh ke andar hi sowing acreage aur kisanon ki yield hoti hai.",
-      "key_risk": "Sabse bada macro risk erratic monsoon ya unseasonal rainfall hai, jo naye crop ki quality aur quantity ko kharab kar sakta hai, jisse domestic market me achanak short-term supply crunch aur price spikes aa sakte hain.",
+      "macro_headline": "Cotton prices mein pichle ek mahine mein 14.17% ki zabardast girawat aayi hai, jo ki Indian textile aur garment manufacturers ke liye quarterly results mein margin rahat lekar aane wali hai.",
+      "forward_thesis": "Kyunki textile companies aam taur par 45 se 90 din ka raw cotton inventory apne warehouses mein rakhti hain, isliye international prices ka ye correction aane wale quarters (jaise Q3 aur Q4) mein balance sheet par reflect hoga. Jab purana mahanga stock khatam hoga aur naye saste daamon par kapaas kharidi jayegi, toh companies ke gross margins mein sudhaar dekhne ko milega. Halanki, retail demand ki kamzori ke chalte companies ko yeh savings end-customers tak price cuts ke roop mein pass karni pad sakti hain, jisse top-line growth par thoda asar pad sakta hai par profitability protect ho jayegi.",
+      "import_context": "India me cotton ki sourcing lagbhag 95% domestic market se hoti hai, isliye yahan ki kheti monsoon, MSP (Minimum Support Price), aur sowing acreage par nirbhar karti hai. Baaki ki 5% high-value extra-long staple (ELS) cotton jaise ki Supima ya Giza varieties USA, Egypt, aur Australia se import karni padti hai. USD-INR currency movement ka direct asar import hone wali raw material ki lagat par padta hai, aur Red Sea shipping disruptions ke chalte global logistics cost bhi thodi volatile bani hui hai.",
+      "key_risk": "Sabse bada macro risk ye hai ki agar aane wale monsoon season mein baarish aniyamit (erratic) rahi ya fir pink bollworm ke attack se domestic crop yield kharab ho gayi, toh saste cotton ka ye trend achanak palat sakta hai aur domestic prices global trends se alag hokar tezi se badh sakti hain.",
       "impacted_stocks": [
-        {
-          "symbol": "PAGEIND",
-          "company_name": "Page Industries Limited",
-          "sector": "Innerwear & Garmenting",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+150 bps",
-          "rationale": "Page Industries ke total Cost of Goods Sold (COGS) me yarn aur fabric ka hissa lagbhag 40% se 50% hota hai. Cotton ki keemat me correction aane se company ki raw material lagat ghat jayegi, jisse premium innerwear aur athleisure segments me unke gross margins behtar honge.",
-          "business_impact": "Saste cotton ka benefit 2 quarters ke inventory lag ke baad margins me dikhega, jisse operating cash flow sudhrega."
-        },
         {
           "symbol": "KPRMILL",
           "company_name": "K.P.R. Mill Limited",
-          "sector": "Textiles & Garments",
+          "sector": "Textiles & Garmenting",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+200 bps",
-          "rationale": "KPR Mill ek vertically integrated textile player hai jo cotton yarn se lekar garments tak sab banata hai. Inke COGS me raw cotton ka direct share 60% se zyada hai, isliye cotton prices ke girne se inhe sabse zyada operational advantage milta hai.",
-          "business_impact": "Inventory lag 45 dino ki hone ki wajah se, purane mehnge stock ke nikalne ke baad profitability me sharp jump aane ki ummeed hai."
+          "margin_impact_bps": "+1.5% (+150 bps)",
+          "rationale": "K.P.R. Mill apni integrated business model ke liye jaani jati hai jisme yarn, fabric, aur garments shamil hain. Cotton inke total cost of goods sold (COGS) ka lagbhag 55% se 60% hissa banata hai. Cotton prices mein 14% ki girawat se inki spinning aur apparel manufacturing divisions ki lagat kam hogi, jisse operating margins mein seedha fayda hoga.",
+          "business_impact": "Raw material sasta hone se company ke gross margins expand honge, aur global retail brands ko competitive pricing dene mein aasani rahegi, jisse order volume badh sakta hai."
         },
         {
           "symbol": "TRIDENT",
           "company_name": "Trident Limited",
-          "sector": "Home Textiles & Yarn",
+          "sector": "Home Textiles",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+120 bps",
-          "rationale": "Trident home textiles (bedsheets, bath linen) aur yarn ka ek global exporter hai, jahan cotton inke total input cost ka lagbhag 55% hissa banata hai. Cotton prices me 1-month ki 13% ki girawat se international markets me inki pricing competitiveness aur strong hogi.",
-          "business_impact": "Raw material ki lagat kam hone se global buyers ko competitive pricing dene me madad milegi, jisse volume growth accelerate hogi."
+          "margin_impact_bps": "+1.2% (+120 bps)",
+          "rationale": "Trident duniya ki sabse badi home textiles companies mein se ek hai jo bed sheets aur bath linen banati hai. Inke COGS mein raw cotton aur yarn ki hissedari kareeb 50% hai. Cotton prices mein correction aane se export market mein inki competitiveness badhegi kyunki ye European aur American clients ko behtar daamon par products offer kar payenge.",
+          "business_impact": "Purana mahanga inventory liquidate hone ke baad, naye saste cotton ki kharid se quarterly EBITDA margins mein sudhaar aane ki poori ummeed hai."
         },
         {
           "symbol": "WELSPUNLIV",
           "company_name": "Welspun Living Limited",
           "sector": "Home Textiles",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+130 bps",
-          "rationale": "Welspun Living global home textile market me ek bada naam hai, jinke COGS me raw cotton aur blended yarn ka proportion lagbhag 50-55% tak hota hai. Cotton me mandi aane se inke manufacturing margins par se cost pressure hat jayega.",
-          "business_impact": "Purana mehanga inventory clear hone ke baad, aane wale quarters me EBITDA margins me sudhar dekhne ko milega."
+          "margin_impact_bps": "+1.0% (+100 bps)",
+          "rationale": "Welspun Living global home textile space mein ek bada player hai jiska raw material cost mein cotton ka share lagbhag 45% tak hota hai. Cotton prices ke cool-off hone se inke cost pressures kam honge, khaas taur par jab ye US aur UK ke major retail chains ke sath annual contracts negotiate karte hain.",
+          "business_impact": "Lagat kam hone se company ko pricing flexibility milegi aur supply chain bottlenecks se hone wale nuksan ki bharpai karne mein madad milegi."
         },
         {
-          "symbol": "VARDHMNRLT",
+          "symbol": "VARDHACRLC",
           "company_name": "Vardhman Textiles Limited",
           "sector": "Yarn Spinning",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+180 bps",
-          "rationale": "Vardhman Textiles desh ke leading yarn spinners me se ek hai, jahan raw cotton direct COGS ka lagbhag 65% to 70% consume karta hai. Cotton ki keemat kam hone se inke spinning margins jo pichle dino dabav me the, unko badi rahat milegi.",
-          "business_impact": "Yarn realization aur raw cotton ki cost ke beech ka spread behtar hone se quarterly net profit me positive impact aayega."
-        },
-        {
-          "symbol": "LUXIND",
-          "company_name": "Lux Industries Limited",
-          "sector": "Innerwear & Hosiery",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+110 bps",
-          "rationale": "Lux Industries ke cost structure me fabric aur cotton yarn ka hissa lagbhag 45% hai. Cotton prices me correction aane se company ko apne mass aur mid-premium products me margin protect karne ya promotional discounts dene me asani hogi.",
-          "business_impact": "Lagat ghatne se company ke operating margins expand honge, aur cash flow generation behtar hoga."
-        },
-        {
-          "symbol": "RPGLIFE",
-          "company_name": "Nitin Spinners Limited",
-          "sector": "Yarn & Knitted Fabrics",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+160 bps",
-          "rationale": "Nitin Spinners primarily cotton yarn aur knitted fabrics banata hai, jahan raw cotton akela inke total COGS ka lagbhag 70% hissa rakhta hai. Cotton prices me aayi is recent girawat se inke operating performance me direct positive changes aayenge.",
-          "business_impact": "Inventory cycle lag 60 days hone ki wajah se, agle quarter ke results me input cost relief ka poora asar dikhne lagega."
+          "margin_impact_bps": "+1.8% (+180 bps)",
+          "rationale": "Vardhman Textiles ek pure-play yarn manufacturer hai jahan raw cotton direct inke COGS ka 65% se 70% hissa cover karta hai. Spinning mills par cotton price volatility ka sabse zyada direct asar padta hai. Prices girne se inka inventory holding loss khatam hoga aur spread (cotton aur yarn ke daam ka antar) behtar hoga.",
+          "business_impact": "Yarn spinning division ka operating profit margin seedhe taur par cotton ki sasti kharid se expand hoga, jisse bottom-line mein strong recovery dikhegi."
         },
         {
           "symbol": "ALOKINDS",
           "company_name": "Alok Industries Limited",
           "sector": "Textiles",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+100 bps",
-          "rationale": "Alok Industries ek diversified textile manufacturer hai jiska cotton consumption inke total COGS ka lagbhag 45% hai. Cotton prices soft hone se inke high debt burden wale business model ko operational level par thodi raahat milegi.",
-          "business_impact": "Input cost kam hone se EBITDA generation me sudhar hoga jo interest servicing me madad karega."
+          "margin_impact_bps": "+0.8% (+80 bps)",
+          "rationale": "Reliance Industries backed Alok Industries cotton aur polyester dono ki large-scale processing karti hai, jisme cotton COGS ka lagbhag 45% hissa hai. Financial restructuring ke daur se guzar rahi is company ke liye raw material ki lagat kam hona working capital pressure ko halka karne mein madad karega.",
+          "business_impact": "Operating margins par jo pichle kai quarters se dabaav tha, usme thodi rahat milegi aur interest servicing capacity behtar hogi."
+        },
+        {
+          "symbol": "PAGEIND",
+          "company_name": "Page Industries Limited",
+          "sector": "Apparel & Innerwear",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+0.6% (+60 bps)",
+          "rationale": "Jockey brand ki parent company Page Industries premium innerwear aur athleisure banati hai jisme high-quality combed cotton ka istemal hota hai. Inke COGS mein raw material ka share lagbhag 35% hai. Halanki ye brand premium positioning ki wajah se cost pass-on karne mein aage rehti hai, par input cost girne se inke gross margins ko extra boost milega.",
+          "business_impact": "Manufacturing cost kam hone se EBITDA margins mein expansion aayega, jise company marketing aur distribution network expand karne mein use kar sakti hai."
+        },
+        {
+          "symbol": "LUXIND",
+          "company_name": "Lux Industries Limited",
+          "sector": "Apparel & Innerwear",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+1.1% (+110 bps)",
+          "rationale": "Lux Industries mass-market aur economy segment mein innerwear sell karti hai, jahan cost sensitivity bahut zyada hoti hai. Inke COGS mein cotton yarn aur raw cotton ka share 50% se upar hai. Is segment mein companies turant daam nahi badha pati hain, isliye raw material sasta hone ka pura fayda inke margins ko expand karne mein milega.",
+          "business_impact": "Saste cotton ki wajah se gross margins mein jo improvement aayegi, woh company ke operating cash flow ko majboot karegi."
+        },
+        {
+          "symbol": "RUPA",
+          "company_name": "Rupa & Company Limited",
+          "sector": "Apparel & Innerwear",
+          "impact_type": "POSITIVE",
+          "margin_impact_bps": "+0.9% (+90 bps)",
+          "rationale": "Rupa and Company bhi mass-market hosiery products mein ek pramukh khiladi hai. Inka raw material consumption kapaas aur yarn par kafi hadd tak nirbhar hai jo inke COGS ka lagbhag 48% banata hai. Pichle samay mein high input cost ki wajah se inke margins par kafi dabaav dekha gaya tha.",
+          "business_impact": "Inventory lag khatam hone ke baad, naye saste stock ke istemal se quarterly results mein profitability behtar hone ke clear sanket milenge."
         }
       ],
       "fifty_two_week_low": 60.71,
@@ -470,91 +470,91 @@
     {
       "commodity_name": "Iron Ore 62% Fe (Proxy)",
       "unit": "USD/dmt",
-      "current_price": 96.73,
+      "current_price": 96.59,
       "period_changes": {
-        "1M": 0.93,
-        "6M": -9.07,
-        "1Y": -8.18,
-        "3Y": -19.49
+        "1M": 0.56,
+        "6M": -10.16,
+        "1Y": -8.26,
+        "3Y": -19.6
       },
       "margin_trajectory": "EXPANDING",
       "retail_badge": "🟢 Lagat Ghategi (Margin Rahat)",
-      "macro_headline": "Iron Ore 62% Fe ke daam pichle ek saal mein kareeb 8.18% aur 6 mahine mein 9.07% tak gir chuke hain, jisse domestic steel makers aur manufacturing companies ki lagat mein badi rahat mil rahi hai.",
-      "forward_thesis": "Global markets mein Iron Ore ke daam kam hone aur NMDC dwara gharelu daamo mein samay-samay par ki gayi cuts se companies ko bada fayda mil raha hai. Inventory lag ka concept samajhna zaroori hai: har manufacturing company ke paas lagbhag 45 se 90 din ka purana raw material stock warehouse mein hota hai, isliye current global price drop ka asli asar agle 1 ya 2 quarters ke financial results mein EBITDA expansion ke roop mein dikhai dega. Jab tak yeh purana stock exhaust nahi hota, tab tak companies low-cost naya iron ore consume karke apne gross margins ko behter kar rahi hain. Halaanki, agar global demand mein sudden recovery aayi ya China ki housing market stabilize hui, toh yeh lagat rahat temporary bhi ho sakti hai, lekin filhal Q3 aur Q4 margins ke liye yeh ek positive setup hai.",
-      "import_context": "Iron Ore ke mamle mein Bharat poori tarah se aatmanirbhar (self-reliant) hai kyunki desh mein NMDC, Tata Steel aur doosri mining companies ke paas ample domestic reserves available hain. Humein 100% domestic sourcing ka fayda milta hai, isliye humein ocean freight volatility ya Suez Canal jaise maritime shipping choke points ki chinta nahi karni padti. USD-INR currency fluctuation ka bhi direct bada impact nahi hota kyunki NMDC ke monthly price revisions global 62% Fe benchmark indices ko track zaroor karte hain, lekin transactions INR mein hi execute hote hain, jo domestic steel manufacturers ke liye ek bada macroeconomic cushion provide karta hai.",
-      "key_risk": "Sabse bada macroeconomic risk China ki steel demand aur unki government ke real estate stimulus packages hain. Agar China mein construction activity achanak tez ho gayi aur unhone export restrictions ya domestic production cuts implement kiye, toh global Iron Ore prices mein sharp bounce-back aa sakta hai, jisse Indian steel producers aur auto/infra sectors par wapas input cost ka dabaav ban jayega.",
+      "macro_headline": "Iron ore prices me pichle 6 mahino se jo correction aayi hai, usse domestic steel makers aur auto-ancillary manufacturers ki lagat me rahat mil rahi hai, jisse upcoming quarters me gross margins improve hone ki ummeed hai.",
+      "forward_thesis": "Iron ore ke daam global market me soft rehne ka seedha asar Indian steel manufacturers par padta hai, lekin 45 se 90 din ka inventory lag hota hai jiske chalte purana mahanga stock pehle consume hota hai. Jab tak naye lower-cost raw materials factories ke floor par process hote hain, tab tak lagbhag ek ya do quarters lag jaate hain. Is inventory transition ke baad, companies ke EBITDA per tonne me sudhar dekhne ko milta hai kyunki cost of goods sold (COGS) kam ho jata hai. Halanki, finished steel ki demand agar sluggish rahi toh companies ko yeh price benefit end-consumers ko dena pad sakta hai, jisse margin expansion thoda limit ho sakta hai.",
+      "import_context": "India me iron ore ka 100% domestic sourcing hota hai kyunki desh ke paas NMDC aur private miners ke roop me ample reserves available hain, aur government ne export duty lagakar domestic availability ko secure kiya hai. Isliye global shipping routes, Red Sea crisis, ya USD-INR currency fluctuations ka direct import impact bahut kam hota hai. Halanki, NMDC har mahine global 62% Fe iron ore benchmarks aur domestic demand-supply dynamics ko dekh kar apne prices revise karta hai, jiska seedha asar sabhi secondary aur primary steel makers ke raw material input costs par padta hai.",
+      "key_risk": "Sabse bada macro risk Chinese real estate sector ki demand recovery hai; agar China me construction activity unexpectedly badh gayi toh global iron ore prices tezi se upar ja sakte hain, jisse Indian manufacturers ke liye cost relief temporary sabit hogi.",
       "impacted_stocks": [
         {
           "symbol": "TATASTEEL",
           "company_name": "Tata Steel Limited",
           "sector": "Primary Steel Production",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+1.5% (+150 bps)",
-          "rationale": "Tata Steel ke COGS mein iron ore aur coking coal ka hissa kareeb 45% se 50% hota hai. Kyunki company captive mines bhi chalati hai aur open market se bhi ore procure karti hai, global daamo mein aayi kami se unki overall raw material lagat ghat rahi hai. Inventory lag cycle ke poora hone par, company ke EBITDA per tonne mein sudhar aane ki poori ummeed hai.",
-          "business_impact": "Saste iron ore ka fayda milne se operating profit margins expand honge, lekin global steel oversupply ki wajah se finished steel ke daam agar girte hain, toh top-line growth par thoda asar pad sakta hai."
+          "margin_impact_bps": "+150 bps",
+          "rationale": "Tata Steel ke total Cost of Goods Sold (COGS) me iron ore ka hissa lagbhag 35% se 40% hota hai, chahe wo captive mines se aaye ya merchant purchase ho. Global aur domestic iron ore daamo me jo pichle kuch mahino se narmi aayi hai, usse company ke input costs me kafi rahat mil rahi hai. Q3 aur Q4 ke financial results me iska positive asar gross margins par saaf dikhai dega, khaas kar jab European operations ke high energy costs thode stabilize ho rahe hain.",
+          "business_impact": "Iron ore lagat ghatne se company ke EBITDA per tonne me sudhar aayega, halanki global steel oversupply ki wajah se finished goods ki pricing power par thoda pressure bana hua hai."
         },
         {
           "symbol": "JSWSTEEL",
           "company_name": "JSW Steel Limited",
           "sector": "Primary Steel Production",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+1.8% (+180 bps)",
-          "rationale": "JSW Steel ek major primary steel manufacturer hai jinki production capacity bohot badi hai. Iron ore unke total Cost of Goods Sold (COGS) ka lagbhag 35% to 40% hissa banata hai. Pichle 6 mahine mein iron ore prices mein 9% ki giravat aane se company ki input cost direct tareeqe se kam ho rahi hai, jiska reflection agle quarters ke balance sheet par aayega.",
-          "business_impact": "Raw material ki lagat kam hone se operational efficiency badhegi aur EBITDA margins mein positive expansion dekhne ko milega, jisse strong operating cash flow support milega."
+          "margin_impact_bps": "+180 bps",
+          "rationale": "JSW Steel apni massive capacity ke liye large scale par iron ore ki khareed karti hai, jisme NMDC aur merchant miners ka bada yogdaan hota hai. Iron ore prices me YoY -8.26% ki girawat se company ke input cost pressure me kafi kami aayi hai. COGS me raw material ka weight 50% ke aas-paas hone ki wajah se, ore prices ka thoda sa bhi correction bottom-line par bada positive impact dalta hai, jiska benefit 60-din ke inventory lag ke baad balance sheet me reflect hoga.",
+          "business_impact": "Lower input costs operating margins ko expand karenge aur domestic infra demand ke chalte volume growth ko achhi financial support milegi."
         },
         {
           "symbol": "JSL",
           "company_name": "Jindal Stainless Limited",
-          "sector": "Specialty & Stainless Steel",
+          "sector": "Stainless Steel Production",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+1.2% (+120 bps)",
-          "rationale": "Jindal Stainless alloy aur specialty steel banati hai jismein scrap aur iron derivatives ka bada role hota hai. Iron ore aur related alloy inputs ka cost structure mein kareeb 30% contribution hota hai. Global raw material cooling ka fayda inke high-margin value-added products ko better margin protect karne mein madad kar raha hai.",
-          "business_impact": "Input cost down hone se gross margins mein rahat milegi, aur auto ya railway sectors se aane wali demand ko behtar pricing flexibility ke sath cater kiya ja sakega."
+          "margin_impact_bps": "+120 bps",
+          "rationale": "Halanki Jindal Stainless ka primary raw material nickel aur ferro-chrome hai, lekin overall metallurgical grade inputs aur alloy making me iron ore derivatives aur base carbon steel scrap ke daam bhi linked rehte hain. COGS me total raw material cost ka share 70% se upar hai, aur iron ore ki soft pricing trend ka indirect fayda overall input cost basket me milta hai. Inventory cycle ke chalte yeh rahat agle quarter me fully materialize hogi.",
+          "business_impact": "Raw material basket softening ki wajah se gross margins me stability aayegi, jisse value-added stainless steel segments me profitability behtar hogi."
+        },
+        {
+          "symbol": "JSWINFRA",
+          "company_name": "JSW Infrastructure Limited",
+          "sector": "Ports and Logistics",
+          "impact_type": "NEGATIVE",
+          "margin_impact_bps": "-90 bps",
+          "rationale": "JSW Infrastructure ke ports par bulk cargo jaise ki iron ore aur coal ki handling se significant revenue generate hota hai. Jab iron ore prices weak rehte hain aur global export volumes me susti aati hai, toh port handling volumes aur realization par thoda dabav banta hai. Company ke COGS aur operational expenses me fixed costs zyada hote hain, isliye volume dip hone par operating leverage thoda negative ho jata hai.",
+          "business_impact": "Iron ore export aur domestic coastal movement me volume growth slow hone se port segment ki top-line growth par thoda temporary drag dekhne ko mil sakta hai."
         },
         {
           "symbol": "APLAPOLLO",
           "company_name": "APL Apollo Tubes Limited",
           "sector": "Structural Steel Tubes",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+2.0% (+200 bps)",
-          "rationale": "APL Apollo Bharat ki sabse badi structural steel tube maker hai jo hot-rolled coils (HRC) ko raw material ke roop mein kheedti hai. Steel prices aur iron ore trend down hone se inka input HRC sasta milta hai, jo inke COGS ka lagbhag 80% to 85% hissa hai. Lagat kam hone se inke volume-led growth model ko zabardast financial cushion milta hai.",
-          "business_impact": "HRC ki lagat kam hone par distribution channel mein inventory gains milte hain, aur end-user construction segment mein volume off-take tezi se badhta hai."
+          "margin_impact_bps": "+140 bps",
+          "rationale": "APL Apollo ke business model me primary hot-rolled coils (HRC) sabse bada raw material hai jo unke total COGS ka lagbhag 80% se 85% banata hai. HRC ke daam direct iron ore prices par depend karte hain; isliye jab iron ore sasta hota hai, toh kuch mahino ke lag ke baad HRC manufacturers steel tubes makers ko lower prices par mal dete hain. Is backward integration benefit se company ke spread (HRC aur pipe ke daam ka fark) me kafi expansion hota hai.",
+          "business_impact": "Lower steel input costs ki wajah se inventory holding gains milenge aur retail as well as structural demand ke chalte volume uptake strong rahega."
         },
         {
-          "symbol": "JSPL",
-          "company_name": "Jindal Steel & Power Limited",
-          "sector": "Long Steel & Infrastructure",
+          "symbol": "MOTHERSON",
+          "company_name": "Samvardhana Motherson International Limited",
+          "sector": "Auto Components & Ancillaries",
           "impact_type": "POSITIVE",
-          "margin_impact_bps": "+1.6% (+160 bps)",
-          "rationale": "JSPL long steel products aur infra rebars par focus karti hai. Unke COGS mein iron ore ka share kareeb 35% hai. Domestically sourced iron ore aur lower global benchmarks ke chalte company ko raw material cost optimization mein kafi bada advantage mil raha hai, jisse unka EBITDA per tonne industry average se behtar perform kar raha hai.",
-          "business_impact": "Lagat ghatne se government aur private infrastructure projects ke tender bidding mein aggressive pricing rakhne ki kshamta badh jati hai."
+          "margin_impact_bps": "+60 bps",
+          "rationale": "Motherson jaise auto component makers ke liye steel, polymers, aur metal components major raw materials hain. Commercial vehicles aur passenger cars ke chassis aur structural parts me steel ka bada use hota hai. Iron ore prices me soft trend rehne se auto-grade steel parts ki lagat me jo thandak aati hai, wo component manufacturers ke margins ko protect karne me madad karti hai, kyunki OEM customers price renegotiation ke dauran cost benefit maangte hain.",
+          "business_impact": "Input cost inflation kam hone se operating cash flow support milega aur margin pressure jo pichle saalo me dekha gaya tha, usme relief milegi."
         },
         {
-          "symbol": "RATNAMANI",
-          "company_name": "Ratnamani Metals & Tubes Limited",
-          "sector": "Industrial Steel Pipes",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+1.0% (+100 bps)",
-          "rationale": "Ratnamani industrial sectors jaise ki oil & gas, water, aur infra ke liye high-end steel pipes banati hai. Steel raw materials inke total COGS ka kareeb 65% hissa banate hain. Iron ore mein soft trend hone ki wajah se inhein high-grade steel plates aur coils kam daam par mil rahi hain.",
-          "business_impact": "Raw material ka pressure kam hone se execution margins improve honge aur order book conversion zyada profitable sabit hoga."
+          "symbol": "CERA",
+          "company_name": "Cera Sanitaryware Limited",
+          "sector": "Building Materials",
+          "impact_type": "NEUTRAL",
+          "margin_impact_bps": "+10 bps",
+          "rationale": "Cera Sanitaryware ka core business sanitaryware aur faucets banane ka hai, jisme primary raw materials clay, feldspar, brass, aur packaging items hain. Iron ore ya steel ka direct use inke manufacturing process me nahi hota, isliye global iron ore price fluctuations ka inke COGS par koi direct ya significant asar nahi padta. Halanki, real estate sector ki overall health ki wajah se minor sentiment link zaroor hota hai.",
+          "business_impact": "Raw material cost structure iron ore se uncorrelated hone ke karan financial results par is commodity ka negligible operational impact rahega."
         },
         {
-          "symbol": "MAHINDEIE",
-          "company_name": "Mahindra & Mahindra Limited",
-          "sector": "Commercial & Passenger Vehicles",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+0.8% (+80 bps)",
-          "rationale": "M&M commercial vehicles, tractors aur SUVs banati hai, jahan steel aur iron castings ka total vehicle weight mein kareeb 60% contribution hota hai. Steel aur raw material lagat mein aayi narmi se inke auto component sourcing costs par positive asar padta hai, jo COGS ka ek bada hissa hai.",
-          "business_impact": "Input cost pressure hatne se auto segment ke operating margins mein sudhar aayega, jise festive ya rural demand se aur zyada boost milega."
-        },
-        {
-          "symbol": "ASHOKLEY",
-          "company_name": "Ashok Leyland Limited",
-          "sector": "Commercial Vehicles",
-          "impact_type": "POSITIVE",
-          "margin_impact_bps": "+0.9% (+90 bps)",
-          "rationale": "Ashok Leyland heavy commercial vehicles (HCVs) ki manufacturing karti hai jismein steel chassis, body panels aur heavy iron components ka use hota hai. Raw material steel prices aur underlying iron ore correction ki wajah se inke manufacturing input costs mein kafi control aaya hai, jo total cost structure ka 70% tak cover karta hai.",
-          "business_impact": "Truck manufacturing lagat kam hone se vehicle pricing mein flexibility milti hai aur fleet operators ki purchasing power improve hoti hai."
+          "symbol": "SUPREMEIND",
+          "company_name": "The Supreme Industries Limited",
+          "sector": "Plastic Products & Piping",
+          "impact_type": "NEUTRAL",
+          "margin_impact_bps": "-10 bps",
+          "rationale": "Supreme Industries polymers jaise ki PVC, HDPE, aur PP pardepend karti hai jo ki petrochemical derivatives hain, na ki steel ya iron ore derivatives. Inke COGS me crude oil aur petrochemical prices ka 75% se zyada contribution hota hai. Iron ore ke daam chahe ghein ya badhein, iska plastic piping ya industrial components ke input costs par koi direct correlation nahi hota hai.",
+          "business_impact": "Petrochemical cycles aur monsoon-driven agricultural piping demand inke margins ko drive karti hain, jabki iron ore trends se inka business unimpacted rehta hai."
         }
       ],
       "fifty_two_week_low": 93.66,
