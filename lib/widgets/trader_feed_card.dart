@@ -281,7 +281,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     }
   }
 
-  // 🔍 Full-Screen Pinch-To-Zoom Chart Dialog
+  // 🔍 Full Screen Viewport (Interactive Zoom on Tap)
   void _openFullScreenChart(String imageUrl) {
     showDialog(
       context: context,
@@ -294,23 +294,34 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
               child: InteractiveViewer(
                 panEnabled: true,
                 minScale: 0.8,
-                maxScale: 5.0, // 5x zoom support
+                maxScale: 6.0,
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: BoxFit.contain,
                   placeholder: (c, u) => const Center(
                     child: CircularProgressIndicator(color: Color(0xFF00E5FF)),
                   ),
-                  errorWidget: (c, u, e) => const Icon(Icons.broken_image, color: Colors.white24, size: 40),
+                  errorWidget: (c, u, e) => const Icon(
+                    Icons.broken_image,
+                    color: Colors.white24,
+                    size: 44,
+                  ),
                 ),
               ),
             ),
             Positioned(
               top: 40,
               right: 20,
-              child: IconButton(
-                icon: const Icon(Icons.close_rounded, color: Colors.white, size: 28),
-                onPressed: () => Navigator.pop(ctx),
+              child: InkWell(
+                onTap: () => Navigator.pop(ctx),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: Colors.black54,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.close_rounded, color: Colors.white, size: 26),
+                ),
               ),
             ),
           ],
@@ -373,7 +384,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Left: Avatar
+          // 1. Left Avatar
           CircleAvatar(
             radius: 18,
             backgroundColor: const Color(0xFF1E2B3E),
@@ -384,100 +395,118 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
           ),
           const SizedBox(width: 10),
 
-          // 2. Right: Content
+          // 2. Right Content Block
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header (Name + Handle + Time [SPACER] Bias + 3-Dot at extreme right)
+                // 🎯 Header: Fixed alignment with 3-dot stuck to the right edge
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Flexible(
-                      child: Text(
-                        authorName,
-                        style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '@$username · ${_formatTimestamp(widget.post['created_at'])}',
-                      style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
-                    ),
-                    
-                    // 👈 Full Space cover karega taaki icons extreme right chale jayein
-                    const Spacer(),
-
-                    // 🏷️ Bias Chip
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: biasColor.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        _bias,
-                        style: TextStyle(color: biasColor, fontSize: 9, fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-
-                    // 🎯 3-Dots Menu - Extreme Right Par
-                    SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: PopupMenuButton<String>(
-                        padding: EdgeInsets.zero,
-                        icon: const Icon(Icons.more_horiz, color: Colors.white38, size: 18),
-                        color: const Color(0xFF141C2B),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: Color(0xFF1E2B3E)),
-                        ),
-                        onSelected: (val) {
-                          if (val == 'edit') _editPost();
-                          if (val == 'delete') _deletePost();
-                          if (val == 'report') _reportPost();
-                        },
-                        itemBuilder: (ctx) => [
-                          if (isMyPost) ...[
-                            const PopupMenuItem(
-                              value: 'edit',
-                              height: 34,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.edit_outlined, color: Color(0xFF00E5FF), size: 15),
-                                  SizedBox(width: 8),
-                                  Text('Edit Setup', style: TextStyle(color: Colors.white, fontSize: 12)),
-                                ],
+                    // Author & Handle container
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              authorName,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            const PopupMenuItem(
-                              value: 'delete',
-                              height: 34,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete_outline, color: Color(0xFFFF2A6D), size: 15),
-                                  SizedBox(width: 8),
-                                  Text('Delete Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
-                                ],
-                              ),
+                          ),
+                          const SizedBox(width: 4),
+                          Flexible(
+                            child: Text(
+                              '@$username · ${_formatTimestamp(widget.post['created_at'])}',
+                              style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ] else
-                            const PopupMenuItem(
-                              value: 'report',
-                              height: 34,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.flag_outlined, color: Color(0xFFFF2A6D), size: 15),
-                                  SizedBox(width: 8),
-                                  Text('Report Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
-                                ],
-                              ),
-                            ),
+                          ),
                         ],
                       ),
+                    ),
+
+                    // Right Side Group: Bias Chip + 3-Dot (Extreme Right)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: biasColor.withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            _bias,
+                            style: TextStyle(
+                              color: biasColor,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: PopupMenuButton<String>(
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(Icons.more_horiz, color: Colors.white38, size: 18),
+                            color: const Color(0xFF141C2B),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: const BorderSide(color: Color(0xFF1E2B3E)),
+                            ),
+                            onSelected: (val) {
+                              if (val == 'edit') _editPost();
+                              if (val == 'delete') _deletePost();
+                              if (val == 'report') _reportPost();
+                            },
+                            itemBuilder: (ctx) => [
+                              if (isMyPost) ...[
+                                const PopupMenuItem(
+                                  value: 'edit',
+                                  height: 34,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.edit_outlined, color: Color(0xFF00E5FF), size: 15),
+                                      SizedBox(width: 8),
+                                      Text('Edit Setup', style: TextStyle(color: Colors.white, fontSize: 12)),
+                                    ],
+                                  ),
+                                ),
+                                const PopupMenuItem(
+                                  value: 'delete',
+                                  height: 34,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.delete_outline, color: Color(0xFFFF2A6D), size: 15),
+                                      SizedBox(width: 8),
+                                      Text('Delete Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
+                                    ],
+                                  ),
+                                ),
+                              ] else
+                                const PopupMenuItem(
+                                  value: 'report',
+                                  height: 34,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.flag_outlined, color: Color(0xFFFF2A6D), size: 15),
+                                      SizedBox(width: 8),
+                                      Text('Report Setup', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 12)),
+                                    ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -521,15 +550,19 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                     ),
                   ),
 
-                // 📈 Chart Image (With Full-Screen Zoom on Tap)
+                // 📈 Full-Width Canvas Chart (Edge-to-Edge Fill + Tap to Zoom)
                 if (widget.post['chart_url'] != null)
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(top: 4, bottom: 10),
                     child: GestureDetector(
                       onTap: () => _openFullScreenChart(widget.post['chart_url']),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Container(
+                          width: double.infinity,
+                          constraints: const BoxConstraints(
+                            maxHeight: 380, // Poori height taaki canvas cut na ho
+                          ),
                           decoration: BoxDecoration(
                             border: Border.all(color: const Color(0xFF1E2B3E)),
                             borderRadius: BorderRadius.circular(12),
@@ -538,20 +571,20 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                           child: CachedNetworkImage(
                             imageUrl: widget.post['chart_url'],
                             width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.contain, // 👈 Uncropped ladder
+                            fit: BoxFit.cover, // 👈 Pure container ko cover karega (zero black side bars)
+                            alignment: Alignment.topCenter,
                             placeholder: (c, u) => Container(
-                              height: 180,
+                              height: 220,
                               color: const Color(0xFF141C2B),
                               child: const Center(
                                 child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF00E5FF)),
                               ),
                             ),
                             errorWidget: (c, u, e) => Container(
-                              height: 140,
+                              height: 160,
                               color: const Color(0xFF141C2B),
                               child: const Center(
-                                child: Icon(Icons.broken_image, color: Colors.white24),
+                                child: Icon(Icons.broken_image, color: Colors.white24, size: 36),
                               ),
                             ),
                           ),
@@ -560,7 +593,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                     ),
                   ),
 
-                // Twitter Style Bottom Actions (Comments, Agree, Trap Alert)
+                // Twitter Style Bottom Actions (Comments, Agree, Disagree)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
