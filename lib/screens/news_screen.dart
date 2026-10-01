@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-// 🪙 Bullion, Retail & Trend Cards Import
+// 🪙 Spot Ticker Import
 import '../widgets/metals_ticker_card.dart';
-import '../widgets/ibja_retail_calculator_card.dart';
-import '../widgets/retail_gold_trend_card.dart';
+
+// 📊 Single Unified Institutional Bullion Desk Import (New Clean Widget)
+import '../widgets/bullion_efficiency_desk_card.dart';
 
 // 🧠 Macro Margin Research Desk Import
 import '../widgets/macro_research_desk_view.dart';
@@ -31,7 +32,6 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
           color: const Color(0xFF00E5FF),
           backgroundColor: const Color(0xFF0F1726),
           onRefresh: () async {
-            // Screen refresh trigger
             setState(() {});
             await Future.delayed(const Duration(milliseconds: 600));
           },
@@ -136,17 +136,12 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🏬 3. IBJA GROUND REALITY RETAIL CALCULATOR (City + Karat + Making + GST)
+              // 📊 3. INSTITUTIONAL BULLION EFFICIENCY DESK (Replaced deleted cards)
               const SliverToBoxAdapter(
-                child: IbjaRetailCalculatorCard(),
+                child: BullionEfficiencyDeskCard(),
               ),
 
-              // 📈 4. 1-YEAR RETAIL ALPHA, NET LIQUIDATION & INFLATION TREND ENGINE
-              const SliverToBoxAdapter(
-                child: RetailGoldTrendCard(),
-              ),
-
-              // Bottom Spacer taaki navigation dock content ko cut na kare
+              // Bottom Spacer
               const SliverToBoxAdapter(
                 child: SizedBox(height: 100),
               ),
