@@ -38,9 +38,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  flutter_launcher_icons: ^0.13.1 # 👈 App Icon generate karne ke liye
+  flutter_launcher_icons: ^0.13.1
 
-# 📱 Android / iOS App Icon Configuration
+# 📱 App Launcher Icon Configuration
 flutter_launcher_icons:
   android: true
   ios: false
@@ -50,7 +50,7 @@ flutter_launcher_icons:
 flutter:
   uses-material-design: true
 
-  # 📂 Assets Declaration
+  # 📂 Bundled Assets
   assets:
     - assets/data/bactest.json
     - assets/data/stockpulse.jpeg
