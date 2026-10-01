@@ -9,7 +9,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
-import 'screens/custom_strategy_screen.dart'; // 👈 Custom Rule-Based Strategy Screen
 import 'screens/community_screen.dart';
 import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
@@ -318,22 +317,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 'ANALYTICS & ENGINES',
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
-            ),
-            // 🌟 Naya Custom Strategy Lab Tile
-            _drawerTile(
-              icon: Icons.science_outlined,
-              title: 'Custom Strategy Builder',
-              subtitle: 'Price action condition builder & 3-yr backtest',
-              isHighlight: true,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const CustomStrategyScreen(),
-                  ),
-                );
-              },
             ),
             _drawerTile(
               icon: Icons.pie_chart_rounded,
