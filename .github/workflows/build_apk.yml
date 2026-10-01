@@ -53,6 +53,10 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
 
+      # 🎨 App Launcher Icons Generation (APK compile hone se pehle mipmap folders create honge)
+      - name: Generate App Launcher Icons
+        run: dart run flutter_launcher_icons
+
       - name: Build Release APK
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
