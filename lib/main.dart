@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
+import 'screens/custom_strategy_screen.dart'; // 👈 Custom Rule-Based Strategy Screen
 import 'screens/community_screen.dart';
 import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
@@ -101,13 +102,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> value) {
       if (value.isNotEmpty) {
         _handleSharedImage(File(value.first.path));
-        ReceiveSharingIntent.instance.reset(); // Intent consume hone ke baad clear karein
+        ReceiveSharingIntent.instance.reset();
       }
     });
   }
 
   void _handleSharedImage(File imageFile) {
-    // 🔒 Pehle Auth Check: User registered/logged-in hona mandatory hai
     if (!AuthService.isLoggedIn()) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -124,10 +124,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       return;
     }
 
-    // 1. Bottom navigation tab ko 'Community' (Index 3) par switch karein
     setState(() => _currentIndex = 3);
 
-    // 2. Direct Create Post bottom sheet open karein jisme image already loaded hogi
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showModalBottomSheet(
         context: context,
@@ -135,9 +133,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         backgroundColor: Colors.transparent,
         builder: (ctx) => CreateChartPostSheet(
           initialImage: imageFile,
-          onPostCreated: () {
-            // Post successfully create ho gaya
-          },
+          onPostCreated: () {},
         ),
       );
     });
@@ -323,11 +319,26 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ),
+            // 🌟 Naya Custom Strategy Lab Tile
+            _drawerTile(
+              icon: Icons.science_outlined,
+              title: 'Custom Strategy Builder',
+              subtitle: 'Price action condition builder & 3-yr backtest',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CustomStrategyScreen(),
+                  ),
+                );
+              },
+            ),
             _drawerTile(
               icon: Icons.pie_chart_rounded,
               title: 'Delivery & OHLC History',
               subtitle: '20-Day Qty, Del %, High/Low filters',
-              isHighlight: true,
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
