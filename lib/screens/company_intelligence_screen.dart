@@ -586,12 +586,13 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     );
   }
 
+  // ✅ Fixed naming conflict: 'parsedVal' used instead of 'num'
   String _formatCr(dynamic val) {
     if (val == null) return "0";
-    double num = (val as num).toDouble();
-    if (num >= 100000) {
-      return "${(num / 100000).toStringAsFixed(2)}L Cr";
+    double parsedVal = (val as num).toDouble();
+    if (parsedVal >= 100000) {
+      return "${(parsedVal / 100000).toStringAsFixed(2)}L Cr";
     }
-    return "${num.toStringAsFixed(0)} Cr";
+    return "${parsedVal.toStringAsFixed(0)} Cr";
   }
 }
