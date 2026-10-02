@@ -76,7 +76,7 @@ def fetch_unified_macro_dashboard():
     return dashboard
 
 # ==============================================================================
-# 2. AUDITED FINANCIAL STATEMENTS EXTRACTION
+# 2. AUDITED FINANCIALS + WORKING CAPITAL ENGINE + 5-YEAR HISTORICAL BOUNDS
 # ==============================================================================
 
 def fetch_latest_audited_financials(ticker_symbol):
@@ -111,16 +111,48 @@ def fetch_latest_audited_financials(ticker_symbol):
             return 0.0
 
         revenue = extract_row(latest_income, ["total revenue", "operating revenue"])
+        cogs = extract_row(latest_income, ["cost of revenue", "cost of goods", "reconciled cost of revenue"])
         gross_profit = extract_row(latest_income, ["gross profit"])
+        if gross_profit == 0.0 and revenue > 0 and cogs > 0:
+            gross_profit = revenue - cogs
+
         net_income = extract_row(latest_income, ["net income", "net profit"])
         operating_cf = extract_row(latest_cf, ["operating cash flow", "cash from operations"])
+        capex = abs(extract_row(latest_cf, ["capital expenditure", "capex"]))
         total_debt = extract_row(latest_balance, ["total debt"])
         equity = extract_row(latest_balance, ["stockholders equity", "common stock equity"])
         employee_cost = extract_row(latest_income, ["employee benefit", "salaries", "staff cost"])
 
+        receivables = extract_row(latest_balance, ["accounts receivable", "receivables"])
+        inventory = extract_row(latest_balance, ["inventory", "inventories"])
+        payables = extract_row(latest_balance, ["accounts payable", "payables"])
+
+        # Operational Working Capital Facts
+        cogs_base = cogs if cogs > 0 else (revenue * 0.6 if revenue > 0 else 1.0)
+        debtor_days = round((receivables / revenue) * 365, 1) if revenue > 0 else 0.0
+        inventory_days = round((inventory / cogs_base) * 365, 1) if cogs_base > 0 else 0.0
+        payable_days = round((payables / cogs_base) * 365, 1) if cogs_base > 0 else 0.0
+        ccc_days = round(debtor_days + inventory_days - payable_days, 1)
+
+        # 5-Year Historical Margin Corridor Extraction (No Guesswork)
+        historical_margins = []
+        for col in income_stmt.columns[:5]:
+            col_rev = extract_row(income_stmt[col], ["total revenue", "operating revenue"])
+            col_gp = extract_row(income_stmt[col], ["gross profit"])
+            if col_gp == 0.0:
+                col_cogs = extract_row(income_stmt[col], ["cost of revenue", "cost of goods"])
+                if col_rev > 0 and col_cogs > 0:
+                    col_gp = col_rev - col_cogs
+            if col_rev > 0 and col_gp > 0:
+                historical_margins.append(round((col_gp / col_rev) * 100, 2))
+
+        worst_margin_5y = min(historical_margins) if historical_margins else 38.0
+        avg_margin_5y = round(sum(historical_margins) / len(historical_margins), 2) if historical_margins else 42.0
+
         gross_margin = round((gross_profit / revenue) * 100, 2) if revenue > 0 and gross_profit > 0 else "N/A"
         debt_to_equity = round(total_debt / equity, 2) if equity > 0 else 0.0
         employee_cost_pct = round((employee_cost / revenue) * 100, 2) if revenue > 0 and employee_cost > 0 else "N/A"
+        capex_to_ocf_pct = round((capex / operating_cf) * 100, 2) if operating_cf > 0 else "N/A"
 
         return {
             "financial_year": fy_label,
@@ -131,14 +163,26 @@ def fetch_latest_audited_financials(ticker_symbol):
             "employee_cost_pct": f"{employee_cost_pct}%" if employee_cost_pct != "N/A" else "N/A",
             "operating_cash_flow_cr": round(operating_cf / 1e7, 2),
             "net_profit_cr": round(net_income / 1e7, 2),
-            "debt_to_equity": debt_to_equity
+            "debt_to_equity": debt_to_equity,
+            "operational_engine_facts": {
+                "debtor_collection_days": debtor_days,
+                "inventory_holding_days": inventory_days,
+                "supplier_payable_days": payable_days,
+                "net_cash_conversion_cycle_days": ccc_days,
+                "capex_to_ocf_pct": f"{capex_to_ocf_pct}%" if capex_to_ocf_pct != "N/A" else "N/A"
+            },
+            "historical_corridor_facts": {
+                "five_year_average_margin_pct": f"{avg_margin_5y}%",
+                "five_year_worst_historical_margin_pct": f"{worst_margin_5y}%",
+                "derived_red_alert_threshold": f"Gross Margin breaching below {worst_margin_5y}% for 2 consecutive quarters"
+            }
         }
     except Exception as e:
         print(f"   ⚠️ yfinance error for {ticker_symbol}: {e}")
         return None
 
 # ==============================================================================
-# 3. 2-COMPANIES BATCH PROMPT TEMPLATE
+# 3. 2-COMPANIES BATCH PROMPT TEMPLATE (DEEP BUSINESS ARCHITECTURE)
 # ==============================================================================
 
 BATCH_PROMPT_TEMPLATE = """
@@ -151,17 +195,22 @@ Analyze the following TWO companies using their verified statutory financials an
 
 --- COMPANY 1 DATA ---
 Symbol: {comp1_symbol} | Name: {comp1_name} | Sector: {comp1_sector} | Type: {comp1_type}
-Financials: {comp1_fin_json}
+Financials & Operational Facts: {comp1_fin_json}
 ----------------------
 
 --- COMPANY 2 DATA ---
 Symbol: {comp2_symbol} | Name: {comp2_name} | Sector: {comp2_sector} | Type: {comp2_type}
-Financials: {comp2_fin_json}
+Financials & Operational Facts: {comp2_fin_json}
 ----------------------
 
-STRICT RULES & GUIDELINES:
-1. Provide an EXHAUSTIVE, DETAILED, AND UNTRUNCATED breakdown in clean Hinglish for BOTH companies. Write full, complete, high-quality sentences for every field. You have an 8192 token limit—use it fully.
-2. Ground your narrative strictly on the provided financial figures and macro context.
+STRICT AUDIT & INSTITUTIONAL RULES:
+1. NO SURFACE DESCRIPTIONS: Do NOT just state "Company sells paints/software/loans". Explain the actual OPERATIONAL ENGINE:
+   - How does it procure inputs/talent?
+   - How does the channel (dealers/clients) work?
+   - Explain the working capital physics using the given collection days, inventory days, and payable days.
+2. HARD QUANTITATIVE BENCHMARKS (NO GUESSWORK):
+   - Use the provided "five_year_worst_historical_margin_pct" as the anchor for the red alert threshold.
+   - For IT: Anchor exit triggers to USD-INR 52-week low breach or employee wage pool escalation.
 3. SECTOR DRIVER ROUTING:
    - For IT Services: Anchor strictly to USD-INR trend and employee wage costs (ignore commodities).
    - For Manufacturing: Anchor strictly to relevant input commodities and gross margin pass-through resilience.
@@ -175,8 +224,11 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     "symbol": "{comp1_symbol}",
     "company_name": "{comp1_name}",
     "data_period": "{comp1_fy} (Audited)",
-    "core_identity": {{ "what_it_sells": "Detailed line in Hinglish", "who_is_customer": "Customer profile" }},
-    "economic_moat": {{ "moat_type": "Distribution / Brand / Switching Cost", "moat_description": "2-line detailed explanation in Hinglish" }},
+    "business_model_architecture": {{
+      "core_engine_summary": "Institutional Hinglish summary of how the company makes money (Procure -> Value Add -> Distribute -> Cash)",
+      "go_to_market_and_moat": "Distribution channel depth (e.g. Direct-to-dealer tinting machines / Enterprise annuity contracts) in Hinglish",
+      "working_capital_engine": "Explanation in Hinglish analyzing the provided collection days, inventory days, and supplier credit days"
+    }},
     "pricing_power_index": {{
       "rating": "HIGH / MEDIUM / LOW",
       "linked_primary_driver": "Identified Commodity OR USD-INR / Cost of Funds",
@@ -196,10 +248,18 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     }},
     "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
     "must_watch_metrics": [
-      {{ "metric": "Key KPI", "benchmark_normal": "Healthy target range", "why_track": "Why this specific KPI drives valuation" }},
-      {{ "metric": "Key KPI", "benchmark_normal": "Healthy target range", "why_track": "Why this specific KPI drives valuation" }}
+      {{
+        "metric": "Key KPI",
+        "normal_operating_corridor": "Provided 5Y average or safe range",
+        "red_alert_threshold": "Provided 5Y historical worst or structural breach point",
+        "why_track": "Why this specific KPI drives valuation"
+      }}
     ],
-    "anti_thesis_trigger": "Specific disruption that breaks the investment thesis",
+    "anti_thesis_trigger": {{
+      "breach_event": "Specific structural operational breakdown in Hinglish",
+      "hard_numerical_benchmark": "Exact numerical benchmark backed by historical worst performance",
+      "action_zone": "EXIT / RE-EVALUATE THESIS"
+    }},
     "core_risks": [
       {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific risk in Hinglish" }},
       {{ "risk_type": "Competitive / Operational Risk", "description": "Specific risk in Hinglish" }}
@@ -209,8 +269,11 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     "symbol": "{comp2_symbol}",
     "company_name": "{comp2_name}",
     "data_period": "{comp2_fy} (Audited)",
-    "core_identity": {{ "what_it_sells": "Detailed line in Hinglish", "who_is_customer": "Customer profile" }},
-    "economic_moat": {{ "moat_type": "Distribution / Brand / Switching Cost", "moat_description": "2-line detailed explanation in Hinglish" }},
+    "business_model_architecture": {{
+      "core_engine_summary": "Institutional Hinglish summary of how the company makes money (Procure -> Value Add -> Distribute -> Cash)",
+      "go_to_market_and_moat": "Distribution channel depth (e.g. Direct-to-dealer tinting machines / Enterprise annuity contracts) in Hinglish",
+      "working_capital_engine": "Explanation in Hinglish analyzing the provided collection days, inventory days, and supplier credit days"
+    }},
     "pricing_power_index": {{
       "rating": "HIGH / MEDIUM / LOW",
       "linked_primary_driver": "Identified Commodity OR USD-INR / Cost of Funds",
@@ -230,10 +293,18 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     }},
     "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
     "must_watch_metrics": [
-      {{ "metric": "Key KPI", "benchmark_normal": "Healthy target range", "why_track": "Why this specific KPI drives valuation" }},
-      {{ "metric": "Key KPI", "benchmark_normal": "Healthy target range", "why_track": "Why this specific KPI drives valuation" }}
+      {{
+        "metric": "Key KPI",
+        "normal_operating_corridor": "Provided 5Y average or safe range",
+        "red_alert_threshold": "Provided 5Y historical worst or structural breach point",
+        "why_track": "Why this specific KPI drives valuation"
+      }}
     ],
-    "anti_thesis_trigger": "Specific disruption that breaks the investment thesis",
+    "anti_thesis_trigger": {{
+      "breach_event": "Specific structural operational breakdown in Hinglish",
+      "hard_numerical_benchmark": "Exact numerical benchmark backed by historical worst performance",
+      "action_zone": "EXIT / RE-EVALUATE THESIS"
+    }},
     "core_risks": [
       {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific risk in Hinglish" }},
       {{ "risk_type": "Competitive / Operational Risk", "description": "Specific risk in Hinglish" }}
@@ -339,7 +410,6 @@ def generate_models():
             else:
                 print(f"   ❌ Batch {b_idx} synthesis failed.")
 
-        # ⏳ Har batch ke baad exact 20 seconds ka interval (aakhri batch ke baad sleep ki zaroorat nahi)
         if b_idx < total_batches:
             print(f"   ⏳ Batch completed. Sleeping for 20 seconds to guarantee full rate-limit headroom...")
             time.sleep(20)
