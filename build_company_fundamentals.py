@@ -211,7 +211,7 @@ Do NOT wrap output in markdown backticks like ```json. Output ONLY raw parseable
 """
 
 # ==============================================================================
-# 3. GEMINI API CALLER
+# 3. GEMINI API CALLER (SAFE STRING CONCATENATION)
 # ==============================================================================
 
 def call_gemini(prompt, api_key):
@@ -223,8 +223,12 @@ def call_gemini(prompt, api_key):
         }
     }
 
+    scheme = "https://"
+    domain = "generativelanguage.googleapis.com"
+    endpoint = "/v1beta/models/"
+
     for model in MODELS_TO_TRY:
-        url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){model}:generateContent?key={api_key}"
+        url = scheme + domain + endpoint + model + ":generateContent?key=" + api_key
 
         try:
             res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=35)
