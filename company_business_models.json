@@ -1,482 +1,574 @@
 {
-  "ASIANPAINT": {
-    "symbol": "ASIANPAINT",
-    "company_name": "Asian Paints Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "Asian Paints decorative aur industrial paints, waterproofing solutions, wall coverings, adhesives, aur home decor products jaise ki kitchen aur bath fittings bechti hai.",
-      "who_is_customer": "Retail consumers (B2C) jo ghar ke liye paint aur decor khareedte hain, sath hi contractors, painters, aur institutional clients (B2B/OEMs)."
-    },
-    "economic_moat": {
-      "moat_type": "Distribution / Brand",
-      "moat_description": "Company ka nationwide dealer network aur supply chain strong hai, jisse rural aur urban markets mein products jaldi pahunchte hain. Saath hi, brand recall aur paint products mein established trust ek bada barrier banata hai."
-    },
-    "pricing_power_index": {
-      "rating": "HIGH",
-      "pass_through_speed": "30 to 60 days",
-      "rationale": "FY2026 mein gross margin 43.39% par sustain ho raha hai, jo ye darshata hai ki raw material inflation ko company apne strong brand aur market leadership ke dam par end consumers tak pass-through karne ki kshamta rakhti hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Lean Working Capital",
-      "operating_cash_vs_profit": "FY2026 mein Net Profit INR 4325.35 Cr hai aur Operating Cash Flow INR 7088.18 Cr hai. OCF, Net Profit se significantly higher hai, jo ki excellent earnings quality aur cash conversion ko reflect karta hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose precise percentage breakdowns for sub-segments in the audited statement extract.",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Volume growth demand in real estate and housing renovation sectors",
-      "Expansion into home decor, waterproofing, and kitchen/bath segments",
-      "Pricing actions taken to protect margins against crude-derivative raw material fluctuations"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Gross Margin",
-        "benchmark_normal": "40% - 45%",
-        "why_track": "Ye raw material cost (crude oil derivatives) inflation aur pricing power ka sabse accha indicator hai."
+  "metadata": {
+    "generated_at": "2026-10-02 13:16:40",
+    "total_companies": 6,
+    "macro_snapshot": {
+      "BZ=F": {
+        "name": "Brent Crude Oil",
+        "unit": "USD/bbl",
+        "relevant_sectors": "Paints, Petrochemicals, Tyres, Aviation",
+        "current_price": 99.19,
+        "fifty_two_week_low": 58.72,
+        "fifty_two_week_high": 126.1,
+        "deltas": {
+          "1M": 3.72,
+          "6M": -9.64,
+          "1Y_YoY": 54.72
+        }
       },
-      {
-        "metric": "Operating Cash Flow to Net Profit Ratio",
-        "benchmark_normal": "Greater than 1.0x",
-        "why_track": "Ye ensure karta hai ki accounting profit real bank balance aur cash mein convert ho raha hai ya nahi."
-      }
-    ],
-    "anti_thesis_trigger": "Aggressive price wars by new deep-pocketed corporate entrants leading to structural erosion in gross margins below 38% persistently.",
-    "core_risks": [
-      {
-        "risk_type": "Raw Material Price Volatility",
-        "description": "Crude oil prices badhne se raw material ki cost me izafa hota hai, jisse short-term me margins par dabav aa sakta hai."
+      "HG=F": {
+        "name": "Refined Copper",
+        "unit": "USD/lb",
+        "relevant_sectors": "Cables & Wires, Electricals, Auto, Capital Goods",
+        "current_price": 6.61,
+        "fifty_two_week_low": 4.83,
+        "fifty_two_week_high": 6.83,
+        "deltas": {
+          "1M": 1.69,
+          "6M": 18.46,
+          "1Y_YoY": 34.9
+        }
       },
-      {
-        "risk_type": "Intense Competition",
-        "description": "Naye aur purane domestic players ki taraf se paint aur decor segment me competition badhne se market share aur pricing power par asar pad sakta hai."
+      "NG=F": {
+        "name": "Natural Gas",
+        "unit": "USD/MMBtu",
+        "relevant_sectors": "Fertilizers, Ceramics, City Gas Distribution",
+        "current_price": 2.96,
+        "fifty_two_week_low": 2.48,
+        "fifty_two_week_high": 7.83,
+        "deltas": {
+          "1M": 0.0,
+          "6M": 5.34,
+          "1Y_YoY": -13.95
+        }
+      },
+      "ALI=F": {
+        "name": "Aluminium",
+        "unit": "USD/MT",
+        "relevant_sectors": "Automotive Ancillary, Packaging, White Goods",
+        "current_price": 3229.75,
+        "fifty_two_week_low": 2596.5,
+        "fifty_two_week_high": 4195.0,
+        "deltas": {
+          "1M": -5.54,
+          "6M": -5.62,
+          "1Y_YoY": 24.39
+        }
+      },
+      "CT=F": {
+        "name": "Cotton",
+        "unit": "USc/lb",
+        "relevant_sectors": "Textiles, Apparel, Yarn Mills",
+        "current_price": 77.46,
+        "fifty_two_week_low": 60.71,
+        "fifty_two_week_high": 92.15,
+        "deltas": {
+          "1M": -10.33,
+          "6M": 8.08,
+          "1Y_YoY": 23.64
+        }
+      },
+      "TIO=F": {
+        "name": "Iron Ore Proxy",
+        "unit": "USD/dmt",
+        "relevant_sectors": "Steel, Infrastructure, Commercial Vehicles",
+        "current_price": 96.59,
+        "fifty_two_week_low": 93.66,
+        "fifty_two_week_high": 111.42,
+        "deltas": {
+          "1M": 0.56,
+          "6M": -10.16,
+          "1Y_YoY": -7.21
+        }
       }
-    ],
-    "sources": [
-      {
-        "title": "Asian Paints Limited Annual Report FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
-      "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 35540.9,
-      "gross_profit_cr": 15421.41,
-      "operating_cash_flow_cr": 7088.18,
-      "net_profit_cr": 4325.35,
-      "gross_margin_pct": "43.39%",
-      "net_margin_pct": "12.17%",
-      "debt_to_equity": 0.18
     }
   },
-  "RELIANCE": {
-    "symbol": "RELIANCE",
-    "company_name": "Reliance Industries Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "Reliance oil-to-chemicals (O2C) products, retail products, aur digital telecom services bechti hai.",
-      "who_is_customer": "Retail consumers (B2C) aur large enterprise/industrial clients (B2B)."
-    },
-    "economic_moat": {
-      "moat_type": "Cost Advantage",
-      "moat_description": "Massive scale aur integrated refining operations ke through company cost leadership maintain karti hai."
-    },
-    "pricing_power_index": {
-      "rating": "MEDIUM",
-      "pass_through_speed": "30 to 60 days",
-      "rationale": "Gross margin 25.58% par stable hai, jo yeh darshata hai ki company raw material inflation ko kuch had tak end consumers ya clients tak pass on kar sakti hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Heavy Working Capital",
-      "operating_cash_vs_profit": "Operating Cash Flow (INR 192113.0 Cr) Net Profit (INR 80775.0 Cr) se kaafi zyada strong hai, jo ki excellent earnings quality ko dikhata hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108 without explicit sub-segment percentage breakdown in provided prompt parameters.",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Digital services subscriber base expansion aur ARPU growth",
-      "Retail store footprint aur omni-channel scaling",
-      "O2C demand and chemical margin realisations"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Debt to Equity Ratio",
-        "benchmark_normal": "Under 0.50",
-        "why_track": "Yeh batata hai ki balance sheet par leverage kitna control mein hai (current ratio 0.44 par safe zone mein hai)."
-      },
-      {
-        "metric": "Operating Cash Flow to Net Profit",
-        "benchmark_normal": "Greater than 1.0x",
-        "why_track": "Yeh ensure karta hai ki accounting profit real cash mein convert ho raha hai."
-      }
-    ],
-    "anti_thesis_trigger": "Agar OCF aur Net Profit ka conversion lagataar girne lage aur Debt to Equity limit cross kar jaye.",
-    "core_risks": [
-      {
-        "risk_type": "Regulatory Risk",
-        "description": "Telecom aur energy sectors mein government policies aur tariff regulations ka badlav business ko impact kar sakta hai."
-      },
-      {
-        "risk_type": "Commodity Price Volatility",
-        "description": "Global crude oil prices aur refining margins mein utaar-chadhav O2C segment ki profitability par asar dal sakta hai."
-      }
-    ],
-    "sources": [
-      {
-        "title": "Reliance Industries Limited Annual Report FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
+  "companies": {
+    "ASIANPAINT": {
+      "symbol": "ASIANPAINT",
+      "company_name": "Asian Paints Limited",
+      "data_period": "FY2026 (Audited)",
       "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 1057219.0,
-      "gross_profit_cr": 270395.0,
-      "operating_cash_flow_cr": 192113.0,
-      "net_profit_cr": 80775.0,
-      "gross_margin_pct": "25.58%",
-      "net_margin_pct": "7.64%",
-      "debt_to_equity": 0.44
-    }
-  },
-  "HDFCBANK": {
-    "symbol": "HDFCBANK",
-    "company_name": "HDFC Bank Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "Yeh bank retail aur corporate customers ko savings accounts, current accounts, loans (retail, corporate, housing), credit cards, aur wealth management services bechta hai.",
-      "who_is_customer": "Retail individuals, Small and Medium Enterprises (SMEs), large corporates, aur government institutions."
-    },
-    "economic_moat": {
-      "moat_type": "Distribution / Brand",
-      "moat_description": "FY2026 mein INR 192,566.78 Cr ki total revenue generate karne wala yeh bank extensive branch network aur strong brand recall ke zariye low-cost CASA deposits attract karta hai, jisse funding cost competitive rehti hai."
-    },
-    "pricing_power_index": {
-      "rating": "MEDIUM",
-      "pass_through_speed": "30-90 days",
-      "rationale": "Banking sector mein raw material ki jagah cost of funds hoti hai. Gross margin data officially disclosed nahi hai, par interest rate cycles aur intense competition ki wajah se loan rates badhane mein thoda waqt lagta hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Lean Working Capital",
-      "operating_cash_vs_profit": "FY2026 mein Net Profit INR 70,479.34 Cr tha, jabki Operating Cash Flow INR 111,855.99 Cr raha. OCF ka net profit se zyada hona yeh dikhata hai ki cash conversion strong hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108: Detailed sub-segment wise percentage breakdown is not officially disclosed in the verified summary.",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Credit growth across retail and wholesale loan portfolios",
-      "Fee income from cross-selling third-party financial products and credit cards",
-      "Expansion of branch network and digital banking touchpoints"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Net Interest Margin (NIM)",
-        "benchmark_normal": "3.5% to 4.1%",
-        "why_track": "Yeh core lending profitability ko measure karta hai jo Total Revenue (INR 192,566.78 Cr) ko drive karti hai."
+      "core_identity": {
+        "what_it_sells": "Decorative aur industrial paints, wood finishes, waterproofing solutions, wall coverings, aur home decor items jaise kitchen aur bath fittings bechti hai.",
+        "who_is_customer": "Retail households (B2C), institutional contractors, builders, aur auto/industrial OEMs."
       },
-      {
-        "metric": "Gross Non-Performing Assets (GNPA)",
-        "benchmark_normal": "Below 1.5%",
-        "why_track": "Asset quality track karne ke liye zaroori hai taaki Net Profit (INR 70,479.34 Cr) par credit cost ka negative impact na pade."
-      }
-    ],
-    "anti_thesis_trigger": "CASA deposit ratio mein lagataar giravat aana aur systemic credit cost ka achanak se badh jana.",
-    "core_risks": [
-      {
-        "risk_type": "Interest Rate Risk",
-        "description": "Interest rate cycles badalne se Net Interest Margin (NIM) par pressure aa sakta hai."
+      "economic_moat": {
+        "moat_type": "Distribution & Brand",
+        "moat_description": "Desh bhar mein peli hui supply chain aur dealer network ki wajah se naye competitors ke liye market mein ghusna bahut mushkil hota hai."
       },
-      {
-        "risk_type": "Credit Risk",
-        "description": "Retail ya corporate loans mein defaults badhne se provisioning badh sakti hai jisse profitability asar padegi."
+      "pricing_power_index": {
+        "rating": "MEDIUM",
+        "linked_primary_commodity": "Brent Crude Oil",
+        "pass_through_speed": "30-60 days",
+        "rationale": "Brent Crude Oil ka price 1Y_YoY mein 54.72% upar hai (current price $99.19/bbl). Company ka Gross Margin 43.39% hai, jo dikhata hai ki raw material inflation ka dabav hain par strong brand value ki wajah se company lagbhag saara cost aage pass-on karne ki kshamta rakhti hai."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Lean Working Capital",
+        "operating_cash_vs_profit": "Operating Cash Flow (INR 7088.18 Cr) Net Profit (INR 4325.35 Cr) se kafi zyada hai, jo ki zabardast cash conversion quality aur strong receivables management ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose sub-segment percentages in the summary notes.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Decorative paints volume growth jo ki real estate demand aur urban/rural housing demand par nirbhar hai",
+        "Waterproofing aur home decor segments ka naya contribution",
+        "Raw material price fluctuations ke mutabiq timely price hikes lena"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Gross Margin",
+          "benchmark_normal": "40% - 45%",
+          "why_track": "Kachhe maal (crude derivatives) ke dam badhne par margin protect karne ki kshamta ko track karne ke liye."
+        },
+        {
+          "metric": "Operating Cash Flow to Net Profit Ratio",
+          "benchmark_normal": "Above 1.0x",
+          "why_track": "Yeh ensure karne ke liye ki profit sirf paper par nahi hai balki asli cash mein convert ho raha hai."
+        }
+      ],
+      "anti_thesis_trigger": "Brent Crude ka price agar $100-$120 ke upar sustained rahe aur company competitive pressure ki wajah se price hike pass na kar paaye, toh gross margin 40% ke niche gir sakta hai.",
+      "core_risks": [
+        {
+          "risk_type": "Raw Material Risk",
+          "description": "Brent Crude Oil mein 1Y_YoY 54.72% ki tezi se petrochemical-based raw materials mehange ho rahe hain, jisse input cost pressure badhta hai."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "Naye organized aur unorganized players (jaise bade business groups ka paint sector mein aana) ki wajah se market share aur pricing power par competition ka dabav."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Asian Paints Limited Annual Report FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 35540.9,
+        "gross_profit_cr": 15421.41,
+        "operating_cash_flow_cr": 7088.18,
+        "net_profit_cr": 4325.35,
+        "gross_margin_pct": "43.39%",
+        "net_margin_pct": "12.17%",
+        "debt_to_equity": 0.18
       }
-    ],
-    "sources": [
-      {
-        "title": "HDFC Bank Limited Annual Report FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
+    },
+    "RELIANCE": {
+      "symbol": "RELIANCE",
+      "company_name": "Reliance Industries Limited",
+      "data_period": "FY2026 (Audited)",
       "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 192566.78,
-      "gross_profit_cr": 0.0,
-      "operating_cash_flow_cr": 111855.99,
-      "net_profit_cr": 70479.34,
-      "gross_margin_pct": "N/A",
-      "net_margin_pct": "36.6%",
-      "debt_to_equity": 0.81
-    }
-  },
-  "TCS": {
-    "symbol": "TCS",
-    "company_name": "Tata Consultancy Services Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "TCS global enterprises ko IT services, consulting, aur digital transformation solutions bechti hai.",
-      "who_is_customer": "B2B (Large global corporations across BFSI, Retail, Manufacturing, and Healthcare sectors)."
-    },
-    "economic_moat": {
-      "moat_type": "Switching Cost",
-      "moat_description": "TCS ke deep domain expertise aur mission-critical systems mein integration ki wajah se clients ke liye vendor badalna bahut costly aur risky hota hai."
-    },
-    "pricing_power_index": {
-      "rating": "HIGH",
-      "pass_through_speed": "30-90 days",
-      "rationale": "45.1% ka gross margin indicate karta hai ki company ke paas strong pricing power hai, jisse woh wage inflation ko clients par pass kar sakti hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Lean",
-      "operating_cash_vs_profit": "OCF (52094 Cr) Net Profit (49210 Cr) se zyada hai, jo ki excellent cash conversion aur high-quality earnings dikhata hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Digital transformation projects aur cloud migration demand",
-      "Large enterprise deal wins aur order book execution",
-      "Global clients ka IT spend budget allocation"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Operating Margin",
-        "benchmark_normal": "24% - 26%",
-        "why_track": "Operational efficiency aur cost management ka primary indicator hai."
+      "core_identity": {
+        "what_it_sells": "Reliance telco services, retail goods, petroleum products, petrochemicals, aur digital/data services bechti hai.",
+        "who_is_customer": "B2C retail consumers, mobile subscribers, B2B industrial clients, aur global petrochemical buyers."
       },
-      {
-        "metric": "Attrition Rate",
-        "benchmark_normal": "12% - 15%",
-        "why_track": "Talent retention directly service delivery aur margin stability ko impact karta hai."
-      }
-    ],
-    "anti_thesis_trigger": "Major global recession leading to massive IT budget cuts by top-tier clients or significant loss of key long-term contracts.",
-    "core_risks": [
-      {
-        "risk_type": "Geopolitical Risk",
-        "description": "Global markets mein visa restrictions aur protectionist policies ka business operations par asar."
+      "economic_moat": {
+        "moat_type": "Cost Advantage / Distribution",
+        "moat_description": "Integrated refinery-to-petrochemical complex aur massive nationwide physical-digital retail-telecom infrastructure ke chalte scale efficiencies milti hain jo competitors ke liye replicate karna difficult hai."
       },
-      {
-        "risk_type": "Talent Risk",
-        "description": "High-end tech talent ki shortage aur wage inflation se margins par pressure."
+      "pricing_power_index": {
+        "rating": "MEDIUM",
+        "linked_primary_commodity": "Brent Crude Oil",
+        "pass_through_speed": "30 to 60 days",
+        "rationale": "Brent crude 1Y YoY 54.72% upar hai current price 99.19 USD/bbl par, jabki company ka Gross Margin 25.58% hai. O2C aur retail segments mein raw material inflation ka impact margins par padta hai, lekin strong market position ki wajah se yeh cost pass-through gradual tarike se kar lete hain."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Heavy Working Capital",
+        "operating_cash_vs_profit": "Net profit INR 80775.0 Cr hai aur Operating Cash Flow INR 192113.0 Cr hai, matlab OCF net profit se significantly higher hai jo ki strong cash conversion ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "As per strict audit rules and zero estimate rule, sub-segment percentages are not officially disclosed in the provided prompt data.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Telecom subscriber additions and Average Revenue Per User (ARPU) expansion in Jio",
+        "Store footprint expansion and omni-channel scale-up in Reliance Retail",
+        "Petrochemical and refining product demand linked to global energy dynamics"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Jio ARPU (Average Revenue Per User)",
+          "benchmark_normal": "INR 180 - INR 220+",
+          "why_track": "Yeh digital services revenue growth ka primary driver hai."
+        },
+        {
+          "metric": "Debt to Equity Ratio",
+          "benchmark_normal": "Below 0.50",
+          "why_track": "Current ratio 0.44 hai jo healthy balance sheet aur comfortable leverage ko reflect karta hai."
+        }
+      ],
+      "anti_thesis_trigger": "Brent Crude extreme volatility beyond USD 120/bbl combined with retail margin compression aur aggressive capex burn jo cash flows ko negative kar de.",
+      "core_risks": [
+        {
+          "risk_type": "Raw Material or Macro Risk",
+          "description": "Brent crude ki 54.72% YoY tezi se input costs badh sakti hain agar refining margins (GRMs) expand na karein."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "Retail aur telecom sectors mein intense price competition ki wajah se margins par pressure aa sakta hai."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Reliance Industries Limited Statutory Financials FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Balance Sheet, P&L, and Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 1057219.0,
+        "gross_profit_cr": 270395.0,
+        "operating_cash_flow_cr": 192113.0,
+        "net_profit_cr": 80775.0,
+        "gross_margin_pct": "25.58%",
+        "net_margin_pct": "7.64%",
+        "debt_to_equity": 0.44
       }
-    ],
-    "sources": [
-      {
-        "title": "Tata Consultancy Services Limited Annual Report FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
+    },
+    "HDFCBANK": {
+      "symbol": "HDFCBANK",
+      "company_name": "HDFC Bank Limited",
+      "data_period": "FY2026 (Audited)",
       "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 267021.0,
-      "gross_profit_cr": 120418.0,
-      "operating_cash_flow_cr": 52094.0,
-      "net_profit_cr": 49210.0,
-      "gross_margin_pct": "45.1%",
-      "net_margin_pct": "18.43%",
-      "debt_to_equity": 0.11
-    }
-  },
-  "MARUTI": {
-    "symbol": "MARUTI",
-    "company_name": "Maruti Suzuki India Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "Yeh company entry-level se lekar SUV segment tak passenger vehicles, spare parts, aur accessories bechti hai.",
-      "who_is_customer": "Retail consumers (B2C) aur commercial fleet operators jo Indian market aur export markets mein vehicles khareedte hain."
-    },
-    "economic_moat": {
-      "moat_type": "Distribution",
-      "moat_description": "Company ka nationwide dealership aur service network bahut bada hai, jisse tier-2 aur tier-3 cities mein bhi deep market penetration milti hai."
-    },
-    "pricing_power_index": {
-      "rating": "MEDIUM",
-      "pass_through_speed": "30 to 60 days",
-      "rationale": "Gross margin 21.47% par stable hai, jo yeh darshata hai ki competitive passenger vehicle market mein raw material inflation ko consumers tak pass karne ki kshamta moderate hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Lean Working Capital",
-      "operating_cash_vs_profit": "Operating Cash Flow (INR 19099.9 Cr) Net Profit (INR 14679.5 Cr) se zyada hai, jo strong earnings quality aur cash conversion ko dikhata hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose precise sub-segment percentages in the provided extract.",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Domestic volume growth through new SUV launches and refresh of hatchback models",
-      "Spare parts, accessories, and value-added services revenue expansion",
-      "Export volume growth across global markets including Africa, Latin America, and Asia"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Capacity Utilization and Sales Volume",
-        "benchmark_normal": "85% - 95%",
-        "why_track": "Higher plant utilization optimizes fixed cost absorption and improves operating margins."
+      "core_identity": {
+        "what_it_sells": "Yeh bank retail aur corporate customers ko savings accounts, current accounts, loans (housing, auto, personal, commercial), credit cards, aur wealth management services provide karta hai.",
+        "who_is_customer": "Retail individuals, SMEs, large corporates, aur institutional clients."
       },
-      {
-        "metric": "EBITDA Margin / Gross Margin",
-        "benchmark_normal": "Gross margin around 20% - 23%",
-        "why_track": "Tracks pricing power against commodity inflation and competitive discounting pressures."
-      }
-    ],
-    "anti_thesis_trigger": "Persistent loss of market share in the high-growth SUV segment or severe margin contraction due to unabsorbed input cost inflation.",
-    "core_risks": [
-      {
-        "risk_type": "Commodity Price Risk",
-        "description": "Steel, aluminum, aur precious metals ke daam badhne se gross margins par dabav aa sakta hai."
+      "economic_moat": {
+        "moat_type": "Distribution / Cost Advantage",
+        "moat_description": "HDFC Bank ka vast branch network aur low-cost CASA deposits ka bada base isko dusre banks ke mukable saste rates par funds raise karne mein madad karta hai."
       },
-      {
-        "risk_type": "Regulatory Risk",
-        "description": "Safety aur emission norms (jaise CAFE standards) mein naye badlav aane se compliance cost badh sakti hai."
+      "pricing_power_index": {
+        "rating": "MEDIUM",
+        "linked_primary_commodity": "Brent Crude Oil",
+        "pass_through_speed": "Not directly applicable for banks",
+        "rationale": "Banking sector ka Gross Margin N/A hota hai kyunki yeh physical raw materials purchase nahi karte balki capital aur credit mein deal karte hain. Inki pricing power interest rate cycles aur credit demand par depend karti hai."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Lean Working Capital",
+        "operating_cash_vs_profit": "Operating Cash Flow INR 111,855.99 Cr hai jo Net Profit INR 70,479.34 Cr se zyaada hai, jo ki banking business ke liye strong cash conversion ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose sub-segment percentage splits in the summary notes provided.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Credit growth across retail and wholesale loan portfolios",
+        "Net Interest Margin (NIM) expansion and maintenance",
+        "Fee-based income from cross-selling credit cards and third-party products"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Net Interest Margin (NIM)",
+          "benchmark_normal": "3.8% to 4.2%",
+          "why_track": "Yeh bank ki core lending profitability aur cost of funds ko reflect karta hai."
+        },
+        {
+          "metric": "Gross Non-Performing Assets (GNPA)",
+          "benchmark_normal": "Under 1.3%",
+          "why_track": "Asset quality aur loan book ki health ko track karne ke liye zaroori hai."
+        }
+      ],
+      "anti_thesis_trigger": "Credit growth mein sharp slowdown ke sath-sath NPA mein unexpected spike aana aur deposit growth ka advance growth se lagataar piche rehna.",
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "description": "Interest rate volatility ki wajah se cost of funds badh sakti hai aur margins par pressure aa sakta hai."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "Unsecured retail lending portfolio mein stress badhne se credit costs mein izafa ho sakta hai."
+        }
+      ],
+      "sources": [
+        {
+          "title": "HDFC Bank Limited Annual Report FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Financial Statements & Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 192566.78,
+        "gross_profit_cr": 0.0,
+        "operating_cash_flow_cr": 111855.99,
+        "net_profit_cr": 70479.34,
+        "gross_margin_pct": "N/A",
+        "net_margin_pct": "36.6%",
+        "debt_to_equity": 0.81
       }
-    ],
-    "sources": [
-      {
-        "title": "Maruti Suzuki India Limited Audited Financial Results FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Statement of Profit and Loss, Cash Flow Statement & Ind AS 108",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
+    },
+    "TCS": {
+      "symbol": "TCS",
+      "company_name": "Tata Consultancy Services Limited",
+      "data_period": "FY2026 (Audited)",
       "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 177094.1,
-      "gross_profit_cr": 38022.3,
-      "operating_cash_flow_cr": 19099.9,
-      "net_profit_cr": 14679.5,
-      "gross_margin_pct": "21.47%",
-      "net_margin_pct": "8.29%",
-      "debt_to_equity": 0.0
-    }
-  },
-  "POLYCAB": {
-    "symbol": "POLYCAB",
-    "company_name": "Polycab India Limited",
-    "data_period": "FY2026 (Audited)",
-    "period_end_date": "2026-03-31",
-    "core_identity": {
-      "what_it_sells": "Polycab wires, cables, aur fast-moving electrical goods (FMEG) jaise fans, switches, aur lighting products bechti hai.",
-      "who_is_customer": "Inke customers mein retail consumers, B2B infrastructure developers, industrial contractors, aur large OEMs shamil hain."
-    },
-    "economic_moat": {
-      "moat_type": "Distribution / Brand",
-      "moat_description": "Company ka nationwide dealer aur distributor network bahut strong hai, jisse tier-2 aur tier-3 cities tak deep market penetration milti hai. Sath hi, Polycab brand ki recall value safety aur quality mein market leader banati hai."
-    },
-    "pricing_power_index": {
-      "rating": "HIGH",
-      "pass_through_speed": "Within 30 to 45 days",
-      "rationale": "Company 21.61% ka solid gross margin maintain kar rahi hai, jo yeh darshata hai ki copper aur aluminum jaise raw materials ki cost inflation ko woh aasani se end customers par pass on kar sakti hai."
-    },
-    "cash_flow_health": {
-      "working_capital_nature": "Heavy Working Capital",
-      "operating_cash_vs_profit": "Operating Cash Flow (INR 3810.67 Cr) Net Profit (INR 2672.03 Cr) se zyada hai, matlab earnings ki cash conversion quality bahut strong aur healthy hai.",
-      "free_cash_flow_quality": "High"
-    },
-    "revenue_breakdown": {
-      "has_disclosed_segments": false,
-      "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not explicitly provide precise percentage breakdowns in the summary dataset.",
-      "segments": [],
-      "geographic_split": null
-    },
-    "revenue_drivers": [
-      "Volume growth in infrastructure and real estate sectors driving wire and cable demand",
-      "Expansion of retail dealer footprint into Tier-2 and Tier-3 Indian cities",
-      "Product portfolio scaling in FMEG and allied electrical accessories"
-    ],
-    "must_watch_metrics": [
-      {
-        "metric": "Gross Margin",
-        "benchmark_normal": "20% to 23%",
-        "why_track": "Yeh metric raw material price fluctuations ko absorb karne ki company ki taakat ko track karta hai."
+      "core_identity": {
+        "what_it_sells": "TCS global clients ko IT services, consulting, aur digital transformation solutions provide karti hai.",
+        "who_is_customer": "B2B enterprise clients across global BFSI, retail, manufacturing, aur healthcare sectors."
       },
-      {
-        "metric": "Operating Cash Flow to Net Profit Ratio",
-        "benchmark_normal": "Greater than 1.0x",
-        "why_track": "Yeh ensure karta hai ki accounting profits actual cash mein convert ho rahe hain ya nahi."
-      }
-    ],
-    "anti_thesis_trigger": "Raw material (copper/aluminum) prices mein extreme volatility aana jise passing-on karna impossible ho jaaye, ya operating cash flow ka net profit se lagataar niche girna.",
-    "core_risks": [
-      {
-        "risk_type": "Commodity Price Risk",
-        "description": "Copper aur aluminum jaise key raw materials ke global price fluctuations margins ko compress kar sakte hain."
+      "economic_moat": {
+        "moat_type": "Switching Cost / Brand",
+        "moat_description": "Enterprise-level mission-critical applications aur long-term client relationships ki wajah se switch karna mushkil hota hai, jisse high client retention milti hai."
       },
-      {
-        "risk_type": "Competition Risk",
-        "description": "Unorganised players aur aggressive regional competitors se price wars hone ka risk rehta hai."
+      "pricing_power_index": {
+        "rating": "HIGH",
+        "linked_primary_commodity": "Brent Crude Oil",
+        "pass_through_speed": "Immediate",
+        "rationale": "IT services ek asset-light model hai jo direct raw material commodities (jaise Brent ya Copper) par dependent nahi hai. 45.1% gross margin stable hai kyunki company apne high-value solutions aur specialized digital consulting ke zariye wage inflation ya macro costs ko asani se pass-through kar leti hai."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Lean Working Capital",
+        "operating_cash_vs_profit": "Operating Cash Flow (INR 52094.0 Cr) net profit (INR 49210.0 Cr) se zyada hai, jo ki excellent earnings quality aur strong cash conversion ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose precise sub-segment percentage splits in the summary prompt data, ensuring strict compliance with zero-estimate rules.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Large enterprise digital transformation deals aur cloud migration wins",
+        "BFSI aur Retail verticals mein discretionary IT spending ka recovery trend",
+        "Global delivery model aur employee utilization optimization"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Total Contract Value (TCV) of Deal Wins",
+          "benchmark_normal": "USD 8-10 Billion per quarter",
+          "why_track": "Future revenue visibility aur medium-term growth momentum ka direct indicator hai."
+        },
+        {
+          "metric": "Attrition Rate (LTM)",
+          "benchmark_normal": "11% - 13%",
+          "why_track": "Talent retention cost, delivery execution efficiency, aur margins ko protect karne ke liye crucial hai."
+        }
+      ],
+      "anti_thesis_trigger": "US aur European markets mein severe macroeconomic recession jiski wajah se global enterprises apne IT budgets mein sudden cuts announce karein.",
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "description": "Global inflation aur wage pressures ki wajah se operating margins par dabav aa sakta hai."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "Cross-currency fluctuations (USD/INR volatility) aur on-site visa regulatory changes ke chalte revenue realization affect ho sakti hai."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Tata Consultancy Services Limited Annual Report FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Financial Statements, Segment Information (Ind AS 108) & Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 267021.0,
+        "gross_profit_cr": 120418.0,
+        "operating_cash_flow_cr": 52094.0,
+        "net_profit_cr": 49210.0,
+        "gross_margin_pct": "45.1%",
+        "net_margin_pct": "18.43%",
+        "debt_to_equity": 0.11
       }
-    ],
-    "sources": [
-      {
-        "title": "Polycab India Limited Annual Report FY2026",
-        "filing_type": "Audited Statutory Annual Filing",
-        "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
-        "period": "FY2026"
-      }
-    ],
-    "audited_statement_snapshot": {
-      "financial_year": "FY2026",
+    },
+    "MARUTI": {
+      "symbol": "MARUTI",
+      "company_name": "Maruti Suzuki India Limited",
+      "data_period": "FY2026 (Audited)",
       "period_end_date": "2026-03-31",
-      "is_stale": false,
-      "days_old": 185,
-      "currency": "INR",
-      "revenue_cr": 28269.51,
-      "gross_profit_cr": 6109.34,
-      "operating_cash_flow_cr": 3810.67,
-      "net_profit_cr": 2672.03,
-      "gross_margin_pct": "21.61%",
-      "net_margin_pct": "9.45%",
-      "debt_to_equity": 0.37
+      "core_identity": {
+        "what_it_sells": "Passenger vehicles, utility vehicles, commercial cars, aur spare parts.",
+        "who_is_customer": "Retail consumers (B2C) aur commercial fleet operators (B2B)."
+      },
+      "economic_moat": {
+        "moat_type": "Distribution / Cost Advantage",
+        "moat_description": "India ka sabse bada dealer aur service network, jisse economical manufacturing aur unmatched resale value milti hai."
+      },
+      "pricing_power_index": {
+        "rating": "MEDIUM",
+        "linked_primary_commodity": "Aluminium",
+        "pass_through_speed": "30 to 60 days",
+        "rationale": "Company ka gross margin 21.47% hai. Aluminium ki prices mein 1Y YoY 24.39% ki tezi aur Brent Crude mein 54.72% ki badhotri ke bawajud, highly competitive passenger vehicle market mein raw material cost inflation ko turant poori tarah pass-through karna mushkil hota hai."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Lean Working Capital",
+        "operating_cash_vs_profit": "Operating Cash Flow (INR 19099.9 Cr) Net Profit (INR 14679.5 Cr) se zyada hai, jo ki strong cash conversion aur healthy business operations ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially break down sub-segment percentages beyond automotive as a single primary reporting segment.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Domestic volume growth through new SUV launches and refreshed variants",
+        "Export volume expansion to international markets including Europe, Latin America, and Africa",
+        "Higher realization per vehicle via premiumization and feature upgrades"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Capacity Utilization Rate",
+          "benchmark_normal": "85% - 95%",
+          "why_track": "Plant efficiency aur fixed cost absorption ko track karne ke liye zaroori hai."
+        },
+        {
+          "metric": "EBITDA Margin",
+          "benchmark_normal": "11% - 13%",
+          "why_track": "Operational profitability aur cost control measures ki performance dekne ke liye."
+        }
+      ],
+      "anti_thesis_trigger": "Brent Crude oil ka USD 100/bbl ke upar sustained trading aur Aluminium ki prices mein continued anomaly, jisse gross margin 21.47% se tezi se niche gir jaye.",
+      "core_risks": [
+        {
+          "risk_type": "Raw Material Risk",
+          "description": "Aluminium (price up by 24.39% YoY) aur Brent Crude (price up by 54.72% YoY) ke daam badhne se input costs par dabav padta hai."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "Entry-level segment mein demand ki kami aur domestic market mein badhti hui fierce competition."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Maruti Suzuki India Limited Annual Report FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 177094.1,
+        "gross_profit_cr": 38022.3,
+        "operating_cash_flow_cr": 19099.9,
+        "net_profit_cr": 14679.5,
+        "gross_margin_pct": "21.47%",
+        "net_margin_pct": "8.29%",
+        "debt_to_equity": 0.0
+      }
+    },
+    "POLYCAB": {
+      "symbol": "POLYCAB",
+      "company_name": "Polycab India Limited",
+      "data_period": "FY2026 (Audited)",
+      "period_end_date": "2026-03-31",
+      "core_identity": {
+        "what_it_sells": "Polycab wires, cables, FMEG products jaise fans, switches, lighting aur conduits bechti hai.",
+        "who_is_customer": "Retail consumers (B2C), B2B infrastructure developers, industrial clients aur institutional buyers."
+      },
+      "economic_moat": {
+        "moat_type": "Distribution / Brand",
+        "moat_description": "Pan-India dealer aur distributor network ke sath strong brand recall jo direct retail reach aur institutional projects me competitive edge deta hai."
+      },
+      "pricing_power_index": {
+        "rating": "MEDIUM",
+        "linked_primary_commodity": "Refined Copper",
+        "pass_through_speed": "30 to 60 days",
+        "rationale": "Refined Copper ka 1Y_YoY price increase 34.90% hai, jabki company ka Gross Margin 21.61% par hai. Input cost inflation ko end consumers ya B2B clients tak pass karne me thoda time lagta hai, jisse margin compression ka risk banta hai agar raw material volatility bahut fast ho."
+      },
+      "cash_flow_health": {
+        "working_capital_nature": "Heavy Working Capital",
+        "operating_cash_vs_profit": "Operating Cash Flow (INR 3810.67 Cr) Net Profit (INR 2672.03 Cr) se zyada hai, jo strong cash conversion aur healthy earnings quality ko darshata hai.",
+        "free_cash_flow_quality": "High"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 does not officially disclose precise sub-segment percentages in the provided snapshot.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "revenue_drivers": [
+        "Volume growth in wires and cables due to continuous real estate and infrastructure expansion",
+        "Market share gains in FMEG (Fast Moving Electrical Goods) through dealer network expansion",
+        "Execution of large institutional and government electrification orders"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Gross Margin",
+          "benchmark_normal": "20% - 24%",
+          "why_track": "Ye batata hai ki company raw material price fluctuations ko kitni acchi tarah absorb ya pass-through kar rahi hai."
+        },
+        {
+          "metric": "Operating Cash Flow to Net Profit Ratio",
+          "benchmark_normal": "> 1.0x",
+          "why_track": "Ye ensure karta hai ki reported profits actual cash me convert ho rahe hain ya working capital me fass rahe hain."
+        }
+      ],
+      "anti_thesis_trigger": "Refined copper ya aluminium prices me sudden massive spike aur company ka unhe delayed pass-through karna, jisse Gross Margin 21.61% se gir kar critical threshold ke niche chala jaye.",
+      "core_risks": [
+        {
+          "risk_type": "Raw Material Risk",
+          "description": "Refined Copper aur Aluminium jaise key metals ki global price volatility direct input costs ko badha deti hai, jisse margins par pressure aata hai."
+        },
+        {
+          "risk_type": "Business Risk",
+          "description": "FMEG segment me intense competition aur pricing pressure unbranded ya regional players se margins ko affect kar sakta hai."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Polycab India Limited Annual Report FY2026",
+          "filing_type": "Audited Statutory Annual Filing",
+          "page_or_section": "Segment Information (Ind AS 108) & Cash Flow Statement",
+          "period": "FY2026"
+        }
+      ],
+      "audited_statement_snapshot": {
+        "financial_year": "FY2026",
+        "period_end_date": "2026-03-31",
+        "is_stale": false,
+        "days_old": 185,
+        "currency": "INR",
+        "revenue_cr": 28269.51,
+        "gross_profit_cr": 6109.34,
+        "operating_cash_flow_cr": 3810.67,
+        "net_profit_cr": 2672.03,
+        "gross_margin_pct": "21.61%",
+        "net_margin_pct": "9.45%",
+        "debt_to_equity": 0.37
+      }
     }
   }
 }
