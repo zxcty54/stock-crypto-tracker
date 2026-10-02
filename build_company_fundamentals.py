@@ -9,21 +9,29 @@ from datetime import datetime
 OUTPUT_FILE = "company_business_models.json"
 
 STOCKS_LIST = [
-    {"symbol": "ASIANPAINT", "ticker": "ASIANPAINT.NS", "name": "Asian Paints Limited", "sector": "Paints & Home Decor"},
-    {"symbol": "RELIANCE", "ticker": "RELIANCE.NS", "name": "Reliance Industries Limited", "sector": "Energy, Retail & Telecom"},
-    {"symbol": "HDFCBANK", "ticker": "HDFCBANK.NS", "name": "HDFC Bank Limited", "sector": "Banking & Financial Services"},
-    {"symbol": "TCS", "ticker": "TCS.NS", "name": "Tata Consultancy Services Limited", "sector": "IT Services & Consulting"},
-    {"symbol": "MARUTI", "ticker": "MARUTI.NS", "name": "Maruti Suzuki India Limited", "sector": "Automotive"},
-    {"symbol": "POLYCAB", "ticker": "POLYCAB.NS", "name": "Polycab India Limited", "sector": "Cables & Fast Moving Electrical Goods"}
+    {"symbol": "ASIANPAINT", "ticker": "ASIANPAINT.NS", "name": "Asian Paints Limited", "sector": "Manufacturing - Paints & Home Decor", "sector_type": "MANUFACTURING"},
+    {"symbol": "RELIANCE", "ticker": "RELIANCE.NS", "name": "Reliance Industries Limited", "sector": "Conglomerate - Energy, Retail & Telecom", "sector_type": "CONGLOMERATE"},
+    {"symbol": "HDFCBANK", "ticker": "HDFCBANK.NS", "name": "HDFC Bank Limited", "sector": "Banking & Financial Services", "sector_type": "BANKING"},
+    {"symbol": "TCS", "ticker": "TCS.NS", "name": "Tata Consultancy Services Limited", "sector": "IT Services & Consulting", "sector_type": "IT_SERVICES"},
+    {"symbol": "MARUTI", "ticker": "MARUTI.NS", "name": "Maruti Suzuki India Limited", "sector": "Manufacturing - Automotive", "sector_type": "MANUFACTURING"},
+    {"symbol": "POLYCAB", "ticker": "POLYCAB.NS", "name": "Polycab India Limited", "sector": "Manufacturing - Cables & FMEG", "sector_type": "MANUFACTURING"}
 ]
 
-COMMODITIES_LIST = [
-    {"name": "Brent Crude Oil", "ticker": "BZ=F", "unit": "USD/bbl", "impact_sectors": "Paints, Petrochemicals, Tyres, Aviation"},
-    {"name": "Refined Copper", "ticker": "HG=F", "unit": "USD/lb", "impact_sectors": "Cables & Wires, Electricals, Auto, Capital Goods"},
-    {"name": "Natural Gas", "ticker": "NG=F", "unit": "USD/MMBtu", "impact_sectors": "Fertilizers, Ceramics, City Gas Distribution"},
-    {"name": "Aluminium", "ticker": "ALI=F", "unit": "USD/MT", "impact_sectors": "Automotive Ancillary, Packaging, White Goods"},
-    {"name": "Cotton", "ticker": "CT=F", "unit": "USc/lb", "impact_sectors": "Textiles, Apparel, Yarn Mills"},
-    {"name": "Iron Ore Proxy", "ticker": "TIO=F", "unit": "USD/dmt", "impact_sectors": "Steel, Infrastructure, Commercial Vehicles"}
+# Comprehensive Macro Tickers (Commodities + Currencies + Interest Rates)
+MACRO_TICKERS = [
+    # 1. Industrial Commodities (For Manufacturing & Auto)
+    {"id": "brent_crude", "name": "Brent Crude Oil", "ticker": "BZ=F", "unit": "USD/bbl", "category": "COMMODITY", "impact_sectors": "Paints, Petrochemicals, Tyres, Aviation"},
+    {"id": "copper", "name": "Refined Copper", "ticker": "HG=F", "unit": "USD/lb", "category": "COMMODITY", "impact_sectors": "Cables & Wires, Electricals, Auto, Capital Goods"},
+    {"id": "natural_gas", "name": "Natural Gas", "ticker": "NG=F", "unit": "USD/MMBtu", "category": "COMMODITY", "impact_sectors": "Fertilizers, Ceramics, City Gas Distribution"},
+    {"id": "aluminium", "name": "Aluminium", "ticker": "ALI=F", "unit": "USD/MT", "category": "COMMODITY", "impact_sectors": "Automotive Ancillary, Packaging, White Goods"},
+    {"id": "cotton", "name": "Cotton", "ticker": "CT=F", "unit": "USc/lb", "category": "COMMODITY", "impact_sectors": "Textiles, Apparel, Yarn Mills"},
+    {"id": "iron_ore", "name": "Iron Ore Proxy", "ticker": "TIO=F", "unit": "USD/dmt", "category": "COMMODITY", "impact_sectors": "Steel, Infrastructure, Commercial Vehicles"},
+    
+    # 2. Currency & Global Exposure (Crucial for IT Services & Exporters)
+    {"id": "usd_inr", "name": "USD-INR Currency Pair", "ticker": "USDINR=X", "unit": "INR/USD", "category": "CURRENCY", "impact_sectors": "IT Services, Pharma, Importers & Exporters"},
+    
+    # 3. Sovereign Yields (Crucial for Banking & Cost of Capital)
+    {"id": "us_10y_yield", "name": "US 10-Year Bond Yield", "ticker": "^TNX", "unit": "%", "category": "YIELD", "impact_sectors": "Banking, Global Capital Flows, Tech Valuations"}
 ]
 
 MODELS_TO_TRY = [
@@ -32,20 +40,20 @@ MODELS_TO_TRY = [
 ]
 
 # ==============================================================================
-# 1. COMMODITY MACRO LAYER (1-YEAR YOY & MULTI-PERIOD EXTRACTION)
+# 1. UNIFIED MACRO LAYER (COMMODITIES + FX + RATES)
 # ==============================================================================
 
-def fetch_all_commodity_macro_context():
+def fetch_unified_macro_dashboard():
     """
-    yfinance se key industrial commodities ka 1Y, 6M trend aur 52W range fetch karta hai.
+    yfinance se Commodities, USD-INR aur Yields ka 1Y YoY aur multi-period snapshot extract karta hai.
     """
     print("\n" + "=" * 75)
-    print("🌍 Step 1: Gathering Key Industrial Commodities Macro Snapshot...")
+    print("🌍 Step 1: Gathering Unified Macro Dashboard (Commodities + FX + Rates)...")
     print("=" * 75)
 
     macro_data = {}
 
-    for item in COMMODITIES_LIST:
+    for item in MACRO_TICKERS:
         ticker = item["ticker"]
         name = item["name"]
         try:
@@ -56,7 +64,7 @@ def fetch_all_commodity_macro_context():
                 print(f"   ⚠️ Incomplete data for {name} ({ticker})")
                 continue
 
-            current_price = round(float(hist['Close'].iloc[-1]), 2)
+            current_val = round(float(hist['Close'].iloc[-1]), 2)
             p_1m = round(float(hist['Close'].iloc[-22]), 2) if len(hist) >= 22 else float(hist['Close'].iloc[0])
             p_6m = round(float(hist['Close'].iloc[-126]), 2) if len(hist) >= 126 else float(hist['Close'].iloc[0])
             p_1y = round(float(hist['Close'].iloc[0]), 2)
@@ -67,20 +75,22 @@ def fetch_all_commodity_macro_context():
             def pct(latest, past):
                 return round(((latest - past) / past) * 100, 2)
 
-            macro_data[ticker] = {
+            macro_data[item["id"]] = {
                 "name": name,
+                "ticker": ticker,
+                "category": item["category"],
                 "unit": item["unit"],
                 "relevant_sectors": item["impact_sectors"],
-                "current_price": current_price,
+                "current_value": current_val,
                 "fifty_two_week_low": low_52w,
                 "fifty_two_week_high": high_52w,
                 "deltas": {
-                    "1M": pct(current_price, p_1m),
-                    "6M": pct(current_price, p_6m),
-                    "1Y_YoY": pct(current_price, p_1y)
+                    "1M": pct(current_val, p_1m),
+                    "6M": pct(current_val, p_6m),
+                    "1Y_YoY": pct(current_val, p_1y)
                 }
             }
-            print(f"   ✅ {name:<18}: {current_price:>8} {item['unit']:<8} | 1Y YoY: {macro_data[ticker]['deltas']['1Y_YoY']:>6}% | 52W: [{low_52w} - {high_52w}]")
+            print(f"   ✅ [{item['category']:<9}] {name:<22}: {current_val:>8} {item['unit']:<8} | 1Y YoY: {macro_data[item['id']]['deltas']['1Y_YoY']:>6}%")
             time.sleep(0.3)
         except Exception as e:
             print(f"   ❌ Error fetching {name}: {e}")
@@ -88,12 +98,14 @@ def fetch_all_commodity_macro_context():
     return macro_data
 
 # ==============================================================================
-# 2. STRICT AUDITED FINANCIALS EXTRACTION
+# 2. STRICT AUDITED FINANCIALS EXTRACTION (WITH EMPLOYEE EXPENSE FOR IT)
 # ==============================================================================
 
 def fetch_latest_audited_financials(ticker_symbol):
     """
-    yfinance se latest annual statements extract karta hai aur exact Indian FY calculate karta hai.
+    yfinance se latest annual statements extract karta hai,
+    descending date sort karke most recent period pakadta hai,
+    aur exact Indian Financial Year (FY) calculate karta hai.
     """
     try:
         t = yf.Ticker(ticker_symbol)
@@ -104,7 +116,7 @@ def fetch_latest_audited_financials(ticker_symbol):
         if income_stmt is None or income_stmt.empty:
             return None
 
-        # Descending date sort
+        # Descending date sorting
         sorted_dates = sorted(income_stmt.columns, reverse=True)
         latest_date = sorted_dates[0]
         latest_date_dt = pd.to_datetime(latest_date)
@@ -141,10 +153,14 @@ def fetch_latest_audited_financials(ticker_symbol):
         operating_cf = extract_row(latest_cf, ["operating cash flow", "cash from operations"])
         total_debt = extract_row(latest_balance, ["total debt"])
         equity = extract_row(latest_balance, ["stockholders equity", "common stock equity"])
+        
+        # 🎯 Key metric for IT/Services: Employee Benefit Expense / Staff Cost
+        employee_cost = extract_row(latest_income, ["employee benefit", "salaries", "staff cost", "personnel"])
 
         gross_margin = round((gross_profit / revenue) * 100, 2) if revenue > 0 and gross_profit > 0 else "N/A"
         net_margin = round((net_income / revenue) * 100, 2) if revenue > 0 else "N/A"
         debt_to_equity = round(total_debt / equity, 2) if equity > 0 else 0.0
+        employee_cost_pct = round((employee_cost / revenue) * 100, 2) if revenue > 0 and employee_cost > 0 else "N/A"
 
         return {
             "financial_year": fy_label,
@@ -154,6 +170,8 @@ def fetch_latest_audited_financials(ticker_symbol):
             "currency": "INR",
             "revenue_cr": round(revenue / 1e7, 2),
             "gross_profit_cr": round(gross_profit / 1e7, 2),
+            "employee_cost_cr": round(employee_cost / 1e7, 2),
+            "employee_cost_pct": f"{employee_cost_pct}%" if employee_cost_pct != "N/A" else "N/A",
             "operating_cash_flow_cr": round(operating_cf / 1e7, 2),
             "net_profit_cr": round(net_income / 1e7, 2),
             "gross_margin_pct": f"{gross_margin}%" if gross_margin != "N/A" else "N/A",
@@ -166,33 +184,46 @@ def fetch_latest_audited_financials(ticker_symbol):
         return None
 
 # ==============================================================================
-# 3. PROMPT TEMPLATE WITH DUAL CONTEXT (FUNDAMENTALS + COMMODITIES)
+# 3. SECTOR-AWARE PROMPT TEMPLATE (DYNAMIC ROUTING)
 # ==============================================================================
 
 PROMPT_TEMPLATE = """
-You are a Lead Equity Research Compliance Officer & Macro Analyst for Indian public markets.
-Analyze {company_name} (NSE: {symbol}) by cross-referencing its verified statutory financials against current global commodity price dynamics:
+You are a Lead Equity Research Compliance Officer & Senior Sector Analyst for Indian equity markets.
+Analyze {company_name} (NSE: {symbol}) categorized as [{sector} - Type: {sector_type}] using verified statutory figures and global macro conditions:
 
 --- VERIFIED LATEST AUDITED STATEMENTS ---
 Financial Period: {financial_year} (Audited Year Ended: {period_end_date})
 Total Revenue: INR {revenue_cr} Cr
 Gross Margin: {gross_margin_pct}
+Employee Cost: INR {employee_cost_cr} Cr ({employee_cost_pct} of Revenue)
 Operating Cash Flow: INR {operating_cash_flow_cr} Cr
 Net Profit: INR {net_profit_cr} Cr
 Debt to Equity: {debt_to_equity}
 ------------------------------------------
 
---- GLOBAL INDUSTRIAL COMMODITIES SNAPSHOT (1-YEAR YoY & MULTI-PERIOD) ---
-{commodity_context}
---------------------------------------------------------------------------
+--- UNIFIED GLOBAL MACRO DASHBOARD (COMMODITIES, FX, YIELDS) ---
+{macro_context}
+----------------------------------------------------------------
 
 Extract the business model in clean, factual business HINGLISH.
 
-STRICT AUDIT & ANTI-HALLUCINATION RULES:
+STRICT AUDIT & SECTOR-SPECIFIC EVALUATION PROTOCOL:
 1. ANCHOR TO GIVEN FINANCIAL YEAR: "data_period" must be strictly set to "{financial_year} (Audited)".
-2. ZERO ESTIMATE RULE: If sub-segment percentages are not officially disclosed in statutory Ind AS 108 notes, set "has_disclosed_segments": false, "segments": [], "geographic_split": null. DO NOT guess.
-3. COMMODITY MARGIN SENSITIVITY: Automatically identify the most relevant commodity from the snapshot (e.g. Brent Crude for Paints/O2C, Copper for Cables/Durables, Gas for Fertilizers/City Gas). Compare the 1Y YoY commodity price trend against the company's Gross Margin ({gross_margin_pct}) to evaluate real pricing power and cost pass-through speed.
-4. CASH QUALITY: Evaluate whether Net Profit converts into real Operating Cash Flow.
+2. ZERO ESTIMATE RULE: If sub-segment percentages are not officially disclosed in statutory Ind AS 108 notes, set "has_disclosed_segments": false, "segments": [], "geographic_split": null. DO NOT guess numbers.
+3. DYNAMIC SECTOR DRIVER ROUTING:
+   - IF {sector_type} == "IT_SERVICES":
+     * DO NOT CITE COMMODITIES. Software engineers and currency are the primary drivers.
+     * Set "linked_primary_driver": "USD-INR Currency Pair & Employee Cost Pool"
+     * Evaluate how the 1-Year USD-INR trend impacts billings vs domestic wage inflation (Employee Cost: {employee_cost_pct}).
+     * Evaluate client discretionary spend risk (US BFSI & Tech enterprise budgets).
+   - IF {sector_type} == "BANKING":
+     * DO NOT CITE COMMODITIES.
+     * Set "linked_primary_driver": "Cost of Funds, CASA Deposits & Bond Yields"
+     * Evaluate credit growth, Net Interest Margin (NIM) sensitivity, and yield dynamics.
+   - IF {sector_type} == "MANUFACTURING" or "CONGLOMERATE":
+     * Match to the relevant input commodity (e.g. Brent Crude for Paints/O2C, Copper for Cables, Aluminium for Auto).
+     * Compare 1Y YoY commodity price movement against the company's Gross Margin ({gross_margin_pct}) to evaluate cost pass-through speed and pricing power.
+4. CASH QUALITY: Evaluate whether Net Profit converts into real Operating Cash Flow (OCF vs Net Profit).
 5. NO TRADING ADVICE: Strictly avoid Buy/Sell/Hold recommendations.
 
 Respond ONLY with valid JSON conforming to this schema:
@@ -202,18 +233,18 @@ Respond ONLY with valid JSON conforming to this schema:
   "data_period": "{financial_year} (Audited)",
   "period_end_date": "{period_end_date}",
   "core_identity": {{
-    "what_it_sells": "Clear Hinglish line: company kya bechti hai",
-    "who_is_customer": "Customer profile (B2C, B2B, OEMs, etc.)"
+    "what_it_sells": "Clear Hinglish line: company kya bechti hai ya service deti hai",
+    "who_is_customer": "Customer profile (B2C, B2B, US/EU Enterprises, OEMs, etc.)"
   }},
   "economic_moat": {{
-    "moat_type": "Distribution / Switching Cost / Cost Advantage / Brand",
+    "moat_type": "Distribution / Switching Cost / Cost Advantage / Brand / Client Stickiness",
     "moat_description": "2-line operational explanation in Hinglish"
   }},
   "pricing_power_index": {{
     "rating": "HIGH / MEDIUM / LOW",
-    "linked_primary_commodity": "Identified commodity from snapshot (e.g. Brent Crude Oil or Refined Copper)",
-    "pass_through_speed": "Estimated days to pass raw material inflation",
-    "rationale": "Detailed explanation comparing company's {gross_margin_pct} gross margin against recent commodity price trend"
+    "linked_primary_driver": "Relevant Commodity (for Manufacturing) OR USD-INR / Cost of Funds (for IT/Banking)",
+    "pass_through_speed": "Estimated days to pass inflation or adjust billing rates",
+    "rationale": "In-depth sector-specific Hinglish explanation comparing margins/costs against relevant macro trend"
   }},
   "cash_flow_health": {{
     "working_capital_nature": "Negative / Lean / Heavy Working Capital",
@@ -232,31 +263,31 @@ Respond ONLY with valid JSON conforming to this schema:
     }}
   }},
   "revenue_drivers": [
-    "Driver 1 (volume, pricing, order book, or capacity expansion)",
+    "Driver 1 (volume, billing realization, order book, or capacity)",
     "Driver 2",
     "Driver 3"
   ],
   "must_watch_metrics": [
     {{
-      "metric": "Company-specific metric",
+      "metric": "Company/Sector specific metric (e.g. Volume Growth for Paints, Utilization/Attrition for IT, NIM/NPA for Banks)",
       "benchmark_normal": "Healthy target range",
       "why_track": "Why this specific KPI drives valuation"
     }},
     {{
-      "metric": "Company-specific metric",
+      "metric": "Company/Sector specific metric",
       "benchmark_normal": "Healthy target range",
       "why_track": "Why this specific KPI drives valuation"
     }}
   ],
-  "anti_thesis_trigger": "Specific operational or raw material price spike that breaks the investment thesis",
+  "anti_thesis_trigger": "Specific sector disruption, currency shift, or raw material surge that breaks the investment thesis",
   "core_risks": [
     {{
-      "risk_type": "Raw Material or Macro Risk",
-      "description": "Specific impact of input commodity price surge in Hinglish"
+      "risk_type": "Macro or Input Cost Risk",
+      "description": "Specific operational risk in Hinglish (commodity inflation for Mfg, wage hike/US slowdown for IT, NPA spike for Bank)"
     }},
     {{
-      "risk_type": "Business Risk",
-      "description": "Specific operational/competitive risk in Hinglish"
+      "risk_type": "Competitive or Structural Risk",
+      "description": "Specific business risk in Hinglish"
     }}
   ],
   "sources": [
@@ -322,19 +353,19 @@ def generate_models():
         print("❌ Set GEMINI_API_KEY environment variable first!")
         return
 
-    # 1. Fetch Global Commodities Snapshot Once
-    commodity_snapshot = fetch_all_commodity_macro_context()
-    commodity_context_str = json.dumps(commodity_snapshot, indent=2) if commodity_snapshot else "Commodity data unavailable"
+    # 1. Fetch Unified Macro Context (Commodities + FX + Yields)
+    macro_dashboard = fetch_unified_macro_dashboard()
+    macro_context_str = json.dumps(macro_dashboard, indent=2) if macro_dashboard else "Macro dashboard unavailable"
 
     results = {}
     total = len(STOCKS_LIST)
 
     print("\n" + "=" * 75)
-    print("🏢 Step 2: Processing Company Business Models with Macro Context...")
+    print("🏢 Step 2: Processing Sector-Specific Company Business Models...")
     print("=" * 75)
 
     for idx, item in enumerate(STOCKS_LIST, 1):
-        print(f"\n📦 [{idx}/{total}] Processing: {item['name']} ({item['ticker']})...")
+        print(f"\n📦 [{idx}/{total}] Processing: {item['name']} ({item['ticker']}) | Sector: {item['sector_type']}...")
 
         # 2. Fetch Latest Audited Company Financials
         fin = fetch_latest_audited_financials(item["ticker"])
@@ -344,24 +375,27 @@ def generate_models():
 
         print(f"   📊 Period Detected: {fin['financial_year']} (Ended: {fin['period_end_date']}) | Revenue: ₹{fin['revenue_cr']} Cr")
 
-        # 3. Formulate Prompt with Financials + Commodity Snapshot
+        # 3. Formulate Sector-Aware Prompt
         prompt = PROMPT_TEMPLATE.format(
             company_name=item["name"],
             symbol=item["symbol"],
+            sector=item["sector"],
+            sector_type=item["sector_type"],
             financial_year=fin["financial_year"],
             period_end_date=fin["period_end_date"],
             revenue_cr=fin["revenue_cr"],
             gross_margin_pct=fin["gross_margin_pct"],
+            employee_cost_cr=fin["employee_cost_cr"],
+            employee_cost_pct=fin["employee_cost_pct"],
             operating_cash_flow_cr=fin["operating_cash_flow_cr"],
             net_profit_cr=fin["net_profit_cr"],
             debt_to_equity=fin["debt_to_equity"],
-            commodity_context=commodity_context_str
+            macro_context=macro_context_str
         )
 
         # 4. Synthesize via Gemini
         parsed_data, used_model = call_gemini(prompt, api_key)
         if parsed_data:
-            # Store verified data snapshots for auditability
             parsed_data["audited_statement_snapshot"] = fin
             results[item["symbol"]] = parsed_data
             print(f"   ✨ Successfully extracted via [{used_model}] | Financial Year: {fin['financial_year']}")
@@ -377,7 +411,7 @@ def generate_models():
         "metadata": {
             "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "total_companies": len(results),
-            "macro_snapshot": commodity_snapshot
+            "macro_snapshot": macro_dashboard
         },
         "companies": results
     }
