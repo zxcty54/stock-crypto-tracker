@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,9 +12,11 @@ class CompanyIntelligenceScreen extends StatefulWidget {
 }
 
 class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
-  // ⚡ Fastly Direct Upstream Proxy (Stale cache bypass ke liye)
-  final String _fastlyCdnUrl =
-      'https://fastly.jsdelivr.net/raw/github/zxcty54/stock-crypto-tracker/main/company_business_models.json';
+  // ⚡ Guaranteed Upstream Proxy (Edge cache lock bypass)
+  final String _primaryCdnUrl =
+      'https://raw.githack.com/zxcty54/stock-crypto-tracker/main/company_business_models.json';
+  final String _fallbackFastlyUrl =
+      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
 
   Map<String, dynamic> _companiesData = {};
   String? _selectedSymbol;
@@ -29,50 +30,73 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     _fetchCompaniesData();
   }
 
-  /// 🚀 Live Fastly Fetch with Cache Nonce
+  /// 🚀 Multi-Tier Live Sync (Githack -> Fastly jsDelivr -> Local Assets)
   Future<void> _fetchCompaniesData({bool isManual = false}) async {
     if (isManual) setState(() => _isRefreshing = true);
 
-    final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(99999)}';
-    final fetchUri = Uri.parse('$_fastlyCdnUrl?cache=$nonce');
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
 
+    // 1. Primary Direct Upstream Fetch
     try {
       final res = await http.get(
-        fetchUri,
+        Uri.parse('$_primaryCdnUrl?_t=$timestamp'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
         },
-      ).timeout(const Duration(seconds: 14));
+      ).timeout(const Duration(seconds: 12));
 
       if (res.statusCode == 200) {
         _parseAndSetData(res.body);
-
-        if (isManual && mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('⚡ Live Research Memo Synced (${_companiesData.length} Companies)'),
-              backgroundColor: const Color(0xFF00F5A0),
-              behavior: SnackBarBehavior.floating,
-              duration: const Duration(seconds: 2),
-            ),
-          );
-        }
+        _showSuccessSnackbar(isManual);
         return;
       }
-      throw Exception("Fastly returned HTTP ${res.statusCode}");
-    } catch (e) {
-      debugPrint("Fastly fetch error: $e");
-      try {
-        final localData = await rootBundle.loadString('assets/data/company_business_models.json');
-        _parseAndSetData(localData);
-      } catch (_) {
-        setState(() {
-          _errorMessage = 'Data sync issue. Check internet connection.';
-          _isLoading = false;
-          _isRefreshing = false;
-        });
+    } catch (primaryErr) {
+      debugPrint("Primary fetch failed: $primaryErr. Trying Fastly fallback...");
+    }
+
+    // 2. Secondary Fastly jsDelivr Fetch
+    try {
+      final resFallback = await http.get(
+        Uri.parse('$_fallbackFastlyUrl?ts=$timestamp'),
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      ).timeout(const Duration(seconds: 10));
+
+      if (resFallback.statusCode == 200) {
+        _parseAndSetData(resFallback.body);
+        _showSuccessSnackbar(isManual);
+        return;
       }
+    } catch (fallbackErr) {
+      debugPrint("Fastly fallback failed: $fallbackErr. Loading local assets...");
+    }
+
+    // 3. Final Local Fallback
+    try {
+      final localData = await rootBundle.loadString('assets/data/company_business_models.json');
+      _parseAndSetData(localData);
+    } catch (localErr) {
+      setState(() {
+        _errorMessage = 'Data sync issue. Check internet connection.';
+        _isLoading = false;
+        _isRefreshing = false;
+      });
+    }
+  }
+
+  void _showSuccessSnackbar(bool isManual) {
+    if (isManual && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('⚡ Live Research Memo Synced (${_companiesData.length} Companies)'),
+          backgroundColor: const Color(0xFF00F5A0),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -221,7 +245,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                               border: Border.all(color: const Color(0xFF1E2B3E)),
                             ),
                             child: Text(
-                              "OPM $opm",
+                              "OPM $opm%",
                               style: const TextStyle(color: Color(0xFF00F5A0), fontSize: 10.5, fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -269,7 +293,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
 
-    // 🛡 Dual-Schema Safe Extraction (Null aur blank fields avoid karne ke liye)
+    // 🛡 Dual-Schema Safe Extraction
     final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ?? {};
     final coreOld = (company['core_identity'] as Map<String, dynamic>?) ?? {};
     final moatOld = (company['economic_moat'] as Map<String, dynamic>?) ?? {};
@@ -373,7 +397,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               _buildReportHeader(company, pricing),
               const SizedBox(height: 16),
 
-              // 2. Business Model Architecture (Poora Qualitative Analysis)
+              // 2. Business Model Architecture (Qualitative Analysis)
               _buildSectionHeader("BUSINESS MODEL ARCHITECTURE", "HOW THE OPERATIONAL ENGINE WORKS", Icons.domain_rounded),
               const SizedBox(height: 10),
               _buildAnalysisCard(
