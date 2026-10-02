@@ -11,8 +11,8 @@ TARGET_REPO = "zxcty54/stock-crypto-tracker"
 TARGET_FILE_PATH = "historical_5yr_ohlc.json"
 TARGET_BRANCH = "main"
 
-# IT Majors
-SYMBOLS = ["TCS", "INFY", "HCLTECH","SBIN","TITAN","JINDALSTEL"]
+# Multi-Sector Symbols (IT, Banking, Consumer, Metal)
+SYMBOLS = ["TCS", "INFY", "HCLTECH", "SBIN", "TITAN", "JINDALSTEL"]
 
 def fetch_5year_ohlc():
     master_store = {}
@@ -21,13 +21,12 @@ def fetch_5year_ohlc():
     }
 
     print("=" * 70)
-    print("⏳ Fetching 5-Year Daily OHLCV Data for IT Majors...")
+    print("⏳ Fetching 5-Year Daily OHLCV Data...")
     print(f"🎯 Symbols: {', '.join(SYMBOLS)}")
     print("=" * 70)
 
     for symbol in SYMBOLS:
         ticker = f"{symbol}.NS"
-        # 👈 range=5y kar diya gaya hai
         url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=5y&interval=1d"
 
         try:
@@ -64,7 +63,7 @@ def fetch_5year_ohlc():
                 ])
 
             master_store[symbol] = stock_candles
-            print(f"✅ {symbol}: {len(stock_candles)} sessions fetched (~5 years, ~1240+ candles)")
+            print(f"✅ {symbol}: {len(stock_candles)} sessions fetched (~5 years)")
             time.sleep(0.5)
 
         except Exception as e:
@@ -102,7 +101,7 @@ def push_to_target_repo():
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
-        "User-Agent": "IT-OHLC-Sync-Engine"
+        "User-Agent": "Multi-Stock-Sync-Engine"
     }
 
     sha = None
@@ -114,7 +113,7 @@ def push_to_target_repo():
         print(f"⚠️ Notice while fetching SHA: {e}")
 
     payload = {
-        "message": f"📊 Auto-Update: 5Y OHLCV for TCS, INFY, HCLTECH [{datetime.now().strftime('%d-%b-%Y')}]",
+        "message": f"📊 Auto-Update: 5Y OHLCV for {len(SYMBOLS)} Stocks [{datetime.now().strftime('%d-%b-%Y')}]",
         "content": b64_content,
         "branch": TARGET_BRANCH
     }
