@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-01 22:42:59 IST",
-  "worthy_count": 28,
-  "skipped_count": 20,
+  "generated_at": "2026-10-02 15:28:36 IST",
+  "worthy_count": 29,
+  "skipped_count": 21,
   "content_feed": [
+    {
+      "hash": "ee45cdc97bff",
+      "symbol": "TCI",
+      "company_name": "Transport Corporation of India Limited",
+      "category": "BUYBACK",
+      "event_type": "BUYBACK",
+      "broadcast_date": "30-Sep-2026 17:08:59",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ak_bansal_tcil_com_30092026170751_TCIL.pdf",
+      "headline": "TCI Board Approves Tender Offer Buyback of Fully Paid Shares",
+      "content_worthy": true,
+      "worthiness_reason": "Board approval of buyback of fully paid-equity shares.",
+      "telegram_post": "<b>💰 #BUYBACK</b> | <b>Transport Corporation of India Limited (NSE: TCI)</b>\n\n<b>TCI Board Approves Tender Offer Buyback of Fully Paid Shares</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Resolution Date:</b> 29 Sep 2026\n- <b>Share Face Value:</b> ₹2/- each\n- <b>Route:</b> Tender offer\n- <b>Basis:</b> Proportionate\n\n📌 <b>What happened:</b>\n↳ Board approved buyback of fully paid-equity shares through a tender offer on a proportionate basis.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ak_bansal_tcil_com_30092026170751_TCIL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-02 15:28:36 IST"
+    },
     {
       "hash": "69241bb2fb1f",
       "symbol": "TCI",
@@ -397,6 +411,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "03406bedeb25",
+      "symbol": "SHYAMMETL",
+      "company_name": "Shyam Metalics and Energy Limited",
+      "category": "STRATEGIC_PARTNERSHIP",
+      "event_type": "OTHER",
+      "broadcast_date": "02-Oct-2026 13:51:42",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SHYAMMETL_02102026135130_SMELIntimationofMOU02102026.pdf",
+      "headline": "Agreements",
+      "content_worthy": false,
+      "worthiness_reason": "Non-binding MoU with government, no material development.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-02 15:28:36 IST"
+    },
     {
       "hash": "ec0e115aad1f",
       "symbol": "COALINDIA",
