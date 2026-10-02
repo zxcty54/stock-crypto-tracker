@@ -17,20 +17,83 @@ STOCKS_LIST = [
     {"symbol": "POLYCAB", "ticker": "POLYCAB.NS", "name": "Polycab India Limited", "sector": "Cables & Fast Moving Electrical Goods"}
 ]
 
+COMMODITIES_LIST = [
+    {"name": "Brent Crude Oil", "ticker": "BZ=F", "unit": "USD/bbl", "impact_sectors": "Paints, Petrochemicals, Tyres, Aviation"},
+    {"name": "Refined Copper", "ticker": "HG=F", "unit": "USD/lb", "impact_sectors": "Cables & Wires, Electricals, Auto, Capital Goods"},
+    {"name": "Natural Gas", "ticker": "NG=F", "unit": "USD/MMBtu", "impact_sectors": "Fertilizers, Ceramics, City Gas Distribution"},
+    {"name": "Aluminium", "ticker": "ALI=F", "unit": "USD/MT", "impact_sectors": "Automotive Ancillary, Packaging, White Goods"},
+    {"name": "Cotton", "ticker": "CT=F", "unit": "USc/lb", "impact_sectors": "Textiles, Apparel, Yarn Mills"},
+    {"name": "Iron Ore Proxy", "ticker": "TIO=F", "unit": "USD/dmt", "impact_sectors": "Steel, Infrastructure, Commercial Vehicles"}
+]
+
 MODELS_TO_TRY = [
     "gemini-3.5-flash-lite",
     "gemini-3.1-flash-lite"
 ]
 
 # ==============================================================================
-# 1. STRICT LATEST FINANCIAL YEAR EXTRACTION (NO STALE/OLD DATA)
+# 1. COMMODITY MACRO LAYER (1-YEAR YOY & MULTI-PERIOD EXTRACTION)
+# ==============================================================================
+
+def fetch_all_commodity_macro_context():
+    """
+    yfinance se key industrial commodities ka 1Y, 6M trend aur 52W range fetch karta hai.
+    """
+    print("\n" + "=" * 75)
+    print("🌍 Step 1: Gathering Key Industrial Commodities Macro Snapshot...")
+    print("=" * 75)
+
+    macro_data = {}
+
+    for item in COMMODITIES_LIST:
+        ticker = item["ticker"]
+        name = item["name"]
+        try:
+            t = yf.Ticker(ticker)
+            hist = t.history(period="1y")
+
+            if hist is None or hist.empty or len(hist) < 20:
+                print(f"   ⚠️ Incomplete data for {name} ({ticker})")
+                continue
+
+            current_price = round(float(hist['Close'].iloc[-1]), 2)
+            p_1m = round(float(hist['Close'].iloc[-22]), 2) if len(hist) >= 22 else float(hist['Close'].iloc[0])
+            p_6m = round(float(hist['Close'].iloc[-126]), 2) if len(hist) >= 126 else float(hist['Close'].iloc[0])
+            p_1y = round(float(hist['Close'].iloc[0]), 2)
+
+            high_52w = round(float(hist['High'].max()), 2)
+            low_52w = round(float(hist['Low'].min()), 2)
+
+            def pct(latest, past):
+                return round(((latest - past) / past) * 100, 2)
+
+            macro_data[ticker] = {
+                "name": name,
+                "unit": item["unit"],
+                "relevant_sectors": item["impact_sectors"],
+                "current_price": current_price,
+                "fifty_two_week_low": low_52w,
+                "fifty_two_week_high": high_52w,
+                "deltas": {
+                    "1M": pct(current_price, p_1m),
+                    "6M": pct(current_price, p_6m),
+                    "1Y_YoY": pct(current_price, p_1y)
+                }
+            }
+            print(f"   ✅ {name:<18}: {current_price:>8} {item['unit']:<8} | 1Y YoY: {macro_data[ticker]['deltas']['1Y_YoY']:>6}% | 52W: [{low_52w} - {high_52w}]")
+            time.sleep(0.3)
+        except Exception as e:
+            print(f"   ❌ Error fetching {name}: {e}")
+
+    return macro_data
+
+# ==============================================================================
+# 2. STRICT AUDITED FINANCIALS EXTRACTION
 # ==============================================================================
 
 def fetch_latest_audited_financials(ticker_symbol):
     """
-    yfinance se latest annual statements extract karta hai,
-    descending date sort karke most recent period pakadta hai,
-    aur exact Indian Financial Year (FY) calculate karta hai.
+    yfinance se latest annual statements extract karta hai aur exact Indian FY calculate karta hai.
     """
     try:
         t = yf.Ticker(ticker_symbol)
@@ -41,7 +104,7 @@ def fetch_latest_audited_financials(ticker_symbol):
         if income_stmt is None or income_stmt.empty:
             return None
 
-        # 1. Strict Date Sorting (Descending: [2025-03-31, 2024-03-31, ...])
+        # Descending date sort
         sorted_dates = sorted(income_stmt.columns, reverse=True)
         latest_date = sorted_dates[0]
         latest_date_dt = pd.to_datetime(latest_date)
@@ -50,17 +113,14 @@ def fetch_latest_audited_financials(ticker_symbol):
         filing_year = latest_date_dt.year
         filing_month = latest_date_dt.month
 
-        # Indian Financial Year Logic (Apr - Mar)
         if filing_month <= 3:
             fy_label = f"FY{filing_year}"
         else:
             fy_label = f"FY{filing_year + 1}"
 
-        # 2. Staleness Guard (Alert if data is older than ~550 days)
         days_old = (datetime.now() - latest_date_dt).days
         is_stale = days_old > 550
 
-        # 3. Column Data Extraction
         latest_income = income_stmt[latest_date]
         latest_balance = balance_sheet[latest_date] if balance_sheet is not None and latest_date in balance_sheet else None
         latest_cf = cash_flow[latest_date] if cash_flow is not None and latest_date in cash_flow else None
@@ -106,12 +166,12 @@ def fetch_latest_audited_financials(ticker_symbol):
         return None
 
 # ==============================================================================
-# 2. PROMPT TEMPLATE (STRICT AUDIT & PROVENANCE PROTOCOL)
+# 3. PROMPT TEMPLATE WITH DUAL CONTEXT (FUNDAMENTALS + COMMODITIES)
 # ==============================================================================
 
 PROMPT_TEMPLATE = """
-You are a Lead Equity Research Compliance Officer & Analyst for Indian public markets.
-Analyze {company_name} (NSE: {symbol}) strictly anchored to these official financial figures extracted from statutory statements:
+You are a Lead Equity Research Compliance Officer & Macro Analyst for Indian public markets.
+Analyze {company_name} (NSE: {symbol}) by cross-referencing its verified statutory financials against current global commodity price dynamics:
 
 --- VERIFIED LATEST AUDITED STATEMENTS ---
 Financial Period: {financial_year} (Audited Year Ended: {period_end_date})
@@ -122,17 +182,17 @@ Net Profit: INR {net_profit_cr} Cr
 Debt to Equity: {debt_to_equity}
 ------------------------------------------
 
+--- GLOBAL INDUSTRIAL COMMODITIES SNAPSHOT (1-YEAR YoY & MULTI-PERIOD) ---
+{commodity_context}
+--------------------------------------------------------------------------
+
 Extract the business model in clean, factual business HINGLISH.
 
 STRICT AUDIT & ANTI-HALLUCINATION RULES:
-1. ANCHOR TO GIVEN FINANCIAL YEAR: "data_period" must be strictly set to "{financial_year} (Audited)". Do NOT cite past years.
-2. ZERO ESTIMATE RULE: If sub-segment percentages are not officially disclosed in statutory Ind AS 108 notes, set:
-   "has_disclosed_segments": false,
-   "segments": [],
-   "geographic_split": null
-   DO NOT fabricate percentages.
-3. PRICING POWER: Explain whether the company can pass raw material inflation to customers based on gross margin behavior.
-4. CASH QUALITY: Explain whether Net Profit converts into real Operating Cash Flow (look at OCF vs Net Profit numbers).
+1. ANCHOR TO GIVEN FINANCIAL YEAR: "data_period" must be strictly set to "{financial_year} (Audited)".
+2. ZERO ESTIMATE RULE: If sub-segment percentages are not officially disclosed in statutory Ind AS 108 notes, set "has_disclosed_segments": false, "segments": [], "geographic_split": null. DO NOT guess.
+3. COMMODITY MARGIN SENSITIVITY: Automatically identify the most relevant commodity from the snapshot (e.g. Brent Crude for Paints/O2C, Copper for Cables/Durables, Gas for Fertilizers/City Gas). Compare the 1Y YoY commodity price trend against the company's Gross Margin ({gross_margin_pct}) to evaluate real pricing power and cost pass-through speed.
+4. CASH QUALITY: Evaluate whether Net Profit converts into real Operating Cash Flow.
 5. NO TRADING ADVICE: Strictly avoid Buy/Sell/Hold recommendations.
 
 Respond ONLY with valid JSON conforming to this schema:
@@ -151,8 +211,9 @@ Respond ONLY with valid JSON conforming to this schema:
   }},
   "pricing_power_index": {{
     "rating": "HIGH / MEDIUM / LOW",
-    "pass_through_speed": "Estimated days to pass inflation",
-    "rationale": "Reason based on gross margin and competition"
+    "linked_primary_commodity": "Identified commodity from snapshot (e.g. Brent Crude Oil or Refined Copper)",
+    "pass_through_speed": "Estimated days to pass raw material inflation",
+    "rationale": "Detailed explanation comparing company's {gross_margin_pct} gross margin against recent commodity price trend"
   }},
   "cash_flow_health": {{
     "working_capital_nature": "Negative / Lean / Heavy Working Capital",
@@ -187,15 +248,15 @@ Respond ONLY with valid JSON conforming to this schema:
       "why_track": "Why this specific KPI drives valuation"
     }}
   ],
-  "anti_thesis_trigger": "Specific operational or competitive event that breaks the investment thesis",
+  "anti_thesis_trigger": "Specific operational or raw material price spike that breaks the investment thesis",
   "core_risks": [
     {{
-      "risk_type": "Risk Classification",
-      "description": "Specific operational risk in Hinglish"
+      "risk_type": "Raw Material or Macro Risk",
+      "description": "Specific impact of input commodity price surge in Hinglish"
     }},
     {{
-      "risk_type": "Risk Classification",
-      "description": "Specific operational risk in Hinglish"
+      "risk_type": "Business Risk",
+      "description": "Specific operational/competitive risk in Hinglish"
     }}
   ],
   "sources": [
@@ -211,7 +272,7 @@ Do NOT wrap output in markdown backticks like ```json. Output ONLY raw parseable
 """
 
 # ==============================================================================
-# 3. GEMINI API CALLER (SAFE STRING CONCATENATION)
+# 4. GEMINI API CALLER (SAFE STRING CONCATENATION)
 # ==============================================================================
 
 def call_gemini(prompt, api_key):
@@ -252,7 +313,7 @@ def call_gemini(prompt, api_key):
     return None, None
 
 # ==============================================================================
-# 4. MAIN BATCH PIPELINE
+# 5. MAIN BATCH PIPELINE
 # ==============================================================================
 
 def generate_models():
@@ -261,13 +322,21 @@ def generate_models():
         print("❌ Set GEMINI_API_KEY environment variable first!")
         return
 
+    # 1. Fetch Global Commodities Snapshot Once
+    commodity_snapshot = fetch_all_commodity_macro_context()
+    commodity_context_str = json.dumps(commodity_snapshot, indent=2) if commodity_snapshot else "Commodity data unavailable"
+
     results = {}
     total = len(STOCKS_LIST)
+
+    print("\n" + "=" * 75)
+    print("🏢 Step 2: Processing Company Business Models with Macro Context...")
+    print("=" * 75)
 
     for idx, item in enumerate(STOCKS_LIST, 1):
         print(f"\n📦 [{idx}/{total}] Processing: {item['name']} ({item['ticker']})...")
 
-        # 1. Fetch Verified Audited Financials
+        # 2. Fetch Latest Audited Company Financials
         fin = fetch_latest_audited_financials(item["ticker"])
         if not fin:
             print(f"   ❌ Skipping {item['symbol']} due to missing financial statement data.")
@@ -275,10 +344,7 @@ def generate_models():
 
         print(f"   📊 Period Detected: {fin['financial_year']} (Ended: {fin['period_end_date']}) | Revenue: ₹{fin['revenue_cr']} Cr")
 
-        if fin["is_stale"]:
-            print(f"   ⚠️ WARNING: Latest reported data is {fin['days_old']} days old.")
-
-        # 2. Inject Verified Financials into Prompt
+        # 3. Formulate Prompt with Financials + Commodity Snapshot
         prompt = PROMPT_TEMPLATE.format(
             company_name=item["name"],
             symbol=item["symbol"],
@@ -288,13 +354,14 @@ def generate_models():
             gross_margin_pct=fin["gross_margin_pct"],
             operating_cash_flow_cr=fin["operating_cash_flow_cr"],
             net_profit_cr=fin["net_profit_cr"],
-            debt_to_equity=fin["debt_to_equity"]
+            debt_to_equity=fin["debt_to_equity"],
+            commodity_context=commodity_context_str
         )
 
-        # 3. Gemini Synthesis
+        # 4. Synthesize via Gemini
         parsed_data, used_model = call_gemini(prompt, api_key)
         if parsed_data:
-            # Inject raw verified metrics as proof of truth
+            # Store verified data snapshots for auditability
             parsed_data["audited_statement_snapshot"] = fin
             results[item["symbol"]] = parsed_data
             print(f"   ✨ Successfully extracted via [{used_model}] | Financial Year: {fin['financial_year']}")
@@ -305,9 +372,18 @@ def generate_models():
             print("   ⏳ Cooldown 15 seconds...")
             time.sleep(15)
 
-    # 4. Save Final JSON
+    # 5. Save Output
+    final_output = {
+        "metadata": {
+            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "total_companies": len(results),
+            "macro_snapshot": commodity_snapshot
+        },
+        "companies": results
+    }
+
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
+        json.dump(final_output, f, ensure_ascii=False, indent=2)
 
     print(f"\n🎉 Successfully compiled {len(results)} verified business models to '{OUTPUT_FILE}'")
 
