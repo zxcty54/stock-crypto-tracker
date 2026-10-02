@@ -35,7 +35,6 @@ class ReplayCandle {
     );
   }
 
-  // Exact JSON Array: ["2023-09-29", 3537.2, 3568.45, 3505.55, 3528.6, 2243791]
   factory ReplayCandle.fromList(List dynamicList) {
     return ReplayCandle(
       date: dynamicList[0].toString(),
@@ -93,12 +92,14 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   @override
   bool get wantKeepAlive => true;
 
-  final String _jsonUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/historical_3yr_ohlc.json';
+  // Fastly jsDelivr CDN endpoint
+  final String _fastlyCdnUrl =
+      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/historical_5yr_ohlc.json';
 
   Map<String, List<ReplayCandle>> _masterDatabase = {};
-  String _selectedSymbol = 'TCS';
+  String? _selectedSymbol;
   bool _isLoading = true;
+  bool _isRefreshing = false;
   String? _errorMessage;
 
   // Replay State
@@ -166,48 +167,86 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     }
   }
 
-  Future<void> _fetchDataset() async {
+  Future<void> _fetchDataset({bool isManualRefresh = false}) async {
+    if (isManualRefresh) {
+      setState(() => _isRefreshing = true);
+    }
+
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final headers = {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+    };
+
     try {
-      final res = await http.get(
-        Uri.parse('$_jsonUrl?ts=${DateTime.now().millisecondsSinceEpoch}'),
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-        },
-      );
+      // 1. Primary: Fastly jsDelivr CDN call
+      final res = await http
+          .get(Uri.parse('$_fastlyCdnUrl?ts=$timestamp'), headers: headers)
+          .timeout(const Duration(seconds: 14));
+
       if (res.statusCode == 200) {
-        final Map<String, dynamic> raw = jsonDecode(res.body);
-        final Map<String, List<ReplayCandle>> parsed = {};
+        _applyParsedJson(res.body);
+        _showSuccessNotification(isManualRefresh);
+        return;
+      }
+      throw Exception("Fastly returned HTTP ${res.statusCode}");
+    } catch (networkErr) {
+      debugPrint("Fastly Fetch Issue ($networkErr). Offline assets fallback load ho raha hai...");
 
-        raw.forEach((key, val) {
-          final list = val as List;
-          if (list.isNotEmpty && list.first is Map) {
-            parsed[key] = list.map((e) => ReplayCandle.fromMap(e)).toList();
-          } else {
-            parsed[key] = list.map((e) => ReplayCandle.fromList(e)).toList();
-          }
-        });
-
+      // 2. Offline Fallback: Local assets/data/bactest.json call
+      try {
+        final localData = await rootBundle.loadString('assets/data/bactest.json');
+        _applyParsedJson(localData);
+      } catch (localErr) {
         setState(() {
-          _masterDatabase = parsed;
-          if (_masterDatabase.isNotEmpty && !_masterDatabase.containsKey(_selectedSymbol)) {
-            _selectedSymbol = _masterDatabase.keys.first;
-          }
+          _errorMessage = 'Network issue & offline file unavailable';
           _isLoading = false;
-          _initSession(_selectedSymbol);
-        });
-      } else {
-        setState(() {
-          _errorMessage = 'Sync failed: HTTP ${res.statusCode}';
-          _isLoading = false;
+          _isRefreshing = false;
         });
       }
-    } catch (e) {
-      setState(() {
-        _errorMessage = 'Network connection issue: $e';
-        _isLoading = false;
-      });
     }
+  }
+
+  void _showSuccessNotification(bool isManualRefresh) {
+    if (isManualRefresh && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('⚡ Sync Complete! ${_masterDatabase.length} Stocks updated via Fastly.'),
+          backgroundColor: const Color(0xFF00F5A0),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _applyParsedJson(String jsonString) {
+    final Map<String, dynamic> raw = jsonDecode(jsonString);
+    final Map<String, List<ReplayCandle>> parsed = {};
+
+    raw.forEach((key, val) {
+      final list = val as List;
+      if (list.isNotEmpty && list.first is Map) {
+        parsed[key] = list.map((e) => ReplayCandle.fromMap(e)).toList();
+      } else {
+        parsed[key] = list.map((e) => ReplayCandle.fromList(e)).toList();
+      }
+    });
+
+    setState(() {
+      _masterDatabase = parsed;
+      if (_masterDatabase.isNotEmpty) {
+        if (_selectedSymbol == null || !_masterDatabase.containsKey(_selectedSymbol)) {
+          _selectedSymbol = _masterDatabase.keys.first;
+        }
+      }
+      _isLoading = false;
+      _isRefreshing = false;
+      _errorMessage = null;
+
+      if (_selectedSymbol != null) {
+        _initSession(_selectedSymbol!);
+      }
+    });
   }
 
   void _initSession(String symbol) {
@@ -392,7 +431,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     final pnl = _positionSide == 'LONG' ? (diff * _orderQty) : (-diff * _orderQty);
 
     final record = ClosedTrade(
-      symbol: _selectedSymbol,
+      symbol: _selectedSymbol ?? '',
       side: _positionSide!,
       entryPrice: _entryPrice!,
       exitPrice: exitPrice,
@@ -812,7 +851,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // ✅ Fixed with correct variable names (_stopLoss and _takeProfit)
   _PainterBounds _calculateChartBounds(List<ReplayCandle> displayCandles) {
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
     double minPrice = displayCandles.map((c) => c.low).reduce(min);
@@ -855,6 +893,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       color: const Color(0xFF0F1726),
       child: Row(
         children: [
+          // Dynamic Dropdown (JSON keys se build hota hai)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
@@ -884,11 +923,28 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             ),
           ),
           const SizedBox(width: 8),
+
           IconButton(
             icon: const Icon(Icons.shuffle_rounded, color: Colors.white70, size: 20),
             tooltip: 'Random Time Slice',
-            onPressed: () => _initSession(_selectedSymbol),
+            onPressed: () {
+              if (_selectedSymbol != null) _initSession(_selectedSymbol!);
+            },
           ),
+
+          // 🔄 Fastly Manual Sync Button
+          IconButton(
+            icon: _isRefreshing
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(color: Color(0xFF00F0FF), strokeWidth: 2),
+                  )
+                : const Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 20),
+            tooltip: 'Fetch Latest Data via Fastly',
+            onPressed: _isRefreshing ? null : () => _fetchDataset(isManualRefresh: true),
+          ),
+
           IconButton(
             icon: Icon(
               _isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded,
@@ -1219,7 +1275,7 @@ class _PainterBounds {
   _PainterBounds({required this.minPrice, required this.maxPrice, required this.range});
 }
 
-// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER (WITH DRAGGABLE BRACKETS) ----------------
+// ---------------- HIGH-CONTRAST TRADINGVIEW PRO CUSTOM PAINTER ----------------
 class TradingViewProPainter extends CustomPainter {
   final List<ReplayCandle> candles;
   final List<double> volumeEmaSeries;
@@ -1292,7 +1348,6 @@ class TradingViewProPainter extends CustomPainter {
     minPrice = midPrice - (adjustedRange / 2);
     double range = maxPrice - minPrice;
 
-    // 1. Grid Lines & Bright Price Scale
     final gridPaint = Paint()
       ..color = const Color(0xFF182234)
       ..strokeWidth = 0.8;
@@ -1317,7 +1372,6 @@ class TradingViewProPainter extends CustomPainter {
       tp.paint(canvas, Offset(chartWidth + 6, y - 7));
     }
 
-    // 2. Volume Sub-panel Separator & Legend
     canvas.drawLine(Offset(0, chartHeight), Offset(chartWidth + priceAxisWidth, chartHeight), gridPaint);
     final volLabelPainter = TextPainter(
       text: TextSpan(
@@ -1339,7 +1393,6 @@ class TradingViewProPainter extends CustomPainter {
     final bearColor = const Color(0xFFFF2A6D);
     final wickPaint = Paint()..strokeWidth = 1.3;
 
-    // 3. Render Shaded Position Zones
     if (entryPrice != null) {
       final entryY = chartHeight - ((entryPrice! - minPrice) / range) * chartHeight;
 
@@ -1356,7 +1409,6 @@ class TradingViewProPainter extends CustomPainter {
       }
     }
 
-    // 4. Render Candlesticks & Volume Histogram
     for (int i = 0; i < displayCandles.length; i++) {
       final c = displayCandles[i];
       final isBull = c.isBull;
@@ -1403,7 +1455,6 @@ class TradingViewProPainter extends CustomPainter {
       );
     }
 
-    // 5. Render Volume 20 EMA Curve
     if (displayEma.isNotEmpty) {
       final emaPaint = Paint()
         ..color = const Color(0xFFFF9800)
@@ -1429,7 +1480,6 @@ class TradingViewProPainter extends CustomPainter {
       canvas.drawPath(emaPath, emaPaint);
     }
 
-    // 6. Live Current Price Marker
     final latestCandle = displayCandles.last;
     final ltpY = chartHeight - ((latestCandle.close - minPrice) / range) * chartHeight;
     final ltpColor = latestCandle.isBull ? bullColor : bearColor;
@@ -1457,7 +1507,6 @@ class TradingViewProPainter extends CustomPainter {
     )..layout();
     ltpText.paint(canvas, Offset(chartWidth + 8, ltpY - 6));
 
-    // 7. Interactive Draggable Bracket Handles
     if (entryPrice != null) {
       _drawGlowLine(canvas, chartWidth, entryPrice!, minPrice, range, chartHeight,
           positionSide == 'LONG' ? bullColor : bearColor, 'ENTRY');
@@ -1475,7 +1524,6 @@ class TradingViewProPainter extends CustomPainter {
       }
     }
 
-    // 8. Interactive Crosshair HUD
     if (crosshair != null && crosshair!.dx <= chartWidth && crosshair!.dy <= chartHeight) {
       final chPaint = Paint()
         ..color = Colors.white38
