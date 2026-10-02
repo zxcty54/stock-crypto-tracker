@@ -104,7 +104,8 @@ def call_gemini(prompt, api_key):
 
     for model in MODELS_TO_TRY:
         # Clean URL string without markdown brackets
-        url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){model}:generateContent?key={api_key}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+
         try:
             res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=35)
             if res.status_code == 200:
