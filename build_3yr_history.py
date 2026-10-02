@@ -5,32 +5,33 @@ import base64
 from datetime import datetime
 import requests
 
-OUTPUT_FILE = "historical_3yr_ohlc.json"
+OUTPUT_FILE = "historical_5yr_ohlc.json"
 
 TARGET_REPO = "zxcty54/stock-crypto-tracker"
-TARGET_FILE_PATH = "historical_3yr_ohlc.json"
+TARGET_FILE_PATH = "historical_5yr_ohlc.json"
 TARGET_BRANCH = "main"
 
 # IT Majors
-SYMBOLS = ["TCS", "INFY", "HCLTECH"]
+SYMBOLS = ["TCS", "INFY", "HCLTECH","SBIN","TITAN","JINDALSTEL"]
 
-def fetch_3year_ohlc():
+def fetch_5year_ohlc():
     master_store = {}
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
 
     print("=" * 70)
-    print("⏳ Fetching 3-Year Daily OHLCV Data for IT Majors...")
+    print("⏳ Fetching 5-Year Daily OHLCV Data for IT Majors...")
     print(f"🎯 Symbols: {', '.join(SYMBOLS)}")
     print("=" * 70)
 
     for symbol in SYMBOLS:
         ticker = f"{symbol}.NS"
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=3y&interval=1d"
+        # 👈 range=5y kar diya gaya hai
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=5y&interval=1d"
 
         try:
-            res = requests.get(url, headers=headers, timeout=12)
+            res = requests.get(url, headers=headers, timeout=15)
             if res.status_code != 200:
                 print(f"⚠️ Failed for {symbol} (HTTP {res.status_code})")
                 continue
@@ -63,13 +64,13 @@ def fetch_3year_ohlc():
                 ])
 
             master_store[symbol] = stock_candles
-            print(f"✅ {symbol}: {len(stock_candles)} sessions fetched (~3 years)")
+            print(f"✅ {symbol}: {len(stock_candles)} sessions fetched (~5 years, ~1240+ candles)")
             time.sleep(0.5)
 
         except Exception as e:
             print(f"❌ Error fetching {symbol}: {e}")
 
-    # Local Save with clean indentation (Fixes "Line too large" error)
+    # Local Save with clean indentation
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(master_store, f, ensure_ascii=False, indent=2)
 
@@ -113,7 +114,7 @@ def push_to_target_repo():
         print(f"⚠️ Notice while fetching SHA: {e}")
 
     payload = {
-        "message": f"📊 Auto-Update: 3Y OHLCV for TCS, INFY, HCLTECH [{datetime.now().strftime('%d-%b-%Y')}]",
+        "message": f"📊 Auto-Update: 5Y OHLCV for TCS, INFY, HCLTECH [{datetime.now().strftime('%d-%b-%Y')}]",
         "content": b64_content,
         "branch": TARGET_BRANCH
     }
@@ -121,7 +122,7 @@ def push_to_target_repo():
         payload["sha"] = sha
 
     try:
-        put_res = requests.put(api_url, headers=headers, json=payload, timeout=25)
+        put_res = requests.put(api_url, headers=headers, json=payload, timeout=30)
         if put_res.status_code in [200, 201]:
             print(f"✅ Target repo updated: https://github.com/{TARGET_REPO}/blob/{TARGET_BRANCH}/{TARGET_FILE_PATH}")
         else:
@@ -131,4 +132,4 @@ def push_to_target_repo():
 
 
 if __name__ == "__main__":
-    fetch_3year_ohlc()
+    fetch_5year_ohlc()
