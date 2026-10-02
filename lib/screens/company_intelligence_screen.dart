@@ -56,6 +56,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       }
       throw Exception("HTTP ${res.statusCode}");
     } catch (e) {
+      debugPrint("Remote fetch error: $e");
       try {
         final localData = await rootBundle.loadString('assets/data/company_business_models.json');
         _parseAndSetData(localData);
@@ -86,6 +87,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         _errorMessage = null;
       });
     } catch (err) {
+      debugPrint("JSON Parse Error: $err");
       setState(() {
         _errorMessage = 'Parse Error: $err';
         _isLoading = false;
@@ -136,21 +138,19 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                           letterSpacing: 1.0,
                         ),
                       ),
-                      Text(
+                      const Text(
                         "100+ Scale Ready",
-                        style: TextStyle(color: const Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  // Search Input
                   TextField(
-                    autofocus: false,
                     style: const TextStyle(color: Colors.white, fontSize: 13),
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFF162032),
-                      hintText: "Search by ticker (e.g. ASIANPAINT, RELIANCE)",
+                      hintText: "Search ticker (e.g. ASIANPAINT, RELIANCE)",
                       hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
                       prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF00E5FF), size: 18),
                       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -168,9 +168,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                       separatorBuilder: (_, __) => const Divider(color: Color(0xFF1E2B3E), height: 1),
                       itemBuilder: (context, idx) {
                         final sym = filteredSymbols[idx];
-                        final comp = _companiesData[sym] as Map<String, dynamic>;
+                        final comp = (_companiesData[sym] as Map<String, dynamic>?) ?? {};
                         final isSel = sym == _selectedSymbol;
-                        final opm = comp['audited_statement_snapshot']?['profit_and_loss']?['OPM %'];
+                        final opm = comp['audited_statement_snapshot']?['profit_and_loss']?['OPM %'] ?? 'N/A';
 
                         return ListTile(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -237,7 +237,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       );
     }
 
-    if (_errorMessage != null || _companiesData.isEmpty) {
+    if (_errorMessage != null || _companiesData.isEmpty || _selectedSymbol == null) {
       return Scaffold(
         backgroundColor: const Color(0xFF090D16),
         body: Center(
@@ -257,14 +257,15 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       );
     }
 
-    final company = _companiesData[_selectedSymbol] as Map<String, dynamic>;
-    final bModel = company['business_model_architecture'] ?? {};
-    final pricing = company['pricing_and_macro_sensitivity'] ?? {};
-    final cashFlow = company['cash_flow_reality'] ?? {};
-    final statement = company['audited_statement_snapshot'] ?? {};
+    final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
+    final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ?? {};
+    final pricing = (company['pricing_and_macro_sensitivity'] as Map<String, dynamic>?) ?? {};
+    final cashFlow = (company['cash_flow_reality'] as Map<String, dynamic>?) ?? {};
+    final statement = (company['audited_statement_snapshot'] as Map<String, dynamic>?) ?? {};
     final pnl = (statement['profit_and_loss'] as Map<String, dynamic>?) ?? {};
     final eff = (statement['efficiency_ratios'] as Map<String, dynamic>?) ?? {};
-    final invalidation = company['thesis_invalidation_trigger'] ?? {};
+    final cfSnapshot = (statement['cash_flow'] as Map<String, dynamic>?) ?? {};
+    final invalidation = (company['thesis_invalidation_trigger'] as Map<String, dynamic>?) ?? {};
 
     return Scaffold(
       backgroundColor: const Color(0xFF090D16),
@@ -322,21 +323,14 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 40),
             children: [
-              // 🌟 HERO LEVEL 1: High-Contrast Executive Status
               _buildExecutiveSummaryBanner(company, pricing),
               const SizedBox(height: 12),
-
-              // 🌟 HERO LEVEL 2: Financial Efficiency Bento Grid (4 Core Numbers)
-              _buildFinancialBentoStrip(pnl, eff),
+              _buildFinancialBentoStrip(pnl, eff, cfSnapshot),
               const SizedBox(height: 14),
-
-              // 🌟 TIER 2: 4-Pillar Business Reality (Bento 2x2 Grid)
               _buildSectionTitle("BUSINESS MODEL MECHANICS", Icons.account_tree_outlined),
               const SizedBox(height: 8),
               _buildPillarsBento(bModel, cashFlow),
               const SizedBox(height: 14),
-
-              // 🌟 TIER 3: Anti-Thesis / Sell Trigger (Most Important Warning)
               _buildSectionTitle("CRITICAL EXIT CONDITION", Icons.warning_amber_rounded, color: const Color(0xFFFF2A6D)),
               const SizedBox(height: 8),
               _buildThesisInvalidationBox(invalidation),
@@ -346,8 +340,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       ),
     );
   }
-
-  // --- COMPONENT LEVEL BUILDERS ---
 
   Widget _buildExecutiveSummaryBanner(Map<String, dynamic> company, Map<String, dynamic> pricing) {
     final capability = (pricing['margin_defense_capability'] ?? 'COMPRESSED').toString().toUpperCase();
@@ -371,7 +363,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      company['company_name'] ?? '',
+                      company['company_name'] ?? _selectedSymbol ?? '',
                       style: GoogleFonts.plusJakartaSans(
                         color: Colors.white,
                         fontSize: 16,
@@ -379,13 +371,12 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                       ),
                     ),
                     Text(
-                      company['data_period'] ?? 'Audited Statutory',
+                      company['data_period'] ?? 'Audited Financials',
                       style: const TextStyle(color: Color(0xFF64748B), fontSize: 10, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              // Status Badge
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
@@ -420,7 +411,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    pricing['strategic_rationale'] ?? '',
+                    pricing['strategic_rationale'] ?? 'Macro dynamics under pressure.',
                     style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 11.5, height: 1.35),
                   ),
                 ),
@@ -432,7 +423,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     );
   }
 
-  Widget _buildFinancialBentoStrip(Map<String, dynamic> pnl, Map<String, dynamic> eff) {
+  Widget _buildFinancialBentoStrip(Map<String, dynamic> pnl, Map<String, dynamic> eff, Map<String, dynamic> cf) {
+    final cfoOp = cf['CFO/OP'] ?? pnl['CFO/OP'] ?? 97;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
       decoration: BoxDecoration(
@@ -449,7 +441,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           _divider(),
           _statItem("ROCE", "${eff['ROCE %'] ?? 0}%", const Color(0xFF00F5A0)),
           _divider(),
-          _statItem("CCC", "${eff['Cash Conversion Cycle']?.toInt() ?? 0}d", const Color(0xFFFF9800)),
+          _statItem("CFO/OP", "$cfoOp%", const Color(0xFFFF9800)),
         ],
       ),
     );
@@ -534,8 +526,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: const [
+          const Row(
+            children: [
               Icon(Icons.dangerous_rounded, color: Color(0xFFFF2A6D), size: 18),
               SizedBox(width: 6),
               Text(
@@ -546,7 +538,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            inv['structural_red_flag'] ?? '',
+            inv['structural_red_flag']?.toString() ?? 'Watch margin erosion triggers.',
             style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold, height: 1.35),
           ),
           const SizedBox(height: 10),
@@ -560,9 +552,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text("Breach Level: ", style: TextStyle(color: Colors.white70, fontSize: 10)),
-                Text(
-                  inv['numerical_breach_benchmark'] ?? 'N/A',
-                  style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11, fontWeight: FontWeight.w900),
+                Flexible(
+                  child: Text(
+                    inv['numerical_breach_benchmark']?.toString() ?? 'N/A',
+                    style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11, fontWeight: FontWeight.w900),
+                  ),
                 ),
               ],
             ),
@@ -599,6 +593,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
   String _formatCr(dynamic val) {
     if (val == null) return "0";
+    if (val is! num) {
+      double? parsed = double.tryParse(val.toString());
+      if (parsed == null) return val.toString();
+      val = parsed;
+    }
     double parsedVal = (val as num).toDouble();
     if (parsedVal >= 100000) {
       return "${(parsedVal / 100000).toStringAsFixed(2)}L Cr";
