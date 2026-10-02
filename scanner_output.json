@@ -1,88 +1,40 @@
 {
-  "last_updated": "2026-10-01 19:01:49",
+  "last_updated": "2026-10-02 18:37:03",
   "tracked_dates": [
     "2026-09-29",
     "2026-09-30",
-    "2026-10-01"
+    "2026-10-01",
+    "2026-10-02"
   ],
   "latest": {
-    "date": "2026-10-01",
-    "triggers_count": 8,
-    "watchlist_count": 17,
-    "triggers": [
-      {
-        "symbol": "ATLANTAELE",
-        "close": 1716.5,
-        "volume_spike": "2.8x",
-        "base_squeeze": "8.1%"
-      },
-      {
-        "symbol": "CCL",
-        "close": 1056.6,
-        "volume_spike": "2.8x",
-        "base_squeeze": "6.2%"
-      },
-      {
-        "symbol": "COFORGE",
-        "close": 1826.0,
-        "volume_spike": "2.1x",
-        "base_squeeze": "5.9%"
-      },
-      {
-        "symbol": "DIFFNKG",
-        "close": 464.4,
-        "volume_spike": "4.7x",
-        "base_squeeze": "7.5%"
-      },
-      {
-        "symbol": "GKSL",
-        "close": 194.27,
-        "volume_spike": "47.8x",
-        "base_squeeze": "9.3%"
-      },
-      {
-        "symbol": "SCHNEIDER",
-        "close": 1275.4,
-        "volume_spike": "9.0x",
-        "base_squeeze": "5.3%"
-      },
-      {
-        "symbol": "SGFIN",
-        "close": 631.85,
-        "volume_spike": "5.0x",
-        "base_squeeze": "8.5%"
-      },
-      {
-        "symbol": "WELSPUNLIV",
-        "close": 239.17,
-        "volume_spike": "6.7x",
-        "base_squeeze": "7.0%"
-      }
-    ],
+    "date": "2026-10-02",
+    "triggers_count": 0,
+    "watchlist_count": 19,
+    "triggers": [],
     "watchlist": [
       {
         "symbol": "AKUMS",
         "close": 813.1,
-        "trigger_level": 836.8,
-        "squeeze": "4.9%"
-      },
-      {
-        "symbol": "BERGEPAINT",
-        "close": 452.4,
-        "trigger_level": 459.0,
-        "squeeze": "4.1%"
+        "trigger_level": 828.65,
+        "squeeze": "3.8%"
       },
       {
         "symbol": "CASTROLIND",
         "close": 199.04,
         "trigger_level": 203.4,
-        "squeeze": "5.9%"
+        "squeeze": "4.7%"
       },
       {
         "symbol": "CEIGALL",
         "close": 380.1,
-        "trigger_level": 390.0,
-        "squeeze": "4.6%"
+        "trigger_level": 388.1,
+        "squeeze": "4.0%"
+      },
+      {
+        "symbol": "GOKEX",
+        "close": 688.75,
+        "trigger_level": 709.0,
+        "squeeze": "6.5%"
       },
       {
         "symbol": "GOLD1",
@@ -105,14 +57,20 @@
       {
         "symbol": "HDFCLIFE",
         "close": 534.2,
-        "trigger_level": 535.35,
-        "squeeze": "4.3%"
+        "trigger_level": 538.9,
+        "squeeze": "5.0%"
       },
       {
         "symbol": "IXIGO",
         "close": 161.9,
         "trigger_level": 164.21,
         "squeeze": "7.7%"
+      },
+      {
+        "symbol": "JSWINFRA",
+        "close": 357.45,
+        "trigger_level": 366.0,
+        "squeeze": "7.3%"
       },
       {
         "symbol": "KLBRENG-B",
@@ -130,7 +88,13 @@
         "symbol": "LIQUIDPLUS",
         "close": 1105.97,
         "trigger_level": 1110.62,
-        "squeeze": "0.6%"
+        "squeeze": "0.5%"
+      },
+      {
+        "symbol": "MANBA",
+        "close": 139.01,
+        "trigger_level": 142.0,
+        "squeeze": "4.4%"
       },
       {
         "symbol": "MANKIND",
@@ -141,26 +105,26 @@
       {
         "symbol": "PREMEXPLN",
         "close": 682.05,
-        "trigger_level": 686.0,
-        "squeeze": "2.2%"
+        "trigger_level": 685.95,
+        "squeeze": "2.1%"
       },
       {
-        "symbol": "SARDAEN",
-        "close": 494.75,
-        "trigger_level": 508.35,
-        "squeeze": "4.8%"
+        "symbol": "SHINDL",
+        "close": 159.12,
+        "trigger_level": 163.8,
+        "squeeze": "6.4%"
+      },
+      {
+        "symbol": "SMSPHARMA",
+        "close": 471.3,
+        "trigger_level": 485.0,
+        "squeeze": "6.9%"
       },
       {
         "symbol": "SOMANYCERA",
         "close": 614.2,
         "trigger_level": 627.3,
-        "squeeze": "6.2%"
-      },
-      {
-        "symbol": "TATACOMM",
-        "close": 1683.0,
-        "trigger_level": 1701.0,
-        "squeeze": "4.4%"
+        "squeeze": "5.9%"
       }
     ]
   },
@@ -702,6 +666,127 @@
           "close": 1683.0,
           "trigger_level": 1701.0,
           "squeeze": "4.4%"
+        }
+      ]
+    },
+    "2026-10-02": {
+      "triggers_count": 0,
+      "watchlist_count": 19,
+      "triggers": [],
+      "watchlist": [
+        {
+          "symbol": "AKUMS",
+          "close": 813.1,
+          "trigger_level": 828.65,
+          "squeeze": "3.8%"
+        },
+        {
+          "symbol": "CASTROLIND",
+          "close": 199.04,
+          "trigger_level": 203.4,
+          "squeeze": "4.7%"
+        },
+        {
+          "symbol": "CEIGALL",
+          "close": 380.1,
+          "trigger_level": 388.1,
+          "squeeze": "4.0%"
+        },
+        {
+          "symbol": "GOKEX",
+          "close": 688.75,
+          "trigger_level": 709.0,
+          "squeeze": "6.5%"
+        },
+        {
+          "symbol": "GOLD1",
+          "close": 122.74,
+          "trigger_level": 125.78,
+          "squeeze": "4.0%"
+        },
+        {
+          "symbol": "GOLDAXIS",
+          "close": 122.36,
+          "trigger_level": 125.45,
+          "squeeze": "4.1%"
+        },
+        {
+          "symbol": "HDFCGOLD",
+          "close": 125.58,
+          "trigger_level": 128.69,
+          "squeeze": "3.9%"
+        },
+        {
+          "symbol": "HDFCLIFE",
+          "close": 534.2,
+          "trigger_level": 538.9,
+          "squeeze": "5.0%"
+        },
+        {
+          "symbol": "IXIGO",
+          "close": 161.9,
+          "trigger_level": 164.21,
+          "squeeze": "7.7%"
+        },
+        {
+          "symbol": "JSWINFRA",
+          "close": 357.45,
+          "trigger_level": 366.0,
+          "squeeze": "7.3%"
+        },
+        {
+          "symbol": "KLBRENG-B",
+          "close": 523.95,
+          "trigger_level": 534.55,
+          "squeeze": "6.8%"
+        },
+        {
+          "symbol": "LENSKART",
+          "close": 691.15,
+          "trigger_level": 698.1,
+          "squeeze": "7.7%"
+        },
+        {
+          "symbol": "LIQUIDPLUS",
+          "close": 1105.97,
+          "trigger_level": 1110.62,
+          "squeeze": "0.5%"
+        },
+        {
+          "symbol": "MANBA",
+          "close": 139.01,
+          "trigger_level": 142.0,
+          "squeeze": "4.4%"
+        },
+        {
+          "symbol": "MANKIND",
+          "close": 2535.0,
+          "trigger_level": 2559.0,
+          "squeeze": "5.3%"
+        },
+        {
+          "symbol": "PREMEXPLN",
+          "close": 682.05,
+          "trigger_level": 685.95,
+          "squeeze": "2.1%"
+        },
+        {
+          "symbol": "SHINDL",
+          "close": 159.12,
+          "trigger_level": 163.8,
+          "squeeze": "6.4%"
+        },
+        {
+          "symbol": "SMSPHARMA",
+          "close": 471.3,
+          "trigger_level": 485.0,
+          "squeeze": "6.9%"
+        },
+        {
+          "symbol": "SOMANYCERA",
+          "close": 614.2,
+          "trigger_level": 627.3,
+          "squeeze": "5.9%"
         }
       ]
     }
