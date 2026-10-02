@@ -13,8 +13,11 @@ class CompanyIntelligenceScreen extends StatefulWidget {
 }
 
 class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
-  final String _cdnUrl =
+  // ⚡ Fastly CDN Endpoint
+  final String _fastlyCdnUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
+  
+  // 🧹 Fastly Global Cache Purge Endpoint
   final String _purgeUrl =
       'https://purge.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
 
@@ -30,52 +33,56 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     _fetchCompaniesData();
   }
 
-  /// 🚀 Live Fetch with automatic Fastly Cache Purge
+  /// 🚀 Fastly Edge Purge + Fresh Fetch Engine
   Future<void> _fetchCompaniesData({bool isManual = false}) async {
     if (isManual) setState(() => _isRefreshing = true);
 
-    // Agar user manual refresh kare toh jsDelivr global cache ko purge karein
-    if (isManual) {
-      try {
-        await http.get(Uri.parse(_purgeUrl)).timeout(const Duration(seconds: 4));
-      } catch (_) {}
-    }
-
-    final cacheBuster = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(999999)}';
-    final requestUri = Uri.parse('$_cdnUrl?v=$cacheBuster');
-
     try {
+      // Step 1: Agar manual sync dabaya hai ya initial load hai, Fastly cache purge request bhejo
+      if (isManual) {
+        try {
+          await http.get(Uri.parse(_purgeUrl)).timeout(const Duration(seconds: 3));
+        } catch (_) {
+          // Purge timeout hone par bhi normal fetch continue karein
+        }
+      }
+
+      // Step 2: Unique Nonce taaki client-level caching bypass ho
+      final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(99999)}';
+      final fetchUri = Uri.parse('$_fastlyCdnUrl?v=$nonce');
+
       final res = await http.get(
-        requestUri,
+        fetchUri,
         headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
-          'Expires': '0',
         },
-      ).timeout(const Duration(seconds: 14));
+      ).timeout(const Duration(seconds: 12));
 
       if (res.statusCode == 200) {
         _parseAndSetData(res.body);
+
         if (isManual && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('⚡ Research Dossier Synced (${_companiesData.length} Companies)'),
+              content: Text('⚡ Fastly Synced (${_companiesData.length} Companies Live)'),
               backgroundColor: const Color(0xFF00F5A0),
               behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 2),
             ),
           );
         }
         return;
       }
-      throw Exception("HTTP ${res.statusCode}");
+      throw Exception("Fastly returned HTTP ${res.statusCode}");
     } catch (e) {
-      debugPrint("Remote fetch notice: $e");
+      debugPrint("Fastly fetch error: $e");
       try {
         final localData = await rootBundle.loadString('assets/data/company_business_models.json');
         _parseAndSetData(localData);
       } catch (_) {
         setState(() {
-          _errorMessage = 'Data sync failed. Check internet connection.';
+          _errorMessage = 'Data connection issue. Tap retry.';
           _isLoading = false;
           _isRefreshing = false;
         });
@@ -108,7 +115,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     }
   }
 
-  /// 🔍 100+ Companies Search Modal
   void _openStockPicker() {
     showModalBottomSheet(
       context: context,
@@ -152,8 +158,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                         ),
                       ),
                       const Text(
-                        "Tap to switch report",
-                        style: TextStyle(color: Colors.white38, fontSize: 11),
+                        "Fastly Powered",
+                        style: TextStyle(color: Color(0xFF00F5A0), fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -265,8 +271,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               const SizedBox(height: 10),
               Text(_errorMessage ?? 'Data unavailable', style: const TextStyle(color: Colors.white70)),
               TextButton(
-                onPressed: () => _fetchCompaniesData(),
-                child: const Text('Retry Connection', style: TextStyle(color: Color(0xFF00E5FF))),
+                onPressed: () => _fetchCompaniesData(isManual: true),
+                child: const Text('Purge & Retry', style: TextStyle(color: Color(0xFF00E5FF))),
               ),
             ],
           ),
@@ -276,7 +282,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
 
-    // 🛡 Dual-Schema Safe Parser (Supports both new and cached schemas seamlessly)
+    // 🛡 Comprehensive Data Extractors
     final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ?? {};
     final coreOld = (company['core_identity'] as Map<String, dynamic>?) ?? {};
     final moatOld = (company['economic_moat'] as Map<String, dynamic>?) ?? {};
@@ -306,7 +312,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final metrics = (company['must_watch_metrics'] as List?) ?? [];
 
-    // Red flag trigger mapping
     dynamic invRaw = company['thesis_invalidation_trigger'] ?? company['anti_thesis_trigger'];
     Map<String, dynamic> invalidation = {};
     if (invRaw is Map<String, dynamic>) {
@@ -314,7 +319,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     } else if (invRaw is String) {
       invalidation = {
         'structural_red_flag': invRaw,
-        'numerical_breach_benchmark': 'Continuous OPM decline or moat erosion',
+        'numerical_breach_benchmark': 'Continuous margin erosion trigger',
         'strategic_implication': 'Pricing power breakdown and volume contraction',
       };
     }
@@ -364,7 +369,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2),
                   )
                 : const Icon(Icons.sync_rounded, color: Color(0xFF00E5FF), size: 20),
-            tooltip: 'Live CDN Sync (Bypass Cache)',
+            tooltip: 'Fastly Cache Purge & Sync',
             onPressed: _isRefreshing ? null : () => _fetchCompaniesData(isManual: true),
           ),
         ],
@@ -377,11 +382,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 40),
             children: [
-              // 1. Research Memo Executive Header
               _buildReportHeader(company, pricing),
               const SizedBox(height: 16),
 
-              // 2. Business Model Architecture (4 Full Narrative Analysis Sections)
               _buildSectionHeader("BUSINESS MODEL ARCHITECTURE", "HOW THE OPERATIONAL ENGINE WORKS", Icons.domain_rounded),
               const SizedBox(height: 10),
               _buildAnalysisCard(
@@ -417,25 +420,21 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               ),
               const SizedBox(height: 16),
 
-              // 3. Cash Flow Reality & Capital Deployment
               _buildSectionHeader("CASH FLOW REALITY", "OPERATIONAL CASH CONVERSION & FREE CASH FLOW", Icons.account_balance_wallet_outlined),
               const SizedBox(height: 10),
               _buildCashFlowDossier(cashFlowReality, cf),
               const SizedBox(height: 16),
 
-              // 4. Strategic Catalysts & Monitorable Metrics
               _buildSectionHeader("STRATEGIC CATALYSTS & METRICS", "WHAT DRIVES GROWTH IN UPCOMING QUARTERS", Icons.track_changes_rounded),
               const SizedBox(height: 10),
               _buildCatalystsAndMetricsCard(catalysts, metrics),
               const SizedBox(height: 16),
 
-              // 5. Critical Exit Trigger (Thesis Invalidation)
               _buildSectionHeader("THESIS INVALIDATION TRIGGER", "CLEAR CONDITIONS TO EXIT / AVOID THIS STOCK", Icons.dangerous_rounded, titleColor: const Color(0xFFFF2A6D)),
               const SizedBox(height: 10),
               _buildThesisInvalidationDossier(invalidation, risks),
               const SizedBox(height: 16),
 
-              // 6. Audited Financial Statements Baseline (Collapsible Detailed Views)
               _buildSectionHeader("AUDITED FINANCIAL BASELINE", "STATUTORY STATEMENTS & EFFICIENCY RATIOS", Icons.table_chart_rounded),
               const SizedBox(height: 10),
               _buildFinancialStatementsAccordion(pnl, bs, cf, eff, statement),
@@ -446,7 +445,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     );
   }
 
-  // --- RESEARCH MEMO COMPONENTS ---
+  // --- SUB COMPONENTS ---
 
   Widget _buildReportHeader(Map<String, dynamic> comp, Map<String, dynamic> pricing) {
     final capability = (pricing['margin_defense_capability'] ?? pricing['rating'] ?? 'COMPRESSED')
@@ -619,9 +618,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   Widget _buildCashFlowDossier(Map<String, dynamic> cfReality, Map<String, dynamic> cf) {
     final earningsQuality = cfReality['earnings_quality_assessment'] ??
         cfReality['operating_cash_vs_profit'] ??
-        'Earnings to cash conversion tracked at high quality.';
+        'Operating cash flow conversion tracked at high quality.';
     final fcfProfile = cfReality['free_cash_flow_profile'] ??
-        'Free cash flow primarily deployed in capex and capacity expansions.';
+        'Free cash flow primarily deployed in capacity expansions and home decor.';
     final cfoOp = cf['CFO/OP'] ?? 97;
     final fcfVal = cf['Free Cash Flow'] ?? 2604;
 
@@ -749,7 +748,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   }
 
   Widget _buildThesisInvalidationDossier(Map<String, dynamic> inv, List risks) {
-    final redFlag = inv['structural_red_flag']?.toString() ?? 'Watch margin erosion and volume loss.';
+    final redFlag = inv['structural_red_flag']?.toString() ?? 'Watch continuous margin compression and loss of volume.';
     final benchmark = inv['numerical_breach_benchmark']?.toString() ?? 'OPM % < 15% aur Inventory Days > 160 days';
     final implication = inv['strategic_implication']?.toString();
 
@@ -880,7 +879,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                   const Divider(color: Color(0xFF1A263D), height: 1),
                   const SizedBox(height: 10),
 
-                  // Efficiency Metrics Strip
                   const Text("EFFICIENCY & WORKING CAPITAL RATIOS", style: TextStyle(color: Color(0xFF00F5A0), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
                   _statementRow("Cash Conversion Cycle (CCC)", "${eff['Cash Conversion Cycle']?.toInt() ?? 107} days", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
@@ -891,7 +889,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
                   const Divider(color: Color(0xFF1A263D), height: 18),
 
-                  // P&L Statement
                   const Text("PROFIT & LOSS STATEMENT (INR CR)", style: TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
                   _statementRow("Sales Turnover", "₹${_formatCr(sales)}"),
@@ -904,7 +901,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
                   const Divider(color: Color(0xFF1A263D), height: 18),
 
-                  // Balance Sheet & Cash Flow
                   const Text("BALANCE SHEET & CASH FLOW HEALTH", style: TextStyle(color: Color(0xFFFFB300), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
                   _statementRow("Borrowings (Debt)", "₹${_formatCr(bs['Borrowings'] ?? 2290)}"),
