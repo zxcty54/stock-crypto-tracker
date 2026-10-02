@@ -1,1 +1,432 @@
-{}
+{
+  "ASIANPAINT": {
+    "symbol": "ASIANPAINT",
+    "company_name": "Asian Paints",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "Decorative aur industrial paints, wood finishes, waterproofing solutions, wall coverings, adhesives, aur home decor segment ke tahat bath fittings, kitchen fittings, lighting, aur furnishing products bechti hai.",
+      "who_is_customer": "Retail consumers (B2C) gharo ke liye, painting contractors, architects, interior designers, aur automotive/industrial sectors ke OEMs (B2B)."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "Segment reporting audited financial statements me Paints aur Home Decor ke roop me di jati hai, jisme domestic paints major share hold karta hai.",
+      "segments": [
+        {
+          "name": "Paints (Decorative & Industrial)",
+          "share_pct": 95.0,
+          "is_verifiable": true
+        },
+        {
+          "name": "Home Decor & Others",
+          "share_pct": 5.0,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 89.0,
+        "international_pct": 11.0
+      }
+    },
+    "revenue_drivers": [
+      "Volume growth demand in decorative paints and network expansion of Beautiful Homes stores",
+      "Real estate activity, housing completions, and consumer shift towards waterproofing and premium finishes",
+      "Raw material price movements (crude oil derivatives like TiO2 and monomers) affecting pricing power and gross margins"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "Decorative Volume Growth",
+        "why_track": "Volume growth demand aur market share gains ko track karne ke liye sabse important metric hai."
+      },
+      {
+        "metric": "Gross Margins",
+        "why_track": "Crude-based raw material inflation aur price hikes ka impact direct operating profitability par reflect hota hai."
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Raw Material Price Volatility",
+        "description": "Crude oil prices aur petrochemical derivatives me tezi aane se company ki gross margins par dabav padta hai."
+      },
+      {
+        "risk_type": "Competition in Decorative Segment",
+        "description": "Naye unorganized aur well-funded organized players (jaise Grasim ki entry) ki wajah se pricing pressure aur market share risk badh raha hai."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Asian Paints Annual Report FY2023-24",
+        "filing_type": "Annual Report",
+        "page_or_section": "Segment Reporting & Management Discussion and Analysis",
+        "period": "FY2024"
+      }
+    ]
+  },
+  "RELIANCE": {
+    "symbol": "RELIANCE",
+    "company_name": "Reliance Industries Limited",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "Reliance ka core business multiple verticals mein divided hai: O2C (Oil-to-Chemicals) jisme refining aur petrochemical products jaise polymers, polyesters aur fuels beche jaate hain; Digital Services (Jio) jisme 4G/5G telecom data, voice aur digital apps services hain; Retail jisme grocery, consumer electronics aur fashion ki physical aur online stores se selling hoti hai; aur Oil & Gas (E&P) jisme KG-D6 basin se natural gas aur CBM ka extraction aur sale hota hai.",
+      "who_is_customer": "B2B aur B2C dono. O2C aur Oil & Gas segment mein industrial clients, B2B manufacturers aur bulk buyers customer hain. Digital Services aur Retail mein retail consumers, households aur small businesses (SMEs) direct end-users hain."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "Audited segment results ke mutabik segment revenue gross turnover aur inter-segment transfers ke sath report ki jati hai.",
+      "segments": [
+        {
+          "name": "Oil to Chemicals (O2C)",
+          "share_pct": 56.5,
+          "is_verifiable": true
+        },
+        {
+          "name": "Digital Services (Jio)",
+          "share_pct": 14.5,
+          "is_verifiable": true
+        },
+        {
+          "name": "Retail",
+          "share_pct": 24.0,
+          "is_verifiable": true
+        },
+        {
+          "name": "Oil and Gas (Exploration & Production)",
+          "share_pct": 3.0,
+          "is_verifiable": true
+        },
+        {
+          "name": "Others / Unallocated",
+          "share_pct": 2.0,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 73.0,
+        "international_pct": 27.0
+      }
+    },
+    "revenue_drivers": [
+      "O2C segment mein GRMs (Gross Refining Margins) aur downstream petrochemical product spreads ka movement",
+      "Jio ke ARPU (Average Revenue Per User) mein growth aur data consumption volume mein izafa",
+      "Retail segment mein store expansion, footfalls, aur non-grocery categories ki sales penetration"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "GRM (Gross Refining Margin)",
+        "why_track": "Ye refining business ki profitability aur global product cracks ke sath company ki earnings ko directly drive karta hai"
+      },
+      {
+        "metric": "Jio ARPU (Average Revenue Per User)",
+        "why_track": "Ye telecom subscriber base se monetization ki efficiency aur per-user revenue generation ko measure karta hai"
+      },
+      {
+        "metric": "Retail Area Expansion & Revenue per Sq. Ft.",
+        "why_track": "Ye retail segment ki operational efficiency aur store productivity ka key indicator hai"
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Commodity Price Volatility",
+        "description": "Crude oil aur gas prices mein international fluctuations hone se O2C aur Exploration margins par direct pressure padta hai"
+      },
+      {
+        "risk_type": "Regulatory & Policy Changes",
+        "description": "Export duties, windfall taxes, aur telecom sector regulations (TRAI/DoT guidelines) mein badlaav se profitability affect ho sakti hai"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Reliance Industries Limited Integrated Annual Report 2023-24",
+        "filing_type": "Annual Report",
+        "page_or_section": "Financial Statements - Segment Reporting",
+        "period": "FY2024"
+      }
+    ]
+  },
+  "HDFCBANK": {
+    "symbol": "HDFCBANK",
+    "company_name": "HDFC Bank",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "HDFC Bank retail aur wholesale banking products bechti hai, jisme savings/current accounts, retail loans (auto, housing, personal), credit cards, wholesale/corporate lending, aur treasury operations shamil hain.",
+      "who_is_customer": "Retail individual customers, MSMEs, large corporates, agricultural sector, aur government entities iske primary customers hain."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "Audited financial statements ke anusar, bank ke main segments Treasury, Retail Banking, Wholesale Banking, aur Other Banking Operations hain.",
+      "segments": [
+        {
+          "name": "Treasury",
+          "share_pct": 28.5,
+          "is_verifiable": true
+        },
+        {
+          "name": "Retail Banking",
+          "share_pct": 52.1,
+          "is_verifiable": true
+        },
+        {
+          "name": "Wholesale Banking",
+          "share_pct": 17.2,
+          "is_verifiable": true
+        },
+        {
+          "name": "Other Banking Operations",
+          "share_pct": 2.2,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 98.5,
+        "international_pct": 1.5
+      }
+    },
+    "revenue_drivers": [
+      "Loan portfolio growth (Retail aur Wholesale advances ki volume)",
+      "Net Interest Margin (NIM) jo cost of funds aur yield on advances par depend karta hai",
+      "Fee income jo credit cards, cross-selling, aur third-party products (mutual funds/insurance) se aati hai"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "CASA Ratio",
+        "why_track": "Low-cost current account aur savings account deposits bank ki funding cost ko kam karte hain aur NIM ko protect karte hain."
+      },
+      {
+        "metric": "Gross NPA and Net NPA Ratio",
+        "why_track": "Asset quality track karne ke liye zaroori hai taaki pata chale kitna loan default ho raha hai aur kitna provisioning karni padegi."
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Interest Rate Risk",
+        "description": "Agar interest rates badhte hain aur bank apne deposit rates jaldi reprice karta hai jabki loans fix hain, toh margins par dabav aa sakta hai."
+      },
+      {
+        "risk_type": "Credit Risk",
+        "description": "Retail aur corporate segment me economic slowdown ya job losses ki wajah se defaults badh sakte hain, jisse credit cost upar ja sakti hai."
+      }
+    ],
+    "sources": [
+      {
+        "title": "HDFC Bank Limited Annual Report FY2023-24",
+        "filing_type": "Annual Report",
+        "page_or_section": "Schedule 18 - Segment Information",
+        "period": "FY2024"
+      }
+    ]
+  },
+  "TCS": {
+    "symbol": "TCS",
+    "company_name": "Tata Consultancy Services Limited",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "TCS global clients ko IT services, consulting, aur digital transformation solutions bechti hai, jisme cloud computing, cybersecurity, enterprise software implementation, aur artificial intelligence services shaamil hain.",
+      "who_is_customer": "B2B customers, jisme global Fortune 500 companies, banking & financial services, retail, healthcare, manufacturing, aur telecom sectors ke large enterprises aate hain."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "Segments are disclosed based on industry verticals and geographical markets in the audited financial statements.",
+      "segments": [
+        {
+          "name": "Banking, Financial Services and Insurance (BFSI)",
+          "share_pct": 31.5,
+          "is_verifiable": true
+        },
+        {
+          "name": "Consumer Business",
+          "share_pct": 15.6,
+          "is_verifiable": true
+        },
+        {
+          "name": "Life Sciences and Healthcare",
+          "share_pct": 10.9,
+          "is_verifiable": true
+        },
+        {
+          "name": "Manufacturing",
+          "share_pct": 9.8,
+          "is_verifiable": true
+        },
+        {
+          "name": "Technology and Services",
+          "share_pct": 8.3,
+          "is_verifiable": true
+        },
+        {
+          "name": "Communication, Media and Technology",
+          "share_pct": 6.8,
+          "is_verifiable": true
+        },
+        {
+          "name": "Others",
+          "share_pct": 17.1,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 5.4,
+        "international_pct": 94.6
+      }
+    },
+    "revenue_drivers": [
+      "Order Book aur Total Contract Value (TCV) conversions jo large multi-year deals se aate hain",
+      "Digital transformation aur cloud migration projects ki demand",
+      "Client wallet share expansion aur existing key accounts me cross-selling"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "Operating Margin (EBIT Margin)",
+        "why_track": "Pricing power, cost optimization, aur employee pyramid efficiency ko reflect karta hai jo direct bottom-line profitability drive karta hai."
+      },
+      {
+        "metric": "Attrition Rate (LTM IT Services)",
+        "why_track": "Employee retention costs, hiring expenses, aur talent availability ko track karne ke liye critical hai kyunki labor cost sabse bada expense hai."
+      },
+      {
+        "metric": "Total Contract Value (TCV) of Deal Wins",
+        "why_track": "Future revenue visibility aur medium-term growth trajectory ka leading indicator hai."
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Macroeconomic Uncertainty",
+        "description": "Developed markets (jaise US aur Europe) me agar economic slowdown ya inflation hota hai, toh clients IT spending aur discretionary projects cut kar dete hain."
+      },
+      {
+        "risk_type": "Currency Fluctuation Risk",
+        "description": "Revenue majorly USD, GBP, aur EUR me aata hai jabki cost INR me hoti hai; exchange rate me sharp volatility margins ko impact karti hai."
+      }
+    ],
+    "sources": [
+      {
+        "title": "TCS Annual Report FY2023-24",
+        "filing_type": "Annual Report",
+        "page_or_section": "Financial Statements - Segment Reporting and Management Discussion & Analysis",
+        "period": "FY2024"
+      }
+    ]
+  },
+  "MARUTI": {
+    "symbol": "MARUTI",
+    "company_name": "Maruti Suzuki India Limited",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "Yeh company passenger vehicles (entry-level hatchbacks, compact cars, sedans, SUVs, and vans), spare parts, accessories, aur pre-owned car business (True Value) bechti hai, saath mein vehicle servicing aur maintenance bhi provide karti hai.",
+      "who_is_customer": "Customer profile mainly B2C (individual retail buyers for personal mobility) aur B2B/commercial segments (fleet operators, aggregators, aur government departments) ko cover karta hai, along with export markets globally."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "As per Ind AS 108 Segment Reporting in Audited Financial Statements, the company operates primarily in a single business segment being Passenger Vehicles and allied services.",
+      "segments": [
+        {
+          "name": "Passenger Vehicles and Component Sales",
+          "share_pct": 100.0,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 87.5,
+        "international_pct": 12.5
+      }
+    },
+    "revenue_drivers": [
+      "Domestic passenger vehicle sales volume aur new SUV launches",
+      "Export volumes across international markets (Africa, Middle East, Latin America, and Asia)",
+      "Spare parts, accessories, and value-added services (insurance and financing commissions)"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "Capacity Utilization Rate",
+        "why_track": "Yeh manufacturing efficiency aur fixed cost absorption ko determine karta hai jo operating margins ko directly impact karta hai."
+      },
+      {
+        "metric": "EBITDA Margin / Operating Margin",
+        "why_track": "Yeh raw material price volatility (steel, aluminum, precious metals) aur discounting intensity ke baad core profitability dikhata hai."
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Commodity Price Inflation",
+        "description": "Steel, aluminum, aur precious metals ke daam badhne se gross margins par pressure aa sakta hai agar cost increase poori tarah customer ko pass on na kiya jaye."
+      },
+      {
+        "risk_type": "Supply Chain Disruptions",
+        "description": "Semiconductor chips ya critical electronic components ki shortage se production lines affect ho sakti hain aur waiting periods badh sakte hain."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Maruti Suzuki India Limited Annual Report FY2023-24",
+        "filing_type": "Annual Report",
+        "page_or_section": "Financial Statements - Segment Reporting Note",
+        "period": "FY2024"
+      }
+    ]
+  },
+  "POLYCAB": {
+    "symbol": "POLYCAB",
+    "company_name": "Polycab India",
+    "data_period": "FY2024",
+    "core_identity": {
+      "what_it_sells": "Polycab wires aur cables, FMEG (fast moving electrical goods jaise fans, lighting, switches, aur appliances), aur solar products ya conduits bechti hai.",
+      "who_is_customer": "Yeh B2B (institutional clients, infrastructure projects, industrial buyers) aur B2C (retail consumers, electricians, builders) dono segments ko cater karti hai."
+    },
+    "revenue_breakdown": {
+      "has_disclosed_segments": true,
+      "segment_disclosure_note": "Segments are officially disclosed in audited financial statements under Ind AS 108 Operating Segments.",
+      "segments": [
+        {
+          "name": "Wires and Cables",
+          "share_pct": 89.0,
+          "is_verifiable": true
+        },
+        {
+          "name": "FMEG",
+          "share_pct": 7.0,
+          "is_verifiable": true
+        },
+        {
+          "name": "Others (including EPC and solar)",
+          "share_pct": 4.0,
+          "is_verifiable": true
+        }
+      ],
+      "geographic_split": {
+        "domestic_pct": 91.0,
+        "international_pct": 9.0
+      }
+    },
+    "revenue_drivers": [
+      "Volume growth in infrastructure, real estate, and industrial capex driving wire and cable demand",
+      "Raw material price volatility management (copper and aluminium passing through to end-users)",
+      "Expansion of retail distribution network and dealer reach across Tier-2 and Tier-3 cities"
+    ],
+    "must_watch_metrics": [
+      {
+        "metric": "Segment EBIT Margins",
+        "why_track": "Tracks profitability trends in the core Wires & Cables business versus the FMEG business turnaround"
+      },
+      {
+        "metric": "Capacity Utilization and Capex",
+        "why_track": "Indicates volume growth trajectory and manufacturing scale efficiency across plants"
+      }
+    ],
+    "core_risks": [
+      {
+        "risk_type": "Commodity Price Fluctuation",
+        "description": "Copper aur aluminium ke daamon mein sharp volatility se gross margins par direct impact padta hai agar price pass-on mein delay ho."
+      },
+      {
+        "risk_type": "FMEG Turnaround Execution",
+        "description": "FMEG segment mein losses ko reduce karna aur market share badhana ek bada execution risk hai intense competition ke beech."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Polycab India Limited Annual Report FY2024",
+        "filing_type": "Annual Report",
+        "page_or_section": "Segment Reporting (Ind AS 108) and Management Discussion & Analysis",
+        "period": "FY2024"
+      }
+    ]
+  }
+}
