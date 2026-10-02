@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,11 +13,13 @@ class CompanyIntelligenceScreen extends StatefulWidget {
 }
 
 class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
-  // ⚡ Guaranteed Upstream Proxy (Edge cache lock bypass)
-  final String _primaryCdnUrl =
-      'https://raw.githack.com/zxcty54/stock-crypto-tracker/main/company_business_models.json';
-  final String _fallbackFastlyUrl =
+  // ⚡ Fastly CDN Primary
+  final String _fastlyUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
+
+  // 🛡️ Cloudflare jsDelivr Backup (ISP block proof)
+  final String _cfUrl =
+      'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
 
   Map<String, dynamic> _companiesData = {};
   String? _selectedSymbol;
@@ -30,68 +33,61 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     _fetchCompaniesData();
   }
 
-  /// 🚀 Multi-Tier Live Sync (Githack -> Fastly jsDelivr -> Local Assets)
   Future<void> _fetchCompaniesData({bool isManual = false}) async {
     if (isManual) setState(() => _isRefreshing = true);
 
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(9999)}';
 
-    // 1. Primary Direct Upstream Fetch
+    // 1. Try Fastly jsDelivr with Cache-Bust Nonce
     try {
       final res = await http.get(
-        Uri.parse('$_primaryCdnUrl?_t=$timestamp'),
+        Uri.parse('$_fastlyUrl?v=$nonce'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
         },
-      ).timeout(const Duration(seconds: 12));
+      ).timeout(const Duration(seconds: 8));
 
       if (res.statusCode == 200) {
         _parseAndSetData(res.body);
-        _showSuccessSnackbar(isManual);
+        _showToast(isManual);
         return;
       }
-    } catch (primaryErr) {
-      debugPrint("Primary fetch failed: $primaryErr. Trying Fastly fallback...");
+    } catch (e) {
+      debugPrint("Fastly failed/blocked: $e. Trying Cloudflare jsDelivr...");
     }
 
-    // 2. Secondary Fastly jsDelivr Fetch
+    // 2. Try Cloudflare jsDelivr Backup (ISPs par kabhi block nahi hota)
     try {
-      final resFallback = await http.get(
-        Uri.parse('$_fallbackFastlyUrl?ts=$timestamp'),
+      final resCf = await http.get(
+        Uri.parse('$_cfUrl?v=$nonce'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
         },
-      ).timeout(const Duration(seconds: 10));
+      ).timeout(const Duration(seconds: 8));
 
-      if (resFallback.statusCode == 200) {
-        _parseAndSetData(resFallback.body);
-        _showSuccessSnackbar(isManual);
+      if (resCf.statusCode == 200) {
+        _parseAndSetData(resCf.body);
+        _showToast(isManual);
         return;
       }
-    } catch (fallbackErr) {
-      debugPrint("Fastly fallback failed: $fallbackErr. Loading local assets...");
+    } catch (e) {
+      debugPrint("Cloudflare mirror failed: $e");
     }
 
-    // 3. Final Local Fallback
-    try {
-      final localData = await rootBundle.loadString('assets/data/company_business_models.json');
-      _parseAndSetData(localData);
-    } catch (localErr) {
-      setState(() {
-        _errorMessage = 'Data sync issue. Check internet connection.';
-        _isLoading = false;
-        _isRefreshing = false;
-      });
-    }
+    setState(() {
+      _errorMessage = 'Internet network error. CDN connect nahi ho pa raha hai.';
+      _isLoading = false;
+      _isRefreshing = false;
+    });
   }
 
-  void _showSuccessSnackbar(bool isManual) {
+  void _showToast(bool isManual) {
     if (isManual && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('⚡ Live Research Memo Synced (${_companiesData.length} Companies)'),
+          content: Text('⚡ Synced Live (${_companiesData.length} Companies Loaded)'),
           backgroundColor: const Color(0xFF00F5A0),
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 2),
@@ -118,14 +114,13 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       });
     } catch (err) {
       setState(() {
-        _errorMessage = 'Parse Error: $err';
+        _errorMessage = 'JSON Parse Error: $err';
         _isLoading = false;
         _isRefreshing = false;
       });
     }
   }
 
-  /// 🔍 100+ Companies Search Modal
   void _openStockPicker() {
     showModalBottomSheet(
       context: context,
@@ -169,7 +164,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                         ),
                       ),
                       const Text(
-                        "Fastly Powered",
+                        "Tap to switch",
                         style: TextStyle(color: Color(0xFF00F5A0), fontSize: 10, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -180,7 +175,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFF131D31),
-                      hintText: "Search company ticker (e.g. ASIANPAINT, RELIANCE)",
+                      hintText: "Search ticker (e.g. POLYCAB, MARUTI, TCS)",
                       hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
                       prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF00E5FF), size: 18),
                       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -201,9 +196,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                         final comp = (_companiesData[sym] as Map<String, dynamic>?) ?? {};
                         final isSel = sym == _selectedSymbol;
 
-                        final opm = comp['audited_statement_snapshot']?['profit_and_loss']?['OPM %'] ??
-                            comp['audited_statement_snapshot']?['gross_margin_pct'] ??
-                            '18%';
+                        final pnl = comp['audited_statement_snapshot']?['profit_and_loss'] ?? {};
+                        final marginVal = pnl['OPM %'] ?? pnl['Financing Margin %'] ?? 'N/A';
 
                         return ListTile(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -240,12 +234,12 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                           trailing: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF131F33),
+                              color: const Color(0xFF131D31),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(color: const Color(0xFF1E2B3E)),
                             ),
                             child: Text(
-                              "OPM $opm%",
+                              "Margin $marginVal%",
                               style: const TextStyle(color: Color(0xFF00F5A0), fontSize: 10.5, fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -275,17 +269,30 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       return Scaffold(
         backgroundColor: const Color(0xFF070B14),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 40),
-              const SizedBox(height: 10),
-              Text(_errorMessage ?? 'Data unavailable', style: const TextStyle(color: Colors.white70)),
-              TextButton(
-                onPressed: () => _fetchCompaniesData(isManual: true),
-                child: const Text('Purge & Retry', style: TextStyle(color: Color(0xFF00E5FF))),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 48),
+                const SizedBox(height: 14),
+                Text(
+                  _errorMessage ?? 'Connection Error',
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF131D31)),
+                  onPressed: () {
+                    setState(() => _isLoading = true);
+                    _fetchCompaniesData(isManual: true);
+                  },
+                  icon: const Icon(Icons.refresh_rounded, color: Color(0xFF00E5FF)),
+                  label: const Text('Retry CDN Fetch', style: TextStyle(color: Color(0xFF00E5FF))),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -293,23 +300,18 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
 
-    // 🛡 Dual-Schema Safe Extraction
-    final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ?? {};
-    final coreOld = (company['core_identity'] as Map<String, dynamic>?) ?? {};
-    final moatOld = (company['economic_moat'] as Map<String, dynamic>?) ?? {};
-
-    final opEngine = bModel['operational_engine_analysis'] ?? coreOld['what_it_sells'] ?? 'Operational analysis pending.';
-    final costDefense = bModel['sourcing_and_cost_defense'] ?? moatOld['moat_description'] ?? 'Cost defense details pending.';
-    final channelMoat = bModel['channel_moat_vulnerability'] ?? coreOld['who_is_customer'] ?? 'Channel distribution details pending.';
-    final wcPhysics = bModel['working_capital_physics'] ?? (company['cash_flow_health'] as Map?)?['working_capital_nature'] ?? 'Working capital dynamics pending.';
-
-    final pricing = (company['pricing_and_macro_sensitivity'] as Map<String, dynamic>?) ??
-        (company['pricing_power_index'] as Map<String, dynamic>?) ??
+    // 🛡 Fix: JSON ke dono keys support karta hai (business_model_architecture aur business_company_architecture)
+    final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ??
+        (company['business_company_architecture'] as Map<String, dynamic>?) ??
         {};
 
-    final cashFlowReality = (company['cash_flow_reality'] as Map<String, dynamic>?) ??
-        (company['cash_flow_health'] as Map<String, dynamic>?) ??
-        {};
+    final opEngine = bModel['operational_engine_analysis'] ?? 'Operational analysis pending.';
+    final costDefense = bModel['sourcing_and_cost_defense'] ?? 'Cost defense details pending.';
+    final channelMoat = bModel['channel_moat_vulnerability'] ?? 'Channel distribution details pending.';
+    final wcPhysics = bModel['working_capital_physics'] ?? 'Working capital dynamics pending.';
+
+    final pricing = (company['pricing_and_macro_sensitivity'] as Map<String, dynamic>?) ?? {};
+    final cashFlowReality = (company['cash_flow_reality'] as Map<String, dynamic>?) ?? {};
 
     final statement = (company['audited_statement_snapshot'] as Map<String, dynamic>?) ?? {};
     final pnl = (statement['profit_and_loss'] as Map<String, dynamic>?) ?? {};
@@ -317,24 +319,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     final cf = (statement['cash_flow'] as Map<String, dynamic>?) ?? {};
     final eff = (statement['efficiency_ratios'] as Map<String, dynamic>?) ?? {};
 
-    final catalysts = (company['strategic_catalysts'] as List?) ??
-        (company['revenue_drivers'] as List?) ??
-        [];
-
+    final catalysts = (company['strategic_catalysts'] as List?) ?? [];
     final metrics = (company['must_watch_metrics'] as List?) ?? [];
-
-    dynamic invRaw = company['thesis_invalidation_trigger'] ?? company['anti_thesis_trigger'];
-    Map<String, dynamic> invalidation = {};
-    if (invRaw is Map<String, dynamic>) {
-      invalidation = invRaw;
-    } else if (invRaw is String) {
-      invalidation = {
-        'structural_red_flag': invRaw,
-        'numerical_breach_benchmark': 'Continuous margin erosion trigger',
-        'strategic_implication': 'Pricing power breakdown and volume contraction',
-      };
-    }
-
+    final invalidation = (company['thesis_invalidation_trigger'] as Map<String, dynamic>?) ?? {};
     final risks = (company['core_risks'] as List?) ?? [];
 
     return Scaffold(
@@ -380,7 +367,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2),
                   )
                 : const Icon(Icons.sync_rounded, color: Color(0xFF00E5FF), size: 20),
-            tooltip: 'Live Fastly Sync',
+            tooltip: 'Live Refresh',
             onPressed: _isRefreshing ? null : () => _fetchCompaniesData(isManual: true),
           ),
         ],
@@ -393,11 +380,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 40),
             children: [
-              // 1. Research Memo Executive Header
               _buildReportHeader(company, pricing),
               const SizedBox(height: 16),
 
-              // 2. Business Model Architecture (Qualitative Analysis)
               _buildSectionHeader("BUSINESS MODEL ARCHITECTURE", "HOW THE OPERATIONAL ENGINE WORKS", Icons.domain_rounded),
               const SizedBox(height: 10),
               _buildAnalysisCard(
@@ -410,7 +395,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               const SizedBox(height: 10),
               _buildAnalysisCard(
                 title: "2. Sourcing & Cost Defense (Margin Impact)",
-                subtitle: "Crude oil inflation & pricing pass-through ability",
+                subtitle: "Inflation pass-through and cost defense capability",
                 analysis: costDefense,
                 accentColor: const Color(0xFFFFB300),
                 icon: Icons.shield_outlined,
@@ -433,25 +418,21 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               ),
               const SizedBox(height: 16),
 
-              // 3. Cash Flow Reality & Capital Deployment
               _buildSectionHeader("CASH FLOW REALITY", "OPERATIONAL CASH CONVERSION & FREE CASH FLOW", Icons.account_balance_wallet_outlined),
               const SizedBox(height: 10),
               _buildCashFlowDossier(cashFlowReality, cf),
               const SizedBox(height: 16),
 
-              // 4. Strategic Catalysts & Monitorable Metrics
               _buildSectionHeader("STRATEGIC CATALYSTS & METRICS", "WHAT DRIVES GROWTH IN UPCOMING QUARTERS", Icons.track_changes_rounded),
               const SizedBox(height: 10),
               _buildCatalystsAndMetricsCard(catalysts, metrics),
               const SizedBox(height: 16),
 
-              // 5. Critical Exit Trigger (Thesis Invalidation)
               _buildSectionHeader("THESIS INVALIDATION TRIGGER", "CLEAR CONDITIONS TO EXIT / AVOID THIS STOCK", Icons.dangerous_rounded, titleColor: const Color(0xFFFF2A6D)),
               const SizedBox(height: 10),
               _buildThesisInvalidationDossier(invalidation, risks),
               const SizedBox(height: 16),
 
-              // 6. Audited Financial Baseline (Collapsible Detailed Views)
               _buildSectionHeader("AUDITED FINANCIAL BASELINE", "STATUTORY STATEMENTS & EFFICIENCY RATIOS", Icons.table_chart_rounded),
               const SizedBox(height: 10),
               _buildFinancialStatementsAccordion(pnl, bs, cf, eff, statement),
@@ -465,12 +446,10 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   // --- SUB WIDGET BUILDERS ---
 
   Widget _buildReportHeader(Map<String, dynamic> comp, Map<String, dynamic> pricing) {
-    final capability = (pricing['margin_defense_capability'] ?? pricing['rating'] ?? 'COMPRESSED')
-        .toString()
-        .toUpperCase();
-    final isCompressed = capability.contains('COMPRESSED') || capability.contains('MEDIUM');
-    final driver = pricing['primary_macro_driver'] ?? pricing['linked_primary_driver'] ?? 'Brent Crude Oil & USD-INR';
-    final rationale = pricing['strategic_rationale'] ?? pricing['rationale'] ?? '';
+    final capability = (pricing['margin_defense_capability'] ?? 'RESILIENT').toString().toUpperCase();
+    final isCompressed = capability.contains('COMPRESSED');
+    final driver = pricing['primary_macro_driver'] ?? 'Macro Drivers & Commodities';
+    final rationale = pricing['strategic_rationale'] ?? '';
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -634,12 +613,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
   Widget _buildCashFlowDossier(Map<String, dynamic> cfReality, Map<String, dynamic> cf) {
     final earningsQuality = cfReality['earnings_quality_assessment'] ??
-        cfReality['operating_cash_vs_profit'] ??
         'Operating cash flow conversion tracked at high quality.';
     final fcfProfile = cfReality['free_cash_flow_profile'] ??
-        'Free cash flow primarily deployed in capacity expansions and home decor.';
-    final cfoOp = cf['CFO/OP'] ?? 97;
-    final fcfVal = cf['Free Cash Flow'] ?? 2604;
+        'Cash flow reinvestment profile.';
+    final cfoOp = cf['CFO/OP'] ?? 95;
+    final fcfVal = cf['Free Cash Flow'] ?? 0;
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -724,8 +702,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
             ...metrics.map((m) {
               final map = m as Map<String, dynamic>;
               final mName = map['metric'] ?? '';
-              final mVal = map['reported_value'] ?? map['benchmark_normal'] ?? '';
-              final mWhy = map['analytical_significance'] ?? map['why_track'] ?? '';
+              final mVal = map['reported_value'] ?? '';
+              final mWhy = map['analytical_significance'] ?? '';
 
               return Container(
                 padding: const EdgeInsets.all(10),
@@ -739,9 +717,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          mName,
-                          style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w800),
+                        Expanded(
+                          child: Text(
+                            mName,
+                            style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w800),
+                          ),
                         ),
                         Text(
                           mVal,
@@ -765,8 +745,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   }
 
   Widget _buildThesisInvalidationDossier(Map<String, dynamic> inv, List risks) {
-    final redFlag = inv['structural_red_flag']?.toString() ?? 'Watch continuous margin compression and loss of volume.';
-    final benchmark = inv['numerical_breach_benchmark']?.toString() ?? 'OPM % < 15% aur Inventory Days > 160 days';
+    final redFlag = inv['structural_red_flag']?.toString() ?? 'Watch continuous margin compression and loss of market share.';
+    final benchmark = inv['numerical_breach_benchmark']?.toString() ?? 'OPM % breach benchmark';
     final implication = inv['strategic_implication']?.toString();
 
     return Container(
@@ -831,7 +811,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
             ...risks.map((r) {
               final rMap = r as Map<String, dynamic>;
               final rType = rMap['risk_type'] ?? 'Risk Factor';
-              final rDesc = rMap['analysis'] ?? rMap['description'] ?? '';
+              final rDesc = rMap['analysis'] ?? '';
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 6),
@@ -858,11 +838,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       Map<String, dynamic> eff,
       Map<String, dynamic> rawSnapshot,
   ) {
-    final sales = pnl['Sales'] ?? rawSnapshot['revenue_cr'] ?? 33906.0;
-    final opm = pnl['OPM %'] ?? rawSnapshot['gross_margin_pct'] ?? 18.0;
-    final netProfit = pnl['Net Profit'] ?? rawSnapshot['net_profit_cr'] ?? 3710.0;
-    final roce = eff['ROCE %'] ?? 26.0;
-    final ccc = eff['Cash Conversion Cycle'] ?? 107.0;
+    final sales = pnl['Sales'] ?? pnl['Revenue'] ?? 0.0;
+    final opm = pnl['OPM %'] ?? pnl['Financing Margin %'] ?? 0.0;
+    final netProfit = pnl['Net Profit'] ?? 0.0;
+    final roceOrRoe = eff['ROCE %'] ?? eff['ROE %'] ?? 0.0;
+    final isBank = pnl.containsKey('Financing Margin %');
 
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -884,7 +864,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
             ),
           ),
           subtitle: Text(
-            "Sales: ₹${_formatCr(sales)} • OPM: $opm% • ROCE: $roce% • CCC: ${ccc.toInt()}d",
+            "${isBank ? 'Revenue' : 'Sales'}: ₹${_formatCr(sales)} • Margin: $opm% • Return: $roceOrRoe%",
             style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 10.5, fontWeight: FontWeight.bold),
           ),
           children: [
@@ -896,34 +876,41 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                   const Divider(color: Color(0xFF1A263D), height: 1),
                   const SizedBox(height: 10),
 
-                  const Text("EFFICIENCY & WORKING CAPITAL RATIOS", style: TextStyle(color: Color(0xFF00F5A0), fontSize: 10, fontWeight: FontWeight.w900)),
+                  const Text("EFFICIENCY & RETURN RATIOS", style: TextStyle(color: Color(0xFF00F5A0), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
-                  _statementRow("Cash Conversion Cycle (CCC)", "${eff['Cash Conversion Cycle']?.toInt() ?? 107} days", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
-                  _statementRow("Inventory Days", "${eff['Inventory Days']?.toInt() ?? 142} days"),
-                  _statementRow("Debtor Days", "${eff['Debtor Days']?.toInt() ?? 46} days"),
-                  _statementRow("Days Payable", "${eff['Days Payable']?.toInt() ?? 81} days"),
-                  _statementRow("ROCE %", "${eff['ROCE %'] ?? 26}%", isHighlight: true, highlightColor: const Color(0xFF00E5FF)),
+                  if (eff.containsKey('Cash Conversion Cycle'))
+                    _statementRow("Cash Conversion Cycle (CCC)", "${eff['Cash Conversion Cycle']} days", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
+                  if (eff.containsKey('Inventory Days'))
+                    _statementRow("Inventory Days", "${eff['Inventory Days']} days"),
+                  if (eff.containsKey('Debtor Days'))
+                    _statementRow("Debtor Days", "${eff['Debtor Days']} days"),
+                  if (eff.containsKey('Days Payable'))
+                    _statementRow("Days Payable", "${eff['Days Payable']} days"),
+                  if (eff.containsKey('ROCE %'))
+                    _statementRow("ROCE %", "${eff['ROCE %']}%", isHighlight: true, highlightColor: const Color(0xFF00E5FF)),
+                  if (eff.containsKey('ROE %'))
+                    _statementRow("ROE %", "${eff['ROE %']}%", isHighlight: true, highlightColor: const Color(0xFF00E5FF)),
 
                   const Divider(color: Color(0xFF1A263D), height: 18),
 
                   const Text("PROFIT & LOSS STATEMENT (INR CR)", style: TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
-                  _statementRow("Sales Turnover", "₹${_formatCr(sales)}"),
-                  _statementRow("Operating Expenses", "₹${_formatCr(pnl['Expenses'] ?? 27899)}"),
-                  _statementRow("Operating Profit (EBITDA)", "₹${_formatCr(pnl['Operating Profit'] ?? 6006)}"),
-                  _statementRow("Operating Profit Margin (OPM)", "$opm%", isHighlight: true, highlightColor: const Color(0xFF00E5FF)),
+                  _statementRow(isBank ? "Revenue" : "Sales Turnover", "₹${_formatCr(sales)}"),
+                  _statementRow("Expenses", "₹${_formatCr(pnl['Expenses'] ?? 0)}"),
+                  _statementRow(isBank ? "Financing Profit" : "Operating Profit (EBITDA)", "₹${_formatCr(pnl['Operating Profit'] ?? pnl['Financing Profit'] ?? 0)}"),
+                  _statementRow(isBank ? "Financing Margin %" : "Operating Margin (OPM)", "$opm%", isHighlight: true, highlightColor: const Color(0xFF00E5FF)),
                   _statementRow("Net Profit (PAT)", "₹${_formatCr(netProfit)}", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
-                  _statementRow("EPS in Rs", "₹${pnl['EPS in Rs'] ?? 38.23}"),
-                  _statementRow("Dividend Payout %", "${pnl['Dividend Payout %'] ?? 65}%"),
+                  _statementRow("EPS in Rs", "₹${pnl['EPS in Rs'] ?? 0}"),
+                  _statementRow("Dividend Payout %", "${pnl['Dividend Payout %'] ?? 0}%"),
 
                   const Divider(color: Color(0xFF1A263D), height: 18),
 
                   const Text("BALANCE SHEET & CASH FLOW HEALTH", style: TextStyle(color: Color(0xFFFFB300), fontSize: 10, fontWeight: FontWeight.w900)),
                   const SizedBox(height: 6),
-                  _statementRow("Borrowings (Debt)", "₹${_formatCr(bs['Borrowings'] ?? 2290)}"),
-                  _statementRow("Total Balance Sheet Size", "₹${_formatCr(bs['Total Assets'] ?? 30355)}"),
-                  _statementRow("Cash from Operations (CFO)", "₹${_formatCr(cf['Cash from Operating Activity'] ?? 4424)}"),
-                  _statementRow("Free Cash Flow (FCF)", "₹${_formatCr(cf['Free Cash Flow'] ?? 2604)}", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
+                  _statementRow("Borrowings / Debt", "₹${_formatCr(bs['Borrowings'] ?? bs['Borrowing'] ?? 0)}"),
+                  _statementRow("Total Assets", "₹${_formatCr(bs['Total Assets'] ?? 0)}"),
+                  _statementRow("Cash from Operations (CFO)", "₹${_formatCr(cf['Cash from Operating Activity'] ?? 0)}"),
+                  _statementRow("Free Cash Flow (FCF)", "₹${_formatCr(cf['Free Cash Flow'] ?? 0)}", isHighlight: true, highlightColor: const Color(0xFF00F5A0)),
                 ],
               ),
             ),
