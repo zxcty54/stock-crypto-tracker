@@ -1,4 +1,4 @@
-name: Generate & Sync 3-Year Historical OHLCV Dataset
+name: Generate & Sync 5-Year Historical OHLCV Dataset
 
 on:
   schedule:
@@ -28,23 +28,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Run IT OHLCV Scraper & Sync
+      - name: Run 5Y OHLCV Scraper & Sync
         env:
           GH_PAT_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
         run: |
-          python build_3yr_history.py
+          python build_5yr_history.py
 
       - name: Commit & Push Locally to Backend Repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          if [ -f historical_3yr_ohlc.json ]; then
-            git add historical_3yr_ohlc.json
+          if [ -f historical_5yr_ohlc.json ]; then
+            git add historical_5yr_ohlc.json
             if git diff --staged --quiet; then
               echo "ℹ️ No changes in historical dataset."
             else
-              git commit -m "📊 Auto-Update: TCS, INFY, HCLTECH 3Y OHLC [$(date +'%d-%b-%Y')]"
+              git commit -m "📊 Auto-Update: 5Y OHLC for 6 Stocks [$(date +'%d-%b-%Y')]"
               git pull --rebase origin main
               git push origin main
             fi
