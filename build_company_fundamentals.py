@@ -34,7 +34,7 @@ MODELS_TO_TRY = [
 ]
 
 # ==============================================================================
-# 1. UNIFIED MACRO DATA EXTRACTION
+# 1. UNIFIED MACRO DASHBOARD EXTRACTION
 # ==============================================================================
 
 def fetch_unified_macro_dashboard():
@@ -76,10 +76,29 @@ def fetch_unified_macro_dashboard():
     return dashboard
 
 # ==============================================================================
-# 2. AUDITED FINANCIALS + WORKING CAPITAL ENGINE + 5-YEAR HISTORICAL BOUNDS
+# 2. ZERO-GUESSWORK EXTRACTOR (Missing vs Actual 0 Distinction)
 # ==============================================================================
 
-def fetch_latest_audited_financials(ticker_symbol):
+def extract_metric(series, search_keys):
+    """
+    Returns float value if found.
+    Returns None if metric is not disclosed (NO DEFAULT ZERO).
+    """
+    if series is None or series.empty:
+        return None
+    for idx in series.index:
+        idx_str = str(idx).lower()
+        if any(k.lower() in idx_str for k in search_keys):
+            val = series.loc[idx]
+            if pd.notna(val):
+                return float(val)
+    return None
+
+def fetch_sector_specific_financials(ticker_symbol, sector_type):
+    """
+    Extracts strictly disclosed statutory items.
+    Sector-specific: No inventory days for Banks/IT, no loan metrics for Mfg.
+    """
     try:
         t = yf.Ticker(ticker_symbol)
         income_stmt = t.financials
@@ -100,94 +119,132 @@ def fetch_latest_audited_financials(ticker_symbol):
         latest_balance = balance_sheet[latest_date] if balance_sheet is not None and latest_date in balance_sheet else None
         latest_cf = cash_flow[latest_date] if cash_flow is not None and latest_date in cash_flow else None
 
-        def extract_row(series, search_keys):
-            if series is None or series.empty:
-                return 0.0
-            for idx in series.index:
-                idx_str = str(idx).lower()
-                if any(k.lower() in idx_str for k in search_keys):
-                    val = series.loc[idx]
-                    return float(val) if pd.notna(val) else 0.0
-            return 0.0
+        # Universal Metrics
+        revenue = extract_metric(latest_income, ["total revenue", "operating revenue", "interest income"])
+        net_income = extract_metric(latest_income, ["net income", "net profit"])
+        operating_cf = extract_metric(latest_cf, ["operating cash flow", "cash from operations"])
+        capex = extract_metric(latest_cf, ["capital expenditure", "capex"])
+        total_debt = extract_metric(latest_balance, ["total debt"])
+        equity = extract_metric(latest_balance, ["stockholders equity", "common stock equity"])
 
-        revenue = extract_row(latest_income, ["total revenue", "operating revenue"])
-        cogs = extract_row(latest_income, ["cost of revenue", "cost of goods", "reconciled cost of revenue"])
-        gross_profit = extract_row(latest_income, ["gross profit"])
-        if gross_profit == 0.0 and revenue > 0 and cogs > 0:
-            gross_profit = revenue - cogs
-
-        net_income = extract_row(latest_income, ["net income", "net profit"])
-        operating_cf = extract_row(latest_cf, ["operating cash flow", "cash from operations"])
-        capex = abs(extract_row(latest_cf, ["capital expenditure", "capex"]))
-        total_debt = extract_row(latest_balance, ["total debt"])
-        equity = extract_row(latest_balance, ["stockholders equity", "common stock equity"])
-        employee_cost = extract_row(latest_income, ["employee benefit", "salaries", "staff cost"])
-
-        receivables = extract_row(latest_balance, ["accounts receivable", "receivables"])
-        inventory = extract_row(latest_balance, ["inventory", "inventories"])
-        payables = extract_row(latest_balance, ["accounts payable", "payables"])
-
-        # Operational Working Capital Facts
-        cogs_base = cogs if cogs > 0 else (revenue * 0.6 if revenue > 0 else 1.0)
-        debtor_days = round((receivables / revenue) * 365, 1) if revenue > 0 else 0.0
-        inventory_days = round((inventory / cogs_base) * 365, 1) if cogs_base > 0 else 0.0
-        payable_days = round((payables / cogs_base) * 365, 1) if cogs_base > 0 else 0.0
-        ccc_days = round(debtor_days + inventory_days - payable_days, 1)
-
-        # 5-Year Historical Margin Corridor Extraction (No Guesswork)
-        historical_margins = []
-        for col in income_stmt.columns[:5]:
-            col_rev = extract_row(income_stmt[col], ["total revenue", "operating revenue"])
-            col_gp = extract_row(income_stmt[col], ["gross profit"])
-            if col_gp == 0.0:
-                col_cogs = extract_row(income_stmt[col], ["cost of revenue", "cost of goods"])
-                if col_rev > 0 and col_cogs > 0:
-                    col_gp = col_rev - col_cogs
-            if col_rev > 0 and col_gp > 0:
-                historical_margins.append(round((col_gp / col_rev) * 100, 2))
-
-        worst_margin_5y = min(historical_margins) if historical_margins else 38.0
-        avg_margin_5y = round(sum(historical_margins) / len(historical_margins), 2) if historical_margins else 42.0
-
-        gross_margin = round((gross_profit / revenue) * 100, 2) if revenue > 0 and gross_profit > 0 else "N/A"
-        debt_to_equity = round(total_debt / equity, 2) if equity > 0 else 0.0
-        employee_cost_pct = round((employee_cost / revenue) * 100, 2) if revenue > 0 and employee_cost > 0 else "N/A"
-        capex_to_ocf_pct = round((capex / operating_cf) * 100, 2) if operating_cf > 0 else "N/A"
-
-        return {
+        base_report = {
             "financial_year": fy_label,
             "period_end_date": latest_date_dt.strftime("%Y-%m-%d"),
-            "revenue_cr": round(revenue / 1e7, 2),
-            "gross_margin_pct": f"{gross_margin}%" if gross_margin != "N/A" else "N/A",
-            "employee_cost_cr": round(employee_cost / 1e7, 2),
-            "employee_cost_pct": f"{employee_cost_pct}%" if employee_cost_pct != "N/A" else "N/A",
-            "operating_cash_flow_cr": round(operating_cf / 1e7, 2),
-            "net_profit_cr": round(net_income / 1e7, 2),
-            "debt_to_equity": debt_to_equity,
-            "operational_engine_facts": {
-                "debtor_collection_days": debtor_days,
-                "inventory_holding_days": inventory_days,
-                "supplier_payable_days": payable_days,
-                "net_cash_conversion_cycle_days": ccc_days,
-                "capex_to_ocf_pct": f"{capex_to_ocf_pct}%" if capex_to_ocf_pct != "N/A" else "N/A"
-            },
-            "historical_corridor_facts": {
-                "five_year_average_margin_pct": f"{avg_margin_5y}%",
-                "five_year_worst_historical_margin_pct": f"{worst_margin_5y}%",
-                "derived_red_alert_threshold": f"Gross Margin breaching below {worst_margin_5y}% for 2 consecutive quarters"
-            }
+            "revenue_cr": round(revenue / 1e7, 2) if revenue is not None else "Disclosed Nahi Hai",
+            "net_profit_cr": round(net_income / 1e7, 2) if net_income is not None else "Disclosed Nahi Hai",
+            "operating_cash_flow_cr": round(operating_cf / 1e7, 2) if operating_cf is not None else "Disclosed Nahi Hai",
+            "debt_to_equity": round(total_debt / equity, 2) if (total_debt is not None and equity is not None and equity > 0) else "Disclosed Nahi Hai",
+            "capex_cr": round(abs(capex) / 1e7, 2) if capex is not None else "Disclosed Nahi Hai"
         }
+
+        # -------------------------------------------------------------
+        # SECTOR SPECIFIC EXTRACTION
+        # -------------------------------------------------------------
+        if sector_type in ["MANUFACTURING", "CONGLOMERATE"]:
+            cogs = extract_metric(latest_income, ["cost of revenue", "cost of goods", "reconciled cost of revenue"])
+            gross_profit = extract_metric(latest_income, ["gross profit"])
+            if gross_profit is None and revenue is not None and cogs is not None:
+                gross_profit = revenue - cogs
+
+            receivables = extract_metric(latest_balance, ["accounts receivable", "receivables"])
+            inventory = extract_metric(latest_balance, ["inventory", "inventories"])
+            payables = extract_metric(latest_balance, ["accounts payable", "payables"])
+
+            # Strict Calculation: Agar data missing hai, toh "Disclosed Nahi Hai"
+            gm_pct = round((gross_profit / revenue) * 100, 2) if (revenue and gross_profit and revenue > 0) else "Disclosed Nahi Hai"
+            debtor_days = round((receivables / revenue) * 365, 1) if (revenue and receivables and revenue > 0) else "Disclosed Nahi Hai"
+            inv_days = round((inventory / cogs) * 365, 1) if (cogs and inventory and cogs > 0) else "Disclosed Nahi Hai"
+            pay_days = round((payables / cogs) * 365, 1) if (cogs and payables and cogs > 0) else "Disclosed Nahi Hai"
+
+            ccc = "Disclosed Nahi Hai"
+            if isinstance(debtor_days, (int, float)) and isinstance(inv_days, (int, float)) and isinstance(pay_days, (int, float)):
+                ccc = round(debtor_days + inv_days - pay_days, 1)
+
+            # 5-Year Historical Gross Margin Corridor (Actual Data Only)
+            historical_margins = []
+            for col in income_stmt.columns[:5]:
+                col_rev = extract_metric(income_stmt[col], ["total revenue", "operating revenue"])
+                col_gp = extract_metric(income_stmt[col], ["gross profit"])
+                if col_gp is None:
+                    col_cogs = extract_metric(income_stmt[col], ["cost of revenue", "cost of goods"])
+                    if col_rev and col_cogs:
+                        col_gp = col_rev - col_cogs
+                if col_rev and col_gp and col_rev > 0:
+                    historical_margins.append(round((col_gp / col_rev) * 100, 2))
+
+            historical_facts = {
+                "five_year_data_available": len(historical_margins) > 0,
+                "five_year_average_gross_margin": f"{round(sum(historical_margins) / len(historical_margins), 2)}%" if historical_margins else "Disclosed Nahi Hai",
+                "five_year_lowest_historical_margin": f"{min(historical_margins)}%" if historical_margins else "Disclosed Nahi Hai"
+            }
+
+            base_report["manufacturing_metrics"] = {
+                "gross_margin_pct": f"{gm_pct}%" if gm_pct != "Disclosed Nahi Hai" else "Disclosed Nahi Hai",
+                "raw_material_cogs_cr": round(cogs / 1e7, 2) if cogs is not None else "Disclosed Nahi Hai",
+                "debtor_collection_days": debtor_days,
+                "inventory_holding_days": inv_days,
+                "supplier_payable_days": pay_days,
+                "cash_conversion_cycle_days": ccc,
+                "historical_corridor": historical_facts
+            }
+
+        elif sector_type == "IT_SERVICES":
+            employee_cost = extract_metric(latest_income, ["employee benefit", "salaries", "staff cost", "personnel"])
+            emp_cost_pct = round((employee_cost / revenue) * 100, 2) if (revenue and employee_cost and revenue > 0) else "Disclosed Nahi Hai"
+            receivables = extract_metric(latest_balance, ["accounts receivable", "receivables"])
+            unbilled_rev = extract_metric(latest_balance, ["unbilled revenue", "other receivables"])
+            dso_days = round((receivables / revenue) * 365, 1) if (revenue and receivables and revenue > 0) else "Disclosed Nahi Hai"
+
+            # 5-Year Historical Operating Margin (EBIT) Corridor (Actual Data Only)
+            historical_ebit_margins = []
+            for col in income_stmt.columns[:5]:
+                col_rev = extract_metric(income_stmt[col], ["total revenue", "operating revenue"])
+                col_ebit = extract_metric(income_stmt[col], ["operating income", "ebit"])
+                if col_rev and col_ebit and col_rev > 0:
+                    historical_ebit_margins.append(round((col_ebit / col_rev) * 100, 2))
+
+            base_report["it_services_metrics"] = {
+                "employee_cost_cr": round(employee_cost / 1e7, 2) if employee_cost is not None else "Disclosed Nahi Hai",
+                "employee_cost_pct_of_revenue": f"{emp_cost_pct}%" if emp_cost_pct != "Disclosed Nahi Hai" else "Disclosed Nahi Hai",
+                "days_sales_outstanding_dso": dso_days,
+                "historical_ebit_corridor": {
+                    "five_year_data_available": len(historical_ebit_margins) > 0,
+                    "five_year_average_ebit_margin": f"{round(sum(historical_ebit_margins) / len(historical_ebit_margins), 2)}%" if historical_ebit_margins else "Disclosed Nahi Hai",
+                    "five_year_lowest_ebit_margin": f"{min(historical_ebit_margins)}%" if historical_ebit_margins else "Disclosed Nahi Hai"
+                }
+            }
+
+        elif sector_type == "BANKING":
+            interest_income = extract_metric(latest_income, ["interest income", "interest and dividend income"])
+            interest_expense = extract_metric(latest_income, ["interest expense"])
+            nii = (interest_income - interest_expense) if (interest_income and interest_expense) else None
+            provisions = extract_metric(latest_income, ["provision for credit losses", "loan losses", "provisions"])
+            total_deposits = extract_metric(latest_balance, ["total deposits", "deposits"])
+            total_loans = extract_metric(latest_balance, ["loans and advances", "net loans", "gross loans"])
+
+            cd_ratio = round((total_loans / total_deposits) * 100, 2) if (total_loans and total_deposits and total_deposits > 0) else "Disclosed Nahi Hai"
+
+            base_report["banking_metrics"] = {
+                "net_interest_income_cr": round(nii / 1e7, 2) if nii is not None else "Disclosed Nahi Hai",
+                "loan_loss_provisions_cr": round(provisions / 1e7, 2) if provisions is not None else "Disclosed Nahi Hai",
+                "total_deposits_cr": round(total_deposits / 1e7, 2) if total_deposits is not None else "Disclosed Nahi Hai",
+                "total_loans_advances_cr": round(total_loans / 1e7, 2) if total_loans is not None else "Disclosed Nahi Hai",
+                "credit_to_deposit_cd_ratio": f"{cd_ratio}%" if cd_ratio != "Disclosed Nahi Hai" else "Disclosed Nahi Hai"
+            }
+
+        return base_report
+
     except Exception as e:
-        print(f"   ⚠️ yfinance error for {ticker_symbol}: {e}")
+        print(f"   ⚠️ Extraction error for {ticker_symbol}: {e}")
         return None
 
 # ==============================================================================
-# 3. 2-COMPANIES BATCH PROMPT TEMPLATE (DEEP BUSINESS ARCHITECTURE)
+# 3. 2-COMPANIES BATCH PROMPT TEMPLATE (FACTS-ONLY & COMPLIANT)
 # ==============================================================================
 
 BATCH_PROMPT_TEMPLATE = """
-You are a Lead Equity Research Compliance Officer & Senior Analyst for Indian public markets.
-Analyze the following TWO companies using their verified statutory financials and the global macro dashboard:
+You are a Senior Equity Research Compliance Officer & Analyst for Indian markets.
+Analyze the following TWO companies strictly using the provided facts and macro dashboard:
 
 --- UNIFIED GLOBAL MACRO DASHBOARD ---
 {macro_context}
@@ -195,50 +252,43 @@ Analyze the following TWO companies using their verified statutory financials an
 
 --- COMPANY 1 DATA ---
 Symbol: {comp1_symbol} | Name: {comp1_name} | Sector: {comp1_sector} | Type: {comp1_type}
-Financials & Operational Facts: {comp1_fin_json}
+Disclosed Financials & Operational Facts: {comp1_fin_json}
 ----------------------
 
 --- COMPANY 2 DATA ---
 Symbol: {comp2_symbol} | Name: {comp2_name} | Sector: {comp2_sector} | Type: {comp2_type}
-Financials & Operational Facts: {comp2_fin_json}
+Disclosed Financials & Operational Facts: {comp2_fin_json}
 ----------------------
 
-STRICT AUDIT & INSTITUTIONAL RULES:
-1. NO SURFACE DESCRIPTIONS: Do NOT just state "Company sells paints/software/loans". Explain the actual OPERATIONAL ENGINE:
-   - How does it procure inputs/talent?
-   - How does the channel (dealers/clients) work?
-   - Explain the working capital physics using the given collection days, inventory days, and payable days.
-2. HARD QUANTITATIVE BENCHMARKS (NO GUESSWORK):
-   - Use the provided "five_year_worst_historical_margin_pct" as the anchor for the red alert threshold.
-   - For IT: Anchor exit triggers to USD-INR 52-week low breach or employee wage pool escalation.
-3. SECTOR DRIVER ROUTING:
-   - For IT Services: Anchor strictly to USD-INR trend and employee wage costs (ignore commodities).
-   - For Manufacturing: Anchor strictly to relevant input commodities and gross margin pass-through resilience.
-   - For Banking: Anchor to cost of funds and credit demand.
-4. ZERO ESTIMATE RULE: If sub-segments are not officially disclosed in statements under Ind AS 108, set "has_disclosed_segments": false, "segments": [], "geographic_split": null. DO NOT guess numbers.
-5. NO TRADING ADVICE: Strictly avoid Buy/Sell/Hold words.
+STRICT ANTI-HALLUCINATION & COMPLIANCE RULES:
+1. NO ESTIMATES / NO GUESSING: If any metric is marked "Disclosed Nahi Hai" or not present, explicitly state "Company ne statutory statements mein disclose nahi kiya hai". DO NOT assume or invent numbers.
+2. NO PRICING-PASS-THROUGH GUESSES: If pass-through speed (number of days) is not disclosed in filings, state "Statutory disclosure mein pass-through days uplabdh nahi hain".
+3. NO TRADING ADVICE / NO "EXIT" WORDS: Do NOT use words like "Buy", "Sell", "Exit", "Hold", "Accumulate". Use strictly institutional phrasing like "Key Monitorable Level" or "Thesis Invalidation Trigger".
+4. SECTOR RELEVANCE:
+   - For IT: Anchor strictly to USD-INR trend, talent wage cost ratio, and client tech spending. Do NOT mention commodities.
+   - For Manufacturing: Anchor strictly to raw material trends (Crude/Metals), inventory cycle, and gross margin behavior.
+   - For Banking: Anchor to NII, Credit-Deposit dynamics, and interest rates. Do NOT mention inventory or factory metrics.
+5. ZERO-ESTIMATE SEGMENTS: If segments are not officially disclosed under Ind AS 108 in data, set "has_disclosed_segments": false, "segments": [], "geographic_split": null.
 
-Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}" and "{comp2_symbol}":
+Respond ONLY with a valid JSON object matching this schema where keys are "{comp1_symbol}" and "{comp2_symbol}":
 {{
   "{comp1_symbol}": {{
     "symbol": "{comp1_symbol}",
     "company_name": "{comp1_name}",
     "data_period": "{comp1_fy} (Audited)",
     "business_model_architecture": {{
-      "core_engine_summary": "Institutional Hinglish summary of how the company makes money (Procure -> Value Add -> Distribute -> Cash)",
-      "go_to_market_and_moat": "Distribution channel depth (e.g. Direct-to-dealer tinting machines / Enterprise annuity contracts) in Hinglish",
-      "working_capital_engine": "Explanation in Hinglish analyzing the provided collection days, inventory days, and supplier credit days"
+      "operational_summary": "Factual operational summary in Hinglish explaining how value is created",
+      "revenue_engine_and_channel": "Distribution and client engagement model in Hinglish",
+      "capital_and_working_cycle": "Hinglish analysis grounded strictly in the disclosed sector metrics (or state 'Data available nahi hai' if undisclosed)"
     }},
-    "pricing_power_index": {{
-      "rating": "HIGH / MEDIUM / LOW",
-      "linked_primary_driver": "Identified Commodity OR USD-INR / Cost of Funds",
-      "pass_through_speed": "Estimated days to pass inflation or adjust billing rates",
-      "rationale": "Comprehensive deep-dive Hinglish rationale comparing margins/costs against relevant macro trend"
+    "pricing_and_margin_dynamics": {{
+      "linked_macro_driver": "Identified driver (Relevant Commodity / USD-INR / Yields)",
+      "pass_through_reality": "Factual statement (if days are unknown, state 'Disclosed nahi hai')",
+      "margin_behavior_rationale": "Deep-dive Hinglish rationale comparing margins against recent macro trends"
     }},
-    "cash_flow_health": {{
-      "working_capital_nature": "Negative / Lean / Heavy Working Capital",
+    "cash_flow_quality": {{
       "operating_cash_vs_profit": "Comparison in Hinglish (OCF vs Net Profit quality)",
-      "free_cash_flow_quality": "High / Medium / Low"
+      "free_cash_flow_profile": "High / Medium / Low / Data Available Nahi Hai"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -249,20 +299,20 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
     "must_watch_metrics": [
       {{
-        "metric": "Key KPI",
-        "normal_operating_corridor": "Provided 5Y average or safe range",
-        "red_alert_threshold": "Provided 5Y historical worst or structural breach point",
-        "why_track": "Why this specific KPI drives valuation"
+        "metric": "Key Sector KPI",
+        "historical_benchmark": "Disclosed 5-year average or statutory target (or 'Disclosed nahi hai')",
+        "caution_threshold": "Disclosed 5-year lowest or operational red-line",
+        "why_track": "Why this KPI is critical in Hinglish"
       }}
     ],
-    "anti_thesis_trigger": {{
-      "breach_event": "Specific structural operational breakdown in Hinglish",
-      "hard_numerical_benchmark": "Exact numerical benchmark backed by historical worst performance",
-      "action_zone": "EXIT / RE-EVALUATE THESIS"
+    "thesis_invalidation_trigger": {{
+      "event": "Operational breakdown event in Hinglish",
+      "benchmark_reference": "Based on 5-year worst historical performance or 'Data Disclosed Nahi Hai'",
+      "analytical_interpretation": "Thesis breach / structural margin compression"
     }},
     "core_risks": [
       {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Operational Risk", "description": "Specific risk in Hinglish" }}
+      {{ "risk_type": "Operational / Regulatory Risk", "description": "Specific risk in Hinglish" }}
     ]
   }},
   "{comp2_symbol}": {{
@@ -270,20 +320,18 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     "company_name": "{comp2_name}",
     "data_period": "{comp2_fy} (Audited)",
     "business_model_architecture": {{
-      "core_engine_summary": "Institutional Hinglish summary of how the company makes money (Procure -> Value Add -> Distribute -> Cash)",
-      "go_to_market_and_moat": "Distribution channel depth (e.g. Direct-to-dealer tinting machines / Enterprise annuity contracts) in Hinglish",
-      "working_capital_engine": "Explanation in Hinglish analyzing the provided collection days, inventory days, and supplier credit days"
+      "operational_summary": "Factual operational summary in Hinglish explaining how value is created",
+      "revenue_engine_and_channel": "Distribution and client engagement model in Hinglish",
+      "capital_and_working_cycle": "Hinglish analysis grounded strictly in the disclosed sector metrics (or state 'Data available nahi hai' if undisclosed)"
     }},
-    "pricing_power_index": {{
-      "rating": "HIGH / MEDIUM / LOW",
-      "linked_primary_driver": "Identified Commodity OR USD-INR / Cost of Funds",
-      "pass_through_speed": "Estimated days to pass inflation or adjust billing rates",
-      "rationale": "Comprehensive deep-dive Hinglish rationale comparing margins/costs against relevant macro trend"
+    "pricing_and_margin_dynamics": {{
+      "linked_macro_driver": "Identified driver (Relevant Commodity / USD-INR / Yields)",
+      "pass_through_reality": "Factual statement (if days are unknown, state 'Disclosed nahi hai')",
+      "margin_behavior_rationale": "Deep-dive Hinglish rationale comparing margins against recent macro trends"
     }},
-    "cash_flow_health": {{
-      "working_capital_nature": "Negative / Lean / Heavy Working Capital",
+    "cash_flow_quality": {{
       "operating_cash_vs_profit": "Comparison in Hinglish (OCF vs Net Profit quality)",
-      "free_cash_flow_quality": "High / Medium / Low"
+      "free_cash_flow_profile": "High / Medium / Low / Data Available Nahi Hai"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -294,24 +342,24 @@ Respond ONLY with a valid JSON object where keys are the symbols "{comp1_symbol}
     "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
     "must_watch_metrics": [
       {{
-        "metric": "Key KPI",
-        "normal_operating_corridor": "Provided 5Y average or safe range",
-        "red_alert_threshold": "Provided 5Y historical worst or structural breach point",
-        "why_track": "Why this specific KPI drives valuation"
+        "metric": "Key Sector KPI",
+        "historical_benchmark": "Disclosed 5-year average or statutory target (or 'Disclosed nahi hai')",
+        "caution_threshold": "Disclosed 5-year lowest or operational red-line",
+        "why_track": "Why this KPI is critical in Hinglish"
       }}
     ],
-    "anti_thesis_trigger": {{
-      "breach_event": "Specific structural operational breakdown in Hinglish",
-      "hard_numerical_benchmark": "Exact numerical benchmark backed by historical worst performance",
-      "action_zone": "EXIT / RE-EVALUATE THESIS"
+    "thesis_invalidation_trigger": {{
+      "event": "Operational breakdown event in Hinglish",
+      "benchmark_reference": "Based on 5-year worst historical performance or 'Data Disclosed Nahi Hai'",
+      "analytical_interpretation": "Thesis breach / structural margin compression"
     }},
     "core_risks": [
       {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Operational Risk", "description": "Specific risk in Hinglish" }}
+      {{ "risk_type": "Operational / Regulatory Risk", "description": "Specific risk in Hinglish" }}
     ]
   }}
 }}
-Do NOT wrap output in markdown backticks like ```json. Output ONLY raw parseable JSON.
+Do NOT output markdown backticks like ```json. Output ONLY raw parseable JSON.
 """
 
 # ==============================================================================
@@ -322,7 +370,7 @@ def call_gemini(prompt, api_key):
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 0.2,
+            "temperature": 0.15,
             "maxOutputTokens": 8192,
             "responseMimeType": "application/json"
         }
@@ -355,7 +403,7 @@ def call_gemini(prompt, api_key):
     return None, None
 
 # ==============================================================================
-# 5. MAIN BATCH PIPELINE (2 COMPANIES PER BATCH + 20S SLEEP)
+# 5. MAIN PIPELINE (2 COMPANIES PER BATCH + 20S SLEEP)
 # ==============================================================================
 
 def generate_models():
@@ -381,8 +429,8 @@ def generate_models():
             c1, c2 = batch[0], batch[1]
             print(f"\n🚀 [Batch {b_idx}/{total_batches}] Processing Pair: {c1['symbol']} & {c2['symbol']}...")
 
-            fin1 = fetch_latest_audited_financials(c1["ticker"])
-            fin2 = fetch_latest_audited_financials(c2["ticker"])
+            fin1 = fetch_sector_specific_financials(c1["ticker"], c1["sector_type"])
+            fin2 = fetch_sector_specific_financials(c2["ticker"], c2["sector_type"])
 
             if not fin1 or not fin2:
                 print(f"   ⚠️ Statement extraction failed for pair; skipping batch.")
