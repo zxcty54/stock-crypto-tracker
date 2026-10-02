@@ -14,7 +14,7 @@ STOCKS_LIST = [
     {"symbol": "POLYCAB", "name": "Polycab India", "sector": "Cables & Fast Moving Electrical Goods"}
 ]
 
-# Primary models set as requested with safe fallbacks
+# Primary models set with fallbacks
 MODELS_TO_TRY = [
     "gemini-3.5-flash-lite",
     "gemini-3.1-flash-lite",
@@ -103,6 +103,7 @@ def call_gemini(prompt, api_key):
     }
 
     for model in MODELS_TO_TRY:
+        # Clean URL string without markdown brackets
         url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){model}:generateContent?key={api_key}"
         try:
             res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=35)
