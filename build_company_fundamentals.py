@@ -180,11 +180,8 @@ def scrape_screener_full_statements(symbol):
 # ==============================================================================
 
 BATCH_PROMPT_TEMPLATE = """
-You are a Principal Institutional Equity Analyst at a Tier-1 Investment Bank. 
-Analyze the two companies provided below. 
-
-DO NOT JUST READ OR SUMMARIZE THE NUMBERS. The reader can already see the raw tables. 
-Your job is to provide RIGOROUS OPERATIONAL & STRATEGIC ANALYSIS ("THE 'SO WHAT?' FACTOR").
+You are a Senior Equity Research Analyst for Indian public markets.
+Analyze the following TWO companies using their COMPLETE AUDITED STATUTORY STATEMENTS from Screener.in and the Global Macro Dashboard:
 
 --- UNIFIED GLOBAL MACRO DASHBOARD ---
 {macro_context}
@@ -202,20 +199,23 @@ Audited Statements & Ratios:
 {comp2_statements_json}
 ------------------------------------------------
 
-STRICT INSTITUTIONAL ANALYSIS RULES:
-1. THE "SO WHAT?" MANDATE: 
-   - Never say "Debtor days is 46 and Inventory days is 142".
-   - Say: "142 days of inventory holding (vs historical norms) highlights channel stress / sluggish product off-take, forced by competitive price wars, but offset by strong 81-day supplier bargaining power."
-   - Explain the STRATEGIC REALITY behind every metric.
-2. COMPETITIVE & COMMODITY TENSION:
-   - For Manufacturing: Connect Crude/Copper delta directly to gross margin defense. Are they able to hike prices, or are competitors forcing them to absorb the inflation?
-   - For IT: Connect USD-INR depreciation to whether it actually protected margins against wage hikes and subcontractor leakages.
-   - For Banking: Connect Loan vs Deposit growth. Is growth coming from cheap CASA or high-cost bulk deposits squeezing NIMs?
-3. ZERO RECITATION OF STANDALONE FIGURES: 
-   - Writing sentences like "Sales was INR X Cr and profit was INR Y Cr" is STRICTLY FORBIDDEN. Use numbers strictly as supporting evidence inside analytical arguments.
-4. HONEST UNCERTAINTY:
-   - Where audited disclosures do not reveal a sub-metric (e.g. unhedged currency ratio or exact pass-through days), state the analytical limitation directly rather than inventing facts.
-5. NO TRADING ADVICE: Strictly avoid Buy/Sell/Exit terminology. Frame risks around "Thesis Invalidation Trigger" and "Monitorable Corridor".
+STRICT LANGUAGE & STYLE RULES (100% EASY HINGLISH):
+1. LANGUAGE TONE:
+   - Output must be in clean, natural, and conversational **Hinglish** (Roman Hindi + common English business words).
+   - AVOID bombastic, heavy English words (e.g. do NOT use "unassailable", "manifesting", "entrenched", "subjugation").
+2. HEAVY WORD EXPLANATION RULE:
+   - Agar koi zaroori financial ya business term aati hai, toh use aasan shabdon mein bracket ya short line mein explain karein.
+   - Examples:
+     * "Working Capital (Rozmarra ka business chalane ke liye zaroori cash)"
+     * "Gross Margin / OPM (Maal bechkar factory level par bacha hua munafa)"
+     * "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din)"
+     * "Pricing Power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat)"
+3. THE "SO WHAT?" FACTOR (ONLY ACTIONABLE ANALYSIS):
+   - Sirf number repeat mat karein (e.g. do not just write "Sales itni thi aur profit itna").
+   - Har number ka asar samjhayein: Company ko kahan se faayda ho raha hai aur kahan naye competitors ya mehenge crude/dollar se problem aa rahi hai.
+4. ZERO GUESSWORK & NO TRADING ADVICE:
+   - Agar koi data report mein nahi hai, toh seedhe likhein "Statutory statements mein yeh number disclose nahi kiya gaya hai".
+   - Do NOT give Buy/Sell/Hold/Exit advice. Frame risks around "Thesis Invalidation Trigger (Kab yeh maana jaye ki company ka core business kamzor ho chuka hai)".
 
 Respond ONLY with a valid JSON object matching this schema where keys are "{comp1_symbol}" and "{comp2_symbol}":
 {{
@@ -224,19 +224,19 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
     "company_name": "{comp1_name}",
     "data_period": "{comp1_period} (Audited)",
     "business_model_architecture": {{
-      "operational_engine_analysis": "Analytical breakdown of the economic engine: Procurement bargaining power -> Value-addition -> Channel extraction. Why does this model generate or fail to generate high return on capital?",
-      "sourcing_and_cost_defense": "Analysis of raw material/payroll pressures vs pricing power. Are margins being defended via price hikes, cost optimization, or being squeezed by input inflation?",
-      "channel_moat_vulnerability": "Critical assessment of their distribution channel and customer lock-in. Where is the moat strong, and where is it vulnerable to new competitors or tech disruption?",
-      "working_capital_physics": "In-depth critique of the cash conversion engine. Analyze the tension between inventory days, receivables, and payables. Is cash stuck or flowing freely?"
+      "operational_engine_analysis": "Aasan Hinglish mein samjhayein ki company ka asli dhandha kaise chalta hai: Kaccha maal kahan se aata hai -> Factory mein kya banta hai -> Dealer tak kaise pahunchta hai aur munafa kaise nikalta hai.",
+      "sourcing_and_cost_defense": "Kacche maal ki lagat aur worker cost ka aasan analysis. Kya mehengaai ka bojha company jhel rahi hai ya grahak par daal pa rahi hai?",
+      "channel_moat_vulnerability": "Dukaandar/Dealer network ki taakat aur kamzori. Naye competitors ke aane se ispar kya asar pad raha hai?",
+      "working_capital_physics": "Paisa kitne din kahan fasa hua hai (Inventory aur dukaandar ki udhari) aur cash smooth chal raha hai ya nahi."
     }},
     "pricing_and_macro_sensitivity": {{
-      "primary_macro_driver": "Identified macro benchmark (e.g. Brent Crude / USD-INR / Yields)",
+      "primary_macro_driver": "Main factor (e.g. Brent Crude Oil / Dollar-Rupee / Interest Rate)",
       "margin_defense_capability": "HIGH / RESILIENT / COMPRESSED / WEAK",
-      "strategic_rationale": "Deep institutional thesis on how recent 1-year macro movements interacted with the company's operating margin (OPM %)"
+      "strategic_rationale": "Crude ya Dollar ke badhne-ghatne se company ke munafe par kya asar pada, simple Hinglish mein samjhayein."
     }},
     "cash_flow_reality": {{
-      "earnings_quality_assessment": "Analyze whether reported Net Profit is backed by genuine Cash Flow from Operations, or inflated by working capital build-up",
-      "free_cash_flow_profile": "Self-Funding Cash Machine / Reinvestment Heavy / Capital Constrained"
+      "earnings_quality_assessment": "P&L ka dikhaya gaya munafa sach mein bank account mein Cash bankar aaya hai ya sirf kitabon mein credit par atka hai?",
+      "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine / Naye Plants Me Kharch Hone Wala / Cash Ki Tangi"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -245,25 +245,25 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
       "geographic_split": null
     }},
     "strategic_catalysts": [
-      "Catalyst 1 (e.g. Product premiumization, capacity ramp-up, or distribution expansion)",
-      "Catalyst 2",
-      "Catalyst 3"
+      "Agla Growth Driver 1 (Aasan Hinglish)",
+      "Agla Growth Driver 2",
+      "Agla Growth Driver 3"
     ],
     "must_watch_metrics": [
       {{
-        "metric": "Key Analytical Metric (e.g. OPM %, Inventory Holding, Debtor Days)",
-        "reported_value": "Latest figure with context",
-        "analytical_significance": "Why this specific number is the pulse of the company's competitive health"
+        "metric": "Key Financial Ratio (e.g. OPM % ya Inventory Days)",
+        "reported_value": "Latest number context ke sath",
+        "analytical_significance": "Is number ko regular track karna kyu zaroori hai (Aasan explanation)"
       }}
     ],
     "thesis_invalidation_trigger": {{
-      "structural_red_flag": "The exact operational breakdown that would prove the bull thesis is dead",
-      "numerical_breach_benchmark": "Specific threshold derived from historical stress periods",
-      "strategic_implication": "Loss of pricing power / commoditization of business"
+      "structural_red_flag": "Woh kaunsi sthiti hogi jisse yeh saaf ho jaye ki company ka main business model toot chuka hai?",
+      "numerical_breach_benchmark": "Specific number jiske niche aane par alert hona zaroori hai",
+      "strategic_implication": "Pricing power ka khatam hona / Dhandhe ka aam commodity ban jana"
     }},
     "core_risks": [
-      {{ "risk_type": "Macro / Input Cost Disruption", "analysis": "Detailed strategic risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Structural Threat", "analysis": "Detailed competitive risk in Hinglish" }}
+      {{ "risk_type": "Macro / Kacche Maal Ka Risk", "analysis": "Kacche maal ke daam badhne ka direct asar aasan shabdon mein" }},
+      {{ "risk_type": "Competitive / Market Ka Khatra", "analysis": "Naye competitors ke aane ka asar aasan shabdon mein" }}
     ]
   }},
   "{comp2_symbol}": {{
@@ -271,19 +271,19 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
     "company_name": "{comp2_name}",
     "data_period": "{comp2_period} (Audited)",
     "business_model_architecture": {{
-      "operational_engine_analysis": "Analytical breakdown of the economic engine: Procurement bargaining power -> Value-addition -> Channel extraction. Why does this model generate or fail to generate high return on capital?",
-      "sourcing_and_cost_defense": "Analysis of raw material/payroll pressures vs pricing power. Are margins being defended via price hikes, cost optimization, or being squeezed by input inflation?",
-      "channel_moat_vulnerability": "Critical assessment of their distribution channel and customer lock-in. Where is the moat strong, and where is it vulnerable to new competitors or tech disruption?",
-      "working_capital_physics": "In-depth critique of the cash conversion engine. Analyze the tension between inventory days, receivables, and payables. Is cash stuck or flowing freely?"
+      "operational_engine_analysis": "Aasan Hinglish mein samjhayein ki company ka asli dhandha kaise chalta hai: Kaccha maal kahan se aata hai -> Factory mein kya banta hai -> Dealer tak kaise pahunchta hai aur munafa kaise nikalta hai.",
+      "sourcing_and_cost_defense": "Kacche maal ki lagat aur worker cost ka aasan analysis. Kya mehengaai ka bojha company jhel rahi hai ya grahak par daal pa rahi hai?",
+      "channel_moat_vulnerability": "Dukaandar/Dealer network ki taakat aur kamzori. Naye competitors ke aane se ispar kya asar pad raha hai?",
+      "working_capital_physics": "Paisa kitne din kahan fasa hua hai (Inventory aur dukaandar ki udhari) aur cash smooth chal raha hai ya nahi."
     }},
     "pricing_and_macro_sensitivity": {{
-      "primary_macro_driver": "Identified macro benchmark (e.g. Brent Crude / USD-INR / Yields)",
+      "primary_macro_driver": "Main factor (e.g. Brent Crude Oil / Dollar-Rupee / Interest Rate)",
       "margin_defense_capability": "HIGH / RESILIENT / COMPRESSED / WEAK",
-      "strategic_rationale": "Deep institutional thesis on how recent 1-year macro movements interacted with the company's operating margin (OPM %)"
+      "strategic_rationale": "Crude ya Dollar ke badhne-ghatne se company ke munafe par kya asar pada, simple Hinglish mein samjhayein."
     }},
     "cash_flow_reality": {{
-      "earnings_quality_assessment": "Analyze whether reported Net Profit is backed by genuine Cash Flow from Operations, or inflated by working capital build-up",
-      "free_cash_flow_profile": "Self-Funding Cash Machine / Reinvestment Heavy / Capital Constrained"
+      "earnings_quality_assessment": "P&L ka dikhaya gaya munafa sach mein bank account mein Cash bankar aaya hai ya sirf kitabon mein credit par atka hai?",
+      "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine / Naye Plants Me Kharch Hone Wala / Cash Ki Tangi"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -292,25 +292,25 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
       "geographic_split": null
     }},
     "strategic_catalysts": [
-      "Catalyst 1",
-      "Catalyst 2",
-      "Catalyst 3"
+      "Agla Growth Driver 1",
+      "Agla Growth Driver 2",
+      "Agla Growth Driver 3"
     ],
     "must_watch_metrics": [
       {{
-        "metric": "Key Analytical Metric",
-        "reported_value": "Latest figure with context",
-        "analytical_significance": "Why this specific number is the pulse of the company's competitive health"
+        "metric": "Key Financial Ratio",
+        "reported_value": "Latest number context ke sath",
+        "analytical_significance": "Is number ko regular track karna kyu zaroori hai (Aasan explanation)"
       }}
     ],
     "thesis_invalidation_trigger": {{
-      "structural_red_flag": "The exact operational breakdown that would prove the bull thesis is dead",
-      "numerical_breach_benchmark": "Specific threshold derived from historical stress periods",
-      "strategic_implication": "Loss of pricing power / commoditization of business"
+      "structural_red_flag": "Woh kaunsi sthiti hogi jisse yeh saaf ho jaye ki company ka main business model toot chuka hai?",
+      "numerical_breach_benchmark": "Specific number jiske niche aane par alert hona zaroori hai",
+      "strategic_implication": "Pricing power ka khatam hona / Dhandhe ka aam commodity ban jana"
     }},
     "core_risks": [
-      {{ "risk_type": "Macro / Input Cost Disruption", "analysis": "Detailed strategic risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Structural Threat", "analysis": "Detailed competitive risk in Hinglish" }}
+      {{ "risk_type": "Macro / Kacche Maal Ka Risk", "analysis": "Kacche maal ke daam badhne ka direct asar aasan shabdon mein" }},
+      {{ "risk_type": "Competitive / Market Ka Khatra", "analysis": "Naye competitors ke aane ka asar aasan shabdon mein" }}
     ]
   }}
 }}
