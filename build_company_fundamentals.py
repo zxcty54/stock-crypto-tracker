@@ -180,8 +180,11 @@ def scrape_screener_full_statements(symbol):
 # ==============================================================================
 
 BATCH_PROMPT_TEMPLATE = """
-You are a Lead Equity Research Compliance Officer & Senior Analyst for Indian public markets.
-Analyze the following TWO companies using their COMPLETE AUDITED STATUTORY STATEMENTS from Screener.in and the Global Macro Dashboard:
+You are a Principal Institutional Equity Analyst at a Tier-1 Investment Bank. 
+Analyze the two companies provided below. 
+
+DO NOT JUST READ OR SUMMARIZE THE NUMBERS. The reader can already see the raw tables. 
+Your job is to provide RIGOROUS OPERATIONAL & STRATEGIC ANALYSIS ("THE 'SO WHAT?' FACTOR").
 
 --- UNIFIED GLOBAL MACRO DASHBOARD ---
 {macro_context}
@@ -199,20 +202,20 @@ Audited Statements & Ratios:
 {comp2_statements_json}
 ------------------------------------------------
 
-STRICT INSTITUTIONAL AUDIT & ANTI-HALLUCINATION PROTOCOL:
-1. USE EXACT FIGURES FROM STATEMENTS:
-   - For Sales, Operating Profit, Material Cost %, Borrowings, Cash Flow from Operations, Debtor Days, and Working Capital Days, cite the EXACT numbers present in the JSON.
-   - Do NOT guess or calculate imaginary percentages. If a metric is missing, explicitly state "Company ne statements mein disclose nahi kiya hai".
-2. DEEP OPERATIONAL BUSINESS ENGINE:
-   - Explain how the business actually functions (Procurement of raw materials/talent -> Production -> Route to Market/Distribution -> Working Capital & Cash Conversion).
-   - For Manufacturing: Connect Sales & Operating Profit directly to the Commodity Price Trends (e.g. Brent Crude, Copper) and Material Cost %.
-   - For IT Services: Connect to USD-INR currency deltas and Employee cost absorption.
-   - For Banking: Connect to Interest Income, Financing Margin, and Capital adequacy.
-3. NO TRADING ADVICE / NO "EXIT" COMMANDS:
-   - Do NOT write Buy/Sell/Hold/Exit.
-   - Phrase risk thresholds as "Thesis Invalidation Trigger" or "Key Monitorable Benchmark".
-4. PASS-THROUGH REALITY:
-   - If exact pass-through days are not statutory disclosures, state "Pass-through cycle statutory reporting mein disclose nahi hota".
+STRICT INSTITUTIONAL ANALYSIS RULES:
+1. THE "SO WHAT?" MANDATE: 
+   - Never say "Debtor days is 46 and Inventory days is 142".
+   - Say: "142 days of inventory holding (vs historical norms) highlights channel stress / sluggish product off-take, forced by competitive price wars, but offset by strong 81-day supplier bargaining power."
+   - Explain the STRATEGIC REALITY behind every metric.
+2. COMPETITIVE & COMMODITY TENSION:
+   - For Manufacturing: Connect Crude/Copper delta directly to gross margin defense. Are they able to hike prices, or are competitors forcing them to absorb the inflation?
+   - For IT: Connect USD-INR depreciation to whether it actually protected margins against wage hikes and subcontractor leakages.
+   - For Banking: Connect Loan vs Deposit growth. Is growth coming from cheap CASA or high-cost bulk deposits squeezing NIMs?
+3. ZERO RECITATION OF STANDALONE FIGURES: 
+   - Writing sentences like "Sales was INR X Cr and profit was INR Y Cr" is STRICTLY FORBIDDEN. Use numbers strictly as supporting evidence inside analytical arguments.
+4. HONEST UNCERTAINTY:
+   - Where audited disclosures do not reveal a sub-metric (e.g. unhedged currency ratio or exact pass-through days), state the analytical limitation directly rather than inventing facts.
+5. NO TRADING ADVICE: Strictly avoid Buy/Sell/Exit terminology. Frame risks around "Thesis Invalidation Trigger" and "Monitorable Corridor".
 
 Respond ONLY with a valid JSON object matching this schema where keys are "{comp1_symbol}" and "{comp2_symbol}":
 {{
@@ -221,19 +224,19 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
     "company_name": "{comp1_name}",
     "data_period": "{comp1_period} (Audited)",
     "business_model_architecture": {{
-      "operational_engine_summary": "Exhaustive institutional Hinglish summary explaining the core economic engine",
-      "sourcing_and_cost_dynamics": "Analysis of raw material / employee cost structure grounded in audited statements",
-      "go_to_market_and_channel_moat": "Distribution depth, direct dealer/client lock-in, and switching barriers in Hinglish",
-      "working_capital_and_cash_machine": "Analysis of Debtor Days, Inventory Days, and Cash Flow from Operations from statements"
+      "operational_engine_analysis": "Analytical breakdown of the economic engine: Procurement bargaining power -> Value-addition -> Channel extraction. Why does this model generate or fail to generate high return on capital?",
+      "sourcing_and_cost_defense": "Analysis of raw material/payroll pressures vs pricing power. Are margins being defended via price hikes, cost optimization, or being squeezed by input inflation?",
+      "channel_moat_vulnerability": "Critical assessment of their distribution channel and customer lock-in. Where is the moat strong, and where is it vulnerable to new competitors or tech disruption?",
+      "working_capital_physics": "In-depth critique of the cash conversion engine. Analyze the tension between inventory days, receivables, and payables. Is cash stuck or flowing freely?"
     }},
     "pricing_and_macro_sensitivity": {{
-      "linked_macro_benchmark": "Primary identified driver (e.g. Brent Crude / USD-INR / Yields)",
-      "operational_pass_through_reality": "Statement on cost pass-through limitations in Hinglish",
-      "margin_resilience_rationale": "Comprehensive breakdown comparing reported Operating Profit Margin (OPM %) against macro trend"
+      "primary_macro_driver": "Identified macro benchmark (e.g. Brent Crude / USD-INR / Yields)",
+      "margin_defense_capability": "HIGH / RESILIENT / COMPRESSED / WEAK",
+      "strategic_rationale": "Deep institutional thesis on how recent 1-year macro movements interacted with the company's operating margin (OPM %)"
     }},
-    "cash_flow_health": {{
-      "operating_cash_vs_net_profit": "Comparison in Hinglish (Cash from Operations vs Reported Net Profit)",
-      "free_cash_flow_quality": "High / Medium / Low / Constrained by Capex"
+    "cash_flow_reality": {{
+      "earnings_quality_assessment": "Analyze whether reported Net Profit is backed by genuine Cash Flow from Operations, or inflated by working capital build-up",
+      "free_cash_flow_profile": "Self-Funding Cash Machine / Reinvestment Heavy / Capital Constrained"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -241,23 +244,26 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
       "segments": [],
       "geographic_split": null
     }},
-    "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
+    "strategic_catalysts": [
+      "Catalyst 1 (e.g. Product premiumization, capacity ramp-up, or distribution expansion)",
+      "Catalyst 2",
+      "Catalyst 3"
+    ],
     "must_watch_metrics": [
       {{
-        "metric": "Key Sector KPI (e.g. OPM %, Debtor Days, Sales Growth)",
-        "reported_audited_value": "Exact latest statutory number from statement",
-        "five_year_trend_context": "Trend observed over the provided 5-year periods",
-        "why_critical": "Why this KPI drives company valuation"
+        "metric": "Key Analytical Metric (e.g. OPM %, Inventory Holding, Debtor Days)",
+        "reported_value": "Latest figure with context",
+        "analytical_significance": "Why this specific number is the pulse of the company's competitive health"
       }}
     ],
     "thesis_invalidation_trigger": {{
-      "structural_event": "Specific operational collapse event in Hinglish",
-      "numerical_breach_benchmark": "Exact metric breach based on historical low performance",
-      "investor_interpretation": "Key Monitorable Alert / Core Thesis Invalidation"
+      "structural_red_flag": "The exact operational breakdown that would prove the bull thesis is dead",
+      "numerical_breach_benchmark": "Specific threshold derived from historical stress periods",
+      "strategic_implication": "Loss of pricing power / commoditization of business"
     }},
     "core_risks": [
-      {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific operational risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Structural Risk", "description": "Specific business risk in Hinglish" }}
+      {{ "risk_type": "Macro / Input Cost Disruption", "analysis": "Detailed strategic risk in Hinglish" }},
+      {{ "risk_type": "Competitive / Structural Threat", "analysis": "Detailed competitive risk in Hinglish" }}
     ]
   }},
   "{comp2_symbol}": {{
@@ -265,19 +271,19 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
     "company_name": "{comp2_name}",
     "data_period": "{comp2_period} (Audited)",
     "business_model_architecture": {{
-      "operational_engine_summary": "Exhaustive institutional Hinglish summary explaining the core economic engine",
-      "sourcing_and_cost_dynamics": "Analysis of raw material / employee cost structure grounded in audited statements",
-      "go_to_market_and_channel_moat": "Distribution depth, direct dealer/client lock-in, and switching barriers in Hinglish",
-      "working_capital_and_cash_machine": "Analysis of Debtor Days, Inventory Days, and Cash Flow from Operations from statements"
+      "operational_engine_analysis": "Analytical breakdown of the economic engine: Procurement bargaining power -> Value-addition -> Channel extraction. Why does this model generate or fail to generate high return on capital?",
+      "sourcing_and_cost_defense": "Analysis of raw material/payroll pressures vs pricing power. Are margins being defended via price hikes, cost optimization, or being squeezed by input inflation?",
+      "channel_moat_vulnerability": "Critical assessment of their distribution channel and customer lock-in. Where is the moat strong, and where is it vulnerable to new competitors or tech disruption?",
+      "working_capital_physics": "In-depth critique of the cash conversion engine. Analyze the tension between inventory days, receivables, and payables. Is cash stuck or flowing freely?"
     }},
     "pricing_and_macro_sensitivity": {{
-      "linked_macro_benchmark": "Primary identified driver (e.g. Brent Crude / USD-INR / Yields)",
-      "operational_pass_through_reality": "Statement on cost pass-through limitations in Hinglish",
-      "margin_resilience_rationale": "Comprehensive breakdown comparing reported Operating Profit Margin (OPM %) against macro trend"
+      "primary_macro_driver": "Identified macro benchmark (e.g. Brent Crude / USD-INR / Yields)",
+      "margin_defense_capability": "HIGH / RESILIENT / COMPRESSED / WEAK",
+      "strategic_rationale": "Deep institutional thesis on how recent 1-year macro movements interacted with the company's operating margin (OPM %)"
     }},
-    "cash_flow_health": {{
-      "operating_cash_vs_net_profit": "Comparison in Hinglish (Cash from Operations vs Reported Net Profit)",
-      "free_cash_flow_quality": "High / Medium / Low / Constrained by Capex"
+    "cash_flow_reality": {{
+      "earnings_quality_assessment": "Analyze whether reported Net Profit is backed by genuine Cash Flow from Operations, or inflated by working capital build-up",
+      "free_cash_flow_profile": "Self-Funding Cash Machine / Reinvestment Heavy / Capital Constrained"
     }},
     "revenue_breakdown": {{
       "has_disclosed_segments": false,
@@ -285,23 +291,26 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
       "segments": [],
       "geographic_split": null
     }},
-    "revenue_drivers": ["Driver 1", "Driver 2", "Driver 3"],
+    "strategic_catalysts": [
+      "Catalyst 1",
+      "Catalyst 2",
+      "Catalyst 3"
+    ],
     "must_watch_metrics": [
       {{
-        "metric": "Key Sector KPI",
-        "reported_audited_value": "Exact latest statutory number from statement",
-        "five_year_trend_context": "Trend observed over the provided 5-year periods",
-        "why_critical": "Why this KPI drives company valuation"
+        "metric": "Key Analytical Metric",
+        "reported_value": "Latest figure with context",
+        "analytical_significance": "Why this specific number is the pulse of the company's competitive health"
       }}
     ],
     "thesis_invalidation_trigger": {{
-      "structural_event": "Specific operational collapse event in Hinglish",
-      "numerical_breach_benchmark": "Exact metric breach based on historical low performance",
-      "investor_interpretation": "Key Monitorable Alert / Core Thesis Invalidation"
+      "structural_red_flag": "The exact operational breakdown that would prove the bull thesis is dead",
+      "numerical_breach_benchmark": "Specific threshold derived from historical stress periods",
+      "strategic_implication": "Loss of pricing power / commoditization of business"
     }},
     "core_risks": [
-      {{ "risk_type": "Macro / Input Cost Risk", "description": "Specific risk in Hinglish" }},
-      {{ "risk_type": "Competitive / Structural Risk", "description": "Specific business risk in Hinglish" }}
+      {{ "risk_type": "Macro / Input Cost Disruption", "analysis": "Detailed strategic risk in Hinglish" }},
+      {{ "risk_type": "Competitive / Structural Threat", "analysis": "Detailed competitive risk in Hinglish" }}
     ]
   }}
 }}
