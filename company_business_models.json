@@ -1,0 +1,692 @@
+{
+  "metadata": {
+    "generated_at": "2026-10-02 16:57:19",
+    "total_companies": 6,
+    "macro_snapshot": {
+      "brent_crude": {
+        "name": "Brent Crude Oil",
+        "category": "COMMODITY",
+        "current_val": 102.38,
+        "unit": "USD/bbl",
+        "52w_low": 58.72,
+        "52w_high": 126.1,
+        "deltas": {
+          "1M": 7.06,
+          "6M": -6.73,
+          "1Y_YoY": 59.69
+        }
+      },
+      "copper": {
+        "name": "Refined Copper",
+        "category": "COMMODITY",
+        "current_val": 6.55,
+        "unit": "USD/lb",
+        "52w_low": 4.83,
+        "52w_high": 6.83,
+        "deltas": {
+          "1M": 0.77,
+          "6M": 17.38,
+          "1Y_YoY": 33.67
+        }
+      },
+      "natural_gas": {
+        "name": "Natural Gas",
+        "category": "COMMODITY",
+        "current_val": 3.01,
+        "unit": "USD/MMBtu",
+        "52w_low": 2.48,
+        "52w_high": 7.83,
+        "deltas": {
+          "1M": 1.69,
+          "6M": 7.12,
+          "1Y_YoY": -12.5
+        }
+      },
+      "aluminium": {
+        "name": "Aluminium",
+        "category": "COMMODITY",
+        "current_val": 3214.5,
+        "unit": "USD/MT",
+        "52w_low": 2596.5,
+        "52w_high": 4195.0,
+        "deltas": {
+          "1M": -5.99,
+          "6M": -6.06,
+          "1Y_YoY": 23.8
+        }
+      },
+      "cotton": {
+        "name": "Cotton",
+        "category": "COMMODITY",
+        "current_val": 78.19,
+        "unit": "USc/lb",
+        "52w_low": 60.71,
+        "52w_high": 92.15,
+        "deltas": {
+          "1M": -9.48,
+          "6M": 9.1,
+          "1Y_YoY": 24.8
+        }
+      },
+      "iron_ore": {
+        "name": "Iron Ore Proxy",
+        "category": "COMMODITY",
+        "current_val": 92.1,
+        "unit": "USD/dmt",
+        "52w_low": 92.1,
+        "52w_high": 111.42,
+        "deltas": {
+          "1M": -7.28,
+          "6M": -14.29,
+          "1Y_YoY": -11.53
+        }
+      },
+      "usd_inr": {
+        "name": "USD-INR Currency Pair",
+        "category": "CURRENCY",
+        "current_val": 96.3,
+        "unit": "INR/USD",
+        "52w_low": 85.86,
+        "52w_high": 97.05,
+        "deltas": {
+          "1M": 1.92,
+          "6M": 4.14,
+          "1Y_YoY": 8.59
+        }
+      },
+      "us_10y_yield": {
+        "name": "US 10-Year Bond Yield",
+        "category": "YIELD",
+        "current_val": 5.27,
+        "unit": "%",
+        "52w_low": 3.95,
+        "52w_high": 5.34,
+        "deltas": {
+          "1M": 9.79,
+          "6M": 21.43,
+          "1Y_YoY": 28.85
+        }
+      }
+    }
+  },
+  "companies": {
+    "ASIANPAINT": {
+      "symbol": "ASIANPAINT",
+      "company_name": "Asian Paints Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Asian Paints ka dhandha chemical aur petrochemical derivatives (jaise crude oil se jude raw materials) khareedkar paint, waterproofing aur home decor products banane aur unhe distributors ke zariye retail counters tak pahunchane par chalta hai. Sales Mar 2026 mein ghulkar 33,906 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "Company ka OPM % (Operating Profit Margin - maal bechkar factory level par bacha hua munafa) Mar 2026 mein 18% par aa gaya hai (jo pichle saal 21% tha). Brent Crude current mein 102.38 USD/bbl par hai, jisse kachhe maal ki laagat badhi hai aur company poori tarah se yeh bojha grahako par transfer nahi kar paayi.",
+        "channel_moat_vulnerability": "Inka dealer network poore desh mein sabse mazboot hai, par naye non-paint players ke market mein aane se pricing pressure badha hai aur purane dealer relationships par thoda asar pad raha hai.",
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 107 din hai. Inventory Days 142 din hai, iska matlab kachha maal aur finished goods kaafi dinon tak warehouses mein fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil (Current: 102.38 USD/bbl) aur USD-INR Currency Pair (Current: 96.3 INR/USD)",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "Crude oil mehenga hone aur dollar ke mazboot hone se kachhe maal ki laagat badh gayi hai, jis wajah se operating margins 21% se gir kar 18% par aa gaye hain."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO/OP (Operating Profit ke mukable cash aane ki raftar) 97% hai, iska matlab P&L ka dikhaya gaya munafa kaafi hadd tak asli cash bankar bank account mein aa raha hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala (Free Cash Flow Mar 2026 mein 2,604 crore hai, jise company capacity expansion aur home decor investments mein laga rahi hai)"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Home decor aur waterproofing segments mein naye products ka vistar",
+        "Tier-2 aur Tier-3 cities mein demand recovery",
+        "Supply chain automation se inventory days ko kam karna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin)",
+          "reported_value": "18.0% (Mar 2026)",
+          "analytical_significance": "Isse pata chalta hai ki company kachhe maal ki mehengaai ko kitne acche se jhel rahi hai aur apne margins bacha pa rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar market share naye competitors ke paas tezi se jaane lage aur OPM lagaataar 15% ke neeche girne lage",
+        "numerical_breach_benchmark": "OPM % < 15% aur Inventory Days > 160 days",
+        "strategic_implication": "Pricing power ka poori tarah khatam hona aur paint ka ek aam commodity ban jana jisme koi brand premium na mile"
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent crude 100+ USD/bbl par hone ke karan raw material ki laagat badh rahi hai jisse margins dab rahe hain."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Market mein naye bade players ke aane se price wars shuru ho chuke hain, jisse premium pricing maintain karna mushkil ho raha hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 33906.0,
+          "Expenses": 27899.0,
+          "Operating Profit": 6006.0,
+          "OPM %": 18.0,
+          "Other Income": 350.0,
+          "Interest": 227.0,
+          "Depreciation": 1026.0,
+          "Profit before tax": 5103.0,
+          "Tax %": 27.0,
+          "Net Profit": 3710.0,
+          "EPS in Rs": 38.23,
+          "Dividend Payout %": 65.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 96.0,
+          "Reserves": 19304.0,
+          "Borrowings": 2290.0,
+          "Other Liabilities": 8665.0,
+          "Total Liabilities": 30355.0,
+          "Fixed Assets": 9220.0,
+          "CWIP": 1254.0,
+          "Investments": 4725.0,
+          "Other Assets": 15156.0,
+          "Total Assets": 30355.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 4424.0,
+          "Cash from Investing Activity": -941.0,
+          "Cash from Financing Activity": -3753.0,
+          "Net Cash Flow": -270.0,
+          "Free Cash Flow": 2604.0,
+          "CFO/OP": 97.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 46.0,
+          "Inventory Days": 142.0,
+          "Days Payable": 81.0,
+          "Cash Conversion Cycle": 107.0,
+          "Working Capital Days": 52.0,
+          "ROCE %": 26.0
+        }
+      }
+    },
+    "RELIANCE": {
+      "symbol": "RELIANCE",
+      "company_name": "Reliance Industries Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Reliance ek bada conglomerate hai jiska dhandha oil refining aur petrochemicals se lekar telecom (Jio) aur retail tak फैला hua hai. Mar 2026 mein sales badhkar 9,62,820 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "O2C (Oil-to-Chemicals) business ke liye crude oil global markets se sors hota hai. High energy prices aur global supply chain shifts ke bawajood company ka OPM 17% par stable hai kyunki consumer businesses (Retail aur Telecom) kaafi strong cash flow generate karte hain.",
+        "channel_moat_vulnerability": "Retail aur Telecom mein inka customer reach aur physical/digital infrastructure behad bada hai, jise todna kisi bhi naye competitor ke liye aasan nahi hai.",
+        "working_capital_physics": "Cash Conversion Cycle -8 din hai aur Working Capital Days -68 din hain, iska matlab company ko apne suppliers ko payment dene se pehle customers se paisa mil jata hai, jo ki ek zabardast negative working capital model hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil (Current: 102.38 USD/bbl) aur US 10-Year Bond Yield / Interest Rates",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Crude oil ke mehenge hone ka asar refining margins par padta hai, lekin retail aur telecom ki wajah se overall company ke margins 17% par sthir bane hue hain."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO/OP 115% hai, jo yeh dikhata hai ki operating profit se zyada cash generate ho raha hai aur earnings ki quality bahut strong hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala (Free Cash Flow Mar 2026 mein 41,079 crore hai, jabki investing cash flow mein bada hissa capex mein ja raha hai)"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Telecom aur 5G services ka monetization aur aage ka data expansion",
+        "Retail store footprint aur quick commerce/digital commerce ki growth",
+        "New Energy (Green Energy) giga factories ka aane wale samay mein shuru hona"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Borrowings (Karza)",
+          "reported_value": "3,74,313 crore (Mar 2026)",
+          "analytical_significance": "Bari capex cycles ke chalte karze ke star ko track karna zaroori hai taaki interest burden control mein rahe."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar telecom aur retail growth thap ho jaye aur refining margins mein lagataar saalon tak bhari giraavat aaye",
+        "numerical_breach_benchmark": "ROCE % < 8% aur Net Debt-to-Equity mein anuguchit uchhal",
+        "strategic_implication": "Conglomerate ke alag-alag engines ka stall ho jana aur capital allocation par dabav aana"
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Crude oil ki volatility refining aur petrochemical margins ko direct asar karti hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Retail aur telecom space mein heavy competition ki wajah se margins expand karna aur naye tariffs implement karna chunauti ban sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 962820.0,
+          "Expenses": 797222.0,
+          "Operating Profit": 165598.0,
+          "OPM %": 17.0,
+          "Other Income": 17824.0,
+          "Interest": 24269.0,
+          "Depreciation": 53136.0,
+          "Profit before tax": 106017.0,
+          "Tax %": 24.0,
+          "Net Profit": 81309.0,
+          "EPS in Rs": 51.47,
+          "Dividend Payout %": 11.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 13532.0,
+          "Reserves": 829668.0,
+          "Borrowings": 374313.0,
+          "Other Liabilities": 732200.0,
+          "Total Liabilities": 1949713.0,
+          "Fixed Assets": 999393.0,
+          "CWIP": 262358.0,
+          "Investments": 242381.0,
+          "Other Assets": 445581.0,
+          "Total Assets": 1949713.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 178703.0,
+          "Cash from Investing Activity": -137535.0,
+          "Cash from Financing Activity": -31891.0,
+          "Net Cash Flow": 9277.0,
+          "Free Cash Flow": 41079.0,
+          "CFO/OP": 115.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 16.0,
+          "Inventory Days": 85.0,
+          "Days Payable": 108.0,
+          "Cash Conversion Cycle": -8.0,
+          "Working Capital Days": -68.0,
+          "ROCE %": 10.0
+        }
+      }
+    },
+    "HDFCBANK": {
+      "symbol": "HDFCBANK",
+      "company_name": "HDFC Bank Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Bank ka asli dhandha aam logo aur companies se saste byaaj par Deposit (Paisa) jama karna hai aur wahi paisa unhe ya doosron ko mehenge byaaj par Loan (Advances) ke roop mein dena hai. Iske beech ke gap (Net Interest Margin) se bank ka main munafa banta hai, sath hi digital banking, credit cards aur mutual funds se Other Income aati hai.",
+        "sourcing_and_cost_defense": "Bank ke liye 'kaccha maal' yaani raw material depositors ko diya jane wala byaaj hai aur kharche branch network aur employee salaries ke hain. Jaise jaise US 10-Year Bond Yield aur overall interest rates badhte hain, bank ko bhi apne deposits par zyada byaaj dena padta hai, jisse cost defense par dabav aata hai.",
+        "channel_moat_vulnerability": "HDFC Bank ka poore desh mein bada branch aur ATM network hai jo iska sabse bada moat hai. Merger ke baad scale aur bada ho gaya hai, par naye age Fintechs aur digital-first banks se low-cost deposits (Current Account Savings Account - CASA) ke liyecompetition tezi se badh raha hai.",
+        "working_capital_physics": "Banking business mein traditional inventory ya working capital days nahi hote, balki yahan liquidity aur Asset-Liability Management (ALM) dekhi jaati hai. Bank ka Operating Cash Flow 1,27,242 Crore hai, jo yeh dikhata hai ki core business se strong cash generation ho raha hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "US 10-Year Bond Yield & Domestic Interest Rates",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Jaise ki US 10-Year Bond Yield 5.27% par hai aur domestic interest rates high hain, bank ki cost of funds badh gayi hai. Halanki, loan par byaaj badhakar bank ne margin protect karne ki koshish ki hai, par financing margin negative dikhne ka kaaran accounting reclassifications aur merger ke badle ki cost hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit 73,440 Crore dikhaya gaya hai aur Cash from Operating Activity 1,27,242 Crore hai. Iska matlab hai ki profit sirf kagaz par nahi hai balki asli cash bank ke andar aa raha hai, jo ki earnings quality ko bohot mazboot banata hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 for banking enterprises",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Merger ke baad cross-selling ka fayda uthakar retail aur corporate loans mein tezi lana",
+        "Digital channels aur apps ke zariye operating cost ko kam karna",
+        "Credit card aur fee-based income (Other Income jo ki 1,34,548 Crore hai) ko lagatar badhana"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "ROE % (Return on Equity - Shareholder ke paise par milne wala return)",
+          "reported_value": "14.0%",
+          "analytical_significance": "Is ratio se pata chalta hai ki bank shareholder ke capital par kitna badhiya munafa kama raha hai. 14% ka ROE merger ke baad stable return ko darshata hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar deposit growth lagatar loan growth se peeche rehne lage aur saste deposits (CASA) tezi se kam hone lagen.",
+        "numerical_breach_benchmark": "ROE % agar 10% ke neeche gir jaye",
+        "strategic_implication": "Iska matlab hoga ki bank ki deposit mobilization ki taakat kam ho chuki hai aur use mehenge borrowings par nirbhar rehna padega."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Interest Rate Risk",
+          "analysis": "Agar byaaj darein lambe samay tak unchi rehti hain ya aur badhti hain, toh cost of funds badhegi aur margins par dabav aayega."
+        },
+        {
+          "risk_type": "Competitive / Deposit Mobilization Risk",
+          "analysis": "Bade scale par deposits ikattha karna aur chhote naye age banks/fintechs se milne wale competition ko face karna ek bada challenge hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Revenue": 336367.0,
+          "Interest": 183894.0,
+          "Expenses": 186974.0,
+          "Financing Profit": -34501.0,
+          "Financing Margin %": -10.0,
+          "Other Income": 134548.0,
+          "Depreciation": 3805.0,
+          "Profit before tax": 96242.0,
+          "Tax %": 24.0,
+          "Net Profit": 73440.0,
+          "EPS in Rs": 46.26,
+          "Dividend Payout %": 24.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 765.0,
+          "Reserves": 521024.0,
+          "Deposits": 2710898.0,
+          "Borrowing": 634606.0,
+          "Other Liabilities": 524817.0,
+          "Total Liabilities": 4392110.0,
+          "Fixed Assets": 15258.0,
+          "CWIP": 0.0,
+          "Investments": 1186473.0,
+          "Other Assets": 3190379.0,
+          "Total Assets": 4392110.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 127242.0,
+          "Cash from Investing Activity": -3651.0,
+          "Cash from Financing Activity": -102478.0,
+          "Net Cash Flow": 21113.0,
+          "Free Cash Flow": 123267.0,
+          "CFO/OP": 98.0
+        },
+        "efficiency_ratios": {
+          "ROE %": 14.0
+        }
+      }
+    },
+    "TCS": {
+      "symbol": "TCS",
+      "company_name": "Tata Consultancy Services Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "TCS ek IT Services company hai jo duniya bhar ke clients (jaise banks, retailers, manufacturers) ke liye software banati hai, unke digital systems chalati hai aur consulting deti hai. Iska kaccha maal 'skilled software engineers' hain, jinhe salary di jaati hai aur badle mein clients se contracts ke taur par revenue milta hai.",
+        "sourcing_and_cost_defense": "Company ka sabse bada kharcha employee costs (wages/salaries) ka hai. Jaise jaise global wage inflation badhti hai ya talented engineers ki maang hoti hai, expenses badhte hain. TCS apni strong brand value aur long-term client contracts ke dam par yeh mehengaai clients par daam badhakar (Pricing Power) thodi had tak daal pati hai.",
+        "channel_moat_vulnerability": "TCS ka global delivery model aur Fortune 500 companies ke sath purana aur gehra rishta iska sabse bada moat hai. Halanki, AI (Artificial Intelligence) aur automation ke aane se traditional coding aur maintenance ke kaam par naye competitors aur tech shifts ka thoda dabav ban raha hai.",
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 84 din hai, jisme Debtor Days bhi 84 din hain. Iska matlab hai ki clients se paisa aane mein lagbhag 3 mahine lagte hain, jo ki IT industry ke hisaab se normal hai, par ismein thoda dhyan rakhna padta hai ki udhari na fase."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR Currency Pair & Global IT Spending",
+        "margin_defense_capability": "HIGH",
+        "strategic_rationale": "USD-INR currency pair 96.3 par chal raha hai. Dollar ke mazboot hone se TCS jaise export-oriented business ko fayda hota hai kyunki unki kamai dollar mein hoti hai aur kharche zyadatar rupees mein hote hain, jisse OPM % (Operating Profit Margin - Maal bechkar factory level par bacha hua munafa) 26% par mazboot bana hua hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit 48,797 Crore hai aur Cash from Operating Activity 48,908 Crore hai. Yeh is baat ka saboot hai ki profit sirf kitabon mein nahi hai, balki poora ka poora cash bank account mein sach mein aa raha hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Artificial Intelligence (AI) aur Cloud migration projects mein naye contracts jeetna",
+        "Bade global clients ke sath long-term outsourcing deals ko badhana",
+        "Operational efficiency aur employee utilization ko behtar karke margins ko 26% ya isse upar banaye rakhna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin - Factory level munafa)",
+          "reported_value": "26.0%",
+          "analytical_significance": "Is number se pata chalta hai ki company apne projects se kitna efficient munafa nikal rahi hai bina wage inflation ke dabav mein aaye."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar global IT spending mein badi girawat aaye aur bade clients apne tech budgets ko achanak se rok dein.",
+        "numerical_breach_benchmark": "OPM % agar 20% ke neeche gir jaye",
+        "strategic_implication": "Iska matlab hoga ki pricing power poori tarah khatam ho chuki hai aur employee cost itni badh gayi hai ki company margin protect nahi kar pa rahi."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Currency & Global Economy Risk",
+          "analysis": "US ya Europe mein agar economic slowdown aaye ya dollar ke mukable rupee achanak bohot mazboot ho jaye, toh dollar kamai ka rupee conversion kam ho jayega."
+        },
+        {
+          "risk_type": "Competitive / Technology Shift Risk",
+          "analysis": "Generative AI aur automation ke tezi se aane par agar traditional outsourcing kaam kam hote hain, toh company ko apne business model mein tezi se badlaav karna hoga."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 255324.0,
+          "Expenses": 187917.0,
+          "Operating Profit": 67407.0,
+          "OPM %": 26.0,
+          "Other Income": 3962.0,
+          "Interest": 796.0,
+          "Depreciation": 5242.0,
+          "Profit before tax": 65331.0,
+          "Tax %": 25.0,
+          "Net Profit": 48797.0,
+          "EPS in Rs": 134.2,
+          "Dividend Payout %": 94.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 362.0,
+          "Reserves": 94394.0,
+          "Borrowings": 9392.0,
+          "Other Liabilities": 54501.0,
+          "Total Liabilities": 158649.0,
+          "Fixed Assets": 23053.0,
+          "CWIP": 1546.0,
+          "Investments": 30964.0,
+          "Other Assets": 103086.0,
+          "Total Assets": 158649.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 48908.0,
+          "Cash from Investing Activity": -2144.0,
+          "Cash from Financing Activity": -47438.0,
+          "Net Cash Flow": -674.0,
+          "Free Cash Flow": 44994.0,
+          "CFO/OP": 96.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 84.0,
+          "Inventory Days": "Disclosed Nahi Hai",
+          "Days Payable": "Disclosed Nahi Hai",
+          "Cash Conversion Cycle": 84.0,
+          "Working Capital Days": 34.0,
+          "ROCE %": 65.0
+        }
+      }
+    },
+    "MARUTI": {
+      "symbol": "MARUTI",
+      "company_name": "Maruti Suzuki India Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_company_architecture": {
+        "operational_engine_analysis": "Maruti ka dhandha gaadiyan banane aur bechne ka hai. Yeh steel, aluminium, rubber jaise kacche maal ko factories mein process karke passenger vehicles banati hai. Phir yeh gaadiyan apne bade dealer network ke zariye poore desh mein grahakon tak pahunchti hain.",
+        "sourcing_and_cost_defense": "Company metal prices aur supply chain ke dabav ko jhelte hue bhi strong Gross Margins maintain karti hai. Jab kacche maal ki keematein badhti hain, toh Maruti apni strong market position ki wajah se daam thode badhakar aam grahak par daal deti hai.",
+        "channel_moat_vulnerability": "Inka dealer aur service network desh ka sabse bada hai, jo inki sabse badi taakat hai. Halanki, electric vehicles (EVs) ke badhte daur mein naye competitors ke aane se is moat ko thodi chunauti mil rahi hai.",
+        "working_capital_physics": "Working Capital (Rozmarra ka business chalane ke liye zaroori cash) bahut shaandar hai kyunki inka Cash Conversion Cycle negative (-18 din) hai. Iska matlab hai ki ye dealers se paisa pehle le lete hain aur suppliers ko baad mein payment karte hain."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil aur USD-INR Exchange Rate",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Brent Crude Oil 102 USD/bbl ke aas-paas chal raha hai jisse input costs par thoda dabav hai, lekin USD-INR ke 96.3 hone ke bawajud company ki OPM (Operating Profit Margin - Maal bechkar factory level par bacha hua munafa) 13% par stable hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein dikhaya gaya munafa kaafi hadd tak asli cash mein convert ho raha hai. CFO/OP 99% hai, jo yeh dikhata hai ki profits sirf kagaz par nahi balki bank account mein bhi aa rahe hain.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "SUV segment mein market share ko aur majboot karna",
+        "Electric Vehicles (EVs) ki nayi range launch karna",
+        "Rural aur semi-urban markets mein penetration badhana"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin)",
+          "reported_value": "13.0% (Mar 2026)",
+          "analytical_significance": "Isse pata chalta hai ki mehenge raw materials ke bawajud company kitna munafa bacha pa rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar Maruti ka market share lagataar girne lage aur yeh pricing power kho de, jisse OPM single digit mein chala jaye.",
+        "numerical_breach_benchmark": "OPM % < 9.0%",
+        "strategic_implication": "Pricing power ka khatam hona aur dhandhe ka aam competition mein fas jana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent Crude aur steel ke daam badhne se operating margins par dabav aa sakta hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Electric vehicle market mein aggressive naye players ke aane se share loss ka khatra."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 152913.0,
+          "Expenses": 132689.0,
+          "Operating Profit": 20224.0,
+          "OPM %": 13.0,
+          "Other Income": 5199.0,
+          "Interest": 194.0,
+          "Depreciation": 5608.0,
+          "Profit before tax": 19620.0,
+          "Tax %": 26.0,
+          "Net Profit": 14500.0,
+          "EPS in Rs": 461.2,
+          "Dividend Payout %": 29.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 157.0,
+          "Reserves": 96083.0,
+          "Borrowings": 87.0,
+          "Other Liabilities": 34689.0,
+          "Total Liabilities": 131016.0,
+          "Fixed Assets": 32983.0,
+          "CWIP": 7929.0,
+          "Investments": 66265.0,
+          "Other Assets": 23839.0,
+          "Total Assets": 131016.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 16180.0,
+          "Cash from Investing Activity": -14500.0,
+          "Cash from Financing Activity": -4155.0,
+          "Net Cash Flow": -2475.0,
+          "Free Cash Flow": 5601.0,
+          "CFO/OP": 99.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 16.0,
+          "Inventory Days": 23.0,
+          "Days Payable": 57.0,
+          "Cash Conversion Cycle": -18.0,
+          "Working Capital Days": -24.0,
+          "ROCE %": 22.0
+        }
+      }
+    },
+    "POLYCAB": {
+      "symbol": "POLYCAB",
+      "company_name": "Polycab India Limited",
+      "data_period": "Mar 2026 (Audited)",
+      "business_company_architecture": {
+        "operational_engine_analysis": "Polycab wires, cables aur FMEG (Fast Moving Electrical Goods) banati hai. Yeh copper aur aluminium jaise metals ko khareed kar factories mein electrical products mein badalti hai aur distribution network ke zariye bechti hai.",
+        "sourcing_and_cost_defense": "Company copper aur aluminium jaise key raw materials par nirbhar hai. Copper ke daam unche hone par ye daam badha kar risk ko neutralize karne ki koshish karti hain.",
+        "channel_moat_vulnerability": "Inka electrical dealers aur electricians ke sath gahra rishta hai. Halanki FMEG category mein local aur branded competitors se kadi takkar milti hai.",
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 64 din hai, jiska matlab hai ki working capital mein thoda paisa fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Refined Copper aur Aluminium Prices",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Copper (6.55 USD/lb) aur Aluminium ke daam high hone ke bawajud company ki OPM 13% par bani hui hai, jo inki strong pricing power ko darshata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO/OP 82% hai, yani profit ka ek bada hissa cash mein badal raha hai, jo ek achhi financial health ki nishani hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Expansion Phase"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "B2C FMEG segment mein brand awareness aur reach badhana",
+        "Infrastructure aur real estate boom se cables ki demand ka fayda uthana",
+        "Manufacturing capacity ka lagataar expansion karna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "64 Days (Mar 2026)",
+          "analytical_significance": "Yeh track karna zaroori hai ki inventory aur debtors mein kitna paisa atka hua hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar copper ke daam badhne par company use pass-on na kar paye aur margins crash ho jayein.",
+        "numerical_breach_benchmark": "OPM % < 9.0%",
+        "strategic_implication": "Pricing power ka khatam hona aur commodity-driven margins ka dabav mein aana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Copper aur Aluminium ki keematon mein bhari utaar-chadhaw se margins par asar pad sakta hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "FMEG aur cable sector mein local unorganized players se price war ka khatra."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 22408.0,
+          "Expenses": 19445.0,
+          "Operating Profit": 2964.0,
+          "OPM %": 13.0,
+          "Other Income": 204.0,
+          "Interest": 169.0,
+          "Depreciation": 298.0,
+          "Profit before tax": 2701.0,
+          "Tax %": 24.0,
+          "Net Profit": 2046.0,
+          "EPS in Rs": 134.28,
+          "Dividend Payout %": 26.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 150.0,
+          "Reserves": 9675.0,
+          "Borrowings": 202.0,
+          "Other Liabilities": 3721.0,
+          "Total Liabilities": 13749.0,
+          "Fixed Assets": 3011.0,
+          "CWIP": 708.0,
+          "Investments": 1749.0,
+          "Other Assets": 8280.0,
+          "Total Assets": 13749.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 1809.0,
+          "Cash from Investing Activity": -1239.0,
+          "Cash from Financing Activity": -628.0,
+          "Net Cash Flow": -59.0,
+          "Free Cash Flow": 853.0,
+          "CFO/OP": 82.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 42.0,
+          "Inventory Days": 86.0,
+          "Days Payable": 64.0,
+          "Cash Conversion Cycle": 64.0,
+          "Working Capital Days": 54.0,
+          "ROCE %": 30.0
+        }
+      }
+    }
+  }
+}
