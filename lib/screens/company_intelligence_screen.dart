@@ -13,13 +13,9 @@ class CompanyIntelligenceScreen extends StatefulWidget {
 }
 
 class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
-  // ⚡ Fastly CDN Endpoint
+  // ⚡ Fastly Direct Upstream Proxy (Stale cache bypass ke liye)
   final String _fastlyCdnUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
-  
-  // 🧹 Fastly Global Cache Purge Endpoint
-  final String _purgeUrl =
-      'https://purge.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
+      'https://fastly.jsdelivr.net/raw/github/zxcty54/stock-crypto-tracker/main/company_business_models.json';
 
   Map<String, dynamic> _companiesData = {};
   String? _selectedSymbol;
@@ -33,31 +29,21 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     _fetchCompaniesData();
   }
 
-  /// 🚀 Fastly Edge Purge + Fresh Fetch Engine
+  /// 🚀 Live Fastly Fetch with Cache Nonce
   Future<void> _fetchCompaniesData({bool isManual = false}) async {
     if (isManual) setState(() => _isRefreshing = true);
 
+    final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(99999)}';
+    final fetchUri = Uri.parse('$_fastlyCdnUrl?cache=$nonce');
+
     try {
-      // Step 1: Agar manual sync dabaya hai ya initial load hai, Fastly cache purge request bhejo
-      if (isManual) {
-        try {
-          await http.get(Uri.parse(_purgeUrl)).timeout(const Duration(seconds: 3));
-        } catch (_) {
-          // Purge timeout hone par bhi normal fetch continue karein
-        }
-      }
-
-      // Step 2: Unique Nonce taaki client-level caching bypass ho
-      final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(99999)}';
-      final fetchUri = Uri.parse('$_fastlyCdnUrl?v=$nonce');
-
       final res = await http.get(
         fetchUri,
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
         },
-      ).timeout(const Duration(seconds: 12));
+      ).timeout(const Duration(seconds: 14));
 
       if (res.statusCode == 200) {
         _parseAndSetData(res.body);
@@ -65,7 +51,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         if (isManual && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('⚡ Fastly Synced (${_companiesData.length} Companies Live)'),
+              content: Text('⚡ Live Research Memo Synced (${_companiesData.length} Companies)'),
               backgroundColor: const Color(0xFF00F5A0),
               behavior: SnackBarBehavior.floating,
               duration: const Duration(seconds: 2),
@@ -82,7 +68,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         _parseAndSetData(localData);
       } catch (_) {
         setState(() {
-          _errorMessage = 'Data connection issue. Tap retry.';
+          _errorMessage = 'Data sync issue. Check internet connection.';
           _isLoading = false;
           _isRefreshing = false;
         });
@@ -115,6 +101,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     }
   }
 
+  /// 🔍 100+ Companies Search Modal
   void _openStockPicker() {
     showModalBottomSheet(
       context: context,
@@ -282,7 +269,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
 
-    // 🛡 Comprehensive Data Extractors
+    // 🛡 Dual-Schema Safe Extraction (Null aur blank fields avoid karne ke liye)
     final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ?? {};
     final coreOld = (company['core_identity'] as Map<String, dynamic>?) ?? {};
     final moatOld = (company['economic_moat'] as Map<String, dynamic>?) ?? {};
@@ -369,7 +356,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2),
                   )
                 : const Icon(Icons.sync_rounded, color: Color(0xFF00E5FF), size: 20),
-            tooltip: 'Fastly Cache Purge & Sync',
+            tooltip: 'Live Fastly Sync',
             onPressed: _isRefreshing ? null : () => _fetchCompaniesData(isManual: true),
           ),
         ],
@@ -382,9 +369,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 40),
             children: [
+              // 1. Research Memo Executive Header
               _buildReportHeader(company, pricing),
               const SizedBox(height: 16),
 
+              // 2. Business Model Architecture (Poora Qualitative Analysis)
               _buildSectionHeader("BUSINESS MODEL ARCHITECTURE", "HOW THE OPERATIONAL ENGINE WORKS", Icons.domain_rounded),
               const SizedBox(height: 10),
               _buildAnalysisCard(
@@ -420,21 +409,25 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               ),
               const SizedBox(height: 16),
 
+              // 3. Cash Flow Reality & Capital Deployment
               _buildSectionHeader("CASH FLOW REALITY", "OPERATIONAL CASH CONVERSION & FREE CASH FLOW", Icons.account_balance_wallet_outlined),
               const SizedBox(height: 10),
               _buildCashFlowDossier(cashFlowReality, cf),
               const SizedBox(height: 16),
 
+              // 4. Strategic Catalysts & Monitorable Metrics
               _buildSectionHeader("STRATEGIC CATALYSTS & METRICS", "WHAT DRIVES GROWTH IN UPCOMING QUARTERS", Icons.track_changes_rounded),
               const SizedBox(height: 10),
               _buildCatalystsAndMetricsCard(catalysts, metrics),
               const SizedBox(height: 16),
 
+              // 5. Critical Exit Trigger (Thesis Invalidation)
               _buildSectionHeader("THESIS INVALIDATION TRIGGER", "CLEAR CONDITIONS TO EXIT / AVOID THIS STOCK", Icons.dangerous_rounded, titleColor: const Color(0xFFFF2A6D)),
               const SizedBox(height: 10),
               _buildThesisInvalidationDossier(invalidation, risks),
               const SizedBox(height: 16),
 
+              // 6. Audited Financial Baseline (Collapsible Detailed Views)
               _buildSectionHeader("AUDITED FINANCIAL BASELINE", "STATUTORY STATEMENTS & EFFICIENCY RATIOS", Icons.table_chart_rounded),
               const SizedBox(height: 10),
               _buildFinancialStatementsAccordion(pnl, bs, cf, eff, statement),
@@ -445,7 +438,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
     );
   }
 
-  // --- SUB COMPONENTS ---
+  // --- SUB WIDGET BUILDERS ---
 
   Widget _buildReportHeader(Map<String, dynamic> comp, Map<String, dynamic> pricing) {
     final capability = (pricing['margin_defense_capability'] ?? pricing['rating'] ?? 'COMPRESSED')
