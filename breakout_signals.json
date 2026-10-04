@@ -1,18 +1,924 @@
 {
-  "last_updated": "2026-10-04 04:16:24",
-  "total_scanned_stocks": 6,
-  "tracked_dates": [
-    "2026-10-01"
-  ],
-  "latest": {
-    "date": "2026-10-01",
-    "triggers_count": 0,
-    "triggers": []
+  "metadata": {
+    "generated_at": "2026-10-04 04:20:42",
+    "total_companies_scanned": 6,
+    "total_signals_found": 27,
+    "cooldown_period_days": 10
   },
-  "history": {
-    "2026-10-01": {
-      "triggers_count": 0,
-      "triggers": []
+  "latest_signals": [
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-08-10",
+      "entry_price": 5090.0,
+      "day_move": "+3.0%",
+      "volume_ratio": "4.7x",
+      "rsi_14": 76.4,
+      "dma_20": 4793.83,
+      "dma_50": 4518.32,
+      "breakout_high_20d": 5005.0
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-04-08",
+      "entry_price": 4492.5,
+      "day_move": "+6.2%",
+      "volume_ratio": "3.7x",
+      "rsi_14": 65.1,
+      "dma_20": 4102.52,
+      "dma_50": 4145.46,
+      "breakout_high_20d": 4302.0
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2026-02-09",
+      "entry_price": 1146.0,
+      "day_move": "+7.5%",
+      "volume_ratio": "4.2x",
+      "rsi_14": 69.5,
+      "dma_20": 1051.55,
+      "dma_50": 1006.02,
+      "breakout_high_20d": 1089.8
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-01-07",
+      "entry_price": 4273.2,
+      "day_move": "+3.9%",
+      "volume_ratio": "4.5x",
+      "rsi_14": 90.2,
+      "dma_20": 3972.98,
+      "dma_50": 3887.85,
+      "breakout_high_20d": 4120.5
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2025-12-31",
+      "entry_price": 1053.8,
+      "day_move": "+3.2%",
+      "volume_ratio": "3.9x",
+      "rsi_14": 61.6,
+      "dma_20": 1008.66,
+      "dma_50": 1035.28,
+      "breakout_high_20d": 1052.0
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2025-11-19",
+      "entry_price": 1662.6,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 73.0,
+      "dma_20": 1555.55,
+      "dma_50": 1493.75,
+      "breakout_high_20d": 1607.7
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2025-09-17",
+      "entry_price": 857.15,
+      "day_move": "+3.1%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 89.0,
+      "dma_20": 816.71,
+      "dma_50": 814.32,
+      "breakout_high_20d": 833.25
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2025-06-25",
+      "entry_price": 3652.2,
+      "day_move": "+3.6%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 63.5,
+      "dma_20": 3512.32,
+      "dma_50": 3477.3,
+      "breakout_high_20d": 3605.0
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2025-05-14",
+      "entry_price": 943.2,
+      "day_move": "+3.7%",
+      "volume_ratio": "4.3x",
+      "rsi_14": 55.5,
+      "dma_20": 891.97,
+      "dma_50": 886.51,
+      "breakout_high_20d": 926.0
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2025-05-09",
+      "entry_price": 3510.3,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 74.2,
+      "dma_20": 3324.6,
+      "dma_50": 3183.49,
+      "breakout_high_20d": 3419.5
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2024-09-05",
+      "entry_price": 3722.85,
+      "day_move": "+3.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 74.0,
+      "dma_20": 3510.03,
+      "dma_50": 3412.31,
+      "breakout_high_20d": 3658.8
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2024-07-23",
+      "entry_price": 3466.85,
+      "day_move": "+6.5%",
+      "volume_ratio": "5.2x",
+      "rsi_14": 55.4,
+      "dma_20": 3306.61,
+      "dma_50": 3347.22,
+      "breakout_high_20d": 3450.0
+    },
+    {
+      "symbol": "TCS",
+      "entry_date": "2024-07-12",
+      "entry_price": 4183.95,
+      "day_move": "+6.6%",
+      "volume_ratio": "5.6x",
+      "rsi_14": 74.3,
+      "dma_20": 3919.27,
+      "dma_50": 3877.79,
+      "breakout_high_20d": 4047.35
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2024-06-03",
+      "entry_price": 905.65,
+      "day_move": "+9.1%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 79.1,
+      "dma_20": 824.71,
+      "dma_50": 790.89,
+      "breakout_high_20d": 841.25
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2024-05-14",
+      "entry_price": 978.45,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 66.9,
+      "dma_20": 929.26,
+      "dma_50": 873.04,
+      "breakout_high_20d": 960.0
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2024-02-08",
+      "entry_price": 699.55,
+      "day_move": "+3.6%",
+      "volume_ratio": "3.6x",
+      "rsi_14": 75.5,
+      "dma_20": 636.31,
+      "dma_50": 628.27,
+      "breakout_high_20d": 677.95
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2024-01-15",
+      "entry_price": 1588.2,
+      "day_move": "+3.1%",
+      "volume_ratio": "3.5x",
+      "rsi_14": 72.8,
+      "dma_20": 1472.2,
+      "dma_50": 1382.53,
+      "breakout_high_20d": 1555.0
+    },
+    {
+      "symbol": "INFY",
+      "entry_date": "2024-01-12",
+      "entry_price": 1612.75,
+      "day_move": "+7.9%",
+      "volume_ratio": "3.9x",
+      "rsi_14": 57.2,
+      "dma_20": 1542.64,
+      "dma_50": 1477.39,
+      "breakout_high_20d": 1593.0
+    },
+    {
+      "symbol": "INFY",
+      "entry_date": "2023-12-15",
+      "entry_price": 1578.4,
+      "day_move": "+5.1%",
+      "volume_ratio": "3.4x",
+      "rsi_14": 75.4,
+      "dma_20": 1465.52,
+      "dma_50": 1435.7,
+      "breakout_high_20d": 1511.0
+    },
+    {
+      "symbol": "TCS",
+      "entry_date": "2023-12-15",
+      "entry_price": 3861.0,
+      "day_move": "+5.3%",
+      "volume_ratio": "4.0x",
+      "rsi_14": 82.9,
+      "dma_20": 3566.87,
+      "dma_50": 3497.38,
+      "breakout_high_20d": 3698.4
+    }
+  ],
+  "all_signals_chronological": [
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-08-10",
+      "entry_price": 5090.0,
+      "day_move": "+3.0%",
+      "volume_ratio": "4.7x",
+      "rsi_14": 76.4,
+      "dma_20": 4793.83,
+      "dma_50": 4518.32,
+      "breakout_high_20d": 5005.0
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-04-08",
+      "entry_price": 4492.5,
+      "day_move": "+6.2%",
+      "volume_ratio": "3.7x",
+      "rsi_14": 65.1,
+      "dma_20": 4102.52,
+      "dma_50": 4145.46,
+      "breakout_high_20d": 4302.0
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2026-02-09",
+      "entry_price": 1146.0,
+      "day_move": "+7.5%",
+      "volume_ratio": "4.2x",
+      "rsi_14": 69.5,
+      "dma_20": 1051.55,
+      "dma_50": 1006.02,
+      "breakout_high_20d": 1089.8
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2026-01-07",
+      "entry_price": 4273.2,
+      "day_move": "+3.9%",
+      "volume_ratio": "4.5x",
+      "rsi_14": 90.2,
+      "dma_20": 3972.98,
+      "dma_50": 3887.85,
+      "breakout_high_20d": 4120.5
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2025-12-31",
+      "entry_price": 1053.8,
+      "day_move": "+3.2%",
+      "volume_ratio": "3.9x",
+      "rsi_14": 61.6,
+      "dma_20": 1008.66,
+      "dma_50": 1035.28,
+      "breakout_high_20d": 1052.0
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2025-11-19",
+      "entry_price": 1662.6,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 73.0,
+      "dma_20": 1555.55,
+      "dma_50": 1493.75,
+      "breakout_high_20d": 1607.7
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2025-09-17",
+      "entry_price": 857.15,
+      "day_move": "+3.1%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 89.0,
+      "dma_20": 816.71,
+      "dma_50": 814.32,
+      "breakout_high_20d": 833.25
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2025-06-25",
+      "entry_price": 3652.2,
+      "day_move": "+3.6%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 63.5,
+      "dma_20": 3512.32,
+      "dma_50": 3477.3,
+      "breakout_high_20d": 3605.0
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2025-05-14",
+      "entry_price": 943.2,
+      "day_move": "+3.7%",
+      "volume_ratio": "4.3x",
+      "rsi_14": 55.5,
+      "dma_20": 891.97,
+      "dma_50": 886.51,
+      "breakout_high_20d": 926.0
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2025-05-09",
+      "entry_price": 3510.3,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 74.2,
+      "dma_20": 3324.6,
+      "dma_50": 3183.49,
+      "breakout_high_20d": 3419.5
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2024-09-05",
+      "entry_price": 3722.85,
+      "day_move": "+3.2%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 74.0,
+      "dma_20": 3510.03,
+      "dma_50": 3412.31,
+      "breakout_high_20d": 3658.8
+    },
+    {
+      "symbol": "TITAN",
+      "entry_date": "2024-07-23",
+      "entry_price": 3466.85,
+      "day_move": "+6.5%",
+      "volume_ratio": "5.2x",
+      "rsi_14": 55.4,
+      "dma_20": 3306.61,
+      "dma_50": 3347.22,
+      "breakout_high_20d": 3450.0
+    },
+    {
+      "symbol": "TCS",
+      "entry_date": "2024-07-12",
+      "entry_price": 4183.95,
+      "day_move": "+6.6%",
+      "volume_ratio": "5.6x",
+      "rsi_14": 74.3,
+      "dma_20": 3919.27,
+      "dma_50": 3877.79,
+      "breakout_high_20d": 4047.35
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2024-06-03",
+      "entry_price": 905.65,
+      "day_move": "+9.1%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 79.1,
+      "dma_20": 824.71,
+      "dma_50": 790.89,
+      "breakout_high_20d": 841.25
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2024-05-14",
+      "entry_price": 978.45,
+      "day_move": "+4.2%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 66.9,
+      "dma_20": 929.26,
+      "dma_50": 873.04,
+      "breakout_high_20d": 960.0
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2024-02-08",
+      "entry_price": 699.55,
+      "day_move": "+3.6%",
+      "volume_ratio": "3.6x",
+      "rsi_14": 75.5,
+      "dma_20": 636.31,
+      "dma_50": 628.27,
+      "breakout_high_20d": 677.95
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2024-01-15",
+      "entry_price": 1588.2,
+      "day_move": "+3.1%",
+      "volume_ratio": "3.5x",
+      "rsi_14": 72.8,
+      "dma_20": 1472.2,
+      "dma_50": 1382.53,
+      "breakout_high_20d": 1555.0
+    },
+    {
+      "symbol": "INFY",
+      "entry_date": "2024-01-12",
+      "entry_price": 1612.75,
+      "day_move": "+7.9%",
+      "volume_ratio": "3.9x",
+      "rsi_14": 57.2,
+      "dma_20": 1542.64,
+      "dma_50": 1477.39,
+      "breakout_high_20d": 1593.0
+    },
+    {
+      "symbol": "INFY",
+      "entry_date": "2023-12-15",
+      "entry_price": 1578.4,
+      "day_move": "+5.1%",
+      "volume_ratio": "3.4x",
+      "rsi_14": 75.4,
+      "dma_20": 1465.52,
+      "dma_50": 1435.7,
+      "breakout_high_20d": 1511.0
+    },
+    {
+      "symbol": "TCS",
+      "entry_date": "2023-12-15",
+      "entry_price": 3861.0,
+      "day_move": "+5.3%",
+      "volume_ratio": "4.0x",
+      "rsi_14": 82.9,
+      "dma_20": 3566.87,
+      "dma_50": 3497.38,
+      "breakout_high_20d": 3698.4
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2023-12-11",
+      "entry_price": 719.25,
+      "day_move": "+4.8%",
+      "volume_ratio": "3.7x",
+      "rsi_14": 81.6,
+      "dma_20": 666.0,
+      "dma_50": 662.24,
+      "breakout_high_20d": 699.0
+    },
+    {
+      "symbol": "TCS",
+      "entry_date": "2023-07-14",
+      "entry_price": 3514.65,
+      "day_move": "+5.2%",
+      "volume_ratio": "3.3x",
+      "rsi_14": 77.1,
+      "dma_20": 3272.17,
+      "dma_50": 3269.46,
+      "breakout_high_20d": 3367.45
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2023-06-20",
+      "entry_price": 594.15,
+      "day_move": "+3.4%",
+      "volume_ratio": "3.0x",
+      "rsi_14": 82.1,
+      "dma_20": 531.61,
+      "dma_50": 553.09,
+      "breakout_high_20d": 581.15
+    },
+    {
+      "symbol": "JINDALSTEL",
+      "entry_date": "2022-12-27",
+      "entry_price": 575.95,
+      "day_move": "+9.0%",
+      "volume_ratio": "4.4x",
+      "rsi_14": 55.1,
+      "dma_20": 551.74,
+      "dma_50": 511.06,
+      "breakout_high_20d": 573.5
+    },
+    {
+      "symbol": "SBIN",
+      "entry_date": "2022-11-07",
+      "entry_price": 614.15,
+      "day_move": "+3.4%",
+      "volume_ratio": "3.5x",
+      "rsi_14": 81.3,
+      "dma_20": 561.67,
+      "dma_50": 550.61,
+      "breakout_high_20d": 596.95
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2022-10-13",
+      "entry_price": 982.1,
+      "day_move": "+3.2%",
+      "volume_ratio": "3.1x",
+      "rsi_14": 77.2,
+      "dma_20": 927.96,
+      "dma_50": 940.69,
+      "breakout_high_20d": 972.95
+    },
+    {
+      "symbol": "HCLTECH",
+      "entry_date": "2021-12-24",
+      "entry_price": 1265.2,
+      "day_move": "+3.1%",
+      "volume_ratio": "5.1x",
+      "rsi_14": 81.6,
+      "dma_20": 1172.75,
+      "dma_50": 1172.58,
+      "breakout_high_20d": 1230.7
+    }
+  ],
+  "companies": {
+    "HCLTECH": {
+      "total_5yr_triggers": 4,
+      "latest_trigger": {
+        "symbol": "HCLTECH",
+        "entry_date": "2025-11-19",
+        "entry_price": 1662.6,
+        "day_move": "+4.2%",
+        "volume_ratio": "3.0x",
+        "rsi_14": 73.0,
+        "dma_20": 1555.55,
+        "dma_50": 1493.75,
+        "breakout_high_20d": 1607.7
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "HCLTECH",
+          "entry_date": "2021-12-24",
+          "entry_price": 1265.2,
+          "day_move": "+3.1%",
+          "volume_ratio": "5.1x",
+          "rsi_14": 81.6,
+          "dma_20": 1172.75,
+          "dma_50": 1172.58,
+          "breakout_high_20d": 1230.7
+        },
+        {
+          "symbol": "HCLTECH",
+          "entry_date": "2022-10-13",
+          "entry_price": 982.1,
+          "day_move": "+3.2%",
+          "volume_ratio": "3.1x",
+          "rsi_14": 77.2,
+          "dma_20": 927.96,
+          "dma_50": 940.69,
+          "breakout_high_20d": 972.95
+        },
+        {
+          "symbol": "HCLTECH",
+          "entry_date": "2024-01-15",
+          "entry_price": 1588.2,
+          "day_move": "+3.1%",
+          "volume_ratio": "3.5x",
+          "rsi_14": 72.8,
+          "dma_20": 1472.2,
+          "dma_50": 1382.53,
+          "breakout_high_20d": 1555.0
+        },
+        {
+          "symbol": "HCLTECH",
+          "entry_date": "2025-11-19",
+          "entry_price": 1662.6,
+          "day_move": "+4.2%",
+          "volume_ratio": "3.0x",
+          "rsi_14": 73.0,
+          "dma_20": 1555.55,
+          "dma_50": 1493.75,
+          "breakout_high_20d": 1607.7
+        }
+      ]
+    },
+    "INFY": {
+      "total_5yr_triggers": 2,
+      "latest_trigger": {
+        "symbol": "INFY",
+        "entry_date": "2024-01-12",
+        "entry_price": 1612.75,
+        "day_move": "+7.9%",
+        "volume_ratio": "3.9x",
+        "rsi_14": 57.2,
+        "dma_20": 1542.64,
+        "dma_50": 1477.39,
+        "breakout_high_20d": 1593.0
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "INFY",
+          "entry_date": "2023-12-15",
+          "entry_price": 1578.4,
+          "day_move": "+5.1%",
+          "volume_ratio": "3.4x",
+          "rsi_14": 75.4,
+          "dma_20": 1465.52,
+          "dma_50": 1435.7,
+          "breakout_high_20d": 1511.0
+        },
+        {
+          "symbol": "INFY",
+          "entry_date": "2024-01-12",
+          "entry_price": 1612.75,
+          "day_move": "+7.9%",
+          "volume_ratio": "3.9x",
+          "rsi_14": 57.2,
+          "dma_20": 1542.64,
+          "dma_50": 1477.39,
+          "breakout_high_20d": 1593.0
+        }
+      ]
+    },
+    "JINDALSTEL": {
+      "total_5yr_triggers": 6,
+      "latest_trigger": {
+        "symbol": "JINDALSTEL",
+        "entry_date": "2025-12-31",
+        "entry_price": 1053.8,
+        "day_move": "+3.2%",
+        "volume_ratio": "3.9x",
+        "rsi_14": 61.6,
+        "dma_20": 1008.66,
+        "dma_50": 1035.28,
+        "breakout_high_20d": 1052.0
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2022-12-27",
+          "entry_price": 575.95,
+          "day_move": "+9.0%",
+          "volume_ratio": "4.4x",
+          "rsi_14": 55.1,
+          "dma_20": 551.74,
+          "dma_50": 511.06,
+          "breakout_high_20d": 573.5
+        },
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2023-06-20",
+          "entry_price": 594.15,
+          "day_move": "+3.4%",
+          "volume_ratio": "3.0x",
+          "rsi_14": 82.1,
+          "dma_20": 531.61,
+          "dma_50": 553.09,
+          "breakout_high_20d": 581.15
+        },
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2023-12-11",
+          "entry_price": 719.25,
+          "day_move": "+4.8%",
+          "volume_ratio": "3.7x",
+          "rsi_14": 81.6,
+          "dma_20": 666.0,
+          "dma_50": 662.24,
+          "breakout_high_20d": 699.0
+        },
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2024-05-14",
+          "entry_price": 978.45,
+          "day_move": "+4.2%",
+          "volume_ratio": "3.3x",
+          "rsi_14": 66.9,
+          "dma_20": 929.26,
+          "dma_50": 873.04,
+          "breakout_high_20d": 960.0
+        },
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2025-05-14",
+          "entry_price": 943.2,
+          "day_move": "+3.7%",
+          "volume_ratio": "4.3x",
+          "rsi_14": 55.5,
+          "dma_20": 891.97,
+          "dma_50": 886.51,
+          "breakout_high_20d": 926.0
+        },
+        {
+          "symbol": "JINDALSTEL",
+          "entry_date": "2025-12-31",
+          "entry_price": 1053.8,
+          "day_move": "+3.2%",
+          "volume_ratio": "3.9x",
+          "rsi_14": 61.6,
+          "dma_20": 1008.66,
+          "dma_50": 1035.28,
+          "breakout_high_20d": 1052.0
+        }
+      ]
+    },
+    "SBIN": {
+      "total_5yr_triggers": 5,
+      "latest_trigger": {
+        "symbol": "SBIN",
+        "entry_date": "2026-02-09",
+        "entry_price": 1146.0,
+        "day_move": "+7.5%",
+        "volume_ratio": "4.2x",
+        "rsi_14": 69.5,
+        "dma_20": 1051.55,
+        "dma_50": 1006.02,
+        "breakout_high_20d": 1089.8
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "SBIN",
+          "entry_date": "2022-11-07",
+          "entry_price": 614.15,
+          "day_move": "+3.4%",
+          "volume_ratio": "3.5x",
+          "rsi_14": 81.3,
+          "dma_20": 561.67,
+          "dma_50": 550.61,
+          "breakout_high_20d": 596.95
+        },
+        {
+          "symbol": "SBIN",
+          "entry_date": "2024-02-08",
+          "entry_price": 699.55,
+          "day_move": "+3.6%",
+          "volume_ratio": "3.6x",
+          "rsi_14": 75.5,
+          "dma_20": 636.31,
+          "dma_50": 628.27,
+          "breakout_high_20d": 677.95
+        },
+        {
+          "symbol": "SBIN",
+          "entry_date": "2024-06-03",
+          "entry_price": 905.65,
+          "day_move": "+9.1%",
+          "volume_ratio": "3.3x",
+          "rsi_14": 79.1,
+          "dma_20": 824.71,
+          "dma_50": 790.89,
+          "breakout_high_20d": 841.25
+        },
+        {
+          "symbol": "SBIN",
+          "entry_date": "2025-09-17",
+          "entry_price": 857.15,
+          "day_move": "+3.1%",
+          "volume_ratio": "3.0x",
+          "rsi_14": 89.0,
+          "dma_20": 816.71,
+          "dma_50": 814.32,
+          "breakout_high_20d": 833.25
+        },
+        {
+          "symbol": "SBIN",
+          "entry_date": "2026-02-09",
+          "entry_price": 1146.0,
+          "day_move": "+7.5%",
+          "volume_ratio": "4.2x",
+          "rsi_14": 69.5,
+          "dma_20": 1051.55,
+          "dma_50": 1006.02,
+          "breakout_high_20d": 1089.8
+        }
+      ]
+    },
+    "TCS": {
+      "total_5yr_triggers": 3,
+      "latest_trigger": {
+        "symbol": "TCS",
+        "entry_date": "2024-07-12",
+        "entry_price": 4183.95,
+        "day_move": "+6.6%",
+        "volume_ratio": "5.6x",
+        "rsi_14": 74.3,
+        "dma_20": 3919.27,
+        "dma_50": 3877.79,
+        "breakout_high_20d": 4047.35
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "TCS",
+          "entry_date": "2023-07-14",
+          "entry_price": 3514.65,
+          "day_move": "+5.2%",
+          "volume_ratio": "3.3x",
+          "rsi_14": 77.1,
+          "dma_20": 3272.17,
+          "dma_50": 3269.46,
+          "breakout_high_20d": 3367.45
+        },
+        {
+          "symbol": "TCS",
+          "entry_date": "2023-12-15",
+          "entry_price": 3861.0,
+          "day_move": "+5.3%",
+          "volume_ratio": "4.0x",
+          "rsi_14": 82.9,
+          "dma_20": 3566.87,
+          "dma_50": 3497.38,
+          "breakout_high_20d": 3698.4
+        },
+        {
+          "symbol": "TCS",
+          "entry_date": "2024-07-12",
+          "entry_price": 4183.95,
+          "day_move": "+6.6%",
+          "volume_ratio": "5.6x",
+          "rsi_14": 74.3,
+          "dma_20": 3919.27,
+          "dma_50": 3877.79,
+          "breakout_high_20d": 4047.35
+        }
+      ]
+    },
+    "TITAN": {
+      "total_5yr_triggers": 7,
+      "latest_trigger": {
+        "symbol": "TITAN",
+        "entry_date": "2026-08-10",
+        "entry_price": 5090.0,
+        "day_move": "+3.0%",
+        "volume_ratio": "4.7x",
+        "rsi_14": 76.4,
+        "dma_20": 4793.83,
+        "dma_50": 4518.32,
+        "breakout_high_20d": 5005.0
+      },
+      "all_historical_triggers": [
+        {
+          "symbol": "TITAN",
+          "entry_date": "2024-07-23",
+          "entry_price": 3466.85,
+          "day_move": "+6.5%",
+          "volume_ratio": "5.2x",
+          "rsi_14": 55.4,
+          "dma_20": 3306.61,
+          "dma_50": 3347.22,
+          "breakout_high_20d": 3450.0
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2024-09-05",
+          "entry_price": 3722.85,
+          "day_move": "+3.2%",
+          "volume_ratio": "3.0x",
+          "rsi_14": 74.0,
+          "dma_20": 3510.03,
+          "dma_50": 3412.31,
+          "breakout_high_20d": 3658.8
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2025-05-09",
+          "entry_price": 3510.3,
+          "day_move": "+4.2%",
+          "volume_ratio": "3.0x",
+          "rsi_14": 74.2,
+          "dma_20": 3324.6,
+          "dma_50": 3183.49,
+          "breakout_high_20d": 3419.5
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2025-06-25",
+          "entry_price": 3652.2,
+          "day_move": "+3.6%",
+          "volume_ratio": "3.3x",
+          "rsi_14": 63.5,
+          "dma_20": 3512.32,
+          "dma_50": 3477.3,
+          "breakout_high_20d": 3605.0
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2026-01-07",
+          "entry_price": 4273.2,
+          "day_move": "+3.9%",
+          "volume_ratio": "4.5x",
+          "rsi_14": 90.2,
+          "dma_20": 3972.98,
+          "dma_50": 3887.85,
+          "breakout_high_20d": 4120.5
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2026-04-08",
+          "entry_price": 4492.5,
+          "day_move": "+6.2%",
+          "volume_ratio": "3.7x",
+          "rsi_14": 65.1,
+          "dma_20": 4102.52,
+          "dma_50": 4145.46,
+          "breakout_high_20d": 4302.0
+        },
+        {
+          "symbol": "TITAN",
+          "entry_date": "2026-08-10",
+          "entry_price": 5090.0,
+          "day_move": "+3.0%",
+          "volume_ratio": "4.7x",
+          "rsi_14": 76.4,
+          "dma_20": 4793.83,
+          "dma_50": 4518.32,
+          "breakout_high_20d": 5005.0
+        }
+      ]
     }
   }
 }
