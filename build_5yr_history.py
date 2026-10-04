@@ -8,47 +8,68 @@ import requests
 OUTPUT_FILE = "historical_5yr_ohlc.json"
 
 TARGET_REPO = "zxcty54/stock-crypto-tracker"
-TARGET_FILE_PATH = "historical_5yr_ohlc.json"
+TARGET_FILE_PATH = "historical_10yr_ohlc.json"
 TARGET_BRANCH = "main"
 
-# Nifty Smallcap 250 Stocks List
-STOCKS_LIST = [
-    {"symbol": "ACC", "name": "ACC Ltd.", "sector": "Construction Materials"},
-    {"symbol": "ACMESOLAR", "name": "ACME Solar Holdings Ltd.", "sector": "Power"},
-
-    {"symbol": "COCHINSHIP", "name": "Cochin Shipyard Ltd.", "sector": "Capital Goods"},
-    {"symbol": "CONCOR", "name": "Container Corporation of India Ltd.", "sector": "Services"},
-    {"symbol": "COROMANDEL", "name": "Coromandel International Ltd.", "sector": "Chemicals"},
-    {"symbol": "CREDITACC", "name": "CreditAccess Grameen Ltd.", "sector": "Financial Services"},
-   
+# Nifty 50, Bank Nifty aur Top 20 High-Momentum Smallcap 250 Stocks
+ASSETS_LIST = [
+    # Indices
+    {"id": "NIFTY50", "ticker": "^NSEI", "name": "Nifty 50 Index"},
+    {"id": "BANKNIFTY", "ticker": "^NSEBANK", "name": "Nifty Bank Index"},
+    
+    # 20 Popular Nifty Smallcap 250 Stocks
+    {"id": "CDSL", "ticker": "CDSL.NS", "name": "Central Depository Services (India) Ltd."},
+    {"id": "ANGELONE", "ticker": "ANGELONE.NS", "name": "Angel One Ltd."},
+    {"id": "KAYNES", "ticker": "KAYNES.NS", "name": "Kaynes Technology India Ltd."},
+    {"id": "TITAGARH", "ticker": "TITAGARH.NS", "name": "Titagarh Rail Systems Ltd."},
+    {"id": "DATAPATTNS", "ticker": "DATAPATTNS.NS", "name": "Data Patterns (India) Ltd."},
+    {"id": "BEML", "ticker": "BEML.NS", "name": "BEML Ltd."},
+    {"id": "AMBER", "ticker": "AMBER.NS", "name": "Amber Enterprises India Ltd."},
+    {"id": "ANANTRAJ", "ticker": "ANANTRAJ.NS", "name": "Anant Raj Ltd."},
+    {"id": "ARE&M", "ticker": "ARE&M.NS", "name": "Amara Raja Energy & Mobility Ltd."},
+    {"id": "OLECTRA", "ticker": "OLECTRA.NS", "name": "Olectra Greentech Ltd."},
+    {"id": "JBMA", "ticker": "JBMA.NS", "name": "JBM Auto Ltd."},
+    {"id": "KPITTECH", "ticker": "KPITTECH.NS", "name": "KPIT Technologies Ltd."},
+    {"id": "TATATECH", "ticker": "TATATECH.NS", "name": "Tata Technologies Ltd."},
+    {"id": "TEJASNET", "ticker": "TEJASNET.NS", "name": "Tejas Networks Ltd."},
+    {"id": "BSOFT", "ticker": "BSOFT.NS", "name": "Birlasoft Ltd."},
+    {"id": "CYIENT", "ticker": "CYIENT.NS", "name": "Cyient Ltd."},
+    {"id": "TRITURBINE", "ticker": "TRITURBINE.NS", "name": "Triveni Turbine Ltd."},
+    {"id": "NBCC", "ticker": "NBCC.NS", "name": "NBCC (India) Ltd."},
+    {"id": "SJVN", "ticker": "SJVN.NS", "name": "SJVN Ltd."},
+    {"id": "DEEPAKNTR", "ticker": "DEEPAKNTR.NS", "name": "Deepak Nitrite Ltd."}
 ]
 
-# Extract ticker symbols directly
-SYMBOLS = [item["symbol"] for item in STOCKS_LIST]
-
-def fetch_5year_ohlc():
+def fetch_10year_ohlc():
     master_store = {}
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     }
 
-    print("=" * 70)
-    print(f"⏳ Fetching 5-Year Daily OHLCV Data for {len(SYMBOLS)} Stocks...")
-    print("=" * 70)
+    print("=" * 80)
+    print(f"⏳ Fetching 10-Year Daily OHLCV Data for {len(ASSETS_LIST)} Assets...")
+    print("=" * 80)
 
-    for idx, symbol in enumerate(SYMBOLS, 1):
-        ticker = f"{symbol}.NS"
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=5y&interval=1d"
+    for idx, asset in enumerate(ASSETS_LIST, 1):
+        asset_id = asset["id"]
+        ticker = asset["ticker"]
+        
+        # 10-year daily historical data endpoint
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=10y&interval=1d"
 
         try:
-            res = requests.get(url, headers=headers, timeout=15)
+            res = requests.get(url, headers=headers, timeout=20)
             if res.status_code != 200:
-                print(f"⚠️ [{idx}/{len(SYMBOLS)}] Failed for {symbol} (HTTP {res.status_code})")
+                print(f"⚠️ [{idx}/{len(ASSETS_LIST)}] Failed for {asset_id} (HTTP {res.status_code})")
                 continue
 
             data = res.json()
-            result = data.get("chart", {}).get("result", [])[0]
+            result_list = data.get("chart", {}).get("result", [])
+            if not result_list:
+                print(f"⚠️ [{idx}/{len(ASSETS_LIST)}] No data found for {asset_id}")
+                continue
 
+            result = result_list[0]
             timestamps = result.get("timestamp", [])
             indicators = result.get("indicators", {}).get("quote", [])[0]
 
@@ -58,35 +79,36 @@ def fetch_5year_ohlc():
             closes = indicators.get("close", [])
             volumes = indicators.get("volume", [])
 
-            stock_candles = []
+            candles = []
             for i in range(len(timestamps)):
+                # None ya invalid prices skip karein
                 if None in (opens[i], highs[i], lows[i], closes[i]):
                     continue
 
                 date_str = datetime.fromtimestamp(timestamps[i]).strftime("%Y-%m-%d")
-                stock_candles.append([
+                candles.append([
                     date_str,
-                    round(opens[i], 2),
-                    round(highs[i], 2),
-                    round(lows[i], 2),
-                    round(closes[i], 2),
+                    round(float(opens[i]), 2),
+                    round(float(highs[i]), 2),
+                    round(float(lows[i]), 2),
+                    round(float(closes[i]), 2),
                     int(volumes[i] or 0)
                 ])
 
-            master_store[symbol] = stock_candles
-            print(f"✅ [{idx}/{len(SYMBOLS)}] {symbol}: {len(stock_candles)} sessions fetched")
-            time.sleep(0.3)
+            master_store[asset_id] = candles
+            print(f"✅ [{idx:>2}/{len(ASSETS_LIST)}] {asset_id:<11} ({ticker:<12}): {len(candles)} trading sessions")
+            time.sleep(0.35)  # Rate-limit safety
 
         except Exception as e:
-            print(f"❌ [{idx}/{len(SYMBOLS)}] Error fetching {symbol}: {e}")
+            print(f"❌ [{idx}/{len(ASSETS_LIST)}] Error fetching {asset_id}: {e}")
 
-    # Local Save with clean indentation
+    # Local file save
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(master_store, f, ensure_ascii=False, indent=2)
 
-    print("=" * 70)
-    print(f"💾 File Saved Locally: '{OUTPUT_FILE}' ({len(master_store)} stocks stored)")
-    print("=" * 70)
+    print("=" * 80)
+    print(f"💾 File Saved Locally: '{OUTPUT_FILE}' ({len(master_store)} assets saved)")
+    print("=" * 80)
 
     push_to_target_repo()
 
@@ -94,11 +116,11 @@ def fetch_5year_ohlc():
 def push_to_target_repo():
     token = os.environ.get("GH_PAT_TOKEN", "").strip()
     if not token:
-        print("⚠️ GH_PAT_TOKEN not found. Skipping remote push.")
+        print("⚠️ GH_PAT_TOKEN environment variable nahi mila. Remote push skip kiya.")
         return
 
     if not os.path.exists(OUTPUT_FILE):
-        print(f"⚠️ {OUTPUT_FILE} not found. Nothing to push.")
+        print(f"⚠️ '{OUTPUT_FILE}' file nahi mili.")
         return
 
     print(f"\n🚀 Direct-Pushing '{OUTPUT_FILE}' to '{TARGET_REPO}'...")
@@ -124,7 +146,7 @@ def push_to_target_repo():
         print(f"⚠️ Notice while fetching SHA: {e}")
 
     payload = {
-        "message": f"📊 Auto-Update: 5Y OHLCV for {len(SYMBOLS)} Stocks [{datetime.now().strftime('%d-%b-%Y')}]",
+        "message": f"📊 Auto-Update: 10Y OHLCV for Nifty, BankNifty & 20 Smallcaps [{datetime.now().strftime('%d-%b-%Y')}]",
         "content": b64_content,
         "branch": TARGET_BRANCH
     }
@@ -138,8 +160,8 @@ def push_to_target_repo():
         else:
             print(f"❌ Target repo push failed ({put_res.status_code}): {put_res.text}")
     except Exception as e:
-        print(f"❌ Error during remote sync: {e}")
+        print(f"❌ Remote sync exception: {e}")
 
 
 if __name__ == "__main__":
-    fetch_5year_ohlc()
+    fetch_10year_ohlc()
