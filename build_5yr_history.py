@@ -11,8 +11,19 @@ TARGET_REPO = "zxcty54/stock-crypto-tracker"
 TARGET_FILE_PATH = "historical_5yr_ohlc.json"
 TARGET_BRANCH = "main"
 
-# Multi-Sector Symbols (IT, Banking, Consumer, Metal)
-SYMBOLS = ["TCS", "INFY", "HCLTECH", "SBIN", "TITAN", "JINDALSTEL"]
+# 10 Companies (Market Cap ₹1,000 Cr - ₹20,000 Cr | Price > ₹100 | Daily Volume > 1 Lakh)
+SYMBOLS = [
+    "CESC",        # Power & Utilities
+    "MANAPPURAM",  # NBFC / Gold Loan
+    "CASTROLIND",  # Lubricants / Auto Ancillary
+    "ENGINERSIN",  # Engineering / Infra PSU
+    "MARKSANS",    # Pharmaceuticals
+    "RITES",       # Railway Infrastructure
+    "AARTIPHARM",  # Specialty Chemicals / Pharma
+    "EPL",         # Packaging
+    "NCC",         # Infrastructure
+    "CERA"         # Building Products
+]
 
 def fetch_5year_ohlc():
     master_store = {}
@@ -22,7 +33,7 @@ def fetch_5year_ohlc():
 
     print("=" * 70)
     print("⏳ Fetching 5-Year Daily OHLCV Data...")
-    print(f"🎯 Symbols: {', '.join(SYMBOLS)}")
+    print(f"🎯 Symbols ({len(SYMBOLS)}): {', '.join(SYMBOLS)}")
     print("=" * 70)
 
     for symbol in SYMBOLS:
@@ -110,7 +121,7 @@ def push_to_target_repo():
         if check_res.status_code == 200:
             sha = check_res.json().get("sha")
     except Exception as e:
-        print(f"⚠️ Notice while fetching SHA: {e}")
+        print(f"⚠️️ Notice while fetching SHA: {e}")
 
     payload = {
         "message": f"📊 Auto-Update: 5Y OHLCV for {len(SYMBOLS)} Stocks [{datetime.now().strftime('%d-%b-%Y')}]",
