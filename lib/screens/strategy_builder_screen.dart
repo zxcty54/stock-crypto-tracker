@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 // ---------------- DATA MODELS ----------------
 class ReplayCandle {
@@ -79,6 +79,23 @@ class ClosedTrade {
   bool get isWin => pnl > 0;
 }
 
+// ---------------- BACKGROUND ISOLATE PARSER ----------------
+Map<String, List<ReplayCandle>> _parseCandlesInBackground(String jsonString) {
+  final Map<String, dynamic> raw = jsonDecode(jsonString);
+  final Map<String, List<ReplayCandle>> parsed = {};
+
+  raw.forEach((key, val) {
+    final list = val as List;
+    if (list.isNotEmpty && list.first is Map) {
+      parsed[key] = list.map((e) => ReplayCandle.fromMap(e)).toList();
+    } else {
+      parsed[key] = list.map((e) => ReplayCandle.fromList(e)).toList();
+    }
+  });
+
+  return parsed;
+}
+
 // ---------------- MAIN TERMINAL SCREEN ----------------
 class StrategyBuilderScreen extends StatefulWidget {
   const StrategyBuilderScreen({super.key});
@@ -92,16 +109,9 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   @override
   bool get wantKeepAlive => true;
 
-  // Waterfall CDN routing chain
-  final List<String> _cdnEndpoints = [
-    'https://cdn.staticaly.com/gh/zxcty54/stock-crypto-tracker/main/historical_5yr_ohlc.json',
-    'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@latest/historical_5yr_ohlc.json',
-  ];
-
   Map<String, List<ReplayCandle>> _masterDatabase = {};
   String? _selectedSymbol;
   bool _isLoading = true;
-  bool _isRefreshing = false;
   String? _errorMessage;
 
   // Replay State
@@ -141,7 +151,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   @override
   void initState() {
     super.initState();
-    _fetchDataset();
+    _loadAssetDataset();
   }
 
   @override
@@ -169,95 +179,32 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     }
   }
 
-  Future<void> _fetchDataset({bool isManualRefresh = false}) async {
-    if (isManualRefresh) {
-      setState(() => _isRefreshing = true);
-    }
+  Future<void> _loadAssetDataset() async {
+    try {
+      final localData = await rootBundle.loadString('assets/data/bactest.json');
+      final parsed = await compute(_parseCandlesInBackground, localData);
 
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final headers = {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-    };
-
-    bool loadedSuccessfully = false;
-
-    // Step 1 & 2: Statically CDN and jsDelivr @latest fallback
-    for (int i = 0; i < _cdnEndpoints.length; i++) {
-      final endpoint = '${_cdnEndpoints[i]}?ts=$timestamp';
-      try {
-        debugPrint("Trying CDN source ${i + 1}: ${_cdnEndpoints[i]}");
-        final res = await http
-            .get(Uri.parse(endpoint), headers: headers)
-            .timeout(const Duration(seconds: 12));
-
-        if (res.statusCode == 200 && res.body.isNotEmpty) {
-          _applyParsedJson(res.body);
-          _showSuccessNotification(isManualRefresh);
-          loadedSuccessfully = true;
-          break;
+      setState(() {
+        _masterDatabase = parsed;
+        if (_masterDatabase.isNotEmpty) {
+          if (_selectedSymbol == null || !_masterDatabase.containsKey(_selectedSymbol)) {
+            _selectedSymbol = _masterDatabase.keys.first;
+          }
         }
-      } catch (err) {
-        debugPrint("CDN source ${i + 1} failed: $err");
-      }
-    }
+        _isLoading = false;
+        _errorMessage = null;
 
-    // Step 3: Local Offline Asset Fallback
-    if (!loadedSuccessfully) {
-      debugPrint("CDNs unreachable. Loading local assets fallback...");
-      try {
-        final localData = await rootBundle.loadString('assets/data/bactest.json');
-        _applyParsedJson(localData);
-      } catch (localErr) {
-        setState(() {
-          _errorMessage = 'Network connection failed & offline asset missing';
-          _isLoading = false;
-          _isRefreshing = false;
-        });
-      }
-    }
-  }
-
-  void _showSuccessNotification(bool isManualRefresh) {
-    if (isManualRefresh && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('⚡ Sync Complete! ${_masterDatabase.length} Stocks updated.'),
-          backgroundColor: const Color(0xFF00F5A0),
-          duration: const Duration(seconds: 2),
-        ),
-      );
-    }
-  }
-
-  void _applyParsedJson(String jsonString) {
-    final Map<String, dynamic> raw = jsonDecode(jsonString);
-    final Map<String, List<ReplayCandle>> parsed = {};
-
-    raw.forEach((key, val) {
-      final list = val as List;
-      if (list.isNotEmpty && list.first is Map) {
-        parsed[key] = list.map((e) => ReplayCandle.fromMap(e)).toList();
-      } else {
-        parsed[key] = list.map((e) => ReplayCandle.fromList(e)).toList();
-      }
-    });
-
-    setState(() {
-      _masterDatabase = parsed;
-      if (_masterDatabase.isNotEmpty) {
-        if (_selectedSymbol == null || !_masterDatabase.containsKey(_selectedSymbol)) {
-          _selectedSymbol = _masterDatabase.keys.first;
+        if (_selectedSymbol != null) {
+          _initSession(_selectedSymbol!);
         }
-      }
-      _isLoading = false;
-      _isRefreshing = false;
-      _errorMessage = null;
-
-      if (_selectedSymbol != null) {
-        _initSession(_selectedSymbol!);
-      }
-    });
+      });
+    } catch (e) {
+      debugPrint("Asset load error: $e");
+      setState(() {
+        _errorMessage = "Assets file 'assets/data/bactest.json' not found or invalid format";
+        _isLoading = false;
+      });
+    }
   }
 
   void _initSession(String symbol) {
@@ -528,21 +475,27 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       return Scaffold(
         backgroundColor: const Color(0xFF070B12),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 40),
-              const SizedBox(height: 10),
-              Text(_errorMessage ?? 'Data unavailable',
-                  style: GoogleFonts.plusJakartaSans(color: Colors.white70)),
-              TextButton(
-                onPressed: () {
-                  setState(() => _isLoading = true);
-                  _fetchDataset();
-                },
-                child: const Text('Retry Connection', style: TextStyle(color: Color(0xFF00F0FF))),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.folder_off_rounded, color: Colors.redAccent, size: 44),
+                const SizedBox(height: 12),
+                Text(_errorMessage ?? 'Data unavailable',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.plusJakartaSans(color: Colors.white70, fontSize: 13)),
+                const SizedBox(height: 12),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00F0FF)),
+                  onPressed: () {
+                    setState(() => _isLoading = true);
+                    _loadAssetDataset();
+                  },
+                  child: const Text('Reload Asset', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -938,18 +891,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             onPressed: () {
               if (_selectedSymbol != null) _initSession(_selectedSymbol!);
             },
-          ),
-
-          IconButton(
-            icon: _isRefreshing
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(color: Color(0xFF00F0FF), strokeWidth: 2),
-                  )
-                : const Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 20),
-            tooltip: 'Fetch Latest Data via CDN',
-            onPressed: _isRefreshing ? null : () => _fetchDataset(isManualRefresh: true),
           ),
 
           IconButton(
