@@ -92,9 +92,11 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
   @override
   bool get wantKeepAlive => true;
 
-  // Fastly jsDelivr CDN endpoint
-  final String _fastlyCdnUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/historical_5yr_ohlc.json';
+  // Waterfall CDN routing chain
+  final List<String> _cdnEndpoints = [
+    'https://cdn.staticaly.com/gh/zxcty54/stock-crypto-tracker/main/historical_5yr_ohlc.json',
+    'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@latest/historical_5yr_ohlc.json',
+  ];
 
   Map<String, List<ReplayCandle>> _masterDatabase = {};
   String? _selectedSymbol;
@@ -178,28 +180,37 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       'Pragma': 'no-cache',
     };
 
-    try {
-      // 1. Primary: Fastly jsDelivr CDN call
-      final res = await http
-          .get(Uri.parse('$_fastlyCdnUrl?ts=$timestamp'), headers: headers)
-          .timeout(const Duration(seconds: 14));
+    bool loadedSuccessfully = false;
 
-      if (res.statusCode == 200) {
-        _applyParsedJson(res.body);
-        _showSuccessNotification(isManualRefresh);
-        return;
+    // Step 1 & 2: Statically CDN and jsDelivr @latest fallback
+    for (int i = 0; i < _cdnEndpoints.length; i++) {
+      final endpoint = '${_cdnEndpoints[i]}?ts=$timestamp';
+      try {
+        debugPrint("Trying CDN source ${i + 1}: ${_cdnEndpoints[i]}");
+        final res = await http
+            .get(Uri.parse(endpoint), headers: headers)
+            .timeout(const Duration(seconds: 12));
+
+        if (res.statusCode == 200 && res.body.isNotEmpty) {
+          _applyParsedJson(res.body);
+          _showSuccessNotification(isManualRefresh);
+          loadedSuccessfully = true;
+          break;
+        }
+      } catch (err) {
+        debugPrint("CDN source ${i + 1} failed: $err");
       }
-      throw Exception("Fastly returned HTTP ${res.statusCode}");
-    } catch (networkErr) {
-      debugPrint("Fastly Fetch Issue ($networkErr). Offline assets fallback load ho raha hai...");
+    }
 
-      // 2. Offline Fallback: Local assets/data/bactest.json call
+    // Step 3: Local Offline Asset Fallback
+    if (!loadedSuccessfully) {
+      debugPrint("CDNs unreachable. Loading local assets fallback...");
       try {
         final localData = await rootBundle.loadString('assets/data/bactest.json');
         _applyParsedJson(localData);
       } catch (localErr) {
         setState(() {
-          _errorMessage = 'Network issue & offline file unavailable';
+          _errorMessage = 'Network connection failed & offline asset missing';
           _isLoading = false;
           _isRefreshing = false;
         });
@@ -211,7 +222,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     if (isManualRefresh && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('⚡ Sync Complete! ${_masterDatabase.length} Stocks updated via Fastly.'),
+          content: Text('⚡ Sync Complete! ${_masterDatabase.length} Stocks updated.'),
           backgroundColor: const Color(0xFF00F5A0),
           duration: const Duration(seconds: 2),
         ),
@@ -579,7 +590,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             _buildTopBar(winRate),
             _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
-            // High-Contrast Interactive Viewport
             Expanded(
               child: Stack(
                 clipBehavior: Clip.none,
@@ -737,7 +747,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  // Floating On-Chart Instant Order Dock
   Widget _buildFloatingTradingViewOrderDock(double ltp) {
     final bool hasActivePosition = _positionSide != null;
 
@@ -893,7 +902,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       color: const Color(0xFF0F1726),
       child: Row(
         children: [
-          // Dynamic Dropdown (JSON keys se build hota hai)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
@@ -932,7 +940,6 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
             },
           ),
 
-          // 🔄 Fastly Manual Sync Button
           IconButton(
             icon: _isRefreshing
                 ? const SizedBox(
@@ -941,7 +948,7 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                     child: CircularProgressIndicator(color: Color(0xFF00F0FF), strokeWidth: 2),
                   )
                 : const Icon(Icons.sync_rounded, color: Color(0xFF00F0FF), size: 20),
-            tooltip: 'Fetch Latest Data via Fastly',
+            tooltip: 'Fetch Latest Data via CDN',
             onPressed: _isRefreshing ? null : () => _fetchDataset(isManualRefresh: true),
           ),
 
