@@ -6,41 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PortfolioTrackerScreen extends StatefulWidget {
-  const PortfolioTrackerScreen({super.key});
-
-  @override
-  State<Ek premium aur institutional-grade feel dene ke liye interface mein Bloomberg/TradingView jaisa high-density design, segmented dashboards, dynamic watchlist switching aur granular execution controls hona zaroori hai.
-
-Neeche poora complete architecture aur layout design plan diya gaya hai, sath hi woh core features jisse yeh best portfolio aur multiple-watchlist widget banega.
-
----
-
-### Core Architecture & Features Jo Is Widget Mein Milenge:
-
-1. **5 Independent Watchlists:**
-   * User 5 distinct watchlists manage kar sakega (jaise *Main Tech*, *Breakout Candidates*, *High Dividend*, *Nifty Heavyweights*, *Penny Scanners*).
-   * Har watchlist ka alag dashboard metrics hoga: Average Change %, Top Gainer, Top Loser aur Total Monitored Count.
-2. **Dedicated Institutional Navigation Tabs:**
-   * **Dashboard & Holdings:** ₹5 Lakh virtual ledger, live floating P&L, allocation breakdown aur open copy-trading positions.
-   * **Multi-Watchlist Engine:** Horizontal ticker badges se 1-click watchlist switch, custom add/delete stocks, aur real-time CMP & Change% sync.
-   * **Settled Audit Book:** Closed trades ka date-wise historical ledger with gross return % calculation.
-3. **Execution Sheet (Paper Trading Order Pad):**
-   * Live price par instant buy, dynamic margin buffer check (insufficient cash blocker), aur visual slippage simulation.
-   * Quick quantity multipliers (10x, 50x, 100x ya Max Available Cash).
-
----
-
-### Complete Widget Source Code: `lib/screens/portfolio_tracker_screen.dart`
-
-```dart
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
-class PortfolioTrackerScreen extends StatefulWidget {
   PortfolioTrackerScreen({super.key});
 
   @override
@@ -50,7 +15,7 @@ class PortfolioTrackerScreen extends StatefulWidget {
 class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     with SingleTickerProviderStateMixin {
   final String _sheetUrl =
-      '[https://script.google.com/macros/s/AKfycbzE5FVwepYICR2SPsubssC8zdvCrFbEJqh1lEawkjb8DxVrAv2hTnOzKfozz4Sj3uW8vQ/exec](https://script.google.com/macros/s/AKfycbzE5FVwepYICR2SPsubssC8zdvCrFbEJqh1lEawkjb8DxVrAv2hTnOzKfozz4Sj3uW8vQ/exec)';
+      'https://script.google.com/macros/s/AKfycbzE5FVwepYICR2SPsubssC8zdvCrFbEJqh1lEawkjb8DxVrAv2hTnOzKfozz4Sj3uW8vQ/exec';
 
   late TabController _tabController;
   static const double _initialCapital = 500000.0;
@@ -65,7 +30,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
   List<Map<String, dynamic>> _openPositions = [];
   List<Map<String, dynamic>> _closedTrades = [];
 
-  // Multi-Watchlist Configuration (5 Independent Slots)
   final List<String> _watchlistNames = [
     'Primary Radar',
     'Momentum Breakouts',
@@ -100,7 +64,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     super.dispose();
   }
 
-  // --- STATE STORAGE ---
   Future<void> _restorePersistence() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -138,7 +101,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     }
   }
 
-  // --- API DATA PIPELINE ---
   Future<void> _loadPrices({bool showSnackbar = false}) async {
     if (showSnackbar) setState(() => _isRefreshing = true);
 
@@ -201,7 +163,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     return double.tryParse(val.toString().replaceAll(',', '').replaceAll('%', '').trim()) ?? 0.0;
   }
 
-  // --- ORDER EXECUTION ---
   void _executeBuy(String symbol, double price, int qty) {
     final totalCost = price * qty;
     if (totalCost > _availableCash) {
@@ -280,7 +241,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- PORTFOLIO VALUATION METRICS ---
   double get _floatingUnrealizedPnl {
     double total = 0.0;
     for (var pos in _openPositions) {
@@ -377,7 +337,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- INSTITUTIONAL EXECUTIVE BANNER ---
   Widget _buildInstitutionalDashboardBanner() {
     final unPnl = _floatingUnrealizedPnl;
     final isPos = unPnl >= 0;
@@ -460,7 +419,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- TERMINAL SEARCH CONTROL ---
   Widget _buildTerminalSearchBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -497,7 +455,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- TAB 1: ACTIVE HOLDINGS ---
   Widget _buildPositionsTab() {
     if (_openPositions.isEmpty) {
       return _buildEmptySlot("No Active Exposure", "Discover stocks from Watchlists or Search to initiate paper orders.");
@@ -595,7 +552,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- TAB 2: MULTI-WATCHLIST MATRIX (5 WATCHLISTS) ---
   Widget _buildMultiWatchlistTab() {
     final activeSet = _watchlists[_activeWatchlistIndex]!;
 
@@ -610,7 +566,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
 
     return Column(
       children: [
-        // 5 Segmented Watchlist Selector Badges
         Container(
           height: 38,
           margin: const EdgeInsets.only(top: 6, bottom: 4),
@@ -648,8 +603,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
             },
           ),
         ),
-
-        // Live Watchlist Metric Header
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
           child: Row(
@@ -668,8 +621,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
             ],
           ),
         ),
-
-        // Stock Rows
         Expanded(
           child: displayList.isEmpty
               ? _buildEmptySlot("Watchlist Empty", "Use search bar above to bookmark stocks into this bucket.")
@@ -749,7 +700,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- TAB 3: SETTLED AUDIT LEDGER ---
   Widget _buildSettledLedgerTab() {
     if (_closedTrades.isEmpty) {
       return _buildEmptySlot("Audit Ledger Clean", "Completed and closed paper trades will appear here with audited P&L.");
@@ -812,7 +762,6 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     );
   }
 
-  // --- PAPER TRADE ORDER MODAL ---
   void _openOrderModal(String symbol, double price) {
     int qty = 1;
 
