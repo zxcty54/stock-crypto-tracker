@@ -1,0 +1,18 @@
+{
+  "last_updated": "2026-10-04 04:16:24",
+  "total_scanned_stocks": 6,
+  "tracked_dates": [
+    "2026-10-01"
+  ],
+  "latest": {
+    "date": "2026-10-01",
+    "triggers_count": 0,
+    "triggers": []
+  },
+  "history": {
+    "2026-10-01": {
+      "triggers_count": 0,
+      "triggers": []
+    }
+  }
+}
