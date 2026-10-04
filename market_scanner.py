@@ -3,18 +3,13 @@ import os
 import requests
 from datetime import datetime
 
-# GitHub repo ke root mein input file
 LOCAL_INPUT_FILE = "historical_5yr_ohlc.json"
-
-# Local file na milne par fallback URL
 RAW_GITHUB_URL = "https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/historical_5yr_ohlc.json"
-
-# Naya Output File Name
 OUTPUT_JSON_FILE = "breakout_signals.json"
-MAX_HISTORY_DAYS = 10                   # Rolling 10 trading sessions
+COOLDOWN_DAYS = 10  # Ek entry ke baad agle 10 sessions tak duplicate signal avoid karega
 
 def calculate_rsi(closes, period=14):
-    """Standard 14-period RSI calculation"""
+    """Standard 14-period Wilder/SMA RSI calculation"""
     if len(closes) < period + 1:
         return 0.0
     
@@ -69,129 +64,139 @@ def load_historical_data():
 
     return None
 
-def scan_market():
+def scan_full_history():
     history_data = load_historical_data()
     if not history_data:
         print("❌ Error: Stock historical data load nahi ho saka.")
         return
 
-    triggers = []
-    scan_date = None
-    scanned_count = 0
+    company_signals = {}
+    all_triggered_events = []
+    total_companies = len(history_data)
+
+    print(f"\n🚀 Scanning full 5-year timeline for {total_companies} companies...")
+    print("=" * 80)
 
     for symbol, raw_records in sorted(history_data.items()):
         if not raw_records or len(raw_records) < 51:
+            print(f"⚠️ {symbol}: 50DMA ke liye data kam hai ({len(raw_records)} records), skipping.")
             continue
 
-        scanned_count += 1
+        # Chronological sort: sabse purani date index 0 par, sabse nayi aakhri mein
         sorted_records = sorted(raw_records, key=lambda x: parse_date(x[0]))
-        records = sorted_records[-60:]
+        total_records = len(sorted_records)
 
-        today = records[-1]
-        prev_day = records[-2]
+        symbol_triggers = []
+        last_triggered_idx = -999  # 10-day cooldown track karne ke liye
 
-        today_date = today[0]
-        today_close = float(today[4])
-        prev_close = float(prev_day[4])
-        today_volume = float(today[5])
-        scan_date = today_date
+        # Index 50 se lekar aakhri session tak har din check karega (Rolling 50DMA Window)
+        for idx in range(50, total_records):
+            # Agar pichhle 10 sessions ke andar trigger hua tha toh skip karein (No Repeat Filter)
+            if (idx - last_triggered_idx) <= COOLDOWN_DAYS:
+                continue
 
-        if prev_close <= 0 or today_close <= 0:
-            continue
+            curr_day = sorted_records[idx]
+            prev_day = sorted_records[idx - 1]
 
-        all_closes = [float(r[4]) for r in records]
-        last_20_records = records[-21:-1]
-        last_20_closes = all_closes[-20:]
-        last_50_closes = all_closes[-50:]
+            entry_date = curr_day[0]
+            entry_close = float(curr_day[4])
+            prev_close = float(prev_day[4])
+            curr_volume = float(curr_day[5])
 
-        # ---------------- 6 CONDITIONS ----------------
-        day_move_pct = ((today_close - prev_close) / prev_close) * 100
-        cond_1 = day_move_pct >= 3.0
+            if prev_close <= 0 or entry_close <= 0:
+                continue
 
-        avg_vol_20d = sum(float(r[5]) for r in last_20_records) / 20.0
-        vol_ratio = (today_volume / avg_vol_20d) if avg_vol_20d > 0 else 0.0
-        cond_2 = today_volume >= (3.0 * avg_vol_20d)
+            # Data Slices up to current index
+            # 1. Closes up to today
+            closes_up_to_today = [float(r[4]) for r in sorted_records[:idx + 1]]
+            
+            # 2. Last 20 trading sessions prior to today (for 20D high & 20D avg volume)
+            last_20_records = sorted_records[idx - 20:idx]
+            
+            # 3. Last 20 closes including today (for 20DMA)
+            last_20_closes = closes_up_to_today[-20:]
+            
+            # 4. Last 50 closes including today (for 50DMA)
+            last_50_closes = closes_up_to_today[-50:]
 
-        dma_20 = sum(last_20_closes) / 20.0
-        cond_3 = today_close >= (dma_20 * 1.03)
+            # ---------------- 6 CONDITIONS CHECK ----------------
+            
+            # 1. Day Move >= +3%
+            day_move_pct = ((entry_close - prev_close) / prev_close) * 100
+            cond_1 = day_move_pct >= 3.0
 
-        rsi_14 = calculate_rsi(all_closes, 14)
-        cond_4 = rsi_14 > 50.0
+            # 2. Volume >= 3x (Pichle 20 din ke average volume ka 3 guna)
+            avg_vol_20d = sum(float(r[5]) for r in last_20_records) / 20.0
+            vol_ratio = (curr_volume / avg_vol_20d) if avg_vol_20d > 0 else 0.0
+            cond_2 = curr_volume >= (3.0 * avg_vol_20d)
 
-        high_20d = max(float(r[2]) for r in last_20_records)
-        cond_5 = today_close > high_20d
+            # 3. Close >= 20DMA + 3%
+            dma_20 = sum(last_20_closes) / 20.0
+            cond_3 = entry_close >= (dma_20 * 1.03)
 
-        dma_50 = sum(last_50_closes) / 50.0
-        cond_6 = today_close > dma_50
+            # 4. RSI(14) > 50
+            rsi_14 = calculate_rsi(closes_up_to_today, 14)
+            cond_4 = rsi_14 > 50.0
 
-        if cond_1 and cond_2 and cond_3 and cond_4 and cond_5 and cond_6:
-            triggers.append({
-                "symbol": symbol,
-                "close": round(today_close, 2),
-                "day_move": f"+{round(day_move_pct, 1)}%",
-                "volume_ratio": f"{round(vol_ratio, 1)}x",
-                "dma_20": round(dma_20, 2),
-                "dma_50": round(dma_50, 2),
-                "rsi_14": round(rsi_14, 1),
-                "high_20d": round(high_20d, 2)
-            })
+            # 5. 20-Day High Breakout (Close pichhle 20 din ke High ke upar)
+            high_20d = max(float(r[2]) for r in last_20_records)
+            cond_5 = entry_close > high_20d
 
-    if not scan_date:
-        print("⚠️ Koi valid trading data scan nahi ho saka.")
-        return
+            # 6. Trend Filter (Close > 50DMA)
+            dma_50 = sum(last_50_closes) / 50.0
+            cond_6 = entry_close > dma_50
 
-    # ---------------- 10-DAY REPEAT FILTER ----------------
-    existing_store = {}
-    if os.path.exists(OUTPUT_JSON_FILE):
-        try:
-            with open(OUTPUT_JSON_FILE, "r", encoding="utf-8") as f:
-                existing_store = json.load(f).get("history", {})
-        except Exception:
-            existing_store = {}
+            # Sabhi 6 conditions match hone par Trigger banega
+            if cond_1 and cond_2 and cond_3 and cond_4 and cond_5 and cond_6:
+                trigger_item = {
+                    "symbol": symbol,
+                    "entry_date": entry_date,
+                    "entry_price": round(entry_close, 2),
+                    "day_move": f"+{round(day_move_pct, 1)}%",
+                    "volume_ratio": f"{round(vol_ratio, 1)}x",
+                    "rsi_14": round(rsi_14, 1),
+                    "dma_20": round(dma_20, 2),
+                    "dma_50": round(dma_50, 2),
+                    "breakout_high_20d": round(high_20d, 2)
+                }
 
-    past_dates_sorted = sorted(existing_store.keys(), key=parse_date)
-    recent_10_dates = past_dates_sorted[-10:] if len(past_dates_sorted) >= 10 else past_dates_sorted
-    
-    recent_triggered_symbols = set()
-    for d in recent_10_dates:
-        for item in existing_store[d].get("triggers", []):
-            recent_triggered_symbols.add(item["symbol"])
+                symbol_triggers.append(trigger_item)
+                all_triggered_events.append(trigger_item)
+                last_triggered_idx = idx  # Cooldown lock lagao
 
-    filtered_triggers = [t for t in triggers if t["symbol"] not in recent_triggered_symbols]
+        # Stock summary
+        company_signals[symbol] = {
+            "total_5yr_triggers": len(symbol_triggers),
+            "latest_trigger": symbol_triggers[-1] if symbol_triggers else None,
+            "all_historical_triggers": symbol_triggers
+        }
 
-    existing_store[scan_date] = {
-        "triggers_count": len(filtered_triggers),
-        "triggers": filtered_triggers
-    }
+        latest_info = f"Latest on {symbol_triggers[-1]['entry_date']} @ ₹{symbol_triggers[-1]['entry_price']}" if symbol_triggers else "No triggers in 5 years"
+        print(f"📊 {symbol:<12} | Found {len(symbol_triggers):>2} triggers | {latest_info}")
 
-    all_dates = sorted(existing_store.keys(), key=parse_date)
-    if len(all_dates) > MAX_HISTORY_DAYS:
-        keep = all_dates[-MAX_HISTORY_DAYS:]
-        existing_store = {d: existing_store[d] for d in keep}
-        all_dates = keep
-
-    latest_date = all_dates[-1]
+    # Chronologically sort all signals across all companies (Latest first)
+    all_triggered_events.sort(key=lambda x: parse_date(x["entry_date"]), reverse=True)
 
     final_payload = {
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "total_scanned_stocks": scanned_count,
-        "tracked_dates": all_dates,
-        "latest": {
-            "date": latest_date,
-            "triggers_count": existing_store[latest_date]["triggers_count"],
-            "triggers": existing_store[latest_date]["triggers"]
+        "metadata": {
+            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "total_companies_scanned": total_companies,
+            "total_signals_found": len(all_triggered_events),
+            "cooldown_period_days": COOLDOWN_DAYS
         },
-        "history": existing_store
+        "latest_signals": all_triggered_events[:20],  # UI Dashboard ke liye Top 20 latest entries
+        "all_signals_chronological": all_triggered_events,
+        "companies": company_signals
     }
 
     with open(OUTPUT_JSON_FILE, "w", encoding="utf-8") as out_f:
         json.dump(final_payload, out_f, indent=2, ensure_ascii=False)
 
     print("=" * 80)
-    print(f"📊 Scan Completed for: {scan_date}")
-    print(f"🔥 Qualified Triggers: {len(filtered_triggers)}")
+    print(f"🎉 5-Year Scan Completed!")
+    print(f"🔥 Total Breakout Signals Found Across All Stocks: {len(all_triggered_events)}")
     print(f"📁 Output Saved: '{OUTPUT_JSON_FILE}'")
     print("=" * 80)
 
 if __name__ == "__main__":
-    scan_market()
+    scan_full_history()
