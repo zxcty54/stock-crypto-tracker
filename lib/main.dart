@@ -7,7 +7,6 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'screens/news_screen.dart';
-import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
 import 'screens/community_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
@@ -63,16 +62,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   StreamSubscription? _intentSub;
 
-  final List<Widget> _pages = const [
-    NewsScreen(),
-    CorporateAnnouncementsScreen(),
-    StrategyBuilderScreen(),
-    CommunityScreen(),
+  final List<Widget> _pages = [
+    const NewsScreen(),
+    PortfolioTrackerScreen(), // 👈 Index 1 par Portfolio Tracker lagaya
+    const StrategyBuilderScreen(),
+    const CommunityScreen(),
   ];
 
   final List<String> _titles = const [
     'MARKET NEWS WIRE',
-    'CORPORATE FILINGS',
+    'PORTFOLIO TERMINAL', // 👈 Index 1 header title
     'STRATEGY BUILDER',
     'TRADER COMMUNITY WIRE',
   ];
@@ -323,12 +322,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               isHighlight: true,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => PortfolioTrackerScreen(),
-                  ),
-                );
+                setState(() => _currentIndex = 1);
               },
             ),
             _drawerTile(
@@ -369,15 +363,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               onTap: () {
                 Navigator.pop(context);
                 setState(() => _currentIndex = 3);
-              },
-            ),
-            _drawerTile(
-              icon: Icons.campaign_rounded,
-              title: 'Corporate Filings & Orders',
-              subtitle: 'BSE/NSE exchange disclosures',
-              onTap: () {
-                Navigator.pop(context);
-                setState(() => _currentIndex = 1);
               },
             ),
             _drawerTile(
@@ -487,7 +472,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _navItem(0, Icons.newspaper_rounded, 'News'),
-          _navItem(1, Icons.campaign_rounded, 'Filings'),
+          _navItem(1, Icons.account_balance_wallet_rounded, 'Portfolio'), // 👈 Filings replaced with Portfolio
           _navItem(2, Icons.candlestick_chart_rounded, 'Strategy'),
           _navItem(3, Icons.hub_rounded, 'Community'),
         ],
