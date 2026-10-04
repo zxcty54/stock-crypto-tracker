@@ -8,36 +8,16 @@ import requests
 OUTPUT_FILE = "historical_5yr_ohlc.json"
 
 TARGET_REPO = "zxcty54/stock-crypto-tracker"
-TARGET_FILE_PATH = "historical_10yr_ohlc.json"
+TARGET_FILE_PATH = "historical_5yr_ohlc.json"
 TARGET_BRANCH = "main"
 
-# Nifty 50, Bank Nifty aur Top 20 High-Momentum Smallcap 250 Stocks
+# Tickers List: Indices ke liye exact symbol, Stocks ke liye normal symbol
 ASSETS_LIST = [
-    # Indices
     {"id": "NIFTY50", "ticker": "^NSEI", "name": "Nifty 50 Index"},
     {"id": "BANKNIFTY", "ticker": "^NSEBANK", "name": "Nifty Bank Index"},
-    
-    # 20 Popular Nifty Smallcap 250 Stocks
-    {"id": "CDSL", "ticker": "CDSL.NS", "name": "Central Depository Services (India) Ltd."},
-    {"id": "ANGELONE", "ticker": "ANGELONE.NS", "name": "Angel One Ltd."},
-    {"id": "KAYNES", "ticker": "KAYNES.NS", "name": "Kaynes Technology India Ltd."},
-    {"id": "TITAGARH", "ticker": "TITAGARH.NS", "name": "Titagarh Rail Systems Ltd."},
-    {"id": "DATAPATTNS", "ticker": "DATAPATTNS.NS", "name": "Data Patterns (India) Ltd."},
-    {"id": "BEML", "ticker": "BEML.NS", "name": "BEML Ltd."},
-    {"id": "AMBER", "ticker": "AMBER.NS", "name": "Amber Enterprises India Ltd."},
-    {"id": "ANANTRAJ", "ticker": "ANANTRAJ.NS", "name": "Anant Raj Ltd."},
-    {"id": "ARE&M", "ticker": "ARE&M.NS", "name": "Amara Raja Energy & Mobility Ltd."},
-    {"id": "OLECTRA", "ticker": "OLECTRA.NS", "name": "Olectra Greentech Ltd."},
-    {"id": "JBMA", "ticker": "JBMA.NS", "name": "JBM Auto Ltd."},
-    {"id": "KPITTECH", "ticker": "KPITTECH.NS", "name": "KPIT Technologies Ltd."},
-    {"id": "TATATECH", "ticker": "TATATECH.NS", "name": "Tata Technologies Ltd."},
-    {"id": "TEJASNET", "ticker": "TEJASNET.NS", "name": "Tejas Networks Ltd."},
-    {"id": "BSOFT", "ticker": "BSOFT.NS", "name": "Birlasoft Ltd."},
-    {"id": "CYIENT", "ticker": "CYIENT.NS", "name": "Cyient Ltd."},
-    {"id": "TRITURBINE", "ticker": "TRITURBINE.NS", "name": "Triveni Turbine Ltd."},
-    {"id": "NBCC", "ticker": "NBCC.NS", "name": "NBCC (India) Ltd."},
-    {"id": "SJVN", "ticker": "SJVN.NS", "name": "SJVN Ltd."},
-    {"id": "DEEPAKNTR", "ticker": "DEEPAKNTR.NS", "name": "Deepak Nitrite Ltd."}
+    {"id": "TCS", "ticker": "TCS.NS", "name": "Tata Consultancy Services"},
+    {"id": "RELIANCE", "ticker": "RELIANCE.NS", "name": "Reliance Industries Ltd."},
+    {"id": "HDFCBANK", "ticker": "HDFCBANK.NS", "name": "HDFC Bank Ltd."}
 ]
 
 def fetch_10year_ohlc():
@@ -46,15 +26,15 @@ def fetch_10year_ohlc():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     }
 
-    print("=" * 80)
+    print("=" * 75)
     print(f"⏳ Fetching 10-Year Daily OHLCV Data for {len(ASSETS_LIST)} Assets...")
-    print("=" * 80)
+    print("=" * 75)
 
     for idx, asset in enumerate(ASSETS_LIST, 1):
         asset_id = asset["id"]
         ticker = asset["ticker"]
         
-        # 10-year daily historical data endpoint
+        # 10-year daily data endpoint
         url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=10y&interval=1d"
 
         try:
@@ -66,7 +46,7 @@ def fetch_10year_ohlc():
             data = res.json()
             result_list = data.get("chart", {}).get("result", [])
             if not result_list:
-                print(f"⚠️ [{idx}/{len(ASSETS_LIST)}] No data found for {asset_id}")
+                print(f"⚠️ [{idx}/{len(ASSETS_LIST)}] No data returned for {asset_id}")
                 continue
 
             result = result_list[0]
@@ -81,7 +61,7 @@ def fetch_10year_ohlc():
 
             candles = []
             for i in range(len(timestamps)):
-                # None ya invalid prices skip karein
+                # Skip invalid sessions
                 if None in (opens[i], highs[i], lows[i], closes[i]):
                     continue
 
@@ -96,19 +76,19 @@ def fetch_10year_ohlc():
                 ])
 
             master_store[asset_id] = candles
-            print(f"✅ [{idx:>2}/{len(ASSETS_LIST)}] {asset_id:<11} ({ticker:<12}): {len(candles)} trading sessions")
-            time.sleep(0.35)  # Rate-limit safety
+            print(f"✅ [{idx}/{len(ASSETS_LIST)}] {asset_id} ({ticker}): {len(candles)} trading sessions fetched (~10 Years)")
+            time.sleep(0.4)
 
         except Exception as e:
             print(f"❌ [{idx}/{len(ASSETS_LIST)}] Error fetching {asset_id}: {e}")
 
-    # Local file save
+    # Local Save
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(master_store, f, ensure_ascii=False, indent=2)
 
-    print("=" * 80)
-    print(f"💾 File Saved Locally: '{OUTPUT_FILE}' ({len(master_store)} assets saved)")
-    print("=" * 80)
+    print("=" * 75)
+    print(f"💾 File Saved: '{OUTPUT_FILE}' ({len(master_store)} assets saved)")
+    print("=" * 75)
 
     push_to_target_repo()
 
@@ -116,11 +96,10 @@ def fetch_10year_ohlc():
 def push_to_target_repo():
     token = os.environ.get("GH_PAT_TOKEN", "").strip()
     if not token:
-        print("⚠️ GH_PAT_TOKEN environment variable nahi mila. Remote push skip kiya.")
+        print("⚠️ GH_PAT_TOKEN not found. Skipping remote push.")
         return
 
     if not os.path.exists(OUTPUT_FILE):
-        print(f"⚠️ '{OUTPUT_FILE}' file nahi mili.")
         return
 
     print(f"\n🚀 Direct-Pushing '{OUTPUT_FILE}' to '{TARGET_REPO}'...")
@@ -146,7 +125,7 @@ def push_to_target_repo():
         print(f"⚠️ Notice while fetching SHA: {e}")
 
     payload = {
-        "message": f"📊 Auto-Update: 10Y OHLCV for Nifty, BankNifty & 20 Smallcaps [{datetime.now().strftime('%d-%b-%Y')}]",
+        "message": f"📊 Auto-Update: 10Y OHLCV for Nifty, BankNifty & Stocks [{datetime.now().strftime('%d-%b-%Y')}]",
         "content": b64_content,
         "branch": TARGET_BRANCH
     }
@@ -160,7 +139,7 @@ def push_to_target_repo():
         else:
             print(f"❌ Target repo push failed ({put_res.status_code}): {put_res.text}")
     except Exception as e:
-        print(f"❌ Remote sync exception: {e}")
+        print(f"❌ Error during remote sync: {e}")
 
 
 if __name__ == "__main__":
