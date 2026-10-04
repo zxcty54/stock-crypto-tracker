@@ -9,7 +9,7 @@ LOCAL_INPUT_FILE = "historical_5yr_ohlc.json"
 # Agar local file na mile toh seedhe GitHub raw se uthayega
 RAW_GITHUB_URL = "https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/historical_5yr_ohlc.json"
 
-OUTPUT_JSON_FILE = "scanner_output.json"
+OUTPUT_JSON_FILE = "new_output.json"
 MAX_HISTORY_DAYS = 10                   # 10 rolling trading days dashboard ke liye
 
 def calculate_rsi(closes, period=14):
