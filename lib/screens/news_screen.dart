@@ -15,6 +15,10 @@ import 'company_intelligence_screen.dart';
 // 📢 Corporate Announcements Screen Import
 import 'corporate_announcements_screen.dart';
 
+// 🎯 Strategy Replay Hero Card & Screen Import
+import '../widgets/strategy_replay_hero_card.dart';
+import 'strategy_builder_screen.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -44,15 +48,32 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
           child: CustomScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             slivers: [
-              // 🪙 1. LIVE SPOT METALS, COPPER & FOREX TICKER
+              // 🎯 1. 10-YEAR HISTORICAL STRATEGY REPLAY HERO CARD (Top Highlight)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: StrategyReplayHeroCard(
+                    onLaunch: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StrategyBuilderScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+              // 🪙 2. LIVE SPOT METALS, COPPER & FOREX TICKER
               const SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: EdgeInsets.only(top: 4.0),
                   child: MetalsTickerCard(),
                 ),
               ),
 
-              // 📢 2. CORPORATE ANNOUNCEMENTS & FILINGS BANNER
+              // 📢 3. CORPORATE ANNOUNCEMENTS & FILINGS BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -142,7 +163,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🧠 3. AI MACRO MARGIN RADAR ENTRY BANNER
+              // 🧠 4. AI MACRO MARGIN RADAR ENTRY BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -232,7 +253,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🏢 4. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
+              // 🏢 5. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -322,7 +343,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 📊 5. INSTITUTIONAL BULLION EFFICIENCY DESK
+              // 📊 6. INSTITUTIONAL BULLION EFFICIENCY DESK
               const SliverToBoxAdapter(
                 child: BullionEfficiencyDeskCard(),
               ),
