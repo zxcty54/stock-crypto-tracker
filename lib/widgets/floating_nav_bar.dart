@@ -31,9 +31,9 @@ class FloatingNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _navItem(0, Icons.newspaper_rounded, 'News'),
-          _navItem(1, Icons.campaign_rounded, 'Filings'),
+          _navItem(1, Icons.account_balance_wallet_rounded, 'Portfolio'), // 👈 Replaced Filings with Portfolio
           _navItem(2, Icons.currency_bitcoin_rounded, 'Crypto'),
-          _navItem(3, Icons.hub_rounded, 'Community'), // 👈 Replaced Radar with Community
+          _navItem(3, Icons.hub_rounded, 'Community'),
         ],
       ),
     );
