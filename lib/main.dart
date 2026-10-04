@@ -10,8 +10,9 @@ import 'screens/news_screen.dart';
 import 'screens/corporate_announcements_screen.dart';
 import 'screens/strategy_builder_screen.dart';
 import 'screens/community_screen.dart';
-import 'screens/scanner_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
+import 'screens/portfolio_tracker_screen.dart'; // 💼 Portfolio & Copy Trading Desk
+import 'screens/gold_rates_screen.dart';         // 🪙 India Gold & Bullion Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -19,7 +20,6 @@ import 'services/auth_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🌐 GitHub Secrets se inject hone wale variables
   const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
   const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
@@ -83,9 +83,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     _listenToSharedMedia();
   }
 
-  /// 📸 Phone Gallery se share ki hui image ko listen aur handle karein
   void _listenToSharedMedia() {
-    // Scenario 1: App background / memory mein chal rahi ho
     _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
       (List<SharedMediaFile> value) {
         if (value.isNotEmpty) {
@@ -97,7 +95,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       },
     );
 
-    // Scenario 2: App completely closed ho aur user ne gallery se khola ho
     ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> value) {
       if (value.isNotEmpty) {
         _handleSharedImage(File(value.first.path));
@@ -318,6 +315,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ),
+
+            // 💼 1. Virtual Portfolio & Copy Trading Desk
+            _drawerTile(
+              icon: Icons.account_balance_wallet_rounded,
+              title: 'Portfolio & Copy Tracker',
+              subtitle: '₹5L Virtual capital, live P&L settlement',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const PortfolioTrackerScreen(),
+                  ),
+                );
+              },
+            ),
+
             _drawerTile(
               icon: Icons.pie_chart_rounded,
               title: 'Delivery & OHLC History',
@@ -341,20 +356,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 setState(() => _currentIndex = 2);
               },
             ),
-            _drawerTile(
-              icon: Icons.radar_rounded,
-              title: 'Market Radar & Scanner',
-              subtitle: 'Consolidation squeeze & breakouts',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const Scaffold(body: ScannerScreen()),
-                  ),
-                );
-              },
-            ),
             const Divider(color: Color(0xFF1E2B3E), height: 20),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
@@ -363,6 +364,23 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 style: TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ),
+
+            // 🪙 2. India Gold & Bullion Radar
+            _drawerTile(
+              icon: Icons.monetization_on_rounded,
+              title: 'India Gold & Bullion Radar',
+              subtitle: '24K, 22K & 18K city spot rates',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const GoldRatesScreen(),
+                  ),
+                );
+              },
+            ),
+
             _drawerTile(
               icon: Icons.hub_rounded,
               title: 'Trader Wire Community',
