@@ -35,7 +35,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   }
 
   Future<void> _loadReportJson() async {
-    // 🎯 ISP Bypass Endpoints (raw.githubusercontent.com bypass via global edge CDNs)
+    // 🎯 ISP Bypass Endpoints (Never blocked by Jio/Airtel)
     final List<String> endpoints = [
       'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/macro_research_report.json',
       'https://cdn.staticaly.com/gh/zxcty54/stock-crypto-tracker/main/macro_research_report.json',
@@ -316,58 +316,73 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          // 🎯 1. Sector Title (Full Width Layout - No Squeezing)
+          Text(
+            sectorName,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 0.3,
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // 🎯 2. Commodity Driver Ribbon (Wrap Layout)
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
             children: [
-              Expanded(
-                child: Text(
-                  sectorName,
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: kSurfaceBg,
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(color: kBorderDark),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.bolt, size: 12, color: Colors.amberAccent),
-                    const SizedBox(width: 3),
+                    const SizedBox(width: 4),
                     Text(
                       "${sector['benchmark_commodity']}: ${sector['benchmark_price']}",
-                      style: const TextStyle(fontSize: 10, color: Colors.white70),
+                      style: const TextStyle(fontSize: 11, color: Colors.white70),
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 6),
                     Text(
                       "${isDeltaUp ? '+' : ''}${delta.toStringAsFixed(1)}%",
                       style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 11,
                         fontWeight: FontWeight.bold,
                         color: isDeltaUp ? kRedAccent : kGreenAccent,
                       ),
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
+          // 🎯 3. Sector Macro Thesis
           Text(
             sector['sector_macro_thesis'] ?? '',
-            style: const TextStyle(fontSize: 11, color: kMutedText, height: 1.4),
+            style: const TextStyle(fontSize: 12, color: kMutedText, height: 1.4),
           ),
           const SizedBox(height: 12),
 
+          // 🎯 4. Sector Trajectory Ratio Bar
           Row(
             children: [
               Text(
                 "SECTOR TRAJECTORY RATIO ($expandingCount/$totalCount EXPANDING)",
-                style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 0.5, color: kMutedText),
+                style: const TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                  color: kMutedText,
+                ),
               ),
             ],
           ),
@@ -392,6 +407,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           ),
           const SizedBox(height: 16),
 
+          // 🎯 5. Equities Cards
           ...filteredStocks.map((stock) => _buildStockVisualCard(stock)),
         ],
       ),
@@ -403,6 +419,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     final int bps = (stock['projected_opm_change_bps'] ?? 0) as int;
     final color = isExpanding ? kGreenAccent : kRedAccent;
 
+    // Normalizing divergence bar (300 bps max ceiling)
     final double normalizedWidth = min(1.0, bps.abs() / 300.0);
 
     return Container(
@@ -419,19 +436,24 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stock['symbol'] ?? '',
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white),
-                  ),
-                  Text(
-                    stock['company_name'] ?? '',
-                    style: const TextStyle(fontSize: 10, color: kMutedText),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      stock['symbol'] ?? '',
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white),
+                    ),
+                    Text(
+                      stock['company_name'] ?? '',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 10, color: kMutedText),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
@@ -473,6 +495,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 ),
                 child: Row(
                   children: [
+                    // Contraction Left Half
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -487,7 +510,9 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                         ),
                       ),
                     ),
+                    // Center Line
                     Container(width: 2, color: Colors.white38),
+                    // Expansion Right Half
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -509,12 +534,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           ),
           const SizedBox(height: 10),
 
+          // Operational Transmission Explanation
           Text(
             stock['operational_transmission_rationale'] ?? '',
             style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.3),
           ),
           const SizedBox(height: 8),
 
+          // Pricing Power & Outlook Row
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
