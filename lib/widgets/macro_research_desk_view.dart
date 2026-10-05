@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
 
 class MacroResearchDeskView extends StatefulWidget {
-  // 🎯 'const' constructor enabled - news_screen.dart mein 'const' se build fail nahi hoga
   const MacroResearchDeskView({super.key});
 
   @override
@@ -17,7 +16,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   Map<String, dynamic> _reportData = {};
   List<dynamic> _sectors = [];
 
-  int _selectedFilterIndex = 0; // 0: All Sectors, 1: 🟢 Expanding Only, 2: 🔴 Contracting Only
+  int _selectedFilterIndex = 0; // 0: All Sectors, 1: 🟢 Expanding, 2: 🔴 Contracting
   String _searchQuery = "";
 
   // Institutional Dark Design Palette
@@ -36,24 +35,41 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   }
 
   Future<void> _loadReportJson() async {
-    try {
-      final jsonString = await rootBundle.loadString('assets/macro_research_report.json');
-      final decoded = json.decode(jsonString);
+    // 🎯 ISP Bypass Endpoints (raw.githubusercontent.com bypass via global edge CDNs)
+    final List<String> endpoints = [
+      'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/macro_research_report.json',
+      'https://cdn.staticaly.com/gh/zxcty54/stock-crypto-tracker/main/macro_research_report.json',
+    ];
 
-      if (mounted) {
-        setState(() {
-          _reportData = decoded;
-          _sectors = decoded['sectors'] ?? [];
-          _isLoading = false;
-        });
+    for (final urlString in endpoints) {
+      try {
+        final response = await http.get(
+          Uri.parse(urlString),
+          headers: {'Accept': 'application/json'},
+        ).timeout(const Duration(seconds: 12));
+
+        if (response.statusCode == 200) {
+          final decoded = json.decode(utf8.decode(response.bodyBytes));
+          if (mounted) {
+            setState(() {
+              _reportData = decoded;
+              _sectors = decoded['sectors'] ?? [];
+              _isLoading = false;
+              _errorMessage = null;
+            });
+          }
+          return;
+        }
+      } catch (e) {
+        debugPrint("Endpoint failed ($urlString): $e");
       }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _errorMessage = "Failed to load report: $e";
-          _isLoading = false;
-        });
-      }
+    }
+
+    if (mounted) {
+      setState(() {
+        _errorMessage = "Network issue: Unable to fetch data from CDN endpoints.";
+        _isLoading = false;
+      });
     }
   }
 
@@ -138,14 +154,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.error_outline, color: kRedAccent, size: 40),
+              const Icon(Icons.cloud_off, color: kRedAccent, size: 44),
               const SizedBox(height: 12),
               Text(
                 _errorMessage!,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: kMutedText, fontSize: 13),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -154,8 +170,12 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                   });
                   _loadReportJson();
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: kSurfaceBg),
-                child: const Text("Retry", style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kSurfaceBg,
+                  side: const BorderSide(color: kBorderDark),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+                child: const Text("Retry Connection", style: TextStyle(color: Colors.white)),
               )
             ],
           ),
@@ -189,7 +209,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
       child: Column(
         children: [
-          // Search Input
+          // Search Box
           Container(
             height: 42,
             decoration: BoxDecoration(
@@ -210,7 +230,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             ),
           ),
           const SizedBox(height: 10),
-          // 3-Way Segment Tabs
+          // Filter Tabs
           Container(
             decoration: BoxDecoration(
               color: kCardBg,
@@ -259,7 +279,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     final sectorName = sector['sector_name'] ?? '';
     final allStocks = (sector['evaluated_stocks'] as List<dynamic>? ?? []);
 
-    // Filter stocks by query & expanding/contracting intent
     final filteredStocks = allStocks.where((s) {
       final sym = (s['symbol'] ?? '').toString().toLowerCase();
       final name = (s['company_name'] ?? '').toString().toLowerCase();
@@ -279,7 +298,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
 
     if (filteredStocks.isEmpty) return const SizedBox.shrink();
 
-    // Trajectory Ratio
     final expandingCount = allStocks.where((s) => s['margin_trajectory'] == "MARGIN_EXPANSION").length;
     final totalCount = allStocks.isNotEmpty ? allStocks.length : 1;
     final expandingRatio = expandingCount / totalCount;
@@ -298,7 +316,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Sector Title + Commodity Driver Pill
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -340,14 +357,12 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           ),
           const SizedBox(height: 8),
 
-          // Sector Macro Thesis
           Text(
             sector['sector_macro_thesis'] ?? '',
             style: const TextStyle(fontSize: 11, color: kMutedText, height: 1.4),
           ),
           const SizedBox(height: 12),
 
-          // Sector Trajectory Ratio Bar
           Row(
             children: [
               Text(
@@ -377,7 +392,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           ),
           const SizedBox(height: 16),
 
-          // Equities List
           ...filteredStocks.map((stock) => _buildStockVisualCard(stock)),
         ],
       ),
@@ -389,7 +403,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     final int bps = (stock['projected_opm_change_bps'] ?? 0) as int;
     final color = isExpanding ? kGreenAccent : kRedAccent;
 
-    // Normalizing divergence bar (300 bps baseline ceiling)
     final double normalizedWidth = min(1.0, bps.abs() / 300.0);
 
     return Container(
@@ -403,7 +416,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header: Symbol, Name, BPS Badge
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -461,7 +473,6 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 ),
                 child: Row(
                   children: [
-                    // Negative / Contraction Half
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -476,9 +487,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                         ),
                       ),
                     ),
-                    // Center Zero Line
                     Container(width: 2, color: Colors.white38),
-                    // Positive / Expansion Half
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -500,14 +509,12 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           ),
           const SizedBox(height: 10),
 
-          // Operational Transmission Explanation
           Text(
             stock['operational_transmission_rationale'] ?? '',
             style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.3),
           ),
           const SizedBox(height: 8),
 
-          // Pricing Power Badge + Quarterly Outlook
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
