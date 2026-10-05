@@ -11,7 +11,7 @@ OUTPUT_REPORT_FILE = "macro_research_report.json"
 # 🎯 AI CANDIDATE MODELS LIST (Gemini 3.7 Priority)
 # ==============================================================================
 CANDIDATE_MODELS = [
-    "gemini-3.7-flash",
+    "gemini-3.5-flash-lite",
     
 ]
 
