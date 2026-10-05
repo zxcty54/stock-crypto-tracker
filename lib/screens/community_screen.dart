@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../widgets/trader_feed_card.dart';
 import '../widgets/create_chart_post_sheet.dart';
+import '../widgets/create_confession_sheet.dart'; // 👈 Text-Only Confession Sheet Import
 import '../widgets/community_sentiment_card.dart';
 import '../services/auth_service.dart';
 
@@ -136,6 +137,18 @@ class _CommunityScreenState extends State<CommunityScreen> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => CreateChartPostSheet(
         onPostCreated: () => _fetchCommunityPosts(),
+      ),
+    );
+  }
+
+  void _openConfessionFlow() {
+    HapticFeedback.mediumImpact();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => CreateConfessionSheet(
+        onConfessionPosted: () => _fetchCommunityPosts(),
       ),
     );
   }
@@ -288,14 +301,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
           },
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 6, bottom: 120),
-            itemCount: 2 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
+            // 3 static header items: Indices (0), Sentiment (1), Confession Bar (2)
+            itemCount: 3 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
             itemBuilder: (context, index) {
               // 1. TOP INDICES TICKER
               if (index == 0) {
                 return _buildTopIndicesTickerStrip();
               }
 
-              // 2. HERO SENTIMENT CARD (Seperate Component)
+              // 2. HERO SENTIMENT CARD
               if (index == 1) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
@@ -303,6 +317,64 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     niftyLivePrice: _niftyPrice,
                     marketStatus: _marketStatus,
                     isVotingAllowed: _isVotingAllowed,
+                  ),
+                );
+              }
+
+              // 3. 🎯 TRADER CONFESSION DESK ENTRY STRIP (Max 700 words, No attachment)
+              if (index == 2) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: _openConfessionFlow,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF131B2A),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: const Color(0xFFFF2A6D).withOpacity(0.4),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFF2A6D).withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(Icons.shield_rounded, color: Color(0xFFFF2A6D), size: 16),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "TRADER CONFESSION DESK",
+                                  style: GoogleFonts.robotoMono(
+                                    color: const Color(0xFFFF2A6D),
+                                    fontSize: 9.5,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0.6,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                const Text(
+                                  "FOMO ya Revenge trade? Confess anonymously (Max 700 words)...",
+                                  style: TextStyle(color: Colors.white70, fontSize: 11),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(Icons.edit_note_rounded, color: Color(0xFFFF2A6D), size: 20),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               }
@@ -321,8 +393,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // Feed Cards
-              final post = _communityPosts[index - 2];
+              // Feed Cards (Offset index - 3)
+              final post = _communityPosts[index - 3];
               return TraderFeedCard(
                 key: ValueKey(post['id']),
                 post: post,
