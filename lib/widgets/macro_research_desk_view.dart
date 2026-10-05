@@ -1,1010 +1,476 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-// ---------------- DATA MODELS ----------------
-class ImpactedStock {
-  final String symbol;
-  final String companyName;
-  final String sector;
-  final String impactType; // POSITIVE / NEGATIVE
-  final String marginImpactBps;
-  final int baselineBpsValue;
-  final String rationale;
-  final String businessImpact;
+class MacroMarginRadarScreen extends StatefulWidget {
+  final String rawJsonReport;
 
-  const ImpactedStock({
-    required this.symbol,
-    required this.companyName,
-    required this.sector,
-    required this.impactType,
-    required this.marginImpactBps,
-    required this.baselineBpsValue,
-    required this.rationale,
-    required this.businessImpact,
-  });
-
-  factory ImpactedStock.fromJson(Map<String, dynamic> json) {
-    final rawBpsString = json['margin_impact_bps']?.toString() ?? '0';
-    final cleaned = rawBpsString.replaceAll(RegExp(r'[^0-9\-]'), '');
-    final parsedBps = int.tryParse(cleaned) ?? 0;
-
-    return ImpactedStock(
-      symbol: json['symbol'] ?? '',
-      companyName: json['company_name'] ?? '',
-      sector: json['sector'] ?? '',
-      impactType: (json['impact_type'] ?? 'POSITIVE').toString().toUpperCase(),
-      marginImpactBps: rawBpsString,
-      baselineBpsValue: parsedBps,
-      rationale: json['rationale'] ?? '',
-      businessImpact: json['business_impact'] ?? '',
-    );
-  }
-}
-
-class MacroReportItem {
-  final String commodityName;
-  final String unit;
-  final double currentPrice;
-  final Map<String, dynamic> periodChanges;
-  final String marginTrajectory;
-  final String retailBadge;
-  final String macroHeadline;
-  final String forwardThesis;
-  final String importContext;
-  final String keyRisk;
-  final List<ImpactedStock> impactedStocks;
-  final double fiftyTwoWeekLow;
-  final double fiftyTwoWeekHigh;
-  final int transmissionLagDays;
-
-  const MacroReportItem({
-    required this.commodityName,
-    required this.unit,
-    required this.currentPrice,
-    required this.periodChanges,
-    required this.marginTrajectory,
-    required this.retailBadge,
-    required this.macroHeadline,
-    required this.forwardThesis,
-    required this.importContext,
-    required this.keyRisk,
-    required this.impactedStocks,
-    required this.fiftyTwoWeekLow,
-    required this.fiftyTwoWeekHigh,
-    this.transmissionLagDays = 60,
-  });
-
-  factory MacroReportItem.fromJson(Map<String, dynamic> json) {
-    final price = (json['current_price'] as num?)?.toDouble() ?? 0.0;
-    return MacroReportItem(
-      commodityName: json['commodity_name'] ?? '',
-      unit: json['unit'] ?? '',
-      currentPrice: price,
-      periodChanges: json['period_changes'] ?? {},
-      marginTrajectory: json['margin_trajectory'] ?? 'NEUTRAL',
-      retailBadge: json['retail_badge'] ?? '',
-      macroHeadline: json['macro_headline'] ?? '',
-      forwardThesis: json['forward_thesis'] ?? '',
-      importContext: json['import_context'] ?? '',
-      keyRisk: json['key_risk'] ?? '',
-      fiftyTwoWeekLow: (json['fifty_two_week_low'] as num?)?.toDouble() ?? (price * 0.78),
-      fiftyTwoWeekHigh: (json['fifty_two_week_high'] as num?)?.toDouble() ?? (price * 1.22),
-      transmissionLagDays: json['transmission_lag_days'] ?? 60,
-      impactedStocks: (json['impacted_stocks'] as List? ?? [])
-          .map((e) => ImpactedStock.fromJson(e))
-          .toList(),
-    );
-  }
-}
-
-// ---------------- MAIN WIDGET SCREEN ----------------
-class MacroResearchDeskView extends StatefulWidget {
-  final bool isDarkMode;
-  const MacroResearchDeskView({super.key, this.isDarkMode = true});
+  const MacroMarginRadarScreen({super.key, required this.rawJsonReport});
 
   @override
-  State<MacroResearchDeskView> createState() => _MacroResearchDeskViewState();
+  State<MacroMarginRadarScreen> createState() => _MacroMarginRadarScreenState();
 }
 
-class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
-  final String _jsonUrl =
-      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/refs/heads/main/macro_research_report.json';
+class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
+  int _selectedFilterIndex = 0; // 0: All Sectors, 1: Expanding Only, 2: Contracting Only
+  String _searchQuery = "";
+  late Map<String, dynamic> _reportData;
+  List<dynamic> _sectors = [];
 
-  List<MacroReportItem> _reports = [];
-  String _lastUpdatedAt = '';
-  int _selectedCommodityIndex = 0;
-  bool _isLoading = true;
-  String? _errorMessage;
-
-  // Screener & Live Simulator State
-  String _searchQuery = '';
-  String _impactFilter = 'ALL'; // ALL, POSITIVE, NEGATIVE
-  double _priceSimulationOffset = 0.0; // -20% to +20%
-
-  // High-Contrast Terminal Colors
-  static const Color bgDark = Color(0xFF090D16);
-  static const Color surfaceCard = Color(0xFF131B2A);
-  static const Color borderSubtle = Color(0xFF202C42);
-  static const Color accentNeonGreen = Color(0xFF00E676);
-  static const Color accentCyan = Color(0xFF00E5FF);
-  static const Color accentFlame = Color(0xFFFF9100);
-  static const Color textMuted = Color(0xFF94A3B8);
+  // Theme Constants (Institutional Dark Palette)
+  static const Color kBgDark = Color(0xFF090D16);
+  static const Color kCardBg = Color(0xFF131823);
+  static const Color kSurfaceBg = Color(0xFF1A2232);
+  static const Color kBorderDark = Color(0xFF263042);
+  static const Color kGreenAccent = Color(0xFF00E676);
+  static const Color kRedAccent = Color(0xFFFF5252);
+  static const Color kMutedText = Color(0xFF8B949E);
 
   @override
   void initState() {
     super.initState();
-    _fetchAiResearchData();
+    _parseData();
   }
 
-  Future<void> _fetchAiResearchData() async {
-    if (!mounted) return;
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
+  void _parseData() {
     try {
-      final urlWithTs = '$_jsonUrl?ts=${DateTime.now().millisecondsSinceEpoch}';
-      final response = await http.get(Uri.parse(urlWithTs)).timeout(const Duration(seconds: 12));
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> decoded = jsonDecode(response.body);
-        final List<dynamic> reportsList = decoded['reports'] ?? [];
-
-        if (mounted) {
-          setState(() {
-            _lastUpdatedAt = decoded['updated_at'] ?? '';
-            _reports = reportsList.map((e) => MacroReportItem.fromJson(e)).toList();
-            if (_selectedCommodityIndex >= _reports.length) {
-              _selectedCommodityIndex = 0;
-            }
-            _isLoading = false;
-          });
-        }
-      } else {
-        if (mounted) {
-          setState(() {
-            _errorMessage = 'Failed to load report (HTTP ${response.statusCode})';
-            _isLoading = false;
-          });
-        }
-      }
+      _reportData = json.decode(widget.rawJsonReport);
+      _sectors = _reportData['sectors'] ?? [];
     } catch (e) {
-      if (mounted) {
-        setState(() {
-          _errorMessage = 'Network Error: Check internet connection or JSON sync';
-          _isLoading = false;
-        });
-      }
+      _sectors = [];
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Scaffold(
-        backgroundColor: bgDark,
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(color: accentCyan),
-              SizedBox(height: 16),
-              Text(
-                "Syncing Institutional Macro Radar...",
-                style: TextStyle(color: textMuted, fontSize: 13),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    if (_errorMessage != null || _reports.isEmpty) {
-      return Scaffold(
-        backgroundColor: bgDark,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.cloud_off_rounded, color: Colors.redAccent, size: 48),
-                const SizedBox(height: 12),
-                Text(
-                  _errorMessage ?? "No research reports available",
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: surfaceCard),
-                  onPressed: _fetchAiResearchData,
-                  child: const Text("Retry Sync", style: TextStyle(color: accentCyan)),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    final activeItem = _reports[_selectedCommodityIndex];
-
-    final filteredStocks = activeItem.impactedStocks.where((s) {
-      final matchesSearch = _searchQuery.isEmpty ||
-          s.symbol.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          s.companyName.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          s.sector.toLowerCase().contains(_searchQuery.toLowerCase());
-      final matchesImpact = _impactFilter == 'ALL' || s.impactType == _impactFilter;
-      return matchesSearch && matchesImpact;
-    }).toList();
-
     return Scaffold(
-      backgroundColor: bgDark,
+      backgroundColor: kBgDark,
       appBar: AppBar(
-        backgroundColor: surfaceCard,
+        backgroundColor: kBgDark,
         elevation: 0,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "MACRO MARGIN RADAR",
               style: TextStyle(
-                fontSize: 12,
-                letterSpacing: 1.5,
-                color: accentCyan,
-                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.2,
+                color: Colors.white,
               ),
             ),
-            const SizedBox(height: 2),
             Text(
-              _lastUpdatedAt.isNotEmpty ? "Synced: $_lastUpdatedAt" : "Corporate Input Cost Transmission",
-              style: const TextStyle(fontSize: 11, color: textMuted),
+              "Audited Balance Sheets vs Live Commodity Transmission",
+              style: TextStyle(fontSize: 10, color: kMutedText),
             ),
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh_rounded, color: Colors.white70, size: 22),
-            onPressed: _fetchAiResearchData,
+          Container(
+            margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: kSurfaceBg,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: kBorderDark),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: kGreenAccent,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                const Text(
+                  "LIVE SIGNALS",
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          _buildSearchAndFilters(),
+          Expanded(
+            child: _sectors.isEmpty
+                ? const Center(
+                    child: Text("No Data Available", style: TextStyle(color: kMutedText)),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    itemCount: _sectors.length,
+                    itemBuilder: (context, index) {
+                      final sector = _sectors[index];
+                      return _buildSectorCard(sector);
+                    },
+                  ),
           ),
         ],
       ),
-      body: RefreshIndicator(
-        color: accentCyan,
-        backgroundColor: surfaceCard,
-        onRefresh: _fetchAiResearchData,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildCommodityRibbon(),
-              const SizedBox(height: 16),
-              _buildHeroPriceAndRangeCard(activeItem),
-              const SizedBox(height: 14),
-              _buildTransmissionPipeline(activeItem),
-              if (activeItem.importContext.isNotEmpty) ...[
-                const SizedBox(height: 14),
-                _buildSourcingGeopoliticalCard(activeItem),
+    );
+  }
+
+  Widget _buildSearchAndFilters() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+      child: Column(
+        children: [
+          // Search Input
+          Container(
+            height: 42,
+            decoration: BoxDecoration(
+              color: kCardBg,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: kBorderDark),
+            ),
+            child: TextField(
+              style: const TextStyle(fontSize: 13, color: Colors.white),
+              onChanged: (val) => setState(() => _searchQuery = val.trim().toLowerCase()),
+              decoration: const InputDecoration(
+                hintText: "Search company symbol or sector...",
+                hintStyle: TextStyle(fontSize: 12, color: kMutedText),
+                prefixIcon: Icon(Icons.search, size: 18, color: kMutedText),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          // 3-Way Segment Tabs
+          Container(
+            decoration: BoxDecoration(
+              color: kCardBg,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: kBorderDark),
+            ),
+            child: Row(
+              children: [
+                _buildSegmentTab("All Sectors", 0),
+                _buildSegmentTab("🟢 Expanding", 1),
+                _buildSegmentTab("🔴 Contracting", 2),
               ],
-              const SizedBox(height: 14),
-              _buildAiForecastDeck(activeItem),
-              const SizedBox(height: 14),
-              _buildSensitivitySimulator(activeItem),
-              const SizedBox(height: 22),
-              _buildScreenerHeader(filteredStocks.length),
-              const SizedBox(height: 12),
-              _buildScreenerControls(),
-              const SizedBox(height: 14),
-              _buildEquitiesList(filteredStocks),
-              const SizedBox(height: 40),
-            ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSegmentTab(String title, int index) {
+    final isSelected = _selectedFilterIndex == index;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => setState(() => _selectedFilterIndex = index),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 9),
+          decoration: BoxDecoration(
+            color: isSelected ? const Color(0xFF238636) : Colors.transparent,
+            borderRadius: BorderRadius.circular(9),
+          ),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Colors.white : kMutedText,
+            ),
           ),
         ),
       ),
     );
   }
 
-  /// 1. Commodity Selector Ribbon
-  Widget _buildCommodityRibbon() {
-    return SizedBox(
-      height: 44,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: _reports.length,
-        itemBuilder: (context, idx) {
-          final isSelected = idx == _selectedCommodityIndex;
-          final item = _reports[idx];
-          final delta1M = (item.periodChanges['1M'] as num?)?.toDouble() ?? 0.0;
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedCommodityIndex = idx;
-                _priceSimulationOffset = 0.0;
-              });
-            },
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF223048) : surfaceCard,
-                borderRadius: BorderRadius.circular(22),
-                border: Border.all(
-                  color: isSelected ? accentCyan : borderSubtle,
-                  width: isSelected ? 1.5 : 1.0,
-                ),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    item.commodityName,
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : textMuted,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
-                      fontSize: 13,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: (delta1M >= 0 ? accentNeonGreen : Colors.redAccent).withAlpha(40),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      "${delta1M >= 0 ? '+' : ''}${delta1M.toStringAsFixed(1)}%",
-                      style: TextStyle(
-                        fontSize: 10.5,
-                        fontWeight: FontWeight.w900,
-                        color: delta1M >= 0 ? accentNeonGreen : Colors.redAccent,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  Widget _buildSectorCard(Map<String, dynamic> sector) {
+    final sectorName = sector['sector_name'] ?? '';
+    final allStocks = (sector['evaluated_stocks'] as List<dynamic>? ?? []);
 
-  /// 2. Hero Price + Range Card
-  Widget _buildHeroPriceAndRangeCard(MacroReportItem item) {
-    final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
-    final badgeColor = isContracting ? Colors.redAccent : accentNeonGreen;
+    // Filter stocks by intent tab & search query
+    final filteredStocks = allStocks.where((s) {
+      final sym = (s['symbol'] ?? '').toString().toLowerCase();
+      final name = (s['company_name'] ?? '').toString().toLowerCase();
+      final sName = sectorName.toLowerCase();
 
-    final effectivePrice = item.currentPrice * (1 + (_priceSimulationOffset / 100));
-    final range = item.fiftyTwoWeekHigh - item.fiftyTwoWeekLow;
-    final position = range > 0
-        ? ((effectivePrice - item.fiftyTwoWeekLow) / range).clamp(0.0, 1.0)
-        : 0.5;
+      final matchesSearch = _searchQuery.isEmpty ||
+          sym.contains(_searchQuery) ||
+          name.contains(_searchQuery) ||
+          sName.contains(_searchQuery);
+
+      if (!matchesSearch) return false;
+
+      if (_selectedFilterIndex == 1) return s['margin_trajectory'] == "MARGIN_EXPANSION";
+      if (_selectedFilterIndex == 2) return s['margin_trajectory'] == "MARGIN_CONTRACTION";
+      return true;
+    }).toList();
+
+    if (filteredStocks.isEmpty) return const SizedBox.shrink();
+
+    // Ratio Calculation (Expanding vs Contracting in this sector)
+    final expandingCount = allStocks.where((s) => s['margin_trajectory'] == "MARGIN_EXPANSION").length;
+    final totalCount = allStocks.isNotEmpty ? allStocks.length : 1;
+    final expandingRatio = expandingCount / totalCount;
+
+    final delta = (sector['benchmark_1m_delta_pct'] ?? 0.0) as num;
+    final isDeltaUp = delta >= 0;
 
     return Container(
-      padding: const EdgeInsets.all(18),
+      margin: const EdgeInsets.only(bottom: 18),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: surfaceCard,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: borderSubtle),
+        color: kCardBg,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: kBorderDark),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Sector Title + Commodity Badge
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.commodityName,
-                      style: const TextStyle(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      item.retailBadge.isNotEmpty ? item.retailBadge : "Corporate Input Cost Radar",
-                      style: TextStyle(
-                        color: isContracting ? const Color(0xFFFCA5A5) : const Color(0xFF86EFAC),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  sectorName,
+                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: badgeColor.withAlpha(40),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: badgeColor.withAlpha(80)),
+                  color: kSurfaceBg,
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: kBorderDark),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.bolt, size: 12, color: Colors.amberAccent),
+                    const SizedBox(width: 3),
+                    Text(
+                      "${sector['benchmark_commodity']}: ${sector['benchmark_price']}",
+                      style: const TextStyle(fontSize: 10, color: Colors.white70),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      "${isDeltaUp ? '+' : ''}${delta.toStringAsFixed(1)}%",
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: isDeltaUp ? kRedAccent : kGreenAccent,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Sector Macro Thesis
+          Text(
+            sector['sector_macro_thesis'] ?? '',
+            style: const TextStyle(fontSize: 11, color: kMutedText, height: 1.4),
+          ),
+          const SizedBox(height: 12),
+
+          // Visual Macro Sentiment Ratio Bar
+          Row(
+            children: [
+              Text(
+                "SECTOR TRAJECTORY RATIO ($expandingCount/$totalCount EXPANDING)",
+                style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 0.5, color: kMutedText),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: SizedBox(
+              height: 5,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: (expandingRatio * 100).toInt(),
+                    child: Container(color: kGreenAccent),
+                  ),
+                  Expanded(
+                    flex: ((1 - expandingRatio) * 100).toInt(),
+                    child: Container(color: kRedAccent),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Equities List
+          ...filteredStocks.map((stock) => _buildStockVisualCard(stock)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStockVisualCard(Map<String, dynamic> stock) {
+    final isExpanding = stock['margin_trajectory'] == "MARGIN_EXPANSION";
+    final int bps = (stock['projected_opm_change_bps'] ?? 0) as int;
+    final color = isExpanding ? kGreenAccent : kRedAccent;
+
+    // Normalize BPS bar (Max scale reference ~300 bps)
+    final double normalizedWidth = min(1.0, bps.abs() / 300.0);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kBgDark,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.25)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header: Symbol, Name, BPS Badge
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    stock['symbol'] ?? '',
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white),
+                  ),
+                  Text(
+                    stock['company_name'] ?? '',
+                    style: const TextStyle(fontSize: 10, color: kMutedText),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: color.withOpacity(0.4)),
                 ),
                 child: Text(
-                  "MARGINS: ${item.marginTrajectory}",
-                  style: TextStyle(color: badgeColor, fontSize: 10.5, fontWeight: FontWeight.bold),
+                  "${bps > 0 ? '+' : ''}$bps bps",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w900,
+                    color: color,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text(
-                "${effectivePrice.toStringAsFixed(2)} ${item.unit}",
-                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: accentCyan),
-              ),
-              if (_priceSimulationOffset != 0.0) ...[
-                const SizedBox(width: 8),
-                Text(
-                  "(${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}% What-If)",
-                  style: const TextStyle(fontSize: 12, color: Colors.amberAccent, fontWeight: FontWeight.bold),
-                ),
-              ]
-            ],
-          ),
-          const SizedBox(height: 14),
+
+          // 🎯 VISUAL: ZERO-CENTER DIVERGENCE BAR
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("52W Low: \$${item.fiftyTwoWeekLow.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
-                  Text(
-                    "Position: ${(position * 100).toInt()}%",
-                    style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
-                  ),
-                  Text("52W High: \$${item.fiftyTwoWeekHigh.toStringAsFixed(1)}", style: const TextStyle(color: textMuted, fontSize: 11)),
+                  const Text("MARGIN CONTRACTION", style: TextStyle(fontSize: 8, color: kRedAccent, fontWeight: FontWeight.bold)),
+                  const Text("BASE (0)", style: TextStyle(fontSize: 8, color: kMutedText)),
+                  const Text("MARGIN EXPANSION", style: TextStyle(fontSize: 8, color: kGreenAccent, fontWeight: FontWeight.bold)),
                 ],
               ),
-              const SizedBox(height: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: LinearProgressIndicator(
-                  value: position,
-                  minHeight: 7,
-                  backgroundColor: const Color(0xFF1E293B),
-                  valueColor: AlwaysStoppedAnimation<Color>(isContracting ? Colors.amber : accentNeonGreen),
+              const SizedBox(height: 3),
+              Container(
+                height: 6,
+                decoration: BoxDecoration(
+                  color: kSurfaceBg,
+                  borderRadius: BorderRadius.circular(3),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          const Divider(color: borderSubtle, height: 1),
-          const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _deltaPill("1M Spike", item.periodChanges["1M"]),
-              _deltaPill("6M Trend", item.periodChanges["6M"]),
-              _deltaPill("1Y YoY", item.periodChanges["1Y"]),
-              _deltaPill("3Y Cycle", item.periodChanges["3Y"]),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _deltaPill(String label, dynamic val) {
-    final double value = (val as num?)?.toDouble() ?? 0.0;
-    final isNegative = value < 0;
-    return Column(
-      children: [
-        Text(label, style: const TextStyle(color: textMuted, fontSize: 12, fontWeight: FontWeight.w500)),
-        const SizedBox(height: 4),
-        Text(
-          "${isNegative ? '' : '+'}${value.toStringAsFixed(1)}%",
-          style: TextStyle(
-            fontSize: 13.5,
-            fontWeight: FontWeight.bold,
-            color: isNegative ? Colors.redAccent : accentNeonGreen,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 3. Visual Transmission Pipeline (Zero Overlap & Zero Text Cutoff)
-  Widget _buildTransmissionPipeline(MacroReportItem item) {
-    final delta1Y = (item.periodChanges['1Y'] as num?)?.toDouble() ?? 0.0;
-    final shockText = "${item.commodityName} ${delta1Y >= 0 ? '+' : ''}${delta1Y.toStringAsFixed(1)}% YoY";
-    final isContracting = item.marginTrajectory.toUpperCase() == 'CONTRACTING';
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F172A),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accentCyan.withAlpha(76)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header with Expanded to prevent text collision
-          Row(
-            children: [
-              const Expanded(
-                child: Text(
-                  "INPUT COST TRANSMISSION",
-                  style: TextStyle(
-                    color: accentCyan,
-                    fontSize: 11.5,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1.1,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                "Est. Cycle: ~${item.transmissionLagDays}d",
-                style: const TextStyle(color: textMuted, fontSize: 11),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          // Step 1: Raw Shock
-          _pipelineStepCard(
-            "1. RAW MATERIAL SHOCK",
-            shockText,
-            Colors.amber,
-            Icons.bolt_rounded,
-          ),
-          const SizedBox(height: 8),
-          // Step 2: Full Width Inventory Lag to eliminate truncation
-          _pipelineStepCard(
-            "2. INVENTORY LAG",
-            "${item.transmissionLagDays} Days Inventory Buffer Depletion",
-            Colors.purpleAccent,
-            Icons.hourglass_bottom_rounded,
-          ),
-          const SizedBox(height: 8),
-          // Step 3: Full Width EBITDA Trajectory (Never cuts off CONTRACTING)
-          _pipelineStepCard(
-            "3. EBITDA TRAJECTORY",
-            "Operating Margins: ${item.marginTrajectory}",
-            isContracting ? Colors.redAccent : accentNeonGreen,
-            isContracting ? Icons.trending_down_rounded : Icons.trending_up_rounded,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _pipelineStepCard(String title, String desc, Color col, IconData icon) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFF131B2A),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: col.withAlpha(70)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(icon, color: col, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: col,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.8,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  desc,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 🌍 Independent Full-Width Sourcing Card
-  Widget _buildSourcingGeopoliticalCard(MacroReportItem item) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFF131B2A),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.lightBlueAccent.withAlpha(70)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.public_rounded, color: Colors.lightBlueAccent, size: 20),
-              SizedBox(width: 8),
-              Text(
-                "SOURCING & GEOPOLITICAL CONTEXT",
-                style: TextStyle(
-                  color: Colors.lightBlueAccent,
-                  fontSize: 11.5,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.1,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            item.importContext,
-            style: const TextStyle(
-              color: Color(0xFFE2E8F0),
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-              height: 1.55,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 4. AI Forecast Deck
-  Widget _buildAiForecastDeck(MacroReportItem item) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: surfaceCard,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: borderSubtle),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.psychology, color: accentCyan, size: 22),
-              SizedBox(width: 8),
-              Text("AI STRATEGIST FORWARD THESIS", style: TextStyle(color: accentCyan, fontSize: 12.5, fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(item.macroHeadline, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold, height: 1.4)),
-          const SizedBox(height: 8),
-          Text(item.forwardThesis, style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 13.5, height: 1.55)),
-          if (item.keyRisk.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.black.withAlpha(76),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: accentFlame.withAlpha(76)),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.warning_amber_rounded, color: accentFlame, size: 18),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      "Key Catalyst Risk: ${item.keyRisk}",
-                      style: const TextStyle(color: Color(0xFFCBD5E1), fontSize: 12.5, height: 1.4),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ]
-        ],
-      ),
-    );
-  }
-
-  /// 5. Live Interactive Sensitivity Simulator
-  Widget _buildSensitivitySimulator(MacroReportItem item) {
-    final simulatedPrice = item.currentPrice * (1 + _priceSimulationOffset / 100);
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withAlpha(76),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: _priceSimulationOffset != 0 ? Colors.amberAccent : Colors.indigoAccent.withAlpha(100),
-          width: _priceSimulationOffset != 0 ? 1.5 : 1.0,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.tune_rounded,
-                    size: 16,
-                    color: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
-                  ),
-                  const SizedBox(width: 6),
-                  const Text(
-                    "SENSITIVITY SIMULATOR (WHAT-IF)",
-                    style: TextStyle(color: Colors.amberAccent, fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              Text(
-                "\$${simulatedPrice.toStringAsFixed(1)} (${_priceSimulationOffset >= 0 ? '+' : ''}${_priceSimulationOffset.toInt()}%)",
-                style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          const Text(
-            "Slide to stress-test stock margins against commodity shocks in real-time:",
-            style: TextStyle(color: textMuted, fontSize: 11),
-          ),
-          Slider(
-            min: -20,
-            max: 20,
-            divisions: 8,
-            value: _priceSimulationOffset,
-            activeColor: _priceSimulationOffset != 0 ? Colors.amberAccent : accentCyan,
-            inactiveColor: const Color(0xFF1E293B),
-            onChanged: (val) => setState(() => _priceSimulationOffset = val),
-          ),
-          if (_priceSimulationOffset != 0.0) ...[
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () => setState(() => _priceSimulationOffset = 0.0),
-                child: const Text(
-                  "Reset to Baseline (0%)",
-                  style: TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ]
-        ],
-      ),
-    );
-  }
-
-  Widget _buildScreenerHeader(int count) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          "IMPACTED EQUITIES AUDIT",
-          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1.2, color: textMuted),
-        ),
-        Text("$count Stocks Screened", style: const TextStyle(fontSize: 13, color: accentCyan, fontWeight: FontWeight.bold)),
-      ],
-    );
-  }
-
-  /// 6. Screener Controls
-  Widget _buildScreenerControls() {
-    return Column(
-      children: [
-        Container(
-          height: 42,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: surfaceCard,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderSubtle),
-          ),
-          child: TextField(
-            style: const TextStyle(color: Colors.white, fontSize: 13),
-            decoration: const InputDecoration(
-              hintText: "Search ticker (e.g. ASIANPAINT, ONGC)...",
-              hintStyle: TextStyle(color: textMuted, fontSize: 13),
-              border: InputBorder.none,
-              icon: Icon(Icons.search, size: 18, color: textMuted),
-            ),
-            onChanged: (val) => setState(() => _searchQuery = val),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            _impactFilterChip("ALL", "All Stocks"),
-            const SizedBox(width: 8),
-            _impactFilterChip("NEGATIVE", "🔴 Margin Drag"),
-            const SizedBox(width: 8),
-            _impactFilterChip("POSITIVE", "🟢 Beneficiary"),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _impactFilterChip(String val, String label) {
-    final isSelected = _impactFilter == val;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _impactFilter = val),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: isSelected ? accentCyan : surfaceCard,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: isSelected ? accentCyan : borderSubtle),
-          ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.black : Colors.white70,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// 7. Equities List
-  Widget _buildEquitiesList(List<ImpactedStock> list) {
-    if (list.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(24),
-        alignment: Alignment.center,
-        child: const Text("No stocks match your filter criteria", style: TextStyle(color: textMuted, fontSize: 13)),
-      );
-    }
-
-    final isSimulating = _priceSimulationOffset != 0.0;
-
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: list.length,
-      itemBuilder: (context, idx) {
-        final stock = list[idx];
-
-        final int simulatedBps = (stock.baselineBpsValue * (1 + (_priceSimulationOffset / 100))).round();
-        final isPositive = simulatedBps >= 0;
-        final displayBpsText = "${isPositive ? '+' : ''}$simulatedBps bps";
-
-        return Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: surfaceCard,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: isSimulating ? Colors.amberAccent.withAlpha(50) : borderSubtle,
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              stock.symbol,
-                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+                child: Row(
+                  children: [
+                    // Negative / Contraction Half
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: FractionallySizedBox(
+                          widthFactor: !isExpanding ? normalizedWidth : 0.0,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: kRedAccent,
+                              borderRadius: BorderRadius.horizontal(left: Radius.circular(3)),
                             ),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF1E293B),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  stock.sector,
-                                  style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w500),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          stock.companyName,
-                          style: const TextStyle(color: textMuted, fontSize: 12),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: (isPositive ? accentNeonGreen : Colors.redAccent).withAlpha(40),
-                          borderRadius: BorderRadius.circular(8),
-                          border: isSimulating ? Border.all(color: Colors.amberAccent.withAlpha(120)) : null,
-                        ),
-                        child: Text(
-                          displayBpsText,
-                          style: TextStyle(
-                            color: isPositive ? accentNeonGreen : Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
                           ),
                         ),
                       ),
-                      if (isSimulating) ...[
-                        const SizedBox(height: 2),
-                        Text(
-                          "Base: ${stock.marginImpactBps}",
-                          style: const TextStyle(color: Colors.amberAccent, fontSize: 10, fontWeight: FontWeight.bold),
-                        ),
-                      ]
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Text(
-                stock.rationale,
-                style: const TextStyle(color: Color(0xFFE2E8F0), fontSize: 13, height: 1.45),
-              ),
-              if (stock.businessImpact.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withAlpha(50),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: borderSubtle),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.insights, size: 14, color: accentCyan),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          stock.businessImpact,
-                          style: const TextStyle(color: textMuted, fontSize: 11.5, height: 1.35),
+                    ),
+                    // Center Zero Divider
+                    Container(width: 2, color: Colors.white38),
+                    // Positive / Expansion Half
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: FractionallySizedBox(
+                          widthFactor: isExpanding ? normalizedWidth : 0.0,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: kGreenAccent,
+                              borderRadius: BorderRadius.horizontal(right: Radius.circular(3)),
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ],
           ),
-        );
-      },
+          const SizedBox(height: 10),
+
+          // Operational Transmission Explanation
+          Text(
+            stock['operational_transmission_rationale'] ?? '',
+            style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.3),
+          ),
+          const SizedBox(height: 8),
+
+          // Pricing Power & Quarterly Outlook Footnotes
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: kSurfaceBg,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "PRICING POWER: ${stock['pricing_power'] ?? 'MODERATE'}",
+                  style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white70),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  "Outlook: ${stock['quarterly_ebitda_outlook'] ?? ''}",
+                  style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic, color: color.withOpacity(0.9)),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
