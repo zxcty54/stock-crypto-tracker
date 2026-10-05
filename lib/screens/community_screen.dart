@@ -20,9 +20,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
   bool _isLoadingPosts = true;
   String? _postsError;
 
-  // Active target period (Next month or custom label)
-  final String _currentPeriod = "NOV-2026";
-
   @override
   void initState() {
     super.initState();
@@ -193,31 +190,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF090D16),
+      // Blank App Bar with no title or icon
       appBar: AppBar(
         backgroundColor: const Color(0xFF0F1726),
         elevation: 0,
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: const Color(0xFF00E5FF).withOpacity(0.12),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: const Icon(Icons.hub_outlined, color: Color(0xFF00E5FF), size: 16),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'TRADER WIRE',
-              style: GoogleFonts.plusJakartaSans(
-                color: Colors.white,
-                fontSize: 13,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0.6,
-              ),
-            ),
-          ],
-        ),
+        toolbarHeight: 0, // Removes the header space cleanly
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 70),
@@ -236,72 +213,69 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ),
       ),
-      body: RefreshIndicator(
-        color: const Color(0xFF00E5FF),
-        backgroundColor: const Color(0xFF0F1726),
-        onRefresh: () async => await _fetchCommunityPosts(),
-        child: _isLoadingPosts
-            ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2))
-            : _postsError != null
-                ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text(
-                        'Unable to connect: $_postsError',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11),
+      body: SafeArea(
+        child: RefreshIndicator(
+          color: const Color(0xFF00E5FF),
+          backgroundColor: const Color(0xFF0F1726),
+          onRefresh: () async => await _fetchCommunityPosts(),
+          child: _isLoadingPosts
+              ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2))
+              : _postsError != null
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'Unable to connect: $_postsError',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11),
+                        ),
                       ),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(top: 10, bottom: 120),
+                      itemCount: 1 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
+                      itemBuilder: (context, index) {
+                        // 🎯 TOP SENTIMENT CARD
+                        if (index == 0) {
+                          return const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                            child: CommunitySentimentCard(),
+                          );
+                        }
+
+                        // Empty Posts placeholder
+                        if (_communityPosts.isEmpty) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 60),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'No Setups Posted Yet',
+                                  style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 4),
+                                const Text(
+                                  'Be the first to share your chart setup.',
+                                  style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
+                        // Trader Feed Posts
+                        final post = _communityPosts[index - 1];
+                        return TraderFeedCard(
+                          key: ValueKey(post['id']),
+                          post: post,
+                          onPostDeleted: _fetchCommunityPosts,
+                        );
+                      },
                     ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(top: 8, bottom: 120),
-                    // Item count: 1 (Sentiment Widget) + Posts (ya 1 empty message)
-                    itemCount: 1 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
-                    itemBuilder: (context, index) {
-                      // ------------------------------------------------------
-                      // 🎯 INDEX 0: TOP SENTIMENT POLL WIDGET
-                      // ------------------------------------------------------
-                      if (index == 0) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                          child: CommunitySentimentCard(targetPeriod: _currentPeriod),
-                        );
-                      }
-
-                      // Agar posts empty hain toh Empty Placeholder Card dikhao
-                      if (_communityPosts.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 60),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
-                              const SizedBox(height: 10),
-                              const Text(
-                                'No Setups Posted Yet',
-                                style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Be the first to share your chart setup.',
-                                style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-
-                      // ------------------------------------------------------
-                      // 📊 INDEX 1+: COMMUNITY TRADER POSTS
-                      // ------------------------------------------------------
-                      final post = _communityPosts[index - 1];
-                      return TraderFeedCard(
-                        key: ValueKey(post['id']),
-                        post: post,
-                        onPostDeleted: _fetchCommunityPosts,
-                      );
-                    },
-                  ),
+        ),
       ),
     );
   }
@@ -311,9 +285,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 // 🎯 REALTIME COMMUNITY SENTIMENT CARD COMPONENT
 // ============================================================================
 class CommunitySentimentCard extends StatefulWidget {
-  final String targetPeriod;
-
-  const CommunitySentimentCard({super.key, required this.targetPeriod});
+  const CommunitySentimentCard({super.key});
 
   @override
   State<CommunitySentimentCard> createState() => _CommunitySentimentCardState();
@@ -321,6 +293,10 @@ class CommunitySentimentCard extends StatefulWidget {
 
 class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
   final SupabaseClient _supabase = Supabase.instance.client;
+
+  int _selectedTab = 1;
+  String get _currentPeriod => _selectedTab == 0 ? "TODAY" : "NOV-2026";
+
   String? _myVote;
   bool _isSubmitting = false;
 
@@ -339,15 +315,24 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
           .from('user_predictions')
           .select('prediction')
           .eq('user_id', user.id)
-          .eq('target_month', widget.targetPeriod)
+          .eq('target_month', _currentPeriod)
           .maybeSingle();
 
-      if (res != null && mounted) {
+      if (mounted) {
         setState(() {
-          _myVote = res['prediction'] as String?;
+          _myVote = res?['prediction'] as String?;
         });
       }
     } catch (_) {}
+  }
+
+  void _onTabChanged(int index) {
+    if (_selectedTab == index) return;
+    setState(() {
+      _selectedTab = index;
+      _myVote = null;
+    });
+    _loadMyVote();
   }
 
   Future<void> _castVote(String type) async {
@@ -356,7 +341,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Color(0xFF0F1726),
-          content: Text('Please login or create handle to vote!', style: TextStyle(color: Colors.white, fontSize: 12)),
+          content: Text('Please create trader handle to vote!', style: TextStyle(color: Colors.white, fontSize: 12)),
         ),
       );
       return;
@@ -366,17 +351,34 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
     HapticFeedback.lightImpact();
 
     try {
-      await _supabase.from('user_predictions').upsert({
-        'user_id': user.id,
-        'target_month': widget.targetPeriod,
-        'prediction': type,
-      });
+      await _supabase.from('user_predictions').upsert(
+        {
+          'user_id': user.id,
+          'target_month': _currentPeriod,
+          'prediction': type,
+        },
+        onConflict: 'user_id,target_month',
+      );
 
       if (mounted) {
         setState(() {
           _myVote = type;
           _isSubmitting = false;
         });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: const Color(0xFF141C2B),
+            duration: const Duration(seconds: 1),
+            content: Text(
+              'Vote recorded: $type',
+              style: TextStyle(
+                color: type == 'BULLISH' ? const Color(0xFF00C076) : const Color(0xFFFF2A6D),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -394,14 +396,21 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFF1E2B3E)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: StreamBuilder<List<Map<String, dynamic>>>(
         stream: _supabase
             .from('sentiment_stats')
             .stream(primaryKey: ['target_month'])
-            .eq('target_month', widget.targetPeriod),
+            .eq('target_month', _currentPeriod),
         builder: (context, snapshot) {
           final data = snapshot.data?.isNotEmpty == true ? snapshot.data!.first : null;
 
@@ -409,51 +418,116 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
           final bullPct = (data?['bullish_pct'] ?? 50.0).toDouble();
           final bearPct = (data?['bearish_pct'] ?? 50.0).toDouble();
 
+          final bool isMajorityBull = bullPct >= bearPct;
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
+              // Top Bar: Header Icon + Timeframe Tabs
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.bolt_rounded, color: Color(0xFF00E5FF), size: 16),
-                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF00E5FF).withOpacity(0.12),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: const Icon(Icons.flash_on_rounded, color: Color(0xFF00E5FF), size: 14),
+                      ),
+                      const SizedBox(width: 8),
                       Text(
-                        'MARKET SENTIMENT (${widget.targetPeriod})',
+                        'MARKET PULSE',
                         style: GoogleFonts.plusJakartaSans(
                           color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.w900,
-                          letterSpacing: 0.5,
+                          letterSpacing: 0.6,
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    '$totalVotes votes',
-                    style: const TextStyle(color: Color(0xFF8896AB), fontSize: 11, fontWeight: FontWeight.bold),
+                  Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF141C2B),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xFF1E2B3E)),
+                    ),
+                    child: Row(
+                      children: [
+                        _buildTabButton("Today", 0),
+                        _buildTabButton("Nov Expiry", 1),
+                      ],
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
 
+              // Visual Status Headline
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        totalVotes == 0
+                            ? "Awaiting Votes"
+                            : (isMajorityBull ? "Extreme Bullish" : "High Bearish"),
+                        style: TextStyle(
+                          color: totalVotes == 0
+                              ? Colors.white54
+                              : (isMajorityBull ? const Color(0xFF00C076) : const Color(0xFFFF2A6D)),
+                          fontWeight: FontWeight.w900,
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(
+                        isMajorityBull ? Icons.trending_up_rounded : Icons.trending_down_rounded,
+                        size: 15,
+                        color: isMajorityBull ? const Color(0xFF00C076) : const Color(0xFFFF2A6D),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "$totalVotes Traders Voted",
+                    style: const TextStyle(color: Color(0xFF8896AB), fontSize: 10, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+
               // Ratio Progress Bar
               ClipRRect(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(8),
                 child: SizedBox(
-                  height: 8,
+                  height: 9,
                   child: Row(
                     children: [
                       Expanded(
-                        flex: totalVotes == 0 ? 50 : bullPct.round().clamp(1, 99),
-                        child: Container(color: const Color(0xFF00C076)),
+                        flex: totalVotes == 0 ? 50 : bullPct.round().clamp(2, 98),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF00A86B), Color(0xFF00E676)],
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(width: 2),
                       Expanded(
-                        flex: totalVotes == 0 ? 50 : bearPct.round().clamp(1, 99),
-                        child: Container(color: const Color(0xFFFF2A6D)),
+                        flex: totalVotes == 0 ? 50 : bearPct.round().clamp(2, 98),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFFF1744), Color(0xFFD50000)],
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -461,17 +535,17 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
               ),
               const SizedBox(height: 8),
 
-              // Percentage Breakdown
+              // Live Percentages
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Bullish: ${totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(1)}%"}',
-                    style: const TextStyle(color: Color(0xFF00C076), fontWeight: FontWeight.w900, fontSize: 11),
+                    "Bullish: ${totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(1)}%"}",
+                    style: const TextStyle(color: Color(0xFF00E676), fontWeight: FontWeight.w900, fontSize: 11),
                   ),
                   Text(
-                    'Bearish: ${totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(1)}%"}',
-                    style: const TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w900, fontSize: 11),
+                    "Bearish: ${totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(1)}%"}",
+                    style: const TextStyle(color: Color(0xFFFF1744), fontWeight: FontWeight.w900, fontSize: 11),
                   ),
                 ],
               ),
@@ -481,22 +555,22 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
               Row(
                 children: [
                   Expanded(
-                    child: _buildVoteBtn(
-                      label: 'BULLISH',
-                      type: 'BULLISH',
+                    child: _buildVoteActionBtn(
+                      label: "BULLISH",
+                      type: "BULLISH",
                       icon: Icons.trending_up_rounded,
                       color: const Color(0xFF00C076),
-                      isSelected: _myVote == 'BULLISH',
+                      isSelected: _myVote == "BULLISH",
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _buildVoteBtn(
-                      label: 'BEARISH',
-                      type: 'BEARISH',
+                    child: _buildVoteActionBtn(
+                      label: "BEARISH",
+                      type: "BEARISH",
                       icon: Icons.trending_down_rounded,
                       color: const Color(0xFFFF2A6D),
-                      isSelected: _myVote == 'BEARISH',
+                      isSelected: _myVote == "BEARISH",
                     ),
                   ),
                 ],
@@ -508,7 +582,29 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
     );
   }
 
-  Widget _buildVoteBtn({
+  Widget _buildTabButton(String title, int idx) {
+    final active = _selectedTab == idx;
+    return GestureDetector(
+      onTap: () => _onTabChanged(idx),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          color: active ? const Color(0xFF00E5FF).withOpacity(0.18) : Colors.transparent,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: active ? const Color(0xFF00E5FF) : Colors.white54,
+            fontWeight: active ? FontWeight.bold : FontWeight.w500,
+            fontSize: 10,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVoteActionBtn({
     required String label,
     required String type,
     required IconData icon,
@@ -517,15 +613,16 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
   }) {
     return InkWell(
       onTap: _isSubmitting ? null : () => _castVote(type),
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+      borderRadius: BorderRadius.circular(10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 9),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.18) : const Color(0xFF141C2B),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected ? color : const Color(0xFF1E2B3E),
-            width: isSelected ? 1.5 : 1,
+            width: isSelected ? 1.6 : 1.0,
           ),
         ),
         child: Row(
@@ -534,10 +631,10 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
             Icon(icon, size: 15, color: isSelected ? color : Colors.white60),
             const SizedBox(width: 6),
             Text(
-              label,
+              isSelected ? "$label (VOTED)" : label,
               style: TextStyle(
                 color: isSelected ? color : Colors.white70,
-                fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
+                fontWeight: FontWeight.w900,
                 fontSize: 11,
               ),
             ),
