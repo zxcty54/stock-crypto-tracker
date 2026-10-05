@@ -5,12 +5,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CommunitySentimentCard extends StatefulWidget {
   final double niftyLivePrice;
+  final String niftyChangeStr; // e.g. "+0.17%" or "-0.45%"
   final String marketStatus;
   final bool isVotingAllowed;
 
   const CommunitySentimentCard({
     super.key,
     required this.niftyLivePrice,
+    required this.niftyChangeStr,
     required this.marketStatus,
     required this.isVotingAllowed,
   });
@@ -28,6 +30,11 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
   String? _myTargetLevel;
   bool _isSubmitting = false;
 
+  // Real Dynamic Accountability State
+  String? _yesterdayResultText;
+  bool _isCrowdWinner = false;
+  bool _hasYesterdayData = false;
+
   late AnimationController _pulseController;
 
   static const List<String> _monthNames = [
@@ -35,19 +42,16 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
     "July", "August", "September", "October", "November", "December"
   ];
 
-  // Dynamic Current Month Name (e.g. October, November)
   String get _currentMonthName {
     final now = DateTime.now();
     return _monthNames[now.month - 1];
   }
 
-  // Dynamic Daily Key
   String get _dailyPeriodKey {
     final now = DateTime.now();
     return "DAILY-${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
   }
 
-  // Dynamic Monthly Key (e.g. MONTHLY-2026-10) - Automatic rollover at month end
   String get _monthlyPeriodKey {
     final now = DateTime.now();
     return "MONTHLY-${now.year}-${now.month.toString().padLeft(2, '0')}";
@@ -55,7 +59,6 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
 
   String get _currentPeriod => _activeTab == 0 ? _dailyPeriodKey : _monthlyPeriodKey;
 
-  // Dynamic Nearest 500 Strike Ranges from Live CMP
   List<String> get _dynamicRanges {
     final p = widget.niftyLivePrice > 0 ? widget.niftyLivePrice : 22459.80;
     final base = ((p / 500).round() * 500).toInt();
@@ -74,13 +77,14 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
       duration: const Duration(milliseconds: 1400),
     )..repeat(reverse: true);
     _loadUserExistingVote();
+    _calculateYesterdayAccountability();
   }
 
   @override
   void didUpdateWidget(covariant CommunitySentimentCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.niftyLivePrice != widget.niftyLivePrice) {
-      setState(() {});
+    if (oldWidget.niftyChangeStr != widget.niftyChangeStr) {
+      _calculateYesterdayAccountability();
     }
   }
 
@@ -88,6 +92,50 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
   void dispose() {
     _pulseController.dispose();
     super.dispose();
+  }
+
+  // -------------------------------------------------------------
+  // Realtime Accuracy & Yesterday Validation
+  // -------------------------------------------------------------
+  Future<void> _calculateYesterdayAccountability() async {
+    try {
+      final now = DateTime.now();
+      DateTime prevTradingDay = now.subtract(const Duration(days: 1));
+      if (now.weekday == DateTime.monday) {
+        prevTradingDay = now.subtract(const Duration(days: 3)); // Monday skips to Friday
+      }
+
+      final prevKey = "DAILY-${prevTradingDay.year}-${prevTradingDay.month.toString().padLeft(2, '0')}-${prevTradingDay.day.toString().padLeft(2, '0')}";
+
+      final res = await _supabase
+          .from('sentiment_stats')
+          .select('bullish_pct, bearish_pct, total_votes')
+          .eq('target_month', prevKey)
+          .maybeSingle();
+
+      if (res != null && (res['total_votes'] ?? 0) > 0) {
+        final double prevBullPct = (res['bullish_pct'] as num).toDouble();
+        final bool wasCrowdBullish = prevBullPct >= 50.0;
+
+        final String changeStr = widget.niftyChangeStr;
+        final bool isNiftyGreen = !changeStr.startsWith("-");
+
+        final bool crowdWon = (wasCrowdBullish && isNiftyGreen) || (!wasCrowdBullish && !isNiftyGreen);
+
+        if (mounted) {
+          setState(() {
+            _hasYesterdayData = true;
+            _isCrowdWinner = crowdWon;
+            _yesterdayResultText =
+                "Yesterday: ${prevBullPct.toStringAsFixed(0)}% Bullish → NIFTY $changeStr [${crowdWon ? 'CROWD WON ✓' : 'CROWD TRAPPED ✗'}]";
+          });
+        }
+      } else {
+        if (mounted) setState(() => _hasYesterdayData = false);
+      }
+    } catch (_) {
+      if (mounted) setState(() => _hasYesterdayData = false);
+    }
   }
 
   Future<void> _loadUserExistingVote() async {
@@ -135,9 +183,9 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
 
     if (_activeTab == 0 && !widget.isVotingAllowed) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Color(0xFF141C2B),
-          content: Text('Voting locked! Market is currently live (opens post-market 3:30 PM).'),
+        SnackBar(
+          backgroundColor: const Color(0xFF141C2B),
+          content: Text('Voting locked! Market is currently ${widget.marketStatus}.'),
         ),
       );
       return;
@@ -255,7 +303,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               child: StreamBuilder<List<Map<String, dynamic>>>(
                 stream: _supabase
                     .from('sentiment_stats')
@@ -269,8 +317,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                   final bearPct = (data?['bearish_pct'] ?? 50.0).toDouble();
                   final sidePct = (data?['sideways_pct'] ?? 0.0).toDouble();
 
-                  // Dominance Status
-                  String dominantText = "⚖️️ EVEN MATCH";
+                  String dominantText = "⚖️ EVEN MATCH";
                   Color dominantColor = Colors.white70;
 
                   if (totalVotes > 0) {
@@ -291,7 +338,45 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Header Row: Badge + Dynamic Tabs
+                      // 1. DYNAMIC ACCOUNTABILITY STRIP (Only visible when yesterday data exists)
+                      if (_hasYesterdayData && _yesterdayResultText != null)
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF090E1A),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: _isCrowdWinner
+                                  ? const Color(0xFF00FF88).withOpacity(0.35)
+                                  : const Color(0xFFFF2A6D).withOpacity(0.35),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                _isCrowdWinner ? Icons.verified_rounded : Icons.warning_amber_rounded,
+                                color: _isCrowdWinner ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                                size: 14,
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  _yesterdayResultText!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontSize: 10,
+                                    color: _isCrowdWinner ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // 2. HEADER: BADGE + TABS
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -355,15 +440,15 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                             child: Row(
                               children: [
                                 _buildTabChip("Daily", 0),
-                                _buildTabChip(_currentMonthName, 1), // Dynamic Month Name
+                                _buildTabChip(_currentMonthName, 1),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 14),
 
-                      // Clean Question Without 'Expiry'
+                      // 3. CLEAN QUESTION
                       Text(
                         _activeTab == 0
                             ? "Kal Nifty Bullish rahega ya Bearish?"
@@ -374,51 +459,97 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 12),
 
-                      // Live Tug-of-War Scoreboard
+                      // 4. FLOATING DOMINANCE PILL
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: dominantColor.withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: dominantColor.withOpacity(0.35), width: 1),
+                          ),
+                          child: Text(
+                            dominantText,
+                            style: TextStyle(
+                              color: dominantColor,
+                              fontSize: 10.5,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.4,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+
+                      // 5. UNCLUTTERED SPLIT SCOREBOARD
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(0)}%",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: const Color(0xFF00FF88),
-                              fontSize: 26,
-                              fontWeight: FontWeight.w900,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(0)}%",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xFF00FF88),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w900,
+                                  height: 1.1,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              const Text(
+                                "BULLISH",
+                                style: TextStyle(color: Color(0xFF00FF88), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 4),
-                          const Text("BULLISH", style: TextStyle(color: Color(0xFF00FF88), fontSize: 10, fontWeight: FontWeight.w900)),
-                          const Spacer(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: dominantColor.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(6),
+                          if (_activeTab == 1)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  totalVotes == 0 ? "0%" : "${sidePct.toStringAsFixed(0)}%",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    color: const Color(0xFFFFB300),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w900,
+                                    height: 1.1,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                const Text(
+                                  "RANGE",
+                                  style: TextStyle(color: Color(0xFFFFB300), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                                ),
+                              ],
                             ),
-                            child: Text(
-                              dominantText,
-                              style: TextStyle(color: dominantColor, fontSize: 9.5, fontWeight: FontWeight.w900),
-                            ),
-                          ),
-                          const Spacer(),
-                          const Text("BEARISH", style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 10, fontWeight: FontWeight.w900)),
-                          const SizedBox(width: 4),
-                          Text(
-                            totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(0)}%",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: const Color(0xFFFF2A6D),
-                              fontSize: 26,
-                              fontWeight: FontWeight.w900,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(0)}%",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xFFFF2A6D),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w900,
+                                  height: 1.1,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              const Text(
+                                "BEARISH",
+                                style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
 
-                      // Multi-colored 3D Bar
+                      // 6. 3D RATIO BAR
                       Container(
                         height: 12,
                         decoration: BoxDecoration(
@@ -464,11 +595,8 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                       ),
                       const SizedBox(height: 18),
 
-                      // -----------------------------------------------------------
-                      // ACTIONS: DAILY vs EXPANDED SPACIOUS MONTHLY
-                      // -----------------------------------------------------------
+                      // 7. ACTION BUTTONS & CHIPS
                       if (_activeTab == 0) ...[
-                        // Daily 2-Column Buttons
                         Row(
                           children: [
                             Expanded(
@@ -504,7 +632,6 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ],
                       ] else ...[
-                        // 🌟 EXPANDED & UNCLUTTERED MONTHLY VIEW
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
