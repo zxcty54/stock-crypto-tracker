@@ -35,8 +35,19 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
   bool _isProcessing = false;
   String _statusMessage = '';
 
+  // 💔 Regret & Redemption Selected Tag
+  String? _selectedRegretTag;
+
   final List<String> _quickTickers = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'RELIANCE', 'CRUDEOIL', 'BTCUSD'];
   final List<String> _timeframes = ['1m', '3m', '5m', '15m', '1h', '4h', '1D', '1W'];
+
+  // Psychological Hook Tags
+  final List<Map<String, dynamic>> _regretTags = [
+    {'label': '🚫 Missed Entry', 'value': 'MISSED ENTRY', 'color': Color(0xFFFFB703)},
+    {'label': '⏳ Early Exit', 'value': 'EARLY EXIT', 'color': Color(0xFF00E5FF)},
+    {'label': '😡 Revenge Trade', 'value': 'REVENGE TRADE', 'color': Color(0xFFFF2A6D)},
+    {'label': '🎰 Overtrading', 'value': 'OVERTRADING', 'color': Color(0xFFB388FF)},
+  ];
 
   // Terminal Theme Constants
   static const Color bgSheet = Color(0xFF090D16);
@@ -97,7 +108,6 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
     return originalFile;
   }
 
-  // 🎯 Live Risk:Reward Ratio Calculation
   String _calculateRiskReward() {
     final entry = double.tryParse(_entryController.text.trim()) ?? 0.0;
     final sl = double.tryParse(_slController.text.trim()) ?? 0.0;
@@ -267,7 +277,6 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
 
       final imageUrl = supabase.storage.from('charts').getPublicUrl(fileName);
 
-      // Safe Map Payload: 'tags' completely removed to prevent DB schema mismatch
       final Map<String, dynamic> payload = {
         'user_id': user.id,
         'chart_url': imageUrl,
@@ -275,6 +284,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
         'timeframe': _selectedTimeframe,
         'bias': _selectedBias,
         'analysis_note': _noteController.text.trim(),
+        'regret_tag': _selectedRegretTag, // 👈 Regret / Redemption Tag
       };
 
       if (_enableLevels && _entryController.text.isNotEmpty) {
@@ -374,6 +384,71 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                   ],
                 ),
                 const SizedBox(height: 8),
+
+                // 💔 Regret & Redemption Psychology Chips (New)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'TRADER PSYCHOLOGY / CONFESSION',
+                          style: TextStyle(color: Color(0xFF6B7A99), fontSize: 9.5, fontWeight: FontWeight.w800, letterSpacing: 0.6),
+                        ),
+                        if (_selectedRegretTag != null) ...[
+                          const SizedBox(width: 6),
+                          InkWell(
+                            onTap: () => setState(() => _selectedRegretTag = null),
+                            child: const Text('Clear', style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 9.5, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      height: 30,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _regretTags.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 6),
+                        itemBuilder: (ctx, i) {
+                          final item = _regretTags[i];
+                          final isSelected = _selectedRegretTag == item['value'];
+                          final Color color = item['color'];
+
+                          return GestureDetector(
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              setState(() {
+                                _selectedRegretTag = isSelected ? null : item['value'];
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                color: isSelected ? color.withOpacity(0.25) : surfaceCard,
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: isSelected ? color : borderSubtle,
+                                  width: isSelected ? 1.2 : 0.8,
+                                ),
+                              ),
+                              child: Text(
+                                item['label'],
+                                style: TextStyle(
+                                  color: isSelected ? color : textMuted,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
 
                 // 3. Quick Ticker Selector Ribbon
                 SizedBox(
@@ -531,7 +606,7 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                 ),
                 const SizedBox(height: 10),
 
-                // 7. Actionable Execution Levels (Entry, SL, Target with Live R:R)
+                // 7. Actionable Execution Levels
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -602,11 +677,13 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                     controller: _noteController,
                     maxLines: 2,
                     style: const TextStyle(color: Colors.white, fontSize: 12),
-                    decoration: const InputDecoration(
-                      hintText: 'Add triggers: e.g. Retest of demand zone, RSI divergence...',
-                      hintStyle: TextStyle(color: Colors.white24, fontSize: 11),
+                    decoration: InputDecoration(
+                      hintText: _selectedRegretTag != null
+                          ? 'Galti kya hui? e.g. Missed plan trigger, entered late due to FOMO...'
+                          : 'Add triggers: e.g. Retest of demand zone, RSI divergence...',
+                      hintStyle: const TextStyle(color: Colors.white24, fontSize: 11),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -619,15 +696,15 @@ class _CreateChartPostSheetState extends State<CreateChartPostSheet> {
                   child: ElevatedButton(
                     onPressed: _isProcessing ? null : _submitPost,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: accentCyan,
+                      backgroundColor: _selectedRegretTag != null ? const Color(0xFFFF2A6D) : accentCyan,
                       disabledBackgroundColor: accentCyan.withOpacity(0.3),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       elevation: 0,
                     ),
                     child: Text(
-                      'PUBLISH WIRE SETUP',
+                      _selectedRegretTag != null ? 'PUBLISH CONFESSION & SETUP' : 'PUBLISH WIRE SETUP',
                       style: GoogleFonts.plusJakartaSans(
-                        color: Colors.black,
+                        color: _selectedRegretTag != null ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w900,
                         fontSize: 12,
                         letterSpacing: 0.8,
