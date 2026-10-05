@@ -20,6 +20,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
   bool _isLoadingPosts = true;
   String? _postsError;
 
+  // Active target period (Next month or custom label)
+  final String _currentPeriod = "NOV-2026";
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +56,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   void _openCreatePostFlow() {
     HapticFeedback.mediumImpact();
-    // Agar already logged in hai toh direct post bottomsheet open karein
     if (AuthService.isLoggedIn()) {
       _openCreatePostBottomSheet();
     } else {
@@ -148,7 +150,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         if (name.isEmpty) return;
 
                         setDialogState(() => isSubmitting = true);
-
                         final ok = await AuthService.startAnonymousSession(name);
 
                         if (!dialogCtx.mounted) return;
@@ -245,38 +246,303 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 ? Center(
                     child: Padding(
                       padding: const EdgeInsets.all(20),
-                      child: Text('Unable to connect: $_postsError',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11)),
+                      child: Text(
+                        'Unable to connect: $_postsError',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11),
+                      ),
                     ),
                   )
-                : _communityPosts.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
-                            const SizedBox(height: 10),
-                            const Text('No Setups Posted Yet',
-                                style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 4),
-                            const Text('Be the first to share your chart setup.',
-                                style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11)),
-                          ],
+                : ListView.builder(
+                    padding: const EdgeInsets.only(top: 8, bottom: 120),
+                    // Item count: 1 (Sentiment Widget) + Posts (ya 1 empty message)
+                    itemCount: 1 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
+                    itemBuilder: (context, index) {
+                      // ------------------------------------------------------
+                      // 🎯 INDEX 0: TOP SENTIMENT POLL WIDGET
+                      // ------------------------------------------------------
+                      if (index == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          child: CommunitySentimentCard(targetPeriod: _currentPeriod),
+                        );
+                      }
+
+                      // Agar posts empty hain toh Empty Placeholder Card dikhao
+                      if (_communityPosts.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 60),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'No Setups Posted Yet',
+                                style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Be the first to share your chart setup.',
+                                style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
+                      // ------------------------------------------------------
+                      // 📊 INDEX 1+: COMMUNITY TRADER POSTS
+                      // ------------------------------------------------------
+                      final post = _communityPosts[index - 1];
+                      return TraderFeedCard(
+                        key: ValueKey(post['id']),
+                        post: post,
+                        onPostDeleted: _fetchCommunityPosts,
+                      );
+                    },
+                  ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// 🎯 REALTIME COMMUNITY SENTIMENT CARD COMPONENT
+// ============================================================================
+class CommunitySentimentCard extends StatefulWidget {
+  final String targetPeriod;
+
+  const CommunitySentimentCard({super.key, required this.targetPeriod});
+
+  @override
+  State<CommunitySentimentCard> createState() => _CommunitySentimentCardState();
+}
+
+class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
+  final SupabaseClient _supabase = Supabase.instance.client;
+  String? _myVote;
+  bool _isSubmitting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMyVote();
+  }
+
+  Future<void> _loadMyVote() async {
+    final user = _supabase.auth.currentUser;
+    if (user == null) return;
+
+    try {
+      final res = await _supabase
+          .from('user_predictions')
+          .select('prediction')
+          .eq('user_id', user.id)
+          .eq('target_month', widget.targetPeriod)
+          .maybeSingle();
+
+      if (res != null && mounted) {
+        setState(() {
+          _myVote = res['prediction'] as String?;
+        });
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _castVote(String type) async {
+    final user = _supabase.auth.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Color(0xFF0F1726),
+          content: Text('Please login or create handle to vote!', style: TextStyle(color: Colors.white, fontSize: 12)),
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isSubmitting = true);
+    HapticFeedback.lightImpact();
+
+    try {
+      await _supabase.from('user_predictions').upsert({
+        'user_id': user.id,
+        'target_month': widget.targetPeriod,
+        'prediction': type,
+      });
+
+      if (mounted) {
+        setState(() {
+          _myVote = type;
+          _isSubmitting = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isSubmitting = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Vote error: $e')),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1726),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: StreamBuilder<List<Map<String, dynamic>>>(
+        stream: _supabase
+            .from('sentiment_stats')
+            .stream(primaryKey: ['target_month'])
+            .eq('target_month', widget.targetPeriod),
+        builder: (context, snapshot) {
+          final data = snapshot.data?.isNotEmpty == true ? snapshot.data!.first : null;
+
+          final totalVotes = data?['total_votes'] ?? 0;
+          final bullPct = (data?['bullish_pct'] ?? 50.0).toDouble();
+          final bearPct = (data?['bearish_pct'] ?? 50.0).toDouble();
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.bolt_rounded, color: Color(0xFF00E5FF), size: 16),
+                      const SizedBox(width: 6),
+                      Text(
+                        'MARKET SENTIMENT (${widget.targetPeriod})',
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.5,
                         ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.only(top: 8, bottom: 120),
-                        itemCount: _communityPosts.length,
-                        itemBuilder: (context, index) {
-                          final post = _communityPosts[index];
-                          return TraderFeedCard(
-                            key: ValueKey(post['id']),
-                            post: post,
-                            onPostDeleted: _fetchCommunityPosts,
-                          );
-                        },
                       ),
+                    ],
+                  ),
+                  Text(
+                    '$totalVotes votes',
+                    style: const TextStyle(color: Color(0xFF8896AB), fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Ratio Progress Bar
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: SizedBox(
+                  height: 8,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: totalVotes == 0 ? 50 : bullPct.round().clamp(1, 99),
+                        child: Container(color: const Color(0xFF00C076)),
+                      ),
+                      const SizedBox(width: 2),
+                      Expanded(
+                        flex: totalVotes == 0 ? 50 : bearPct.round().clamp(1, 99),
+                        child: Container(color: const Color(0xFFFF2A6D)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Percentage Breakdown
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Bullish: ${totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(1)}%"}',
+                    style: const TextStyle(color: Color(0xFF00C076), fontWeight: FontWeight.w900, fontSize: 11),
+                  ),
+                  Text(
+                    'Bearish: ${totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(1)}%"}',
+                    style: const TextStyle(color: Color(0xFFFF2A6D), fontWeight: FontWeight.w900, fontSize: 11),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Action Voting Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildVoteBtn(
+                      label: 'BULLISH',
+                      type: 'BULLISH',
+                      icon: Icons.trending_up_rounded,
+                      color: const Color(0xFF00C076),
+                      isSelected: _myVote == 'BULLISH',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _buildVoteBtn(
+                      label: 'BEARISH',
+                      type: 'BEARISH',
+                      icon: Icons.trending_down_rounded,
+                      color: const Color(0xFFFF2A6D),
+                      isSelected: _myVote == 'BEARISH',
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildVoteBtn({
+    required String label,
+    required String type,
+    required IconData icon,
+    required Color color,
+    required bool isSelected,
+  }) {
+    return InkWell(
+      onTap: _isSubmitting ? null : () => _castVote(type),
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.18) : const Color(0xFF141C2B),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected ? color : const Color(0xFF1E2B3E),
+            width: isSelected ? 1.5 : 1,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 15, color: isSelected ? color : Colors.white60),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? color : Colors.white70,
+                fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
+                fontSize: 11,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
