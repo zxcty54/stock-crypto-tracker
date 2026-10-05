@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,11 +12,15 @@ class CompanyIntelligenceScreen extends StatefulWidget {
 }
 
 class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
-  // ⚡ Fastly CDN Primary
+  // ⚡ 1. Primary Cloudflare Worker Proxy (No ISP Block + Zero 24hr Cache Delay)
+  final String _workerUrl =
+      'https://stock-models-api.nitesh-skyhigh.workers.dev/';
+
+  // 🛡️️ 2. Secondary Fastly jsDelivr Mirror (Fallback)
   final String _fastlyUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
 
-  // 🛡️ Cloudflare jsDelivr Backup (ISP block proof)
+  // 🛡️ 3. Cloudflare jsDelivr Mirror (Secondary Fallback)
   final String _cfUrl =
       'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/company_business_models.json';
 
@@ -36,31 +39,56 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   Future<void> _fetchCompaniesData({bool isManual = false}) async {
     if (isManual) setState(() => _isRefreshing = true);
 
-    final nonce = '${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(9999)}';
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
 
-    // 1. Try Fastly jsDelivr with Cache-Bust Nonce
+    // -------------------------------------------------------------------------
+    // Tier 1: Cloudflare Worker API (Fast, Fresh, High Availability)
+    // -------------------------------------------------------------------------
     try {
-      final res = await http.get(
-        Uri.parse('$_fastlyUrl?v=$nonce'),
+      final resWorker = await http.get(
+        Uri.parse('$_workerUrl?_t=$timestamp'),
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      ).timeout(const Duration(seconds: 10));
+
+      if (resWorker.statusCode == 200) {
+        _parseAndSetData(resWorker.body);
+        _showToast(isManual);
+        return;
+      }
+    } catch (e) {
+      debugPrint("Cloudflare Worker fetch failed: $e. Trying Fastly fallback...");
+    }
+
+    // -------------------------------------------------------------------------
+    // Tier 2: Fastly jsDelivr (Edge Cache)
+    // -------------------------------------------------------------------------
+    try {
+      final resFastly = await http.get(
+        Uri.parse('$_fastlyUrl?_t=$timestamp'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
         },
       ).timeout(const Duration(seconds: 8));
 
-      if (res.statusCode == 200) {
-        _parseAndSetData(res.body);
+      if (resFastly.statusCode == 200) {
+        _parseAndSetData(resFastly.body);
         _showToast(isManual);
         return;
       }
     } catch (e) {
-      debugPrint("Fastly failed/blocked: $e. Trying Cloudflare jsDelivr...");
+      debugPrint("Fastly failed: $e. Trying Cloudflare jsDelivr mirror...");
     }
 
-    // 2. Try Cloudflare jsDelivr Backup (ISPs par kabhi block nahi hota)
+    // -------------------------------------------------------------------------
+    // Tier 3: Cloudflare jsDelivr
+    // -------------------------------------------------------------------------
     try {
       final resCf = await http.get(
-        Uri.parse('$_cfUrl?v=$nonce'),
+        Uri.parse('$_cfUrl?_t=$timestamp'),
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
@@ -73,14 +101,22 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         return;
       }
     } catch (e) {
-      debugPrint("Cloudflare mirror failed: $e");
+      debugPrint("Cloudflare CDN mirror failed: $e. Loading local assets...");
     }
 
-    setState(() {
-      _errorMessage = 'Internet network error. CDN connect nahi ho pa raha hai.';
-      _isLoading = false;
-      _isRefreshing = false;
-    });
+    // -------------------------------------------------------------------------
+    // Tier 4: Offline Local Assets Fallback
+    // -------------------------------------------------------------------------
+    try {
+      final localData = await rootBundle.loadString('assets/data/company_business_models.json');
+      _parseAndSetData(localData);
+    } catch (localErr) {
+      setState(() {
+        _errorMessage = 'Internet network error. Data connect nahi ho pa raha hai.';
+        _isLoading = false;
+        _isRefreshing = false;
+      });
+    }
   }
 
   void _showToast(bool isManual) {
@@ -133,9 +169,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         String query = "";
         return StatefulBuilder(
           builder: (context, setModalState) {
+            // A to Z Alphabetical Sort taaki 100+ stocks structured dikhein
             final filteredSymbols = _companiesData.keys
                 .where((s) => s.toLowerCase().contains(query.toLowerCase()))
-                .toList();
+                .toList()
+              ..sort();
 
             return Container(
               height: MediaQuery.of(context).size.height * 0.80,
@@ -234,7 +272,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                           trailing: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF131D31),
+                              color: const Color(0xFF131F33),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(color: const Color(0xFF1E2B3E)),
                             ),
@@ -289,7 +327,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
                     _fetchCompaniesData(isManual: true);
                   },
                   icon: const Icon(Icons.refresh_rounded, color: Color(0xFF00E5FF)),
-                  label: const Text('Retry CDN Fetch', style: TextStyle(color: Color(0xFF00E5FF))),
+                  label: const Text('Retry Fetch', style: TextStyle(color: Color(0xFF00E5FF))),
                 ),
               ],
             ),
@@ -300,7 +338,6 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
 
     final company = (_companiesData[_selectedSymbol] as Map<String, dynamic>?) ?? {};
 
-    // 🛡 Fix: JSON ke dono keys support karta hai (business_model_architecture aur business_company_architecture)
     final bModel = (company['business_model_architecture'] as Map<String, dynamic>?) ??
         (company['business_company_architecture'] as Map<String, dynamic>?) ??
         {};
