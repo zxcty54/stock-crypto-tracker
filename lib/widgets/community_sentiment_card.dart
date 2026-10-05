@@ -12,9 +12,9 @@ class CommunitySentimentCard extends StatefulWidget {
   const CommunitySentimentCard({
     super.key,
     required this.niftyLivePrice,
-    required this.niftyChangeStr,
-    required this.marketStatus,
-    required this.isVotingAllowed,
+    this.niftyChangeStr = "+0.00%", // Safe default: Compilation error fix
+    this.marketStatus = "POST_MARKET",
+    this.isVotingAllowed = true,
   });
 
   @override
@@ -42,11 +42,13 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
     "July", "August", "September", "October", "November", "December"
   ];
 
+  // Dynamic Current Month Name
   String get _currentMonthName {
     final now = DateTime.now();
     return _monthNames[now.month - 1];
   }
 
+  // Dynamic Rolling Keys (Month rollover handled automatically)
   String get _dailyPeriodKey {
     final now = DateTime.now();
     return "DAILY-${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
@@ -59,6 +61,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
 
   String get _currentPeriod => _activeTab == 0 ? _dailyPeriodKey : _monthlyPeriodKey;
 
+  // Dynamic 500-Strike Ranges from Nifty CMP
   List<String> get _dynamicRanges {
     final p = widget.niftyLivePrice > 0 ? widget.niftyLivePrice : 22459.80;
     final base = ((p / 500).round() * 500).toInt();
@@ -338,7 +341,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // 1. DYNAMIC ACCOUNTABILITY STRIP (Only visible when yesterday data exists)
+                      // 1. DYNAMIC ACCOUNTABILITY STRIP (Only visible when verified yesterday data exists)
                       if (_hasYesterdayData && _yesterdayResultText != null)
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
@@ -376,7 +379,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ),
 
-                      // 2. HEADER: BADGE + TABS
+                      // 2. HEADER ROW: BADGE + DYNAMIC TABS
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -461,7 +464,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                       ),
                       const SizedBox(height: 12),
 
-                      // 4. FLOATING DOMINANCE PILL
+                      // 4. FLOATING DOMINANCE BADGE (Separate Row)
                       Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -632,6 +635,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ],
                       ] else ...[
+                        // Spacious Monthly Container
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
