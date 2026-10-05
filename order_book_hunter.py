@@ -16,7 +16,7 @@ MIN_ORDER_TO_MCAP_MULTIPLE = 1.5  # At least 1.5x of Market Cap
 
 # Gemini Candidate Models
 CANDIDATE_MODELS = [
-    "gemini-2.5-flash",
+    "gemini-3.5-flash-lite",
     "gemini-2.0-flash",
     "gemini-1.5-flash"
 ]
