@@ -30,14 +30,32 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
 
   late AnimationController _pulseController;
 
+  static const List<String> _monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Dynamic Current Month Name (e.g. October, November)
+  String get _currentMonthName {
+    final now = DateTime.now();
+    return _monthNames[now.month - 1];
+  }
+
+  // Dynamic Daily Key
   String get _dailyPeriodKey {
     final now = DateTime.now();
     return "DAILY-${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
   }
 
-  final String _monthlyPeriodKey = "EXPIRY-NOV-2026";
+  // Dynamic Monthly Key (e.g. MONTHLY-2026-10) - Automatic rollover at month end
+  String get _monthlyPeriodKey {
+    final now = DateTime.now();
+    return "MONTHLY-${now.year}-${now.month.toString().padLeft(2, '0')}";
+  }
+
   String get _currentPeriod => _activeTab == 0 ? _dailyPeriodKey : _monthlyPeriodKey;
 
+  // Dynamic Nearest 500 Strike Ranges from Live CMP
   List<String> get _dynamicRanges {
     final p = widget.niftyLivePrice > 0 ? widget.niftyLivePrice : 22459.80;
     final base = ((p / 500).round() * 500).toInt();
@@ -117,23 +135,26 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
 
     if (_activeTab == 0 && !widget.isVotingAllowed) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: const Color(0xFF141C2B),
-          content: Text('Voting locked! Market is currently ${widget.marketStatus}.'),
+        const SnackBar(
+          backgroundColor: Color(0xFF141C2B),
+          content: Text('Voting locked! Market is currently live (opens post-market 3:30 PM).'),
         ),
       );
       return;
     }
 
+    final bool isUpdate = _myVote != null;
+    final bool isOnlyRangeChange = isUpdate && _myVote == type && _myTargetLevel != targetLevel;
+
     setState(() => _isSubmitting = true);
-    HapticFeedback.heavyImpact();
+    HapticFeedback.selectionClick();
 
     try {
       final payload = {
         'user_id': user.id,
         'target_month': _currentPeriod,
         'prediction': type,
-        if (targetLevel != null) 'target_level': targetLevel,
+        'target_level': targetLevel ?? _myTargetLevel,
       };
 
       await _supabase.from('user_predictions').upsert(
@@ -148,14 +169,30 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
           _isSubmitting = false;
         });
 
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: const Color(0xFF10192A),
             behavior: SnackBarBehavior.floating,
+            duration: const Duration(milliseconds: 1500),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            content: Text(
-              'Vote Recorded: $type ${targetLevel ?? ""}',
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            content: Row(
+              children: [
+                Icon(
+                  isOnlyRangeChange ? Icons.tune_rounded : Icons.check_circle_rounded,
+                  color: const Color(0xFF00E5FF),
+                  size: 18,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    isOnlyRangeChange
+                        ? 'Range Updated: $targetLevel'
+                        : (isUpdate ? 'Vote Changed to $type' : 'Vote Recorded: $type'),
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+              ],
             ),
           ),
         );
@@ -232,8 +269,8 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                   final bearPct = (data?['bearish_pct'] ?? 50.0).toDouble();
                   final sidePct = (data?['sideways_pct'] ?? 0.0).toDouble();
 
-                  // Dominance Status Logic
-                  String dominantText = "⚖️ EVEN MATCH";
+                  // Dominance Status
+                  String dominantText = "⚖️️ EVEN MATCH";
                   Color dominantColor = Colors.white70;
 
                   if (totalVotes > 0) {
@@ -249,10 +286,12 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                     }
                   }
 
+                  final bool isDailyLocked = _activeTab == 0 && !widget.isVotingAllowed;
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Header Row
+                      // Header Row: Badge + Dynamic Tabs
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -264,10 +303,14 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                   return Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF00FF88).withOpacity(0.12 + (_pulseController.value * 0.1)),
+                                      color: isDailyLocked
+                                          ? Colors.orange.withOpacity(0.12)
+                                          : const Color(0xFF00FF88).withOpacity(0.12 + (_pulseController.value * 0.1)),
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(
-                                        color: const Color(0xFF00FF88).withOpacity(0.4 + (_pulseController.value * 0.4)),
+                                        color: isDailyLocked
+                                            ? Colors.orange.withOpacity(0.5)
+                                            : const Color(0xFF00FF88).withOpacity(0.4 + (_pulseController.value * 0.4)),
                                       ),
                                     ),
                                     child: Row(
@@ -275,16 +318,16 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                         Container(
                                           width: 6,
                                           height: 6,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFF00FF88),
+                                          decoration: BoxDecoration(
+                                            color: isDailyLocked ? Colors.orange : const Color(0xFF00FF88),
                                             shape: BoxShape.circle,
                                           ),
                                         ),
                                         const SizedBox(width: 5),
                                         Text(
-                                          widget.marketStatus == "LIVE" ? "MARKET LIVE" : "LIVE POLL",
+                                          isDailyLocked ? "MARKET LIVE" : "LIVE POLL",
                                           style: GoogleFonts.plusJakartaSans(
-                                            color: const Color(0xFF00FF88),
+                                            color: isDailyLocked ? Colors.orange : const Color(0xFF00FF88),
                                             fontSize: 9.5,
                                             fontWeight: FontWeight.w900,
                                             letterSpacing: 0.5,
@@ -312,7 +355,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                             child: Row(
                               children: [
                                 _buildTabChip("Daily", 0),
-                                _buildTabChip("Nov Expiry", 1),
+                                _buildTabChip(_currentMonthName, 1), // Dynamic Month Name
                               ],
                             ),
                           ),
@@ -320,19 +363,20 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                       ),
                       const SizedBox(height: 16),
 
+                      // Clean Question Without 'Expiry'
                       Text(
                         _activeTab == 0
                             ? "Kal Nifty Bullish rahega ya Bearish?"
-                            : "November Expiry tak Nifty ka Major Trend?",
+                            : "$_currentMonthName me Nifty ka Major Trend?",
                         style: GoogleFonts.plusJakartaSans(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 14.5,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       const SizedBox(height: 14),
 
-                      // Scoreboard
+                      // Live Tug-of-War Scoreboard
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
@@ -374,7 +418,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                       ),
                       const SizedBox(height: 10),
 
-                      // Multi-color Bar
+                      // Multi-colored 3D Bar
                       Container(
                         height: 12,
                         decoration: BoxDecoration(
@@ -418,10 +462,13 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 18),
 
-                      // Voting Buttons
+                      // -----------------------------------------------------------
+                      // ACTIONS: DAILY vs EXPANDED SPACIOUS MONTHLY
+                      // -----------------------------------------------------------
                       if (_activeTab == 0) ...[
+                        // Daily 2-Column Buttons
                         Row(
                           children: [
                             Expanded(
@@ -431,6 +478,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                 icon: Icons.trending_up_rounded,
                                 baseColor: const Color(0xFF00FF88),
                                 isSelected: _myVote == "BULLISH",
+                                isLocked: isDailyLocked,
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -441,69 +489,97 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                 icon: Icons.trending_down_rounded,
                                 baseColor: const Color(0xFFFF2A6D),
                                 isSelected: _myVote == "BEARISH",
+                                isLocked: isDailyLocked,
                               ),
                             ),
                           ],
                         ),
+                        if (isDailyLocked) ...[
+                          const SizedBox(height: 8),
+                          const Center(
+                            child: Text(
+                              "🔒 Market is live. Daily voting opens at 3:30 PM.",
+                              style: TextStyle(color: Colors.orange, fontSize: 10, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
                       ] else ...[
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildHeroActionBtn(
-                                label: "BULLISH",
-                                type: "BULLISH",
-                                icon: Icons.trending_up_rounded,
-                                baseColor: const Color(0xFF00FF88),
-                                isSelected: _myVote == "BULLISH",
+                        // 🌟 EXPANDED & UNCLUTTERED MONTHLY VIEW
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF090E1A).withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: const Color(0xFF1E2B3E)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "1. SELECT PRIMARY BIAS",
+                                style: TextStyle(color: Colors.white54, fontSize: 9.5, fontWeight: FontWeight.w900, letterSpacing: 0.5),
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: _buildHeroActionBtn(
-                                label: "SIDEWAYS",
-                                type: "SIDEWAYS",
-                                icon: Icons.swap_horiz_rounded,
-                                baseColor: const Color(0xFFFFB300),
-                                isSelected: _myVote == "SIDEWAYS",
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildHeroActionBtn(
+                                      label: "BULLISH",
+                                      type: "BULLISH",
+                                      icon: Icons.trending_up_rounded,
+                                      baseColor: const Color(0xFF00FF88),
+                                      isSelected: _myVote == "BULLISH",
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: _buildHeroActionBtn(
+                                      label: "RANGE",
+                                      type: "SIDEWAYS",
+                                      icon: Icons.swap_horiz_rounded,
+                                      baseColor: const Color(0xFFFFB300),
+                                      isSelected: _myVote == "SIDEWAYS",
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: _buildHeroActionBtn(
+                                      label: "BEARISH",
+                                      type: "BEARISH",
+                                      icon: Icons.trending_down_rounded,
+                                      baseColor: const Color(0xFFFF2A6D),
+                                      isSelected: _myVote == "BEARISH",
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: _buildHeroActionBtn(
-                                label: "BEARISH",
-                                type: "BEARISH",
-                                icon: Icons.trending_down_rounded,
-                                baseColor: const Color(0xFFFF2A6D),
-                                isSelected: _myVote == "BEARISH",
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "2. TARGET RANGE",
+                                    style: TextStyle(color: Colors.white54, fontSize: 9.5, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                                  ),
+                                  Text(
+                                    "Nifty: ${widget.niftyLivePrice.toStringAsFixed(1)}",
+                                    style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 14),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "EXPECTED RANGE:",
-                              style: TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w900),
-                            ),
-                            Text(
-                              "Nifty CMP: ${widget.niftyLivePrice.toStringAsFixed(1)}",
-                              style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: _dynamicRanges.map((range) {
-                            return Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 3),
-                                child: _buildRangeChip(range),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: _dynamicRanges.map((range) {
+                                  return Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 3),
+                                      child: _buildRangeChip(range),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                            );
-                          }).toList(),
+                            ],
+                          ),
                         ),
                       ],
                     ],
@@ -546,32 +622,51 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
     required IconData icon,
     required Color baseColor,
     required bool isSelected,
+    bool isLocked = false,
   }) {
     return InkWell(
-      onTap: _isSubmitting ? null : () => _castVote(type, targetLevel: _myTargetLevel),
+      onTap: (_isSubmitting || isLocked) ? null : () => _castVote(type, targetLevel: _myTargetLevel),
       borderRadius: BorderRadius.circular(12),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 11),
         decoration: BoxDecoration(
-          color: isSelected ? baseColor.withOpacity(0.25) : const Color(0xFF0A0F1D),
+          color: isLocked
+              ? Colors.white.withOpacity(0.04)
+              : (isSelected ? baseColor.withOpacity(0.25) : const Color(0xFF0A0F1D)),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? baseColor : baseColor.withOpacity(0.35),
+            color: isLocked
+                ? Colors.white12
+                : (isSelected ? baseColor : baseColor.withOpacity(0.35)),
             width: isSelected ? 2.0 : 1.2,
           ),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: baseColor.withOpacity(0.4),
+                    blurRadius: 14,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : [],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 16, color: isSelected ? baseColor : Colors.white70),
-            const SizedBox(width: 6),
+            Icon(
+              isLocked ? Icons.lock_outline_rounded : icon,
+              size: 15,
+              color: isLocked ? Colors.white30 : (isSelected ? baseColor : Colors.white70),
+            ),
+            const SizedBox(width: 5),
             Text(
-              isSelected ? "$label ✓" : label,
+              isLocked ? "LOCKED" : (isSelected ? "$label ✓" : label),
               style: TextStyle(
-                color: isSelected ? baseColor : Colors.white,
+                color: isLocked ? Colors.white30 : (isSelected ? baseColor : Colors.white),
                 fontWeight: FontWeight.w900,
-                fontSize: 12,
+                fontSize: 11,
+                letterSpacing: 0.3,
               ),
             ),
           ],
@@ -583,20 +678,26 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
   Widget _buildRangeChip(String range) {
     final isSelected = _myTargetLevel == range;
     return InkWell(
-      onTap: () {
-        if (_myVote != null) {
-          _castVote(_myVote!, targetLevel: range);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Pehle Bullish/Bearish/Sideways chun lijiye!")),
-          );
-        }
-      },
+      onTap: _isSubmitting
+          ? null
+          : () {
+              if (_myVote != null) {
+                _castVote(_myVote!, targetLevel: range);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Color(0xFF141C2B),
+                    content: Text('Pehle Bullish, Range ya Bearish select karein!'),
+                  ),
+                );
+              }
+            },
       borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 7),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.2) : const Color(0xFF090E1A),
+          color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.2) : const Color(0xFF0E1524),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: isSelected ? const Color(0xFF00E5FF) : const Color(0xFF26354D),
@@ -609,7 +710,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
           style: TextStyle(
             color: isSelected ? const Color(0xFF00E5FF) : Colors.white70,
             fontSize: 10,
-            fontWeight: FontWeight.bold,
+            fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
           ),
         ),
       ),
