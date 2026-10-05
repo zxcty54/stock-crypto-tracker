@@ -1,0 +1,52 @@
+name: Hunt Smallcap Order Book Hidden Gems
+
+on:
+  schedule:
+    # ⏰ Har Monday se Friday raat 7:30 PM IST (14:00 UTC) par execute hoga
+    - cron: '0 14 * * 1-5'
+  workflow_dispatch: # Manual one-click trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  hunt-order-gems:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Required Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 yfinance
+
+      - name: 🚀 Execute Order Book Hunter Engine
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python order_book_hunter.py
+
+      - name: 💾 Commit and Push Updated Radar JSON
+        run: |
+          git config --global user.name "OrderHunterBot"
+          git config --global user.email "bot@github-actions.internal"
+          git add order_radar_report.json
+
+          # Sirf tab commit karega agar JSON content mein koi naya change aaya ho
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes detected in order_radar_report.json. Skipping commit."
+          else
+            git commit -m "🤖 Auto-Update: Order Book Hidden Gems Radar [skip ci]"
+            git push
+            echo "✅ Successfully pushed updated order_radar_report.json to repository!"
+          fi
