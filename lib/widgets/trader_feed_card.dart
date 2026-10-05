@@ -42,6 +42,21 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     _fetchCommentCount();
   }
 
+  Color _getRegretColor(String? tag) {
+    switch (tag) {
+      case 'REVENGE TRADE':
+        return const Color(0xFFFF2A6D);
+      case 'MISSED ENTRY':
+        return const Color(0xFFFFB703);
+      case 'EARLY EXIT':
+        return const Color(0xFF00E5FF);
+      case 'OVERTRADING':
+        return const Color(0xFFB388FF);
+      default:
+        return const Color(0xFF6B7A99);
+    }
+  }
+
   Future<void> _checkMyVote() async {
     final user = supabase.auth.currentUser;
     if (user == null) return;
@@ -106,7 +121,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     } catch (_) {}
   }
 
-  // ✏️ Edit Post Note & Bias
   Future<void> _editPost() async {
     final noteCtrl = TextEditingController(text: _analysisNote);
     String editBias = _bias;
@@ -281,7 +295,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     }
   }
 
-  // 🔍 Full Screen Viewport (Interactive Zoom on Tap)
   void _openFullScreenChart(String imageUrl) {
     showDialog(
       context: context,
@@ -330,7 +343,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     );
   }
 
-  // 💬 Comments & Replies Modal Sheet
   void _openCommentsSheet() {
     showModalBottomSheet(
       context: context,
@@ -370,21 +382,26 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     final String authorName = profile?['full_name'] ?? 'Trader';
     final String username = profile?['username'] ?? 'trader';
 
+    final String? regretTag = widget.post['regret_tag'];
+    final bool hasRegret = regretTag != null && regretTag.trim().isNotEmpty;
+    final Color regretColor = _getRegretColor(regretTag);
+
     Color biasColor = const Color(0xFFFFD700);
     if (_bias == 'BULLISH') biasColor = const Color(0xFF00F5A0);
     if (_bias == 'BEARISH') biasColor = const Color(0xFFFF2A6D);
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        color: hasRegret ? regretColor.withOpacity(0.02) : Colors.transparent,
         border: Border(
-          bottom: BorderSide(color: Color(0xFF1A2333), width: 0.8),
+          bottom: const BorderSide(color: Color(0xFF1A2333), width: 0.8),
+          left: hasRegret ? BorderSide(color: regretColor, width: 3.0) : BorderSide.none,
         ),
       ),
       padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Left Avatar
           CircleAvatar(
             radius: 18,
             backgroundColor: const Color(0xFF1E2B3E),
@@ -395,16 +412,13 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
           ),
           const SizedBox(width: 10),
 
-          // 2. Right Content Block
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🎯 Header: Fixed alignment with 3-dot stuck to the right edge
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Author & Handle container
                     Expanded(
                       child: Row(
                         children: [
@@ -431,7 +445,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                       ),
                     ),
 
-                    // Right Side Group: Bias Chip + 3-Dot (Extreme Right)
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -511,7 +524,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                   ],
                 ),
 
-                // Asset Symbol & Timeframe badge
+                // Asset Symbol, Timeframe & Clean Regret Tag Badge
                 Padding(
                   padding: const EdgeInsets.only(top: 2, bottom: 4),
                   child: Row(
@@ -536,11 +549,32 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                           style: const TextStyle(color: Colors.white54, fontSize: 9, fontWeight: FontWeight.bold),
                         ),
                       ),
+
+                      // Regret / Redemption Tag
+                      if (hasRegret) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
+                          decoration: BoxDecoration(
+                            color: regretColor.withOpacity(0.14),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: regretColor.withOpacity(0.4), width: 0.8),
+                          ),
+                          child: Text(
+                            regretTag!,
+                            style: GoogleFonts.robotoMono(
+                              color: regretColor,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
 
-                // Analysis Note
                 if (_analysisNote.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
@@ -550,7 +584,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                     ),
                   ),
 
-                // 📈 Full-Width Canvas Chart (Edge-to-Edge Fill + Tap to Zoom)
                 if (widget.post['chart_url'] != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 10),
@@ -561,7 +594,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                         child: Container(
                           width: double.infinity,
                           constraints: const BoxConstraints(
-                            maxHeight: 380, // Poori height taaki canvas cut na ho
+                            maxHeight: 380,
                           ),
                           decoration: BoxDecoration(
                             border: Border.all(color: const Color(0xFF1E2B3E)),
@@ -571,7 +604,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                           child: CachedNetworkImage(
                             imageUrl: widget.post['chart_url'],
                             width: double.infinity,
-                            fit: BoxFit.cover, // 👈 Pure container ko cover karega (zero black side bars)
+                            fit: BoxFit.cover,
                             alignment: Alignment.topCenter,
                             placeholder: (c, u) => Container(
                               height: 220,
@@ -593,11 +626,9 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                     ),
                   ),
 
-                // Twitter Style Bottom Actions (Comments, Agree, Disagree)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Comment button
                     InkWell(
                       onTap: _openCommentsSheet,
                       child: Row(
@@ -612,7 +643,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                       ),
                     ),
 
-                    // Agree (Upvote)
                     InkWell(
                       onTap: () => _castVote('AGREE'),
                       child: Row(
@@ -635,7 +665,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                       ),
                     ),
 
-                    // Trap Alert (Disagree)
                     InkWell(
                       onTap: () => _castVote('DISAGREE'),
                       child: Row(
@@ -658,7 +687,6 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
                       ),
                     ),
 
-                    // Sentiment %
                     Text(
                       '${(_agreeCount + _disagreeCount) == 0 ? 50 : ((_agreeCount / (_agreeCount + _disagreeCount)) * 100).toInt()}% Bull',
                       style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 9.5),
@@ -675,7 +703,7 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
 }
 
 // =========================================================
-// 💬 Comment & Threaded Reply Bottom Sheet
+// Comment & Threaded Reply Bottom Sheet
 // =========================================================
 class _CommentSectionSheet extends StatefulWidget {
   final String postId;
@@ -765,7 +793,6 @@ class _CommentSectionSheetState extends State<_CommentSectionSheet> {
         height: MediaQuery.of(context).size.height * 0.75,
         child: Column(
           children: [
-            // Sheet Header
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: const BoxDecoration(
@@ -790,7 +817,6 @@ class _CommentSectionSheetState extends State<_CommentSectionSheet> {
               ),
             ),
 
-            // Comments List
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2))
@@ -824,7 +850,6 @@ class _CommentSectionSheetState extends State<_CommentSectionSheet> {
                         ),
             ),
 
-            // Reply Banner
             if (_replyingTo != null)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
@@ -844,7 +869,6 @@ class _CommentSectionSheetState extends State<_CommentSectionSheet> {
                 ),
               ),
 
-            // Bottom Input Field
             Container(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
               decoration: const BoxDecoration(
