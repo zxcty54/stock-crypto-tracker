@@ -7,7 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../widgets/trader_feed_card.dart';
 import '../widgets/create_chart_post_sheet.dart';
-import '../widgets/create_confession_sheet.dart'; // 👈 Text-Only Confession Sheet Import
+import '../widgets/create_confession_sheet.dart';
 import '../widgets/community_sentiment_card.dart';
 import '../services/auth_service.dart';
 
@@ -26,6 +26,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
   bool _isLoadingPosts = true;
   String? _postsError;
 
+  // 🎯 Feed Filter State: 'ALL', 'CHARTS', 'CONFESSIONS'
+  String _selectedFilter = 'ALL';
+
   // Google Sheet Web App State
   Map<String, dynamic> _liveIndices = {};
   double _niftyPrice = 22459.80;
@@ -40,6 +43,20 @@ class _CommunityScreenState extends State<CommunityScreen> {
     super.initState();
     _fetchLiveIndices();
     _fetchCommunityPosts();
+  }
+
+  // Filtered List calculation
+  List<Map<String, dynamic>> get _filteredPosts {
+    if (_selectedFilter == 'CHARTS') {
+      return _communityPosts.where((p) => p['chart_url'] != null && (p['chart_url'] as String).isNotEmpty).toList();
+    } else if (_selectedFilter == 'CONFESSIONS') {
+      return _communityPosts.where((p) {
+        final tag = p['regret_tag']?.toString();
+        final bool isAnon = p['is_anonymous'] == true;
+        return (tag != null && tag.isNotEmpty) || isAnon;
+      }).toList();
+    }
+    return _communityPosts;
   }
 
   Future<void> _fetchLiveIndices() async {
@@ -100,7 +117,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           .from('trader_posts')
           .select('*, profiles(username, full_name, avatar_url)')
           .order('created_at', ascending: false)
-          .limit(30);
+          .limit(40);
 
       if (mounted) {
         setState(() {
@@ -263,6 +280,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final posts = _filteredPosts;
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xFF090D16),
@@ -301,8 +320,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
           },
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 6, bottom: 120),
-            // 3 static header items: Indices (0), Sentiment (1), Confession Bar (2)
-            itemCount: 3 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
+            // 4 static headers: Indices(0), Sentiment(1), ConfessionBar(2), FilterRibbon(3)
+            itemCount: 4 + (posts.isEmpty ? 1 : posts.length),
             itemBuilder: (context, index) {
               // 1. TOP INDICES TICKER
               if (index == 0) {
@@ -321,7 +340,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // 3. 🎯 TRADER CONFESSION DESK ENTRY STRIP (Max 700 words, No attachment)
+              // 3. TRADER CONFESSION ENTRY STRIP
               if (index == 2) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
@@ -379,28 +398,86 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // Empty placeholder
-              if (_communityPosts.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.only(top: 60),
-                  child: Column(
+              // 4. 🎯 FEED FILTER TABS (ALL / CHARTS / CONFESSIONS)
+              if (index == 3) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  child: Row(
                     children: [
-                      Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
-                      SizedBox(height: 10),
-                      Text('No Setups Posted Yet', style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold)),
+                      _buildFilterChip('ALL', 'ALL WIRE (${_communityPosts.length})'),
+                      const SizedBox(width: 6),
+                      _buildFilterChip('CHARTS', 'CHARTS'),
+                      const SizedBox(width: 6),
+                      _buildFilterChip('CONFESSIONS', 'CONFESSIONS'),
                     ],
                   ),
                 );
               }
 
-              // Feed Cards (Offset index - 3)
-              final post = _communityPosts[index - 3];
+              // Empty placeholder
+              if (posts.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: Column(
+                    children: [
+                      const Icon(Icons.inbox_rounded, color: Colors.white24, size: 38),
+                      const SizedBox(height: 10),
+                      Text(
+                        _selectedFilter == 'CONFESSIONS'
+                            ? 'No Confessions Yet. Be the first to share!'
+                            : (_selectedFilter == 'CHARTS' ? 'No Chart Setups Found' : 'No Posts Yet'),
+                        style: const TextStyle(color: Colors.white60, fontSize: 12.5, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              // Feed Cards (Offset index - 4)
+              final post = posts[index - 4];
               return TraderFeedCard(
                 key: ValueKey(post['id']),
                 post: post,
                 onPostDeleted: _fetchCommunityPosts,
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterChip(String value, String label) {
+    final isSelected = _selectedFilter == value;
+    final isConfession = value == 'CONFESSIONS';
+    final activeColor = isConfession ? const Color(0xFFFF2A6D) : const Color(0xFF00E5FF);
+
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() => _selectedFilter = value);
+        },
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+            color: isSelected ? activeColor.withOpacity(0.16) : const Color(0xFF131B2A),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: isSelected ? activeColor : const Color(0xFF1E2B3E),
+              width: isSelected ? 1.2 : 0.8,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: GoogleFonts.robotoMono(
+              color: isSelected ? activeColor : Colors.white60,
+              fontSize: 10,
+              fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
+              letterSpacing: 0.3,
+            ),
           ),
         ),
       ),
