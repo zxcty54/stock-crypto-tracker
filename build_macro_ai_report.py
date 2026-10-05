@@ -8,12 +8,13 @@ INPUT_MODELS_FILE = "company_business_models.json"
 OUTPUT_REPORT_FILE = "macro_research_report.json"
 
 # ==============================================================================
-# 🎯 AI CANDIDATE MODELS LIST (Priority Fallback)
+# 🎯 AI CANDIDATE MODELS LIST (Gemini 3.7 Priority)
 # ==============================================================================
 CANDIDATE_MODELS = [
-    "gemini-3.5-flash-lite",
     "gemini-3.7-flash",
-    
+    "gemini-2.5-flash",
+    "gemini-2.0-flash",
+    "gemini-1.5-flash"
 ]
 
 # ==============================================================================
@@ -53,8 +54,8 @@ SECTOR_REGISTRY = [
         "benchmark_label": "Natural Gas (Spot LNG / APM)",
         "transmission_note": "Sourcing cost for CGDs (~65% COGS) vs realization price for upstream producers.",
         "stocks": [
-            {"symbol": "IGL", "name": "Indraprastha Gas Limited", "role": "Delhi-NCR city gas distributor retaining CNG retail prices"},
-            {"symbol": "MGL", "name": "Mahanagar Gas Limited", "role": "Mumbai metropolitan city gas distributor with steady industrial demand"},
+            {"symbol": "IGL",  "name": "Indraprastha Gas Limited", "role": "Delhi-NCR city gas distributor retaining CNG retail prices"},
+            {"symbol": "MGL",  "name": "Mahanagar Gas Limited", "role": "Mumbai metropolitan city gas distributor with steady industrial demand"},
             {"symbol": "ONGC", "name": "Oil and Natural Gas Corp", "role": "Domestic natural gas & crude oil exploration producer"},
             {"symbol": "OIL",  "name": "Oil India Limited", "role": "Upstream crude & natural gas producer with regulated gas realization"}
         ]
@@ -192,11 +193,11 @@ SECTOR_REGISTRY = [
     {
         "id": "sugar_distilleries_fmcg",
         "name": "Sugar Mills, Bio-Ethanol & Sweeteners",
-        "benchmark_key": "crude_oil",
+        "benchmark_key": "brent_crude",
         "benchmark_label": "Ethanol Pricing Linked to Energy",
         "transmission_note": "Sugarcane FRP set by government; ethanol procurement price benchmarked to national fuel blending.",
         "stocks": [
-            {"symbol": "BALRAMCHIN", "name": "Balrampur Chini Mills", "role": "Integrated Uttar Pradesh sugar mill with large grain/syrup ethanol distilleries"},
+            {"symbol": "BALRAMCHIN", "name": "Balrampur Chini Mills", "role": "Integrated sugar mill with large grain/syrup ethanol distilleries"},
             {"symbol": "EIDPARRY",   "name": "E.I.D. - Parry (India)", "role": "South India sugar, nutraceuticals, and distillery producer"},
             {"symbol": "SHREERAMA",  "name": "Shree Renuka Sugars", "role": "Port-based sugar refiner capturing global white sugar trade flows"},
             {"symbol": "BRITANNIA",  "name": "Britannia Industries", "role": "Packaged food giant with high consumption of industrial sugar and palm oil"}
@@ -219,7 +220,7 @@ SECTOR_REGISTRY = [
         "id": "it_services_digital",
         "name": "IT Services & Digital Engineering",
         "benchmark_key": "usd_inr",
-        "benchmark_label": "USD-INR Currency Pair & US 10Y Yield",
+        "benchmark_label": "USD-INR Currency Pair",
         "transmission_note": "80%+ revenue in USD/EUR while 60%+ costs in INR; 1% rupee depreciation expands EBIT margin by ~30-40 bps.",
         "stocks": [
             {"symbol": "TCS",      "name": "Tata Consultancy Services", "role": "Tier-1 IT leader with defensive margins and low subcontractor dependence"},
@@ -268,7 +269,7 @@ def call_gemini_with_fallback(prompt, api_key):
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "temperature": 0.2,
-            "maxOutputTokens": 4096,
+            "maxOutputTokens": 6000,
             "responseMimeType": "application/json"
         }
     }
@@ -279,7 +280,7 @@ def call_gemini_with_fallback(prompt, api_key):
             headers = {"Content-Type": "application/json"}
 
             try:
-                res = requests.post(url, json=payload, headers=headers, timeout=45)
+                res = requests.post(url, json=payload, headers=headers, timeout=50)
                 if res.status_code == 200:
                     raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
                     if raw_text.startswith("```json"):
@@ -289,93 +290,102 @@ def call_gemini_with_fallback(prompt, api_key):
                     if raw_text.endswith("```"):
                         raw_text = raw_text[:-3]
 
-                    return json.loads(raw_text.strip()), f"{model_name} [{version}]"
+                    parsed = json.loads(raw_text.strip())
+                    return parsed, f"{model_name} [{version}]"
                 else:
                     if res.status_code != 404:
                         print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code}")
                     time.sleep(0.5)
 
-            except Exception as e:
+            except Exception:
                 time.sleep(0.5)
 
     return None, None
 
-def evaluate_sector_with_ai(sector_def, macro_data, companies_data, api_key):
+def evaluate_sector_batch_with_ai(sector_batch, macro_data, companies_data, api_key):
     """
-    Submits a sector's 4 candidate stocks along with their real audited figures
-    and live commodity deltas to Gemini for unbiased classification.
+    Submits 2 sectors (8 stocks) to Gemini 3.7 with their audited figures
+    and live macro shock deltas.
     """
-    bench_key = sector_def["benchmark_key"]
-    macro_info = macro_data.get(bench_key, {})
-    
-    macro_price_str = f"{macro_info.get('current_val', 'N/A')} {macro_info.get('unit', '')}"
-    deltas = macro_info.get("deltas", {})
-    delta_1m = deltas.get("1M", 0.0)
-    delta_1y = deltas.get("1Y_YoY", 0.0)
+    batch_prompts = []
 
-    # 4 stocks ke audited metrics pack karte hain
-    stocks_context = []
-    for s in sector_def["stocks"]:
-        sym = s["symbol"]
-        comp = companies_data.get(sym, {})
-        pnl = comp.get("audited_statement_snapshot", {}).get("profit_and_loss", {})
-        eff = comp.get("audited_statement_snapshot", {}).get("efficiency_ratios", {})
-        cf = comp.get("audited_statement_snapshot", {}).get("cash_flow", {})
+    for sec in sector_batch:
+        bench_key = sec["benchmark_key"]
+        macro_info = macro_data.get(bench_key, {})
+        price_str = f"{macro_info.get('current_val', 'N/A')} {macro_info.get('unit', '')}"
+        deltas = macro_info.get("deltas", {})
+        d1m = deltas.get("1M", 0.0)
+        d1y = deltas.get("1Y_YoY", 0.0)
 
-        opm = pnl.get("OPM %", "N/A")
-        inv_days = eff.get("Inventory Days", "N/A")
-        ccc = eff.get("Cash Conversion Cycle", "N/A")
-        cfo_op = cf.get("CFO/OP", "N/A")
+        stocks_context = []
+        for s in sec["stocks"]:
+            sym = s["symbol"]
+            comp = companies_data.get(sym, {})
+            pnl = comp.get("audited_statement_snapshot", {}).get("profit_and_loss", {})
+            eff = comp.get("audited_statement_snapshot", {}).get("efficiency_ratios", {})
+            cf = comp.get("audited_statement_snapshot", {}).get("cash_flow", {})
 
-        stocks_context.append(
-            f"• Stock: {sym} ({s['name']})\n"
-            f"  Business Role: {s['role']}\n"
-            f"  Audited OPM: {opm}% | Inventory Days: {inv_days}d | Cash Conversion Cycle: {ccc}d | CFO/OP: {cfo_op}%"
+            opm = pnl.get("OPM %", "N/A")
+            inv_days = eff.get("Inventory Days", "N/A")
+            ccc = eff.get("Cash Conversion Cycle", "N/A")
+            cfo_op = cf.get("CFO/OP", "N/A")
+
+            stocks_context.append(
+                f"  - Stock: {sym} ({s['name']})\n"
+                f"    Business Role: {s['role']}\n"
+                f"    Audited OPM: {opm}% | Inventory Days: {inv_days}d | CCC: {ccc}d | CFO/OP: {cfo_op}%"
+            )
+
+        stocks_text = "\n".join(stocks_context)
+
+        batch_prompts.append(
+            f"=== SECTOR: {sec['name']} (ID: {sec['id']}) ===\n"
+            f"Primary Macro Benchmark: {sec['benchmark_label']} ({price_str}) | 1M Delta: {d1m}% | 1Y Delta: {d1y}%\n"
+            f"Transmission Mechanism: {sec['transmission_note']}\n"
+            f"Candidate Equities Audited Snapshot:\n{stocks_text}"
         )
 
-    stocks_text = "\n\n".join(stocks_context)
+    full_sectors_input = "\n\n".join(batch_prompts)
 
     prompt = f"""
 ACT AS: Senior Head of Institutional Equity Research & Corporate Margin Intelligence.
-TASK: Analyze the following 4 candidate stocks in the Indian market sector '{sector_def['name']}' based on real audited financials and live macro deltas.
+TASK: Analyze the following {len(sector_batch)} Indian market sectors (each having 4 stocks, total {len(sector_batch)*4} stocks) based strictly on real audited numbers and live macro deltas.
 
-LIVE MACRO BENCHMARK SHOCK:
-- Primary Driver: {sector_def['benchmark_label']} ({macro_price_str})
-- Trend Changes: 1-Month: {delta_1m}%, 1-Year (YoY): {delta_1y}%
-- Transmission Context: {sector_def['transmission_note']}
-
-CANDIDATE EQUITIES AUDITED STATEMENT REALITY:
-{stocks_text}
+INPUT DATA:
+{full_sectors_input}
 
 MANDATE FOR AI CLASSIFICATION:
-For EACH of the 4 stocks, analyze the interplay between:
+For EACH stock in each sector, analyze:
 1. Operational business role (Consumer vs Producer vs Inelastic Brand).
-2. Audited Inventory Days (e.g. 142 days means high delay in cost impact).
-3. Pricing power and contractual pass-through ability.
+2. Audited Inventory Days (e.g. 142 days means high delay in cost transmission).
+3. Contractual pass-through ability / Pricing Power.
 
-Decide whether the company will experience 'MARGIN_EXPANSION' (OPM expanding/tailwinds) OR 'MARGIN_CONTRACTION' (OPM compression/headwinds).
+Decide whether each stock experiences 'MARGIN_EXPANSION' (Tailwinds) OR 'MARGIN_CONTRACTION' (Headwinds).
+Provide an integer estimate for projected OPM change in bps (Positive for EXPANSION, Negative for CONTRACTION).
 
-OUTPUT SCHEMA (Must be valid raw JSON without markdown):
-{{
-  "sector_id": "{sector_def['id']}",
-  "sector_name": "{sector_def['name']}",
-  "benchmark_commodity": "{sector_def['benchmark_label']}",
-  "benchmark_price": "{macro_price_str}",
-  "benchmark_1m_delta_pct": {delta_1m},
-  "sector_macro_thesis": "2 to 3 sentences in conversational business Hinglish explaining how this macro movement transmits into upcoming quarterly EBITDA/OPM for this sector.",
-  "evaluated_stocks": [
-    {{
-      "symbol": "NSE_SYMBOL",
-      "company_name": "Full Name",
-      "margin_trajectory": "MARGIN_EXPANSION or MARGIN_CONTRACTION",
-      "projected_opm_change_bps": 220,
-      "pricing_power": "HIGH or MODERATE or WEAK",
-      "operational_transmission_rationale": "Crisp single-sentence explanation in Hinglish linking inventory holding days and raw material cost absorption.",
-      "quarterly_ebitda_outlook": "Crisp single-sentence forward-looking margin impact for upcoming Q3/Q4 results."
-    }}
-  ]
-}}
-Ensure exactly 4 stocks are evaluated. Projected BPS must be positive for EXPANSION and negative for CONTRACTION.
+OUTPUT SCHEMA (Must be valid raw JSON list of sectors, without markdown):
+[
+  {{
+    "sector_id": "sector_id_here",
+    "sector_name": "Sector Name",
+    "benchmark_commodity": "Benchmark Name",
+    "benchmark_price": "Price + Unit",
+    "benchmark_1m_delta_pct": 0.0,
+    "sector_macro_thesis": "2 to 3 sentences in conversational business Hinglish explaining the macro transmission into upcoming quarterly results.",
+    "evaluated_stocks": [
+      {{
+        "symbol": "NSE_SYMBOL",
+        "company_name": "Full Name",
+        "margin_trajectory": "MARGIN_EXPANSION or MARGIN_CONTRACTION",
+        "projected_opm_change_bps": 220,
+        "pricing_power": "HIGH or MODERATE or WEAK",
+        "operational_transmission_rationale": "Crisp single-sentence Hinglish explaining inventory lag and cost absorption.",
+        "quarterly_ebitda_outlook": "Crisp single-sentence forward-looking margin impact for upcoming Q3/Q4 results."
+      }}
+    ]
+  }}
+]
+Ensure all {len(sector_batch)} sectors are returned in the list.
 """
 
     return call_gemini_with_fallback(prompt, api_key)
@@ -392,27 +402,33 @@ def run_pipeline():
         exit(1)
 
     print("\n" + "=" * 75)
-    print("🚀 Running 17-Sector Macro Margin Radar Pipeline (68 Equities)")
+    print("🚀 Running 17-Sector Macro Margin Radar Pipeline (Batch Size: 2 Sectors / 8 Stocks)")
     print("=" * 75)
 
+    # 2-2 sectors ke batches banate hain
+    sector_pairs = [SECTOR_REGISTRY[i:i + 2] for i in range(0, len(SECTOR_REGISTRY), 2)]
+    total_batches = len(sector_pairs)
     all_sector_reports = []
-    total_sectors = len(SECTOR_REGISTRY)
 
-    for idx, sec in enumerate(SECTOR_REGISTRY, 1):
-        print(f"\n📦 [{idx}/{total_sectors}] Evaluating Sector: {sec['name']}...")
-        report, engine = evaluate_sector_with_ai(sec, macro_data, companies_data, api_key)
+    for batch_idx, batch in enumerate(sector_pairs, 1):
+        names = " & ".join([s["name"] for s in batch])
+        print(f"\n📦 [Batch {batch_idx}/{total_batches}] Processing {len(batch)} Sectors: {names}...")
 
-        if report:
-            all_sector_reports.append(report)
-            stock_count = len(report.get("evaluated_stocks", []))
-            print(f"   ✨ Processed {stock_count} stocks via [{engine}]")
+        reports, engine = evaluate_sector_batch_with_ai(batch, macro_data, companies_data, api_key)
+
+        if reports and isinstance(reports, list):
+            all_sector_reports.extend(reports)
+            stocks_count = sum(len(r.get("evaluated_stocks", [])) for r in reports)
+            print(f"   ✨ Success! Evaluated {stocks_count} stocks using [{engine}]")
         else:
-            print(f"   ❌ Sector evaluation failed for {sec['name']}")
+            print(f"   ❌ Batch failed for: {names}")
 
-        # 2-second rate-limit breathing gap
-        time.sleep(2)
+        # ⏳ 10-Second Cooldown (Aakhri batch ke baad sleep nahi lagega)
+        if batch_idx < total_batches:
+            print("   ⏳ Sleeping 10s to maintain safe rate limits...")
+            time.sleep(10)
 
-    # Aggregating into Outcome-First Matrix
+    # Aggregation into Outcome-First Matrix
     expanding_stocks_global = []
     contracting_stocks_global = []
 
