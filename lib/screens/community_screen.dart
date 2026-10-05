@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../widgets/trader_feed_card.dart';
@@ -16,14 +18,80 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreenState extends State<CommunityScreen> {
   final SupabaseClient _supabase = Supabase.instance.client;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<Map<String, dynamic>> _communityPosts = [];
   bool _isLoadingPosts = true;
   String? _postsError;
 
+  // Google Sheet Live Indices State
+  Map<String, dynamic> _liveIndices = {};
+  double _niftyPrice = 22459.80; // Baseline fallback
+  bool _isLoadingIndices = false;
+
+  final String _sheetApiUrl =
+      "https://script.google.com/macros/s/AKfycbyPkUC7yn0aj8zhpLYfHAKXFCiW6oZ6tp42nHU4PUnxuDoc7pAZ3eUStmC4NQXZxu47/exec";
+
   @override
   void initState() {
     super.initState();
+    _fetchLiveIndices();
     _fetchCommunityPosts();
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1. Live Indices Fetch with Google 302 Redirect & Safe Fallback
+  // ---------------------------------------------------------------------------
+  Future<void> _fetchLiveIndices() async {
+    if (mounted) setState(() => _isLoadingIndices = true);
+
+    try {
+      final client = http.Client();
+      final request = http.Request('GET', Uri.parse(_sheetApiUrl))
+        ..followRedirects = true
+        ..maxRedirects = 5;
+
+      final streamedResponse = await client.send(request).timeout(const Duration(seconds: 12));
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+
+        Map<String, dynamic> parsedData = {};
+        if (decoded is Map<String, dynamic>) {
+          if (decoded.containsKey('data') && decoded['data'] is Map<String, dynamic>) {
+            parsedData = Map<String, dynamic>.from(decoded['data']);
+          } else {
+            parsedData = decoded;
+          }
+        }
+
+        // Extract Nifty 50 CMP to feed Sentiment Dynamic Strikes
+        double extractedNifty = _niftyPrice;
+        parsedData.forEach((key, val) {
+          final cleanKey = key.toString().toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+          if (cleanKey.contains("nifty50") || cleanKey == "nifty") {
+            if (val is Map && val.containsKey('price')) {
+              extractedNifty = (val['price'] as num).toDouble();
+            } else if (val is num) {
+              extractedNifty = val.toDouble();
+            }
+          }
+        });
+
+        if (mounted) {
+          setState(() {
+            _liveIndices = parsedData;
+            _niftyPrice = extractedNifty;
+            _isLoadingIndices = false;
+          });
+        }
+      } else {
+        if (mounted) setState(() => _isLoadingIndices = false);
+      }
+    } catch (_) {
+      if (mounted) setState(() => _isLoadingIndices = false);
+    }
   }
 
   Future<void> _fetchCommunityPosts() async {
@@ -189,12 +257,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: const Color(0xFF090D16),
-      // Clean blank status area with no title text
+      endDrawer: _buildIndicesDrawer(),
       appBar: AppBar(
         backgroundColor: const Color(0xFF090D16),
         elevation: 0,
-        toolbarHeight: 0,
+        toolbarHeight: 0, // Clean completely blank top bar
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 70),
@@ -217,64 +286,262 @@ class _CommunityScreenState extends State<CommunityScreen> {
         child: RefreshIndicator(
           color: const Color(0xFF00E5FF),
           backgroundColor: const Color(0xFF0F1726),
-          onRefresh: () async => await _fetchCommunityPosts(),
-          child: _isLoadingPosts
-              ? const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF), strokeWidth: 2))
-              : _postsError != null
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          'Unable to connect: $_postsError',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Color(0xFFFF2A6D), fontSize: 11),
+          onRefresh: () async {
+            await Future.wait([
+              _fetchLiveIndices(),
+              _fetchCommunityPosts(),
+            ]);
+          },
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 6, bottom: 120),
+            itemCount: 2 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
+            itemBuilder: (context, index) {
+              // -------------------------------------------------------------
+              // 1. TOP LIVE INDICES HORIZONTAL STRIP
+              // -------------------------------------------------------------
+              if (index == 0) {
+                return _buildTopIndicesTickerStrip();
+              }
+
+              // -------------------------------------------------------------
+              // 2. REALTIME SENTIMENT CARD (In Front with Dynamic Nifty Strikes)
+              // -------------------------------------------------------------
+              if (index == 1) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  child: CommunitySentimentCard(niftyLivePrice: _niftyPrice),
+                );
+              }
+
+              // Empty Feed Message
+              if (_communityPosts.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'No Setups Posted Yet',
+                        style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Be the first to share your chart setup.',
+                        style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              // Community Trader Feed Posts
+              final post = _communityPosts[index - 2];
+              return TraderFeedCard(
+                key: ValueKey(post['id']),
+                post: post,
+                onPostDeleted: _fetchCommunityPosts,
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Top Subtle Indices Bar (Horizontal Scroll)
+  // ---------------------------------------------------------------------------
+  Widget _buildTopIndicesTickerStrip() {
+    final entries = _liveIndices.isNotEmpty
+        ? _liveIndices.entries.toList()
+        : [
+            MapEntry("Nifty 50", {"price": 22459.80, "change": "+0.17%"}),
+            MapEntry("Bank Nifty", {"price": 54522.70, "change": "+0.13%"}),
+            MapEntry("Sensex", {"price": 72042.98, "change": "+0.19%"}),
+            MapEntry("Dow Jones", {"price": 46592.53, "change": "+0.31%"}),
+            MapEntry("Nasdaq", {"price": 22764.46, "change": "-0.47%"}),
+          ];
+
+    return Container(
+      height: 38,
+      margin: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        children: [
+          // Drawer trigger button
+          InkWell(
+            onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+            child: Container(
+              margin: const EdgeInsets.only(left: 14, right: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0F1726),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFF1E2B3E)),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.candlestick_chart_rounded, color: Color(0xFF00E5FF), size: 14),
+                  SizedBox(width: 4),
+                  Text("MARKETS", style: TextStyle(color: Colors.white, fontSize: 9.5, fontWeight: FontWeight.w900)),
+                ],
+              ),
+            ),
+          ),
+          // Horizontal ticker items
+          Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(right: 14),
+              itemCount: entries.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              itemBuilder: (context, i) {
+                final item = entries[i];
+                final name = item.key;
+                double price = 0.0;
+                String change = "0.0%";
+
+                if (item.value is Map) {
+                  price = (item.value['price'] as num?)?.toDouble() ?? 0.0;
+                  change = item.value['change']?.toString() ?? "0.0%";
+                } else if (item.value is num) {
+                  price = (item.value as num).toDouble();
+                }
+
+                final bool isUp = !change.startsWith("-");
+
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F1726),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: const Color(0xFF1E2B3E)),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(color: Colors.white70, fontSize: 10.5, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        price.toStringAsFixed(price > 1000 ? 1 : 2),
+                        style: const TextStyle(color: Colors.white, fontSize: 10.5, fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        change.startsWith("+") || change.startsWith("-") ? change : "+$change",
+                        style: TextStyle(
+                          color: isUp ? const Color(0xFF00C076) : const Color(0xFFFF2A6D),
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.only(top: 8, bottom: 120),
-                      itemCount: 1 + (_communityPosts.isEmpty ? 1 : _communityPosts.length),
-                      itemBuilder: (context, index) {
-                        // 🎯 Top Sentiment Widget
-                        if (index == 0) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                            child: CommunitySentimentCard(),
-                          );
-                        }
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-                        // Feed is empty
-                        if (_communityPosts.isEmpty) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 60),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(Icons.query_stats_rounded, color: Colors.white24, size: 40),
-                                const SizedBox(height: 10),
-                                const Text(
-                                  'No Setups Posted Yet',
-                                  style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  'Be the first to share your chart setup.',
-                                  style: TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
+  // ---------------------------------------------------------------------------
+  // Clean Indices Drawer (Displays all fetched items in one panel)
+  // ---------------------------------------------------------------------------
+  Widget _buildIndicesDrawer() {
+    final entries = _liveIndices.entries.toList();
 
-                        // Trader Posts List
-                        final post = _communityPosts[index - 1];
-                        return TraderFeedCard(
-                          key: ValueKey(post['id']),
-                          post: post,
-                          onPostDeleted: _fetchCommunityPosts,
-                        );
-                      },
-                    ),
+    return Drawer(
+      backgroundColor: const Color(0xFF0F1726),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.public_rounded, color: Color(0xFF00E5FF), size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        "GLOBAL INDICES",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.6,
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close, color: Colors.white54, size: 18),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text("Realtime feeds from Google Finance", style: TextStyle(color: Color(0xFF8896AB), fontSize: 11)),
+              const Divider(color: Color(0xFF1E2B3E), height: 24),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: entries.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (context, i) {
+                    final item = entries[i];
+                    final name = item.key;
+                    double price = 0.0;
+                    String change = "0.0%";
+
+                    if (item.value is Map) {
+                      price = (item.value['price'] as num?)?.toDouble() ?? 0.0;
+                      change = item.value['change']?.toString() ?? "0.0%";
+                    } else if (item.value is num) {
+                      price = (item.value as num).toDouble();
+                    }
+
+                    final bool isUp = !change.startsWith("-");
+
+                    return Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF141C2B),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: const Color(0xFF1E2B3E)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(price.toStringAsFixed(2), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 12)),
+                              Text(
+                                change.startsWith("+") || change.startsWith("-") ? change : "+$change",
+                                style: TextStyle(
+                                  color: isUp ? const Color(0xFF00C076) : const Color(0xFFFF2A6D),
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -282,10 +549,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
 }
 
 // ============================================================================
-// 🎯 REALTIME 2-IN-1 COMMUNITY SENTIMENT CARD COMPONENT
+// 🎯 REALTIME 2-IN-1 COMMUNITY SENTIMENT CARD WITH DYNAMIC STRIKE RANGES
 // ============================================================================
 class CommunitySentimentCard extends StatefulWidget {
-  const CommunitySentimentCard({super.key});
+  final double niftyLivePrice;
+
+  const CommunitySentimentCard({super.key, required this.niftyLivePrice});
 
   @override
   State<CommunitySentimentCard> createState() => _CommunitySentimentCardState();
@@ -294,24 +563,33 @@ class CommunitySentimentCard extends StatefulWidget {
 class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
   final SupabaseClient _supabase = Supabase.instance.client;
 
-  // 0 = Daily Mood, 1 = Monthly Outlook
-  int _activeTab = 0;
-
+  int _activeTab = 0; // 0 = Daily, 1 = Monthly Outlook
   String? _myVote;
   String? _myTargetLevel;
   bool _isSubmitting = false;
 
-  // Dynamic daily period key based on date
   String get _dailyPeriodKey {
     final now = DateTime.now();
     return "DAILY-${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
   }
 
   final String _monthlyPeriodKey = "EXPIRY-NOV-2026";
-
   String get _currentPeriod => _activeTab == 0 ? _dailyPeriodKey : _monthlyPeriodKey;
 
-  // Daily Voting Window: 3:30 PM to 9:15 AM
+  // Auto-calculated strike ranges from Live Nifty CMP
+  List<String> get _dynamicRanges {
+    final p = widget.niftyLivePrice > 0 ? widget.niftyLivePrice : 22459.80;
+    final base = ((p / 500).round() * 500).toInt();
+    final upper = base + 500;
+    final lower = base - 500;
+
+    return [
+      "> $upper",
+      "$lower - $upper",
+      "< $lower",
+    ];
+  }
+
   bool get _isDailyVotingWindowOpen {
     final now = DateTime.now();
     final currentMinutes = now.hour * 60 + now.minute;
@@ -373,7 +651,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Color(0xFF141C2B),
-          content: Text('Voting locked! Market is currently live (9:15 AM - 3:30 PM).'),
+          content: Text('Voting locked! Market is live (9:15 AM - 3:30 PM). Opens at 3:30 PM.'),
         ),
       );
       return;
@@ -416,9 +694,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
     } catch (e) {
       if (mounted) {
         setState(() => _isSubmitting = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Vote error: $e')),
-        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Vote error: $e')));
       }
     }
   }
@@ -455,7 +731,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top Bar: Section Title + Segmented Switcher
+              // Top Bar: Section Title + Dual Timeframe Switcher
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -499,7 +775,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
               ),
               const SizedBox(height: 12),
 
-              // Prompt Question + Window Badge
+              // Question Prompt + Status Chip
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -537,7 +813,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
               ),
               const SizedBox(height: 12),
 
-              // Ratio Progress Bar
+              // Multi-Segment Ratio Progress Bar
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: SizedBox(
@@ -566,7 +842,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
               ),
               const SizedBox(height: 8),
 
-              // Live Percentages
+              // Live Percentages Breakdown
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -647,19 +923,31 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  "Expected Expiry Range:",
-                  style: GoogleFonts.plusJakartaSans(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.bold),
+
+                // Dynamic Expiry Range Chips (From Sheet CMP)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Expected Expiry Range:",
+                      style: GoogleFonts.plusJakartaSans(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Nifty: ${widget.niftyLivePrice.toStringAsFixed(1)}",
+                      style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 9.5, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 6),
                 Row(
-                  children: [
-                    _buildTargetChip("> 25,500"),
-                    const SizedBox(width: 6),
-                    _buildTargetChip("24,500 - 25,500"),
-                    const SizedBox(width: 6),
-                    _buildTargetChip("< 24,500"),
-                  ],
+                  children: _dynamicRanges.map((range) {
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3),
+                        child: _buildTargetChip(range),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ],
@@ -671,35 +959,33 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard> {
 
   Widget _buildTargetChip(String range) {
     final isSelected = _myTargetLevel == range;
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          if (_myVote != null) {
-            _castVote(_myVote!, targetLevel: range);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Pehle Bullish/Bearish/Range vote select karein!")),
-            );
-          }
-        },
-        borderRadius: BorderRadius.circular(6),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.15) : const Color(0xFF141C2B),
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(
-              color: isSelected ? const Color(0xFF00E5FF) : const Color(0xFF1E2B3E),
-            ),
+    return InkWell(
+      onTap: () {
+        if (_myVote != null) {
+          _castVote(_myVote!, targetLevel: range);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Pehle Bullish/Bearish/Range chun lijiye!")),
+          );
+        }
+      },
+      borderRadius: BorderRadius.circular(6),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.15) : const Color(0xFF141C2B),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF00E5FF) : const Color(0xFF1E2B3E),
           ),
-          child: Text(
-            range,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isSelected ? const Color(0xFF00E5FF) : Colors.white60,
-              fontSize: 9.5,
-              fontWeight: FontWeight.bold,
-            ),
+        ),
+        child: Text(
+          range,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: isSelected ? const Color(0xFF00E5FF) : Colors.white60,
+            fontSize: 9.5,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
