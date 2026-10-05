@@ -29,14 +29,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
   // 🎯 Feed Filter State: 'ALL', 'CHARTS', 'CONFESSIONS'
   String _selectedFilter = 'ALL';
 
-  // Google Sheet Web App State
+  // Google Sheet Web App State (Powered by Cloudflare Worker Edge Proxy)
   Map<String, dynamic> _liveIndices = {};
   double _niftyPrice = 22459.80;
   String _marketStatus = "POST_MARKET";
   bool _isVotingAllowed = true;
 
+  // ⚡ Cloudflare Worker Proxy Endpoint (Mapped to Sheet 2)
   final String _sheetApiUrl =
-      "https://script.google.com/macros/s/AKfycbyPkUC7yn0aj8zhpLYfHAKXFCiW6oZ6tp42nHU4PUnxuDoc7pAZ3eUStmC4NQXZxu47/exec";
+      "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
 
   @override
   void initState() {
@@ -61,13 +62,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   Future<void> _fetchLiveIndices() async {
     try {
-      final client = http.Client();
-      final request = http.Request('GET', Uri.parse(_sheetApiUrl))
-        ..followRedirects = true
-        ..maxRedirects = 5;
-
-      final streamedResponse = await client.send(request).timeout(const Duration(seconds: 12));
-      final response = await http.Response.fromStream(streamedResponse);
+      final response = await http
+          .get(Uri.parse(_sheetApiUrl))
+          .timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         final decoded = jsonDecode(response.body);
@@ -108,7 +105,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
           });
         }
       }
-    } catch (_) {}
+    } catch (e) {
+      debugPrint("Live Indices fetch error: $e");
+    }
   }
 
   Future<void> _fetchCommunityPosts() async {
@@ -475,7 +474,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
             style: GoogleFonts.robotoMono(
               color: isSelected ? activeColor : Colors.white60,
               fontSize: 10,
-              fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
+              fontWeight: FontWeight.w900,
               letterSpacing: 0.3,
             ),
           ),
