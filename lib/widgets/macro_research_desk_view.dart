@@ -1,23 +1,26 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-class MacroMarginRadarScreen extends StatefulWidget {
-  final String rawJsonReport;
-
-  const MacroMarginRadarScreen({super.key, required this.rawJsonReport});
+class MacroResearchDeskView extends StatefulWidget {
+  // 🎯 'const' constructor enabled - news_screen.dart mein 'const' se build fail nahi hoga
+  const MacroResearchDeskView({super.key});
 
   @override
-  State<MacroMarginRadarScreen> createState() => _MacroMarginRadarScreenState();
+  State<MacroResearchDeskView> createState() => _MacroResearchDeskViewState();
 }
 
-class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
-  int _selectedFilterIndex = 0; // 0: All Sectors, 1: Expanding Only, 2: Contracting Only
-  String _searchQuery = "";
-  late Map<String, dynamic> _reportData;
+class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
+  bool _isLoading = true;
+  String? _errorMessage;
+  Map<String, dynamic> _reportData = {};
   List<dynamic> _sectors = [];
 
-  // Theme Constants (Institutional Dark Palette)
+  int _selectedFilterIndex = 0; // 0: All Sectors, 1: 🟢 Expanding Only, 2: 🔴 Contracting Only
+  String _searchQuery = "";
+
+  // Institutional Dark Design Palette
   static const Color kBgDark = Color(0xFF090D16);
   static const Color kCardBg = Color(0xFF131823);
   static const Color kSurfaceBg = Color(0xFF1A2232);
@@ -29,15 +32,28 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
   @override
   void initState() {
     super.initState();
-    _parseData();
+    _loadReportJson();
   }
 
-  void _parseData() {
+  Future<void> _loadReportJson() async {
     try {
-      _reportData = json.decode(widget.rawJsonReport);
-      _sectors = _reportData['sectors'] ?? [];
+      final jsonString = await rootBundle.loadString('assets/macro_research_report.json');
+      final decoded = json.decode(jsonString);
+
+      if (mounted) {
+        setState(() {
+          _reportData = decoded;
+          _sectors = decoded['sectors'] ?? [];
+          _isLoading = false;
+        });
+      }
     } catch (e) {
-      _sectors = [];
+      if (mounted) {
+        setState(() {
+          _errorMessage = "Failed to load report: $e";
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -48,6 +64,10 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
       appBar: AppBar(
         backgroundColor: kBgDark,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,7 +76,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
-                letterSpacing: 1.2,
+                letterSpacing: 1.1,
                 color: Colors.white,
               ),
             ),
@@ -78,8 +98,8 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
             child: Row(
               children: [
                 Container(
-                  width: 8,
-                  height: 8,
+                  width: 7,
+                  height: 7,
                   decoration: const BoxDecoration(
                     color: kGreenAccent,
                     shape: BoxShape.circle,
@@ -87,7 +107,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
                 ),
                 const SizedBox(width: 6),
                 const Text(
-                  "LIVE SIGNALS",
+                  "17 SECTORS",
                   style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.bold,
@@ -100,25 +120,67 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          _buildSearchAndFilters(),
-          Expanded(
-            child: _sectors.isEmpty
-                ? const Center(
-                    child: Text("No Data Available", style: TextStyle(color: kMutedText)),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    itemCount: _sectors.length,
-                    itemBuilder: (context, index) {
-                      final sector = _sectors[index];
-                      return _buildSectorCard(sector);
-                    },
-                  ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: kGreenAccent),
+      );
+    }
+
+    if (_errorMessage != null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.error_outline, color: kRedAccent, size: 40),
+              const SizedBox(height: 12),
+              Text(
+                _errorMessage!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: kMutedText, fontSize: 13),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _isLoading = true;
+                    _errorMessage = null;
+                  });
+                  _loadReportJson();
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: kSurfaceBg),
+                child: const Text("Retry", style: TextStyle(color: Colors.white)),
+              )
+            ],
           ),
-        ],
-      ),
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        _buildSearchAndFilters(),
+        Expanded(
+          child: _sectors.isEmpty
+              ? const Center(
+                  child: Text("No sectors available", style: TextStyle(color: kMutedText)),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  itemCount: _sectors.length,
+                  itemBuilder: (context, index) {
+                    final sector = _sectors[index];
+                    return _buildSectorCard(sector);
+                  },
+                ),
+        ),
+      ],
     );
   }
 
@@ -197,7 +259,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
     final sectorName = sector['sector_name'] ?? '';
     final allStocks = (sector['evaluated_stocks'] as List<dynamic>? ?? []);
 
-    // Filter stocks by intent tab & search query
+    // Filter stocks by query & expanding/contracting intent
     final filteredStocks = allStocks.where((s) {
       final sym = (s['symbol'] ?? '').toString().toLowerCase();
       final name = (s['company_name'] ?? '').toString().toLowerCase();
@@ -217,7 +279,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
 
     if (filteredStocks.isEmpty) return const SizedBox.shrink();
 
-    // Ratio Calculation (Expanding vs Contracting in this sector)
+    // Trajectory Ratio
     final expandingCount = allStocks.where((s) => s['margin_trajectory'] == "MARGIN_EXPANSION").length;
     final totalCount = allStocks.isNotEmpty ? allStocks.length : 1;
     final expandingRatio = expandingCount / totalCount;
@@ -236,7 +298,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Sector Title + Commodity Badge
+          // Sector Title + Commodity Driver Pill
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -285,7 +347,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
           ),
           const SizedBox(height: 12),
 
-          // Visual Macro Sentiment Ratio Bar
+          // Sector Trajectory Ratio Bar
           Row(
             children: [
               Text(
@@ -302,11 +364,11 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    flex: (expandingRatio * 100).toInt(),
+                    flex: max(1, (expandingRatio * 100).toInt()),
                     child: Container(color: kGreenAccent),
                   ),
                   Expanded(
-                    flex: ((1 - expandingRatio) * 100).toInt(),
+                    flex: max(1, ((1 - expandingRatio) * 100).toInt()),
                     child: Container(color: kRedAccent),
                   ),
                 ],
@@ -327,7 +389,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
     final int bps = (stock['projected_opm_change_bps'] ?? 0) as int;
     final color = isExpanding ? kGreenAccent : kRedAccent;
 
-    // Normalize BPS bar (Max scale reference ~300 bps)
+    // Normalizing divergence bar (300 bps baseline ceiling)
     final double normalizedWidth = min(1.0, bps.abs() / 300.0);
 
     return Container(
@@ -378,7 +440,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
           ),
           const SizedBox(height: 10),
 
-          // 🎯 VISUAL: ZERO-CENTER DIVERGENCE BAR
+          // Zero-Center Divergence Bar
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -414,7 +476,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
                         ),
                       ),
                     ),
-                    // Center Zero Divider
+                    // Center Zero Line
                     Container(width: 2, color: Colors.white38),
                     // Positive / Expansion Half
                     Expanded(
@@ -445,7 +507,7 @@ class _MacroMarginRadarScreenState extends State<MacroMarginRadarScreen> {
           ),
           const SizedBox(height: 8),
 
-          // Pricing Power & Quarterly Outlook Footnotes
+          // Pricing Power Badge + Quarterly Outlook
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
