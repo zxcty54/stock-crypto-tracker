@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PortfolioTrackerScreen extends StatefulWidget {
-  PortfolioTrackerScreen({super.key});
+  const PortfolioTrackerScreen({super.key});
 
   @override
   State<PortfolioTrackerScreen> createState() => _PortfolioTrackerScreenState();
@@ -14,8 +14,9 @@ class PortfolioTrackerScreen extends StatefulWidget {
 
 class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     with SingleTickerProviderStateMixin {
+  // ⚡ Cloudflare Worker Proxy Endpoint (Sheet 1 - Live CMP Data)
   final String _sheetUrl =
-      'https://script.google.com/macros/s/AKfycbzE5FVwepYICR2SPsubssC8zdvCrFbEJqh1lEawkjb8DxVrAv2hTnOzKfozz4Sj3uW8vQ/exec';
+      'https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet1';
 
   late TabController _tabController;
   static const double _initialCapital = 500000.0;
@@ -66,6 +67,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
 
   Future<void> _restorePersistence() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
     setState(() {
       _availableCash = prefs.getDouble('v_capital') ?? _initialCapital;
       _realizedPnl = prefs.getDouble('v_realized') ?? 0.0;
@@ -105,13 +107,11 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     if (showSnackbar) setState(() => _isRefreshing = true);
 
     try {
-      final client = http.Client();
-      final req = http.Request('GET', Uri.parse(_sheetUrl))
-        ..followRedirects = true
-        ..maxRedirects = 5;
+      final res = await http.get(
+        Uri.parse(_sheetUrl),
+      ).timeout(const Duration(seconds: 10));
 
-      final resStream = await client.send(req).timeout(const Duration(seconds: 15));
-      final res = await http.Response.fromStream(resStream);
+      if (!mounted) return;
 
       if (res.statusCode == 200) {
         final List<dynamic> data = jsonDecode(res.body);
@@ -142,6 +142,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
               content: Text('⚡ Sync Success: ${_marketFeed.length} assets synced live'),
               backgroundColor: const Color(0xFF00F5A0),
               behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 2),
             ),
           );
         }
@@ -149,6 +150,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
       }
     } catch (e) {
       debugPrint("API sync error: $e");
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
         _isRefreshing = false;
@@ -173,7 +175,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     setState(() {
       _availableCash -= totalCost;
       _openPositions.insert(0, {
-        'id': DateTime.now().millisecondsSinceEpoch.toString(),
+        'id': '${DateTime.now().millisecondsSinceEpoch}_$symbol',
         'symbol': symbol,
         'entry_price': price,
         'qty': qty,
@@ -428,7 +430,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
         decoration: InputDecoration(
           filled: true,
           fillColor: const Color(0xFF131D31),
-          hintText: _marketFeed.isEmpty ? "Connecting to Sheet..." : "Search in ${_marketFeed.length} live stocks...",
+          hintText: _marketFeed.isEmpty ? "Connecting via Cloudflare..." : "Search in ${_marketFeed.length} live stocks...",
           hintStyle: const TextStyle(color: Colors.white38, fontSize: 11),
           prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF00E5FF), size: 16),
           suffixIcon: _searchFilter.isNotEmpty
@@ -553,7 +555,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
   }
 
   Widget _buildMultiWatchlistTab() {
-    final activeSet = _watchlists[_activeWatchlistIndex]!;
+    final activeSet = _watchlists[_activeWatchlistIndex] ?? {};
 
     List<String> displayList = [];
     if (_searchFilter.isNotEmpty) {
@@ -561,7 +563,7 @@ class _PortfolioTrackerScreenState extends State<PortfolioTrackerScreen>
     } else if (activeSet.isNotEmpty) {
       displayList = activeSet.toList();
     } else {
-      displayList = _marketFeed.keys.take(25).toList();
+      displayList = [];
     }
 
     return Column(
