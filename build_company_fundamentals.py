@@ -9,6 +9,10 @@ from datetime import datetime
 
 OUTPUT_FILE = "company_business_models.json"
 
+# 🔄 Jab poore 150+ stocks ko zabardasti fresh regenerate karna ho, toh ise True kar dein.
+# Normal dino mein False rakhein taaki crash recovery kaam kare.
+FORCE_REFRESH = os.environ.get("FORCE_REFRESH", "false").lower() == "true"
+
 STOCKS_LIST = [
     {"symbol": "ASIANPAINT", "name": "Asian Paints Limited", "sector": "Manufacturing - Paints & Home Decor", "sector_type": "MANUFACTURING"},
     {"symbol": "RELIANCE", "name": "Reliance Industries Limited", "sector": "Conglomerate - Energy, Retail & Telecom", "sector_type": "CONGLOMERATE"},
@@ -65,7 +69,7 @@ STOCKS_LIST = [
     {"symbol": "CAMPUS", "name": "Campus Activewear Ltd.", "sector": "Consumer Durables", "sector_type": "CONSUMER_DURABLES"},
     {"symbol": "CAMS", "name": "Computer Age Management Services Ltd.", "sector": "Financial Services", "sector_type": "FINANCIAL_SERVICES"},
     {"symbol": "CANFINHOME", "name": "Can Fin Homes Ltd.", "sector": "Financial Services", "sector_type": "FINANCIAL_SERVICES"},
-    {"symbol": "CAPL", "name": "Caplin Point Laboratories Ltd.", "sector": "Healthcare", "sector_type": "HEALTHCARE"},
+    {"symbol": "CAPLIPOINT", "name": "Caplin Point Laboratories Ltd.", "sector": "Healthcare", "sector_type": "HEALTHCARE"},
     {"symbol": "CARBORUNIV", "name": "Carborundum Universal Ltd.", "sector": "Capital Goods", "sector_type": "CAPITAL_GOODS"},
     {"symbol": "CASTROLIND", "name": "Castrol India Ltd.", "sector": "Oil Gas & Consumable Fuels", "sector_type": "OIL_GAS_CONSUMABLE_FUELS"},
     {"symbol": "CEATLTD", "name": "CEAT Ltd.", "sector": "Automobile and Auto Components", "sector_type": "AUTOMOBILE_AND_AUTO_COMPONENTS"},
@@ -349,10 +353,18 @@ def scrape_screener_full_statements(symbol):
     
     def parse_section_table(section_id):
         section = soup.find("section", {"id": section_id})
-        if not section:
-            return None
+        table = None
+        if section:
+            table = section.find("table")
+            
+        # Fallback for Banking/NBFC/Finance headings
+        if not table:
+            for sec in soup.find_all("section"):
+                h2 = sec.find("h2")
+                if h2 and section_id.replace("-", " ").lower() in h2.text.lower():
+                    table = sec.find("table")
+                    break
         
-        table = section.find("table")
         if not table:
             return None
         
@@ -397,8 +409,8 @@ def scrape_screener_full_statements(symbol):
     c_flow = parse_section_table("cash-flow")
     ratios = parse_section_table("ratios")
 
-    if not p_and_l or not b_sheet:
-        print(f"   ⚠️️ Fundamental tables not parsed for {symbol}")
+    if not p_and_l:
+        print(f"   ⚠ Fundamental tables not parsed for {symbol}")
         return None
 
     periods = p_and_l["periods"]
@@ -412,7 +424,7 @@ def scrape_screener_full_statements(symbol):
 
     pl_multi_year = {k: {yr: v.get(yr) for yr in audited_periods[-5:]} for k, v in p_and_l["data"].items()}
 
-    print(f"   ✅ Screener Scraped: Period: {latest_audited_period} | Sales: ₹{latest_pl.get('Sales', 'N/A')} Cr | Net Profit: ₹{latest_pl.get('Net Profit', 'N/A')} Cr")
+    print(f"   ✅ Screener Scraped: Period: {latest_audited_period} | Sales/Revenue: ₹{latest_pl.get('Sales', latest_pl.get('Revenue', 'N/A'))} Cr")
 
     return {
         "latest_period": latest_audited_period,
@@ -427,7 +439,7 @@ def scrape_screener_full_statements(symbol):
     }
 
 # ==============================================================================
-# 3. 2-COMPANIES BATCH PROMPT TEMPLATE (EXHAUSTIVE AUDITED DATA PASS)
+# 3. PROMPT TEMPLATES (PAIR BATCH & SINGLE FALLBACK)
 # ==============================================================================
 
 BATCH_PROMPT_TEMPLATE = """
@@ -568,6 +580,74 @@ Respond ONLY with a valid JSON object matching this schema where keys are "{comp
 Do NOT wrap output in markdown backticks. Output ONLY raw parseable JSON.
 """
 
+SINGLE_PROMPT_TEMPLATE = """
+You are a Senior Equity Research Analyst for Indian public markets.
+Analyze the following company using its COMPLETE AUDITED STATUTORY STATEMENTS from Screener.in and the Global Macro Dashboard:
+
+--- UNIFIED GLOBAL MACRO DASHBOARD ---
+{macro_context}
+--------------------------------------
+
+--- COMPANY: {comp_symbol} ({comp_name}) ---
+Sector: {comp_sector} | Type: {comp_type} | Period: {comp_period}
+Audited Statements & Ratios:
+{comp_statements_json}
+---------------------------------------------
+
+STRICT LANGUAGE & STYLE RULES (100% EASY HINGLISH):
+1. Output must be in clean, natural, and conversational **Hinglish** (Roman Hindi + common English business words).
+2. Explain heavy financial terms simply in brackets.
+3. Only actionable analysis without guesswork.
+
+Respond ONLY with a valid JSON object matching this schema where key is "{comp_symbol}":
+{{
+  "{comp_symbol}": {{
+    "symbol": "{comp_symbol}",
+    "company_name": "{comp_name}",
+    "data_period": "{comp_period} (Audited)",
+    "business_model_architecture": {{
+      "operational_engine_analysis": "Aasan Hinglish analysis",
+      "sourcing_and_cost_defense": "Aasan Hinglish analysis",
+      "channel_moat_vulnerability": "Aasan Hinglish analysis",
+      "working_capital_physics": "Aasan Hinglish analysis"
+    }},
+    "pricing_and_macro_sensitivity": {{
+      "primary_macro_driver": "Main factor",
+      "margin_defense_capability": "HIGH / RESILIENT / COMPRESSED / WEAK",
+      "strategic_rationale": "Simple explanation"
+    }},
+    "cash_flow_reality": {{
+      "earnings_quality_assessment": "P&L vs Cash analysis",
+      "free_cash_flow_profile": "Profile type"
+    }},
+    "revenue_breakdown": {{
+      "has_disclosed_segments": false,
+      "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+      "segments": [],
+      "geographic_split": null
+    }},
+    "strategic_catalysts": ["Driver 1", "Driver 2"],
+    "must_watch_metrics": [
+      {{
+        "metric": "Key Ratio",
+        "reported_value": "Latest value",
+        "analytical_significance": "Why track"
+      }}
+    ],
+    "thesis_invalidation_trigger": {{
+      "structural_red_flag": "Red flag condition",
+      "numerical_breach_benchmark": "Breach level",
+      "strategic_implication": "Implication"
+    }},
+    "core_risks": [
+      {{ "risk_type": "Macro Risk", "analysis": "Explanation" }},
+      {{ "risk_type": "Competitive Risk", "analysis": "Explanation" }}
+    ]
+  }}
+}}
+Do NOT wrap output in markdown backticks. Output ONLY raw parseable JSON.
+"""
+
 # ==============================================================================
 # 4. GEMINI API CALLER (SAFE STRING CONCATENATION & ROBUST STRIPPING)
 # ==============================================================================
@@ -612,7 +692,7 @@ def call_gemini(prompt, api_key):
     return None, None
 
 # ==============================================================================
-# 5. MAIN PIPELINE (2 COMPANIES PER BATCH + 20S SLEEP)
+# 5. MAIN PIPELINE (SMART AUDITED PERIOD RESUME + 8S SLEEP)
 # ==============================================================================
 
 def generate_models():
@@ -621,72 +701,112 @@ def generate_models():
         print("❌ Set GEMINI_API_KEY environment variable first!")
         return
 
-    # Step 1: Fetch Macro Data
+    # Step 1: Fetch Live Macro Data
     macro_data = fetch_unified_macro_dashboard()
     macro_str = json.dumps(macro_data, indent=2)
 
+    # Step 2: Load Existing JSON for Crash Recovery
     all_results = {}
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+                existing_payload = json.load(f)
+                all_results = existing_payload.get("companies", {})
+                print(f"\n📦 Loaded existing database: {len(all_results)} companies cached.")
+        except Exception as e:
+            print(f"⚠️ Could not read existing file: {e}. Starting fresh.")
+            all_results = {}
+
     batch_size = 2
     batches = [STOCKS_LIST[i:i + batch_size] for i in range(0, len(STOCKS_LIST), batch_size)]
     total_batches = len(batches)
 
-    print(f"\n📦 Starting Batch Pipeline: Total {len(STOCKS_LIST)} stocks divided into {total_batches} batches.")
-    print("⏳ Interval Policy: Exact 20 seconds cooldown between batches.")
+    print(f"\n📦 Starting Batch Pipeline: Total {len(STOCKS_LIST)} stocks ({total_batches} batches).")
+    print(f"⏳ Cooldown Interval: Exact 8 seconds | Force Refresh: {FORCE_REFRESH}")
 
     for b_idx, batch in enumerate(batches, 1):
-        if len(batch) == 2:
-            c1, c2 = batch[0], batch[1]
-            print(f"\n🚀 [Batch {b_idx}/{total_batches}] Scraping & Processing Pair: {c1['symbol']} & {c2['symbol']}...")
+        c1 = batch[0]
+        c2 = batch[1] if len(batch) > 1 else None
 
-            # Step 2: Scrape Complete Screener.in Statements
-            s1_data = scrape_screener_full_statements(c1["symbol"])
-            time.sleep(1.0)
-            s2_data = scrape_screener_full_statements(c2["symbol"])
+        # Scrape Screener data
+        s1_data = scrape_screener_full_statements(c1["symbol"])
+        time.sleep(0.4)
+        s2_data = scrape_screener_full_statements(c2["symbol"]) if c2 else None
 
-            if not s1_data or not s2_data:
-                print(f"   ⚠️ Statement scraping failed for pair; skipping batch.")
-                continue
+        if not s1_data and (not c2 or not s2_data):
+            print(f"   ⚠️ Both scrapings failed for batch {b_idx}; skipping.")
+            continue
 
-            # Step 3: Inject into Batch Prompt
+        # 🧠 SMART RESUME & FINANCIAL UPDATE CHECK:
+        # Agar FORCE_REFRESH False hai, toh compare karein ki kya Screener ka latest_period
+        # pehle se saved data ke period se match karta hai ya nahi?
+        def is_up_to_date(symbol, scraped_info):
+            if FORCE_REFRESH or symbol not in all_results or not scraped_info:
+                return False
+            existing_period = all_results[symbol].get("data_period", "")
+            scraped_period = scraped_info["latest_period"]
+            # Example match: "Mar 2026" in "Mar 2026 (Audited)"
+            return scraped_period in existing_period
+
+        c1_ready = is_up_to_date(c1["symbol"], s1_data)
+        c2_ready = is_up_to_date(c2["symbol"], s2_data) if c2 else True
+
+        # Agar dono companies ka financial period latest hai, tabhi skip karein!
+        if c1_ready and c2_ready:
+            print(f"⏩ [Batch {b_idx}/{total_batches}] {c1['symbol']}" + (f" & {c2['symbol']}" if c2 else "") + " already up to date with latest period. Skipping...")
+            continue
+
+        print(f"\n🚀 [Batch {b_idx}/{total_batches}] Generating AI Research: {c1['symbol']}" + (f" & {c2['symbol']}" if c2 else ""))
+
+        # Dynamic prompt selection
+        if c2 and s2_data:
             prompt = BATCH_PROMPT_TEMPLATE.format(
                 macro_context=macro_str,
                 comp1_symbol=c1["symbol"], comp1_name=c1["name"], comp1_sector=c1["sector"], comp1_type=c1["sector_type"],
-                comp1_period=s1_data["latest_period"], comp1_statements_json=json.dumps(s1_data),
+                comp1_period=s1_data["latest_period"] if s1_data else "Latest",
+                comp1_statements_json=json.dumps(s1_data) if s1_data else "{}",
                 comp2_symbol=c2["symbol"], comp2_name=c2["name"], comp2_sector=c2["sector"], comp2_type=c2["sector_type"],
                 comp2_period=s2_data["latest_period"], comp2_statements_json=json.dumps(s2_data)
             )
+        else:
+            prompt = SINGLE_PROMPT_TEMPLATE.format(
+                macro_context=macro_str,
+                comp_symbol=c1["symbol"], comp_name=c1["name"], comp_sector=c1["sector"], comp_type=c1["sector_type"],
+                comp_period=s1_data["latest_period"] if s1_data else "Latest",
+                comp_statements_json=json.dumps(s1_data) if s1_data else "{}"
+            )
 
-            # Step 4: Call Gemini
-            parsed_batch, used_model = call_gemini(prompt, api_key)
-            if parsed_batch:
-                if c1["symbol"] in parsed_batch:
-                    parsed_batch[c1["symbol"]]["audited_statement_snapshot"] = s1_data["audited_latest_year"]
-                    all_results[c1["symbol"]] = parsed_batch[c1["symbol"]]
+        # Gemini Call
+        parsed_batch, used_model = call_gemini(prompt, api_key)
+        if parsed_batch:
+            if s1_data and c1["symbol"] in parsed_batch:
+                parsed_batch[c1["symbol"]]["audited_statement_snapshot"] = s1_data["audited_latest_year"]
+                all_results[c1["symbol"]] = parsed_batch[c1["symbol"]]
 
-                if c2["symbol"] in parsed_batch:
-                    parsed_batch[c2["symbol"]]["audited_statement_snapshot"] = s2_data["audited_latest_year"]
-                    all_results[c2["symbol"]] = parsed_batch[c2["symbol"]]
+            if c2 and s2_data and c2["symbol"] in parsed_batch:
+                parsed_batch[c2["symbol"]]["audited_statement_snapshot"] = s2_data["audited_latest_year"]
+                all_results[c2["symbol"]] = parsed_batch[c2["symbol"]]
 
-                print(f"   ✨ Successfully synthesized {c1['symbol']} and {c2['symbol']} via [{used_model}]")
-            else:
-                print(f"   ❌ Batch {b_idx} synthesis failed.")
+            print(f"   ✨ Successfully updated via [{used_model}] | Saved to cache!")
 
-        # Step 5: 20-second interval between batches
+            # 💾 Incremental Flush: Har batch ke turant baad disk par update karein
+            final_payload = {
+                "metadata": {
+                    "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "total_companies": len(all_results),
+                    "macro_snapshot": macro_data
+                },
+                "companies": all_results
+            }
+            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+                json.dump(final_payload, f, ensure_ascii=False, indent=2)
+        else:
+            print(f"   ❌ Batch {b_idx} synthesis failed.")
+
+        # Exact 8-second interval policy
         if b_idx < total_batches:
-            print(f"   ⏳ Batch completed. Sleeping for 20 seconds to guarantee full rate-limit headroom...")
-            time.sleep(20)
-
-    final_payload = {
-        "metadata": {
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "total_companies": len(all_results),
-            "macro_snapshot": macro_data
-        },
-        "companies": all_results
-    }
-
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_payload, f, ensure_ascii=False, indent=2)
+            print(f"   ⏳ Batch completed. Sleeping for 8 seconds...")
+            time.sleep(8)
 
     print(f"\n🎉 Successfully compiled {len(all_results)} companies across {total_batches} batches to '{OUTPUT_FILE}'!")
 
