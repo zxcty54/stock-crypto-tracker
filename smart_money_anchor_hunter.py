@@ -8,8 +8,8 @@ from pypdf import PdfReader
 
 OUTPUT_FILE = "smart_money_anchor_report.json"
 
-# Aapka Cloudflare Worker / Google Sheet Endpoint
-LIVE_PRICES_API = "https://stock-models-api.nitesh-skyhigh.workers.dev/"
+# Aapka live market endpoint
+LIVE_PRICES_API = "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet1"
 
 NSE_HOME = "https://www.nseindia.com"
 NSE_ANNOUNCEMENTS_API = "https://www.nseindia.com/api/corporate-announcements"
@@ -42,12 +42,6 @@ INSTITUTIONAL_DIRECTORY = {
     ]
 }
 
-# Known alias mapper
-SYMBOL_ALIASES = {
-    "PIRAMALFIN": "PEL",
-    "PIRAMALCAP": "PEL"
-}
-
 def init_nse_session():
     session = requests.Session()
     session.headers.update(NSE_HEADERS)
@@ -59,30 +53,59 @@ def init_nse_session():
     return session
 
 def load_live_market_data():
-    """Aapke API endpoint se poore stocks ka data load karke symbol-indexed dict banata hai."""
-    print("📡 Loading Live CMP & MCap from your Worker API...")
+    """Cloudflare Worker se dynamic live data load karta hai (handles string or JSON)."""
+    print("📡 Loading Live Market Data from your Worker API...")
     market_db = {}
     try:
-        res = requests.get(LIVE_PRICES_API, timeout=12)
+        res = requests.get(LIVE_PRICES_API, timeout=15)
         if res.status_code == 200:
-            stock_list = res.json()
+            raw_data = res.json()
+            
+            # Stringified JSON safe unwrap
+            if isinstance(raw_data, str):
+                stock_list = json.loads(raw_data)
+            else:
+                stock_list = raw_data
+
+            if isinstance(stock_list, str):
+                stock_list = json.loads(stock_list)
+
             for item in stock_list:
+                if isinstance(item, str):
+                    try:
+                        item = json.loads(item)
+                    except Exception:
+                        continue
+
                 sym = str(item.get("Symbol", "")).strip().upper()
                 if sym:
-                    cmp_val = float(item.get("CMP") or 0.0)
-                    mcap_raw = float(item.get("MCap") or 0.0)
+                    cmp_raw = item.get("CMP") or item.get("cmp") or 0.0
+                    mcap_raw = item.get("MCap") or item.get("mcap") or 0.0
+
+                    try:
+                        cmp_val = float(str(cmp_raw).replace(",", ""))
+                    except ValueError:
+                        cmp_val = 0.0
+
+                    try:
+                        mcap_val = float(str(mcap_raw).replace(",", ""))
+                    except ValueError:
+                        mcap_val = 0.0
+
                     # Convert raw Rupees to Crores
-                    mcap_cr = round(mcap_raw / 10000000.0, 2) if mcap_raw > 0 else 0.0
+                    mcap_cr = round(mcap_val / 10000000.0, 2) if mcap_val > 0 else 0.0
                     
                     market_db[sym] = {
                         "cmp": cmp_val,
                         "mcap_cr": mcap_cr
                     }
+
             print(f"✅ Loaded {len(market_db)} live stocks into memory cache.")
         else:
             print(f"❌ Failed to fetch from worker API. Status: {res.status_code}")
     except Exception as e:
         print(f"⚠️ Worker API Error: {e}")
+        
     return market_db
 
 def download_and_parse_pdf(pdf_url, session):
@@ -194,12 +217,12 @@ def fetch_institutional_anchors(market_db, days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
 
-            # Strict elimination of non-dilutive / retail noise
+            # Strict negative filter: non-dilutive / retail noise drop karo
             blacklist = r'(?:dividend|acquisition of|in the units of|rights\s+issue|esop|sweat\s+equity|bonus|warrant|debt\s+conversion|loan\s+conversion|remuneration|resignation|loss of share)'
             if re.search(blacklist, full_text, re.I):
                 continue
 
-            # Must be QIP or Preferential Equity Allotment
+            # QIP or Preferential Equity Allotment
             is_qip = bool(re.search(r'\bqip\b|qualified\s+institutions\s+placement', full_text, re.I))
             is_pref = bool(re.search(r'preferential\s+(?:allotment|issue).*(?:equity\s+shares)', full_text, re.I)) or \
                       bool(re.search(r'allotment\s+of\s+[\d,]+\s+equity\s+shares', full_text, re.I))
@@ -254,26 +277,36 @@ def fetch_institutional_anchors(market_db, days_back=60):
                     continue
 
         processed = []
-        print(f"\n🔍 Screening {len(raw_candidates)} candidate filings against Live API DB...")
+        print(f"\n🔍 Screening {len(raw_candidates)} candidate filings dynamically...")
 
         for cand in raw_candidates:
             symbol = cand["symbol"]
             floor = cand["floor_price"]
 
-            # Lookup in your loaded memory DB (also checks alias)
-            lookup_sym = SYMBOL_ALIASES.get(symbol, symbol)
-            stock_data = market_db.get(lookup_sym) or market_db.get(symbol)
+            # Completely Generic lookup directly from your Live Worker DB
+            stock_data = market_db.get(symbol)
+
+            # Agar Worker DB me symbol nahi hai, toh direct NSE quote se check karo (Generic Fallback)
+            if not stock_data:
+                try:
+                    url_nse = f"https://www.nseindia.com/api/quote-equity?symbol={symbol}"
+                    res = session.get(url_nse, timeout=5)
+                    if res.status_code == 200:
+                        q_data = res.json()
+                        p_val = float(q_data.get("priceInfo", {}).get("lastPrice", 0.0))
+                        s_val = float(q_data.get("securityInfo", {}).get("issuedSize", 0))
+                        m_val = round((p_val * s_val) / 10000000.0, 2) if (p_val and s_val) else 0.0
+                        if p_val > 0:
+                            stock_data = {"cmp": p_val, "mcap_cr": m_val}
+                except Exception:
+                    pass
 
             if not stock_data:
-                print(f"❌ Dropped {symbol}: Not present in Live DB")
+                print(f"❌ Dropped {symbol}: Could not resolve CMP dynamically")
                 continue
 
             cmp_val = stock_data["cmp"]
             mcap_cr = stock_data["mcap_cr"]
-
-            if cmp_val <= 0:
-                print(f"❌ Dropped {symbol}: Invalid CMP")
-                continue
 
             if cmp_val < 15.0:
                 print(f"❌ Dropped {symbol}: CMP ₹{cmp_val} is below penny cutoff (₹15.0)")
@@ -281,9 +314,9 @@ def fetch_institutional_anchors(market_db, days_back=60):
 
             delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
 
-            # Sanity bound: regex OCR glitches reject karna (-40% to +60%)
+            # Sanity Bound Check: OCR Glitches eliminate karna (-40% se +60%)
             if delta_pct < -40.0 or delta_pct > 60.0:
-                print(f"🚫 Dropped OCR Error on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} (Delta: {delta_pct}%)")
+                print(f"🚫 Dropped Anomaly on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} (Delta: {delta_pct}%)")
                 continue
 
             deal_pct_of_mcap = round((cand["capital_raised_cr"] / mcap_cr * 100), 2) if mcap_cr > 0 else 0.0
@@ -329,13 +362,10 @@ def fetch_institutional_anchors(market_db, days_back=60):
 
 def main():
     print("=" * 65)
-    print("💎 EXECUTING RESILIENT FRESH CAPITAL ANCHOR ENGINE")
+    print("💎 EXECUTING ZERO-HARDCODED FRESH CAPITAL ANCHOR ENGINE")
     print("=" * 65)
 
-    # 1. Load Live Database from Cloudflare Worker once
     market_db = load_live_market_data()
-
-    # 2. Fetch and evaluate against NSE filings
     all_setups = fetch_institutional_anchors(market_db, days_back=60)
 
     prime_setups = [item for item in all_setups if item["zone"] == "PRIME_DISCOUNT"]
