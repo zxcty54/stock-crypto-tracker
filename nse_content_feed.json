@@ -1,8 +1,64 @@
 {
-  "generated_at": "2026-10-05 16:17:00 IST",
-  "worthy_count": 5,
-  "skipped_count": 3,
+  "generated_at": "2026-10-06 16:08:56 IST",
+  "worthy_count": 9,
+  "skipped_count": 5,
   "content_feed": [
+    {
+      "hash": "4d108902eace",
+      "symbol": "SIMPLEXINF",
+      "company_name": "Simplex Infrastructures Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "05-Oct-2026 13:10:40",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SIMPLEXINF_05102026131020_Stock_Exchange_Letter__3_.pdf",
+      "headline": "Simplex Infrastructures wins ₹255.52 Crore oil drilling contract from Oil India",
+      "content_worthy": true,
+      "worthiness_reason": "Contract award with disclosed value and client.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Simplex Infrastructures Limited (NSE: SIMPLEXINF)</b>\n\n<b>Simplex Infrastructures wins ₹255.52 Crore oil drilling contract from Oil India</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Value:</b> ₹255.52 Crores\n- <b>Client:</b> Oil India Limited\n- <b>Total Orders (FY 2026):</b> ₹920 Crores\n- <b>Project Type:</b> Oil drilling services\n\n📌 <b>What happened:</b>\n↳ The company secured a new oil drilling contract and has accumulated orders totaling ₹920 Crores for the year.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SIMPLEXINF_05102026131020_Stock_Exchange_Letter__3_.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-06 16:08:56 IST"
+    },
+    {
+      "hash": "0a0ab250880d",
+      "symbol": "SPAL",
+      "company_name": "S. P. Apparels Limited",
+      "category": "SPLIT",
+      "event_type": "STOCK_SPLIT",
+      "broadcast_date": "06-Oct-2026 14:02:03",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SPAL_06102026140136_OutcomeFinal.pdf",
+      "headline": "S. P. Apparels Limited announces 5:1 stock split with record date 10-Dec-2026",
+      "content_worthy": true,
+      "worthiness_reason": "Stock split announcement with record date and ratio disclosed.",
+      "telegram_post": "✂️ <b>#STOCK_SPLIT</b> | <b>S. P. Apparels Limited (NSE: SPAL)</b>\n\n<b>S. P. Apparels Limited announces 5:1 stock split with record date 10-Dec-2026</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Record Date:</b> 10-Dec-2026\n- <b>Split Ratio:</b> 5 new shares for every 1 existing share\n- <b>Face Value:</b> Rs.10 to Rs.2 per share\n\n📌 <b>What happened:</b>\n↳ The split is ranking pari‑passu with existing equity shares.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SPAL_06102026140136_OutcomeFinal.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-06 16:08:34 IST"
+    },
+    {
+      "hash": "878eb893630a",
+      "symbol": "VEEGALAND",
+      "company_name": "Veegaland Developers Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "06-Oct-2026 15:41:59",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VEEGALAND_06102026154146_Press_Release.pdf",
+      "headline": "Veegaland Developers Reports Q1 FY 2027 Revenue 7,432 Lakhs, PAT 972 Lakhs",
+      "content_worthy": true,
+      "worthiness_reason": "Unaudited financial results with revenue and PAT disclosed.",
+      "telegram_post": "📊 <b>RESULT</b> | <b>Veegaland Developers Limited (NSE: VEEGALAND)</b>\n\n<b>Veegaland Developers Reports Q1 FY 2027 Revenue 7,432 Lakhs, PAT 972 Lakhs</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue:</b> 7,432 Lakhs (YoY +79%)\n- <b>Gross Profit:</b> 2,099 Lakhs\n- <b>EBITDA:</b> 1,431 Lakhs\n- <b>Profit After Tax:</b> 972 Lakhs\n- <b>PAT Margin:</b> 12.86%\n\n📌 <b>What happened:</b>\n↳ Unaudited financial results for quarter ended 30 June 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VEEGALAND_06102026154146_Press_Release.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-06 16:08:13 IST"
+    },
+    {
+      "hash": "48b2401f25c7",
+      "symbol": "MARSONS",
+      "company_name": "Marsons Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "06-Oct-2026 16:01:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MARSONS_06102026160040_Marsons_Press_Release_Filing_signed.pdf",
+      "headline": "Marsons & Cleanhill Partners to Form Joint Venture for Power Transformer Manufacturing in North America",
+      "content_worthy": true,
+      "worthiness_reason": "Joint venture formation with commercial impact.",
+      "telegram_post": "🤝 <b>JOINT_VENTURE</b> | <b>Marsons Limited (NSE: MARSONS)</b>\n\n<b>Marsons & Cleanhill Partners to Form Joint Venture for Power Transformer Manufacturing in North America</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Joint Venture:</b> Marsons Limited & Cleanhill Partners\n- <b>Target Market:</b> United States & Canada\n- <b>Marsons Capacity:</b> 12,000 MVA (expanding to 26,000 MVA)\n- <b>Objective:</b> Accelerate transformer distribution, service & manufacturing\n\n📌 <b>What happened:</b>\n↳ The JV aims to address the transformer supply gap in North America.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MARSONS_06102026160040_Marsons_Press_Release_Filing_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-06 16:08:13 IST"
+    },
     {
       "hash": "a23752fc900b",
       "symbol": "KNACK",
@@ -75,6 +131,34 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "30fad49296f4",
+      "symbol": "ADANIPOWER",
+      "company_name": "Adani Power Limited",
+      "category": "STRATEGIC_PARTNERSHIP",
+      "event_type": "OTHER",
+      "broadcast_date": "06-Oct-2026 07:00:08",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ADANIPOWER_06102026065235_APLSigningofSHAtosetup770MWChamkharchhuHEPinBhutan05102026.pdf",
+      "headline": "Memorandum of Understanding/Agreements",
+      "content_worthy": false,
+      "worthiness_reason": "Strategic partnership not a commercial acquisition; no material development.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-06 16:08:56 IST"
+    },
+    {
+      "hash": "b669b70ad3a9",
+      "symbol": "VEEGALAND",
+      "company_name": "Veegaland Developers Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "06-Oct-2026 15:04:44",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VEEGALAND_06102026150313_Outcome_of_BM.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results not disclosed with revenue/PAT.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-06 16:08:34 IST"
+    },
     {
       "hash": "a8dd7f01ee22",
       "symbol": "PVSL",
