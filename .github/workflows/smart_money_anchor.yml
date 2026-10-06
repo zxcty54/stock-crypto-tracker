@@ -9,6 +9,9 @@ concurrency:
   group: anchor-pipeline
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   run-anchor-hunter:
     runs-on: ubuntu-latest
