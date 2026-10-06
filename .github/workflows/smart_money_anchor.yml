@@ -1,4 +1,4 @@
-name: BSE Smart Money Anchor & Floor Pipeline
+name: "BSE Smart Money Anchor and Floor Pipeline"
 
 on:
   schedule:
