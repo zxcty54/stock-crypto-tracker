@@ -392,4 +392,17 @@ def main():
     report = {
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
         "total_anchors_discovered": len(all_setups),
-        "prime_discount_
+        "prime_discount_opportunities": len(prime_setups),
+        "buffer_safe_entries": len(buffer_setups),
+        "prime_setups": prime_setups,
+        "buffer_setups": buffer_setups,
+        "all_setups": all_setups
+    }
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+
+    print(f"\n🏆 Completed! Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)}")
+
+if __name__ == "__main__":
+    main()
