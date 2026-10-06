@@ -11,15 +11,17 @@ import pypdf
 OUTPUT_REPORT_FILE = "order_radar_report.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
-# Universal Max Debt/MCap ratio across all categories
+# Universal Guards Parameters
 MAX_DEBT_TO_MCAP_RATIO = 1.2
+MAX_BOOK_TO_BILL_RATIO = 6.0  # > 6x annual revenue = Paper backlog / slow execution trap
+MIN_BOOK_TO_BILL_RATIO = 1.0  # < 1x annual revenue = Insufficient multi-year runway
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
-# Non-order sectors jahan order book nahi hota
+# Sectors jahan order backlog model physically exist nahi karta
 NON_ORDER_SECTORS = [
     "bank", "financial services", "finance", "nbfc", "housing finance",
     "information technology", "it services", "software", "consulting",
@@ -189,6 +191,7 @@ def get_screener_data(symbol):
                         mcap_val = float(m.group(0))
                         break
 
+        # Total Debt (Borrowings Row parsing from Balance Sheet)
         total_debt_cr = 0.0
         bs_section = soup.find("section", id="balance-sheet")
         if bs_section:
@@ -203,6 +206,7 @@ def get_screener_data(symbol):
                             total_debt_cr = float(m.group(0))
                             break
 
+        # Fallback Debt from Top Card Section
         if total_debt_cr == 0.0:
             for span in soup.find_all("span", string=re.compile(r"^\s*Debt\s*$", re.I)):
                 parent = span.find_parent("li")
@@ -229,6 +233,7 @@ def get_screener_data(symbol):
         ebitda_positive = False
         profit_table = soup.find("section", id="profit-loss")
         if profit_table:
+            # Sales extraction
             for tr in profit_table.find_all("tr"):
                 first_col = tr.find(["td", "th"])
                 if first_col and "sales" in first_col.get_text().lower():
@@ -240,6 +245,7 @@ def get_screener_data(symbol):
                             annual_sales = float(m.group(0))
                             break
 
+            # Operating Profit extraction
             for tr in profit_table.find_all("tr"):
                 first_col = tr.find(["td", "th"])
                 if first_col and "operating profit" in first_col.get_text().lower():
@@ -303,21 +309,21 @@ def batch_process_gemini(batch_candidates):
         stocks_text_bundle += f"\n\n=== STOCK: {item['symbol']} ===\n{item['text'][:3200]}\n"
 
     prompt = f"""
-You are a senior equity research analyst. Analyze the following batch of credit rating rationale documents for up to 3 companies.
+You are a senior institutional equity research analyst. Analyze the credit rating rationale documents for up to 3 companies below.
 For EACH company marked with '=== STOCK: SYMBOL ===', extract:
-1. "order_book_cr": Float unexecuted order backlog in Crores INR (0.0 if not found).
-2. "total_debt_cr": Float Total Debt/Borrowings from 'Key Financial Indicators' table or text in Crores INR (0.0 if not found).
-3. "timeline_months": Execution tenure in months (integer, default 24).
-4. "thesis": 1-line crisp summary highlighting backlog and debt health.
+1. "order_book_cr": Float number of unexecuted/pending order backlog in Crores INR (0.0 if not found).
+2. "total_debt_cr": Float number of Total Debt/Borrowings from 'Key Financial Indicators' table or text in Crores INR (0.0 if not found).
+3. "timeline_months": Integer tenure of execution in months (default 24).
+4. "thesis": Crisp 1-line summary stating order backlog and balance sheet debt health.
 
-Return a JSON array of objects. Exactly follow this structure:
+Return ONLY a pure JSON array of objects without markdown backticks. Example:
 [
   {{
     "symbol": "SYMBOL",
     "order_book_cr": 0.0,
     "total_debt_cr": 0.0,
     "timeline_months": 24,
-    "thesis": "..."
+    "thesis": "Crisp one line statement."
   }}
 ]
 """
@@ -334,12 +340,11 @@ Return a JSON array of objects. Exactly follow this structure:
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-lite:generateContent?key={GEMINI_API_KEY}"
     
     try:
-        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=20)
-        
-        # Fallback to flash-lite if specific alias varies
+        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=22)
         if res.status_code == 404:
+            # Fallback alias if direct route varies
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key={GEMINI_API_KEY}"
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=20)
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=22)
 
         if res.status_code == 200:
             raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
@@ -357,9 +362,9 @@ Return a JSON array of objects. Exactly follow this structure:
                 }
             return result
     except Exception as e:
-        print(f"   ⚠️ Gemini Batch Error: {e}")
+        print(f"   ⚠️ Gemini Batch Extraction skipped: {e}")
 
-    # Fallback to regex if AI call fails
+    # Fallback to local regex if AI call is unavailable
     fallback_res = {}
     for item in batch_candidates:
         txt = item["text"]
@@ -385,11 +390,12 @@ def run():
     print("=" * 75)
     print(f"🚀 UNIFIED RADAR: SCANNING {len(WATCHLIST_SYMBOLS)} STOCKS")
     print(f"   🤖 Batched AI Processing (3 Stocks/Call) with 15s Cooldown")
-    print(f"   🛡️ Universal Guards: Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x & CIRP/NCLT Blocked")
+    print(f"   🛡️ Reality Filter: Book-to-Bill <= {MAX_BOOK_TO_BILL_RATIO}x & Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x")
     print("=" * 75)
 
     hidden_gems = []
     all_tracked_orders = []
+    paper_backlog_traps = []
     turnaround_sales_gems = []
     order_doc_queue = []
 
@@ -424,6 +430,7 @@ def run():
                     "company_name": name,
                     "market_cap_cr": mcap,
                     "total_debt_cr": debt,
+                    "annual_sales_cr": sales or 0.0,
                     "doc_url": doc_url,
                     "text": doc_text
                 })
@@ -451,7 +458,7 @@ def run():
     # BATCHED GEMINI AI EXECUTION (3 Stocks per API call + 15 sec sleep)
     # =========================================================================
     print("\n" + "=" * 75)
-    print(f"⚡ DISPATCHING {len(order_doc_queue)} CANDIDATES TO GEMINI (BATCH SIZE: 3, SLEEP: 15s)")
+    print(f"⚡ DISPATCHING {len(order_doc_queue)} CANDIDATES TO GEMINI 3.5 LITE (BATCH: 3, SLEEP: 15s)")
     print("=" * 75)
 
     batch_size = 3
@@ -466,12 +473,13 @@ def run():
             s_sym = stock["symbol"]
             m_cap = stock["market_cap_cr"]
             debt_val = stock["total_debt_cr"]
+            sales_val = stock["annual_sales_cr"]
             metrics = ai_results.get(s_sym, {})
             
             order_val = metrics.get("order_book_cr", 0.0)
             pdf_debt = metrics.get("pdf_debt_cr", 0.0)
 
-            # AI Debt Recovery from PDF table
+            # AI Debt Recovery from PDF table if Screener missed it
             if debt_val == 0.0 and pdf_debt > 0.0:
                 debt_val = pdf_debt
                 print(f"   🔍 AI Debt Recovery from PDF for {s_sym}: ₹{debt_val:,.1f} Cr")
@@ -479,36 +487,58 @@ def run():
             d_to_mcap = round(debt_val / m_cap, 2) if m_cap > 0 else 999.0
 
             if order_val > 0:
+                # Debt/MCap Check
                 if d_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
                     print(f"   ⛔ Disqualified {s_sym} after AI: Debt/MCap {d_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x")
                     continue
 
-                multiple = round(order_val / m_cap, 2)
+                order_to_mcap = round(order_val / m_cap, 2)
+                
+                # -------------------------------------------------------------
+                # 🛡️ THE EXECUTION REALITY FILTER (Book-to-Bill / Revenue Runway)
+                # -------------------------------------------------------------
+                book_to_bill = round(order_val / sales_val, 2) if sales_val > 0 else 0.0
+                
                 record = {
                     "symbol": s_sym,
                     "company_name": stock["company_name"],
                     "market_cap_cr": m_cap,
+                    "annual_sales_cr": sales_val,
                     "total_debt_cr": debt_val,
                     "debt_to_mcap": d_to_mcap,
                     "pending_order_book_cr": order_val,
-                    "order_to_mcap_multiple": multiple,
+                    "order_to_mcap_multiple": order_to_mcap,
+                    "book_to_bill_ratio": book_to_bill,
+                    "execution_runway_years": f"{book_to_bill} Years" if book_to_bill > 0 else "N/A",
                     "execution_timeline_months": metrics.get("timeline_months", 24),
                     "thesis": metrics.get("thesis", f"Backlog of ₹{order_val:,.1f} Cr."),
                     "source_doc": stock["doc_url"]
                 }
+                
                 all_tracked_orders.append(record)
-                if multiple >= 1.0:
-                    hidden_gems.append(record)
-                    print(f"   🔥 [HIDDEN GEM] {s_sym}: Backlog ₹{order_val:,.1f} Cr | {multiple}x MCap | Debt: {d_to_mcap}x")
 
-        # 15 seconds break between batches
+                # Reality Test: Agar backlog annual sales ke 6x se zyada hai (e.g. Tera Software)
+                if book_to_bill > MAX_BOOK_TO_BILL_RATIO:
+                    record["classification"] = "PAPER_BACKLOG_TRAP"
+                    record["warning"] = f"Order book is {book_to_bill}x of annual sales. Unrealistic 24m execution speed."
+                    paper_backlog_traps.append(record)
+                    print(f"   ⚠️ [PAPER TRAP DETECTED] {s_sym}: Backlog ₹{order_val:,.1f} Cr vs Sales ₹{sales_val:,.1f} Cr ({book_to_bill} Years Runway!)")
+                
+                # Asli Hidden Gem: Order > MCap AND Realistic Book-to-Bill (1.0x to 6.0x)
+                elif order_to_mcap >= 1.0 and book_to_bill >= MIN_BOOK_TO_BILL_RATIO:
+                    record["classification"] = "PRIME_HIDDEN_GEM"
+                    hidden_gems.append(record)
+                    print(f"   🔥 [PRIME ALPHA GEM] {s_sym}: Backlog ₹{order_val:,.1f} Cr | {order_to_mcap}x MCap | Runway: {book_to_bill} Years | Debt: {d_to_mcap}x")
+
+        # 15 seconds rate limit sleep between batches
         if i + batch_size < len(order_doc_queue):
             print("⏳ 15s rate-limit cooldown before next batch...")
             time.sleep(15)
 
-    # Sort and dump
+    # Sort rankings
     hidden_gems.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
     all_tracked_orders.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+    paper_backlog_traps.sort(key=lambda x: x["book_to_bill_ratio"], reverse=True)
     turnaround_sales_gems.sort(key=lambda x: x["sales_to_mcap_multiple"], reverse=True)
 
     final_report = {
@@ -516,12 +546,15 @@ def run():
         "total_scanned": len(WATCHLIST_SYMBOLS),
         "guards_applied": {
             "max_debt_to_mcap": MAX_DEBT_TO_MCAP_RATIO,
+            "max_book_to_bill_runway_years": MAX_BOOK_TO_BILL_RATIO,
             "insolvency_and_cirp_filtered": True
         },
-        "total_hidden_gems_multiple_gt_1": len(hidden_gems),
+        "total_prime_hidden_gems": len(hidden_gems),
+        "total_paper_backlog_traps": len(paper_backlog_traps),
         "total_tracked_order_books": len(all_tracked_orders),
         "total_sales_turnaround_gems": len(turnaround_sales_gems),
-        "hidden_gems": hidden_gems,
+        "prime_hidden_gems": hidden_gems,
+        "paper_backlog_traps": paper_backlog_traps,
         "all_tracked_orders": all_tracked_orders,
         "turnaround_sales_gems": turnaround_sales_gems
     }
@@ -531,10 +564,11 @@ def run():
 
     print("\n" + "=" * 75)
     print(f"✅ UNIFIED SCAN FINISHED!")
-    print(f"   🔥 Hidden Gems (Order Book >= 1.0x): {len(hidden_gems)}")
-    print(f"   📋 All Order Book Tracked: {len(all_tracked_orders)}")
-    print(f"   🚀 Clean Sales Turnaround Gems (Sales > MCap): {len(turnaround_sales_gems)}")
-    print(f"   💾 Saved into: {OUTPUT_REPORT_FILE}")
+    print(f"   🔥 Real Execution Alpha Gems: {len(hidden_gems)}")
+    print(f"   ⚠️ Paper Backlog Traps Filtered: {len(paper_backlog_traps)}")
+    print(f"   📋 Total Order Books Tracked: {len(all_tracked_orders)}")
+    print(f"   🚀 Clean Sales Turnaround Gems: {len(turnaround_sales_gems)}")
+    print(f"   💾 Saved cleanly into: {OUTPUT_REPORT_FILE}")
     print("=" * 75)
 
 if __name__ == "__main__":
