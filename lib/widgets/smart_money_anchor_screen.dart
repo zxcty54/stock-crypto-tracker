@@ -166,6 +166,7 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
           ),
           if (setups.isEmpty)
             const SliverFillRemaining(
+              hasScrollBody: false,
               child: Center(
                 child: Text('No setups found under this category.', style: TextStyle(color: Colors.grey)),
               ),
@@ -177,7 +178,11 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
                 childCount: setups.length,
               ),
             ),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          // SEBI Statutory Disclaimer Card
+          SliverToBoxAdapter(
+            child: _buildSebiDisclaimer(),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),
     );
@@ -310,7 +315,7 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
                   decoration: BoxDecoration(
                     color: badgeColor.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(8),
-                    border: BorderSide(color: badgeColor, width: 0.8),
+                    border: Border.all(color: badgeColor, width: 0.8),
                   ),
                   child: Text(
                     item['zone_label'] ?? '',
@@ -335,7 +340,9 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
                 ),
                 _buildMetricColumn(
                   'Raised',
-                  item['capital_raised_cr'] > 0 ? '₹${item['capital_raised_cr']} Cr' : '--',
+                  (item['capital_raised_cr'] as num?)?.toDouble() != null && (item['capital_raised_cr'] as num) > 0
+                      ? '₹${item['capital_raised_cr']} Cr'
+                      : '--',
                   Colors.white70,
                 ),
               ],
@@ -353,7 +360,7 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
                     decoration: BoxDecoration(
                       color: const Color(0xFF21262D),
                       borderRadius: BorderRadius.circular(6),
-                      border: BorderSide(color: Colors.white.withOpacity(0.08)),
+                      border: Border.all(color: Colors.white.withOpacity(0.08)),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -413,6 +420,41 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: color),
         ),
       ],
+    );
+  }
+
+  Widget _buildSebiDisclaimer() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF161B22).withOpacity(0.6),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Colors.amberAccent, size: 14),
+              SizedBox(width: 6),
+              Text(
+                'SEBI Regulatory Compliance & Disclaimer',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.amberAccent),
+              ),
+            ],
+          ),
+          SizedBox(height: 6),
+          Text(
+            'Data displayed is sourced directly from statutory corporate announcements filed with BSE/NSE for informational & algorithmic tracking purposes only. '
+            'We are NOT a SEBI-registered Research Analyst (RA) or Investment Advisor (IA). '
+            'Historical institutional allotment prices do not guarantee future returns or downside protection. '
+            'Securities investments are subject to market risks. Please consult a qualified financial advisor before making any investment decisions.',
+            style: TextStyle(fontSize: 10, color: Colors.white54, height: 1.4),
+          ),
+        ],
+      ),
     );
   }
 }
