@@ -11,13 +11,16 @@ import pypdf
 OUTPUT_REPORT_FILE = "order_radar_report.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
+# Universal Max Debt/MCap ratio across all categories
+MAX_DEBT_TO_MCAP_RATIO = 1.2
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
-# 🚫 Non-Order Sectors: Inhe direct skip karenge
-EXCLUDED_SECTORS = [
+# Non-order sectors jahan order book nahi hota (Inme Sales Turnaround engine chalega)
+NON_ORDER_SECTORS = [
     "bank", "financial services", "finance", "nbfc", "housing finance",
     "information technology", "it services", "software", "consulting",
     "fast moving consumer goods", "fmcg", "consumer goods", "retail",
@@ -26,7 +29,7 @@ EXCLUDED_SECTORS = [
     "hotel", "restaurant", "travel", "tourism"
 ]
 
-# Aapke 1,392 watchlist symbols
+# Aapke 1,392 watchlist stocks
 WATCHLIST_SYMBOLS = [
     "20MICRONS", "21STCENMGM", "3PLAND", "5PAISA", "A2ZINFRA", "AAATECH", "AAKASH", "AAREYDRUGS",
     "AARON", "AARTIDRUGS", "AARTISURF", "AARVI", "AASTHA", "ABANSENT", "ABCOTS", "ABFRL", "ABINFRA",
@@ -187,8 +190,29 @@ WATCHLIST_SYMBOLS = [
     "ZODIAC", "ZODIACLOTH", "ZUARI", "ZUARIIND"
 ]
 
-def get_screener_details(symbol):
-    """Screener se Live Market Cap, Sector, aur Rating Doc fetch karta hai."""
+def check_insolvency_and_warnings(soup):
+    """
+    IBC, NCLT, CIRP, Resolution Professional aur Red-alert warnings check karta hai.
+    """
+    text_blob = soup.get_text().lower()
+    red_keywords = [
+        "insolvency", "cirp", "nclt", "resolution professional",
+        "corporate insolvency", "interim resolution professional", "going concern issue"
+    ]
+    if any(k in text_blob for k in red_keywords):
+        return True
+
+    # Screener Red alerts ya callout boxes
+    alerts = soup.find_all(["div", "p", "span"], class_=lambda c: c and any(x in str(c).lower() for x in ["warning", "danger", "alert", "caution"]))
+    for alert in alerts:
+        a_text = alert.get_text().lower()
+        if any(k in a_text for k in ["default", "insolvency", "nclt", "going concern", "suspended"]):
+            return True
+
+    return False
+
+def get_screener_data(symbol):
+    """Screener se Live MCap, Sector, Debt, Sales, EBITDA aur Documents fetch karta hai."""
     url = f"https://www.screener.in/company/{symbol}/consolidated/"
     try:
         res = requests.get(url, headers=HEADERS, timeout=8)
@@ -197,21 +221,19 @@ def get_screener_details(symbol):
             res = requests.get(url, headers=HEADERS, timeout=8)
             
         if res.status_code != 200:
-            return None, None, None, symbol, ""
+            return None
 
         soup = BeautifulSoup(res.text, "html.parser")
         
         # 1. Company Name
         h1 = soup.find("h1")
-        company_name = h1.get_text(strip=True) if h1 else symbol
+        name = h1.get_text(strip=True) if h1 else symbol
 
-        # 2. Sector Check & Filter
+        # 2. Sector Identification
         sector_text = ""
         crumbs = soup.find("div", class_="breadcrumbs") or soup.find("ul", class_="breadcrumbs")
         if crumbs:
             sector_text = crumbs.get_text(separator=" ", strip=True).lower()
-            if any(bad in sector_text for bad in EXCLUDED_SECTORS):
-                return None, None, None, symbol, "EXCLUDED_SECTOR"
 
         # 3. Market Cap Extraction
         mcap_val = None
@@ -226,7 +248,21 @@ def get_screener_details(symbol):
                         mcap_val = float(m.group(0))
                         break
 
-        # 4. Rating Document Discovery
+        # 4. Total Debt (Borrowings) Extraction from Balance Sheet
+        total_debt_cr = 0.0
+        bs_section = soup.find("section", id="balance-sheet")
+        if bs_section:
+            borrowings_row = bs_section.find("td", string=re.compile(r"Borrowings", re.I))
+            if borrowings_row:
+                parent_tr = borrowings_row.find_parent("tr")
+                tds = parent_tr.find_all("td")
+                if len(tds) > 1:
+                    last_val = tds[-1].get_text(strip=True).replace(",", "")
+                    m = re.search(r"[\d.]+", last_val)
+                    if m:
+                        total_debt_cr = float(m.group(0))
+
+        # 5. Rating Document Link Discovery
         doc_url = None
         agency_name = "Audited Disclosures"
         for a in soup.find_all("a", href=True):
@@ -237,12 +273,53 @@ def get_screener_details(symbol):
                 agency_name = a.get_text(strip=True)
                 break
 
-        return mcap_val, doc_url, agency_name, company_name, sector_text
+        # 6. Annual Sales & Operating Profit (EBITDA) Extraction
+        annual_sales = None
+        ebitda_positive = False
+        
+        profit_table = soup.find("section", id="profit-loss")
+        if profit_table:
+            # Sales
+            sales_row = profit_table.find("tr", class_=re.compile(r"stripe", re.I)) or profit_table.find("td", string=re.compile(r"Sales", re.I))
+            if sales_row:
+                parent_tr = sales_row if sales_row.name == "tr" else sales_row.find_parent("tr")
+                tds = parent_tr.find_all("td")
+                if len(tds) > 1:
+                    last_val = tds[-1].get_text(strip=True).replace(",", "")
+                    m = re.search(r"[\d.]+", last_val)
+                    if m:
+                        annual_sales = float(m.group(0))
+
+            # Operating Profit
+            op_row = profit_table.find("td", string=re.compile(r"Operating Profit", re.I))
+            if op_row:
+                parent_tr = op_row.find_parent("tr")
+                tds = parent_tr.find_all("td")
+                if len(tds) > 1:
+                    last_op = tds[-1].get_text(strip=True).replace(",", "")
+                    if last_op and not last_op.startswith("-"):
+                        ebitda_positive = True
+
+        # 7. Check Insolvency
+        is_stressed = check_insolvency_and_warnings(soup)
+
+        return {
+            "symbol": symbol,
+            "company_name": name,
+            "mcap": mcap_val,
+            "total_debt": total_debt_cr,
+            "sector": sector_text,
+            "doc_url": doc_url,
+            "agency": agency_name,
+            "annual_sales": annual_sales,
+            "ebitda_positive": ebitda_positive,
+            "is_stressed": is_stressed
+        }
     except Exception:
-        return None, None, None, symbol, ""
+        return None
 
 def extract_document_text(doc_url):
-    """PDF aur HTML dono document types se readable text extract karta hai."""
+    """PDF / HTML Rating Rationale documents se text extract karta hai."""
     try:
         res = requests.get(doc_url, headers=HEADERS, timeout=12)
         if res.status_code != 200 or len(res.content) < 500:
@@ -266,14 +343,13 @@ def extract_document_text(doc_url):
         return ""
 
 def parse_order_metrics(text):
-    """Keywords check karke unexecuted order book extract karta hai."""
+    """Unexecuted order book extract karta hai."""
     if not any(k in text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "under-construction"]):
         return None
 
-    # AI Extraction
     if GEMINI_API_KEY:
         try:
-            prompt = f"Analyze text: '{text[:2500]}'. Extract unexecuted order numbers into JSON: {{\"order_book_cr\": 1500.0, \"timeline_months\": 24, \"thesis\": \"short impact summary\"}}"
+            prompt = f"Analyze text: '{text[:2500]}'. Extract unexecuted order numbers into JSON: {{\"order_book_cr\": 1500.0, \"timeline_months\": 24, \"thesis\": \"short summary\"}}"
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
                 "generationConfig": {"temperature": 0.1, "responseMimeType": "application/json"}
@@ -290,12 +366,11 @@ def parse_order_metrics(text):
                     return {
                         "order_book_cr": val,
                         "timeline_months": int(data.get("timeline_months", 24)),
-                        "thesis": data.get("thesis", "Revenue visibility from order backlog.")
+                        "thesis": data.get("thesis", "Revenue visibility from backlog.")
                     }
         except Exception:
             pass
 
-    # Regex Fallback
     patterns = [
         r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
         r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
@@ -313,77 +388,130 @@ def parse_order_metrics(text):
 
 def run():
     print("=" * 75)
-    print(f"🚀 ORDER BOOK RADAR: SCANNING {len(WATCHLIST_SYMBOLS)} STOCKS WITH AUTO-FILTER")
+    print(f"🚀 UNIFIED RADAR: SCANNING {len(WATCHLIST_SYMBOLS)} STOCKS")
+    print(f"   🛡️ Universal Guards: Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x & Insolvency Shield (CIRP/NCLT Blocked)")
     print("=" * 75)
 
-    all_tracked_orders = []
     hidden_gems = []
+    all_tracked_orders = []
+    turnaround_sales_gems = []
 
     for idx, symbol in enumerate(WATCHLIST_SYMBOLS, 1):
-        mcap, doc_url, agency, company_name, sector_info = get_screener_details(symbol)
+        info = get_screener_data(symbol)
+        if not info or not info["mcap"]:
+            continue
+
+        sym = info["symbol"]
+        name = info["company_name"]
+        mcap = info["mcap"]
+        debt = info["total_debt"]
+        sector = info["sector"]
+        doc_url = info["doc_url"]
+        sales = info["annual_sales"]
+        ebitda_ok = info["ebitda_positive"]
+        is_stressed = info["is_stressed"]
+
+        debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
+
+        # =============================================================
+        # 🚨 UNIVERSAL GUARD 1: INSOLVENCY / NCLT CHECK (All Stocks)
+        # =============================================================
+        if is_stressed:
+            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: Under Insolvency / CIRP / Stressed.")
+            continue
+
+        # =============================================================
+        # 🚨 UNIVERSAL GUARD 2: DEBT TO MCAP RATIO (All Stocks)
+        # =============================================================
+        if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
+            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr | Debt/MCap: {debt_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x)")
+            continue
+
+        print(f"\n[{idx}/{len(WATCHLIST_SYMBOLS)}] 🟢 Passed Guards: {name} ({sym}) | MCap: ₹{mcap:,.1f} Cr | Debt: ₹{debt:,.1f} Cr ({debt_to_mcap}x)")
+
+        # -------------------------------------------------------------
+        # ENGINE 1: ORDER BOOK SCANNER (Infra, EPC, Capital Goods)
+        # -------------------------------------------------------------
+        is_non_order_sector = any(bad in sector for bad in NON_ORDER_SECTORS)
         
-        # Non-Order Sector Skip
-        if sector_info == "EXCLUDED_SECTOR":
-            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⏩ Skipping {symbol} (Non-Order Sector: Bank/IT/Pharma/FMCG)")
-            continue
+        if not is_non_order_sector and doc_url:
+            doc_text = extract_document_text(doc_url)
+            metrics = parse_order_metrics(doc_text)
+            if metrics and metrics["order_book_cr"] > 0:
+                order_val = metrics["order_book_cr"]
+                multiple = round(order_val / mcap, 2)
+                print(f"   🎯 [ORDER BOOK] ₹{order_val:,.1f} Cr | Multiple: {multiple}x MCap")
 
-        if not mcap:
-            continue
+                record = {
+                    "symbol": sym,
+                    "company_name": name,
+                    "market_cap_cr": mcap,
+                    "total_debt_cr": debt,
+                    "debt_to_mcap": debt_to_mcap,
+                    "pending_order_book_cr": order_val,
+                    "order_to_mcap_multiple": multiple,
+                    "execution_timeline_months": metrics["timeline_months"],
+                    "thesis": metrics["thesis"],
+                    "source_doc": doc_url
+                }
+                all_tracked_orders.append(record)
+                if multiple >= 1.0:
+                    hidden_gems.append(record)
+                    print(f"   🔥 [HIDDEN GEM: ORDER BOOK >= 1.0x] Multiple: {multiple}x!")
 
-        print(f"\n[{idx}/{len(WATCHLIST_SYMBOLS)}] 🔍 Scanning: {company_name} ({symbol}) | MCap: ₹{mcap:,.1f} Cr")
-        if not doc_url:
-            print("   ℹ️ No direct rating document found.")
-            continue
+        # -------------------------------------------------------------
+        # ENGINE 2: SALES-TO-MCAP TURNAROUND RADAR (Safe Balance Sheet)
+        # -------------------------------------------------------------
+        if sales and sales > mcap:  # P/S < 1.0
+            if ebitda_ok:
+                sales_multiple = round(sales / mcap, 2)
+                ps_val = round(mcap / sales, 2)
+                print(f"   🚀 [TURNAROUND GEM] Sales: ₹{sales:,.1f} Cr | Multiple: {sales_multiple}x MCap | P/S: {ps_val}x")
 
-        doc_text = extract_document_text(doc_url)
-        if not doc_text:
-            continue
-
-        metrics = parse_order_metrics(doc_text)
-        if not metrics or metrics["order_book_cr"] <= 0:
-            print("   ℹ️ No unexecuted order book disclosed.")
-            continue
-
-        order_val = metrics["order_book_cr"]
-        multiple = round(order_val / mcap, 2)
-        print(f"   🎯 Order Book: ₹{order_val:,.1f} Cr ➔ Multiple: {multiple}x MCap")
-
-        record = {
-            "symbol": symbol,
-            "company_name": company_name,
-            "market_cap_cr": mcap,
-            "pending_order_book_cr": order_val,
-            "order_to_mcap_multiple": multiple,
-            "execution_timeline_months": metrics["timeline_months"],
-            "thesis": metrics["thesis"],
-            "source_doc": doc_url
-        }
-
-        all_tracked_orders.append(record)
-
-        if multiple >= 1.0:
-            hidden_gems.append(record)
-            print(f"   🔥 [HIDDEN GEM CONFIRMED] Multiple {multiple}x >= 1.0x!")
+                turnaround_entry = {
+                    "symbol": sym,
+                    "company_name": name,
+                    "market_cap_cr": mcap,
+                    "total_debt_cr": debt,
+                    "debt_to_mcap": debt_to_mcap,
+                    "annual_sales_cr": sales,
+                    "sales_to_mcap_multiple": sales_multiple,
+                    "ps_ratio": ps_val,
+                    "catalyst": f"P/S: {ps_val}x + Positive EBITDA + Debt/MCap: {debt_to_mcap}x (Safe)"
+                }
+                turnaround_sales_gems.append(turnaround_entry)
 
         time.sleep(0.3)
 
-    all_tracked_orders.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+    # Sort results
     hidden_gems.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+    all_tracked_orders.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+    turnaround_sales_gems.sort(key=lambda x: x["sales_to_mcap_multiple"], reverse=True)
 
-    final_output = {
+    final_report = {
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
         "total_scanned": len(WATCHLIST_SYMBOLS),
-        "total_companies_with_order_book": len(all_tracked_orders),
+        "guards_applied": {
+            "max_debt_to_mcap": MAX_DEBT_TO_MCAP_RATIO,
+            "insolvency_and_cirp_filtered": True
+        },
         "total_hidden_gems_multiple_gt_1": len(hidden_gems),
+        "total_tracked_order_books": len(all_tracked_orders),
+        "total_sales_turnaround_gems": len(turnaround_sales_gems),
         "hidden_gems": hidden_gems,
-        "all_tracked_orders": all_tracked_orders
+        "all_tracked_orders": all_tracked_orders,
+        "turnaround_sales_gems": turnaround_sales_gems
     }
 
     with open(OUTPUT_REPORT_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_output, f, ensure_ascii=False, indent=2)
+        json.dump(final_report, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 75)
-    print(f"✅ COMPLETED: Found {len(hidden_gems)} Hidden Gems (>=1.0x) and {len(all_tracked_orders)} Total Orders.")
+    print(f"✅ UNIFIED SCAN FINISHED (DEBT & INSOLVENCY PROTECTED)!")
+    print(f"   🔥 Hidden Gems (Order Book >= 1.0x): {len(hidden_gems)}")
+    print(f"   📋 All Order Book Tracked: {len(all_tracked_orders)}")
+    print(f"   🚀 Clean Sales Turnaround Gems (Sales > MCap): {len(turnaround_sales_gems)}")
+    print(f"   💾 Saved cleanly into: {OUTPUT_REPORT_FILE}")
     print("=" * 75)
 
 if __name__ == "__main__":
