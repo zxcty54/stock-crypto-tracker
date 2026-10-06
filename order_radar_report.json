@@ -1,10 +1,59 @@
 {
-  "last_updated": "2026-10-06 04:31:31 IST",
+  "last_updated": "2026-10-06 04:54:09 IST",
   "filter_criteria": {
-    "max_mcap_cr": 5000.0,
-    "min_order_multiple": 1.0,
-    "pipeline": "Dynamic Rating Agencies Rationale Feed"
+    "source_universe": "Nifty Smallcap 250 Index (Embedded)",
+    "max_mcap_cr": 15000.0,
+    "min_order_multiple": 0.8
   },
-  "total_hidden_gems_found": 0,
-  "gems": []
+  "total_hidden_gems_found": 3,
+  "gems": [
+    {
+      "symbol": "CAPACITE",
+      "company_name": "Capacite Infraprojects Ltd.",
+      "sector": "Construction",
+      "market_cap_cr": 1526.0,
+      "unexecuted_order_book_cr": 13188.1,
+      "order_to_mcap_multiple": 8.64,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹13,188.1 Cr.",
+      "source_verification": {
+        "source_name": "Rating update19 May from infomerics",
+        "document_url": "https://www.infomerics.com/admin/uploads/pr-capacite-infraprojects-19may26.pdf",
+        "as_on_date": "Oct 2026",
+        "is_audited_regulatory": true
+      }
+    },
+    {
+      "symbol": "PATELENG",
+      "company_name": "Patel Engineering Ltd.",
+      "sector": "Construction",
+      "market_cap_cr": 2584.0,
+      "unexecuted_order_book_cr": 15119.3,
+      "order_to_mcap_multiple": 5.85,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹15,119.3 Cr.",
+      "source_verification": {
+        "source_name": "Rating update5 Jun from infomerics",
+        "document_url": "https://www.infomerics.com/admin/uploads/Pr-Patel-Engineering05Jun26.pdf",
+        "as_on_date": "Oct 2026",
+        "is_audited_regulatory": true
+      }
+    },
+    {
+      "symbol": "IRCON",
+      "company_name": "Ircon International Ltd.",
+      "sector": "Construction",
+      "market_cap_cr": 10205.0,
+      "unexecuted_order_book_cr": 23801.0,
+      "order_to_mcap_multiple": 2.33,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹23,801.0 Cr.",
+      "source_verification": {
+        "source_name": "Rating update24 Mar from infomerics",
+        "document_url": "https://www.infomerics.com/admin/uploads/pr-IRCON-24mar26.pdf",
+        "as_on_date": "Oct 2026",
+        "is_audited_regulatory": true
+      }
+    }
+  ]
 }
