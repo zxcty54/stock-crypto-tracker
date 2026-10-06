@@ -1,59 +1,10 @@
 {
-  "last_updated": "2026-10-06 04:20:15 IST",
+  "last_updated": "2026-10-06 04:31:31 IST",
   "filter_criteria": {
     "max_mcap_cr": 5000.0,
-    "min_order_multiple": 1.1,
-    "source": "Audited Credit Rating Rationales (CARE, ICRA, CRISIL) + Screener Valuation"
+    "min_order_multiple": 1.0,
+    "pipeline": "Dynamic Rating Agencies Rationale Feed"
   },
-  "total_hidden_gems_found": 3,
-  "gems": [
-    {
-      "symbol": "GENSOL",
-      "company_name": "Gensol Engineering Limited",
-      "market_cap_cr": 49.6,
-      "unexecuted_order_book_cr": 4120.0,
-      "order_to_mcap_multiple": 83.06,
-      "execution_timeline_months": 18,
-      "client_sector": "Solar EPC & BESS Battery",
-      "thesis": "18 months delivery timeline backed by Solar EPC & BESS Battery order backlog.",
-      "source_verification": {
-        "source_name": "ICRA Rating Rationale",
-        "document_url": "https://www.icra.in/Rating/RatingRationale",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
-    },
-    {
-      "symbol": "RMC",
-      "company_name": "RMC Switchgears Limited",
-      "market_cap_cr": 210.0,
-      "unexecuted_order_book_cr": 1140.0,
-      "order_to_mcap_multiple": 5.43,
-      "execution_timeline_months": 18,
-      "client_sector": "Power Transmission & Smart Grid",
-      "thesis": "18 months delivery timeline backed by Power Transmission & Smart Grid order backlog.",
-      "source_verification": {
-        "source_name": "CARE Ratings Rationale",
-        "document_url": "https://www.careratings.com/ratings-history",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
-    },
-    {
-      "symbol": "SALASAR",
-      "company_name": "Salasar Techno Engineering Limited",
-      "market_cap_cr": 752.0,
-      "unexecuted_order_book_cr": 2400.0,
-      "order_to_mcap_multiple": 3.19,
-      "execution_timeline_months": 24,
-      "client_sector": "Railway Electrification & Telecom",
-      "thesis": "24 months delivery timeline backed by Railway Electrification & Telecom order backlog.",
-      "source_verification": {
-        "source_name": "CRISIL Credit Rationale",
-        "document_url": "https://www.crisilratings.com/",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
-    }
-  ]
+  "total_hidden_gems_found": 0,
+  "gems": []
 }
