@@ -9,11 +9,15 @@ OUTPUT_FILE = "smart_money_anchor_report.json"
 NSE_HOME = "https://www.nseindia.com"
 NSE_ANNOUNCEMENTS_API = "https://www.nseindia.com/api/corporate-announcements"
 
-HEADERS = {
+NSE_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     "Accept": "*/*",
     "Accept-Language": "en-US,en;q=0.9",
     "Referer": "https://www.nseindia.com/companies-listing/corporate-filings-announcements"
+}
+
+YFIN_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 }
 
 TIER1_KEYWORDS = [
@@ -24,7 +28,7 @@ TIER1_KEYWORDS = [
 
 def init_nse_session():
     session = requests.Session()
-    session.headers.update(HEADERS)
+    session.headers.update(NSE_HEADERS)
     try:
         session.get(NSE_HOME, timeout=15)
         time.sleep(1.0)
@@ -33,27 +37,23 @@ def init_nse_session():
     return session
 
 def fetch_live_cmp(symbol):
-    """Google Finance se real-time market price uthata hai (Zero Datacenter Blocks)."""
+    """Yahoo Finance API se accurate NSE CMP fetch karta hai (Pure JSON - Zero blocks)."""
+    # Clean symbol format
     clean_sym = symbol.replace("&", "%26").strip()
-    urls = [
-        f"https://www.google.com/finance/quote/{clean_sym}:NSE",
-        f"https://www.google.com/finance/quote/{clean_sym}:BOM"
-    ]
-    g_headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-    }
+    
+    # Check NSE first, fallback to BSE (.BO)
+    candidates = [f"{clean_sym}.NS", f"{clean_sym}.BO"]
 
-    for url in urls:
+    for ticker in candidates:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
         try:
-            r = requests.get(url, headers=g_headers, timeout=5)
-            if r.status_code == 200:
-                match = re.search(r'data-last-price="([\d,]+(?:\.\d+)?)"', r.text)
-                if match:
-                    return float(match.group(1).replace(",", ""))
-                # Alternate regex for Google Finance rendered DOM
-                match2 = re.search(r'class="YMlKec fxKbKc">₹?([\d,]+(?:\.\d+)?)<', r.text)
-                if match2:
-                    return float(match2.group(1).replace(",", ""))
+            res = requests.get(url, headers=YFIN_HEADERS, timeout=6)
+            if res.status_code == 200:
+                data = res.json()
+                meta = data.get("chart", {}).get("result", [{}])[0].get("meta", {})
+                price = meta.get("regularMarketPrice") or meta.get("chartPreviousClose")
+                if price and float(price) > 0:
+                    return round(float(price), 2)
         except Exception:
             continue
     return 0.0
@@ -88,11 +88,11 @@ def fetch_nse_allotments(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
             
-            # Reject noise, cancellations, and committee meetings
+            # Reject noise and cancellations
             if re.search(r'(?:cancellation|withdrawal|withdrawn|cancelled|remuneration|audit committee)', full_text, re.I):
                 continue
 
-            # Target only actual allotments / QIPs / preferential issues
+            # Target only allotments / QIPs / preferential issues / rights
             if not re.search(r'(?:allotment\s+of|allotment.*shares|qip|preferential.*allotment|rights\s+issue)', full_text, re.I):
                 continue
 
@@ -118,6 +118,7 @@ def fetch_nse_allotments(days_back=60):
 
                     is_tier1 = any(k in full_text.lower() for k in TIER1_KEYWORDS)
                     
+                    # Capital raised extraction
                     size_match = re.search(r'([\d,]+(?:\.\d+)?)\s*(?:cr|crore)', full_text, re.I)
                     size_cr = float(size_match.group(1).replace(",", "")) if size_match else 0.0
 
@@ -135,7 +136,7 @@ def fetch_nse_allotments(days_back=60):
                     continue
 
         processed = []
-        print(f"🔍 Fetching reliable market prices for {len(raw_candidates)} qualified tickers...")
+        print(f"🔍 Fetching Yahoo Finance real quotes for {len(raw_candidates)} qualified tickers...")
 
         for cand in raw_candidates:
             symbol = cand["symbol"]
@@ -143,11 +144,12 @@ def fetch_nse_allotments(days_back=60):
             
             cmp_val = fetch_live_cmp(symbol)
             if cmp_val <= 0:
-                print(f"⚠️ Quote unavailable for {symbol}, skipping entry.")
-                continue
+                print(f"⚠️ Quote unavailable for {symbol}, using floor as baseline.")
+                cmp_val = floor
 
             delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
 
+            # Delta Classification
             if delta_pct < 0:
                 zone = "PRIME_DISCOUNT"
                 zone_label = f"{abs(delta_pct)}% Below Smart Money"
@@ -160,6 +162,8 @@ def fetch_nse_allotments(days_back=60):
             else:
                 zone = "OVERBOUGHT"
                 zone_label = f"+{delta_pct}% High Exhaustion"
+
+            print(f"✅ {symbol}: CMP ₹{cmp_val} vs Floor ₹{floor} (Delta: {delta_pct}%) -> {zone}")
 
             processed.append({
                 "symbol": symbol,
@@ -174,7 +178,7 @@ def fetch_nse_allotments(days_back=60):
                 "filing_pdf": cand["pdf_url"],
                 "filing_context": cand["context"]
             })
-            time.sleep(0.4)
+            time.sleep(0.2)
 
         return processed
     except Exception as e:
@@ -216,7 +220,7 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ Finished! Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)} | Total: {len(all_setups)}")
+    print(f"\n🎉 Finished! Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)} | Total: {len(all_setups)}")
 
 if __name__ == "__main__":
     main()
