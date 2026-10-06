@@ -2,9 +2,8 @@ name: BSE Smart Money Anchor & Floor Pipeline
 
 on:
   schedule:
-    # Market band hone ke baad Mon-Fri roz shaam 6:30 PM IST (13:00 UTC) par chalega
     - cron: '0 13 * * 1-5'
-  workflow_dispatch: # GitHub dashboard se manually run karne ke liye
+  workflow_dispatch:
 
 concurrency:
   group: anchor-pipeline
@@ -36,8 +35,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add smart_money_anchor_report.json
-          
-          # Check if there are changes before committing
           if git diff --staged --quiet; then
             echo "No fresh anchor updates found today."
           else
