@@ -16,7 +16,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
-# 🚫 In sectors me Order Book ka concept nahi hota - direct skip honge
+# 🚫 Non-Order Sectors: Inhe direct skip karenge
 EXCLUDED_SECTORS = [
     "bank", "financial services", "finance", "nbfc", "housing finance",
     "information technology", "it services", "software", "consulting",
@@ -26,7 +26,7 @@ EXCLUDED_SECTORS = [
     "hotel", "restaurant", "travel", "tourism"
 ]
 
-# Aapki di hui complete unique watchlist (1,392 Symbols)
+# Aapke 1,392 watchlist symbols
 WATCHLIST_SYMBOLS = [
     "20MICRONS", "21STCENMGM", "3PLAND", "5PAISA", "A2ZINFRA", "AAATECH", "AAKASH", "AAREYDRUGS",
     "AARON", "AARTIDRUGS", "AARTISURF", "AARVI", "AASTHA", "ABANSENT", "ABCOTS", "ABFRL", "ABINFRA",
@@ -267,7 +267,6 @@ def extract_document_text(doc_url):
 
 def parse_order_metrics(text):
     """Keywords check karke unexecuted order book extract karta hai."""
-    # Fast Pre-Check: Agar ye shabda na ho toh aage time waste na ho
     if not any(k in text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "under-construction"]):
         return None
 
@@ -283,7 +282,8 @@ def parse_order_metrics(text):
             res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=10)
             if res.status_code == 200:
                 raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                if raw.startswith("```"): raw = re.sub(r"^```[a-z]*|```$", "", raw).strip()
+                if raw.startswith("```"):
+                    raw = re.sub(r"^```[a-z]*|```$", "", raw).strip()
                 data = json.loads(raw)
                 val = float(data.get("order_book_cr", 0))
                 if val > 0:
@@ -332,7 +332,7 @@ def run():
 
         print(f"\n[{idx}/{len(WATCHLIST_SYMBOLS)}] 🔍 Scanning: {company_name} ({symbol}) | MCap: ₹{mcap:,.1f} Cr")
         if not doc_url:
-            print("   ℹ️️ No direct rating document found.")
+            print("   ℹ️ No direct rating document found.")
             continue
 
         doc_text = extract_document_text(doc_url)
@@ -350,4 +350,41 @@ def run():
 
         record = {
             "symbol": symbol,
-            "company_name": company
+            "company_name": company_name,
+            "market_cap_cr": mcap,
+            "pending_order_book_cr": order_val,
+            "order_to_mcap_multiple": multiple,
+            "execution_timeline_months": metrics["timeline_months"],
+            "thesis": metrics["thesis"],
+            "source_doc": doc_url
+        }
+
+        all_tracked_orders.append(record)
+
+        if multiple >= 1.0:
+            hidden_gems.append(record)
+            print(f"   🔥 [HIDDEN GEM CONFIRMED] Multiple {multiple}x >= 1.0x!")
+
+        time.sleep(0.3)
+
+    all_tracked_orders.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+    hidden_gems.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
+
+    final_output = {
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
+        "total_scanned": len(WATCHLIST_SYMBOLS),
+        "total_companies_with_order_book": len(all_tracked_orders),
+        "total_hidden_gems_multiple_gt_1": len(hidden_gems),
+        "hidden_gems": hidden_gems,
+        "all_tracked_orders": all_tracked_orders
+    }
+
+    with open(OUTPUT_REPORT_FILE, "w", encoding="utf-8") as f:
+        json.dump(final_output, f, ensure_ascii=False, indent=2)
+
+    print("\n" + "=" * 75)
+    print(f"✅ COMPLETED: Found {len(hidden_gems)} Hidden Gems (>=1.0x) and {len(all_tracked_orders)} Total Orders.")
+    print("=" * 75)
+
+if __name__ == "__main__":
+    run()
