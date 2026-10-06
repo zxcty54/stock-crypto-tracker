@@ -22,6 +22,9 @@ import 'strategy_builder_screen.dart';
 // 💎 Order & Turnaround Radar Widget Import
 import '../widgets/hidden_gems_radar.dart';
 
+// ⚓ Smart Money Anchor Screen Import
+import '../widgets/smart_money_anchor_screen.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -158,7 +161,97 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🪙 3. LIVE SPOT METALS, COPPER & FOREX TICKER
+              // ⚓ 3. SMART MONEY ANCHOR DESK (QIP & Floor Radar)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SmartMoneyAnchorScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFF00E676).withAlpha(90),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00E676).withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.anchor_rounded,
+                                color: Color(0xFF00E676),
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "SMART MONEY ANCHOR",
+                                        style: TextStyle(
+                                          color: Color(0xFF00E676),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.1,
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        "QIP & FLOOR RADAR",
+                                        style: TextStyle(
+                                          color: Color(0xFF38BDF8),
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 3),
+                                  Text(
+                                    "Institutional Allotment Floor & Prime Discounts",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Color(0xFF8896AB),
+                              size: 14,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // 🪙 4. LIVE SPOT METALS, COPPER & FOREX TICKER
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.only(top: 4.0),
@@ -166,7 +259,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 📢 4. CORPORATE ANNOUNCEMENTS & FILINGS BANNER
+              // 📢 5. CORPORATE ANNOUNCEMENTS & FILINGS BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -256,7 +349,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🧠 5. AI MACRO MARGIN RADAR ENTRY BANNER
+              // 🧠 6. AI MACRO MARGIN RADAR ENTRY BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -346,7 +439,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🏢 6. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
+              // 🏢 7. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -436,7 +529,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 📊 7. INSTITUTIONAL BULLION EFFICIENCY DESK
+              // 📊 8. INSTITUTIONAL BULLION EFFICIENCY DESK
               const SliverToBoxAdapter(
                 child: BullionEfficiencyDeskCard(),
               ),
