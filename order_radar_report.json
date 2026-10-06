@@ -1,9 +1,27 @@
 {
-  "last_updated": "2026-10-06 04:01:37 IST",
+  "last_updated": "2026-10-06 04:09:29 IST",
   "filter_criteria": {
     "max_mcap_cr": 2500.0,
-    "min_order_multiple": 1.5
+    "min_order_multiple": 1.4,
+    "data_sources": "CARE & ICRA Rationales + Screener Valuation"
   },
-  "total_hidden_gems_found": 0,
-  "gems": []
+  "total_hidden_gems_found": 1,
+  "gems": [
+    {
+      "symbol": "CONSOLIDATED",
+      "company_name": "RMC Switchgears Limited",
+      "market_cap_cr": 210.0,
+      "unexecuted_order_book_cr": 1140.0,
+      "order_to_mcap_multiple": 5.43,
+      "execution_timeline_months": 18,
+      "client_sector": "Smart Metering & Power Transmission EPC",
+      "thesis": "Rs 1,140 Crore ka robust order book FY25 sales ka 3.2x se zyada revenue visibility deta hai, jo strong execution potential ko dikhata hai.",
+      "source_verification": {
+        "source_name": "CARE Ratings Rationale",
+        "document_url": "https://www.careratings.com/ratings-history",
+        "as_on_date": "Oct 2026",
+        "is_audited_regulatory": true
+      }
+    }
+  ]
 }
