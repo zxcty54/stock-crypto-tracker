@@ -29,7 +29,6 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
     _loadRadarData();
   }
 
-  // Live Edge Fetch (No Local Disk Storage)
   Future<void> _loadRadarData() async {
     setState(() {
       _isLoading = true;
@@ -40,10 +39,10 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
       final endpoint = "${widget.workerBaseUrl}/?type=radar";
       final response = await http
           .get(Uri.parse(endpoint))
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 12));
 
       if (response.statusCode == 200 && response.body.isNotEmpty) {
-        final decoded = json.decode(response.body);
+        final decoded = json.decode(utf8.decode(response.bodyBytes));
         setState(() {
           _reportData = decoded;
           _isLoading = false;
@@ -109,7 +108,10 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
       );
     }
 
-    final hiddenGems = _reportData?['hidden_gems'] as List? ?? [];
+    // FIXED: prime_hidden_gems aur hidden_gems dono keys ko check karega
+    final hiddenGems = (_reportData?['prime_hidden_gems'] as List?) ??
+        (_reportData?['hidden_gems'] as List?) ??
+        [];
     final allOrders = _reportData?['all_tracked_orders'] as List? ?? [];
     final turnaroundGems = _reportData?['turnaround_sales_gems'] as List? ?? [];
     final lastUpdated = _reportData?['last_updated'] ?? "N/A";
@@ -166,15 +168,24 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
 
   Widget _buildOrderListView(List items, {required bool isHiddenGemTab}) {
     if (items.isEmpty) {
-      return const Center(
-        child: Text("No records available.", style: TextStyle(color: Colors.white54)),
+      return Center(
+        child: Text(
+          isHiddenGemTab
+              ? "No prime hidden gems matching runway & debt guards currently."
+              : "No tracked order records available.",
+          style: const TextStyle(color: Colors.white54),
+        ),
       );
     }
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      itemCount: items.length,
+      itemCount: items.length + 1, // +1 for SEBI Disclaimer at bottom
       itemBuilder: (context, index) {
+        if (index == items.length) {
+          return _buildSebiDisclaimer();
+        }
+
         final item = items[index];
         final symbol = item['symbol'] ?? "";
         final companyName = item['company_name'] ?? symbol;
@@ -182,6 +193,9 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
         final orderBook = (item['pending_order_book_cr'] ?? 0).toDouble();
         final multiple = (item['order_to_mcap_multiple'] ?? 0).toDouble();
         final debtToMcap = (item['debt_to_mcap'] ?? 0).toDouble();
+        final runwayYears = item['revenue_runway_years'] ?? item['execution_runway_years'] ?? "";
+        final classification = item['classification'] ?? "";
+        final isPaperTrap = classification == "PAPER_BACKLOG_TRAP";
         final thesis = item['thesis'] ?? "";
         final docUrl = item['source_doc'] ?? "";
 
@@ -192,8 +206,10 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
             color: const Color(0xFF1E293B),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isHiddenGemTab ? const Color(0xFFF59E0B) : const Color(0xFF334155),
-              width: isHiddenGemTab ? 1.4 : 1.0,
+              color: isPaperTrap
+                  ? Colors.redAccent.withOpacity(0.5)
+                  : (isHiddenGemTab ? const Color(0xFFF59E0B) : const Color(0xFF334155)),
+              width: (isHiddenGemTab || isPaperTrap) ? 1.4 : 1.0,
             ),
           ),
           child: Column(
@@ -206,14 +222,39 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          symbol,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              symbol,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            if (runwayYears.isNotEmpty) ...[
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: isPaperTrap
+                                      ? Colors.redAccent.withOpacity(0.15)
+                                      : const Color(0xFF0284C7).withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  isPaperTrap ? "⚠️ $runwayYears" : "⏳ $runwayYears Runway",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: isPaperTrap ? Colors.redAccent : const Color(0xFF38BDF8),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
+                        const SizedBox(height: 2),
                         Text(
                           companyName,
                           maxLines: 1,
@@ -226,12 +267,16 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: multiple >= 1.0
-                          ? const Color(0xFF16A34A).withOpacity(0.2)
-                          : const Color(0xFF38BDF8).withOpacity(0.15),
+                      color: isPaperTrap
+                          ? Colors.redAccent.withOpacity(0.2)
+                          : (multiple >= 1.0
+                              ? const Color(0xFF16A34A).withOpacity(0.2)
+                              : const Color(0xFF38BDF8).withOpacity(0.15)),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: multiple >= 1.0 ? const Color(0xFF22C55E) : const Color(0xFF38BDF8),
+                        color: isPaperTrap
+                            ? Colors.redAccent
+                            : (multiple >= 1.0 ? const Color(0xFF22C55E) : const Color(0xFF38BDF8)),
                       ),
                     ),
                     child: Text(
@@ -239,7 +284,9 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: multiple >= 1.0 ? const Color(0xFF4ADE80) : const Color(0xFF38BDF8),
+                        color: isPaperTrap
+                            ? Colors.redAccent
+                            : (multiple >= 1.0 ? const Color(0xFF4ADE80) : const Color(0xFF38BDF8)),
                       ),
                     ),
                   ),
@@ -296,14 +343,18 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
   Widget _buildTurnaroundListView(List items) {
     if (items.isEmpty) {
       return const Center(
-        child: Text("No records available.", style: TextStyle(color: Colors.white54)),
+        child: Text("No turnaround records available.", style: TextStyle(color: Colors.white54)),
       );
     }
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      itemCount: items.length,
+      itemCount: items.length + 1,
       itemBuilder: (context, index) {
+        if (index == items.length) {
+          return _buildSebiDisclaimer();
+        }
+
         final item = items[index];
         final symbol = item['symbol'] ?? "";
         final companyName = item['company_name'] ?? symbol;
@@ -404,6 +455,40 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
           Text(
             value,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: valueColor),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSebiDisclaimer() {
+    return Container(
+      margin: const EdgeInsets.only(top: 8, bottom: 24),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Colors.amberAccent, size: 14),
+              SizedBox(width: 6),
+              Text(
+                "SEBI Statutory Disclaimer",
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.amberAccent),
+              ),
+            ],
+          ),
+          SizedBox(height: 4),
+          Text(
+            "This tracker computes quantitative order-to-sales ratios from publicly available statutory disclosures for research purposes only. "
+            "We are not a SEBI-registered Investment Advisor or Research Analyst. Backlog execution is subject to project and client delays. "
+            "Please consult a certified financial advisor before investing.",
+            style: TextStyle(fontSize: 10, color: Colors.white54, height: 1.3),
           ),
         ],
       ),
