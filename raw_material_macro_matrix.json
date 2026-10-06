@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02 17:56:51 IST",
+  "generated_at": "2026-10-06 18:30:55 IST",
   "total_commodities_tracked": 6,
   "materials": [
     {
@@ -8,13 +8,13 @@
       "category": "Energy & Petrochem Feedstock",
       "benchmark_ticker": "BZ=F",
       "unit": "USD/bbl",
-      "current_price": 102.37,
-      "trend_status": "COOLING (Margin Positive)",
+      "current_price": 100.35,
+      "trend_status": "HEATING UP (Margin Drag)",
       "multi_period_trend": {
-        "1M": 7.05,
-        "6M": -6.74,
-        "1Y": 59.68,
-        "3Y": 12.85
+        "1M": 4.23,
+        "6M": 5.91,
+        "1Y": 53.28,
+        "3Y": 18.65
       },
       "sourcing_profile": {
         "type": "HEAVILY_IMPORTED",
@@ -76,13 +76,13 @@
       "category": "Industrial Metals",
       "benchmark_ticker": "HG=F",
       "unit": "USD/lb",
-      "current_price": 6.55,
+      "current_price": 6.66,
       "trend_status": "HEATING UP (Margin Drag)",
       "multi_period_trend": {
-        "1M": 0.76,
-        "6M": 17.32,
-        "1Y": 33.74,
-        "3Y": 80.36
+        "1M": 0.9,
+        "6M": 15.57,
+        "1Y": 33.48,
+        "3Y": 83.65
       },
       "sourcing_profile": {
         "type": "HEAVILY_IMPORTED",
@@ -134,13 +134,13 @@
       "category": "Steel Feedstock",
       "benchmark_ticker": "TIO=F",
       "unit": "USD/dmt",
-      "current_price": 96.59,
+      "current_price": 91.45,
       "trend_status": "COOLING (Margin Positive)",
       "multi_period_trend": {
-        "1M": 0.56,
-        "6M": -10.16,
-        "1Y": -8.26,
-        "3Y": -19.6
+        "1M": -8.02,
+        "6M": -15.57,
+        "1Y": -12.37,
+        "3Y": -22.33
       },
       "sourcing_profile": {
         "type": "INDIGENOUS_DOMESTIC",
@@ -191,13 +191,13 @@
       "category": "Fuel & Chemical Feedstock",
       "benchmark_ticker": "NG=F",
       "unit": "USD/MMBtu",
-      "current_price": 3.02,
+      "current_price": 3.11,
       "trend_status": "HEATING UP (Margin Drag)",
       "multi_period_trend": {
-        "1M": 2.0,
-        "6M": 7.26,
-        "1Y": -12.41,
-        "3Y": 6.16
+        "1M": 4.44,
+        "6M": 14.06,
+        "1Y": -7.45,
+        "3Y": -6.92
       },
       "sourcing_profile": {
         "type": "PARTIALLY_IMPORTED",
@@ -243,13 +243,13 @@
       "category": "Industrial Metals",
       "benchmark_ticker": "ALI=F",
       "unit": "USD/MT",
-      "current_price": 3221.5,
+      "current_price": 3246.0,
       "trend_status": "COOLING (Margin Positive)",
       "multi_period_trend": {
-        "1M": -5.78,
-        "6M": -5.86,
-        "1Y": 24.07,
-        "3Y": 39.44
+        "1M": -5.62,
+        "6M": -3.8,
+        "1Y": 23.13,
+        "3Y": 45.74
       },
       "sourcing_profile": {
         "type": "INDIGENOUS_DOMESTIC",
@@ -294,13 +294,13 @@
       "category": "Agri Feedstock",
       "benchmark_ticker": "CT=F",
       "unit": "USc/lb",
-      "current_price": 78.19,
+      "current_price": 80.92,
       "trend_status": "HEATING UP (Margin Drag)",
       "multi_period_trend": {
-        "1M": -9.48,
-        "6M": 9.1,
-        "1Y": 24.8,
-        "3Y": -10.6
+        "1M": -1.82,
+        "6M": 12.91,
+        "1Y": 29.06,
+        "3Y": -6.83
       },
       "sourcing_profile": {
         "type": "INDIGENOUS_DOMESTIC",
