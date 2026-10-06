@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: 🐍 Set up Python 3.11
         uses: actions/setup-python@v5
@@ -46,6 +47,8 @@ jobs:
             echo "ℹ️ No changes detected in order_radar_report.json. Skipping commit."
           else
             git commit -m "🤖 Auto-Update: Order Book Hidden Gems Radar [skip ci]"
-            git push
+            # Remote changes pull karke rebase karega taaki push reject na ho
+            git pull --rebase origin main
+            git push origin main
             echo "✅ Successfully pushed updated order_radar_report.json to repository!"
           fi
