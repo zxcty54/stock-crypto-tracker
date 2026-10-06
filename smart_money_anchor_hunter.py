@@ -18,6 +18,10 @@ NSE_HEADERS = {
     "Referer": "https://www.nseindia.com/companies-listing/corporate-filings-announcements"
 }
 
+YFIN_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+}
+
 INSTITUTIONAL_DIRECTORY = {
     "Tier-1 DII / MF": [
         "sbi mutual", "hdfc mutual", "icici prudential", "nippon india",
@@ -46,29 +50,50 @@ def init_nse_session():
         session.get(NSE_HOME, timeout=15)
         time.sleep(1.0)
     except Exception as e:
-        print(f"Warning session init: {e}")
+        print(f"⚠️ Warning Session Init: {e}")
     return session
 
-def fetch_nse_metrics(symbol, session):
-    """NSE ke live quote API se CMP aur Total Issued Shares nikaal kar exact Market Cap banata hai."""
-    url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol}"
+def fetch_financial_metrics_resilient(symbol, session):
+    """Pehle NSE live API hit karta hai, cookie/session drop hone par Yahoo Finance backup use karta hai."""
+    clean_sym = symbol.replace("&", "%26").strip()
+    
+    # 1. Primary: NSE Live Quote
+    url_nse = f"https://www.nseindia.com/api/quote-equity?symbol={clean_sym}"
     try:
-        res = session.get(url, timeout=10)
+        res = session.get(url_nse, timeout=6)
         if res.status_code == 200:
             data = res.json()
             price_info = data.get("priceInfo", {})
             security_info = data.get("securityInfo", {})
-
             cmp_val = price_info.get("lastPrice", 0.0)
             issued_shares = security_info.get("issuedSize", 0)
 
             mcap_cr = 0.0
-            if cmp_val > 0 and issued_shares > 0:
-                mcap_cr = round((cmp_val * issued_shares) / 10000000, 2)
+            if cmp_val and issued_shares:
+                mcap_cr = round((float(cmp_val) * float(issued_shares)) / 10000000.0, 2)
 
-            return float(cmp_val), mcap_cr
+            if cmp_val and float(cmp_val) > 0:
+                return float(cmp_val), mcap_cr
     except Exception:
         pass
+
+    # 2. Resilient Fallback: Yahoo Finance Chart Endpoint
+    candidates = [f"{clean_sym}.NS", f"{clean_sym}.BO"]
+    for ticker in candidates:
+        url_yf = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
+        try:
+            res = requests.get(url_yf, headers=YFIN_HEADERS, timeout=6)
+            if res.status_code == 200:
+                data = res.json()
+                meta = data.get("chart", {}).get("result", [{}])[0].get("meta", {})
+                price = meta.get("regularMarketPrice") or meta.get("chartPreviousClose", 0.0)
+                mcap_raw = meta.get("marketCap", 0)
+                mcap_cr = round(float(mcap_raw) / 10000000.0, 2) if mcap_raw else 0.0
+                if price and float(price) > 0:
+                    return round(float(price), 2), mcap_cr
+        except Exception:
+            continue
+
     return 0.0, 0.0
 
 def download_and_parse_pdf(pdf_url, session):
@@ -113,17 +138,35 @@ def extract_deal_size_cr(text, shares_count=0, floor_price=0.0):
     if cr_match:
         try:
             val = float(cr_match.group(1).replace(",", ""))
-            if 5.0 <= val <= 25000:
+            if 1.0 <= val <= 35000:
                 return round(val, 2)
         except ValueError:
             pass
 
     if shares_count > 0 and floor_price > 0:
         total_cr = round((shares_count * floor_price) / 10000000, 2)
-        if 5.0 <= total_cr <= 25000:
+        if 1.0 <= total_cr <= 35000:
             return total_cr
 
     return 0.0
+
+def build_alert_card(entry):
+    allottees_str = "\n".join([f"- {a['name']} ({a['tier']})" for a in entry['allottees']]) if entry['allottees'] else "- Qualified Institutional Buyers (QIB)"
+    dilution_str = f"~{entry['deal_size_pct_mcap']}% Dilution" if entry['deal_size_pct_mcap'] > 0 else "Deal Size Pending"
+
+    card = (
+        f"🚨 FRESH CAPITAL RADAR | {entry['zone_label'].upper()}\n\n"
+        f"📌 {entry['company_name']} (NSE: {entry['symbol']})\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"💰 Issue Price:         ₹{entry['institutional_floor_price']:,.2f}\n"
+        f"📊 Current CMP:          ₹{entry['cmp']:,.2f} ({entry['delta_to_floor_pct']:+0.2f}% vs Anchor)\n"
+        f"📦 Capital Infused:      ₹{entry['capital_raised_cr']:,.2f} Cr\n"
+        f"🏢 Dilution / MCap:      {dilution_str}\n\n"
+        f"🏦 Key Marquee Allottees:\n"
+        f"{allottees_str}\n"
+        f"📄 Official Filing: {entry['filing_pdf']}"
+    )
+    return card
 
 def fetch_institutional_anchors(days_back=60):
     session = init_nse_session()
@@ -144,6 +187,7 @@ def fetch_institutional_anchors(days_back=60):
             response = session.get(NSE_ANNOUNCEMENTS_API, params=params, timeout=20)
 
         if response.status_code != 200:
+            print("❌ Failed to fetch announcements from NSE API.")
             return []
 
         filings = response.json()
@@ -155,12 +199,12 @@ def fetch_institutional_anchors(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
 
-            # Strict Negative Filter: Drop dividends, acquisitions, warrants, rights
+            # Strict elimination of non-equity dilution events
             blacklist = r'(?:dividend|acquisition of|in the units of|rights\s+issue|esop|sweat\s+equity|bonus|warrant|debt\s+conversion|loan\s+conversion|remuneration|resignation|loss of share)'
             if re.search(blacklist, full_text, re.I):
                 continue
 
-            # Must be QIP or Pure Preferential Equity Allotment
+            # Must be QIP or Preferential Equity Allotment
             is_qip = bool(re.search(r'\bqip\b|qualified\s+institutions\s+placement', full_text, re.I))
             is_pref = bool(re.search(r'preferential\s+(?:allotment|issue).*(?:equity\s+shares)', full_text, re.I)) or \
                       bool(re.search(r'allotment\s+of\s+[\d,]+\s+equity\s+shares', full_text, re.I))
@@ -177,152 +221,6 @@ def fetch_institutional_anchors(days_back=60):
             company_name = item.get("sm_name") or symbol
             pdf_url = item.get("attchmntFile") or ""
 
-            # More precise price match (rejecting single/double digit noise unless penny)
+            # Extract Issue Price
             price_match = re.search(
-                r'(?:issue\s+price|price\s+of|allotment\s+price)\s*(?:of|is|at)?\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)',
-                full_text,
-                re.I
-            )
-
-            shares_match = re.search(r'([\d,]+)\s*(?:equity\s+shares)', full_text, re.I)
-            shares_count = int(shares_match.group(1).replace(",", "")) if shares_match else 0
-
-            if price_match:
-                try:
-                    floor_price = float(price_match.group(1).replace(",", ""))
-
-                    # PDF Deep Dive
-                    allottees = extract_allottees(full_text)
-                    deal_size_cr = extract_deal_size_cr(full_text, shares_count, floor_price)
-
-                    if not allottees and pdf_url:
-                        pdf_content = download_and_parse_pdf(pdf_url, session)
-                        if pdf_content:
-                            allottees = extract_allottees(pdf_content)
-                            if deal_size_cr == 0.0:
-                                deal_size_cr = extract_deal_size_cr(pdf_content, shares_count, floor_price)
-
-                    raw_candidates.append({
-                        "symbol": symbol,
-                        "company_name": company_name,
-                        "deal_type": deal_type,
-                        "floor_price": floor_price,
-                        "capital_raised_cr": deal_size_cr,
-                        "allottees": allottees,
-                        "pdf_url": pdf_url,
-                        "context": full_text[:160]
-                    })
-                    seen_symbols.add(symbol)
-                except ValueError:
-                    continue
-
-        processed = []
-        print(f"🔍 Screening {len(raw_candidates)} filings with Sanity Bounds & NSE MCAP...")
-
-        for cand in raw_candidates:
-            symbol = cand["symbol"]
-            floor = cand["floor_price"]
-
-            cmp_val, mcap_cr = fetch_nse_metrics(symbol, session)
-            
-            # Penny stocks filter
-            if cmp_val < 20.0:
-                continue
-
-            # CRITICAL SANITY FILTER: OCR / Regex Error Eliminator
-            # Floor price aur CMP me 35% se zyada unrealistic gap nahi hona chahiye
-            delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
-            if delta_pct < -35.0 or delta_pct > 50.0:
-                print(f"🚫 Dropped regex error on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} ({delta_pct}%)")
-                continue
-
-            deal_pct_of_mcap = round((cand["capital_raised_cr"] / mcap_cr * 100), 2) if mcap_cr > 0 else 0.0
-
-            # Only consider Tier-1 backed if actually discovered
-            has_tier1 = len(cand["allottees"]) > 0
-
-            if delta_pct < 0:
-                zone = "PRIME_DISCOUNT"
-                zone_label = f"{abs(delta_pct)}% Below Anchor"
-            elif delta_pct <= 6.0:
-                zone = "ACCUMULATION_BUFFER"
-                zone_label = f"+{delta_pct}% Near Floor"
-            else:
-                zone = "EXTENDED"
-                zone_label = f"+{delta_pct}% Extended"
-
-            dilution_str = f"~{deal_pct_of_mcap}% Dilution" if deal_pct_of_mcap > 0 else "Deal Size Pending"
-            allottees_str = "\n".join([f"- {a['name']} ({a['tier']})" for a in cand['allottees']]) if cand['allottees'] else "- Qualified Institutional Buyers (Verified in Filing)"
-
-            card = (
-                f"🚨 FRESH CAPITAL RADAR | {zone_label.upper()}\n\n"
-                f"📌 {cand['company_name']} (NSE: {symbol})\n"
-                f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                f"💰 Issue Price:         ₹{floor:,.2f}\n"
-                f"📊 Current CMP:          ₹{cmp_val:,.2f} ({delta_pct:+0.2f}% vs Anchor)\n"
-                f"📦 Capital Infused:      ₹{cand['capital_raised_cr']:,.2f} Cr\n"
-                f"🏢 Dilution / MCap:      {dilution_str} (MCap: ₹{mcap_cr:,.0f} Cr)\n\n"
-                f"🏦 Key Marquee Allottees:\n"
-                f"{allottees_str}\n"
-                f"📄 Official Filing: {cand['pdf_url']}"
-            )
-
-            entry = {
-                "symbol": symbol,
-                "company_name": cand["company_name"],
-                "deal_type": cand["deal_type"],
-                "cmp": cmp_val,
-                "institutional_floor_price": floor,
-                "capital_raised_cr": cand["capital_raised_cr"],
-                "market_cap_cr": mcap_cr,
-                "deal_size_pct_mcap": deal_pct_of_mcap,
-                "delta_to_floor_pct": delta_pct,
-                "zone": zone,
-                "zone_label": zone_label,
-                "tier1_backed": has_tier1,
-                "allottees": cand["allottees"],
-                "filing_pdf": cand["pdf_url"],
-                "filing_context": cand["context"],
-                "alert_card": card
-            }
-
-            print(f"✨ Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | Delta: {delta_pct}%")
-            processed.append(entry)
-            time.sleep(0.4)
-
-        return processed
-    except Exception as e:
-        print(f"Error in pipeline: {e}")
-        return []
-
-def main():
-    prime_setups = []
-    buffer_setups = []
-    all_setups = fetch_institutional_anchors(days_back=60)
-
-    for item in all_setups:
-        if item["zone"] == "PRIME_DISCOUNT":
-            prime_setups.append(item)
-        elif item["zone"] == "ACCUMULATION_BUFFER":
-            buffer_setups.append(item)
-
-    prime_setups.sort(key=lambda x: x["delta_to_floor_pct"])
-    buffer_setups.sort(key=lambda x: x["delta_to_floor_pct"])
-
-    report = {
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
-        "total_anchors_discovered": len(all_setups),
-        "prime_discount_opportunities": len(prime_setups),
-        "buffer_safe_entries": len(buffer_setups),
-        "prime_setups": prime_setups,
-        "buffer_setups": buffer_setups,
-        "all_setups": all_setups
-    }
-
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, indent=2)
-
-    print(f"\n Clean Output Written! Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)}")
-
-if __name__ == "__main__":
-    main()
+                r'(?:issue\s+price|price\s+of|allotment\s+price)\s*(?:of|is|at)?\s*(?:rs\.?|inr)?
