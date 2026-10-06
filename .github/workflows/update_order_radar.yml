@@ -40,15 +40,23 @@ jobs:
         run: |
           git config --global user.name "OrderHunterBot"
           git config --global user.email "bot@github-actions.internal"
-          git add order_radar_report.json
 
-          # Sirf tab commit karega agar JSON content mein koi naya change aaya ho
+          # 1. Freshly generated JSON ko safe location (/tmp) par backup karein
+          cp order_radar_report.json /tmp/order_radar_report.json
+
+          # 2. Remote branch se latest state fetch karke runner ko align karein
+          git fetch origin main
+          git reset --hard origin/main
+
+          # 3. Fresh report wapas paste karein
+          cp /tmp/order_radar_report.json order_radar_report.json
+
+          # 4. Check karein agar actual changes hain
+          git add order_radar_report.json
           if git diff --staged --quiet; then
             echo "ℹ️ No changes detected in order_radar_report.json. Skipping commit."
           else
             git commit -m "🤖 Auto-Update: Order Book Hidden Gems Radar [skip ci]"
-            # Remote changes pull karke rebase karega taaki push reject na ho
-            git pull --rebase origin main
             git push origin main
             echo "✅ Successfully pushed updated order_radar_report.json to repository!"
           fi
