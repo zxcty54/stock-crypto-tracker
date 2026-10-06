@@ -1,9 +1,1677 @@
 {
-  "last_updated": "2026-10-06 15:36:42 IST",
-  "total_anchors_discovered": 0,
-  "prime_discount_opportunities": 0,
-  "buffer_safe_entries": 0,
-  "prime_setups": [],
-  "buffer_setups": [],
-  "all_setups": []
+  "last_updated": "2026-10-06 15:53:04 IST",
+  "total_anchors_discovered": 54,
+  "prime_discount_opportunities": 18,
+  "buffer_safe_entries": 2,
+  "prime_setups": [
+    {
+      "symbol": "NECCLTD",
+      "company_name": "North Eastern Carrying Corporation Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 19.38,
+      "institutional_floor_price": 1851.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -98.95,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "98.95% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/NECCLTD_01102026120204_Disclosure_Reg30_AllotmentofConvertiableWarratns.pdf",
+      "filing_context": "General Updates North Eastern Carrying Corporation Limited has informed the Exchange about General Updates - Allotment of one Crores Convertible Warrants to Mr.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 98.95% BELOW ANCHOR\n\n📌 North Eastern Carrying Corporation Limited (NSE: NECCLTD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹1,851.00\n📊 Current CMP:          ₹19.38 (-98.95% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/NECCLTD_01102026120204_Disclosure_Reg30_AllotmentofConvertiableWarratns.pdf"
+    },
+    {
+      "symbol": "BELRISE",
+      "company_name": "Belrise Industries Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 236.81,
+      "institutional_floor_price": 3220.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -92.65,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "92.65% Below Anchor",
+      "tier1_backed": true,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/BELRISE_14082026195401_BELRISE_Outcome_of_Board_Meeting_14082026.pdf",
+      "filing_context": "Dividend Belrise Industries Limited has informed the Exchange about Recommendation of final dividend of Rs. 0.55 (@ 11%) per equity share for the financial year",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 92.65% BELOW ANCHOR\n\n📌 Belrise Industries Limited (NSE: BELRISE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹3,220.00\n📊 Current CMP:          ₹236.81 (-92.65% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BELRISE_14082026195401_BELRISE_Outcome_of_Board_Meeting_14082026.pdf"
+    },
+    {
+      "symbol": "IRB",
+      "company_name": "IRB Infrastructure Developers Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 17.84,
+      "institutional_floor_price": 65.0,
+      "capital_raised_cr": 1484.55,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -72.55,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "72.55% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/IRB_26082026163407_IRBIDL_Outcome_Investment_in_units_of_IRB_InvIT_Fund.pdf",
+      "filing_context": "Acquisition IRB Infrastructure Developers Limited has informed the Exchange that the Board of Directors has approved investment in the units of IRB InvIT Fund t",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 72.55% BELOW ANCHOR\n\n📌 IRB Infrastructure Developers Limited (NSE: IRB)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹65.00\n📊 Current CMP:          ₹17.84 (-72.55% vs Anchor)\n📦 Capital Infused:      ₹1,484.55 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/IRB_26082026163407_IRBIDL_Outcome_Investment_in_units_of_IRB_InvIT_Fund.pdf"
+    },
+    {
+      "symbol": "SUMEETINDS",
+      "company_name": "Sumeet Industries Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 11.43,
+      "institutional_floor_price": 33.21,
+      "capital_raised_cr": 28.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -65.58,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "65.58% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/SUMEETINDS_19092026121137_outcomeofBM19092026.pdf",
+      "filing_context": "Outcome of Board Meeting Sumeet Industries Limited has informed the Exchange regarding Outcome of Board Meeting held on September 19, 2026 regarding allotment o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 65.58% BELOW ANCHOR\n\n📌 Sumeet Industries Limited (NSE: SUMEETINDS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹33.21\n📊 Current CMP:          ₹11.43 (-65.58% vs Anchor)\n📦 Capital Infused:      ₹28.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SUMEETINDS_19092026121137_outcomeofBM19092026.pdf"
+    },
+    {
+      "symbol": "ANURAS",
+      "company_name": "Anupam Rasayan India Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 1170.2,
+      "institutional_floor_price": 2341.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -50.01,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "50.01% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ANURAS_09092026183541_ARILSLDSTX20260909058Reg30DisclosureTanfacAcquisitionUpdate.pdf",
+      "filing_context": "General Updates Anupam Rasayan India Limited has informed the Exchange about acquisition of equity shares in Tanfac Industries Limited pursuant to preferential ",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 50.01% BELOW ANCHOR\n\n📌 Anupam Rasayan India Limited (NSE: ANURAS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹2,341.00\n📊 Current CMP:          ₹1,170.20 (-50.01% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ANURAS_09092026183541_ARILSLDSTX20260909058Reg30DisclosureTanfacAcquisitionUpdate.pdf"
+    },
+    {
+      "symbol": "EFCIL",
+      "company_name": "EFC (I) Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 170.1,
+      "institutional_floor_price": 270.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -37.0,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "37.0% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/EFCILTD_01102026175614_EFC__I__Limited_-_Preferential_Issue_Allotment.pdf",
+      "filing_context": "Allotment of Securities EFC (I) Limited has informed the Exchange regarding allotment of 1999996 securities pursuant to Preferential Issue at its meeting held o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 37.0% BELOW ANCHOR\n\n📌 EFC (I) Limited (NSE: EFCIL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹270.00\n📊 Current CMP:          ₹170.10 (-37.00% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/EFCILTD_01102026175614_EFC__I__Limited_-_Preferential_Issue_Allotment.pdf"
+    },
+    {
+      "symbol": "BAIDFIN",
+      "company_name": "Baid Finserv Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 10.32,
+      "institutional_floor_price": 15.1,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -31.66,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "31.66% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/20121991_26082026114418_Intimation.pdf",
+      "filing_context": "General Updates Allotment of Equity Shares pursuant to the exercise and conversion of Convertible Warrants",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 31.66% BELOW ANCHOR\n\n📌 Baid Finserv Limited (NSE: BAIDFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹15.10\n📊 Current CMP:          ₹10.32 (-31.66% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/20121991_26082026114418_Intimation.pdf"
+    },
+    {
+      "symbol": "ICEMAKE",
+      "company_name": "Ice Make Refrigeration Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 631.2,
+      "institutional_floor_price": 802.51,
+      "capital_raised_cr": 2007.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -21.35,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "21.35% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ICEMAKE_10092026122953_NSEOutcome10092026.pdf",
+      "filing_context": "Allotment of Securities Ice Make Refrigeration Limited has informed the Exchange regarding allotment of 2367573 securities pursuant to Preferential Issue at its",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 21.35% BELOW ANCHOR\n\n📌 Ice Make Refrigeration Limited (NSE: ICEMAKE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹802.51\n📊 Current CMP:          ₹631.20 (-21.35% vs Anchor)\n📦 Capital Infused:      ₹2,007.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ICEMAKE_10092026122953_NSEOutcome10092026.pdf"
+    },
+    {
+      "symbol": "BORORENEW",
+      "company_name": "BOROSIL RENEWABLES LIMITED",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 449.85,
+      "institutional_floor_price": 530.0,
+      "capital_raised_cr": 282.96,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -15.12,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "15.12% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/BORORENEW12_14082026114905_INTIMATION.pdf",
+      "filing_context": "Allotment of Securities BOROSIL RENEWABLES LIMITED has informed the Exchange regarding allotment of 5338840 Equity Shares upon conversion of Warrants allotted o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 15.12% BELOW ANCHOR\n\n📌 BOROSIL RENEWABLES LIMITED (NSE: BORORENEW)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹530.00\n📊 Current CMP:          ₹449.85 (-15.12% vs Anchor)\n📦 Capital Infused:      ₹282.96 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BORORENEW12_14082026114905_INTIMATION.pdf"
+    },
+    {
+      "symbol": "APOLLOPIPE",
+      "company_name": "Apollo Pipes Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 529.8,
+      "institutional_floor_price": 610.0,
+      "capital_raised_cr": 300.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -13.15,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "13.15% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/APOLLOPIPE_31082026142611_RevisedOutcome31082026.pdf",
+      "filing_context": "Preferential issue Apollo Pipes Limited has informed the Exchange about Preferential issue",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 13.15% BELOW ANCHOR\n\n📌 Apollo Pipes Limited (NSE: APOLLOPIPE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹610.00\n📊 Current CMP:          ₹529.80 (-13.15% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/APOLLOPIPE_31082026142611_RevisedOutcome31082026.pdf"
+    },
+    {
+      "symbol": "DEVX",
+      "company_name": "Dev Accelerator Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 39.62,
+      "institutional_floor_price": 45.0,
+      "capital_raised_cr": 35.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.96,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.96% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/DEVACCE_12082026185604_SE_Monitoring_Agency_Report_Preferential.pdf",
+      "filing_context": "Monitoring Agency Report Monitoring Agency Report in respect of utilization of proceeds raised through issuance of equity shares and convertible warrants throug",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.96% BELOW ANCHOR\n\n📌 Dev Accelerator Limited (NSE: DEVX)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹45.00\n📊 Current CMP:          ₹39.62 (-11.96% vs Anchor)\n📦 Capital Infused:      ₹35.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/DEVACCE_12082026185604_SE_Monitoring_Agency_Report_Preferential.pdf"
+    },
+    {
+      "symbol": "ONIDA",
+      "company_name": "Onida Electronics Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 31.11,
+      "institutional_floor_price": 35.2,
+      "capital_raised_cr": 26.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.62,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.62% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/MIRCELECTR_17092026185306_OutcomeofFinanceCommittee.pdf",
+      "filing_context": "Updates Onida Electronics Limited has informed the Exchange regarding 'allotment of 73,86,362 warrants convertible into equal number of equity shares on Prefere",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.62% BELOW ANCHOR\n\n📌 Onida Electronics Limited (NSE: ONIDA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹35.20\n📊 Current CMP:          ₹31.11 (-11.62% vs Anchor)\n📦 Capital Infused:      ₹26.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/MIRCELECTR_17092026185306_OutcomeofFinanceCommittee.pdf"
+    },
+    {
+      "symbol": "INOXGREEN",
+      "company_name": "Inox Green Energy Services Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 146.59,
+      "institutional_floor_price": 165.65,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.51,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.51% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/IGESL_30092026005646_IGESL_SE_Allotment_30092026_S.pdf",
+      "filing_context": "Qualified Institutional Placement Allotment of Equity Shares to all Eligible Qualified Institutional Buyers.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.51% BELOW ANCHOR\n\n📌 Inox Green Energy Services Limited (NSE: INOXGREEN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹165.65\n📊 Current CMP:          ₹146.59 (-11.51% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/IGESL_30092026005646_IGESL_SE_Allotment_30092026_S.pdf"
+    },
+    {
+      "symbol": "VIPCLOTHNG",
+      "company_name": "VIP Clothing Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 20.3,
+      "institutional_floor_price": 22.5,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -9.78,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "9.78% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/VIPCLOTHNG_12092026202229_Outcome_of_Preferential_Issue_Committee_Meeting_12092026.pdf",
+      "filing_context": "Allotment of Securities VIP Clothing Limited has informed the Exchange regarding allotment of 84,75,000 securities pursuant to Preferential Issue at its Prefere",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 9.78% BELOW ANCHOR\n\n📌 VIP Clothing Limited (NSE: VIPCLOTHNG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹22.50\n📊 Current CMP:          ₹20.30 (-9.78% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/VIPCLOTHNG_12092026202229_Outcome_of_Preferential_Issue_Committee_Meeting_12092026.pdf"
+    },
+    {
+      "symbol": "PROSTARM",
+      "company_name": "Prostarm Info Systems Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 132.91,
+      "institutional_floor_price": 145.78,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -8.83,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "8.83% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/PROSTARM_23092026154853_SE_PRE_ISSUE.pdf",
+      "filing_context": "Updates Prostarm Info Systems Limited has informed the Exchange regarding 'Clarification regarding valuation methodology adopted for determination of fair value",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 8.83% BELOW ANCHOR\n\n📌 Prostarm Info Systems Limited (NSE: PROSTARM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹145.78\n📊 Current CMP:          ₹132.91 (-8.83% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PROSTARM_23092026154853_SE_PRE_ISSUE.pdf"
+    },
+    {
+      "symbol": "HTMEDIA",
+      "company_name": "HT Media Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 22.99,
+      "institutional_floor_price": 24.57,
+      "capital_raised_cr": 95.3,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -6.43,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "6.43% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/HTMEDIA_20082026132058_HTMLAllotment.pdf",
+      "filing_context": "Allotment of Securities HT Media Limited has informed the Exchange regarding allotment of 38787137 warrants pursuant to Preferential Issue on August 20, 2026",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 6.43% BELOW ANCHOR\n\n📌 HT Media Limited (NSE: HTMEDIA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹24.57\n📊 Current CMP:          ₹22.99 (-6.43% vs Anchor)\n📦 Capital Infused:      ₹95.30 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/HTMEDIA_20082026132058_HTMLAllotment.pdf"
+    },
+    {
+      "symbol": "DGCONTENT",
+      "company_name": "Digicontent Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 24.73,
+      "institutional_floor_price": 26.41,
+      "capital_raised_cr": 37.2,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -6.36,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "6.36% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/DGCONTENT_03092026204757_DCL_REG30_03092026sd.pdf",
+      "filing_context": "Allotment of Securities Digicontent Limited has informed the Exchange regarding allotment of 14085571 warrants pursuant to Preferential Issue on September 03, 2",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 6.36% BELOW ANCHOR\n\n📌 Digicontent Limited (NSE: DGCONTENT)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹26.41\n📊 Current CMP:          ₹24.73 (-6.36% vs Anchor)\n📦 Capital Infused:      ₹37.20 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/DGCONTENT_03092026204757_DCL_REG30_03092026sd.pdf"
+    },
+    {
+      "symbol": "PIRAMALFIN",
+      "company_name": "Piramal Finance Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 2018.5,
+      "institutional_floor_price": 2110.0,
+      "capital_raised_cr": 2100.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -4.34,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "4.34% Below Anchor",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Icici Prudential",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Axis Mutual",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Motilal Oswal",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Quant Mutual",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Goldman Sachs",
+          "tier": "Marquee FII / Sovereign"
+        },
+        {
+          "name": "Blackrock",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
+      "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 4.34% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹2,110.00\n📊 Current CMP:          ₹2,018.50 (-4.34% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+    }
+  ],
+  "buffer_setups": [
+    {
+      "symbol": "EIFFL",
+      "company_name": "Euro India Fresh Foods Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 259.5,
+      "institutional_floor_price": 245.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 5.92,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.92% Near Floor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/EIFFL_07082026183912_NSE_Intimation_allotment_of_convertible_warrants.pdf",
+      "filing_context": "Allotment of Securities Euro India Fresh Foods Limited has informed the Exchange regarding allotment of 1930000 securities pursuant to Preferential Issue at its",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +5.92% NEAR FLOOR\n\n📌 Euro India Fresh Foods Limited (NSE: EIFFL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹245.00\n📊 Current CMP:          ₹259.50 (+5.92% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/EIFFL_07082026183912_NSE_Intimation_allotment_of_convertible_warrants.pdf"
+    },
+    {
+      "symbol": "JAYNECOIND",
+      "company_name": "Jayaswal Neco Industries Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 94.45,
+      "institutional_floor_price": 89.13,
+      "capital_raised_cr": 200.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 5.97,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.97% Near Floor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/JAYNECOIND3_01102026114607_REG30_01102026_ALLOTMENT_OF_SHARES.pdf",
+      "filing_context": "Allotment of Securities Jayaswal Neco Industries Limited has informed the Exchange regarding allotment of 22439134 warrants pursuant to Preferential Issue at it",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +5.97% NEAR FLOOR\n\n📌 Jayaswal Neco Industries Limited (NSE: JAYNECOIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹89.13\n📊 Current CMP:          ₹94.45 (+5.97% vs Anchor)\n📦 Capital Infused:      ₹200.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/JAYNECOIND3_01102026114607_REG30_01102026_ALLOTMENT_OF_SHARES.pdf"
+    }
+  ],
+  "all_setups": [
+    {
+      "symbol": "EFCIL",
+      "company_name": "EFC (I) Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 170.1,
+      "institutional_floor_price": 270.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -37.0,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "37.0% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/EFCILTD_01102026175614_EFC__I__Limited_-_Preferential_Issue_Allotment.pdf",
+      "filing_context": "Allotment of Securities EFC (I) Limited has informed the Exchange regarding allotment of 1999996 securities pursuant to Preferential Issue at its meeting held o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 37.0% BELOW ANCHOR\n\n📌 EFC (I) Limited (NSE: EFCIL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹270.00\n📊 Current CMP:          ₹170.10 (-37.00% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/EFCILTD_01102026175614_EFC__I__Limited_-_Preferential_Issue_Allotment.pdf"
+    },
+    {
+      "symbol": "NECCLTD",
+      "company_name": "North Eastern Carrying Corporation Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 19.38,
+      "institutional_floor_price": 1851.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -98.95,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "98.95% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/NECCLTD_01102026120204_Disclosure_Reg30_AllotmentofConvertiableWarratns.pdf",
+      "filing_context": "General Updates North Eastern Carrying Corporation Limited has informed the Exchange about General Updates - Allotment of one Crores Convertible Warrants to Mr.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 98.95% BELOW ANCHOR\n\n📌 North Eastern Carrying Corporation Limited (NSE: NECCLTD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹1,851.00\n📊 Current CMP:          ₹19.38 (-98.95% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/NECCLTD_01102026120204_Disclosure_Reg30_AllotmentofConvertiableWarratns.pdf"
+    },
+    {
+      "symbol": "JAYNECOIND",
+      "company_name": "Jayaswal Neco Industries Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 94.45,
+      "institutional_floor_price": 89.13,
+      "capital_raised_cr": 200.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 5.97,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.97% Near Floor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/JAYNECOIND3_01102026114607_REG30_01102026_ALLOTMENT_OF_SHARES.pdf",
+      "filing_context": "Allotment of Securities Jayaswal Neco Industries Limited has informed the Exchange regarding allotment of 22439134 warrants pursuant to Preferential Issue at it",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +5.97% NEAR FLOOR\n\n📌 Jayaswal Neco Industries Limited (NSE: JAYNECOIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹89.13\n📊 Current CMP:          ₹94.45 (+5.97% vs Anchor)\n📦 Capital Infused:      ₹200.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/JAYNECOIND3_01102026114607_REG30_01102026_ALLOTMENT_OF_SHARES.pdf"
+    },
+    {
+      "symbol": "INOXGREEN",
+      "company_name": "Inox Green Energy Services Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 146.59,
+      "institutional_floor_price": 165.65,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.51,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.51% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/IGESL_30092026005646_IGESL_SE_Allotment_30092026_S.pdf",
+      "filing_context": "Qualified Institutional Placement Allotment of Equity Shares to all Eligible Qualified Institutional Buyers.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.51% BELOW ANCHOR\n\n📌 Inox Green Energy Services Limited (NSE: INOXGREEN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹165.65\n📊 Current CMP:          ₹146.59 (-11.51% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/IGESL_30092026005646_IGESL_SE_Allotment_30092026_S.pdf"
+    },
+    {
+      "symbol": "KAYA",
+      "company_name": "Kaya Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 305.55,
+      "institutional_floor_price": 274.1,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 11.47,
+      "zone": "EXTENDED",
+      "zone_label": "+11.47% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/KAYA_29092026162601_Intimation_Signed.pdf",
+      "filing_context": "Updates 'In pursuant to Regulation 30 of SEBI LODR, Kaya Limited hereby informs about the Clarifications issued in furtherance to the in-principal application o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +11.47% EXTENDED\n\n📌 Kaya Limited (NSE: KAYA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹274.10\n📊 Current CMP:          ₹305.55 (+11.47% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KAYA_29092026162601_Intimation_Signed.pdf"
+    },
+    {
+      "symbol": "NEOGEN",
+      "company_name": "Neogen Chemicals Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 2429.2,
+      "institutional_floor_price": 1066.66,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 127.74,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+127.74% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/NEOGEN_26092026195328_NMLPI.pdf",
+      "filing_context": "Disclosure of material issue Neogen Chemicals Limited has informed regarding Disclosure pertaining to approval by the Board of Neogen Morita New Materials Limit",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +127.74% HIGH EXHAUSTION\n\n📌 Neogen Chemicals Limited (NSE: NEOGEN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹1,066.66\n📊 Current CMP:          ₹2,429.20 (+127.74% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/NEOGEN_26092026195328_NMLPI.pdf"
+    },
+    {
+      "symbol": "AEQUS",
+      "company_name": "Aequs Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 286.1,
+      "institutional_floor_price": 231.55,
+      "capital_raised_cr": 325.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 23.56,
+      "zone": "EXTENDED",
+      "zone_label": "+23.56% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/AEQUSLIMITED_25092026182322_Outcome_of_Board_Meeting_FINAL.pdf",
+      "filing_context": "Preferential issue The Board of Directors of Aequs Limited, at their meeting held today i.e. Friday, September 25, 2026, inter alia, approved the preferential i",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +23.56% EXTENDED\n\n📌 Aequs Limited (NSE: AEQUS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹231.55\n📊 Current CMP:          ₹286.10 (+23.56% vs Anchor)\n📦 Capital Infused:      ₹325.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/AEQUSLIMITED_25092026182322_Outcome_of_Board_Meeting_FINAL.pdf"
+    },
+    {
+      "symbol": "THEMISMED",
+      "company_name": "Themis Medicare Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 113.49,
+      "institutional_floor_price": 102.87,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 10.32,
+      "zone": "EXTENDED",
+      "zone_label": "+10.32% Extended",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/THEMISMED_24092026194457_Reg30withdrawalntimationTML.pdf",
+      "filing_context": "General Updates Themis Medicare Limited has informed the Exchange about the Withdrawal of proposed Preferential Issue of 45,95,795 convertible equity warrants.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +10.32% EXTENDED\n\n📌 Themis Medicare Limited (NSE: THEMISMED)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹102.87\n📊 Current CMP:          ₹113.49 (+10.32% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/THEMISMED_24092026194457_Reg30withdrawalntimationTML.pdf"
+    },
+    {
+      "symbol": "IBULLSLTD",
+      "company_name": "Indiabulls Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 30.95,
+      "institutional_floor_price": 19.4,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 59.54,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+59.54% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/YAARI_24092026182726_IBL_Intimation_Allotment_Warrants_24092026.pdf",
+      "filing_context": "Allotment of Securities Indiabulls Limited has informed the Exchange regarding allotment of 51,55,00,000 convertible Warrants to certain Promoter Group Entities",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +59.54% HIGH EXHAUSTION\n\n📌 Indiabulls Limited (NSE: IBULLSLTD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹19.40\n📊 Current CMP:          ₹30.95 (+59.54% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/YAARI_24092026182726_IBL_Intimation_Allotment_Warrants_24092026.pdf"
+    },
+    {
+      "symbol": "RKFORGE",
+      "company_name": "Ramkrishna Forgings Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 732.65,
+      "institutional_floor_price": 588.0,
+      "capital_raised_cr": 199.92,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 24.6,
+      "zone": "EXTENDED",
+      "zone_label": "+24.6% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/RKFORGE_24092026135858_STExchCMCOutcome24Sep26.pdf",
+      "filing_context": "Allotment of Securities Ramkrishna Forgings Limited has informed the Exchange regarding allotment of 3400000 equity shares pursuant to exercise of conversion of",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +24.6% EXTENDED\n\n📌 Ramkrishna Forgings Limited (NSE: RKFORGE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹588.00\n📊 Current CMP:          ₹732.65 (+24.60% vs Anchor)\n📦 Capital Infused:      ₹199.92 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/RKFORGE_24092026135858_STExchCMCOutcome24Sep26.pdf"
+    },
+    {
+      "symbol": "JAYKAY",
+      "company_name": "Jaykay Enterprises Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 240.02,
+      "institutional_floor_price": 75.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 220.03,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+220.03% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/JAYKAY_23092026180739_RIC_Outcome_Sd.pdf",
+      "filing_context": "Allotment of Securities Jaykay Enterprises Limited has informed the Exchange regarding allotment of 2,05,71,642 Partly Paid Equity Shares pursuant to Rights Iss",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +220.03% HIGH EXHAUSTION\n\n📌 Jaykay Enterprises Limited (NSE: JAYKAY)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹75.00\n📊 Current CMP:          ₹240.02 (+220.03% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/JAYKAY_23092026180739_RIC_Outcome_Sd.pdf"
+    },
+    {
+      "symbol": "PROSTARM",
+      "company_name": "Prostarm Info Systems Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 132.91,
+      "institutional_floor_price": 145.78,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -8.83,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "8.83% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/PROSTARM_23092026154853_SE_PRE_ISSUE.pdf",
+      "filing_context": "Updates Prostarm Info Systems Limited has informed the Exchange regarding 'Clarification regarding valuation methodology adopted for determination of fair value",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 8.83% BELOW ANCHOR\n\n📌 Prostarm Info Systems Limited (NSE: PROSTARM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹145.78\n📊 Current CMP:          ₹132.91 (-8.83% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PROSTARM_23092026154853_SE_PRE_ISSUE.pdf"
+    },
+    {
+      "symbol": "EMKAY",
+      "company_name": "Emkay Global Financial Services Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 285.6,
+      "institutional_floor_price": 239.5,
+      "capital_raised_cr": 2.4,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 19.25,
+      "zone": "EXTENDED",
+      "zone_label": "+19.25% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/jpshah_21092026144259_IntimationofallotmentofEquitysharesSep92026.pdf",
+      "filing_context": "Allotment of Securities Emkay Global Financial Services Limited has informed the Exchange regarding allotment of 1,00,000 equity shares pursuant to conversion o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +19.25% EXTENDED\n\n📌 Emkay Global Financial Services Limited (NSE: EMKAY)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹239.50\n📊 Current CMP:          ₹285.60 (+19.25% vs Anchor)\n📦 Capital Infused:      ₹2.40 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/jpshah_21092026144259_IntimationofallotmentofEquitysharesSep92026.pdf"
+    },
+    {
+      "symbol": "SUMEETINDS",
+      "company_name": "Sumeet Industries Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 11.43,
+      "institutional_floor_price": 33.21,
+      "capital_raised_cr": 28.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -65.58,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "65.58% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/SUMEETINDS_19092026121137_outcomeofBM19092026.pdf",
+      "filing_context": "Outcome of Board Meeting Sumeet Industries Limited has informed the Exchange regarding Outcome of Board Meeting held on September 19, 2026 regarding allotment o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 65.58% BELOW ANCHOR\n\n📌 Sumeet Industries Limited (NSE: SUMEETINDS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹33.21\n📊 Current CMP:          ₹11.43 (-65.58% vs Anchor)\n📦 Capital Infused:      ₹28.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SUMEETINDS_19092026121137_outcomeofBM19092026.pdf"
+    },
+    {
+      "symbol": "KISSHT",
+      "company_name": "OnEMI Technology Solutions Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 383.1,
+      "institutional_floor_price": 314.11,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 21.96,
+      "zone": "EXTENDED",
+      "zone_label": "+21.96% Extended",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Nippon India",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Whiteoak",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Citigroup",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ONEMI_17092026220209_Outcome_of_BM_Sept_2026_17092026.pdf",
+      "filing_context": "Preferential issue Please find attached the outcome of Board meeting approving the Preferential issue.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +21.96% EXTENDED\n\n📌 OnEMI Technology Solutions Limited (NSE: KISSHT)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹314.11\n📊 Current CMP:          ₹383.10 (+21.96% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Nippon India (Tier-1 DII / MF)\n- Whiteoak (Tier-1 DII / MF)\n- Citigroup (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ONEMI_17092026220209_Outcome_of_BM_Sept_2026_17092026.pdf"
+    },
+    {
+      "symbol": "ONIDA",
+      "company_name": "Onida Electronics Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 31.11,
+      "institutional_floor_price": 35.2,
+      "capital_raised_cr": 26.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.62,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.62% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/MIRCELECTR_17092026185306_OutcomeofFinanceCommittee.pdf",
+      "filing_context": "Updates Onida Electronics Limited has informed the Exchange regarding 'allotment of 73,86,362 warrants convertible into equal number of equity shares on Prefere",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.62% BELOW ANCHOR\n\n📌 Onida Electronics Limited (NSE: ONIDA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹35.20\n📊 Current CMP:          ₹31.11 (-11.62% vs Anchor)\n📦 Capital Infused:      ₹26.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/MIRCELECTR_17092026185306_OutcomeofFinanceCommittee.pdf"
+    },
+    {
+      "symbol": "INDSWFTLAB",
+      "company_name": "Ind-Swift Laboratories Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 400.45,
+      "institutional_floor_price": 196.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 104.31,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+104.31% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/INDSWFTLAB_17092026174502_Outcome_Allotment.pdf",
+      "filing_context": "Allotment of Securities Ind-Swift Laboratories Limited has informed the Exchange regarding allotment of 70,00,000 Fully Convertible Warrants on Preferential Bas",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +104.31% HIGH EXHAUSTION\n\n📌 Ind-Swift Laboratories Limited (NSE: INDSWFTLAB)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹196.00\n📊 Current CMP:          ₹400.45 (+104.31% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/INDSWFTLAB_17092026174502_Outcome_Allotment.pdf"
+    },
+    {
+      "symbol": "YATHARTH",
+      "company_name": "Yatharth Hospital & Trauma Care Services Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 1058.8,
+      "institutional_floor_price": 985.17,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 7.47,
+      "zone": "EXTENDED",
+      "zone_label": "+7.47% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/YATHARTH_17092026144932_Outcome_Final.pdf",
+      "filing_context": "Issue of Securities We hereby submit Issuance and allotment of equity shares and warrants of the Company by way of preferential issue on a private placement bas",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +7.47% EXTENDED\n\n📌 Yatharth Hospital & Trauma Care Services Limited (NSE: YATHARTH)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹985.17\n📊 Current CMP:          ₹1,058.80 (+7.47% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/YATHARTH_17092026144932_Outcome_Final.pdf"
+    },
+    {
+      "symbol": "VHLTD",
+      "company_name": "Viceroy Hotels Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 128.97,
+      "institutional_floor_price": 115.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 12.15,
+      "zone": "EXTENDED",
+      "zone_label": "+12.15% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/VICEROYHOTELSLTD_15092026192523_outcome.pdf",
+      "filing_context": "Disclosure of material issue Viceroy Hotels Limited has informed regarding allotment of shares on rights basis",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +12.15% EXTENDED\n\n📌 Viceroy Hotels Limited (NSE: VHLTD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹115.00\n📊 Current CMP:          ₹128.97 (+12.15% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/VICEROYHOTELSLTD_15092026192523_outcome.pdf"
+    },
+    {
+      "symbol": "VIPCLOTHNG",
+      "company_name": "VIP Clothing Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 20.3,
+      "institutional_floor_price": 22.5,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -9.78,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "9.78% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/VIPCLOTHNG_12092026202229_Outcome_of_Preferential_Issue_Committee_Meeting_12092026.pdf",
+      "filing_context": "Allotment of Securities VIP Clothing Limited has informed the Exchange regarding allotment of 84,75,000 securities pursuant to Preferential Issue at its Prefere",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 9.78% BELOW ANCHOR\n\n📌 VIP Clothing Limited (NSE: VIPCLOTHNG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹22.50\n📊 Current CMP:          ₹20.30 (-9.78% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/VIPCLOTHNG_12092026202229_Outcome_of_Preferential_Issue_Committee_Meeting_12092026.pdf"
+    },
+    {
+      "symbol": "SANGAMIND",
+      "company_name": "Sangam (India) Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 642.4,
+      "institutional_floor_price": 555.56,
+      "capital_raised_cr": 100.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 15.63,
+      "zone": "EXTENDED",
+      "zone_label": "+15.63% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/SANGAMIND_11092026124107_Outcome_Allotment_of_warrant_sign.pdf",
+      "filing_context": "Allotment of Securities Sangam (India) Limited has informed the Exchange regarding allotment of 1800000 warrants convertible into equal number of equity shares ",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +15.63% EXTENDED\n\n📌 Sangam (India) Limited (NSE: SANGAMIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹555.56\n📊 Current CMP:          ₹642.40 (+15.63% vs Anchor)\n📦 Capital Infused:      ₹100.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SANGAMIND_11092026124107_Outcome_Allotment_of_warrant_sign.pdf"
+    },
+    {
+      "symbol": "ICEMAKE",
+      "company_name": "Ice Make Refrigeration Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 631.2,
+      "institutional_floor_price": 802.51,
+      "capital_raised_cr": 2007.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -21.35,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "21.35% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ICEMAKE_10092026122953_NSEOutcome10092026.pdf",
+      "filing_context": "Allotment of Securities Ice Make Refrigeration Limited has informed the Exchange regarding allotment of 2367573 securities pursuant to Preferential Issue at its",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 21.35% BELOW ANCHOR\n\n📌 Ice Make Refrigeration Limited (NSE: ICEMAKE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹802.51\n📊 Current CMP:          ₹631.20 (-21.35% vs Anchor)\n📦 Capital Infused:      ₹2,007.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ICEMAKE_10092026122953_NSEOutcome10092026.pdf"
+    },
+    {
+      "symbol": "MUKKA",
+      "company_name": "Mukka Proteins Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 26.97,
+      "institutional_floor_price": 23.5,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 14.77,
+      "zone": "EXTENDED",
+      "zone_label": "+14.77% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/MUKKA_10092026103254_Intimation_of_allotment_of_warrants.pdf",
+      "filing_context": "Allotment of Securities Mukka Proteins Limited has informed the Exchange regarding allotment of 20000000 securities pursuant to Preferential Issue at its circul",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +14.77% EXTENDED\n\n📌 Mukka Proteins Limited (NSE: MUKKA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹23.50\n📊 Current CMP:          ₹26.97 (+14.77% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/MUKKA_10092026103254_Intimation_of_allotment_of_warrants.pdf"
+    },
+    {
+      "symbol": "ANURAS",
+      "company_name": "Anupam Rasayan India Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 1170.2,
+      "institutional_floor_price": 2341.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -50.01,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "50.01% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ANURAS_09092026183541_ARILSLDSTX20260909058Reg30DisclosureTanfacAcquisitionUpdate.pdf",
+      "filing_context": "General Updates Anupam Rasayan India Limited has informed the Exchange about acquisition of equity shares in Tanfac Industries Limited pursuant to preferential ",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 50.01% BELOW ANCHOR\n\n📌 Anupam Rasayan India Limited (NSE: ANURAS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹2,341.00\n📊 Current CMP:          ₹1,170.20 (-50.01% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ANURAS_09092026183541_ARILSLDSTX20260909058Reg30DisclosureTanfacAcquisitionUpdate.pdf"
+    },
+    {
+      "symbol": "TIRUPATIFL",
+      "company_name": "Tirupati Forge Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 72.19,
+      "institutional_floor_price": 58.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 24.47,
+      "zone": "EXTENDED",
+      "zone_label": "+24.47% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/TIRUPATIFL_07092026153149_Outcome_of_Board_Meeting__07_09_2026.pdf",
+      "filing_context": "Allotment of Securities Tirupati Forge Limited has informed the Exchange regarding allotment of 3700000 securities pursuant to Preferential Issue at its meeting",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +24.47% EXTENDED\n\n📌 Tirupati Forge Limited (NSE: TIRUPATIFL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹58.00\n📊 Current CMP:          ₹72.19 (+24.47% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/TIRUPATIFL_07092026153149_Outcome_of_Board_Meeting__07_09_2026.pdf"
+    },
+    {
+      "symbol": "DGCONTENT",
+      "company_name": "Digicontent Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 24.73,
+      "institutional_floor_price": 26.41,
+      "capital_raised_cr": 37.2,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -6.36,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "6.36% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/DGCONTENT_03092026204757_DCL_REG30_03092026sd.pdf",
+      "filing_context": "Allotment of Securities Digicontent Limited has informed the Exchange regarding allotment of 14085571 warrants pursuant to Preferential Issue on September 03, 2",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 6.36% BELOW ANCHOR\n\n📌 Digicontent Limited (NSE: DGCONTENT)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹26.41\n📊 Current CMP:          ₹24.73 (-6.36% vs Anchor)\n📦 Capital Infused:      ₹37.20 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/DGCONTENT_03092026204757_DCL_REG30_03092026sd.pdf"
+    },
+    {
+      "symbol": "KIRIINDUS",
+      "company_name": "Kiri Industries Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 564.1,
+      "institutional_floor_price": 475.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 18.76,
+      "zone": "EXTENDED",
+      "zone_label": "+18.76% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/KIRIINDUS_31082026185031_Outcome_31082026_S.pdf",
+      "filing_context": "Preferential issue Kiri Industries Limited has informed the Exchange about Preferential issue",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +18.76% EXTENDED\n\n📌 Kiri Industries Limited (NSE: KIRIINDUS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹475.00\n📊 Current CMP:          ₹564.10 (+18.76% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KIRIINDUS_31082026185031_Outcome_31082026_S.pdf"
+    },
+    {
+      "symbol": "APOLLOPIPE",
+      "company_name": "Apollo Pipes Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 529.8,
+      "institutional_floor_price": 610.0,
+      "capital_raised_cr": 300.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -13.15,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "13.15% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/APOLLOPIPE_31082026142611_RevisedOutcome31082026.pdf",
+      "filing_context": "Preferential issue Apollo Pipes Limited has informed the Exchange about Preferential issue",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 13.15% BELOW ANCHOR\n\n📌 Apollo Pipes Limited (NSE: APOLLOPIPE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹610.00\n📊 Current CMP:          ₹529.80 (-13.15% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/APOLLOPIPE_31082026142611_RevisedOutcome31082026.pdf"
+    },
+    {
+      "symbol": "KROSS",
+      "company_name": "Kross Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 253.2,
+      "institutional_floor_price": 212.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 19.43,
+      "zone": "EXTENDED",
+      "zone_label": "+19.43% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/8910457293_31082026124442_BM_outcome_310826.pdf",
+      "filing_context": "Issue of Securities Kross Limited has informed the Exchange about Board of the directors at their meeting held today i.e. 31st August 2026 has considered and ap",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +19.43% EXTENDED\n\n📌 Kross Limited (NSE: KROSS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹212.00\n📊 Current CMP:          ₹253.20 (+19.43% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/8910457293_31082026124442_BM_outcome_310826.pdf"
+    },
+    {
+      "symbol": "RETAIL",
+      "company_name": "JHS Svendgaard Retail Ventures Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 31.54,
+      "institutional_floor_price": 25.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 26.16,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+26.16% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/RETAIL_29082026183346_Allotment_of_Warrants.pdf",
+      "filing_context": "General Updates JHS Svendgaard Retail Ventures Limited has informed the Exchange about allotment of fully convertible warrants.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +26.16% HIGH EXHAUSTION\n\n📌 JHS Svendgaard Retail Ventures Limited (NSE: RETAIL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹25.00\n📊 Current CMP:          ₹31.54 (+26.16% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/RETAIL_29082026183346_Allotment_of_Warrants.pdf"
+    },
+    {
+      "symbol": "PIRAMALFIN",
+      "company_name": "Piramal Finance Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 2018.5,
+      "institutional_floor_price": 2110.0,
+      "capital_raised_cr": 2100.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -4.34,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "4.34% Below Anchor",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Icici Prudential",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Axis Mutual",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Motilal Oswal",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Quant Mutual",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Goldman Sachs",
+          "tier": "Marquee FII / Sovereign"
+        },
+        {
+          "name": "Blackrock",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
+      "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 4.34% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹2,110.00\n📊 Current CMP:          ₹2,018.50 (-4.34% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+    },
+    {
+      "symbol": "GUJTHEM",
+      "company_name": "Gujarat Themis Biosyn Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 390.0,
+      "institutional_floor_price": 354.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 10.17,
+      "zone": "EXTENDED",
+      "zone_label": "+10.17% Extended",
+      "tier1_backed": true,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/GUJARATTHEMIS_28082026210332_Outcome28082026.pdf",
+      "filing_context": "General Updates Gujarat Themis Biosyn Limited has informed the Exchange about the closure of QIP Issue.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +10.17% EXTENDED\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹354.00\n📊 Current CMP:          ₹390.00 (+10.17% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJARATTHEMIS_28082026210332_Outcome28082026.pdf"
+    },
+    {
+      "symbol": "UNIVASTU",
+      "company_name": "Univastu India Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 131.63,
+      "institutional_floor_price": 87.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 51.3,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+51.3% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/UNIVASTU_28082026124354_BM_Outcome_28082026.pdf",
+      "filing_context": "Outcome of Board Meeting Univastu India Limited has informed the Exchange regarding Outcome of Board Meeting held on August 28, 2026 in which the Board has appr",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +51.3% HIGH EXHAUSTION\n\n📌 Univastu India Limited (NSE: UNIVASTU)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹87.00\n📊 Current CMP:          ₹131.63 (+51.30% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/UNIVASTU_28082026124354_BM_Outcome_28082026.pdf"
+    },
+    {
+      "symbol": "IRB",
+      "company_name": "IRB Infrastructure Developers Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 17.84,
+      "institutional_floor_price": 65.0,
+      "capital_raised_cr": 1484.55,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -72.55,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "72.55% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/IRB_26082026163407_IRBIDL_Outcome_Investment_in_units_of_IRB_InvIT_Fund.pdf",
+      "filing_context": "Acquisition IRB Infrastructure Developers Limited has informed the Exchange that the Board of Directors has approved investment in the units of IRB InvIT Fund t",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 72.55% BELOW ANCHOR\n\n📌 IRB Infrastructure Developers Limited (NSE: IRB)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹65.00\n📊 Current CMP:          ₹17.84 (-72.55% vs Anchor)\n📦 Capital Infused:      ₹1,484.55 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/IRB_26082026163407_IRBIDL_Outcome_Investment_in_units_of_IRB_InvIT_Fund.pdf"
+    },
+    {
+      "symbol": "SHANTIGOLD",
+      "company_name": "Shanti Gold International Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 336.65,
+      "institutional_floor_price": 21.5,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 1465.81,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+1465.81% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/SHANTIGOLD_26082026154613_Newspapers_Ad_SGIL.pdf",
+      "filing_context": "Copy of Newspaper Publication Shanti Gold International Limited has informed the Exchange about Copy of Newspaper Publication regarding basis of allotment of Eq",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +1465.81% HIGH EXHAUSTION\n\n📌 Shanti Gold International Limited (NSE: SHANTIGOLD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹21.50\n📊 Current CMP:          ₹336.65 (+1465.81% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SHANTIGOLD_26082026154613_Newspapers_Ad_SGIL.pdf"
+    },
+    {
+      "symbol": "BAIDFIN",
+      "company_name": "Baid Finserv Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 10.32,
+      "institutional_floor_price": 15.1,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -31.66,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "31.66% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/20121991_26082026114418_Intimation.pdf",
+      "filing_context": "General Updates Allotment of Equity Shares pursuant to the exercise and conversion of Convertible Warrants",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 31.66% BELOW ANCHOR\n\n📌 Baid Finserv Limited (NSE: BAIDFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹15.10\n📊 Current CMP:          ₹10.32 (-31.66% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/20121991_26082026114418_Intimation.pdf"
+    },
+    {
+      "symbol": "ATHERENERG",
+      "company_name": "Ather Energy Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 1446.0,
+      "institutional_floor_price": 1230.0,
+      "capital_raised_cr": 199.99,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 17.56,
+      "zone": "EXTENDED",
+      "zone_label": "+17.56% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ATHERENERGY_25082026193729_SEIntimationAllotmentFINAL1signed.pdf",
+      "filing_context": "Allotment of Securities Ather Energy Limited has informed the Exchange regarding allotment of 1626016 fully paid-up equity shares and 7936507  convertible warra",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +17.56% EXTENDED\n\n📌 Ather Energy Limited (NSE: ATHERENERG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹1,230.00\n📊 Current CMP:          ₹1,446.00 (+17.56% vs Anchor)\n📦 Capital Infused:      ₹199.99 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ATHERENERGY_25082026193729_SEIntimationAllotmentFINAL1signed.pdf"
+    },
+    {
+      "symbol": "MAHLOG",
+      "company_name": "Mahindra Logistics Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 415.05,
+      "institutional_floor_price": 10.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 4050.5,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+4050.5% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/MAHLOG24_24082026150223_SEIntimationSRC_Allotment54919eqsharesSigned.pdf",
+      "filing_context": "General Updates Mahindra Logistics Limited has informed the Exchange about allotment of 54,919 Equity Shares of the Company in terms of exercise of the Restrict",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +4050.5% HIGH EXHAUSTION\n\n📌 Mahindra Logistics Limited (NSE: MAHLOG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹10.00\n📊 Current CMP:          ₹415.05 (+4050.50% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/MAHLOG24_24082026150223_SEIntimationSRC_Allotment54919eqsharesSigned.pdf"
+    },
+    {
+      "symbol": "HTMEDIA",
+      "company_name": "HT Media Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 22.99,
+      "institutional_floor_price": 24.57,
+      "capital_raised_cr": 95.3,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -6.43,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "6.43% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/HTMEDIA_20082026132058_HTMLAllotment.pdf",
+      "filing_context": "Allotment of Securities HT Media Limited has informed the Exchange regarding allotment of 38787137 warrants pursuant to Preferential Issue on August 20, 2026",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 6.43% BELOW ANCHOR\n\n📌 HT Media Limited (NSE: HTMEDIA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹24.57\n📊 Current CMP:          ₹22.99 (-6.43% vs Anchor)\n📦 Capital Infused:      ₹95.30 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/HTMEDIA_20082026132058_HTMLAllotment.pdf"
+    },
+    {
+      "symbol": "LLOYDSENGG",
+      "company_name": "LLOYDS ENGINEERING WORKS LIMITED",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 101.15,
+      "institutional_floor_price": 71.25,
+      "capital_raised_cr": 816.87,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 41.96,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+41.96% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/LSIL_17082026213442_OutcomeIntimation.pdf",
+      "filing_context": "General Updates LLOYDS ENGINEERING WORKS LIMITED has informed the Exchange about  the Acquisition of Shares through Preferential Issue",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +41.96% HIGH EXHAUSTION\n\n📌 LLOYDS ENGINEERING WORKS LIMITED (NSE: LLOYDSENGG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹71.25\n📊 Current CMP:          ₹101.15 (+41.96% vs Anchor)\n📦 Capital Infused:      ₹816.87 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/LSIL_17082026213442_OutcomeIntimation.pdf"
+    },
+    {
+      "symbol": "FISCHER",
+      "company_name": "Fischer Medical Ventures Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 33.14,
+      "institutional_floor_price": 23.4,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 41.62,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+41.62% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/FISCHER_17082026181032_INTIREG30.pdf",
+      "filing_context": "General Updates Fischer Medical Ventures Limited has informed the Exchange on the allotment of Equity shares pursuant to conversion of warrants",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +41.62% HIGH EXHAUSTION\n\n📌 Fischer Medical Ventures Limited (NSE: FISCHER)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹23.40\n📊 Current CMP:          ₹33.14 (+41.62% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/FISCHER_17082026181032_INTIREG30.pdf"
+    },
+    {
+      "symbol": "RELTD",
+      "company_name": "Ravindra Energy Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 147.25,
+      "institutional_floor_price": 74.0,
+      "capital_raised_cr": 180.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 98.99,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+98.99% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/RAVINDRA_14082026221442_MA_Pref_Q1.pdf",
+      "filing_context": "Monitoring Agency Report Submission of Monitoring Agency report for Q1-FY2026-27 - India Ratings and Research Private Limited - preferential issue made by the C",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +98.99% HIGH EXHAUSTION\n\n📌 Ravindra Energy Limited (NSE: RELTD)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹74.00\n📊 Current CMP:          ₹147.25 (+98.99% vs Anchor)\n📦 Capital Infused:      ₹180.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/RAVINDRA_14082026221442_MA_Pref_Q1.pdf"
+    },
+    {
+      "symbol": "SWARAJ",
+      "company_name": "Swaraj Suiting Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 354.7,
+      "institutional_floor_price": 236.0,
+      "capital_raised_cr": 2.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 50.3,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+50.3% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/SWARAJ_14082026215717_Regu32IntiMA14Aug2026.pdf",
+      "filing_context": "Monitoring Agency Report Swaraj Suiting Limited submit the Monitoring Agency Report to the Exchange for the quarter ended on June 30, 2026 issued by CRISIL Rati",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +50.3% HIGH EXHAUSTION\n\n📌 Swaraj Suiting Limited (NSE: SWARAJ)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹236.00\n📊 Current CMP:          ₹354.70 (+50.30% vs Anchor)\n📦 Capital Infused:      ₹2.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SWARAJ_14082026215717_Regu32IntiMA14Aug2026.pdf"
+    },
+    {
+      "symbol": "BELRISE",
+      "company_name": "Belrise Industries Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 236.81,
+      "institutional_floor_price": 3220.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -92.65,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "92.65% Below Anchor",
+      "tier1_backed": true,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/BELRISE_14082026195401_BELRISE_Outcome_of_Board_Meeting_14082026.pdf",
+      "filing_context": "Dividend Belrise Industries Limited has informed the Exchange about Recommendation of final dividend of Rs. 0.55 (@ 11%) per equity share for the financial year",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 92.65% BELOW ANCHOR\n\n📌 Belrise Industries Limited (NSE: BELRISE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹3,220.00\n📊 Current CMP:          ₹236.81 (-92.65% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BELRISE_14082026195401_BELRISE_Outcome_of_Board_Meeting_14082026.pdf"
+    },
+    {
+      "symbol": "RATNAVEER",
+      "company_name": "Ratnaveer Precision Engineering Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 335.25,
+      "institutional_floor_price": 159.25,
+      "capital_raised_cr": 2.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 110.52,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+110.52% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/RATNAVEER_14082026171825_MA_Report_PI_merged_signed.pdf",
+      "filing_context": "Monitoring Agency Report Monitoring Agency Report for the quarter ended 30th June, 2026  in respect of utilization of proceeds of the Preferential Issue of the ",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +110.52% HIGH EXHAUSTION\n\n📌 Ratnaveer Precision Engineering Limited (NSE: RATNAVEER)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹159.25\n📊 Current CMP:          ₹335.25 (+110.52% vs Anchor)\n📦 Capital Infused:      ₹2.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/RATNAVEER_14082026171825_MA_Report_PI_merged_signed.pdf"
+    },
+    {
+      "symbol": "BORORENEW",
+      "company_name": "BOROSIL RENEWABLES LIMITED",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 449.85,
+      "institutional_floor_price": 530.0,
+      "capital_raised_cr": 282.96,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -15.12,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "15.12% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/BORORENEW12_14082026114905_INTIMATION.pdf",
+      "filing_context": "Allotment of Securities BOROSIL RENEWABLES LIMITED has informed the Exchange regarding allotment of 5338840 Equity Shares upon conversion of Warrants allotted o",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 15.12% BELOW ANCHOR\n\n📌 BOROSIL RENEWABLES LIMITED (NSE: BORORENEW)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹530.00\n📊 Current CMP:          ₹449.85 (-15.12% vs Anchor)\n📦 Capital Infused:      ₹282.96 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BORORENEW12_14082026114905_INTIMATION.pdf"
+    },
+    {
+      "symbol": "CENTUM",
+      "company_name": "Centum Electronics Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 4451.0,
+      "institutional_floor_price": 1160.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 283.71,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+283.71% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/CENTUME_13082026175555_Outcome13082026.pdf",
+      "filing_context": "Updates Centum Electronics Limited has informed the Exchange regarding 'Allotment of Shares - RSU'.",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +283.71% HIGH EXHAUSTION\n\n📌 Centum Electronics Limited (NSE: CENTUM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹1,160.00\n📊 Current CMP:          ₹4,451.00 (+283.71% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Qualified Institutional Buyers (QIB Allotment in PDF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/CENTUME_13082026175555_Outcome13082026.pdf"
+    },
+    {
+      "symbol": "VOEPL",
+      "company_name": "Virtuoso Optoelectronics Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 511.15,
+      "institutional_floor_price": 356.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 43.58,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+43.58% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/VIRTUOSO_13082026144732_allotment.pdf",
+      "filing_context": "General Updates Virtuoso Optoelectronics Limited has informed the Exchange about allotment of shares and warrants",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +43.58% HIGH EXHAUSTION\n\n📌 Virtuoso Optoelectronics Limited (NSE: VOEPL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹356.00\n📊 Current CMP:          ₹511.15 (+43.58% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/VIRTUOSO_13082026144732_allotment.pdf"
+    },
+    {
+      "symbol": "BHAGYANGR",
+      "company_name": "Bhagyanagar India Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 432.95,
+      "institutional_floor_price": 348.0,
+      "capital_raised_cr": 52.25,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 24.41,
+      "zone": "EXTENDED",
+      "zone_label": "+24.41% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/BHAGYANGR_13082026114035_BILOUTCOMEBM13062026sd.pdf",
+      "filing_context": "Outcome of Board Meeting Bhagyanagar India Limited has informed the Exchange regarding Outcome of   the Executive Committee of the board of Bhagyanagar India Li",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +24.41% EXTENDED\n\n📌 Bhagyanagar India Limited (NSE: BHAGYANGR)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹348.00\n📊 Current CMP:          ₹432.95 (+24.41% vs Anchor)\n📦 Capital Infused:      ₹52.25 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BHAGYANGR_13082026114035_BILOUTCOMEBM13062026sd.pdf"
+    },
+    {
+      "symbol": "TEXMOPIPES",
+      "company_name": "Texmo Pipes and Products Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 53.8,
+      "institutional_floor_price": 45.65,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 17.85,
+      "zone": "EXTENDED",
+      "zone_label": "+17.85% Extended",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/TEXMOPIPES_12082026202319_SEOutcomeofBM12082026.pdf",
+      "filing_context": "Preferential issue Texmo Pipes and Products Limited has informed the Exchange about Preferential issue",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +17.85% EXTENDED\n\n📌 Texmo Pipes and Products Limited (NSE: TEXMOPIPES)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹45.65\n📊 Current CMP:          ₹53.80 (+17.85% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/TEXMOPIPES_12082026202319_SEOutcomeofBM12082026.pdf"
+    },
+    {
+      "symbol": "DEVX",
+      "company_name": "Dev Accelerator Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 39.62,
+      "institutional_floor_price": 45.0,
+      "capital_raised_cr": 35.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -11.96,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "11.96% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Identified Strategic Investors",
+          "tier": "Non-Promoter Allottees"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/DEVACCE_12082026185604_SE_Monitoring_Agency_Report_Preferential.pdf",
+      "filing_context": "Monitoring Agency Report Monitoring Agency Report in respect of utilization of proceeds raised through issuance of equity shares and convertible warrants throug",
+      "alert_card": "🚨 SMART MONEY ANCHOR | 11.96% BELOW ANCHOR\n\n📌 Dev Accelerator Limited (NSE: DEVX)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹45.00\n📊 Current CMP:          ₹39.62 (-11.96% vs Anchor)\n📦 Capital Infused:      ₹35.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Identified Strategic Investors (Non-Promoter Allottees)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/DEVACCE_12082026185604_SE_Monitoring_Agency_Report_Preferential.pdf"
+    },
+    {
+      "symbol": "OPTIEMUS",
+      "company_name": "Optiemus Infracom Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 889.9,
+      "institutional_floor_price": 672.25,
+      "capital_raised_cr": 11.24,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 32.38,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+32.38% High Exhaustion",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/OPTIEMUS_11082026115808_OILOutcomeOfPACMeeting11082026.pdf",
+      "filing_context": "Allotment of Securities Optiemus Infracom Limited has informed the Exchange regarding allotment of 167250 equity shares pursuant to conversion of fully converti",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +32.38% HIGH EXHAUSTION\n\n📌 Optiemus Infracom Limited (NSE: OPTIEMUS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹672.25\n📊 Current CMP:          ₹889.90 (+32.38% vs Anchor)\n📦 Capital Infused:      ₹11.24 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/OPTIEMUS_11082026115808_OILOutcomeOfPACMeeting11082026.pdf"
+    },
+    {
+      "symbol": "POWERINDIA",
+      "company_name": "Hitachi Energy India Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 31640.0,
+      "institutional_floor_price": 11507.0,
+      "capital_raised_cr": 2026.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 174.96,
+      "zone": "OVERBOUGHT",
+      "zone_label": "+174.96% High Exhaustion",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/HitachiEnergy_07082026184820_MA.pdf",
+      "filing_context": "Monitoring Agency Report Regulation 32(6)   Report of Monitoring Agency on the use of proceeds raised through QualifiedInstitutional Placement ( QIP ) for the q",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +174.96% HIGH EXHAUSTION\n\n📌 Hitachi Energy India Limited (NSE: POWERINDIA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹11,507.00\n📊 Current CMP:          ₹31,640.00 (+174.96% vs Anchor)\n📦 Capital Infused:      ₹2,026.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/HitachiEnergy_07082026184820_MA.pdf"
+    },
+    {
+      "symbol": "EIFFL",
+      "company_name": "Euro India Fresh Foods Limited",
+      "deal_type": "Preferential Issue / Warrants",
+      "cmp": 259.5,
+      "institutional_floor_price": 245.0,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 0.0,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": 5.92,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.92% Near Floor",
+      "tier1_backed": false,
+      "allottees": [
+        {
+          "name": "Promoter / Strategic Entities",
+          "tier": "Promoter Group Warrants/Equity"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/EIFFL_07082026183912_NSE_Intimation_allotment_of_convertible_warrants.pdf",
+      "filing_context": "Allotment of Securities Euro India Fresh Foods Limited has informed the Exchange regarding allotment of 1930000 securities pursuant to Preferential Issue at its",
+      "alert_card": "🚨 SMART MONEY ANCHOR | +5.92% NEAR FLOOR\n\n📌 Euro India Fresh Foods Limited (NSE: EIFFL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Anchor Floor Price:   ₹245.00\n📊 Current CMP:          ₹259.50 (+5.92% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      Deal Size Pending\n\n🏦 Verified Allottees:\n- Promoter / Strategic Entities (Promoter Group Warrants/Equity)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/EIFFL_07082026183912_NSE_Intimation_allotment_of_convertible_warrants.pdf"
+    }
+  ]
 }
