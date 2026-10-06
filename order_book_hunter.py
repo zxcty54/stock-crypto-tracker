@@ -19,7 +19,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
-# Non-order sectors jahan order book nahi hota (Inme Sales Turnaround engine chalega)
+# Non-order sectors jahan order book nahi hota
 NON_ORDER_SECTORS = [
     "bank", "financial services", "finance", "nbfc", "housing finance",
     "information technology", "it services", "software", "consulting",
@@ -140,7 +140,6 @@ WATCHLIST_SYMBOLS = [
 ]
 
 def check_insolvency_and_warnings(soup):
-    """IBC, NCLT, CIRP, Resolution Professional aur Red-alert warnings check karta hai."""
     text_blob = soup.get_text().lower()
     red_keywords = [
         "insolvency", "cirp", "nclt", "resolution professional",
@@ -158,7 +157,6 @@ def check_insolvency_and_warnings(soup):
     return False
 
 def get_screener_data(symbol):
-    """Screener se Live MCap, Debt, Sales, EBITDA, Sector aur Documents extract karta hai."""
     url = f"https://www.screener.in/company/{symbol}/consolidated/"
     try:
         res = requests.get(url, headers=HEADERS, timeout=8)
@@ -171,17 +169,14 @@ def get_screener_data(symbol):
 
         soup = BeautifulSoup(res.text, "html.parser")
         
-        # 1. Company Name
         h1 = soup.find("h1")
         name = h1.get_text(strip=True) if h1 else symbol
 
-        # 2. Sector Identification
         sector_text = ""
         crumbs = soup.find("div", class_="breadcrumbs") or soup.find("ul", class_="breadcrumbs")
         if crumbs:
             sector_text = crumbs.get_text(separator=" ", strip=True).lower()
 
-        # 3. Market Cap
         mcap_val = None
         for span in soup.find_all("span", string=re.compile(r"Market Cap", re.I)):
             parent = span.find_parent("li")
@@ -194,7 +189,6 @@ def get_screener_data(symbol):
                         mcap_val = float(m.group(0))
                         break
 
-        # 4. Total Debt (Borrowings Row parsing from Balance Sheet)
         total_debt_cr = 0.0
         bs_section = soup.find("section", id="balance-sheet")
         if bs_section:
@@ -209,7 +203,6 @@ def get_screener_data(symbol):
                             total_debt_cr = float(m.group(0))
                             break
 
-        # Fallback Debt from Top Card Section
         if total_debt_cr == 0.0:
             for span in soup.find_all("span", string=re.compile(r"^\s*Debt\s*$", re.I)):
                 parent = span.find_parent("li")
@@ -222,7 +215,6 @@ def get_screener_data(symbol):
                             total_debt_cr = float(m.group(0))
                             break
 
-        # 5. Rating Document Link
         doc_url = None
         agency_name = "Audited Disclosures"
         for a in soup.find_all("a", href=True):
@@ -233,10 +225,8 @@ def get_screener_data(symbol):
                 agency_name = a.get_text(strip=True)
                 break
 
-        # 6. Annual Sales & Operating Profit
         annual_sales = None
         ebitda_positive = False
-        
         profit_table = soup.find("section", id="profit-loss")
         if profit_table:
             for tr in profit_table.find_all("tr"):
@@ -260,7 +250,6 @@ def get_screener_data(symbol):
                             ebitda_positive = True
                             break
 
-        # 7. Insolvency / CIRP Check
         is_stressed = check_insolvency_and_warnings(soup)
 
         return {
@@ -279,7 +268,6 @@ def get_screener_data(symbol):
         return None
 
 def extract_document_text(doc_url):
-    """PDF / HTML Rating Rationale documents se text extract karta hai."""
     try:
         res = requests.get(doc_url, headers=HEADERS, timeout=12)
         if res.status_code != 200 or len(res.content) < 500:
@@ -289,7 +277,6 @@ def extract_document_text(doc_url):
         if "pdf" in content_type or doc_url.lower().endswith(".pdf") or res.content.startswith(b"%PDF"):
             reader = pypdf.PdfReader(io.BytesIO(res.content))
             pages = []
-            # Extract first 5 pages (covers Key Financials & Rating Rationale)
             for p in reader.pages[:5]:
                 txt = p.extract_text()
                 if txt:
@@ -303,87 +290,108 @@ def extract_document_text(doc_url):
     except Exception:
         return ""
 
-def parse_order_and_debt_metrics_gemini(text):
+def batch_process_gemini(batch_candidates):
     """
-    Rating Rationale text se Gemini 2.5 Flash model ke zariye
-    Order Book aur Total Debt (Borrowings) extract karta hai.
+    3 stocks ke PDF text ko ek saath Gemini AI ko bhejta hai.
+    Returns: Dict of {SYMBOL: {order_book_cr, pdf_debt_cr, timeline_months, thesis}}
     """
-    if not any(k in text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "under-construction", "total debt", "gearing"]):
-        return None
+    if not GEMINI_API_KEY or not batch_candidates:
+        return {}
 
-    if GEMINI_API_KEY:
-        try:
-            prompt = f"""
-You are a senior equity research analyst. Carefully analyze this credit rating rationale document text:
-----------------------------------------
-{text[:5000]}
-----------------------------------------
-Tasks:
-1. Extract "order_book_cr": Float number of unexecuted/pending order book backlog in Crores INR (0.0 if not present).
-2. Extract "total_debt_cr": Float number of Total Debt or Borrowings in Crores INR from Key Financial Indicators or text (0.0 if not present).
-3. Extract "timeline_months": Execution tenure in months (integer, default 24).
-4. Extract "thesis": Crisp 1-line summary stating order visibility and leverage.
+    stocks_text_bundle = ""
+    for item in batch_candidates:
+        stocks_text_bundle += f"\n\n=== STOCK: {item['symbol']} ===\n{item['text'][:3200]}\n"
 
-Return ONLY pure valid JSON in this exact structure without markdown backticks:
-{{"order_book_cr": 0.0, "total_debt_cr": 0.0, "timeline_months": 24, "thesis": ""}}
+    prompt = f"""
+You are a senior equity research analyst. Analyze the following batch of credit rating rationale documents for up to 3 companies.
+For EACH company marked with '=== STOCK: SYMBOL ===', extract:
+1. "order_book_cr": Float unexecuted order backlog in Crores INR (0.0 if not found).
+2. "total_debt_cr": Float Total Debt/Borrowings from 'Key Financial Indicators' table or text in Crores INR (0.0 if not found).
+3. "timeline_months": Execution tenure in months (integer, default 24).
+4. "thesis": 1-line crisp summary highlighting backlog and debt health.
+
+Return a JSON array of objects. Exactly follow this structure:
+[
+  {{
+    "symbol": "SYMBOL",
+    "order_book_cr": 0.0,
+    "total_debt_cr": 0.0,
+    "timeline_months": 24,
+    "thesis": "..."
+  }}
+]
 """
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {
-                    "temperature": 0.1,
-                    "responseMimeType": "application/json"
-                }
-            }
-            # Gemini 2.5 Flash Endpoint
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={GEMINI_API_KEY}"
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=12)
-            
-            if res.status_code == 200:
-                raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                if raw.startswith("```"):
-                    raw = re.sub(r"^```[a-z]*|```$", "", raw).strip()
-                data = json.loads(raw)
-                
-                order_val = float(data.get("order_book_cr", 0.0))
-                debt_val = float(data.get("total_debt_cr", 0.0))
-                
-                if order_val > 0:
-                    return {
-                        "order_book_cr": order_val,
-                        "pdf_debt_cr": debt_val,
-                        "timeline_months": int(data.get("timeline_months", 24)),
-                        "thesis": data.get("thesis", f"Backlog of ₹{order_val:,.1f} Cr verified via credit rating rationale.")
-                    }
-        except Exception as e:
-            print(f"   ⚠️ Gemini extraction fallback: {e}")
 
-    # Fallback Regex Parsing agar Gemini unavailable ho
-    patterns = [
-        r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
-        r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
-    ]
-    for p in patterns:
-        m = re.search(p, text, re.I)
-        if m:
-            val = float(m.group(1).replace(",", ""))
-            return {
-                "order_book_cr": val,
-                "pdf_debt_cr": 0.0,
-                "timeline_months": 24,
-                "thesis": f"Healthy revenue runway backed by order backlog of ₹{val:,.1f} Cr."
-            }
-    return None
+    payload = {
+        "contents": [{"parts": [{"text": prompt + stocks_text_bundle}]}],
+        "generationConfig": {
+            "temperature": 0.1,
+            "responseMimeType": "application/json"
+        }
+    }
+    
+    # Gemini 3.5 Lite endpoint
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-lite:generateContent?key={GEMINI_API_KEY}"
+    
+    try:
+        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=20)
+        
+        # Fallback to flash-lite if specific alias varies
+        if res.status_code == 404:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key={GEMINI_API_KEY}"
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=20)
+
+        if res.status_code == 200:
+            raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+            if raw.startswith("```"):
+                raw = re.sub(r"^```[a-z]*|```$", "", raw).strip()
+            data = json.loads(raw)
+            result = {}
+            for row in data:
+                sym = row.get("symbol", "").upper()
+                result[sym] = {
+                    "order_book_cr": float(row.get("order_book_cr", 0.0)),
+                    "pdf_debt_cr": float(row.get("total_debt_cr", 0.0)),
+                    "timeline_months": int(row.get("timeline_months", 24)),
+                    "thesis": row.get("thesis", "Order backlog verified via AI.")
+                }
+            return result
+    except Exception as e:
+        print(f"   ⚠️ Gemini Batch Error: {e}")
+
+    # Fallback to regex if AI call fails
+    fallback_res = {}
+    for item in batch_candidates:
+        txt = item["text"]
+        pats = [
+            r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
+            r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
+        ]
+        val = 0.0
+        for pat in pats:
+            m = re.search(pat, txt, re.I)
+            if m:
+                val = float(m.group(1).replace(",", ""))
+                break
+        fallback_res[item["symbol"]] = {
+            "order_book_cr": val,
+            "pdf_debt_cr": 0.0,
+            "timeline_months": 24,
+            "thesis": f"Order backlog of ₹{val:,.1f} Cr."
+        }
+    return fallback_res
 
 def run():
     print("=" * 75)
     print(f"🚀 UNIFIED RADAR: SCANNING {len(WATCHLIST_SYMBOLS)} STOCKS")
-    print(f"   🤖 Powered by Gemini Flash + Screener Defense")
-    print(f"   🛡️ Universal Guards: Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x & Insolvency Shield (CIRP/NCLT Blocked)")
+    print(f"   🤖 Batched AI Processing (3 Stocks/Call) with 15s Cooldown")
+    print(f"   🛡️ Universal Guards: Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x & CIRP/NCLT Blocked")
     print("=" * 75)
 
     hidden_gems = []
     all_tracked_orders = []
     turnaround_sales_gems = []
+    order_doc_queue = []
 
     for idx, symbol in enumerate(WATCHLIST_SYMBOLS, 1):
         info = get_screener_data(symbol)
@@ -400,90 +408,105 @@ def run():
         ebitda_ok = info["ebitda_positive"]
         is_stressed = info["is_stressed"]
 
-        # =============================================================
-        # 🚨 UNIVERSAL GUARD 1: INSOLVENCY / NCLT CHECK (All Stocks)
-        # =============================================================
         if is_stressed:
-            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: Under Insolvency / CIRP / Stressed.")
+            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: Under Insolvency / CIRP.")
             continue
 
-        # -------------------------------------------------------------
-        # ENGINE 1: ORDER BOOK & PDF FINANCIAL AUDIT
-        # -------------------------------------------------------------
+        # Check for order-book eligible stocks
         is_non_order_sector = any(bad in sector for bad in NON_ORDER_SECTORS)
-        
         if not is_non_order_sector and doc_url:
             doc_text = extract_document_text(doc_url)
-            metrics = parse_order_and_debt_metrics_gemini(doc_text)
-            
-            if metrics and metrics["order_book_cr"] > 0:
-                order_val = metrics["order_book_cr"]
-                pdf_debt = metrics.get("pdf_debt_cr", 0.0)
-                
-                # Agar Screener par debt 0.0 tha aur PDF table me debt mil gaya, PDF debt use karo
-                if debt == 0.0 and pdf_debt > 0.0:
-                    debt = pdf_debt
-                    print(f"   🔍 AI Debt Recovery from PDF: ₹{debt:,.1f} Cr for {sym}")
-
-                debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
-
-                # Check Debt Guard for Order Gems
-                if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
-                    print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr | {debt_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x)")
-                    continue
-
-                multiple = round(order_val / mcap, 2)
-                print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] 🎯 [ORDER BOOK] {name} ({sym}) | Backlog: ₹{order_val:,.1f} Cr | Debt: ₹{debt:,.1f} Cr ({debt_to_mcap}x) | Multiple: {multiple}x MCap")
-
-                record = {
+            # Local keyword prescreen
+            if any(k in doc_text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "total debt"]):
+                print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] 📥 Queued for AI: {name} ({sym})")
+                order_doc_queue.append({
                     "symbol": sym,
                     "company_name": name,
                     "market_cap_cr": mcap,
                     "total_debt_cr": debt,
-                    "debt_to_mcap": debt_to_mcap,
+                    "doc_url": doc_url,
+                    "text": doc_text
+                })
+
+        # Sales Turnaround Engine (Screener Only)
+        debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
+        if debt_to_mcap <= MAX_DEBT_TO_MCAP_RATIO and sales and sales > mcap and ebitda_ok:
+            sales_multiple = round(sales / mcap, 2)
+            ps_val = round(mcap / sales, 2)
+            turnaround_sales_gems.append({
+                "symbol": sym,
+                "company_name": name,
+                "market_cap_cr": mcap,
+                "total_debt_cr": debt,
+                "debt_to_mcap": debt_to_mcap,
+                "annual_sales_cr": sales,
+                "sales_to_mcap_multiple": sales_multiple,
+                "ps_ratio": ps_val,
+                "catalyst": f"P/S: {ps_val}x + Positive EBITDA + Debt/MCap: {debt_to_mcap}x (Safe)"
+            })
+
+        time.sleep(0.15)
+
+    # =========================================================================
+    # BATCHED GEMINI AI EXECUTION (3 Stocks per API call + 15 sec sleep)
+    # =========================================================================
+    print("\n" + "=" * 75)
+    print(f"⚡ DISPATCHING {len(order_doc_queue)} CANDIDATES TO GEMINI (BATCH SIZE: 3, SLEEP: 15s)")
+    print("=" * 75)
+
+    batch_size = 3
+    for i in range(0, len(order_doc_queue), batch_size):
+        chunk = order_doc_queue[i:i + batch_size]
+        chunk_syms = [item["symbol"] for item in chunk]
+        print(f"\n📦 Processing Batch {i//batch_size + 1}: {chunk_syms}...")
+
+        ai_results = batch_process_gemini(chunk)
+
+        for stock in chunk:
+            s_sym = stock["symbol"]
+            m_cap = stock["market_cap_cr"]
+            debt_val = stock["total_debt_cr"]
+            metrics = ai_results.get(s_sym, {})
+            
+            order_val = metrics.get("order_book_cr", 0.0)
+            pdf_debt = metrics.get("pdf_debt_cr", 0.0)
+
+            # AI Debt Recovery from PDF table
+            if debt_val == 0.0 and pdf_debt > 0.0:
+                debt_val = pdf_debt
+                print(f"   🔍 AI Debt Recovery from PDF for {s_sym}: ₹{debt_val:,.1f} Cr")
+
+            d_to_mcap = round(debt_val / m_cap, 2) if m_cap > 0 else 999.0
+
+            if order_val > 0:
+                if d_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
+                    print(f"   ⛔ Disqualified {s_sym} after AI: Debt/MCap {d_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x")
+                    continue
+
+                multiple = round(order_val / m_cap, 2)
+                record = {
+                    "symbol": s_sym,
+                    "company_name": stock["company_name"],
+                    "market_cap_cr": m_cap,
+                    "total_debt_cr": debt_val,
+                    "debt_to_mcap": d_to_mcap,
                     "pending_order_book_cr": order_val,
                     "order_to_mcap_multiple": multiple,
-                    "execution_timeline_months": metrics["timeline_months"],
-                    "thesis": metrics["thesis"],
-                    "source_doc": doc_url
+                    "execution_timeline_months": metrics.get("timeline_months", 24),
+                    "thesis": metrics.get("thesis", f"Backlog of ₹{order_val:,.1f} Cr."),
+                    "source_doc": stock["doc_url"]
                 }
                 all_tracked_orders.append(record)
                 if multiple >= 1.0:
                     hidden_gems.append(record)
-                    print(f"   🔥 [HIDDEN GEM: ORDER BOOK >= 1.0x] Multiple: {multiple}x!")
-                continue
+                    print(f"   🔥 [HIDDEN GEM] {s_sym}: Backlog ₹{order_val:,.1f} Cr | {multiple}x MCap | Debt: {d_to_mcap}x")
 
-        # -------------------------------------------------------------
-        # ENGINE 2: SALES-TO-MCAP TURNAROUND RADAR
-        # -------------------------------------------------------------
-        debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
-        
-        if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
-            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr)")
-            continue
+        # 15 seconds break between batches
+        if i + batch_size < len(order_doc_queue):
+            print("⏳ 15s rate-limit cooldown before next batch...")
+            time.sleep(15)
 
-        if sales and sales > mcap:  # P/S < 1.0
-            if ebitda_ok:
-                sales_multiple = round(sales / mcap, 2)
-                ps_val = round(mcap / sales, 2)
-                print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] 🚀 [TURNAROUND GEM] {name} ({sym}) | Sales: ₹{sales:,.1f} Cr | Debt: ₹{debt:,.1f} Cr | P/S: {ps_val}x")
-
-                turnaround_entry = {
-                    "symbol": sym,
-                    "company_name": name,
-                    "market_cap_cr": mcap,
-                    "total_debt_cr": debt,
-                    "debt_to_mcap": debt_to_mcap,
-                    "annual_sales_cr": sales,
-                    "sales_to_mcap_multiple": sales_multiple,
-                    "ps_ratio": ps_val,
-                    "catalyst": f"P/S: {ps_val}x + Positive EBITDA + Debt/MCap: {debt_to_mcap}x (Safe)"
-                }
-                turnaround_sales_gems.append(turnaround_entry)
-
-        time.sleep(0.3)
-
-    # Sort results
+    # Sort and dump
     hidden_gems.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
     all_tracked_orders.sort(key=lambda x: x["order_to_mcap_multiple"], reverse=True)
     turnaround_sales_gems.sort(key=lambda x: x["sales_to_mcap_multiple"], reverse=True)
