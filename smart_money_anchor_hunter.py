@@ -8,7 +8,6 @@ OUTPUT_FILE = "smart_money_anchor_report.json"
 
 NSE_HOME = "https://www.nseindia.com"
 NSE_ANNOUNCEMENTS_API = "https://www.nseindia.com/api/corporate-announcements"
-NSE_QUOTE_API = "https://www.nseindia.com/api/quote-equity?symbol="
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -33,16 +32,30 @@ def init_nse_session():
         print(f"Warning session init: {e}")
     return session
 
-def get_live_cmp(session, symbol):
-    """NSE equity quote API se live market price fetch karta hai."""
-    try:
-        url = f"{NSE_QUOTE_API}{requests.utils.quote(symbol)}"
-        res = session.get(url, timeout=6)
-        if res.status_code == 200:
-            data = res.json()
-            return float(data.get("priceInfo", {}).get("lastPrice", 0.0))
-    except Exception:
-        pass
+def fetch_live_cmp(symbol):
+    """Google Finance se real-time market price uthata hai (Zero Datacenter Blocks)."""
+    clean_sym = symbol.replace("&", "%26").strip()
+    urls = [
+        f"https://www.google.com/finance/quote/{clean_sym}:NSE",
+        f"https://www.google.com/finance/quote/{clean_sym}:BOM"
+    ]
+    g_headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    }
+
+    for url in urls:
+        try:
+            r = requests.get(url, headers=g_headers, timeout=5)
+            if r.status_code == 200:
+                match = re.search(r'data-last-price="([\d,]+(?:\.\d+)?)"', r.text)
+                if match:
+                    return float(match.group(1).replace(",", ""))
+                # Alternate regex for Google Finance rendered DOM
+                match2 = re.search(r'class="YMlKec fxKbKc">₹?([\d,]+(?:\.\d+)?)<', r.text)
+                if match2:
+                    return float(match2.group(1).replace(",", ""))
+        except Exception:
+            continue
     return 0.0
 
 def fetch_nse_allotments(days_back=60):
@@ -75,12 +88,12 @@ def fetch_nse_allotments(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
             
-            # Reject cancellations and withdrawals
-            if re.search(r'(?:cancellation|withdrawal|withdrawn|cancelled)', full_text, re.I):
+            # Reject noise, cancellations, and committee meetings
+            if re.search(r'(?:cancellation|withdrawal|withdrawn|cancelled|remuneration|audit committee)', full_text, re.I):
                 continue
 
-            # Must contain allotment / placement / issue keyword
-            if not re.search(r'(?:allotment|qip|preferential|rights\s+issue|issue\s+price)', full_text, re.I):
+            # Target only actual allotments / QIPs / preferential issues
+            if not re.search(r'(?:allotment\s+of|allotment.*shares|qip|preferential.*allotment|rights\s+issue)', full_text, re.I):
                 continue
 
             symbol = item.get("symbol") or ""
@@ -90,7 +103,7 @@ def fetch_nse_allotments(days_back=60):
             company_name = item.get("sm_name") or symbol
             pdf_url = item.get("attchmntFile") or ""
 
-            # Extract Issue Price
+            # Extract Issue Price (e.g. at Rs. 450 per share / price of Rs 65.50)
             price_match = re.search(
                 r'(?:issue\s+price|price\s+of|at\s+a\s+price\s+of|allotment\s+at)\s*(?:of|at|is)?\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)', 
                 full_text, 
@@ -100,12 +113,11 @@ def fetch_nse_allotments(days_back=60):
             if price_match:
                 try:
                     floor_price = float(price_match.group(1).replace(",", ""))
-                    if floor_price <= 0:
+                    if floor_price <= 0.5:
                         continue
 
                     is_tier1 = any(k in full_text.lower() for k in TIER1_KEYWORDS)
                     
-                    # Capital raised extraction
                     size_match = re.search(r'([\d,]+(?:\.\d+)?)\s*(?:cr|crore)', full_text, re.I)
                     size_cr = float(size_match.group(1).replace(",", "")) if size_match else 0.0
 
@@ -123,19 +135,19 @@ def fetch_nse_allotments(days_back=60):
                     continue
 
         processed = []
-        print(f"🔍 Fetching live CMP for {len(raw_candidates)} qualified companies...")
+        print(f"🔍 Fetching reliable market prices for {len(raw_candidates)} qualified tickers...")
 
         for cand in raw_candidates:
             symbol = cand["symbol"]
             floor = cand["floor_price"]
             
-            live_price = get_live_cmp(session, symbol)
-            # Fallback agar quote market closed/delayed ho
-            cmp_val = live_price if live_price > 0 else floor
+            cmp_val = fetch_live_cmp(symbol)
+            if cmp_val <= 0:
+                print(f"⚠️ Quote unavailable for {symbol}, skipping entry.")
+                continue
 
             delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
 
-            # Zone classification
             if delta_pct < 0:
                 zone = "PRIME_DISCOUNT"
                 zone_label = f"{abs(delta_pct)}% Below Smart Money"
@@ -162,7 +174,7 @@ def fetch_nse_allotments(days_back=60):
                 "filing_pdf": cand["pdf_url"],
                 "filing_context": cand["context"]
             })
-            time.sleep(0.3)
+            time.sleep(0.4)
 
         return processed
     except Exception as e:
@@ -171,7 +183,7 @@ def fetch_nse_allotments(days_back=60):
 
 def main():
     print("=" * 60)
-    print("🚀 Running NSE Smart Money Floor Pipeline with Live Quotes...")
+    print("🚀 Running Institutional Floor Anchor Pipeline...")
     print("=" * 60)
 
     prime_setups = []
@@ -204,7 +216,7 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ Generated {OUTPUT_FILE}: {len(prime_setups)} Prime Discounts, {len(buffer_setups)} Buffer entries.")
+    print(f"✅ Finished! Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)} | Total: {len(all_setups)}")
 
 if __name__ == "__main__":
     main()
