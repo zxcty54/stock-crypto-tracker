@@ -8,6 +8,9 @@ from pypdf import PdfReader
 
 OUTPUT_FILE = "smart_money_anchor_report.json"
 
+# Aapka Cloudflare Worker / Google Sheet Endpoint
+LIVE_PRICES_API = "https://stock-models-api.nitesh-skyhigh.workers.dev/"
+
 NSE_HOME = "https://www.nseindia.com"
 NSE_ANNOUNCEMENTS_API = "https://www.nseindia.com/api/corporate-announcements"
 
@@ -16,11 +19,6 @@ NSE_HEADERS = {
     "Accept": "application/json,text/html,*/*",
     "Accept-Language": "en-US,en;q=0.9",
     "Referer": "https://www.nseindia.com/companies-listing/corporate-filings-announcements"
-}
-
-YFIN_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "*/*"
 }
 
 INSTITUTIONAL_DIRECTORY = {
@@ -44,6 +42,12 @@ INSTITUTIONAL_DIRECTORY = {
     ]
 }
 
+# Known alias mapper
+SYMBOL_ALIASES = {
+    "PIRAMALFIN": "PEL",
+    "PIRAMALCAP": "PEL"
+}
+
 def init_nse_session():
     session = requests.Session()
     session.headers.update(NSE_HEADERS)
@@ -54,47 +58,32 @@ def init_nse_session():
         print(f"⚠️ Warning Session Init: {e}")
     return session
 
-def fetch_financial_metrics_resilient(symbol, session=None):
-    """Yahoo Finance V7 Quote API se live CMP aur accurate Market Cap (in Cr) fetch karta hai."""
-    clean_sym = symbol.replace("&", "%26").strip()
-    candidates = [f"{clean_sym}.NS", f"{clean_sym}.BO"]
-
-    # 1. Primary: Yahoo Finance V7 Quote Endpoint (Market Cap + Price)
-    for ticker in candidates:
-        url = f"https://query1.finance.yahoo.com/v7/finance/quote?symbols={ticker}"
-        try:
-            res = requests.get(url, headers=YFIN_HEADERS, timeout=6)
-            if res.status_code == 200:
-                data = res.json()
-                results = data.get("quoteResponse", {}).get("result", [])
-                if results:
-                    quote = results[0]
-                    cmp_val = quote.get("regularMarketPrice", 0.0)
-                    mcap_raw = quote.get("marketCap", 0)
-
-                    mcap_cr = round(float(mcap_raw) / 10000000.0, 2) if mcap_raw else 0.0
-                    if cmp_val and float(cmp_val) > 0:
-                        return round(float(cmp_val), 2), mcap_cr
-        except Exception:
-            continue
-
-    # 2. Secondary Fallback: Yahoo Finance Chart Module
-    for ticker in candidates:
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
-        try:
-            res = requests.get(url, headers=YFIN_HEADERS, timeout=6)
-            if res.status_code == 200:
-                data = res.json()
-                meta = data.get("chart", {}).get("result", [{}])[0].get("meta", {})
-                price = meta.get("regularMarketPrice") or meta.get("chartPreviousClose", 0.0)
-                mcap_raw = meta.get("marketCap", 0)
-                mcap_cr = round(float(mcap_raw) / 10000000.0, 2) if mcap_raw else 0.0
-                if price and float(price) > 0:
-                    return round(float(price), 2), mcap_cr
-        except Exception:
-            continue
-
-    return 0.0, 0.0
+def load_live_market_data():
+    """Aapke API endpoint se poore stocks ka data load karke symbol-indexed dict banata hai."""
+    print("📡 Loading Live CMP & MCap from your Worker API...")
+    market_db = {}
+    try:
+        res = requests.get(LIVE_PRICES_API, timeout=12)
+        if res.status_code == 200:
+            stock_list = res.json()
+            for item in stock_list:
+                sym = str(item.get("Symbol", "")).strip().upper()
+                if sym:
+                    cmp_val = float(item.get("CMP") or 0.0)
+                    mcap_raw = float(item.get("MCap") or 0.0)
+                    # Convert raw Rupees to Crores
+                    mcap_cr = round(mcap_raw / 10000000.0, 2) if mcap_raw > 0 else 0.0
+                    
+                    market_db[sym] = {
+                        "cmp": cmp_val,
+                        "mcap_cr": mcap_cr
+                    }
+            print(f"✅ Loaded {len(market_db)} live stocks into memory cache.")
+        else:
+            print(f"❌ Failed to fetch from worker API. Status: {res.status_code}")
+    except Exception as e:
+        print(f"⚠️ Worker API Error: {e}")
+    return market_db
 
 def download_and_parse_pdf(pdf_url, session):
     if not pdf_url or not pdf_url.endswith(".pdf"):
@@ -156,7 +145,7 @@ def build_alert_card(entry):
     if entry['market_cap_cr'] > 0 and entry['deal_size_pct_mcap'] > 0:
         dilution_str = f"~{entry['deal_size_pct_mcap']}% Dilution (MCap: ₹{entry['market_cap_cr']:,.0f} Cr)"
     elif entry['market_cap_cr'] > 0:
-        dilution_str = f"MCap: ₹{entry['market_cap_cr']:,.0f} Cr (Deal Size Pending)"
+        dilution_str = f"MCap: ₹{entry['market_cap_cr']:,.0f} Cr"
     else:
         dilution_str = "Deal Size Pending"
 
@@ -174,7 +163,7 @@ def build_alert_card(entry):
     )
     return card
 
-def fetch_institutional_anchors(days_back=60):
+def fetch_institutional_anchors(market_db, days_back=60):
     session = init_nse_session()
 
     to_date = datetime.now().strftime("%d-%m-%Y")
@@ -205,12 +194,12 @@ def fetch_institutional_anchors(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
 
-            # Strict negative filter: drop dividends, acquisitions, warrants, rights
+            # Strict elimination of non-dilutive / retail noise
             blacklist = r'(?:dividend|acquisition of|in the units of|rights\s+issue|esop|sweat\s+equity|bonus|warrant|debt\s+conversion|loan\s+conversion|remuneration|resignation|loss of share)'
             if re.search(blacklist, full_text, re.I):
                 continue
 
-            # QIP or Preferential Equity Allotment
+            # Must be QIP or Preferential Equity Allotment
             is_qip = bool(re.search(r'\bqip\b|qualified\s+institutions\s+placement', full_text, re.I))
             is_pref = bool(re.search(r'preferential\s+(?:allotment|issue).*(?:equity\s+shares)', full_text, re.I)) or \
                       bool(re.search(r'allotment\s+of\s+[\d,]+\s+equity\s+shares', full_text, re.I))
@@ -220,14 +209,13 @@ def fetch_institutional_anchors(days_back=60):
 
             deal_type = "QIP (Institutions Only)" if is_qip else "Preferential Equity Allotment"
 
-            symbol = item.get("symbol") or ""
+            symbol = str(item.get("symbol") or "").strip().upper()
             if not symbol or symbol in seen_symbols:
                 continue
 
             company_name = item.get("sm_name") or symbol
             pdf_url = item.get("attchmntFile") or ""
 
-            # Extract Issue Price
             price_match = re.search(
                 r'(?:issue\s+price|price\s+of|allotment\s+price)\s*(?:of|is|at)?\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)',
                 full_text,
@@ -241,7 +229,6 @@ def fetch_institutional_anchors(days_back=60):
                 try:
                     floor_price = float(price_match.group(1).replace(",", ""))
 
-                    # PDF Parsing for Allottees & Capital Infusion
                     allottees = extract_allottees(full_text)
                     deal_size_cr = extract_deal_size_cr(full_text, shares_count, floor_price)
 
@@ -267,16 +254,25 @@ def fetch_institutional_anchors(days_back=60):
                     continue
 
         processed = []
-        print(f"\n🔍 Screening {len(raw_candidates)} candidate filings with price sanity checks...")
+        print(f"\n🔍 Screening {len(raw_candidates)} candidate filings against Live API DB...")
 
         for cand in raw_candidates:
             symbol = cand["symbol"]
             floor = cand["floor_price"]
 
-            cmp_val, mcap_cr = fetch_financial_metrics_resilient(symbol, session)
+            # Lookup in your loaded memory DB (also checks alias)
+            lookup_sym = SYMBOL_ALIASES.get(symbol, symbol)
+            stock_data = market_db.get(lookup_sym) or market_db.get(symbol)
+
+            if not stock_data:
+                print(f"❌ Dropped {symbol}: Not present in Live DB")
+                continue
+
+            cmp_val = stock_data["cmp"]
+            mcap_cr = stock_data["mcap_cr"]
 
             if cmp_val <= 0:
-                print(f"❌ Dropped {symbol}: Price fetch failed")
+                print(f"❌ Dropped {symbol}: Invalid CMP")
                 continue
 
             if cmp_val < 15.0:
@@ -285,7 +281,7 @@ def fetch_institutional_anchors(days_back=60):
 
             delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
 
-            # OCR / Regex Anomaly Filter (-40% to +60%)
+            # Sanity bound: regex OCR glitches reject karna (-40% to +60%)
             if delta_pct < -40.0 or delta_pct > 60.0:
                 print(f"🚫 Dropped OCR Error on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} (Delta: {delta_pct}%)")
                 continue
@@ -323,9 +319,8 @@ def fetch_institutional_anchors(days_back=60):
             }
 
             entry["alert_card"] = build_alert_card(entry)
-            print(f"✨ Signal Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | MCap: ₹{mcap_cr} Cr | Zone: {zone}")
+            print(f"✨ Signal Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | MCap: ₹{mcap_cr:,.0f} Cr | Zone: {zone}")
             processed.append(entry)
-            time.sleep(0.3)
 
         return processed
     except Exception as e:
@@ -337,15 +332,14 @@ def main():
     print("💎 EXECUTING RESILIENT FRESH CAPITAL ANCHOR ENGINE")
     print("=" * 65)
 
-    prime_setups = []
-    buffer_setups = []
-    all_setups = fetch_institutional_anchors(days_back=60)
+    # 1. Load Live Database from Cloudflare Worker once
+    market_db = load_live_market_data()
 
-    for item in all_setups:
-        if item["zone"] == "PRIME_DISCOUNT":
-            prime_setups.append(item)
-        elif item["zone"] == "ACCUMULATION_BUFFER":
-            buffer_setups.append(item)
+    # 2. Fetch and evaluate against NSE filings
+    all_setups = fetch_institutional_anchors(market_db, days_back=60)
+
+    prime_setups = [item for item in all_setups if item["zone"] == "PRIME_DISCOUNT"]
+    buffer_setups = [item for item in all_setups if item["zone"] == "ACCUMULATION_BUFFER"]
 
     prime_setups.sort(key=lambda x: x["delta_to_floor_pct"])
     buffer_setups.sort(key=lambda x: x["delta_to_floor_pct"])
