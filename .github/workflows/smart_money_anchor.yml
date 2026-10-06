@@ -1,20 +1,19 @@
-name: "BSE Smart Money Anchor and Floor Pipeline"
+name: BSE Smart Money Anchor and Floor Pipeline
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'
+    - cron: "0 13 * * 1-5"
   workflow_dispatch:
 
 concurrency:
   group: anchor-pipeline
   cancel-in-progress: true
 
-permissions:
-  contents: write
-
 jobs:
   run-anchor-hunter:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -23,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install Dependencies
         run: |
