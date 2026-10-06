@@ -19,7 +19,8 @@ NSE_HEADERS = {
 }
 
 YFIN_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "*/*"
 }
 
 INSTITUTIONAL_DIRECTORY = {
@@ -53,36 +54,35 @@ def init_nse_session():
         print(f"⚠️ Warning Session Init: {e}")
     return session
 
-def fetch_financial_metrics_resilient(symbol, session):
-    """Pehle NSE live API hit karta hai, cookie/session drop hone par Yahoo Finance backup use karta hai."""
+def fetch_financial_metrics_resilient(symbol, session=None):
+    """Yahoo Finance V7 Quote API se live CMP aur accurate Market Cap (in Cr) fetch karta hai."""
     clean_sym = symbol.replace("&", "%26").strip()
-    
-    # 1. Primary: NSE Live Quote
-    url_nse = f"https://www.nseindia.com/api/quote-equity?symbol={clean_sym}"
-    try:
-        res = session.get(url_nse, timeout=6)
-        if res.status_code == 200:
-            data = res.json()
-            price_info = data.get("priceInfo", {})
-            security_info = data.get("securityInfo", {})
-            cmp_val = price_info.get("lastPrice", 0.0)
-            issued_shares = security_info.get("issuedSize", 0)
-
-            mcap_cr = 0.0
-            if cmp_val and issued_shares:
-                mcap_cr = round((float(cmp_val) * float(issued_shares)) / 10000000.0, 2)
-
-            if cmp_val and float(cmp_val) > 0:
-                return float(cmp_val), mcap_cr
-    except Exception:
-        pass
-
-    # 2. Resilient Fallback: Yahoo Finance Chart Endpoint
     candidates = [f"{clean_sym}.NS", f"{clean_sym}.BO"]
+
+    # 1. Primary: Yahoo Finance V7 Quote Endpoint (Market Cap + Price)
     for ticker in candidates:
-        url_yf = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
+        url = f"https://query1.finance.yahoo.com/v7/finance/quote?symbols={ticker}"
         try:
-            res = requests.get(url_yf, headers=YFIN_HEADERS, timeout=6)
+            res = requests.get(url, headers=YFIN_HEADERS, timeout=6)
+            if res.status_code == 200:
+                data = res.json()
+                results = data.get("quoteResponse", {}).get("result", [])
+                if results:
+                    quote = results[0]
+                    cmp_val = quote.get("regularMarketPrice", 0.0)
+                    mcap_raw = quote.get("marketCap", 0)
+
+                    mcap_cr = round(float(mcap_raw) / 10000000.0, 2) if mcap_raw else 0.0
+                    if cmp_val and float(cmp_val) > 0:
+                        return round(float(cmp_val), 2), mcap_cr
+        except Exception:
+            continue
+
+    # 2. Secondary Fallback: Yahoo Finance Chart Module
+    for ticker in candidates:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
+        try:
+            res = requests.get(url, headers=YFIN_HEADERS, timeout=6)
             if res.status_code == 200:
                 data = res.json()
                 meta = data.get("chart", {}).get("result", [{}])[0].get("meta", {})
@@ -152,7 +152,13 @@ def extract_deal_size_cr(text, shares_count=0, floor_price=0.0):
 
 def build_alert_card(entry):
     allottees_str = "\n".join([f"- {a['name']} ({a['tier']})" for a in entry['allottees']]) if entry['allottees'] else "- Qualified Institutional Buyers (QIB)"
-    dilution_str = f"~{entry['deal_size_pct_mcap']}% Dilution" if entry['deal_size_pct_mcap'] > 0 else "Deal Size Pending"
+    
+    if entry['market_cap_cr'] > 0 and entry['deal_size_pct_mcap'] > 0:
+        dilution_str = f"~{entry['deal_size_pct_mcap']}% Dilution (MCap: ₹{entry['market_cap_cr']:,.0f} Cr)"
+    elif entry['market_cap_cr'] > 0:
+        dilution_str = f"MCap: ₹{entry['market_cap_cr']:,.0f} Cr (Deal Size Pending)"
+    else:
+        dilution_str = "Deal Size Pending"
 
     card = (
         f"🚨 FRESH CAPITAL RADAR | {entry['zone_label'].upper()}\n\n"
@@ -199,12 +205,12 @@ def fetch_institutional_anchors(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
 
-            # Strict elimination of non-equity dilution events
+            # Strict negative filter: drop dividends, acquisitions, warrants, rights
             blacklist = r'(?:dividend|acquisition of|in the units of|rights\s+issue|esop|sweat\s+equity|bonus|warrant|debt\s+conversion|loan\s+conversion|remuneration|resignation|loss of share)'
             if re.search(blacklist, full_text, re.I):
                 continue
 
-            # Must be QIP or Preferential Equity Allotment
+            # QIP or Preferential Equity Allotment
             is_qip = bool(re.search(r'\bqip\b|qualified\s+institutions\s+placement', full_text, re.I))
             is_pref = bool(re.search(r'preferential\s+(?:allotment|issue).*(?:equity\s+shares)', full_text, re.I)) or \
                       bool(re.search(r'allotment\s+of\s+[\d,]+\s+equity\s+shares', full_text, re.I))
@@ -235,7 +241,7 @@ def fetch_institutional_anchors(days_back=60):
                 try:
                     floor_price = float(price_match.group(1).replace(",", ""))
 
-                    # PDF Parsing for Allottees & Issue Size
+                    # PDF Parsing for Allottees & Capital Infusion
                     allottees = extract_allottees(full_text)
                     deal_size_cr = extract_deal_size_cr(full_text, shares_count, floor_price)
 
@@ -269,9 +275,8 @@ def fetch_institutional_anchors(days_back=60):
 
             cmp_val, mcap_cr = fetch_financial_metrics_resilient(symbol, session)
 
-            # Debugging Reasons
             if cmp_val <= 0:
-                print(f"❌ Dropped {symbol}: Price fetch failed (NSE & Yahoo unavailable)")
+                print(f"❌ Dropped {symbol}: Price fetch failed")
                 continue
 
             if cmp_val < 15.0:
@@ -280,7 +285,7 @@ def fetch_institutional_anchors(days_back=60):
 
             delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
 
-            # Sanity bound: regex OCR glitches reject karna (-40% to +60%)
+            # OCR / Regex Anomaly Filter (-40% to +60%)
             if delta_pct < -40.0 or delta_pct > 60.0:
                 print(f"🚫 Dropped OCR Error on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} (Delta: {delta_pct}%)")
                 continue
@@ -318,7 +323,7 @@ def fetch_institutional_anchors(days_back=60):
             }
 
             entry["alert_card"] = build_alert_card(entry)
-            print(f"✨ Signal Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | Zone: {zone}")
+            print(f"✨ Signal Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | MCap: ₹{mcap_cr} Cr | Zone: {zone}")
             processed.append(entry)
             time.sleep(0.3)
 
