@@ -223,4 +223,142 @@ def fetch_institutional_anchors(days_back=60):
 
             # Extract Issue Price
             price_match = re.search(
-                r'(?:issue\s+price|price\s+of|allotment\s+price)\s*(?:of|is|at)?\s*(?:rs\.?|inr)?
+                r'(?:issue\s+price|price\s+of|allotment\s+price)\s*(?:of|is|at)?\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)',
+                full_text,
+                re.I
+            )
+
+            shares_match = re.search(r'([\d,]+)\s*(?:equity\s+shares)', full_text, re.I)
+            shares_count = int(shares_match.group(1).replace(",", "")) if shares_match else 0
+
+            if price_match:
+                try:
+                    floor_price = float(price_match.group(1).replace(",", ""))
+
+                    # PDF Parsing for Allottees & Issue Size
+                    allottees = extract_allottees(full_text)
+                    deal_size_cr = extract_deal_size_cr(full_text, shares_count, floor_price)
+
+                    if not allottees and pdf_url:
+                        pdf_content = download_and_parse_pdf(pdf_url, session)
+                        if pdf_content:
+                            allottees = extract_allottees(pdf_content)
+                            if deal_size_cr == 0.0:
+                                deal_size_cr = extract_deal_size_cr(pdf_content, shares_count, floor_price)
+
+                    raw_candidates.append({
+                        "symbol": symbol,
+                        "company_name": company_name,
+                        "deal_type": deal_type,
+                        "floor_price": floor_price,
+                        "capital_raised_cr": deal_size_cr,
+                        "allottees": allottees,
+                        "pdf_url": pdf_url,
+                        "context": full_text[:160]
+                    })
+                    seen_symbols.add(symbol)
+                except ValueError:
+                    continue
+
+        processed = []
+        print(f"\n🔍 Screening {len(raw_candidates)} candidate filings with price sanity checks...")
+
+        for cand in raw_candidates:
+            symbol = cand["symbol"]
+            floor = cand["floor_price"]
+
+            cmp_val, mcap_cr = fetch_financial_metrics_resilient(symbol, session)
+
+            # Debugging Reasons
+            if cmp_val <= 0:
+                print(f"❌ Dropped {symbol}: Price fetch failed (NSE & Yahoo unavailable)")
+                continue
+
+            if cmp_val < 15.0:
+                print(f"❌ Dropped {symbol}: CMP ₹{cmp_val} is below penny cutoff (₹15.0)")
+                continue
+
+            delta_pct = round(((cmp_val - floor) / floor) * 100, 2)
+
+            # Sanity bound: regex OCR glitches reject karna (-40% to +60%)
+            if delta_pct < -40.0 or delta_pct > 60.0:
+                print(f"🚫 Dropped OCR Error on {symbol}: Floor ₹{floor} vs CMP ₹{cmp_val} (Delta: {delta_pct}%)")
+                continue
+
+            deal_pct_of_mcap = round((cand["capital_raised_cr"] / mcap_cr * 100), 2) if mcap_cr > 0 else 0.0
+            has_tier1 = len(cand["allottees"]) > 0
+
+            # Classification
+            if delta_pct < 0:
+                zone = "PRIME_DISCOUNT"
+                zone_label = f"{abs(delta_pct)}% Below Anchor"
+            elif delta_pct <= 6.0:
+                zone = "ACCUMULATION_BUFFER"
+                zone_label = f"+{delta_pct}% Near Floor"
+            else:
+                zone = "EXTENDED"
+                zone_label = f"+{delta_pct}% Extended"
+
+            entry = {
+                "symbol": symbol,
+                "company_name": cand["company_name"],
+                "deal_type": cand["deal_type"],
+                "cmp": cmp_val,
+                "institutional_floor_price": floor,
+                "capital_raised_cr": cand["capital_raised_cr"],
+                "market_cap_cr": mcap_cr,
+                "deal_size_pct_mcap": deal_pct_of_mcap,
+                "delta_to_floor_pct": delta_pct,
+                "zone": zone,
+                "zone_label": zone_label,
+                "tier1_backed": has_tier1,
+                "allottees": cand["allottees"],
+                "filing_pdf": cand["pdf_url"],
+                "filing_context": cand["context"]
+            }
+
+            entry["alert_card"] = build_alert_card(entry)
+            print(f"✨ Signal Verified: {symbol} | Floor: ₹{floor} | CMP: ₹{cmp_val} | Zone: {zone}")
+            processed.append(entry)
+            time.sleep(0.3)
+
+        return processed
+    except Exception as e:
+        print(f"Execution Pipeline Error: {e}")
+        return []
+
+def main():
+    print("=" * 65)
+    print("💎 EXECUTING RESILIENT FRESH CAPITAL ANCHOR ENGINE")
+    print("=" * 65)
+
+    prime_setups = []
+    buffer_setups = []
+    all_setups = fetch_institutional_anchors(days_back=60)
+
+    for item in all_setups:
+        if item["zone"] == "PRIME_DISCOUNT":
+            prime_setups.append(item)
+        elif item["zone"] == "ACCUMULATION_BUFFER":
+            buffer_setups.append(item)
+
+    prime_setups.sort(key=lambda x: x["delta_to_floor_pct"])
+    buffer_setups.sort(key=lambda x: x["delta_to_floor_pct"])
+
+    report = {
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
+        "total_anchors_discovered": len(all_setups),
+        "prime_discount_opportunities": len(prime_setups),
+        "buffer_safe_entries": len(buffer_setups),
+        "prime_setups": prime_setups,
+        "buffer_setups": buffer_setups,
+        "all_setups": all_setups
+    }
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+
+    print(f"\n🏆 Completed! Verified Anchors: {len(all_setups)} | Prime Discounts: {len(prime_setups)} | Buffer Setups: {len(buffer_setups)}")
+
+if __name__ == "__main__":
+    main()
