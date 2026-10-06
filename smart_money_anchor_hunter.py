@@ -94,10 +94,6 @@ def fetch_financial_metrics(symbol):
     return 0.0, 0.0
 
 def deep_scan_pdf(pdf_url, session):
-    """
-    BSE/NSE PDF circular ko RAM me load karke text, issue price,
-    aur allottee tables/categories deeply scan karta hai.
-    """
     if not pdf_url or not pdf_url.endswith(".pdf"):
         return "", None, []
 
@@ -119,7 +115,6 @@ def deep_scan_pdf(pdf_url, session):
         if not full_text.strip():
             return "", None, []
 
-        # 1. Regex hunt for Price inside PDF
         price_patterns = [
             r'(?:issue\s+price|allotment\s+price|price\s+of|allotted\s+at)\s*(?:of|at|is)?\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)',
             r'(?:at\s+a\s+price\s+of\s+rs\.?)\s*([\d,]+(?:\.\d+)?)',
@@ -140,7 +135,6 @@ def deep_scan_pdf(pdf_url, session):
             if discovered_price:
                 break
 
-        # 2. Extract Allottees & Identify Promoter vs QIB
         discovered_allottees = extract_allottees(full_text)
         
         if not discovered_allottees:
@@ -247,7 +241,6 @@ def fetch_institutional_anchors(days_back=60):
             att_text = item.get("attchmntText") or ""
             full_text = f"{subject} {att_text}"
             
-            # Filter non-equity / retail-only operations
             if re.search(r'(?:esop|sweat\s+equity|bonus\s+shares|debt\s+conversion|loan\s+conversion|remuneration|audit\s+committee|cancellation|withdrawn)', full_text, re.I):
                 continue
 
@@ -272,8 +265,13 @@ def fetch_institutional_anchors(days_back=60):
                 re.I
             )
 
+            # Safe shares extraction: guard against empty strings and non-digits
             shares_match = re.search(r'([\d,]+)\s*(?:equity\s+shares|shares|warrants)', full_text, re.I)
-            shares_count = int(shares_match.group(1).replace(",", "")) if shares_match else 0
+            shares_count = 0
+            if shares_match:
+                cleaned_shares = shares_match.group(1).replace(",", "").strip()
+                if cleaned_shares.isdigit():
+                    shares_count = int(cleaned_shares)
 
             floor_price = None
             if price_match:
@@ -285,7 +283,6 @@ def fetch_institutional_anchors(days_back=60):
             allottees = extract_allottees(full_text)
             deal_size_cr = extract_deal_size_cr(full_text, shares_count, floor_price or 0.0)
 
-            # Deep Scan PDF fallback if price or allottees missing in snippet
             if (not floor_price or not allottees) and pdf_url:
                 pdf_text, pdf_price, pdf_allottees = deep_scan_pdf(pdf_url, session)
                 if not floor_price and pdf_price:
