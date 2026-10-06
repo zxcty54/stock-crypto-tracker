@@ -1,59 +1,360 @@
 {
-  "last_updated": "2026-10-06 04:54:09 IST",
-  "filter_criteria": {
-    "source_universe": "Nifty Smallcap 250 Index (Embedded)",
-    "max_mcap_cr": 15000.0,
-    "min_order_multiple": 0.8
-  },
-  "total_hidden_gems_found": 3,
-  "gems": [
+  "last_updated": "2026-10-06 06:29:36 IST",
+  "total_scanned": 1399,
+  "total_companies_with_order_book": 23,
+  "total_hidden_gems_multiple_gt_1": 12,
+  "hidden_gems": [
+    {
+      "symbol": "TERASOFT",
+      "company_name": "Tera Software Ltd",
+      "market_cap_cr": 302.0,
+      "pending_order_book_cr": 3841.14,
+      "order_to_mcap_multiple": 12.72,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹3,841.1 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR_Tera_Software16Feb26.pdf"
+    },
     {
       "symbol": "CAPACITE",
-      "company_name": "Capacite Infraprojects Ltd.",
-      "sector": "Construction",
-      "market_cap_cr": 1526.0,
-      "unexecuted_order_book_cr": 13188.1,
-      "order_to_mcap_multiple": 8.64,
+      "company_name": "Capacite Infraprojects Ltd",
+      "market_cap_cr": 1548.0,
+      "pending_order_book_cr": 13188.1,
+      "order_to_mcap_multiple": 8.52,
       "execution_timeline_months": 24,
       "thesis": "Healthy revenue runway backed by order backlog of ₹13,188.1 Cr.",
-      "source_verification": {
-        "source_name": "Rating update19 May from infomerics",
-        "document_url": "https://www.infomerics.com/admin/uploads/pr-capacite-infraprojects-19may26.pdf",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-capacite-infraprojects-19may26.pdf"
     },
     {
-      "symbol": "PATELENG",
-      "company_name": "Patel Engineering Ltd.",
-      "sector": "Construction",
-      "market_cap_cr": 2584.0,
-      "unexecuted_order_book_cr": 15119.3,
-      "order_to_mcap_multiple": 5.85,
+      "symbol": "NIRAJ",
+      "company_name": "Niraj Cement Structurals Ltd",
+      "market_cap_cr": 171.0,
+      "pending_order_book_cr": 1383.0,
+      "order_to_mcap_multiple": 8.09,
       "execution_timeline_months": 24,
-      "thesis": "Healthy revenue runway backed by order backlog of ₹15,119.3 Cr.",
-      "source_verification": {
-        "source_name": "Rating update5 Jun from infomerics",
-        "document_url": "https://www.infomerics.com/admin/uploads/Pr-Patel-Engineering05Jun26.pdf",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,383.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-nirajcement-10june26.pdf"
     },
     {
-      "symbol": "IRCON",
-      "company_name": "Ircon International Ltd.",
-      "sector": "Construction",
-      "market_cap_cr": 10205.0,
-      "unexecuted_order_book_cr": 23801.0,
+      "symbol": "GENCON",
+      "company_name": "Generic Engineering Construction & Projects Ltd",
+      "market_cap_cr": 217.0,
+      "pending_order_book_cr": 1351.48,
+      "order_to_mcap_multiple": 6.23,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,351.5 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-generic-engineering-5feb26.pdf"
+    },
+    {
+      "symbol": "GLOBECIVIL",
+      "company_name": "Globe Civil Projects Ltd",
+      "market_cap_cr": 250.0,
+      "pending_order_book_cr": 870.0,
+      "order_to_mcap_multiple": 3.48,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹870.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR-Globe-Civil-Projects08April26.pdf"
+    },
+    {
+      "symbol": "BCPL",
+      "company_name": "BCPL Railway Infrastructure Ltd",
+      "market_cap_cr": 113.0,
+      "pending_order_book_cr": 296.0,
+      "order_to_mcap_multiple": 2.62,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹296.0 Cr.",
+      "source_doc": "https://www.acuite.in/documents/ratings/revised/14007-RR-20251202.pdf"
+    },
+    {
+      "symbol": "HCC",
+      "company_name": "Hindustan Construction Company Ltd",
+      "market_cap_cr": 5323.0,
+      "pending_order_book_cr": 12971.32,
+      "order_to_mcap_multiple": 2.44,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹12,971.3 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-hindustan-construction-30june26.pdf"
+    },
+    {
+      "symbol": "SWSOLAR",
+      "company_name": "Sterling & Wilson Renewable Energy Ltd",
+      "market_cap_cr": 3984.0,
+      "pending_order_book_cr": 9286.59,
       "order_to_mcap_multiple": 2.33,
       "execution_timeline_months": 24,
-      "thesis": "Healthy revenue runway backed by order backlog of ₹23,801.0 Cr.",
-      "source_verification": {
-        "source_name": "Rating update24 Mar from infomerics",
-        "document_url": "https://www.infomerics.com/admin/uploads/pr-IRCON-24mar26.pdf",
-        "as_on_date": "Oct 2026",
-        "is_audited_regulatory": true
-      }
+      "thesis": "Healthy revenue runway backed by order backlog of ₹9,286.6 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR-SterlingandWilson-Renewable-Energy27April26.pdf"
+    },
+    {
+      "symbol": "STLNETWORK",
+      "company_name": "STL Networks Ltd",
+      "market_cap_cr": 2301.0,
+      "pending_order_book_cr": 5003.0,
+      "order_to_mcap_multiple": 2.17,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹5,003.0 Cr.",
+      "source_doc": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ba382f5d-249f-4477-9784-7259385b2f7b.pdf"
+    },
+    {
+      "symbol": "ATALREAL",
+      "company_name": "Atal Realtech Ltd",
+      "market_cap_cr": 152.0,
+      "pending_order_book_cr": 328.0,
+      "order_to_mcap_multiple": 2.16,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹328.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-atal-realtech-15sep25.pdf"
+    },
+    {
+      "symbol": "HAZOOR",
+      "company_name": "Hazoor Multi Projects Ltd",
+      "market_cap_cr": 481.0,
+      "pending_order_book_cr": 1012.0,
+      "order_to_mcap_multiple": 2.1,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,012.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/HAZOOR_MULTI_PROJECTS_LIMITED/31st_Mar_26"
+    },
+    {
+      "symbol": "KNRCON",
+      "company_name": "KNR Constructions Ltd",
+      "market_cap_cr": 3227.0,
+      "pending_order_book_cr": 5052.0,
+      "order_to_mcap_multiple": 1.57,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹5,052.0 Cr.",
+      "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/KNRConstructionsLimited_August 03_ 2026_RR_400775.html"
+    }
+  ],
+  "all_tracked_orders": [
+    {
+      "symbol": "TERASOFT",
+      "company_name": "Tera Software Ltd",
+      "market_cap_cr": 302.0,
+      "pending_order_book_cr": 3841.14,
+      "order_to_mcap_multiple": 12.72,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹3,841.1 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR_Tera_Software16Feb26.pdf"
+    },
+    {
+      "symbol": "CAPACITE",
+      "company_name": "Capacite Infraprojects Ltd",
+      "market_cap_cr": 1548.0,
+      "pending_order_book_cr": 13188.1,
+      "order_to_mcap_multiple": 8.52,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹13,188.1 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-capacite-infraprojects-19may26.pdf"
+    },
+    {
+      "symbol": "NIRAJ",
+      "company_name": "Niraj Cement Structurals Ltd",
+      "market_cap_cr": 171.0,
+      "pending_order_book_cr": 1383.0,
+      "order_to_mcap_multiple": 8.09,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,383.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-nirajcement-10june26.pdf"
+    },
+    {
+      "symbol": "GENCON",
+      "company_name": "Generic Engineering Construction & Projects Ltd",
+      "market_cap_cr": 217.0,
+      "pending_order_book_cr": 1351.48,
+      "order_to_mcap_multiple": 6.23,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,351.5 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-generic-engineering-5feb26.pdf"
+    },
+    {
+      "symbol": "GLOBECIVIL",
+      "company_name": "Globe Civil Projects Ltd",
+      "market_cap_cr": 250.0,
+      "pending_order_book_cr": 870.0,
+      "order_to_mcap_multiple": 3.48,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹870.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR-Globe-Civil-Projects08April26.pdf"
+    },
+    {
+      "symbol": "BCPL",
+      "company_name": "BCPL Railway Infrastructure Ltd",
+      "market_cap_cr": 113.0,
+      "pending_order_book_cr": 296.0,
+      "order_to_mcap_multiple": 2.62,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹296.0 Cr.",
+      "source_doc": "https://www.acuite.in/documents/ratings/revised/14007-RR-20251202.pdf"
+    },
+    {
+      "symbol": "HCC",
+      "company_name": "Hindustan Construction Company Ltd",
+      "market_cap_cr": 5323.0,
+      "pending_order_book_cr": 12971.32,
+      "order_to_mcap_multiple": 2.44,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹12,971.3 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-hindustan-construction-30june26.pdf"
+    },
+    {
+      "symbol": "SWSOLAR",
+      "company_name": "Sterling & Wilson Renewable Energy Ltd",
+      "market_cap_cr": 3984.0,
+      "pending_order_book_cr": 9286.59,
+      "order_to_mcap_multiple": 2.33,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹9,286.6 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/PR-SterlingandWilson-Renewable-Energy27April26.pdf"
+    },
+    {
+      "symbol": "STLNETWORK",
+      "company_name": "STL Networks Ltd",
+      "market_cap_cr": 2301.0,
+      "pending_order_book_cr": 5003.0,
+      "order_to_mcap_multiple": 2.17,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹5,003.0 Cr.",
+      "source_doc": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ba382f5d-249f-4477-9784-7259385b2f7b.pdf"
+    },
+    {
+      "symbol": "ATALREAL",
+      "company_name": "Atal Realtech Ltd",
+      "market_cap_cr": 152.0,
+      "pending_order_book_cr": 328.0,
+      "order_to_mcap_multiple": 2.16,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹328.0 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/pr-atal-realtech-15sep25.pdf"
+    },
+    {
+      "symbol": "HAZOOR",
+      "company_name": "Hazoor Multi Projects Ltd",
+      "market_cap_cr": 481.0,
+      "pending_order_book_cr": 1012.0,
+      "order_to_mcap_multiple": 2.1,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹1,012.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/HAZOOR_MULTI_PROJECTS_LIMITED/31st_Mar_26"
+    },
+    {
+      "symbol": "KNRCON",
+      "company_name": "KNR Constructions Ltd",
+      "market_cap_cr": 3227.0,
+      "pending_order_book_cr": 5052.0,
+      "order_to_mcap_multiple": 1.57,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹5,052.0 Cr.",
+      "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/KNRConstructionsLimited_August 03_ 2026_RR_400775.html"
+    },
+    {
+      "symbol": "SOUTHWEST",
+      "company_name": "South West Pinnacle Exploration Ltd",
+      "market_cap_cr": 646.0,
+      "pending_order_book_cr": 581.0,
+      "order_to_mcap_multiple": 0.9,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹581.0 Cr.",
+      "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/SouthWestPinnacleExplorationLimited_July 10_ 2026_RR_399297.html"
+    },
+    {
+      "symbol": "REFEX",
+      "company_name": "Refex Industries Ltd",
+      "market_cap_cr": 3615.0,
+      "pending_order_book_cr": 2518.36,
+      "order_to_mcap_multiple": 0.7,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹2,518.4 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/REFEX_INDUSTRIES_LIMITED/7th_Aug_26"
+    },
+    {
+      "symbol": "LASERPOWER",
+      "company_name": "Laser Power & Infra Ltd",
+      "market_cap_cr": 3800.0,
+      "pending_order_book_cr": 2440.0,
+      "order_to_mcap_multiple": 0.64,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹2,440.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/LASER_POWER_AND_INFRA_LIMITED_(ERSTWHILE_LASER_POWER_AND_INFRA_PRIVATE_LIMITED)/5th_May_26"
+    },
+    {
+      "symbol": "JWL",
+      "company_name": "Jupiter Wagons Ltd",
+      "market_cap_cr": 9586.0,
+      "pending_order_book_cr": 4675.0,
+      "order_to_mcap_multiple": 0.49,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹4,675.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/JUPITER_WAGONS_LIMITED_(ERSTWHILE_COMMERCIAL_ENGINEERS_AND_BODY_BUILDERS_COMPANY_LIMITED)/30th_Sep_26"
+    },
+    {
+      "symbol": "BATLIBOI",
+      "company_name": "Batliboi Ltd",
+      "market_cap_cr": 439.0,
+      "pending_order_book_cr": 171.31,
+      "order_to_mcap_multiple": 0.39,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹171.3 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/Batliboi_Limited/12th_Jun_26"
+    },
+    {
+      "symbol": "AEROPLANE",
+      "company_name": "Amir Chand Jagdish Kumar (Exports) Ltd",
+      "market_cap_cr": 2147.0,
+      "pending_order_book_cr": 806.24,
+      "order_to_mcap_multiple": 0.38,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹806.2 Cr.",
+      "source_doc": "https://www.infomerics.com/admin/uploads/Pr-Amir-Chand-Jagdish-Kum-Exp29Sep26.pdf"
+    },
+    {
+      "symbol": "TECHNOCRAF",
+      "company_name": "Technocraft Ventures Ltd",
+      "market_cap_cr": 1861.0,
+      "pending_order_book_cr": 685.8,
+      "order_to_mcap_multiple": 0.37,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹685.8 Cr.",
+      "source_doc": "https://www.careratings.com/upload/CompanyFiles/PR/202603130358_TECHNOCRAFT_VENTURES_LIMITED.pdf"
+    },
+    {
+      "symbol": "XTRANET",
+      "company_name": "Xtranet Technologies Ltd",
+      "market_cap_cr": 1498.0,
+      "pending_order_book_cr": 392.0,
+      "order_to_mcap_multiple": 0.26,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹392.0 Cr.",
+      "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/XtranetTechnologiesLimited_March 31_ 2026_RR_392467.html"
+    },
+    {
+      "symbol": "ANDREWYU",
+      "company_name": "Andrew Yule & Company Ltd",
+      "market_cap_cr": 1232.0,
+      "pending_order_book_cr": 139.94,
+      "order_to_mcap_multiple": 0.11,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹139.9 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/ANDREW_YULE_AND_CO_LIMITED/2nd_Sep_26"
+    },
+    {
+      "symbol": "SAB",
+      "company_name": "SAB Industries Ltd",
+      "market_cap_cr": 259.0,
+      "pending_order_book_cr": 12.25,
+      "order_to_mcap_multiple": 0.05,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹12.2 Cr.",
+      "source_doc": "https://www.careratings.com/upload/CompanyFiles/PR/SAB Industries Limited-11-20-2020.pdf"
+    },
+    {
+      "symbol": "TIMETECHNO",
+      "company_name": "Time Technoplast Ltd",
+      "market_cap_cr": 8977.0,
+      "pending_order_book_cr": 195.0,
+      "order_to_mcap_multiple": 0.02,
+      "execution_timeline_months": 24,
+      "thesis": "Healthy revenue runway backed by order backlog of ₹195.0 Cr.",
+      "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/TimeTechnoplastLimited_July 28_ 2026_RR_400645.html"
     }
   ]
 }
