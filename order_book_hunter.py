@@ -29,7 +29,6 @@ NON_ORDER_SECTORS = [
     "hotel", "restaurant", "travel", "tourism"
 ]
 
-# Aapki di hui 967 Unique Watchlist
 WATCHLIST_SYMBOLS = [
     "20MICRONS", "5PAISA", "AAATECH", "AAREYDRUGS", "AARON", "AARTIDRUGS", "AARVI", "ABCOTS", "ABLBL",
     "ABMKNO", "ACI", "ADDIND", "ADFFOODS", "ADL", "ADSL", "ADVANCE", "ADVENZYMES", "ADVENTHTL", "AEROENTER",
@@ -195,19 +194,33 @@ def get_screener_data(symbol):
                         mcap_val = float(m.group(0))
                         break
 
-        # 4. Total Debt (Borrowings)
+        # 4. Total Debt (Borrowings Row parsing from Balance Sheet)
         total_debt_cr = 0.0
         bs_section = soup.find("section", id="balance-sheet")
         if bs_section:
-            borrowings_row = bs_section.find("td", string=re.compile(r"Borrowings", re.I))
-            if borrowings_row:
-                parent_tr = borrowings_row.find_parent("tr")
-                tds = parent_tr.find_all("td")
-                if len(tds) > 1:
-                    last_val = tds[-1].get_text(strip=True).replace(",", "")
-                    m = re.search(r"[\d.]+", last_val)
-                    if m:
-                        total_debt_cr = float(m.group(0))
+            for tr in bs_section.find_all("tr"):
+                first_col = tr.find(["td", "th"])
+                if first_col and "borrowings" in first_col.get_text().lower():
+                    tds = tr.find_all("td")
+                    if len(tds) > 1:
+                        last_val = tds[-1].get_text(strip=True).replace(",", "")
+                        m = re.search(r"[\d.]+", last_val)
+                        if m:
+                            total_debt_cr = float(m.group(0))
+                            break
+
+        # Fallback Debt from Top Card Section
+        if total_debt_cr == 0.0:
+            for span in soup.find_all("span", string=re.compile(r"^\s*Debt\s*$", re.I)):
+                parent = span.find_parent("li")
+                if parent:
+                    num = parent.find("span", class_="number")
+                    if num:
+                        val_str = num.text.replace(",", "").strip()
+                        m = re.search(r"[\d.]+", val_str)
+                        if m:
+                            total_debt_cr = float(m.group(0))
+                            break
 
         # 5. Rating Document Link
         doc_url = None
@@ -226,26 +239,26 @@ def get_screener_data(symbol):
         
         profit_table = soup.find("section", id="profit-loss")
         if profit_table:
-            # Sales
-            sales_row = profit_table.find("tr", class_=re.compile(r"stripe", re.I)) or profit_table.find("td", string=re.compile(r"Sales", re.I))
-            if sales_row:
-                parent_tr = sales_row if sales_row.name == "tr" else sales_row.find_parent("tr")
-                tds = parent_tr.find_all("td")
-                if len(tds) > 1:
-                    last_val = tds[-1].get_text(strip=True).replace(",", "")
-                    m = re.search(r"[\d.]+", last_val)
-                    if m:
-                        annual_sales = float(m.group(0))
+            for tr in profit_table.find_all("tr"):
+                first_col = tr.find(["td", "th"])
+                if first_col and "sales" in first_col.get_text().lower():
+                    tds = tr.find_all("td")
+                    if len(tds) > 1:
+                        last_val = tds[-1].get_text(strip=True).replace(",", "")
+                        m = re.search(r"[\d.]+", last_val)
+                        if m:
+                            annual_sales = float(m.group(0))
+                            break
 
-            # Operating Profit
-            op_row = profit_table.find("td", string=re.compile(r"Operating Profit", re.I))
-            if op_row:
-                parent_tr = op_row.find_parent("tr")
-                tds = parent_tr.find_all("td")
-                if len(tds) > 1:
-                    last_op = tds[-1].get_text(strip=True).replace(",", "")
-                    if last_op and not last_op.startswith("-"):
-                        ebitda_positive = True
+            for tr in profit_table.find_all("tr"):
+                first_col = tr.find(["td", "th"])
+                if first_col and "operating profit" in first_col.get_text().lower():
+                    tds = tr.find_all("td")
+                    if len(tds) > 1:
+                        last_op = tds[-1].get_text(strip=True).replace(",", "")
+                        if last_op and not last_op.startswith("-"):
+                            ebitda_positive = True
+                            break
 
         # 7. Insolvency / CIRP Check
         is_stressed = check_insolvency_and_warnings(soup)
@@ -276,7 +289,8 @@ def extract_document_text(doc_url):
         if "pdf" in content_type or doc_url.lower().endswith(".pdf") or res.content.startswith(b"%PDF"):
             reader = pypdf.PdfReader(io.BytesIO(res.content))
             pages = []
-            for p in reader.pages[:4]:
+            # Extract first 5 pages (covers Key Financials & Rating Rationale)
+            for p in reader.pages[:5]:
                 txt = p.extract_text()
                 if txt:
                     pages.append(txt)
@@ -289,35 +303,61 @@ def extract_document_text(doc_url):
     except Exception:
         return ""
 
-def parse_order_metrics(text):
-    """Unexecuted order book extract karta hai."""
-    if not any(k in text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "under-construction"]):
+def parse_order_and_debt_metrics_gemini(text):
+    """
+    Rating Rationale text se Gemini 2.5 Flash model ke zariye
+    Order Book aur Total Debt (Borrowings) extract karta hai.
+    """
+    if not any(k in text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "under-construction", "total debt", "gearing"]):
         return None
 
     if GEMINI_API_KEY:
         try:
-            prompt = f"Analyze text: '{text[:2500]}'. Extract unexecuted order numbers into JSON: {{\"order_book_cr\": 1500.0, \"timeline_months\": 24, \"thesis\": \"short summary\"}}"
+            prompt = f"""
+You are a senior equity research analyst. Carefully analyze this credit rating rationale document text:
+----------------------------------------
+{text[:5000]}
+----------------------------------------
+Tasks:
+1. Extract "order_book_cr": Float number of unexecuted/pending order book backlog in Crores INR (0.0 if not present).
+2. Extract "total_debt_cr": Float number of Total Debt or Borrowings in Crores INR from Key Financial Indicators or text (0.0 if not present).
+3. Extract "timeline_months": Execution tenure in months (integer, default 24).
+4. Extract "thesis": Crisp 1-line summary stating order visibility and leverage.
+
+Return ONLY pure valid JSON in this exact structure without markdown backticks:
+{{"order_book_cr": 0.0, "total_debt_cr": 0.0, "timeline_months": 24, "thesis": ""}}
+"""
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {"temperature": 0.1, "responseMimeType": "application/json"}
+                "generationConfig": {
+                    "temperature": 0.1,
+                    "responseMimeType": "application/json"
+                }
             }
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=10)
+            # Gemini 2.5 Flash Endpoint
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={GEMINI_API_KEY}"
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=12)
+            
             if res.status_code == 200:
                 raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
                 if raw.startswith("```"):
                     raw = re.sub(r"^```[a-z]*|```$", "", raw).strip()
                 data = json.loads(raw)
-                val = float(data.get("order_book_cr", 0))
-                if val > 0:
+                
+                order_val = float(data.get("order_book_cr", 0.0))
+                debt_val = float(data.get("total_debt_cr", 0.0))
+                
+                if order_val > 0:
                     return {
-                        "order_book_cr": val,
+                        "order_book_cr": order_val,
+                        "pdf_debt_cr": debt_val,
                         "timeline_months": int(data.get("timeline_months", 24)),
-                        "thesis": data.get("thesis", "Revenue visibility from backlog.")
+                        "thesis": data.get("thesis", f"Backlog of ₹{order_val:,.1f} Cr verified via credit rating rationale.")
                     }
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"   ⚠️ Gemini extraction fallback: {e}")
 
+    # Fallback Regex Parsing agar Gemini unavailable ho
     patterns = [
         r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
         r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
@@ -328,6 +368,7 @@ def parse_order_metrics(text):
             val = float(m.group(1).replace(",", ""))
             return {
                 "order_book_cr": val,
+                "pdf_debt_cr": 0.0,
                 "timeline_months": 24,
                 "thesis": f"Healthy revenue runway backed by order backlog of ₹{val:,.1f} Cr."
             }
@@ -336,6 +377,7 @@ def parse_order_metrics(text):
 def run():
     print("=" * 75)
     print(f"🚀 UNIFIED RADAR: SCANNING {len(WATCHLIST_SYMBOLS)} STOCKS")
+    print(f"   🤖 Powered by Gemini Flash + Screener Defense")
     print(f"   🛡️ Universal Guards: Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x & Insolvency Shield (CIRP/NCLT Blocked)")
     print("=" * 75)
 
@@ -358,8 +400,6 @@ def run():
         ebitda_ok = info["ebitda_positive"]
         is_stressed = info["is_stressed"]
 
-        debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
-
         # =============================================================
         # 🚨 UNIVERSAL GUARD 1: INSOLVENCY / NCLT CHECK (All Stocks)
         # =============================================================
@@ -367,27 +407,33 @@ def run():
             print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: Under Insolvency / CIRP / Stressed.")
             continue
 
-        # =============================================================
-        # 🚨 UNIVERSAL GUARD 2: DEBT TO MCAP RATIO (All Stocks)
-        # =============================================================
-        if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
-            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr | Debt/MCap: {debt_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x)")
-            continue
-
-        print(f"\n[{idx}/{len(WATCHLIST_SYMBOLS)}] 🟢 Passed Guards: {name} ({sym}) | MCap: ₹{mcap:,.1f} Cr | Debt: ₹{debt:,.1f} Cr ({debt_to_mcap}x)")
-
         # -------------------------------------------------------------
-        # ENGINE 1: ORDER BOOK SCANNER (Infra, EPC, Capital Goods)
+        # ENGINE 1: ORDER BOOK & PDF FINANCIAL AUDIT
         # -------------------------------------------------------------
         is_non_order_sector = any(bad in sector for bad in NON_ORDER_SECTORS)
         
         if not is_non_order_sector and doc_url:
             doc_text = extract_document_text(doc_url)
-            metrics = parse_order_metrics(doc_text)
+            metrics = parse_order_and_debt_metrics_gemini(doc_text)
+            
             if metrics and metrics["order_book_cr"] > 0:
                 order_val = metrics["order_book_cr"]
+                pdf_debt = metrics.get("pdf_debt_cr", 0.0)
+                
+                # Agar Screener par debt 0.0 tha aur PDF table me debt mil gaya, PDF debt use karo
+                if debt == 0.0 and pdf_debt > 0.0:
+                    debt = pdf_debt
+                    print(f"   🔍 AI Debt Recovery from PDF: ₹{debt:,.1f} Cr for {sym}")
+
+                debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
+
+                # Check Debt Guard for Order Gems
+                if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
+                    print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr | {debt_to_mcap}x > {MAX_DEBT_TO_MCAP_RATIO}x)")
+                    continue
+
                 multiple = round(order_val / mcap, 2)
-                print(f"   🎯 [ORDER BOOK] ₹{order_val:,.1f} Cr | Multiple: {multiple}x MCap")
+                print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] 🎯 [ORDER BOOK] {name} ({sym}) | Backlog: ₹{order_val:,.1f} Cr | Debt: ₹{debt:,.1f} Cr ({debt_to_mcap}x) | Multiple: {multiple}x MCap")
 
                 record = {
                     "symbol": sym,
@@ -405,15 +451,22 @@ def run():
                 if multiple >= 1.0:
                     hidden_gems.append(record)
                     print(f"   🔥 [HIDDEN GEM: ORDER BOOK >= 1.0x] Multiple: {multiple}x!")
+                continue
 
         # -------------------------------------------------------------
-        # ENGINE 2: SALES-TO-MCAP TURNAROUND RADAR (Safe Balance Sheet)
+        # ENGINE 2: SALES-TO-MCAP TURNAROUND RADAR
         # -------------------------------------------------------------
+        debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
+        
+        if debt_to_mcap > MAX_DEBT_TO_MCAP_RATIO:
+            print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] ⛔ Disqualified {sym}: High Debt (₹{debt:,.1f} Cr vs MCap ₹{mcap:,.1f} Cr)")
+            continue
+
         if sales and sales > mcap:  # P/S < 1.0
             if ebitda_ok:
                 sales_multiple = round(sales / mcap, 2)
                 ps_val = round(mcap / sales, 2)
-                print(f"   🚀 [TURNAROUND GEM] Sales: ₹{sales:,.1f} Cr | Multiple: {sales_multiple}x MCap | P/S: {ps_val}x")
+                print(f"[{idx}/{len(WATCHLIST_SYMBOLS)}] 🚀 [TURNAROUND GEM] {name} ({sym}) | Sales: ₹{sales:,.1f} Cr | Debt: ₹{debt:,.1f} Cr | P/S: {ps_val}x")
 
                 turnaround_entry = {
                     "symbol": sym,
@@ -454,11 +507,11 @@ def run():
         json.dump(final_report, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 75)
-    print(f"✅ UNIFIED SCAN FINISHED (DEBT & INSOLVENCY PROTECTED)!")
+    print(f"✅ UNIFIED SCAN FINISHED!")
     print(f"   🔥 Hidden Gems (Order Book >= 1.0x): {len(hidden_gems)}")
     print(f"   📋 All Order Book Tracked: {len(all_tracked_orders)}")
     print(f"   🚀 Clean Sales Turnaround Gems (Sales > MCap): {len(turnaround_sales_gems)}")
-    print(f"   💾 Saved cleanly into: {OUTPUT_REPORT_FILE}")
+    print(f"   💾 Saved into: {OUTPUT_REPORT_FILE}")
     print("=" * 75)
 
 if __name__ == "__main__":
