@@ -1,10 +1,18 @@
 {
- "generated_at": "2026-10-07 18:33 IST",
+ "generated_at": "2026-10-07 19:29 IST",
  "sample_size": 54,
- "identified": 3,
- "inferred": 51,
+ "identified": 1,
+ "inferred": 53,
  "cards_skipped": 6,
  "channel_avg_views": 2.0,
+ "growth": {
+  "today": 3,
+  "snapshots": 1,
+  "delta_7d": null,
+  "per_day": null,
+  "days_to_target": null,
+  "target": 1000
+ },
  "status": "ok",
  "pillars": {
   "psychology": {
