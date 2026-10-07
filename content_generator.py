@@ -64,7 +64,29 @@ ANGLES = [
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
+def _load_dotenv(path=".env"):
+    """Local run ke liye — .env file se keys load karo. GitHub Actions me zarurat nahi
+    (wahan workflow ka env: block keys deta hai)."""
+    if not os.path.exists(path):
+        return
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                k, v = k.strip(), v.strip().strip('"').strip("'")
+                if k and v and not os.environ.get(k):
+                    os.environ[k] = v
+    except Exception:
+        pass
+
+
+_load_dotenv()
+
 DRY_RUN = "--dry-run" in sys.argv
+KEYS_CHECK = "--keys" in sys.argv
 FORCE   = "--force" in sys.argv
 REPORT  = "--report" in sys.argv
 COUNT   = DEFAULT_COUNT
@@ -341,10 +363,40 @@ Return STRICTLY valid JSON, no markdown fences:
 {{"posts": [{{"topic_key": "key", "text": "post text"}}]}}"""
 
 
+KEY_NAMES_GROQ = ["GROQ_API_KEY", "GROQ_API_KEY2"]
+KEY_NAMES_GOOG = ["GOOGLE_API_KEY", "GOOGLE_API_KEY2", "GEMINI_API_KEY", "GEMINI_API_KEY2"]
+KEY_NAMES_ALL  = KEY_NAMES_GROQ + KEY_NAMES_GOOG + ["TELEGRAM_BOT_TOKEN", "TELEGRAM_TOKEN"]
+
+
 def _keys():
-    groq = [os.environ.get(k, "").strip() for k in ("GROQ_API_KEY", "GROQ_API_KEY2")]
-    goog = [os.environ.get(k, "").strip() for k in ("GOOGLE_API_KEY", "GOOGLE_API_KEY2", "GEMINI_API_KEY")]
+    groq = [os.environ.get(k, "").strip() for k in KEY_NAMES_GROQ]
+    goog = [os.environ.get(k, "").strip() for k in KEY_NAMES_GOOG]
     return ([k for k in dict.fromkeys(groq) if k], [k for k in dict.fromkeys(goog) if k])
+
+
+def check_keys():
+    """--keys mode: kaunsi key mili, kaunsi nahi. Name + length dikhata hai (value nahi)."""
+    print("\n" + "=" * 70)
+    print("🔑 AI KEY CHECK")
+    print("=" * 70)
+    found = []
+    for n in KEY_NAMES_ALL:
+        v = os.environ.get(n, "").strip()
+        if v:
+            found.append(n)
+            print(f"   ✅ {n:20} mili  ({len(v)} chars)")
+        else:
+            print(f"   ⚪ {n:20} nahi mili")
+    print("-" * 70)
+    if found:
+        print(f"✅ {len(found)} key mili — generation chalega")
+    else:
+        print("❌ Koi key nahi mili.")
+        print("   GitHub Actions : Settings → Secrets → Actions me key daalo")
+        print("                    (naam: GEMINI_API_KEY ya GOOGLE_API_KEY — dono chalte hain)")
+        print("   Local run      : .env file banao (dekho .env.example)")
+    print("=" * 70 + "\n")
+    return found
 
 
 def _parse_posts(raw):
@@ -567,8 +619,10 @@ def main():
 
     groq_keys, goog_keys = _keys()
     if not groq_keys and not goog_keys:
-        print("\n❌ Koi AI key nahi mili (GROQ_API_KEY ya GOOGLE_API_KEY). Generation band.")
-        print("   GitHub Secrets me key daalo, ya .env me set karo.")
+        print("\n❌ Koi AI key nahi mili — generation band.")
+        print("   Diagnose: python content_generator.py --keys")
+        print("   GitHub: Settings → Secrets → Actions (naam: GEMINI_API_KEY ya GOOGLE_API_KEY)")
+        print("   Local : .env file banao (dekho .env.example)")
         return
 
     queue = load_json(QUEUE_FILE, {"queue": []})
@@ -576,6 +630,10 @@ def main():
 
     total_topics = sum(len(v) for v in TOPIC_POOL.values())
     used_count = len(used)
+
+    if KEYS_CHECK:
+        check_keys()
+        return
 
     if REPORT:
         print(f"\n📊 TOPIC COVERAGE: {used_count}/{total_topics} used "
