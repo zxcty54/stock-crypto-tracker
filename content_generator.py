@@ -241,15 +241,27 @@ COMPANY_NAMES = [
     "abb", "bosch", "bel", "hal", "ireda", "irfc", "rvnl", "lic", "gmr",
 ]
 
-# Advice / call patterns
+# Advice / call patterns — sirf ASLI call pakdo, educational math nahi
+# Fark: "SL ₹10 door hai to quantity 100" = education (descriptive)
+#       "SL 2900 lagao" / "Target: 3200" / "Buy above 2900" = CALL (imperative)
+ACTION_VERBS = r"(rakho|rakhna|rakhein|rakh|lagao|lagana|laga\s*do|set\s*karo|book\s*kar\s*lo|le\s*lo|lo\b|nikal|exit\s*karo|enter\s*karo|kharido|becho|kar\s*lo)"
+
 ADVICE_PATTERNS = [
-    r"\b(buy|sell|long|short)\s+(above|below|at)\s+[\d₹]",
-    r"\b(target|tgt|sl|stop\s?loss|entry)\s*[:\-=]?\s*₹?\s*\d",
+    # 1) direct action + level:  "Buy above 2900", "sell below 25100"
+    r"\b(buy|sell|long|short)\s+(above|below|at|near|around|around)\s+[\d₹]",
+    # 2) trade-plan card format:  "Target: 3200", "SL = 2900", "Entry - 250"  (price, not %)
+    r"\b(target|tgt|sl|stop\s?loss|entry|exit)\s*[:\-=]\s*₹?\s*\d+(?!\s*%)",
+    # 3) imperative with level:  "target 3200 rakho", "SL 2900 lagao"
+    r"\b(target|tgt|sl|stop\s?loss)\s+₹?\s*[\d,.]+\s*" + ACTION_VERBS,
+    # 4) imperative without number:  "entry le lo", "position le lo", "nikal jao"
+    r"\b(entry|position|trade)\s+le\s*lo\b", r"\bnikal\s+jao\b",
+    r"\b(kharid|bech)\s*(lo|do|dena)\b",
+    # 5) coded hints / pump language
     r"\bkeep\s+an?\s+eye\b", r"\bwatchlist\s+me\b", r"\bdekho\s+isko\b",
-    r"\bposition\s+le\s+lo\b", r"\bentry\s+le\s+lo\b", r"\bnikal\s+jao\b",
     r"\bsomething\s+cooking\b", r"\bkuch\s+to\s+hai\b", r"\bhint\s*:",
-    r"\bmultibagger\b", r"\b\d+\s*%\s*(return|profit|gain)",
-    r"\b(tp|target)\s+hit\b", r"\bbook\s+(kar|profit)\b",
+    # 6) return / performance claims
+    r"\bmultibagger\b", r"\b\d+\s*%\s*(return|profit|gain)\b",
+    r"\bbook\s+kar\s*lo\b",          # imperative only — "profit book karna chahiye" education hai
 ]
 
 DANGER_EMOJI_COMBO = re.compile(r"[🔥🚀💰💥✅]\s*$")
@@ -472,7 +484,7 @@ def call_ai(topics, angles):
                 from google.genai import types
                 c = genai.Client(api_key=random.choice(goog_keys))
                 r = c.models.generate_content(
-                    model="gemini-2.5-flash",
+                    model="gemini-3.5-flash-lite",
                     contents=prompt,
                     config=types.GenerateContentConfig(temperature=0.75,
                                                        response_mime_type="application/json"),
@@ -677,6 +689,7 @@ def main():
     existing_norm = [normalize_for_sim(i["text"]) for i in queue.get("queue", [])]
 
     accepted, rejected = [], []
+    attempted_keys = set()          # is run me jo topics try ho chuke (dobara waste na ho)
     attempts = 0
 
     while picked and attempts < MAX_AI_ATTEMPTS + 1:
@@ -713,12 +726,15 @@ def main():
             existing_norm.append(normalize_for_sim(text))
             print(f"   ✅ accept ({len(text)} chars)")
 
+        attempted_keys.update({k for k, _ in batch})
         picked = picked[BATCH_SIZE:]
-        # jo topics cover nahi hue, dobara try karo
+
+        # jo topics cover nahi hue, naye topics se try karo (same topic dobara nahi)
         if not picked and len(accepted) < need and attempts < MAX_AI_ATTEMPTS + 1:
-            more = pick_topics(used, need - len(accepted))
-            picked = [t for t in more if t not in batch]
+            more = pick_topics(used, need - len(accepted) + len(attempted_keys))
+            picked = [t for t in more if t[0] not in attempted_keys]
             if not picked:
+                print("   (naye topics khatam — is run me bas)")
                 break
         time.sleep(2)
 
@@ -727,10 +743,14 @@ def main():
 
     if accepted:
         if DRY_RUN:
-            print("\n🧪 DRY RUN — queue me save nahi kiya. Sample:")
-            print("-" * 60)
-            print(accepted[0]["text"][:600])
-            print("-" * 60)
+            print("\n🧪 DRY RUN — queue me save nahi kiya.")
+            print("   Neeche 3 samples (log me poori quality dekh lo):")
+            for n, a in enumerate(accepted[:3], 1):
+                print("\n" + "─" * 62)
+                print(f"SAMPLE {n}  ({len(a['text'])} chars)")
+                print("─" * 62)
+                print(a["text"])
+            print("─" * 62)
         else:
             queue, added = append_to_queue(queue, accepted)
             save_json(QUEUE_FILE, queue)
