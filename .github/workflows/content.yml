@@ -1,18 +1,16 @@
 name: 🏭 AI Content Factory
 
-# Weekly: Somwar 08:30 IST = 03:00 UTC
-# Queue me 20 din se kam content bacha ho to naye posts banata hai
 on:
   schedule:
     - cron: '0 3 * * 1'
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Action'
+        description: 'Action (pehli baar "keys" chalao)'
         required: true
-        default: 'generate'
+        default: 'keys'
         type: choice
-        options: [generate, force, report, dry-run]
+        options: [keys, generate, force, report, dry-run]
       count:
         description: 'Kitne posts (default 24)'
         required: false
@@ -29,7 +27,6 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
@@ -44,20 +41,41 @@ jobs:
       - name: 📦 Install deps
         run: pip install --quiet groq google-genai requests
 
+      - name: 🔍 Repo me kaunsi keys hain (names only)
+        if: github.event.inputs.mode == 'keys'
+        continue-on-error: true
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+          VARS_JSON: ${{ toJSON(vars) }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os
+          for label, raw in (("🔑 SECRETS", os.environ.get("SECRETS_JSON")),
+                             ("📋 VARIABLES", os.environ.get("VARS_JSON"))):
+              try:
+                  d = json.loads(raw or "{}")
+              except Exception:
+                  d = {}
+              names = sorted(d.keys()) if d else []
+              print(f"{label}: {names if names else '(kuch nahi mila — yahan khaali hai)'}")
+          PYEOF
+
       - name: 🏭 Run content factory
         env:
-          GROQ_API_KEY:    ${{ secrets.GROQ_API_KEY }}
-          GROQ_API_KEY2:   ${{ secrets.GROQ_API_KEY2 }}
-          GOOGLE_API_KEY:  ${{ secrets.GOOGLE_API_KEY }}
-          GOOGLE_API_KEY2: ${{ secrets.GOOGLE_API_KEY2 }}
-          GEMINI_API_KEY:  ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_API_KEY:   "${{ secrets.GEMINI_API_KEY || secrets.GOOGLE_API_KEY || secrets.GEMINI_KEY || secrets.GOOGLE_GENAI_API_KEY || secrets.GOOGLE_KEY }}"
+          GEMINI_API_KEY2:  "${{ secrets.GEMINI_API_KEY2 || secrets.GOOGLE_API_KEY2 }}"
+          GOOGLE_API_KEY:   "${{ secrets.GOOGLE_API_KEY || secrets.GEMINI_API_KEY || secrets.GEMINI_KEY || secrets.GOOGLE_GENAI_API_KEY || secrets.GOOGLE_KEY }}"
+          GOOGLE_API_KEY2:  "${{ secrets.GOOGLE_API_KEY2 || secrets.GEMINI_API_KEY2 }}"
+          GROQ_API_KEY:     "${{ secrets.GROQ_API_KEY || secrets.GROQ_KEY || secrets.GROQ_API_KEY_1 }}"
+          GROQ_API_KEY2:    "${{ secrets.GROQ_API_KEY2 || secrets.GROQ_KEY2 || secrets.GROQ_API_KEY_2 }}"
         run: |
           MODE="${{ github.event.inputs.mode }}"
           COUNT="${{ github.event.inputs.count }}"
-          if [ -z "$MODE" ]; then MODE="generate"; fi
-          if [ -z "$COUNT" ]; then COUNT="24"; fi
+          [ -z "$MODE" ] && MODE="generate"
+          [ -z "$COUNT" ] && COUNT="24"
           echo "▶️ mode: $MODE | count: $COUNT"
           case "$MODE" in
+            keys)    python content_generator.py --keys ;;
             report)  python content_generator.py --report ;;
             force)   python content_generator.py --force --count "$COUNT" ;;
             dry-run) python content_generator.py --force --dry-run --count "$COUNT" ;;
@@ -74,26 +92,4 @@ jobs:
             git commit -m "🏭 content factory [$(date -u +'%d-%b-%Y %H:%M UTC')]"
             git pull --rebase --autostash origin ${GITHUB_REF_NAME} || true
             git push
-            echo "✅ queue + topic memory committed"
-          else
-            echo "ℹ️ no change"
           fi
-
-      - name: 📊 Summary
-        if: always()
-        run: |
-          python - <<'EOF' >> $GITHUB_STEP_SUMMARY
-          import json, os
-          if os.path.exists("content_queue.json"):
-              q = json.load(open("content_queue.json"))
-              items = q.get("queue", [])
-              print("## 🏭 Content Factory Report\n")
-              print(f"- **Queue total**: {len(items)} posts")
-              print(f"- **Last scheduled**: {q.get('last_scheduled')} IST")
-              ai = len([i for i in items if i.get("ai_generated")])
-              print(f"- **AI-generated**: {ai}")
-          if os.path.exists("content_topics_used.json"):
-              u = json.load(open("content_topics_used.json"))
-              print(f"- **Topics covered**: {len(u)}")
-          EOF
-          cat $GITHUB_STEP_SUMMARY
