@@ -14,6 +14,21 @@
    "at": "2026-10-07 17:05 IST",
    "pillar": "lifestyle",
    "file": "card_ai0003.png"
+  },
+  "ai0004": {
+   "at": "2026-10-07 17:10 IST",
+   "pillar": "other",
+   "file": "card_ai0004.png"
+  },
+  "ai0005": {
+   "at": "2026-10-07 17:10 IST",
+   "pillar": "corporate",
+   "file": "card_ai0005.png"
+  },
+  "ai0006": {
+   "at": "2026-10-07 17:10 IST",
+   "pillar": "tools",
+   "file": "card_ai0006.png"
   }
  }
 }
