@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-GROWTH ENGINE — performance loop
-================================
-Ek hi kaam: channel ke views padho → pillar weights banao → content factory ko batao
-ki kaunsa type chal raha hai. Isse channel apne aap seekhta hai.
+GROWTH ENGINE — channel growth loop
+===================================
+Ek hi kaam: channel ko grow karna. Do tarah se:
+
+  1. VIEWS      → kaunsa post/pillar chala → weights → content factory wahi zyada banata hai
+  2. SUBSCRIBERS → roz snapshot → growth rate, target ka kitna door
+
+Isse channel apne aap seekhta hai aur tumhe pata rehta hai ki badh raha hai ya nahi.
 
 USAGE
   python growth_engine.py            # status
@@ -28,7 +32,9 @@ QUEUE_FILE = "content_queue.json"
 POSTED_LOG = "post_log.json"
 PERF_FILE  = "performance.json"
 PERF_REPORT = "performance-report.md"
+GROWTH_FILE = "growth_history.json"   # roz ka subscriber/post snapshot
 
+SUBS_TARGET      = 1000   # channel growth ka target
 MIN_SAMPLE       = 5      # itne posts se kam ho to weights nahi
 MIN_PILLAR_POSTS = 3      # ek pillar ka weight tabhi jab uske 3+ posts hon
 
@@ -268,6 +274,72 @@ def _queue_hit(snippet, idx):
     return None
 
 
+
+def _eta_text(days):
+    """9063 din → '24 saal' — insaani bhasha."""
+    if days is None:
+        return ""
+    if days <= 60:
+        return f"~{days} din"
+    if days <= 730:
+        return f"~{round(days / 30)} mahine"
+    return f"~{round(days / 365, 1)} saal"
+
+
+def scrape_channel_meta():
+    """Channel ka subscriber count nikalo (public preview page se)."""
+    html = fetch(f"https://t.me/s/{CHANNEL_USERNAME}")
+    if not html:
+        return {}
+    m = re.search(r'tgme_header_counter">\s*([0-9][0-9,\s.]*?)\s*(subscribers|members)', html)
+    if not m:
+        return {}
+    raw = re.sub(r"[,\s]", "", m.group(1))
+    try:
+        return {"subscribers": int(float(raw)), "kind": m.group(2)}
+    except ValueError:
+        return {}
+
+
+def record_growth(n_posts):
+    """Aaj ka snapshot growth_history.json me likho + growth nikalo."""
+    hist = load_json(GROWTH_FILE, {"history": []})
+    rows = [r for r in hist.get("history", []) if isinstance(r, dict)]
+    meta = scrape_channel_meta()
+    subs = meta.get("subscribers")
+    today = NOW.strftime("%Y-%m-%d")
+
+    rows = [r for r in rows if r.get("date") != today]
+    rows.append({"date": today, "subs": subs, "posts": n_posts})
+    rows.sort(key=lambda r: r.get("date", ""))
+    save_json(GROWTH_FILE, {"history": rows[-120:]})       # 120 din ka record
+
+    out = {"today": subs, "snapshots": len(rows), "delta_7d": None,
+           "per_day": None, "days_to_target": None, "target": SUBS_TARGET}
+
+    have = [r for r in rows if r.get("subs") is not None]
+    if subs is not None and len(have) >= 2:
+        first = have[0]
+        days = max(1, (NOW.date() - datetime.strptime(first["date"], "%Y-%m-%d").date()).days)
+
+        # 7-din wala delta (ya sabse purana record agar 7 din se kam hai)
+        base = None
+        for r in have[:-1]:
+            d = (NOW.date() - datetime.strptime(r["date"], "%Y-%m-%d").date()).days
+            if d >= 7:
+                base = r
+            else:
+                break
+        if base is None:
+            base = first
+        out["delta_7d"]  = subs - base["subs"]
+        out["days_span"] = days
+        out["per_day"]   = round((subs - first["subs"]) / days, 2)
+        if out["per_day"] > 0 and subs < SUBS_TARGET:
+            out["days_to_target"] = int((SUBS_TARGET - subs) / out["per_day"])
+    return out
+
+
 def run_perf():
     print("\n📊 PERFORMANCE LOOP")
     print("-" * 60)
@@ -331,6 +403,14 @@ def run_perf():
 
     matched = scored   # aage ka code wahi rahega
 
+    growth = record_growth(len(views))
+    if growth.get("today") is not None:
+        line = f"   Subscribers: {growth['today']}"
+        if growth.get("delta_7d") is not None:
+            sign = "+" if growth["delta_7d"] >= 0 else ""
+            line += f"   (7 din me {sign}{growth['delta_7d']})"
+        print(line)
+
     # pillar-wise
     overall = sum(m["views"] for m in matched) / len(matched)
     by_pillar = {}
@@ -363,6 +443,7 @@ def run_perf():
         "inferred": src_count["inferred"],
         "cards_skipped": cards,
         "channel_avg_views": round(overall, 1),
+        "growth": growth,
         "status": "ok",
         "pillars": pillars,
         "top_posts": [{"title": m["title"], "views": m["views"], "pillar": m["pillar"]} for m in top],
@@ -373,11 +454,25 @@ def run_perf():
           f"**{NOW.strftime('%d-%b-%Y %H:%M IST')}** | {len(matched)} posts tracked "
           f"| channel avg **{overall:.0f} views**\n",
           f"*{identified} posts pehchaane gaye, {src_count['inferred']} ka pillar "
-          f"text se nikala gaya. {cards} infographic cards skip kiye.*\n",
+          f"text se nikala gaya. {cards} repackaged cards skip kiye.*\n",
           "## Pillar performance\n",
           "| Pillar | Posts | Avg views | Weight |", "|---|---|---|---|"]
     for p, d in sorted(pillars.items(), key=lambda x: -x[1]["avg_views"]):
         md.append(f"| {p} | {d['posts']} | {d['avg_views']:.0f} | {d['weight']} |")
+    md += ["\n## 📈 Channel Growth\n"]
+    if growth.get("today") is not None:
+        md.append(f"**Subscribers: {growth['today']}** "
+                  f"(target {growth['target']})\n")
+        if growth.get("delta_7d") is not None:
+            sign = "+" if growth["delta_7d"] >= 0 else ""
+            md.append(f"- Pichhle 7 din me: **{sign}{growth['delta_7d']}**")
+            md.append(f"- Average: **{growth['per_day']}/din**")
+            if growth.get("days_to_target"):
+                md.append(f"- Isi raftaar se {growth['target']} subs: **{_eta_text(growth['days_to_target'])}**")
+            md.append("")
+    else:
+        md.append("_Subscriber data nahi mila (channel public hai?)_\n")
+
     md += ["\n## 🏆 Top posts\n"]
     for m in top:
         md.append(f"- **{m['views']} views** — {m['title']}  \n  `{m['pillar']}`")
@@ -419,14 +514,23 @@ def show_status():
         print(f"   Perf loop        : ⏳ data collect ho raha hai")
     print(f"   Report           : {PERF_REPORT if os.path.exists(PERF_REPORT) else 'abhi nahi bana'}")
     print()
+    g = perf.get("growth", {})
+    if g.get("today") is not None:
+        line = f"   Subscribers      : {g['today']} / {g.get('target', SUBS_TARGET)}"
+        if g.get("delta_7d") is not None:
+            sign = "+" if g["delta_7d"] >= 0 else ""
+            line += f"  (7d: {sign}{g['delta_7d']}, {g.get('per_day')}/din)"
+            if g.get("days_to_target"):
+                line += f"  → target {_eta_text(g['days_to_target'])}"
+        print(line)
+
     if perf.get("pillars"):
-        print("   Pillar weights (content factory inhe use karta hai):")
+        print("\n   Pillar weights (content factory inhe use karta hai):")
         for p, d in sorted(perf["pillars"].items(), key=lambda x: -x[1]["weight"])[:6]:
             note = "  (sample kam — neutral)" if d.get("low_sample") else ""
             print(f"      {p:18} {d['weight']}x  ({d['avg_views']:.0f} avg views){note}")
     print()
     print(f"   Telegram setup   : {'✅' if BOT_TOKEN else '❌ (TELEGRAM_BOT_TOKEN secret chahiye)'}")
-    print(f"   (infographic abhi BAND — archive/dropped-features me pada hai)")
     print("=" * 60)
 
 
