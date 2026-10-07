@@ -1,0 +1,65 @@
+name: 📢 Post Content to Telegram
+
+on:
+  schedule:
+    # Din me 3 slots (IST = UTC + 5:30):
+    # 08:15 AM IST = 02:45 UTC
+    # 12:45 PM IST = 07:15 UTC
+    # 08:30 PM IST = 15:00 UTC
+    - cron: '45 2 * * *'
+    - cron: '15 7 * * *'
+    - cron: '0 15 * * *'
+  workflow_dispatch: # Test karne ke liye manual run button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telegram-poster
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Requests
+        run: pip install requests
+
+      - name: 🚀 Dispatch Post to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python telegram_poster.py
+
+      - name: 💾 Commit Updated Queue State
+        run: |
+          git config --global user.name "TelegramPosterBot"
+          git config --global user.email "bot@github-actions.internal"
+
+          cp content_queue.json /tmp/content_queue.json
+
+          git fetch origin main
+          git reset --hard origin/main
+
+          cp /tmp/content_queue.json content_queue.json
+
+          git add content_queue.json
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes to commit."
+          else
+            git commit -m "🤖 Update: Marked post as used [skip ci]"
+            git push origin main
+            echo "✅ Queue state committed."
+          fi
