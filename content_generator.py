@@ -188,12 +188,21 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - Language: Engaging Hinglish (Hindi + English) as Indian traders communicate.
 - Length: 120-180 words per post.
 
-Format for each post:
-1. First line: "TOPIC LABEL: Title"
-2. 5-7 short lines explaining the concept with a generic example (e.g. ₹1,00,000 capital).
-3. One actionable takeaway line.
-4. 1-2 hashtags (e.g. #tradingpsychology #riskmanagement).
-5. EXACT FINAL LINE: "⚠️ Educational only. Not investment advice. Not SEBI registered."
+VISUAL FORMAT REQUIREMENTS (Strictly follow layout with line breaks):
+Line 1: Punchy Header with an emoji (e.g., 🚨 TOPIC: Catchy Title)
+[Blank line]
+Hook line: Relatable question or real trading situation.
+[Blank line]
+Core Breakdown (Use 3-4 bullet points using '•' with bold lead-ins):
+• Point 1: Explanation with numbers/example (e.g., ₹1,00,000 capital).
+• Point 2: Reality check or common mistake.
+• Point 3: The corrective framework.
+[Blank line]
+💡 Golden Rule: One crisp, bold memorable takeaway line.
+[Blank line]
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hashtags (1-2 relevant hashtags)
+⚠️ Educational only. Not investment advice. Not SEBI registered.
 
 Return ONLY valid JSON matching this schema:
 {{"posts": [{{"topic_key": "key", "text": "complete post text"}}]}}"""
