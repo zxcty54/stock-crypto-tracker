@@ -1,12 +1,14 @@
 name: 🏭 AI Content Factory
 
+# Weekly: Somwar 08:30 IST = 03:00 UTC
+# Queue me 20 din se kam content bacha ho to naye posts banata hai
 on:
   schedule:
     - cron: '0 3 * * 1'
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Action (pehli baar "keys" chalao)'
+        description: 'Action (pehli baar "keys" chalao — check karega ki API key mil rahi hai ya nahi)'
         required: true
         default: 'keys'
         type: choice
@@ -27,6 +29,7 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
@@ -41,6 +44,7 @@ jobs:
       - name: 📦 Install deps
         run: pip install --quiet groq google-genai requests
 
+      # 🔍 DEBUG: repo me kaunsi SECRETS aur VARIABLES maujood hain (sirf naam, value masked)
       - name: 🔍 Repo me kaunsi keys hain (names only)
         if: github.event.inputs.mode == 'keys'
         continue-on-error: true
@@ -92,4 +96,7 @@ jobs:
             git commit -m "🏭 content factory [$(date -u +'%d-%b-%Y %H:%M UTC')]"
             git pull --rebase --autostash origin ${GITHUB_REF_NAME} || true
             git push
+            echo "✅ queue + topic memory committed"
+          else
+            echo "ℹ️ no change"
           fi
