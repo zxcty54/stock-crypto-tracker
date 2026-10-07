@@ -1,17 +1,18 @@
 {
- "generated_at": "2026-10-07 19:29 IST",
+ "generated_at": "2026-10-08 02:12 IST",
  "sample_size": 54,
- "identified": 1,
- "inferred": 53,
+ "identified": 0,
+ "inferred": 54,
  "cards_skipped": 6,
  "channel_avg_views": 2.0,
  "growth": {
   "today": 3,
-  "snapshots": 1,
-  "delta_7d": null,
-  "per_day": null,
+  "snapshots": 2,
+  "delta_7d": 0,
+  "per_day": 0.0,
   "days_to_target": null,
-  "target": 1000
+  "target": 1000,
+  "days_span": 1
  },
  "status": "ok",
  "pillars": {
