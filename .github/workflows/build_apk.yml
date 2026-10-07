@@ -1,15 +1,15 @@
 name: Build & Release Flutter APK
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Manual run allow karega testing ke liye
   push:
     branches:
       - main
-    paths-ignore:
-      - '**.json'
-      - '**.md'
-      - '.github/workflows/macro_research_pipeline.yml'
-      - '.github/workflows/raw_material_matrix.yml'
+    paths:
+      # 🎯 Sirf tab trigger hoga jab inme se koi file modify hogi:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - 'android/**'
 
 jobs:
   build-apk:
