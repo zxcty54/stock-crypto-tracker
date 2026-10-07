@@ -1,23 +1,17 @@
 {
- "generated_at": "2026-10-07 17:00 IST",
- "sample_size": 60,
+ "generated_at": "2026-10-07 18:33 IST",
+ "sample_size": 54,
  "identified": 3,
- "inferred": 57,
- "cards_skipped": 0,
+ "inferred": 51,
+ "cards_skipped": 6,
  "channel_avg_views": 2.0,
  "status": "ok",
  "pillars": {
-  "technical": {
-   "posts": 5,
-   "avg_views": 2.2,
-   "weight": 1.11,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 28,
+  "psychology": {
+   "posts": 1,
    "avg_views": 2.0,
-   "weight": 1.01,
-   "low_sample": false
+   "weight": 1.0,
+   "low_sample": true
   },
   "process": {
    "posts": 3,
@@ -26,13 +20,13 @@
    "low_sample": false
   },
   "business_model": {
-   "posts": 3,
-   "avg_views": 2.0,
-   "weight": 1.01,
-   "low_sample": false
-  },
-  "psychology": {
    "posts": 1,
+   "avg_views": 2.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "technical": {
+   "posts": 2,
    "avg_views": 2.0,
    "weight": 1.0,
    "low_sample": true
@@ -50,52 +44,58 @@
    "low_sample": true
   },
   "other": {
-   "posts": 18,
-   "avg_views": 1.9,
-   "weight": 0.95,
+   "posts": 8,
+   "avg_views": 2.0,
+   "weight": 1.01,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 37,
+   "avg_views": 2.0,
+   "weight": 1.0,
    "low_sample": false
   }
  },
  "top_posts": [
   {
-   "title": "Highway Infrastructure Limited (NSE: HILINFRA) Highway Infrastructure ",
-   "views": 3,
-   "pillar": "technical"
-  },
-  {
-   "title": "Knack Packaging Limited (NSE: KNACK) Knack Packaging Secures 3‑Year Or",
+   "title": "GPT Infraprojects Limited (NSE: GPTINFRA)",
    "views": 3,
    "pillar": "corporate"
   },
   {
-   "title": "GPT Infraprojects Limited (NSE: GPTINFRA) GPT Infraprojects Secures ₹3",
+   "title": "Highway Infrastructure Limited (NSE: HILINFRA)",
    "views": 3,
    "pillar": "corporate"
   },
   {
-   "title": "JOINT_VENTURE — Marsons Limited (NSE: MARSONS) Marsons & Cleanhill Par",
+   "title": "Knack Packaging Limited (NSE: KNACK)",
+   "views": 3,
+   "pillar": "corporate"
+  },
+  {
+   "title": "JSW Cement Limited (NSE: JSWCEMENT)",
    "views": 2,
-   "pillar": "other"
+   "pillar": "corporate"
   },
   {
-   "title": "RESULT — Veegaland Developers Limited (NSE: VEEGALAND) Veegaland Devel",
+   "title": "Godrej Consumer Products Limited (NSE: GODREJCP)",
    "views": 2,
    "pillar": "corporate"
   }
  ],
  "weak_posts": [
   {
-   "title": "BUYBACK — Transport Corporation of India Limited (NSE: TCI) TCI Board ",
+   "title": "BUYBACK — Transport Corporation of India Limited (NSE: TCI)",
    "views": 1,
    "pillar": "corporate"
   },
   {
-   "title": "R&B Denims Limited (NSE: RNBDENIMS) Subsidiary Ricon Industries starts",
+   "title": "R&B Denims Limited (NSE: RNBDENIMS)",
    "views": 1,
-   "pillar": "other"
+   "pillar": "corporate"
   },
   {
-   "title": "Transport Corporation of India Limited (NSE: TCI) TCI announces buybac",
+   "title": "Transport Corporation of India Limited (NSE: TCI)",
    "views": 1,
    "pillar": "corporate"
   }
