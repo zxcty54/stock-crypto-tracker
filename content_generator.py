@@ -189,22 +189,23 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - Length: 120-180 words per post.
 
 TELEGRAM FORMATTING SPECIFICATION (Strictly maintain exact line breaks and spacing):
-[LINE 1]: 📌 {TOPIC_IN_CAPS}: Catchy Headline
-[EMPTY LINE]
-[LINE 2]: Hook question or relatable trader scenario that grabs attention immediately.
-[EMPTY LINE]
-[LINE 3]: • Point 1: Clear explanation with practical logic or capital example (e.g. ₹1,00,000 capital).
-[LINE 4]: • Point 2: The common trap or retail mistake people make.
-[LINE 5]: • Point 3: The practical corrective rule or solution.
-[EMPTY LINE]
-[LINE 6]: 💡 Golden Rule: One memorable, impactful punchline.
-[EMPTY LINE]
-[LINE 7]: ━━━━━━━━━━━━━━━━━━━━━
-[LINE 8]: #TradingPsychology #RiskManagement
-[LINE 9]: ⚠️ Educational only. Not investment advice. Not SEBI registered.
+Line 1: 📌 TOPIC: Catchy Headline
+[Blank line]
+Hook line: Relatable question or real trading scenario that grabs attention.
+[Blank line]
+Core Breakdown (Use 3 bullet points using '•' with clear explanation):
+• Point 1: Explanation with practical logic or capital example (e.g. ₹1,00,000 capital).
+• Point 2: The common trap or retail mistake people make.
+• Point 3: The practical corrective rule or solution.
+[Blank line]
+💡 Golden Rule: One memorable, impactful punchline.
+[Blank line]
+━━━━━━━━━━━━━━━━━━━━━
+#TradingPsychology #RiskManagement
+⚠️ Educational only. Not investment advice. Not SEBI registered.
 
-Return ONLY a valid JSON object matching this schema:
-{{"posts": [{{"topic_key": "key", "text": "complete formatted post text"}}]}}"""
+Return ONLY valid JSON matching this schema:
+{{"posts": [{{"topic_key": "key", "text": "complete post text"}}]}}"""
 
 def get_api_key():
     return (os.environ.get("GEMINI_API_KEY") or 
