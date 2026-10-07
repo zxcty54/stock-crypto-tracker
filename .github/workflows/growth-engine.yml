@@ -1,26 +1,26 @@
 name: ⚙️ Growth Engine
 
 # ─────────────────────────────────────────────────────────────────────────
-#  1️⃣ perf        → roz 21:00 IST  (din ke posts ka data)
-#  2️⃣ infographic → Mon/Wed/Sat 09:30 IST
+#  PERF LOOP — roz 21:00 IST apne aap
 #
-#  (Blogger alag workflow me — wo LAST step hai)
+#  Kaam: channel ke views padho → pillar weights banao
+#        → content_generator.py un weights se topics chunta hai
 #
-#  Manually: Actions → Run workflow → mode chuno
+#  Manually: Actions → Run workflow → mode chuno (sirf TEST ke liye)
+#  (infographic + blogger alag files me hain — filhal dormant)
 # ─────────────────────────────────────────────────────────────────────────
 
 on:
   schedule:
     - cron: '30 15 * * *'        # 21:00 IST — perf (roz)
-    - cron: '0 4 * * 1,3,6'      # 09:30 IST — infographic (Mon/Wed/Sat)
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Kya chalao?'
+        description: 'Kya chalao? (status = haal dekho)'
         required: true
         default: 'status'
         type: choice
-        options: [status, perf, infographic, dry-run]
+        options: [status, perf]
 
 permissions:
   contents: write
@@ -46,22 +46,18 @@ jobs:
           python-version: '3.11'
 
       - name: 📦 Install deps
-        run: pip install --quiet requests matplotlib
+        run: pip install --quiet requests
 
       # ── konsa mode chalana hai (schedule se decide) ──
       - name: 🎯 Decide mode
         id: pick
         run: |
           MODE="${{ github.event.inputs.mode }}"
-          if [ -z "$MODE" ] || [ "$MODE" = "dry-run" ]; then
-            case "${{ github.event.schedule }}" in
-              '30 15 * * *')   MODE="perf" ;;
-              '0 4 * * 1,3,6') MODE="infographic" ;;
-              *)               MODE="status" ;;
-            esac
+          if [ -z "$MODE" ]; then       # schedule se aaya (koi input nahi)
+            MODE="perf"
           fi
           echo "mode=$MODE" >> $GITHUB_OUTPUT
-          echo "▶️ mode: $MODE"
+          echo "▶️ chalega: $MODE"
 
       - name: ⚙️ Run growth engine
         env:
@@ -70,10 +66,8 @@ jobs:
           CHANNEL_LINK:       ${{ secrets.CHANNEL_LINK }}
         run: |
           MODE="${{ steps.pick.outputs.mode }}"
-          EXTRA=""
-          [ "${{ github.event.inputs.mode }}" = "dry-run" ] && EXTRA="--dry-run"
-          echo "▶️ python growth_engine.py $MODE $EXTRA"
-          python growth_engine.py "$MODE" $EXTRA
+          echo "▶️ python growth_engine.py $MODE"
+          python growth_engine.py "$MODE"
 
       - name: 💾 State save
         if: always()
@@ -81,11 +75,10 @@ jobs:
           git config user.name  "growth-bot"
           git config user.email "bot@users.noreply.github.com"
 
-          for f in performance.json performance-report.md \
-                   infographic_state.json; do
+          for f in performance.json performance-report.md; do
             [ -f "$f" ] && git add "$f"
           done
-          git add -A -- ':!card_*.png' ':!.github' 2>/dev/null || true
+          git add -A -- ':!card_*.png' ':!.card_render.html' ':!.github' 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "ℹ️ Koi change nahi"
