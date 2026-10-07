@@ -31,7 +31,7 @@ BOT_TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN")
              or os.environ.get("TELEGRAM_TOKEN") or "").strip()
 
 # 🎯 Channel Target Hardcoded (Direct Broadcast)
-CHAT_ID = "@bhaga_657"
+CHAT_ID = "@niftytradingstrategies"
 
 # Brand Details
 CHANNEL_LINK = "https://t.me/bhaga_657"
