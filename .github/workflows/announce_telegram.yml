@@ -42,7 +42,7 @@ jobs:
       - name: Execute Telegram Post Dispatcher
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python announce_telegram_bot.py
 
