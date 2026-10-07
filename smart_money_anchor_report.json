@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-07 04:31:52 IST",
+  "last_updated": "2026-10-07 19:07:59 IST",
   "total_anchors_discovered": 2,
   "prime_discount_opportunities": 1,
   "buffer_safe_entries": 0,
@@ -8,14 +8,14 @@
       "symbol": "PIRAMALFIN",
       "company_name": "Piramal Finance Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 1986.3,
+      "cmp": 1980.0,
       "institutional_floor_price": 2110.0,
       "capital_raised_cr": 2100.0,
-      "market_cap_cr": 47402.49,
-      "deal_size_pct_mcap": 4.43,
-      "delta_to_floor_pct": -5.86,
+      "market_cap_cr": 46884.9,
+      "deal_size_pct_mcap": 4.48,
+      "delta_to_floor_pct": -6.16,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "5.86% Below Anchor",
+      "zone_label": "6.16% Below Anchor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -45,7 +45,7 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
       "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 5.86% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,986.30 (-5.86% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.43% Dilution (MCap: ₹47,402 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 6.16% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,980.00 (-6.16% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.48% Dilution (MCap: ₹46,885 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
     }
   ],
   "buffer_setups": [],
@@ -54,14 +54,14 @@
       "symbol": "PIRAMALFIN",
       "company_name": "Piramal Finance Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 1986.3,
+      "cmp": 1980.0,
       "institutional_floor_price": 2110.0,
       "capital_raised_cr": 2100.0,
-      "market_cap_cr": 47402.49,
-      "deal_size_pct_mcap": 4.43,
-      "delta_to_floor_pct": -5.86,
+      "market_cap_cr": 46884.9,
+      "deal_size_pct_mcap": 4.48,
+      "delta_to_floor_pct": -6.16,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "5.86% Below Anchor",
+      "zone_label": "6.16% Below Anchor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -91,7 +91,7 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
       "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 5.86% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,986.30 (-5.86% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.43% Dilution (MCap: ₹47,402 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 6.16% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,980.00 (-6.16% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.48% Dilution (MCap: ₹46,885 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
     },
     {
       "symbol": "BHAGYANGR",
@@ -100,8 +100,8 @@
       "cmp": 454.55,
       "institutional_floor_price": 348.0,
       "capital_raised_cr": 52.25,
-      "market_cap_cr": 1486.76,
-      "deal_size_pct_mcap": 3.51,
+      "market_cap_cr": 1415.82,
+      "deal_size_pct_mcap": 3.69,
       "delta_to_floor_pct": 30.62,
       "zone": "EXTENDED",
       "zone_label": "+30.62% Extended",
@@ -109,7 +109,7 @@
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/BHAGYANGR_13082026114035_BILOUTCOMEBM13062026sd.pdf",
       "filing_context": "Outcome of Board Meeting Bhagyanagar India Limited has informed the Exchange regarding Outcome of   the Executive Committee of the board of Bhagyanagar India Li",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +30.62% EXTENDED\n\n📌 Bhagyanagar India Limited (NSE: BHAGYANGR)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹348.00\n📊 Current CMP:          ₹454.55 (+30.62% vs Anchor)\n📦 Capital Infused:      ₹52.25 Cr\n🏢 Dilution / MCap:      ~3.51% Dilution (MCap: ₹1,487 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BHAGYANGR_13082026114035_BILOUTCOMEBM13062026sd.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +30.62% EXTENDED\n\n📌 Bhagyanagar India Limited (NSE: BHAGYANGR)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹348.00\n📊 Current CMP:          ₹454.55 (+30.62% vs Anchor)\n📦 Capital Infused:      ₹52.25 Cr\n🏢 Dilution / MCap:      ~3.69% Dilution (MCap: ₹1,416 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/BHAGYANGR_13082026114035_BILOUTCOMEBM13062026sd.pdf"
     }
   ]
 }
