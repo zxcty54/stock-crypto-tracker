@@ -644,7 +644,8 @@ def main():
     print(f"📅 {NOW.strftime('%d-%b-%Y %H:%M IST')} | mode: {MODE or 'status'}")
     print("=" * 60)
 
-    if STATUS or not MODE:
+    # status: "--status" (local) ya "status" (workflow) — dono chalein
+    if STATUS or not MODE or MODE == "status":
         show_status()
         return
 
@@ -654,7 +655,7 @@ def main():
         run_infographic()
     else:
         print(f"❌ Unknown mode: {MODE}")
-        print("   Modes: perf | infographic | --status")
+        print("   Modes: status | perf | infographic   (ya --status)")
 
 
 if __name__ == "__main__":
