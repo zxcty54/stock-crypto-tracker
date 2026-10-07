@@ -1,6 +1,103 @@
 {
- "generated_at": "2026-10-07 16:47 IST",
- "sample_size": 1,
- "status": "collecting_data",
- "pillars": {}
+ "generated_at": "2026-10-07 16:54 IST",
+ "sample_size": 60,
+ "identified": 3,
+ "inferred": 57,
+ "cards_skipped": 0,
+ "channel_avg_views": 2.0,
+ "status": "ok",
+ "pillars": {
+  "technical": {
+   "posts": 5,
+   "avg_views": 2.2,
+   "weight": 1.11,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 28,
+   "avg_views": 2.0,
+   "weight": 1.01,
+   "low_sample": false
+  },
+  "process": {
+   "posts": 3,
+   "avg_views": 2.0,
+   "weight": 1.01,
+   "low_sample": false
+  },
+  "business_model": {
+   "posts": 3,
+   "avg_views": 2.0,
+   "weight": 1.01,
+   "low_sample": false
+  },
+  "psychology": {
+   "posts": 1,
+   "avg_views": 2.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "market_mechanics": {
+   "posts": 1,
+   "avg_views": 2.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "lifestyle": {
+   "posts": 1,
+   "avg_views": 2.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "other": {
+   "posts": 18,
+   "avg_views": 1.9,
+   "weight": 0.95,
+   "low_sample": false
+  }
+ },
+ "top_posts": [
+  {
+   "title": "Highway Infrastructure Limited (NSE: HILINFRA) Highway Infrastructure ",
+   "views": 3,
+   "pillar": "technical"
+  },
+  {
+   "title": "Knack Packaging Limited (NSE: KNACK) Knack Packaging Secures 3‑Year Or",
+   "views": 3,
+   "pillar": "corporate"
+  },
+  {
+   "title": "GPT Infraprojects Limited (NSE: GPTINFRA) GPT Infraprojects Secures ₹3",
+   "views": 3,
+   "pillar": "corporate"
+  },
+  {
+   "title": "JOINT_VENTURE — Marsons Limited (NSE: MARSONS) Marsons & Cleanhill Par",
+   "views": 2,
+   "pillar": "other"
+  },
+  {
+   "title": "RESULT — Veegaland Developers Limited (NSE: VEEGALAND) Veegaland Devel",
+   "views": 2,
+   "pillar": "corporate"
+  }
+ ],
+ "weak_posts": [
+  {
+   "title": "BUYBACK — Transport Corporation of India Limited (NSE: TCI) TCI Board ",
+   "views": 1,
+   "pillar": "corporate"
+  },
+  {
+   "title": "R&B Denims Limited (NSE: RNBDENIMS) Subsidiary Ricon Industries starts",
+   "views": 1,
+   "pillar": "other"
+  },
+  {
+   "title": "Transport Corporation of India Limited (NSE: TCI) TCI announces buybac",
+   "views": 1,
+   "pillar": "corporate"
+  }
+ ]
 }
