@@ -188,24 +188,27 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - Language: Engaging Hinglish (Hindi + English) as Indian traders communicate.
 - Length: 120-180 words per post.
 
-TELEGRAM FORMATTING SPECIFICATION (Strictly maintain exact line breaks and spacing):
-Line 1: 📌 TOPIC: Catchy Headline
-[Blank line]
-Hook line: Relatable question or real trading scenario that grabs attention.
-[Blank line]
-Core Breakdown (Use 3 bullet points using '•' with clear explanation):
-• Point 1: Explanation with practical logic or capital example (e.g. ₹1,00,000 capital).
-• Point 2: The common trap or retail mistake people make.
-• Point 3: The practical corrective rule or solution.
-[Blank line]
-💡 Golden Rule: One memorable, impactful punchline.
-[Blank line]
+CRITICAL TELEGRAM FORMATTING RULES:
+- Use asterisks for bold text (*like this*), especially for headings, key metrics, and bullet titles.
+- DO NOT WRITE the literal words "Point 1", "Point 2", "Point 3". Use bold contextual names instead!
+
+EXACT LAYOUT STRUCTURE:
+📌 *TOPIC: Catchy Headline*
+
+*Hook Line:* Relatable question or real trading dilemma that grabs immediate attention.
+
+• *The Mistake:* What retail traders usually do wrong in excitement/panic.
+• *The Reality Check:* Real mathematical damage or risk scenario (e.g. ₹1,00,000 capital).
+• *The Smart Fix:* Practical rule or system to handle this systematically.
+
+💡 *Golden Rule:* One punchy, memorable takeaway line.
+
 ━━━━━━━━━━━━━━━━━━━━━
 #TradingPsychology #RiskManagement
 ⚠️ Educational only. Not investment advice. Not SEBI registered.
 
 Return ONLY valid JSON matching this schema:
-{{"posts": [{{"topic_key": "key", "text": "complete post text"}}]}}"""
+{{"posts": [{{"topic_key": "key", "text": "complete formatted post text"}}]}}"""
 
 def get_api_key():
     return (os.environ.get("GEMINI_API_KEY") or 
