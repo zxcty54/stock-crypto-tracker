@@ -1,1 +1,156 @@
-
+{
+  "queue": [
+    {
+      "id": "ai0001",
+      "slot": "A",
+      "scheduled_ist": "2026-10-07 08:15",
+      "title": "📌 *TOPIC: Trading Plan Kaise Likhein: Professional Trader Banne Ka Blueprint*",
+      "text": "📌 *TOPIC: Trading Plan Kaise Likhein: Professional Trader Banne Ka Blueprint*\n\n*Hook Line:* Kya aap bina map ke anjaan raste par safar karte ho? Fir bina trading plan ke market me entry kyun?\n\n• *The Setup:* Roz subah bina kisi rule ya preparation ke screen kholna aur impulse me trades lena.\n• *The Blueprint:* Ek solid written plan me teen cheezein honi chahiye—Pre-market analysis (kya trade karna hai), Execution rules (entry/exit ke exact conditions), aur Risk limits (daily max loss kitna hoga).\n• *The Discipline:* Jab market volatility high ho, tab bhi apne likhe hue rules par strictly stick karna hi true discipline hai.\n\n💡 *Golden Rule:* Plan your trade, and trade your plan.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "trading_plan",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0002",
+      "slot": "B",
+      "scheduled_ist": "2026-10-07 12:45",
+      "title": "📌 *TOPIC: Cash Flow vs Profit: Business Ki Asli Health Ko Samjho*",
+      "text": "📌 *TOPIC: Cash Flow vs Profit: Business Ki Asli Health Ko Samjho*\n\n*Hook Line:* Profit dikhne par bhi company ke paas salary dene ke paise kyun nahi hote?\n\n• *The Illusion:* Profit matlab accounting entry jo paper par hoti hai, isme udhar par becha gaya samaan bhi shamil hota hai.\n• *The Reality:* Cash flow matlab actual cash jo bank account me aaya ya gaya. Agar customer ne 90 din me payment nahi diya, toh profit hone ke bawajood business band ho sakta hai.\n• *The Learning:* Hamesha balance sheet me operating cash flow check karo taaki pata chale ki business ke paas liquid cash kitna hai.\n\n💡 *Golden Rule:* Profit is an opinion, cash is a fact.\n\n━━━━━━━━━━━━━━━━━━━━━\n#FundamentalAnalysis #StockMarketEducation\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "cash_flow_vs_profit",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0003",
+      "slot": "C",
+      "scheduled_ist": "2026-10-07 20:30",
+      "title": "📌 *TOPIC: Quarterly Result Ke 4 Number: Sahi Analysis Ka Sahi Tarika*",
+      "text": "📌 *TOPIC: Quarterly Result Ke 4 Number: Sahi Analysis Ka Sahi Tarika*\n\n*Hook Line:* Kya aap bhi sirf headline profit dekh kar agle din stock me kood padte ho?\n\n• *The Mistake:* Sirf net profit number dekhna aur pichle quarter ya pichle saal ke base ko ignore kar dena.\n• *The Correction:* Result padhte waqt in 4 numbers par dhyan do—Revenue growth, Operating Margin (EBITDA), Net Profit, aur Management Commentary. Agar sales badh rahi hai par margin gir raha hai, toh cost pressure ki problem hai.\n• *The Process:* Quarter-on-Quarter (QoQ) aur Year-on-Year (YoY) dono comparison karna zaroori hai.\n\n💡 *Golden Rule:* Numbers tell a story; read the footnotes, not just the headlines.\n\n━━━━━━━━━━━━━━━━━━━━━\n#FundamentalAnalysis #Investing\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "quarterly_results",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0004",
+      "slot": "A",
+      "scheduled_ist": "2026-10-08 08:15",
+      "title": "📌 *TOPIC: Circuit Limit Kaise Lagti Hai: Jab Market Me Achanak Sannata Chha Jaye",
+      "text": "📌 *TOPIC: Circuit Limit Kaise Lagti Hai: Jab Market Me Achanak Sannata Chha Jaye*\n\n*Hook Line:* Subah screen kholte hi ek stock me achanak trading ruk gayi, aisi situation me kya hota hai?\n\n• *The Scene:* Ek aisi news aayi jisse stock me ek taraf bhaari buying ya selling shuru ho gayi, aur kuch hi minutes me exchange ne circuit limit hit kar di.\n• *The Mechanism:* Stock exchanges (NSE/BSE) price volatility ko control karne ke liye upper aur lower circuits set karte hain (jaise 5%, 10%, ya 20%). Ek baar limit hit hone ke baad, uske aage orders match hona band ho jaate hain.\n• *The Impact:* Aise waqt me panic order place karne ka koi fayda nahi hota kyunki liquidity khatam ho chuki hoti hai.\n\n💡 *Golden Rule:* Circuits are safety valves designed to prevent market panic.\n\n━━━━━━━━━━━━━━━━━━━━━\n#StockMarketBasics #TradingRules\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "circuit_limit",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0005",
+      "slot": "B",
+      "scheduled_ist": "2026-10-08 12:45",
+      "title": "📌 *TOPIC: Market Structure (HH-HL): Retail Mistakes Ki Checklist*",
+      "text": "📌 *TOPIC: Market Structure (HH-HL): Retail Mistakes Ki Checklist*\n\n*Hook Line:* Trend ke saath trade karne ki koshish me baar baar stop-hit kyun ho jaate hain?\n\n• *The Mistake:* Bina structure samjhe kisi bhi level par trend reversal ki ummeed lagakar baith jana.\n• *The Checklist:* \n1. Kya price pichle high ko cross kar raha hai (Higher High)?\n2. Kya pullback pichle low ke upar hi ruk raha hai (Higher Low)?\n3. Kya aap sirf moving averages par depend hain bina price action dekhe?\n• *The Fix:* Hamesha multi-timeframe par structure map karo aur trend ke flow ke sath chalo.\n\n💡 *Golden Rule:* The trend is your friend until it bends.\n\n━━━━━━━━━━━━━━━━━━━━━\n#PriceAction #TradingStrategy\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "market_structure",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0006",
+      "slot": "C",
+      "scheduled_ist": "2026-10-08 20:30",
+      "title": "📌 *MAX TRADES PER DAY: Overtrading vs Discipline*",
+      "text": "📌 *MAX TRADES PER DAY: Overtrading vs Discipline*\n\n*Hook Line:* Din ke end mein broker ko heavy brokerage dene ke baad account balance dekh kar dukh hota hai kya?\n\n• *The Myth:* Traders ko lagta hai ki jitne zyada trades lenge, utna bada profit banega aur market se daily paisa nikalna zaroori hai.\n• *The Reality:* Zyada trades lene se sirf transaction charges badhte hain aur revenge trading ka cycle start hota hai, jisse capital tezi se deplete hoti hai.\n• *The Smart Fix:* Daily ka ek strict maximum trade limit set karo. Ek baar limit hit hone ke baad system band karke screen se dur ho jao.\n\n💡 *Golden Rule:* Trading ek business hai, isse casino mat banao; kam trades lo par high clarity ke sath lo.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "max_trades",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0007",
+      "slot": "A",
+      "scheduled_ist": "2026-10-09 08:15",
+      "title": "📌 *BREAKOUT VS FAKEOUT: The Capital Trap*",
+      "text": "📌 *BREAKOUT VS FAKEOUT: The Capital Trap*\n\n*Hook Line:* Har resistance break hone par entry lete ho aur agliii hi candle me market reverse ho jati hai?\n\n• *The Mistake:* Retail traders bina volume ya market structure check kiye har breakout ko blind chase karte hain.\n• *The Reality:* Maan lijiye aapke paas ₹1,00,000 capital hai. Agar aap bina confirmation ke 5 fake breakouts me entry loge, toh chote-chote false moves milakar aapki capital ka ek bada hissa sirf chop me barbaad ho jayega.\n• *The Smart Fix:* Hamesha breakout ke baad retest ka wait karo ya volume expansion ko confirm hone do tabhi trade execution ka socho.\n\n💡 *Golden Rule:* Har breakout successful nahi hota, isliye patience aur confirmation hamesha entry se pehle aane chahiye.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "breakout_vs_fakeout",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0008",
+      "slot": "B",
+      "scheduled_ist": "2026-10-09 12:45",
+      "title": "📌 *PRE-TRADE CHECKLIST: Planning vs Gambling*",
+      "text": "📌 *PRE-TRADE CHECKLIST: Planning vs Gambling*\n\n*Hook Line:* Market khulne se pehle kya aapke paas ek solid plan hota hai ya screen kholte hi impulse trading shuru?\n\n• *The Myth:* Bahut se traders sochte hain ki live market me jo dikhega waisa hi act karenge, checklist rakhna time waste hai.\n• *The Reality:* Bina checklist ke trading karne ka matlab hai bina parachute ke plane se jump karna; emotions high hote hain aur capital risk par lag jati hai.\n• *The Smart Fix:* Trade lene se pehle ek written checklist follow karo jisme risk limit, setup validation, aur market trend clearly defined ho.\n\n💡 *Golden Rule:* Professional trader banne ka rasta disciplined preparation se jata hai, random guessing se nahi.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "pre_trade_checklist",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0009",
+      "slot": "C",
+      "scheduled_ist": "2026-10-09 20:30",
+      "title": "📌 *DIVERGENCE KYA BATATI HAI: Hidden Momentum Shift*",
+      "text": "📌 *DIVERGENCE KYA BATATI HAI: Hidden Momentum Shift*\n\n*Hook Line:* Price naye highs bana raha hai, par andar hi andar market ki jaan nikal chuki hai ye kaise pata chale?\n\n• *The Mistake:* Sirf price action dekh kar blindly trend ko continue man lena jabki momentum weak ho raha ho.\n• *The Reality:* Jab price upar jata hai par indicator neeche ki taraf jhukne lagta hai, toh ye clear sign hota hai ki buyers ab thak rahe hain aur smart money exit kar raha hai.\n• *The Smart Fix:* Divergence ko ek warning bell ki tarah use karo. Iska matlab ye nahi ki turant reverse trade lo, balki apne existing profit ko protect karne ka signal samjho.\n\n💡 *Golden Rule:* Price sab kuch chhupa sakta hai, par momentum ka change hamesha divergence me pakda jata hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "divergence",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0010",
+      "slot": "A",
+      "scheduled_ist": "2026-10-10 08:15",
+      "title": "📌 *TREND VS RANGE: Stop Losing in Sideways Market*",
+      "text": "📌 *TREND VS RANGE: Stop Losing in Sideways Market*\n\n*Hook Line:* Kya aap trend-following strategies ko sideways market me use karke apna paisa loose kar dete ho?\n\n• *The Mistake:* Pehle traders har jagah trend dhundne ki koshish karte hain aur jab market ek hi range me ghumta hai, toh breakout trade ke chakkar me fas jate hain.\n• *The Corrective Process:* Sabse pehle multi-timeframe analysis se ye identify karo ki market trending hai ya range-bound. Agar range hai, toh support-resistance boundaries par focus karo aur breakout ki umeed chhor do.\n• *The Smart Fix:* Market ki current condition ke hisab se apni strategy change karo; har din ek hi tarike se trade mat karo.\n\n💡 *Golden Rule:* Market ka mood pehchano, uske khilaf ladoge toh loss hi hath lagega.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "trend_vs_range",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0011",
+      "slot": "B",
+      "scheduled_ist": "2026-10-10 12:45",
+      "title": "📌 *RISK TO REWARD KA JHOOT: The Math Behind It*",
+      "text": "📌 *RISK TO REWARD KA JHOOT: The Math Behind It*\n\n*Hook Line:* Kya aapko lagta hai ki sirf bada Risk:Reward rakhne se aap profitable trader ban jaoge?\n\n• *The Myth:* Log sochte hain ki agar hum high target rakhenge toh ek trade me saara loss cover ho jayega, chahe win rate kitna bhi kam ho.\n• *The Reality:* Agar aapka win rate sirf 20% hai, toh bade target ke chakkar me aapki capital lagataar stop-loss hit hone ki wajah se khatam ho jayegi.\n• *The Smart Fix:* Risk:Reward ke sath-sath apni strategy ki accuracy (win rate) par kaam karo. Ek realistic balance hi aapko long term me market me tika sakta hai.\n\n💡 *Golden Rule:* Risk aur Reward ka ratio tabhi kaam karta hai jab aapka setup aur executionconsistent ho.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "risk_reward_myth",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0012",
+      "slot": "C",
+      "scheduled_ist": "2026-10-10 20:30",
+      "title": "📌 *TOPIC: NBFC vs Bank - Kya Galat Hota Hai?*",
+      "text": "📌 *TOPIC: NBFC vs Bank - Kya Galat Hota Hai?*\n\n*Hook Line:* Kya aapko pata hai ki kyun kuch NBFCs banks ke comparison me jaldi stress me aa jaati hain?\n\n• *The Mistake:* Pehle ke samay me, NBFCs short-term borrowings karke long-term loans de deti thin. Asset-Liability Mismatch ko ignore karke sirf high growth par focus hota tha.\n• *The Reality Check:* Jab liquidity tight hoti thi, tab rollover risk badh jata tha aur default crisis shuru ho jati thi. Pure financial system me panic failta tha.\n• *The Smart Fix:* Ab regulators ne strict rules bana diye hain. Asset-Liability Management (ALM) guidelines ko follow karna mandatory hai, aur liquidity buffer maintain karna padta hai.\n\n💡 *Golden Rule:* Growth important hai, par asset aur liability ka matching timeline sabse bada safety shield hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "nbfc_vs_bank",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0013",
+      "slot": "A",
+      "scheduled_ist": "2026-10-11 08:15",
+      "title": "📌 *TOPIC: Overtrading ki Khatarnak Checklist*",
+      "text": "📌 *TOPIC: Overtrading ki Khatarnak Checklist*\n\n*Hook Line:* Subah ka profit dopahar tak loss me kaise badal jata hai? Kabhi socha hai?\n\n• *The Mistake:* Ek ya do bad trades ke baad 'revenge trading' shuru kar dena aur bina setup ke bas screen par click karte rehna.\n• *The Reality Check:* Brokerage aur taxes milkar aapke 1,00,000 capital ka ek bada hissa bina kisi logic ke uda dete hain.\n• *The Smart Fix:* Daily max loss limit set karo. Jaise hi limit hit ho, laptop band karke screen se door ho jao.\n\n💡 *Golden Rule:* Discipline kam trades lene me hai, pure din screen chipke rehne me nahi.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "overtrading",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0014",
+      "slot": "B",
+      "scheduled_ist": "2026-10-11 12:45",
+      "title": "📌 *TOPIC: 30 Minute Daily Trading Routine*",
+      "text": "📌 *TOPIC: 30 Minute Daily Trading Routine*\n\n*Hook Line:* Subah 9 baj kar 15 minute par jab market khulta hai, toh kya aapka haath bhi panic me trade button dabata hai?\n\n• *The Mistake:* Bina pre-market prep ke seedhe charts kholkar random breakout par entry le lena.\n• *The Reality Check:* Planning ke bina kiya gaya trade sirf ek gamble hota hai jiska outcome luck par depend karta hai.\n• *The Smart Fix:* 30 minute routine follow karo: 15 minute global cues aur levels mark karne ke liye, aur 15 minute apne rules review karne ke liye.\n\n💡 *Golden Rule:* Prepared trader hamesha reactive trader se behtar perform karta hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "daily_routine_30_minute",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    },
+    {
+      "id": "ai0015",
+      "slot": "C",
+      "scheduled_ist": "2026-10-11 20:30",
+      "title": "📌 *TOPIC: Candlestick Anatomy ki Common Mistakes*",
+      "text": "📌 *TOPIC: Candlestick Anatomy ki Common Mistakes*\n\n*Hook Line:* Kya aap bhi sirf ek green candle dekhkar blindly buy kar lete hain?\n\n• *The Mistake:* Candle ki body aur wick (shadow) ke piche ki buyer-seller psychology ko ignore karna.\n• *The Reality Check:* Ek choti body wali candle with long wick dikhati hai ki rejection kahan se aa raha hai, jise retail traders nahi samajhte.\n• *The Smart Fix:* Hamesha candle ke context ko samjho. Support ya resistance par candle kaise close ho rahi hai, yeh sabse important hai.\n\n💡 *Golden Rule:* Candle sirf ek picture hai, uske piche ka volume aur trend asli kahani batata hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "candlestick_anatomy",
+      "generated_at": "2026-10-07 13:20:08 IST"
+    }
+  ],
+  "total": 15,
+  "last_scheduled": "2026-10-11 20:30"
+}
