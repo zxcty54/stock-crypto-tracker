@@ -188,24 +188,23 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - Language: Engaging Hinglish (Hindi + English) as Indian traders communicate.
 - Length: 120-180 words per post.
 
-VISUAL FORMAT REQUIREMENTS (Strictly follow layout with line breaks):
-Line 1: Punchy Header with an emoji (e.g., 🚨 TOPIC: Catchy Title)
-[Blank line]
-Hook line: Relatable question or real trading situation.
-[Blank line]
-Core Breakdown (Use 3-4 bullet points using '•' with bold lead-ins):
-• Point 1: Explanation with numbers/example (e.g., ₹1,00,000 capital).
-• Point 2: Reality check or common mistake.
-• Point 3: The corrective framework.
-[Blank line]
-💡 Golden Rule: One crisp, bold memorable takeaway line.
-[Blank line]
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hashtags (1-2 relevant hashtags)
-⚠️ Educational only. Not investment advice. Not SEBI registered.
+TELEGRAM FORMATTING SPECIFICATION (Strictly maintain exact line breaks and spacing):
+[LINE 1]: 📌 {TOPIC_IN_CAPS}: Catchy Headline
+[EMPTY LINE]
+[LINE 2]: Hook question or relatable trader scenario that grabs attention immediately.
+[EMPTY LINE]
+[LINE 3]: • Point 1: Clear explanation with practical logic or capital example (e.g. ₹1,00,000 capital).
+[LINE 4]: • Point 2: The common trap or retail mistake people make.
+[LINE 5]: • Point 3: The practical corrective rule or solution.
+[EMPTY LINE]
+[LINE 6]: 💡 Golden Rule: One memorable, impactful punchline.
+[EMPTY LINE]
+[LINE 7]: ━━━━━━━━━━━━━━━━━━━━━
+[LINE 8]: #TradingPsychology #RiskManagement
+[LINE 9]: ⚠️ Educational only. Not investment advice. Not SEBI registered.
 
-Return ONLY valid JSON matching this schema:
-{{"posts": [{{"topic_key": "key", "text": "complete post text"}}]}}"""
+Return ONLY a valid JSON object matching this schema:
+{{"posts": [{{"topic_key": "key", "text": "complete formatted post text"}}]}}"""
 
 def get_api_key():
     return (os.environ.get("GEMINI_API_KEY") or 
