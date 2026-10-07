@@ -2,8 +2,8 @@ name: Hourly NSE Scraper & AI Summarizer Pipeline
 
 on:
   schedule:
-    # 24 ghante har 30 minute par chalega (All day, every day)
-    - cron: '*/30 * * * *'
+    # 24 ghante har 30 min (17th & 47th minute offset to avoid queue drop)
+    - cron: '17,47 * * * *'
   workflow_dispatch:
 
 jobs:
