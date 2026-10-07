@@ -15,7 +15,7 @@ POSTED_LOG_FILE = "telegram_posted_log.json"
 BOT_TOKEN = os.environ.get("TELEGRAM_TOKEN") or os.environ.get("TELEGRAM_BOT_TOKEN")
 
 # Channel username
-CHAT_ID = "@bhaga_657"
+CHAT_ID = "@niftytradingstrategies"
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
