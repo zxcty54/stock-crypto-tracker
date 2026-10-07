@@ -176,44 +176,68 @@ def topic_key_of(label):
 # ============================================================
 # AI GENERATION ENGINE (GEMINI)
 # ============================================================
-PROMPT_TEMPLATE = """You are writing educational Telegram posts for an Indian stock market education channel.
+PROMPT_TEMPLATE = """You are an institutional trading psychology and risk management educator writing educational Telegram content for Indian traders.
 Topics to cover:
 {topics}
 
 STRICT SEBI & EDITORIAL GUIDELINES:
-- No company or stock names (No Reliance, TCS, HDFC, Adani, etc.)
-- No price levels, entry, stop-loss, or target numbers.
-- No profit or return claims (No 'guaranteed', 'multibagger', 'sure shot').
-- Focus 100% on concepts, math, logic, risk management, and discipline.
-- Language: Engaging Hinglish (Hindi + English) as Indian traders communicate.
-- Length: 120-180 words per post.
+- No stock or company names (No Reliance, Tata, HDFC, Adani, etc.)
+- No entry, stop-loss, target numbers, or trade calls.
+- No profit/return claims (No 'guaranteed', 'multibagger', '100%').
+- Language: Punchy, conversational Hinglish (Hindi + English mix).
 
-CRITICAL TELEGRAM FORMATTING RULES:
-- Use asterisks for bold text (*like this*), especially for headings, key metrics, and bullet titles.
-- DO NOT WRITE the literal words "Point 1", "Point 2", "Point 3". Use bold contextual names instead!
-
-EXACT LAYOUT STRUCTURE:
-📌 *TOPIC: Catchy Headline*
-
-*Hook Line:* Relatable question or real trading dilemma that grabs immediate attention.
-
-• *The Mistake:* What retail traders usually do wrong in excitement/panic.
-• *The Reality Check:* Real mathematical damage or risk scenario (e.g. ₹1,00,000 capital).
-• *The Smart Fix:* Practical rule or system to handle this systematically.
-
-💡 *Golden Rule:* One punchy, memorable takeaway line.
-
-━━━━━━━━━━━━━━━━━━━━━
-#TradingPsychology #RiskManagement
-⚠️ Educational only. Not investment advice. Not SEBI registered.
+For EACH topic, return JSON with these exact conceptual breakdown fields:
+- "topic_key": Short identifier string
+- "title": Short catchy title in Hinglish (e.g. GREED: Green Numbers Ka Nasha)
+- "hook": Relatable real trading emotion or situation (1-2 sentences)
+- "mistake": The exact trap or blunder retail traders commit (1 clear sentence)
+- "reality_check": Concrete consequence or mathematical risk scenario with numbers e.g. ₹1,00,000 capital (1 clear sentence)
+- "solution": The practical discipline rule or execution checklist (1 clear sentence)
+- "golden_rule": One hard-hitting memorable punchline (1 crisp sentence)
 
 Return ONLY valid JSON matching this schema:
-{{"posts": [{{"topic_key": "key", "text": "complete formatted post text"}}]}}"""
+{{"posts": [{{
+  "topic_key": "key",
+  "title": "...",
+  "hook": "...",
+  "mistake": "...",
+  "reality_check": "...",
+  "solution": "...",
+  "golden_rule": "..."
+}}]}}"""
 
 def get_api_key():
     return (os.environ.get("GEMINI_API_KEY") or 
             os.environ.get("GOOGLE_API_KEY") or 
             os.environ.get("GROQ_API_KEY") or "").strip()
+
+def assemble_telegram_post(p):
+    """
+    Python deterministic formatter:
+    Assembles structured components into a bold, clean Telegram layout.
+    Eliminates robotic 'Point 1 / Point 2' tags completely.
+    """
+    title = p.get("title", "").strip().replace("*", "")
+    hook = p.get("hook", "").strip()
+    mistake = p.get("mistake", "").strip()
+    reality = p.get("reality_check", "").strip()
+    solution = p.get("solution", "").strip()
+    golden_rule = p.get("golden_rule", "").strip()
+
+    formatted_text = f"""📌 *{title}*
+
+{hook}
+
+• *The Trap:* {mistake}
+• *The Damage:* {reality}
+• *The Fix:* {solution}
+
+💡 *Golden Rule:* {golden_rule}
+
+━━━━━━━━━━━━━━━━━━━━━
+#TradingPsychology #RiskManagement
+⚠️ Educational only. Not investment advice. Not SEBI registered."""
+    return formatted_text
 
 def call_ai(topics, angles):
     api_key = get_api_key()
@@ -224,7 +248,6 @@ def call_ai(topics, angles):
     topic_lines = "\n".join(f"- {t} (Angle: {a})" for t, a in zip(topics, angles))
     prompt = PROMPT_TEMPLATE.format(topics=topic_lines)
 
-    # Gemini API Call (Direct REST endpoint, zero SDK dependencies)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={api_key}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
@@ -240,7 +263,20 @@ def call_ai(topics, angles):
         if res.status_code == 200:
             raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
             data = json.loads(raw)
-            return data.get("posts", [])
+            raw_posts = data.get("posts", [])
+            
+            final_posts = []
+            for item in raw_posts:
+                # Agar AI ne already string me 'text' de diya ho
+                if "text" in item and len(item["text"]) > 100:
+                    final_posts.append(item)
+                else:
+                    # Deterministic formatting assemble karo
+                    final_posts.append({
+                        "topic_key": item.get("topic_key", ""),
+                        "text": assemble_telegram_post(item)
+                    })
+            return final_posts
         else:
             print(f"   ⚠️ Gemini returned HTTP {res.status_code}: {res.text[:150]}")
     except Exception as e:
@@ -304,11 +340,13 @@ def append_to_queue(queue, accepted):
         dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
         new_id = f"ai{last_id + i:04d}"
 
+        raw_title = post["text"].split("\n")[0].replace("📌", "").replace("*", "").strip()
+
         items.append({
             "id": new_id,
             "slot": slot,
             "scheduled_ist": dt.strftime("%Y-%m-%d %H:%M"),
-            "title": post["text"].split("\n")[0][:80],
+            "title": raw_title[:80],
             "text": post["text"],
             "used": False,
             "topic_key": post.get("topic_key", ""),
@@ -336,7 +374,6 @@ def pick_topics(used, count):
     if len(candidates) >= count:
         return candidates[:count]
 
-    # Recycle older topics if pool exhausted
     cutoff = (NOW - timedelta(days=REUSE_AFTER_DAYS)).strftime("%Y-%m-%d")
     reusable = [
         (f"{p}:{topic_key_of(l)}", l)
@@ -389,7 +426,6 @@ def main():
     accepted = []
     rejected = []
 
-    # Process in chunks of BATCH_SIZE (6 posts at a time)
     for i in range(0, len(topics), BATCH_SIZE):
         chunk = topics[i:i + BATCH_SIZE]
         angles = [random.choice(ANGLES) for _ in chunk]
@@ -410,7 +446,7 @@ def main():
             accepted.append(p)
             existing_norm.append(normalize_text(text))
 
-        time.sleep(2)  # Cooldown between API chunks
+        time.sleep(2)
 
     print(f"\n📊 Run Summary: {len(accepted)} Accepted | {len(rejected)} Rejected")
 
