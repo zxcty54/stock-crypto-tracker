@@ -2,6 +2,7 @@
 """
 CONTENT FACTORY — Production Grade Engine
 Automated, SEBI-compliant content generation for Telegram.
+Uses HTML formatting for 100% reliable bold text delivery.
 """
 
 import os
@@ -28,7 +29,6 @@ REUSE_AFTER_DAYS  = 180       # Cycle old topics only after 6 months
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-# Post presentation angles
 ANGLES = [
     "step-by-step practical guide ki tarah likho",
     "common retail mistakes ki checklist banao",
@@ -140,7 +140,6 @@ def scan_compliance(text):
         if m:
             reasons.append(f"Advice pattern: '{m.group(0)[:35]}'")
 
-    # Regulatory Disclaimer check
     if "not sebi registered" not in low and "sebi registered nahi" not in low:
         reasons.append("Disclaimer missing")
 
@@ -155,7 +154,8 @@ def scan_compliance(text):
 # DEDUPLICATION & REUSE
 # ============================================================
 def normalize_text(text):
-    t = re.sub(r"#\w+", " ", text.lower())
+    t = re.sub(r"<[^>]+>", " ", text) # Strip HTML tags for clean diffing
+    t = re.sub(r"#\w+", " ", t.lower())
     t = re.sub(r"⚠️|not investment advice|not sebi registered", " ", t)
     t = re.sub(r"[^a-z0-9\s]", " ", t)
     return re.sub(r"\s+", " ", t).strip()
@@ -176,7 +176,7 @@ def topic_key_of(label):
 # ============================================================
 # AI GENERATION ENGINE (GEMINI)
 # ============================================================
-PROMPT_TEMPLATE = """You are an institutional trading psychology and risk management educator writing educational Telegram content for Indian traders.
+PROMPT_TEMPLATE = """You are an institutional trading educator writing educational posts for Indian traders.
 Topics to cover:
 {topics}
 
@@ -184,15 +184,15 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - No stock or company names (No Reliance, Tata, HDFC, Adani, etc.)
 - No entry, stop-loss, target numbers, or trade calls.
 - No profit/return claims (No 'guaranteed', 'multibagger', '100%').
-- Language: Punchy, conversational Hinglish (Hindi + English mix).
+- Language: Natural Hinglish (Hindi + English mix).
 
-For EACH topic, return JSON with these exact conceptual breakdown fields:
+For EACH topic, provide structured conceptual breakdown fields:
 - "topic_key": Short identifier string
-- "title": Short catchy title in Hinglish (e.g. GREED: Green Numbers Ka Nasha)
+- "title": Short catchy headline in Hinglish (e.g. MA KA SAHI USE: Trend Pehchano)
 - "hook": Relatable real trading emotion or situation (1-2 sentences)
-- "mistake": The exact trap or blunder retail traders commit (1 clear sentence)
-- "reality_check": Concrete consequence or mathematical risk scenario with numbers e.g. ₹1,00,000 capital (1 clear sentence)
-- "solution": The practical discipline rule or execution checklist (1 clear sentence)
+- "mistake": The exact retail error or trap (1 clear sentence)
+- "reality_check": Concrete risk/damage scenario with numbers e.g. ₹1,00,000 capital (1 clear sentence)
+- "solution": Practical rule or system to handle this systematically (1 clear sentence)
 - "golden_rule": One hard-hitting memorable punchline (1 crisp sentence)
 
 Return ONLY valid JSON matching this schema:
@@ -211,33 +211,34 @@ def get_api_key():
             os.environ.get("GOOGLE_API_KEY") or 
             os.environ.get("GROQ_API_KEY") or "").strip()
 
+def clean_html(text: str) -> str:
+    """Removes HTML characters that could break Telegram HTML parser."""
+    return text.replace("<", "").replace(">", "").replace("&", "&amp;").strip()
+
 def assemble_telegram_post(p):
     """
-    Python deterministic formatter:
-    Assembles structured components into a bold, clean Telegram layout.
-    Eliminates robotic 'Point 1 / Point 2' tags completely.
+    Constructs post using clean, un-breakable HTML bold tags.
     """
-    title = p.get("title", "").strip().replace("*", "")
-    hook = p.get("hook", "").strip()
-    mistake = p.get("mistake", "").strip()
-    reality = p.get("reality_check", "").strip()
-    solution = p.get("solution", "").strip()
-    golden_rule = p.get("golden_rule", "").strip()
+    title = clean_html(p.get("title", ""))
+    hook = clean_html(p.get("hook", ""))
+    mistake = clean_html(p.get("mistake", ""))
+    reality = clean_html(p.get("reality_check", ""))
+    solution = clean_html(p.get("solution", ""))
+    golden_rule = clean_html(p.get("golden_rule", ""))
 
-    formatted_text = f"""📌 *{title}*
+    return f"""📌 <b>{title}</b>
 
 {hook}
 
-• *The Trap:* {mistake}
-• *The Damage:* {reality}
-• *The Fix:* {solution}
+• <b>The Trap:</b> {mistake}
+• <b>The Damage:</b> {reality}
+• <b>The Fix:</b> {solution}
 
-💡 *Golden Rule:* {golden_rule}
+💡 <b>Golden Rule:</b> {golden_rule}
 
 ━━━━━━━━━━━━━━━━━━━━━
 #TradingPsychology #RiskManagement
 ⚠️ Educational only. Not investment advice. Not SEBI registered."""
-    return formatted_text
 
 def call_ai(topics, angles):
     api_key = get_api_key()
@@ -267,15 +268,13 @@ def call_ai(topics, angles):
             
             final_posts = []
             for item in raw_posts:
-                # Agar AI ne already string me 'text' de diya ho
-                if "text" in item and len(item["text"]) > 100:
-                    final_posts.append(item)
-                else:
-                    # Deterministic formatting assemble karo
+                if "title" in item and "mistake" in item:
                     final_posts.append({
                         "topic_key": item.get("topic_key", ""),
                         "text": assemble_telegram_post(item)
                     })
+                elif "text" in item and len(item["text"]) > 100:
+                    final_posts.append(item)
             return final_posts
         else:
             print(f"   ⚠️ Gemini returned HTTP {res.status_code}: {res.text[:150]}")
@@ -285,7 +284,7 @@ def call_ai(topics, angles):
     return []
 
 # ============================================================
-# QUEUE SCHEDULER (3 POSTS/DAY)
+# QUEUE SCHEDULER
 # ============================================================
 SLOTS = [("A", 8, 15), ("B", 12, 45), ("C", 20, 30)]
 
@@ -340,13 +339,14 @@ def append_to_queue(queue, accepted):
         dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
         new_id = f"ai{last_id + i:04d}"
 
-        raw_title = post["text"].split("\n")[0].replace("📌", "").replace("*", "").strip()
+        # Clean title for logging
+        clean_title = re.sub(r"<[^>]+>", "", post["text"].split("\n")[0]).replace("📌", "").strip()
 
         items.append({
             "id": new_id,
             "slot": slot,
             "scheduled_ist": dt.strftime("%Y-%m-%d %H:%M"),
-            "title": raw_title[:80],
+            "title": clean_title[:80],
             "text": post["text"],
             "used": False,
             "topic_key": post.get("topic_key", ""),
