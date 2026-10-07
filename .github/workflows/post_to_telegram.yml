@@ -36,30 +36,42 @@ jobs:
       - name: 📦 Install Requests
         run: pip install requests
 
-      - name: 🚀 Dispatch Post to Telegram
+      - name: 🚀 Dispatch Post to Telegram & Telegraph
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python telegram_poster.py
+          python channel_dispatcher.py
 
-      - name: 💾 Commit Updated Queue State
+      - name: 💾 Commit Updated Queue and State Files
         run: |
           git config --global user.name "TelegramPosterBot"
           git config --global user.email "bot@github-actions.internal"
 
-          cp content_queue.json /tmp/content_queue.json
+          # 1. State files ko safe backup (/tmp) folder me copy karein
+          mkdir -p /tmp/state_backup
+          [ -f content_queue.json ] && cp content_queue.json /tmp/state_backup/
+          [ -f nse_content_feed.json ] && cp nse_content_feed.json /tmp/state_backup/
+          [ -f telegraph_state.json ] && cp telegraph_state.json /tmp/state_backup/
+          [ -f post_log.json ] && cp post_log.json /tmp/state_backup/
 
+          # 2. Remote repo se hard sync karein (merge conflict eliminate karne ke liye)
           git fetch origin main
           git reset --hard origin/main
 
-          cp /tmp/content_queue.json content_queue.json
+          # 3. Updated state files ko wapas restore karein
+          [ -f /tmp/state_backup/content_queue.json ] && cp /tmp/state_backup/content_queue.json content_queue.json
+          [ -f /tmp/state_backup/nse_content_feed.json ] && cp /tmp/state_backup/nse_content_feed.json nse_content_feed.json
+          [ -f /tmp/state_backup/telegraph_state.json ] && cp /tmp/state_backup/telegraph_state.json telegraph_state.json
+          [ -f /tmp/state_backup/post_log.json ] && cp /tmp/state_backup/post_log.json post_log.json
 
-          git add content_queue.json
+          # 4. Stage aur commit karein
+          git add content_queue.json nse_content_feed.json telegraph_state.json post_log.json 2>/dev/null || true
+
           if git diff --staged --quiet; then
             echo "ℹ️ No changes to commit."
           else
-            git commit -m "🤖 Update: Marked post as used [skip ci]"
+            git commit -m "🤖 Update: Dispatched post & synced Telegraph state [skip ci]"
             git push origin main
-            echo "✅ Queue state committed."
+            echo "✅ Queue and state files cleanly committed."
           fi
