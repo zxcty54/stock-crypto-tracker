@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
 """
-NSE AI EDITORIAL PIPELINE â€” v2 (Hardened)
+NSE AI EDITORIAL PIPELINE — v2 (Hardened)
 =========================================
 v1 ke saare bugs fixed + SEBI compliance guardrails.
 
 CHANGES vs v1:
-  [FIX] Persistent dedup (seen_hashes) â€” 24h purge ke baad duplicate repost band
-  [FIX] analyzed_at ab actually set hota hai â€” retention kaam karta hai
-  [FIX] attempts counter â€” failed filings hamesha retry nahi karenge
-  [FIX] input_id int coercion â€” silent data loss band
+  [FIX] Persistent dedup (seen_hashes) — 24h purge ke baad duplicate repost band
+  [FIX] analyzed_at ab actually set hota hai — retention kaam karta hai
+  [FIX] attempts counter — failed filings hamesha retry nahi karenge
+  [FIX] input_id int coercion — silent data loss band
   [FIX] BATCH_PAUSE_SECONDS actually used
-  [FIX] API key dedup
+  [FIX] API key dedup (GEMINI_API_KEY prioritized)
   [FIX] RESULT guardrail source-level pe (AI se pehle)
   [NEW] HTML sanitizer (invalid tags / markdown slip se post fail nahi hogi)
   [NEW] DISCLAIMER + AI-disclosure auto-inject (har post me)
-  [NEW] Number verification â€” AI hallucination guard
+  [NEW] Number verification — AI hallucination guard
   [NEW] SME / holdings / routine-keyword pre-filter (API cost bhi bachega)
 
 ENV VARS:
-  GROQ_API_KEY, GROQ_API_KEY2, GOOGLE_API_KEY, GOOGLE_API_KEY2, GEMINI_API_KEY
-  GH_PAT_TOKEN                       (optional â€” repo push ke liye)
+  GEMINI_API_KEY, GOOGLE_API_KEY, GOOGLE_API_KEY2, GROQ_API_KEY, GROQ_API_KEY2
+  GH_PAT_TOKEN                       (optional — repo push ke liye)
   MAX_FILING_AGE_DAYS=3              (optional)
-  STRICT_NUMBER_CHECK=true           (optional â€” mismatch pe post drop)
+  STRICT_NUMBER_CHECK=true           (optional — mismatch pe post drop)
   BLOCK_SME=true                     (optional)
 """
 
@@ -70,10 +70,10 @@ MAX_ATTEMPTS         = 3
 HASH_HISTORY_DAYS    = 180
 MAX_HASH_HISTORY     = 50000
 
-# Tumhari personal holdings â€” in symbols ka post auto-skip (conflict of interest)
+# Tumhari personal holdings — in symbols ka post auto-skip (conflict of interest)
 MY_HOLDINGS = {"EXAMPLE1", "EXAMPLE2"}             # <-- apne symbols daalo
 
-# Manual blocklist â€” jin symbols ko post nahi karna (SME, illiquid, past issues)
+# Manual blocklist — jin symbols ko post nahi karna (SME, illiquid, past issues)
 BLOCKED_SYMBOLS = set()                            # <-- apne symbols daalo
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -84,20 +84,21 @@ CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
 MODEL_REGISTRY = [
     {"name": "openai/gpt-oss-20b",       "provider": "groq"},
     {"name": "openai/gpt-oss-120b",      "provider": "groq"},
-    {"name": "gemini-3.5-flash-lite",         "provider": "google"},
-    {"name": "gemini-3.1-flash-lite",    "provider": "google"},
+    {"name": "gemini-2.5-flash",         "provider": "google"},
+    {"name": "gemini-2.5-flash-lite",    "provider": "google"},
 ]
 
-# [FIX] dedup â€” same key do env vars me ho to rotation useless ho jaati thi
+# [FIX] dedup — same key do env vars me ho to rotation useless ho jaati thi
 def _collect_keys(names):
     vals = [os.environ.get(n, "").strip() for n in names]
     return list(dict.fromkeys([v for v in vals if v]))
 
 GROQ_KEYS   = _collect_keys(["GROQ_API_KEY", "GROQ_API_KEY2"])
-GOOGLE_KEYS = _collect_keys(["GOOGLE_API_KEY", "GOOGLE_API_KEY2", "GEMINI_API_KEY"])
+# 🎯 GEMINI_API_KEY ko pehli priority di gayi hai:
+GOOGLE_KEYS = _collect_keys(["GEMINI_API_KEY", "GOOGLE_API_KEY", "GOOGLE_API_KEY2"])
 
 if not GROQ_KEYS and not GOOGLE_KEYS:
-    print("âŒ FATAL: No API keys found! Exiting.")
+    print("❌ FATAL: No API keys found! Exiting.")
     raise SystemExit(1)
 
 groq_key_idx = 0
@@ -106,7 +107,7 @@ current_model_idx = 0
 
 
 # ============================================================
-# PRE-FILTER (routine disclosures â€” API call se pehle hi reject)
+# PRE-FILTER (routine disclosures — API call se pehle hi reject)
 # ============================================================
 
 ROUTINE_PATTERNS = [
@@ -160,7 +161,7 @@ def prefilter(item):
 
 
 # ============================================================
-# SYSTEM PROMPT (NEWSROOM EDITOR â€” FACTUAL FLASH ALERTS)
+# SYSTEM PROMPT (NEWSROOM EDITOR — FACTUAL FLASH ALERTS)
 # ============================================================
 
 SYSTEM_PROMPT = """
@@ -173,7 +174,7 @@ Your task is to convert raw corporate filings into SHORT, FACTUAL, TELEGRAM-READ
 ============================================================
 For every filing:
 1. Decide whether it is content-worthy based on commercial and corporate materiality.
-2. Identify the correct event type.
+​2. Identify the correct event type.
 3. Extract only material facts explicitly available in the supplied data.
 4. Write a concise Telegram post.
 5. Never invent, infer, exaggerate, or speculate.
@@ -220,7 +221,7 @@ A post should contain:
 - 1 short factual context/explanation sentence
 - Official source link
 
-Do NOT add any disclaimer or AI-notice line â€” the system appends that automatically.
+Do NOT add any disclaimer or AI-notice line — the system appends that automatically.
 
 ============================================================
 5. EVENT SPECIFIC RULES
@@ -244,23 +245,23 @@ Layout:
 {ICON} <b>#{EVENT_TYPE}</b> | <b>{company_name} (NSE: {symbol})</b>
 
 <b>{headline}</b>
-â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+━━━━━━━━━━━━━━━━━━━━━
 
-ðŸ”¹ <b>Key Details:</b>
+🔹 <b>Key Details:</b>
 - <b>{Field}:</b> {Value}
 - <b>{Field}:</b> {Value}
 - <b>{Field}:</b> {Value}
 
-ðŸ“Œ <b>What happened:</b>
-â†³ {1-2 concise factual sentences based strictly on filing}
-â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
-ðŸ“Œ <b>Source:</b> <a href="{pdf_link}">NSE Corporate Filing</a>
+📍 <b>What happened:</b>
+↳ {1-2 concise factual sentences based strictly on filing}
+━━━━━━━━━━━━━━━━━━━━━
+📍 <b>Source:</b> <a href="{pdf_link}">NSE Corporate Filing</a>
 
-CATEGORY ICONS: BUYBACK ðŸ’° | DIVIDEND ðŸ’µ | BONUS ðŸŽ | STOCK_SPLIT âœ‚ï¸ | RESULT ðŸ“Š |
-ORDER_WIN ðŸ“œ | CONTRACT ðŸ“œ | CAPEX ðŸ­ | COMMERCIAL_PRODUCTION ðŸ­ | ACQUISITION ðŸ¤ |
-JOINT_VENTURE ðŸ¤ | MERGER ðŸ”„ | DEMERGER ðŸ”„ | FUNDRAISING ðŸ’° | QIP ðŸ’° | RIGHTS_ISSUE ðŸ’° |
-NEW_PRODUCT ðŸš€ | REGULATORY_APPROVAL âœ… | USFDA_OBSERVATION âš ï¸ | LITIGATION âš–ï¸ |
-RESIGNATION ðŸ‘¤ | APPOINTMENT ðŸ‘¤ | CREDIT_RATING ðŸ¦ | OTHER âš¡
+CATEGORY ICONS: BUYBACK 💰 | DIVIDEND 💵 | BONUS 🎁 | STOCK_SPLIT ✂️ | RESULT 📊 |
+ORDER_WIN 📜 | CONTRACT 📜 | CAPEX 🏭 | COMMERCIAL_PRODUCTION 🏭 | ACQUISITION 🤝 |
+JOINT_VENTURE 🤝 | MERGER 🔄 | DEMERGER 🔄 | FUNDRAISING 💰 | QIP 💰 | RIGHTS_ISSUE 💰 |
+NEW_PRODUCT 🚀 | REGULATORY_APPROVAL ✅ | USFDA_OBSERVATION ⚠️ | LITIGATION ⚖️ |
+RESIGNATION 👤 | APPOINTMENT 👤 | CREDIT_RATING 🏦 | OTHER ⚡
 
 ============================================================
 7. OUTPUT FORMAT
@@ -306,17 +307,13 @@ def sanitize_telegram_html(text):
     if not text:
         return ""
 
-    # markdown slip safety net
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text, flags=re.S)
 
-    # disallowed tags strip
     def _tag(m):
         tag = m.group(2).lower()
         return m.group(0) if tag in ALLOWED_TAGS else ""
 
     text = re.sub(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)([^<>]*)>", _tag, text)
-
-    # stray angle brackets + raw ampersand
     text = re.sub(r"<(?![a-zA-Z/])", "&lt;", text)
     text = re.sub(r"(?<![\"=a-zA-Z])>(?![a-zA-Z])", "&gt;", text)
     text = re.sub(r"&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)", "&amp;", text)
@@ -325,14 +322,14 @@ def sanitize_telegram_html(text):
 
 
 DISCLAIMER_BLOCK = (
-    "\n\nâš ï¸ <i>Educational only. Not investment advice. Not SEBI registered.</i>\n"
-    "ðŸ¤– <i>AI-assisted summary of public filing. Numbers verify karne ke liye "
+    "\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>\n"
+    "🤖 <i>AI-assisted summary of public filing. Numbers verify karne ke liye "
     "source link dekho.</i>"
 )
 
 
 def inject_disclaimer(post):
-    """Har post me disclaimer â€” agar already nahi hai to."""
+    """Har post me disclaimer — agar already nahi hai to."""
     if not post:
         return post
     if "Not SEBI registered" in post:
@@ -364,20 +361,15 @@ MONTH_RE = r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)"
 
 
 def _is_context_number(raw, val, ctx):
-    """
-    Dates / years / times ko ignore karo â€” warna false positives aayenge.
-    IMPORTANT: sirf INTEGER values ko date maano, aur sirf tab jab context
-    date-jaisa ho. Warna '3.8 ha' ya '25 crore' chhoot jaayega.
-    """
-    if re.search(r"\d\s*:\s*\d", ctx):                 # 12:45 (time)
+    if re.search(r"\d\s*:\s*\d", ctx):
         return True
 
     is_int = "." not in raw
 
-    if is_int and 2000 <= val <= 2100:                 # 2026 (saal)
+    if is_int and 2000 <= val <= 2100:
         return True
 
-    if is_int and 1 <= val <= 31:                      # 6 Oct / 06-10-2026
+    if is_int and 1 <= val <= 31:
         if re.search(rf"\b\d{{1,2}}\s*[-\s]?\s*{MONTH_RE}", ctx, re.I):
             return True
         if re.search(r"\d{1,2}\s*[/-]\s*\d{1,2}", ctx):
@@ -387,7 +379,6 @@ def _is_context_number(raw, val, ctx):
 
 
 def verify_numbers(post_html, source_text):
-    """Post ke numbers source payload me maujood hain? Missing list return karo."""
     src_canon, src_vals = set(), set()
     for raw, val, _ in _extract_numbers(source_text):
         src_canon.add(raw.replace(",", ""))
@@ -502,7 +493,7 @@ def call_hybrid_ai(batch_prompt):
     while current_model_idx < total:
         target = MODEL_REGISTRY[current_model_idx]
         provider = target["provider"]
-        print(f"   ðŸ¤– trying {target['name']} ({provider})")
+        print(f"   🤖 trying {target['name']} ({provider})")
 
         res, err = (call_groq(target["name"], batch_prompt) if provider == "groq"
                     else call_google(target["name"], batch_prompt))
@@ -510,7 +501,7 @@ def call_hybrid_ai(batch_prompt):
         if res:
             return res
 
-        print(f"   âš ï¸ Fail on {target['name']}: {err}. Switching fallback...")
+        print(f"   ⚠️ Fail on {target['name']}: {err}. Switching fallback...")
         current_model_idx += 1
 
     time.sleep(45)
@@ -533,15 +524,12 @@ def load_state():
         except Exception:
             pass
 
-    # prune purane hashes
     cutoff = (NOW - timedelta(days=HASH_HISTORY_DAYS)).strftime("%Y-%m-%d")
     seen = {h: d for h, d in state.get("seen_hashes", {}).items() if d >= cutoff}
     if len(seen) > MAX_HASH_HISTORY:
         newest = sorted(seen.items(), key=lambda kv: kv[1], reverse=True)[:MAX_HASH_HISTORY]
         seen = dict(newest)
     state["seen_hashes"] = seen
-
-    # attempts bhi prune (seene hashes ke bahar wale)
     state["attempts"] = {h: n for h, n in state.get("attempts", {}).items() if h in seen}
     return state
 
@@ -564,7 +552,6 @@ def is_within_24h_of_analysis(item):
 
 
 def is_recent_enough(date_str):
-    """Purani filings process na ho â€” warna duplicate/irrelevant post."""
     if not date_str:
         return True
     for fmt in ("%Y-%m-%d", "%d-%b-%Y", "%d-%m-%Y", "%Y-%m-%d %H:%M:%S"):
@@ -580,19 +567,19 @@ def is_recent_enough(date_str):
 # REPO PUSH
 # ============================================================
 
-def push_file_to_repo(local_path, remote_path, commit_prefix="âš¡ Auto-Feed Sync"):
+def push_file_to_repo(local_path, remote_path, commit_prefix="⚡ Auto-Feed Sync"):
     token = os.environ.get("GH_PAT_TOKEN", "").strip()
     if not token:
-        print("âš ï¸ GH_PAT_TOKEN not found. Skipping repo push.")
+        print("⚠️ GH_PAT_TOKEN not found. Skipping repo push.")
         return
     if not os.path.exists(local_path):
-        print(f"âš ï¸ {local_path} not found. Nothing to push.")
+        print(f"⚠️ {local_path} not found. Nothing to push.")
         return
 
     with open(local_path, "rb") as f:
         b64_content = base64.b64encode(f.read()).decode("utf-8")
 
-    api_url = f"https://api.github.com/repos/{TARGET_REPO}/contents/{remote_path}"
+    api_url = f"[https://api.github.com/repos/](https://api.github.com/repos/){TARGET_REPO}/contents/{remote_path}"
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
@@ -608,11 +595,10 @@ def push_file_to_repo(local_path, remote_path, commit_prefix="âš¡ Auto-Feed S
             sha = j.get("sha")
             existing_b64 = (j.get("content") or "").replace("\n", "")
     except Exception as e:
-        print(f"âš ï¸ SHA fetch warning: {e}")
+        print(f"⚠️ SHA fetch warning: {e}")
 
-    # [NEW] identical content â†’ commit skip (ghost commits band)
     if existing_b64 and existing_b64 == b64_content:
-        print(f"â„¹ï¸ {remote_path} unchanged â€” push skipped.")
+        print(f"ℹ️ {remote_path} unchanged — push skipped.")
         return
 
     payload = {
@@ -627,20 +613,20 @@ def push_file_to_repo(local_path, remote_path, commit_prefix="âš¡ Auto-Feed S
         try:
             put = requests.put(api_url, headers=headers, json=payload, timeout=20)
             if put.status_code in (200, 201):
-                print(f"âœ… pushed: {remote_path}")
+                print(f"✅ pushed: {remote_path}")
                 return
-            print(f"âŒ push failed {put.status_code}: {put.text[:200]}")
+            print(f"❌ push failed {put.status_code}: {put.text[:200]}")
         except Exception as e:
-            print(f"âŒ push error: {e}")
+            print(f"❌ push error: {e}")
         time.sleep(3 * (attempt + 1))
-    print(f"âŒ Giving up on {remote_path}")
+    print(f"❌ Giving up on {remote_path}")
 
 
 def push_to_target_repo():
-    print(f"\nðŸš€ Pushing to {TARGET_REPO}...")
+    print(f"\n🚀 Pushing to {TARGET_REPO}...")
     push_file_to_repo(OUTPUT_FILE, TARGET_FILE_PATH)
     if PUSH_STATE:
-        push_file_to_repo(STATE_FILE, TARGET_STATE_PATH, commit_prefix="ðŸ§  Pipeline State")
+        push_file_to_repo(STATE_FILE, TARGET_STATE_PATH, commit_prefix="🧠 Pipeline State")
 
 
 # ============================================================
@@ -649,8 +635,8 @@ def push_to_target_repo():
 
 def process_corporate_actions_feed():
     print("=" * 80)
-    print("ðŸš€ AI EDITORIAL GATEKEEPER v2 â€” NSE CORPORATE FEED")
-    print(f"ðŸ“… {NOW.strftime('%d-%b-%Y %H:%M:%S IST')}")
+    print("🚀 AI EDITORIAL GATEKEEPER v2 — NSE CORPORATE FEED")
+    print(f"📅 {NOW.strftime('%d-%b-%Y %H:%M:%S IST')}")
     print("=" * 80)
 
     state = load_state()
@@ -677,16 +663,15 @@ def process_corporate_actions_feed():
                                         if is_within_24h_of_analysis(i)],
                 })
         except Exception as e:
-            print(f"âš ï¸ Feed load warning: {e}")
+            print(f"⚠️ Feed load warning: {e}")
 
     if not os.path.exists(INPUT_FILE):
-        print(f"âŒ '{INPUT_FILE}' not found! Run scraper first.")
+        print(f"❌ '{INPUT_FILE}' not found! Run scraper first.")
         return
 
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         master_data = json.load(f)
 
-    # [FIX] dedup ab persistent state se â€” 24h purge se independent
     already = set(seen_hashes.keys())
     already.update(i.get("hash") for i in feed_archive["content_feed"] if i.get("hash"))
     already.update(i.get("hash") for i in feed_archive["skipped_archive"] if i.get("hash"))
@@ -713,7 +698,6 @@ def process_corporate_actions_feed():
         h = r.get("hash")
         if not h or h in already:
             continue
-        # [FIX] source-level guard â€” AI call se pehle hi reject
         if r.get("revenue") is None or r.get("pat") is None:
             seen_hashes[h] = NOW.strftime("%Y-%m-%d")
             feed_archive["skipped_archive"].append({
@@ -729,18 +713,17 @@ def process_corporate_actions_feed():
             "symbol": r.get("symbol"),
             "company_name": r.get("company_name"),
             "category": "RESULT",
-            "subject": f"Quarterly Result - Revenue â‚¹{r.get('revenue')} Cr | PAT â‚¹{r.get('pat')} Cr",
+            "subject": f"Quarterly Result - Revenue ₹{r.get('revenue')} Cr | PAT ₹{r.get('pat')} Cr",
             "summary": (
-                f"Revenue: â‚¹{r.get('revenue')} Cr (YoY: {r.get('yoy_revenue_growth')}%), "
-                f"PAT: â‚¹{r.get('pat')} Cr (YoY: {r.get('yoy_pat_growth')}%), "
-                f"Signal: {r.get('signal_tag')}, Exceptional: â‚¹{r.get('exceptional_items')} Cr"
+                f"Revenue: ₹{r.get('revenue')} Cr (YoY: {r.get('yoy_revenue_growth')}%), "
+                f"PAT: ₹{r.get('pat')} Cr (YoY: {r.get('yoy_pat_growth')}%), "
+                f"Signal: {r.get('signal_tag')}, Exceptional: ₹{r.get('exceptional_items')} Cr"
             ),
             "payload_text": json.dumps(r, indent=2, ensure_ascii=False),
             "broadcast_date": r.get("result_date"),
             "pdf_link": r.get("pdf_link"),
         })
 
-    # [NEW] pre-filter + age filter
     filtered = []
     for itm in candidates:
         h = itm["hash"]
@@ -768,10 +751,10 @@ def process_corporate_actions_feed():
 
         filtered.append(itm)
 
-    print(f"ðŸŽ¯ Candidates: {len(candidates)} â†’ after pre-filter: {len(filtered)}")
+    print(f"🎯 Candidates: {len(candidates)} → after pre-filter: {len(filtered)}")
 
     if not filtered:
-        print("âœ… Nothing pending. Feed synchronized.")
+        print("✅ Nothing pending. Feed synchronized.")
         _finalize(feed_archive, state)
         return
 
@@ -781,7 +764,7 @@ def process_corporate_actions_feed():
 
     while i < len(filtered):
         batch = filtered[i:i + BATCH_SIZE]
-        print(f"\nâš¡ Batch {batch_counter}/{total_batches} ({len(batch)} items)")
+        print(f"\n⚡ Batch {batch_counter}/{total_batches} ({len(batch)} items)")
 
         batch_payload = [{
             "input_id": idx,
@@ -801,7 +784,7 @@ def process_corporate_actions_feed():
         batch_result = call_hybrid_ai(prompt_str)
 
         if not batch_result:
-            print(f"âš ï¸ Batch {batch_counter} failed on all providers.")
+            print(f"⚠️ Batch {batch_counter} failed on all providers.")
             for itm in batch:
                 h = itm["hash"]
                 attempts[h] = attempts.get(h, 0) + 1
@@ -817,7 +800,6 @@ def process_corporate_actions_feed():
             batch_counter += 1
             continue
 
-        # [FIX] input_id int coercion â€” string ids se silent drop band
         result_map = {}
         for r in batch_result:
             if not isinstance(r, dict):
@@ -833,7 +815,7 @@ def process_corporate_actions_feed():
             analyzed_at = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
 
             if not res:
-                print(f"   âš ï¸ No AI result for input_id={idx} ({itm.get('symbol')})")
+                print(f"   ⚠️ No AI result for input_id={idx} ({itm.get('symbol')})")
                 attempts[h] = attempts.get(h, 0) + 1
                 continue
 
@@ -843,7 +825,6 @@ def process_corporate_actions_feed():
             post = sanitize_telegram_html(res.get("telegram_post", ""))
             reason = res.get("worthiness_reason", "")
 
-            # [NEW] numeric verification
             if is_worthy and post:
                 source_blob = " ".join(str(x) for x in [
                     itm.get("subject"), itm.get("summary"), itm.get("payload_text"),
@@ -851,14 +832,13 @@ def process_corporate_actions_feed():
                 missing = verify_numbers(post, source_blob)
                 if missing:
                     note = f"unverified_numbers: {', '.join(missing[:5])}"
-                    print(f"   ðŸš« {itm.get('symbol')}: {note}")
+                    print(f"   🚷 {itm.get('symbol')}: {note}")
                     if STRICT_NUMBER_CHECK:
                         is_worthy = False
                         reason = f"Numeric mismatch (source me nahi mila): {', '.join(missing[:5])}"
                     else:
-                        reason = f"{reason} | âš ï¸ {note}"
+                        reason = f"{reason} | ⚠️ {note}"
 
-            # [NEW] disclaimer injection
             if is_worthy and post:
                 post = inject_disclaimer(post)
 
@@ -875,7 +855,7 @@ def process_corporate_actions_feed():
                     "pdf_link": itm.get("pdf_link"),
                     "telegram_post": post,
                 })
-                print(f"   âœ… {itm.get('symbol')} â€” {event_type}")
+                print(f"   ✅ {itm.get('symbol')} — {event_type}")
             else:
                 feed_archive["skipped_archive"].append({
                     "hash": h,
@@ -887,7 +867,7 @@ def process_corporate_actions_feed():
                     "reason": reason or "not_content_worthy",
                     "analyzed_at_24h": analyzed_at,
                 })
-                print(f"   â­ï¸ {itm.get('symbol')} skipped â€” {(reason or 'not worthy')[:70]}")
+                print(f"   ⏭️ {itm.get('symbol')} skipped — {(reason or 'not worthy')[:70]}")
 
             seen_hashes[h] = NOW.strftime("%Y-%m-%d")
             attempts.pop(h, None)
@@ -896,7 +876,7 @@ def process_corporate_actions_feed():
         batch_counter += 1
 
         if i < len(filtered):
-            print(f"   ðŸ’¤ pause {BATCH_PAUSE_SECONDS}s (rate-limit safety)")
+            print(f"   💤 pause {BATCH_PAUSE_SECONDS}s (rate-limit safety)")
             time.sleep(BATCH_PAUSE_SECONDS)
 
     _finalize(feed_archive, state)
@@ -908,11 +888,11 @@ def _finalize(feed_archive, state):
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(feed_archive, f, ensure_ascii=False, indent=2)
-    print(f"\nðŸ“„ {OUTPUT_FILE}: {feed_archive['worthy_count']} worthy, "
+    print(f"\n📄 {OUTPUT_FILE}: {feed_archive['worthy_count']} worthy, "
           f"{feed_archive['skipped_count']} skipped")
 
     save_state(state)
-    print(f"ðŸ§  state saved: {len(state['seen_hashes'])} hashes remembered")
+    print(f"🧠 state saved: {len(state['seen_hashes'])} hashes remembered")
 
     push_to_target_repo()
 
