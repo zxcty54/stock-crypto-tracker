@@ -1,0 +1,51 @@
+name: Hourly NSE Scraper & AI Summarizer Pipeline
+
+on:
+  schedule:
+    # 24 ghante har 30 minute par chalega
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-radar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install curl_cffi pypdf pdfplumber google-genai groq requests
+
+      - name: 🚀 Run Unified Corporate Radar
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_API_KEY2: ${{ secrets.GOOGLE_API_KEY2 }}
+        run: python corporate_radar.py
+
+      - name: 💾 Commit Updated Feed
+        run: |
+          git config --global user.name "CorporateRadarBot"
+          git config --global user.email "bot@github-actions.internal"
+
+          [ -f nse_content_feed.json ] && git add nse_content_feed.json
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Koi naya update nahi mila. Skipping commit."
+          else
+            git commit -m "⚡ Auto-Update: Corporate Feed [$(date +'%d-%b-%Y %H:%M IST')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
