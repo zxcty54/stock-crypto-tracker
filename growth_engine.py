@@ -32,7 +32,7 @@ PERF_REPORT = "performance-report.md"
 MIN_SAMPLE       = 5      # itne posts se kam ho to weights nahi
 MIN_PILLAR_POSTS = 3      # ek pillar ka weight tabhi jab uske 3+ posts hon
 
-# infographic cards ko perf me na gino (wo repackaged content hai)
+# purane infographic cards ko perf me na gino (wo repackaged content hai)
 CARD_MARKER = "Poora post"
 
 BOT_TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -426,7 +426,7 @@ def show_status():
             print(f"      {p:18} {d['weight']}x  ({d['avg_views']:.0f} avg views){note}")
     print()
     print(f"   Telegram setup   : {'✅' if BOT_TOKEN else '❌ (TELEGRAM_BOT_TOKEN secret chahiye)'}")
-    print(f"   (infographic + blogger alag files me — filhal dormant)")
+    print(f"   (infographic abhi BAND — archive/dropped-features me pada hai)")
     print("=" * 60)
 
 
