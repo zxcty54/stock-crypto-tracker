@@ -1,1 +1,50 @@
-
+{
+  "generated_at": "2026-10-07 15:27:50 IST",
+  "worthy_count": 3,
+  "skipped_count": 0,
+  "content_feed": [
+    {
+      "hash": "e42ac9a2b238",
+      "symbol": "SWASTIKAIN",
+      "company_name": "Swastika Infra Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "07-Oct-2026 10:29:06",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SWASTIKAINFRA_07102026102824_Disclosure_of_Order_win.pdf",
+      "headline": "Swastika Infra Wins Rs 615.76 Crore MSEDCL Contract",
+      "content_worthy": true,
+      "worthiness_reason": "Material order win worth over Rs 600 crore from a state utility.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Swastika Infra Limited (NSE: SWASTIKAIN)</b>\n\n<b>Swastika Infra Secures Rs 615.76 Cr Order from MSEDCL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Maharashtra State Electricity Distribution Company Limited (MSEDCL)\n- <b>Order Value:</b> ₹615.76 crore (including taxes)\n- <b>Scope:</b> Distribution Infrastructure & System Strengthening works\n- <b>Geography:</b> Bhandup Zone, Maharashtra\n- <b>Execution Period:</b> 24 months from LOA\n\n📌 <b>What happened:</b>\n↳ The company received a Letter of Award (LOA) for survey, design, engineering, supply, installation, testing, and commissioning of distribution infrastructure and associated civil and electrical works.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SWASTIKAINFRA_07102026102824_Disclosure_of_Order_win.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-07 15:27:50 IST"
+    },
+    {
+      "hash": "5b3c4d2b81dc",
+      "symbol": "ARCIL",
+      "company_name": "Asset Reconstruction Company (India) Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "07-Oct-2026 14:53:50",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ARCIL_07102026145237_Disclosure_of_Press_Release_June_2026_Signed.pdf",
+      "headline": "Asset Reconstruction Company (India) reports Q1FY27 standalone PAT at Rs. 143.1 crore, up 107% YoY",
+      "content_worthy": true,
+      "worthiness_reason": "Strong Q1 financial results report with numeric revenue and PAT growth figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Asset Reconstruction Company (India) Limited (NSE: ARCIL)</b>\n\n<b>ARCIL reports Q1FY27 results: PAT doubles to Rs. 143.1 crore on higher recoveries</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income:</b> Rs. 276.1 crore vs Rs. 128.5 crore (up 115% YoY)\n- <b>Profit After Tax (PAT):</b> Rs. 143.1 crore vs Rs. 69.1 crore (up 107% YoY)\n- <b>Assets Under Management (AUM):</b> Rs. 19,574 crore (up 16% YoY)\n- <b>Total Recovery:</b> Rs. 1,066.0 crore vs Rs. 425.0 crore (up 151% YoY)\n- <b>Acquisitions:</b> Rs. 352.7 crore vs Rs. 502.2 crore (down 30% YoY)\n\n📌 <b>What happened:</b>\n↳ ARCIL announced its audited standalone and consolidated financial results for the quarter ended June 30, 2026, driven by a sharp rise in recoveries and fee income.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ARCIL_07102026145237_Disclosure_of_Press_Release_June_2026_Signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-07 15:27:28 IST"
+    },
+    {
+      "hash": "9b048ea7aa31",
+      "symbol": "DIXON",
+      "company_name": "Dixon Technologies (India) Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "07-Oct-2026 15:01:51",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/DIXON_07102026150006_Regulation30_DisclosureGemtek07102026.pdf",
+      "headline": "Dixon Technologies executes JV agreement with Gemtek Technology for telecom hardware manufacturing",
+      "content_worthy": true,
+      "worthiness_reason": "Execution of a definitive joint venture agreement for telecom manufacturing with Gemtek Technology.",
+      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Dixon Technologies (India) Limited (NSE: DIXON)</b>\n\n<b>Dixon executes definitive JV agreement with Gemtek Technology for telecom gear manufacturing</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Partners:</b> Dixon Technologies, Dixon Electroconnect, and Gemtek Technology Co., Ltd.\n- <b>Business Scope:</b> Manufacturing and supply of Optical Transceiver - SFP and BOSA or other telecom products in India\n- <b>Post-Transaction Shareholding:</b> Dixon Technologies (60%) and Gemtek (40%) in Dixon Electroconnect\n- <b>Agreement Date:</b> October 7, 2026\n\n📌 <b>What happened:</b>\n↳ The parties executed a definitive joint venture agreement pursuant to a binding term sheet signed earlier in June 2026. The transaction remains subject to customary conditions precedent.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/DIXON_07102026150006_Regulation30_DisclosureGemtek07102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-07 15:27:28 IST"
+    }
+  ],
+  "skipped_archive": []
+}
