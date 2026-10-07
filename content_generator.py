@@ -409,7 +409,7 @@ def call_ai(topics, angles):
                 from google.genai import types
                 c = genai.Client(api_key=random.choice(goog_keys))
                 r = c.models.generate_content(
-                    model="gemini-2.5-flash",
+                    model="gemini-3.5-flash-lite",
                     contents=prompt,
                     config=types.GenerateContentConfig(temperature=0.75,
                                                        response_mime_type="application/json"),
