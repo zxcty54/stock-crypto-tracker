@@ -1,0 +1,63 @@
+name: Telegram Channel Post Dispatcher
+
+on:
+  # 1. Main pipeline complete hote hi turant auto-trigger
+  workflow_run:
+    workflows: ["Hourly NSE Scraper & AI Summarizer Pipeline"]
+    types:
+      - completed
+
+  # 2. Market hours schedule (Monday to Friday, every 30 minutes between 09:00 AM - 05:00 PM IST)
+  # 09:00 AM - 05:00 PM IST = 03:30 to 11:30 UTC
+  schedule:
+    - cron: '*/30 3-11 * * 1-5'
+
+  # 3. GitHub UI se manual run ka option
+  workflow_dispatch:
+
+jobs:
+  broadcast-to-telegram:
+    # Sirf tabhi run hoga jab manual trigger ho, cron ho, ya parent workflow successfully finish hua ho
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Execute Telegram Post Dispatcher
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+        run: |
+          python nse_telegram_bot.py
+
+      - name: Commit and Push Delivery Log
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Sirf posted log file track hogi
+          [ -f telegram_posted_log.json ] && git add telegram_posted_log.json
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Koi naya post deliver nahi hua. Skipping commit."
+          else
+            git commit -m "⚡ Sync Telegram Delivery Log [$(date +'%d-%b-%Y %H:%M IST')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
