@@ -1,8 +1,25 @@
 #!/usr/bin/env python3
 """
 CONTENT FACTORY — Production Grade Engine
+=========================================
 Automated, SEBI-compliant content generation for Telegram.
 Uses HTML formatting for 100% reliable bold text delivery.
+
+🆕 AB PERFORMANCE WEIGHTS BHI PADHTA HAI
+   performance.json se pata chalta hai kaunsa pillar chal raha hai
+   → us pillar ke ZYADA topics chune jaate hain.
+   (growth_engine.py roz 21:00 IST pe ye file banata hai)
+
+USAGE
+  python content_generator.py                 # auto (runway kam ho to)
+  python content_generator.py --force         # abhi hi banao
+  python content_generator.py --count 18      # ya --count=18
+  python content_generator.py --dry-run       # save mat karo
+
+ENV VARS
+  GEMINI_API_KEY / GOOGLE_API_KEY (+2 variants)   ← primary
+  GROQ_API_KEY / GROQ_API_KEY2                    ← fallback (apne endpoint pe jata hai)
+  GEMINI_MODEL (optional) / GROQ_MODEL (optional)
 """
 
 import os
@@ -19,6 +36,7 @@ from datetime import datetime, timezone, timedelta
 # ============================================================
 QUEUE_FILE   = "content_queue.json"
 USED_FILE    = "content_topics_used.json"
+PERF_FILE    = "performance.json"      # 🆕 growth_engine.py isse banata hai
 
 BATCH_SIZE        = 6         # Safe token limit (6 posts per prompt prevents truncated JSON)
 DEFAULT_COUNT     = 18        # Default 18 posts (~6 days buffer @ 3 posts/day)
@@ -38,6 +56,28 @@ ANGLES = [
     "practical numbers aur capital example ke saath explain karo",
     "pehle kya galat hota hai aur uska sahi corrective process kya hai",
 ]
+
+# ── AI providers ────────────────────────────────────────────
+GEMINI_DEFAULT   = "gemini-3.5-flash-lite"
+GEMINI_FALLBACKS = ["gemini-3.1-flash-lite", "gemini-flash-lite-latest"]
+GROQ_DEFAULT     = "llama-3.3-70b-versatile"
+
+def _env_keys(*names):
+    out = []
+    for n in names:
+        v = (os.environ.get(n) or "").strip()
+        if v and v not in out:
+            out.append(v)
+    return out
+
+GEMINI_KEYS = _env_keys("GEMINI_API_KEY", "GOOGLE_API_KEY", "GEMINI_API_KEY2", "GOOGLE_API_KEY2")
+GROQ_KEYS   = _env_keys("GROQ_API_KEY", "GROQ_API_KEY2")
+
+def gemini_models():
+    m = (os.environ.get("GEMINI_MODEL") or "").strip() or GEMINI_DEFAULT
+    return [m] + [x for x in GEMINI_FALLBACKS if x != m]
+
+GROQ_MODEL = (os.environ.get("GROQ_MODEL") or "").strip() or GROQ_DEFAULT
 
 # ============================================================
 # TOPIC POOL (10 PILLARS)
@@ -174,7 +214,59 @@ def topic_key_of(label):
     return re.sub(r"[^a-z0-9]+", "_", label.lower()).strip("_")[:50]
 
 # ============================================================
-# AI GENERATION ENGINE (GEMINI)
+# 📊 PERFORMANCE WEIGHTS  (growth_engine.py se aate hain)
+# ============================================================
+def load_perf_weights():
+    """
+    performance.json se pillar weights padho — jo pillar chal raha hai uske zyada topics.
+    File na ho / khaali ho / kharab ho → {} (normal rotation, crash nahi).
+    """
+    if not os.path.exists(PERF_FILE):
+        return {}
+    try:
+        d = json.load(open(PERF_FILE, encoding="utf-8"))
+    except Exception:
+        return {}
+    if d.get("status") != "ok" or not d.get("pillars"):
+        return {}
+    return {p: v.get("weight", 1.0) for p, v in d["pillars"].items()}
+
+def weighted_pick(by_pillar, count, weights):
+    """Weights ke hisaab se topics chuno (jo pillar chal raha hai, uske zyada)."""
+    if not weights:
+        # original round-robin
+        names = list(by_pillar.keys())
+        random.shuffle(names)
+        out = []
+        while len(out) < count and any(by_pillar.values()):
+            for p in names:
+                if len(out) >= count:
+                    break
+                if by_pillar[p]:
+                    out.append(by_pillar[p].pop(0))
+        return out
+
+    # weighted rotation: har pillar ko uske weight ke hisaab se "tickets"
+    tickets = []
+    for p in by_pillar:
+        w = weights.get(p, 1.0)
+        tickets.extend([p] * max(1, int(round(w * 10))))
+    random.shuffle(tickets)
+
+    out = []
+    i = 0
+    while len(out) < count and any(by_pillar.values()):
+        p = tickets[i % len(tickets)] if tickets else None
+        i += 1
+        if p and by_pillar.get(p):
+            out.append(by_pillar[p].pop(0))
+        elif any(by_pillar.values()):
+            p = max(by_pillar, key=lambda k: len(by_pillar[k]))
+            out.append(by_pillar[p].pop(0))
+    return out
+
+# ============================================================
+# AI GENERATION ENGINE
 # ============================================================
 PROMPT_TEMPLATE = """You are an institutional trading educator writing educational posts for Indian traders.
 Topics to cover:
@@ -187,6 +279,7 @@ STRICT SEBI & EDITORIAL GUIDELINES:
 - Language: Natural Hinglish (Hindi + English mix).
 
 For EACH topic, provide structured conceptual breakdown fields:
+- "topic": EXACT topic text as given in the list above, copied word-for-word
 - "topic_key": Short identifier string
 - "title": Short catchy headline in Hinglish (e.g. MA KA SAHI USE: Trend Pehchano)
 - "hook": Relatable real trading emotion or situation (1-2 sentences)
@@ -197,6 +290,7 @@ For EACH topic, provide structured conceptual breakdown fields:
 
 Return ONLY valid JSON matching this schema:
 {{"posts": [{{
+  "topic": "exact topic text",
   "topic_key": "key",
   "title": "...",
   "hook": "...",
@@ -206,10 +300,11 @@ Return ONLY valid JSON matching this schema:
   "golden_rule": "..."
 }}]}}"""
 
+def has_api_keys():
+    return bool(GEMINI_KEYS or GROQ_KEYS)
+
 def get_api_key():
-    return (os.environ.get("GEMINI_API_KEY") or 
-            os.environ.get("GOOGLE_API_KEY") or 
-            os.environ.get("GROQ_API_KEY") or "").strip()
+    return (GEMINI_KEYS or GROQ_KEYS or [""])[0]
 
 def clean_html(text: str) -> str:
     """Removes HTML characters that could break Telegram HTML parser."""
@@ -240,48 +335,107 @@ def assemble_telegram_post(p):
 #TradingPsychology #RiskManagement
 ⚠️ Educational only. Not investment advice. Not SEBI registered."""
 
+def _parse_ai_json(raw):
+    """AI ke response se posts nikalo (dono format support — 'topic' bhi le lo)."""
+    data = json.loads(raw)
+    out = []
+    for item in data.get("posts", []):
+        if "title" in item and "mistake" in item:
+            out.append({
+                "topic": item.get("topic", ""),
+                "topic_key": item.get("topic_key", ""),
+                "text": assemble_telegram_post(item),
+            })
+        elif "text" in item and len(item["text"]) > 100:
+            out.append({
+                "topic": item.get("topic", ""),
+                "topic_key": item.get("topic_key", ""),
+                "text": item["text"],
+            })
+    return out
+
+def _call_gemini(prompt):
+    """Gemini — model fallback + retry (429/5xx pe)."""
+    import requests
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.7, "responseMimeType": "application/json"},
+    }
+    for model in gemini_models():
+        for key in GEMINI_KEYS:
+            for attempt in range(3):
+                try:
+                    r = requests.post(
+                        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+                        json=payload, headers={"Content-Type": "application/json"}, timeout=90)
+                except Exception as e:
+                    print(f"   ⚠️ Gemini network error: {str(e)[:80]}")
+                    time.sleep(5)
+                    continue
+
+                if r.status_code == 200:
+                    return r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+                if r.status_code == 404:
+                    print(f"   ⚠️ Model '{model}' nahi mila — agla model try kar rahe hain")
+                    break
+                if r.status_code in (429, 500, 503):
+                    wait = 5 * (attempt + 1)
+                    print(f"   ⏳ Gemini {r.status_code} — {wait}s ruk ke dobara (#{attempt + 1})")
+                    time.sleep(wait)
+                    continue
+
+                print(f"   ⚠️ Gemini HTTP {r.status_code}: {r.text[:140]}")
+                break
+            else:
+                continue
+            continue
+    return None
+
+def _call_groq(prompt):
+    """Groq (OpenAI-compatible endpoint) — sirf jab Gemini key na ho ya fail ho."""
+    import requests
+    for key in GROQ_KEYS:
+        try:
+            r = requests.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+                json={"model": GROQ_MODEL,
+                      "messages": [{"role": "user", "content": prompt}],
+                      "temperature": 0.7,
+                      "response_format": {"type": "json_object"}},
+                timeout=90)
+        except Exception as e:
+            print(f"   ⚠️ Groq network error: {str(e)[:80]}")
+            continue
+        if r.status_code == 200:
+            return r.json()["choices"][0]["message"]["content"].strip()
+        print(f"   ⚠️ Groq HTTP {r.status_code}: {r.text[:140]}")
+    return None
+
 def call_ai(topics, angles):
-    api_key = get_api_key()
-    if not api_key:
-        print("❌ Error: No AI API Key found in environment variables.")
+    """Ek batch banao. Gemini pehle, Groq fallback."""
+    if not has_api_keys():
+        print("❌ Error: Koi AI API key nahi mili (GEMINI_API_KEY / GROQ_API_KEY).")
         return []
 
     topic_lines = "\n".join(f"- {t} (Angle: {a})" for t, a in zip(topics, angles))
     prompt = PROMPT_TEMPLATE.format(topics=topic_lines)
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={api_key}"
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.7,
-            "responseMimeType": "application/json"
-        }
-    }
+    raw = None
+    if GEMINI_KEYS:
+        raw = _call_gemini(prompt)
+    if raw is None and GROQ_KEYS:
+        print("   🔁 Gemini nahi chala — Groq try kar rahe hain")
+        raw = _call_groq(prompt)
+    if not raw:
+        return []
 
     try:
-        import requests
-        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
-        if res.status_code == 200:
-            raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-            data = json.loads(raw)
-            raw_posts = data.get("posts", [])
-            
-            final_posts = []
-            for item in raw_posts:
-                if "title" in item and "mistake" in item:
-                    final_posts.append({
-                        "topic_key": item.get("topic_key", ""),
-                        "text": assemble_telegram_post(item)
-                    })
-                elif "text" in item and len(item["text"]) > 100:
-                    final_posts.append(item)
-            return final_posts
-        else:
-            print(f"   ⚠️ Gemini returned HTTP {res.status_code}: {res.text[:150]}")
+        return _parse_ai_json(raw)
     except Exception as e:
-        print(f"   ⚠️ AI call failed: {e}")
-
-    return []
+        print(f"   ⚠️ JSON parse fail: {str(e)[:100]}")
+        return []
 
 # ============================================================
 # QUEUE SCHEDULER
@@ -337,6 +491,16 @@ def append_to_queue(queue, accepted):
 
         slot, hh, mm = SLOTS[slot_i]
         dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
+
+        # 🔧 GUARD: bhoot me schedule na ho (warna dispatcher ek saath sab bhej dega)
+        while dt <= NOW + timedelta(minutes=5):
+            slot_i += 1
+            if slot_i >= len(SLOTS):
+                slot_i = 0
+                day += timedelta(days=1)
+            slot, hh, mm = SLOTS[slot_i]
+            dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
+
         new_id = f"ai{last_id + i:04d}"
 
         # Clean title for logging
@@ -360,30 +524,33 @@ def append_to_queue(queue, accepted):
     return queue, added
 
 # ============================================================
-# TOPIC PICKER
+# TOPIC PICKER  (weights ke saath)
 # ============================================================
-def pick_topics(used, count):
-    candidates = []
+def pick_topics(used, count, weights=None):
+    """
+    Topics chuno. Pehle unused, phir REUSE_AFTER_DAYS se purane.
+    weights mile to jo pillar chal raha hai uske ZYADA topics.
+    """
+    cutoff = (NOW - timedelta(days=REUSE_AFTER_DAYS)).strftime("%Y-%m-%d")
+    fresh  = {p: [] for p in TOPIC_POOL}
+    reuse  = {p: [] for p in TOPIC_POOL}
+
     for pillar, labels in TOPIC_POOL.items():
         for label in labels:
             key = f"{pillar}:{topic_key_of(label)}"
             if key not in used:
-                candidates.append((key, label))
+                fresh[pillar].append((key, label))
+            elif used.get(key, "") < cutoff:
+                reuse[pillar].append((key, label))
 
-    random.shuffle(candidates)
-    if len(candidates) >= count:
-        return candidates[:count]
+    picked = weighted_pick(fresh, count, weights)
 
-    cutoff = (NOW - timedelta(days=REUSE_AFTER_DAYS)).strftime("%Y-%m-%d")
-    reusable = [
-        (f"{p}:{topic_key_of(l)}", l)
-        for p, labels in TOPIC_POOL.items()
-        for l in labels
-        if used.get(f"{p}:{topic_key_of(l)}", "") < cutoff
-    ]
-    random.shuffle(reusable)
-    combined = candidates + [t for t in reusable if t not in candidates]
-    return combined[:count]
+    if len(picked) < count:
+        extra = weighted_pick(reuse, count - len(picked), weights)
+        seen = {k for k, _ in picked}
+        picked += [t for t in extra if t[0] not in seen][: count - len(picked)]
+
+    return picked
 
 # ============================================================
 # MAIN ORCHESTRATION
@@ -393,17 +560,30 @@ def main():
     dry_run = "--dry-run" in sys.argv
     count = DEFAULT_COUNT
 
-    for arg in sys.argv:
+    for i, arg in enumerate(sys.argv):
         if arg.startswith("--count="):
-            count = int(arg.split("=")[1])
+            try:
+                count = int(arg.split("=", 1)[1])
+            except ValueError:
+                pass
+        elif arg == "--count" and i + 1 < len(sys.argv):
+            try:
+                count = int(sys.argv[i + 1])
+            except ValueError:
+                pass
 
     print("=" * 65)
     print("🏭 CONTENT FACTORY: AUTOMATED EXECUTION")
     print("=" * 65)
 
-    if not get_api_key():
-        print("❌ GEMINI_API_KEY environment variable missing. Exiting safely.")
+    if not has_api_keys():
+        print("❌ GEMINI_API_KEY / GROQ_API_KEY dono missing. Exiting safely.")
         return
+
+    if GEMINI_KEYS:
+        print(f"🤖 Provider: Gemini ({gemini_models()[0]})")
+    else:
+        print(f"🤖 Provider: Groq ({GROQ_MODEL})")
 
     queue = load_json(QUEUE_FILE, {"queue": []})
     used = load_json(USED_FILE, {})
@@ -415,21 +595,35 @@ def main():
         print(f"✅ Runway is sufficient ({runway} >= {MIN_RUNWAY_DAYS} days). Skipping generation.")
         return
 
-    topics = pick_topics(used, count)
+    # 📊 performance.json se weights
+    weights = load_perf_weights()
+    if weights:
+        top = sorted(weights.items(), key=lambda x: -x[1])[:3]
+        print("📊 Performance weights active: " + ", ".join(f"{p} {w}x" for p, w in top))
+    else:
+        print("📊 Performance weights: nahi mile (normal rotation)")
+
+    topics = pick_topics(used, count, weights)
     if not topics:
         print("⚠️ No topics available to generate.")
         return
 
+    # topic label → pool key (Marking ke liye)
+    label_map = {}
+    for key, label in topics:
+        label_map.setdefault(normalize_text(label), key)
+
     print(f"🎯 Selected {len(topics)} topics. Starting batch execution...")
-    existing_norm = [normalize_text(i["text"]) for i in queue.get("queue", [])]
-    
+    existing_norm = [normalize_text(i.get("text", "")) for i in queue.get("queue", [])]
+
     accepted = []
     rejected = []
+    accepted_keys = set()
 
     for i in range(0, len(topics), BATCH_SIZE):
         chunk = topics[i:i + BATCH_SIZE]
         angles = [random.choice(ANGLES) for _ in chunk]
-        
+
         posts = call_ai([t[1] for t in chunk], angles)
         for p in posts:
             text = p.get("text", "")
@@ -446,23 +640,40 @@ def main():
             accepted.append(p)
             existing_norm.append(normalize_text(text))
 
+            # 🔧 kaunsa pool topic tha → wahi mark hoga "used"
+            t_norm = normalize_text(p.get("topic", ""))
+            tkey = label_map.get(t_norm)
+            if not tkey and t_norm:
+                best, best_r = None, 0.0
+                for lab, k in label_map.items():
+                    rr = difflib.SequenceMatcher(None, t_norm, lab).ratio()
+                    if rr > best_r:
+                        best, best_r = k, rr
+                if best_r >= 0.6:
+                    tkey = best
+            if tkey:
+                accepted_keys.add(tkey)
+
         time.sleep(2)
 
     print(f"\n📊 Run Summary: {len(accepted)} Accepted | {len(rejected)} Rejected")
+    if rejected:
+        for r in rejected[:5]:
+            print(f"   ❌ {', '.join(r['reasons'])[:80]}")
 
     if accepted and not dry_run:
         queue, added = append_to_queue(queue, accepted)
         save_json(QUEUE_FILE, queue)
 
-        for a in accepted:
-            k = a.get("topic_key")
-            if k:
-                used[k] = NOW.strftime("%Y-%m-%d")
+        for k in accepted_keys:
+            used[k] = NOW.strftime("%Y-%m-%d")
         save_json(USED_FILE, used)
 
         new_runway = calculate_runway_days(queue)
         print(f"✅ Successfully scheduled {len(added)} new posts!")
         print(f"📅 New Queue Runway: {new_runway} Days (Last: {queue.get('last_scheduled')})")
+        print(f"🧠 Topics marked used: {len(accepted_keys)}/{len(topics)}"
+              + ("" if accepted_keys else "  ⚠️ AI ne 'topic' field nahi diya — agla run baaki topics lega"))
     elif dry_run:
         print("🧪 Dry Run Mode: Nothing was saved to disk.")
 
