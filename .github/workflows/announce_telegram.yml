@@ -44,7 +44,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
         run: |
-          python nse_telegram_bot.py
+          python announce_telegram_bot.py
 
       - name: Commit and Push Delivery Log
         run: |
