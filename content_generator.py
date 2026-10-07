@@ -387,7 +387,18 @@ def check_keys():
             print(f"   ✅ {n:20} mili  ({len(v)} chars)")
         else:
             print(f"   ⚪ {n:20} nahi mili")
-    print("-" * 70)
+    # Runner pe jo env vars mile unke NAAM dikhao (values mask) — isse pata chalega
+    # ki secret ka asli naam kya hai (agar mapping miss ho gayi ho)
+    interesting = sorted({k for k in os.environ
+                          if any(x in k.upper() for x in
+                                 ("KEY", "GEMINI", "GROQ", "GOOGLE", "TOKEN", "SECRET", "AI"))})
+    if interesting:
+        print("\n   🔎 Runner pe ye env vars available hain (names only):")
+        for k in interesting:
+            v = os.environ.get(k, "")
+            print(f"      • {k:24} {'(' + str(len(v)) + ' chars ✅)' if v else '(KHAALI ❌)'}")
+        print("-" * 70)
+
     if found:
         print(f"✅ {len(found)} key mili — generation chalega")
     else:
@@ -461,7 +472,7 @@ def call_ai(topics, angles):
                 from google.genai import types
                 c = genai.Client(api_key=random.choice(goog_keys))
                 r = c.models.generate_content(
-                    model="gemini-3.5-flash-lite",
+                    model="gemini-2.5-flash",
                     contents=prompt,
                     config=types.GenerateContentConfig(temperature=0.75,
                                                        response_mime_type="application/json"),
