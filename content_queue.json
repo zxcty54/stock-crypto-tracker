@@ -1,1 +1,166 @@
-
+{
+  "queue": [
+    {
+      "id": "ai0001",
+      "slot": "A",
+      "scheduled_ist": "2026-10-07 08:15",
+      "title": "FAKE PROFIT SCREENSHOTS: Kaise Pehchane?",
+      "text": "FAKE PROFIT SCREENSHOTS: Kaise Pehchane?\nSocial media par bade green numbers dekhkar darr ya lalach mat aane do.\nBohot se log inspect element ya editing apps se fake P&L dikhate hain.\nAsli trading terminal me fonts, alignment, aur colors ekdum standard hote hain.\nAgar koi banda sirf profit dikhata hai par logic ya risk management nahi, toh alert ho jao.\nAsli trader hamesha process aur rules ki baat karega, sirf badi income ki nahi.\nTakeaway: Screenshot par nahi, apne khud ke learning aur analysis par bharosa rakho.\n#TradingPsychology #StockMarketIndia\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "fake_profit",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0002",
+      "slot": "B",
+      "scheduled_ist": "2026-10-07 12:45",
+      "title": "PROMOTER PLEDGE: Asli Sach Kaise Dekhein?",
+      "text": "PROMOTER PLEDGE: Asli Sach Kaise Dekhein?\nMaante hain aapke paas ₹1,00,000 ka investment capital hai.\nCompany ke promoters ne apne shares gidvi (pledge) rakhe hain, toh yeh ek red flag ho sakta hai.\nMano 50% holding me se 30% pledge hai, matlab risk high hai.\nAgar market me price gira, toh lender shares bech sakta hai jisse aur panic aayega.\nBalance sheet me shareholding pattern check karke pledge percentage hamesha dekho.\nKam pledge ya zero pledge wali companies financially zyada secure maani jaati hain.\nTakeaway: Fundamental analysis me promoter pledge check karna bilkul mat bhoolo.\n#FundamentalAnalysis #InvestingTips\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "promoter_pledge",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0003",
+      "slot": "C",
+      "scheduled_ist": "2026-10-07 20:30",
+      "title": "STOCK SPLIT VS BONUS: Myth vs Reality",
+      "text": "STOCK SPLIT VS BONUS: Myth vs Reality\nMyth: Split ya bonus milne se stock sasta ho gaya aur overnight ameer ban jaoge.\nReality: Yeh sirf pizza ke tukde 4 ki jagah 8 karne jaisa hai, total size wahi rehta hai.\nAgar ₹1,00,000 ki value ka stock 1:1 bonus deta hai, toh price adha ho jayega.\nMarket capitalization aur aapki total holding ki value bilkul same rehti hai.\nSplit me face value kam hoti hai, bonus me naye shares free milte hain calculation par.\nFayda sirf liquidity ka hota hai, koi free ka profit nahi milta yahan.\nTakeaway: Corporate actions se sirf shares ki quantity badalti hai, net worth nahi.\n#StockMarketBasics #Learning\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "split_vs_bonus",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0004",
+      "slot": "A",
+      "scheduled_ist": "2026-10-08 08:15",
+      "title": "MOVING AVERAGE KA SAHI USE: Common Mistakes Checklist",
+      "text": "MOVING AVERAGE KA SAHI USE: Common Mistakes Checklist\nMistake 1: Sirf ek moving average ko dekhkar blind entry le lena.\nMistake 2: Har crossover ko final buy ya sell signal maan lena.\nMistake 3: Higher timeframes ko ignore karke sirf 1-minute chart par trade karna.\nMistake 4: Stop loss na lagana jab price moving average ko tod de.\nMistake 5: Yeh sochna ki indicator kabhi galat signal nahi dega.\nMoving averages sirf trend ko smooth dekhne aur samajhne ke tools hote hain.\nTakeaway: Indicators ko risk management ke rules ke sath hi hamesha use karo.\n#TechnicalAnalysis #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "moving_average",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0005",
+      "slot": "B",
+      "scheduled_ist": "2026-10-08 12:45",
+      "title": "NEWS KE REACTION ME TRADE: Step-by-Step Guide",
+      "text": "NEWS KE REACTION ME TRADE: Step-by-Step Guide\nStep 1: News aate hi bina soche samjhe position mat lo, panic buying/selling avoid karo.\nStep 2: Dekho ki market ka initial reaction kya hai aur volume kitna hai.\nStep 3: Support aur resistance levels ko mark karo jahan price ruk sakti hai.\nStep 4: Chote capital ke sath price action settle hone ka wait karo.\nStep 5: Apne risk ko define karo ki agar news negative nikli toh exit kahan karoge.\nNews driven trades me volatility bohot high hoti hai, isliye cautious raho.\nTakeaway: Humesha news ke emotion se nahi, apne trading plan ke hisab se chalo.\n#TradingMindset #PriceAction\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "news_reaction",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0006",
+      "slot": "C",
+      "scheduled_ist": "2026-10-08 20:30",
+      "title": "PORTFOLIO HEAT: Asaan Bhasha Me Samjho",
+      "text": "PORTFOLIO HEAT: Asaan Bhasha Me Samjho\nPortfolio heat ka matlab hai ki aapka kitna paisa ek hi tarah ke risk me fasa hai.\nMaano aapke paas ₹1,00,000 hain aur aapne saara paisa ek hi sector me laga diya.\nAgar us sector me koi buri khabar aayi, toh aapka poora portfolio ek sath lal ho jayega.\nIsi ko high portfolio heat kehte hain jisse bada loss ho sakta hai.\nAlag-alag sectors aur asset classes me invest karke heat ko cool rakha jata hai.\nAapka risk hamesha spread hona chahiye, ek hi jagah concentrate nahi.\nTakeaway: Diversification se portfolio ki heat kam hoti hai aur capital safe rehta hai.\n#PortfolioManagement #SmartInvesting\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "portfolio_heat",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0007",
+      "slot": "A",
+      "scheduled_ist": "2026-10-09 08:15",
+      "title": "GAP RISK & OVERNIGHT RISK: Step-by-Step Practical Guide",
+      "text": "GAP RISK & OVERNIGHT RISK: Step-by-Step Practical Guide\n1. Market close hone ke baad aur agle din open hone ke beech jo gap aata hai, wahi gap risk hai.\n2. Step 1: Hamesha check karo ki overnight koi bada economic event ya global news toh nahi hai.\n3. Step 2: Apne trading capital ka size aisa rakho ki agar gap against khule, toh account blow na ho.\n4. Step 3: Intraday positions ko bina soche overnight carry forward bilkul mat karo.\n5. Step 4: Agar position hold karni hi hai, toh hedge ka use karo ya lot size chhota rakho.\nActionable Takeaway: Overnight risk control karne ke liye position sizing aur stop-loss dono strict hone chahiye.\n#RiskManagement #TradingTips\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "gap_risk",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0008",
+      "slot": "B",
+      "scheduled_ist": "2026-10-09 12:45",
+      "title": "POSITION SIZE & NEEND: Myth vs Reality",
+      "text": "POSITION SIZE & NEEND: Myth vs Reality\nMyth: Jitni badi position loge, utna bada thrill milega aur raat ko utni hi gehri neend aayegi.\nReality: Agar subah uthte hi screen kholne ka dar lagta hai, matlab aapka position size galat hai.\nMyth: Bade traders kabhi risk manage nahi karte, sirf bade quantity me trade daalte hain.\nReality: Real professional trader ₹1,00,000 capital par bhi sirf utna risk leta hai jisse uski neend kharab na ho.\nActionable Takeaway: Position size wahi sahi hai jo aapko raat ko sukoon ki neend de sake.\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "sleep_and_position_size",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0009",
+      "slot": "C",
+      "scheduled_ist": "2026-10-09 20:30",
+      "title": "WATCHLIST TEMPLATE: Myth vs Reality",
+      "text": "WATCHLIST TEMPLATE: Myth vs Reality\nMyth: Jitne zyada stocks watchlist me honge, utne zyada profit ke mauke milenge.\nReality: 50 stocks ki lambi list sirf confusion aur FOMO paida karti hai.\nMyth: Watchlist roz badalni chahiye taaki naye trends pakde ja sakein.\nReality: Ek solid template me sirf 5-10 strong setups hone chahiye jo aapki strategy se match karein.\nActionable Takeaway: Simple aur clean watchlist rakho jisme sirf wahi stocks hon jinhe aap deeply track karte ho.\n#TradingStrategy #Discipline\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "watchlist_template",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0010",
+      "slot": "A",
+      "scheduled_ist": "2026-10-10 08:15",
+      "title": "NBFC VS BANK: Beginner Friendly Guide",
+      "text": "NBFC VS BANK: Beginner Friendly Guide\nBank woh hai jiske paas apna savings account hota hai aur aap wahan seedhe paise jama kar sakte ho.\nNBFC (Non-Banking Financial Company) bank nahi hoti, yeh sirf loans aur finance deti hai par current account nahi khol sakti.\nBanks ke paas public deposit ka access hone ki wajah se funding ka cost sasta padta hai.\nNBFCs ko paise raise karne ke liye thoda mehenga padta hai kyunki yeh bank se ya market se udhaar leti hain.\nActionable Takeaway: Banks ka business model zyada stable mana jata hai, jabki NBFCs high-growth par focus karti hain.\n#StockMarketBasics #Finance101\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "nbfc_vs_bank",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0011",
+      "slot": "B",
+      "scheduled_ist": "2026-10-10 12:45",
+      "title": "TRAILING STOP: Practical Numbers aur Capital Example",
+      "text": "TRAILING STOP: Practical Numbers aur Capital Example\nMaante hain aapke paas ₹1,00,000 ka capital hai aur aapne ek trade me risk manage kiya hai.\nJab price aapke favor me chalne lage, toh stop-loss ko upar shift karna hi trailing stop hai.\nExample: Agar trade ₹10 upar gaya, toh apna initial stop-loss cost-to-cost par le aao.\nIsse agar market wapas palta bhi hai, toh aapka capital safe rehta hai aur nuksan nahi hota.\nActionable Takeaway: Trailing stop-loss ka use karke apne open profit ko lock karna seekho.\n#RiskManagement #TradingRules\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "trailing_stop",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0012",
+      "slot": "C",
+      "scheduled_ist": "2026-10-10 20:30",
+      "title": "FOMO vs FOL: Scene yeh hai ki screen par ek green candle tezi se bhaag rahi hai,",
+      "text": "FOMO vs FOL: Scene yeh hai ki screen par ek green candle tezi se bhaag rahi hai, aapka haath buy button par kaanp raha hai ki kahin profit miss na ho jaye! Yeh hai FOMO. Dusri taraf, jab trade loss mein jata hai, toh aap darr ke maare use cut nahi karte ki kahin aur bada nuksaan na ho jaye. Yeh hai Fear of Losing. Dono hi darr trader ke sabse bade dushman hain. Jab aap FOMO mein enter karte hain, toh aap logic nahi dekhte, sirf emotion kaam karta hai. Wahi FOL mein aap risk ko manage karne ki jagah ummeed lagate hain. Trading mein emotion nahi, system chalta hai. Agar entry ka setup match nahi ho raha, toh train miss hone do, agli train ka wait karo. Discipline hi aapka real edge hai market mein.\n\n#tradingpsychology #riskmanagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "fomo_vs_fol",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0013",
+      "slot": "A",
+      "scheduled_ist": "2026-10-11 08:15",
+      "title": "Drawdown Math: Socho aapne ₹1,00,000 ke capital se trading shuru ki aur lagataar",
+      "text": "Drawdown Math: Socho aapne ₹1,00,000 ke capital se trading shuru ki aur lagataar galat trades ki wajah se capital 50% gatt kar ₹50,000 reh gaya. Ab aapko wapas ₹1,00,000 par aane ke liye 50% ka nahi, balki 100% ka return chahiye hoga! Yahi hai drawdown ka khaufnaak ganit. Jitna bada capital cut lagega, recover karna utna hi mushkil hota jata hai. Retail traders aksar yeh samajhte nahi hain aur ek hi din mein bada loss le lete hain. Math kehta hai ki chote losses ko accept karna aasan hai, lekin bade losses ko recover karna almost impossible ho jata hai. Hamesha position size choti rakho taaki drawdown control mein rahe. Capital bachana hi sabse bada profit hai.\n\n#riskmanagement #tradingmath\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "drawdown_math",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0014",
+      "slot": "B",
+      "scheduled_ist": "2026-10-11 12:45",
+      "title": "Kitna Capital Chahiye: Naye traders aksar market mein utarte hi yeh checklist ig",
+      "text": "Kitna Capital Chahiye: Naye traders aksar market mein utarte hi yeh checklist ignore kar dete hain aur bade nuksaan uthate hain. Dekho yeh common mistakes:\n- Yeh sochna ki sirf ₹10,000 se ameer ban jaunga aur poora risk le lunga.\n- Living expenses ka paisa ya udhaar lekar trading shuru karna.\n- Brokerage aur tax ke cost ko ignore karke chote trades lena.\n- Emergency fund ko touch karke market mein laga dena.\nSahi tarika yeh hai ki sirf utna hi capital lao jise khone ka darr na ho. Shuruat mein focus paisa banane par nahi, balki process seekhne par hona chahiye. Capital itna ho ki ek-do galat trades se aapka ghar ka budget na hile.\n\n#tradingcapital #smarttrader\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "capital_requirement",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0015",
+      "slot": "C",
+      "scheduled_ist": "2026-10-11 20:30",
+      "title": "Trading Plan Kaise Likhein: Pehle kya galat hota tha? Hum bina kisi plan ke scre",
+      "text": "Trading Plan Kaise Likhein: Pehle kya galat hota tha? Hum bina kisi plan ke screen kholte the, jahan green dikha wahan ghus jaate the aur jahan red dikha wahan panic ho jaate the. Iska sahi corrective process hai ek likhit trading plan banana. Plan mein clear hona chahiye: Aap kis setup par trade karoge, aapka maximum risk per trade kya hoga, aur din mein kitne max trades loge. Jab market khulne se pehle aapka yeh sab written mein ready hoga, toh trading hours mein dimag par pressure nahi aayega. Emotion tabhi haavi hota hai jab plan nahi hota. Rules banao aur unhe religiously follow karo.\n\n#tradingplan #disciplinedtrader\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "trading_plan",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    },
+    {
+      "id": "ai0016",
+      "slot": "A",
+      "scheduled_ist": "2026-10-12 08:15",
+      "title": "TradingView Layout: Charts par clutter dekh kar confuse ho jana ek aam retail mi",
+      "text": "TradingView Layout: Charts par clutter dekh kar confuse ho jana ek aam retail mistake hai. Yeh checklist dekho jo aapki screen clean rakhne mein madad karegi:\n- Chart par 5 se zyada indicators ek saath laga dena jisse price dikhna hi band ho jaye.\n- Har time-frame par alag-alag drawing karke khud ko confuse karna.\n- Colors aur themes itni bright rakhna ki aankhon mein dard hone lage.\n- Important levels ko mark karke unhe na bhoolna aur purani lines delete na karna.\nCorrective step yeh hai ki ek minimal layout rakho. Bas ek ya do basic tools aur clean price action par focus karo. Jitna simple chart hoga, utna hi clear aapka decision hoga.\n\n#tradingtools #tradingview\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "tradingview_layout",
+      "generated_at": "2026-10-07 12:19:53 IST"
+    }
+  ],
+  "total": 16,
+  "last_scheduled": "2026-10-12 08:15"
+}
