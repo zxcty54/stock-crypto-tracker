@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
+"""
+TELEGRAM POSTER
+Broadcaster script to deliver scheduled educational content to Telegram channel.
+Uses parse_mode='HTML' for reliable bold tag support.
+"""
+
 import os
+import sys
 import json
 import requests
 from datetime import datetime, timezone, timedelta
@@ -10,20 +17,25 @@ NOW = datetime.now(IST)
 
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 
-# 🎯 Channel Target Configuration:
-# Agar secret set hai toh wo lega, warna directly aapke channel @bhaga_657 par post karega
-RAW_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
-if RAW_CHAT_ID and (RAW_CHAT_ID.startswith("@") or RAW_CHAT_ID.startswith("-100")):
-    CHAT_ID = RAW_CHAT_ID
+# Target channel resolution:
+# Takes secret if provided and valid channel identifier; otherwise falls back to @bhaga_657
+RAW_TARGET = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+if RAW_TARGET and (RAW_TARGET.startswith("@") or RAW_TARGET.startswith("-100")):
+    CHAT_ID = RAW_TARGET
 else:
-    # Fallback to direct channel username
     CHAT_ID = "@bhaga_657"
 
-def send_telegram_message(text):
+
+def send_telegram_message(text: str):
+    """
+    Sends message using HTML mode.
+    Includes fallback to plain text if HTML tags fail to parse.
+    """
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": CHAT_ID,
         "text": text,
+        "parse_mode": "HTML",
         "disable_web_page_preview": True
     }
     
@@ -33,34 +45,44 @@ def send_telegram_message(text):
         if res_data.get("ok"):
             return True, res_data.get("result", {}).get("message_id")
         else:
-            print(f"❌ Telegram API Error: {res_data.get('description')}")
+            print(f"⚠️ HTML parse failed: {res_data.get('description')}. Retrying without HTML tags...")
+            # Fallback: Strip HTML tags and send plain text
+            import re
+            plain_text = re.sub(r"<[^>]+>", "", text)
+            payload["text"] = plain_text
+            payload.pop("parse_mode", None)
+            retry_res = requests.post(url, json=payload, timeout=15)
+            retry_data = retry_res.json()
+            if retry_data.get("ok"):
+                return True, retry_data.get("result", {}).get("message_id")
             return False, None
     except Exception as e:
-        print(f"⚠️ Network error while calling Telegram API: {e}")
+        print(f"⚠️ Network error while dispatching to Telegram: {e}")
         return False, None
+
 
 def main():
     if not BOT_TOKEN:
         print("❌ TELEGRAM_BOT_TOKEN environment variable is missing.")
-        return
+        sys.exit(1)
 
-    print(f"📢 Target Destination: {CHAT_ID}")
+    print(f"📢 Target Channel: {CHAT_ID}")
 
     if not os.path.exists(QUEUE_FILE):
         print(f"❌ {QUEUE_FILE} not found.")
-        return
+        sys.exit(0)
 
     try:
         with open(QUEUE_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
     except Exception as e:
         print(f"❌ Failed to parse {QUEUE_FILE}: {e}")
-        return
+        sys.exit(1)
 
     queue = data.get("queue", [])
     now_str = NOW.strftime("%Y-%m-%d %H:%M")
 
-    # 1. First priority: Jo scheduled time cross kar chuka ho
+    # Priority 1: Pick post whose scheduled IST time has passed
     target_post = None
     for item in queue:
         if not item.get("used", False):
@@ -68,7 +90,7 @@ def main():
                 target_post = item
                 break
 
-    # 2. Fallback: Agla unused post
+    # Priority 2: Fallback to first available unused post
     if not target_post:
         for item in queue:
             if not item.get("used", False):
@@ -92,9 +114,11 @@ def main():
         with open(QUEUE_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
-        print(f"✅ Success! Message ID {msg_id} broadcast to channel {CHAT_ID}!")
+        print(f"✅ Success! Message ID {msg_id} posted to {CHAT_ID}")
     else:
-        print("❌ Broadcast failed. Check if Bot is an administrator in @bhaga_657 with 'Post Messages' permission.")
+        print("❌ Broadcast failed. Check Bot permissions in the channel.")
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
