@@ -1,1 +1,106 @@
-
+{
+  "queue": [
+    {
+      "id": "ai0001",
+      "slot": "C",
+      "scheduled_ist": "2026-10-07 20:30",
+      "title": "POSITION SIZER KA USE: Andhaadhundh Quantity Mat Uthao",
+      "text": "📌 <b>POSITION SIZER KA USE: Andhaadhundh Quantity Mat Uthao</b>\n\nJab man kiya tab 500 quantity utha li aur jab loss hua toh poora account hil gaya.\n\n• <b>The Trap:</b> Trader bina risk calculate kiye apne mood ke hisaab se random quantity trade kar leta hai.\n• <b>The Damage:</b> Agar aapke paas ₹1,00,000 ka capital hai aur bina stop-loss distance check kiye heavy size le liya, toh ek hi bad trade mein 20% capital wipeout ho sakta hai.\n• <b>The Fix:</b> Hamesha position size calculator ka use karo taaki total risk aapke total capital ka 1% ya 2% hi ho.\n\n💡 <b>Golden Rule:</b> Quantity woh nahi jo dil chahe, quantity woh hai jo risk management allow kare.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "position_size_calculator",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0002",
+      "slot": "A",
+      "scheduled_ist": "2026-10-08 08:15",
+      "title": "KITNA CAPITAL CHAHIYE: Shuruat Kahan Se Karein",
+      "text": "📌 <b>KITNA CAPITAL CHAHIYE: Shuruat Kahan Se Karein</b>\n\nLakhon rupaye udhar lekar market mein utar gaye yeh sochkar ki ek din mein ameer ban jayenge.\n\n• <b>The Trap:</b> Naye traders zyadatar udhaar ya life savings ka bada hissaa ek saath trading account mein daal dete hain.\n• <b>The Damage:</b> Agar aap ₹5,00,000 se shuru karte hain aur bina experience ke trading karte hain, toh kuch mahino mein poori capital doob sakti hai.\n• <b>The Fix:</b> Shuruwat hamesha ek chote amount jaise ₹25,000 se karo jisse agar loss bhi ho toh mental peace kharab na ho.\n\n💡 <b>Golden Rule:</b> Pehle apne skills ko polish karo, capital toh baad mein bhi badhayi ja sakti hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "starting_capital",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0003",
+      "slot": "B",
+      "scheduled_ist": "2026-10-08 12:45",
+      "title": "EMERGENCY FUND VS CAPITAL: Paisa Kahan Rakhna Chahiye",
+      "text": "📌 <b>EMERGENCY FUND VS CAPITAL: Paisa Kahan Rakhna Chahiye</b>\n\nGhar ka zaroori paisa ya medical savings bhi trading account mein daal di yeh sochkar ki double ho jayega.\n\n• <b>The Trap:</b> Apne basic survival aur emergency funds ko risk capital ke sath mix kar dena.\n• <b>The Damage:</b> Agar aapne ₹1,50,000 ki emergency savings ko trading mein laga diya aur market down ho gaya, toh emergency ke waqt aapke paas ek rupaya bhi nahi bachega.\n• <b>The Fix:</b> Pehle 6 mahine ka emergency fund alag safe jagah rakho, aur sirf wahi paisa trading mein lagao jise khone ka darr na ho.\n\n💡 <b>Golden Rule:</b> Emergency fund ko chhoona matlab apni financial security ko daav par lagana hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "emergency_fund_vs_trading",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0004",
+      "slot": "C",
+      "scheduled_ist": "2026-10-08 20:30",
+      "title": "SUPPORT RESISTANCE: 3 Golden Rules Follow Karo",
+      "text": "📌 <b>SUPPORT RESISTANCE: 3 Golden Rules Follow Karo</b>\n\nHar jagah line khinch lete hain aur samajh nahi aata ki kahan se market paltega.\n\n• <b>The Trap:</b> Support ya resistance ko ek single exact point samajh lena jabki woh ek zone hota hai.\n• <b>The Damage:</b> Agar aapne ek minor candle wick ko support maan liya aur ₹1,00,000 ka trade daal diya, toh false breakout mein poora capital trap ho jayega.\n• <b>The Fix:</b> Rule 1: Support/Resistance ko hamesha zone ki tarah dekho. Rule 2: Multiple touchpoints hone chahiye. Rule 3: Volume confirmation ka wait karo.\n\n💡 <b>Golden Rule:</b> Jitna bada timeframe ka support hoga, utna hi strong uska reaction hoga.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "support_resistance_rules",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0005",
+      "slot": "A",
+      "scheduled_ist": "2026-10-09 08:15",
+      "title": "MARKET STRUCTURE: Trend Ke Saath Chalo",
+      "text": "📌 <b>MARKET STRUCTURE: Trend Ke Saath Chalo</b>\n\nJab market upar jaa raha hota hai tab bhi retail traders top par short karne ki koshish karte hain.\n\n• <b>The Trap:</b> Higher Highs aur Higher Lows ki basic sequence ko ignore karke beech me trade lena sabse badi mistake hai.\n• <b>The Damage:</b> Galat jagah trend ke khilaf position lene se ₹1,00,000 ke capital me se sirf ek din me 10% ka bada loss ho sakta hai.\n• <b>The Fix:</b> Hamesha structure map karo aur jab tak Higher Highs ban rahe hain, tab tak trend ke direction me hi focus rakho.\n\n💡 <b>Golden Rule:</b> Trend hi aapka sabse bada dost hai, uske khilaf jaane ki koshish mat karo.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "market_structure_hh_hl",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0006",
+      "slot": "B",
+      "scheduled_ist": "2026-10-09 12:45",
+      "title": "SEBI CHECK: Asli Advisor Pehchano",
+      "text": "📌 <b>SEBI CHECK: Asli Advisor Pehchano</b>\n\nSocial media par tips aur bade profit ke screenshots dekh kar log bina soche-samjhe kisi ko bhi paise de dete hain.\n\n• <b>The Trap:</b> Bina kisi verification ke kisi bhi random influencer ya unverified 'expert' ki baaton me aa jana.\n• <b>The Damage:</b> Fake tips ke chakkar me log apni poori savings yaani ₹5,00,000 tak ganwa dete hain aur koi legal help bhi nahi milti.\n• <b>The Fix:</b> Hamesha SEBI ki official website par jaakar Intermediary Search me us vyakti ya firm ka registration number check karo.\n\n💡 <b>Golden Rule:</b> Verify kiye bina kisi ko bhi apni hard-earned money ki direction mat do.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "sebi_registration_verify",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0007",
+      "slot": "C",
+      "scheduled_ist": "2026-10-09 20:30",
+      "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
+      "text": "📌 <b>1% RULE: Capital Bachao Ge Tabhi Kheloge</b>\n\nShuruwat me traders ko lagta hai ki bada risk lenge tabhi bada profit jaldi aayega.\n\n• <b>The Trap:</b> Ek hi trade me total capital ka 20% ya usse zyada risk le lena.\n• <b>The Damage:</b> Agar aapke paas ₹2,00,000 capital hai aur ek trade me 20% loss ho gaya, toh agle trades me usse recover karna bahut mushkil ho jata hai.\n• <b>The Fix:</b> Apne total capital ka maximum 1% hi ek trade me risk lene ka strict niyam bana lo.\n\n💡 <b>Golden Rule:</b> Capital preserve karna trading ka sabse pehla aur sabse important rule hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "one_percent_rule",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0008",
+      "slot": "A",
+      "scheduled_ist": "2026-10-10 08:15",
+      "title": "NBFC VS BANK: Risk Ko Pehle Samjho",
+      "text": "📌 <b>NBFC VS BANK: Risk Ko Pehle Samjho</b>\n\nLog zyada returns ya asani se loan milne ke chakkar me ye nahi dekhte ki background me risk kitna hai.\n\n• <b>The Trap:</b> Banks aur NBFCs ke funding model aur risk structure ko ek jaisa samajh lena.\n• <b>The Damage:</b> Economic downturn ke time par agar NBFCs ko liquidity crunch aata hai, toh investors ka ₹3,00,000 tak ka allocation ek jhatke me fas sakta hai.\n• <b>The Fix:</b> Hamesha company ke fundamental balance sheet strength aur unke borrowing sources ko deeply analyze karo.\n\n💡 <b>Golden Rule:</b> Zyada return ke lalach me safety ko kabhi compromise mat karo.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "nbfc_vs_bank",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0009",
+      "slot": "B",
+      "scheduled_ist": "2026-10-10 12:45",
+      "title": "POSITION SIZING: Andaza Lagana Band Karo",
+      "text": "📌 <b>POSITION SIZING: Andaza Lagana Band Karo</b>\n\nTraders bina calculation ke mann me aaye utne shares utha lete hain aur fir market movement se darte hain.\n\n• <b>The Trap:</b> Fixed risk amount aur stop-loss distance ke bina random quantity me trade enter karna.\n• <b>The Damage:</b> Galat quantity ki wajah se ek chote se movement par bhi ₹50,000 ka nuksaan ho sakta hai jo ki mental stress badhata hai.\n• <b>The Fix:</b> Formula use karo: (Total Capital ka Risk Amount) divided by (Entry se Stop-Loss ka distance) = Exact Quantity.\n\n💡 <b>Golden Rule:</b> Maths ke bina trading karna blindfold hokar gaadi chalane jaisa hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "position_sizing_formula",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    },
+    {
+      "id": "ai0010",
+      "slot": "C",
+      "scheduled_ist": "2026-10-10 20:30",
+      "title": "BONUS ISSUE: Free Shares ka Sach",
+      "text": "📌 <b>BONUS ISSUE: Free Shares ka Sach</b>\n\nBeginners ko lagta hai ki bonus shares milne ka matlab company ne bina kisi reason ke unhe extra paisa de diya hai.\n\n• <b>The Trap:</b> Yeh samajh lena ki bonus aane se raaton-raat wealth double ho jaati hai bina price adjustment ko dekhe.\n• <b>The Damage:</b> Agar kisi ke paas ₹1,00,000 value ke shares hain, toh bonus ke baad shares ki quantity badh jaati hai par price usi ratio me adjust ho jaati hai, total value same rehti hai.\n• <b>The Fix:</b> Bonus issue ko hamesha sirf ek bookkeeping entry ki tarah dekho, isse company ki intrinsic value par koi direct magical farak nahi padta.\n\n💡 <b>Golden Rule:</b> Market me kuch bhi free nahi milta, price hamesha adjust hoti hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "bonus_issue_works",
+      "generated_at": "2026-10-07 19:21:39 IST"
+    }
+  ],
+  "total": 10,
+  "last_scheduled": "2026-10-10 20:30"
+}
