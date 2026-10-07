@@ -39,6 +39,10 @@ PERF_FILE      = "performance.json"
 PERF_REPORT    = "performance-report.md"
 INFO_STATE     = "infographic_state.json"
 
+MIN_SAMPLE       = 5      # itne posts se kam ho to weights nahi
+MIN_PILLAR_POSTS = 3      # ek pillar ka weight tabhi jab uske 3+ posts hon
+CARD_MARKER      = "Poora post channel me"   # infographic caption ki pehchaan
+
 BOT_TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN")
              or os.environ.get("TELEGRAM_TOKEN") or "").strip()
 CHAT_ID = (os.environ.get("TELEGRAM_CHANNEL")
@@ -214,43 +218,100 @@ def scrape_channel_views(pages=3):
     return rows
 
 
+
+def _norm(s):
+    """Text ko compare karne layak banao (lowercase, hashtag/emoji hata ke)."""
+    s = (s or "").lower()
+    s = re.sub(r"#\w+", " ", s)
+    s = re.sub(r"[^a-z0-9\u0900-\u097f]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _queue_index(queue):
+    """content_queue ke posts ka normalized-title index (text match ke liye)."""
+    idx = {}
+    for item in queue.get("queue", []):
+        for raw in (item.get("title", ""), strip_html(item.get("text", ""))):
+            k = _norm(raw)[:60]
+            if len(k) >= 15:
+                idx.setdefault(k, item)
+    return idx
+
+
+def _queue_hit(snippet, idx):
+    """Channel post ka text queue ke kisi post se match karta hai?"""
+    s = _norm(snippet)
+    if len(s) < 15:
+        return None
+    head = s[:60]
+    for key, item in idx.items():
+        if key[:40] in s or head[:40] in key:
+            return item
+    return None
+
+
 def run_perf():
     print("\n📊 PERFORMANCE LOOP")
     print("-" * 60)
 
-    log = load_json(POSTED_LOG, {})
+    log   = load_json(POSTED_LOG, {})          # optional — sirf dispatcher likhta hai
+    queue = load_json(QUEUE_FILE, {"queue": []})
     views = scrape_channel_views(pages=3)
     print(f"   Channel se {len(views)} posts ka data mila")
 
-    # match: channel post_id ↔ post_log msg_id
+    # (a) exact match: channel post_id ↔ post_log msg_id
     by_msgid = {}
     for internal_id, entry in log.items():
         mid = entry.get("msg_id")
         if mid:
             by_msgid[int(mid)] = {"internal_id": internal_id, **entry}
+    qidx = _queue_index(queue)
 
-    matched = []
+    # (b) har post ko score karo — match na ho to pillar text se nikalo
+    scored, cards = [], 0
+    src_count = {"log": 0, "queue": 0, "inferred": 0}
+
     for v in views:
-        info = by_msgid.get(v["post_id"])
-        if not info:
+        text = v["snippet"]
+
+        if CARD_MARKER in text:                     # infographic card — repackaged
+            cards += 1
             continue
-        matched.append({
-            **v,
-            "internal_id": info["internal_id"],
-            "title": clean_title(info.get("title", "")),
-            "kind": info.get("kind", "evergreen"),
-            "pillar": topic_pillar(info.get("title", "") + " " + v["snippet"]),
-        })
 
-    print(f"   Hamare posts match hue: {len(matched)}")
+        info = by_msgid.get(v["post_id"])
+        if info:                                    # 1) pakka match
+            title  = clean_title(info.get("title", "")) or f"Post #{v['post_id']}"
+            pillar = topic_pillar(info.get("title", "") + " " + text)
+            src    = "log"
+        else:
+            hit = _queue_hit(text, qidx)            # 2) queue text match
+            if hit:
+                title  = clean_title(hit.get("title", "")) or f"Post #{v['post_id']}"
+                pillar = topic_pillar(hit.get("title", "") + " " + text)
+                src    = "queue"
+            else:                                   # 3) text se pillar infer
+                title  = clean_title(text.split("\n")[0]) or f"Post #{v['post_id']}"
+                pillar = topic_pillar(text)
+                src    = "inferred"
 
-    if len(matched) < 5:
-        print(f"\n   ⚠️ Data kam hai ({len(matched)} posts). Kam se kam 5 posts chahiye.")
-        print(f"      Abhi posts jaate rahenge — 1 hafte baad ye loop kaam karega.")
+        src_count[src] += 1
+        scored.append({**v, "title": title[:70], "pillar": pillar, "source": src})
+
+    identified = src_count["log"] + src_count["queue"]
+    print(f"   Score kiye: {len(scored)} posts "
+          f"({identified} pehchaane, {len(scored) - identified} pillar text se)")
+    if cards:
+        print(f"   Infographic cards: {cards} (skip — repackaged content)")
+
+    if len(scored) < MIN_SAMPLE:
+        print(f"\n   ⚠️ Data kam hai ({len(scored)} posts). Kam se kam {MIN_SAMPLE} chahiye.")
         save_json(PERF_FILE, {"generated_at": NOW.strftime("%Y-%m-%d %H:%M IST"),
-                              "sample_size": len(matched), "status": "collecting_data",
+                              "sample_size": len(scored), "status": "collecting_data",
                               "pillars": {}})
+        print(f"      Channel public hona chahiye + posts dikhne chahiye.")
         return
+
+    matched = scored   # aage ka code wahi rahega
 
     # pillar-wise
     overall = sum(m["views"] for m in matched) / len(matched)
@@ -265,10 +326,14 @@ def run_perf():
     print("   " + "-" * 46)
     for p, vals in sorted(by_pillar.items(), key=lambda x: -sum(x[1]) / len(x[1])):
         avg = sum(vals) / len(vals)
-        weight = max(0.5, min(2.0, avg / overall if overall else 1.0))
-        pillars[p] = {"posts": len(vals), "avg_views": round(avg, 1), "weight": round(weight, 2)}
+        thin = len(vals) < MIN_PILLAR_POSTS
+        raw_w = avg / overall if overall else 1.0
+        weight = 1.0 if thin else max(0.5, min(2.0, raw_w))
+        pillars[p] = {"posts": len(vals), "avg_views": round(avg, 1),
+                      "weight": round(weight, 2), "low_sample": thin}
         bar = "█" * int(weight * 8)
-        print(f"   {p:18} {len(vals):>6} {avg:>10.0f} {weight:>8.2f} {bar}")
+        note = "  (sample kam — neutral)" if thin else ""
+        print(f"   {p:18} {len(vals):>6} {avg:>10.0f} {weight:>8.2f} {bar}{note}")
 
     matched.sort(key=lambda x: -x["views"])
     top, bottom = matched[:5], matched[-3:]
@@ -276,6 +341,9 @@ def run_perf():
     save_json(PERF_FILE, {
         "generated_at": NOW.strftime("%Y-%m-%d %H:%M IST"),
         "sample_size": len(matched),
+        "identified": identified,
+        "inferred": src_count["inferred"],
+        "cards_skipped": cards,
         "channel_avg_views": round(overall, 1),
         "status": "ok",
         "pillars": pillars,
@@ -286,6 +354,8 @@ def run_perf():
     md = [f"# 📊 Performance Report\n",
           f"**{NOW.strftime('%d-%b-%Y %H:%M IST')}** | {len(matched)} posts tracked "
           f"| channel avg **{overall:.0f} views**\n",
+          f"*{identified} posts pehchaane gaye, {src_count['inferred']} ka pillar "
+          f"text se nikala gaya. {cards} infographic cards skip kiye.*\n",
           "## Pillar performance\n",
           "| Pillar | Posts | Avg views | Weight |", "|---|---|---|---|"]
     for p, d in sorted(pillars.items(), key=lambda x: -x[1]["avg_views"]):
