@@ -213,7 +213,7 @@ def call_ai(topics, angles):
     prompt = PROMPT_TEMPLATE.format(topics=topic_lines)
 
     # Gemini API Call (Direct REST endpoint, zero SDK dependencies)
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key={api_key}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
