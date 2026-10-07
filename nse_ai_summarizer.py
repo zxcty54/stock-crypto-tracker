@@ -84,8 +84,8 @@ CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
 MODEL_REGISTRY = [
     {"name": "openai/gpt-oss-20b",       "provider": "groq"},
     {"name": "openai/gpt-oss-120b",      "provider": "groq"},
-    {"name": "gemini-2.5-flash",         "provider": "google"},
-    {"name": "gemini-2.5-flash-lite",    "provider": "google"},
+    {"name": "gemini-3.5-flash-lite",         "provider": "google"},
+    {"name": "gemini-3.1-flash-lite",    "provider": "google"},
 ]
 
 # [FIX] dedup â€” same key do env vars me ho to rotation useless ho jaati thi
