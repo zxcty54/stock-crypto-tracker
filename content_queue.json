@@ -1,0 +1,151 @@
+{
+ "queue": [
+  {
+   "id": "ai0001",
+   "slot": "A",
+   "scheduled_ist": "2026-10-07 08:15",
+   "scheduled_utc": "2026-10-07 02:45",
+   "title": "TOPIC LABEL: FII DII flow kaise padhein",
+   "text": "TOPIC LABEL: FII DII flow kaise padhein\nFII yaani foreign investors aur DII yaani domestic institutions daily market me kitna paisa la rahe hain, ye data har sham ko aata hai.\nMaante hain FIIs ne ₹2,000 crore beche aur DIIs ne ₹2,500 crore kharide, toh net positive flow hua ₹500 crore.\nYe numbers sirf direction batate hain, koi magic signal nahi.\nInko roj dekhne ki aadat daalo taaki bade players ka mood samajh aaye.\nMarket ke sentiment ko track karne ka ye ek basic tool hai.\nKya aapne aaj ka institutional data check kiya?\n#fiidiidata #marketmood\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "fii_dii_flow",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0002",
+   "slot": "B",
+   "scheduled_ist": "2026-10-07 12:45",
+   "scheduled_utc": "2026-10-07 07:15",
+   "title": "TOPIC LABEL: bonus issue kaise kaam karta hai",
+   "text": "TOPIC LABEL: bonus issue kaise kaam karta hai\nJab koi company apne existing shareholders ko muft me extra shares deti hai, toh use bonus issue kehte hain.\nIsme aapki wealth wahi rehti hai bas shares ki sankhya badh jaati hai.\nChecklist for bonus:\n1. Ratio dekho jaise 1:1 ya 2:1.\n2. Record date check karo jis din tak share account me hona chahiye.\n3. Ex-date ke din price adjust hota hai.\nBonus milne se company ka valuation magically double nahi hota.\nHamesha fundamentals dekho, sirf bonus ke peeche mat bhago.\nAaj ek aisi company dhundo jisne pichle 2 saal me bonus diya ho.\n#bonusissue #investingbasics\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "bonus_issue",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0003",
+   "slot": "C",
+   "scheduled_ist": "2026-10-07 20:30",
+   "scheduled_utc": "2026-10-07 15:00",
+   "title": "TOPIC LABEL: position size calculator ka use",
+   "text": "TOPIC LABEL: position size calculator ka use\nPosition size calculator ye decide karne me madad karta hai ki ek trade me kitne shares lene chahiye.\nLekin log isme badi galtiyan karte hain:\n- Calculator me stop-loss galat daalna.\n- Apni total capital ka galat figure use karna.\n- Calculator ko ignore karke gut feeling pe trade lena.\nAgar aapka risk ₹1,000 hai aur stop-loss ₹10 door hai, toh calculator batayega ki 100 shares lene hain.\nIs calculation ko avoid karne se bada nuksaan ho sakta hai.\nHar trade se pehle calculator ka use karne ki kasam khao.\nApne agle trade me size calculate karke dekho.\n#positionsizing #riskmanagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "position_size_calculator",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0004",
+   "slot": "A",
+   "scheduled_ist": "2026-10-08 08:15",
+   "scheduled_utc": "2026-10-08 02:45",
+   "title": "TOPIC LABEL: 1% rule kaise lagate hain",
+   "text": "TOPIC LABEL: 1% rule kaise lagate hain\n1% rule kehta hai ki ek trade me apni total capital ka sirf 1% ya usse kam risk lo.\nMaante hain aapke paas ₹1,00,000 ki capital hai, toh ek trade me maximum ₹1,000 ka risk hona chahiye.\nCommon mistakes jo log karte hain:\n- Ek hi trade me saari capital ka risk le lena.\n- Loss badhne par bhi position hold karna.\n- 1% rule ko chote account par apply na karna.\nAgar aap lagataar 10 trades me bhi galat ho, toh bhi aapka sirf 10% nuksaan hoga aur aap game me rahoge.\nCapital bachana hi sabse bada skill hai.\nKya aap apne har trade me 1% rule follow karte ho?\n#1percentrule #tradingdiscipline\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "one_percent_rule",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0005",
+   "slot": "B",
+   "scheduled_ist": "2026-10-08 12:45",
+   "scheduled_utc": "2026-10-08 07:15",
+   "title": "TOPIC LABEL: SEBI registration kaise check karein",
+   "text": "TOPIC LABEL: SEBI registration kaise check karein\nEk din Rahul ko social media par ek tip mili ki ek khas jagah paisa lagao aur raato-raat double ho jayega.\nRahul ne bina soche samjhe paisa bhej diya aur agle din wo banda gayab tha.\nYe tab hota hai jab hum bina verify kiye kisi par bharosa karte hain.\nAsli process ye hai:\n1. Us vyakti ya firm ka SEBI registration number maango.\n2. SEBI ki official website par jaakar 'Intermediaries' section me wo number daalo.\n3. Check karo ki license valid hai ya nahi.\nSirf verified advisors ke sath hi seekho ya aage bado.\nApne kisi bhi educator ka SEBI status aaj hi check karo.\n#sebiregistered #safeinvesting\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "sebi_registration",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0006",
+   "slot": "C",
+   "scheduled_ist": "2026-10-08 20:30",
+   "scheduled_utc": "2026-10-08 15:00",
+   "title": "TOPIC LABEL: trading journal ke columns",
+   "text": "TOPIC LABEL: trading journal ke columns\nPehle log trading journal nahi banate the, sirf dimaag me rakhte the ki kya kharida aur kya becha.\nNatija? Yahi yaad nahi rehta tha ki trade kyun liya tha aur loss kyun hua.\nSahi tarika hai ek proper journal maintain karna.\nImportant columns jo hone chahiye:\n- Date aur Time\n- Setup ka naam\n- Entry aur Exit reason\n- Risk kitna liya tha\n- Emotional state (Ghabrahat thi ya confidence)\n- Mistake kya ki\nJab aap apne purane trades likhte ho, toh aapko apni kamzoriyan saaf dikhne lagti hain.\nApne pichle 3 trades ko ek notebook me likho.\n#tradingjournal #processoriented\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "trading_journal",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0007",
+   "slot": "A",
+   "scheduled_ist": "2026-10-09 08:15",
+   "scheduled_utc": "2026-10-09 02:45",
+   "title": "TOPIC LABEL: bank paisa kaise kamata hai",
+   "text": "TOPIC LABEL: bank paisa kaise kamata hai\nKya aapne kabhi socha hai ki bank aapko savings account par 3% interest deta hai aur wahi paisa loan par 9% par de deta hai?\nIs beech ke 6% ko Net Interest Margin kehte hain, aur yehi bank ki main kamai hoti hai.\nBanks sirf loan dekar hi nahi, balki credit cards, processing fees, aur mutual fund distribution se bhi commission kamate hain.\nJab aap bank ka business model samajhte ho, toh aapko samajh aata hai ki inka paisa kaise rotate hota hai.\nFinancial sector ko samajhna ek trader ke liye behad zaroori hai.\nBank ke alawa aur kaunse sectors hain jo aisi hi fee model par kaam karte hain?\n#bankingsector #financialliteracy\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "bank_paisa_kaise_kamata_hai",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0008",
+   "slot": "B",
+   "scheduled_ist": "2026-10-09 12:45",
+   "scheduled_utc": "2026-10-09 07:15",
+   "title": "TOPIC LABEL: FOMO (Fear Of Missing Out)",
+   "text": "TOPIC LABEL: FOMO (Fear Of Missing Out)\nMyth: Agar maine abhi fast move karte hue chart me entry nahi li, toh duniya ka sabse bada mauka chhoot jayega aur main garib reh jaunga.\nReality: Market roz khulta hai, hazaaron mauke roz aate hain. Jaldbazi me bina setup ke entry lene se sirf loss aur stress milta hai.\nFOMO tab hota hai jab aap discipline chhodkar doosron ke screenshot dekhne lagte ho.\nMarket me patient rehna hi sabse badi kala hai.\nAgar train chhoot gayi, toh agli train ka wait karo, patri par mat daudne lago.\nKya aaj aapne FOMO me aakar koi trade liya?\n#tradingpsychology #fomo\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "fomo",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0009",
+   "slot": "C",
+   "scheduled_ist": "2026-10-09 20:30",
+   "scheduled_utc": "2026-10-09 15:00",
+   "title": "TOPIC LABEL: support aur resistance ke 3 rule",
+   "text": "TOPIC LABEL: support aur resistance ke 3 rule\nPehle log support aur resistance ko ek single exact line maante the aur jaise hi price wahan aata tha, andhadhundh trade le lete the.\nSahi tarika ye hai ki support aur resistance ko ek 'zone' maana jaye na ki ek single line.\n3 zaroori rules:\n1. Zones ko hamesha higher timeframes par mark karo.\n2. Ek hi level jitni baar test hota hai, utna weak ho sakta hai.\n3. Breakout ya bounce ke liye volume aur candle confirmation ka wait karo.\nPrice wahan aane par turant reaction dene ke bajaye observe karo.\nApne chart par pichle hafte ke major zones draw karke practice karo.\n#technicalanalysis #learning\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "support_resistance",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0010",
+   "slot": "A",
+   "scheduled_ist": "2026-10-10 08:15",
+   "scheduled_utc": "2026-10-10 02:45",
+   "title": "TOPIC LABEL: kitna capital chahiye shuru karne ke liye",
+   "text": "TOPIC LABEL: kitna capital chahiye shuru karne ke liye\nBefore scenario: Rahul ne socha ki market me utarne ke liye kam se kam ₹5,00,000 chahiye honge, tabhi wo bada trader ban payega. Usne sabse udhar lekar paisa laga diya aur pehle hi hafte darr ke maare sab gawa diya.\nAfter scenario: Priya ne samjha ki shuruwat me capital se zyada seekhne par dhyan dena chahiye. Usne sirf ₹10,000 se start kiya jisse agar loss bhi ho, toh uski life par koi asar na pade.\nTrading seekhne ke liye chota capital hi sabse best hota hai.\nPehle apne skills develop karo, capital toh baad me bhi badhayi ja sakti hai.\nAapne kitni capital se shuru kiya tha?\n#capitalmanagement #tradermindset\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "capital_requirement",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0011",
+   "slot": "B",
+   "scheduled_ist": "2026-10-10 12:45",
+   "scheduled_utc": "2026-10-10 07:15",
+   "title": "TOPIC LABEL: market breadth kya batati hai",
+   "text": "TOPIC LABEL: market breadth kya batati hai\nMarket breadth ye batati hai ki poore index me kitne stocks upar ja rahe hain aur kitne neeche ja rahe hain.\nChecklist for market breadth:\n1. Dekho ki kitne shares green me hain aur kitne red me.\n2. Advance-Decline ratio check karo ki buyers hawi hain ya sellers.\n3. Sector performance dekho ki kya sabhi sectors chal rahe hain ya sirf ek do.\nAgar index upar ja raha hai lekin sirf 2 stocks ki wajah se baaki sab gir rahe hain, toh breadth weak hai.\nYe hidden strength ya weakness ko pehchane me madad karta hai.\nKya aapne aaj advance-decline ratio dekha?\n#marketbreadth #nse\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "market_breadth",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  },
+  {
+   "id": "ai0012",
+   "slot": "C",
+   "scheduled_ist": "2026-10-10 20:30",
+   "scheduled_utc": "2026-10-10 15:00",
+   "title": "TOPIC LABEL: stock split vs bonus",
+   "text": "TOPIC LABEL: stock split vs bonus\nMyth 1: Stock split aur bonus milne se company ke shares saste ho jaate hain aur value badh jaati hai.\nMyth 2: Dono bilkul alag cheezein hain aurinme se ek me bada profit milta hai.\nReality: Stock split me face value change hoti hai (jaise ₹10 se ₹2), aur bonus me reserves se naye shares allocate hote hain.\nDono hi cases me company ki total market cap aur aapki holding ki value par koi farak nahi padta.\nYe sirf liquidity badhane ke tareeqe hain taaki chote retail investors bhi easily trade kar sakein.\nIncorporate these concepts in your fundamental study.\nAapke paas last konsa split ya bonus share aaya tha?\n#stocksplit #investoredcation\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+   "used": false,
+   "ai_generated": true,
+   "topic_key": "stock_split_vs_bonus",
+   "generated_at": "2026-10-07 12:04:49 IST"
+  }
+ ],
+ "total": 12,
+ "last_scheduled": "2026-10-10 20:30",
+ "generated_at": "2026-10-07 12:04:49 IST"
+}
