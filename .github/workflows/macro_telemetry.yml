@@ -1,42 +1,60 @@
-name: Daily Macro Telemetry Scraper
+name: Scrape Macro Telemetry
 
 on:
-  schedule:
-    # Runs daily at 12:30 PM UTC (6:00 PM IST)
-    - cron: '30 12 * * *'
   workflow_dispatch:
 
+  # Optional: automatically run once every day
+  schedule:
+    - cron: "30 12 * * *"   # 18:00 IST
+
+permissions:
+  contents: write
+
 jobs:
-  scrape-macro-data:
+  scrape-macro:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
-          pip install curl_cffi pdfplumber beautifulsoup4 pandas openpyxl
+          python -m pip install --upgrade pip
+          pip install \
+            curl_cffi \
+            beautifulsoup4 \
+            pdfplumber
 
-      - name: Run Macro Scraper
+      - name: Run macro scraper
         run: |
-          python macro_economic_telemetry_scraper.py
+          python macro_telemetry_scraper.py
 
-      - name: Commit and Push Telemetry Data
+      - name: Verify output
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "===== OUTPUT FILE ====="
+          ls -lh macro_telemetry_master.json
+          echo "===== FIRST 80 LINES ====="
+          head -n 80 macro_telemetry_master.json
+
+      - name: Commit scraped data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add macro_telemetry_master.json
-          if git diff --staged --quiet; then
-            echo "No new macro metrics found."
+
+          if git diff --cached --quiet; then
+            echo "No new data to commit."
           else
-            git commit -m "📊 Sync Macro Telemetry Master [$(date +'%d-%b-%Y')]"
+            git commit -m "Update macro telemetry data [skip ci]"
+            git pull --rebase origin main
             git push origin main
           fi
