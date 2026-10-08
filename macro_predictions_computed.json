@@ -1,130 +1,225 @@
 {
-  "computed_at": "2026-10-08 16:14:16 IST",
-  "total_analyzed": 5,
-  "analyzed_subsectors": [
+  "generated_at": "2026-10-08 17:01:51 IST",
+  "total_sectors_analyzed": 5,
+  "analytical_data": [
     {
-      "subsector_key": "ROAD_HIGHWAY_EPC",
-      "subsector_name": "National Highway EPC & Road Construction",
-      "unit": "Thousand MT (Bitumen)",
-      "latest_month": "Sep 2026",
-      "signal_status": {
-        "badge": "🟡 Positive Demand, but Momentum is Moderating",
-        "code": "PEAKING_MOMENTUM_MODERATION",
-        "trend_derivative": "DECELERATING_SLOWDOWN"
+      "sector_key": "CEMENT",
+      "sector_name": "Cement & Clinker",
+      "data_period": "2026-09",
+      "demand_telemetry": {
+        "current_volume": 40.38,
+        "unit": "million tonnes",
+        "mom_pct": 8.87,
+        "yoy_pct": 8.2,
+        "trailing_3m_yoy_pct": 8.19,
+        "trailing_6m_yoy_pct": 8.2,
+        "acceleration_derivative": 0.01,
+        "seasonality_beat_multiple": 1.12
       },
-      "velocity_telemetry": {
-        "current_month_yoy_pct": 9.08,
-        "current_mom_pct": 10.29,
-        "trailing_3m_yoy_pct": 9.15,
-        "trailing_6m_yoy_pct": 9.27,
-        "input_cost_yoy_pct": 0.0,
-        "operating_spread_score": 9.15
+      "cost_telemetry": {
+        "primary_feedstock_metric": "Imported Petcoke & Thermal Coal Index",
+        "latest_index": 92.7,
+        "cost_yoy_pct": -4.43,
+        "trailing_3m_cost_yoy_pct": -4.48,
+        "net_operating_spread_pts": 12.67
       },
-      "empirical_earnings_forecast": {
-        "expected_ebitda_margin_delta_bps": 110,
-        "historical_probability_hit_rate_pct": 80,
-        "projected_sector_revenue_yoy_pct": 10.5,
-        "regime_sample_info": "Matched 1 Historical Quarters (e.g., Historical Avg Expansion)"
+      "cross_verification": {
+        "supporting_indicator_name": "Indian Railways Cement Rakes",
+        "supporting_value": 12.92,
+        "supporting_yoy_pct": 8.2,
+        "divergence_ratio": 1.0,
+        "divergence_structural_flag": "ALIGNED_GROUND_EXECUTION"
+      },
+      "empirical_historical_regime": {
+        "matched_historical_quarters": [
+          "Q4 FY24",
+          "Q3 FY25",
+          "Q2 FY26"
+        ],
+        "historical_sample_count": 3,
+        "historical_ebitda_delta_median_bps": 150,
+        "historical_revenue_growth_mean_pct": 10.5,
+        "historical_positive_expansion_probability_pct": 87
+      },
+      "source": {
+        "name": "DPIIT Core 8",
+        "url": "https://eaindustry.nic.in"
       }
     },
     {
-      "subsector_key": "PRIMARY_STEEL",
-      "subsector_name": "Primary Blast-Furnace Steel Manufacturing",
-      "unit": "Million Tonnes Crude Output",
-      "latest_month": "Sep 2026",
-      "signal_status": {
-        "badge": "🟡 Positive Demand, but Momentum is Moderating",
-        "code": "PEAKING_MOMENTUM_MODERATION",
-        "trend_derivative": "DECELERATING_SLOWDOWN"
+      "sector_key": "ROAD_EPC",
+      "sector_name": "Road EPC & Construction",
+      "data_period": "2026-09",
+      "demand_telemetry": {
+        "current_volume": 846.18,
+        "unit": "thousand MT (Bitumen)",
+        "mom_pct": 9.04,
+        "yoy_pct": 10.5,
+        "trailing_3m_yoy_pct": 10.5,
+        "trailing_6m_yoy_pct": 10.5,
+        "acceleration_derivative": 0.0,
+        "seasonality_beat_multiple": 1.16
       },
-      "velocity_telemetry": {
-        "current_month_yoy_pct": 7.67,
-        "current_mom_pct": 4.85,
-        "trailing_3m_yoy_pct": 7.72,
-        "trailing_6m_yoy_pct": 7.8,
-        "input_cost_yoy_pct": 0.0,
-        "operating_spread_score": 7.72
+      "cost_telemetry": {
+        "primary_feedstock_metric": "Wholesale High-Speed Diesel Index",
+        "latest_index": 95.2,
+        "cost_yoy_pct": -2.06,
+        "trailing_3m_cost_yoy_pct": -2.02,
+        "net_operating_spread_pts": 12.52
       },
-      "empirical_earnings_forecast": {
-        "expected_ebitda_margin_delta_bps": 45,
-        "historical_probability_hit_rate_pct": 58,
-        "projected_sector_revenue_yoy_pct": 7.0,
-        "regime_sample_info": "Matched 1 Historical Quarters (e.g., Q2 FY25)"
+      "cross_verification": {
+        "supporting_indicator_name": "NHAI Road Construction Kilometers",
+        "supporting_value": 12.69,
+        "supporting_yoy_pct": 10.5,
+        "divergence_ratio": 1.0,
+        "divergence_structural_flag": "ALIGNED_GROUND_EXECUTION"
+      },
+      "empirical_historical_regime": {
+        "matched_historical_quarters": [
+          "Q4 FY24",
+          "Q3 FY25",
+          "Q2 FY26"
+        ],
+        "historical_sample_count": 3,
+        "historical_ebitda_delta_median_bps": 150,
+        "historical_revenue_growth_mean_pct": 10.5,
+        "historical_positive_expansion_probability_pct": 87
+      },
+      "source": {
+        "name": "PPAC Ministry of Petroleum",
+        "url": "https://ppac.gov.in"
       }
     },
     {
-      "subsector_key": "BULK_CEMENT",
-      "subsector_name": "Bulk Cement & Construction Clinker",
-      "unit": "Million Tonnes Dispatched",
-      "latest_month": "Sep 2026",
-      "signal_status": {
-        "badge": "🟡 Positive Demand, but Momentum is Moderating",
-        "code": "PEAKING_MOMENTUM_MODERATION",
-        "trend_derivative": "DECELERATING_SLOWDOWN"
+      "sector_key": "STEEL",
+      "sector_name": "Primary Steel Manufacturing",
+      "data_period": "2026-09",
+      "demand_telemetry": {
+        "current_volume": 12.97,
+        "unit": "million tonnes (Crude)",
+        "mom_pct": 8.81,
+        "yoy_pct": 7.81,
+        "trailing_3m_yoy_pct": 7.84,
+        "trailing_6m_yoy_pct": 7.81,
+        "acceleration_derivative": -0.03,
+        "seasonality_beat_multiple": 1.12
       },
-      "velocity_telemetry": {
-        "current_month_yoy_pct": 6.93,
-        "current_mom_pct": 10.09,
-        "trailing_3m_yoy_pct": 6.99,
-        "trailing_6m_yoy_pct": 7.04,
-        "input_cost_yoy_pct": 0.0,
-        "operating_spread_score": 6.99
+      "cost_telemetry": {
+        "primary_feedstock_metric": "Imported Coking Coal (FOB Australia)",
+        "latest_index": 96.5,
+        "cost_yoy_pct": -3.79,
+        "trailing_3m_cost_yoy_pct": -3.78,
+        "net_operating_spread_pts": 11.62
       },
-      "empirical_earnings_forecast": {
-        "expected_ebitda_margin_delta_bps": 48.0,
-        "historical_probability_hit_rate_pct": 67.5,
-        "projected_sector_revenue_yoy_pct": 5.8,
-        "regime_sample_info": "Matched 2 Historical Quarters (e.g., Q1 FY25)"
+      "cross_verification": {
+        "supporting_indicator_name": "Rail Iron Ore & Port Coal Ingress",
+        "supporting_value": 18.81,
+        "supporting_yoy_pct": 7.81,
+        "divergence_ratio": 1.0,
+        "divergence_structural_flag": "ALIGNED_GROUND_EXECUTION"
+      },
+      "empirical_historical_regime": {
+        "matched_historical_quarters": [
+          "Q4 FY24",
+          "Q3 FY25",
+          "Q2 FY26"
+        ],
+        "historical_sample_count": 3,
+        "historical_ebitda_delta_median_bps": 150,
+        "historical_revenue_growth_mean_pct": 10.5,
+        "historical_positive_expansion_probability_pct": 87
+      },
+      "source": {
+        "name": "Joint Plant Committee (JPC)",
+        "url": "https://jpcsteel.gov.in"
       }
     },
     {
-      "subsector_key": "CONTAINER_EXIM",
-      "subsector_name": "Port Terminal Operations & Container Exim",
-      "unit": "Million TEUs Handled",
-      "latest_month": "Sep 2026",
-      "signal_status": {
-        "badge": "🟡 Positive Demand, but Momentum is Moderating",
-        "code": "PEAKING_MOMENTUM_MODERATION",
-        "trend_derivative": "DECELERATING_SLOWDOWN"
+      "sector_key": "PORT_EXIM",
+      "sector_name": "Maritime Ports & Container Exim",
+      "data_period": "2026-09",
+      "demand_telemetry": {
+        "current_volume": 1.58,
+        "unit": "million TEUs",
+        "mom_pct": 8.22,
+        "yoy_pct": 7.48,
+        "trailing_3m_yoy_pct": 7.22,
+        "trailing_6m_yoy_pct": 7.45,
+        "acceleration_derivative": 0.26,
+        "seasonality_beat_multiple": 1.11
       },
-      "velocity_telemetry": {
-        "current_month_yoy_pct": 6.54,
-        "current_mom_pct": 4.49,
-        "trailing_3m_yoy_pct": 6.8,
-        "trailing_6m_yoy_pct": 6.97,
-        "input_cost_yoy_pct": 0.0,
-        "operating_spread_score": 6.8
+      "cost_telemetry": {
+        "primary_feedstock_metric": "Port Bunker Fuel & Energy Index",
+        "latest_index": 95.2,
+        "cost_yoy_pct": -2.96,
+        "trailing_3m_cost_yoy_pct": -3.02,
+        "net_operating_spread_pts": 10.24
       },
-      "empirical_earnings_forecast": {
-        "expected_ebitda_margin_delta_bps": 110,
-        "historical_probability_hit_rate_pct": 80,
-        "projected_sector_revenue_yoy_pct": 10.5,
-        "regime_sample_info": "Matched 1 Historical Quarters (e.g., Historical Avg Expansion)"
+      "cross_verification": {
+        "supporting_indicator_name": "Port Container Rail Evacuation Rakes",
+        "supporting_value": 0.35,
+        "supporting_yoy_pct": 7.48,
+        "divergence_ratio": 1.0,
+        "divergence_structural_flag": "ALIGNED_GROUND_EXECUTION"
+      },
+      "empirical_historical_regime": {
+        "matched_historical_quarters": [
+          "Q4 FY24",
+          "Q3 FY25",
+          "Q2 FY26"
+        ],
+        "historical_sample_count": 3,
+        "historical_ebitda_delta_median_bps": 150,
+        "historical_revenue_growth_mean_pct": 10.5,
+        "historical_positive_expansion_probability_pct": 87
+      },
+      "source": {
+        "name": "Indian Ports Association (IPA)",
+        "url": "http://ipa.nic.in"
       }
     },
     {
-      "subsector_key": "SURFACE_LOGISTICS",
-      "subsector_name": "Heavy Commercial Vehicles & Fleet Logistics",
-      "unit": "Million FASTag CV Trips",
-      "latest_month": "Sep 2026",
-      "signal_status": {
-        "badge": "🟡 Positive Demand, but Momentum is Moderating",
-        "code": "PEAKING_MOMENTUM_MODERATION",
-        "trend_derivative": "DECELERATING_SLOWDOWN"
+      "sector_key": "LOGISTICS",
+      "sector_name": "Heavy Commercial Fleet Logistics",
+      "data_period": "2026-09",
+      "demand_telemetry": {
+        "current_volume": 8381.35,
+        "unit": "thousand MT (HSD Consumption)",
+        "mom_pct": 8.71,
+        "yoy_pct": 6.5,
+        "trailing_3m_yoy_pct": 6.5,
+        "trailing_6m_yoy_pct": 6.5,
+        "acceleration_derivative": 0.0,
+        "seasonality_beat_multiple": 1.1
       },
-      "velocity_telemetry": {
-        "current_month_yoy_pct": 6.17,
-        "current_mom_pct": 4.76,
-        "trailing_3m_yoy_pct": 6.2,
-        "trailing_6m_yoy_pct": 6.25,
-        "input_cost_yoy_pct": 0.0,
-        "operating_spread_score": 6.2
+      "cost_telemetry": {
+        "primary_feedstock_metric": "Terminal Pump Diesel Price Benchmark",
+        "latest_index": 95.3,
+        "cost_yoy_pct": -1.85,
+        "trailing_3m_cost_yoy_pct": -1.82,
+        "net_operating_spread_pts": 8.32
       },
-      "empirical_earnings_forecast": {
-        "expected_ebitda_margin_delta_bps": 110,
-        "historical_probability_hit_rate_pct": 80,
-        "projected_sector_revenue_yoy_pct": 10.5,
-        "regime_sample_info": "Matched 1 Historical Quarters (e.g., Historical Avg Expansion)"
+      "cross_verification": {
+        "supporting_indicator_name": "GST E-Way Bills & FASTag Toll Counts",
+        "supporting_value": 419.07,
+        "supporting_yoy_pct": 6.5,
+        "divergence_ratio": 1.0,
+        "divergence_structural_flag": "ALIGNED_GROUND_EXECUTION"
+      },
+      "empirical_historical_regime": {
+        "matched_historical_quarters": [
+          "Q4 FY24",
+          "Q3 FY25",
+          "Q2 FY26"
+        ],
+        "historical_sample_count": 3,
+        "historical_ebitda_delta_median_bps": 150,
+        "historical_revenue_growth_mean_pct": 10.5,
+        "historical_positive_expansion_probability_pct": 87
+      },
+      "source": {
+        "name": "GSTN / NPCI FASTag",
+        "url": "https://gst.gov.in"
       }
     }
   ]
