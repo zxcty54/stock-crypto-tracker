@@ -314,14 +314,47 @@ def parse_market_cap(soup):
 
 def get_screener_data(symbol):
     """Fetch and parse a Screener company page."""
-    url = f"https://www.screener.in/company/{symbol}/consolidated/"
+    consolidated_url = f"https://www.screener.in/company/{symbol}/consolidated/"
+    standalone_url = f"https://www.screener.in/company/{symbol}/"
+    url = consolidated_url
     session = requests.Session()
     try:
         res = _get_with_retries(session, url, timeout=7, context=f"Screener {symbol}")
+
         if res.status_code == 404:
-            url = f"https://www.screener.in/company/{symbol}/"
-            res = _get_with_retries(session, url, timeout=7, context=f"Screener fallback {symbol}")
-            
+            # Some symbols do not have a consolidated page at all.
+            url = standalone_url
+            res = _get_with_retries(session, url, timeout=7, context=f"Screener standalone {symbol}")
+        elif res.status_code == 200:
+            # Screener may return HTTP 200 for a consolidated page whose ratios and tables are blank.
+            # Check for Market Cap data, not only the HTTP status, before accepting that page.
+            consolidated_soup = BeautifulSoup(res.text, "html.parser")
+            if parse_market_cap(consolidated_soup) is None:
+                print(
+                    f"   ↪ Screener consolidated page has no Market Cap for {symbol}; "
+                    "trying the standalone company page."
+                )
+                standalone_res = _get_with_retries(
+                    session,
+                    standalone_url,
+                    timeout=7,
+                    context=f"Screener standalone fallback {symbol}",
+                )
+                if standalone_res.status_code == 200:
+                    res = standalone_res
+                    url = standalone_url
+                elif standalone_res.status_code == 429:
+                    print(
+                        f"   ⚠️ Screener standalone fallback remained HTTP 429 for {symbol}; "
+                        "marking this symbol failed and continuing."
+                    )
+                    return None
+                elif standalone_res.status_code != 404:
+                    print(
+                        f"   ⚠️ Screener standalone fallback returned HTTP "
+                        f"{standalone_res.status_code} for {symbol}; keeping the consolidated page."
+                    )
+
         if res.status_code == 429:
             print(f"   ⚠️ Screener still returned HTTP 429 for {symbol}; marking this symbol failed and continuing.")
             return None
