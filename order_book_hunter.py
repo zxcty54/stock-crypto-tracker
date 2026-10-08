@@ -7,7 +7,6 @@ import io
 import requests
 from bs4 import BeautifulSoup
 import pypdf
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 OUTPUT_REPORT_FILE = "order_radar_report.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -30,7 +29,8 @@ def _get_with_retries(session, url, *, timeout, context, attempts=3):
         try:
             response = session.get(url, headers=HEADERS, timeout=timeout)
         except requests.RequestException as exc:
-            if attempt == attempts:
+            # Errno 101 means there is no route to the host; repeating every stock request is futile.
+            if "network is unreachable" in str(exc).lower() or attempt == attempts:
                 raise
             delay = min(2 ** (attempt - 1), 4)
             print(f"   ↻ {context} request failed ({exc}); retry {attempt + 1}/{attempts} in {delay}s")
@@ -304,6 +304,10 @@ def get_screener_data(symbol):
         }
     except Exception as e:
         print(f"   ⚠️ Screener fetch/parse failed for {symbol}: {type(e).__name__}: {e}")
+        if "network is unreachable" in str(e).lower():
+            raise RuntimeError(
+                "Runner cannot reach Screener (network route unavailable); stopping scan to preserve the last report."
+            ) from e
         return None
 
 
@@ -454,7 +458,7 @@ Return ONLY a pure JSON array of objects without markdown backticks:
 def run():
     start_time = time.time()
     print("=" * 75)
-    print(f"🚀 TURBO RADAR: PARALLEL SCREENING {len(WATCHLIST_SYMBOLS)} STOCKS (12 THREADS)")
+    print(f"🚀 TURBO RADAR: SEQUENTIAL SCREENING {len(WATCHLIST_SYMBOLS)} STOCKS (0.15s spacing)")
     print(f"   🛡️ Reality Filter: Book-to-Bill <= {MAX_BOOK_TO_BILL_RATIO}x & Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x")
     print("=" * 75)
 
@@ -464,19 +468,32 @@ def run():
     turnaround_sales_gems = []
     order_doc_queue = []
 
-    # 1. PARALLEL FAST SCREENING (Takes ~2.5 mins for all 967 stocks)
+    # 1. SEQUENTIAL SCREENING (match the previously working paced request flow)
     scanned_results = []
-    with ThreadPoolExecutor(max_workers=12) as executor:
-        future_to_sym = {executor.submit(get_screener_data, sym): sym for sym in WATCHLIST_SYMBOLS}
-        for future in as_completed(future_to_sym):
-            res = future.result()
-            if res and res.get("mcap"):
-                scanned_results.append(res)
+    for idx, sym in enumerate(WATCHLIST_SYMBOLS, start=1):
+        res = get_screener_data(sym)
+        if res and res.get("mcap"):
+            scanned_results.append(res)
+
+        if idx % 50 == 0 or idx == len(WATCHLIST_SYMBOLS):
+            print(
+                f"   📥 Screener progress: {idx}/{len(WATCHLIST_SYMBOLS)} symbols; "
+                f"{len(scanned_results)} pages parsed"
+            )
+
+        if idx < len(WATCHLIST_SYMBOLS):
+            time.sleep(0.15)
 
     print(
         f"⚡ Screener screening complete in {round((time.time() - start_time)/60, 2)} mins: "
         f"parsed {len(scanned_results)}/{len(WATCHLIST_SYMBOLS)} company pages. Parsing candidates..."
     )
+
+    if not scanned_results:
+        raise RuntimeError(
+            f"No Screener company pages parsed out of {len(WATCHLIST_SYMBOLS)}. "
+            "Check runner network access; refusing to overwrite the existing radar report."
+        )
 
     # 2. FILTERING & QUEUE BUILDING
     for info in scanned_results:
