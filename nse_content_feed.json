@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-09 02:16:17 IST",
+  "generated_at": "2026-10-09 05:28:39 IST",
   "worthy_count": 13,
   "skipped_count": 4,
   "content_feed": [
+    {
+      "hash": "30fa7c1e7d1d",
+      "symbol": "KANORICHEM",
+      "company_name": "Kanoria Chemicals & Industries Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "CAPEX",
+      "broadcast_date": "07-Oct-2026 18:13:53",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf",
+      "headline": "Kanoria Chemicals Launches New Triacetin Manufacturing Facility at Ankleshwar",
+      "content_worthy": true,
+      "worthiness_reason": "Material capacity expansion and new product facility launch announced via regulatory filing.",
+      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Kanoria Chemicals & Industries Limited (NSE: KANORICHEM)</b>\n\n<b>Kanoria Chemicals Launches New 12 TPD Triacetin Facility in Gujarat</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Triacetin (Chemical/Food and Pharma)\n- <b>Capacity:</b> 12 Metric Tons per Day (TPD)\n- <b>Location:</b> GIDC, Ankleshwar, Gujarat\n- <b>Launch Date:</b> 07.10.2026\n- <b>Target Markets:</b> Domestic and International\n\n📌 <b>What happened:</b>\n↳ Kanoria Chemicals & Industries Limited announced the launch of a new 12 TPD Triacetin manufacturing facility at its existing site in Ankleshwar, Gujarat, expanding its specialty chemicals portfolio.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 05:28:39 IST"
+    },
     {
       "hash": "638ba167f6f0",
       "symbol": "VOLTAMP",
@@ -170,20 +184,6 @@
       "worthiness_reason": "Material order win with disclosed value, capacity and revenue details.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Pace Digitek Limited (NSE: PACEDIGITK)</b>\n\n<b>Pace Digitek receives LOI for 57.5 MW / 115 MWh BESS project from BSES Rajdhani Power</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs 1,794 million (≈Rs 179.4 crore)\n- <b>Capacity:</b> 57.5 MW / 115 MWh across four grid stations\n- <b>Model:</b> 12‑year BOOT (Build‑Own‑Operate‑Transfer)\n- <b>Project Capital Outlay:</b> Rs 179.4 crore\n- <b>Execution Timeline:</b> 7 months\n- <b>Annual Contracted Revenue:</b> Rs 27.1 crore (Rs 47.05 lakh per MW per year)\n\n📌 <b>What happened:</b>\n↳ The company received a Letter of Intent from BSES Rajdhani Power for a utility‑scale battery energy storage system, marking its fifth major BOOT storage win and raising its BOOT portfolio to 3.32 GWh.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-08 20:35:01 IST"
-    },
-    {
-      "hash": "30fa7c1e7d1d",
-      "symbol": "KANORICHEM",
-      "company_name": "Kanoria Chemicals & Industries Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "CAPEX",
-      "broadcast_date": "07-Oct-2026 18:13:53",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf",
-      "headline": "Kanoria Chemicals launches 12 TPD Triacetin plant at Ankleshwar",
-      "content_worthy": true,
-      "worthiness_reason": "New manufacturing capacity launch.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Kanoria Chemicals & Industries Limited (NSE: KANORICHEM)</b>\n\n<b>Kanoria Chemicals launches 12 TPD Triacetin plant at Ankleshwar</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Triacetin\n- <b>Capacity:</b> 12 Metric Tons per Day\n- <b>Launch Date:</b> 07 Oct 2026\n- <b>Location:</b> GIDC, Ankleshwar, Gujarat\n\n📌 <b>What happened:</b>\n↳ The company inaugurated a new Triacetin manufacturing facility at its existing site in Ankleshwar, expanding its specialty chemicals portfolio for domestic and international markets.\n\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-08 03:12:48 IST"
     }
   ],
   "skipped_archive": [
