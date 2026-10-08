@@ -22,6 +22,31 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
+
+def _get_with_retries(session, url, *, timeout, context, attempts=3):
+    """Retry transient network/server errors without changing the selected URL."""
+    retryable_statuses = {408, 425, 429, 500, 502, 503, 504}
+    for attempt in range(1, attempts + 1):
+        try:
+            response = session.get(url, headers=HEADERS, timeout=timeout)
+        except requests.RequestException as exc:
+            if attempt == attempts:
+                raise
+            delay = min(2 ** (attempt - 1), 4)
+            print(f"   ↻ {context} request failed ({exc}); retry {attempt + 1}/{attempts} in {delay}s")
+            time.sleep(delay)
+            continue
+
+        if response.status_code in retryable_statuses and attempt < attempts:
+            delay = min(2 ** (attempt - 1), 4)
+            print(f"   ↻ {context} returned HTTP {response.status_code}; retry {attempt + 1}/{attempts} in {delay}s")
+            time.sleep(delay)
+            continue
+        return response
+
+    raise RuntimeError(f"{context} request failed after {attempts} attempts")
+
+
 # Sectors jahan order backlog model physically exist nahi karta
 NON_ORDER_SECTORS = [
     "bank", "financial services", "finance", "nbfc", "housing finance",
@@ -142,6 +167,7 @@ WATCHLIST_SYMBOLS = [
     "ZODIAC", "ZODIACLOTH", "ZUARI", "ZUARIIND"
 ]
 
+
 def check_insolvency_and_warnings(soup):
     text_blob = soup.get_text().lower()
     red_keywords = [
@@ -151,7 +177,12 @@ def check_insolvency_and_warnings(soup):
     if any(k in text_blob for k in red_keywords):
         return True
 
-    alerts = soup.find_all(["div", "p", "span"], class_=lambda c: c and any(x in str(c).lower() for x in ["warning", "danger", "alert", "caution"]))
+    alerts = soup.find_all(
+        ["div", "p", "span"],
+        class_=lambda c: c and any(
+            x in str(c).lower() for x in ["warning", "danger", "alert", "caution"]
+        )
+    )
     for alert in alerts:
         a_text = alert.get_text().lower()
         if any(k in a_text for k in ["default", "insolvency", "nclt", "going concern", "suspended"]):
@@ -159,21 +190,23 @@ def check_insolvency_and_warnings(soup):
 
     return False
 
+
 def get_screener_data(symbol):
     """Screener se live data parallel fast fetch karta hai."""
     url = f"https://www.screener.in/company/{symbol}/consolidated/"
     session = requests.Session()
     try:
-        res = session.get(url, headers=HEADERS, timeout=7)
+        res = _get_with_retries(session, url, timeout=7, context=f"Screener {symbol}")
         if res.status_code == 404:
             url = f"https://www.screener.in/company/{symbol}/"
-            res = session.get(url, headers=HEADERS, timeout=7)
-            
+            res = _get_with_retries(session, url, timeout=7, context=f"Screener fallback {symbol}")
+
         if res.status_code != 200:
+            print(f"   ⚠️ Screener returned HTTP {res.status_code} for {symbol}")
             return None
 
         soup = BeautifulSoup(res.text, "html.parser")
-        
+
         h1 = soup.find("h1")
         name = h1.get_text(strip=True) if h1 else symbol
 
@@ -269,40 +302,96 @@ def get_screener_data(symbol):
             "ebitda_positive": ebitda_positive,
             "is_stressed": is_stressed
         }
-    except Exception:
+    except Exception as e:
+        print(f"   ⚠️ Screener fetch/parse failed for {symbol}: {type(e).__name__}: {e}")
         return None
 
-def extract_document_text(doc_url):
+
+def extract_document_text(doc_url, symbol="UNKNOWN"):
+    """Fetch the selected Screener credit document and extract text from every page."""
     try:
-        res = requests.get(doc_url, headers=HEADERS, timeout=10)
-        if res.status_code != 200 or len(res.content) < 500:
+        with requests.Session() as session:
+            res = _get_with_retries(
+                session,
+                doc_url,
+                timeout=(10, 30),
+                context=f"Credit document {symbol}",
+            )
+
+        if res.status_code != 200:
+            print(f"   ⚠️ Credit document fetch failed for {symbol}: HTTP {res.status_code} ({doc_url})")
+            return ""
+        if len(res.content) < 500:
+            print(f"   ⚠️ Credit document for {symbol} is too small ({len(res.content)} bytes): {doc_url}")
             return ""
 
         content_type = res.headers.get("Content-Type", "").lower()
         if "pdf" in content_type or doc_url.lower().endswith(".pdf") or res.content.startswith(b"%PDF"):
             reader = pypdf.PdfReader(io.BytesIO(res.content))
-            pages = []
-            for p in reader.pages[:5]:
-                txt = p.extract_text()
-                if txt:
-                    pages.append(txt)
-            return " ".join(pages)
+            page_texts = []
+            for page_number, page in enumerate(reader.pages, start=1):
+                try:
+                    text = page.extract_text()
+                    if text:
+                        page_texts.append(text)
+                except Exception as e:
+                    print(f"   ⚠️ PDF text extraction failed for {symbol}, page {page_number}: {e}")
+
+            full_text = "\n".join(page_texts)
+            if not full_text.strip():
+                print(f"   ⚠️ Credit PDF for {symbol} has no extractable text ({len(reader.pages)} pages): {doc_url}")
+            else:
+                print(f"   📄 Credit PDF fetched for {symbol}: {len(reader.pages)} pages, {len(full_text):,} extracted characters")
+            return full_text
         else:
             soup = BeautifulSoup(res.text, "html.parser")
             for t in soup(["script", "style", "nav", "footer"]):
                 t.decompose()
-            return soup.get_text(separator=" ", strip=True)
-    except Exception:
+            full_text = soup.get_text(separator=" ", strip=True)
+            print(f"   📄 Credit document fetched for {symbol}: {len(full_text):,} extracted characters")
+            return full_text
+    except Exception as e:
+        print(f"   ⚠️ Credit document fetch/parse failed for {symbol} ({doc_url}): {type(e).__name__}: {e}")
         return ""
 
+
+def _regex_fallback_order_books(batch_candidates):
+    """Best-effort extraction if Gemini is unavailable or its request fails."""
+    fallback_res = {}
+    for item in batch_candidates:
+        txt = item["text"]
+        pats = [
+            r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
+            r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
+        ]
+        val = 0.0
+        for pat in pats:
+            match = re.search(pat, txt, re.I)
+            if match:
+                val = float(match.group(1).replace(",", ""))
+                break
+        fallback_res[item["symbol"]] = {
+            "order_book_cr": val,
+            "pdf_debt_cr": 0.0,
+            "timeline_months": 24,
+            "thesis": f"Order backlog of ₹{val:,.1f} Cr."
+        }
+    return fallback_res
+
+
 def batch_process_gemini(batch_candidates):
-    """3 stocks ka data ek prompt me Gemini 3.5 Lite ko bhejta hai."""
-    if not GEMINI_API_KEY or not batch_candidates:
+    """Send the complete extracted credit-document text to Gemini."""
+    if not batch_candidates:
         return {}
+    if not GEMINI_API_KEY:
+        print("   ⚠️ GEMINI_API_KEY is missing; using regex fallback for this batch.")
+        return _regex_fallback_order_books(batch_candidates)
 
     stocks_text_bundle = ""
     for item in batch_candidates:
-        stocks_text_bundle += f"\n\n=== STOCK: {item['symbol']} ===\n{item['text'][:3200]}\n"
+        full_text = item["text"]
+        print(f"   📤 Sending full credit document for {item['symbol']} ({len(full_text):,} characters)")
+        stocks_text_bundle += f"\n\n=== STOCK: {item['symbol']} ===\n{full_text}\n"
 
     prompt = f"""
 You are an equity research analyst. Analyze these credit rating rationale documents for up to 3 companies.
@@ -331,14 +420,14 @@ Return ONLY a pure JSON array of objects without markdown backticks:
             "responseMimeType": "application/json"
         }
     }
-    
+
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-lite:generateContent?key={GEMINI_API_KEY}"
-    
+
     try:
-        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=22)
+        res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=60)
         if res.status_code == 404:
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key={GEMINI_API_KEY}"
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=22)
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=60)
 
         if res.status_code == 200:
             raw = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
@@ -355,30 +444,12 @@ Return ONLY a pure JSON array of objects without markdown backticks:
                     "thesis": row.get("thesis", "Order backlog verified via AI.")
                 }
             return result
+        print(f"   ⚠️ Gemini returned HTTP {res.status_code}; using regex fallback.")
     except Exception as e:
-        print(f"   ⚠️ Gemini Batch Extraction skipped: {e}")
+        print(f"   ⚠️ Gemini Batch Extraction failed; using regex fallback: {type(e).__name__}: {e}")
 
-    # Fallback to Regex
-    fallback_res = {}
-    for item in batch_candidates:
-        txt = item["text"]
-        pats = [
-            r'(?:unexecuted\s+order\s+book|order\s+backlog|order\s+book|under-construction\s+portfolio)\s+(?:has\s+grown|stood\s+at|stands\s+at|at|of)?\s*(?:around|~)?\s*(?:Rs\.?|INR)?\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)',
-            r'(?:Rs\.?|INR)\s*([\d,]+(?:\.\d+)?)\s*(?:cr|crore)\s+(?:of\s+unexecuted\s+orders|order\s+book)'
-        ]
-        val = 0.0
-        for pat in pats:
-            m = re.search(pat, txt, re.I)
-            if m:
-                val = float(m.group(1).replace(",", ""))
-                break
-        fallback_res[item["symbol"]] = {
-            "order_book_cr": val,
-            "pdf_debt_cr": 0.0,
-            "timeline_months": 24,
-            "thesis": f"Order backlog of ₹{val:,.1f} Cr."
-        }
-    return fallback_res
+    return _regex_fallback_order_books(batch_candidates)
+
 
 def run():
     start_time = time.time()
@@ -402,7 +473,10 @@ def run():
             if res and res.get("mcap"):
                 scanned_results.append(res)
 
-    print(f"⚡ Parallel Screening Complete in {round((time.time() - start_time)/60, 2)} mins! Parsing Candidates...")
+    print(
+        f"⚡ Screener screening complete in {round((time.time() - start_time)/60, 2)} mins: "
+        f"parsed {len(scanned_results)}/{len(WATCHLIST_SYMBOLS)} company pages. Parsing candidates..."
+    )
 
     # 2. FILTERING & QUEUE BUILDING
     for info in scanned_results:
@@ -421,7 +495,7 @@ def run():
 
         is_non_order_sector = any(bad in sector for bad in NON_ORDER_SECTORS)
         if not is_non_order_sector and doc_url:
-            doc_text = extract_document_text(doc_url)
+            doc_text = extract_document_text(doc_url, sym)
             if any(k in doc_text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "total debt"]):
                 order_doc_queue.append({
                     "symbol": sym,
@@ -469,7 +543,7 @@ def run():
             debt_val = stock["total_debt_cr"]
             sales_val = stock["annual_sales_cr"]
             metrics = ai_results.get(s_sym, {})
-            
+
             order_val = metrics.get("order_book_cr", 0.0)
             pdf_debt = metrics.get("pdf_debt_cr", 0.0)
 
@@ -502,7 +576,7 @@ def run():
                     "thesis": metrics.get("thesis", f"Backlog of ₹{order_val:,.1f} Cr."),
                     "source_doc": stock["doc_url"]
                 }
-                
+
                 all_tracked_orders.append(record)
 
                 if order_to_ttm > MAX_BOOK_TO_BILL_RATIO:
@@ -527,7 +601,9 @@ def run():
 
     final_report = {
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
-        "total_scanned": len(WATCHLIST_SYMBOLS),
+        "total_scanned": len(scanned_results),
+        "watchlist_size": len(WATCHLIST_SYMBOLS),
+        "credit_documents_queued": len(order_doc_queue),
         "guards_applied": {
             "max_debt_to_mcap": MAX_DEBT_TO_MCAP_RATIO,
             "max_book_to_bill_runway_years": MAX_BOOK_TO_BILL_RATIO,
@@ -555,6 +631,7 @@ def run():
     print(f"   🚀 Clean Sales Turnaround Gems: {len(turnaround_sales_gems)}")
     print(f"   💾 Saved cleanly into: {OUTPUT_REPORT_FILE}")
     print("=" * 75)
+
 
 if __name__ == "__main__":
     run()
