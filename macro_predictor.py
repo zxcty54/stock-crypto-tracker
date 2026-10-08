@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-MODULE: MACRO QUANTITATIVE ENGINE (Pure Python Math)
-- Auto-seeds DB if missing
-- Computes QoQ Sequential Volume %, Cost Delta %, Operating Spread Score
-- Writes guaranteed 'macro_predictions_computed.json'
+REPLACED: ADVANCED QUANTITATIVE PREDICTOR (Multi-Horizon & Seasonality Normalizer)
+- Computes: Current Month YoY, MoM, 3M YoY, 6M YoY
+- Trajectory Derivative: ACCELERATING vs PEAKING vs DECELERATING
+- Same-Month Multi-Year Baseline (Is Sep 2026 normal seasonal vs Sep 2025/2024?)
+- Writes pre-computed facts to 'macro_predictions_computed.json'
 """
 
 import os
 import sys
 import json
+import statistics
 from datetime import datetime, timezone, timedelta
 
 DB_FILE = "macro_historical_db.json"
@@ -17,105 +19,101 @@ OUTPUT_COMPUTED_FILE = "macro_predictions_computed.json"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-def ensure_db_exists():
-    """Agar DB file missing ho, toh seeder ko call karke create karo."""
+def compute_multiyear_metrics():
     if not os.path.exists(DB_FILE):
-        print(f"⚠️ '{DB_FILE}' not found. Attempting auto-seed...")
-        if os.path.exists("seed_historical_macro_db.py"):
-            import subprocess
-            subprocess.run([sys.executable, "seed_historical_macro_db.py"], check=True)
-        else:
-            print("❌ 'seed_historical_macro_db.py' not found. Cannot proceed.")
-            sys.exit(1)
-
-def compute_all_metrics():
-    ensure_db_exists()
+        print(f"⚠️ '{DB_FILE}' missing. Running seeder...")
+        import subprocess
+        subprocess.run([sys.executable, "seed_historical_macro_db.py"], check=True)
 
     with open(DB_FILE, "r", encoding="utf-8") as f:
         db = json.load(f)
 
     subsectors = db.get("subsectors", {})
-    analyzed_list = []
+    analyzed_data = []
 
-    print(f"🔍 Reading {len(subsectors)} sub-sectors from historical DB...")
+    print(f"🧮 Processing multi-horizon seasonality for {len(subsectors)} sub-sectors...")
 
-    for key, data in subsectors.items():
-        history = data.get("history", [])
-        if len(history) < 2:
+    for key, item in subsectors.items():
+        name = item.get("name", key)
+        series = item.get("series", [])
+        if len(series) < 24:
             continue
 
-        name = data.get("name", key)
-        unit = data.get("unit", "")
+        # Latest pointers
+        latest = series[-1]
+        cal_month = latest["cal_month"] # e.g. "Sep"
+        current_vol = latest["volume"]
+        prev_month_vol = series[-2]["volume"]
 
-        # Dynamic split: agar 6 points hain toh 3-3, warna half-half
-        mid = len(history) // 2
-        prev_block = history[:mid]
-        curr_block = history[mid:]
+        # 1. MoM Growth
+        mom_growth = round(((current_vol - prev_month_vol) / prev_month_vol) * 100, 2)
 
-        q_prev_vol = sum(m.get("volume", 0.0) for m in prev_block)
-        q_curr_vol = sum(m.get("volume", 0.0) for m in curr_block)
+        # 2. YoY (Latest month vs exactly 12 months ago)
+        yoy_base = series[-13]["volume"]
+        yoy_growth = round(((current_vol - yoy_base) / yoy_base) * 100, 2)
 
-        q_prev_cost = sum(m.get("cost_index", 100.0) for m in prev_block) / max(len(prev_block), 1)
-        q_curr_cost = sum(m.get("cost_index", 100.0) for m in curr_block) / max(len(curr_block), 1)
+        # 3. 3-Month Trailing YoY Average
+        curr_3m_vol = sum(m["volume"] for m in series[-3:])
+        prev_3m_vol = sum(m["volume"] for m in series[-15:-12])
+        growth_3m_yoy = round(((curr_3m_vol - prev_3m_vol) / prev_3m_vol) * 100, 2)
 
-        if q_prev_vol <= 0:
-            vol_growth = 0.0
+        # 4. 6-Month Trailing YoY Average
+        curr_6m_vol = sum(m["volume"] for m in series[-6:])
+        prev_6m_vol = sum(m["volume"] for m in series[-18:-12])
+        growth_6m_yoy = round(((curr_6m_vol - prev_6m_vol) / prev_6m_vol) * 100, 2)
+
+        # 5. Trajectory Velocity Derivative
+        if yoy_growth > growth_3m_yoy > growth_6m_yoy:
+            trend_velocity = "ACCELERATING_SURGE"
+        elif yoy_growth < growth_3m_yoy < growth_6m_yoy:
+            trend_velocity = "DECELERATING_SLOWDOWN"
+        elif yoy_growth > growth_3m_yoy and growth_3m_yoy <= growth_6m_yoy:
+            trend_velocity = "EARLY_INFLECTION"
         else:
-            vol_growth = round(((q_curr_vol - q_prev_vol) / q_prev_vol) * 100, 2)
+            trend_velocity = "STEADY_MATURE"
 
-        cost_delta = round(((q_curr_cost - q_prev_cost) / q_prev_cost) * 100, 2)
-        spread_score = round(vol_growth - cost_delta, 2)
+        # 6. Seasonality Normalizer (Same-Month Historical Average)
+        same_months_hist = [m["volume"] for m in series if m["cal_month"] == cal_month and m != latest]
+        historical_same_month_avg = statistics.mean(same_months_hist)
+        seasonality_beat_ratio = round(current_vol / historical_same_month_avg, 2)
 
-        # Quantitative Classification
-        if vol_growth >= 10.0 and cost_delta <= 1.5:
-            classification = "OPERATING_LEVERAGE_OUTPERFORMER"
-        elif vol_growth >= 10.0 and cost_delta > 4.0:
-            classification = "MARGIN_SQUEEZE_RISK"
-        elif vol_growth <= -5.0 and cost_delta >= 2.0:
-            classification = "VOLUME_DELEVERAGE_DOWNGRADE"
-        elif vol_growth <= -5.0 and cost_delta <= -4.0:
-            classification = "DEFENSIVE_MARGIN_RESILIENCE"
-        else:
-            classification = "IN_LINE_SEASONAL"
+        # 7. Input Cost Deflation Spread
+        curr_cost_3m = sum(m["cost_index"] for m in series[-3:]) / 3.0
+        prev_cost_3m = sum(m["cost_index"] for m in series[-15:-12]) / 3.0
+        cost_yoy_delta = round(((curr_cost_3m - prev_cost_3m) / prev_cost_3m) * 100, 2)
+        operating_spread = round(growth_3m_yoy - cost_yoy_delta, 2)
 
-        analyzed_list.append({
+        analyzed_data.append({
             "subsector_key": key,
             "subsector_name": name,
-            "unit": unit,
-            "classification": classification,
-            "sequential_vol_growth_pct": vol_growth,
-            "input_cost_inflation_pct": cost_delta,
-            "operating_spread_score": spread_score,
-            "q_prev_volume_agg": round(q_prev_vol, 2),
-            "q_curr_volume_agg": round(q_curr_vol, 2)
+            "unit": item.get("unit", ""),
+            "latest_month": latest["month"],
+            "quantitative_metrics": {
+                "current_month_yoy_pct": yoy_growth,
+                "current_mom_pct": mom_growth,
+                "trailing_3m_yoy_pct": growth_3m_yoy,
+                "trailing_6m_yoy_pct": growth_6m_yoy,
+                "trend_momentum": trend_velocity,
+                "seasonality_beat_multiple": seasonality_beat_ratio,
+                "input_cost_yoy_pct": cost_yoy_delta,
+                "operating_spread_score": operating_spread
+            },
+            "financial_elasticity_anchor": item.get("financial_elasticity", {})
         })
 
     # Sort descending by operating spread
-    analyzed_list.sort(key=lambda x: x["operating_spread_score"], reverse=True)
+    analyzed_data.sort(key=lambda x: x["quantitative_metrics"]["operating_spread_score"], reverse=True)
 
-    outperformers = [s for s in analyzed_list if s["classification"] == "OPERATING_LEVERAGE_OUTPERFORMER"]
-    margin_squeezes = [s for s in analyzed_list if s["classification"] == "MARGIN_SQUEEZE_RISK"]
-    risks = [s for s in analyzed_list if s["classification"] == "VOLUME_DELEVERAGE_DOWNGRADE"]
-
-    computed_payload = {
-        "calculated_at": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-        "total_subsectors_analyzed": len(analyzed_list),
-        "summary": {
-            "outperformers_count": len(outperformers),
-            "margin_squeeze_count": len(margin_squeezes),
-            "downgrade_risk_count": len(risks)
-        },
-        "top_outperformers": outperformers,
-        "margin_pressure_sectors": margin_squeezes,
-        "all_ranked_subsectors": analyzed_list
+    output = {
+        "computed_at": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+        "total_analyzed": len(analyzed_data),
+        "analyzed_subsectors": analyzed_data
     }
 
-    # Atomic write to guarantee file creation
     with open(OUTPUT_COMPUTED_FILE, "w", encoding="utf-8") as f:
-        json.dump(computed_payload, f, ensure_ascii=False, indent=2)
+        json.dump(output, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ Success: Processed {len(analyzed_list)} sub-sectors.")
-    print(f"💾 File generated at: '{OUTPUT_COMPUTED_FILE}' ({os.path.getsize(OUTPUT_COMPUTED_FILE)} bytes)")
+    print(f"✅ Success: Generated Multi-Horizon Computed File at '{OUTPUT_COMPUTED_FILE}'.")
 
 if __name__ == "__main__":
-    compute_all_metrics()
+    compute_multiyear_metrics()
