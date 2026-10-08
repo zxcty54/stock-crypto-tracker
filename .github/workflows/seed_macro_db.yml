@@ -1,0 +1,63 @@
+name: Seed 6-Month Macro Historical Database
+
+on:
+  workflow_dispatch: # Actions tab se 1-click manual run button
+
+permissions:
+  contents: write
+
+jobs:
+  seed-database:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: ⏳ Execute Historical Seeder
+        run: |
+          python seed_historical_macro_db.py
+
+      - name: 🔍 Inspect Generated Database Summary
+        run: |
+          echo "=========================================="
+          echo "📊 VERIFYING GENERATED HISTORICAL DATABASE"
+          echo "=========================================="
+          if [ -f macro_historical_db.json ]; then
+            python -c "
+import json
+with open('macro_historical_db.json') as f:
+    d = json.load(f)
+print('Seeded At:', d.get('seeded_at'))
+print('Months Covered:', d.get('months_covered'))
+print('Total Sub-Sectors Seeded:', len(d.get('subsectors', {})))
+print('\nSample Sub-Sector (PRIMARY_STEEL):')
+print(json.dumps(d.get('subsectors', {}).get('PRIMARY_STEEL', {}), indent=2))
+"
+          else
+            echo "❌ ERROR: macro_historical_db.json was not generated!"
+            exit 1
+          fi
+
+      - name: 💾 Commit and Push Historical DB
+        run: |
+          git config --global user.name "MacroSeederBot"
+          git config --global user.email "bot@macro-radar.internal"
+
+          git add macro_historical_db.json
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Database already up to date. No changes to commit."
+          else
+            git commit -m "🌱 Seed: 6-Month Historical Macro Database [$(date +'%d-%b-%Y %H:%M IST')]"
+            git pull --rebase origin main
+            git push origin main
+            echo "✅ macro_historical_db.json cleanly pushed to repository."
+          fi
