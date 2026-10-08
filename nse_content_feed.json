@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-08 03:12:48 IST",
+  "generated_at": "2026-10-08 13:16:00 IST",
   "worthy_count": 5,
-  "skipped_count": 4,
+  "skipped_count": 5,
   "content_feed": [
     {
       "hash": "30fa7c1e7d1d",
@@ -75,6 +75,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "97549d73d846",
+      "symbol": "GMBREW",
+      "company_name": "GM Breweries Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "08-Oct-2026 12:36:34",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/sab65d_08102026123516_outcome.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Revenue and PAT not both disclosed in the filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-08 13:16:00 IST"
+    },
     {
       "hash": "10107b52dcc4",
       "symbol": "TINNARUBR",
