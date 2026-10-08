@@ -1,12 +1,35 @@
-import os
+#!/usr/bin/env python3
+"""
+MACRO TELEMETRY OFFICIAL DATA HARVESTER
+=======================================
+
+Sources:
+1. DPIIT / Office of Economic Adviser
+   - Eight Core Industries monthly archive
+2. PPAC
+   - Products-wise petroleum consumption
+3. Ministry of Ports, Shipping & Waterways
+   - Monthly Major Ports cargo reports
+4. NPCI
+   - NETC FASTag monthly statistics
+
+IMPORTANT:
+- No synthetic/fallback values.
+- If an official observation cannot be extracted -> value = None.
+- Every observation keeps source URL/status.
+- Designed for GitHub Actions.
+"""
+
 import io
 import json
+import os
 import re
+import time
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin
 
+import requests
 from bs4 import BeautifulSoup
-from curl_cffi import requests
 
 try:
     import pdfplumber
@@ -21,848 +44,851 @@ NOW = datetime.now(IST)
 
 HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Mozilla/5.0 (X11; Linux x86_64) "
+        "AppleWebKit/537.36 "
+        "(KHTML, like Gecko) "
         "Chrome/124.0.0.0 Safari/537.36"
     ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;"
+        "q=0.9,application/pdf;q=0.8,*/*;q=0.7"
+    ),
     "Accept-Language": "en-US,en;q=0.9",
+    "Connection": "keep-alive",
 }
 
+TIMEOUT = 30
+
+
+# ============================================================
+# HELPERS
+# ============================================================
 
 def clean_num(value):
     if value is None:
         return None
 
-    text = str(value).replace(",", "").replace("%", "").strip()
+    s = str(value)
+    s = s.replace(",", "")
+    s = s.replace("%", "")
+    s = s.replace("₹", "")
+    s = s.strip()
 
-    match = re.search(r"[-+]?\d+(?:\.\d+)?", text)
+    m = re.search(r"[-+]?\d+(?:\.\d+)?", s)
 
-    if not match:
+    if not m:
         return None
 
     try:
-        return float(match.group(0))
+        return float(m.group(0))
     except Exception:
         return None
 
 
-def make_session():
-    return requests.Session(
-        impersonate="chrome124"
-    )
-
-
-def get(session, url, timeout=30):
+def get(session, url, timeout=TIMEOUT):
     try:
-        response = session.get(
+        r = session.get(
             url,
             headers=HEADERS,
             timeout=timeout,
-            verify=False,
             allow_redirects=True,
         )
 
-        if response.status_code == 200:
-            return response
+        if r.status_code == 200:
+            return r
 
-        print(f"   HTTP {response.status_code}: {url}")
+        print(f"   HTTP {r.status_code}: {url}")
 
-    except Exception as exc:
+    except Exception as e:
         print(f"   Request failed: {url}")
-        print(f"   {exc}")
+        print(f"   {e}")
 
     return None
 
 
+def extract_pdf_text(content):
+    if not pdfplumber:
+        return ""
+
+    try:
+        with pdfplumber.open(io.BytesIO(content)) as pdf:
+            pages = []
+
+            for page in pdf.pages:
+                txt = page.extract_text() or ""
+                pages.append(txt)
+
+            return "\n".join(pages)
+
+    except Exception as e:
+        print(f"   PDF extraction error: {e}")
+        return ""
+
+
+def soup_text(html):
+    soup = BeautifulSoup(html, "html.parser")
+
+    for tag in soup(["script", "style", "noscript"]):
+        tag.decompose()
+
+    return soup.get_text(" ", strip=True)
+
+
+def find_pdf_links(html, base_url):
+    soup = BeautifulSoup(html, "html.parser")
+
+    links = []
+
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        text = a.get_text(" ", strip=True)
+
+        if ".pdf" in href.lower():
+            links.append({
+                "url": urljoin(base_url, href),
+                "text": text
+            })
+
+    return links
+
+
+def month_key(year, month):
+    return f"{year:04d}-{month:02d}"
+
+
+def empty_record(period, source, url=None):
+    return {
+        "period": period,
+        "source": source,
+        "source_url": url,
+        "status": "NOT_FOUND",
+        "value": None,
+        "unit": None,
+        "retrieved_at": NOW.strftime("%Y-%m-%d %H:%M:%S IST")
+    }
+
+
 # ============================================================
-# DPIIT / OEA
+# 1. DPIIT / OEA
 # ============================================================
 
-def scrape_dpiit(session):
+DPIIT_ARCHIVE = (
+    "https://eaindustry.nic.in/ici_press_release_archive.asp"
+)
 
+
+def get_dpiit_archive(session):
     print("\n" + "=" * 70)
     print("🏭 DPIIT / OEA — EIGHT CORE INDUSTRIES")
     print("=" * 70)
 
-    result = {
-        "source": "DPIIT / Office of Economic Adviser",
-        "cement_growth_pct": None,
-        "steel_growth_pct": None,
-        "overall_core_growth_pct": None,
-        "cement_production_mt": None,
-        "steel_production_mt": None,
-        "source_url": None,
-        "status": "NOT_FOUND",
-    }
+    r = get(session, DPIIT_ARCHIVE)
 
-    urls = [
-        "https://eaindustry.nic.in/eight_core_infra.asp",
-        "https://eaindustry.nic.in/",
-    ]
+    if not r:
+        return []
 
-    text = ""
+    soup = BeautifulSoup(r.text, "html.parser")
 
-    for url in urls:
+    documents = []
 
-        response = get(session, url)
+    for a in soup.find_all("a", href=True):
 
-        if not response:
-            continue
+        text = a.get_text(" ", strip=True)
+        href = a["href"]
 
-        result["source_url"] = url
+        combined = f"{text} {href}".lower()
 
-        content_type = response.headers.get(
-            "content-type", ""
-        ).lower()
+        if (
+            ".pdf" in href.lower()
+            or "press" in combined
+            or "ici" in combined
+            or "core" in combined
+        ):
+            url = urljoin(DPIIT_ARCHIVE, href)
 
-        if "pdf" in content_type and pdfplumber:
+            if url not in [x["url"] for x in documents]:
+                documents.append({
+                    "text": text,
+                    "url": url
+                })
 
-            try:
-                with pdfplumber.open(
-                    io.BytesIO(response.content)
-                ) as pdf:
+    print(f"   Archive links discovered: {len(documents)}")
 
-                    text = "\n".join(
-                        page.extract_text() or ""
-                        for page in pdf.pages
-                    )
+    return documents
 
-            except Exception:
-                continue
 
-        else:
+def parse_dpiit_document(session, url, period):
+    rec = empty_record(
+        period,
+        "DPIIT / Office of Economic Adviser",
+        url
+    )
 
-            soup = BeautifulSoup(
-                response.text,
-                "html.parser"
-            )
+    r = get(session, url)
 
-            # Search PDF links.
-            for a in soup.find_all("a", href=True):
+    if not r:
+        return rec
 
-                href = a["href"]
+    content_type = r.headers.get("content-type", "").lower()
 
-                label = (
-                    a.get_text(" ", strip=True)
-                    + " "
-                    + href
-                ).lower()
-
-                if ".pdf" in href.lower() and (
-                    "core" in label
-                    or "press" in label
-                    or "industry" in label
-                ):
-
-                    pdf_url = urljoin(
-                        url,
-                        href
-                    )
-
-                    print(f"   📄 PDF: {pdf_url}")
-
-                    pdf_response = get(
-                        session,
-                        pdf_url,
-                        timeout=40
-                    )
-
-                    if (
-                        pdf_response
-                        and pdfplumber
-                    ):
-
-                        try:
-
-                            with pdfplumber.open(
-                                io.BytesIO(
-                                    pdf_response.content
-                                )
-                            ) as pdf:
-
-                                text = "\n".join(
-                                    page.extract_text() or ""
-                                    for page in pdf.pages
-                                )
-
-                            result["source_url"] = pdf_url
-                            break
-
-                        except Exception:
-                            pass
-
-            if not text:
-                text = soup.get_text(
-                    " ",
-                    strip=True
-                )
-
-        if text:
-            break
+    if ".pdf" in url.lower() or "pdf" in content_type:
+        text = extract_pdf_text(r.content)
+    else:
+        text = soup_text(r.text)
 
     if not text:
-        print("   ⚠️ DPIIT data not extracted.")
-        return result
+        return rec
 
-    lower = text.lower()
+    # --------------------------------------------------------
+    # Cement
+    # --------------------------------------------------------
 
-    # Overall core growth
-    patterns = [
-        r"eight core industries.*?(\d+(?:\.\d+)?)\s*%",
-        r"combined index.*?(\d+(?:\.\d+)?)\s*%",
+    cement_growth = None
+    steel_growth = None
+
+    patterns_cement = [
+        r"Cement.*?(?:growth|increased|declined|contraction).*?([-+]?\d+(?:\.\d+)?)\s*%",
+        r"Cement\s+([-+]?\d+(?:\.\d+)?)\s*%",
     ]
 
-    for pattern in patterns:
+    for pattern in patterns_cement:
+        m = re.search(pattern, text, re.I | re.S)
 
-        match = re.search(
-            pattern,
-            lower,
-            re.IGNORECASE | re.DOTALL
-        )
-
-        if match:
-
-            result["overall_core_growth_pct"] = clean_num(
-                match.group(1)
-            )
-
+        if m:
+            cement_growth = clean_num(m.group(1))
             break
 
-    # Cement growth
-    match = re.search(
-        r"cement.*?(\d+(?:\.\d+)?)\s*%",
-        lower,
-        re.IGNORECASE | re.DOTALL
-    )
+    patterns_steel = [
+        r"Steel.*?(?:growth|increased|declined|contraction).*?([-+]?\d+(?:\.\d+)?)\s*%",
+        r"Steel\s+([-+]?\d+(?:\.\d+)?)\s*%",
+    ]
 
-    if match:
-        result["cement_growth_pct"] = clean_num(
-            match.group(1)
+    for pattern in patterns_steel:
+        m = re.search(pattern, text, re.I | re.S)
+
+        if m:
+            steel_growth = clean_num(m.group(1))
+            break
+
+    rec["status"] = "PARSED"
+
+    rec["cement_growth_pct"] = cement_growth
+    rec["steel_growth_pct"] = steel_growth
+
+    return rec
+
+
+def scrape_dpiit(session):
+    documents = get_dpiit_archive(session)
+
+    output = []
+
+    for doc in documents:
+
+        text = doc["text"].lower()
+
+        # Try to infer month/year from link/text
+        m = re.search(
+            r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)"
+            r"[^0-9]{0,5}(20\d\d)",
+            text,
+            re.I
         )
 
-    # Steel growth
-    match = re.search(
-        r"steel.*?(\d+(?:\.\d+)?)\s*%",
-        lower,
-        re.IGNORECASE | re.DOTALL
-    )
+        if not m:
+            m = re.search(
+                r"(20\d\d)[-_](0?[1-9]|1[0-2])",
+                text
+            )
 
-    if match:
-        result["steel_growth_pct"] = clean_num(
-            match.group(1)
+        if not m:
+            continue
+
+        if m.group(1).isdigit():
+            year = int(m.group(1))
+            month = int(m.group(2))
+        else:
+            months = {
+                "jan": 1, "feb": 2, "mar": 3,
+                "apr": 4, "may": 5, "jun": 6,
+                "jul": 7, "aug": 8, "sep": 9,
+                "oct": 10, "nov": 11, "dec": 12
+            }
+
+            month = months[m.group(1).lower()]
+            year = int(m.group(2))
+
+        period = month_key(year, month)
+
+        parsed = parse_dpiit_document(
+            session,
+            doc["url"],
+            period
         )
 
-    if (
-        result["cement_growth_pct"] is not None
-        or result["steel_growth_pct"] is not None
-    ):
-        result["status"] = "SUCCESS"
+        parsed["document_text"] = doc["text"]
 
-    print(
-        "   Cement growth:",
-        result["cement_growth_pct"]
+        output.append(parsed)
+
+        time.sleep(0.25)
+
+    # Deduplicate
+    unique = {}
+
+    for row in output:
+        unique[row["period"]] = row
+
+    print(f"   DPIIT records: {len(unique)}")
+
+    return sorted(
+        unique.values(),
+        key=lambda x: x["period"]
     )
-
-    print(
-        "   Steel growth:",
-        result["steel_growth_pct"]
-    )
-
-    return result
 
 
 # ============================================================
-# PPAC
+# 2. PPAC
 # ============================================================
+
+PPAC_URL = (
+    "https://ppac.gov.in/index.php/"
+    "consumption/products-wise"
+)
+
 
 def scrape_ppac(session):
-
     print("\n" + "=" * 70)
-    print("🛢️ PPAC — PETROLEUM CONSUMPTION")
+    print("🛢️ PPAC — PETROLEUM PRODUCTS")
     print("=" * 70)
 
     result = {
         "source": "PPAC",
-        "hsd_diesel_tmt": None,
-        "bitumen_tmt": None,
-        "petcoke_tmt": None,
-        "source_url": None,
+        "source_url": PPAC_URL,
         "status": "NOT_FOUND",
+        "records": []
     }
 
-    urls = [
-        "https://ppac.gov.in/",
-        "https://ppac.gov.in/consumption",
-    ]
+    r = get(session, PPAC_URL)
 
-    for url in urls:
+    if not r:
+        return result
 
-        response = get(
-            session,
-            url
-        )
+    soup = BeautifulSoup(r.text, "html.parser")
 
-        if not response:
+    tables = soup.find_all("table")
+
+    print(f"   Tables found: {len(tables)}")
+
+    for table in tables:
+
+        rows = table.find_all("tr")
+
+        if not rows:
             continue
 
-        result["source_url"] = url
+        headers = [
+            c.get_text(" ", strip=True)
+            for c in rows[0].find_all(["th", "td"])
+        ]
 
-        soup = BeautifulSoup(
-            response.text,
-            "html.parser"
-        )
-
-        page_text = soup.get_text(
-            " ",
-            strip=True
-        )
-
-        # Look through visible tables.
-        for row in soup.find_all("tr"):
+        for row in rows[1:]:
 
             cells = [
-                c.get_text(
-                    " ",
-                    strip=True
-                )
-                for c in row.find_all(
-                    ["td", "th"]
-                )
+                c.get_text(" ", strip=True)
+                for c in row.find_all(["td", "th"])
             ]
 
             if not cells:
                 continue
 
-            row_text = " ".join(cells).lower()
+            label = cells[0].lower()
 
-            numbers = [
-                clean_num(x)
-                for x in re.findall(
-                    r"[-+]?\d[\d,]*(?:\.\d+)?",
-                    " ".join(cells)
-                )
-            ]
+            product = None
 
-            numbers = [
-                x for x in numbers
-                if x is not None
-            ]
+            if "high speed diesel" in label or label == "diesel":
+                product = "HSD"
 
-            if (
-                ("hsd" in row_text
-                 or "diesel" in row_text)
-                and numbers
-            ):
+            elif "bitumen" in label:
+                product = "BITUMEN"
 
-                candidates = [
-                    x for x in numbers
-                    if 3000 <= x <= 15000
-                ]
+            elif "petroleum coke" in label or "petcoke" in label:
+                product = "PETCOKE"
 
-                if candidates:
-                    result["hsd_diesel_tmt"] = candidates[-1]
+            if not product:
+                continue
 
-            if "bitumen" in row_text:
+            result["status"] = "PARSED"
 
-                candidates = [
-                    x for x in numbers
-                    if 100 <= x <= 3000
-                ]
+            for i, value in enumerate(cells[1:], start=1):
 
-                if candidates:
-                    result["bitumen_tmt"] = candidates[-1]
+                if i >= len(headers):
+                    break
 
-            if (
-                "pet coke" in row_text
-                or "petcoke" in row_text
-                or "petroleum coke" in row_text
-            ):
+                month_name = headers[i]
 
-                candidates = [
-                    x for x in numbers
-                    if 100 <= x <= 5000
-                ]
+                if month_name.lower() in [
+                    "total",
+                    "annual",
+                    ""
+                ]:
+                    continue
 
-                if candidates:
-                    result["petcoke_tmt"] = candidates[-1]
+                numeric = clean_num(value)
 
-        if (
-            result["hsd_diesel_tmt"] is not None
-            or result["bitumen_tmt"] is not None
-        ):
-            result["status"] = "PARTIAL"
+                if numeric is None:
+                    continue
 
-        if (
-            result["hsd_diesel_tmt"] is not None
-            and result["bitumen_tmt"] is not None
-        ):
-            result["status"] = "SUCCESS"
-
-        if result["status"] != "NOT_FOUND":
-            break
+                result["records"].append({
+                    "product": product,
+                    "month": month_name,
+                    "value": numeric,
+                    "raw": value,
+                    "source_url": PPAC_URL
+                })
 
     print(
-        "   HSD:",
-        result["hsd_diesel_tmt"]
-    )
-
-    print(
-        "   Bitumen:",
-        result["bitumen_tmt"]
-    )
-
-    print(
-        "   Petcoke:",
-        result["petcoke_tmt"]
+        f"   PPAC records extracted: "
+        f"{len(result['records'])}"
     )
 
     return result
 
 
 # ============================================================
-# INDIAN RAILWAYS
+# 3. MINISTRY OF PORTS
 # ============================================================
 
-def scrape_railways(session):
+PORTS_URL = (
+    "https://www.shipmin.gov.in/"
+    "transport-reseach/"
+    "monthly-cargo-traffic-handled-major-ports"
+)
 
-    print("\n" + "=" * 70)
-    print("🚂 INDIAN RAILWAYS — FREIGHT")
-    print("=" * 70)
-
-    result = {
-        "source": "Indian Railways",
-        "originating_freight_mt": None,
-        "freight_revenue_cr": None,
-        "cement_clinker_mt": None,
-        "iron_ore_mt": None,
-        "source_url": None,
-        "status": "NOT_FOUND",
-    }
-
-    urls = [
-        "https://pib.gov.in/",
-        "https://www.indianrailways.gov.in/",
-    ]
-
-    for url in urls:
-
-        response = get(
-            session,
-            url
-        )
-
-        if not response:
-            continue
-
-        result["source_url"] = url
-
-        text = BeautifulSoup(
-            response.text,
-            "html.parser"
-        ).get_text(
-            " ",
-            strip=True
-        )
-
-        # Freight loading
-        patterns = [
-            r"freight loading.*?([\d,]+(?:\.\d+)?)\s*mt",
-            r"originating freight.*?([\d,]+(?:\.\d+)?)\s*mt",
-            r"loading.*?([\d,]+(?:\.\d+)?)\s*mt",
-        ]
-
-        for pattern in patterns:
-
-            match = re.search(
-                pattern,
-                text,
-                re.IGNORECASE
-            )
-
-            if match:
-                result["originating_freight_mt"] = clean_num(
-                    match.group(1)
-                )
-                break
-
-        match = re.search(
-            r"revenue.*?₹?\s*([\d,]+(?:\.\d+)?)\s*crore",
-            text,
-            re.IGNORECASE
-        )
-
-        if match:
-            result["freight_revenue_cr"] = clean_num(
-                match.group(1)
-            )
-
-        if result["originating_freight_mt"] is not None:
-            result["status"] = "SUCCESS"
-            break
-
-    print(
-        "   Freight:",
-        result["originating_freight_mt"]
-    )
-
-    print(
-        "   Revenue:",
-        result["freight_revenue_cr"]
-    )
-
-    return result
-
-
-# ============================================================
-# PORTS
-# ============================================================
 
 def scrape_ports(session):
-
     print("\n" + "=" * 70)
-    print("🚢 INDIAN PORTS — CARGO / CONTAINER")
+    print("🚢 MINISTRY OF PORTS — MAJOR PORTS")
     print("=" * 70)
 
     result = {
-        "source": "Indian Ports Association / Ministry of Ports",
-        "cargo_traffic_mt": None,
-        "container_teus": None,
-        "source_url": None,
+        "source": (
+            "Ministry of Ports, Shipping "
+            "& Waterways"
+        ),
+        "source_url": PORTS_URL,
         "status": "NOT_FOUND",
+        "records": []
     }
 
-    # Do NOT depend only on ipa.nic.in.
-    # Try Ministry / PIB sources too.
-    urls = [
-        "https://shipmin.gov.in/",
-        "https://pib.gov.in/",
-        "https://ipa.nic.in/",
-    ]
+    r = get(session, PORTS_URL)
 
-    for url in urls:
+    if not r:
+        return result
 
-        print(f"   🌐 Trying {url}")
+    soup = BeautifulSoup(r.text, "html.parser")
 
-        response = get(
-            session,
-            url,
-            timeout=25
+    links = []
+
+    for a in soup.find_all("a", href=True):
+
+        txt = a.get_text(" ", strip=True)
+        href = a["href"]
+
+        combined = f"{txt} {href}".lower()
+
+        if (
+            "major port" in combined
+            and (
+                "2023" in combined
+                or "2024" in combined
+                or "2025" in combined
+                or "2026" in combined
+            )
+        ):
+            links.append({
+                "text": txt,
+                "url": urljoin(PORTS_URL, href)
+            })
+
+    # Also include PDF links directly
+    for a in soup.find_all("a", href=True):
+
+        href = a["href"]
+
+        if ".pdf" in href.lower():
+
+            links.append({
+                "text": a.get_text(" ", strip=True),
+                "url": urljoin(PORTS_URL, href)
+            })
+
+    # Deduplicate
+    unique = {}
+
+    for x in links:
+        unique[x["url"]] = x
+
+    links = list(unique.values())
+
+    print(f"   Port documents discovered: {len(links)}")
+
+    for doc in links:
+
+        title = doc["text"]
+
+        # Find year/month in title
+        m = re.search(
+            r"(January|February|March|April|May|June|July|"
+            r"August|September|October|November|December)"
+            r"[^0-9]{0,10}(20\d\d)",
+            title,
+            re.I
         )
 
-        if not response:
+        if not m:
             continue
 
-        result["source_url"] = url
+        months = {
+            "january": 1,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12
+        }
 
-        soup = BeautifulSoup(
-            response.text,
-            "html.parser"
+        month = months[m.group(1).lower()]
+        year = int(m.group(2))
+
+        period = month_key(year, month)
+
+        page = get(session, doc["url"])
+
+        if not page:
+            continue
+
+        pdf_links = find_pdf_links(
+            page.text,
+            doc["url"]
         )
 
-        text = soup.get_text(
-            " ",
-            strip=True
-        )
+        # If page itself points to PDF
+        for pdf in pdf_links:
 
-        # Container TEU
-        patterns_teu = [
-            r"([\d,]+(?:\.\d+)?)\s*million\s*teu",
-            r"([\d,]+(?:\.\d+)?)\s*million\s*teus",
-            r"([\d,]+(?:\.\d+)?)\s*teus",
-        ]
+            pdf_url = pdf["url"]
 
-        for pattern in patterns_teu:
+            pdf_resp = get(session, pdf_url)
 
-            match = re.search(
-                pattern,
-                text,
-                re.IGNORECASE
+            if not pdf_resp:
+                continue
+
+            text = extract_pdf_text(
+                pdf_resp.content
             )
 
-            if match:
+            if not text:
+                continue
 
-                value = clean_num(
-                    match.group(1)
+            # Find total cargo numbers around
+            # "Total Cargo handled"
+            cargo = None
+
+            patterns = [
+                r"Total Cargo handled\s*"
+                r"([\d,]+(?:\.\d+)?)\s*MMT",
+
+                r"Total Cargo.*?"
+                r"([\d,]+(?:\.\d+)?)\s*"
+                r"million tonnes",
+
+                r"cargo handled.*?"
+                r"([\d,]+(?:\.\d+)?)\s*MMT",
+            ]
+
+            for pattern in patterns:
+
+                cm = re.search(
+                    pattern,
+                    text,
+                    re.I | re.S
                 )
 
-                if value is not None:
-                    result["container_teus"] = value
+                if cm:
+                    cargo = clean_num(
+                        cm.group(1)
+                    )
                     break
 
-        # Cargo traffic
-        patterns_cargo = [
-            r"([\d,]+(?:\.\d+)?)\s*million\s*tonnes.*?cargo",
-            r"cargo.*?([\d,]+(?:\.\d+)?)\s*million\s*tonnes",
-            r"([\d,]+(?:\.\d+)?)\s*mt.*?cargo",
-        ]
-
-        for pattern in patterns_cargo:
-
-            match = re.search(
-                pattern,
-                text,
-                re.IGNORECASE
-            )
-
-            if match:
-
-                value = clean_num(
-                    match.group(1)
+            result["records"].append({
+                "period": period,
+                "cargo_traffic_mmt": cargo,
+                "source_url": pdf_url,
+                "status": (
+                    "PARSED"
+                    if cargo is not None
+                    else "DOCUMENT_FOUND_VALUE_NOT_PARSED"
                 )
+            })
 
-                if value is not None:
-                    result["cargo_traffic_mt"] = value
-                    break
+            result["status"] = "PARSED"
 
-        if (
-            result["container_teus"] is not None
-            or result["cargo_traffic_mt"] is not None
-        ):
-            result["status"] = "PARTIAL"
-
-        if (
-            result["container_teus"] is not None
-            and result["cargo_traffic_mt"] is not None
-        ):
-            result["status"] = "SUCCESS"
-
-        if result["status"] != "NOT_FOUND":
             break
 
-    print(
-        "   Container TEUs:",
-        result["container_teus"]
+        time.sleep(0.2)
+
+    # Deduplicate periods
+    unique = {}
+
+    for row in result["records"]:
+        unique[row["period"]] = row
+
+    result["records"] = sorted(
+        unique.values(),
+        key=lambda x: x["period"]
     )
 
     print(
-        "   Cargo:",
-        result["cargo_traffic_mt"]
+        f"   Port monthly records: "
+        f"{len(result['records'])}"
     )
 
     return result
 
 
 # ============================================================
-# FASTAG
+# 4. NPCI FASTAG
 # ============================================================
 
-def scrape_fastag(session):
+FASTAG_URL = (
+    "https://www.npci.org.in/"
+    "product/netc/product-statistics"
+)
 
+
+def scrape_fastag(session):
     print("\n" + "=" * 70)
-    print("🛣️ NPCI / NETC FASTag")
+    print("🛣️ NPCI — NETC FASTag")
     print("=" * 70)
 
     result = {
-        "source": "NPCI / NETC FASTag",
-        "toll_volume_crore": None,
-        "toll_value_crore": None,
-        "source_url": None,
+        "source": "NPCI NETC FASTag",
+        "source_url": FASTAG_URL,
         "status": "NOT_FOUND",
+        "records": []
     }
 
-    urls = [
-        "https://www.npci.org.in/what-we-do/netc-fastag/product-statistics",
-        "https://www.npci.org.in/what-we-do/netc-fastag",
-    ]
+    r = get(session, FASTAG_URL)
 
-    for url in urls:
+    if not r:
+        return result
 
-        response = get(
-            session,
-            url
-        )
+    soup = BeautifulSoup(r.text, "html.parser")
 
-        if not response:
+    tables = soup.find_all("table")
+
+    print(f"   Tables found: {len(tables)}")
+
+    month_map = {
+        "january": 1,
+        "february": 2,
+        "march": 3,
+        "april": 4,
+        "may": 5,
+        "june": 6,
+        "july": 7,
+        "august": 8,
+        "september": 9,
+        "october": 10,
+        "november": 11,
+        "december": 12
+    }
+
+    for table in tables:
+
+        rows = table.find_all("tr")
+
+        if not rows:
             continue
 
-        result["source_url"] = url
-
-        soup = BeautifulSoup(
-            response.text,
-            "html.parser"
-        )
-
-        # Search tables first.
-        for row in soup.find_all("tr"):
+        for row in rows:
 
             cells = [
-                c.get_text(
-                    " ",
-                    strip=True
-                )
+                c.get_text(" ", strip=True)
                 for c in row.find_all(
                     ["td", "th"]
                 )
             ]
 
-            if not cells:
+            if len(cells) < 4:
                 continue
 
-            row_text = " ".join(
-                cells
-            ).lower()
+            month_cell = cells[0]
 
-            nums = [
-                clean_num(x)
-                for x in re.findall(
-                    r"[\d,]+(?:\.\d+)?",
-                    " ".join(cells)
-                )
-            ]
+            m = re.search(
+                r"(January|February|March|April|May|June|"
+                r"July|August|September|October|November|December)"
+                r"[-\s]+(20\d\d)",
+                month_cell,
+                re.I
+            )
 
-            nums = [
-                x for x in nums
-                if x is not None
-            ]
-
-            if not nums:
+            if not m:
                 continue
 
-            if (
-                "volume" in row_text
-                or "transaction" in row_text
-                or "transactions" in row_text
-            ):
+            month = month_map[
+                m.group(1).lower()
+            ]
 
-                candidates = [
-                    x for x in nums
-                    if 1 <= x <= 100
-                ]
+            year = int(m.group(2))
 
-                if candidates:
-                    result["toll_volume_crore"] = candidates[-1]
+            period = month_key(year, month)
 
-            if (
-                "value" in row_text
-                or "amount" in row_text
-                or "toll" in row_text
-            ):
+            banks = clean_num(cells[1])
+            tags = clean_num(cells[2])
+            volume = clean_num(cells[3])
+            amount = (
+                clean_num(cells[4])
+                if len(cells) > 4
+                else None
+            )
 
-                candidates = [
-                    x for x in nums
-                    if 500 <= x <= 20000
-                ]
+            result["records"].append({
+                "period": period,
+                "banks_live": banks,
+                "tag_issuance_btd": tags,
+                "volume_mn_mtd": volume,
+                "amount_cr_mtd": amount,
+                "source_url": FASTAG_URL,
+                "status": "PARSED"
+            })
 
-                if candidates:
-                    result["toll_value_crore"] = candidates[-1]
+            result["status"] = "PARSED"
 
-        if (
-            result["toll_volume_crore"] is not None
-            or result["toll_value_crore"] is not None
-        ):
-            result["status"] = "PARTIAL"
+    # Deduplicate
+    unique = {}
 
-        if (
-            result["toll_volume_crore"] is not None
-            and result["toll_value_crore"] is not None
-        ):
-            result["status"] = "SUCCESS"
-            break
+    for row in result["records"]:
+        unique[row["period"]] = row
 
-    print(
-        "   Volume:",
-        result["toll_volume_crore"]
+    result["records"] = sorted(
+        unique.values(),
+        key=lambda x: x["period"]
     )
 
     print(
-        "   Value:",
-        result["toll_value_crore"]
+        f"   FASTag monthly records: "
+        f"{len(result['records'])}"
     )
 
     return result
 
 
 # ============================================================
-# MAIN
+# MASTER OUTPUT
 # ============================================================
 
-def run():
+def load_existing():
+    if not os.path.exists(OUTPUT_FILE):
+        return {
+            "schema_version": "1.0",
+            "generated_at": None,
+            "snapshots": []
+        }
 
+    try:
+        with open(
+            OUTPUT_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            return json.load(f)
+
+    except Exception:
+        return {
+            "schema_version": "1.0",
+            "generated_at": None,
+            "snapshots": []
+        }
+
+
+def run():
     print("=" * 80)
-    print("🚀 LIVE MACRO TELEMETRY SCRAPER")
+    print("🚀 OFFICIAL MACRO TELEMETRY HARVESTER")
     print("=" * 80)
 
     print(
-        "Time:",
-        NOW.strftime(
-            "%Y-%m-%d %H:%M:%S IST"
-        )
+        f"Time: "
+        f"{NOW.strftime('%Y-%m-%d %H:%M:%S IST')}"
     )
 
-    session = make_session()
+    session = requests.Session()
 
-    payload = {
-        "timestamp": NOW.strftime(
+    # --------------------------------------------------------
+    # Scrape
+    # --------------------------------------------------------
+
+    dpiit = scrape_dpiit(session)
+    ppac = scrape_ppac(session)
+    ports = scrape_ports(session)
+    fastag = scrape_fastag(session)
+
+    # --------------------------------------------------------
+    # Snapshot
+    # --------------------------------------------------------
+
+    snapshot = {
+        "retrieved_at": NOW.strftime(
             "%Y-%m-%d %H:%M:%S IST"
         ),
-        "data_period": NOW.strftime(
-            "%Y-%m"
-        ),
-        "synthetic_data": False,
-        "metrics": {
-            "dpiit_eight_core":
-                scrape_dpiit(session),
-
-            "ppac_petroleum":
-                scrape_ppac(session),
-
-            "railways_freight":
-                scrape_railways(session),
-
-            "ports":
-                scrape_ports(session),
-
-            "fastag":
-                scrape_fastag(session),
+        "sources": {
+            "dpiit_oea": dpiit,
+            "ppac": ppac,
+            "ports": ports,
+            "npcI_fastag": fastag
         }
     }
 
-    # Existing history
-    history = []
+    # --------------------------------------------------------
+    # Preserve history
+    # --------------------------------------------------------
 
-    if os.path.exists(OUTPUT_FILE):
+    db = load_existing()
 
-        try:
+    if not isinstance(
+        db.get("snapshots"),
+        list
+    ):
+        db["snapshots"] = []
 
-            with open(
-                OUTPUT_FILE,
-                "r",
-                encoding="utf-8"
-            ) as f:
-
-                old = json.load(f)
-
-            if isinstance(old, list):
-                history = old
-            elif isinstance(old, dict):
-                history = [old]
-
-        except Exception:
-            history = []
-
-    # Avoid duplicate exact timestamp.
-    history = [
-        x for x in history
-        if x.get("timestamp") != payload["timestamp"]
-    ]
-
-    history.insert(
+    db["snapshots"].insert(
         0,
-        payload
+        snapshot
     )
 
-    # Keep last 36 snapshots.
-    history = history[:36]
+    # Keep last 36 scraper runs
+    db["snapshots"] = db["snapshots"][:36]
+
+    db["generated_at"] = NOW.strftime(
+        "%Y-%m-%d %H:%M:%S IST"
+    )
+
+    # --------------------------------------------------------
+    # Write
+    # --------------------------------------------------------
 
     with open(
         OUTPUT_FILE,
         "w",
         encoding="utf-8"
     ) as f:
-
         json.dump(
-            history,
+            db,
             f,
             ensure_ascii=False,
             indent=2
@@ -873,21 +899,47 @@ def run():
     print("=" * 80)
 
     print(
-        f"📁 File: {OUTPUT_FILE}"
+        f"📁 Output: {OUTPUT_FILE}"
     )
 
     print(
-        f"📊 Snapshots stored: {len(history)}"
+        f"🏭 DPIIT records: "
+        f"{len(dpiit)}"
     )
 
     print(
-        "ℹ️ No synthetic fallback values were inserted."
+        f"🛢️ PPAC records: "
+        f"{len(ppac.get('records', []))}"
     )
 
     print(
-        "ℹ️ Unavailable official observations remain null."
+        f"🚢 Port records: "
+        f"{len(ports.get('records', []))}"
     )
+
+    print(
+        f"🛣️ FASTag records: "
+        f"{len(fastag.get('records', []))}"
+    )
+
+    print("=" * 80)
 
 
 if __name__ == "__main__":
     run()
+
+Iske liye dependency
+
+"requirements.txt":
+
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+pdfplumber>=0.11.0
+
+Ek limitation deliberately rakhi hai: PPAC aur NPCI pages dynamically change ho sakte hain, isliye code sirf wahi table values save karega jo page ke HTML mein actually milti hain. PPAC officially historical/current report downloads provide karta hai, aur NPCI ka page monthly statistics table expose karta hai. citeturn0search1turn0search0
+
+Ports ke liye "ipa.nic.in" ko hit nahi kiya gaya hai. Ministry of Ports ka official monthly archive use kiya gaya hai, jahan Major Ports ke monthly documents listed hain. citeturn0search2turn0search7
+
+DPIIT ke liye official ICI Press Release Archive use ho raha hai, jisme 2023, 2024, 2025 aur 2026 ke monthly releases listed hain. citeturn0search6
+
+Lekin ek baat: ye first version archive discovery + extraction engine hai. Isko GitHub Actions mein daalne se pehle local run karke actual output dekhna best hai. Agar kisi source par "records: 0" aata hai, us source ka exact HTML/PDF structure dekhkar parser ko targeted karna hoga—guess karke numbers nahi bharne hain.
