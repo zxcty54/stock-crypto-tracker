@@ -13,13 +13,8 @@ try:
 except ImportError:
     pdfplumber = None
 
-try:
-    import pandas as pd
-except ImportError:
-    pd = None
-
 # ============================================================
-# CONFIGURATION & REBUILT CLIENT
+# CONFIGURATION
 # ============================================================
 
 OUTPUT_FILE = "macro_telemetry_master.json"
@@ -33,9 +28,10 @@ COMMON_HEADERS = {
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/124.0.0.0 Safari/537.36"
     ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
-    "Connection": "keep-alive"
+    "Origin": "https://www.npci.org.in",
+    "Referer": "https://www.npci.org.in/"
 }
 
 def clean_num(val):
@@ -51,85 +47,78 @@ def clean_num(val):
     return None
 
 # ============================================================
-# 1. DPIIT (EIGHT CORE INDUSTRIES VIA PIB/DPIIT MIRROR)
+# 1. DPIIT (EIGHT CORE INDUSTRIES VIA OFFICIAL PIB ENGINE)
 # ============================================================
 
 def scrape_dpiit_core_industries(session):
     print("🏭 [1/5] Scraping DPIIT Eight Core Industries...")
     result = {
-        "source": "DPIIT",
+        "source": "DPIIT / PIB",
         "cement_production_mt": None,
         "steel_production_mt": None,
-        "cement_index": None,
-        "steel_index": None,
-        "pdf_url": None
+        "cement_growth_pct": None,
+        "steel_growth_pct": None,
+        "overall_core_growth_pct": None,
+        "release_title": None,
+        "release_url": None
     }
     
-    # Primary & Mirror URLs for Eight Core
-    target_urls = [
-        "https://eaindustry.nic.in/",
-        "https://pib.gov.in/PressReleasePage.aspx?PRID=INDEX_CORE",
-        "https://www.eaindustry.nic.in/eight_core_infra.asp"
-    ]
-    
-    pdf_link = None
-    for url in target_urls:
-        try:
-            resp = session.get(url, headers=COMMON_HEADERS, timeout=20, verify=False)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    href = a['href']
-                    t = (a.get_text() + " " + href).lower()
-                    if ("eight core" in t or "core" in t or "index" in t) and ".pdf" in href.lower():
-                        pdf_link = urljoin(url, href)
-                        break
-            if pdf_link:
-                break
-        except Exception:
-            continue
-
-    if not pdf_link:
-        # Fallback to direct latest archive query
-        print("   ⚠️ Primary DPIIT page altered. Checking national data repository...")
-        pdf_link = "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
-
-    result["pdf_url"] = pdf_link
+    # PIB Ministry of Commerce & Industry Press Releases (Always Accessible Globally)
+    pib_api = "https://pib.gov.in/AllRelease.aspx"
     try:
-        pdf_resp = session.get(pdf_link, headers=COMMON_HEADERS, timeout=30, verify=False)
-        if pdf_resp.status_code == 200 and pdfplumber:
-            with pdfplumber.open(io.BytesIO(pdf_resp.content)) as pdf:
-                full_text = "\n".join([p.extract_text() or "" for p in pdf.pages[:6]])
+        resp = session.get(pib_api, headers=COMMON_HEADERS, timeout=25, verify=False)
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            target_link = None
+            
+            for a in soup.find_all("a", href=True):
+                txt = a.get_text().strip()
+                if "Eight Core" in txt or "eight core industries" in txt.lower():
+                    target_link = urljoin("https://pib.gov.in/", a['href'])
+                    result["release_title"] = txt
+                    break
+
+            if not target_link:
+                # Direct search fallback
+                search_url = "https://pib.gov.in/PressReleasePage.aspx?PRID=INDEX_CORE"
+                target_link = search_url
+
+            result["release_url"] = target_link
+            rel_resp = session.get(target_link, headers=COMMON_HEADERS, timeout=25, verify=False)
+            if rel_resp.status_code == 200:
+                body_text = rel_resp.text
                 
-                # Match lines like: Cement (Weight: 5.37%) ... Production: 35.4 MT
-                cem_matches = re.findall(r'Cement[^\d\n]+([\d,\.]+)', full_text, re.IGNORECASE)
-                if cem_matches:
-                    valid = [clean_num(x) for x in cem_matches if clean_num(x) and clean_num(x) > 5.0]
-                    if valid:
-                        result["cement_production_mt"] = valid[0]
+                # Overall core growth
+                core_match = re.search(r'Eight Core Industries.*?increased by\s+([\d\.]+)\s*%', body_text, re.IGNORECASE)
+                if core_match:
+                    result["overall_core_growth_pct"] = clean_num(core_match.group(1))
 
-                steel_matches = re.findall(r'Steel[^\d\n]+([\d,\.]+)', full_text, re.IGNORECASE)
-                if steel_matches:
-                    valid = [clean_num(x) for x in steel_matches if clean_num(x) and clean_num(x) > 5.0]
-                    if valid:
-                        result["steel_production_mt"] = valid[0]
+                # Cement Production & Growth
+                cem_match = re.search(r'Cement\s+production.*?increased by\s+([\d\.\-]+)\s*%', body_text, re.IGNORECASE)
+                if cem_match:
+                    result["cement_growth_pct"] = clean_num(cem_match.group(1))
 
-                c_idx = re.search(r'Cement.*?Index.*?([\d]{2,3}\.[\d]+)', full_text, re.IGNORECASE)
-                if c_idx:
-                    result["cement_index"] = clean_num(c_idx.group(1))
+                # Steel Production & Growth
+                steel_match = re.search(r'Steel\s+production.*?increased by\s+([\d\.\-]+)\s*%', body_text, re.IGNORECASE)
+                if steel_match:
+                    result["steel_growth_pct"] = clean_num(steel_match.group(1))
 
-                s_idx = re.search(r'Steel.*?Index.*?([\d]{2,3}\.[\d]+)', full_text, re.IGNORECASE)
-                if s_idx:
-                    result["steel_index"] = clean_num(s_idx.group(1))
+                # Physical volume scan (in Million Tonnes)
+                cem_vol = re.search(r'Cement[^\d\n]+(\d{2}\.\d+)\s*(?:million|MT)', body_text, re.IGNORECASE)
+                if cem_vol:
+                    result["cement_production_mt"] = clean_num(cem_vol.group(1))
 
-        print(f"   ✅ DPIIT Extracted: Cement: {result['cement_production_mt']} MT | Steel: {result['steel_production_mt']} MT")
+                steel_vol = re.search(r'Steel[^\d\n]+(\d{2}\.\d+)\s*(?:million|MT)', body_text, re.IGNORECASE)
+                if steel_vol:
+                    result["steel_production_mt"] = clean_num(steel_vol.group(1))
+
+        print(f"   ✅ DPIIT: Cement Growth: {result['cement_growth_pct']}% | Steel Growth: {result['steel_growth_pct']}% | Core Overall: {result['overall_core_growth_pct']}%")
     except Exception as e:
-        print(f"   ❌ DPIIT Parser Error: {e}")
-        
+        print(f"   ❌ DPIIT Error: {e}")
     return result
 
 # ============================================================
-# 2. PPAC — PETROLEUM & GAS (Accurate Column Extraction)
+# 2. PPAC (PETROLEUM CONSUMPTION FORENSIC SCAN)
 # ============================================================
 
 def scrape_ppac_consumption(session):
@@ -139,46 +128,52 @@ def scrape_ppac_consumption(session):
         "hsd_diesel_tmt": None,
         "bitumen_tmt": None,
         "petcoke_tmt": None,
-        "source_doc_url": None
+        "report_period": None,
+        "pdf_url": None
     }
-    target_url = "https://ppac.gov.in/consumption"
+    url = "https://ppac.gov.in/consumption"
     try:
-        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+        resp = session.get(url, headers=COMMON_HEADERS, timeout=25, verify=False)
         soup = BeautifulSoup(resp.text, "html.parser")
-        doc_link = None
+        
+        pdf_link = None
         for a in soup.find_all("a", href=True):
             href = a['href']
-            t = a.get_text().lower()
-            if ("snapshot" in t or "consumption" in t) and any(href.lower().endswith(ext) for ext in [".pdf", ".xlsx", ".xls"]):
-                doc_link = urljoin("https://ppac.gov.in/", href)
+            txt = (a.get_text() + " " + href).lower()
+            if ".pdf" in href.lower() and ("snapshot" in txt or "icr" in txt or "consumption" in txt):
+                pdf_link = urljoin("https://ppac.gov.in/", href)
                 break
 
-        if not doc_link:
-            for a in soup.find_all("a", href=True):
-                if a['href'].endswith((".xlsx", ".xls", ".pdf")):
-                    doc_link = urljoin("https://ppac.gov.in/", a['href'])
-                    break
-
-        if doc_link:
-            result["source_doc_url"] = doc_link
-            doc_resp = session.get(doc_link, headers=COMMON_HEADERS, timeout=35, verify=False)
-            if doc_resp.status_code == 200 and pdfplumber and doc_link.endswith(".pdf"):
-                with pdfplumber.open(io.BytesIO(doc_resp.content)) as pdf:
+        if pdf_link:
+            result["pdf_url"] = pdf_link
+            pdf_resp = session.get(pdf_link, headers=COMMON_HEADERS, timeout=35, verify=False)
+            if pdf_resp.status_code == 200 and pdfplumber:
+                with pdfplumber.open(io.BytesIO(pdf_resp.content)) as pdf:
                     for page in pdf.pages[:6]:
                         tables = page.extract_tables()
                         for table in tables:
                             for row in table:
-                                row_str = " ".join([str(c) for c in row if c]).lower()
-                                nums = [clean_num(c) for c in row if clean_num(c) is not None and clean_num(c) > 50]
-                                if "hsd" in row_str or "high speed diesel" in row_str:
-                                    if nums and not result["hsd_diesel_tmt"]:
-                                        result["hsd_diesel_tmt"] = nums[0]
-                                if "bitumen" in row_str:
-                                    if nums and not result["bitumen_tmt"]:
-                                        result["bitumen_tmt"] = nums[0]
-                                if "petcoke" in row_str or "petroleum coke" in row_str:
-                                    if nums and not result["petcoke_tmt"]:
-                                        result["petcoke_tmt"] = nums[0]
+                                if not row:
+                                    continue
+                                row_joined = " ".join([str(c) for c in row if c]).lower()
+                                
+                                # Quantity filter: Diesel TMT is always in thousands (e.g., 6500 - 8500 TMT)
+                                nums = [clean_num(c) for c in row if clean_num(c) is not None]
+                                
+                                if ("hsd" in row_joined or "diesel" in row_joined) and not result["hsd_diesel_tmt"]:
+                                    valid_hsd = [n for n in nums if 3000 <= n <= 15000]
+                                    if valid_hsd:
+                                        result["hsd_diesel_tmt"] = valid_hsd[0]
+
+                                if "bitumen" in row_joined and not result["bitumen_tmt"]:
+                                    valid_bit = [n for n in nums if 200 <= n <= 2000]
+                                    if valid_bit:
+                                        result["bitumen_tmt"] = valid_bit[0]
+
+                                if "petcoke" in row_joined and not result["petcoke_tmt"]:
+                                    valid_pet = [n for n in nums if 300 <= n <= 3000]
+                                    if valid_pet:
+                                        result["petcoke_tmt"] = valid_pet[0]
 
         print(f"   ✅ PPAC Extracted: HSD: {result['hsd_diesel_tmt']} TMT | Bitumen: {result['bitumen_tmt']} TMT | Petcoke: {result['petcoke_tmt']} TMT")
     except Exception as e:
@@ -186,192 +181,177 @@ def scrape_ppac_consumption(session):
     return result
 
 # ============================================================
-# 3. RAILWAYS (FALLBACK AGGREGATOR / FOIS / PIB)
+# 3. RAILWAYS (VIA PIB RAILWAYS RELEASE - ZERO IP BLOCK)
 # ============================================================
 
 def scrape_railways_freight(session):
     print("🚂 [3/5] Scraping Ministry of Railways (Freight Traffic)...")
     result = {
-        "source": "Indian Railways",
+        "source": "Ministry of Railways / PIB",
+        "originating_freight_mt": None,
+        "freight_revenue_cr": None,
         "cement_clinker_mt": None,
-        "iron_ore_steel_mt": None,
-        "rakes_loaded_per_day": None,
-        "pdf_url": None
+        "iron_ore_mt": None,
+        "report_title": None,
+        "source_url": None
     }
     
-    # Direct PIB Mirror (Bypasses Indian Railways Datacenter IP block)
-    pib_rail_url = "https://pib.gov.in/PressReleasePage.aspx?PRID=RAIL_FREIGHT"
-    primary_url = "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554,630"
-    
-    pdf_bytes = None
+    # Query PIB for Ministry of Railways monthly loading records
+    pib_url = "https://pib.gov.in/AllRelease.aspx"
     try:
-        # First attempt with short timeout
-        resp = session.get(primary_url, headers=COMMON_HEADERS, timeout=12, verify=False)
+        resp = session.get(pib_url, headers=COMMON_HEADERS, timeout=25, verify=False)
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.text, "html.parser")
+            target_href = None
+            
             for a in soup.find_all("a", href=True):
-                if ".pdf" in a['href'].lower() and "freight" in a.get_text().lower():
-                    result["pdf_url"] = urljoin(primary_url, a['href'])
-                    p_resp = session.get(result["pdf_url"], headers=COMMON_HEADERS, timeout=20, verify=False)
-                    if p_resp.status_code == 200:
-                        pdf_bytes = p_resp.content
+                txt = a.get_text().strip()
+                if "Railway" in txt and ("Freight" in txt or "freight" in txt.lower()):
+                    target_href = urljoin("https://pib.gov.in/", a['href'])
+                    result["report_title"] = txt
                     break
-    except Exception:
-        print("   ⚠️ Indian Railways direct IP blocked runner. Falling back to official PIB release feed...")
 
-    # PIB Fallback
-    if not pdf_bytes:
-        try:
-            pib_feed = "https://pib.gov.in/AllRelease.aspx"
-            p_resp = session.get(pib_feed, headers=COMMON_HEADERS, timeout=25, verify=False)
-            if p_resp.status_code == 200:
-                soup = BeautifulSoup(p_resp.text, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    txt = a.get_text().lower()
-                    if "railway" in txt and ("freight" in txt or "revenue" in txt):
-                        p_page = session.get(urljoin("https://pib.gov.in/", a['href']), headers=COMMON_HEADERS, timeout=20, verify=False)
-                        txt_body = p_page.text
-                        
-                        cem = re.search(r'Cement\s*(?:&|\+)?\s*Clinker[^\d\n]+([\d,\.]+)', txt_body, re.IGNORECASE)
-                        if cem:
-                            result["cement_clinker_mt"] = clean_num(cem.group(1))
-                        iron = re.search(r'(?:Iron\s+Ore|Raw\s+Material\s+for\s+Steel)[^\d\n]+([\d,\.]+)', txt_body, re.IGNORECASE)
-                        if iron:
-                            result["iron_ore_steel_mt"] = clean_num(iron.group(1))
-                        break
-        except Exception as e:
-            print(f"   ⚠️ PIB Railway Fallback note: {e}")
+            if target_href:
+                result["source_url"] = target_href
+                rel_resp = session.get(target_href, headers=COMMON_HEADERS, timeout=25, verify=False)
+                txt_content = rel_resp.text
+                
+                # Total Freight Loading (in MT)
+                total_match = re.search(r'(?:freight loading of|originating freight of)\s*([\d\.,]+)\s*MT', txt_content, re.IGNORECASE)
+                if total_match:
+                    result["originating_freight_mt"] = clean_num(total_match.group(1))
 
-    if pdf_bytes and pdfplumber:
-        with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-            full_text = "\n".join([p.extract_text() or "" for p in pdf.pages[:4]])
-            cem = re.search(r'Cement\s*(?:&|\+)?\s*Clinker[^\d\n]+([\d,\.]+)', full_text, re.IGNORECASE)
-            if cem:
-                result["cement_clinker_mt"] = clean_num(cem.group(1))
-            iron = re.search(r'Iron\s+Ore[^\d\n]+([\d,\.]+)', full_text, re.IGNORECASE)
-            if iron:
-                result["iron_ore_steel_mt"] = clean_num(iron.group(1))
+                # Revenue (in Rs. Cr)
+                rev_match = re.search(r'(?:freight revenue of|revenue of)\s*(?:Rs\.?)?\s*([\d\.,]+)\s*crore', txt_content, re.IGNORECASE)
+                if rev_match:
+                    result["freight_revenue_cr"] = clean_num(rev_match.group(1))
 
-    print(f"   ✅ Railways Extracted: Cement/Clinker: {result['cement_clinker_mt']} MT | Iron Ore: {result['iron_ore_steel_mt']} MT")
+                # Cement & Clinker
+                cem = re.search(r'([\d\.,]+)\s*MT\s*of\s*Cement', txt_content, re.IGNORECASE)
+                if not cem:
+                    cem = re.search(r'Cement[^\d\n]+([\d\.,]+)\s*MT', txt_content, re.IGNORECASE)
+                if cem:
+                    result["cement_clinker_mt"] = clean_num(cem.group(1))
+
+                # Iron Ore
+                iron = re.search(r'([\d\.,]+)\s*MT\s*of\s*Iron\s*Ore', txt_content, re.IGNORECASE)
+                if not iron:
+                    iron = re.search(r'Iron\s*Ore[^\d\n]+([\d\.,]+)\s*MT', txt_content, re.IGNORECASE)
+                if iron:
+                    result["iron_ore_mt"] = clean_num(iron.group(1))
+
+        print(f"   ✅ Railways: Total: {result['originating_freight_mt']} MT | Revenue: ₹{result['freight_revenue_cr']} Cr | Cement: {result['cement_clinker_mt']} MT | Iron Ore: {result['iron_ore_mt']} MT")
+    except Exception as e:
+        print(f"   ❌ Railways Error: {e}")
     return result
 
 # ============================================================
-# 4. IPA (INDIAN PORTS ASSOCIATION WITH HIGHER TIMEOUT)
+# 4. IPA (INDIAN PORTS ASSOCIATION / SAGARMALA DASHBOARD)
 # ============================================================
 
 def scrape_ipa_ports(session):
-    print("⚓ [4/5] Scraping Indian Ports Association (Cargo & Container)...")
+    print("⚓ [4/5] Scraping Indian Ports Association (Cargo Traffic)...")
     result = {
-        "source": "IPA",
+        "source": "IPA / Ministry of Ports",
+        "total_traffic_mt": None,
         "container_teus": None,
-        "coking_coal_tonnes": None,
-        "thermal_coal_tonnes": None,
-        "avg_turnaround_hours": None,
-        "pdf_url": None
+        "coking_coal_mt": None,
+        "source_url": None
     }
-    # Direct PDF Archive listing to avoid slow CMS redirects
-    ipa_urls = [
-        "http://ipa.nic.in/index1.cphp?lsid=16&lev=2&lid=34&lang=1",
-        "https://shipmin.gov.in/traffic-handled-major-ports"
-    ]
     
-    for portal in ipa_urls:
-        try:
-            resp = session.get(portal, headers=COMMON_HEADERS, timeout=40, verify=False)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                pdf_link = None
-                for a in soup.find_all("a", href=True):
-                    h = a['href']
-                    t = (a.get_text() + " " + h).lower()
-                    if ".pdf" in h.lower() and ("traffic" in t or "performance" in t or "monthly" in t):
-                        pdf_link = urljoin(portal, h)
-                        break
-                
-                if pdf_link:
-                    result["pdf_url"] = pdf_link
-                    pdf_resp = session.get(pdf_link, headers=COMMON_HEADERS, timeout=40, verify=False)
-                    if pdf_resp.status_code == 200 and pdfplumber:
-                        with pdfplumber.open(io.BytesIO(pdf_resp.content)) as pdf:
-                            text = "\n".join([p.extract_text() or "" for p in pdf.pages[:6]])
-                            
-                            t_match = re.search(r'(?:TEUs|Containers?)[^\d\n]+([\d,\.]+)', text, re.IGNORECASE)
-                            if t_match:
-                                result["container_teus"] = clean_num(t_match.group(1))
-                            c_match = re.search(r'Coking\s+Coal[^\d\n]+([\d,\.]+)', text, re.IGNORECASE)
-                            if c_match:
-                                result["coking_coal_tonnes"] = clean_num(c_match.group(1))
-                            trt_match = re.search(r'(?:Turn\s*Around\s*Time|TRT)[^\d\n]+([\d,\.]+)', text, re.IGNORECASE)
-                            if trt_match:
-                                result["avg_turnaround_hours"] = clean_num(trt_match.group(1))
+    # Mirror via Ministry of Ports Press Releases on PIB
+    pib_url = "https://pib.gov.in/AllRelease.aspx"
+    try:
+        resp = session.get(pib_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            target_href = None
+            
+            for a in soup.find_all("a", href=True):
+                txt = a.get_text().strip().lower()
+                if ("major ports" in txt or "traffic handled" in txt or "cargo traffic" in txt):
+                    target_href = urljoin("https://pib.gov.in/", a['href'])
                     break
-        except Exception as e:
-            print(f"   ⚠️ IPA Endpoint {portal} timed out or unreachable: {e}")
-            continue
 
-    print(f"   ✅ IPA Extracted: Containers: {result['container_teus']} TEUs | TRT: {result['avg_turnaround_hours']} Hrs")
+            if target_href:
+                result["source_url"] = target_href
+                p_resp = session.get(target_href, headers=COMMON_HEADERS, timeout=25, verify=False)
+                t_content = p_resp.text
+                
+                tot = re.search(r'([\d\.,]+)\s*Million\s*Tonnes.*?cargo', t_content, re.IGNORECASE)
+                if tot:
+                    result["total_traffic_mt"] = clean_num(tot.group(1))
+                    
+                teu = re.search(r'([\d\.,]+)\s*(?:million)?\s*TEUs', t_content, re.IGNORECASE)
+                if teu:
+                    result["container_teus"] = clean_num(teu.group(1))
+
+        print(f"   ✅ Ports/IPA Extracted: Total Cargo: {result['total_traffic_mt']} MT | Containers: {result['container_teus']} TEUs")
+    except Exception as e:
+        print(f"   ❌ IPA Ports Error: {e}")
     return result
 
 # ============================================================
-# 5. NPCI / FASTAG (DYNAMIC TABLE & EMBEDDED METRIC EXTRACTION)
+# 5. NPCI / FASTAG (API & HIGHWAY TOLL METRICS ENGINE)
 # ============================================================
 
 def scrape_npci_fastag(session):
     print("🛣️ [5/5] Scraping NPCI / NETC FASTag Statistics...")
     result = {
-        "source": "NPCI / FASTag",
+        "source": "NPCI / NETC FASTag",
+        "month": None,
         "toll_transaction_volume_crores": None,
         "toll_collection_value_inr_crores": None,
-        "commercial_truck_proxy_movement": None
+        "commercial_truck_proxy_index": None
     }
     
-    target_urls = [
-        "https://www.npci.org.in/what-we-do/netc-fastag/product-statistics",
-        "https://www.npci.org.in/api/netc-statistics" # direct headless endpoint
-    ]
+    # NPCI Direct Static Table & API Endpoints
+    target_url = "https://www.npci.org.in/what-we-do/netc-fastag/product-statistics"
     
-    headers = dict(COMMON_HEADERS)
-    headers["Referer"] = "https://www.npci.org.in/"
-    
-    for url in target_urls:
-        try:
-            resp = session.get(url, headers=headers, timeout=25, verify=False)
-            if resp.status_code == 200:
-                # Try JSON API response first
-                try:
-                    data = resp.json()
-                    if isinstance(data, list) and len(data) > 0:
-                        latest = data[0]
-                        result["toll_transaction_volume_crores"] = clean_num(latest.get("volume") or latest.get("txn_count"))
-                        result["toll_collection_value_inr_crores"] = clean_num(latest.get("amount") or latest.get("total_value"))
-                except Exception:
-                    pass
+    try:
+        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            
+            # 1. Search all tables
+            tables = soup.find_all("table")
+            for table in tables:
+                rows = table.find_all("tr")
+                for r in rows:
+                    cols = [c.get_text().strip() for c in r.find_all(["td", "th"])]
+                    if len(cols) >= 3:
+                        c_month = cols[0]
+                        nums = [clean_num(c) for c in cols[1:] if clean_num(c) is not None]
+                        
+                        # Valid FASTag volumes are typically 25 - 45 Cr; Value is 4,000 - 7,000 Cr
+                        vol = next((n for n in nums if 20.0 <= n <= 55.0), None)
+                        val = next((n for n in nums if n >= 3000.0), None)
+                        
+                        if vol and val and not result["toll_transaction_volume_crores"]:
+                            result["month"] = c_month
+                            result["toll_transaction_volume_crores"] = vol
+                            result["toll_collection_value_inr_crores"] = val
+                            break
 
-                # HTML Parsing
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for tr in soup.find_all("tr"):
-                    tds = [td.get_text().strip() for td in tr.find_all(["td", "th"])]
-                    if len(tds) >= 3:
-                        nums = [clean_num(x) for x in tds if clean_num(x) is not None]
-                        # Transaction volumes are typically between 25-50 Crores, Values > 4,000 Crores
-                        for val in nums:
-                            if 20.0 <= val <= 60.0 and not result["toll_transaction_volume_crores"]:
-                                result["toll_transaction_volume_crores"] = val
-                            elif val > 3000.0 and not result["toll_collection_value_inr_crores"]:
-                                result["toll_collection_value_inr_crores"] = val
+            # 2. Regex fallback over page text if tables use custom div classes
+            if not result["toll_transaction_volume_crores"]:
+                all_nums = re.findall(r'([\d,\.]+)\s*(?:Cr|Crores?)', resp.text, re.IGNORECASE)
+                cleaned = [clean_num(n) for n in all_nums if clean_num(n)]
+                vol = next((n for n in cleaned if 20.0 <= n <= 55.0), None)
+                val = next((n for n in cleaned if n >= 3000.0), None)
+                if vol and val:
+                    result["toll_transaction_volume_crores"] = vol
+                    result["toll_collection_value_inr_crores"] = val
 
-                if result["toll_transaction_volume_crores"] and result["toll_collection_value_inr_crores"]:
-                    break
-        except Exception:
-            continue
+        # Calculate Freight Intensity (Value per Transaction ratio)
+        if result["toll_collection_value_inr_crores"] and result["toll_transaction_volume_crores"]:
+            result["commercial_truck_proxy_index"] = round(
+                result["toll_collection_value_inr_crores"] / result["toll_transaction_volume_crores"], 2
+            )
 
-    # Compute Commercial Freight Intensity Ratio
-    if result["toll_collection_value_inr_crores"] and result["toll_transaction_volume_crores"]:
-        result["commercial_truck_proxy_movement"] = round(
-            result["toll_collection_value_inr_crores"] / result["toll_transaction_volume_crores"], 2
-        )
-
-    print(f"   ✅ FASTag Extracted: Volume: {result['toll_transaction_volume_crores']} Cr | Value: ₹{result['toll_collection_value_inr_crores']} Cr | Proxy Ratio: {result['commercial_truck_proxy_movement']}")
+        print(f"   ✅ FASTag: Month: {result['month']} | Volume: {result['toll_transaction_volume_crores']} Cr | Value: ₹{result['toll_collection_value_inr_crores']} Cr | Proxy Index: {result['commercial_truck_proxy_index']}")
+    except Exception as e:
+        print(f"   ❌ FASTag Error: {e}")
     return result
 
 # ============================================================
@@ -380,8 +360,8 @@ def scrape_npci_fastag(session):
 
 def run_macro_telemetry_pipeline():
     print("=" * 80)
-    print("🚀 MACRO-ECONOMIC & PHYSICAL INFRASTRUCTURE TELEMETRY PIPELINE")
-    print(f"📅 Execution Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
+    print("🚀 MACRO-ECONOMIC & PHYSICAL INFRASTRUCTURE TELEMETRY ENGINE")
+    print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
     session = requests.Session(impersonate="chrome124")
@@ -413,7 +393,7 @@ def run_macro_telemetry_pipeline():
         json.dump(history, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 80)
-    print(f"💾 Master Telemetry Snapshot written successfully to: '{OUTPUT_FILE}'")
+    print(f"💾 Snapshot successfully committed to '{OUTPUT_FILE}'")
     print("=" * 80)
 
 if __name__ == "__main__":
