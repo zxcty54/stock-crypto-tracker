@@ -1,0 +1,49 @@
+name: Run Macro Quarterly Predictor
+
+on:
+  schedule:
+    # Har Friday shaam 06:30 PM IST (13:00 UTC)
+    - cron: '0 13 * * 5'
+  workflow_dispatch: # Manual test button
+
+permissions:
+  contents: write
+
+jobs:
+  predict-quarterly-earnings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Execute Macro Predictor Engine
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python macro_predictor.py
+
+      - name: Commit and Push Prediction Feed
+        run: |
+          git config --global user.name "MacroPredictorBot"
+          git config --global user.email "bot@macro-radar.internal"
+
+          [ -f macro_quarterly_predictions.json ] && git add macro_quarterly_predictions.json
+
+          if git diff --staged --quiet; then
+            echo "No changes in quarterly predictions. Skipping commit."
+          else
+            git commit -m "⚡ Update: Macro Quarterly Earnings Predictions [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
