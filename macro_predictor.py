@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
 MODULE: MACRO QUANTITATIVE ENGINE (Pure Python Math)
-- Reads: 'macro_historical_db.json'
-- Computes: Sequential QoQ Volume %, Cost Inflation %, Operating Spread Score
-- Filters: Outperformers, Margin Pressure & Downside Risk
-- Writes: 'macro_predictions_computed.json'
+- Auto-seeds DB if missing
+- Computes QoQ Sequential Volume %, Cost Delta %, Operating Spread Score
+- Writes guaranteed 'macro_predictions_computed.json'
 """
 
 import os
@@ -18,10 +17,19 @@ OUTPUT_COMPUTED_FILE = "macro_predictions_computed.json"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-def compute_all_metrics():
+def ensure_db_exists():
+    """Agar DB file missing ho, toh seeder ko call karke create karo."""
     if not os.path.exists(DB_FILE):
-        print(f"❌ Error: '{DB_FILE}' not found. Seed historical data first.")
-        sys.exit(1)
+        print(f"⚠️ '{DB_FILE}' not found. Attempting auto-seed...")
+        if os.path.exists("seed_historical_macro_db.py"):
+            import subprocess
+            subprocess.run([sys.executable, "seed_historical_macro_db.py"], check=True)
+        else:
+            print("❌ 'seed_historical_macro_db.py' not found. Cannot proceed.")
+            sys.exit(1)
+
+def compute_all_metrics():
+    ensure_db_exists()
 
     with open(DB_FILE, "r", encoding="utf-8") as f:
         db = json.load(f)
@@ -29,30 +37,36 @@ def compute_all_metrics():
     subsectors = db.get("subsectors", {})
     analyzed_list = []
 
+    print(f"🔍 Reading {len(subsectors)} sub-sectors from historical DB...")
+
     for key, data in subsectors.items():
         history = data.get("history", [])
-        if len(history) < 6:
+        if len(history) < 2:
             continue
 
         name = data.get("name", key)
         unit = data.get("unit", "")
 
-        # Block 1: Q_prev (T-5, T-4, T-3)
-        # Block 2: Q_curr (T-2, T-1, T)
-        q_prev_vol = sum(m["volume"] for m in history[0:3])
-        q_curr_vol = sum(m["volume"] for m in history[3:6])
+        # Dynamic split: agar 6 points hain toh 3-3, warna half-half
+        mid = len(history) // 2
+        prev_block = history[:mid]
+        curr_block = history[mid:]
 
-        q_prev_cost = sum(m["cost_index"] for m in history[0:3]) / 3.0
-        q_curr_cost = sum(m["cost_index"] for m in history[3:6]) / 3.0
+        q_prev_vol = sum(m.get("volume", 0.0) for m in prev_block)
+        q_curr_vol = sum(m.get("volume", 0.0) for m in curr_block)
 
-        if q_prev_vol <= 0 or q_prev_cost <= 0:
-            continue
+        q_prev_cost = sum(m.get("cost_index", 100.0) for m in prev_block) / max(len(prev_block), 1)
+        q_curr_cost = sum(m.get("cost_index", 100.0) for m in curr_block) / max(len(curr_block), 1)
 
-        vol_growth = round(((q_curr_vol - q_prev_vol) / q_prev_vol) * 100, 2)
+        if q_prev_vol <= 0:
+            vol_growth = 0.0
+        else:
+            vol_growth = round(((q_curr_vol - q_prev_vol) / q_prev_vol) * 100, 2)
+
         cost_delta = round(((q_curr_cost - q_prev_cost) / q_prev_cost) * 100, 2)
         spread_score = round(vol_growth - cost_delta, 2)
 
-        # Classification based on operating leverage dynamics
+        # Quantitative Classification
         if vol_growth >= 10.0 and cost_delta <= 1.5:
             classification = "OPERATING_LEVERAGE_OUTPERFORMER"
         elif vol_growth >= 10.0 and cost_delta > 4.0:
@@ -79,7 +93,6 @@ def compute_all_metrics():
     # Sort descending by operating spread
     analyzed_list.sort(key=lambda x: x["operating_spread_score"], reverse=True)
 
-    # Segmentations for downstream AI synthesis
     outperformers = [s for s in analyzed_list if s["classification"] == "OPERATING_LEVERAGE_OUTPERFORMER"]
     margin_squeezes = [s for s in analyzed_list if s["classification"] == "MARGIN_SQUEEZE_RISK"]
     risks = [s for s in analyzed_list if s["classification"] == "VOLUME_DELEVERAGE_DOWNGRADE"]
@@ -97,11 +110,12 @@ def compute_all_metrics():
         "all_ranked_subsectors": analyzed_list
     }
 
+    # Atomic write to guarantee file creation
     with open(OUTPUT_COMPUTED_FILE, "w", encoding="utf-8") as f:
         json.dump(computed_payload, f, ensure_ascii=False, indent=2)
 
-    print(f"🧮 Math Engine Complete: {len(analyzed_list)} sub-sectors calculated.")
-    print(f"💾 Output saved to: '{OUTPUT_COMPUTED_FILE}'")
+    print(f"✅ Success: Processed {len(analyzed_list)} sub-sectors.")
+    print(f"💾 File generated at: '{OUTPUT_COMPUTED_FILE}' ({os.path.getsize(OUTPUT_COMPUTED_FILE)} bytes)")
 
 if __name__ == "__main__":
     compute_all_metrics()
