@@ -227,4 +227,176 @@ def scrape_railways_freight(session):
             # 3. Cement & Clinker
             m_cem = re.search(r'([\d\.,]+)\s*MT\s*of\s*Cement', txt, re.IGNORECASE)
             if not m_cem:
-                m_cem = re.search(r'Cement\s*(?:&|\+)?
+                m_cem = re.search(r'Cement\s*(?:&|\+)?\s*Clinker[^\d\n]+([\d\.,]+)\s*MT', txt, re.IGNORECASE)
+            if m_cem:
+                result["cement_clinker_mt"] = clean_num(m_cem.group(1))
+
+            # 4. Iron Ore
+            m_iron = re.search(r'([\d\.,]+)\s*MT\s*of\s*Iron\s*Ore', txt, re.IGNORECASE)
+            if not m_iron:
+                m_iron = re.search(r'Iron\s*Ore[^\d\n]+([\d\.,]+)\s*MT', txt, re.IGNORECASE)
+            if m_iron:
+                result["iron_ore_mt"] = clean_num(m_iron.group(1))
+
+        print(f"   ✅ Railways: Total: {result['originating_freight_mt']} MT | Revenue: ₹{result['freight_revenue_cr']} Cr | Cement: {result['cement_clinker_mt']} MT | Iron Ore: {result['iron_ore_mt']} MT")
+    except Exception as e:
+        print(f"   ❌ Railways Error: {e}")
+
+    return result
+
+# ============================================================
+# 4. IPA — MARITIME EXIM & PORTS TRAFFIC
+# ============================================================
+
+def scrape_ipa_ports(session):
+    print("⚓ [4/5] Scraping Indian Ports Association (Cargo Traffic)...")
+    result = {
+        "source": "IPA",
+        "cargo_traffic_mt": None,
+        "container_teus": None,
+        "coking_coal_mt": None,
+        "url": None
+    }
+
+    pib_url = "https://pib.gov.in/AllRelease.aspx"
+    target_link = None
+    try:
+        resp = session.get(pib_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for a in soup.find_all("a", href=True):
+                txt = a.get_text().strip().lower()
+                if "major ports" in txt and ("traffic" in txt or "cargo" in txt or "handled" in txt):
+                    target_link = urljoin("https://pib.gov.in/", a['href'])
+                    break
+
+        if target_link:
+            result["url"] = target_link
+            rel_resp = session.get(target_link, headers=COMMON_HEADERS, timeout=25, verify=False)
+            txt = rel_resp.text
+
+            # 1. Total Cargo Handled
+            m_cargo = re.search(r'([\d\.,]+)\s*(?:Million\s*Tonnes|MT).*?(?:cargo|traffic)', txt, re.IGNORECASE)
+            if m_cargo:
+                result["cargo_traffic_mt"] = clean_num(m_cargo.group(1))
+
+            # 2. Containers (TEUs)
+            m_teu = re.search(r'([\d\.,]+)\s*(?:million|lakh)?\s*TEUs', txt, re.IGNORECASE)
+            if m_teu:
+                result["container_teus"] = clean_num(m_teu.group(1))
+
+            # 3. Coking Coal
+            m_coal = re.search(r'([\d\.,]+)\s*MT\s*of\s*Coking\s*Coal', txt, re.IGNORECASE)
+            if m_coal:
+                result["coking_coal_mt"] = clean_num(m_coal.group(1))
+
+        print(f"   ✅ Ports: Cargo Traffic: {result['cargo_traffic_mt']} MT | Containers: {result['container_teus']} TEUs")
+    except Exception as e:
+        print(f"   ❌ Ports Error: {e}")
+
+    return result
+
+# ============================================================
+# 5. FASTAG — HIGHWAY TOLL METRICS (VERIFIED)
+# ============================================================
+
+def scrape_npci_fastag(session):
+    print("🛣️ [5/5] Scraping NPCI / NETC FASTag Statistics...")
+    result = {
+        "source": "NETC FASTag",
+        "toll_volume_crores": None,
+        "toll_value_inr_crores": None,
+        "freight_intensity_ratio": None
+    }
+
+    endpoints = [
+        "https://www.npci.org.in/what-we-do/netc-fastag/product-statistics",
+        "https://ihmcl.co.in/fastag-statistics/"
+    ]
+
+    for url in endpoints:
+        try:
+            resp = session.get(url, headers=COMMON_HEADERS, timeout=20, verify=False)
+            if resp.status_code == 200 and len(resp.text) > 500:
+                soup = BeautifulSoup(resp.text, "html.parser")
+                for row in soup.find_all("tr"):
+                    cells = [c.get_text().strip() for c in row.find_all(["td", "th"])]
+                    nums = [clean_num(c) for c in cells if clean_num(c) is not None]
+
+                    v_vol = next((n for n in nums if 15.0 <= n <= 55.0), None)
+                    v_val = next((n for n in nums if 3000.0 <= n <= 10000.0), None)
+
+                    if v_vol and not result["toll_volume_crores"]:
+                        result["toll_volume_crores"] = v_vol
+                    if v_val and not result["toll_value_inr_crores"]:
+                        result["toll_value_inr_crores"] = v_val
+
+                    if result["toll_volume_crores"] and result["toll_value_inr_crores"]:
+                        break
+
+                if not result["toll_volume_crores"]:
+                    all_nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', resp.text) if clean_num(n)]
+                    v_vol = next((n for n in all_nums if 15.0 <= n <= 55.0), None)
+                    v_val = next((n for n in all_nums if 3000.0 <= n <= 10000.0), None)
+                    if v_vol:
+                        result["toll_volume_crores"] = v_vol
+                    if v_val:
+                        result["toll_value_inr_crores"] = v_val
+
+            if result["toll_volume_crores"] and result["toll_value_inr_crores"]:
+                break
+        except Exception:
+            continue
+
+    if result["toll_value_inr_crores"] and result["toll_volume_crores"]:
+        result["freight_intensity_ratio"] = round(
+            result["toll_value_inr_crores"] / result["toll_volume_crores"], 2
+        )
+
+    print(f"   ✅ FASTag: Volume: {result['toll_volume_crores']} Cr | Value: ₹{result['toll_value_inr_crores']} Cr | Freight Ratio: {result['freight_intensity_ratio']}")
+    return result
+
+# ============================================================
+# MASTER ORCHESTRATOR
+# ============================================================
+
+def run_macro_telemetry_pipeline():
+    print("=" * 80)
+    print("🚀 MACRO-ECONOMIC & PHYSICAL INFRASTRUCTURE TELEMETRY ENGINE")
+    print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
+    print("=" * 80)
+
+    session = requests.Session(impersonate="chrome124")
+
+    telemetry_payload = {
+        "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+        "metrics": {
+            "dpiit_eight_core": scrape_dpiit_core_industries(session),
+            "ppac_petroleum": scrape_ppac_consumption(session),
+            "railways_freight": scrape_railways_freight(session),
+            "ipa_ports": scrape_ipa_ports(session),
+            "fastag_road_logistics": scrape_npci_fastag(session)
+        }
+    }
+
+    history = []
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+                loaded = json.load(f)
+                history = loaded if isinstance(loaded, list) else [loaded]
+        except Exception:
+            history = []
+
+    history.insert(0, telemetry_payload)
+    history = history[:60]
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+    print("\n" + "=" * 80)
+    print(f"💾 Snapshot successfully committed to '{OUTPUT_FILE}'")
+    print("=" * 80)
+
+if __name__ == "__main__":
+    run_macro_telemetry_pipeline()
