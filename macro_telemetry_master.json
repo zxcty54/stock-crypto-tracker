@@ -1,5 +1,51 @@
 [
   {
+    "timestamp": "2026-10-08 20:04:14 IST",
+    "metrics": {
+      "dpiit_eight_core": {
+        "source": "DPIIT / PIB",
+        "cement_production_mt": null,
+        "steel_production_mt": null,
+        "cement_growth_pct": null,
+        "steel_growth_pct": null,
+        "overall_core_growth_pct": null,
+        "release_title": null,
+        "release_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=INDEX_CORE"
+      },
+      "ppac_petroleum": {
+        "source": "PPAC",
+        "hsd_diesel_tmt": null,
+        "bitumen_tmt": null,
+        "petcoke_tmt": null,
+        "report_period": null,
+        "pdf_url": "https://ppac.gov.in/download.php?file=menu/1790073184_ICR_August_26.pdf"
+      },
+      "railways_freight": {
+        "source": "Ministry of Railways / PIB",
+        "originating_freight_mt": null,
+        "freight_revenue_cr": null,
+        "cement_clinker_mt": null,
+        "iron_ore_mt": null,
+        "report_title": null,
+        "source_url": null
+      },
+      "ipa_ports": {
+        "source": "IPA / Ministry of Ports",
+        "total_traffic_mt": null,
+        "container_teus": null,
+        "coking_coal_mt": null,
+        "source_url": null
+      },
+      "fastag_road_logistics": {
+        "source": "NPCI / NETC FASTag",
+        "month": null,
+        "toll_transaction_volume_crores": null,
+        "toll_collection_value_inr_crores": null,
+        "commercial_truck_proxy_index": null
+      }
+    }
+  },
+  {
     "timestamp": "2026-10-08 20:00:29 IST",
     "metrics": {
       "dpiit_eight_core": {
