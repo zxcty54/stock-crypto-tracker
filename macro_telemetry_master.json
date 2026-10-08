@@ -1,5 +1,53 @@
 [
   {
+    "timestamp": "2026-10-08 20:31:05 IST",
+    "data_period": "2026-10",
+    "synthetic_data": false,
+    "metrics": {
+      "dpiit_eight_core": {
+        "source": "DPIIT / Office of Economic Adviser",
+        "cement_growth_pct": null,
+        "steel_growth_pct": null,
+        "overall_core_growth_pct": null,
+        "cement_production_mt": null,
+        "steel_production_mt": null,
+        "source_url": "https://eaindustry.nic.in/press_release/press_release_202608.pdf",
+        "status": "NOT_FOUND"
+      },
+      "ppac_petroleum": {
+        "source": "PPAC",
+        "hsd_diesel_tmt": null,
+        "bitumen_tmt": null,
+        "petcoke_tmt": null,
+        "source_url": "https://ppac.gov.in/consumption",
+        "status": "NOT_FOUND"
+      },
+      "railways_freight": {
+        "source": "Indian Railways",
+        "originating_freight_mt": null,
+        "freight_revenue_cr": null,
+        "cement_clinker_mt": null,
+        "iron_ore_mt": null,
+        "source_url": "https://pib.gov.in/",
+        "status": "NOT_FOUND"
+      },
+      "ports": {
+        "source": "Indian Ports Association / Ministry of Ports",
+        "cargo_traffic_mt": null,
+        "container_teus": null,
+        "source_url": "https://pib.gov.in/",
+        "status": "NOT_FOUND"
+      },
+      "fastag": {
+        "source": "NPCI / NETC FASTag",
+        "toll_volume_crore": null,
+        "toll_value_crore": null,
+        "source_url": "https://www.npci.org.in/what-we-do/netc-fastag",
+        "status": "NOT_FOUND"
+      }
+    }
+  },
+  {
     "timestamp": "2026-10-08 20:12:06 IST",
     "metrics": {
       "dpiit_eight_core": {
