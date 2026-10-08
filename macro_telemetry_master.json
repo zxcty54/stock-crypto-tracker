@@ -1,0 +1,43 @@
+[
+  {
+    "timestamp": "2026-10-08 20:00:29 IST",
+    "metrics": {
+      "dpiit_eight_core": {
+        "source": "DPIIT",
+        "cement_production_mt": null,
+        "steel_production_mt": null,
+        "cement_index": null,
+        "steel_index": null,
+        "pdf_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf"
+      },
+      "ppac_petroleum": {
+        "source": "PPAC",
+        "hsd_diesel_tmt": null,
+        "bitumen_tmt": null,
+        "petcoke_tmt": null,
+        "source_doc_url": "https://ppac.gov.in/download.php?file=menu/1790073184_ICR_August_26.pdf"
+      },
+      "railways_freight": {
+        "source": "Indian Railways",
+        "cement_clinker_mt": null,
+        "iron_ore_steel_mt": null,
+        "rakes_loaded_per_day": null,
+        "pdf_url": null
+      },
+      "ipa_ports": {
+        "source": "IPA",
+        "container_teus": null,
+        "coking_coal_tonnes": null,
+        "thermal_coal_tonnes": null,
+        "avg_turnaround_hours": null,
+        "pdf_url": null
+      },
+      "fastag_road_logistics": {
+        "source": "NPCI / FASTag",
+        "toll_transaction_volume_crores": null,
+        "toll_collection_value_inr_crores": null,
+        "commercial_truck_proxy_movement": null
+      }
+    }
+  }
+]
