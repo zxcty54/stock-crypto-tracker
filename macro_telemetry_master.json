@@ -1,5 +1,46 @@
 [
   {
+    "timestamp": "2026-10-08 20:12:06 IST",
+    "metrics": {
+      "dpiit_eight_core": {
+        "source": "DPIIT",
+        "cement_growth_pct": null,
+        "steel_growth_pct": null,
+        "overall_core_growth_pct": null,
+        "cement_production_mt": null,
+        "steel_production_mt": null,
+        "release_url": null
+      },
+      "ppac_petroleum": {
+        "source": "PPAC",
+        "hsd_diesel_tmt": null,
+        "bitumen_tmt": 2026.0,
+        "petcoke_tmt": null,
+        "pdf_url": "https://ppac.gov.in/download.php?file=menu/1790073184_ICR_August_26.pdf"
+      },
+      "railways_freight": {
+        "source": "Indian Railways",
+        "originating_freight_mt": null,
+        "freight_revenue_cr": null,
+        "cement_clinker_mt": null,
+        "iron_ore_mt": null,
+        "url": null
+      },
+      "ipa_ports": {
+        "source": "IPA",
+        "cargo_traffic_mt": null,
+        "container_teus": null,
+        "url": null
+      },
+      "fastag_road_logistics": {
+        "source": "NETC FASTag",
+        "toll_volume_crores": 23.0,
+        "toll_value_inr_crores": 3339.0,
+        "freight_intensity_ratio": 145.17
+      }
+    }
+  },
+  {
     "timestamp": "2026-10-08 20:09:53 IST",
     "metrics": {
       "dpiit_eight_core": {
