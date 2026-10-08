@@ -35,7 +35,7 @@ jobs:
 
       - name: Run macro scraper
         run: |
-          python macro_telemetry_scraper.py
+          python macro_economic_telemetry_scraper.py
 
       - name: Verify output
         run: |
