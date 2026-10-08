@@ -4,7 +4,7 @@ on:
   schedule:
     # Har Friday shaam 06:30 PM IST (13:00 UTC)
     - cron: '0 13 * * 5'
-  workflow_dispatch: # Manual test button
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -38,12 +38,12 @@ jobs:
           git config --global user.name "MacroPredictorBot"
           git config --global user.email "bot@macro-radar.internal"
 
-          [ -f macro_quarterly_predictions.json ] && git add macro_quarterly_predictions.json
+          [ -f macro_predictions_computed.json ] && git add macro_predictions_computed.json
 
           if git diff --staged --quiet; then
-            echo "No changes in quarterly predictions. Skipping commit."
+            echo "No changes in predictions. Skipping commit."
           else
-            git commit -m "⚡ Update: Macro Quarterly Earnings Predictions [skip ci]"
+            git commit -m "⚡ Update: Macro Predictions Computed [skip ci]"
             git pull --rebase origin main
             git push origin main
           fi
