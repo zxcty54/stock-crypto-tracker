@@ -1,12 +1,292 @@
 {
   "version": "7.0-live-official",
-  "generated_at": "2026-10-08 17:19:55 IST",
+  "generated_at": "2026-10-08 17:48:33 IST",
   "data_type": "RAW_OFFICIAL_SOURCE_DATA",
   "synthetic_data": false,
   "sectors": {
     "CEMENT": {
       "sector": "Cement & Clinker",
       "monthly_demand": [
+        {
+          "month": "2023-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "value": 2.5,
+          "unit": "million tonnes",
+          "source_url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Metadata_20260722.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "value": 8.0,
+          "unit": "million tonnes",
+          "source_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
         {
           "month": "2026-10",
           "value": 4.41,
@@ -19,27 +299,355 @@
             }
           ],
           "yoy_pct": null,
-          "mom_pct": null
+          "mom_pct": -44.88
         }
       ],
       "input_costs": [],
-      "supporting_indicators": [],
+      "supporting_indicators": [
+        {
+          "month": "2023-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "source_documents": [
+        {
+          "sector": "CEMENT",
+          "month": "2026-07",
+          "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Metadata_20260722.pdf",
+          "title": "DPIIT/OEA Eight Core Industries",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "CEMENT",
+          "month": "2026-09",
+          "url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "title": "DPIIT/OEA Eight Core Industries",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
         {
           "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
           "retrieved_at": "2026-10-08 17:19:22 IST",
           "status": "SUCCESS"
-        },
-        {
-          "source_name": "DPIIT / Office of Economic Adviser",
-          "source_url": "https://eaindustry.nic.in",
-          "document_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
-          "document_title": "Press Release",
-          "status": "SUCCESS",
-          "scraped_at": "2026-10-08 17:38:54 IST",
-          "sha256": "8e786a20f97cb809961923e72ef2d6f6a0730bb900580f9bb402115639b483da",
-          "bytes": 389562,
-          "text_length": 7755
         },
         {
           "source_name": "DPIIT / Office of Economic Adviser",
@@ -69,15 +677,304 @@
         "yoy_pct": null,
         "trailing_3m_yoy_pct": null,
         "trailing_6m_yoy_pct": null
+      },
+      "data_quality": {
+        "months_requested": 36,
+        "months_with_demand": 3,
+        "months_with_cost": 0,
+        "months_with_supporting": 0,
+        "coverage_demand_pct": 8.33,
+        "coverage_cost_pct": 0.0,
+        "coverage_supporting_pct": 0.0
       }
     },
     "STEEL": {
       "sector": "Primary Steel Manufacturing",
       "monthly_demand": [
         {
+          "month": "2023-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "value": 2.5,
+          "unit": "million tonnes",
+          "source_url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Metadata_20260722.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "value": null,
+          "unit": "million tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "value": 8.0,
+          "unit": "million tonnes",
+          "source_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
           "month": "2026-10",
           "value": 70.0,
-          "unit": "million tonnes (crude)",
+          "unit": "million tonnes",
           "source_document": [
             {
               "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
@@ -86,27 +983,355 @@
             }
           ],
           "yoy_pct": null,
-          "mom_pct": null
+          "mom_pct": 775.0
         }
       ],
       "input_costs": [],
-      "supporting_indicators": [],
+      "supporting_indicators": [
+        {
+          "month": "2023-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "source_documents": [
+        {
+          "sector": "STEEL",
+          "month": "2026-07",
+          "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Metadata_20260722.pdf",
+          "title": "DPIIT/OEA Eight Core Industries",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "STEEL",
+          "month": "2026-09",
+          "url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "title": "DPIIT/OEA Eight Core Industries",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
         {
           "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
           "retrieved_at": "2026-10-08 17:19:22 IST",
           "status": "SUCCESS"
-        },
-        {
-          "source_name": "DPIIT / Office of Economic Adviser",
-          "source_url": "https://eaindustry.nic.in",
-          "document_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
-          "document_title": "Press Release",
-          "status": "SUCCESS",
-          "scraped_at": "2026-10-08 17:38:54 IST",
-          "sha256": "8e786a20f97cb809961923e72ef2d6f6a0730bb900580f9bb402115639b483da",
-          "bytes": 389562,
-          "text_length": 7755
         },
         {
           "source_name": "DPIIT / Office of Economic Adviser",
@@ -136,14 +1361,833 @@
         "yoy_pct": null,
         "trailing_3m_yoy_pct": null,
         "trailing_6m_yoy_pct": null
+      },
+      "data_quality": {
+        "months_requested": 36,
+        "months_with_demand": 3,
+        "months_with_cost": 0,
+        "months_with_supporting": 0,
+        "coverage_demand_pct": 8.33,
+        "coverage_cost_pct": 0.0,
+        "coverage_supporting_pct": 0.0
       }
     },
     "ROAD_EPC": {
       "sector": "Road EPC & Construction",
-      "monthly_demand": [],
+      "monthly_demand": [
+        {
+          "month": "2023-11",
+          "value": 2023.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1702557853_ICR_November_2023.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "value": 461.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1706525497_Final_202312_Monthly_Report_WebVersion.pdf",
+          "mom_pct": -77.21,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "value": 455.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1710312970_Final_202401_Monthly_Report_WebVersion.pdf",
+          "mom_pct": -1.3,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "value": 523.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782792955_Final_202403_Monthly Report_WebVersion.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "value": 541.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1717735612_Final_202404_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 3.44,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1718714843_Industry_Consumption_Report_May_2024.pdf",
+          "mom_pct": 274.12,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1721287609_Final_ICR_June_2024.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1723815267_ICR_July_2024_16082024_Final.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "value": 208.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1726805793_Final_202408_Monthly Report.pdf",
+          "mom_pct": -89.72,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "value": 210.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1729772476_Final_202409_Monthly Report_WebVersion.pdf",
+          "mom_pct": 0.96,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "value": 298.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1732258840_Final_202410_Monthly Report_WebVersion.pdf",
+          "mom_pct": 41.9,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "value": 411.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1734952730_Final_202411_Monthly Report_WebVersion.pdf",
+          "mom_pct": 37.92,
+          "yoy_pct": -79.68
+        },
+        {
+          "month": "2024-12",
+          "value": 571.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1737624003_Final_202412_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 38.93,
+          "yoy_pct": 23.86
+        },
+        {
+          "month": "2025-01",
+          "value": 505.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1740379072_Final_202501_Monthly Report_WebVersion.pdf",
+          "mom_pct": -11.56,
+          "yoy_pct": 10.99
+        },
+        {
+          "month": "2025-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "value": 673.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1746012017_Final_202503_Monthly_Report_WebVersion.pdf",
+          "mom_pct": null,
+          "yoy_pct": 28.68
+        },
+        {
+          "month": "2025-04",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782125537_ICR_April_2025.pdf",
+          "mom_pct": 200.89,
+          "yoy_pct": 274.31
+        },
+        {
+          "month": "2025-05",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782125074_ICR_May_2025.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-06",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782124913_ICR_Jun_2025_1.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-07",
+          "value": 270.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1756098471_Final_202507_Monthly_Report_WebVersion.pdf",
+          "mom_pct": -86.67,
+          "yoy_pct": -86.66
+        },
+        {
+          "month": "2025-08",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782124733_ICR_Aug_2025.pdf",
+          "mom_pct": 650.0,
+          "yoy_pct": 873.56
+        },
+        {
+          "month": "2025-09",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123979_ICR_SEP_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 864.29
+        },
+        {
+          "month": "2025-10",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123844_ICR_OCT_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 579.53
+        },
+        {
+          "month": "2025-11",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123678_ICR_Nov_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 392.7
+        },
+        {
+          "month": "2025-12",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1781873364_ICR_Jan 26.pdf",
+          "mom_pct": null,
+          "yoy_pct": 301.19
+        },
+        {
+          "month": "2026-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1781864994_ICR_April_2026.pdf",
+          "mom_pct": null,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-05",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1784291336_ICR_May 26.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-06",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1787315556_ICR_June 26.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-07",
+          "value": 262.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1787316620_Monthly_Report_WebVersion.pdf",
+          "mom_pct": -87.07,
+          "yoy_pct": -2.96
+        },
+        {
+          "month": "2026-08",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "input_costs": [],
-      "supporting_indicators": [],
+      "supporting_indicators": [
+        {
+          "month": "2023-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "source_documents": [
+        {
+          "sector": "ROAD_EPC",
+          "month": "2023-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1702557853_ICR_November_2023.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2023-12",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1706525497_Final_202312_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1710312970_Final_202401_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-03",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782792955_Final_202403_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1717735612_Final_202404_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1718714843_Industry_Consumption_Report_May_2024.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1721287609_Final_ICR_June_2024.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1723815267_ICR_July_2024_16082024_Final.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-08",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1726805793_Final_202408_Monthly Report.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-09",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1729772476_Final_202409_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-10",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1732258840_Final_202410_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1734952730_Final_202411_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2024-12",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1737624003_Final_202412_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1740379072_Final_202501_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-03",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1746012017_Final_202503_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782125537_ICR_April_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782125074_ICR_May_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782124913_ICR_Jun_2025_1.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1756098471_Final_202507_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-08",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782124733_ICR_Aug_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-09",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123979_ICR_SEP_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-10",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123844_ICR_OCT_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2025-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123678_ICR_Nov_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2026-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1781873364_ICR_Jan 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2026-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1781864994_ICR_April_2026.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2026-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1784291336_ICR_May 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2026-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1787315556_ICR_June 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "ROAD_EPC",
+          "month": "2026-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1787316620_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
         {
           "url": "https://ppac.gov.in",
           "retrieved_at": "2026-10-08 17:19:25 IST",
@@ -168,15 +2212,304 @@
         "primary": "Petroleum Planning & Analysis Cell",
         "source_url": "https://ppac.gov.in",
         "last_scraped": "2026-10-08 17:40:27 IST"
+      },
+      "data_quality": {
+        "months_requested": 36,
+        "months_with_demand": 28,
+        "months_with_cost": 0,
+        "months_with_supporting": 0,
+        "coverage_demand_pct": 77.78,
+        "coverage_cost_pct": 0.0,
+        "coverage_supporting_pct": 0.0
       }
     },
     "LOGISTICS": {
       "sector": "Heavy Commercial Fleet Logistics",
       "monthly_demand": [
         {
+          "month": "2023-11",
+          "value": 7763.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1702557853_ICR_November_2023.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "value": 2023.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1706525497_Final_202312_Monthly_Report_WebVersion.pdf",
+          "mom_pct": -73.94,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1710312970_Final_202401_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 0.05,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782792955_Final_202403_Monthly Report_WebVersion.pdf",
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1717735612_Final_202404_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "value": 8217.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1718714843_Industry_Consumption_Report_May_2024.pdf",
+          "mom_pct": 305.98,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "value": 7906.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1721287609_Final_ICR_June_2024.pdf",
+          "mom_pct": -3.78,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1723815267_ICR_July_2024_16082024_Final.pdf",
+          "mom_pct": -74.4,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1726805793_Final_202408_Monthly Report.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "value": 8956.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1729772476_Final_202409_Monthly Report_WebVersion.pdf",
+          "mom_pct": 342.49,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1732258840_Final_202410_Monthly Report_WebVersion.pdf",
+          "mom_pct": -77.4,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1734952730_Final_202411_Monthly Report_WebVersion.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": -73.93
+        },
+        {
+          "month": "2024-12",
+          "value": 2024.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1737624003_Final_202412_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-01",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1740379072_Final_202501_Monthly Report_WebVersion.pdf",
+          "mom_pct": 0.05,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1746012017_Final_202503_Monthly_Report_WebVersion.pdf",
+          "mom_pct": null,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-04",
+          "value": 2021.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782125537_ICR_April_2025.pdf",
+          "mom_pct": -0.2,
+          "yoy_pct": -0.15
+        },
+        {
+          "month": "2025-05",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782125074_ICR_May_2025.pdf",
+          "mom_pct": 0.2,
+          "yoy_pct": -75.36
+        },
+        {
+          "month": "2025-06",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782124913_ICR_Jun_2025_1.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": -74.39
+        },
+        {
+          "month": "2025-07",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1756098471_Final_202507_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-08",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782124733_ICR_Aug_2025.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-09",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123979_ICR_SEP_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": -77.39
+        },
+        {
+          "month": "2025-10",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123844_ICR_OCT_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-11",
+          "value": 2025.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1782123678_ICR_Nov_25.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2025-12",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1781873364_ICR_Jan 26.pdf",
+          "mom_pct": null,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-02",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1781864994_ICR_April_2026.pdf",
+          "mom_pct": null,
+          "yoy_pct": 0.25
+        },
+        {
+          "month": "2026-05",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1784291336_ICR_May 26.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-06",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1787315556_ICR_June 26.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-07",
+          "value": 2026.0,
+          "unit": "thousand metric tonnes",
+          "source_url": "https://ppac.gov.in/download.php?file=rep_studies/1787316620_Monthly_Report_WebVersion.pdf",
+          "mom_pct": 0.0,
+          "yoy_pct": 0.05
+        },
+        {
+          "month": "2026-08",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "value": null,
+          "unit": "thousand metric tonnes",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
           "month": "2026-10",
           "value": 4.85,
-          "unit": "thousand MT (HSD)",
+          "unit": "thousand metric tonnes",
           "source_document": [
             {
               "url": "https://ppac.gov.in",
@@ -184,13 +2517,534 @@
               "status": "SUCCESS"
             }
           ],
-          "yoy_pct": null,
+          "yoy_pct": -99.76,
           "mom_pct": null
         }
       ],
       "input_costs": [],
-      "supporting_indicators": [],
+      "supporting_indicators": [
+        {
+          "month": "2023-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "source_documents": [
+        {
+          "sector": "LOGISTICS",
+          "month": "2023-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1702557853_ICR_November_2023.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2023-12",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1706525497_Final_202312_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1710312970_Final_202401_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-03",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782792955_Final_202403_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1717735612_Final_202404_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1718714843_Industry_Consumption_Report_May_2024.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1721287609_Final_ICR_June_2024.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1723815267_ICR_July_2024_16082024_Final.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-08",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1726805793_Final_202408_Monthly Report.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-09",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1729772476_Final_202409_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-10",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1732258840_Final_202410_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1734952730_Final_202411_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2024-12",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1737624003_Final_202412_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1740379072_Final_202501_Monthly Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-03",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1746012017_Final_202503_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782125537_ICR_April_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782125074_ICR_May_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782124913_ICR_Jun_2025_1.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1756098471_Final_202507_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-08",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782124733_ICR_Aug_2025.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-09",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123979_ICR_SEP_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-10",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123844_ICR_OCT_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2025-11",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1782123678_ICR_Nov_25.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2026-01",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1781873364_ICR_Jan 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2026-04",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1781864994_ICR_April_2026.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2026-05",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1784291336_ICR_May 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2026-06",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1787315556_ICR_June 26.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
+        {
+          "sector": "LOGISTICS",
+          "month": "2026-07",
+          "url": "https://ppac.gov.in/download.php?file=rep_studies/1787316620_Monthly_Report_WebVersion.pdf",
+          "title": "PPAC Petroleum Products / Consumption Report",
+          "captured_at": "2026-10-08 17:48:33 IST"
+        },
         {
           "url": "https://ppac.gov.in",
           "retrieved_at": "2026-10-08 17:19:25 IST",
@@ -224,11 +3078,300 @@
         "yoy_pct": null,
         "trailing_3m_yoy_pct": null,
         "trailing_6m_yoy_pct": null
+      },
+      "data_quality": {
+        "months_requested": 36,
+        "months_with_demand": 29,
+        "months_with_cost": 0,
+        "months_with_supporting": 0,
+        "coverage_demand_pct": 80.56,
+        "coverage_cost_pct": 0.0,
+        "coverage_supporting_pct": 0.0
       }
     },
     "PORT_EXIM": {
       "sector": "Maritime Ports & Container EXIM",
       "monthly_demand": [
+        {
+          "month": "2023-11",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "value": null,
+          "unit": "million TEUs",
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
         {
           "month": "2026-10",
           "value": 1.266,
@@ -238,28 +3381,333 @@
         }
       ],
       "input_costs": [],
-      "supporting_indicators": [],
+      "supporting_indicators": [
+        {
+          "month": "2023-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2023-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2024-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-11",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2025-12",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-01",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-02",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-03",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-04",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-05",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-06",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-07",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-08",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-09",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        },
+        {
+          "month": "2026-10",
+          "indicator": null,
+          "value": null,
+          "unit": null,
+          "source_url": null,
+          "mom_pct": null,
+          "yoy_pct": null
+        }
+      ],
       "source_documents": [
-        {
-          "source_name": "Indian Ports Association",
-          "source_url": "https://ipa.nic.in",
-          "document_url": null,
-          "document_title": null,
-          "status": "CONNECTION_FAILED",
-          "scraped_at": "2026-10-08 17:40:08 IST",
-          "error": "IPA homepage unavailable"
-        },
-        {
-          "source_name": "Ministry of Ports, Shipping & Waterways Transport Research Wing",
-          "source_url": "https://www.shipmin.gov.in",
-          "document_url": "https://www.shipmin.gov.in/sites/default/files/Non-Major%20Cargo%20report%20August%202026_0.pdf",
-          "document_title": "Download(961.7 KB)",
-          "status": "SUCCESS",
-          "scraped_at": "2026-10-08 17:40:20 IST",
-          "sha256": "83bffa785c90ab2eafaf32cf080eab96b3cc655dd5cb551cc9c97088c7ae834d",
-          "bytes": 984778,
-          "text_length": 10621
-        },
         {
           "source_name": "Ministry of Ports, Shipping & Waterways Transport Research Wing",
           "source_url": "https://www.shipmin.gov.in",
@@ -288,6 +3736,15 @@
         "yoy_pct": null,
         "trailing_3m_yoy_pct": null,
         "trailing_6m_yoy_pct": null
+      },
+      "data_quality": {
+        "months_requested": 36,
+        "months_with_demand": 1,
+        "months_with_cost": 0,
+        "months_with_supporting": 0,
+        "coverage_demand_pct": 2.78,
+        "coverage_cost_pct": 0.0,
+        "coverage_supporting_pct": 0.0
       }
     }
   },
@@ -308,5 +3765,15 @@
       }
     }
   },
-  "updated_at": "2026-10-08 17:40:27 IST"
+  "updated_at": "2026-10-08 17:40:27 IST",
+  "period_start": "2023-11",
+  "period_end": "2026-10",
+  "requested_month_count": 36,
+  "methodology": {
+    "synthetic_data": false,
+    "missing_values": "null",
+    "growth_calculation": "Python from actual observations",
+    "historical_period_months": 36,
+    "ai_analysis_included": false
+  }
 }
