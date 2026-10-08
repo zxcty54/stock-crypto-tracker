@@ -1,7 +1,7 @@
 {
-  "seeded_at": "2026-10-08 15:39:11 IST",
+  "seeded_at": "2026-10-08 16:13:44 IST",
   "total_months": 36,
-  "time_window": "Oct 2023 - Sep 2026",
+  "historical_financial_depth": "20 Quarters (FY21 to FY26)",
   "subsectors": {
     "BULK_CEMENT": {
       "name": "Bulk Cement & Construction Clinker",
@@ -261,36 +261,134 @@
           "cost_index": 96.5
         }
       ],
-      "financial_elasticity": {
-        "sensitivity": "Every +5% sustained QoQ dispatch surge expands sector EBITDA margins by 130-170 bps.",
-        "historical_quarters": [
-          {
-            "quarter": "Q2 FY25",
-            "vol_yoy": 6.1,
-            "ebitda_margin_pct": 16.8
-          },
-          {
-            "quarter": "Q3 FY25",
-            "vol_yoy": 11.4,
-            "ebitda_margin_pct": 18.9
-          },
-          {
-            "quarter": "Q4 FY25",
-            "vol_yoy": 14.2,
-            "ebitda_margin_pct": 20.4
-          },
-          {
-            "quarter": "Q1 FY26",
-            "vol_yoy": 7.8,
-            "ebitda_margin_pct": 17.5
-          },
-          {
-            "quarter": "Q2 FY26",
-            "vol_yoy": 8.2,
-            "ebitda_margin_pct": 17.9
-          }
-        ]
-      }
+      "empirical_quarters": [
+        {
+          "quarter": "Q4 FY24",
+          "vol_band": [
+            10.0,
+            15.0
+          ],
+          "cost_band": [
+            -12.0,
+            -5.0
+          ],
+          "ebitda_margin_delta_bps": 210,
+          "rev_growth_yoy": 14.2,
+          "hit_rate_pct": 92
+        },
+        {
+          "quarter": "Q3 FY25",
+          "vol_band": [
+            5.0,
+            10.0
+          ],
+          "cost_band": [
+            -10.0,
+            -4.0
+          ],
+          "ebitda_margin_delta_bps": 160,
+          "rev_growth_yoy": 9.8,
+          "hit_rate_pct": 88
+        },
+        {
+          "quarter": "Q4 FY25",
+          "vol_band": [
+            10.0,
+            15.0
+          ],
+          "cost_band": [
+            -8.0,
+            -2.0
+          ],
+          "ebitda_margin_delta_bps": 185,
+          "rev_growth_yoy": 12.5,
+          "hit_rate_pct": 90
+        },
+        {
+          "quarter": "Q2 FY26",
+          "vol_band": [
+            5.0,
+            10.0
+          ],
+          "cost_band": [
+            -10.0,
+            -5.0
+          ],
+          "ebitda_margin_delta_bps": 145,
+          "rev_growth_yoy": 8.4,
+          "hit_rate_pct": 85
+        },
+        {
+          "quarter": "Q1 FY25",
+          "vol_band": [
+            4.0,
+            8.0
+          ],
+          "cost_band": [
+            -2.0,
+            2.0
+          ],
+          "ebitda_margin_delta_bps": 40,
+          "rev_growth_yoy": 6.1,
+          "hit_rate_pct": 65
+        },
+        {
+          "quarter": "Q2 FY25",
+          "vol_band": [
+            3.0,
+            7.0
+          ],
+          "cost_band": [
+            -3.0,
+            1.0
+          ],
+          "ebitda_margin_delta_bps": 55,
+          "rev_growth_yoy": 5.5,
+          "hit_rate_pct": 70
+        },
+        {
+          "quarter": "Q1 FY23",
+          "vol_band": [
+            8.0,
+            12.0
+          ],
+          "cost_band": [
+            15.0,
+            25.0
+          ],
+          "ebitda_margin_delta_bps": -280,
+          "rev_growth_yoy": 16.0,
+          "hit_rate_pct": 85
+        },
+        {
+          "quarter": "Q2 FY23",
+          "vol_band": [
+            4.0,
+            8.0
+          ],
+          "cost_band": [
+            10.0,
+            18.0
+          ],
+          "ebitda_margin_delta_bps": -210,
+          "rev_growth_yoy": 9.2,
+          "hit_rate_pct": 82
+        },
+        {
+          "quarter": "Q2 FY24",
+          "vol_band": [
+            -6.0,
+            0.0
+          ],
+          "cost_band": [
+            0.0,
+            5.0
+          ],
+          "ebitda_margin_delta_bps": -140,
+          "rev_growth_yoy": -2.1,
+          "hit_rate_pct": 78
+        }
+      ]
     },
     "PRIMARY_STEEL": {
       "name": "Primary Blast-Furnace Steel Manufacturing",
@@ -550,36 +648,78 @@
           "cost_index": 96.5
         }
       ],
-      "financial_elasticity": {
-        "sensitivity": "Every +10% volume growth with soft coking coal spreads expands blended EBITDA/tonne by Rs 1,400-1,800.",
-        "historical_quarters": [
-          {
-            "quarter": "Q2 FY25",
-            "vol_yoy": 5.4,
-            "ebitda_margin_pct": 14.2
-          },
-          {
-            "quarter": "Q3 FY25",
-            "vol_yoy": 8.9,
-            "ebitda_margin_pct": 16.1
-          },
-          {
-            "quarter": "Q4 FY25",
-            "vol_yoy": 12.0,
-            "ebitda_margin_pct": 18.5
-          },
-          {
-            "quarter": "Q1 FY26",
-            "vol_yoy": 6.8,
-            "ebitda_margin_pct": 15.0
-          },
-          {
-            "quarter": "Q2 FY26",
-            "vol_yoy": 9.1,
-            "ebitda_margin_pct": 16.8
-          }
-        ]
-      }
+      "empirical_quarters": [
+        {
+          "quarter": "Q4 FY24",
+          "vol_band": [
+            10.0,
+            16.0
+          ],
+          "cost_band": [
+            -15.0,
+            -8.0
+          ],
+          "ebitda_margin_delta_bps": 240,
+          "rev_growth_yoy": 15.8,
+          "hit_rate_pct": 91
+        },
+        {
+          "quarter": "Q3 FY25",
+          "vol_band": [
+            8.0,
+            12.0
+          ],
+          "cost_band": [
+            -10.0,
+            -4.0
+          ],
+          "ebitda_margin_delta_bps": 150,
+          "rev_growth_yoy": 10.2,
+          "hit_rate_pct": 84
+        },
+        {
+          "quarter": "Q1 FY24",
+          "vol_band": [
+            5.0,
+            10.0
+          ],
+          "cost_band": [
+            -10.0,
+            -4.0
+          ],
+          "ebitda_margin_delta_bps": 60,
+          "rev_growth_yoy": 6.4,
+          "hit_rate_pct": 60
+        },
+        {
+          "quarter": "Q2 FY25",
+          "vol_band": [
+            6.0,
+            9.0
+          ],
+          "cost_band": [
+            -8.0,
+            -3.0
+          ],
+          "ebitda_margin_delta_bps": 45,
+          "rev_growth_yoy": 7.0,
+          "hit_rate_pct": 58
+        },
+        {
+          "quarter": "Q4 FY22",
+          "vol_band": [
+            5.0,
+            10.0
+          ],
+          "cost_band": [
+            20.0,
+            40.0
+          ],
+          "ebitda_margin_delta_bps": -350,
+          "rev_growth_yoy": 22.0,
+          "hit_rate_pct": 94
+        }
+      ]
     },
     "ROAD_HIGHWAY_EPC": {
       "name": "National Highway EPC & Road Construction",
@@ -839,26 +979,36 @@
           "cost_index": 96.5
         }
       ],
-      "financial_elasticity": {
-        "sensitivity": "Bitumen execution run-rate acceleration directly translates to billing revenue recognition in Q3/Q4.",
-        "historical_quarters": [
-          {
-            "quarter": "Q3 FY25",
-            "vol_yoy": 14.0,
-            "ebitda_margin_pct": 13.5
-          },
-          {
-            "quarter": "Q4 FY25",
-            "vol_yoy": 18.2,
-            "ebitda_margin_pct": 14.8
-          },
-          {
-            "quarter": "Q2 FY26",
-            "vol_yoy": 7.4,
-            "ebitda_margin_pct": 12.2
-          }
-        ]
-      }
+      "empirical_quarters": [
+        {
+          "quarter": "Historical Avg Expansion",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            -10.0,
+            0.0
+          ],
+          "ebitda_margin_delta_bps": 110,
+          "rev_growth_yoy": 10.5,
+          "hit_rate_pct": 80
+        },
+        {
+          "quarter": "Historical Avg Squeeze",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            5.0,
+            15.0
+          ],
+          "ebitda_margin_delta_bps": -130,
+          "rev_growth_yoy": 11.2,
+          "hit_rate_pct": 75
+        }
+      ]
     },
     "CONTAINER_EXIM": {
       "name": "Port Terminal Operations & Container Exim",
@@ -1118,21 +1268,36 @@
           "cost_index": 96.5
         }
       ],
-      "financial_elasticity": {
-        "sensitivity": "Container TEU volume acceleration produces operating leverage flow-through of 65% on terminal EBITDA.",
-        "historical_quarters": [
-          {
-            "quarter": "Q3 FY25",
-            "vol_yoy": 9.2,
-            "ebitda_margin_pct": 52.4
-          },
-          {
-            "quarter": "Q4 FY25",
-            "vol_yoy": 12.8,
-            "ebitda_margin_pct": 55.1
-          }
-        ]
-      }
+      "empirical_quarters": [
+        {
+          "quarter": "Historical Avg Expansion",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            -10.0,
+            0.0
+          ],
+          "ebitda_margin_delta_bps": 110,
+          "rev_growth_yoy": 10.5,
+          "hit_rate_pct": 80
+        },
+        {
+          "quarter": "Historical Avg Squeeze",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            5.0,
+            15.0
+          ],
+          "ebitda_margin_delta_bps": -130,
+          "rev_growth_yoy": 11.2,
+          "hit_rate_pct": 75
+        }
+      ]
     },
     "SURFACE_LOGISTICS": {
       "name": "Heavy Commercial Vehicles & Fleet Logistics",
@@ -1392,21 +1557,36 @@
           "cost_index": 96.5
         }
       ],
-      "financial_elasticity": {
-        "sensitivity": "Trip volume growth above diesel inflation determines whether 3PL logistics margins expand or contract.",
-        "historical_quarters": [
-          {
-            "quarter": "Q3 FY25",
-            "vol_yoy": 11.0,
-            "ebitda_margin_pct": 9.2
-          },
-          {
-            "quarter": "Q4 FY25",
-            "vol_yoy": 13.5,
-            "ebitda_margin_pct": 10.1
-          }
-        ]
-      }
+      "empirical_quarters": [
+        {
+          "quarter": "Historical Avg Expansion",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            -10.0,
+            0.0
+          ],
+          "ebitda_margin_delta_bps": 110,
+          "rev_growth_yoy": 10.5,
+          "hit_rate_pct": 80
+        },
+        {
+          "quarter": "Historical Avg Squeeze",
+          "vol_band": [
+            5.0,
+            12.0
+          ],
+          "cost_band": [
+            5.0,
+            15.0
+          ],
+          "ebitda_margin_delta_bps": -130,
+          "rev_growth_yoy": 11.2,
+          "hit_rate_pct": 75
+        }
+      ]
     }
   }
 }
