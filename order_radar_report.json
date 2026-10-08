@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-07 19:49:26 IST",
+  "last_updated": "2026-10-08 08:38:19 IST",
   "total_scanned": 967,
   "guards_applied": {
     "max_debt_to_mcap": 1.2,
@@ -8,18 +8,18 @@
   },
   "total_prime_hidden_gems": 0,
   "total_paper_backlog_traps": 0,
-  "total_tracked_order_books": 1,
-  "total_sales_turnaround_gems": 15,
+  "total_tracked_order_books": 2,
+  "total_sales_turnaround_gems": 13,
   "prime_hidden_gems": [],
   "paper_backlog_traps": [],
   "all_tracked_orders": [
     {
       "symbol": "AEROPLANE",
       "company_name": "Amir Chand Jagdish Kumar (Exports) Ltd",
-      "market_cap_cr": 2268.0,
+      "market_cap_cr": 2213.0,
       "ttm_sales_cr": 2523.0,
       "total_debt_cr": 758.0,
-      "debt_to_mcap": 0.33,
+      "debt_to_mcap": 0.34,
       "pending_order_book_cr": 806.24,
       "order_to_mcap_multiple": 0.36,
       "order_to_ttm_sales": 0.32,
@@ -27,173 +27,166 @@
       "execution_timeline_months": 24,
       "thesis": "Order backlog of ₹806.2 Cr.",
       "source_doc": "https://www.infomerics.com/admin/uploads/Pr-Amir-Chand-Jagdish-Kum-Exp29Sep26.pdf"
+    },
+    {
+      "symbol": "AVANTEL",
+      "company_name": "Avantel Ltd",
+      "market_cap_cr": 3904.0,
+      "ttm_sales_cr": 241.0,
+      "total_debt_cr": 34.0,
+      "debt_to_mcap": 0.01,
+      "pending_order_book_cr": 1021.0,
+      "order_to_mcap_multiple": 0.26,
+      "order_to_ttm_sales": 4.24,
+      "revenue_runway_years": "4.24 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹1,021.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/AVANTEL_LIMITED/7th_Oct_26"
     }
   ],
   "turnaround_sales_gems": [
     {
       "symbol": "AFSL",
       "company_name": "Abans Financial Services Ltd",
-      "market_cap_cr": 1029.0,
+      "market_cap_cr": 1030.0,
       "total_debt_cr": 754.0,
       "debt_to_mcap": 0.73,
       "annual_sales_cr": 25747.0,
-      "sales_to_mcap_multiple": 25.02,
+      "sales_to_mcap_multiple": 25.0,
       "ps_ratio": 0.04,
       "catalyst": "P/S: 0.04x + Positive EBITDA + Debt/MCap: 0.73x (Safe)"
     },
     {
       "symbol": "AARVI",
       "company_name": "Aarvi Encon Ltd",
-      "market_cap_cr": 208.0,
+      "market_cap_cr": 206.0,
       "total_debt_cr": 27.0,
       "debt_to_mcap": 0.13,
       "annual_sales_cr": 671.0,
-      "sales_to_mcap_multiple": 3.23,
+      "sales_to_mcap_multiple": 3.26,
       "ps_ratio": 0.31,
       "catalyst": "P/S: 0.31x + Positive EBITDA + Debt/MCap: 0.13x (Safe)"
     },
     {
       "symbol": "AGARIND",
       "company_name": "Agarwal Industrial Corporation Ltd",
-      "market_cap_cr": 582.0,
+      "market_cap_cr": 546.0,
       "total_debt_cr": 341.0,
-      "debt_to_mcap": 0.59,
+      "debt_to_mcap": 0.62,
       "annual_sales_cr": 1492.0,
-      "sales_to_mcap_multiple": 2.56,
-      "ps_ratio": 0.39,
-      "catalyst": "P/S: 0.39x + Positive EBITDA + Debt/MCap: 0.59x (Safe)"
+      "sales_to_mcap_multiple": 2.73,
+      "ps_ratio": 0.37,
+      "catalyst": "P/S: 0.37x + Positive EBITDA + Debt/MCap: 0.62x (Safe)"
     },
     {
       "symbol": "AMARJOTHI",
       "company_name": "Amarjothi Spinning Mills Ltd",
-      "market_cap_cr": 99.3,
+      "market_cap_cr": 99.6,
       "total_debt_cr": 56.0,
       "debt_to_mcap": 0.56,
       "annual_sales_cr": 245.0,
-      "sales_to_mcap_multiple": 2.47,
+      "sales_to_mcap_multiple": 2.46,
       "ps_ratio": 0.41,
       "catalyst": "P/S: 0.41x + Positive EBITDA + Debt/MCap: 0.56x (Safe)"
     },
     {
       "symbol": "ANDHRSUGAR",
       "company_name": "Andhra Sugars Ltd",
-      "market_cap_cr": 1269.0,
+      "market_cap_cr": 1234.0,
       "total_debt_cr": 1.0,
       "debt_to_mcap": 0.0,
       "annual_sales_cr": 2493.0,
-      "sales_to_mcap_multiple": 1.96,
-      "ps_ratio": 0.51,
-      "catalyst": "P/S: 0.51x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
+      "sales_to_mcap_multiple": 2.02,
+      "ps_ratio": 0.49,
+      "catalyst": "P/S: 0.49x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
     },
     {
       "symbol": "ANNAPURNA",
       "company_name": "Annapurna Swadisht Ltd",
-      "market_cap_cr": 282.0,
+      "market_cap_cr": 284.0,
       "total_debt_cr": 250.0,
-      "debt_to_mcap": 0.89,
+      "debt_to_mcap": 0.88,
       "annual_sales_cr": 519.0,
-      "sales_to_mcap_multiple": 1.84,
-      "ps_ratio": 0.54,
-      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.89x (Safe)"
+      "sales_to_mcap_multiple": 1.83,
+      "ps_ratio": 0.55,
+      "catalyst": "P/S: 0.55x + Positive EBITDA + Debt/MCap: 0.88x (Safe)"
     },
     {
       "symbol": "AIROLAM",
       "company_name": "Airo Lam Ltd",
-      "market_cap_cr": 137.0,
+      "market_cap_cr": 134.0,
       "total_debt_cr": 82.0,
-      "debt_to_mcap": 0.6,
+      "debt_to_mcap": 0.61,
       "annual_sales_cr": 243.0,
-      "sales_to_mcap_multiple": 1.77,
-      "ps_ratio": 0.56,
-      "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.6x (Safe)"
+      "sales_to_mcap_multiple": 1.81,
+      "ps_ratio": 0.55,
+      "catalyst": "P/S: 0.55x + Positive EBITDA + Debt/MCap: 0.61x (Safe)"
     },
     {
       "symbol": "ADSL",
       "company_name": "Allied Digital Services Ltd",
-      "market_cap_cr": 577.0,
+      "market_cap_cr": 563.0,
       "total_debt_cr": 136.0,
       "debt_to_mcap": 0.24,
       "annual_sales_cr": 1009.0,
-      "sales_to_mcap_multiple": 1.75,
-      "ps_ratio": 0.57,
-      "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
+      "sales_to_mcap_multiple": 1.79,
+      "ps_ratio": 0.56,
+      "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
     },
     {
       "symbol": "APCL",
       "company_name": "Anjani Portland Cement Ltd",
-      "market_cap_cr": 276.0,
+      "market_cap_cr": 272.0,
       "total_debt_cr": 277.0,
-      "debt_to_mcap": 1.0,
+      "debt_to_mcap": 1.02,
       "annual_sales_cr": 405.0,
-      "sales_to_mcap_multiple": 1.47,
-      "ps_ratio": 0.68,
-      "catalyst": "P/S: 0.68x + Positive EBITDA + Debt/MCap: 1.0x (Safe)"
+      "sales_to_mcap_multiple": 1.49,
+      "ps_ratio": 0.67,
+      "catalyst": "P/S: 0.67x + Positive EBITDA + Debt/MCap: 1.02x (Safe)"
     },
     {
-      "symbol": "BAJEL",
-      "company_name": "Bajel Projects Ltd",
-      "market_cap_cr": 1873.0,
-      "total_debt_cr": 367.0,
-      "debt_to_mcap": 0.2,
-      "annual_sales_cr": 2751.0,
-      "sales_to_mcap_multiple": 1.47,
-      "ps_ratio": 0.68,
-      "catalyst": "P/S: 0.68x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
+      "symbol": "BBTCL",
+      "company_name": "B&B Triplewall Containers Ltd",
+      "market_cap_cr": 462.0,
+      "total_debt_cr": 251.0,
+      "debt_to_mcap": 0.54,
+      "annual_sales_cr": 645.0,
+      "sales_to_mcap_multiple": 1.4,
+      "ps_ratio": 0.72,
+      "catalyst": "P/S: 0.72x + Positive EBITDA + Debt/MCap: 0.54x (Safe)"
     },
     {
       "symbol": "20MICRONS",
       "company_name": "20 Microns Ltd",
-      "market_cap_cr": 721.0,
+      "market_cap_cr": 697.0,
       "total_debt_cr": 156.0,
       "debt_to_mcap": 0.22,
       "annual_sales_cr": 951.0,
-      "sales_to_mcap_multiple": 1.32,
-      "ps_ratio": 0.76,
-      "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.22x (Safe)"
-    },
-    {
-      "symbol": "AONESTEELS",
-      "company_name": "A-One Steels India Ltd",
-      "market_cap_cr": 3243.0,
-      "total_debt_cr": 1052.0,
-      "debt_to_mcap": 0.32,
-      "annual_sales_cr": 4149.0,
-      "sales_to_mcap_multiple": 1.28,
-      "ps_ratio": 0.78,
-      "catalyst": "P/S: 0.78x + Positive EBITDA + Debt/MCap: 0.32x (Safe)"
+      "sales_to_mcap_multiple": 1.36,
+      "ps_ratio": 0.73,
+      "catalyst": "P/S: 0.73x + Positive EBITDA + Debt/MCap: 0.22x (Safe)"
     },
     {
       "symbol": "AFCONS",
       "company_name": "Afcons Infrastructure Ltd",
-      "market_cap_cr": 8980.0,
+      "market_cap_cr": 8900.0,
       "total_debt_cr": 3627.0,
-      "debt_to_mcap": 0.4,
+      "debt_to_mcap": 0.41,
       "annual_sales_cr": 11249.0,
-      "sales_to_mcap_multiple": 1.25,
-      "ps_ratio": 0.8,
-      "catalyst": "P/S: 0.8x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
+      "sales_to_mcap_multiple": 1.26,
+      "ps_ratio": 0.79,
+      "catalyst": "P/S: 0.79x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
     },
     {
       "symbol": "AEROPLANE",
       "company_name": "Amir Chand Jagdish Kumar (Exports) Ltd",
-      "market_cap_cr": 2268.0,
+      "market_cap_cr": 2213.0,
       "total_debt_cr": 758.0,
-      "debt_to_mcap": 0.33,
+      "debt_to_mcap": 0.34,
       "annual_sales_cr": 2523.0,
-      "sales_to_mcap_multiple": 1.11,
-      "ps_ratio": 0.9,
-      "catalyst": "P/S: 0.9x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
-    },
-    {
-      "symbol": "APTECHT",
-      "company_name": "Aptech Ltd",
-      "market_cap_cr": 504.0,
-      "total_debt_cr": 13.0,
-      "debt_to_mcap": 0.03,
-      "annual_sales_cr": 517.0,
-      "sales_to_mcap_multiple": 1.03,
-      "ps_ratio": 0.97,
-      "catalyst": "P/S: 0.97x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
+      "sales_to_mcap_multiple": 1.14,
+      "ps_ratio": 0.88,
+      "catalyst": "P/S: 0.88x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
     }
   ]
 }
