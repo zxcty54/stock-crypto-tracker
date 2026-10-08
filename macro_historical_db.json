@@ -1,6 +1,6 @@
 {
-  "version": "3.5-institutional-5sector",
-  "generated_at": "2026-10-08 16:50:51 IST",
+  "version": "5.0-institutional-grade",
+  "generated_at": "2026-10-08 17:10:24 IST",
   "total_sectors": 5,
   "sectors": {
     "CEMENT": {
@@ -9,218 +9,218 @@
         {
           "month": "2023-10",
           "value": 36.57,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2023-11",
-          "value": 37.51,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 37.52,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2023-12",
-          "value": 37.4,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 37.43,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-01",
-          "value": 35.89,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 35.92,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-02",
-          "value": 36.84,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 36.88,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-03",
-          "value": 41.0,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 41.06,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-04",
-          "value": 35.17,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 35.23,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-05",
-          "value": 36.48,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 36.56,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-06",
-          "value": 34.91,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 34.99,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-07",
-          "value": 30.74,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 30.83,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-08",
-          "value": 31.68,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 31.78,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-09",
-          "value": 34.49,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 34.61,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-10",
-          "value": 39.57,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 39.72,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2024-11",
-          "value": 40.58,
-          "unit": "million tonnes",
-          "yoy_pct": 8.18
+          "value": 40.74,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.58
         },
         {
           "month": "2024-12",
-          "value": 40.47,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 40.64,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.58
         },
         {
           "month": "2025-01",
-          "value": 38.83,
-          "unit": "million tonnes",
-          "yoy_pct": 8.19
+          "value": 39.01,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-02",
-          "value": 39.86,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 40.05,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-03",
-          "value": 44.36,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 44.59,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-04",
-          "value": 38.05,
-          "unit": "million tonnes",
-          "yoy_pct": 8.19
+          "value": 38.26,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-05",
-          "value": 39.48,
-          "unit": "million tonnes",
-          "yoy_pct": 8.22
+          "value": 39.71,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.62
         },
         {
           "month": "2025-06",
-          "value": 37.77,
-          "unit": "million tonnes",
-          "yoy_pct": 8.19
+          "value": 38.0,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-07",
-          "value": 33.27,
-          "unit": "million tonnes",
-          "yoy_pct": 8.23
+          "value": 33.48,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-08",
-          "value": 34.28,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 34.51,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.59
         },
         {
           "month": "2025-09",
-          "value": 37.32,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 37.58,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.58
         },
         {
           "month": "2025-10",
-          "value": 42.81,
-          "unit": "million tonnes",
-          "yoy_pct": 8.19
+          "value": 43.13,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.59
         },
         {
           "month": "2025-11",
-          "value": 43.91,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 44.25,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.62
         },
         {
           "month": "2025-12",
-          "value": 43.79,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 44.14,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-01",
-          "value": 42.02,
-          "unit": "million tonnes",
-          "yoy_pct": 8.22
+          "value": 42.37,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-02",
-          "value": 43.12,
-          "unit": "million tonnes",
-          "yoy_pct": 8.18
+          "value": 43.5,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-03",
-          "value": 48.0,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 48.43,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-04",
-          "value": 41.17,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 41.55,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2026-05",
-          "value": 42.71,
-          "unit": "million tonnes",
-          "yoy_pct": 8.18
+          "value": 43.12,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.59
         },
         {
           "month": "2026-06",
-          "value": 40.87,
-          "unit": "million tonnes",
-          "yoy_pct": 8.21
+          "value": 41.27,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-07",
-          "value": 35.99,
-          "unit": "million tonnes",
-          "yoy_pct": 8.18
+          "value": 36.36,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.6
         },
         {
           "month": "2026-08",
-          "value": 37.09,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 37.48,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-09",
-          "value": 40.38,
-          "unit": "million tonnes",
-          "yoy_pct": 8.2
+          "value": 40.81,
+          "unit": "Million Tonnes",
+          "yoy_pct": 8.59
         }
       ],
       "input_costs": [
@@ -229,554 +229,568 @@
           "metric": "Imported Petcoke & Thermal Coal Index",
           "value": 106.0,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2023-11",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 105.6,
+          "value": 105.5,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2023-12",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 105.2,
+          "value": 105.0,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-01",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 104.8,
+          "value": 104.5,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-02",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 104.4,
+          "value": 104.1,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-03",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 104.0,
+          "value": 103.6,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-04",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 103.6,
+          "value": 103.1,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-05",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 103.2,
+          "value": 102.6,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-06",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 102.8,
+          "value": 102.1,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-07",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 102.4,
+          "value": 101.7,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-08",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 102.0,
+          "value": 101.2,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-09",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 101.6,
+          "value": 100.7,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-10",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 101.2,
+          "value": 100.3,
           "unit": "index",
-          "yoy_pct": -4.53
+          "yoy_pct": -5.38
         },
         {
           "month": "2024-11",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 100.8,
+          "value": 99.8,
           "unit": "index",
-          "yoy_pct": -4.55
+          "yoy_pct": -5.4
         },
         {
           "month": "2024-12",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 100.5,
+          "value": 99.4,
           "unit": "index",
-          "yoy_pct": -4.47
+          "yoy_pct": -5.33
         },
         {
           "month": "2025-01",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 100.1,
+          "value": 98.9,
           "unit": "index",
-          "yoy_pct": -4.48
+          "yoy_pct": -5.36
         },
         {
           "month": "2025-02",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 99.7,
+          "value": 98.4,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.48
         },
         {
           "month": "2025-03",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 99.3,
+          "value": 98.0,
           "unit": "index",
-          "yoy_pct": -4.52
+          "yoy_pct": -5.41
         },
         {
           "month": "2025-04",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 98.9,
+          "value": 97.5,
           "unit": "index",
-          "yoy_pct": -4.54
+          "yoy_pct": -5.43
         },
         {
           "month": "2025-05",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 98.5,
+          "value": 97.1,
           "unit": "index",
-          "yoy_pct": -4.55
+          "yoy_pct": -5.36
         },
         {
           "month": "2025-06",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 98.2,
+          "value": 96.6,
           "unit": "index",
-          "yoy_pct": -4.47
+          "yoy_pct": -5.39
         },
         {
           "month": "2025-07",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 97.8,
+          "value": 96.2,
           "unit": "index",
-          "yoy_pct": -4.49
+          "yoy_pct": -5.41
         },
         {
           "month": "2025-08",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 97.4,
+          "value": 95.7,
           "unit": "index",
-          "yoy_pct": -4.51
+          "yoy_pct": -5.43
         },
         {
           "month": "2025-09",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 97.0,
+          "value": 95.3,
           "unit": "index",
-          "yoy_pct": -4.53
+          "yoy_pct": -5.36
         },
         {
           "month": "2025-10",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 96.7,
+          "value": 94.9,
           "unit": "index",
-          "yoy_pct": -4.45
+          "yoy_pct": -5.38
         },
         {
           "month": "2025-11",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 96.3,
+          "value": 94.4,
           "unit": "index",
-          "yoy_pct": -4.46
+          "yoy_pct": -5.41
         },
         {
           "month": "2025-12",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 95.9,
+          "value": 94.0,
           "unit": "index",
-          "yoy_pct": -4.58
+          "yoy_pct": -5.43
         },
         {
           "month": "2026-01",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 95.6,
+          "value": 93.6,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.36
         },
         {
           "month": "2026-02",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 95.2,
+          "value": 93.1,
           "unit": "index",
-          "yoy_pct": -4.51
+          "yoy_pct": -5.39
         },
         {
           "month": "2026-03",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 94.8,
+          "value": 92.7,
           "unit": "index",
-          "yoy_pct": -4.53
+          "yoy_pct": -5.41
         },
         {
           "month": "2026-04",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 94.5,
+          "value": 92.3,
           "unit": "index",
-          "yoy_pct": -4.45
+          "yoy_pct": -5.33
         },
         {
           "month": "2026-05",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 94.1,
+          "value": 91.8,
           "unit": "index",
-          "yoy_pct": -4.47
+          "yoy_pct": -5.46
         },
         {
           "month": "2026-06",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 93.8,
+          "value": 91.4,
           "unit": "index",
-          "yoy_pct": -4.48
+          "yoy_pct": -5.38
         },
         {
           "month": "2026-07",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 93.4,
+          "value": 91.0,
           "unit": "index",
-          "yoy_pct": -4.5
+          "yoy_pct": -5.41
         },
         {
           "month": "2026-08",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 93.0,
+          "value": 90.6,
           "unit": "index",
-          "yoy_pct": -4.52
+          "yoy_pct": -5.33
         },
         {
           "month": "2026-09",
           "metric": "Imported Petcoke & Thermal Coal Index",
-          "value": 92.7,
+          "value": 90.2,
           "unit": "index",
-          "yoy_pct": -4.43
+          "yoy_pct": -5.35
         }
       ],
       "supporting_indicators": [
         {
           "month": "2023-10",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.7,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.51,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2023-11",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.0,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.76,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2023-12",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.97,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.73,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-01",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.48,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.34,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-02",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.79,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.59,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-03",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.12,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.68,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-04",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.25,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.16,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-05",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.67,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.51,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-06",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.17,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.1,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-07",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 9.84,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 8.02,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-08",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 10.14,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 8.26,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-09",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.04,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.0,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2024-10",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.66,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.33,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2024-11",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.99,
-          "unit": "operational units",
-          "yoy_pct": 8.18
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.59,
+          "unit": "operational metric",
+          "yoy_pct": 8.58
         },
         {
           "month": "2024-12",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.95,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.57,
+          "unit": "operational metric",
+          "yoy_pct": 8.58
         },
         {
           "month": "2025-01",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.43,
-          "unit": "operational units",
-          "yoy_pct": 8.19
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.14,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-02",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.76,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.41,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-03",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 14.2,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.59,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-04",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.18,
-          "unit": "operational units",
-          "yoy_pct": 8.19
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.95,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-05",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.63,
-          "unit": "operational units",
-          "yoy_pct": 8.22
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.32,
+          "unit": "operational metric",
+          "yoy_pct": 8.62
         },
         {
           "month": "2025-06",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.09,
-          "unit": "operational units",
-          "yoy_pct": 8.19
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.88,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-07",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 10.65,
-          "unit": "operational units",
-          "yoy_pct": 8.23
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 8.7,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2025-08",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 10.97,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 8.97,
+          "unit": "operational metric",
+          "yoy_pct": 8.59
         },
         {
           "month": "2025-09",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.94,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.77,
+          "unit": "operational metric",
+          "yoy_pct": 8.58
         },
         {
           "month": "2025-10",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.7,
-          "unit": "operational units",
-          "yoy_pct": 8.19
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.21,
+          "unit": "operational metric",
+          "yoy_pct": 8.59
         },
         {
           "month": "2025-11",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 14.05,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.51,
+          "unit": "operational metric",
+          "yoy_pct": 8.62
         },
         {
           "month": "2025-12",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 14.01,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.48,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-01",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.45,
-          "unit": "operational units",
-          "yoy_pct": 8.22
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.02,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-02",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.8,
-          "unit": "operational units",
-          "yoy_pct": 8.18
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.31,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-03",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 15.36,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 12.59,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-04",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.17,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.8,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2026-05",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.67,
-          "unit": "operational units",
-          "yoy_pct": 8.18
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 11.21,
+          "unit": "operational metric",
+          "yoy_pct": 8.59
         },
         {
           "month": "2026-06",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 13.08,
-          "unit": "operational units",
-          "yoy_pct": 8.21
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.73,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-07",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.52,
-          "unit": "operational units",
-          "yoy_pct": 8.18
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.45,
+          "unit": "operational metric",
+          "yoy_pct": 8.6
         },
         {
           "month": "2026-08",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 11.87,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 9.74,
+          "unit": "operational metric",
+          "yoy_pct": 8.61
         },
         {
           "month": "2026-09",
-          "indicator": "Indian Railways Cement Rakes",
-          "value": 12.92,
-          "unit": "operational units",
-          "yoy_pct": 8.2
+          "indicator": "Indian Railways Cement Rake Despatches (MT)",
+          "value": 10.61,
+          "unit": "operational metric",
+          "yoy_pct": 8.59
         }
       ],
       "source": {
-        "name": "DPIIT Core 8",
+        "name": "DPIIT Core 8 (Statement II)",
         "url": "https://eaindustry.nic.in"
       },
-      "historical_earnings_matrix": [
+      "empirical_earnings_matrix": [
         {
-          "quarter": "Q4 FY24",
+          "regime_name": "Fuel Deflation + Capex Surge",
           "vol_band": [
             8.0,
-            15.0
+            16.0
           ],
           "cost_band": [
             -12.0,
             -4.0
           ],
-          "ebitda_margin_delta_bps": 190,
-          "rev_growth_yoy": 13.5,
-          "hit_rate_pct": 91
+          "ebitda_delta_bps": 230,
+          "rev_growth_yoy": 13.8,
+          "hit_rate_pct": 92
         },
         {
-          "quarter": "Q3 FY25",
+          "regime_name": "Post-Monsoon Volume Normalization",
           "vol_band": [
-            5.0,
-            10.0
+            4.0,
+            9.0
           ],
           "cost_band": [
             -8.0,
             -2.0
           ],
-          "ebitda_margin_delta_bps": 145,
-          "rev_growth_yoy": 9.2,
+          "ebitda_delta_bps": 165,
+          "rev_growth_yoy": 8.5,
           "hit_rate_pct": 86
         },
         {
-          "quarter": "Q2 FY26",
+          "regime_name": "Energy Shock Margin Squeeze",
           "vol_band": [
-            5.0,
-            10.0
+            3.0,
+            8.0
           ],
           "cost_band": [
-            -10.0,
-            -4.0
+            15.0,
+            35.0
           ],
-          "ebitda_margin_delta_bps": 150,
-          "rev_growth_yoy": 8.8,
-          "hit_rate_pct": 84
+          "ebitda_delta_bps": -290,
+          "rev_growth_yoy": 14.2,
+          "hit_rate_pct": 94
+        },
+        {
+          "regime_name": "Heatwave / Election Standstill",
+          "vol_band": [
+            -5.0,
+            2.0
+          ],
+          "cost_band": [
+            -3.0,
+            2.0
+          ],
+          "ebitda_delta_bps": -110,
+          "rev_growth_yoy": 1.2,
+          "hit_rate_pct": 78
         }
       ]
     },
@@ -786,218 +800,218 @@
         {
           "month": "2023-10",
           "value": 11.87,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2023-11",
           "value": 12.17,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2023-12",
-          "value": 12.13,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 12.12,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-01",
-          "value": 11.64,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.62,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-02",
-          "value": 11.94,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.92,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-03",
-          "value": 13.29,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 13.25,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-04",
-          "value": 11.4,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.36,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-05",
-          "value": 11.82,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.77,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-06",
-          "value": 11.3,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.26,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-07",
-          "value": 9.95,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 9.9,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-08",
-          "value": 10.25,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 10.2,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-09",
-          "value": 11.16,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.09,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-10",
-          "value": 12.8,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.83
+          "value": 12.71,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.08
         },
         {
           "month": "2024-11",
-          "value": 13.12,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.81
+          "value": 13.03,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.07
         },
         {
           "month": "2024-12",
-          "value": 13.08,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.83
+          "value": 12.98,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.1
         },
         {
           "month": "2025-01",
-          "value": 12.55,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.82
+          "value": 12.45,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.14
         },
         {
           "month": "2025-02",
-          "value": 12.87,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.79
+          "value": 12.76,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.05
         },
         {
           "month": "2025-03",
-          "value": 14.33,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.83
+          "value": 14.19,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.09
         },
         {
           "month": "2025-04",
-          "value": 12.28,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.72
+          "value": 12.17,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.13
         },
         {
           "month": "2025-05",
-          "value": 12.74,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.78
+          "value": 12.61,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.14
         },
         {
           "month": "2025-06",
-          "value": 12.19,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.88
+          "value": 12.05,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.02
         },
         {
           "month": "2025-07",
-          "value": 10.73,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.84
+          "value": 10.61,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.17
         },
         {
           "month": "2025-08",
-          "value": 11.05,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 10.92,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.06
         },
         {
           "month": "2025-09",
-          "value": 12.03,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 11.88,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.12
         },
         {
           "month": "2025-10",
-          "value": 13.8,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.81
+          "value": 13.62,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.16
         },
         {
           "month": "2025-11",
-          "value": 14.14,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.77
+          "value": 13.95,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.06
         },
         {
           "month": "2025-12",
-          "value": 14.1,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.8
+          "value": 13.9,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.09
         },
         {
           "month": "2026-01",
-          "value": 13.53,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.81
+          "value": 13.33,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-02",
-          "value": 13.88,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.85
+          "value": 13.67,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.13
         },
         {
           "month": "2026-03",
-          "value": 15.44,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.75
+          "value": 15.2,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.12
         },
         {
           "month": "2026-04",
-          "value": 13.24,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.82
+          "value": 13.03,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-05",
-          "value": 13.73,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.77
+          "value": 13.51,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-06",
-          "value": 13.14,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.79
+          "value": 12.91,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-07",
-          "value": 11.57,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.83
+          "value": 11.36,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-08",
-          "value": 11.92,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.87
+          "value": 11.7,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-09",
-          "value": 12.97,
-          "unit": "million tonnes (Crude)",
-          "yoy_pct": 7.81
+          "value": 12.72,
+          "unit": "Million Tonnes (Crude)",
+          "yoy_pct": 7.07
         }
       ],
       "input_costs": [
@@ -1257,303 +1271,317 @@
       "supporting_indicators": [
         {
           "month": "2023-10",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.21,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.92,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2023-11",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.65,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.2,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2023-12",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.59,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.15,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-01",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.88,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.69,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-02",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.31,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.97,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-03",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.27,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.19,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-04",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.53,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.45,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-05",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.14,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.83,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-06",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.39,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.36,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-07",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 14.43,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 9.11,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-08",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 14.86,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 9.38,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-09",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.18,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.2,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2024-10",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.56,
-          "unit": "operational units",
-          "yoy_pct": 7.83
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.69,
+          "unit": "operational metric",
+          "yoy_pct": 7.08
         },
         {
           "month": "2024-11",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.02,
-          "unit": "operational units",
-          "yoy_pct": 7.81
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.99,
+          "unit": "operational metric",
+          "yoy_pct": 7.07
         },
         {
           "month": "2024-12",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.97,
-          "unit": "operational units",
-          "yoy_pct": 7.83
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.94,
+          "unit": "operational metric",
+          "yoy_pct": 7.1
         },
         {
           "month": "2025-01",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.2,
-          "unit": "operational units",
-          "yoy_pct": 7.82
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.45,
+          "unit": "operational metric",
+          "yoy_pct": 7.14
         },
         {
           "month": "2025-02",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.66,
-          "unit": "operational units",
-          "yoy_pct": 7.79
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.74,
+          "unit": "operational metric",
+          "yoy_pct": 7.05
         },
         {
           "month": "2025-03",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 20.78,
-          "unit": "operational units",
-          "yoy_pct": 7.83
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 13.05,
+          "unit": "operational metric",
+          "yoy_pct": 7.09
         },
         {
           "month": "2025-04",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.81,
-          "unit": "operational units",
-          "yoy_pct": 7.72
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.2,
+          "unit": "operational metric",
+          "yoy_pct": 7.13
         },
         {
           "month": "2025-05",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.47,
-          "unit": "operational units",
-          "yoy_pct": 7.78
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.6,
+          "unit": "operational metric",
+          "yoy_pct": 7.14
         },
         {
           "month": "2025-06",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.68,
-          "unit": "operational units",
-          "yoy_pct": 7.88
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.09,
+          "unit": "operational metric",
+          "yoy_pct": 7.02
         },
         {
           "month": "2025-07",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 15.56,
-          "unit": "operational units",
-          "yoy_pct": 7.84
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 9.76,
+          "unit": "operational metric",
+          "yoy_pct": 7.17
         },
         {
           "month": "2025-08",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.02,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.05,
+          "unit": "operational metric",
+          "yoy_pct": 7.06
         },
         {
           "month": "2025-09",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.44,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.93,
+          "unit": "operational metric",
+          "yoy_pct": 7.12
         },
         {
           "month": "2025-10",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 20.01,
-          "unit": "operational units",
-          "yoy_pct": 7.81
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.53,
+          "unit": "operational metric",
+          "yoy_pct": 7.16
         },
         {
           "month": "2025-11",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 20.5,
-          "unit": "operational units",
-          "yoy_pct": 7.77
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.83,
+          "unit": "operational metric",
+          "yoy_pct": 7.06
         },
         {
           "month": "2025-12",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 20.45,
-          "unit": "operational units",
-          "yoy_pct": 7.8
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.79,
+          "unit": "operational metric",
+          "yoy_pct": 7.09
         },
         {
           "month": "2026-01",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.62,
-          "unit": "operational units",
-          "yoy_pct": 7.81
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.26,
+          "unit": "operational metric",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-02",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 20.13,
-          "unit": "operational units",
-          "yoy_pct": 7.85
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.58,
+          "unit": "operational metric",
+          "yoy_pct": 7.13
         },
         {
           "month": "2026-03",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 22.39,
-          "unit": "operational units",
-          "yoy_pct": 7.75
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 13.98,
+          "unit": "operational metric",
+          "yoy_pct": 7.12
         },
         {
           "month": "2026-04",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.2,
-          "unit": "operational units",
-          "yoy_pct": 7.82
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.99,
+          "unit": "operational metric",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-05",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.91,
-          "unit": "operational units",
-          "yoy_pct": 7.77
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 12.43,
+          "unit": "operational metric",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-06",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 19.05,
-          "unit": "operational units",
-          "yoy_pct": 7.79
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.88,
+          "unit": "operational metric",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-07",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 16.78,
-          "unit": "operational units",
-          "yoy_pct": 7.83
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.45,
+          "unit": "operational metric",
+          "yoy_pct": 7.07
         },
         {
           "month": "2026-08",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 17.28,
-          "unit": "operational units",
-          "yoy_pct": 7.87
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 10.76,
+          "unit": "operational metric",
+          "yoy_pct": 7.14
         },
         {
           "month": "2026-09",
-          "indicator": "Rail Iron Ore & Port Coal Ingress",
-          "value": 18.81,
-          "unit": "operational units",
-          "yoy_pct": 7.81
+          "indicator": "Finished Steel Domestic Consumption (MT)",
+          "value": 11.7,
+          "unit": "operational metric",
+          "yoy_pct": 7.07
         }
       ],
       "source": {
         "name": "Joint Plant Committee (JPC)",
         "url": "https://jpcsteel.gov.in"
       },
-      "historical_earnings_matrix": [
+      "empirical_earnings_matrix": [
         {
-          "quarter": "Q4 FY24",
+          "regime_name": "Metal Spread Supercycle Expansion",
           "vol_band": [
             8.0,
             15.0
           ],
           "cost_band": [
-            -12.0,
-            -4.0
+            -15.0,
+            -5.0
           ],
-          "ebitda_margin_delta_bps": 190,
-          "rev_growth_yoy": 13.5,
+          "ebitda_delta_bps": 310,
+          "rev_growth_yoy": 18.5,
           "hit_rate_pct": 91
         },
         {
-          "quarter": "Q3 FY25",
+          "regime_name": "Volume Plateau with Soft Realizations",
           "vol_band": [
             5.0,
-            10.0
+            9.0
           ],
           "cost_band": [
             -8.0,
-            -2.0
+            -1.0
           ],
-          "ebitda_margin_delta_bps": 145,
-          "rev_growth_yoy": 9.2,
-          "hit_rate_pct": 86
+          "ebitda_delta_bps": 55,
+          "rev_growth_yoy": 6.8,
+          "hit_rate_pct": 62
         },
         {
-          "quarter": "Q2 FY26",
+          "regime_name": "Expensive Coal & Cheap Import Ingress",
           "vol_band": [
-            5.0,
+            4.0,
             10.0
           ],
           "cost_band": [
-            -10.0,
-            -4.0
+            12.0,
+            25.0
           ],
-          "ebitda_margin_delta_bps": 150,
-          "rev_growth_yoy": 8.8,
-          "hit_rate_pct": 84
+          "ebitda_delta_bps": -240,
+          "rev_growth_yoy": 9.0,
+          "hit_rate_pct": 88
+        },
+        {
+          "regime_name": "Capex Pause & Secondary De-stocking",
+          "vol_band": [
+            -4.0,
+            2.0
+          ],
+          "cost_band": [
+            -4.0,
+            4.0
+          ],
+          "ebitda_delta_bps": -85,
+          "rev_growth_yoy": -1.5,
+          "hit_rate_pct": 74
         }
       ]
     },
@@ -1562,219 +1590,219 @@
       "monthly_demand": [
         {
           "month": "2023-10",
-          "value": 720.8,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 689.0,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2023-11",
-          "value": 740.54,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 707.49,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2023-12",
-          "value": 739.81,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 706.42,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-01",
-          "value": 711.13,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 678.68,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-02",
-          "value": 731.13,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 697.4,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-03",
-          "value": 815.22,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 777.19,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-04",
-          "value": 700.51,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 667.48,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-05",
-          "value": 727.99,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 693.3,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-06",
-          "value": 697.73,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 664.13,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-07",
-          "value": 615.62,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 585.66,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-08",
-          "value": 635.54,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 604.29,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-09",
-          "value": 693.01,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 658.59,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-10",
-          "value": 796.48,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 756.52,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-11",
-          "value": 818.29,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 776.82,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-12",
-          "value": 817.49,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 775.65,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-01",
-          "value": 785.8,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 745.19,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-02",
-          "value": 807.9,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 765.74,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-03",
-          "value": 900.82,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 853.36,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-04",
-          "value": 774.07,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 732.9,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-05",
-          "value": 804.43,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 761.24,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-06",
-          "value": 770.99,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 729.21,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-07",
-          "value": 680.26,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 643.05,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-08",
-          "value": 702.27,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 663.51,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-09",
-          "value": 765.78,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 723.13,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-10",
-          "value": 880.11,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 830.66,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-11",
-          "value": 904.21,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 852.95,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-12",
-          "value": 903.33,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 851.67,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-01",
-          "value": 868.31,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 818.22,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-02",
-          "value": 892.73,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 840.79,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-03",
-          "value": 995.4,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 936.99,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-04",
-          "value": 855.34,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 804.72,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-05",
-          "value": 888.89,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 835.84,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-06",
-          "value": 851.95,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 800.68,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-07",
-          "value": 751.68,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 706.07,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-08",
-          "value": 776.01,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 728.54,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-09",
-          "value": 846.18,
-          "unit": "thousand MT (Bitumen)",
-          "yoy_pct": 10.5
+          "value": 794.0,
+          "unit": "Thousand MT (Bitumen)",
+          "yoy_pct": 9.8
         }
       ],
       "input_costs": [
@@ -1783,554 +1811,568 @@
           "metric": "Wholesale High-Speed Diesel Index",
           "value": 101.0,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2023-11",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 100.8,
+          "value": 100.9,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2023-12",
           "metric": "Wholesale High-Speed Diesel Index",
           "value": 100.7,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-01",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 100.5,
+          "value": 100.6,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-02",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 100.3,
+          "value": 100.5,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-03",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 100.2,
+          "value": 100.4,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-04",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 100.0,
+          "value": 100.2,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-05",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.8,
+          "value": 100.1,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-06",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.6,
+          "value": 100.0,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-07",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.5,
+          "value": 99.9,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-08",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.3,
+          "value": 99.7,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-09",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.1,
+          "value": 99.6,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2024-10",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 99.0,
+          "value": 99.5,
           "unit": "index",
-          "yoy_pct": -1.98
+          "yoy_pct": -1.49
         },
         {
           "month": "2024-11",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.8,
+          "value": 99.4,
           "unit": "index",
-          "yoy_pct": -1.98
+          "yoy_pct": -1.49
         },
         {
           "month": "2024-12",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.6,
+          "value": 99.2,
           "unit": "index",
-          "yoy_pct": -2.09
+          "yoy_pct": -1.49
         },
         {
           "month": "2025-01",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.5,
+          "value": 99.1,
           "unit": "index",
-          "yoy_pct": -1.99
+          "yoy_pct": -1.49
         },
         {
           "month": "2025-02",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.3,
+          "value": 99.0,
           "unit": "index",
-          "yoy_pct": -1.99
+          "yoy_pct": -1.49
         },
         {
           "month": "2025-03",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.2,
+          "value": 98.9,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.49
         },
         {
           "month": "2025-04",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 98.0,
+          "value": 98.7,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2025-05",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.8,
+          "value": 98.6,
           "unit": "index",
-          "yoy_pct": -2.0
+          "yoy_pct": -1.5
         },
         {
           "month": "2025-06",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.7,
+          "value": 98.5,
           "unit": "index",
-          "yoy_pct": -1.91
+          "yoy_pct": -1.5
         },
         {
           "month": "2025-07",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.5,
+          "value": 98.4,
           "unit": "index",
-          "yoy_pct": -2.01
+          "yoy_pct": -1.5
         },
         {
           "month": "2025-08",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.3,
+          "value": 98.2,
           "unit": "index",
-          "yoy_pct": -2.01
+          "yoy_pct": -1.5
         },
         {
           "month": "2025-09",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.2,
+          "value": 98.1,
           "unit": "index",
-          "yoy_pct": -1.92
+          "yoy_pct": -1.51
         },
         {
           "month": "2025-10",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 97.0,
+          "value": 98.0,
           "unit": "index",
-          "yoy_pct": -2.02
+          "yoy_pct": -1.51
         },
         {
           "month": "2025-11",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.8,
+          "value": 97.9,
           "unit": "index",
-          "yoy_pct": -2.02
+          "yoy_pct": -1.51
         },
         {
           "month": "2025-12",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.7,
+          "value": 97.7,
           "unit": "index",
-          "yoy_pct": -1.93
+          "yoy_pct": -1.51
         },
         {
           "month": "2026-01",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.5,
+          "value": 97.6,
           "unit": "index",
-          "yoy_pct": -2.03
+          "yoy_pct": -1.51
         },
         {
           "month": "2026-02",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.3,
+          "value": 97.5,
           "unit": "index",
-          "yoy_pct": -2.03
+          "yoy_pct": -1.52
         },
         {
           "month": "2026-03",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.2,
+          "value": 97.4,
           "unit": "index",
-          "yoy_pct": -2.04
+          "yoy_pct": -1.52
         },
         {
           "month": "2026-04",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 96.0,
+          "value": 97.3,
           "unit": "index",
-          "yoy_pct": -2.04
+          "yoy_pct": -1.42
         },
         {
           "month": "2026-05",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 95.9,
+          "value": 97.1,
           "unit": "index",
-          "yoy_pct": -1.94
+          "yoy_pct": -1.52
         },
         {
           "month": "2026-06",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 95.7,
+          "value": 97.0,
           "unit": "index",
-          "yoy_pct": -2.05
+          "yoy_pct": -1.52
         },
         {
           "month": "2026-07",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 95.5,
+          "value": 96.9,
           "unit": "index",
-          "yoy_pct": -2.05
+          "yoy_pct": -1.52
         },
         {
           "month": "2026-08",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 95.4,
+          "value": 96.8,
           "unit": "index",
-          "yoy_pct": -1.95
+          "yoy_pct": -1.43
         },
         {
           "month": "2026-09",
           "metric": "Wholesale High-Speed Diesel Index",
-          "value": 95.2,
+          "value": 96.6,
           "unit": "index",
-          "yoy_pct": -2.06
+          "yoy_pct": -1.53
         }
       ],
       "supporting_indicators": [
         {
           "month": "2023-10",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.81,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 34.45,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2023-11",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.11,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 35.37,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2023-12",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.1,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 35.32,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-01",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.67,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 33.93,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-02",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.97,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 34.87,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-03",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.23,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 38.86,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-04",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.51,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 33.37,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-05",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.92,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 34.66,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-06",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.47,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 33.21,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-07",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 9.23,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 29.28,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-08",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 9.53,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 30.21,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-09",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.4,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 32.93,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-10",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.95,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 37.83,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-11",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.27,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 38.84,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2024-12",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.26,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 38.78,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-01",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.79,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 37.26,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-02",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.12,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 38.29,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-03",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.51,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 42.67,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-04",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.61,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 36.65,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-05",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.07,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 38.06,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-06",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.56,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 36.46,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-07",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.2,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 32.15,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-08",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 10.53,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 33.18,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-09",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.49,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 36.16,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-10",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.2,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 41.53,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-11",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.56,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 42.65,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2025-12",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.55,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 42.58,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-01",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.02,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 40.91,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-02",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.39,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 42.04,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-03",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 14.93,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 46.85,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-04",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.83,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 40.24,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-05",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 13.33,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 41.79,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-06",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.78,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 40.03,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-07",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.28,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 35.3,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-08",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 11.64,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 36.43,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         },
         {
           "month": "2026-09",
-          "indicator": "NHAI Road Construction Kilometers",
-          "value": 12.69,
-          "unit": "operational units",
-          "yoy_pct": 10.5
+          "indicator": "MoRTH Highway Construction Pace (KM/day)",
+          "value": 39.7,
+          "unit": "operational metric",
+          "yoy_pct": 9.8
         }
       ],
       "source": {
-        "name": "PPAC Ministry of Petroleum",
+        "name": "PPAC (Bitumen) & MoRTH",
         "url": "https://ppac.gov.in"
       },
-      "historical_earnings_matrix": [
+      "empirical_earnings_matrix": [
         {
-          "quarter": "Q4 FY24",
+          "regime_name": "Fiscal Year-End Highway Paving Blitz",
           "vol_band": [
-            8.0,
-            15.0
+            12.0,
+            22.0
           ],
           "cost_band": [
-            -12.0,
-            -4.0
+            -6.0,
+            1.0
           ],
-          "ebitda_margin_delta_bps": 190,
-          "rev_growth_yoy": 13.5,
-          "hit_rate_pct": 91
+          "ebitda_delta_bps": 135,
+          "rev_growth_yoy": 19.5,
+          "hit_rate_pct": 89
         },
         {
-          "quarter": "Q3 FY25",
+          "regime_name": "Post-Monsoon Road Work Remobilization",
           "vol_band": [
-            5.0,
-            10.0
+            6.0,
+            12.0
           ],
           "cost_band": [
+            -4.0,
+            2.0
+          ],
+          "ebitda_delta_bps": 85,
+          "rev_growth_yoy": 11.4,
+          "hit_rate_pct": 82
+        },
+        {
+          "regime_name": "Monsoon Paving Blackout",
+          "vol_band": [
             -8.0,
-            -2.0
+            2.0
           ],
-          "ebitda_margin_delta_bps": 145,
-          "rev_growth_yoy": 9.2,
-          "hit_rate_pct": 86
+          "cost_band": [
+            -2.0,
+            4.0
+          ],
+          "ebitda_delta_bps": -40,
+          "rev_growth_yoy": 4.1,
+          "hit_rate_pct": 71
         },
         {
-          "quarter": "Q2 FY26",
+          "regime_name": "Fleet Fuel Cost Surge",
           "vol_band": [
-            5.0,
+            4.0,
             10.0
           ],
           "cost_band": [
-            -10.0,
-            -4.0
+            8.0,
+            18.0
           ],
-          "ebitda_margin_delta_bps": 150,
-          "rev_growth_yoy": 8.8,
-          "hit_rate_pct": 84
+          "ebitda_delta_bps": -120,
+          "rev_growth_yoy": 8.5,
+          "hit_rate_pct": 85
         }
       ]
     },
@@ -2339,219 +2381,219 @@
       "monthly_demand": [
         {
           "month": "2023-10",
-          "value": 7950.0,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8056.0,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2023-11",
-          "value": 8142.62,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8242.75,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2023-12",
-          "value": 8109.67,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8201.0,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-01",
-          "value": 7771.39,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7850.87,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-02",
-          "value": 7965.47,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8038.69,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-03",
-          "value": 8854.31,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8926.57,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-04",
-          "value": 7585.11,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7639.19,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-05",
-          "value": 7858.44,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7906.38,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-06",
-          "value": 7508.71,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7546.79,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-07",
-          "value": 6604.69,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 6631.39,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-08",
-          "value": 6797.53,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 6818.02,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-09",
-          "value": 7389.49,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7404.19,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-10",
-          "value": 8466.75,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8474.91,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-11",
-          "value": 8671.89,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8671.37,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-12",
-          "value": 8636.8,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8627.45,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-01",
-          "value": 8276.53,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8259.11,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-02",
-          "value": 8483.22,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8456.71,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-03",
-          "value": 9429.84,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 9390.75,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-04",
-          "value": 8078.15,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8036.43,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-05",
-          "value": 8369.24,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8317.51,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-06",
-          "value": 7996.78,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7939.22,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-07",
-          "value": 7034.0,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 6976.22,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-08",
-          "value": 7239.37,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7172.56,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-09",
-          "value": 7869.81,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7789.21,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-10",
-          "value": 9017.09,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8915.61,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-11",
-          "value": 9235.56,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 9122.28,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-12",
-          "value": 9198.19,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 9076.08,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-01",
-          "value": 8814.51,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8688.59,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-02",
-          "value": 9034.63,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8896.46,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-03",
-          "value": 10042.78,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 9879.07,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-04",
-          "value": 8603.23,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8454.33,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-05",
-          "value": 8913.24,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8750.02,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-06",
-          "value": 8516.57,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8352.06,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-07",
-          "value": 7491.21,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7338.99,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-08",
-          "value": 7709.93,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 7545.53,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-09",
-          "value": 8381.35,
-          "unit": "thousand MT (HSD Consumption)",
-          "yoy_pct": 6.5
+          "value": 8194.25,
+          "unit": "Thousand MT (HSD Sales)",
+          "yoy_pct": 5.2
         }
       ],
       "input_costs": [
@@ -2560,554 +2602,568 @@
           "metric": "Terminal Pump Diesel Price Benchmark",
           "value": 100.5,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2023-11",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 100.3,
+          "value": 100.4,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2023-12",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 100.2,
+          "value": 100.3,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-01",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 100.0,
+          "value": 100.2,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-02",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.9,
+          "value": 100.1,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-03",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.7,
+          "value": 100.0,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-04",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.6,
+          "value": 99.9,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-05",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.4,
+          "value": 99.9,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-06",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.3,
+          "value": 99.8,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-07",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.1,
+          "value": 99.7,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-08",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 99.0,
+          "value": 99.6,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-09",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.8,
+          "value": 99.5,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-10",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.7,
+          "value": 99.4,
           "unit": "index",
-          "yoy_pct": -1.79
+          "yoy_pct": -1.09
         },
         {
           "month": "2024-11",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.5,
+          "value": 99.3,
           "unit": "index",
-          "yoy_pct": -1.79
+          "yoy_pct": -1.1
         },
         {
           "month": "2024-12",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.4,
+          "value": 99.2,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-01",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.2,
+          "value": 99.1,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-02",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 98.1,
+          "value": 99.0,
           "unit": "index",
-          "yoy_pct": -1.8
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-03",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.9,
+          "value": 98.9,
           "unit": "index",
-          "yoy_pct": -1.81
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-04",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.8,
+          "value": 98.8,
           "unit": "index",
-          "yoy_pct": -1.81
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-05",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.7,
+          "value": 98.8,
           "unit": "index",
-          "yoy_pct": -1.71
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-06",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.5,
+          "value": 98.7,
           "unit": "index",
-          "yoy_pct": -1.81
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-07",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.4,
+          "value": 98.6,
           "unit": "index",
-          "yoy_pct": -1.72
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-08",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.2,
+          "value": 98.5,
           "unit": "index",
-          "yoy_pct": -1.82
+          "yoy_pct": -1.1
         },
         {
           "month": "2025-09",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 97.1,
+          "value": 98.4,
           "unit": "index",
-          "yoy_pct": -1.72
+          "yoy_pct": -1.11
         },
         {
           "month": "2025-10",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.9,
+          "value": 98.3,
           "unit": "index",
-          "yoy_pct": -1.82
+          "yoy_pct": -1.11
         },
         {
           "month": "2025-11",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.8,
+          "value": 98.2,
           "unit": "index",
-          "yoy_pct": -1.73
+          "yoy_pct": -1.11
         },
         {
           "month": "2025-12",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.6,
+          "value": 98.1,
           "unit": "index",
-          "yoy_pct": -1.83
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-01",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.5,
+          "value": 98.0,
           "unit": "index",
-          "yoy_pct": -1.73
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-02",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.3,
+          "value": 97.9,
           "unit": "index",
-          "yoy_pct": -1.83
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-03",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.2,
+          "value": 97.8,
           "unit": "index",
-          "yoy_pct": -1.74
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-04",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 96.0,
+          "value": 97.8,
           "unit": "index",
-          "yoy_pct": -1.84
+          "yoy_pct": -1.01
         },
         {
           "month": "2026-05",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 95.9,
+          "value": 97.7,
           "unit": "index",
-          "yoy_pct": -1.84
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-06",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 95.7,
+          "value": 97.6,
           "unit": "index",
-          "yoy_pct": -1.85
+          "yoy_pct": -1.11
         },
         {
           "month": "2026-07",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 95.6,
+          "value": 97.5,
           "unit": "index",
-          "yoy_pct": -1.85
+          "yoy_pct": -1.12
         },
         {
           "month": "2026-08",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 95.5,
+          "value": 97.4,
           "unit": "index",
-          "yoy_pct": -1.75
+          "yoy_pct": -1.12
         },
         {
           "month": "2026-09",
           "metric": "Terminal Pump Diesel Price Benchmark",
-          "value": 95.3,
+          "value": 97.3,
           "unit": "index",
-          "yoy_pct": -1.85
+          "yoy_pct": -1.12
         }
       ],
       "supporting_indicators": [
         {
           "month": "2023-10",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 397.5,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 322.24,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2023-11",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 407.13,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 329.71,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2023-12",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 405.48,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 328.04,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-01",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 388.57,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 314.03,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-02",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 398.27,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 321.55,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-03",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 442.72,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 357.06,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-04",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 379.26,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 305.57,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-05",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 392.92,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 316.26,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-06",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 375.44,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 301.87,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-07",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 330.23,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 265.26,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-08",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 339.88,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 272.72,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-09",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 369.47,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 296.17,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-10",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 423.34,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 339.0,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-11",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 433.59,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 346.85,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2024-12",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 431.84,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 345.1,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-01",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 413.83,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 330.36,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-02",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 424.16,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 338.27,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-03",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 471.49,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 375.63,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-04",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 403.91,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 321.46,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-05",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 418.46,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 332.7,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-06",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 399.84,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 317.57,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-07",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 351.7,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 279.05,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-08",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 361.97,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 286.9,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-09",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 393.49,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 311.57,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-10",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 450.85,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 356.62,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-11",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 461.78,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 364.89,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2025-12",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 459.91,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 363.04,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-01",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 440.73,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 347.54,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-02",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 451.73,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 355.86,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-03",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 502.14,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 395.16,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-04",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 430.16,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 338.17,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-05",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 445.66,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 350.0,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-06",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 425.83,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 334.08,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-07",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 374.56,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 293.56,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-08",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 385.5,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 301.82,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         },
         {
           "month": "2026-09",
-          "indicator": "GST E-Way Bills & FASTag Toll Counts",
-          "value": 419.07,
-          "unit": "operational units",
-          "yoy_pct": 6.5
+          "indicator": "FASTag Commercial Vehicle Toll Transactions (Crore)",
+          "value": 327.77,
+          "unit": "operational metric",
+          "yoy_pct": 5.2
         }
       ],
       "source": {
-        "name": "GSTN / NPCI FASTag",
-        "url": "https://gst.gov.in"
+        "name": "PPAC (HSD) & NPCI FASTag",
+        "url": "https://ppac.gov.in"
       },
-      "historical_earnings_matrix": [
+      "empirical_earnings_matrix": [
         {
-          "quarter": "Q4 FY24",
+          "regime_name": "Festive Freight Surge + Stable Diesel",
           "vol_band": [
-            8.0,
-            15.0
+            7.0,
+            13.0
           ],
           "cost_band": [
-            -12.0,
-            -4.0
+            -5.0,
+            1.0
           ],
-          "ebitda_margin_delta_bps": 190,
-          "rev_growth_yoy": 13.5,
-          "hit_rate_pct": 91
+          "ebitda_delta_bps": 75,
+          "rev_growth_yoy": 12.0,
+          "hit_rate_pct": 84
         },
         {
-          "quarter": "Q3 FY25",
+          "regime_name": "Steady Industrial CV Utilization",
           "vol_band": [
-            5.0,
-            10.0
+            3.0,
+            7.0
           ],
           "cost_band": [
-            -8.0,
-            -2.0
+            -3.0,
+            2.0
           ],
-          "ebitda_margin_delta_bps": 145,
-          "rev_growth_yoy": 9.2,
+          "ebitda_delta_bps": 35,
+          "rev_growth_yoy": 6.5,
+          "hit_rate_pct": 69
+        },
+        {
+          "regime_name": "Diesel Pass-Through Lag (Margin Squeeze)",
+          "vol_band": [
+            2.0,
+            6.0
+          ],
+          "cost_band": [
+            6.0,
+            16.0
+          ],
+          "ebitda_delta_bps": -95,
+          "rev_growth_yoy": 7.2,
           "hit_rate_pct": 86
         },
         {
-          "quarter": "Q2 FY26",
+          "regime_name": "Industrial Freight Slowdown",
           "vol_band": [
-            5.0,
-            10.0
+            -6.0,
+            0.0
           ],
           "cost_band": [
-            -10.0,
-            -4.0
+            -2.0,
+            3.0
           ],
-          "ebitda_margin_delta_bps": 150,
-          "rev_growth_yoy": 8.8,
-          "hit_rate_pct": 84
+          "ebitda_delta_bps": -65,
+          "rev_growth_yoy": 1.5,
+          "hit_rate_pct": 77
         }
       ]
     },
@@ -3116,219 +3172,219 @@
       "monthly_demand": [
         {
           "month": "2023-10",
-          "value": 1.46,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.43,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2023-11",
-          "value": 1.5,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.47,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2023-12",
-          "value": 1.49,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.46,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-01",
-          "value": 1.43,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.4,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-02",
-          "value": 1.47,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.44,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-03",
-          "value": 1.64,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.6,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-04",
-          "value": 1.4,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.38,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-05",
-          "value": 1.45,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.43,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-06",
-          "value": 1.39,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.37,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-07",
-          "value": 1.22,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.2,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-08",
-          "value": 1.26,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.24,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-09",
-          "value": 1.37,
-          "unit": "million TEUs",
-          "yoy_pct": 7.5
+          "value": 1.35,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-10",
-          "value": 1.57,
-          "unit": "million TEUs",
-          "yoy_pct": 7.53
+          "value": 1.55,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.39
         },
         {
           "month": "2024-11",
-          "value": 1.61,
-          "unit": "million TEUs",
-          "yoy_pct": 7.33
+          "value": 1.59,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.16
         },
         {
           "month": "2024-12",
-          "value": 1.61,
-          "unit": "million TEUs",
-          "yoy_pct": 8.05
+          "value": 1.58,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.22
         },
         {
           "month": "2025-01",
-          "value": 1.54,
-          "unit": "million TEUs",
-          "yoy_pct": 7.69
+          "value": 1.52,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.57
         },
         {
           "month": "2025-02",
-          "value": 1.58,
-          "unit": "million TEUs",
-          "yoy_pct": 7.48
+          "value": 1.56,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.33
         },
         {
           "month": "2025-03",
-          "value": 1.76,
-          "unit": "million TEUs",
-          "yoy_pct": 7.32
+          "value": 1.73,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.12
         },
         {
           "month": "2025-04",
-          "value": 1.51,
-          "unit": "million TEUs",
-          "yoy_pct": 7.86
+          "value": 1.49,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.97
         },
         {
           "month": "2025-05",
-          "value": 1.56,
-          "unit": "million TEUs",
-          "yoy_pct": 7.59
-        },
-        {
-          "month": "2025-06",
-          "value": 1.49,
-          "unit": "million TEUs",
-          "yoy_pct": 7.19
-        },
-        {
-          "month": "2025-07",
-          "value": 1.32,
-          "unit": "million TEUs",
-          "yoy_pct": 8.2
-        },
-        {
-          "month": "2025-08",
-          "value": 1.36,
-          "unit": "million TEUs",
-          "yoy_pct": 7.94
-        },
-        {
-          "month": "2025-09",
-          "value": 1.47,
-          "unit": "million TEUs",
-          "yoy_pct": 7.3
-        },
-        {
-          "month": "2025-10",
-          "value": 1.69,
-          "unit": "million TEUs",
-          "yoy_pct": 7.64
-        },
-        {
-          "month": "2025-11",
-          "value": 1.73,
-          "unit": "million TEUs",
-          "yoy_pct": 7.45
-        },
-        {
-          "month": "2025-12",
-          "value": 1.73,
-          "unit": "million TEUs",
-          "yoy_pct": 7.45
-        },
-        {
-          "month": "2026-01",
-          "value": 1.66,
-          "unit": "million TEUs",
-          "yoy_pct": 7.79
-        },
-        {
-          "month": "2026-02",
-          "value": 1.7,
-          "unit": "million TEUs",
-          "yoy_pct": 7.59
-        },
-        {
-          "month": "2026-03",
-          "value": 1.89,
-          "unit": "million TEUs",
-          "yoy_pct": 7.39
-        },
-        {
-          "month": "2026-04",
-          "value": 1.62,
-          "unit": "million TEUs",
-          "yoy_pct": 7.28
-        },
-        {
-          "month": "2026-05",
-          "value": 1.68,
-          "unit": "million TEUs",
+          "value": 1.54,
+          "unit": "Million TEUs",
           "yoy_pct": 7.69
         },
         {
-          "month": "2026-06",
+          "month": "2025-06",
+          "value": 1.48,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.03
+        },
+        {
+          "month": "2025-07",
+          "value": 1.3,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.33
+        },
+        {
+          "month": "2025-08",
+          "value": 1.34,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.06
+        },
+        {
+          "month": "2025-09",
+          "value": 1.46,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.15
+        },
+        {
+          "month": "2025-10",
+          "value": 1.67,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.74
+        },
+        {
+          "month": "2025-11",
+          "value": 1.71,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.55
+        },
+        {
+          "month": "2025-12",
+          "value": 1.71,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.23
+        },
+        {
+          "month": "2026-01",
+          "value": 1.64,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.89
+        },
+        {
+          "month": "2026-02",
+          "value": 1.68,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.69
+        },
+        {
+          "month": "2026-03",
+          "value": 1.87,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.09
+        },
+        {
+          "month": "2026-04",
           "value": 1.61,
-          "unit": "million TEUs",
+          "unit": "Million TEUs",
           "yoy_pct": 8.05
         },
         {
+          "month": "2026-05",
+          "value": 1.67,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.44
+        },
+        {
+          "month": "2026-06",
+          "value": 1.6,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.11
+        },
+        {
           "month": "2026-07",
-          "value": 1.41,
-          "unit": "million TEUs",
-          "yoy_pct": 6.82
+          "value": 1.4,
+          "unit": "Million TEUs",
+          "yoy_pct": 7.69
         },
         {
           "month": "2026-08",
-          "value": 1.46,
-          "unit": "million TEUs",
-          "yoy_pct": 7.35
+          "value": 1.45,
+          "unit": "Million TEUs",
+          "yoy_pct": 8.21
         },
         {
           "month": "2026-09",
           "value": 1.58,
-          "unit": "million TEUs",
-          "yoy_pct": 7.48
+          "unit": "Million TEUs",
+          "yoy_pct": 8.22
         }
       ],
       "input_costs": [
@@ -3337,554 +3393,568 @@
           "metric": "Port Bunker Fuel & Energy Index",
           "value": 104.0,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2023-11",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 103.7,
+          "value": 103.8,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2023-12",
           "metric": "Port Bunker Fuel & Energy Index",
           "value": 103.5,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-01",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 103.2,
+          "value": 103.3,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-02",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 102.9,
+          "value": 103.1,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-03",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 102.7,
+          "value": 102.9,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-04",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 102.4,
+          "value": 102.6,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-05",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 102.2,
+          "value": 102.4,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-06",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 101.9,
+          "value": 102.2,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-07",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 101.7,
+          "value": 102.0,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-08",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 101.4,
+          "value": 101.7,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-09",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 101.1,
+          "value": 101.5,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-10",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 100.9,
+          "value": 101.3,
           "unit": "index",
-          "yoy_pct": -2.98
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-11",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 100.6,
+          "value": 101.1,
           "unit": "index",
-          "yoy_pct": -2.99
+          "yoy_pct": -2.6
         },
         {
           "month": "2024-12",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 100.4,
+          "value": 100.9,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.51
         },
         {
           "month": "2025-01",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 100.1,
+          "value": 100.6,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.61
         },
         {
           "month": "2025-02",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 99.9,
+          "value": 100.4,
           "unit": "index",
-          "yoy_pct": -2.92
+          "yoy_pct": -2.62
         },
         {
           "month": "2025-03",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 99.6,
+          "value": 100.2,
           "unit": "index",
-          "yoy_pct": -3.02
+          "yoy_pct": -2.62
         },
         {
           "month": "2025-04",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 99.4,
+          "value": 100.0,
           "unit": "index",
-          "yoy_pct": -2.93
+          "yoy_pct": -2.53
         },
         {
           "month": "2025-05",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 99.1,
+          "value": 99.8,
           "unit": "index",
-          "yoy_pct": -3.03
+          "yoy_pct": -2.54
         },
         {
           "month": "2025-06",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 98.9,
+          "value": 99.5,
           "unit": "index",
-          "yoy_pct": -2.94
+          "yoy_pct": -2.64
         },
         {
           "month": "2025-07",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 98.6,
+          "value": 99.3,
           "unit": "index",
-          "yoy_pct": -3.05
+          "yoy_pct": -2.65
         },
         {
           "month": "2025-08",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 98.4,
+          "value": 99.1,
           "unit": "index",
-          "yoy_pct": -2.96
+          "yoy_pct": -2.56
         },
         {
           "month": "2025-09",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 98.1,
+          "value": 98.9,
           "unit": "index",
-          "yoy_pct": -2.97
+          "yoy_pct": -2.56
         },
         {
           "month": "2025-10",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 97.9,
+          "value": 98.7,
           "unit": "index",
-          "yoy_pct": -2.97
+          "yoy_pct": -2.57
         },
         {
           "month": "2025-11",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 97.6,
+          "value": 98.4,
           "unit": "index",
-          "yoy_pct": -2.98
+          "yoy_pct": -2.67
         },
         {
           "month": "2025-12",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 97.4,
+          "value": 98.2,
           "unit": "index",
-          "yoy_pct": -2.99
+          "yoy_pct": -2.68
         },
         {
           "month": "2026-01",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 97.1,
+          "value": 98.0,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.58
         },
         {
           "month": "2026-02",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 96.9,
+          "value": 97.8,
           "unit": "index",
-          "yoy_pct": -3.0
+          "yoy_pct": -2.59
         },
         {
           "month": "2026-03",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 96.6,
+          "value": 97.6,
           "unit": "index",
-          "yoy_pct": -3.01
+          "yoy_pct": -2.59
         },
         {
           "month": "2026-04",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 96.4,
+          "value": 97.4,
           "unit": "index",
-          "yoy_pct": -3.02
+          "yoy_pct": -2.6
         },
         {
           "month": "2026-05",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 96.1,
+          "value": 97.2,
           "unit": "index",
-          "yoy_pct": -3.03
+          "yoy_pct": -2.61
         },
         {
           "month": "2026-06",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 95.9,
+          "value": 96.9,
           "unit": "index",
-          "yoy_pct": -3.03
+          "yoy_pct": -2.61
         },
         {
           "month": "2026-07",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 95.6,
+          "value": 96.7,
           "unit": "index",
-          "yoy_pct": -3.04
+          "yoy_pct": -2.62
         },
         {
           "month": "2026-08",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 95.4,
+          "value": 96.5,
           "unit": "index",
-          "yoy_pct": -3.05
+          "yoy_pct": -2.62
         },
         {
           "month": "2026-09",
           "metric": "Port Bunker Fuel & Energy Index",
-          "value": 95.2,
+          "value": 96.3,
           "unit": "index",
-          "yoy_pct": -2.96
+          "yoy_pct": -2.63
         }
       ],
       "supporting_indicators": [
         {
           "month": "2023-10",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.32,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.34,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2023-11",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.33,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.35,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2023-12",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.33,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.35,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-01",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.31,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.34,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-02",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.32,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.35,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-03",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.36,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.38,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-04",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.31,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.33,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-05",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.32,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.34,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-06",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.31,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.33,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-07",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.27,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.29,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-08",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.28,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.3,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-09",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.3,
-          "unit": "operational units",
-          "yoy_pct": 7.5
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.32,
+          "unit": "operational metric",
+          "yoy_pct": 8.1
         },
         {
           "month": "2024-10",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.35,
-          "unit": "operational units",
-          "yoy_pct": 7.53
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.37,
+          "unit": "operational metric",
+          "yoy_pct": 8.39
         },
         {
           "month": "2024-11",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.35,
-          "unit": "operational units",
-          "yoy_pct": 7.33
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.38,
+          "unit": "operational metric",
+          "yoy_pct": 8.16
         },
         {
           "month": "2024-12",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.35,
-          "unit": "operational units",
-          "yoy_pct": 8.05
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.38,
+          "unit": "operational metric",
+          "yoy_pct": 8.22
         },
         {
           "month": "2025-01",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.34,
-          "unit": "operational units",
-          "yoy_pct": 7.69
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.36,
+          "unit": "operational metric",
+          "yoy_pct": 8.57
         },
         {
           "month": "2025-02",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.35,
-          "unit": "operational units",
-          "yoy_pct": 7.48
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.37,
+          "unit": "operational metric",
+          "yoy_pct": 8.33
         },
         {
           "month": "2025-03",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.39,
-          "unit": "operational units",
-          "yoy_pct": 7.32
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.42,
+          "unit": "operational metric",
+          "yoy_pct": 8.12
         },
         {
           "month": "2025-04",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.33,
-          "unit": "operational units",
-          "yoy_pct": 7.86
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.36,
+          "unit": "operational metric",
+          "yoy_pct": 7.97
         },
         {
           "month": "2025-05",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.34,
-          "unit": "operational units",
-          "yoy_pct": 7.59
-        },
-        {
-          "month": "2025-06",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.33,
-          "unit": "operational units",
-          "yoy_pct": 7.19
-        },
-        {
-          "month": "2025-07",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.29,
-          "unit": "operational units",
-          "yoy_pct": 8.2
-        },
-        {
-          "month": "2025-08",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.3,
-          "unit": "operational units",
-          "yoy_pct": 7.94
-        },
-        {
-          "month": "2025-09",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.32,
-          "unit": "operational units",
-          "yoy_pct": 7.3
-        },
-        {
-          "month": "2025-10",
-          "indicator": "Port Container Rail Evacuation Rakes",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
           "value": 0.37,
-          "unit": "operational units",
-          "yoy_pct": 7.64
-        },
-        {
-          "month": "2025-11",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.38,
-          "unit": "operational units",
-          "yoy_pct": 7.45
-        },
-        {
-          "month": "2025-12",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.38,
-          "unit": "operational units",
-          "yoy_pct": 7.45
-        },
-        {
-          "month": "2026-01",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.37,
-          "unit": "operational units",
-          "yoy_pct": 7.79
-        },
-        {
-          "month": "2026-02",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.37,
-          "unit": "operational units",
-          "yoy_pct": 7.59
-        },
-        {
-          "month": "2026-03",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.42,
-          "unit": "operational units",
-          "yoy_pct": 7.39
-        },
-        {
-          "month": "2026-04",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.36,
-          "unit": "operational units",
-          "yoy_pct": 7.28
-        },
-        {
-          "month": "2026-05",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.37,
-          "unit": "operational units",
+          "unit": "operational metric",
           "yoy_pct": 7.69
         },
         {
-          "month": "2026-06",
-          "indicator": "Port Container Rail Evacuation Rakes",
+          "month": "2025-06",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.36,
+          "unit": "operational metric",
+          "yoy_pct": 8.03
+        },
+        {
+          "month": "2025-07",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.31,
+          "unit": "operational metric",
+          "yoy_pct": 8.33
+        },
+        {
+          "month": "2025-08",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.32,
+          "unit": "operational metric",
+          "yoy_pct": 8.06
+        },
+        {
+          "month": "2025-09",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
           "value": 0.35,
-          "unit": "operational units",
+          "unit": "operational metric",
+          "yoy_pct": 8.15
+        },
+        {
+          "month": "2025-10",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.4,
+          "unit": "operational metric",
+          "yoy_pct": 7.74
+        },
+        {
+          "month": "2025-11",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.41,
+          "unit": "operational metric",
+          "yoy_pct": 7.55
+        },
+        {
+          "month": "2025-12",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.41,
+          "unit": "operational metric",
+          "yoy_pct": 8.23
+        },
+        {
+          "month": "2026-01",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.39,
+          "unit": "operational metric",
+          "yoy_pct": 7.89
+        },
+        {
+          "month": "2026-02",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.4,
+          "unit": "operational metric",
+          "yoy_pct": 7.69
+        },
+        {
+          "month": "2026-03",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.45,
+          "unit": "operational metric",
+          "yoy_pct": 8.09
+        },
+        {
+          "month": "2026-04",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.39,
+          "unit": "operational metric",
           "yoy_pct": 8.05
         },
         {
+          "month": "2026-05",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.4,
+          "unit": "operational metric",
+          "yoy_pct": 8.44
+        },
+        {
+          "month": "2026-06",
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.38,
+          "unit": "operational metric",
+          "yoy_pct": 8.11
+        },
+        {
           "month": "2026-07",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.31,
-          "unit": "operational units",
-          "yoy_pct": 6.82
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.34,
+          "unit": "operational metric",
+          "yoy_pct": 7.69
         },
         {
           "month": "2026-08",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.32,
-          "unit": "operational units",
-          "yoy_pct": 7.35
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.35,
+          "unit": "operational metric",
+          "yoy_pct": 8.21
         },
         {
           "month": "2026-09",
-          "indicator": "Port Container Rail Evacuation Rakes",
-          "value": 0.35,
-          "unit": "operational units",
-          "yoy_pct": 7.48
+          "indicator": "Port Container Rail Evacuation (TEUs)",
+          "value": 0.38,
+          "unit": "operational metric",
+          "yoy_pct": 8.22
         }
       ],
       "source": {
         "name": "Indian Ports Association (IPA)",
         "url": "http://ipa.nic.in"
       },
-      "historical_earnings_matrix": [
+      "empirical_earnings_matrix": [
         {
-          "quarter": "Q4 FY24",
+          "regime_name": "Export-Import Container Surge",
           "vol_band": [
             8.0,
             15.0
           ],
           "cost_band": [
-            -12.0,
-            -4.0
-          ],
-          "ebitda_margin_delta_bps": 190,
-          "rev_growth_yoy": 13.5,
-          "hit_rate_pct": 91
-        },
-        {
-          "quarter": "Q3 FY25",
-          "vol_band": [
-            5.0,
-            10.0
-          ],
-          "cost_band": [
             -8.0,
-            -2.0
+            0.0
           ],
-          "ebitda_margin_delta_bps": 145,
-          "rev_growth_yoy": 9.2,
-          "hit_rate_pct": 86
+          "ebitda_delta_bps": 280,
+          "rev_growth_yoy": 16.0,
+          "hit_rate_pct": 95
         },
         {
-          "quarter": "Q2 FY26",
+          "regime_name": "Stable Container Throughput",
           "vol_band": [
-            5.0,
-            10.0
+            4.0,
+            8.0
           ],
           "cost_band": [
-            -10.0,
-            -4.0
+            -5.0,
+            2.0
           ],
-          "ebitda_margin_delta_bps": 150,
-          "rev_growth_yoy": 8.8,
-          "hit_rate_pct": 84
+          "ebitda_delta_bps": 140,
+          "rev_growth_yoy": 9.2,
+          "hit_rate_pct": 88
+        },
+        {
+          "regime_name": "Bunker Energy Spike & Port Congestion",
+          "vol_band": [
+            1.0,
+            6.0
+          ],
+          "cost_band": [
+            10.0,
+            24.0
+          ],
+          "ebitda_delta_bps": -160,
+          "rev_growth_yoy": 7.8,
+          "hit_rate_pct": 82
+        },
+        {
+          "regime_name": "Exim Cargo Contraction",
+          "vol_band": [
+            -7.0,
+            0.0
+          ],
+          "cost_band": [
+            -3.0,
+            3.0
+          ],
+          "ebitda_delta_bps": -190,
+          "rev_growth_yoy": -2.0,
+          "hit_rate_pct": 90
         }
       ]
     }
