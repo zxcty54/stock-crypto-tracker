@@ -1,0 +1,196 @@
+{
+  "computed_at": "2026-10-08 15:50:57 IST",
+  "total_analyzed": 5,
+  "analyzed_subsectors": [
+    {
+      "subsector_key": "PRIMARY_STEEL",
+      "subsector_name": "Primary Blast-Furnace Steel Manufacturing",
+      "unit": "Million Tonnes Crude Output",
+      "latest_month": "Sep 2026",
+      "quantitative_metrics": {
+        "current_month_yoy_pct": 7.67,
+        "current_mom_pct": 4.85,
+        "trailing_3m_yoy_pct": 9.91,
+        "trailing_6m_yoy_pct": 8.42,
+        "trend_momentum": "DECELERATING_SLOWDOWN",
+        "seasonality_beat_multiple": 1.12,
+        "input_cost_yoy_pct": -7.66,
+        "operating_spread_score": 17.57
+      },
+      "financial_elasticity_anchor": {
+        "sensitivity": "Every +10% volume growth with soft coking coal spreads expands blended EBITDA/tonne by Rs 1,400-1,800.",
+        "historical_quarters": [
+          {
+            "quarter": "Q2 FY25",
+            "vol_yoy": 5.4,
+            "ebitda_margin_pct": 14.2
+          },
+          {
+            "quarter": "Q3 FY25",
+            "vol_yoy": 8.9,
+            "ebitda_margin_pct": 16.1
+          },
+          {
+            "quarter": "Q4 FY25",
+            "vol_yoy": 12.0,
+            "ebitda_margin_pct": 18.5
+          },
+          {
+            "quarter": "Q1 FY26",
+            "vol_yoy": 6.8,
+            "ebitda_margin_pct": 15.0
+          },
+          {
+            "quarter": "Q2 FY26",
+            "vol_yoy": 9.1,
+            "ebitda_margin_pct": 16.8
+          }
+        ]
+      }
+    },
+    {
+      "subsector_key": "ROAD_HIGHWAY_EPC",
+      "subsector_name": "National Highway EPC & Road Construction",
+      "unit": "Thousand MT (Bitumen)",
+      "latest_month": "Sep 2026",
+      "quantitative_metrics": {
+        "current_month_yoy_pct": 9.08,
+        "current_mom_pct": 10.29,
+        "trailing_3m_yoy_pct": 9.42,
+        "trailing_6m_yoy_pct": 8.01,
+        "trend_momentum": "DECELERATING_SLOWDOWN",
+        "seasonality_beat_multiple": 1.14,
+        "input_cost_yoy_pct": -7.66,
+        "operating_spread_score": 17.08
+      },
+      "financial_elasticity_anchor": {
+        "sensitivity": "Bitumen execution run-rate acceleration directly translates to billing revenue recognition in Q3/Q4.",
+        "historical_quarters": [
+          {
+            "quarter": "Q3 FY25",
+            "vol_yoy": 14.0,
+            "ebitda_margin_pct": 13.5
+          },
+          {
+            "quarter": "Q4 FY25",
+            "vol_yoy": 18.2,
+            "ebitda_margin_pct": 14.8
+          },
+          {
+            "quarter": "Q2 FY26",
+            "vol_yoy": 7.4,
+            "ebitda_margin_pct": 12.2
+          }
+        ]
+      }
+    },
+    {
+      "subsector_key": "CONTAINER_EXIM",
+      "subsector_name": "Port Terminal Operations & Container Exim",
+      "unit": "Million TEUs Handled",
+      "latest_month": "Sep 2026",
+      "quantitative_metrics": {
+        "current_month_yoy_pct": 6.54,
+        "current_mom_pct": 4.49,
+        "trailing_3m_yoy_pct": 8.75,
+        "trailing_6m_yoy_pct": 7.44,
+        "trend_momentum": "DECELERATING_SLOWDOWN",
+        "seasonality_beat_multiple": 1.11,
+        "input_cost_yoy_pct": -7.66,
+        "operating_spread_score": 16.41
+      },
+      "financial_elasticity_anchor": {
+        "sensitivity": "Container TEU volume acceleration produces operating leverage flow-through of 65% on terminal EBITDA.",
+        "historical_quarters": [
+          {
+            "quarter": "Q3 FY25",
+            "vol_yoy": 9.2,
+            "ebitda_margin_pct": 52.4
+          },
+          {
+            "quarter": "Q4 FY25",
+            "vol_yoy": 12.8,
+            "ebitda_margin_pct": 55.1
+          }
+        ]
+      }
+    },
+    {
+      "subsector_key": "SURFACE_LOGISTICS",
+      "subsector_name": "Heavy Commercial Vehicles & Fleet Logistics",
+      "unit": "Million FASTag CV Trips",
+      "latest_month": "Sep 2026",
+      "quantitative_metrics": {
+        "current_month_yoy_pct": 6.17,
+        "current_mom_pct": 4.76,
+        "trailing_3m_yoy_pct": 7.29,
+        "trailing_6m_yoy_pct": 6.2,
+        "trend_momentum": "DECELERATING_SLOWDOWN",
+        "seasonality_beat_multiple": 1.1,
+        "input_cost_yoy_pct": -7.66,
+        "operating_spread_score": 14.95
+      },
+      "financial_elasticity_anchor": {
+        "sensitivity": "Trip volume growth above diesel inflation determines whether 3PL logistics margins expand or contract.",
+        "historical_quarters": [
+          {
+            "quarter": "Q3 FY25",
+            "vol_yoy": 11.0,
+            "ebitda_margin_pct": 9.2
+          },
+          {
+            "quarter": "Q4 FY25",
+            "vol_yoy": 13.5,
+            "ebitda_margin_pct": 10.1
+          }
+        ]
+      }
+    },
+    {
+      "subsector_key": "BULK_CEMENT",
+      "subsector_name": "Bulk Cement & Construction Clinker",
+      "unit": "Million Tonnes Dispatched",
+      "latest_month": "Sep 2026",
+      "quantitative_metrics": {
+        "current_month_yoy_pct": 6.93,
+        "current_mom_pct": 10.09,
+        "trailing_3m_yoy_pct": 5.68,
+        "trailing_6m_yoy_pct": 4.83,
+        "trend_momentum": "ACCELERATING_SURGE",
+        "seasonality_beat_multiple": 1.11,
+        "input_cost_yoy_pct": -7.66,
+        "operating_spread_score": 13.34
+      },
+      "financial_elasticity_anchor": {
+        "sensitivity": "Every +5% sustained QoQ dispatch surge expands sector EBITDA margins by 130-170 bps.",
+        "historical_quarters": [
+          {
+            "quarter": "Q2 FY25",
+            "vol_yoy": 6.1,
+            "ebitda_margin_pct": 16.8
+          },
+          {
+            "quarter": "Q3 FY25",
+            "vol_yoy": 11.4,
+            "ebitda_margin_pct": 18.9
+          },
+          {
+            "quarter": "Q4 FY25",
+            "vol_yoy": 14.2,
+            "ebitda_margin_pct": 20.4
+          },
+          {
+            "quarter": "Q1 FY26",
+            "vol_yoy": 7.8,
+            "ebitda_margin_pct": 17.5
+          },
+          {
+            "quarter": "Q2 FY26",
+            "vol_yoy": 8.2,
+            "ebitda_margin_pct": 17.9
+          }
+        ]
+      }
+    }
+  ]
+}
