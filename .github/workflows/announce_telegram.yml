@@ -15,9 +15,15 @@ on:
   # 3. GitHub UI se manual run ka option
   workflow_dispatch:
 
+# Prevent scheduled and workflow_run dispatches from posting the same feed simultaneously.
+concurrency:
+  group: corporate-telegram-dispatch
+  cancel-in-progress: false
+
 jobs:
   broadcast-to-telegram:
-    # Sirf tabhi run hoga jab manual trigger ho, cron ho, ya parent workflow successfully finish hua ho
+    # Sirf tabhi run hoga jab manual trigger ho, cron ho,
+    # ya parent workflow successfully finish hua ho
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
