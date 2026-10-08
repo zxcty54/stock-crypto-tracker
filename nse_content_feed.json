@@ -1,35 +1,21 @@
 {
-  "generated_at": "2026-10-09 01:01:19 IST",
-  "worthy_count": 12,
-  "skipped_count": 3,
+  "generated_at": "2026-10-09 02:16:17 IST",
+  "worthy_count": 13,
+  "skipped_count": 4,
   "content_feed": [
-    {
-      "hash": "10107b52dcc4",
-      "symbol": "TINNARUBR",
-      "company_name": "Tinna Rubber and Infrastructure Limited",
-      "category": "JV",
-      "event_type": "JOINT_VENTURE",
-      "broadcast_date": "07-Oct-2026 16:09:05",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/TINNARUBBER_07102026155905_TRIL_SEIntimation_Mbodla_Loan_07Oct2026.pdf",
-      "headline": "Tinna Rubber remits 2nd tranche of loan to South African JV",
-      "content_worthy": true,
-      "worthiness_reason": "Material capital outflow/investment into a foreign joint venture.",
-      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Tinna Rubber and Infrastructure Limited (NSE: TINNARUBR)</b>\n\n<b>Tinna Rubber remits 2nd tranche of loan to South African JV</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Counterparty:</b> Mbodla Investments (Pty) Ltd, South Africa\n- <b>Amount Remitted:</b> US$ 4,00,000\n- <b>INR Equivalent:</b> INR 3,85,68,000\n- <b>Purpose:</b> Loan disbursement to Joint Venture\n\n📌 <b>What happened:</b>\n↳ Tinna Rubber and Infrastructure Limited has completed the remittance of the second tranche of a loan to its South African joint venture, Mbodla Investments (Pty) Ltd.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/TINNARUBBER_07102026155905_TRIL_SEIntimation_Mbodla_Loan_07Oct2026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-09 01:01:19 IST"
-    },
     {
       "hash": "638ba167f6f0",
       "symbol": "VOLTAMP",
       "company_name": "Voltamp Transformers Limited",
       "category": "COMMERCIAL_PRODUCTION",
-      "event_type": "CAPEX",
+      "event_type": "COMMERCIAL_PRODUCTION",
       "broadcast_date": "07-Oct-2026 17:28:10",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/VOLTAMP_07102026172733_SE_INTIMATION.pdf",
-      "headline": "Voltamp Transformers commences production at new Unit-III facility",
+      "headline": "Commencement of commercial production at new Unit‑III plant",
       "content_worthy": true,
-      "worthiness_reason": "Commencement of commercial production at a new manufacturing facility is a material event.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Voltamp Transformers Limited (NSE: VOLTAMP)</b>\n\n<b>Voltamp Transformers commences production at new Unit-III facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility:</b> Unit-III (Power Transformers)\n- <b>Location:</b> Jarod, Vadodara, Gujarat\n- <b>Effective Date:</b> October 07, 2026\n\n📌 <b>What happened:</b>\n↳ Voltamp Transformers has officially commenced commercial production at its new manufacturing plant in Gujarat. The facility is dedicated to the production of power transformers.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VOLTAMP_07102026172733_SE_INTIMATION.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-09 01:00:58 IST"
+      "worthiness_reason": "Commencement of commercial production at new plant.",
+      "telegram_post": "🏭 <b>#COMMERCIAL_PRODUCTION</b> | <b>Voltamp Transformers Limited (NSE: VOLTAMP)</b>\n\n<b>Commencement of commercial production at new Unit‑III plant</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Location:</b> Jarod, Vadodara, Gujarat\n- <b>Product:</b> Power Transformers\n- <b>Unit:</b> III\n- <b>Start Date:</b> Oct 07 2026\n\n📌 <b>What happened:</b>\n↳ Voltamp has begun commercial production at its new state‑of‑the‑art facility for power transformers, effective 7 Oct 2026.\n\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VOLTAMP_07102026172733_SE_INTIMATION.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 02:15:56 IST"
     },
     {
       "hash": "42ab8d68bfdf",
@@ -39,11 +25,39 @@
       "event_type": "ACQUISITION",
       "broadcast_date": "07-Oct-2026 19:26:05",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/BRAINBEES_07102026192542_Disclosureunderregulation30_MOUtosellMush.pdf",
-      "headline": "Brainbees Solutions to divest stake in Mush Textile",
+      "headline": "GlobalBees to sell 51.54% stake in Mush Textile Private Limited",
       "content_worthy": true,
-      "worthiness_reason": "Divestment of a subsidiary is a material corporate development.",
-      "telegram_post": "🤝 <b>#ACQUISITION</b> | <b>Brainbees Solutions Limited (NSE: FIRSTCRY)</b>\n\n<b>Brainbees Solutions to divest stake in Mush Textile</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Entity Sold:</b> Mush Textile Private Limited\n- <b>Stake Divested:</b> 51.54%\n- <b>Consideration:</b> Rs 5.69 Crore\n- <b>Completion Date:</b> On or before October 15, 2026\n\n📌 <b>What happened:</b>\n↳ GlobalBees Brands, a subsidiary of Brainbees Solutions, has signed an MOU to sell its entire 51.54% stake in Mush Textile. Upon completion, Mush Textile will cease to be a step-down subsidiary of Brainbees.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BRAINBEES_07102026192542_Disclosureunderregulation30_MOUtosellMush.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-09 01:00:58 IST"
+      "worthiness_reason": "Sale of entire stake in subsidiary with consideration disclosed.",
+      "telegram_post": "💰 <b>#ACQUISITION</b> | <b>Brainbees Solutions Limited (NSE: FIRSTCRY)</b>\n\n<b>GlobalBees to sell 51.54% stake in Mush Textile Private Limited</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Stake:</b> 51.54%\n- <b>Consideration:</b> ₹5,68,93,940\n- <b>Expected Completion:</b> Oct 15 2026\n- <b>Effect:</b> Mush ceases to be subsidiary\n\n📌 <b>What happened:</b>\n↳ GlobalBees, a subsidiary of Brainbees, entered into a Memorandum of Understanding to sell its entire stake in Mush Textile Private Limited. The transaction is expected to complete by 15 Oct 2026.\n\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BRAINBEES_07102026192542_Disclosureunderregulation30_MOUtosellMush.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 02:15:56 IST"
+    },
+    {
+      "hash": "1c1642760031",
+      "symbol": "FEDERALBNK",
+      "company_name": "The Federal Bank  Limited",
+      "category": "NEW_PRODUCT",
+      "event_type": "NEW_PRODUCT",
+      "broadcast_date": "07-Oct-2026 21:06:01",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/FEDERALBNK_07102026210508_SE_Intimation_Product_Launch_Verto_Savings_Account_S.pdf",
+      "headline": "Federal Bank launches Verto Resident Savings Account",
+      "content_worthy": true,
+      "worthiness_reason": "New savings product launched.",
+      "telegram_post": "🚀 <b>#NEW_PRODUCT</b> | <b>The Federal Bank Limited (NSE: FEDERALBNK)</b>\n\n<b>Federal Bank launches Verto Resident Savings Account</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Verto Resident Savings Account\n- <b>Launch Date:</b> 7 Oct 2026\n- <b>Category:</b> Savings account\n- <b>Market:</b> Domestic\n\n📌 <b>What happened:</b>\n↳ The bank has introduced a new resident savings account for domestic customers.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/FEDERALBNK_07102026210508_SE_Intimation_Product_Launch_Verto_Savings_Account_S.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 02:15:33 IST"
+    },
+    {
+      "hash": "54f319544656",
+      "symbol": "BUILDPRO",
+      "company_name": "Shankara Buildpro Limited",
+      "category": "SPLIT",
+      "event_type": "STOCK_SPLIT",
+      "broadcast_date": "07-Oct-2026 21:21:36",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BUILDPRO_07102026212127_Letter.pdf",
+      "headline": "Shankara Buildpro to split shares 1:5 with record date 8 Oct 2026",
+      "content_worthy": true,
+      "worthiness_reason": "Share split announced with record date.",
+      "telegram_post": "✂️ <b>#STOCK_SPLIT</b> | <b>Shankara Buildpro Limited (NSE: BUILDPRO)</b>\n\n<b>Shankara Buildpro to split shares 1:5 with record date 8 Oct 2026</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Record Date:</b> 8 Oct 2026\n- <b>Split Ratio:</b> 1:5\n- <b>New Face Value:</b> Rs. 2\n- <b>Old Face Value:</b> Rs. 10\n\n📌 <b>What happened:</b>\n↳ Shareholders will receive 5 new shares for each existing share, effective from the record date.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BUILDPRO_07102026212127_Letter.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 02:15:33 IST"
     },
     {
       "hash": "e42ac9a2b238",
@@ -173,6 +187,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "10107b52dcc4",
+      "symbol": "TINNARUBR",
+      "company_name": "Tinna Rubber and Infrastructure Limited",
+      "category": "JV",
+      "event_type": "OTHER",
+      "broadcast_date": "07-Oct-2026 16:09:05",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/TINNARUBBER_07102026155905_TRIL_SEIntimation_Mbodla_Loan_07Oct2026.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Routine compliance under Regulation 30, no material development.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-09 02:16:17 IST"
+    },
     {
       "hash": "80c06de4ffa7",
       "symbol": "TCS",
