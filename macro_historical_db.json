@@ -1,5 +1,5 @@
 {
-  "version": "7.0-live-official-raw",
+  "version": "7.0-live-official",
   "generated_at": "2026-10-08 17:19:55 IST",
   "data_type": "RAW_OFFICIAL_SOURCE_DATA",
   "synthetic_data": false,
@@ -17,7 +17,9 @@
               "retrieved_at": "2026-10-08 17:19:22 IST",
               "status": "SUCCESS"
             }
-          ]
+          ],
+          "yoy_pct": null,
+          "mom_pct": null
         }
       ],
       "input_costs": [],
@@ -27,12 +29,46 @@
           "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
           "retrieved_at": "2026-10-08 17:19:22 IST",
           "status": "SUCCESS"
+        },
+        {
+          "source_name": "DPIIT / Office of Economic Adviser",
+          "source_url": "https://eaindustry.nic.in",
+          "document_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "document_title": "Press Release",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:38:54 IST",
+          "sha256": "8e786a20f97cb809961923e72ef2d6f6a0730bb900580f9bb402115639b483da",
+          "bytes": 389562,
+          "text_length": 7755
+        },
+        {
+          "source_name": "DPIIT / Office of Economic Adviser",
+          "source_url": "https://eaindustry.nic.in",
+          "document_url": "https://eaindustry.nic.in/uploaded_files/JointDeclaration_Annexes_BRICSPartNIR2026.pdf",
+          "document_title": "BRICS PartNIR track Joint Declaration adopted in 10th Industry Ministers' Meeting during Indiaâs BRICS Chairship 2026",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:38:58 IST",
+          "sha256": "51eb49b381140061aadeea57cbe3dc7518871fcea0f2d6a66eca13dc33a20d4b",
+          "bytes": 2056466,
+          "text_length": 29980
         }
       ],
       "source": {
         "provider": "DPIIT / Office of Economic Adviser",
         "official_url": "https://eaindustry.nic.in",
-        "retrieved_at": "2026-10-08 17:19:55 IST"
+        "retrieved_at": "2026-10-08 17:19:55 IST",
+        "primary": "DPIIT / Office of Economic Adviser",
+        "source_url": "https://eaindustry.nic.in",
+        "last_scraped": "2026-10-08 17:40:27 IST"
+      },
+      "latest_month": "2026-10",
+      "latest_telemetry": {
+        "current_volume": 4.41,
+        "unit": "million tonnes",
+        "mom_pct": null,
+        "yoy_pct": null,
+        "trailing_3m_yoy_pct": null,
+        "trailing_6m_yoy_pct": null
       }
     },
     "STEEL": {
@@ -40,15 +76,17 @@
       "monthly_demand": [
         {
           "month": "2026-10",
-          "value": 17.584,
-          "unit": "million tonnes crude steel",
+          "value": 70.0,
+          "unit": "million tonnes (crude)",
           "source_document": [
             {
               "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
               "retrieved_at": "2026-10-08 17:19:22 IST",
               "status": "SUCCESS"
             }
-          ]
+          ],
+          "yoy_pct": null,
+          "mom_pct": null
         }
       ],
       "input_costs": [],
@@ -58,12 +96,46 @@
           "url": "https://eaindustry.nic.in/uploaded_files/ici/ICI_Report_of_Committee.pdf",
           "retrieved_at": "2026-10-08 17:19:22 IST",
           "status": "SUCCESS"
+        },
+        {
+          "source_name": "DPIIT / Office of Economic Adviser",
+          "source_url": "https://eaindustry.nic.in",
+          "document_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+          "document_title": "Press Release",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:38:54 IST",
+          "sha256": "8e786a20f97cb809961923e72ef2d6f6a0730bb900580f9bb402115639b483da",
+          "bytes": 389562,
+          "text_length": 7755
+        },
+        {
+          "source_name": "DPIIT / Office of Economic Adviser",
+          "source_url": "https://eaindustry.nic.in",
+          "document_url": "https://eaindustry.nic.in/uploaded_files/JointDeclaration_Annexes_BRICSPartNIR2026.pdf",
+          "document_title": "BRICS PartNIR track Joint Declaration adopted in 10th Industry Ministers' Meeting during Indiaâs BRICS Chairship 2026",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:38:58 IST",
+          "sha256": "51eb49b381140061aadeea57cbe3dc7518871fcea0f2d6a66eca13dc33a20d4b",
+          "bytes": 2056466,
+          "text_length": 29980
         }
       ],
       "source": {
         "provider": "DPIIT / Office of Economic Adviser",
         "official_url": "https://eaindustry.nic.in",
-        "retrieved_at": "2026-10-08 17:19:55 IST"
+        "retrieved_at": "2026-10-08 17:19:55 IST",
+        "primary": "DPIIT / Office of Economic Adviser",
+        "source_url": "https://eaindustry.nic.in",
+        "last_scraped": "2026-10-08 17:40:27 IST"
+      },
+      "latest_month": "2026-10",
+      "latest_telemetry": {
+        "current_volume": 70.0,
+        "unit": "million tonnes (crude)",
+        "mom_pct": null,
+        "yoy_pct": null,
+        "trailing_3m_yoy_pct": null,
+        "trailing_6m_yoy_pct": null
       }
     },
     "ROAD_EPC": {
@@ -76,12 +148,26 @@
           "url": "https://ppac.gov.in",
           "retrieved_at": "2026-10-08 17:19:25 IST",
           "status": "SUCCESS"
+        },
+        {
+          "source_name": "Petroleum Planning & Analysis Cell",
+          "source_url": "https://ppac.gov.in",
+          "document_url": "https://ppac.gov.in/download.php?file=menu/1790857950_WEB_UPLOAD_Sep26_Flash_Report.pdf",
+          "document_title": "Flash Report Sep 26",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:39:01 IST",
+          "sha256": "85fd9ef7043833e9d9a17857ac375e210df1517d9d82c59f2444da10e71321b6",
+          "bytes": 538110,
+          "text_length": 530
         }
       ],
       "source": {
         "provider": "Petroleum Planning & Analysis Cell",
         "official_url": "https://ppac.gov.in",
-        "retrieved_at": "2026-10-08 17:19:55 IST"
+        "retrieved_at": "2026-10-08 17:19:55 IST",
+        "primary": "Petroleum Planning & Analysis Cell",
+        "source_url": "https://ppac.gov.in",
+        "last_scraped": "2026-10-08 17:40:27 IST"
       }
     },
     "LOGISTICS": {
@@ -89,15 +175,17 @@
       "monthly_demand": [
         {
           "month": "2026-10",
-          "value": 2019.0,
-          "unit": "thousand MT HSD consumption",
+          "value": 4.85,
+          "unit": "thousand MT (HSD)",
           "source_document": [
             {
               "url": "https://ppac.gov.in",
               "retrieved_at": "2026-10-08 17:19:25 IST",
               "status": "SUCCESS"
             }
-          ]
+          ],
+          "yoy_pct": null,
+          "mom_pct": null
         }
       ],
       "input_costs": [],
@@ -107,24 +195,99 @@
           "url": "https://ppac.gov.in",
           "retrieved_at": "2026-10-08 17:19:25 IST",
           "status": "SUCCESS"
+        },
+        {
+          "source_name": "Petroleum Planning & Analysis Cell",
+          "source_url": "https://ppac.gov.in",
+          "document_url": "https://ppac.gov.in/download.php?file=menu/1790857950_WEB_UPLOAD_Sep26_Flash_Report.pdf",
+          "document_title": "Flash Report Sep 26",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:39:01 IST",
+          "sha256": "85fd9ef7043833e9d9a17857ac375e210df1517d9d82c59f2444da10e71321b6",
+          "bytes": 538110,
+          "text_length": 530
         }
       ],
       "source": {
         "provider": "Petroleum Planning & Analysis Cell",
         "official_url": "https://ppac.gov.in",
-        "retrieved_at": "2026-10-08 17:19:55 IST"
+        "retrieved_at": "2026-10-08 17:19:55 IST",
+        "primary": "Petroleum Planning & Analysis Cell",
+        "source_url": "https://ppac.gov.in",
+        "last_scraped": "2026-10-08 17:40:27 IST"
+      },
+      "latest_month": "2026-10",
+      "latest_telemetry": {
+        "current_volume": 4.85,
+        "unit": "thousand MT (HSD)",
+        "mom_pct": null,
+        "yoy_pct": null,
+        "trailing_3m_yoy_pct": null,
+        "trailing_6m_yoy_pct": null
       }
     },
     "PORT_EXIM": {
       "sector": "Maritime Ports & Container EXIM",
-      "monthly_demand": [],
+      "monthly_demand": [
+        {
+          "month": "2026-10",
+          "value": 1.266,
+          "unit": "million TEUs",
+          "yoy_pct": null,
+          "mom_pct": null
+        }
+      ],
       "input_costs": [],
       "supporting_indicators": [],
-      "source_documents": [],
+      "source_documents": [
+        {
+          "source_name": "Indian Ports Association",
+          "source_url": "https://ipa.nic.in",
+          "document_url": null,
+          "document_title": null,
+          "status": "CONNECTION_FAILED",
+          "scraped_at": "2026-10-08 17:40:08 IST",
+          "error": "IPA homepage unavailable"
+        },
+        {
+          "source_name": "Ministry of Ports, Shipping & Waterways Transport Research Wing",
+          "source_url": "https://www.shipmin.gov.in",
+          "document_url": "https://www.shipmin.gov.in/sites/default/files/Non-Major%20Cargo%20report%20August%202026_0.pdf",
+          "document_title": "Download(961.7 KB)",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:40:20 IST",
+          "sha256": "83bffa785c90ab2eafaf32cf080eab96b3cc655dd5cb551cc9c97088c7ae834d",
+          "bytes": 984778,
+          "text_length": 10621
+        },
+        {
+          "source_name": "Ministry of Ports, Shipping & Waterways Transport Research Wing",
+          "source_url": "https://www.shipmin.gov.in",
+          "document_url": "https://www.shipmin.gov.in/sites/default/files/Report%20Cargo%20handled%20at%20Major%20Ports%20August%202026.pdf",
+          "document_title": "Download(1.14 MB)",
+          "status": "SUCCESS",
+          "scraped_at": "2026-10-08 17:40:27 IST",
+          "sha256": "7fe7f784fd70751786f887a39ac569d0a340f8e48ff5d3762f6d388238d85913",
+          "bytes": 1200472,
+          "text_length": 10770
+        }
+      ],
       "source": {
         "provider": "Indian Ports Association",
         "official_url": "https://ipa.nic.in",
-        "retrieved_at": "2026-10-08 17:19:55 IST"
+        "retrieved_at": "2026-10-08 17:19:55 IST",
+        "primary": "Ministry of Ports, Shipping & Waterways / Indian Ports Association",
+        "source_url": "https://www.shipmin.gov.in",
+        "last_scraped": "2026-10-08 17:40:27 IST"
+      },
+      "latest_month": "2026-10",
+      "latest_telemetry": {
+        "current_volume": 1.266,
+        "unit": "million TEUs",
+        "mom_pct": null,
+        "yoy_pct": null,
+        "trailing_3m_yoy_pct": null,
+        "trailing_6m_yoy_pct": null
       }
     }
   },
@@ -144,5 +307,6 @@
         "error": "HTTPSConnectionPool(host='ipa.nic.in', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='ipa.nic.in', port=443) at 0x7f7b2a5437d0>, 'Connection to ipa.nic.in timed out. (connect timeout=30)'))"
       }
     }
-  }
+  },
+  "updated_at": "2026-10-08 17:40:27 IST"
 }
