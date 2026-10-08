@@ -1,78 +1,71 @@
 #!/usr/bin/env python3
 """
-LIVE OFFICIAL MACRO DATA HARVESTER
-==================================
-
-Purpose:
-    Scrape official macroeconomic / industrial sources and
-    save the harvested data into:
-
-        macro_historical_db.json
+LIVE OFFICIAL MACRO HARVESTER
+=============================
 
 Sources:
-    1. DPIIT / Office of Economic Adviser
-    2. PPAC
-    3. Indian Ports Association
+  1. DPIIT / Office of Economic Adviser
+     - Eight Core Industries
+     - Cement
+     - Steel
 
-Design principles:
-    - ZERO synthetic values
-    - ZERO hardcoded fallback data
-    - Official source metadata preserved
-    - Raw source text preserved where available
-    - Network failures do not create fake data
-    - Missing data is represented as null
-    - Source documents are recorded
-    - JSON is validated before exit
+  2. PPAC
+     - Petroleum product consumption
+     - HSD / Diesel
+     - Bitumen
 
-Python:
-    3.11+
+  3. Ministry of Ports, Shipping & Waterways
+     - Transport Research Wing
+     - Monthly Major Port cargo reports
+     - Monthly Non-Major Port cargo reports
 
-Dependencies:
-    requests
-    beautifulsoup4
-    pdfplumber
+IMPORTANT:
+  - ZERO SYNTHETIC DATA
+  - ZERO HARDCODED FALLBACK VALUES
+  - If data cannot be extracted, value remains unavailable.
+  - All calculations are performed in Python.
+  - Raw source-document metadata is stored in JSON.
 """
 
 import io
-import json
 import os
 import re
-import sys
+import json
 import time
+import hashlib
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
-import pdfplumber
+
+try:
+    import pdfplumber
+except ImportError:
+    pdfplumber = None
 
 
 # ============================================================
-# CONFIGURATION
+# CONFIG
 # ============================================================
 
-OUTPUT_FILE = "macro_historical_db.json"
+DB_FILE = "macro_historical_db.json"
 
 IST = timezone(timedelta(hours=5, minutes=30))
+NOW = datetime.now(IST)
 
-REQUEST_TIMEOUT = (
-    20,   # connection timeout
-    120   # read timeout
-)
-
-MAX_RETRIES = 3
+TIMEOUT = (20, 60)
 
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) "
         "AppleWebKit/537.36 "
         "(KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
+        "Chrome/124.0 Safari/537.36"
     ),
     "Accept": (
-        "text/html,application/xhtml+xml,"
-        "application/xml;q=0.9,"
-        "application/pdf;q=0.8,*/*;q=0.7"
+        "text/html,application/xhtml+xml,application/xml;"
+        "q=0.9,application/pdf;q=0.8,*/*;q=0.7"
     ),
     "Accept-Language": "en-US,en;q=0.9",
     "Connection": "keep-alive",
@@ -80,1102 +73,1253 @@ HEADERS = {
 
 
 # ============================================================
-# TIME / LOGGING
-# ============================================================
-
-def now_ist():
-    return datetime.now(IST).strftime(
-        "%Y-%m-%d %H:%M:%S IST"
-    )
-
-
-def log(message):
-    print(message, flush=True)
-
-
-# ============================================================
 # HTTP SESSION
 # ============================================================
 
-def create_session():
-    session = requests.Session()
-
-    session.headers.update(HEADERS)
-
-    return session
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
 
 
-def request_with_retry(
-    session,
-    url,
-    method="GET",
-    retries=MAX_RETRIES,
-    **kwargs
-):
+def now_ist():
+    return datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
+
+
+def clean_url(base, href):
+    if not href:
+        return None
+
+    href = href.strip()
+
+    if href.startswith(("javascript:", "#", "mailto:")):
+        return None
+
+    return urljoin(base, href)
+
+
+def safe_get(url, retries=3, timeout=TIMEOUT):
     """
-    HTTP request with retry.
-
-    Returns:
-        requests.Response
-
-    Raises:
-        Last encountered exception
+    GET with retry + backoff.
+    Returns response or None.
     """
-
-    kwargs.setdefault(
-        "timeout",
-        REQUEST_TIMEOUT
-    )
-
-    last_error = None
 
     for attempt in range(1, retries + 1):
-
         try:
-            log(
-                f"   🌐 Request "
-                f"{attempt}/{retries}: {url}"
+            print(
+                f"      HTTP GET attempt {attempt}/{retries}: {url}"
             )
 
-            response = session.request(
-                method,
+            r = SESSION.get(
                 url,
-                **kwargs
+                timeout=timeout,
+                allow_redirects=True,
             )
 
-            response.raise_for_status()
+            r.raise_for_status()
 
-            return response
+            return r
 
-        except Exception as exc:
-
-            last_error = exc
-
-            log(
-                f"   ⚠️ Attempt {attempt} failed: "
-                f"{exc}"
+        except requests.RequestException as exc:
+            print(
+                f"      ⚠️ Request failed: {type(exc).__name__}: {exc}"
             )
 
             if attempt < retries:
+                time.sleep(2 * attempt)
 
-                sleep_seconds = min(
-                    5 * attempt,
-                    15
-                )
-
-                time.sleep(
-                    sleep_seconds
-                )
-
-    raise last_error
+    return None
 
 
 # ============================================================
-# BASIC UTILITIES
+# PDF HELPERS
 # ============================================================
-
-def safe_float(value):
-    if value is None:
-        return None
-
-    try:
-        cleaned = (
-            str(value)
-            .replace(",", "")
-            .replace("%", "")
-            .strip()
-        )
-
-        if not cleaned:
-            return None
-
-        return float(cleaned)
-
-    except Exception:
-        return None
-
 
 def extract_pdf_text(pdf_bytes):
     """
-    Extract complete text from PDF.
+    Extract all PDF text using pdfplumber.
     """
 
-    pages = []
+    if pdfplumber is None:
+        raise RuntimeError(
+            "pdfplumber is not installed. "
+            "Install: pip install pdfplumber"
+        )
 
-    with pdfplumber.open(
-        io.BytesIO(pdf_bytes)
-    ) as pdf:
+    output = []
 
-        for page_number, page in enumerate(
-            pdf.pages,
-            start=1
-        ):
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+
+        for page_no, page in enumerate(pdf.pages, start=1):
 
             try:
                 text = page.extract_text() or ""
 
+                output.append(
+                    f"\n--- PAGE {page_no} ---\n{text}"
+                )
+
             except Exception as exc:
-
-                log(
-                    f"   ⚠️ PDF page "
-                    f"{page_number} parse error: "
-                    f"{exc}"
+                print(
+                    f"      ⚠️ PDF page {page_no} extraction error: {exc}"
                 )
 
-                text = ""
+    return "\n".join(output)
 
-            pages.append(text)
 
-    return "\n".join(pages)
+def extract_pdf_tables(pdf_bytes):
+    """
+    Best-effort table extraction.
+    """
 
+    if pdfplumber is None:
+        return []
 
-def normalize_space(text):
-    if not text:
-        return ""
+    tables = []
 
-    return re.sub(
-        r"\s+",
-        " ",
-        text
-    ).strip()
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
 
-
-def unique_list(values):
-    output = []
-
-    seen = set()
-
-    for value in values:
-
-        if not value:
-            continue
-
-        if value in seen:
-            continue
-
-        seen.add(value)
-
-        output.append(value)
-
-    return output
-
-
-def is_pdf_url(url):
-    if not url:
-        return False
-
-    return ".pdf" in url.lower()
-
-
-def absolute_url(base_url, href):
-    if not href:
-        return None
-
-    return urljoin(
-        base_url,
-        href
-    )
-
-
-# ============================================================
-# DATABASE STRUCTURE
-# ============================================================
-
-def new_database():
-    return {
-        "version": "7.0-live-official-raw",
-        "generated_at": now_ist(),
-        "data_type": "RAW_OFFICIAL_SOURCE_DATA",
-        "synthetic_data": False,
-        "calculated_by_scraper": False,
-        "sectors": {},
-        "harvest_status": {},
-    }
-
-
-def ensure_sector(
-    db,
-    sector_key,
-    sector_name
-):
-
-    sectors = db.setdefault(
-        "sectors",
-        {}
-    )
-
-    if sector_key not in sectors:
-
-        sectors[sector_key] = {
-            "sector": sector_name,
-            "monthly_demand": [],
-            "input_costs": [],
-            "supporting_indicators": [],
-            "source_documents": [],
-            "source": {},
-        }
-
-    sector = sectors[sector_key]
-
-    # Prevent KeyError such as the previous
-    # source_documents error.
-
-    sector.setdefault(
-        "monthly_demand",
-        []
-    )
-
-    sector.setdefault(
-        "input_costs",
-        []
-    )
-
-    sector.setdefault(
-        "supporting_indicators",
-        []
-    )
-
-    sector.setdefault(
-        "source_documents",
-        []
-    )
-
-    sector.setdefault(
-        "source",
-        {}
-    )
-
-    return sector
-
-
-def append_source_document(
-    sector,
-    document
-):
-
-    if not document:
-        return
-
-    url = document.get(
-        "url"
-    )
-
-    existing_urls = {
-        item.get("url")
-        for item in sector[
-            "source_documents"
-        ]
-    }
-
-    if url and url in existing_urls:
-        return
-
-    sector[
-        "source_documents"
-    ].append(document)
-
-
-# ============================================================
-# GENERIC MONTHLY RECORD
-# ============================================================
-
-def append_monthly_demand(
-    sector,
-    month,
-    value,
-    unit,
-    source_url
-):
-
-    # IMPORTANT:
-    # No value = no record.
-    # Never insert synthetic value.
-
-    if value is None:
-        return
-
-    existing_months = {
-        item.get("month")
-        for item in sector[
-            "monthly_demand"
-        ]
-    }
-
-    if month in existing_months:
-        return
-
-    sector[
-        "monthly_demand"
-    ].append(
-        {
-            "month": month,
-            "value": value,
-            "unit": unit,
-            "source_url": source_url,
-            "retrieved_at": now_ist(),
-        }
-    )
-
-
-# ============================================================
-# DPIIT / OEA
-# ============================================================
-
-def discover_dpiit_pdfs(
-    session,
-    base_url
-):
-
-    candidates = []
-
-    try:
-
-        response = request_with_retry(
-            session,
-            base_url
-        )
-
-        soup = BeautifulSoup(
-            response.text,
-            "html.parser"
-        )
-
-        for anchor in soup.find_all(
-            "a",
-            href=True
-        ):
-
-            href = anchor.get(
-                "href"
-            )
-
-            text = normalize_space(
-                anchor.get_text(
-                    " ",
-                    strip=True
-                )
-            )
-
-            absolute = absolute_url(
-                base_url,
-                href
-            )
-
-            if not absolute:
-                continue
-
-            if not is_pdf_url(
-                absolute
-            ):
-                continue
-
-            combined = (
-                f"{text} "
-                f"{absolute}"
-            ).lower()
-
-            if (
-                "core" in combined
-                or "eight" in combined
-                or "ici" in combined
-                or "infra" in combined
-                or "industry" in combined
-            ):
-                candidates.append(
-                    absolute
-                )
-
-    except Exception as exc:
-
-        log(
-            f"   ⚠️ DPIIT discovery error: "
-            f"{exc}"
-        )
-
-    return unique_list(
-        candidates
-    )
-
-
-def harvest_dpiit(session):
-
-    log("\n🏗️ DPIIT / OEA")
-
-    result = {
-        "status": "FAILED",
-        "cement": None,
-        "steel": None,
-        "source_documents": [],
-        "raw_text": None,
-        "error": None,
-    }
-
-    base_url = (
-        "https://eaindustry.nic.in"
-    )
-
-    try:
-
-        pdf_candidates = (
-            discover_dpiit_pdfs(
-                session,
-                base_url
-            )
-        )
-
-        # ----------------------------------------------------
-        # Known official archive pattern fallback.
-        #
-        # This is a URL PATTERN, not a data fallback.
-        # ----------------------------------------------------
-
-        archive_candidates = [
-            (
-                "https://eaindustry.nic.in/"
-                "eight_core_infra/"
-                "Press_Release_ICI_20260921.pdf"
-            ),
-        ]
-
-        pdf_candidates = unique_list(
-            pdf_candidates
-            + archive_candidates
-        )
-
-        if not pdf_candidates:
-
-            raise RuntimeError(
-                "No DPIIT Core Industries PDF "
-                "was discovered."
-            )
-
-        for pdf_url in pdf_candidates:
+        for page_no, page in enumerate(pdf.pages, start=1):
 
             try:
+                page_tables = page.extract_tables()
 
-                log(
-                    f"   📄 Trying PDF: "
-                    f"{pdf_url}"
+                for table in page_tables:
+
+                    if table:
+                        tables.append({
+                            "page": page_no,
+                            "rows": table,
+                        })
+
+            except Exception:
+                continue
+
+    return tables
+
+
+def download_pdf(url):
+    response = safe_get(url)
+
+    if response is None:
+        return None, None
+
+    content_type = (
+        response.headers.get("Content-Type", "")
+        .lower()
+    )
+
+    data = response.content
+
+    # Check PDF magic bytes too.
+    is_pdf = (
+        "application/pdf" in content_type
+        or data[:4] == b"%PDF"
+        or url.lower().split("?")[0].endswith(".pdf")
+    )
+
+    if not is_pdf:
+        print(
+            f"      ⚠️ URL did not return PDF. "
+            f"Content-Type={content_type}"
+        )
+        return None, response
+
+    return data, response
+
+
+# ============================================================
+# SOURCE METADATA
+# ============================================================
+
+def make_source_document(
+    source_name,
+    source_url,
+    document_url=None,
+    document_title=None,
+    status="UNKNOWN",
+    error=None,
+    content_bytes=None,
+    extracted_text=None,
+):
+    doc = {
+        "source_name": source_name,
+        "source_url": source_url,
+        "document_url": document_url,
+        "document_title": document_title,
+        "status": status,
+        "scraped_at": now_ist(),
+    }
+
+    if error:
+        doc["error"] = str(error)
+
+    if content_bytes is not None:
+        doc["sha256"] = hashlib.sha256(
+            content_bytes
+        ).hexdigest()
+
+        doc["bytes"] = len(content_bytes)
+
+    if extracted_text is not None:
+        doc["text_length"] = len(extracted_text)
+
+    return doc
+
+
+# ============================================================
+# NUMBER PARSING
+# ============================================================
+
+def parse_number(value):
+    if value is None:
+        return None
+
+    text = str(value)
+
+    text = text.replace(",", "")
+    text = text.replace("−", "-")
+    text = text.replace("–", "-")
+
+    match = re.search(
+        r"[-+]?\d+(?:\.\d+)?",
+        text
+    )
+
+    if not match:
+        return None
+
+    try:
+        return float(match.group(0))
+    except ValueError:
+        return None
+
+
+def normalize_text(text):
+    if text is None:
+        return ""
+
+    text = text.replace("\xa0", " ")
+
+    text = re.sub(
+        r"[ \t]+",
+        " ",
+        text
+    )
+
+    return text
+
+
+# ============================================================
+# MONTH UTILITIES
+# ============================================================
+
+MONTHS = {
+    "january": "01",
+    "february": "02",
+    "march": "03",
+    "april": "04",
+    "may": "05",
+    "june": "06",
+    "july": "07",
+    "august": "08",
+    "september": "09",
+    "october": "10",
+    "november": "11",
+    "december": "12",
+}
+
+
+def detect_month(text):
+    """
+    Detect YYYY-MM from document text.
+    """
+
+    if not text:
+        return None
+
+    # YYYY-MM
+    match = re.search(
+        r"\b(20\d{2})[-/](0?[1-9]|1[0-2])\b",
+        text
+    )
+
+    if match:
+        return f"{match.group(1)}-{int(match.group(2)):02d}"
+
+    # Month YYYY
+    lower = text.lower()
+
+    for name, number in MONTHS.items():
+
+        match = re.search(
+            rf"\b{name}\s+(20\d{{2}})\b",
+            lower
+        )
+
+        if match:
+            return f"{match.group(1)}-{number}"
+
+    return None
+
+
+def month_sort_key(value):
+    return value
+
+
+# ============================================================
+# TIME SERIES CALCULATIONS
+# ============================================================
+
+def calculate_yoy(entries):
+    """
+    Calculates YoY using exact 12-month lookback.
+    """
+
+    entries = sorted(
+        entries,
+        key=lambda x: x["month"]
+    )
+
+    lookup = {
+        x["month"]: x.get("value")
+        for x in entries
+    }
+
+    for entry in entries:
+
+        current = entry.get("value")
+
+        if current is None:
+            entry["yoy_pct"] = None
+            continue
+
+        year, month = entry["month"].split("-")
+
+        previous_year = str(
+            int(year) - 1
+        )
+
+        previous_month = (
+            f"{previous_year}-{month}"
+        )
+
+        previous = lookup.get(
+            previous_month
+        )
+
+        if previous in (None, 0):
+            entry["yoy_pct"] = None
+        else:
+            entry["yoy_pct"] = round(
+                ((current - previous) / previous)
+                * 100,
+                2,
+            )
+
+    return entries
+
+
+def calculate_mom(entries):
+    entries = sorted(
+        entries,
+        key=lambda x: x["month"]
+    )
+
+    previous = None
+
+    for entry in entries:
+
+        current = entry.get("value")
+
+        if (
+            current is None
+            or previous in (None, 0)
+        ):
+            entry["mom_pct"] = None
+        else:
+            entry["mom_pct"] = round(
+                ((current - previous) / previous)
+                * 100,
+                2,
+            )
+
+        if current is not None:
+            previous = current
+
+    return entries
+
+
+def trailing_yoy(entries, months):
+    valid = [
+        x.get("yoy_pct")
+        for x in entries[-months:]
+        if x.get("yoy_pct") is not None
+    ]
+
+    if not valid:
+        return None
+
+    return round(
+        sum(valid) / len(valid),
+        2,
+    )
+
+
+# ============================================================
+# HTML DISCOVERY
+# ============================================================
+
+def discover_pdf_links(
+    page_url,
+    keywords,
+    max_links=20,
+):
+    """
+    Finds PDF links from an official page.
+    """
+
+    response = safe_get(page_url)
+
+    if response is None:
+        return []
+
+    soup = BeautifulSoup(
+        response.text,
+        "html.parser"
+    )
+
+    results = []
+
+    for a in soup.find_all("a", href=True):
+
+        href = clean_url(
+            page_url,
+            a.get("href")
+        )
+
+        if not href:
+            continue
+
+        text = normalize_text(
+            a.get_text(" ", strip=True)
+        )
+
+        combined = (
+            f"{text} {href}"
+        ).lower()
+
+        if ".pdf" not in combined:
+            continue
+
+        if keywords:
+            if not any(
+                keyword.lower() in combined
+                for keyword in keywords
+            ):
+                continue
+
+        if href not in [
+            x["url"] for x in results
+        ]:
+            results.append({
+                "url": href,
+                "title": text,
+            })
+
+        if len(results) >= max_links:
+            break
+
+    return results
+
+
+# ============================================================
+# 1. DPIIT / OEA
+# ============================================================
+
+DPIIT_HOME = "https://eaindustry.nic.in"
+
+
+def harvest_dpiit_core8():
+    print("\n" + "=" * 70)
+    print("🏗️ DPIIT / OFFICE OF ECONOMIC ADVISER")
+    print("=" * 70)
+
+    source_documents = []
+
+    # Search official homepage.
+    candidates = discover_pdf_links(
+        DPIIT_HOME,
+        keywords=[
+            "core",
+            "industry",
+            "ici",
+            "eight",
+        ],
+        max_links=30,
+    )
+
+    # Prefer recent PDF-like links.
+    candidates = sorted(
+        candidates,
+        key=lambda x: (
+            "2026" not in x["url"],
+            "202609" not in x["url"],
+            "2026" not in x["title"],
+        )
+    )
+
+    for candidate in candidates:
+
+        pdf_url = candidate["url"]
+
+        pdf_bytes, response = download_pdf(
+            pdf_url
+        )
+
+        if pdf_bytes is None:
+            continue
+
+        try:
+            text = extract_pdf_text(
+                pdf_bytes
+            )
+
+            normalized = normalize_text(text)
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "DPIIT / Office of "
+                        "Economic Adviser"
+                    ),
+                    source_url=DPIIT_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="SUCCESS",
+                    content_bytes=pdf_bytes,
+                    extracted_text=text,
+                )
+            )
+
+            cement = extract_core8_row(
+                normalized,
+                "Cement"
+            )
+
+            steel = extract_core8_row(
+                normalized,
+                "Steel"
+            )
+
+            if cement is not None or steel is not None:
+
+                print(
+                    f"   ✅ PDF: {pdf_url}"
                 )
 
-                response = request_with_retry(
-                    session,
-                    pdf_url
-                )
-
-                content_type = (
-                    response.headers
-                    .get(
-                        "Content-Type",
-                        ""
-                    )
-                    .lower()
-                )
-
-                if (
-                    "pdf" not in content_type
-                    and not is_pdf_url(
-                        response.url
-                    )
-                ):
-                    log(
-                        "   ⚠️ Response does not "
-                        "look like PDF."
-                    )
-                    continue
-
-                text = extract_pdf_text(
-                    response.content
-                )
-
-                if not text.strip():
-
-                    log(
-                        "   ⚠️ PDF has no "
-                        "extractable text."
-                    )
-
-                    continue
-
-                result[
-                    "raw_text"
-                ] = text
-
-                result[
-                    "source_documents"
-                ].append(
-                    {
-                        "url": response.url,
-                        "retrieved_at": now_ist(),
-                        "status": "SUCCESS",
-                        "content_type": content_type,
-                    }
-                )
-
-                # ------------------------------------------------
-                # Cement
-                # ------------------------------------------------
-
-                cement_patterns = [
-
-                    r"\bCement\s+"
-                    r"([\d,]+(?:\.\d+)?)\s+"
-                    r"([\d,]+(?:\.\d+)?)",
-
-                    r"\bCement\b.{0,150}?"
-                    r"([\d,]+(?:\.\d+)?)\s+"
-                    r"([\d,]+(?:\.\d+)?)",
-                ]
-
-                # ------------------------------------------------
-                # Steel
-                # ------------------------------------------------
-
-                steel_patterns = [
-
-                    r"\bSteel\s+"
-                    r"([\d,]+(?:\.\d+)?)\s+"
-                    r"([\d,]+(?:\.\d+)?)",
-
-                    r"\bSteel\b.{0,150}?"
-                    r"([\d,]+(?:\.\d+)?)\s+"
-                    r"([\d,]+(?:\.\d+)?)",
-                ]
-
-                cement = None
-                steel = None
-
-                for pattern in cement_patterns:
-
-                    match = re.search(
-                        pattern,
-                        text,
-                        flags=(
-                            re.IGNORECASE
-                            | re.DOTALL
-                        )
-                    )
-
-                    if match:
-
-                        cement = safe_float(
-                            match.group(2)
-                        )
-
-                        if cement is not None:
-                            break
-
-                for pattern in steel_patterns:
-
-                    match = re.search(
-                        pattern,
-                        text,
-                        flags=(
-                            re.IGNORECASE
-                            | re.DOTALL
-                        )
-                    )
-
-                    if match:
-
-                        steel = safe_float(
-                            match.group(2)
-                        )
-
-                        if steel is not None:
-                            break
-
-                result[
-                    "cement"
-                ] = cement
-
-                result[
-                    "steel"
-                ] = steel
-
-                # We successfully downloaded and parsed
-                # the official PDF even if one row is missing.
-
-                result[
-                    "status"
-                ] = "SUCCESS"
-
-                log(
+                print(
                     f"   Cement: {cement}"
                 )
 
-                log(
-                    f"   Steel : {steel}"
+                print(
+                    f"   Steel: {steel}"
                 )
 
-                log(
-                    "   DPIIT status: SUCCESS"
-                )
-
-                return result
-
-            except Exception as exc:
-
-                log(
-                    f"   ⚠️ PDF failed: "
-                    f"{exc}"
-                )
-
-        raise RuntimeError(
-            "All discovered DPIIT PDFs "
-            "failed to download/parse."
-        )
-
-    except Exception as exc:
-
-        result[
-            "error"
-        ] = str(exc)
-
-        log(
-            f"   ❌ DPIIT error: {exc}"
-        )
-
-    return result
-
-
-# ============================================================
-# PPAC
-# ============================================================
-
-def discover_ppac_documents(
-    session
-):
-
-    base_urls = [
-        "https://ppac.gov.in",
-        "https://www.ppac.gov.in",
-    ]
-
-    documents = []
-
-    for base_url in base_urls:
-
-        try:
-
-            response = request_with_retry(
-                session,
-                base_url,
-                retries=2
-            )
-
-            soup = BeautifulSoup(
-                response.text,
-                "html.parser"
-            )
-
-            for anchor in soup.find_all(
-                "a",
-                href=True
-            ):
-
-                href = anchor[
-                    "href"
-                ]
-
-                text = normalize_space(
-                    anchor.get_text(
-                        " ",
-                        strip=True
-                    )
-                )
-
-                absolute = absolute_url(
-                    response.url,
-                    href
-                )
-
-                if not absolute:
-                    continue
-
-                combined = (
-                    f"{text} "
-                    f"{absolute}"
-                ).lower()
-
-                if (
-                    ".pdf" in absolute.lower()
-                    or "consumption" in combined
-                    or "petroleum" in combined
-                    or "product" in combined
-                    or "monthly" in combined
-                    or "statistics" in combined
-                    or "report" in combined
-                ):
-
-                    documents.append(
-                        absolute
-                    )
+                return {
+                    "cement": cement,
+                    "steel": steel,
+                    "document_url": pdf_url,
+                    "source_documents": source_documents,
+                }
 
         except Exception as exc:
 
-            log(
-                f"   ⚠️ PPAC endpoint "
-                f"unavailable: {exc}"
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "DPIIT / Office of "
+                        "Economic Adviser"
+                    ),
+                    source_url=DPIIT_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="PARSE_ERROR",
+                    error=exc,
+                    content_bytes=pdf_bytes,
+                )
             )
 
-    return unique_list(
-        documents
+    source_documents.append(
+        make_source_document(
+            source_name=(
+                "DPIIT / Office of "
+                "Economic Adviser"
+            ),
+            source_url=DPIIT_HOME,
+            status="NO_USABLE_DOCUMENT",
+        )
     )
 
-
-def parse_ppac_text(
-    text
-):
-
-    hsd = None
-    bitumen = None
-
-    normalized = normalize_space(
-        text
+    print(
+        "   ❌ No usable DPIIT Core-8 document found."
     )
 
-    hsd_patterns = [
-
-        r"High\s+Speed\s+Diesel"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
-
-        r"\bHSD\b"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
-    ]
-
-    bitumen_patterns = [
-
-        r"\bBitumen\b"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
-    ]
-
-    for pattern in hsd_patterns:
-
-        match = re.search(
-            pattern,
-            normalized,
-            flags=re.IGNORECASE
-        )
-
-        if match:
-
-            hsd = safe_float(
-                match.group(1)
-            )
-
-            if hsd is not None:
-                break
-
-    for pattern in bitumen_patterns:
-
-        match = re.search(
-            pattern,
-            normalized,
-            flags=re.IGNORECASE
-        )
-
-        if match:
-
-            bitumen = safe_float(
-                match.group(1)
-            )
-
-            if bitumen is not None:
-                break
-
-    return hsd, bitumen
-
-
-def harvest_ppac(session):
-
-    log("\n⛽ PPAC")
-
-    result = {
-        "status": "FAILED",
-        "hsd": None,
-        "bitumen": None,
-        "source_documents": [],
-        "raw_text": None,
-        "error": None,
+    return {
+        "cement": None,
+        "steel": None,
+        "document_url": None,
+        "source_documents": source_documents,
     }
 
-    try:
 
-        candidates = (
-            discover_ppac_documents(
-                session
-            )
-        )
+def extract_core8_row(text, name):
+    """
+    Attempts to extract the current-period value
+    from Core-8 statement text.
 
-        # Also try official homepages
-        # themselves.
+    Handles:
+        Cement  ...
+        Steel   ...
 
-        candidates = unique_list(
-            [
-                "https://ppac.gov.in",
-                "https://www.ppac.gov.in",
-            ]
-            + candidates
-        )
+    It deliberately avoids returning a fabricated value.
+    """
 
-        for url in candidates:
-
-            try:
-
-                log(
-                    f"   📄 PPAC source: "
-                    f"{url}"
-                )
-
-                response = request_with_retry(
-                    session,
-                    url,
-                    retries=2
-                )
-
-                content_type = (
-                    response.headers
-                    .get(
-                        "Content-Type",
-                        ""
-                    )
-                    .lower()
-                )
-
-                text = ""
-
-                if (
-                    "pdf" in content_type
-                    or is_pdf_url(
-                        response.url
-                    )
-                ):
-
-                    text = extract_pdf_text(
-                        response.content
-                    )
-
-                else:
-
-                    soup = BeautifulSoup(
-                        response.text,
-                        "html.parser"
-                    )
-
-                    text = soup.get_text(
-                        "\n",
-                        strip=True
-                    )
-
-                if not text.strip():
-                    continue
-
-                hsd, bitumen = (
-                    parse_ppac_text(
-                        text
-                    )
-                )
-
-                # Only accept document as useful
-                # if relevant values are found.
-
-                if (
-                    hsd is None
-                    and bitumen is None
-                ):
-                    continue
-
-                result[
-                    "hsd"
-                ] = hsd
-
-                result[
-                    "bitumen"
-                ] = bitumen
-
-                result[
-                    "raw_text"
-                ] = text
-
-                result[
-                    "source_documents"
-                ].append(
-                    {
-                        "url": response.url,
-                        "retrieved_at": now_ist(),
-                        "status": "SUCCESS",
-                        "content_type": content_type,
-                    }
-                )
-
-                result[
-                    "status"
-                ] = "SUCCESS"
-
-                log(
-                    f"   HSD     : {hsd}"
-                )
-
-                log(
-                    f"   Bitumen : {bitumen}"
-                )
-
-                log(
-                    "   PPAC status: SUCCESS"
-                )
-
-                return result
-
-            except Exception as exc:
-
-                log(
-                    f"   ⚠️ PPAC source failed: "
-                    f"{exc}"
-                )
-
-        # Site can be reachable while relevant
-        # table isn't discoverable.
-
-        result[
-            "error"
-        ] = (
-            "PPAC website was reachable or "
-            "attempted, but no reliably parsed "
-            "HSD/Bitumen value was found."
-        )
-
-        log(
-            "   ⚠️ PPAC data not parsed."
-        )
-
-    except Exception as exc:
-
-        result[
-            "error"
-        ] = str(exc)
-
-        log(
-            f"   ❌ PPAC error: {exc}"
-        )
-
-    return result
-
-
-# ============================================================
-# INDIAN PORTS ASSOCIATION
-# ============================================================
-
-def discover_ipa_documents(
-    session
-):
-
-    base_urls = [
-        "https://ipa.nic.in",
-        "http://ipa.nic.in",
-        "https://www.ipa.nic.in",
-        "http://www.ipa.nic.in",
+    lines = [
+        normalize_text(line)
+        for line in text.splitlines()
     ]
 
-    documents = []
+    for line in lines:
 
-    for base_url in base_urls:
+        if not re.search(
+            rf"\b{name}\b",
+            line,
+            re.IGNORECASE
+        ):
+            continue
+
+        numbers = re.findall(
+            r"[-+]?\d+(?:,\d{3})*(?:\.\d+)?",
+            line
+        )
+
+        values = [
+            parse_number(x)
+            for x in numbers
+        ]
+
+        values = [
+            x for x in values
+            if x is not None
+        ]
+
+        if not values:
+            continue
+
+        # In many Core-8 tables the row contains
+        # previous period and current period.
+        # We take the final numeric field.
+        return values[-1]
+
+    return None
+
+
+# ============================================================
+# 2. PPAC
+# ============================================================
+
+PPAC_HOME = "https://ppac.gov.in"
+
+
+def harvest_ppac():
+    print("\n" + "=" * 70)
+    print("⛽ PPAC / PETROLEUM PLANNING & ANALYSIS CELL")
+    print("=" * 70)
+
+    source_documents = []
+
+    candidates = discover_pdf_links(
+        PPAC_HOME,
+        keywords=[
+            "consumption",
+            "petroleum",
+            "product",
+            "monthly",
+            "report",
+            "bitumen",
+        ],
+        max_links=50,
+    )
+
+    for candidate in candidates:
+
+        pdf_url = candidate["url"]
+
+        pdf_bytes, response = download_pdf(
+            pdf_url
+        )
+
+        if pdf_bytes is None:
+            continue
 
         try:
-
-            response = request_with_retry(
-                session,
-                base_url,
-                retries=2
+            text = extract_pdf_text(
+                pdf_bytes
             )
 
-            soup = BeautifulSoup(
-                response.text,
-                "html.parser"
-            )
+            normalized = normalize_text(text)
 
-            for anchor in soup.find_all(
-                "a",
-                href=True
-            ):
-
-                href = anchor[
-                    "href"
+            hsd = extract_ppac_metric(
+                normalized,
+                [
+                    "HSD",
+                    "High Speed Diesel",
+                    "High-Speed Diesel",
+                    "Diesel",
                 ]
+            )
 
-                text = normalize_space(
-                    anchor.get_text(
-                        " ",
-                        strip=True
-                    )
+            bitumen = extract_ppac_metric(
+                normalized,
+                [
+                    "Bitumen",
+                ]
+            )
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Petroleum Planning "
+                        "& Analysis Cell"
+                    ),
+                    source_url=PPAC_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="SUCCESS",
+                    content_bytes=pdf_bytes,
+                    extracted_text=text,
+                )
+            )
+
+            if hsd is not None or bitumen is not None:
+
+                print(
+                    f"   ✅ PDF: {pdf_url}"
                 )
 
-                absolute = absolute_url(
-                    response.url,
-                    href
+                print(
+                    f"   HSD: {hsd}"
                 )
 
-                if not absolute:
-                    continue
+                print(
+                    f"   Bitumen: {bitumen}"
+                )
 
-                combined = (
-                    f"{text} "
-                    f"{absolute}"
-                ).lower()
-
-                if (
-                    ".pdf" in absolute.lower()
-                    or "traffic" in combined
-                    or "container" in combined
-                    or "teu" in combined
-                    or "performance" in combined
-                    or "monthly" in combined
-                    or "statistics" in combined
-                    or "cargo" in combined
-                ):
-
-                    documents.append(
-                        absolute
-                    )
+                return {
+                    "hsd": hsd,
+                    "bitumen": bitumen,
+                    "document_url": pdf_url,
+                    "source_documents": source_documents,
+                }
 
         except Exception as exc:
 
-            log(
-                f"   ⚠️ IPA endpoint failed: "
-                f"{exc}"
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Petroleum Planning "
+                        "& Analysis Cell"
+                    ),
+                    source_url=PPAC_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="PARSE_ERROR",
+                    error=exc,
+                    content_bytes=pdf_bytes,
+                )
             )
 
-    return unique_list(
-        documents
+    source_documents.append(
+        make_source_document(
+            source_name=(
+                "Petroleum Planning "
+                "& Analysis Cell"
+            ),
+            source_url=PPAC_HOME,
+            status="NO_USABLE_DOCUMENT",
+        )
     )
 
+    print(
+        "   ❌ No usable PPAC document found."
+    )
 
-def parse_ipa_text(
-    text
-):
+    return {
+        "hsd": None,
+        "bitumen": None,
+        "document_url": None,
+        "source_documents": source_documents,
+    }
 
-    normalized = normalize_space(
+
+def extract_ppac_metric(text, metric_names):
+    """
+    Generic PPAC row extraction.
+
+    Looks for a line containing metric name
+    and returns the final numeric field.
+    """
+
+    lines = [
+        normalize_text(x)
+        for x in text.splitlines()
+    ]
+
+    for line in lines:
+
+        if not any(
+            re.search(
+                rf"\b{re.escape(metric)}\b",
+                line,
+                re.IGNORECASE,
+            )
+            for metric in metric_names
+        ):
+            continue
+
+        numbers = re.findall(
+            r"[-+]?\d+(?:,\d{3})*(?:\.\d+)?",
+            line
+        )
+
+        values = [
+            parse_number(x)
+            for x in numbers
+        ]
+
+        values = [
+            x for x in values
+            if x is not None
+        ]
+
+        if values:
+            return values[-1]
+
+    return None
+
+
+# ============================================================
+# 3. PORTS
+# ============================================================
+
+IPA_HOME = "https://ipa.nic.in"
+
+MOPSW_HOME = "https://www.shipmin.gov.in"
+
+MOPSW_MAJOR_PAGE = (
+    "https://www.shipmin.gov.in/"
+    "transport-reseach/"
+    "monthly-cargo-traffic-handled-major-ports"
+)
+
+MOPSW_TRW_PAGE = (
+    "https://www.shipmin.gov.in/"
+    "division/transport-research"
+)
+
+
+def harvest_ports():
+    """
+    Port strategy:
+
+    1. Try IPA.
+    2. If IPA fails, use official Ministry of Ports
+       Transport Research Wing.
+    3. Never fabricate a TEU number.
+    """
+
+    print("\n" + "=" * 70)
+    print("🚢 INDIAN PORTS / MINISTRY OF PORTS")
+    print("=" * 70)
+
+    source_documents = []
+
+    # --------------------------------------------------------
+    # IPA
+    # --------------------------------------------------------
+
+    ipa_result = try_ipa_ports()
+
+    source_documents.extend(
+        ipa_result.get(
+            "source_documents",
+            []
+        )
+    )
+
+    if ipa_result.get("container_teu") is not None:
+
+        return {
+            "container_teu": ipa_result["container_teu"],
+            "document_url": ipa_result.get(
+                "document_url"
+            ),
+            "source_documents": source_documents,
+        }
+
+    # --------------------------------------------------------
+    # MOPSW FALLBACK
+    # --------------------------------------------------------
+
+    print(
+        "   ℹ️ IPA unavailable. "
+        "Using official Ministry of Ports TRW."
+    )
+
+    ministry_result = try_mopsw_ports()
+
+    source_documents.extend(
+        ministry_result.get(
+            "source_documents",
+            []
+        )
+    )
+
+    return {
+        "container_teu": ministry_result.get(
+            "container_teu"
+        ),
+        "document_url": ministry_result.get(
+            "document_url"
+        ),
+        "source_documents": source_documents,
+    }
+
+
+def try_ipa_ports():
+    source_documents = []
+
+    response = safe_get(
+        IPA_HOME,
+        retries=3,
+        timeout=(20, 90),
+    )
+
+    if response is None:
+
+        source_documents.append(
+            make_source_document(
+                source_name=(
+                    "Indian Ports Association"
+                ),
+                source_url=IPA_HOME,
+                status="CONNECTION_FAILED",
+                error="IPA homepage unavailable",
+            )
+        )
+
+        print(
+            "   ⚠️ IPA unavailable."
+        )
+
+        return {
+            "container_teu": None,
+            "document_url": None,
+            "source_documents": source_documents,
+        }
+
+    soup = BeautifulSoup(
+        response.text,
+        "html.parser"
+    )
+
+    links = []
+
+    for a in soup.find_all(
+        "a",
+        href=True
+    ):
+
+        href = clean_url(
+            IPA_HOME,
+            a.get("href")
+        )
+
+        if not href:
+            continue
+
+        text = normalize_text(
+            a.get_text(
+                " ",
+                strip=True
+            )
+        )
+
+        combined = (
+            f"{text} {href}"
+        ).lower()
+
+        if (
+            "container" in combined
+            or "traffic" in combined
+            or "cargo" in combined
+            or "monthly" in combined
+        ):
+            links.append({
+                "url": href,
+                "title": text,
+            })
+
+    for candidate in links[:30]:
+
+        if ".pdf" not in candidate["url"].lower():
+            continue
+
+        pdf_bytes, response = download_pdf(
+            candidate["url"]
+        )
+
+        if pdf_bytes is None:
+            continue
+
+        try:
+
+            text = extract_pdf_text(
+                pdf_bytes
+            )
+
+            teu = extract_container_teu(
+                text
+            )
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Indian Ports Association"
+                    ),
+                    source_url=IPA_HOME,
+                    document_url=candidate["url"],
+                    document_title=candidate["title"],
+                    status="SUCCESS",
+                    content_bytes=pdf_bytes,
+                    extracted_text=text,
+                )
+            )
+
+            if teu is not None:
+
+                print(
+                    f"   ✅ IPA Container TEU: {teu}"
+                )
+
+                return {
+                    "container_teu": teu,
+                    "document_url": candidate["url"],
+                    "source_documents": source_documents,
+                }
+
+        except Exception as exc:
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Indian Ports Association"
+                    ),
+                    source_url=IPA_HOME,
+                    document_url=candidate["url"],
+                    document_title=candidate["title"],
+                    status="PARSE_ERROR",
+                    error=exc,
+                    content_bytes=pdf_bytes,
+                )
+            )
+
+    source_documents.append(
+        make_source_document(
+            source_name=(
+                "Indian Ports Association"
+            ),
+            source_url=IPA_HOME,
+            status="NO_USABLE_CONTAINER_DOCUMENT",
+        )
+    )
+
+    return {
+        "container_teu": None,
+        "document_url": None,
+        "source_documents": source_documents,
+    }
+
+
+def try_mopsw_ports():
+    source_documents = []
+
+    # The Ministry currently publishes monthly
+    # Major Port and Non-Major Port cargo reports
+    # through its Transport Research Wing.
+
+    pages = [
+        MOPSW_MAJOR_PAGE,
+        MOPSW_TRW_PAGE,
+    ]
+
+    candidates = []
+
+    for page_url in pages:
+
+        found = discover_pdf_links(
+            page_url,
+            keywords=[
+                "cargo",
+                "major",
+                "container",
+                "traffic",
+                "port",
+            ],
+            max_links=50,
+        )
+
+        candidates.extend(found)
+
+    # Remove duplicates.
+    unique = {}
+    for item in candidates:
+        unique[item["url"]] = item
+
+    candidates = list(
+        unique.values()
+    )
+
+    # Prefer latest-looking documents.
+    candidates.sort(
+        key=lambda x: (
+            "2026" not in (
+                x["url"] + x["title"]
+            ),
+            "Aug" not in (
+                x["url"] + x["title"]
+            ),
+            "July" not in (
+                x["url"] + x["title"]
+            ),
+        )
+    )
+
+    for candidate in candidates:
+
+        pdf_url = candidate["url"]
+
+        pdf_bytes, response = download_pdf(
+            pdf_url
+        )
+
+        if pdf_bytes is None:
+            continue
+
+        try:
+
+            text = extract_pdf_text(
+                pdf_bytes
+            )
+
+            teu = extract_container_teu(
+                text
+            )
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Ministry of Ports, "
+                        "Shipping & Waterways "
+                        "Transport Research Wing"
+                    ),
+                    source_url=MOPSW_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="SUCCESS",
+                    content_bytes=pdf_bytes,
+                    extracted_text=text,
+                )
+            )
+
+            if teu is not None:
+
+                print(
+                    "   ✅ MoPSW Container TEU: "
+                    f"{teu}"
+                )
+
+                return {
+                    "container_teu": teu,
+                    "document_url": pdf_url,
+                    "source_documents": source_documents,
+                }
+
+        except Exception as exc:
+
+            source_documents.append(
+                make_source_document(
+                    source_name=(
+                        "Ministry of Ports, "
+                        "Shipping & Waterways "
+                        "Transport Research Wing"
+                    ),
+                    source_url=MOPSW_HOME,
+                    document_url=pdf_url,
+                    document_title=candidate["title"],
+                    status="PARSE_ERROR",
+                    error=exc,
+                    content_bytes=pdf_bytes,
+                )
+            )
+
+    source_documents.append(
+        make_source_document(
+            source_name=(
+                "Ministry of Ports, "
+                "Shipping & Waterways "
+                "Transport Research Wing"
+            ),
+            source_url=MOPSW_HOME,
+            status="NO_USABLE_CONTAINER_DOCUMENT",
+        )
+    )
+
+    print(
+        "   ❌ No container TEU figure extracted "
+        "from official port reports."
+    )
+
+    return {
+        "container_teu": None,
+        "document_url": None,
+        "source_documents": source_documents,
+    }
+
+
+def extract_container_teu(text):
+    """
+    Extract an explicitly reported container/TEU number.
+
+    This intentionally does NOT convert cargo tonnes into TEUs.
+
+    Accepts patterns such as:
+      Container 1.23 million TEUs
+      Containers 1.23
+      TEUs 1.23
+
+    If only generic cargo tonnage is available,
+    returns None.
+    """
+
+    normalized = normalize_text(
         text
     )
 
+    # Explicit million TEU patterns.
     patterns = [
-
-        r"Container\s+Traffic"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
-
-        r"Container"
-        r".{0,250}?"
-        r"TEU"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
-
-        r"\bTEU\b"
-        r".{0,250}?"
-        r"([\d,]+(?:\.\d+)?)",
+        r"([\d,.]+)\s*million\s*(?:TEUs?|TEU)",
+        r"(?:TEUs?|TEU)\s*[:\-]?\s*([\d,.]+)\s*million",
+        r"([\d,.]+)\s*mn\s*(?:TEUs?|TEU)",
     ]
 
     for pattern in patterns:
@@ -1183,334 +1327,208 @@ def parse_ipa_text(
         match = re.search(
             pattern,
             normalized,
-            flags=re.IGNORECASE
+            re.IGNORECASE,
         )
 
         if match:
 
-            value = safe_float(
+            value = parse_number(
                 match.group(1)
             )
 
             if value is not None:
                 return value
 
-    return None
-
-
-def harvest_ipa(session):
-
-    log("\n🚢 Indian Ports Association")
-
-    result = {
-        "status": "FAILED",
-        "container_teu": None,
-        "source_documents": [],
-        "raw_text": None,
-        "error": None,
-    }
-
-    # Multiple official endpoints.
-    #
-    # The important part is that failure of one
-    # endpoint does NOT immediately terminate
-    # the scraper.
-
-    base_urls = [
-        "https://ipa.nic.in",
-        "http://ipa.nic.in",
-        "https://www.ipa.nic.in",
-        "http://www.ipa.nic.in",
+    # Explicit TEU value without million.
+    patterns = [
+        r"(?:TEUs?|TEU)\s*[:\-]?\s*([\d,]+(?:\.\d+)?)",
+        r"([\d,]+(?:\.\d+)?)\s*(?:TEUs?|TEU)",
     ]
 
-    last_error = None
+    for pattern in patterns:
 
-    # --------------------------------------------------------
-    # First try direct official endpoints
-    # --------------------------------------------------------
+        match = re.search(
+            pattern,
+            normalized,
+            re.IGNORECASE,
+        )
 
-    for url in base_urls:
+        if match:
 
-        try:
-
-            log(
-                f"   🌐 Trying: {url}"
-            )
-
-            response = request_with_retry(
-                session,
-                url,
-                retries=3,
-                timeout=(
-                    30,
-                    180
-                )
-            )
-
-            log(
-                f"   ✅ Connected: "
-                f"{response.status_code} "
-                f"{response.url}"
-            )
-
-            content_type = (
-                response.headers
-                .get(
-                    "Content-Type",
-                    ""
-                )
-                .lower()
-            )
-
-            if (
-                "pdf" in content_type
-                or is_pdf_url(
-                    response.url
-                )
-            ):
-
-                text = extract_pdf_text(
-                    response.content
-                )
-
-            else:
-
-                soup = BeautifulSoup(
-                    response.text,
-                    "html.parser"
-                )
-
-                text = soup.get_text(
-                    "\n",
-                    strip=True
-                )
-
-            value = parse_ipa_text(
-                text
-            )
-
-            result[
-                "raw_text"
-            ] = text
-
-            result[
-                "source_documents"
-            ].append(
-                {
-                    "url": response.url,
-                    "retrieved_at": now_ist(),
-                    "status": "SUCCESS",
-                    "content_type": content_type,
-                }
+            value = parse_number(
+                match.group(1)
             )
 
             if value is not None:
 
-                result[
-                    "container_teu"
-                ] = value
+                # Convert raw TEUs to million TEUs.
+                if value > 100:
+                    value = value / 1_000_000
 
-                result[
-                    "status"
-                ] = "SUCCESS"
-
-                log(
-                    f"   Container TEUs: "
-                    f"{value}"
+                return round(
+                    value,
+                    4
                 )
 
-                log(
-                    "   IPA status: SUCCESS"
-                )
-
-                return result
-
-            log(
-                "   ⚠️ Connected but "
-                "container TEU value "
-                "was not found."
-            )
-
-        except Exception as exc:
-
-            last_error = str(exc)
-
-            log(
-                f"   ⚠️ Failed: {url}"
-            )
-
-            log(
-                f"      {exc}"
-            )
-
-    # --------------------------------------------------------
-    # If homepage failed, try document discovery
-    # from any reachable official endpoint.
-    # --------------------------------------------------------
-
-    documents = []
-
-    for url in base_urls:
-
-        try:
-
-            documents.extend(
-                discover_ipa_documents(
-                    session
-                )
-            )
-
-            if documents:
-                break
-
-        except Exception as exc:
-
-            last_error = str(exc)
-
-    documents = unique_list(
-        documents
-    )
-
-    # --------------------------------------------------------
-    # Try discovered official documents
-    # --------------------------------------------------------
-
-    for document_url in documents:
-
-        try:
-
-            log(
-                f"   📄 IPA document: "
-                f"{document_url}"
-            )
-
-            response = request_with_retry(
-                session,
-                document_url,
-                retries=2,
-                timeout=(
-                    30,
-                    180
-                )
-            )
-
-            content_type = (
-                response.headers
-                .get(
-                    "Content-Type",
-                    ""
-                )
-                .lower()
-            )
-
-            if (
-                "pdf" in content_type
-                or is_pdf_url(
-                    response.url
-                )
-            ):
-
-                text = extract_pdf_text(
-                    response.content
-                )
-
-            else:
-
-                soup = BeautifulSoup(
-                    response.text,
-                    "html.parser"
-                )
-
-                text = soup.get_text(
-                    "\n",
-                    strip=True
-                )
-
-            value = parse_ipa_text(
-                text
-            )
-
-            if value is None:
-                continue
-
-            result[
-                "container_teu"
-            ] = value
-
-            result[
-                "raw_text"
-            ] = text
-
-            result[
-                "source_documents"
-            ].append(
-                {
-                    "url": response.url,
-                    "retrieved_at": now_ist(),
-                    "status": "SUCCESS",
-                    "content_type": content_type,
-                }
-            )
-
-            result[
-                "status"
-            ] = "SUCCESS"
-
-            log(
-                f"   Container TEUs: "
-                f"{value}"
-            )
-
-            log(
-                "   IPA status: SUCCESS"
-            )
-
-            return result
-
-        except Exception as exc:
-
-            last_error = str(exc)
-
-            log(
-                f"   ⚠️ IPA document failed: "
-                f"{exc}"
-            )
-
-    # --------------------------------------------------------
-    # Nothing worked.
-    # --------------------------------------------------------
-
-    result[
-        "error"
-    ] = (
-        "IPA official website/documents "
-        "could not be reached or parsed. "
-        f"Last error: {last_error}"
-    )
-
-    log(
-        "   ❌ IPA unavailable "
-        "from this runner."
-    )
-
-    return result
+    return None
 
 
 # ============================================================
-# BUILD FINAL DATABASE
+# DATABASE HELPERS
 # ============================================================
 
-def build_database(
-    dpiit,
-    ppac,
-    ipa
+def load_database():
+    if not os.path.exists(DB_FILE):
+
+        return {
+            "version": "7.0-live-official",
+            "generated_at": now_ist(),
+            "sectors": {},
+        }
+
+    try:
+
+        with open(
+            DB_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+
+            return json.load(f)
+
+    except Exception as exc:
+
+        print(
+            f"⚠️ Existing DB load failed: {exc}"
+        )
+
+        return {
+            "version": "7.0-live-official",
+            "generated_at": now_ist(),
+            "sectors": {},
+        }
+
+
+def ensure_sector(
+    sectors,
+    key,
+    name,
 ):
+    return sectors.setdefault(
+        key,
+        {
+            "sector": name,
+            "monthly_demand": [],
+            "input_costs": [],
+            "supporting_indicators": [],
+            "source_documents": [],
+            "source": {},
+        },
+    )
 
-    db = new_database()
 
-    current_month = (
-        datetime.now(IST)
-        .strftime("%Y-%m")
+def upsert_monthly(
+    entries,
+    month,
+    value,
+    unit,
+):
+    """
+    Updates month if present,
+    otherwise appends.
+
+    None values are NOT inserted as fake data.
+    """
+
+    if value is None:
+        return
+
+    for entry in entries:
+
+        if entry.get("month") == month:
+
+            entry["value"] = value
+            entry["unit"] = unit
+            return
+
+    entries.append({
+        "month": month,
+        "value": value,
+        "unit": unit,
+    })
+
+
+def add_source_documents(
+    sector,
+    documents,
+):
+    existing = {
+        (
+            d.get("document_url"),
+            d.get("sha256"),
+        )
+        for d in sector.get(
+            "source_documents",
+            []
+        )
+    }
+
+    for document in documents:
+
+        key = (
+            document.get("document_url"),
+            document.get("sha256"),
+        )
+
+        if key not in existing:
+
+            sector.setdefault(
+                "source_documents",
+                []
+            ).append(document)
+
+            existing.add(key)
+
+
+# ============================================================
+# MAIN DB UPDATE
+# ============================================================
+
+def update_database():
+
+    print("=" * 75)
+    print("📡 LIVE OFFICIAL MACRO DATA HARVESTER")
+    print("=" * 75)
+    print(
+        f"Time: {now_ist()}"
+    )
+
+    # --------------------------------------------------------
+    # SCRAPE
+    # --------------------------------------------------------
+
+    dpiit = harvest_dpiit_core8()
+
+    ppac = harvest_ppac()
+
+    ports = harvest_ports()
+
+    current_month = NOW.strftime(
+        "%Y-%m"
+    )
+
+    # --------------------------------------------------------
+    # DATABASE
+    # --------------------------------------------------------
+
+    db = load_database()
+
+    db["version"] = "7.0-live-official"
+    db["updated_at"] = now_ist()
+
+    sectors = db.setdefault(
+        "sectors",
+        {}
     )
 
     # --------------------------------------------------------
@@ -1518,470 +1536,296 @@ def build_database(
     # --------------------------------------------------------
 
     cement = ensure_sector(
-        db,
+        sectors,
         "CEMENT",
-        "Cement & Clinker"
+        "Cement & Clinker",
     )
 
-    if dpiit.get(
-        "cement"
-    ) is not None:
+    upsert_monthly(
+        cement["monthly_demand"],
+        current_month,
+        dpiit.get("cement"),
+        "million tonnes",
+    )
 
-        source_url = None
+    add_source_documents(
+        cement,
+        dpiit.get(
+            "source_documents",
+            []
+        ),
+    )
 
-        if dpiit[
-            "source_documents"
-        ]:
-
-            source_url = dpiit[
-                "source_documents"
-            ][0].get("url")
-
-        append_monthly_demand(
-            cement,
-            current_month,
-            dpiit["cement"],
-            "million tonnes",
-            source_url
-        )
-
-    for document in dpiit[
-        "source_documents"
-    ]:
-
-        append_source_document(
-            cement,
-            document
-        )
-
-    cement[
-        "source"
-    ] = {
-        "provider":
-            "DPIIT / Office of Economic Adviser",
-        "official_url":
-            "https://eaindustry.nic.in",
-        "retrieved_at":
-            now_ist(),
-    }
+    cement.setdefault(
+        "source",
+        {}
+    ).update({
+        "primary": (
+            "DPIIT / Office of "
+            "Economic Adviser"
+        ),
+        "source_url": DPIIT_HOME,
+        "last_scraped": now_ist(),
+    })
 
     # --------------------------------------------------------
     # STEEL
     # --------------------------------------------------------
 
     steel = ensure_sector(
-        db,
+        sectors,
         "STEEL",
-        "Primary Steel Manufacturing"
+        "Primary Steel Manufacturing",
     )
 
-    if dpiit.get(
-        "steel"
-    ) is not None:
+    upsert_monthly(
+        steel["monthly_demand"],
+        current_month,
+        dpiit.get("steel"),
+        "million tonnes (crude)",
+    )
 
-        source_url = None
+    add_source_documents(
+        steel,
+        dpiit.get(
+            "source_documents",
+            []
+        ),
+    )
 
-        if dpiit[
-            "source_documents"
-        ]:
-
-            source_url = dpiit[
-                "source_documents"
-            ][0].get("url")
-
-        append_monthly_demand(
-            steel,
-            current_month,
-            dpiit["steel"],
-            "million tonnes crude steel",
-            source_url
-        )
-
-    for document in dpiit[
-        "source_documents"
-    ]:
-
-        append_source_document(
-            steel,
-            document
-        )
-
-    steel[
-        "source"
-    ] = {
-        "provider":
-            "DPIIT / Office of Economic Adviser",
-        "official_url":
-            "https://eaindustry.nic.in",
-        "retrieved_at":
-            now_ist(),
-    }
+    steel.setdefault(
+        "source",
+        {}
+    ).update({
+        "primary": (
+            "DPIIT / Office of "
+            "Economic Adviser"
+        ),
+        "source_url": DPIIT_HOME,
+        "last_scraped": now_ist(),
+    })
 
     # --------------------------------------------------------
     # ROAD EPC
     # --------------------------------------------------------
 
     road = ensure_sector(
-        db,
+        sectors,
         "ROAD_EPC",
-        "Road EPC & Construction"
+        "Road EPC & Construction",
     )
 
-    if ppac.get(
-        "bitumen"
-    ) is not None:
+    upsert_monthly(
+        road["monthly_demand"],
+        current_month,
+        ppac.get("bitumen"),
+        "thousand MT (bitumen)",
+    )
 
-        source_url = None
+    add_source_documents(
+        road,
+        ppac.get(
+            "source_documents",
+            []
+        ),
+    )
 
-        if ppac[
-            "source_documents"
-        ]:
-
-            source_url = ppac[
-                "source_documents"
-            ][0].get("url")
-
-        append_monthly_demand(
-            road,
-            current_month,
-            ppac["bitumen"],
-            "thousand MT bitumen",
-            source_url
-        )
-
-    for document in ppac[
-        "source_documents"
-    ]:
-
-        append_source_document(
-            road,
-            document
-        )
-
-    road[
-        "source"
-    ] = {
-        "provider":
-            "Petroleum Planning & Analysis Cell",
-        "official_url":
-            "https://ppac.gov.in",
-        "retrieved_at":
-            now_ist(),
-    }
+    road.setdefault(
+        "source",
+        {}
+    ).update({
+        "primary": (
+            "Petroleum Planning "
+            "& Analysis Cell"
+        ),
+        "source_url": PPAC_HOME,
+        "last_scraped": now_ist(),
+    })
 
     # --------------------------------------------------------
     # LOGISTICS
     # --------------------------------------------------------
 
     logistics = ensure_sector(
-        db,
+        sectors,
         "LOGISTICS",
-        "Heavy Commercial Fleet Logistics"
+        "Heavy Commercial Fleet Logistics",
     )
 
-    if ppac.get(
-        "hsd"
-    ) is not None:
+    upsert_monthly(
+        logistics["monthly_demand"],
+        current_month,
+        ppac.get("hsd"),
+        "thousand MT (HSD)",
+    )
 
-        source_url = None
+    add_source_documents(
+        logistics,
+        ppac.get(
+            "source_documents",
+            []
+        ),
+    )
 
-        if ppac[
-            "source_documents"
-        ]:
-
-            source_url = ppac[
-                "source_documents"
-            ][0].get("url")
-
-        append_monthly_demand(
-            logistics,
-            current_month,
-            ppac["hsd"],
-            "thousand MT HSD consumption",
-            source_url
-        )
-
-    for document in ppac[
-        "source_documents"
-    ]:
-
-        append_source_document(
-            logistics,
-            document
-        )
-
-    logistics[
-        "source"
-    ] = {
-        "provider":
-            "Petroleum Planning & Analysis Cell",
-        "official_url":
-            "https://ppac.gov.in",
-        "retrieved_at":
-            now_ist(),
-    }
+    logistics.setdefault(
+        "source",
+        {}
+    ).update({
+        "primary": (
+            "Petroleum Planning "
+            "& Analysis Cell"
+        ),
+        "source_url": PPAC_HOME,
+        "last_scraped": now_ist(),
+    })
 
     # --------------------------------------------------------
     # PORT EXIM
     # --------------------------------------------------------
 
-    ports = ensure_sector(
-        db,
+    ports_sector = ensure_sector(
+        sectors,
         "PORT_EXIM",
-        "Maritime Ports & Container EXIM"
+        "Maritime Ports & Container EXIM",
     )
 
-    if ipa.get(
-        "container_teu"
-    ) is not None:
+    upsert_monthly(
+        ports_sector["monthly_demand"],
+        current_month,
+        ports.get("container_teu"),
+        "million TEUs",
+    )
 
-        source_url = None
+    add_source_documents(
+        ports_sector,
+        ports.get(
+            "source_documents",
+            []
+        ),
+    )
 
-        if ipa[
-            "source_documents"
-        ]:
+    ports_sector.setdefault(
+        "source",
+        {}
+    ).update({
+        "primary": (
+            "Ministry of Ports, "
+            "Shipping & Waterways / "
+            "Indian Ports Association"
+        ),
+        "source_url": MOPSW_HOME,
+        "last_scraped": now_ist(),
+    })
 
-            source_url = ipa[
-                "source_documents"
-            ][0].get("url")
+    # --------------------------------------------------------
+    # CALCULATE TELEMETRY
+    # --------------------------------------------------------
 
-        append_monthly_demand(
-            ports,
-            current_month,
-            ipa["container_teu"],
-            "million TEUs",
-            source_url
+    for key, sector in sectors.items():
+
+        demand = sector.get(
+            "monthly_demand",
+            []
         )
 
-    for document in ipa[
-        "source_documents"
-    ]:
-
-        append_source_document(
-            ports,
-            document
+        demand = sorted(
+            demand,
+            key=lambda x: x["month"]
         )
 
-    ports[
-        "source"
-    ] = {
-        "provider":
-            "Indian Ports Association",
-        "official_url":
-            "https://ipa.nic.in",
-        "retrieved_at":
-            now_ist(),
-    }
+        calculate_yoy(demand)
+        calculate_mom(demand)
 
-    # --------------------------------------------------------
-    # HARVEST STATUS
-    # --------------------------------------------------------
+        sector["monthly_demand"] = demand
 
-    db[
-        "harvest_status"
-    ] = {
+        if demand:
 
-        "timestamp":
-            now_ist(),
+            sector["latest_month"] = (
+                demand[-1]["month"]
+            )
 
-        "DPIIT": {
-            "status":
-                dpiit["status"],
-            "cement":
-                dpiit["cement"],
-            "steel":
-                dpiit["steel"],
-            "error":
-                dpiit["error"],
-        },
+            latest = demand[-1]
 
-        "PPAC": {
-            "status":
-                ppac["status"],
-            "hsd":
-                ppac["hsd"],
-            "bitumen":
-                ppac["bitumen"],
-            "error":
-                ppac["error"],
-        },
-
-        "IPA": {
-            "status":
-                ipa["status"],
-            "container_teu":
-                ipa["container_teu"],
-            "error":
-                ipa["error"],
-        },
-    }
-
-    return db
-
-
-# ============================================================
-# WRITE DATABASE
-# ============================================================
-
-def save_database(db):
-
-    with open(
-        OUTPUT_FILE,
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            db,
-            file,
-            ensure_ascii=False,
-            indent=2
-        )
-
-    # Validate JSON immediately.
-
-    with open(
-        OUTPUT_FILE,
-        "r",
-        encoding="utf-8"
-    ) as file:
-
-        json.load(file)
-
-    return os.path.getsize(
-        OUTPUT_FILE
-    )
-
-
-# ============================================================
-# MAIN
-# ============================================================
-
-def main():
-
-    print("=" * 75)
-    print(
-        "📡 LIVE OFFICIAL MACRO DATA HARVESTER"
-    )
-    print("=" * 75)
-
-    print(
-        f"Time: {now_ist()}"
-    )
-
-    print(
-        "Mode: ZERO SYNTHETIC DATA"
-    )
-
-    print(
-        "Output: "
-        f"{OUTPUT_FILE}"
-    )
-
-    print("=" * 75)
-
-    session = create_session()
-
-    # --------------------------------------------------------
-    # SOURCE HARVEST
-    # --------------------------------------------------------
-
-    dpiit = harvest_dpiit(
-        session
-    )
-
-    ppac = harvest_ppac(
-        session
-    )
-
-    ipa = harvest_ipa(
-        session
-    )
-
-    # --------------------------------------------------------
-    # BUILD DATABASE
-    # --------------------------------------------------------
-
-    database = build_database(
-        dpiit,
-        ppac,
-        ipa
-    )
+            sector["latest_telemetry"] = {
+                "current_volume": latest.get(
+                    "value"
+                ),
+                "unit": latest.get(
+                    "unit"
+                ),
+                "mom_pct": latest.get(
+                    "mom_pct"
+                ),
+                "yoy_pct": latest.get(
+                    "yoy_pct"
+                ),
+                "trailing_3m_yoy_pct":
+                    trailing_yoy(
+                        demand,
+                        3
+                    ),
+                "trailing_6m_yoy_pct":
+                    trailing_yoy(
+                        demand,
+                        6
+                    ),
+            }
 
     # --------------------------------------------------------
     # SAVE
     # --------------------------------------------------------
 
-    file_size = save_database(
-        database
-    )
+    with open(
+        DB_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
 
-    # --------------------------------------------------------
-    # SUMMARY
-    # --------------------------------------------------------
+        json.dump(
+            db,
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
 
-    print("\n")
-    print("=" * 75)
+    print("\n" + "=" * 75)
     print("✅ HARVEST COMPLETE")
     print("=" * 75)
 
     print(
-        f"📁 File: {OUTPUT_FILE}"
+        f"📁 File: {DB_FILE}"
     )
 
     print(
-        f"📦 Size: {file_size} bytes"
-    )
-
-    print("\nSource Results:")
-
-    print(
-        f"🏗️ DPIIT : "
-        f"{dpiit['status']}"
+        f"📅 Latest month: {current_month}"
     )
 
     print(
-        f"   Cement = "
-        f"{dpiit['cement']}"
+        f"🏗️ Cement: "
+        f"{dpiit.get('cement')}"
     )
 
     print(
-        f"   Steel  = "
-        f"{dpiit['steel']}"
+        f"🏭 Steel: "
+        f"{dpiit.get('steel')}"
     )
 
     print(
-        f"\n⛽ PPAC : "
-        f"{ppac['status']}"
+        f"🛣️ Bitumen: "
+        f"{ppac.get('bitumen')}"
     )
 
     print(
-        f"   HSD     = "
-        f"{ppac['hsd']}"
+        f"🚛 HSD: "
+        f"{ppac.get('hsd')}"
     )
 
     print(
-        f"   Bitumen = "
-        f"{ppac['bitumen']}"
+        f"🚢 Container TEU: "
+        f"{ports.get('container_teu')}"
     )
 
-    print(
-        f"\n🚢 IPA : "
-        f"{ipa['status']}"
-    )
-
-    print(
-        f"   Container TEU = "
-        f"{ipa['container_teu']}"
-    )
-
-    print("\nJSON validation: OK")
-
-    print(
-        "\n⚠️ IMPORTANT: "
-        "Any unavailable source is stored as null. "
-        "No synthetic fallback values are used."
-    )
+    print("=" * 75)
 
 
 # ============================================================
@@ -1989,27 +1833,4 @@ def main():
 # ============================================================
 
 if __name__ == "__main__":
-
-    try:
-
-        main()
-
-    except KeyboardInterrupt:
-
-        print(
-            "\n❌ Interrupted."
-        )
-
-        sys.exit(1)
-
-    except Exception as exc:
-
-        print(
-            "\n❌ FATAL ERROR:"
-        )
-
-        print(
-            str(exc)
-        )
-
-        sys.exit(1)
+    update_database()
