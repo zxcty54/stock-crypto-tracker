@@ -1,4 +1,4 @@
-name: Daily Stock Pipeline & Scanner
+name: Daily Stock History Update
 
 on:
   schedule:
@@ -29,19 +29,15 @@ jobs:
         run: |
           python update_daily_history.py
 
-      - name: 2. Run Strategy Scanner (Generate Squeeze & Breakout Watchlist)
-        run: |
-          python run_strategy.py
-
-      - name: 3. Commit & Push Updated Data to Repo
+      - name: 2. Commit & Push Updated History to Repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add stock_history_20d.json scanner_output.json
+          git add stock_history_20d.json
           if git diff --staged --quiet; then
             echo "ℹ️ No changes detected. Data already up-to-date."
           else
-            git commit -m "📊 Daily Pipeline: Updated 10D Cache & Scanner Output [$(date +'%d-%b-%Y')]"
+            git commit -m "📊 Daily Stock History: Updated 10D Cache [$(date +'%d-%b-%Y')]"
             git push origin main
-            echo "✅ Successfully updated stock_history_20d.json and scanner_output.json"
+            echo "✅ Successfully updated stock_history_20d.json"
           fi
