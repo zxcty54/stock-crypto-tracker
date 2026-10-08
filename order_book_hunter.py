@@ -2,11 +2,14 @@ import os
 import re
 import json
 import time
+import threading
+from urllib.parse import urlsplit
 from datetime import datetime
 import io
 import requests
 from bs4 import BeautifulSoup
 import pypdf
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 OUTPUT_REPORT_FILE = "order_radar_report.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -15,6 +18,8 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 MAX_DEBT_TO_MCAP_RATIO = 1.2
 MAX_BOOK_TO_BILL_RATIO = 6.0  # > 6x = Paper backlog trap
 MIN_BOOK_TO_BILL_RATIO = 1.0  # < 1x = Insufficient runway
+SCRAPE_WORKERS = 3  # Parallelism is for Screener/PDF fetching only; Gemini stays sequential.
+SCRAPE_REQUEST_INTERVAL_SECONDS = 1.0  # Minimum gap between requests to the same host.
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -22,11 +27,33 @@ HEADERS = {
 }
 
 
+_host_rate_lock = threading.Lock()
+_host_locks = {}
+_last_request_at = {}
+
+
+def _pace_host_request(url):
+    """Space scraping requests by host while allowing different hosts in parallel."""
+    host = urlsplit(url).netloc.lower()
+    with _host_rate_lock:
+        host_lock = _host_locks.setdefault(host, threading.Lock())
+
+    with host_lock:
+        with _host_rate_lock:
+            last_request_at = _last_request_at.get(host, 0.0)
+        wait_seconds = SCRAPE_REQUEST_INTERVAL_SECONDS - (time.monotonic() - last_request_at)
+        if wait_seconds > 0:
+            time.sleep(wait_seconds)
+        with _host_rate_lock:
+            _last_request_at[host] = time.monotonic()
+
+
 def _get_with_retries(session, url, *, timeout, context, attempts=3):
     """Retry transient network/server errors without changing the selected URL."""
     retryable_statuses = {408, 425, 429, 500, 502, 503, 504}
     for attempt in range(1, attempts + 1):
         try:
+            _pace_host_request(url)
             response = session.get(url, headers=HEADERS, timeout=timeout)
         except requests.RequestException as exc:
             # Errno 101 means there is no route to the host; repeating every stock request is futile.
@@ -458,7 +485,11 @@ Return ONLY a pure JSON array of objects without markdown backticks:
 def run():
     start_time = time.time()
     print("=" * 75)
-    print(f"🚀 TURBO RADAR: SEQUENTIAL SCREENING {len(WATCHLIST_SYMBOLS)} STOCKS (0.15s spacing)")
+    print(
+        f"🚀 TURBO RADAR: PARALLEL SCRAPING {len(WATCHLIST_SYMBOLS)} STOCKS "
+        f"({SCRAPE_WORKERS} workers; {SCRAPE_REQUEST_INTERVAL_SECONDS:.1f}s per host)"
+    )
+    print("   🤖 Gemini calls run sequentially (scraping threads are not used for AI).")
     print(f"   🛡️ Reality Filter: Book-to-Bill <= {MAX_BOOK_TO_BILL_RATIO}x & Debt/MCap <= {MAX_DEBT_TO_MCAP_RATIO}x")
     print("=" * 75)
 
@@ -468,25 +499,52 @@ def run():
     turnaround_sales_gems = []
     order_doc_queue = []
 
-    # 1. SEQUENTIAL SCREENING (match the previously working paced request flow)
+    # 1. PARALLEL SCREENER PAGE SCRAPING. Gemini is not invoked from these threads.
     scanned_results = []
-    for idx, sym in enumerate(WATCHLIST_SYMBOLS, start=1):
-        res = get_screener_data(sym)
-        if res and res.get("mcap"):
-            scanned_results.append(res)
+    screener_failed_symbols = []
+    missing_mcap_symbols = []
+    with ThreadPoolExecutor(max_workers=SCRAPE_WORKERS) as executor:
+        future_to_symbol = {
+            executor.submit(get_screener_data, sym): sym
+            for sym in WATCHLIST_SYMBOLS
+        }
+        for future in as_completed(future_to_symbol):
+            sym = future_to_symbol[future]
+            try:
+                res = future.result()
+            except RuntimeError as exc:
+                if "network route unavailable" in str(exc).lower():
+                    for pending in future_to_symbol:
+                        pending.cancel()
+                    raise
+                print(f"   ⚠️ Screener worker failed for {sym}: {type(exc).__name__}: {exc}")
+                screener_failed_symbols.append(sym)
+                continue
+            except Exception as exc:
+                print(f"   ⚠️ Screener worker failed for {sym}: {type(exc).__name__}: {exc}")
+                screener_failed_symbols.append(sym)
+                continue
 
-        if idx % 50 == 0 or idx == len(WATCHLIST_SYMBOLS):
-            print(
-                f"   📥 Screener progress: {idx}/{len(WATCHLIST_SYMBOLS)} symbols; "
-                f"{len(scanned_results)} pages parsed"
-            )
+            if res and res.get("mcap"):
+                scanned_results.append(res)
+            elif res:
+                print(f"   ⚠️ Screener page parsed but Market Cap was not found for {sym}")
+                missing_mcap_symbols.append(sym)
+            else:
+                screener_failed_symbols.append(sym)
 
-        if idx < len(WATCHLIST_SYMBOLS):
-            time.sleep(0.15)
+            completed = len(scanned_results) + len(screener_failed_symbols) + len(missing_mcap_symbols)
+            if completed % 50 == 0 or completed == len(WATCHLIST_SYMBOLS):
+                print(
+                    f"   📥 Screener progress: {completed}/{len(WATCHLIST_SYMBOLS)} symbols; "
+                    f"{len(scanned_results)} pages parsed"
+                )
 
     print(
-        f"⚡ Screener screening complete in {round((time.time() - start_time)/60, 2)} mins: "
-        f"parsed {len(scanned_results)}/{len(WATCHLIST_SYMBOLS)} company pages. Parsing candidates..."
+        f"⚡ Screener scraping complete in {round((time.time() - start_time)/60, 2)} mins: "
+        f"parsed {len(scanned_results)}/{len(WATCHLIST_SYMBOLS)} company pages; "
+        f"request/parse failures: {len(screener_failed_symbols)}, "
+        f"market-cap misses: {len(missing_mcap_symbols)}."
     )
 
     if not scanned_results:
@@ -495,7 +553,8 @@ def run():
             "Check runner network access; refusing to overwrite the existing radar report."
         )
 
-    # 2. FILTERING & QUEUE BUILDING
+    # 2. APPLY EXISTING FILTERS AND BUILD THE CREDIT-DOCUMENT SCRAPE QUEUE.
+    credit_doc_candidates = []
     for info in scanned_results:
         sym = info["symbol"]
         name = info["company_name"]
@@ -512,19 +571,10 @@ def run():
 
         is_non_order_sector = any(bad in sector for bad in NON_ORDER_SECTORS)
         if not is_non_order_sector and doc_url:
-            doc_text = extract_document_text(doc_url, sym)
-            if any(k in doc_text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "total debt"]):
-                order_doc_queue.append({
-                    "symbol": sym,
-                    "company_name": name,
-                    "market_cap_cr": mcap,
-                    "total_debt_cr": debt,
-                    "annual_sales_cr": sales,
-                    "doc_url": doc_url,
-                    "text": doc_text
-                })
+            # doc_url remains the first qualifying Screener credit/rating document.
+            credit_doc_candidates.append(info)
 
-        # Sales Turnaround Engine
+        # Sales Turnaround Engine (criteria unchanged)
         debt_to_mcap = round(debt / mcap, 2) if mcap > 0 else 999.0
         if debt_to_mcap <= MAX_DEBT_TO_MCAP_RATIO and sales > mcap and ebitda_ok:
             sales_multiple = round(sales / mcap, 2)
@@ -541,7 +591,39 @@ def run():
                 "catalyst": f"P/S: {ps_val}x + Positive EBITDA + Debt/MCap: {debt_to_mcap}x (Safe)"
             })
 
-    # 3. BATCHED GEMINI AI EXECUTION (3 Stocks/Batch + 15s pause)
+    # 3. PARALLEL CREDIT-DOCUMENT FETCH/EXTRACTION. This ends before Gemini starts.
+    print(
+        f"📄 Fetching {len(credit_doc_candidates)} selected Screener credit documents "
+        f"with {SCRAPE_WORKERS} scraping workers..."
+    )
+    with ThreadPoolExecutor(max_workers=SCRAPE_WORKERS) as executor:
+        future_to_info = {
+            executor.submit(extract_document_text, info["doc_url"], info["symbol"]): info
+            for info in credit_doc_candidates
+        }
+        for future in as_completed(future_to_info):
+            info = future_to_info[future]
+            try:
+                doc_text = future.result()
+            except Exception as exc:
+                print(
+                    f"   ⚠️ Credit-document worker failed for {info['symbol']}: "
+                    f"{type(exc).__name__}: {exc}"
+                )
+                continue
+
+            if any(k in doc_text.lower() for k in ["order book", "unexecuted", "backlog", "order intake", "total debt"]):
+                order_doc_queue.append({
+                    "symbol": info["symbol"],
+                    "company_name": info["company_name"],
+                    "market_cap_cr": info["mcap"],
+                    "total_debt_cr": info["total_debt"],
+                    "annual_sales_cr": info["annual_sales"],
+                    "doc_url": info["doc_url"],
+                    "text": doc_text
+                })
+
+    # 4. BATCHED GEMINI AI EXECUTION (sequential; 3 stocks per batch)
     print("\n" + "=" * 75)
     print(f"🤖 DISPATCHING {len(order_doc_queue)} CANDIDATES TO GEMINI (BATCH SIZE: 3, SLEEP: 15s)")
     print("=" * 75)
@@ -620,6 +702,8 @@ def run():
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
         "total_scanned": len(scanned_results),
         "watchlist_size": len(WATCHLIST_SYMBOLS),
+        "screener_request_failures": len(screener_failed_symbols),
+        "market_cap_parse_failures": len(missing_mcap_symbols),
         "credit_documents_queued": len(order_doc_queue),
         "guards_applied": {
             "max_debt_to_mcap": MAX_DEBT_TO_MCAP_RATIO,
