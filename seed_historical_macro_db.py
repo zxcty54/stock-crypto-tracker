@@ -37,7 +37,7 @@ import requests
 from openpyxl import load_workbook
 from pypdf import PdfReader
 
-import seed_institutional_macro_db as oea
+import seed_historical_macro_db as oea
 
 DEFAULT_OUTPUT = Path("macro_historical_db.json")
 DEFAULT_MONTHS = 36
