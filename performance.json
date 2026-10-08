@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-08 02:12 IST",
+ "generated_at": "2026-10-09 02:15 IST",
  "sample_size": 54,
  "identified": 0,
  "inferred": 54,
@@ -7,12 +7,12 @@
  "channel_avg_views": 2.0,
  "growth": {
   "today": 3,
-  "snapshots": 2,
+  "snapshots": 3,
   "delta_7d": 0,
   "per_day": 0.0,
   "days_to_target": null,
   "target": 1000,
-  "days_span": 1
+  "days_span": 2
  },
  "status": "ok",
  "pillars": {
