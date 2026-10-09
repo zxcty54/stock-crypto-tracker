@@ -1,163 +1,105 @@
 import json
-import re
 import urllib.parse
 from datetime import datetime
 import requests
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "*/*",
-    "Accept-Language": "en-IN,en;q=0.9",
-    "Referer": "https://www.google.com/"
-}
-
-# --- ROUTE 1: Google Trends Production RPC (batchedexec) ---
-def try_route_google_rpc():
-    url = "https://trends.google.com/_/TrendsUi/data/batchedexec"
-    payload = '[[["i07Pec","[\\\"IN\\\",\\\"en-IN\\\",20]",null,"generic"]]]'
-    data = {"f.req": payload}
+def get_google_breakout_searches():
+    # Google Trends ka naya unified explore endpoint (geo=IN)
+    # Yeh un keywords ko return karta hai jinke volume me achanak spike (Breakout) aaya hai
+    base_url = "https://trends.google.com/trends/api/explore"
     
-    res = requests.post(url, headers=HEADERS, data=data, timeout=8)
-    if res.status_code != 200:
-        return None
-        
-    raw = res.text
-    # Extract keywords using broad pattern matching inside RPC stream
-    keywords = re.findall(r'\["([A-Za-z0-9\s\.\-]{3,40})",\s*\[\],', raw)
-    traffic_nums = re.findall(r'"([0-9]{1,3}(?:,[0-9]{3})*\+?)"', raw)
-    
-    if not keywords:
-        # Fallback string search inside payload
-        keywords = re.findall(r'\["([A-Za-z0-9\s]{3,30})"', raw)
-
-    clean_kw = list(dict.fromkeys([k.strip() for k in keywords if len(k.strip()) > 3 and not k.startswith("http")]))
-    
-    if clean_kw:
-        results = []
-        for i, kw in enumerate(clean_kw[:12]):
-            vol = traffic_nums[i] if i < len(traffic_nums) else "Breakout Spike"
-            results.append({"keyword": kw, "volume_spike": vol, "source": "Google Trends RPC Engine"})
-        return results
-    return None
-
-# --- ROUTE 2: Google Search Global Live Trending Feeds ---
-def try_route_google_trends_alt():
-    urls = [
-        "https://trends.google.com/trends/trendingsearches/daily?geo=IN",
-        "https://trends.google.com/trending?geo=IN"
-    ]
-    for url in urls:
-        try:
-            res = requests.get(url, headers=HEADERS, timeout=8)
-            if res.status_code == 200 and res.text:
-                queries = re.findall(r'"query":\s*"([^"]+)"', res.text)
-                traffic = re.findall(r'"formattedTraffic":\s*"([^"]+)"', res.text)
-                
-                if queries:
-                    results = []
-                    for i, q in enumerate(list(dict.fromkeys(queries))[:12]):
-                        t = traffic[i] if i < len(traffic) else "Sudden Surge"
-                        results.append({"keyword": q, "volume_spike": t, "source": "Google Live Trending Web"})
-                    return results
-        except Exception:
-            continue
-    return None
-
-# --- ROUTE 3: Google Search Realtime Query Velocity Engine ---
-# Yeh route KABHI fail nahi hota (Zero 404, Zero ban risk)
-def try_route_search_velocity():
-    probes = [
-        "stock market", "nifty share", "sensex today", "rbi rate", 
-        "ipo allotment", "share price today", "economy growth", "gold rate today"
-    ]
-    
-    discovered = {}
-    for p in probes:
-        try:
-            enc = urllib.parse.quote(p)
-            # Live real-time autocomplete velocity API
-            url = f"https://suggestqueries.google.com/complete/search?client=chrome&hl=en-IN&gl=in&q={enc}"
-            res = requests.get(url, headers=HEADERS, timeout=5)
-            if res.status_code == 200:
-                data = res.json()
-                if len(data) > 1 and data[1]:
-                    for sugg in data[1]:
-                        s_clean = sugg.strip()
-                        # Score by position and occurrence
-                        discovered[s_clean] = discovered.get(s_clean, 0) + 1
-        except Exception:
-            continue
-
-    if discovered:
-        # Sort by live user velocity
-        sorted_items = sorted(discovered.items(), key=lambda x: x[1], reverse=True)
-        results = []
-        for kw, score in sorted_items[:12]:
-            results.append({
-                "keyword": kw,
-                "volume_spike": f"High Velocity (Level {score})",
-                "source": "Google Live Search Autocomplete Velocity"
-            })
-        return results
-    return None
-
-# --- ROUTE 4: Live Stock Market & Financial Trending Buzz Ticker ---
-def try_route_financial_buzz():
-    try:
-        url = "https://query1.finance.yahoo.com/v1/finance/trending/IN"
-        res = requests.get(url, headers=HEADERS, timeout=6)
-        if res.status_code == 200:
-            data = res.json()
-            quotes = data.get("finance", {}).get("result", [])[0].get("quotes", [])
-            symbols = [q["symbol"] for q in quotes if "symbol" in q]
-            if symbols:
-                return [{
-                    "keyword": sym,
-                    "volume_spike": "Top Buzzing Indian Market Asset",
-                    "source": "Yahoo Realtime Finance Ticker"
-                } for sym in symbols[:10]]
-    except Exception:
-        pass
-    return None
-
-# --- MASTER CONTROLLER WITH AUTOMATIC FAILOVER ---
-def execute_trend_extraction():
-    print("Trying Route 1 (Google Trends RPC)...")
-    data = try_route_google_rpc()
-    
-    if not data:
-        print("Route 1 missed. Trying Route 2 (Google Live Trending Web)...")
-        data = try_route_google_trends_alt()
-        
-    if not data:
-        print("Route 2 missed. Trying Route 3 (Google Live Query Velocity Stream)...")
-        data = try_route_search_velocity()
-        
-    if not data:
-        print("Route 3 missed. Trying Route 4 (Realtime Market Buzz)...")
-        data = try_route_financial_buzz()
-
-    # Final Guarantee Check
-    if not data:
-        return {
-            "status": "error",
-            "timestamp": datetime.now().isoformat(),
-            "message": "All fallback routes blocked",
-            "total_spikes": 0,
-            "data": []
-        }
-
-    return {
-        "status": "success",
-        "timestamp": datetime.now().isoformat(),
-        "total_spikes": len(data),
-        "data": data
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Referer": "https://trends.google.com/trends/explore?geo=IN"
     }
 
-if __name__ == "__main__":
-    result = execute_trend_extraction()
-    output_json = json.dumps(result, indent=2, ensure_ascii=False)
-    print(output_json)
+    session = requests.Session()
+    
+    # Step 1: Token request for Realtime Rising Searches in India (geo: IN)
+    req_payload = {
+        "comparisonItem": [{"geo": {"country": "IN"}, "time": "now 1-d"}],
+        "category": 0,  # All live rising categories
+        "property": ""
+    }
+    
+    params = {
+        "hl": "en-US",
+        "tz": "-330",
+        "req": json.dumps(req_payload)
+    }
 
+    try:
+        res = session.get(base_url, headers=headers, params=params, timeout=12)
+        clean_text = res.text
+        if clean_text.startswith(")]}',"):
+            clean_text = clean_text.replace(")]}',", "", 1).strip()
+            
+        data = json.loads(clean_text)
+        
+        # RELATED_QUERIES widget ka token nikalna
+        widgets = data.get("widgets", [])
+        related_widget = None
+        for w in widgets:
+            if w.get("id") == "RELATED_QUERIES":
+                related_widget = w
+                break
+                
+        if not related_widget:
+            return []
+
+        # Step 2: Widget se exact Rising/Breakout search queries fetch karna
+        widget_url = "https://trends.google.com/trends/api/widgetdata/relatedsearches"
+        widget_params = {
+            "hl": "en-US",
+            "tz": "-330",
+            "req": json.dumps(related_widget.get("request", {})),
+            "token": related_widget.get("token", "")
+        }
+
+        w_res = session.get(widget_url, headers=headers, params=widget_params, timeout=12)
+        w_text = w_res.text
+        if w_text.startswith(")]}',"):
+            w_text = w_text.replace(")]}',", "", 1).strip()
+            
+        w_data = json.loads(w_text)
+        
+        # rankedList[1] me Google "RISING / BREAKOUT" queries deta hai (jinka volume achanak bada hai)
+        ranked_lists = w_data.get("default", {}).get("rankedList", [])
+        rising_queries = []
+        
+        if len(ranked_lists) > 1:
+            rising_items = ranked_lists[1].get("rankedKeyword", [])
+            for item in rising_items:
+                query = item.get("query", "")
+                # Google metric: "Breakout" ya percentage surge jaise "+4,500%"
+                value = item.get("formattedValue", "Breakout Volume Spike")
+                
+                if query:
+                    rising_queries.append({
+                        "keyword": query,
+                        "search_volume_spike": value,
+                        "source": "Google Realtime Breakout Engine"
+                    })
+                    
+        return rising_queries
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return []
+
+if __name__ == "__main__":
+    spikes = get_google_breakout_searches()
+    
+    output = {
+        "status": "success" if spikes else "empty",
+        "timestamp": datetime.now().isoformat(),
+        "total_hot_spikes": len(spikes),
+        "data": spikes
+    }
+    
+    json_data = json.dumps(output, indent=2, ensure_ascii=False)
+    print(json_data)
+    
     with open("trending_spikes.json", "w", encoding="utf-8") as f:
-        f.write(output_json)
+        f.write(json_data)
