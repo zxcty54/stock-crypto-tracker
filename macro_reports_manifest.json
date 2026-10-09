@@ -1,40 +1,20 @@
 {
-  "timestamp": "2026-10-09 16:24:19 IST",
+  "timestamp": "2026-10-09 16:36:15 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from September 2026",
       "file_url": "https://ipa.org.in/upload/media/media-2026100714585459577610.xlsx",
-      "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx",
-      "extracted_metrics": {
-        "total_traffic_mt": null,
-        "container_teus": null,
-        "coking_coal_mt": null
-      }
+      "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx"
     },
     "dpiit_eight_core": {
       "title": "Press Release",
       "pdf_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
-      "local_path": "downloaded_macro_pdfs/DPIIT_Eight_Core_Latest.pdf",
-      "extracted_metrics": {
-        "overall_growth_pct": null,
-        "cement_production_mt": null,
-        "cement_growth_pct": null,
-        "steel_production_mt": null,
-        "steel_growth_pct": null,
-        "coal_production_mt": null
-      }
+      "local_path": "downloaded_macro_pdfs/DPIIT_Eight_Core_Latest.pdf"
     },
     "dpiit_wpi": {
       "title": "WPI & PPI(Goods) Press Release",
       "pdf_url": "https://eaindustry.nic.in/press_release/press_release_202608.pdf",
-      "local_path": "downloaded_macro_pdfs/DPIIT_WPI_Latest.pdf",
-      "extracted_metrics": {
-        "headline_inflation_pct": null,
-        "all_commodities_index": null,
-        "primary_articles_inflation_pct": null,
-        "fuel_power_inflation_pct": null,
-        "manufactured_products_inflation_pct": null
-      }
+      "local_path": "downloaded_macro_pdfs/DPIIT_WPI_Latest.pdf"
     },
     "netc_fastag": {
       "title": "NETC FASTag Monthly Product Statistics",
