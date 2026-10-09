@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-09T19:50:45.481121",
+  "timestamp": "2026-10-09T23:56:35.462756",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -9,28 +9,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "reporting live movie",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "awarapan 2",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "नवजोत सिंह सिद्धू",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "amitabh bachchan tribute nana patekar",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "animals",
-      "search_volume_spike": "5K+",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -39,22 +19,7 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ককরোচ জনতা পার্টি",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "comrade kalyan",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "matchbox the movie",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "tej pratap yadav",
+      "keyword": "amitabh bachchan tribute nana patekar",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -64,28 +29,18 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "the social reckoning",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "least eligible bachelor",
+      "keyword": "laliga",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "hotstar",
-      "search_volume_spike": "50K+",
+      "keyword": "reporting live movie",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jiohotstar",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mithun chakraborty",
-      "search_volume_spike": "500+",
+      "keyword": "ককরোচ জনতা পার্টি",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -94,13 +49,58 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "அர்ஜுன்",
+      "keyword": "matchbox the movie",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "abp ananda live",
+      "keyword": "aaron sorkin social reckoning",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "hotstar",
+      "search_volume_spike": "50K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "animals",
       "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ishan kishan",
+      "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "tej pratap yadav",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "comrade kalyan",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jiohotstar",
+      "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "zee 5",
+      "search_volume_spike": "100+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "least eligible bachelor",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "அர்ஜுன்",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -109,22 +109,22 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "sun nxt",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "tamil news",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "തനുശ്രീ ദത്ത",
-      "search_volume_spike": "2K+",
+      "keyword": "kuldeep yadav",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "அரவிந்த்சாமி",
+      "keyword": "marathi",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nda",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     }
