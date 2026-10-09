@@ -17,7 +17,7 @@ NOW = datetime.now(IST)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def clean_num(val):
-    if val is None:
+    if not val:
         return None
     val = str(val).replace(",", "").replace("%", "").strip()
     match = re.search(r"[-+]?\d*\.?\d+", val)
@@ -195,7 +195,6 @@ async def download_ppac_icr(page):
 
         if pdf_url:
             res["pdf_url"] = pdf_url
-            print(f"   🌐 Dynamic PPAC Link: {res['pdf_url']}")
             path = await download_binary_file(page, res["pdf_url"], "PPAC_Petroleum_Consumption_Latest.pdf")
             res["local_path"] = path
         else:
@@ -207,11 +206,11 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Optimized Anti-Timeout Extractor)
+# 5. NETC FASTAG (Exact Working Standalone Logic with Clean Context)
 # ============================================================
 
-async def scrape_netc_fastag(page):
-    print("\n🛣️ [5/5] Crawling NETC FASTag Statistics (3-Year History)...")
+async def scrape_netc_fastag(browser):
+    print("\n🛣️ [5/5] Scraping NETC FASTag Monthly Data (3-Year History)...")
     target_url = "https://www.npci.org.in/product/netc/product-statistics"
     years_to_scrape = ["2026", "2025", "2024"]
     all_data = []
@@ -223,26 +222,20 @@ async def scrape_netc_fastag(page):
         "latest_monthly_metrics": {}
     }
 
+    # Isolated context creates a clean session just like the standalone script
+    context = await browser.new_context(
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    )
+    page = await context.new_page()
+
     try:
-        await page.set_extra_http_headers({
-            "Accept-Language": "en-US,en;q=0.9",
-            "Sec-Ch-Ua": '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
-            "Sec-Ch-Ua-Mobile": "?0",
-            "Sec-Ch-Ua-Platform": '"Windows"',
-            "Sec-Fetch-Dest": "document",
-            "Sec-Fetch-Mode": "navigate",
-            "Sec-Fetch-Site": "none",
-            "Sec-Fetch-User": "?1",
-            "Upgrade-Insecure-Requests": "1"
-        })
-
-        print(f"   🌐 Opening: {target_url} (Fast DOM load)...")
-        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
-
+        print(f"   🌐 Opening: {target_url}")
         try:
-            await page.wait_for_selector("text='Monthly Statistics', table", timeout=15000)
+            await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         except Exception:
-            pass
+            await page.goto(target_url, timeout=45000)
+
+        await page.wait_for_timeout(3000)
 
         try:
             monthly_tab = page.locator("text='Monthly Statistics'").first
@@ -253,7 +246,7 @@ async def scrape_netc_fastag(page):
             pass
 
         for year in years_to_scrape:
-            print(f"   📅 Fetching FASTag Year: {year}...")
+            print(f"   📅 Fetching Year: {year}...")
             year_selected = False
 
             selects = await page.query_selector_all("select")
@@ -273,7 +266,7 @@ async def scrape_netc_fastag(page):
                 except Exception:
                     pass
 
-            await page.wait_for_timeout(2500)
+            await page.wait_for_timeout(3000)
 
             rows = await page.query_selector_all("table tr")
             count = 0
@@ -303,7 +296,7 @@ async def scrape_netc_fastag(page):
                         all_data.append(record)
                         count += 1
 
-            print(f"      ✅ Extracted {count} rows for {year}")
+            print(f"      ✅ {count} records extracted for {year}")
 
         if all_data:
             df = pd.DataFrame(all_data)
@@ -311,12 +304,14 @@ async def scrape_netc_fastag(page):
             res["csv_path"] = FASTAG_CSV_FILE
             res["total_records"] = len(all_data)
             res["latest_monthly_metrics"] = all_data[0]
-            print(f"   🎉 FASTag data saved successfully to '{FASTAG_CSV_FILE}'!")
+            print(f"   🎉 Saved successfully to '{FASTAG_CSV_FILE}'!")
         else:
-            print("   ⚠️ FASTag table parse nahi ho payi.")
+            print("   ⚠️ No FASTag table records were parsed.")
 
     except Exception as e:
         print(f"   ❌ FASTag Error: {e}")
+    finally:
+        await context.close()
 
     return res
 
@@ -334,17 +329,22 @@ async def main():
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        context = await browser.new_context(
+
+        download_context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
             ignore_https_errors=True
         )
-        page = await context.new_page()
+        download_page = await download_context.new_page()
 
-        ipa_res = await download_ipa(page)
-        core_res = await download_eight_core(page)
-        wpi_res = await download_wpi(page)
-        ppac_res = await download_ppac_icr(page)
-        fastag_res = await scrape_netc_fastag(page)
+        ipa_res = await download_ipa(download_page)
+        core_res = await download_eight_core(download_page)
+        wpi_res = await download_wpi(download_page)
+        ppac_res = await download_ppac_icr(download_page)
+
+        await download_context.close()
+
+        # FASTag runs in an isolated session
+        fastag_res = await scrape_netc_fastag(browser)
 
         await browser.close()
 
