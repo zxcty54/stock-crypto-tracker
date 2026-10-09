@@ -1,0 +1,56 @@
+name: Scrape NPCI NETC FASTag 3-Year Data
+
+on:
+  # Monthly schedule: Har mahine ki 5 tareekh ko subah 6:00 AM UTC (11:30 AM IST) chalega
+  schedule:
+    - cron: '0 6 5 * *'
+
+  # Manual trigger button GitHub Actions UI se
+  workflow_dispatch:
+
+jobs:
+  scrape-netc-statistics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright pandas
+
+      - name: Install Playwright Chromium with System Dependencies
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Execute NETC Playwright Scraper
+        run: |
+          python scrape_npci_3years.py
+
+      - name: Commit and Push Historical Data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add generated CSV or JSON file
+          [ -f netc_fastag_monthly_3years.csv ] && git add netc_fastag_monthly_3years.csv
+          [ -f netc_fastag_3years_data.json ] && git add netc_fastag_3years_data.json
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes in NETC data. Skipping commit."
+          else
+            git commit -m "📊 Sync NETC FASTag 3-Year Data [$(date +'%d-%b-%Y')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
