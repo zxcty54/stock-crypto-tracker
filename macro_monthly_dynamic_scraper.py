@@ -30,25 +30,24 @@ COMMON_HEADERS = {
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# ============================================================
-# HELPER: SECURE DOWNLOAD & TEXT PREVIEW
-# ============================================================
-
 def download_and_extract_summary(session, url, filename_prefix):
     if not url:
         return None, ""
     try:
-        resp = session.get(url, headers=COMMON_HEADERS, timeout=40, verify=False)
-        if resp.status_code == 200 and resp.content.startswith(b'%PDF'):
+        resp = session.get(url, headers=COMMON_HEADERS, timeout=45, verify=False)
+        if resp.status_code == 200 and (resp.content.startswith(b'%PDF') or ".pdf" in url.lower()):
             filepath = os.path.join(OUTPUT_DIR, f"{filename_prefix}.pdf")
             with open(filepath, "wb") as f:
                 f.write(resp.content)
             
             preview_text = ""
             if pdfplumber:
-                with pdfplumber.open(io.BytesIO(resp.content)) as pdf:
-                    first_pages = [p.extract_text() or "" for p in pdf.pages[:2]]
-                    preview_text = " ".join(" ".join(first_pages).split())[:1200]
+                try:
+                    with pdfplumber.open(io.BytesIO(resp.content)) as pdf:
+                        first_pages = [p.extract_text() or "" for p in pdf.pages[:2]]
+                        preview_text = " ".join(" ".join(first_pages).split())[:1200]
+                except Exception:
+                    pass
             
             print(f"   💾 Downloaded: {filepath} ({len(resp.content) // 1024} KB)")
             return filepath, preview_text
@@ -59,64 +58,51 @@ def download_and_extract_summary(session, url, filename_prefix):
     return None, ""
 
 # ============================================================
-# 1. IPA (Indian Ports Association) — Traffic Month Report
+# 1. IPA — Indian Ports Association Traffic Report
 # ============================================================
 
 def scrape_ipa_latest(session):
     print("\n⚓ [1/4] Scraping IPA Ports Monthly Traffic Report...")
     base_url = "https://ipa.org.in"
-    target_url = "https://ipa.org.in/reports-statistics"
+    target_urls = [
+        "https://ipa.org.in/reports-statistics",
+        "https://ipa.org.in/port-performance-report"
+    ]
     
-    result = {
-        "title": None,
-        "pdf_url": None,
-        "local_path": None,
-        "preview_text": ""
-    }
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
     
-    try:
-        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            
-            # Pattern: "Traffic Month of <Month> <Year>" ya "Traffic <Month> <Year>"
-            pattern = re.compile(r'traffic\s+(?:month\s+of\s+)?([A-Za-z]+)\s+(\d{4})', re.IGNORECASE)
-            
-            candidate_links = []
-            for a in soup.find_all("a", href=True):
-                text = " ".join(a.get_text().split())
-                href = a['href']
-                match = pattern.search(text)
-                if match and (".pdf" in href.lower() or "download" in href.lower() or "report" in href.lower()):
-                    candidate_links.append({
-                        "title": text,
-                        "url": urljoin(base_url, href)
-                    })
-            
-            # Sabse top/latest entry select karein
-            if candidate_links:
-                selected = candidate_links[0]
-                result["title"] = selected["title"]
-                result["pdf_url"] = selected["url"]
-                print(f"   🔗 Found: {result['title']}")
-                print(f"   🌐 Link : {result['pdf_url']}")
+    for t_url in target_urls:
+        try:
+            resp = session.get(t_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.text, "html.parser")
                 
-                path, prev = download_and_extract_summary(session, result["pdf_url"], "IPA_Traffic_Latest")
-                result["local_path"] = path
-                result["preview_text"] = prev
-            else:
-                # Fallback: Find first PDF inside reports section
+                # Check all anchor tags containing .pdf or downloads
                 for a in soup.find_all("a", href=True):
-                    if ".pdf" in a['href'].lower() and "traffic" in a['href'].lower():
-                        result["title"] = a.get_text().strip() or "IPA Traffic Report"
-                        result["pdf_url"] = urljoin(base_url, a['href'])
-                        path, prev = download_and_extract_summary(session, result["pdf_url"], "IPA_Traffic_Latest")
-                        result["local_path"] = path
-                        result["preview_text"] = prev
+                    href = a['href'].strip()
+                    text = " ".join(a.get_text().split()).lower()
+                    parent_text = " ".join(a.parent.get_text().split()).lower() if a.parent else ""
+                    combined = f"{text} {parent_text} {href.lower()}"
+                    
+                    if ".pdf" in href.lower() and ("traffic" in combined or "month" in combined or "performance" in combined):
+                        result["title"] = a.get_text().strip() or "IPA Monthly Traffic Report"
+                        result["pdf_url"] = urljoin(base_url, href)
                         break
-    except Exception as e:
-        print(f"   ❌ IPA Scraper Error: {e}")
-        
+            if result["pdf_url"]:
+                break
+        except Exception as e:
+            print(f"   ⚠️ IPA crawl note: {e}")
+            continue
+
+    if result["pdf_url"]:
+        print(f"   🔗 Found: {result['title']}")
+        print(f"   🌐 Link : {result['pdf_url']}")
+        path, prev = download_and_extract_summary(session, result["pdf_url"], "IPA_Traffic_Latest")
+        result["local_path"] = path
+        result["preview_text"] = prev
+    else:
+        print("   ❌ IPA: No matching Traffic Report link found.")
+
     return result
 
 # ============================================================
@@ -126,111 +112,103 @@ def scrape_ipa_latest(session):
 def scrape_eight_core_latest(session):
     print("\n🏭 [2/4] Scraping DPIIT Eight Core Industries PDF...")
     base_url = "https://eaindustry.nic.in"
-    target_url = "https://eaindustry.nic.in/eight_core_infra/"
+    target_urls = [
+        "https://eaindustry.nic.in/eight_core_infra/",
+        "https://eaindustry.nic.in/"
+    ]
     
-    result = {
-        "title": None,
-        "pdf_url": None,
-        "local_path": None,
-        "preview_text": ""
-    }
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
     
-    try:
-        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            
-            # Directory listing ya links me se sabse naya .pdf dhoondhna
-            found_pdfs = []
-            for a in soup.find_all("a", href=True):
-                href = a['href']
-                text = " ".join(a.get_text().split())
-                if href.lower().endswith(".pdf"):
-                    found_pdfs.append({
-                        "title": text or os.path.basename(href),
-                        "url": urljoin(target_url, href)
-                    })
-            
-            if found_pdfs:
-                # Latest release typically tops the list or matches 'press' / current year
-                selected = found_pdfs[0]
-                for p in found_pdfs:
-                    if "press" in p["title"].lower() or "eight" in p["title"].lower() or str(NOW.year) in p["title"]:
-                        selected = p
-                        break
-                        
-                result["title"] = selected["title"]
-                result["pdf_url"] = selected["url"]
-                print(f"   🔗 Found: {result['title']}")
-                print(f"   🌐 Link : {result['pdf_url']}")
+    for t_url in target_urls:
+        try:
+            resp = session.get(t_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.text, "html.parser")
                 
-                path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_Eight_Core_Latest")
-                result["local_path"] = path
-                result["preview_text"] = prev
-    except Exception as e:
-        print(f"   ❌ Eight Core Scraper Error: {e}")
-        
+                # Collect all PDF links
+                candidate_pdfs = []
+                for a in soup.find_all("a", href=True):
+                    href = a['href'].strip()
+                    text = " ".join(a.get_text().split())
+                    combined = f"{text.lower()} {href.lower()}"
+                    
+                    if href.lower().endswith(".pdf"):
+                        # If inside eight_core directory or mentions core/infra
+                        if "eight_core" in t_url or "core" in combined or "press" in combined or "infra" in combined:
+                            candidate_pdfs.append({
+                                "title": text or os.path.basename(href),
+                                "url": urljoin(t_url, href)
+                            })
+                
+                if candidate_pdfs:
+                    # Select the latest file (most recent uploaded)
+                    selected = candidate_pdfs[0]
+                    # Filter for specific keywords if multiple
+                    for c in candidate_pdfs:
+                        if "press" in c["title"].lower() or "eight" in c["title"].lower() or "core" in c["title"].lower():
+                            selected = c
+                            break
+                    result["title"] = selected["title"]
+                    result["pdf_url"] = selected["url"]
+                    break
+        except Exception as e:
+            print(f"   ⚠️ Eight Core crawl note: {e}")
+            continue
+
+    # Fallback to direct latest static release path
+    if not result["pdf_url"]:
+        fallback_link = "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
+        test = session.head(fallback_link, headers=COMMON_HEADERS, timeout=15, verify=False)
+        if test.status_code == 200:
+            result["title"] = "Index of Eight Core Industries"
+            result["pdf_url"] = fallback_link
+
+    if result["pdf_url"]:
+        print(f"   🔗 Found: {result['title']}")
+        print(f"   🌐 Link : {result['pdf_url']}")
+        path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_Eight_Core_Latest")
+        result["local_path"] = path
+        result["preview_text"] = prev
+    else:
+        print("   ❌ DPIIT Eight Core: Link not found.")
+
     return result
 
 # ============================================================
-# 3. DPIIT — Wholesale Price Index (WPI) Press Release PDF
+# 3. DPIIT — WPI Press Release PDF (Verified Working)
 # ============================================================
 
 def scrape_wpi_latest(session):
     print("\n📈 [3/4] Scraping DPIIT WPI (Wholesale Price Index) PDF...")
     base_url = "https://eaindustry.nic.in"
-    archive_url = "https://eaindustry.nic.in/"
+    target_url = "https://eaindustry.nic.in/"
     
-    result = {
-        "title": None,
-        "pdf_url": None,
-        "local_path": None,
-        "preview_text": ""
-    }
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
     
     try:
-        resp = session.get(archive_url, headers=COMMON_HEADERS, timeout=25, verify=False)
+        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.text, "html.parser")
-            
-            # Pattern: press_release_YYYYMM.pdf ya anchor text me "WPI" / "Press Release"
-            wpi_pdf_link = None
-            
             for a in soup.find_all("a", href=True):
-                href = a['href']
-                text = a.get_text().lower()
+                href = a['href'].strip()
                 if "press_release_" in href.lower() and href.lower().endswith(".pdf"):
-                    wpi_pdf_link = urljoin(base_url, href)
+                    result["pdf_url"] = urljoin(base_url, href)
                     result["title"] = a.get_text().strip() or os.path.basename(href)
                     break
-            
-            # Fallback direct generation agar page dynamically update na ho
-            if not wpi_pdf_link:
-                # WPI 1 month lag ke sath aata hai
-                prev_month = NOW.replace(day=1) - timedelta(days=1)
-                month_str = prev_month.strftime("%Y%m")
-                candidate_url = f"https://eaindustry.nic.in/press_release/press_release_{month_str}.pdf"
-                
-                test_resp = session.head(candidate_url, headers=COMMON_HEADERS, timeout=15, verify=False)
-                if test_resp.status_code == 200:
-                    wpi_pdf_link = candidate_url
-                    result["title"] = f"WPI Press Release {prev_month.strftime('%B %Y')}"
-            
-            if wpi_pdf_link:
-                result["pdf_url"] = wpi_pdf_link
-                print(f"   🔗 Found: {result['title']}")
-                print(f"   🌐 Link : {result['pdf_url']}")
-                
-                path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_WPI_Latest")
-                result["local_path"] = path
-                result["preview_text"] = prev
+
+        if result["pdf_url"]:
+            print(f"   🔗 Found: {result['title']}")
+            print(f"   🌐 Link : {result['pdf_url']}")
+            path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_WPI_Latest")
+            result["local_path"] = path
+            result["preview_text"] = prev
     except Exception as e:
         print(f"   ❌ WPI Scraper Error: {e}")
         
     return result
 
 # ============================================================
-# 4. MoSPI — Index of Industrial Production (IIP) Latest Release
+# 4. MoSPI — Index of Industrial Production (IIP) Release
 # ============================================================
 
 def scrape_mospi_iip_latest(session):
@@ -238,49 +216,39 @@ def scrape_mospi_iip_latest(session):
     base_url = "https://www.mospi.gov.in"
     target_url = "https://www.mospi.gov.in/themes/product/54-index-of-industrial-production"
     
-    result = {
-        "title": None,
-        "pdf_url": None,
-        "local_path": None,
-        "preview_text": ""
-    }
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
     
     try:
         resp = session.get(target_url, headers=COMMON_HEADERS, timeout=30, verify=False)
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.text, "html.parser")
             
-            # Target 1: Check section with id="latest-release"
-            latest_block = soup.find(id="latest-release") or soup.find("div", class_=re.compile(r'latest[-_]release', re.I))
-            
-            selected_link = None
-            selected_title = None
-            
-            search_scope = latest_block if latest_block else soup
-            
-            pattern = re.compile(r'Quick Estimates of Index of Industrial Production.*?(?:Month of)?\s*([A-Za-z]+)\s*(\d{4})?', re.IGNORECASE)
-            
-            for a in search_scope.find_all("a", href=True):
-                href = a['href']
-                text = " ".join(a.get_text().split())
+            # MoSPI files always upload to /uploads/latestreleasesfiles/ or have 'IIP' in url/text
+            for a in soup.find_all("a", href=True):
+                href = a['href'].strip()
+                text = " ".join(a.get_text().split()).lower()
                 
-                # Match title text or uploads path
-                if (pattern.search(text) or "iip press release" in text.lower() or "iip" in href.lower()) and href.lower().endswith(".pdf"):
-                    selected_link = urljoin(base_url, href)
-                    selected_title = text or "MoSPI IIP Press Release"
+                # Check for IIP indicators in href or text
+                is_iip_file = (
+                    "iip" in href.lower() 
+                    or "industrial-production" in href.lower() 
+                    or "quick estimates" in text
+                    or "iip press release" in text
+                )
+                
+                if is_iip_file and (".pdf" in href.lower() or "latestreleasesfiles" in href.lower()):
+                    result["title"] = a.get_text().strip() or "MoSPI IIP Press Release"
+                    result["pdf_url"] = urljoin(base_url, href)
                     break
-            
-            if selected_link:
-                result["title"] = selected_title
-                result["pdf_url"] = selected_link
-                print(f"   🔗 Found: {result['title']}")
-                print(f"   🌐 Link : {result['pdf_url']}")
-                
-                path, prev = download_and_extract_summary(session, result["pdf_url"], "MoSPI_IIP_Latest")
-                result["local_path"] = path
-                result["preview_text"] = prev
-            else:
-                print("   ⚠️ No matching IIP anchor tag found on MoSPI page.")
+                    
+        if result["pdf_url"]:
+            print(f"   🔗 Found: {result['title']}")
+            print(f"   🌐 Link : {result['pdf_url']}")
+            path, prev = download_and_extract_summary(session, result["pdf_url"], "MoSPI_IIP_Latest")
+            result["local_path"] = path
+            result["preview_text"] = prev
+        else:
+            print("   ❌ MoSPI: No matching IIP PDF link found.")
     except Exception as e:
         print(f"   ❌ MoSPI Scraper Error: {e}")
         
