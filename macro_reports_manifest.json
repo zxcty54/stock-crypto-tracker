@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-09 17:31:45 IST",
+  "timestamp": "2026-10-09 18:04:27 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from September 2026",
@@ -16,18 +16,16 @@
       "pdf_url": "https://eaindustry.nic.in/press_release/press_release_202608.pdf",
       "local_path": "downloaded_macro_pdfs/DPIIT_WPI_Latest.pdf"
     },
+    "ppac_petroleum_icr": {
+      "title": " Industry Consumption Report",
+      "pdf_url": "https://ppac.gov.in/download.php?file=menu/1790073184_ICR_August_26.pdf",
+      "local_path": "downloaded_macro_pdfs/PPAC_Petroleum_Consumption_Latest.pdf"
+    },
     "netc_fastag": {
       "title": "NETC FASTag Monthly Product Statistics",
-      "csv_path": "netc_fastag_monthly_3years.csv",
-      "total_records": 21,
-      "latest_monthly_metrics": {
-        "year": "2026",
-        "month": "October-2026",
-        "volume_million": 2001.47,
-        "volume_crore": 200.15,
-        "amount_inr_crore": 250.18,
-        "ticket_size_inr": 1.25
-      }
+      "csv_path": null,
+      "total_records": 0,
+      "latest_monthly_metrics": {}
     }
   }
 }
