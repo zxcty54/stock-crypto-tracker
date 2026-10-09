@@ -52,7 +52,7 @@ async def download_binary_file(page, url, filename):
 # ============================================================
 
 async def download_ipa(page):
-    print("\n⚓ [1/4] Crawling & Downloading IPA Ports Traffic Report...")
+    print("\n⚓ [1/5] Crawling & Downloading IPA Ports Traffic Report...")
     target_url = "https://ipa.org.in/reports-statistics"
     res = {"title": None, "file_url": None, "local_path": None}
 
@@ -97,7 +97,7 @@ async def download_ipa(page):
 # ============================================================
 
 async def download_eight_core(page):
-    print("\n🏭 [2/4] Crawling & Downloading DPIIT Eight Core PDF...")
+    print("\n🏭 [2/5] Crawling & Downloading DPIIT Eight Core PDF...")
     target_url = "https://eaindustry.nic.in/"
     res = {"title": None, "pdf_url": None, "local_path": None}
 
@@ -135,7 +135,7 @@ async def download_eight_core(page):
 # ============================================================
 
 async def download_wpi(page):
-    print("\n📈 [3/4] Crawling & Downloading DPIIT WPI PDF...")
+    print("\n📈 [3/5] Crawling & Downloading DPIIT WPI PDF...")
     target_url = "https://eaindustry.nic.in/"
     res = {"title": None, "pdf_url": None, "local_path": None}
 
@@ -160,11 +160,59 @@ async def download_wpi(page):
     return res
 
 # ============================================================
-# 4. NETC FASTAG (Direct HTML Table Extractor)
+# 4. PPAC INDUSTRY CONSUMPTION REPORT (Petroleum ICR PDF)
+# ============================================================
+
+async def download_ppac_icr(page):
+    print("\n🛢️ [4/5] Crawling & Downloading PPAC Petroleum Consumption Report (ICR)...")
+    target_url = "https://ppac.gov.in/consumption/reports"
+    res = {"title": "PPAC Industry Consumption Report", "pdf_url": None, "local_path": None}
+
+    try:
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(3000)
+
+        pdf_url = None
+        for a in await page.query_selector_all("a"):
+            href = await a.get_attribute("href") or ""
+            title = (await a.get_attribute("title") or "").lower()
+            text = (await a.inner_text()).strip().lower()
+
+            if ("industry consumption report" in title or "industry consumption report" in text or "_icr_" in href.lower()) and "download.php" in href.lower():
+                pdf_url = urljoin(target_url, href)
+                res["title"] = (await a.inner_text()).strip() or (await a.get_attribute("title")) or "PPAC Industry Consumption Report"
+                break
+
+        # Fallback agar URL structure home page se linked ho
+        if not pdf_url:
+            await page.goto("https://ppac.gov.in/", wait_until="domcontentloaded", timeout=45000)
+            await page.wait_for_timeout(2000)
+            for a in await page.query_selector_all("a"):
+                href = await a.get_attribute("href") or ""
+                text = (await a.inner_text()).strip().lower()
+                if "industry consumption report" in text and "download.php" in href:
+                    pdf_url = urljoin("https://ppac.gov.in/", href)
+                    break
+
+        if pdf_url:
+            res["pdf_url"] = pdf_url
+            print(f"   🌐 Dynamic PPAC Link: {res['pdf_url']}")
+            path = await download_binary_file(page, res["pdf_url"], "PPAC_Petroleum_Consumption_Latest.pdf")
+            res["local_path"] = path
+        else:
+            print("   ❌ PPAC: Industry Consumption Report link not found on portal.")
+
+    except Exception as e:
+        print(f"   ❌ PPAC Error: {e}")
+
+    return res
+
+# ============================================================
+# 5. NETC FASTAG (Direct HTML Table Extractor)
 # ============================================================
 
 async def scrape_netc_fastag(page):
-    print("\n🛣️ [4/4] Crawling NETC FASTag Statistics (3-Year History)...")
+    print("\n🛣️ [5/5] Crawling NETC FASTag Statistics (3-Year History)...")
     target_url = "https://www.npci.org.in/product/netc/product-statistics"
     years_to_scrape = ["2026", "2025", "2024"]
     all_data = []
@@ -251,7 +299,7 @@ async def main():
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
-    ipa_res, core_res, wpi_res, fastag_res = {}, {}, {}, {}
+    ipa_res, core_res, wpi_res, ppac_res, fastag_res = {}, {}, {}, {}, {}
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -264,6 +312,7 @@ async def main():
         ipa_res = await download_ipa(page)
         core_res = await download_eight_core(page)
         wpi_res = await download_wpi(page)
+        ppac_res = await download_ppac_icr(page)
         fastag_res = await scrape_netc_fastag(page)
 
         await browser.close()
@@ -274,6 +323,7 @@ async def main():
             "ipa_ports_traffic": ipa_res,
             "dpiit_eight_core": core_res,
             "dpiit_wpi": wpi_res,
+            "ppac_petroleum_icr": ppac_res,
             "netc_fastag": fastag_res
         }
     }
@@ -290,7 +340,7 @@ async def main():
         else:
             status = "✅ Downloaded" if val.get("local_path") else "❌ Failed"
             target = val.get("local_path")
-        print(f"   • {key.upper():<20} : {status} | Saved to: {target}")
+        print(f"   • {key.upper():<22} : {status} | Saved to: {target}")
 
     print(f"\n📁 Manifest Saved To : '{MANIFEST_FILE}'")
     print(f"📂 Files Saved To    : '{OUTPUT_DIR}/'")
