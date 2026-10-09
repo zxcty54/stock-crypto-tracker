@@ -47,7 +47,7 @@ async def download_binary_file(page, url, filename):
     return None
 
 # ============================================================
-# 1. IPA PORTS (Targeting .xlsx Excel Report)
+# 1. IPA PORTS (.xlsx Report)
 # ============================================================
 
 async def scrape_ipa(page):
@@ -59,7 +59,6 @@ async def scrape_ipa(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        # Step 1: Find detail page link
         detail_link = None
         for a in await page.query_selector_all("a"):
             aria = (await a.get_attribute("aria-label") or "").lower()
@@ -76,7 +75,6 @@ async def scrape_ipa(page):
             await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
             await page.wait_for_timeout(2000)
 
-            # Step 2: Grab the .xlsx file
             for a in await page.query_selector_all("a"):
                 href = await a.get_attribute("href") or ""
                 text = (await a.inner_text()).strip()
@@ -91,17 +89,13 @@ async def scrape_ipa(page):
                 path = await download_binary_file(page, result["file_url"], f"IPA_Traffic_Latest{ext}")
                 result["local_path"] = path
                 result["preview_text"] = "Excel report downloaded successfully."
-            else:
-                print("   ❌ IPA: Excel file link not found on detail page.")
-        else:
-            print("   ❌ IPA: Detail page link not found.")
     except Exception as e:
         print(f"   ❌ IPA Error: {e}")
 
     return result
 
 # ============================================================
-# 2. DPIIT EIGHT CORE (Homepage Table Row Traversal)
+# 2. DPIIT EIGHT CORE (Locked to Press_Release_ICI_*.pdf)
 # ============================================================
 
 async def scrape_eight_core(page):
@@ -110,50 +104,28 @@ async def scrape_eight_core(page):
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
 
     try:
-        # Load home page directly (blank eight_core_infra avoided)
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
+        # Snippet Confirmation: href contains 'Press_Release_ICI_' or text contains 'INDEX OF CORE'
         pdf_url = None
+        
+        # 1. Direct Anchor Target for ICI Press Release
+        for a in await page.query_selector_all("a"):
+            href = await a.get_attribute("href") or ""
+            if "press_release_ici_" in href.lower() and href.lower().endswith(".pdf"):
+                pdf_url = href
+                result["title"] = "Index of Eight Core Industries Monthly Press Release"
+                break
 
-        # Snippet Locator: <td class="my-box1-text">INDEX OF CORE...
-        box_cell = page.locator("td.my-box1-text:has-text('INDEX OF CORE')").first
-
-        if await box_cell.count() > 0:
-            # Table row jisme ye cell hai
-            row = box_cell.locator("xpath=ancestor::tr[1]")
-            
-            # Check anchors inside this row (adjacent td cells)
-            for a in await row.locator("a").all():
-                href = await a.get_attribute("href") or ""
-                if href and not "press_release_" in href.lower():
-                    pdf_url = href
-                    result["title"] = (await a.inner_text()).strip() or "Eight Core Press Release"
-                    break
-
-            # If not in same row, check next rows within the same box table
-            if not pdf_url:
-                table = box_cell.locator("xpath=ancestor::table[1]")
-                for a in await table.locator("a").all():
-                    href = await a.get_attribute("href") or ""
-                    if href and not "press_release_" in href.lower():
-                        # Exclude home or non-document links
-                        if any(ext in href.lower() for ext in [".pdf", ".doc", "press", "core"]):
-                            pdf_url = href
-                            result["title"] = (await a.inner_text()).strip() or "Eight Core Press Release"
-                            break
-
-        # Fallback search across home page anchors
+        # 2. Parent Anchor of the Box Text (as seen in provided HTML)
         if not pdf_url:
-            for a in await page.query_selector_all("a"):
-                href = await a.get_attribute("href") or ""
-                text = (await a.inner_text()).lower()
-                h_lower = href.lower()
-                if ("core" in text or "core" in h_lower) and not "press_release_" in h_lower:
-                    if h_lower.endswith(".pdf"):
-                        pdf_url = href
-                        result["title"] = (await a.inner_text()).strip()
-                        break
+            box_cell = page.locator("td.my-box1-text:has-text('INDEX OF CORE')").first
+            if await box_cell.count() > 0:
+                parent_a = box_cell.locator("xpath=ancestor::a[1]").first
+                if await parent_a.count() > 0:
+                    pdf_url = await parent_a.get_attribute("href")
+                    result["title"] = "Index of Eight Core Industries Press Release"
 
         if pdf_url:
             result["pdf_url"] = urljoin(target_url, pdf_url)
@@ -163,7 +135,7 @@ async def scrape_eight_core(page):
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
         else:
-            print("   ❌ DPIIT Eight Core: Download link not found beside header cell.")
+            print("   ❌ DPIIT Eight Core: Link not matched.")
     except Exception as e:
         print(f"   ❌ Eight Core Error: {e}")
 
@@ -182,12 +154,11 @@ async def scrape_wpi(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        anchors = await page.query_selector_all("a")
-        for a in anchors:
+        for a in await page.query_selector_all("a"):
             href = await a.get_attribute("href") or ""
             text = (await a.inner_text()).strip()
 
-            if "press_release_" in href.lower() and href.lower().endswith(".pdf"):
+            if "press_release_" in href.lower() and not "ici" in href.lower() and href.lower().endswith(".pdf"):
                 result["title"] = text or "WPI Press Release"
                 result["pdf_url"] = urljoin(target_url, href)
                 break
@@ -204,7 +175,7 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. MoSPI IIP (Exact Heading Traversal)
+# 4. MoSPI IIP
 # ============================================================
 
 async def scrape_mospi_iip(page):
@@ -217,39 +188,14 @@ async def scrape_mospi_iip(page):
         await page.wait_for_timeout(3000)
 
         pdf_url = None
-        
-        # Snippet match on h3
-        h3 = page.locator("h3:has-text('Quick Estimates of all India Index of Industrial Production')").first
-        
-        if await h3.count() > 0:
-            result["title"] = (await h3.inner_text()).strip()
-            
-            # Container ke andar a[href] dhoondhna
-            card = h3.locator("xpath=./ancestor::div[1]")
-            for a in await card.locator("a").all():
-                h = await a.get_attribute("href") or ""
-                if any(x in h.lower() for x in [".pdf", "download", "latestreleasesfiles"]):
-                    pdf_url = h
-                    break
-                    
-            # Agar div[1] me na ho toh higher level div check karein
-            if not pdf_url:
-                higher_card = h3.locator("xpath=./ancestor::div[2]")
-                for a in await higher_card.locator("a").all():
-                    h = await a.get_attribute("href") or ""
-                    if any(x in h.lower() for x in [".pdf", "download", "latestreleasesfiles"]):
-                        pdf_url = h
-                        break
-
-        # Fallback: Page-wide search for IIP files
-        if not pdf_url:
-            for a in await page.query_selector_all("a"):
-                h = await a.get_attribute("href") or ""
-                t = (await a.inner_text()).lower()
-                if ("iip" in h.lower() or "quick" in t or "iip" in t) and (".pdf" in h.lower() or "latestreleasesfiles" in h.lower()):
-                    pdf_url = h
-                    result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
-                    break
+        # Page ke saare anchors scan karein jo IIP press release / latestreleasesfiles ko point karte hain
+        for a in await page.query_selector_all("a"):
+            h = await a.get_attribute("href") or ""
+            t = (await a.inner_text()).lower()
+            if (".pdf" in h.lower() or "latestreleasesfiles" in h.lower()) and ("iip" in h.lower() or "quick" in t):
+                pdf_url = h
+                result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
+                break
 
         if pdf_url:
             result["pdf_url"] = urljoin(target_url, pdf_url)
