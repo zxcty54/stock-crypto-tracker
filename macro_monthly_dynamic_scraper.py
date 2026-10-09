@@ -2,10 +2,9 @@ import os
 import io
 import json
 import re
+import asyncio
 from datetime import datetime, timezone, timedelta
-from urllib.parse import urljoin
-from bs4 import BeautifulSoup
-from curl_cffi import requests
+from playwright.async_api import async_playwright
 
 try:
     import pdfplumber
@@ -13,19 +12,13 @@ except ImportError:
     pdfplumber = None
 
 OUTPUT_FILE = "macro_telemetry_master.json"
+MANIFEST_FILE = "macro_reports_manifest.json"
+PDF_DIR = "downloaded_macro_pdfs"
+
+os.makedirs(PDF_DIR, exist_ok=True)
 
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
-
-COMMON_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9"
-}
 
 def clean_num(val):
     if val is None:
@@ -40,297 +33,308 @@ def clean_num(val):
     return None
 
 # ============================================================
-# 1 & 3 & 4. PIB BACKEND DIRECT API RESOLVER
+# 1. DPIIT — EIGHT CORE INDUSTRIES (PLAYWRIGHT PIB ENGINE)
 # ============================================================
 
-def fetch_latest_pib_release_text(session, ministry_keywords, title_keywords):
-    """
-    Directly queries PIB's raw release lists and extracts full HTML release body
-    without dealing with ASP.NET forms or pagination.
-    """
-    api_url = "https://pib.gov.in/AllRelease.aspx"
-    try:
-        # Standard release listing
-        resp = session.get(api_url, headers=COMMON_HEADERS, timeout=20, verify=False)
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for a in soup.find_all("a", href=True):
-                txt = a.get_text().strip().lower()
-                href = a['href']
-                if any(k.lower() in txt for k in title_keywords) and "pressrelease" in href.lower():
-                    full_link = urljoin("https://pib.gov.in/", href)
-                    rel_page = session.get(full_link, headers=COMMON_HEADERS, timeout=20, verify=False)
-                    if rel_page.status_code == 200:
-                        psoup = BeautifulSoup(rel_page.text, "html.parser")
-                        return psoup.get_text(), full_link
-    except Exception:
-        pass
-    return "", ""
-
-# ============================================================
-# 1. DPIIT — EIGHT CORE INDUSTRIES
-# ============================================================
-
-def scrape_dpiit_core_industries(session):
-    print("🏭 [1/5] Extracting DPIIT Eight Core Industries...")
-    result = {
+async def scrape_dpiit(page):
+    print("🏭 [1/5] Extracting DPIIT Eight Core Industries via Playwright...")
+    res = {
         "source": "DPIIT",
         "cement_growth_pct": None,
         "steel_growth_pct": None,
         "overall_core_growth_pct": None,
         "cement_production_mt": None,
-        "steel_production_mt": None
+        "steel_production_mt": None,
+        "url": None
     }
+    try:
+        # Navigate to PIB All Release
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(3000)
 
-    text, link = fetch_latest_pib_release_text(session, ["commerce"], ["eight core", "core industries"])
-    
-    # Fallback to direct economic advisory monthly index
-    if not text:
-        try:
-            fallback_url = "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
-            f_resp = session.get(fallback_url, headers=COMMON_HEADERS, timeout=20, verify=False)
-            if f_resp.status_code == 200 and pdfplumber:
-                with pdfplumber.open(io.BytesIO(f_resp.content)) as pdf:
-                    text = "\n".join([p.extract_text() or "" for p in pdf.pages[:5]])
-        except Exception:
-            pass
+        # Look for Eight Core link in rendered DOM
+        link_elem = await page.query_selector("a:has-text('Eight Core'), a:has-text('eight core')")
+        if link_elem:
+            href = await link_elem.get_attribute("href")
+            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
+            await link_elem.click()
+            await page.wait_for_load_state("domcontentloaded")
+            await page.wait_for_timeout(2000)
+            text = await page.inner_text("body")
+        else:
+            # Fallback to direct economic advisory page
+            await page.goto("https://eaindustry.nic.in/", timeout=45000, wait_until="domcontentloaded")
+            text = await page.inner_text("body")
 
-    if text:
-        # Core overall
+        # Parsing
         m_core = re.search(r'(?:Eight Core Industries|combined Index)[^\d\n%]+(?:increased|growth of|by)\s+([\d\.\-]+)\s*%', text, re.IGNORECASE)
         if m_core:
-            result["overall_core_growth_pct"] = clean_num(m_core.group(1))
+            res["overall_core_growth_pct"] = clean_num(m_core.group(1))
 
-        # Cement
         m_cem = re.search(r'Cement\s+production[^\d\n%]+(?:increased|declined|growth|by)?\s*([\d\.\-]+)\s*%', text, re.IGNORECASE)
         if m_cem:
-            result["cement_growth_pct"] = clean_num(m_cem.group(1))
-        
+            res["cement_growth_pct"] = clean_num(m_cem.group(1))
+
         m_cem_v = re.search(r'Cement[^\d\n]+([\d,\.]+)\s*(?:million|MT)', text, re.IGNORECASE)
         if m_cem_v:
-            result["cement_production_mt"] = clean_num(m_cem_v.group(1))
+            res["cement_production_mt"] = clean_num(m_cem_v.group(1))
 
-        # Steel
         m_stl = re.search(r'Steel\s+production[^\d\n%]+(?:increased|declined|growth|by)?\s*([\d\.\-]+)\s*%', text, re.IGNORECASE)
         if m_stl:
-            result["steel_growth_pct"] = clean_num(m_stl.group(1))
+            res["steel_growth_pct"] = clean_num(m_stl.group(1))
 
         m_stl_v = re.search(r'Steel[^\d\n]+([\d,\.]+)\s*(?:million|MT)', text, re.IGNORECASE)
         if m_stl_v:
-            result["steel_production_mt"] = clean_num(m_stl_v.group(1))
+            res["steel_production_mt"] = clean_num(m_stl_v.group(1))
 
-    print(f"   ✅ DPIIT: Core: {result['overall_core_growth_pct']}% | Cement: {result['cement_growth_pct']}% | Steel: {result['steel_growth_pct']}%")
-    return result
+    except Exception as e:
+        print(f"   ⚠️ DPIIT Playwright Error: {e}")
+
+    print(f"   ✅ DPIIT: Core: {res['overall_core_growth_pct']}% | Cement: {res['cement_growth_pct']}% | Steel: {res['steel_growth_pct']}%")
+    return res
 
 # ============================================================
-# 2. PPAC — DIESEL, BITUMEN & PETCOKE (EXCLUDING CALENDAR YEARS)
+# 2. PPAC — DIESEL, BITUMEN & PETCOKE (DIRECT DOWNLOAD HANDLER)
 # ============================================================
 
-def scrape_ppac_consumption(session):
-    print("🛢️ [2/5] Extracting PPAC (Diesel, Bitumen, Petcoke)...")
-    result = {
+async def scrape_ppac(page):
+    print("🛢️ [2/5] Extracting PPAC (Diesel, Bitumen, Petcoke) via Playwright...")
+    res = {
         "source": "PPAC",
         "hsd_diesel_tmt": None,
         "bitumen_tmt": None,
-        "petcoke_tmt": None
+        "petcoke_tmt": None,
+        "downloaded_pdf": None
     }
-
-    url = "https://ppac.gov.in/consumption"
     try:
-        resp = session.get(url, headers=COMMON_HEADERS, timeout=25, verify=False)
-        soup = BeautifulSoup(resp.text, "html.parser")
+        await page.goto("https://ppac.gov.in/consumption", timeout=60000, wait_until="networkidle")
+        await page.wait_for_timeout(3000)
 
-        pdf_link = None
-        for a in soup.find_all("a", href=True):
-            h = a['href']
-            t = (a.get_text() + " " + h).lower()
-            if ".pdf" in h.lower() and ("snapshot" in t or "icr" in t or "consumption" in t):
-                pdf_link = urljoin("https://ppac.gov.in/", h)
-                break
+        # Trigger download on the first relevant PDF/Report link
+        pdf_link_elem = await page.query_selector("a[href*='.pdf']")
+        if pdf_link_elem:
+            async with page.expect_download(timeout=45000) as download_info:
+                await pdf_link_elem.click()
+            download = await download_info.value
+            pdf_path = os.path.join(PDF_DIR, "ppac_latest.pdf")
+            await download.save_as(pdf_path)
+            res["downloaded_pdf"] = pdf_path
 
-        if pdf_link:
-            p_resp = session.get(pdf_link, headers=COMMON_HEADERS, timeout=35, verify=False)
-            if p_resp.status_code == 200 and pdfplumber:
-                with pdfplumber.open(io.BytesIO(p_resp.content)) as pdf:
-                    for page in pdf.pages[:8]:
-                        tables = page.extract_tables()
-                        for table in tables:
-                            for row in table:
-                                if not row:
-                                    continue
-                                line = " ".join([str(c) for c in row if c]).lower()
-                                
-                                # Year filter: Strictly exclude 2024, 2025, 2026, 2027
-                                raw_nums = [clean_num(c) for c in row if clean_num(c) is not None]
-                                valid_nums = [n for n in raw_nums if n not in [2024.0, 2025.0, 2026.0, 2027.0]]
+            # Forensic PDF Parse
+            if pdfplumber and os.path.exists(pdf_path):
+                with pdfplumber.open(pdf_path) as pdf:
+                    for p in pdf.pages[:8]:
+                        txt = p.extract_text() or ""
+                        for line in txt.split("\n"):
+                            l_lower = line.lower()
+                            raw_nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', line) if clean_num(n)]
+                            # Exclude calendar years
+                            valid_nums = [n for n in raw_nums if n not in [2023.0, 2024.0, 2025.0, 2026.0, 2027.0]]
 
-                                if ("hsd" in line or "high speed diesel" in line) and not result["hsd_diesel_tmt"]:
-                                    hsd_c = [n for n in valid_nums if 4000.0 <= n <= 11000.0]
-                                    if hsd_c:
-                                        result["hsd_diesel_tmt"] = hsd_c[0]
+                            if ("hsd" in l_lower or "diesel" in l_lower) and not res["hsd_diesel_tmt"]:
+                                candidates = [n for n in valid_nums if 4000.0 <= n <= 12000.0]
+                                if candidates:
+                                    res["hsd_diesel_tmt"] = candidates[0]
 
-                                if "bitumen" in line and not result["bitumen_tmt"]:
-                                    bit_c = [n for n in valid_nums if 150.0 <= n <= 1500.0]
-                                    if bit_c:
-                                        result["bitumen_tmt"] = bit_c[0]
+                            if "bitumen" in l_lower and not res["bitumen_tmt"]:
+                                candidates = [n for n in valid_nums if 150.0 <= n <= 2000.0]
+                                if candidates:
+                                    res["bitumen_tmt"] = candidates[0]
 
-                                if ("petcoke" in line or "petroleum coke" in line) and not result["petcoke_tmt"]:
-                                    pet_c = [n for n in valid_nums if 200.0 <= n <= 2500.0]
-                                    if pet_c:
-                                        result["petcoke_tmt"] = pet_c[0]
+                            if ("petcoke" in l_lower or "petroleum coke" in l_lower) and not res["petcoke_tmt"]:
+                                candidates = [n for n in valid_nums if 200.0 <= n <= 3000.0]
+                                if candidates:
+                                    res["petcoke_tmt"] = candidates[0]
 
-        print(f"   ✅ PPAC: HSD: {result['hsd_diesel_tmt']} TMT | Bitumen: {result['bitumen_tmt']} TMT | Petcoke: {result['petcoke_tmt']} TMT")
     except Exception as e:
-        print(f"   ❌ PPAC Error: {e}")
+        print(f"   ⚠️ PPAC Playwright Error: {e}")
 
-    return result
+    print(f"   ✅ PPAC: HSD: {res['hsd_diesel_tmt']} TMT | Bitumen: {res['bitumen_tmt']} TMT | Petcoke: {res['petcoke_tmt']} TMT")
+    return res
 
 # ============================================================
 # 3. RAILWAYS — FREIGHT TRAFFIC & REVENUE
 # ============================================================
 
-def scrape_railways_freight(session):
-    print("🚂 [3/5] Extracting Ministry of Railways (Freight Traffic)...")
-    result = {
+async def scrape_railways(page):
+    print("🚂 [3/5] Extracting Ministry of Railways via Playwright...")
+    res = {
         "source": "Indian Railways",
         "originating_freight_mt": None,
         "freight_revenue_cr": None,
         "cement_clinker_mt": None,
-        "iron_ore_mt": None
+        "iron_ore_mt": None,
+        "url": None
     }
+    try:
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(3000)
 
-    text, link = fetch_latest_pib_release_text(session, ["railways"], ["freight", "revenue freight", "loading"])
-    
-    if text:
-        # Total freight volume
-        m_tot = re.search(r'(?:freight loading of|originating freight of|loading of)\s*([\d\.,]+)\s*MT', text, re.IGNORECASE)
-        if not m_tot:
-            m_tot = re.search(r'([\d\.,]+)\s*MT\s*(?:freight|originating)', text, re.IGNORECASE)
-        if m_tot:
-            result["originating_freight_mt"] = clean_num(m_tot.group(1))
+        link_elem = await page.query_selector("a:has-text('Freight'), a:has-text('freight'), a:has-text('Loading')")
+        if link_elem:
+            href = await link_elem.get_attribute("href")
+            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
+            await link_elem.click()
+            await page.wait_for_load_state("domcontentloaded")
+            await page.wait_for_timeout(2000)
+            txt = await page.inner_text("body")
 
-        # Revenue
-        m_rev = re.search(r'(?:revenue of|revenue reached|freight revenue)\s*(?:Rs\.?)?\s*([\d\.,]+)\s*crore', text, re.IGNORECASE)
-        if m_rev:
-            result["freight_revenue_cr"] = clean_num(m_rev.group(1))
+            m_tot = re.search(r'(?:freight loading of|originating freight of|loading of)\s*([\d\.,]+)\s*MT', txt, re.IGNORECASE)
+            if not m_tot:
+                m_tot = re.search(r'([\d\.,]+)\s*MT\s*(?:freight|originating)', txt, re.IGNORECASE)
+            if m_tot:
+                res["originating_freight_mt"] = clean_num(m_tot.group(1))
 
-        # Cement
-        m_cem = re.search(r'([\d\.,]+)\s*MT\s*of\s*Cement', text, re.IGNORECASE)
-        if not m_cem:
-            m_cem = re.search(r'Cement\s*(?:&|\+)?\s*Clinker[^\d\n]+([\d\.,]+)\s*MT', text, re.IGNORECASE)
-        if m_cem:
-            result["cement_clinker_mt"] = clean_num(m_cem.group(1))
+            m_rev = re.search(r'(?:revenue of|revenue reached|freight revenue)\s*(?:Rs\.?)?\s*([\d\.,]+)\s*crore', txt, re.IGNORECASE)
+            if m_rev:
+                res["freight_revenue_cr"] = clean_num(m_rev.group(1))
 
-        # Iron Ore
-        m_iron = re.search(r'([\d\.,]+)\s*MT\s*of\s*Iron\s*Ore', text, re.IGNORECASE)
-        if not m_iron:
-            m_iron = re.search(r'Iron\s*Ore[^\d\n]+([\d\.,]+)\s*MT', text, re.IGNORECASE)
-        if m_iron:
-            result["iron_ore_mt"] = clean_num(m_iron.group(1))
+            m_cem = re.search(r'([\d\.,]+)\s*MT\s*of\s*Cement', txt, re.IGNORECASE)
+            if not m_cem:
+                m_cem = re.search(r'Cement\s*(?:&|\+)?\s*Clinker[^\d\n]+([\d\.,]+)\s*MT', txt, re.IGNORECASE)
+            if m_cem:
+                res["cement_clinker_mt"] = clean_num(m_cem.group(1))
 
-    print(f"   ✅ Railways: Total: {result['originating_freight_mt']} MT | Revenue: ₹{result['freight_revenue_cr']} Cr | Cement: {result['cement_clinker_mt']} MT | Iron Ore: {result['iron_ore_mt']} MT")
-    return result
+            m_iron = re.search(r'([\d\.,]+)\s*MT\s*of\s*Iron\s*Ore', txt, re.IGNORECASE)
+            if not m_iron:
+                m_iron = re.search(r'Iron\s*Ore[^\d\n]+([\d\.,]+)\s*MT', txt, re.IGNORECASE)
+            if m_iron:
+                res["iron_ore_mt"] = clean_num(m_iron.group(1))
+
+    except Exception as e:
+        print(f"   ⚠️ Railways Playwright Error: {e}")
+
+    print(f"   ✅ Railways: Total: {res['originating_freight_mt']} MT | Revenue: ₹{res['freight_revenue_cr']} Cr | Cement: {res['cement_clinker_mt']} MT | Iron Ore: {res['iron_ore_mt']} MT")
+    return res
 
 # ============================================================
-# 4. IPA — MAJOR PORTS TRAFFIC
+# 4. IPA — MARITIME EXIM & PORTS TRAFFIC
 # ============================================================
 
-def scrape_ipa_ports(session):
-    print("⚓ [4/5] Extracting Indian Ports Association (Cargo Traffic)...")
-    result = {
+async def scrape_ipa(page):
+    print("⚓ [4/5] Extracting Indian Ports Association via Playwright...")
+    res = {
         "source": "IPA",
         "cargo_traffic_mt": None,
-        "container_teus": None
+        "container_teus": None,
+        "url": None
     }
+    try:
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(2000)
 
-    text, link = fetch_latest_pib_release_text(session, ["ports", "shipping"], ["cargo", "traffic", "major ports"])
+        link_elem = await page.query_selector("a:has-text('Major Ports'), a:has-text('major ports'), a:has-text('Traffic Handled')")
+        if link_elem:
+            href = await link_elem.get_attribute("href")
+            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
+            await link_elem.click()
+            await page.wait_for_load_state("domcontentloaded")
+            await page.wait_for_timeout(2000)
+            txt = await page.inner_text("body")
 
-    if text:
-        m_cargo = re.search(r'([\d\.,]+)\s*(?:Million\s*Tonnes|MT).*?(?:cargo|traffic)', text, re.IGNORECASE)
-        if m_cargo:
-            result["cargo_traffic_mt"] = clean_num(m_cargo.group(1))
+            m_cargo = re.search(r'([\d\.,]+)\s*(?:Million\s*Tonnes|MT).*?(?:cargo|traffic)', txt, re.IGNORECASE)
+            if m_cargo:
+                res["cargo_traffic_mt"] = clean_num(m_cargo.group(1))
 
-        m_teu = re.search(r'([\d\.,]+)\s*(?:million|lakh)?\s*TEUs', text, re.IGNORECASE)
-        if m_teu:
-            result["container_teus"] = clean_num(m_teu.group(1))
+            m_teu = re.search(r'([\d\.,]+)\s*(?:million|lakh)?\s*TEUs', txt, re.IGNORECASE)
+            if m_teu:
+                res["container_teus"] = clean_num(m_teu.group(1))
 
-    print(f"   ✅ Ports: Cargo: {result['cargo_traffic_mt']} MT | Containers: {result['container_teus']} TEUs")
-    return result
+    except Exception as e:
+        print(f"   ⚠️ IPA Playwright Error: {e}")
+
+    print(f"   ✅ Ports: Cargo: {res['cargo_traffic_mt']} MT | Containers: {res['container_teus']} TEUs")
+    return res
 
 # ============================================================
-# 5. FASTAG — HIGHWAY TOLL METRICS (WORKING)
+# 5. FASTAG — HIGHWAY TOLL METRICS (BROWSER RENDERED DOM)
 # ============================================================
 
-def scrape_npci_fastag(session):
-    print("🛣️ [5/5] Extracting NPCI / NETC FASTag Statistics...")
-    result = {
+async def scrape_fastag(page):
+    print("🛣️ [5/5] Extracting NPCI / NETC FASTag via Playwright...")
+    res = {
         "source": "NETC FASTag",
         "toll_volume_crores": None,
         "toll_value_inr_crores": None,
         "freight_intensity_ratio": None
     }
+    try:
+        await page.goto("https://www.npci.org.in/what-we-do/netc-fastag/product-statistics", timeout=60000, wait_until="networkidle")
+        await page.wait_for_timeout(4000)
 
-    endpoints = [
-        "https://www.npci.org.in/what-we-do/netc-fastag/product-statistics",
-        "https://ihmcl.co.in/fastag-statistics/"
-    ]
+        # Wait for table or dynamic statistical container to hydrate
+        await page.wait_for_selector("table tr", timeout=15000)
 
-    for url in endpoints:
-        try:
-            resp = session.get(url, headers=COMMON_HEADERS, timeout=20, verify=False)
-            if resp.status_code == 200 and len(resp.text) > 500:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for row in soup.find_all("tr"):
-                    cells = [c.get_text().strip() for c in row.find_all(["td", "th"])]
-                    nums = [clean_num(c) for c in cells if clean_num(c) is not None]
+        # Read inner text of hydrated rows
+        rows = await page.query_selector_all("table tr")
+        for row in rows:
+            text = await row.inner_text()
+            nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', text) if clean_num(n)]
+            
+            # Volume: 15-55 Cr, Value: 3000-10000 Cr
+            v_vol = next((n for n in nums if 15.0 <= n <= 55.0), None)
+            v_val = next((n for n in nums if 3000.0 <= n <= 10000.0), None)
 
-                    v_vol = next((n for n in nums if 15.0 <= n <= 55.0), None)
-                    v_val = next((n for n in nums if 3000.0 <= n <= 10000.0), None)
+            if v_vol and not res["toll_volume_crores"]:
+                res["toll_volume_crores"] = v_vol
+            if v_val and not res["toll_value_inr_crores"]:
+                res["toll_value_inr_crores"] = v_val
 
-                    if v_vol and not result["toll_volume_crores"]:
-                        result["toll_volume_crores"] = v_vol
-                    if v_val and not result["toll_value_inr_crores"]:
-                        result["toll_value_inr_crores"] = v_val
-
-                    if result["toll_volume_crores"] and result["toll_value_inr_crores"]:
-                        break
-
-            if result["toll_volume_crores"] and result["toll_value_inr_crores"]:
+            if res["toll_volume_crores"] and res["toll_value_inr_crores"]:
                 break
-        except Exception:
-            continue
 
-    if result["toll_value_inr_crores"] and result["toll_volume_crores"]:
-        result["freight_intensity_ratio"] = round(
-            result["toll_value_inr_crores"] / result["toll_volume_crores"], 2
+    except Exception as e:
+        print(f"   ⚠️ FASTag Playwright Error: {e}")
+
+    if res["toll_value_inr_crores"] and res["toll_volume_crores"]:
+        res["freight_intensity_ratio"] = round(
+            res["toll_value_inr_crores"] / res["toll_volume_crores"], 2
         )
 
-    print(f"   ✅ FASTag: Volume: {result['toll_volume_crores']} Cr | Value: ₹{result['toll_value_inr_crores']} Cr | Freight Ratio: {result['freight_intensity_ratio']}")
-    return result
+    print(f"   ✅ FASTag: Volume: {res['toll_volume_crores']} Cr | Value: ₹{res['toll_value_inr_crores']} Cr | Freight Ratio: {res['freight_intensity_ratio']}")
+    return res
 
 # ============================================================
 # MASTER ORCHESTRATOR
 # ============================================================
 
-def run_macro_telemetry_pipeline():
+async def main():
     print("=" * 80)
-    print("🚀 MACRO-ECONOMIC & PHYSICAL INFRASTRUCTURE TELEMETRY ENGINE")
+    print("🚀 PLAYWRIGHT ASYNC MACRO-ECONOMIC TELEMETRY ENGINE")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
-    session = requests.Session(impersonate="chrome124")
+    async with async_playwright() as p:
+        # Launch Chromium with anti-detection flags
+        browser = await p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-setuid-sandbox"
+            ]
+        )
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            viewport={"width": 1920, "height": 1080},
+            accept_downloads=True
+        )
+        page = await context.new_page()
 
-    telemetry_payload = {
-        "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-        "metrics": {
-            "dpiit_eight_core": scrape_dpiit_core_industries(session),
-            "ppac_petroleum": scrape_ppac_consumption(session),
-            "railways_freight": scrape_railways_freight(session),
-            "ipa_ports": scrape_ipa_ports(session),
-            "fastag_road_logistics": scrape_npci_fastag(session)
+        telemetry_payload = {
+            "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+            "metrics": {
+                "dpiit_eight_core": await scrape_dpiit(page),
+                "ppac_petroleum": await scrape_ppac(page),
+                "railways_freight": await scrape_railways(page),
+                "ipa_ports": await scrape_ipa(page),
+                "fastag_road_logistics": await scrape_fastag(page)
+            }
         }
-    }
 
+        await browser.close()
+
+    # Save to history file
     history = []
     if os.path.exists(OUTPUT_FILE):
         try:
@@ -346,9 +350,12 @@ def run_macro_telemetry_pipeline():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
 
+    with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
+        json.dump({"last_run": NOW.strftime("%Y-%m-%d %H:%M:%S IST"), "status": "SUCCESS"}, f, indent=2)
+
     print("\n" + "=" * 80)
-    print(f"💾 Snapshot successfully committed to '{OUTPUT_FILE}'")
+    print(f"💾 Macro Telemetry Data successfully written to '{OUTPUT_FILE}'")
     print("=" * 80)
 
 if __name__ == "__main__":
-    run_macro_telemetry_pipeline()
+    asyncio.run(main())
