@@ -1,82 +1,160 @@
 {
   "status": "success",
-  "timestamp": "2026-10-09T19:15:38.780664",
-  "total_hot_spikes": 15,
+  "timestamp": "2026-10-09T19:17:57.513943",
+  "total_hot_spikes": 11,
   "data": [
     {
-      "keyword": "sensex nifty surge october rally",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "tcs infosys wipro hcltech q2 results",
+      "search_volume_velocity": "8 active variations expanding",
+      "trending_queries_by_users": [
+        "tcs infosys wipro hcltech q2 results",
+        "infosys tcs hcl tech wipro",
+        "wipro vs hcl tech",
+        "infosys vs hcl tech"
+      ],
+      "trigger_event": {
+        "headline": "TCS, Infosys, Wipro, HCLTech: Nifty IT rallies over 3% despite US suspending eight firms from green-card programme",
+        "source": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPN3ZzUnZuSEtEbm1yUEFNdF9UZFNvSEtlMXA5MDJIVXNyX1BjTHRCWGc3TkE2VVZ3bHpwbGZHUUNNZHd3TTg1Z1VqMGRrT2hsMmtCWFJpRmZIejc2NWdSRFZVQWUyUGhEa0dXMVgzMlJqcWNId0lhZ1lVYTZSb2p1OG5HVXdYbkx3ZnVJZGZrdGZ4eHh5NHg2dTlPVnVZTGhrXzAyczFaMmFyNnppQnQ5QVZzOHdNc1g2eERkSkVDSkY2UHVEVWpMb1RacTl1akh0ZTJUSnBDY1E1NWQ3ckQxc3dueUs3cG5yUEtPbm93?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge today",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "stock market closed today",
+      "search_volume_velocity": "15 active variations expanding",
+      "trending_queries_by_users": [
+        "stock market closed today",
+        "stock market close time",
+        "stock market closed tomorrow",
+        "stock market closes at"
+      ],
+      "trigger_event": {
+        "headline": "Stock Market Close: Broad-based buying helps Sensex rebound 879 pts; Nifty at 22,536; IT pack shines",
+        "source": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPYnhFVTMwNnlRRVdKUE5jTnNUUjFjMTFCVVV1X2FKbnI5RnZ2UlQ0M0xhTXA1Ynd1TUU5cGdMRTVPRnJUTTlxV21LY1BDOEJ1QVhybFpzZ3dhUWF0dWJHd0dya05rVDE2N3ZBaWExMGg2R2QwNi1tM3VzTUNXNkVMbkNQVmJQd2RGOXpjNTZnWVNZTFZqSGlxY0hBSmZFcnQ1RGlvbnF6VVByR1FCdW1jTGtDRk43TThoaDdTT1ZEWm1MVGQ4VGVvSFRza2FMU1hvdnY2bGZOX1FZYVFrOEdKM1YzOXdOeGk1UkxYQklwMFl2R3I3Q0cybW45NNIBgAJBVV95cUxPNzJmMTFPQVJYb2xUNFVWV0l0QzZTWlA1b1U5dFV5T25jYzFqTG1WS21VZlpreC1PdXBSb0x5WEhoTmlXbWNIVE9sVjY0UGhnLXptRjd1bUVLdkRjY2hEYnY1dzBWNGpwbUYyRlYzTF9rSFBibDZqaE1QdXR4Y05mNGlGSl95dnhOa0lqVlZmRW5iOE1CZFNsSzZnMXN1TXYzVUhOd1lxOU1oQWd1MTJLWXJYQTB0aE9XU2d0RWJTZmkwbVNNNU94dzZKdmE1ZXo0QmJLcUtyZy1pc0dWMUVndEpSWGNqY2hRVzdsUUY0ZktHaFhOSGpwbGJMcFhjak5E?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge meaning",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "mizuho avendus deal valuation disagreement",
+      "search_volume_velocity": "14 active variations expanding",
+      "trending_queries_by_users": [
+        "mizuho avendus deal valuation disagreement",
+        "mizuho avendus deal india valuation disagreement",
+        "mizuho avendus deal size",
+        "mizuho avendus deal value"
+      ],
+      "trigger_event": {
+        "headline": "Mizuho-Avendus deal: RBI seeks consolidation plan for India NBFC assets",
+        "source": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNU2VPMl9zdjE4V2FHNEh2enB0d1lPcnFGQ0d4amdjUFQxa0gzSWIxMEc4ZEFoeVpUSTFXOF9OYzFqU21qVE1DZXY5NmdvS3BRVjc2dDByVFg4TlhSWmk4a1NQa2g3RWFNbzhkdHJRakJ3OEY3c3BaNlpGdW9ORTR1RTJnMDVzaUlXVDFldnJIVlQxSEVWR21lX2JpQ1RZX2FUWWRHOHpxOFNUZkZFVUFaQWktOGFXMzhURmlPR2NIY0dqbWdiYWdyV2RXTTg2WmNad1B4YktkUy1ucERL0gHiAUFVX3lxTE93bzlvQlJaeVBWV2FsSXE3dFJTOWMtbHFvY0RTazEyQnhocEVWbFRESEtmSm9NN25TWWw4YkJIQ2toLUtMeTFuVTVjRG55alAwMHIwXzBuZ3RMZV9tcnA4QjB2ZVZaMVhoVWxzUF81U3J2TlZ4SVRLSVdOQ01UUml1bTJ1c3FTbEhXTm1tYzk2ck5TbFJfN2xvVFpoR0ZUV2NWT2JVeUVfV29qNVVuRkJsSU9NdUJ3ZmxReVYtei1uRk4yWWV4YXZJdVh5eVFCM2kzN3ZpX3ZhYzkwblVpNWpUWGc?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge yesterday",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "starlink elon musk india",
+      "search_volume_velocity": "15 active variations expanding",
+      "trending_queries_by_users": [
+        "starlink elon musk india",
+        "starlink elon musk tweet",
+        "starlink elon musk hindi",
+        "starlink elon musk news"
+      ],
+      "trigger_event": {
+        "headline": "Starlink: Why Elon Musk is taking on Mukesh Ambani and Jio over satellite internet",
+        "source": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5yeXN6YkROVGN4ZEpISXlicm9HUjZUZGZoYW1ZYjFlR2NDNVZtTjBBLXhHWGxwNlhvQ05YTHl6NG9YVFpSU3F5Qml2MHVscnZtUlhCeGxkb3J6RTQ?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge s&p",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "mazagon dock support",
+      "search_volume_velocity": "5 active variations expanding",
+      "trending_queries_by_users": [
+        "mazagon dock support",
+        "mazagon dock submarine share price",
+        "mazagon dock support level",
+        "mazagon dock support and resistance"
+      ],
+      "trigger_event": {
+        "headline": "Mazagon Dock, Suzlon To RVNL: How Have India's Retail Stock Darlings Fared From Their Peaks?",
+        "source": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxQU3lNa2l5RXpheE0tY3pTWjhqWG10cU1WN05YMV9tNGpDN3E0V0dWZ0V4bFNBdjQwdTVLTTBkQ2hDVldaSHpSaUJBUVY4cUlQd25xT3YyVXNmZmgzU0tyS0FZdHdHMHNLXzdZZXJyV3JWbFlDcG9UU3ZrZDVOTlUyQUZXVXpwMFk2blBCNm1hX0lIenJ2Wk9BWTV6MFpxVWhYWmJPQzlCakxqSWltbWI0c1ZGMFpPWWwzQzJvb195YTQwSEljUTRBVWhLaDFLVWdQWTBCN3djMkhpS1BGbDM3RG1mTmUzQmZiN3VDQXBDZmJnS2FON0xmeS1xSkxaSUXSAYcCQVVfeXFMTkRMaXpRdURSSjNpRTRvTHhTaXFGbXNNQmxPNXhKYm1uRjRra1UxeVJldXZ4YlhMV0lLby1rM2JORFJyal9IeWNBMGtTQ2dHTVRqNGVPbXUzVzg0YzBPbVBnMmU5RW9EdzdQQ2lkbDdWeURuOExWdTZNMkVBb0RnRDJtSk9ySUNMTWtYc2Q0ak9qdjdwRDg2VXN3Mm5fV3IzNWdlWUEzLWhuTEcxOVJQVFF0QkVYZk8wNjVPOTg0VkJqT3pVbEdxdWJfTGJNMXBsTjh0eWtwTEZFNnJVZU9vamNKUTlUMTZVX1RfZm1lbU9IZHpOY19UOVJ4NU1ZYllrOFpLWTRUaHM?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge key factors",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "next hdfc bank in india",
+      "search_volume_velocity": "8 active variations expanding",
+      "trending_queries_by_users": [
+        "next hdfc bank in india",
+        "hdfc india head email id",
+        "hdfc india customer care",
+        "hdfc next fifty index fund"
+      ],
+      "trigger_event": {
+        "headline": "HDFC's next CEO set to be India's highest-paid bank chief",
+        "source": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPc1U0MThxSEMwa2Rpbk5KOWE5NUpkb0RhQ21OenFPVjVJWUd2Z0pNZVhUSmpZcXh4ajBOWnlfNXlqMDQxaDR3ZHpjTm52SXR4aHJqNEFKS2lINmFvQmswOWFZTmpiSjNscjBCYlE5Z2d0bWp6cmc2ZGhoOWhuZXc2Z3hBQ0c4dE9RREVIZGtoQ3hncERXT1pHUmJnWERwV2FhSmc?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge fed rate cut",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "stocks jump after hours",
+      "search_volume_velocity": "7 active variations expanding",
+      "trending_queries_by_users": [
+        "stocks jump after hours",
+        "tesla shares jump after musk buys",
+        "itc shares jump after gst change",
+        "nvidia shares jump after earnings report"
+      ],
+      "trigger_event": {
+        "headline": "TCS shares jump 4% after Q2 results. What are Goldman Sachs, Nomura, others saying?",
+        "source": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPM0tCNFVmV2thYngxbU43aFhDM0llOUVfZXBCbWU2THlPbWxpbFZNT29ERllJLXZrelBiRjY2c2RicVZ3NGVDZEg2M3VBWmktdnZNajJUbjMzM01qcU5ldGxWZlpNM1VId2h3YjRpUV9aTXhKQ2I2TW96MENXbUtOT21NX0FVVk1GT0gyTFBYR2dIQkVGN0hIRTViUE44Y0F3WEUtZWtWWWdiUTBtLUlUbmJ0azFXQm5uM1hYeVBPSGhUVmVMeXVqREo2VXBmLW9XdExkdFc4Z2UtajJIQnBiNzRKc09BRjDSAewBQVVfeXFMTmNGcWJKLS1DMC12NHhUTEZaMGpPcDJ5b3hYTU8xUExBb0FMajF5UUxnQWw4Sy0xNTZGS0dCNGZGYjJIcEU1b25hU3pNRjZJakszMkpmUGtVc0JKbDJjQmJSWXJoUlJ2emVzR3EzWDdEd19Gcm45SlFkMkFYaUpTa2gyWGFxQkdIaTR5akFvZkF6VTdhZm4ySi11eHdmOVpvUnhNdDcteWNfaVg2NUkyQmhsYjh3YTUzbi1xZFNUc2tBZkpHcFAzRUQ0Ujg3aHFaY3FDZzVUTHRSSkZCZDZsanhMRnl5TDU1R0IwYkQ?oc=5"
+      }
     },
     {
-      "keyword": "stock market surge reason",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "diversification and concentration",
+      "search_volume_velocity": "3 active variations expanding",
+      "trending_queries_by_users": [
+        "diversification and concentration",
+        "diversify to fortify",
+        "diversification solution"
+      ],
+      "trigger_event": {
+        "headline": "Diversify, go contrarian, stay put: ICICI Prudential AMC CIO Sankaran Naren's mantra for volatile markets",
+        "source": "https://news.google.com/rss/articles/CBMirgJBVV95cUxOWjFPN3BaOC1EWS1oeHAyQUh3TGtqaHlWWHFyY1hkV2lrVTFseDJSSkxhZXp5U2FqS3FBZFg2a2w3a25ERDNBaUR6SUYtRHhJTHlRTHY2ak5Tb2FiWktVZ1Fha0hrb0ZCdXdDQ0V2YmVSWDN3dkd4bjZwcFQxWFk5azhOX2RITkN5T0dvbTZhVWlaQnR0dWFMMURXc0hNSlpqcjNNbmlOUmsxYkZDbFc2eDd1NHFJVEtpUTF4OGctS1JNckFYbkVXbWthd29raFhPTFpyNUZQQjhhRXQ3ZUdEVDNkR0wteFlpalhKSzRWcTNkX1NJbHFKREl4ZW1KWXVYQ2s4UDcxVmtZOThwWVAwOWVjNEF5WHF1UkdqYXRzQjVLTkE4TDhXeWFkSGc3QdIBswJBVV95cUxNRE9leG5wVXdHUHBWelhDZDJtQkozTW9xTTFLeF9XY2NiQXhlRkxpekVoNEJudkZxeUh6M1YyYXFtVzBDY19lTjQ3YV9aU0F3ZERwaldvcjU3NXo5LVVLaHBqX2VrcjhrVi1lNFZiSmx1SjkzZWNHeVNqWEJONEhSVll2M3hmb0YtSkNGUllyZ2VSeUtrSTJ1LVVqbXU4UjIxS09XMEMzMlJoSzNUeWhjMjhBYWZpYS1abndIWXhKOTNLVGlxUkdZajlmNGdTMWtEOGxXWDNnbmZtZDhPMnFOcFdYMEdRSDJKWlQtdzhDTEZ4cVJNbjljdWRpZ0c4UzM4VWVDZVdmYkZiSXhjcU5qVFlBT0gyWkpUcXhtSlpCRVBaQVhuTlBfdDQ0TDlGX1ZDVW9r?oc=5"
+      }
     },
     {
-      "keyword": "why repo rate is increased",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "foreign investors selling today",
+      "search_volume_velocity": "15 active variations expanding",
+      "trending_queries_by_users": [
+        "foreign investors selling today",
+        "foreign investors sell off indian stocks",
+        "foreign investors selling korean stocks",
+        "foreign investors selling indian stocks"
+      ],
+      "trigger_event": {
+        "headline": "Foreign investors sell Rs 13,000 crore in equities on Oct 8, second-highest outflow of 2026",
+        "source": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPYlBreG5iM3J6a3lqakhjNk42aFFNckNubWw5YVB3WWw2WUg5SEZ1QzY2OFk0UDlWbkFqNm15UkdCRld1dFZlMV9LNjdOa3Y5dFNlS25MZmM3RENsMWZxQjc5NS00X29OTG9jLWRMMXVVcnp3UVMtalAxY1pXMmc2QkNMam90YXVLOHhwSTRwNHFIaTJrZWN4YmhsY2MwUnV5YkFJcFRQZG9oaXp1MG9sbmNRbk9fZVJyNVl6SG1IT3FWM2FIWDIteUZqZXJaMjJfaG1jYzdVVFpRd1h6Sm5LQW1zOFlTTDg5eE800gHwAUFVX3lxTE9lUmxNM0dTdWZiYUJYbnZfWE51d1JfTC01Smlsajk5Z2s5SGYxdkRlMjh4UDU4SEJMSDMzSElrNlZWOEZrMEFGUFdVUktfTWZlY3NEYkh2cFhsLUIwU3AxbFRCdjliWHNBS3VkQ2M1dW5GY0dRSGN4cDN6SkVsczBET0NZcVJxMWRmSVc2OElmRUgxNVBBUkNab0FKRTktdnAwSVlWYVlDQUhJN0hwM3REaWlnOGcwUlNlYVVPd1dJWDhpa2U3Rjd2NEllakx1RTFMUERWdUhZZDZvZWJqT1duWnlobkRMV3hTSWd4UjA2Tw?oc=5"
+      }
     },
     {
-      "keyword": "what happens when repo rate increases",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "india rate hike expectations",
+      "search_volume_velocity": "10 active variations expanding",
+      "trending_queries_by_users": [
+        "india rate hike expectations",
+        "india price hike",
+        "india price hike petrol",
+        "india price hike coming up"
+      ],
+      "trigger_event": {
+        "headline": "India’s rate hike a loud warning shot for Modinomics",
+        "source": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNUotSUUtamN4Q3dpVW1QQVdvUjFoRXNBWnRWR28ycmE5dGNEOXBQNG1RTHdJaEF2TG9XSmJyVFlJWlZ1M0d5dy15dEdnQXZDSzNTaXk5ZDVsVklzVzlyZzhTZmNURm1qNkhqUWtTWFFzNXh5Rm1HZWpNRmZYdm80blhwZElCWXFsZ1E?oc=5"
+      }
     },
     {
-      "keyword": "repo rate news today live",
-      "velocity_score": 6,
-      "search_status": "High Velocity Spike"
-    },
-    {
-      "keyword": "nifty today live",
-      "velocity_score": 5,
-      "search_status": "High Velocity Spike"
-    },
-    {
-      "keyword": "sensex today live",
-      "velocity_score": 5,
-      "search_status": "High Velocity Spike"
-    },
-    {
-      "keyword": "sensex today gold",
-      "velocity_score": 5,
-      "search_status": "High Velocity Spike"
-    },
-    {
-      "keyword": "stock market news today",
-      "velocity_score": 5,
-      "search_status": "High Velocity Spike"
+      "hot_keyword": "electronic sale 2026",
+      "search_volume_velocity": "13 active variations expanding",
+      "trending_queries_by_users": [
+        "electronic sale 2026",
+        "electric car sales 2026",
+        "ola electric sales 2026",
+        "electric vehicle sales 2026"
+      ],
+      "trigger_event": {
+        "headline": "Electric 2W Sales Sep 2026",
+        "source": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQOXpqak5QaDRDWVZlcS1tbTE2akZMNlJXN2dUU1hWc3AwbDdnM0doWWFXYUhkZ0xmbV9zM2p3azBpRFF1MXphX1ppTklveGFkNTVPY1oxQ2kxNW9JeFktbWViQ2dPdjhxX19IT0gxZ0k0amVxX0h6NXdaWEpscVNaOFg5SUlHLWlMUGR6ei1paTgtZU9H0gGUAUFVX3lxTFA5empqTlBoNENZVmVxLW1tMTZqRkw2Ulc3Z1RTWFZzcDBsN2czR2hZYVdhSGRnTGZtX3MzandrMGlEUXUxemFfWmlOSW94YWQ1NU9jWjFDaTE1b0l4WS1tZWJDZ092OHFfX0hPSDFnSTRqZXFfSHo1d1pYSmxxU1o4WDlJSUctaUxQZHp6LWlpOC1lT0c?oc=5"
+      }
     }
   ]
 }
