@@ -10,86 +10,84 @@ except ImportError:
 
 INPUT_DIR = "downloaded_macro_pdfs"
 OUTPUT_FILE = "macro_raw_extracted_dump.json"
-FASTAG_CSV_FILE = "netc_fastag_monthly_3years.csv"
 
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-def extract_full_pdf(filepath):
-    """PDF ka 100% text aur saari structured tables bina kisi filter ke nikaalta hai."""
-    result = {
-        "file_name": os.path.basename(filepath),
+def extract_pdf_data(filepath):
+    """PDF ka 100% full text aur saari tables nikaalta hai."""
+    res = {
+        "file_type": "PDF",
         "total_pages": 0,
-        "full_text_by_page": {},
-        "tables_by_page": {}
+        "pages_text": {},
+        "pages_tables": {}
     }
-    
     if not pdfplumber or not os.path.exists(filepath):
-        return result
+        return res
 
     try:
         with pdfplumber.open(filepath) as pdf:
-            result["total_pages"] = len(pdf.pages)
+            res["total_pages"] = len(pdf.pages)
             for idx, page in enumerate(pdf.pages):
-                page_num = idx + 1
+                page_key = f"page_{idx + 1}"
                 
-                # 1. Pura raw text
+                # Full raw text bina kisi filter ke
                 text = page.extract_text(layout=False) or ""
-                result["full_text_by_page"][f"page_{page_num}"] = text
+                res["pages_text"][page_key] = text
                 
-                # 2. Saari structured tables
-                extracted_tables = page.extract_tables()
-                if extracted_tables:
+                # Saari tables
+                tables = page.extract_tables()
+                if tables:
                     clean_tables = []
-                    for table in extracted_tables:
-                        # Clean None values in table cells
-                        clean_t = [[str(cell).strip() if cell is not None else "" for cell in row] for row in table]
+                    for t in tables:
+                        clean_t = [[str(c).strip() if c is not None else "" for c in row] for row in t]
                         clean_tables.append(clean_t)
-                    result["tables_by_page"][f"page_{page_num}"] = clean_tables
-
+                    res["pages_tables"][page_key] = clean_tables
     except Exception as e:
-        print(f"   ❌ Error extracting {filepath}: {e}")
+        res["error"] = str(e)
+        print(f"   ❌ Error extracting PDF ({filepath}): {e}")
 
-    return result
+    return res
 
-def extract_full_excel(filepath):
-    """Excel sheet ki har ek sheet ka pura data structured format mein nikaalta hai."""
-    result = {
-        "file_name": os.path.basename(filepath),
+def extract_excel_data(filepath):
+    """Excel file ki har single sheet ka data structured format mein dump karta hai."""
+    res = {
+        "file_type": "EXCEL",
         "sheets": {}
     }
-    
-    if not filepath or not os.path.exists(filepath):
-        return result
-
     try:
         xl = pd.ExcelFile(filepath)
         for sheet_name in xl.sheet_names:
             df = xl.parse(sheet_name).fillna("")
-            # Har sheet ka pura data list of lists / dicts mein convert karein
-            result["sheets"][sheet_name] = {
-                "columns": [str(col).strip() for col in df.columns],
+            res["sheets"][sheet_name] = {
+                "columns": [str(c).strip() for c in df.columns],
                 "rows": df.astype(str).values.tolist()
             }
     except Exception as e:
-        print(f"   ❌ Error extracting Excel {filepath}: {e}")
+        res["error"] = str(e)
+        print(f"   ❌ Error extracting Excel ({filepath}): {e}")
 
-    return result
+    return res
 
-def extract_full_csv(filepath):
-    """Pura CSV data bina truncation ke load karta hai."""
-    if not os.path.exists(filepath):
-        return []
+def extract_csv_data(filepath):
+    """CSV file ka poora record list of dicts mein dump karta hai."""
+    res = {
+        "file_type": "CSV",
+        "records": []
+    }
     try:
         df = pd.read_csv(filepath).fillna("")
-        return df.to_dict(orient="records")
+        res["records"] = df.to_dict(orient="records")
     except Exception as e:
-        print(f"   ❌ Error loading CSV {filepath}: {e}")
-        return []
+        res["error"] = str(e)
+        print(f"   ❌ Error extracting CSV ({filepath}): {e}")
+
+    return res
 
 def main():
     print("=" * 80)
-    print("🚀 FULL RAW DOCUMENT EXTRACTOR (ZERO TRUNCATION / NO SUMMARY)")
+    print("🚀 DYNAMIC FOLDER SCANNER & FULL CONTENT EXTRACTOR")
+    print(f"📂 Scanning Directory: '{INPUT_DIR}'")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
@@ -97,68 +95,65 @@ def main():
         print(f"❌ Directory '{INPUT_DIR}' exist nahi karti.")
         return
 
-    # Files scan karein
-    eight_core_pdf = None
-    wpi_pdf = None
-    ipa_excel = None
+    extracted_files = {}
+    
+    # Folder ke andar ki har ek file ko dynamically scan karein
+    all_files = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
+    
+    if not all_files:
+        print(f"⚠️ Folder '{INPUT_DIR}' khali hai, koi file nahi mili.")
+        return
 
-    for fname in os.listdir(INPUT_DIR):
-        lower = fname.lower()
-        full_p = os.path.join(INPUT_DIR, fname)
-        if "core" in lower and lower.endswith(".pdf"):
-            eight_core_pdf = full_p
-        elif "wpi" in lower and lower.endswith(".pdf"):
-            wpi_pdf = full_p
-        elif ("ipa" in lower or "ports" in lower) and lower.endswith((".xlsx", ".xls")):
-            ipa_excel = full_p
+    print(f"🔍 Found {len(all_files)} files. Starting extraction...\n")
 
+    for filename in sorted(all_files):
+        filepath = os.path.join(INPUT_DIR, filename)
+        file_ext = os.path.splitext(filename)[1].lower()
+        size_kb = os.path.getsize(filepath) // 1024
+
+        print(f"📄 Processing: {filename} ({size_kb} KB)...")
+
+        if file_ext == ".pdf":
+            extracted_files[filename] = extract_pdf_data(filepath)
+            print(f"   ✅ Extracted {extracted_files[filename]['total_pages']} pages from PDF.")
+
+        elif file_ext in [".xlsx", ".xls"]:
+            extracted_files[filename] = extract_excel_data(filepath)
+            sheets_count = len(extracted_files[filename].get("sheets", {}))
+            print(f"   ✅ Extracted {sheets_count} sheets from Excel.")
+
+        elif file_ext == ".csv":
+            extracted_files[filename] = extract_csv_data(filepath)
+            rows_count = len(extracted_files[filename].get("records", []))
+            print(f"   ✅ Extracted {rows_count} records from CSV.")
+
+        else:
+            print(f"   ⚠️ Unsupported format '{file_ext}', skipping.")
+
+    # Also check root for FASTag CSV if saved outside
+    if os.path.exists("netc_fastag_monthly_3years.csv") and "netc_fastag_monthly_3years.csv" not in extracted_files:
+        print("\n🛣️ Processing: netc_fastag_monthly_3years.csv (Root)...")
+        extracted_files["netc_fastag_monthly_3years.csv"] = extract_csv_data("netc_fastag_monthly_3years.csv")
+        print(f"   ✅ Extracted {len(extracted_files['netc_fastag_monthly_3years.csv'].get('records', []))} records.")
+
+    # Final Master Payload
     master_payload = {
-        "extraction_metadata": {
+        "metadata": {
             "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-            "status": "RAW_FULL_EXTRACTION"
+            "total_files_extracted": len(extracted_files),
+            "file_names": list(extracted_files.keys())
         },
-        "dpiit_eight_core_raw": {},
-        "dpiit_wpi_raw": {},
-        "ipa_ports_raw": {},
-        "netc_fastag_raw_table": []
+        "extracted_content": extracted_files
     }
 
-    # 1. Eight Core PDF ka full content
-    if eight_core_pdf:
-        print(f"📑 Extracting 100% content from Eight Core PDF: {eight_core_pdf}...")
-        master_payload["dpiit_eight_core_raw"] = extract_full_pdf(eight_core_pdf)
-    else:
-        print("⚠️ Eight Core PDF nahi mila.")
-
-    # 2. WPI PDF ka full content
-    if wpi_pdf:
-        print(f"📑 Extracting 100% content from WPI PDF: {wpi_pdf}...")
-        master_payload["dpiit_wpi_raw"] = extract_full_pdf(wpi_pdf)
-    else:
-        print("⚠️ WPI PDF nahi mila.")
-
-    # 3. IPA Ports Excel ka full sheet data
-    if ipa_excel:
-        print(f"📊 Extracting all rows/columns from IPA Ports Excel: {ipa_excel}...")
-        master_payload["ipa_ports_raw"] = extract_full_excel(ipa_excel)
-    else:
-        print("⚠️ IPA Excel file nahi mili.")
-
-    # 4. FASTag full history table
-    if os.path.exists(FASTAG_CSV_FILE):
-        print(f"🛣️ Loading complete FASTag historical CSV: {FASTAG_CSV_FILE}...")
-        master_payload["netc_fastag_raw_table"] = extract_full_csv(FASTAG_CSV_FILE)
-    else:
-        print("⚠️ FASTag CSV nahi mila.")
-
-    # Single master raw JSON dump
+    # Save to JSON
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(master_payload, f, ensure_ascii=False, indent=2)
 
-    file_size_kb = os.path.getsize(OUTPUT_FILE) // 1024
+    output_kb = os.path.getsize(OUTPUT_FILE) // 1024
     print("\n" + "=" * 80)
-    print(f"✅ SUCCESS: Poora raw content extract ho gaya!")
-    print(f"💾 File Saved: '{OUTPUT_FILE}' ({file_size_kb} KB)")
+    print(f"🎉 SUCCESS: Saari files bina hardcoding ke extract ho gayi!")
+    print(f"💾 Output Saved To: '{OUTPUT_FILE}' ({output_kb} KB)")
     print("=" * 80)
 
 if __name__ == "__main__":
