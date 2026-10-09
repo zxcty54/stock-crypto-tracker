@@ -30,8 +30,23 @@ def extract_pdf_preview(filepath):
     except Exception:
         return ""
 
+async def download_file(page, url, filename):
+    filepath = os.path.join(OUTPUT_DIR, filename)
+    try:
+        response = await page.request.get(url, timeout=45000)
+        if response.status == 200:
+            with open(filepath, "wb") as f:
+                f.write(await response.body())
+            print(f"   💾 Downloaded: {filepath} ({os.path.getsize(filepath) // 1024} KB)")
+            return filepath
+        else:
+            print(f"   ⚠️ Download failed for {url} with status {response.status}")
+    except Exception as e:
+        print(f"   ❌ Download exception: {e}")
+    return None
+
 # ============================================================
-# 1. IPA (Indian Ports Association)
+# 1. IPA PORTS (Targeting detail page -> direct PDF)
 # ============================================================
 
 async def scrape_ipa(page):
@@ -40,43 +55,59 @@ async def scrape_ipa(page):
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
 
     try:
-        await page.goto(target_url, wait_until="networkidle", timeout=60000)
+        # Load reports listing
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(3000)
 
-        # Saare anchor tags inspect karte hain jinka href .pdf ho ya text me traffic/month ho
+        # Snippet Match: <a aria-label="View details of Traffic Month...">
+        detail_link = None
         anchors = await page.query_selector_all("a")
         for a in anchors:
-            href = await a.get_attribute("href") or ""
-            text = (await a.inner_text()).strip()
-            combined = f"{text.lower()} {href.lower()}"
+            aria = (await a.get_attribute("aria-label") or "").lower()
+            href = (await a.get_attribute("href") or "")
+            text = (await a.inner_text()).lower()
 
-            if ".pdf" in href.lower() and ("traffic" in combined or "month" in combined or "cargo" in combined):
-                result["title"] = text or "IPA Monthly Traffic Report"
-                result["pdf_url"] = urljoin(target_url, href)
+            if "traffic" in aria or "traffic" in text or "traffic-month" in href:
+                detail_link = urljoin(target_url, href)
+                result["title"] = (await a.inner_text()).strip() or "IPA Traffic Report"
                 break
 
-        if result["pdf_url"]:
-            print(f"   🔗 Found: {result['title']}")
-            print(f"   🌐 Link : {result['pdf_url']}")
-            
-            # Browser session se direct download
-            filepath = os.path.join(OUTPUT_DIR, "IPA_Traffic_Latest.pdf")
-            response = await page.request.get(result["pdf_url"], timeout=45000)
-            if response.status == 200:
-                with open(filepath, "wb") as f:
-                    f.write(await response.body())
-                result["local_path"] = filepath
-                result["preview_text"] = extract_pdf_preview(filepath)
-                print(f"   💾 Downloaded: {filepath}")
+        if detail_link:
+            print(f"   🔗 Found Detail Page: {detail_link}")
+            # Navigate to detail page to fetch actual PDF
+            await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
+            await page.wait_for_timeout(2000)
+
+            # Search PDF inside detail page
+            pdf_anchors = await page.query_selector_all("a")
+            for pa in pdf_anchors:
+                phref = await pa.get_attribute("href") or ""
+                if ".pdf" in phref.lower() or "download" in phref.lower():
+                    result["pdf_url"] = urljoin(detail_link, phref)
+                    break
+
+            if not result["pdf_url"]:
+                # If page itself redirects or has iframe
+                iframe = await page.query_selector("iframe")
+                if iframe:
+                    src = await iframe.get_attribute("src") or ""
+                    if ".pdf" in src.lower():
+                        result["pdf_url"] = urljoin(detail_link, src)
+
+            if result["pdf_url"]:
+                print(f"   🌐 PDF Direct Link : {result['pdf_url']}")
+                path = await download_file(page, result["pdf_url"], "IPA_Traffic_Latest.pdf")
+                result["local_path"] = path
+                result["preview_text"] = extract_pdf_preview(path)
         else:
-            print("   ❌ IPA: Link not found in DOM.")
+            print("   ❌ IPA: Detail page link not matched in DOM.")
     except Exception as e:
         print(f"   ❌ IPA Error: {e}")
 
     return result
 
 # ============================================================
-# 2. DPIIT — Eight Core Industries Press Note
+# 2. DPIIT EIGHT CORE (Targeting td.my-box1-text)
 # ============================================================
 
 async def scrape_eight_core(page):
@@ -88,46 +119,50 @@ async def scrape_eight_core(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        # Links collect karein (WPI press_release_ se conflict na ho)
-        anchors = await page.query_selector_all("a")
-        candidate_url = None
-        candidate_title = None
+        # Snippet Match: <td class="my-box1-text">INDEX OF CORE...</td>
+        # Find cell and navigate to its row anchor
+        target_cell = page.locator("td.my-box1-text:has-text('INDEX OF CORE')").first
+        pdf_url = None
 
-        for a in anchors:
-            href = await a.get_attribute("href") or ""
-            text = (await a.inner_text()).strip()
+        if await target_cell.count() > 0:
+            # Check anchor inside or in sibling columns of this row
+            row = target_cell.locator("xpath=..")
+            anchor = row.locator("a[href$='.pdf']").first
+            if await anchor.count() > 0:
+                pdf_url = await anchor.get_attribute("href")
+            else:
+                # Any anchor in that row
+                any_a = row.locator("a").first
+                if await any_a.count() > 0:
+                    pdf_url = await any_a.get_attribute("href")
 
-            if href.lower().endswith(".pdf") and not href.lower().startswith("press_release_"):
-                candidate_url = urljoin(target_url, href)
-                candidate_title = text or "Eight Core Industries Press Note"
-                break
+        # Fallback to scanning all anchors for core index
+        if not pdf_url:
+            all_a = await page.query_selector_all("a")
+            for a in all_a:
+                t = (await a.inner_text()).lower()
+                h = (await a.get_attribute("href") or "").lower()
+                if ("core" in t or "press" in t) and h.endswith(".pdf") and not h.startswith("press_release_"):
+                    pdf_url = h
+                    break
 
-        # Fallback to direct static PDF if directory has no raw anchors
-        if not candidate_url:
-            candidate_url = "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
-            candidate_title = "Index of Eight Core Industries"
-
-        result["pdf_url"] = candidate_url
-        result["title"] = candidate_title
-
-        print(f"   🔗 Found: {result['title']}")
-        print(f"   🌐 Link : {result['pdf_url']}")
-
-        filepath = os.path.join(OUTPUT_DIR, "DPIIT_Eight_Core_Latest.pdf")
-        response = await page.request.get(result["pdf_url"], timeout=45000)
-        if response.status == 200:
-            with open(filepath, "wb") as f:
-                f.write(await response.body())
-            result["local_path"] = filepath
-            result["preview_text"] = extract_pdf_preview(filepath)
-            print(f"   💾 Downloaded: {filepath}")
+        if pdf_url:
+            result["title"] = "Index of Eight Core Industries Press Release"
+            result["pdf_url"] = urljoin(target_url, pdf_url)
+            print(f"   🔗 Found: {result['title']}")
+            print(f"   🌐 Link : {result['pdf_url']}")
+            path = await download_file(page, result["pdf_url"], "DPIIT_Eight_Core_Latest.pdf")
+            result["local_path"] = path
+            result["preview_text"] = extract_pdf_preview(path)
+        else:
+            print("   ❌ DPIIT Eight Core: Row anchor not matched.")
     except Exception as e:
         print(f"   ❌ Eight Core Error: {e}")
 
     return result
 
 # ============================================================
-# 3. DPIIT — WPI Press Release PDF
+# 3. DPIIT WPI (Already working)
 # ============================================================
 
 async def scrape_wpi(page):
@@ -152,22 +187,16 @@ async def scrape_wpi(page):
         if result["pdf_url"]:
             print(f"   🔗 Found: {result['title']}")
             print(f"   🌐 Link : {result['pdf_url']}")
-
-            filepath = os.path.join(OUTPUT_DIR, "DPIIT_WPI_Latest.pdf")
-            response = await page.request.get(result["pdf_url"], timeout=45000)
-            if response.status == 200:
-                with open(filepath, "wb") as f:
-                    f.write(await response.body())
-                result["local_path"] = filepath
-                result["preview_text"] = extract_pdf_preview(filepath)
-                print(f"   💾 Downloaded: {filepath}")
+            path = await download_file(page, result["pdf_url"], "DPIIT_WPI_Latest.pdf")
+            result["local_path"] = path
+            result["preview_text"] = extract_pdf_preview(path)
     except Exception as e:
         print(f"   ❌ WPI Error: {e}")
 
     return result
 
 # ============================================================
-# 4. MoSPI — Index of Industrial Production (IIP) Release
+# 4. MoSPI IIP (Targeting <h3>Press Release on Quick Estimates...)
 # ============================================================
 
 async def scrape_mospi_iip(page):
@@ -176,41 +205,48 @@ async def scrape_mospi_iip(page):
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
 
     try:
-        await page.goto(target_url, wait_until="networkidle", timeout=60000)
+        # Changed from networkidle to domcontentloaded to avoid timeout
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(3000)
 
-        # MoSPI ke rendered DOM me check karte hain
-        anchors = await page.query_selector_all("a")
-        for a in anchors:
-            href = await a.get_attribute("href") or ""
-            text = (await a.inner_text()).strip().lower()
+        # Snippet Match: <h3>Press Release on Quick Estimates...</h3>
+        heading = page.locator("h3:has-text('Quick Estimates of all India Index of Industrial Production')").first
+        pdf_url = None
 
-            is_iip = (
-                "iip" in href.lower()
-                or "quick estimate" in text
-                or "industrial production" in text
-                or "latestreleasesfiles" in href.lower()
-            )
+        if await heading.count() > 0:
+            result["title"] = (await heading.inner_text()).strip()
+            # 1. Check if heading itself is inside an anchor or parent has a link
+            parent_link = heading.locator("xpath=ancestor::a").first
+            if await parent_link.count() > 0:
+                pdf_url = await parent_link.get_attribute("href")
 
-            if is_iip and (".pdf" in href.lower() or "latestreleasesfiles" in href.lower()):
-                result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
-                result["pdf_url"] = urljoin(target_url, href)
-                break
+            # 2. Check nearest sibling or container for download link
+            if not pdf_url:
+                container = heading.locator("xpath=ancestor::div[1]")
+                anchor = container.locator("a[href*='.pdf'], a[href*='latestreleasesfiles']").first
+                if await anchor.count() > 0:
+                    pdf_url = await anchor.get_attribute("href")
 
-        if result["pdf_url"]:
+        # Fallback: scan all links for uploads/latestreleasesfiles
+        if not pdf_url:
+            anchors = await page.query_selector_all("a")
+            for a in anchors:
+                href = (await a.get_attribute("href") or "").lower()
+                text = (await a.inner_text()).lower()
+                if ("iip" in href or "iip" in text) and (".pdf" in href or "latestreleasesfiles" in href):
+                    pdf_url = await a.get_attribute("href")
+                    result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
+                    break
+
+        if pdf_url:
+            result["pdf_url"] = urljoin(target_url, pdf_url)
             print(f"   🔗 Found: {result['title']}")
             print(f"   🌐 Link : {result['pdf_url']}")
-
-            filepath = os.path.join(OUTPUT_DIR, "MoSPI_IIP_Latest.pdf")
-            response = await page.request.get(result["pdf_url"], timeout=45000)
-            if response.status == 200:
-                with open(filepath, "wb") as f:
-                    f.write(await response.body())
-                result["local_path"] = filepath
-                result["preview_text"] = extract_pdf_preview(filepath)
-                print(f"   💾 Downloaded: {filepath}")
+            path = await download_file(page, result["pdf_url"], "MoSPI_IIP_Latest.pdf")
+            result["local_path"] = path
+            result["preview_text"] = extract_pdf_preview(path)
         else:
-            print("   ❌ MoSPI: No matching IIP PDF link found in DOM.")
+            print("   ❌ MoSPI: IIP Heading container link not found.")
     except Exception as e:
         print(f"   ❌ MoSPI Error: {e}")
 
@@ -222,7 +258,7 @@ async def scrape_mospi_iip(page):
 
 async def main():
     print("=" * 80)
-    print("🚀 PLAYWRIGHT MACRO DOCUMENT CRAWLER (HEADLESS CHROMIUM)")
+    print("🚀 TARGETED MACRO DOCUMENT CRAWLER (DOM-ALIGNED)")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
