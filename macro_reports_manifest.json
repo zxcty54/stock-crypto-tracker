@@ -1,29 +1,49 @@
 {
-  "timestamp": "2026-10-09 16:07:10 IST",
+  "timestamp": "2026-10-09 16:13:42 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from September 2026",
       "file_url": "https://ipa.org.in/upload/media/media-2026100714585459577610.xlsx",
       "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx",
-      "preview_text": "Excel report downloaded successfully."
+      "extracted_metrics": {
+        "total_traffic_mt": null,
+        "container_teus": null,
+        "container_tonnes_mt": null,
+        "coking_coal_mt": null,
+        "thermal_coal_mt": null
+      }
     },
     "dpiit_eight_core": {
       "title": "Press Release",
       "pdf_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
       "local_path": "downloaded_macro_pdfs/DPIIT_Eight_Core_Latest.pdf",
-      "preview_text": "EMBARGO ADVISORY This press release is embargoed against circulation, telecast or publication on internet till 5:00 PM of 21st September 2026. OFFICE OF THE ECONOMIC ADVISER DEPARTMENT FOR PROMOTION OF INDUSTRY AND INTERNAL TRADE MINSITRY OF COMMERCE AND INDUSTRY GOVERNMENT OF INDIA PROVISIONAL ESTIMATES OF INDEX OF CORE INDUSTRIES FOR THE MONTH OF AUGUST 2026, AND FINAL INDEX FOR THE MONTH OF JULY 2026 WITH BASE YEAR 2022-23 Provisional Estimates of Index of Core Industries for the month of August 2026 (Base Year 2022-23) 1. Key highlights of ICI for the month of August 2026 (i) The Index of Core Industries (ICI) grew by 4.8 per cent in August 2026 (Provisional Estimate) on a year-on-year basis, compared with August 2025. This is slightly less than the growth rate of 5.0 per cent recorded in July 2026 (Final Index). (ii) Cement, Electricity, Iron Ore, Steel, and Refinery Products observed (Y-o-Y) growth rate of 12.5 per cent, 11.6 per cent, 5.5 per cent, 3.4 per cent, and 2.6 per cent, respectively, whereas Coal, Natural Gas, Crude Oil, and Fertilizers witnessed negative growth in August 2026. (iii) Iron Ore, Electricity, and Cement have been the major drivers of overall growth of"
+      "extracted_metrics": {
+        "overall_growth_pct": null,
+        "cement_production_mt": null,
+        "cement_growth_pct": 5.0,
+        "steel_production_mt": null,
+        "steel_growth_pct": 5.0,
+        "coal_production_mt": null,
+        "electricity_generation_b_kwh": null
+      }
     },
     "dpiit_wpi": {
       "title": "WPI & PPI(Goods) Press Release",
       "pdf_url": "https://eaindustry.nic.in/press_release/press_release_202608.pdf",
       "local_path": "downloaded_macro_pdfs/DPIIT_WPI_Latest.pdf",
-      "preview_text": "EMBARGO ADVISORY This press release is embargoed against circulation, telecast or publication on internet till 12:00 Noon of 14th September 2026 GOVERNMENT OF INDIA MINISTRY OF COMMERCE AND INDUSTRY DEPARTMENT FOR PROMOTION OF INDUSTRY AND INTERNAL TRADE OFFICE OF THE ECONOMIC ADVISER PROVISIONAL ESTIMATES OF WHOLESALE PRICE INDEX, OUTPUT PRODUCER PRICE INDEX, AND TRIAL INPUT PRODUCER PRICE INDEX FOR THE MONTH OF AUGUST 2026, AND FINAL INDEX FOR THE MONTH OF JUNE 2026 Provisional Estimates of Wholesale Price Index (Base Year 2022-23) for the month of August 2026 1. Key highlights of WPI (Base Year 2022-23) for August 2026 (i) All India Wholesale Price Index (WPI) inflation for August 2026 is 9.92 per cent on year-on- year (YoY) basis, compared to 9.78 per cent in July 2026. The index for All Commodities for August 2026 stands at 110.8, whereas it was 110.0 in July 2026. (ii) YoY inflation rates for major groups, namely, Primary Articles, Fuel and Power, and Manufactured Products are 7.76 per cent, 22.93 per cent, and 8.37 per cent, respectively in August 2026, compared to 8.52 per cent, 20.05 per cent, and 8.29 per cent, respectively in July 2026. The indices for Primary Articles, "
+      "extracted_metrics": {
+        "headline_inflation_pct": null,
+        "all_commodities_index": null,
+        "primary_articles_inflation_pct": null,
+        "fuel_power_inflation_pct": null,
+        "manufactured_products_inflation_pct": null
+      }
     },
     "netc_fastag": {
       "title": "NETC FASTag Monthly Product Statistics",
       "csv_path": "netc_fastag_monthly_3years.csv",
-      "total_records_extracted": 21,
-      "latest_metrics": {
+      "total_records": 21,
+      "latest_monthly_metrics": {
         "year": "2026",
         "month": "October-2026",
         "volume_million": 2001.47,
