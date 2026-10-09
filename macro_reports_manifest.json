@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-10-09 12:46:33 IST",
+  "timestamp": "2026-10-09 13:01:18 IST",
   "reports": {
     "ipa_ports_traffic": {
-      "title": "Traffic Month of September 2026",
-      "pdf_url": null,
-      "local_path": null,
-      "preview_text": ""
+      "title": "Major Ports Traffic from September 2026",
+      "file_url": "https://ipa.org.in/upload/media/media-2026100714585459577610.xlsx",
+      "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx",
+      "preview_text": "Excel report downloaded successfully."
     },
     "dpiit_eight_core": {
-      "title": "Index of Eight Core Industries Press Release",
-      "pdf_url": "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf",
-      "local_path": null,
-      "preview_text": ""
+      "title": "Compilation Methodology",
+      "pdf_url": "https://eaindustry.nic.in/eight_core_infra/ICI_Compilation_Methodology.pdf",
+      "local_path": "downloaded_macro_pdfs/DPIIT_Eight_Core_Latest.pdf",
+      "preview_text": "A Note on Index of Eight Core Industries (ICI), Base year 2011-12 1. Introduction The monthly Index of Eight Core Industries (ICI) is a production volume index. ICI measures collective and individual performance of production in selected eight core industries viz. Coal, Crude Oil, Natural Gas, Refinery Products, Fertilizers, Steel, Cement and Electricity. It is compiled and released by Office of the Economic Adviser (OEA), Department of Industrial Policy & Promotion (DIPP), and Ministry of Commerce & Industry. The inter-se weights of these eight industries are largely in alignment with the respective weight of these industries in the Index of Industrial Production (IIP). The base year of the ICI has been revised to 2011-12 from 2004-05 in alignment with the new series of IIP. Combined weight of these eight core industries is 40.27 percent of IIP with base 2011-12. The ICI with base 2004-05 had a weight of 37.90 percent in the IIP (2004-05). The comparison of industry-wise weights of different base years is given at Annexure. ICI for a reference month is released with a time lag of one month on last day of the next month, which is about twelve days prior to the release of IIP for th"
     },
     "dpiit_wpi": {
       "title": "WPI & PPI(Goods) Press Release",
