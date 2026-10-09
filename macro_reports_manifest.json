@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-10-09 12:35:14 IST",
+  "timestamp": "2026-10-09 12:43:52 IST",
   "reports": {
     "ipa_ports_traffic": {
-      "title": null,
+      "title": "Traffic Month of September 2026",
       "pdf_url": null,
       "local_path": null,
       "preview_text": ""
     },
     "dpiit_eight_core": {
-      "title": "Index of Eight Core Industries",
-      "pdf_url": "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf",
+      "title": null,
+      "pdf_url": null,
       "local_path": null,
       "preview_text": ""
     },
