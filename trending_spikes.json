@@ -1,4 +1,67 @@
 {
-  "status": "error",
-  "message": "HTTP Error 404"
+  "status": "success",
+  "timestamp": "2026-10-09T19:26:44.005055",
+  "total_spikes": 12,
+  "data": [
+    {
+      "keyword": "stock market today",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market holidays",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market sensex",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market holidays 2026",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market news",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market crash",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market timings",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market news today",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market live",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market india",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market opening time",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    },
+    {
+      "keyword": "stock market closing time",
+      "volume_spike": "High Velocity (Level 1)",
+      "source": "Google Live Search Autocomplete Velocity"
+    }
+  ]
 }
