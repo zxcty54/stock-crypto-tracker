@@ -95,7 +95,7 @@ async def scrape_ipa(page):
     return result
 
 # ============================================================
-# 2. DPIIT EIGHT CORE (Locked to Press_Release_ICI_*.pdf)
+# 2. DPIIT EIGHT CORE (Press_Release_ICI_*.pdf)
 # ============================================================
 
 async def scrape_eight_core(page):
@@ -107,10 +107,7 @@ async def scrape_eight_core(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        # Snippet Confirmation: href contains 'Press_Release_ICI_' or text contains 'INDEX OF CORE'
         pdf_url = None
-        
-        # 1. Direct Anchor Target for ICI Press Release
         for a in await page.query_selector_all("a"):
             href = await a.get_attribute("href") or ""
             if "press_release_ici_" in href.lower() and href.lower().endswith(".pdf"):
@@ -118,7 +115,6 @@ async def scrape_eight_core(page):
                 result["title"] = "Index of Eight Core Industries Monthly Press Release"
                 break
 
-        # 2. Parent Anchor of the Box Text (as seen in provided HTML)
         if not pdf_url:
             box_cell = page.locator("td.my-box1-text:has-text('INDEX OF CORE')").first
             if await box_cell.count() > 0:
@@ -134,8 +130,6 @@ async def scrape_eight_core(page):
             path = await download_binary_file(page, result["pdf_url"], "DPIIT_Eight_Core_Latest.pdf")
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
-        else:
-            print("   ❌ DPIIT Eight Core: Link not matched.")
     except Exception as e:
         print(f"   ❌ Eight Core Error: {e}")
 
@@ -175,7 +169,7 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. MoSPI IIP
+# 4. MoSPI IIP (React SPA Traversal)
 # ============================================================
 
 async def scrape_mospi_iip(page):
@@ -184,18 +178,40 @@ async def scrape_mospi_iip(page):
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
 
     try:
-        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
-        await page.wait_for_timeout(3000)
+        await page.goto(target_url, wait_until="load", timeout=60000)
+
+        print("   ⏳ Waiting for MoSPI React components to mount...")
+        try:
+            await page.wait_for_selector("h3, div[class*='theme'], div[class*='release']", timeout=20000)
+        except Exception:
+            pass
+
+        await page.wait_for_timeout(4000)
 
         pdf_url = None
-        # Page ke saare anchors scan karein jo IIP press release / latestreleasesfiles ko point karte hain
-        for a in await page.query_selector_all("a"):
-            h = await a.get_attribute("href") or ""
-            t = (await a.inner_text()).lower()
-            if (".pdf" in h.lower() or "latestreleasesfiles" in h.lower()) and ("iip" in h.lower() or "quick" in t):
-                pdf_url = h
-                result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
-                break
+        heading = page.locator("xpath=//h3[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'quick estimates')]").first
+
+        if await heading.count() > 0:
+            result["title"] = (await heading.inner_text()).strip()
+            container = heading.locator("xpath=./ancestor::div[position() <= 5]")
+            anchors = await container.locator("a").all()
+            for a in anchors:
+                href = await a.get_attribute("href") or ""
+                if ".pdf" in href.lower() or "latestreleases" in href.lower():
+                    pdf_url = href
+                    break
+
+        if not pdf_url:
+            all_anchors = await page.query_selector_all("a")
+            for a in all_anchors:
+                href = await a.get_attribute("href") or ""
+                text = (await a.inner_text()).lower()
+                h_lower = href.lower()
+
+                if ("iip" in h_lower or "quick" in text) and (".pdf" in h_lower or "latestreleases" in h_lower):
+                    pdf_url = href
+                    result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
+                    break
 
         if pdf_url:
             result["pdf_url"] = urljoin(target_url, pdf_url)
@@ -205,7 +221,8 @@ async def scrape_mospi_iip(page):
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
         else:
-            print("   ❌ MoSPI: Download link could not be matched.")
+            print("   ❌ MoSPI: React rendered DOM me PDF anchor match nahi hua.")
+
     except Exception as e:
         print(f"   ❌ MoSPI Error: {e}")
 
