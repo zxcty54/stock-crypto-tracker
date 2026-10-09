@@ -195,7 +195,6 @@ async def download_ppac_icr(page):
 
         if pdf_url:
             res["pdf_url"] = pdf_url
-            print(f"   🌐 Dynamic PPAC Link: {res['pdf_url']}")
             path = await download_binary_file(page, res["pdf_url"], "PPAC_Petroleum_Consumption_Latest.pdf")
             res["local_path"] = path
         else:
@@ -207,13 +206,12 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Targeted Exact DOM Selectors for FY)
+# 5. NETC FASTAG (Direct Default / Latest Page Scraper)
 # ============================================================
 
 async def scrape_netc_fastag(browser):
-    print("\n🛣️ [5/5] Scraping NETC FASTag Monthly Data (3-Year FY History)...")
+    print("\n🛣️ [5/5] Scraping NETC FASTag Latest Default Table (No Dropdowns)...")
     target_url = "https://www.npci.org.in/product/netc/product-statistics"
-    fy_list = ["2026-27", "2025-26", "2024-25"]
     all_data = []
 
     res = {
@@ -235,126 +233,58 @@ async def scrape_netc_fastag(browser):
         except Exception:
             await page.goto(target_url, timeout=45000)
 
-        await page.wait_for_timeout(3000)
+        # Tab auto-load hone ka wait
+        await page.wait_for_timeout(4000)
 
-        # 1. Product tab select karein
+        # FASTag statistics tab ensure karein agar needed ho
         try:
             tab_btn = page.locator("#tab-0, [role='tab']:has-text('NETC FASTag Statistics')").first
             if await tab_btn.is_visible():
                 await tab_btn.click()
-                await page.wait_for_timeout(1500)
-        except Exception as e:
-            print(f"   ⚠️ Tab click notice: {e}")
+                await page.wait_for_timeout(2000)
+        except Exception:
+            pass
 
-        # 2. Iterate through Financial Years
-        for fy in fy_list:
-            print(f"   📅 Selecting Financial Year: {fy}...")
+        # Table rows parse karein jo page load hote hi samne aayi hain
+        rows = await page.query_selector_all("table tbody tr")
+        if not rows:
+            rows = await page.query_selector_all("table tr")
 
-            old_first_row = ""
-            first_row_locator = page.locator("table tbody tr").first
-            if await first_row_locator.count() > 0:
-                old_first_row = (await first_row_locator.inner_text()).strip()
+        count = 0
+        for row in rows:
+            cells = await row.query_selector_all("td")
+            if len(cells) >= 3:
+                cell_texts = [(await c.inner_text()).strip() for c in cells]
+                month_name = cell_texts[0]
 
-            year_clicked = False
-
-            # Custom dropdown open karein
-            dropdown_triggers = [
-                page.locator("span[data-has-tooltip='true']").first,
-                page.locator("span[data-tooltip]").first,
-                page.locator("div[class*='select'], div[class*='dropdown']").first,
-                page.locator("text='Select Year'").first
-            ]
-
-            for trigger in dropdown_triggers:
-                try:
-                    if await trigger.is_visible():
-                        await trigger.click()
-                        await page.wait_for_timeout(800)
-                        break
-                except Exception:
+                if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no", ""]:
                     continue
 
-            # Target specific FY option
-            option_locators = [
-                page.locator(f"span[data-tooltip='{fy}']").first,
-                page.locator(f"[role='option']:has-text('{fy}')").first,
-                page.locator(f"li:has-text('{fy}')").first,
-                page.locator(f"span:has-text('{fy}')").last,
-                page.locator(f"div:has-text('{fy}')").last
-            ]
+                nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
 
-            for opt in option_locators:
-                try:
-                    if await opt.is_visible():
-                        await opt.click()
-                        year_clicked = True
-                        break
-                except Exception:
-                    continue
+                if len(nums) >= 2:
+                    vol_mn = nums[-2]
+                    val_cr = nums[-1]
 
-            # Fallback agar standard <select> ho
-            if not year_clicked:
-                for sel in await page.query_selector_all("select"):
-                    txt = await sel.inner_text()
-                    if fy in txt:
-                        await sel.select_option(label=fy)
-                        await sel.evaluate("el => el.dispatchEvent(new Event('change', { bubbles: true }))")
-                        await sel.evaluate("el => el.dispatchEvent(new Event('input', { bubbles: true }))")
-                        year_clicked = True
-                        break
+                    record = {
+                        "month": month_name,
+                        "volume_million": vol_mn,
+                        "volume_crore": round(vol_mn / 10.0, 2) if vol_mn else None,
+                        "amount_inr_crore": val_cr,
+                        "ticket_size_inr": round((val_cr * 10000000) / (vol_mn * 1000000), 2) if (val_cr and vol_mn) else None
+                    }
+                    all_data.append(record)
+                    count += 1
 
-            # Table refresh hone ka wait karein
-            for _ in range(8):
-                await page.wait_for_timeout(1000)
-                current_first_row = page.locator("table tbody tr").first
-                if await current_first_row.count() > 0:
-                    current_text = (await current_first_row.inner_text()).strip()
-                    if current_text and current_text != old_first_row:
-                        break
-
-            # 3. Read table rows
-            rows = await page.query_selector_all("table tbody tr")
-            if not rows:
-                rows = await page.query_selector_all("table tr")
-
-            count = 0
-            for row in rows:
-                cells = await row.query_selector_all("td")
-                if len(cells) >= 3:
-                    cell_texts = [(await c.inner_text()).strip() for c in cells]
-                    month_name = cell_texts[0]
-
-                    if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no", ""]:
-                        continue
-
-                    nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
-
-                    if len(nums) >= 2:
-                        vol_mn = nums[-2]
-                        val_cr = nums[-1]
-
-                        clean_month = month_name.split("-")[0].strip()
-                        record = {
-                            "financial_year": fy,
-                            "month": f"{clean_month}-{fy}",
-                            "volume_million": vol_mn,
-                            "volume_crore": round(vol_mn / 10.0, 2) if vol_mn else None,
-                            "amount_inr_crore": val_cr,
-                            "ticket_size_inr": round((val_cr * 10000000) / (vol_mn * 1000000), 2) if (val_cr and vol_mn) else None
-                        }
-                        all_data.append(record)
-                        count += 1
-
-            print(f"      ✅ Extracted {count} records for FY {fy}")
+        print(f"   ✅ Extracted {count} records from default landing table.")
 
         if all_data:
             df = pd.DataFrame(all_data)
-            df = df.drop_duplicates(subset=["financial_year", "month"])
             df.to_csv(FASTAG_CSV_FILE, index=False)
             res["csv_path"] = FASTAG_CSV_FILE
             res["total_records"] = len(df)
             res["latest_monthly_metrics"] = df.iloc[0].to_dict()
-            print(f"   🎉 Clean FY dataset saved to '{FASTAG_CSV_FILE}' ({len(df)} total rows)!")
+            print(f"   🎉 Saved successfully to '{FASTAG_CSV_FILE}'!")
         else:
             print("   ⚠️ No FASTag table records were parsed.")
 
