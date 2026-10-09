@@ -3,6 +3,7 @@ import io
 import json
 import re
 import asyncio
+import pandas as pd
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin
 from playwright.async_api import async_playwright
@@ -14,11 +15,19 @@ except ImportError:
 
 OUTPUT_DIR = "downloaded_macro_pdfs"
 METADATA_FILE = "macro_reports_manifest.json"
+FASTAG_CSV_FILE = "netc_fastag_monthly_3years.csv"
 
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+def clean_num(val):
+    if not val:
+        return None
+    val = str(val).replace(",", "").replace("%", "").strip()
+    match = re.search(r"[-+]?\d*\.?\d+", val)
+    return float(match.group(0)) if match else None
 
 def extract_pdf_preview(filepath):
     if not pdfplumber or not os.path.exists(filepath) or not filepath.endswith(".pdf"):
@@ -185,56 +194,100 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. MoSPI IIP (100% PURE DYNAMIC - NO HARDCODED URLS)
+# 4. NETC FASTAG (3-YEAR HISTORICAL & LIVE EXTRACTION)
 # ============================================================
 
-async def scrape_mospi_iip(page):
-    print("\n🏭 [4/4] Scraping MoSPI IIP (Index of Industrial Production) PDF...")
-    target_url = "https://www.mospi.gov.in/themes/product/54-index-of-industrial-production"
-    result = {"title": "Index of Industrial Production Press Release", "pdf_url": None, "local_path": None, "preview_text": ""}
+async def scrape_netc_fastag(page):
+    print("\n🛣️ [4/4] Scraping NETC FASTag Monthly Statistics (3-Year History)...")
+    target_url = "https://www.npci.org.in/product/netc/product-statistics"
+    years_to_scrape = ["2026", "2025", "2024"]
+    all_data = []
 
-    pdf_url = None
+    result = {
+        "title": "NETC FASTag Monthly Product Statistics",
+        "csv_path": None,
+        "total_records_extracted": 0,
+        "latest_metrics": {}
+    }
 
-    # Step 1: Direct MoSPI Product Backend API
     try:
-        api_url = "https://www.mospi.gov.in/api/theme-details/54"
-        resp = await page.request.get(api_url, timeout=15000)
-        if resp.status == 200:
-            text_body = await resp.text()
-            matches = re.findall(r'(https?://[^\s"\'\\]+latestreleasesfiles[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', text_body, re.I)
-            if not matches:
-                rel = re.findall(r'(/uploads/latestreleasesfiles/[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', text_body, re.I)
-                matches = [urljoin("https://www.mospi.gov.in", m) for m in rel]
-            if matches:
-                pdf_url = matches[0]
-                print(f"   ⚡ Resolved Dynamically via MoSPI Backend API: {pdf_url}")
-    except Exception:
-        pass
+        print(f"   🌐 Opening: {target_url}")
+        await page.goto(target_url, wait_until="networkidle", timeout=60000)
 
-    # Step 2: Live DOM Crawl (agar API me delay ho)
-    if not pdf_url:
         try:
-            await page.goto(target_url, wait_until="networkidle", timeout=45000)
-            links = await page.eval_on_selector_all(
-                "a[href*='.pdf']",
-                "elements => elements.map(e => e.href).filter(h => /iip/i.test(h) || /latestreleasesfiles/i.test(h))"
-            )
-            if links:
-                pdf_url = links[0]
-                print(f"   ⚡ Resolved Dynamically via Live DOM: {pdf_url}")
+            monthly_tab = page.locator("text='Monthly Statistics'").first
+            if await monthly_tab.is_visible():
+                await monthly_tab.click()
+                await page.wait_for_timeout(2000)
         except Exception:
             pass
 
-    # Strictly dynamic download: koi purana hardcoded link nahi
-    if pdf_url:
-        result["pdf_url"] = pdf_url
-        print(f"   🔗 Found: {result['title']}")
-        print(f"   🌐 Dynamic Link: {result['pdf_url']}")
-        path = await download_binary_file(page, result["pdf_url"], "MoSPI_IIP_Latest.pdf")
-        result["local_path"] = path
-        result["preview_text"] = extract_pdf_preview(path)
-    else:
-        print("   ❌ MoSPI: Latest dynamic PDF link not found.")
+        for year in years_to_scrape:
+            print(f"   📅 Fetching FASTag Year: {year}...")
+            year_selected = False
+
+            # Select option if dropdown exists
+            selects = await page.query_selector_all("select")
+            for sel in selects:
+                options = await sel.inner_text()
+                if year in options:
+                    await sel.select_option(label=year)
+                    year_selected = True
+                    break
+
+            if not year_selected:
+                try:
+                    btn = page.locator(f"button:has-text('{year}'), div:has-text('{year}')").first
+                    if await btn.is_visible():
+                        await btn.click()
+                        year_selected = True
+                except Exception:
+                    pass
+
+            await page.wait_for_timeout(3000)
+
+            rows = await page.query_selector_all("table tr")
+            count = 0
+            for row in rows:
+                cells = await row.query_selector_all("td")
+                if len(cells) >= 3:
+                    cell_texts = [(await c.inner_text()).strip() for c in cells]
+                    month_name = cell_texts[0]
+
+                    if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no"]:
+                        continue
+
+                    nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
+
+                    if len(nums) >= 2:
+                        vol_mn = nums[-2]
+                        val_cr = nums[-1]
+
+                        record = {
+                            "year": year,
+                            "month": month_name,
+                            "volume_million": vol_mn,
+                            "volume_crore": round(vol_mn / 10.0, 2) if vol_mn else None,
+                            "amount_inr_crore": val_cr,
+                            "ticket_size_inr": round((val_cr * 10000000) / (vol_mn * 1000000), 2) if (val_cr and vol_mn) else None
+                        }
+                        all_data.append(record)
+                        count += 1
+
+            print(f"   ✅ {count} records extracted for {year}")
+
+        if all_data:
+            df = pd.DataFrame(all_data)
+            df.to_csv(FASTAG_CSV_FILE, index=False)
+            result["csv_path"] = FASTAG_CSV_FILE
+            result["total_records_extracted"] = len(all_data)
+            result["latest_metrics"] = all_data[0] if len(all_data) > 0 else {}
+            print(f"   🎉 Saved successfully to '{FASTAG_CSV_FILE}'!")
+        else:
+            print("   ❌ FASTag table parse nahi ho paya.")
+
+    except Exception as e:
+        print(f"   ❌ FASTag Error: {e}")
 
     return result
 
@@ -244,7 +297,7 @@ async def scrape_mospi_iip(page):
 
 async def main():
     print("=" * 80)
-    print("🚀 PURE DYNAMIC MACRO DOCUMENT CRAWLER (ZERO HARDCODING)")
+    print("🚀 UNIFIED DYNAMIC MACRO & FASTAG DATA CRAWLER")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
@@ -262,7 +315,7 @@ async def main():
                 "ipa_ports_traffic": await scrape_ipa(page),
                 "dpiit_eight_core": await scrape_eight_core(page),
                 "dpiit_wpi": await scrape_wpi(page),
-                "mospi_iip": await scrape_mospi_iip(page)
+                "netc_fastag": await scrape_netc_fastag(page)
             }
         }
 
@@ -274,11 +327,14 @@ async def main():
     print("\n" + "=" * 80)
     print("✅ EXECUTION SUMMARY:")
     for key, val in manifest["reports"].items():
-        status = "✅ Downloaded" if val["local_path"] else "❌ Not Released / Failed"
-        link_str = val.get("pdf_url") or val.get("file_url")
-        print(f"   • {key.upper():<20} : {status} | Link: {link_str}")
+        if key == "netc_fastag":
+            status = f"✅ Extracted ({val['total_records_extracted']} rows)" if val.get("csv_path") else "❌ Failed"
+            link_str = val.get("csv_path")
+        else:
+            status = "✅ Downloaded" if val.get("local_path") else "❌ Not Released / Failed"
+            link_str = val.get("pdf_url") or val.get("file_url")
+        print(f"   • {key.upper():<20} : {status} | Destination: {link_str}")
     print(f"📁 Manifest Metadata saved to: '{METADATA_FILE}'")
-    print(f"📂 Downloaded Directory        : '{OUTPUT_DIR}/'")
     print("=" * 80)
 
 if __name__ == "__main__":
