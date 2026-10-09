@@ -1,5 +1,82 @@
 {
-  "status": "error",
-  "error": "Failed to fetch trends via pytrends: The request failed: Google returned a response with code 404",
-  "data": []
+  "status": "success",
+  "timestamp": "2026-10-09T19:15:38.780664",
+  "total_hot_spikes": 15,
+  "data": [
+    {
+      "keyword": "sensex nifty surge october rally",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge today",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge meaning",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge yesterday",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge s&p",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge key factors",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge fed rate cut",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market surge reason",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "why repo rate is increased",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "what happens when repo rate increases",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "repo rate news today live",
+      "velocity_score": 6,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "nifty today live",
+      "velocity_score": 5,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "sensex today live",
+      "velocity_score": 5,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "sensex today gold",
+      "velocity_score": 5,
+      "search_status": "High Velocity Spike"
+    },
+    {
+      "keyword": "stock market news today",
+      "velocity_score": 5,
+      "search_status": "High Velocity Spike"
+    }
+  ]
 }
