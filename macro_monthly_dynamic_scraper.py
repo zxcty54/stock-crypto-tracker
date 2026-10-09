@@ -183,7 +183,6 @@ async def download_ppac_icr(page):
                 res["title"] = (await a.inner_text()).strip() or (await a.get_attribute("title")) or "PPAC Industry Consumption Report"
                 break
 
-        # Fallback agar URL structure home page se linked ho
         if not pdf_url:
             await page.goto("https://ppac.gov.in/", wait_until="domcontentloaded", timeout=45000)
             await page.wait_for_timeout(2000)
@@ -208,7 +207,7 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Direct HTML Table Extractor)
+# 5. NETC FASTAG (Optimized Anti-Timeout Extractor)
 # ============================================================
 
 async def scrape_netc_fastag(page):
@@ -225,7 +224,25 @@ async def scrape_netc_fastag(page):
     }
 
     try:
-        await page.goto(target_url, wait_until="networkidle", timeout=60000)
+        await page.set_extra_http_headers({
+            "Accept-Language": "en-US,en;q=0.9",
+            "Sec-Ch-Ua": '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+            "Sec-Ch-Ua-Mobile": "?0",
+            "Sec-Ch-Ua-Platform": '"Windows"',
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
+            "Upgrade-Insecure-Requests": "1"
+        })
+
+        print(f"   🌐 Opening: {target_url} (Fast DOM load)...")
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+
+        try:
+            await page.wait_for_selector("text='Monthly Statistics', table", timeout=15000)
+        except Exception:
+            pass
 
         try:
             monthly_tab = page.locator("text='Monthly Statistics'").first
@@ -236,7 +253,9 @@ async def scrape_netc_fastag(page):
             pass
 
         for year in years_to_scrape:
+            print(f"   📅 Fetching FASTag Year: {year}...")
             year_selected = False
+
             selects = await page.query_selector_all("select")
             for sel in selects:
                 options = await sel.inner_text()
@@ -254,20 +273,25 @@ async def scrape_netc_fastag(page):
                 except Exception:
                     pass
 
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(2500)
+
             rows = await page.query_selector_all("table tr")
+            count = 0
             for row in rows:
                 cells = await row.query_selector_all("td")
                 if len(cells) >= 3:
                     cell_texts = [(await c.inner_text()).strip() for c in cells]
                     month_name = cell_texts[0]
+
                     if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no"]:
                         continue
 
                     nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
+
                     if len(nums) >= 2:
                         vol_mn = nums[-2]
                         val_cr = nums[-1]
+
                         record = {
                             "year": year,
                             "month": month_name,
@@ -277,6 +301,9 @@ async def scrape_netc_fastag(page):
                             "ticket_size_inr": round((val_cr * 10000000) / (vol_mn * 1000000), 2) if (val_cr and vol_mn) else None
                         }
                         all_data.append(record)
+                        count += 1
+
+            print(f"      ✅ Extracted {count} rows for {year}")
 
         if all_data:
             df = pd.DataFrame(all_data)
@@ -284,6 +311,10 @@ async def scrape_netc_fastag(page):
             res["csv_path"] = FASTAG_CSV_FILE
             res["total_records"] = len(all_data)
             res["latest_monthly_metrics"] = all_data[0]
+            print(f"   🎉 FASTag data saved successfully to '{FASTAG_CSV_FILE}'!")
+        else:
+            print("   ⚠️ FASTag table parse nahi ho payi.")
+
     except Exception as e:
         print(f"   ❌ FASTag Error: {e}")
 
