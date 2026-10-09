@@ -7,10 +7,11 @@ on:
     types:
       - completed
 
-  # 2. Market hours schedule (Monday to Friday, every 30 minutes between 09:00 AM - 05:00 PM IST)
-  # 09:00 AM - 05:00 PM IST = 03:30 to 11:30 UTC
+  # 2. Schedule: Har 30 min (09:00 AM IST se 10:00 PM IST)
+  # Raat 10:00 PM se subah 09:00 AM IST band rahega
   schedule:
-    - cron: '*/30 3-11 * * 1-5'
+    - cron: '0,30 4-16 * * *'
+    - cron: '30 3,16 * * *'
 
   # 3. GitHub UI se manual run ka option
   workflow_dispatch:
@@ -22,8 +23,6 @@ concurrency:
 
 jobs:
   broadcast-to-telegram:
-    # Sirf tabhi run hoga jab manual trigger ho, cron ho,
-    # ya parent workflow successfully finish hua ho
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
@@ -57,7 +56,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Sirf posted log file track hogi
           [ -f telegram_posted_log.json ] && git add telegram_posted_log.json
 
           if git diff --staged --quiet; then
