@@ -1,83 +1,138 @@
 # Macro Telemetry Executive Briefing
 
-**Date:** 09-Oct-2026 17:01 IST
+**Date:** 09-Oct-2026 17:13 IST
+
+---
+
+## DPIIT_Eight_Core_Latest.pdf
+
+Based on the raw JSON telemetry extracted from the DPIIT Index of Core Industries (ICI) report, here is the macroeconomic analysis:
+
+### 1. Month / Period
+* **Reporting Period:** August 2026 (Provisional) with final revisions for July 2026.
+* **Cumulative Period:** April – August 2026.
+
+### 2. Key Headline Growth & Volumes (Infrastructure Sectors)
+* **Overall Index of Core Industries (ICI) Growth:** 4.8% YoY for August 2026 (slightly lower than the revised 5.0% in July 2026).
+* **Cumulative ICI Growth (Apr–Aug 2026):** 4.3% YoY (compared to 2.4% in Apr–Aug 2025).
+* **Cement:** +12.5% YoY (Index: 123.3)
+* **Steel:** +3.4% YoY (Index: 140.5)
+* **Electricity:** +11.6% YoY (Index: 133.3)
+* **Iron Ore:** +5.5% YoY (Index: 96.1)
+* **Refinery Products:** +2.6% YoY (Index: 108.4)
+* **Coal:** -3.8% YoY (Index: 89.8)
+* **Natural Gas:** -4.9% YoY (Index: 99.5)
+* **Crude Oil:** -3.6% YoY (Index: 94.7)
+* **Fertilizers:** -12.4% YoY (Index: 100.7)
+* **Cargo Volumes:** Not available
+* **Toll Collections:** Not available
+
+### 3. Macro / Sector Signals
+* **Observations:** 
+  * Growth continues to be strongly anchored by core construction and infrastructure drivers—specifically **Cement (+12.5%)**, **Electricity (+11.6%)**, and **Iron Ore (+5.5%)**—signaling robust underlying physical construction and industrial activity.
+  * Conversely, mining and primary energy inputs like Coal (-3.8%), Natural Gas (-4.9%), Crude Oil (-3.6%), and Fertilizers (-12.4%) registered contractions during August.
+  * The cumulative growth for the fiscal year so far (Apr–Aug 2026 at 4.3%) displays an acceleration compared to the previous year's corresponding period (2.4%).
+* **Economic Signal:** **Bullish** (driven by sustained double-digit expansion in construction-linked infrastructure inputs like cement and electricity, despite weakness in raw energy extraction sectors).
+
+---
+
+## DPIIT_WPI_Latest.pdf
+
+### Macroeconomic Analysis: Indian Physical Infrastructure & WPI Report (August 2026)
+
+#### 1. Month / Period
+* **Primary Reporting Period:** August 2026 (Provisional Estimates)
+* **Revision Period:** June 2026 (Final Estimates)
+
+#### 2. Key Headline Growth & Volumes (Cement, Steel, Cargo, Toll)
+* **Cement (Manufacture of Other Non-Metallic Mineral Products WPI Index):** 
+  * Index: 99.7 (August 2026) vs. 99.9 (July 2026)
+  * YoY Inflation Rate: 2.57% (August 2026) vs. 2.67% (July 2026)
+* **Steel (Manufacture of Basic Metals WPI Index):** 
+  * Index: 100.9 (August 2026) vs. 102.2 (July 2026)
+  * YoY Inflation Rate: 10.88% (August 2026) vs. 12.56% (July 2026)
+* **Cargo:** Not available
+* **Toll:** Not available
+
+#### 3. Macro / Sector Signals
+* **Headline Wholesale Price Inflation (WPI):** All-India WPI inflation stood at **9.92%** YoY for August 2026, up marginally from **9.78%** in July 2026. The All Commodities index registered at 110.8.
+* **Major Group Inflations:** 
+  * Primary Articles: 7.76% YoY
+  * Fuel and Power: 22.93% YoY 
+  * Manufactured Products: 8.37% YoY
+* **Input Costs for Infrastructure & Heavy Industries:** 
+  * *Basic Metals (Steel/Iron input)* index softened month-on-month from 102.2 (July) to 100.9 (August), cooling down YoY price pressures to 10.88%. 
+  * *Trial Input Producer Price Index (IPPI) for Manufacturing* printed at **104.2** for August 2026, pointing to a cooling input cost environment compared to June/July (both at 105.9).
+  * *Manufacture of Coke and Refined Petroleum Products (Input PPI)* dropped significantly to **86.7** in August 2026 down from 99.9 in July, presenting cost relief for heavy transport and logistics fleets.
+* **Economic Signal:** **Neutral to Cautiously Optimistic** *(Input cost pressures for core materials like basic metals and refined petroleum are easing month-on-month, offering cost moderation for ongoing physical infrastructure execution, though broader headline WPI remains elevated near ~9.9% driven primarily by food and fuel major groups).*
 
 ---
 
 ## IPA_Traffic_Latest.xlsx
 
-### 1. Period / Month
-* **Period:** April to September 2026 (Cumulative H1 FY27) vs. April to September 2025 (H1 FY26)
-* **Source Dataset:** Major Ports Traffic Handling (IPA_Traffic_Latest.xlsx)
+### Macroeconomic Analysis: Indian Major Ports Traffic
 
----
+#### 1. Month / Period
+* **Period:** April to September 2026 (Cumulative H1 FY27) vis-à-vis April to September 2025.
 
-### 2. Key Headline Growth & Volumes
-* **Total Cargo Traffic Handled:** 472,750 thousand tonnes (April–September 2026) compared to 437,701 thousand tonnes (April–September 2025).
-* **Overall Growth Rate:** **+8.01%** YoY expansion across all major Indian ports.
-* **Key Segment Volumes (H1 FY27 vs H1 FY26):**
-  * **POL (Crude, Products, LPG/LNG):** 140,969 thousand tonnes (*+6.31%*)
-  * **Thermal & Steam Coal:** 67,994 thousand tonnes (*+5.78%*)
-  * **Coking Coal & Others:** 33,525 thousand tonnes (*+10.07%*)
-  * **Containers (Tonnage):** 112,904 thousand tonnes (*+8.21%*) | **TEUs:** 8,171 thousand tonnes (*+12.22%*)
-  * **Iron Ore (incl. Pellets):** 25,238 thousand tonnes (*+7.25%*)
-  * **Fertilizers (Raw + Finished):** 10,001 thousand tonnes (*Combined -15.4% approx.*)
-  * **Other Liquids:** 15,837 thousand tonnes (*-7.08%*)
-  * **Miscellaneous Cargo:** 66,282 thousand tonnes (*+22.70%*)
+#### 2. Key Headline Growth & Volumes (Major Ports Cargo Traffic)
+* **Total Cargo Handled (H1 FY27):** 472,750 thousand tonnes ('000 tonnes).
+* **Total Cargo Handled (H1 FY26):** 437,701 thousand tonnes ('000 tonnes).
+* **Headline Growth:** +8.01% YoY.
+* **Segment-wise Volumes & Growth (H1 FY27 vs H1 FY26):**
+  * **POL (Crude, Products, LPG/LNG):** 140,969 '000 tonnes (+6.31%)
+  * **Other Liquids:** 15,837 '000 tonnes (-7.08%)
+  * **Iron Ore (incl. Pellets):** 25,238 '000 tonnes (+7.25%)
+  * **Fertilizers (Finished & Raw):** 10,001 '000 tonnes (Finished: +0.67%, Raw: -26.89%)
+  * **Coal (Thermal, Steam, Coking & Others):** 101,519 '000 tonnes (Thermal/Steam: +5.78%, Coking/Others: +10.07%)
+  * **Containers (Tonnage & TEUs):** 112,904 '000 tonnes (+8.21%); 8,171 '000 TEUs (+12.22%)
+  * **Misc. Cargo:** 66,282 '000 tonnes (+22.70%)
 * **Cement:** Not available
 * **Steel:** Not available
 * **Toll:** Not available
 
----
-
-### 3. Macro / Sector Signals
-* **Sector Performance & Port Highlights:** 
-  * Strong double-digit traffic surges were led by **Deendayal Port (+26.85%)**, **JNPA (+13.36%)**, and **Kamarajar/Ennore Port (+8.98%)**, showcasing robust west and east coast maritime throughput. 
-  * Conversely, minor contractions were observed at Chennai (-4.28%) and Paradip (-1.06%).
-* **Economic Indicators:** 
-  * **Containerized Traffic & TEUs (+12.22% growth)** reflect strong manufacturing output, external trade velocity, and resilient consumer goods demand.
-  * **Coking Coal (+10.07%)** and **Iron Ore (+7.25%)** expansion validate robust domestic steel manufacturing feedstock requirements.
-  * **Thermal Coal (+5.78%)** growth points toward sustained heavy industrial and domestic power generation demand.
-* **Overall Economic Signal:** **Bullish** (Strong macroeconomic activity underscored by solid manufacturing input demands and high external trade throughput).
+#### 3. Macro / Sector Signals
+* **Signals:** **Bullish**
+* **Observations:** 
+  * Strong broad-based volume expansion of **8.01% YoY** across major ports indicates robust external trade and domestic industrial activity.
+  * Exceptional double-digit growth in **Container traffic (+12.22% in TEUs)** points to healthy manufacturing output and consumer goods demand.
+  * Substantial increases in **Coal (+6.7% combined)** and **POL (+6.31%)** underscore sustained domestic energy requirements and power generation activity.
+  * Significant outlier performance was recorded by **Deendayal (+26.85%)** and **JNPA (+13.36%)**, driving overall throughput higher.
 
 ---
 
 ## MoSPI_IIP_Latest.pdf
 
-Based on the raw JSON telemetry provided from the official MoSPI Index of Industrial Production (IIP) release, here is the macroeconomic analysis for Indian physical infrastructure and related industrial sectors:
+Based on the telemetry data provided from the MoSPI Index of Industrial Production (IIP) report, here is the macroeconomic analysis for the physical infrastructure and industrial sectors:
 
-### 1. Period / Month
-* **August 2026** (Quick Estimates; alongside final revisions for July 2026).
+### 1. Month / Period
+* **Reporting Period:** August 2026 (Quick Estimates) with revised figures for July 2026.
 
 ---
 
-### 2. Key Headline Growth & Volumes (Exact Numbers)
-* **General IIP (Overall Industrial Growth):** +8.0% YoY (Index stands at 123.3).
-* **Manufacturing Sector:** +9.0% YoY (Index stands at 126.6); marking three consecutive months of 8%+ growth.
-* **Electricity & Gas Supply:** +12.3% YoY (Index stands at 133.9), strongly driven by Renewable Sources (+15.4%).
-* **Mining & Quarrying:** -5.6% YoY contraction (Index stands at 85.7), weighed down by Non-Metallic Minerals (-12.8%) and Fuel Minerals (-5.7%).
-* **Use-Based Infrastructure/Construction Goods:** +6.4% YoY (Index stands at 132.5).
-* **Capital Goods:** +16.9% YoY (Index stands at 140.7).
-* **Intermediate Goods:** +13.7% YoY (Index stands at 131.8).
-* **Physical Infrastructure / Transport Sub-Sectors (NIC 2-Digit):**
-  * *Manufacture of other transport equipment* (includes Railway Rolling Stock): +25.3% YoY.
-  * *Manufacture of motor vehicles, trailers and semi-trailers* (includes Commercial Vehicles & Passenger Cars): +25.2% YoY.
-  * *Manufacture of electrical equipment* (includes Switchgear, Circuit Breakers, UPS): +30.9% YoY.
-  * *Manufacture of basic metals:* +2.4% YoY.
-  * *Manufacture of other non-metallic mineral products* (proxy for cement/construction materials): +11.4% YoY.
-* **Cement:** Not available directly as a standalone metric (tracked under non-metallic mineral products).
-* **Steel:** Not available directly as a standalone metric (tracked under basic metals).
-* **Cargo / Toll:** Not available in this dataset.
+### 2. Key Headline Growth & Volumes
+* **General IIP Growth:** 8.0% year-on-year (YoY) for August 2026 (up from 6.7% in July 2026).
+* **Manufacturing Sector Growth:** 9.0% YoY (marking three consecutive months of 8%+ growth).
+* **Electricity & Gas Supply Growth:** 12.3% YoY (driven heavily by a 15.4% surge in renewable electricity generation).
+* **Infrastructure / Construction Goods Growth:** 6.4% YoY (Index standing at 132.5).
+* **Capital Goods Growth:** 16.9% YoY (Index standing at 140.7).
+* **Intermediate Goods Growth:** 13.7% YoY.
+* **Cement / Construction Inputs (Non-Metallic Mineral Products):** Index at 118.3, reflecting an 11.4% YoY growth for August 2026.
+* **Steel / Basic Metals:** Index at 134.8, reflecting a 2.4% YoY growth.
+* **Cargo / Toll / Logistics Proxies (Transport & Auto Equipment):** 
+  * Manufacture of motor vehicles, trailers, and semi-trailers: +25.2% YoY.
+  * Manufacture of other transport equipment (including railway rolling stock): +25.3% YoY.
+* **Mining & Quarrying:** (-) 5.6% YoY contraction (dragged down by non-metallic minerals at -12.8% and fuel minerals at -5.7%).
 
 ---
 
 ### 3. Macro / Sector Signals
-* **Core Infrastructure & Industrial CapEx:** **Bullish**. The robust double-digit expansion in Capital Goods (+16.9%) and Intermediate Goods (+13.7%), paired with steady growth in Infrastructure/Construction Goods (+6.4%), signals continuous public and private capital formation. 
-* **Manufacturing Momentum:** **Bullish**. Manufacturing remains resilient at 9.0% growth, backed by high-multiplier sectors like automotive, electrical machinery, and heavy transport equipment (railway rolling stock).
-* **Energy & Utilities:** **Bullish**. Electricity generation posted strong double-digit growth (+13.3%), led aggressively by renewables (+15.4%), ensuring unhindered power supply for industrial and commercial operations.
-* **Mining Bottleneck:** **Weak**. Mining & Quarrying contracted by 5.6%, largely driven by sharp drops in non-metallic and fuel minerals, which could pose near-term raw material supply constraints if the trend persists.
-
-**Overall Macroeconomic Stance:** **Bullish** (driven by robust manufacturing, capital goods, and heavy infrastructure manufacturing performance).
+* **Economic Signal:** **Bullish** (driven by high capital formation, robust manufacturing, and sharp expansion in infrastructure/construction-linked segments).
+* **Key Observations:**
+  * **Strong Investment Cycle:** Capital Goods (+16.9%) and Intermediate Goods (+13.7%) point towards sustained private and public capital expenditure expansion.
+  * **Infrastructure Momentum:** Infrastructure and construction goods maintain a steady upward trajectory (6.4% growth), corroborated by double-digit growth in other non-metallic mineral products (cement-associated inputs) at 11.4%.
+  * **Logistics & Automotive Surge:** Heavy outperformance in transport equipment and commercial/passenger vehicles signals active freight movement and strong domestic supply chains.
+  * **Mining Lag:** Mining is the primary structural drag for the month, contracting by 5.6% due to weather or seasonal extraction factors.
 
 ---
 
@@ -85,30 +140,28 @@ Based on the raw JSON telemetry provided from the official MoSPI Index of Indust
 
 ### Macroeconomic Analysis: Indian Physical Infrastructure (NETC FASTag Telemetry)
 
-Based on the provided raw JSON telemetry, here is the extraction and macroeconomic sector analysis:
+Based on the provided raw JSON telemetry, here is the macroeconomic extraction for the available periods:
 
 #### 1. Month / Period
-*   **Data Range Covered in Dataset:** April 2026 to October 2026 *(Note: Raw data contains labeling anomalies where month strings consistently read "-2026" regardless of the record's year field)*. 
-*   **Latest Reporting Period:** October 2026
+*Note: The raw data contains repeated entries across multiple years with anomalous month labels (e.g., "October-2026" through "April-2026"). The specific periods represented in the dataset include:*
+* **April to October (Reference Period)**
+
+---
 
 #### 2. Key Headline Growth & Volumes (Cement, Steel, Cargo, Toll)
-*   **Cement:** Not available
-*   **Steel:** Not available
-*   **Cargo:** Not available
-*   **Toll (NETC FASTag - October 2026):**
-    *   **Volume:** 2,001.47 million transactions (200.15 crore)
-    *   **Transaction Amount:** ₹250.18 crore
-    *   **Average Ticket Size:** ₹1.25
-*   **Toll (NETC FASTag - Peak Monthly Run-Rate between May–September 2026):**
-    *   **Peak Volume:** ~7,308.07 million transactions (~730.81 crore in May 2026)
-    *   **Monthly Volume Range (Apr–Sep 2026):** ~7,024.61 to ~7,308.07 million transactions
-    *   **Monthly Amount Range (Apr–Sep 2026):** ₹230.42 crore to ₹240.49 crore
+* **Cement:** Not available
+* **Steel:** Not available
+* **Cargo:** Not available
+* **Toll (NETC FASTag Volumes & Transactions):**
+  * **Peak Monthly Volume:** 7,308.07 million transactions (May, ~730.81 crore transactions) with an amount of ₹235.74 crore.
+  * **Average Monthly Volume:** Ranges between ~7,024.61 million (April) and ~7,308.07 million (May) for standard months.
+  * **Anomalous Period (October):** Marked at 2,001.47 million volume (200.15 crore transactions) with a higher average ticket size of ₹1.25 (compared to the usual ₹0.32–₹0.33).
+
+---
 
 #### 3. Macro / Sector Signals
-*   **Observations:** 
-    *   FASTag volumes maintained a steady, high-utilization band averaging roughly 7,100 million transactions per month between April and September 2026, pointing to robust underlying highway freight movement and commercial vehicular traffic.
-    *   October 2026 exhibits a sharp downward adjustment in recorded transaction volume (2,001.47 million) alongside an increase in average ticket size (₹1.25 compared to the standard ~₹0.32–₹0.33 seen in prior months), which may indicate partial dataset truncation, reporting lags, or structural toll rate revisions.
-*   **Economic Signal:** 
-    *   **Neutral to Bullish** (based on the sustained high transaction volumes through Q1 and Q2 FY27 reflecting active supply chain and logistics throughput, tempered by the anomalous reporting profile in October 2026).
+* **Commercial Transit & Highway Activity:** High consistent transaction volumes (averaging over 7,000 million transactions monthly from April to September) indicate robust highway logistics, freight movement, and economic activity across the national toll network.
+* **Ticket Size Stability:** The average ticket size remains stable at ₹0.32–₹0.33 between April and September, reflecting consistent toll pricing structures and commuter behavior during these months.
+* **Economic Signal:** **Bullish** (driven by sustained high-frequency FASTag transaction volumes pointing to steady inter-state freight and passenger movement).
 
 ---
