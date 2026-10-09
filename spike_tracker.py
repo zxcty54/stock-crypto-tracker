@@ -2,6 +2,7 @@ import json
 import re
 from datetime import datetime
 import requests
+from pytrends.request import TrendReq
 
 FINANCE_KEYWORDS = [
     "rbi", "nifty", "sensex", "stock", "share", "market", "sebi", 
@@ -19,62 +20,34 @@ def get_autocomplete_queries(keyword):
         return []
 
 def extract_search_spikes():
-    # Google Trends ka internal daily trends JSON endpoint
-    url = "https://trends.google.com/trends/api/dailytrends?hl=en-US&tz=-330&geo=IN&ns=15"
-    
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://trends.google.com/trends/trendingsearches/daily?geo=IN"
-    }
-
-    try:
-        session = requests.Session()
-        # Homepage hit karke zaroori cookies collect karta hai
-        session.get("https://trends.google.com/trends/trendingsearches/daily?geo=IN", headers=headers, timeout=10)
-        
-        response = session.get(url, headers=headers, timeout=10)
-        
-        # Google API response ke shuru me security prefix ')]}\',\n' bhejta hai
-        raw_text = response.text
-        if raw_text.startswith(")]}',"):
-            raw_text = raw_text.replace(")]}',", "", 1).strip()
-            
-        data = json.loads(raw_text)
-    except Exception as e:
-        return {"error": f"Failed to fetch trends: {str(e)}"}
-
     spikes = []
-    
     try:
-        days = data.get("default", {}).get("trendingSearchesDays", [])
-        if days:
-            searches = days[0].get("trendingSearches", [])
-            for item in searches:
-                title = item.get("title", {}).get("query", "")
-                traffic = item.get("formattedTraffic", "High Spike")
-                
-                # Context check: related queries aur news articles
-                articles = item.get("articles", [])
-                news_title = articles[0].get("title", "") if articles else ""
-                news_url = articles[0].get("url", "") if articles else ""
-                
-                full_context = f"{title} {news_title}".lower()
-                
-                # Filter finance topics
-                if any(kw in full_context for kw in FINANCE_KEYWORDS):
-                    queries = get_autocomplete_queries(title)
-                    spikes.append({
-                        "keyword": title,
-                        "search_volume_spike": traffic,
-                        "user_intent_queries": queries,
-                        "trigger_news": {
-                            "headline": re.sub(r'<.*?>', '', news_title),  # HTML tags clean karta hai
-                            "source_url": news_url
-                        }
-                    })
+        # Pytrends session initialize (India timezone)
+        pytrends = TrendReq(hl='en-US', tz=330, timeout=(10, 25))
+        
+        # Realtime trending searches for India
+        df = pytrends.trending_searches(pn='india')
+        trending_list = df[0].tolist()
+        
     except Exception as e:
-        return {"error": f"JSON parsing error: {str(e)}"}
+        return {
+            "status": "error",
+            "error": f"Failed to fetch trends via pytrends: {str(e)}",
+            "data": []
+        }
+
+    for item in trending_list:
+        keyword = str(item).strip()
+        kw_lower = keyword.lower()
+        
+        # Check against finance filters
+        if any(fk in kw_lower for fk in FINANCE_KEYWORDS):
+            queries = get_autocomplete_queries(keyword)
+            spikes.append({
+                "keyword": keyword,
+                "spike_status": "Trending Now (Top Breakout)",
+                "live_intent_queries": queries
+            })
 
     return {
         "status": "success",
