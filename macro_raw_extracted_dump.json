@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-10-09 18:33:00 IST",
+    "timestamp": "2026-10-09 19:14:57 IST",
     "total_files_extracted": 6,
     "file_names": [
       "DPIIT_Eight_Core_Latest.pdf",
@@ -16593,7 +16593,6 @@
       "file_type": "CSV",
       "records": [
         {
-          "year": 2026,
           "month": "October-2026",
           "volume_million": 2001.47,
           "volume_crore": 200.15,
@@ -16601,7 +16600,6 @@
           "ticket_size_inr": 1.25
         },
         {
-          "year": 2026,
           "month": "September-2026",
           "volume_million": 7096.35,
           "volume_crore": 709.63,
@@ -16609,7 +16607,6 @@
           "ticket_size_inr": 0.33
         },
         {
-          "year": 2026,
           "month": "August-2026",
           "volume_million": 7185.03,
           "volume_crore": 718.5,
@@ -16617,7 +16614,6 @@
           "ticket_size_inr": 0.32
         },
         {
-          "year": 2026,
           "month": "July-2026",
           "volume_million": 7143.0,
           "volume_crore": 714.3,
@@ -16625,7 +16621,6 @@
           "ticket_size_inr": 0.32
         },
         {
-          "year": 2026,
           "month": "June-2026",
           "volume_million": 7214.76,
           "volume_crore": 721.48,
@@ -16633,7 +16628,6 @@
           "ticket_size_inr": 0.33
         },
         {
-          "year": 2026,
           "month": "May-2026",
           "volume_million": 7308.07,
           "volume_crore": 730.81,
@@ -16641,119 +16635,6 @@
           "ticket_size_inr": 0.32
         },
         {
-          "year": 2026,
-          "month": "April-2026",
-          "volume_million": 7024.61,
-          "volume_crore": 702.46,
-          "amount_inr_crore": 234.15,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2025,
-          "month": "October-2026",
-          "volume_million": 2001.47,
-          "volume_crore": 200.15,
-          "amount_inr_crore": 250.18,
-          "ticket_size_inr": 1.25
-        },
-        {
-          "year": 2025,
-          "month": "September-2026",
-          "volume_million": 7096.35,
-          "volume_crore": 709.63,
-          "amount_inr_crore": 236.55,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2025,
-          "month": "August-2026",
-          "volume_million": 7185.03,
-          "volume_crore": 718.5,
-          "amount_inr_crore": 231.78,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2025,
-          "month": "July-2026",
-          "volume_million": 7143.0,
-          "volume_crore": 714.3,
-          "amount_inr_crore": 230.42,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2025,
-          "month": "June-2026",
-          "volume_million": 7214.76,
-          "volume_crore": 721.48,
-          "amount_inr_crore": 240.49,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2025,
-          "month": "May-2026",
-          "volume_million": 7308.07,
-          "volume_crore": 730.81,
-          "amount_inr_crore": 235.74,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2025,
-          "month": "April-2026",
-          "volume_million": 7024.61,
-          "volume_crore": 702.46,
-          "amount_inr_crore": 234.15,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2024,
-          "month": "October-2026",
-          "volume_million": 2001.47,
-          "volume_crore": 200.15,
-          "amount_inr_crore": 250.18,
-          "ticket_size_inr": 1.25
-        },
-        {
-          "year": 2024,
-          "month": "September-2026",
-          "volume_million": 7096.35,
-          "volume_crore": 709.63,
-          "amount_inr_crore": 236.55,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2024,
-          "month": "August-2026",
-          "volume_million": 7185.03,
-          "volume_crore": 718.5,
-          "amount_inr_crore": 231.78,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2024,
-          "month": "July-2026",
-          "volume_million": 7143.0,
-          "volume_crore": 714.3,
-          "amount_inr_crore": 230.42,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2024,
-          "month": "June-2026",
-          "volume_million": 7214.76,
-          "volume_crore": 721.48,
-          "amount_inr_crore": 240.49,
-          "ticket_size_inr": 0.33
-        },
-        {
-          "year": 2024,
-          "month": "May-2026",
-          "volume_million": 7308.07,
-          "volume_crore": 730.81,
-          "amount_inr_crore": 235.74,
-          "ticket_size_inr": 0.32
-        },
-        {
-          "year": 2024,
           "month": "April-2026",
           "volume_million": 7024.61,
           "volume_crore": 702.46,
