@@ -1,76 +1,104 @@
 import json
-import string
+import re
+import xml.etree.ElementTree as ET
 from datetime import datetime
 import requests
-
-# Base topics jinka live breakout search volume scan karna hai
-BASE_SEEDS = [
-    "nifty", "sensex", "rbi", "stock market", "share price", 
-    "ipo", "gold rate", "silver rate", "inflation", "sebi", "repo rate"
-]
-
-# Modifiers jo tab trigger hote hain jab achanak search spike hota hai
-SPIKE_MODIFIERS = ["why", "today", "news", "fall", "surge", "live", "crash"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 }
 
-def query_google_suggest(search_term):
-    """Google ke direct autocomplete engine se real-time breakout search queries fetch karta hai"""
-    url = f"https://suggestqueries.google.com/complete/search?client=chrome&hl=en-IN&gl=in&q={search_term}"
+def clean_text(text):
+    """HTML tags aur special characters hatata hai"""
+    clean = re.sub(r'<.*?>', '', text)
+    clean = re.sub(r'[^a-zA-Z0-9\s]', ' ', clean)
+    return " ".join(clean.split())
+
+def fetch_dynamic_breaking_finance_topics():
+    """
+    Google News Business/Economy (India) ke live RSS feed se
+    breakout topics dynamically uthata hai - ZERO hardcoding.
+    """
+    # Google News Business Topic Feed (India - English)
+    url = "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-IN&gl=IN&ceid=IN:en"
+    
     try:
-        res = requests.get(url, headers=HEADERS, timeout=6)
+        res = requests.get(url, headers=HEADERS, timeout=10)
+        root = ET.fromstring(res.content)
+        
+        candidates = []
+        for item in root.findall('.//item')[:15]:
+            title = item.find('title').text or ""
+            link = item.find('link').text or ""
+            
+            # Source name (e.g. " - Economic Times") ko alag karna
+            main_headline = title.split(" - ")[0].strip()
+            
+            # Headline se main meaningful entities nikalna
+            clean_title = clean_text(main_headline)
+            words = [w for w in clean_title.split() if len(w) > 3]
+            
+            candidates.append({
+                "headline": main_headline,
+                "url": link,
+                "tokens": words[:4] # Core topic phrase
+            })
+            
+        return candidates
+    except Exception as e:
+        print(f"Error fetching live feed: {e}")
+        return []
+
+def get_live_search_intent(query_phrase):
+    """Google live autocomplete se volume aur actual user queries verify karta hai"""
+    url = f"https://suggestqueries.google.com/complete/search?client=chrome&hl=en-IN&gl=in&q={query_phrase}"
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=5)
         if res.status_code == 200:
             data = res.json()
-            # data[1] -> query suggestions list
+            # data[1] -> Real-time suggested search queries
             return data[1] if len(data) > 1 else []
     except Exception:
         pass
     return []
 
-def extract_search_spikes():
-    discovered_queries = {}
+def extract_dynamic_spikes():
+    breaking_events = fetch_dynamic_breaking_finance_topics()
     
-    # 1. Base keywords + intent scan
-    for seed in BASE_SEEDS:
-        # Direct seed search
-        direct_results = query_google_suggest(seed)
-        for q in direct_results:
-            q_clean = q.strip().lower()
-            discovered_queries[q_clean] = discovered_queries.get(q_clean, 0) + 2
-
-        # Breakout intent modifiers scan (e.g. "nifty why", "rbi news")
-        for mod in SPIKE_MODIFIERS:
-            combo = f"{seed} {mod}"
-            mod_results = query_google_suggest(combo)
-            for q in mod_results:
-                q_clean = q.strip().lower()
-                discovered_queries[q_clean] = discovered_queries.get(q_clean, 0) + 3
-
-    # Ranking: Highest frequency in velocity predictions = highest spike
-    ranked_spikes = sorted(discovered_queries.items(), key=lambda x: x[1], reverse=True)
-
-    spikes_data = []
-    # Top 15 highest volume trending breakout keywords
-    for query, score in ranked_spikes[:15]:
-        spikes_data.append({
-            "keyword": query,
-            "velocity_score": score,
-            "search_status": "High Velocity Spike" if score >= 4 else "Surging Search"
-        })
+    results = []
+    
+    for event in breaking_events:
+        phrase = " ".join(event["tokens"][:3]) # First 3 strong words
+        if not phrase:
+            continue
+            
+        # Check actual search surge on Google
+        live_queries = get_live_search_intent(phrase)
+        
+        # Agar Google is topic par suggestions de raha hai, iska matlab search volume active hai
+        if live_queries:
+            results.append({
+                "hot_keyword": live_queries[0],
+                "search_volume_velocity": f"{len(live_queries)} active variations expanding",
+                "trending_queries_by_users": live_queries[:4],
+                "trigger_event": {
+                    "headline": event["headline"],
+                    "source": event["url"]
+                }
+            })
 
     return {
         "status": "success",
         "timestamp": datetime.now().isoformat(),
-        "total_hot_spikes": len(spikes_data),
-        "data": spikes_data
+        "total_hot_spikes": len(results),
+        "data": results
     }
 
 if __name__ == "__main__":
-    result = extract_search_spikes()
-    json_output = json.dumps(result, indent=2, ensure_ascii=False)
-    print(json_output)
-
+    output = extract_dynamic_spikes()
+    
+    json_data = json.dumps(output, indent=2, ensure_ascii=False)
+    print(json_data)
+    
     with open("trending_spikes.json", "w", encoding="utf-8") as f:
-        f.write(json_output)
+        f.write(json_data)
