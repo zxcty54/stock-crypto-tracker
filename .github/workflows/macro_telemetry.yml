@@ -1,0 +1,25 @@
+- name: Run Playwright Macro Scraper (Download Phase)
+        run: |
+          python macro_monthly_dynamic_scraper.py
+
+      - name: Extract Full Raw Content for AI
+        run: |
+          python parse_downloaded_reports.py
+
+      - name: Commit and Push All Macro Deliverables
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          [ -f macro_raw_extracted_dump.json ] && git add macro_raw_extracted_dump.json
+          [ -f macro_reports_manifest.json ] && git add macro_reports_manifest.json
+          [ -f netc_fastag_monthly_3years.csv ] && git add netc_fastag_monthly_3years.csv
+          [ -d downloaded_macro_pdfs ] && git add downloaded_macro_pdfs/
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes found."
+          else
+            git commit -m "📊 Sync Raw Macro Content Dump [$(date +'%d-%b-%Y %H:%M IST')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
