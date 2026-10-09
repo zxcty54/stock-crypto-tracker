@@ -206,11 +206,11 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Direct Default / Latest Page Scraper)
+# 5. NETC FASTAG (Your Proven Working Logic - Latest Period)
 # ============================================================
 
 async def scrape_netc_fastag(browser):
-    print("\n🛣️ [5/5] Scraping NETC FASTag Latest Default Table (No Dropdowns)...")
+    print("\n🛣️ [5/5] Scraping NETC FASTag Latest Monthly Data...")
     target_url = "https://www.npci.org.in/product/netc/product-statistics"
     all_data = []
 
@@ -228,28 +228,19 @@ async def scrape_netc_fastag(browser):
 
     try:
         print(f"   🌐 Opening: {target_url}")
-        try:
-            await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
-        except Exception:
-            await page.goto(target_url, timeout=45000)
+        await page.goto(target_url, wait_until="networkidle", timeout=60000)
 
-        # Tab auto-load hone ka wait
-        await page.wait_for_timeout(4000)
-
-        # FASTag statistics tab ensure karein agar needed ho
+        # "Monthly Statistics" tab par click karein agar default selected na ho
         try:
-            tab_btn = page.locator("#tab-0, [role='tab']:has-text('NETC FASTag Statistics')").first
-            if await tab_btn.is_visible():
-                await tab_btn.click()
+            monthly_tab = page.locator("text='Monthly Statistics'").first
+            if await monthly_tab.is_visible():
+                await monthly_tab.click()
                 await page.wait_for_timeout(2000)
         except Exception:
             pass
 
-        # Table rows parse karein jo page load hote hi samne aayi hain
-        rows = await page.query_selector_all("table tbody tr")
-        if not rows:
-            rows = await page.query_selector_all("table tr")
-
+        # Table rows read karein
+        rows = await page.query_selector_all("table tr")
         count = 0
         for row in rows:
             cells = await row.query_selector_all("td")
@@ -257,14 +248,15 @@ async def scrape_netc_fastag(browser):
                 cell_texts = [(await c.inner_text()).strip() for c in cells]
                 month_name = cell_texts[0]
 
-                if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no", ""]:
+                if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no"]:
                     continue
 
+                # Column structure: Month | Live Banks | Tag Issuance | Volume (Mn) | Amount (Cr)
                 nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
 
                 if len(nums) >= 2:
-                    vol_mn = nums[-2]
-                    val_cr = nums[-1]
+                    vol_mn = nums[-2]   # Volume in Million
+                    val_cr = nums[-1]   # Amount in Cr
 
                     record = {
                         "month": month_name,
@@ -276,7 +268,7 @@ async def scrape_netc_fastag(browser):
                     all_data.append(record)
                     count += 1
 
-        print(f"   ✅ Extracted {count} records from default landing table.")
+        print(f"   ✅ Extracted {count} latest monthly records.")
 
         if all_data:
             df = pd.DataFrame(all_data)
@@ -323,7 +315,7 @@ async def main():
 
         await download_context.close()
 
-        # FASTag isolated session
+        # Dedicated context execution for FASTag
         fastag_res = await scrape_netc_fastag(browser)
 
         await browser.close()
