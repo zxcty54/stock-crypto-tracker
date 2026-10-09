@@ -1,3 +1,5 @@
 {
-  "error": "Failed to fetch trends: Expecting value: line 1 column 1 (char 0)"
+  "status": "error",
+  "error": "Failed to fetch trends via pytrends: The request failed: Google returned a response with code 404",
+  "data": []
 }
