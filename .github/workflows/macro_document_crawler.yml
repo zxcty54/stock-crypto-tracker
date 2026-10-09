@@ -1,0 +1,52 @@
+name: Dynamic Macro Documents Crawler (IPA, DPIIT, MoSPI)
+
+on:
+  # Daily run at 06:30 PM IST (01:00 PM UTC)
+  schedule:
+    - cron: '0 13 * * *'
+
+  # Manual trigger button from GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  crawl-macro-documents:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Scraping & Parsing Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install curl_cffi beautifulsoup4 pdfplumber
+
+      - name: Run Dynamic Document Crawler
+        run: |
+          python macro_monthly_dynamic_scraper.py
+
+      - name: Commit and Push Downloaded Reports
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add manifest and downloaded PDFs folder
+          [ -f macro_reports_manifest.json ] && git add macro_reports_manifest.json
+          [ -d downloaded_macro_pdfs ] && git add downloaded_macro_pdfs/
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ Koi naya document ya update nahi mila. Skipping commit."
+          else
+            git commit -m "📑 Sync Macro Reports & PDFs [$(date +'%d-%b-%Y %H:%M IST')]"
+            git pull --rebase origin main
+            git push origin main
+          fi
