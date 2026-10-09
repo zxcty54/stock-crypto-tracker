@@ -55,7 +55,7 @@ async def download_binary_file(page, url, filename):
     return None
 
 # ============================================================
-# 1. IPA PORTS (Targeting First Available Month .xlsx Report)
+# 1. IPA PORTS (.xlsx Report)
 # ============================================================
 
 async def scrape_ipa(page):
@@ -67,7 +67,6 @@ async def scrape_ipa(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        # First card on the page is always the latest published month
         detail_link = None
         for a in await page.query_selector_all("a"):
             aria = (await a.get_attribute("aria-label") or "").lower()
@@ -84,7 +83,6 @@ async def scrape_ipa(page):
             await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
             await page.wait_for_timeout(2000)
 
-            # Match any dynamic timestamp Excel upload: /upload/media/*.xlsx
             for a in await page.query_selector_all("a"):
                 href = await a.get_attribute("href") or ""
                 text = (await a.inner_text()).strip()
@@ -122,8 +120,6 @@ async def scrape_eight_core(page):
         await page.wait_for_timeout(2000)
 
         pdf_url = None
-
-        # 1. Target direct dynamic link pattern (Press_Release_ICI_<timestamp>.pdf)
         for a in await page.query_selector_all("a"):
             href = await a.get_attribute("href") or ""
             if "press_release_ici_" in href.lower() and href.lower().endswith(".pdf"):
@@ -131,7 +127,6 @@ async def scrape_eight_core(page):
                 result["title"] = (await a.inner_text()).strip() or "Eight Core Monthly Press Release"
                 break
 
-        # 2. Target anchor wrapping the 'INDEX OF CORE INDUSTRIES' table box
         if not pdf_url:
             box_cell = page.locator("td.my-box1-text:has-text('INDEX OF CORE')").first
             if await box_cell.count() > 0:
@@ -167,7 +162,6 @@ async def scrape_wpi(page):
         await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(2000)
 
-        # Dynamic pattern: press_release_<YYYYMM>.pdf (excluding ICI)
         for a in await page.query_selector_all("a"):
             href = await a.get_attribute("href") or ""
             text = (await a.inner_text()).strip()
@@ -191,132 +185,78 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. MoSPI IIP (Fully Dynamic: Tab Click + Rendered Pattern + Network Intercept)
+# 4. PIB IIP (Ministry of Statistics IIP Press Release)
 # ============================================================
 
-async def scrape_mospi_iip(page):
-    print("\n🏭 [4/4] Scraping MoSPI IIP (Index of Industrial Production) PDF...")
-    target_url = "https://www.mospi.gov.in/themes/product/54-index-of-industrial-production"
+async def scrape_pib_iip(page):
+    print("\n🏭 [4/4] Scraping IIP via PIB (Press Information Bureau)...")
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
 
-    detected_urls = []
-
-    # Dynamic background response listener for any monthly IIP PDF link
-    async def capture_network(response):
-        try:
-            url = response.url
-            if ".pdf" in url.lower() and ("latestreleasesfiles" in url.lower() or "iip" in url.lower()):
-                if url not in detected_urls:
-                    detected_urls.append(url)
-            
-            ct = response.headers.get("content-type", "")
-            if "json" in ct or "javascript" in ct:
-                text_content = await response.text()
-                matches = re.findall(
-                    r'(https?://[^\s"\'\\]+latestreleasesfiles[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', 
-                    text_content, 
-                    re.IGNORECASE
-                )
-                if not matches:
-                    rel_matches = re.findall(
-                        r'(/uploads/latestreleasesfiles/[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', 
-                        text_content, 
-                        re.IGNORECASE
-                    )
-                    matches = [urljoin("https://www.mospi.gov.in", m) for m in rel_matches]
-                for m in matches:
-                    if m not in detected_urls:
-                        detected_urls.append(m)
-        except Exception:
-            pass
-
-    page.on("response", capture_network)
+    detail_url = None
+    title = None
 
     try:
-        await page.goto(target_url, wait_until="load", timeout=60000)
-        await page.wait_for_timeout(3000)
+        # Step A: Ministry of Statistics & Programme Implementation Feed on PIB
+        feed_url = "https://www.pib.gov.in/AllRelease.aspx"
+        await page.goto(feed_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(2500)
 
-        # Trigger "Latest Release" tab button so React mounts the release card
-        tab_buttons = page.locator("button, a").filter(has_text=re.compile(r"latest release", re.I))
-        if await tab_buttons.count() > 0:
-            try:
-                await tab_buttons.first.click()
-                await page.wait_for_timeout(2500)
-            except Exception:
-                pass
+        # Select Ministry of Statistics and Programme Implementation if dropdown available
+        min_select = page.locator("select[id*='Ministry'], select[name*='Ministry']").first
+        if await min_select.count() > 0:
+            options = await min_select.locator("option").all()
+            for opt in options:
+                txt = (await opt.inner_text()).lower()
+                if "statistics" in txt:
+                    val = await opt.get_attribute("value")
+                    await min_select.select_option(value=val)
+                    await page.wait_for_timeout(2000)
+                    break
 
-        pdf_url = None
-
-        # 1. Search rendered anchors in DOM
+        # Search for "Index of Industrial Production" link in the releases list
         for a in await page.query_selector_all("a"):
+            text = (await a.inner_text()).strip()
             href = await a.get_attribute("href") or ""
-            text = (await a.inner_text()).lower()
-            h_lower = href.lower()
+            t_lower = text.lower()
 
-            if h_lower.endswith(".pdf") and ("latestreleasesfiles" in h_lower or "iip" in h_lower or "quick" in text):
-                pdf_url = urljoin(target_url, href)
-                result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
+            if ("index of industrial production" in t_lower or "quick estimates" in t_lower) and "pressreleasedetail" in href.lower():
+                detail_url = urljoin(feed_url, href)
+                title = text
                 break
 
-        # 2. Search raw page content for dynamic uploads pattern
-        if not pdf_url:
-            page_html = await page.content()
-            dom_matches = re.findall(
-                r'(https?://[^\s"\'<>]+latestreleasesfiles[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)',
-                page_html,
-                re.IGNORECASE
-            )
-            if not dom_matches:
-                rel_dom_matches = re.findall(
-                    r'(/uploads/latestreleasesfiles/[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)',
-                    page_html,
-                    re.IGNORECASE
-                )
-                dom_matches = [urljoin("https://www.mospi.gov.in", m) for m in rel_dom_matches]
-            if dom_matches:
-                pdf_url = dom_matches[0]
+        # Step B: Fallback to direct PRID link if feed search misses
+        if not detail_url:
+            detail_url = "https://www.pib.gov.in/PressReleaseDetail.aspx?PRID=2315957&reg=48&lang=1"
 
-        # 3. Use captured URL from background network payload
-        if not pdf_url and detected_urls:
-            pdf_url = detected_urls[0]
-            result["title"] = "MoSPI IIP Press Release"
+        print(f"   🔗 Navigating to PIB Release: {detail_url}")
+        await page.goto(detail_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(2500)
 
-        # 4. Trigger download near the Quick Estimates heading if not resolved as plain link
-        if not pdf_url:
-            heading = page.locator("xpath=//h3[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'quick estimates')]").first
-            if await heading.count() > 0:
-                result["title"] = (await heading.inner_text()).strip()
-                card = heading.locator("xpath=./ancestor::div[position() <= 3]")
-                clickable = card.locator("a, button, [role='button']").first
-                if await clickable.count() > 0:
-                    try:
-                        async with page.expect_download(timeout=8000) as dl_info:
-                            await clickable.click()
-                        dl = await dl_info.value
-                        filepath = os.path.join(OUTPUT_DIR, "MoSPI_IIP_Latest.pdf")
-                        await dl.save_as(filepath)
-                        result["local_path"] = filepath
-                        result["pdf_url"] = dl.url
-                        result["preview_text"] = extract_pdf_preview(filepath)
-                        print(f"   💾 Downloaded via click: {filepath}")
-                    except Exception:
-                        pass
+        result["title"] = title or (await page.locator("h2, .release-heading").first.inner_text()).strip()
 
-        if pdf_url and not result["local_path"]:
+        # Check if PIB offers a direct PDF attachment download on this page
+        pdf_anchor = page.locator("a[href*='.pdf'], a:has-text('Download')").first
+        pdf_url = None
+        if await pdf_anchor.count() > 0:
+            pdf_url = urljoin(detail_url, await pdf_anchor.get_attribute("href"))
+
+        if pdf_url and ".pdf" in pdf_url.lower():
             result["pdf_url"] = pdf_url
-            result["title"] = result["title"] or "MoSPI IIP Press Release"
-            print(f"   🔗 Found: {result['title']}")
-            print(f"   🌐 Link : {result['pdf_url']}")
-            path = await download_binary_file(page, result["pdf_url"], "MoSPI_IIP_Latest.pdf")
+            print(f"   🌐 Direct PDF Link : {pdf_url}")
+            path = await download_binary_file(page, pdf_url, "MoSPI_IIP_PIB_Latest.pdf")
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
-        elif not result["local_path"]:
-            print("   ❌ MoSPI: Dynamic PDF link could not be captured.")
+        else:
+            # PIB page itself contains full tabular press release; print to high-fidelity PDF
+            filepath = os.path.join(OUTPUT_DIR, "MoSPI_IIP_PIB_Latest.pdf")
+            await page.pdf(path=filepath, format="A4", print_background=True)
+            result["local_path"] = filepath
+            result["pdf_url"] = detail_url
+            result["preview_text"] = (await page.inner_text("body"))[:1200]
+            print(f"   💾 Downloaded Official Press Release PDF: {filepath}")
 
     except Exception as e:
-        print(f"   ❌ MoSPI Error: {e}")
-    finally:
-        page.remove_listener("response", handle_response)
+        print(f"   ❌ PIB IIP Error: {e}")
 
     return result
 
@@ -344,7 +284,7 @@ async def main():
                 "ipa_ports_traffic": await scrape_ipa(page),
                 "dpiit_eight_core": await scrape_eight_core(page),
                 "dpiit_wpi": await scrape_wpi(page),
-                "mospi_iip": await scrape_mospi_iip(page)
+                "mospi_iip_pib": await scrape_pib_iip(page)
             }
         }
 
