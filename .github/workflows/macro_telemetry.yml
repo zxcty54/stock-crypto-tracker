@@ -1,25 +1,70 @@
-- name: Run Playwright Macro Scraper (Download Phase)
+name: Dynamic Macro Documents Crawler and Extractor
+
+on:
+  schedule:
+    # Daily at 06:30 PM IST (01:00 PM UTC)
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  crawl-and-extract-macro:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright pdfplumber pandas openpyxl
+
+      - name: Install Playwright Chromium with OS Dependencies
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Step 1 - Download Macro Reports & FASTag Data
         run: |
           python macro_monthly_dynamic_scraper.py
 
-      - name: Extract Full Raw Content for AI
+      - name: Step 2 - Dynamically Parse Downloaded Reports to JSON
         run: |
           python parse_downloaded_reports.py
 
-      - name: Commit and Push All Macro Deliverables
+      - name: Step 3 - Commit and Push All Macro Deliverables
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          [ -f macro_raw_extracted_dump.json ] && git add macro_raw_extracted_dump.json
-          [ -f macro_reports_manifest.json ] && git add macro_reports_manifest.json
-          [ -f netc_fastag_monthly_3years.csv ] && git add netc_fastag_monthly_3years.csv
-          [ -d downloaded_macro_pdfs ] && git add downloaded_macro_pdfs/
+          if [ -f macro_raw_extracted_dump.json ]; then
+            git add macro_raw_extracted_dump.json
+          fi
+
+          if [ -f macro_reports_manifest.json ]; then
+            git add macro_reports_manifest.json
+          fi
+
+          if [ -f netc_fastag_monthly_3years.csv ]; then
+            git add netc_fastag_monthly_3years.csv
+          fi
+
+          if [ -d downloaded_macro_pdfs ]; then
+            git add downloaded_macro_pdfs/
+          fi
 
           if git diff --staged --quiet; then
-            echo "ℹ️ No changes found."
+            echo "ℹ️ No changes detected to commit."
           else
-            git commit -m "📊 Sync Raw Macro Content Dump [$(date +'%d-%b-%Y %H:%M IST')]"
+            git commit -m "📊 Sync Macro Raw Dumps & Artifacts [$(date +'%d-%b-%Y %H:%M IST')]"
             git pull --rebase origin main
             git push origin main
           fi
