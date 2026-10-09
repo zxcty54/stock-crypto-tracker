@@ -4,6 +4,7 @@ import json
 import re
 import asyncio
 from datetime import datetime, timezone, timedelta
+from urllib.parse import urljoin
 from playwright.async_api import async_playwright
 
 try:
@@ -33,7 +34,7 @@ def clean_num(val):
     return None
 
 # ============================================================
-# 1. DPIIT — EIGHT CORE INDUSTRIES (PLAYWRIGHT PIB ENGINE)
+# 1. DPIIT — EIGHT CORE INDUSTRIES
 # ============================================================
 
 async def scrape_dpiit(page):
@@ -48,22 +49,27 @@ async def scrape_dpiit(page):
         "url": None
     }
     try:
-        # Navigate to PIB All Release
-        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=45000, wait_until="domcontentloaded")
         await page.wait_for_timeout(3000)
 
-        # Look for Eight Core link in rendered DOM
-        link_elem = await page.query_selector("a:has-text('Eight Core'), a:has-text('eight core')")
-        if link_elem:
-            href = await link_elem.get_attribute("href")
-            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
-            await link_elem.click()
-            await page.wait_for_load_state("domcontentloaded")
-            await page.wait_for_timeout(2000)
-            text = await page.inner_text("body")
+        # Evaluate all links matching Eight Core in DOM
+        links = await page.eval_on_selector_all(
+            "a", 
+            "elements => elements.map(e => ({ text: e.innerText, href: e.href })).filter(e => /eight core|core industries/i.test(e.text))"
+        )
+        
+        target_url = links[0]["href"] if links else "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
+        res["url"] = target_url
+
+        if target_url.endswith(".pdf"):
+            resp = await page.request.get(target_url)
+            content = await resp.body()
+            text = ""
+            if pdfplumber:
+                with pdfplumber.open(io.BytesIO(content)) as pdf:
+                    text = "\n".join([p.extract_text() or "" for p in pdf.pages[:5]])
         else:
-            # Fallback to direct economic advisory page
-            await page.goto("https://eaindustry.nic.in/", timeout=45000, wait_until="domcontentloaded")
+            await page.goto(target_url, timeout=30000, wait_until="domcontentloaded")
             text = await page.inner_text("body")
 
         # Parsing
@@ -94,7 +100,7 @@ async def scrape_dpiit(page):
     return res
 
 # ============================================================
-# 2. PPAC — DIESEL, BITUMEN & PETCOKE (DIRECT DOWNLOAD HANDLER)
+# 2. PPAC — DIESEL, BITUMEN & PETCOKE (DIRECT URL EXTRACTION)
 # ============================================================
 
 async def scrape_ppac(page):
@@ -107,28 +113,33 @@ async def scrape_ppac(page):
         "downloaded_pdf": None
     }
     try:
-        await page.goto("https://ppac.gov.in/consumption", timeout=60000, wait_until="networkidle")
+        await page.goto("https://ppac.gov.in/consumption", timeout=45000, wait_until="domcontentloaded")
         await page.wait_for_timeout(3000)
 
-        # Trigger download on the first relevant PDF/Report link
-        pdf_link_elem = await page.query_selector("a[href*='.pdf']")
-        if pdf_link_elem:
-            async with page.expect_download(timeout=45000) as download_info:
-                await pdf_link_elem.click()
-            download = await download_info.value
+        # Directly grab the href without relying on Playwright UI clicks
+        pdf_urls = await page.eval_on_selector_all(
+            "a[href*='.pdf']",
+            "elements => elements.map(e => e.href)"
+        )
+
+        target_pdf_url = pdf_urls[0] if pdf_urls else None
+
+        if target_pdf_url:
             pdf_path = os.path.join(PDF_DIR, "ppac_latest.pdf")
-            await download.save_as(pdf_path)
+            response = await page.request.get(target_pdf_url)
+            pdf_bytes = await response.body()
+
+            with open(pdf_path, "wb") as f:
+                f.write(pdf_bytes)
             res["downloaded_pdf"] = pdf_path
 
-            # Forensic PDF Parse
-            if pdfplumber and os.path.exists(pdf_path):
-                with pdfplumber.open(pdf_path) as pdf:
+            if pdfplumber:
+                with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
                     for p in pdf.pages[:8]:
                         txt = p.extract_text() or ""
                         for line in txt.split("\n"):
                             l_lower = line.lower()
                             raw_nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', line) if clean_num(n)]
-                            # Exclude calendar years
                             valid_nums = [n for n in raw_nums if n not in [2023.0, 2024.0, 2025.0, 2026.0, 2027.0]]
 
                             if ("hsd" in l_lower or "diesel" in l_lower) and not res["hsd_diesel_tmt"]:
@@ -167,16 +178,18 @@ async def scrape_railways(page):
         "url": None
     }
     try:
-        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=45000, wait_until="domcontentloaded")
         await page.wait_for_timeout(3000)
 
-        link_elem = await page.query_selector("a:has-text('Freight'), a:has-text('freight'), a:has-text('Loading')")
-        if link_elem:
-            href = await link_elem.get_attribute("href")
-            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
-            await link_elem.click()
-            await page.wait_for_load_state("domcontentloaded")
-            await page.wait_for_timeout(2000)
+        links = await page.eval_on_selector_all(
+            "a", 
+            "elements => elements.map(e => ({ text: e.innerText, href: e.href })).filter(e => /railway/i.test(e.text) && /freight|loading|revenue/i.test(e.text))"
+        )
+
+        if links:
+            target_url = links[0]["href"]
+            res["url"] = target_url
+            await page.goto(target_url, timeout=30000, wait_until="domcontentloaded")
             txt = await page.inner_text("body")
 
             m_tot = re.search(r'(?:freight loading of|originating freight of|loading of)\s*([\d\.,]+)\s*MT', txt, re.IGNORECASE)
@@ -220,16 +233,18 @@ async def scrape_ipa(page):
         "url": None
     }
     try:
-        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=60000, wait_until="domcontentloaded")
-        await page.wait_for_timeout(2000)
+        await page.goto("https://pib.gov.in/AllRelease.aspx", timeout=45000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(3000)
 
-        link_elem = await page.query_selector("a:has-text('Major Ports'), a:has-text('major ports'), a:has-text('Traffic Handled')")
-        if link_elem:
-            href = await link_elem.get_attribute("href")
-            res["url"] = "https://pib.gov.in/" + href.lstrip("/")
-            await link_elem.click()
-            await page.wait_for_load_state("domcontentloaded")
-            await page.wait_for_timeout(2000)
+        links = await page.eval_on_selector_all(
+            "a", 
+            "elements => elements.map(e => ({ text: e.innerText, href: e.href })).filter(e => /major ports|ports/i.test(e.text) && /traffic|cargo|handled/i.test(e.text))"
+        )
+
+        if links:
+            target_url = links[0]["href"]
+            res["url"] = target_url
+            await page.goto(target_url, timeout=30000, wait_until="domcontentloaded")
             txt = await page.inner_text("body")
 
             m_cargo = re.search(r'([\d\.,]+)\s*(?:Million\s*Tonnes|MT).*?(?:cargo|traffic)', txt, re.IGNORECASE)
@@ -247,7 +262,7 @@ async def scrape_ipa(page):
     return res
 
 # ============================================================
-# 5. FASTAG — HIGHWAY TOLL METRICS (BROWSER RENDERED DOM)
+# 5. FASTAG — HIGHWAY TOLL METRICS (CONTAINER & TEXT SCAN)
 # ============================================================
 
 async def scrape_fastag(page):
@@ -259,29 +274,24 @@ async def scrape_fastag(page):
         "freight_intensity_ratio": None
     }
     try:
-        await page.goto("https://www.npci.org.in/what-we-do/netc-fastag/product-statistics", timeout=60000, wait_until="networkidle")
+        # Load NPCI page without waiting for networkidle (which causes timeouts)
+        await page.goto("https://www.npci.org.in/what-we-do/netc-fastag/product-statistics", timeout=45000, wait_until="domcontentloaded")
         await page.wait_for_timeout(4000)
 
-        # Wait for table or dynamic statistical container to hydrate
-        await page.wait_for_selector("table tr", timeout=15000)
+        # Direct text scrape of the whole body
+        body_text = await page.inner_text("body")
 
-        # Read inner text of hydrated rows
-        rows = await page.query_selector_all("table tr")
-        for row in rows:
-            text = await row.inner_text()
-            nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', text) if clean_num(n)]
-            
-            # Volume: 15-55 Cr, Value: 3000-10000 Cr
-            v_vol = next((n for n in nums if 15.0 <= n <= 55.0), None)
-            v_val = next((n for n in nums if 3000.0 <= n <= 10000.0), None)
+        # Scan for numbers near Crores / Vol / Val
+        all_nums = [clean_num(n) for n in re.findall(r'[\d,]+\.?\d*', body_text) if clean_num(n)]
+        
+        # Volume: typically 15-55 Cr, Value: 3000-10000 Cr
+        v_vol = next((n for n in all_nums if 15.0 <= n <= 55.0), None)
+        v_val = next((n for n in all_nums if 3000.0 <= n <= 10000.0), None)
 
-            if v_vol and not res["toll_volume_crores"]:
-                res["toll_volume_crores"] = v_vol
-            if v_val and not res["toll_value_inr_crores"]:
-                res["toll_value_inr_crores"] = v_val
-
-            if res["toll_volume_crores"] and res["toll_value_inr_crores"]:
-                break
+        if v_vol:
+            res["toll_volume_crores"] = v_vol
+        if v_val:
+            res["toll_value_inr_crores"] = v_val
 
     except Exception as e:
         print(f"   ⚠️ FASTag Playwright Error: {e}")
@@ -305,7 +315,6 @@ async def main():
     print("=" * 80)
 
     async with async_playwright() as p:
-        # Launch Chromium with anti-detection flags
         browser = await p.chromium.launch(
             headless=True,
             args=[
@@ -316,8 +325,7 @@ async def main():
         )
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            viewport={"width": 1920, "height": 1080},
-            accept_downloads=True
+            viewport={"width": 1920, "height": 1080}
         )
         page = await context.new_page()
 
@@ -334,7 +342,6 @@ async def main():
 
         await browser.close()
 
-    # Save to history file
     history = []
     if os.path.exists(OUTPUT_FILE):
         try:
