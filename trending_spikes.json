@@ -1,156 +1,131 @@
 {
   "status": "success",
-  "timestamp": "2026-10-09T19:41:30.260739",
+  "timestamp": "2026-10-09T19:50:45.481121",
   "total_hot_spikes": 25,
   "data": [
     {
       "keyword": "तनुश्री दत्ता",
       "search_volume_spike": "20K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "reporting live movie",
       "search_volume_spike": "10K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "awarapan 2",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "नवजोत सिंह सिद्धू",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "amitabh bachchan tribute nana patekar",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "animals",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ককরোচ জনতা পার্টি",
-      "search_volume_spike": "2K+",
-      "category": "Business & Economy",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "amitabh bachchan tribute nana patekar",
-      "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "radio",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "matchbox the movie",
+      "keyword": "ককরোচ জনতা পার্টি",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "comrade kalyan",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "matchbox the movie",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "tej pratap yadav",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "கீர்த்தி சுரேஷ்",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "the social reckoning",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "least eligible bachelor",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "hotstar",
       "search_volume_spike": "50K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "jiohotstar",
       "search_volume_spike": "20K+",
-      "category": "Business & Economy",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "kuldeep yadav",
-      "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "mithun chakraborty",
       "search_volume_spike": "500+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "आवारापन - 2",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "அர்ஜுன்",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "abp ananda live",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "ajay devgn movie drishyam 3",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "sun nxt",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "tamil news",
       "search_volume_spike": "5K+",
-      "category": "Business & Economy",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "തനുശ്രീ ദത്ത",
       "search_volume_spike": "2K+",
-      "category": "Business & Economy",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "அரவிந்த்சாமி",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
