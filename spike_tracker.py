@@ -1,70 +1,65 @@
 import json
 import re
+import xml.etree.ElementTree as ET
 from datetime import datetime
 import requests
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept-Language": "en-IN,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 }
 
-def get_realtime_trending_searches():
-    """
-    Google Trends ke HTML landing page se embedded hydration state 
-    extract karta hai jahan pure real-time trending queries stored hoti hain.
-    """
-    # India Realtime Trends URL
-    url = "https://trends.google.com/trending?geo=IN&hl=en-IN"
+def extract_realtime_spikes():
+    # Google Trends official real-time daily feed for India
+    url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=IN"
     
     try:
-        session = requests.Session()
-        res = session.get(url, headers=HEADERS, timeout=15)
+        response = requests.get(url, headers=HEADERS, timeout=15)
+        if response.status_code != 200 or not response.content:
+            return {"status": "error", "message": f"HTTP Error {response.status_code}"}
+
+        # Parse XML
+        root = ET.fromstring(response.content)
         
-        if res.status_code != 200 or not res.text:
-            return {"status": "error", "message": f"HTTP status {res.status_code}"}
+        # Namespace Google Trends tags ke liye
+        ns = {'ht': 'https://trends.google.com/trends/trendingsearches/daily'}
         
-        # Google trends ke UI page par data ek JavaScript window variable ya tag mein hota hai
-        # Regex se pure search keywords extract karna:
-        matches = re.findall(r'"query":\s*"([^"]+)"', res.text)
-        traffic_matches = re.findall(r'"formattedTraffic":\s*"([^"]+)"', res.text)
-        
-        if not matches:
-            # Alternate pattern for newer Google Trends frontend layout
-            matches = re.findall(r'\["([A-Za-z0-9\s\.\-]{3,40})",\s*\[\],', res.text)
-        
-        # Unique keywords preserve order
-        seen = set()
-        unique_spikes = []
-        for kw in matches:
-            kw_clean = kw.strip()
-            # Generic UI words filter out
-            if kw_clean.lower() not in seen and len(kw_clean) > 2 and not kw_clean.startswith("http"):
-                seen.add(kw_clean.lower())
-                unique_spikes.append(kw_clean)
-                
-        # Business/Finance intent matching dynamically via category context
-        results = []
-        for idx, keyword in enumerate(unique_spikes[:20]):
-            traffic = traffic_matches[idx] if idx < len(traffic_matches) else "Volume Spike"
-            results.append({
-                "trending_search_query": keyword,
-                "surge_volume": traffic,
-                "source": "Google Real-Time Search Trends"
-            })
+        spikes = []
+        for item in root.findall('.//item'):
+            title_elem = item.find('title')
+            traffic_elem = item.find('ht:approx_traffic', ns)
+            pub_date_elem = item.find('pubDate')
             
+            # Related queries aur entities jo breakout hui hain
+            related_queries = []
+            for q in item.findall('ht:news_item/ht:news_item_title', ns):
+                if q.text:
+                    related_queries.append(re.sub(r'<.*?>', '', q.text).strip())
+            
+            if title_elem is not None and title_elem.text:
+                keyword = title_elem.text.strip()
+                traffic = traffic_elem.text.strip() if traffic_elem is not None and traffic_elem.text else "Spike"
+                pub_date = pub_date_elem.text.strip() if pub_date_elem is not None else ""
+                
+                spikes.append({
+                    "keyword": keyword,
+                    "search_volume_spike": traffic,
+                    "surge_time": pub_date,
+                    "breakout_context": related_queries[:2]
+                })
+
         return {
             "status": "success",
             "timestamp": datetime.now().isoformat(),
-            "total_spikes": len(results),
-            "data": results
+            "total_spikes": len(spikes),
+            "data": spikes
         }
-        
+
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 if __name__ == "__main__":
-    result = get_realtime_trending_searches()
+    result = extract_realtime_spikes()
     
     output_json = json.dumps(result, indent=2, ensure_ascii=False)
     print(output_json)
