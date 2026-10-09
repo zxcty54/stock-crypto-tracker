@@ -1,4 +1,6 @@
 {
-  "status": "error",
-  "message": "Network/Parse Error: Expecting value: line 1 column 1 (char 0)"
+  "status": "success",
+  "timestamp": "2026-10-09T19:22:49.542715",
+  "total_spikes": 0,
+  "data": []
 }
