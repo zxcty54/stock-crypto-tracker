@@ -1,0 +1,33 @@
+[
+  {
+    "timestamp": "2026-10-09 16:24:19 IST",
+    "eight_core_industries": {
+      "overall_growth_pct": null,
+      "cement_production_mt": null,
+      "cement_growth_pct": null,
+      "steel_production_mt": null,
+      "steel_growth_pct": null,
+      "coal_production_mt": null
+    },
+    "wholesale_price_index": {
+      "headline_inflation_pct": null,
+      "all_commodities_index": null,
+      "primary_articles_inflation_pct": null,
+      "fuel_power_inflation_pct": null,
+      "manufactured_products_inflation_pct": null
+    },
+    "ports_maritime_traffic": {
+      "total_traffic_mt": null,
+      "container_teus": null,
+      "coking_coal_mt": null
+    },
+    "road_freight_fastag": {
+      "year": "2026",
+      "month": "October-2026",
+      "volume_million": 2001.47,
+      "volume_crore": 200.15,
+      "amount_inr_crore": 250.18,
+      "ticket_size_inr": 1.25
+    }
+  }
+]

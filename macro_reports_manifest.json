@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-09 16:13:42 IST",
+  "timestamp": "2026-10-09 16:24:19 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from September 2026",
@@ -8,9 +8,7 @@
       "extracted_metrics": {
         "total_traffic_mt": null,
         "container_teus": null,
-        "container_tonnes_mt": null,
-        "coking_coal_mt": null,
-        "thermal_coal_mt": null
+        "coking_coal_mt": null
       }
     },
     "dpiit_eight_core": {
@@ -20,11 +18,10 @@
       "extracted_metrics": {
         "overall_growth_pct": null,
         "cement_production_mt": null,
-        "cement_growth_pct": 5.0,
+        "cement_growth_pct": null,
         "steel_production_mt": null,
-        "steel_growth_pct": 5.0,
-        "coal_production_mt": null,
-        "electricity_generation_b_kwh": null
+        "steel_growth_pct": null,
+        "coal_production_mt": null
       }
     },
     "dpiit_wpi": {
