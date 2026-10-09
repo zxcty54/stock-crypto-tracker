@@ -8,7 +8,7 @@ from google.genai import types
 RAW_DUMP = "macro_raw_extracted_dump.json"
 OUT_JSON = "macro_executive_ai_summary.json"
 OUT_MD = "macro_executive_ai_summary.md"
-MODEL_ID = "gemini-2.5-flash-lite"
+MODEL_ID = "gemini-3.5-flash-lite"
 BREAK_SEC = 15
 
 IST = timezone(timedelta(hours=5, minutes=30))
