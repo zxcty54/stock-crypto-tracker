@@ -195,6 +195,7 @@ async def download_ppac_icr(page):
 
         if pdf_url:
             res["pdf_url"] = pdf_url
+            print(f"   🌐 Dynamic PPAC Link: {res['pdf_url']}")
             path = await download_binary_file(page, res["pdf_url"], "PPAC_Petroleum_Consumption_Latest.pdf")
             res["local_path"] = path
         else:
@@ -206,13 +207,13 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Dynamic Form Dispatch - Anti-Cloning)
+# 5. NETC FASTAG (Targeted Exact DOM Selectors for FY)
 # ============================================================
 
 async def scrape_netc_fastag(browser):
-    print("\n🛣️ [5/5] Scraping NETC FASTag Monthly Data (3-Year History)...")
+    print("\n🛣️ [5/5] Scraping NETC FASTag Monthly Data (3-Year FY History)...")
     target_url = "https://www.npci.org.in/product/netc/product-statistics"
-    years_to_scrape = ["2026", "2025", "2024"]
+    fy_list = ["2026-27", "2025-26", "2024-25"]
     all_data = []
 
     res = {
@@ -236,51 +237,82 @@ async def scrape_netc_fastag(browser):
 
         await page.wait_for_timeout(3000)
 
+        # 1. Product tab select karein
         try:
-            monthly_tab = page.locator("text='Monthly Statistics'").first
-            if await monthly_tab.is_visible():
-                await monthly_tab.click()
-                await page.wait_for_timeout(2000)
-        except Exception:
-            pass
+            tab_btn = page.locator("#tab-0, [role='tab']:has-text('NETC FASTag Statistics')").first
+            if await tab_btn.is_visible():
+                await tab_btn.click()
+                await page.wait_for_timeout(1500)
+        except Exception as e:
+            print(f"   ⚠️ Tab click notice: {e}")
 
-        for year in years_to_scrape:
-            print(f"   📅 Fetching Year: {year}...")
+        # 2. Iterate through Financial Years
+        for fy in fy_list:
+            print(f"   📅 Selecting Financial Year: {fy}...")
 
-            # Capture previous row state to detect DOM refresh
             old_first_row = ""
             first_row_locator = page.locator("table tbody tr").first
             if await first_row_locator.count() > 0:
                 old_first_row = (await first_row_locator.inner_text()).strip()
 
-            year_select = None
-            selects = await page.query_selector_all("select")
-            for sel in selects:
-                options = await sel.inner_text()
-                if "2024" in options or "2025" in options or "2026" in options:
-                    year_select = sel
-                    break
+            year_clicked = False
 
-            if year_select:
-                await year_select.select_option(label=year)
-                # Dispatch DOM change & input events so AJAX handlers trigger
-                await year_select.evaluate("el => el.dispatchEvent(new Event('change', { bubbles: true }))")
-                await year_select.evaluate("el => el.dispatchEvent(new Event('input', { bubbles: true }))")
-            else:
-                btn = page.locator(f"button:has-text('{year}'), li:has-text('{year}'), div:has-text('{year}')").first
-                if await btn.is_visible():
-                    await btn.click()
+            # Custom dropdown open karein
+            dropdown_triggers = [
+                page.locator("span[data-has-tooltip='true']").first,
+                page.locator("span[data-tooltip]").first,
+                page.locator("div[class*='select'], div[class*='dropdown']").first,
+                page.locator("text='Select Year'").first
+            ]
 
-            # Poll until table DOM updates or timeout
+            for trigger in dropdown_triggers:
+                try:
+                    if await trigger.is_visible():
+                        await trigger.click()
+                        await page.wait_for_timeout(800)
+                        break
+                except Exception:
+                    continue
+
+            # Target specific FY option
+            option_locators = [
+                page.locator(f"span[data-tooltip='{fy}']").first,
+                page.locator(f"[role='option']:has-text('{fy}')").first,
+                page.locator(f"li:has-text('{fy}')").first,
+                page.locator(f"span:has-text('{fy}')").last,
+                page.locator(f"div:has-text('{fy}')").last
+            ]
+
+            for opt in option_locators:
+                try:
+                    if await opt.is_visible():
+                        await opt.click()
+                        year_clicked = True
+                        break
+                except Exception:
+                    continue
+
+            # Fallback agar standard <select> ho
+            if not year_clicked:
+                for sel in await page.query_selector_all("select"):
+                    txt = await sel.inner_text()
+                    if fy in txt:
+                        await sel.select_option(label=fy)
+                        await sel.evaluate("el => el.dispatchEvent(new Event('change', { bubbles: true }))")
+                        await sel.evaluate("el => el.dispatchEvent(new Event('input', { bubbles: true }))")
+                        year_clicked = True
+                        break
+
+            # Table refresh hone ka wait karein
             for _ in range(8):
                 await page.wait_for_timeout(1000)
                 current_first_row = page.locator("table tbody tr").first
                 if await current_first_row.count() > 0:
                     current_text = (await current_first_row.inner_text()).strip()
-                    if current_text and (year in current_text or current_text != old_first_row):
+                    if current_text and current_text != old_first_row:
                         break
 
-            # Parse Table Data
+            # 3. Read table rows
             rows = await page.query_selector_all("table tbody tr")
             if not rows:
                 rows = await page.query_selector_all("table tr")
@@ -295,16 +327,16 @@ async def scrape_netc_fastag(browser):
                     if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no", ""]:
                         continue
 
-                    clean_month = month_name.split("-")[0].strip()
                     nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
 
                     if len(nums) >= 2:
                         vol_mn = nums[-2]
                         val_cr = nums[-1]
 
+                        clean_month = month_name.split("-")[0].strip()
                         record = {
-                            "year": year,
-                            "month": f"{clean_month}-{year}",
+                            "financial_year": fy,
+                            "month": f"{clean_month}-{fy}",
                             "volume_million": vol_mn,
                             "volume_crore": round(vol_mn / 10.0, 2) if vol_mn else None,
                             "amount_inr_crore": val_cr,
@@ -313,16 +345,16 @@ async def scrape_netc_fastag(browser):
                         all_data.append(record)
                         count += 1
 
-            print(f"      ✅ {count} records extracted for {year}")
+            print(f"      ✅ Extracted {count} records for FY {fy}")
 
         if all_data:
             df = pd.DataFrame(all_data)
-            df = df.drop_duplicates(subset=["year", "month"])
+            df = df.drop_duplicates(subset=["financial_year", "month"])
             df.to_csv(FASTAG_CSV_FILE, index=False)
             res["csv_path"] = FASTAG_CSV_FILE
             res["total_records"] = len(df)
             res["latest_monthly_metrics"] = df.iloc[0].to_dict()
-            print(f"   🎉 Saved successfully to '{FASTAG_CSV_FILE}'!")
+            print(f"   🎉 Clean FY dataset saved to '{FASTAG_CSV_FILE}' ({len(df)} total rows)!")
         else:
             print("   ⚠️ No FASTag table records were parsed.")
 
@@ -361,7 +393,7 @@ async def main():
 
         await download_context.close()
 
-        # FASTag runs in an isolated session
+        # FASTag isolated session
         fastag_res = await scrape_netc_fastag(browser)
 
         await browser.close()
