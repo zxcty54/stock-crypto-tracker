@@ -1,136 +1,156 @@
 {
   "status": "success",
-  "timestamp": "2026-10-09T19:35:29.416282",
-  "total_hot_spikes": 26,
+  "timestamp": "2026-10-09T19:38:55.297840",
+  "total_hot_spikes": 25,
   "data": [
-    {
-      "keyword": "search",
-      "search_volume_spike": "Volume Surge",
-      "source": "Google Real-Time Search Trends"
-    },
     {
       "keyword": "bangladesh vs afghanistan",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "sri lanka vs pakistan",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "al-nassr vs diriyah",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "mayank yadav",
       "search_volume_spike": "5L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "election results tamil nadu",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "nic maddinson",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "bangladesh vs australia",
       "search_volume_spike": "1L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "कॉकरोच जनता पार्टी",
       "search_volume_spike": "1L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "gta6 leaks",
       "search_volume_spike": "20K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "sl vs pak",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "simon harmer",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "राज्यसभा चुनाव",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "navi pillay",
       "search_volume_spike": "20K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "delhi news",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "wiaan mulder",
       "search_volume_spike": "20K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "तनुश्री दत्ता",
       "search_volume_spike": "20K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "tn election results",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "eci",
       "search_volume_spike": "50K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "indian cricket team bhuvneshwar kumar",
       "search_volume_spike": "10K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "granit xhaka",
       "search_volume_spike": "10K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "oppo coloros 17 launch date",
       "search_volume_spike": "10K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "kamil pooran",
       "search_volume_spike": "2L+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "fortuner leader edition",
       "search_volume_spike": "5K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "inda vs ausa 2nd unofficial odi",
       "search_volume_spike": "10K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "reporting live movie",
       "search_volume_spike": "10K+",
+      "category": "Business & Economy (Google Native)",
       "source": "Google Real-Time Search Trends"
     }
   ]
