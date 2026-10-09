@@ -1,11 +1,11 @@
 import os
 import io
-import re
 import json
+import re
+import asyncio
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin
-from bs4 import BeautifulSoup
-from curl_cffi import requests
+from playwright.async_api import async_playwright
 
 try:
     import pdfplumber
@@ -18,253 +18,237 @@ METADATA_FILE = "macro_reports_manifest.json"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-COMMON_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9"
-}
-
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def download_and_extract_summary(session, url, filename_prefix):
-    if not url:
-        return None, ""
+def extract_pdf_preview(filepath):
+    if not pdfplumber or not os.path.exists(filepath):
+        return ""
     try:
-        resp = session.get(url, headers=COMMON_HEADERS, timeout=40, verify=False)
-        if resp.status_code == 200 and (resp.content.startswith(b'%PDF') or ".pdf" in url.lower()):
-            filepath = os.path.join(OUTPUT_DIR, f"{filename_prefix}.pdf")
-            with open(filepath, "wb") as f:
-                f.write(resp.content)
-            
-            preview_text = ""
-            if pdfplumber:
-                try:
-                    with pdfplumber.open(io.BytesIO(resp.content)) as pdf:
-                        first_pages = [p.extract_text() or "" for p in pdf.pages[:2]]
-                        preview_text = " ".join(" ".join(first_pages).split())[:1200]
-                except Exception:
-                    pass
-            
-            print(f"   💾 Downloaded: {filepath} ({len(resp.content) // 1024} KB)")
-            return filepath, preview_text
-        else:
-            print(f"   ⚠️ PDF download failed for {url} (HTTP {resp.status_code})")
-    except Exception as e:
-        print(f"   ❌ Download error: {e}")
-    return None, ""
-
-# ============================================================
-# 1. IPA — Indian Ports Association (Traffic Month PDF)
-# ============================================================
-
-def scrape_ipa_latest(session):
-    print("\n⚓ [1/4] Scraping IPA Ports Monthly Traffic Report...")
-    base_url = "https://ipa.org.in"
-    target_urls = [
-        "https://ipa.org.in/reports-statistics",
-        "https://ipa.org.in/reports-statistics/",
-        "http://ipa.nic.in/index1.cphp?lsid=16&lev=2&lid=34&lang=1"
-    ]
-    
-    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
-    
-    for t_url in target_urls:
-        try:
-            resp = session.get(t_url, headers=COMMON_HEADERS, timeout=25, verify=False)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                
-                # Check for PDF links in anchor tags or buttons
-                for a in soup.find_all(["a", "link"], href=True):
-                    href = a['href'].strip()
-                    text = " ".join(a.get_text().split()).lower()
-                    h_lower = href.lower()
-                    
-                    if ".pdf" in h_lower:
-                        # Match traffic, cargo, or monthly keyword
-                        if any(k in text or k in h_lower for k in ["traffic", "cargo", "performance", "major-port"]):
-                            result["title"] = a.get_text().strip() or os.path.basename(href)
-                            result["pdf_url"] = urljoin(base_url, href)
-                            break
-            if result["pdf_url"]:
-                break
-        except Exception:
-            continue
-
-    if result["pdf_url"]:
-        print(f"   🔗 Found: {result['title']}")
-        print(f"   🌐 Link : {result['pdf_url']}")
-        path, prev = download_and_extract_summary(session, result["pdf_url"], "IPA_Traffic_Latest")
-        result["local_path"] = path
-        result["preview_text"] = prev
-    else:
-        print("   ❌ IPA: No matching Traffic Report link found.")
-
-    return result
-
-# ============================================================
-# 2. DPIIT — Eight Core Industries Press Note PDF
-# ============================================================
-
-def scrape_eight_core_latest(session):
-    print("\n🏭 [2/4] Scraping DPIIT Eight Core Industries PDF...")
-    base_url = "https://eaindustry.nic.in"
-    
-    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
-    
-    # Check directory listing and direct official PDF targets
-    candidate_urls = [
-        "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf",
-        "https://eaindustry.nic.in/eight_core_infra/"
-    ]
-    
-    # 1. First check if direct Eight_Core_Infra.pdf exists and is active
-    try:
-        head_resp = session.head(candidate_urls[0], headers=COMMON_HEADERS, timeout=15, verify=False)
-        if head_resp.status_code == 200:
-            result["title"] = "Index of Eight Core Industries (Monthly Press Note)"
-            result["pdf_url"] = candidate_urls[0]
+        with pdfplumber.open(filepath) as pdf:
+            pages = [p.extract_text() or "" for p in pdf.pages[:2]]
+            return " ".join(" ".join(pages).split())[:1200]
     except Exception:
-        pass
-
-    # 2. If not, scrape the eight_core_infra directory
-    if not result["pdf_url"]:
-        try:
-            resp = session.get(candidate_urls[1], headers=COMMON_HEADERS, timeout=25, verify=False)
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    href = a['href'].strip()
-                    # Do NOT pick press_release_YYYYMM.pdf (which is WPI)
-                    if href.lower().endswith(".pdf") and not href.lower().startswith("press_release_"):
-                        result["title"] = a.get_text().strip() or "Eight Core Industries Press Note"
-                        result["pdf_url"] = urljoin(candidate_urls[1], href)
-                        break
-        except Exception:
-            pass
-
-    if result["pdf_url"]:
-        print(f"   🔗 Found: {result['title']}")
-        print(f"   🌐 Link : {result['pdf_url']}")
-        path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_Eight_Core_Latest")
-        result["local_path"] = path
-        result["preview_text"] = prev
-    else:
-        print("   ❌ DPIIT Eight Core: PDF link not found.")
-
-    return result
+        return ""
 
 # ============================================================
-# 3. DPIIT — WPI Press Release PDF (Verified Working)
+# 1. IPA (Indian Ports Association)
 # ============================================================
 
-def scrape_wpi_latest(session):
-    print("\n📈 [3/4] Scraping DPIIT WPI (Wholesale Price Index) PDF...")
-    base_url = "https://eaindustry.nic.in"
-    target_url = "https://eaindustry.nic.in/"
-    
+async def scrape_ipa(page):
+    print("\n⚓ [1/4] Scraping IPA Ports Monthly Traffic Report...")
+    target_url = "https://ipa.org.in/reports-statistics"
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
-    
+
     try:
-        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=25, verify=False)
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for a in soup.find_all("a", href=True):
-                href = a['href'].strip()
-                if "press_release_" in href.lower() and href.lower().endswith(".pdf"):
-                    result["pdf_url"] = urljoin(base_url, href)
-                    result["title"] = a.get_text().strip() or os.path.basename(href)
-                    break
+        await page.goto(target_url, wait_until="networkidle", timeout=60000)
+        await page.wait_for_timeout(3000)
+
+        # Saare anchor tags inspect karte hain jinka href .pdf ho ya text me traffic/month ho
+        anchors = await page.query_selector_all("a")
+        for a in anchors:
+            href = await a.get_attribute("href") or ""
+            text = (await a.inner_text()).strip()
+            combined = f"{text.lower()} {href.lower()}"
+
+            if ".pdf" in href.lower() and ("traffic" in combined or "month" in combined or "cargo" in combined):
+                result["title"] = text or "IPA Monthly Traffic Report"
+                result["pdf_url"] = urljoin(target_url, href)
+                break
 
         if result["pdf_url"]:
             print(f"   🔗 Found: {result['title']}")
             print(f"   🌐 Link : {result['pdf_url']}")
-            path, prev = download_and_extract_summary(session, result["pdf_url"], "DPIIT_WPI_Latest")
-            result["local_path"] = path
-            result["preview_text"] = prev
+            
+            # Browser session se direct download
+            filepath = os.path.join(OUTPUT_DIR, "IPA_Traffic_Latest.pdf")
+            response = await page.request.get(result["pdf_url"], timeout=45000)
+            if response.status == 200:
+                with open(filepath, "wb") as f:
+                    f.write(await response.body())
+                result["local_path"] = filepath
+                result["preview_text"] = extract_pdf_preview(filepath)
+                print(f"   💾 Downloaded: {filepath}")
+        else:
+            print("   ❌ IPA: Link not found in DOM.")
     except Exception as e:
-        print(f"   ❌ WPI Scraper Error: {e}")
-        
+        print(f"   ❌ IPA Error: {e}")
+
+    return result
+
+# ============================================================
+# 2. DPIIT — Eight Core Industries Press Note
+# ============================================================
+
+async def scrape_eight_core(page):
+    print("\n🏭 [2/4] Scraping DPIIT Eight Core Industries PDF...")
+    target_url = "https://eaindustry.nic.in/eight_core_infra/"
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
+
+    try:
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(2000)
+
+        # Links collect karein (WPI press_release_ se conflict na ho)
+        anchors = await page.query_selector_all("a")
+        candidate_url = None
+        candidate_title = None
+
+        for a in anchors:
+            href = await a.get_attribute("href") or ""
+            text = (await a.inner_text()).strip()
+
+            if href.lower().endswith(".pdf") and not href.lower().startswith("press_release_"):
+                candidate_url = urljoin(target_url, href)
+                candidate_title = text or "Eight Core Industries Press Note"
+                break
+
+        # Fallback to direct static PDF if directory has no raw anchors
+        if not candidate_url:
+            candidate_url = "https://eaindustry.nic.in/pdf_files/Eight_Core_Infra.pdf"
+            candidate_title = "Index of Eight Core Industries"
+
+        result["pdf_url"] = candidate_url
+        result["title"] = candidate_title
+
+        print(f"   🔗 Found: {result['title']}")
+        print(f"   🌐 Link : {result['pdf_url']}")
+
+        filepath = os.path.join(OUTPUT_DIR, "DPIIT_Eight_Core_Latest.pdf")
+        response = await page.request.get(result["pdf_url"], timeout=45000)
+        if response.status == 200:
+            with open(filepath, "wb") as f:
+                f.write(await response.body())
+            result["local_path"] = filepath
+            result["preview_text"] = extract_pdf_preview(filepath)
+            print(f"   💾 Downloaded: {filepath}")
+    except Exception as e:
+        print(f"   ❌ Eight Core Error: {e}")
+
+    return result
+
+# ============================================================
+# 3. DPIIT — WPI Press Release PDF
+# ============================================================
+
+async def scrape_wpi(page):
+    print("\n📈 [3/4] Scraping DPIIT WPI (Wholesale Price Index) PDF...")
+    target_url = "https://eaindustry.nic.in/"
+    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
+
+    try:
+        await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(2000)
+
+        anchors = await page.query_selector_all("a")
+        for a in anchors:
+            href = await a.get_attribute("href") or ""
+            text = (await a.inner_text()).strip()
+
+            if "press_release_" in href.lower() and href.lower().endswith(".pdf"):
+                result["title"] = text or "WPI Press Release"
+                result["pdf_url"] = urljoin(target_url, href)
+                break
+
+        if result["pdf_url"]:
+            print(f"   🔗 Found: {result['title']}")
+            print(f"   🌐 Link : {result['pdf_url']}")
+
+            filepath = os.path.join(OUTPUT_DIR, "DPIIT_WPI_Latest.pdf")
+            response = await page.request.get(result["pdf_url"], timeout=45000)
+            if response.status == 200:
+                with open(filepath, "wb") as f:
+                    f.write(await response.body())
+                result["local_path"] = filepath
+                result["preview_text"] = extract_pdf_preview(filepath)
+                print(f"   💾 Downloaded: {filepath}")
+    except Exception as e:
+        print(f"   ❌ WPI Error: {e}")
+
     return result
 
 # ============================================================
 # 4. MoSPI — Index of Industrial Production (IIP) Release
 # ============================================================
 
-def scrape_mospi_iip_latest(session):
+async def scrape_mospi_iip(page):
     print("\n🏭 [4/4] Scraping MoSPI IIP (Index of Industrial Production) PDF...")
-    base_url = "https://www.mospi.gov.in"
     target_url = "https://www.mospi.gov.in/themes/product/54-index-of-industrial-production"
-    
     result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
-    
+
     try:
-        resp = session.get(target_url, headers=COMMON_HEADERS, timeout=30, verify=False)
-        if resp.status_code == 200:
-            html = resp.text
-            
-            # Method A: Direct Regex Scan for uploaded IIP PDF paths
-            pdf_matches = re.findall(r'(?:href=[\'"])?([^\'"\s>]+latestreleasesfiles[^\'"\s>]+IIP[^\'"\s>]*\.pdf)', html, re.IGNORECASE)
-            if not pdf_matches:
-                pdf_matches = re.findall(r'(?:href=[\'"])?([^\'"\s>]+(?:uploads|sites)[^\'"\s>]*(?:IIP|industrial[-_]production)[^\'"\s>]*\.pdf)', html, re.IGNORECASE)
-            
-            if pdf_matches:
-                raw_path = pdf_matches[0]
-                result["pdf_url"] = urljoin(base_url, raw_path)
-                result["title"] = os.path.basename(raw_path)
-            else:
-                # Method B: BeautifulSoup DOM search
-                soup = BeautifulSoup(html, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    href = a['href'].strip()
-                    text = " ".join(a.get_text().split()).lower()
-                    if (".pdf" in href.lower()) and ("iip" in href.lower() or "quick estimate" in text or "industrial production" in text):
-                        result["pdf_url"] = urljoin(base_url, href)
-                        result["title"] = a.get_text().strip() or os.path.basename(href)
-                        break
+        await page.goto(target_url, wait_until="networkidle", timeout=60000)
+        await page.wait_for_timeout(3000)
+
+        # MoSPI ke rendered DOM me check karte hain
+        anchors = await page.query_selector_all("a")
+        for a in anchors:
+            href = await a.get_attribute("href") or ""
+            text = (await a.inner_text()).strip().lower()
+
+            is_iip = (
+                "iip" in href.lower()
+                or "quick estimate" in text
+                or "industrial production" in text
+                or "latestreleasesfiles" in href.lower()
+            )
+
+            if is_iip and (".pdf" in href.lower() or "latestreleasesfiles" in href.lower()):
+                result["title"] = (await a.inner_text()).strip() or "MoSPI IIP Press Release"
+                result["pdf_url"] = urljoin(target_url, href)
+                break
 
         if result["pdf_url"]:
             print(f"   🔗 Found: {result['title']}")
             print(f"   🌐 Link : {result['pdf_url']}")
-            path, prev = download_and_extract_summary(session, result["pdf_url"], "MoSPI_IIP_Latest")
-            result["local_path"] = path
-            result["preview_text"] = prev
+
+            filepath = os.path.join(OUTPUT_DIR, "MoSPI_IIP_Latest.pdf")
+            response = await page.request.get(result["pdf_url"], timeout=45000)
+            if response.status == 200:
+                with open(filepath, "wb") as f:
+                    f.write(await response.body())
+                result["local_path"] = filepath
+                result["preview_text"] = extract_pdf_preview(filepath)
+                print(f"   💾 Downloaded: {filepath}")
         else:
-            print("   ❌ MoSPI: No matching IIP PDF link found.")
+            print("   ❌ MoSPI: No matching IIP PDF link found in DOM.")
     except Exception as e:
-        print(f"   ❌ MoSPI Scraper Error: {e}")
-        
+        print(f"   ❌ MoSPI Error: {e}")
+
     return result
 
 # ============================================================
 # MASTER ORCHESTRATOR
 # ============================================================
 
-def run_macro_document_crawler():
+async def main():
     print("=" * 80)
-    print("🚀 DYNAMIC MACRO DOCUMENT SCRAPER & INGESTION PIPELINE")
+    print("🚀 PLAYWRIGHT MACRO DOCUMENT CRAWLER (HEADLESS CHROMIUM)")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
-    
-    session = requests.Session(impersonate="chrome124")
-    
-    manifest = {
-        "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-        "reports": {
-            "ipa_ports_traffic": scrape_ipa_latest(session),
-            "dpiit_eight_core": scrape_eight_core_latest(session),
-            "dpiit_wpi": scrape_wpi_latest(session),
-            "mospi_iip": scrape_mospi_iip_latest(session)
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            ignore_https_errors=True
+        )
+        page = await context.new_page()
+
+        manifest = {
+            "timestamp": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+            "reports": {
+                "ipa_ports_traffic": await scrape_ipa(page),
+                "dpiit_eight_core": await scrape_eight_core(page),
+                "dpiit_wpi": await scrape_wpi(page),
+                "mospi_iip": await scrape_mospi_iip(page)
+            }
         }
-    }
-    
+
+        await browser.close()
+
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
-        
+
     print("\n" + "=" * 80)
     print("✅ EXECUTION SUMMARY:")
     for key, val in manifest["reports"].items():
@@ -275,4 +259,4 @@ def run_macro_document_crawler():
     print("=" * 80)
 
 if __name__ == "__main__":
-    run_macro_document_crawler()
+    asyncio.run(main())
