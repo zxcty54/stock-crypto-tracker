@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-09 06:21:35 IST",
-  "worthy_count": 13,
+  "generated_at": "2026-10-09 11:45:22 IST",
+  "worthy_count": 15,
   "skipped_count": 4,
   "content_feed": [
+    {
+      "hash": "9fc0d033e071",
+      "symbol": "BEML",
+      "company_name": "BEML Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "09-Oct-2026 07:12:58",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BEML_09102026071209_intimation_nse_signed.pdf",
+      "headline": "BEML Receives Export and Maintenance Order Worth Rs. 75.58 Crores",
+      "content_worthy": true,
+      "worthiness_reason": "Material export order worth approximately Rs. 75.58 crores received by BEML.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>BEML Limited (NSE: BEML)</b>\n\n<b>BEML Receives Export and Maintenance Order Worth Rs. 75.58 Crores</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs. 75.58 crores (approx.)\n- <b>Scope:</b> Export and maintenance of HMV 12x12 & HMV 8x8\n- <b>Geography:</b> Southeast Asian region\n\n📌 <b>What happened:</b>\n↳ BEML Limited has secured an order for the export and maintenance of heavy mobility vehicles to the Southeast Asian region in the normal course of business.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BEML_09102026071209_intimation_nse_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 11:45:22 IST"
+    },
+    {
+      "hash": "40c30bd98476",
+      "symbol": "HILINFRA",
+      "company_name": "Highway Infrastructure Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "09-Oct-2026 08:59:10",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/HIGHWAY123_09102026085436_HIL_Velanchettiyur_PR_Wo_08102026.pdf",
+      "headline": "Highway Infrastructure Bags Rs. 24.46 Crore Toll Contract From NHAI",
+      "content_worthy": true,
+      "worthiness_reason": "Material order win worth Rs. 24.46 crore from NHAI for toll operations.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Highway Infrastructure Limited (NSE: HILINFRA)</b>\n\n<b>Highway Infrastructure Bags Rs. 24.46 Crore Toll Contract From NHAI</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Value:</b> Rs. 24.46 crore\n- <b>Counterparty:</b> National Highways Authority of India (NHAI)\n- <b>Project:</b> Velanchettiyur Fee Plaza, Karur-Dindigul section (NH-7), Tamil Nadu\n- <b>Scope:</b> Toll collection, upkeep, and maintenance of adjacent toilet facilities\n- <b>Execution Period:</b> 90 days\n\n📌 <b>What happened:</b>\n↳ Highway Infrastructure Limited has entered into a contract agreement with NHAI for the operation and collection of user fees at the Velanchettiyur Fee Plaza in Tamil Nadu, expanding its footprint in Southern India.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/HIGHWAY123_09102026085436_HIL_Velanchettiyur_PR_Wo_08102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-09 11:45:22 IST"
+    },
     {
       "hash": "30fa7c1e7d1d",
       "symbol": "KANORICHEM",
