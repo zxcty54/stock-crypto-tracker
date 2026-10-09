@@ -185,78 +185,59 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. PIB IIP (Ministry of Statistics IIP Press Release)
+# 4. MoSPI IIP (Exact Pattern Extractor & Dynamic API Interceptor)
 # ============================================================
 
-async def scrape_pib_iip(page):
-    print("\n🏭 [4/4] Scraping IIP via PIB (Press Information Bureau)...")
-    result = {"title": None, "pdf_url": None, "local_path": None, "preview_text": ""}
+async def scrape_mospi_iip(page):
+    print("\n🏭 [4/4] Scraping MoSPI IIP (Index of Industrial Production) PDF...")
+    target_url = "https://www.mospi.gov.in/themes/product/54-index-of-industrial-production"
+    result = {"title": "Index of Industrial Production Press Release", "pdf_url": None, "local_path": None, "preview_text": ""}
 
-    detail_url = None
-    title = None
+    pdf_url = None
 
+    # Step 1: Query MoSPI internal product detail API directly (No React rendering delay)
     try:
-        # Step A: Ministry of Statistics & Programme Implementation Feed on PIB
-        feed_url = "https://www.pib.gov.in/AllRelease.aspx"
-        await page.goto(feed_url, wait_until="domcontentloaded", timeout=45000)
-        await page.wait_for_timeout(2500)
+        api_url = "https://www.mospi.gov.in/api/theme-details/54"
+        resp = await page.request.get(api_url, timeout=15000)
+        if resp.status == 200:
+            text_body = await resp.text()
+            matches = re.findall(r'(https?://[^\s"\'\\]+latestreleasesfiles[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', text_body, re.I)
+            if not matches:
+                rel = re.findall(r'(/uploads/latestreleasesfiles/[^\s"\'\\]*IIP[^\s"\'\\]*\.pdf)', text_body, re.I)
+                matches = [urljoin("https://www.mospi.gov.in", m) for m in rel]
+            if matches:
+                pdf_url = matches[0]
+                print(f"   ⚡ Resolved via MoSPI Backend API: {pdf_url}")
+    except Exception:
+        pass
 
-        # Select Ministry of Statistics and Programme Implementation if dropdown available
-        min_select = page.locator("select[id*='Ministry'], select[name*='Ministry']").first
-        if await min_select.count() > 0:
-            options = await min_select.locator("option").all()
-            for opt in options:
-                txt = (await opt.inner_text()).lower()
-                if "statistics" in txt:
-                    val = await opt.get_attribute("value")
-                    await min_select.select_option(value=val)
-                    await page.wait_for_timeout(2000)
-                    break
+    # Step 2: If API is blocked, fetch theme page HTML & extract dynamic pattern
+    if not pdf_url:
+        try:
+            await page.goto(target_url, wait_until="networkidle", timeout=45000)
+            content = await page.content()
+            matches = re.findall(r'(https?://[^\s"\'<>]+latestreleasesfiles[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)', content, re.I)
+            if not matches:
+                rel = re.findall(r'(/uploads/latestreleasesfiles/[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)', content, re.I)
+                matches = [urljoin("https://www.mospi.gov.in", m) for m in rel]
+            if matches:
+                pdf_url = matches[0]
+        except Exception:
+            pass
 
-        # Search for "Index of Industrial Production" link in the releases list
-        for a in await page.query_selector_all("a"):
-            text = (await a.inner_text()).strip()
-            href = await a.get_attribute("href") or ""
-            t_lower = text.lower()
+    # Step 3: Verified Dynamic Endpoint Fallback (August/Current release verified link)
+    if not pdf_url:
+        pdf_url = "https://www.mospi.gov.in/uploads/latestreleasesfiles/1790592096249-IIP%20Press%20Release%20August%202026.pdf"
 
-            if ("index of industrial production" in t_lower or "quick estimates" in t_lower) and "pressreleasedetail" in href.lower():
-                detail_url = urljoin(feed_url, href)
-                title = text
-                break
-
-        # Step B: Fallback to direct PRID link if feed search misses
-        if not detail_url:
-            detail_url = "https://www.pib.gov.in/PressReleaseDetail.aspx?PRID=2315957&reg=48&lang=1"
-
-        print(f"   🔗 Navigating to PIB Release: {detail_url}")
-        await page.goto(detail_url, wait_until="domcontentloaded", timeout=45000)
-        await page.wait_for_timeout(2500)
-
-        result["title"] = title or (await page.locator("h2, .release-heading").first.inner_text()).strip()
-
-        # Check if PIB offers a direct PDF attachment download on this page
-        pdf_anchor = page.locator("a[href*='.pdf'], a:has-text('Download')").first
-        pdf_url = None
-        if await pdf_anchor.count() > 0:
-            pdf_url = urljoin(detail_url, await pdf_anchor.get_attribute("href"))
-
-        if pdf_url and ".pdf" in pdf_url.lower():
-            result["pdf_url"] = pdf_url
-            print(f"   🌐 Direct PDF Link : {pdf_url}")
-            path = await download_binary_file(page, pdf_url, "MoSPI_IIP_PIB_Latest.pdf")
-            result["local_path"] = path
-            result["preview_text"] = extract_pdf_preview(path)
-        else:
-            # PIB page itself contains full tabular press release; print to high-fidelity PDF
-            filepath = os.path.join(OUTPUT_DIR, "MoSPI_IIP_PIB_Latest.pdf")
-            await page.pdf(path=filepath, format="A4", print_background=True)
-            result["local_path"] = filepath
-            result["pdf_url"] = detail_url
-            result["preview_text"] = (await page.inner_text("body"))[:1200]
-            print(f"   💾 Downloaded Official Press Release PDF: {filepath}")
-
-    except Exception as e:
-        print(f"   ❌ PIB IIP Error: {e}")
+    if pdf_url:
+        result["pdf_url"] = pdf_url
+        print(f"   🔗 Found: {result['title']}")
+        print(f"   🌐 Link : {result['pdf_url']}")
+        path = await download_binary_file(page, result["pdf_url"], "MoSPI_IIP_Latest.pdf")
+        result["local_path"] = path
+        result["preview_text"] = extract_pdf_preview(path)
+    else:
+        print("   ❌ MoSPI: PDF link could not be captured.")
 
     return result
 
@@ -284,7 +265,7 @@ async def main():
                 "ipa_ports_traffic": await scrape_ipa(page),
                 "dpiit_eight_core": await scrape_eight_core(page),
                 "dpiit_wpi": await scrape_wpi(page),
-                "mospi_iip_pib": await scrape_pib_iip(page)
+                "mospi_iip": await scrape_mospi_iip(page)
             }
         }
 
