@@ -38,7 +38,7 @@ async def download_binary_file(page, url, filename):
             timeout=45000,
             headers={
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                "Accept": "application/pdf,*/*"
+                "Accept": "*/*"
             }
         )
         if response.status == 200:
@@ -55,7 +55,7 @@ async def download_binary_file(page, url, filename):
     return None
 
 # ============================================================
-# 1. IPA PORTS (.xlsx Report)
+# 1. IPA PORTS (Pure Dynamic .xlsx Crawl)
 # ============================================================
 
 async def scrape_ipa(page):
@@ -79,7 +79,7 @@ async def scrape_ipa(page):
                 break
 
         if detail_link:
-            print(f"   🔗 Detail Page: {detail_link}")
+            print(f"   🔗 Latest Detail Page: {detail_link}")
             await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
             await page.wait_for_timeout(2000)
 
@@ -92,22 +92,22 @@ async def scrape_ipa(page):
                     break
 
             if result["file_url"]:
-                print(f"   🌐 File Link : {result['file_url']}")
+                print(f"   🌐 Dynamic File Link: {result['file_url']}")
                 ext = ".xlsx" if ".xlsx" in result["file_url"].lower() else ".xls"
                 path = await download_binary_file(page, result["file_url"], f"IPA_Traffic_Latest{ext}")
                 result["local_path"] = path
                 result["preview_text"] = "Excel report downloaded successfully."
             else:
-                print("   ❌ IPA: Excel file link not found on detail page.")
+                print("   ❌ IPA: Dynamic file link not found on detail page.")
         else:
-            print("   ❌ IPA: Detail page link not found.")
+            print("   ❌ IPA: Latest detail page link not found.")
     except Exception as e:
         print(f"   ❌ IPA Error: {e}")
 
     return result
 
 # ============================================================
-# 2. DPIIT EIGHT CORE (Homepage Table Wrapper -> Press_Release_ICI_*.pdf)
+# 2. DPIIT EIGHT CORE (Pure Dynamic PDF Crawl)
 # ============================================================
 
 async def scrape_eight_core(page):
@@ -138,7 +138,7 @@ async def scrape_eight_core(page):
         if pdf_url:
             result["pdf_url"] = urljoin(target_url, pdf_url)
             print(f"   🔗 Found: {result['title']}")
-            print(f"   🌐 Link : {result['pdf_url']}")
+            print(f"   🌐 Dynamic Link: {result['pdf_url']}")
             path = await download_binary_file(page, result["pdf_url"], "DPIIT_Eight_Core_Latest.pdf")
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
@@ -150,7 +150,7 @@ async def scrape_eight_core(page):
     return result
 
 # ============================================================
-# 3. DPIIT WPI (Wholesale Price Index Press Release)
+# 3. DPIIT WPI (Pure Dynamic PDF Crawl)
 # ============================================================
 
 async def scrape_wpi(page):
@@ -173,7 +173,7 @@ async def scrape_wpi(page):
 
         if result["pdf_url"]:
             print(f"   🔗 Found: {result['title']}")
-            print(f"   🌐 Link : {result['pdf_url']}")
+            print(f"   🌐 Dynamic Link: {result['pdf_url']}")
             path = await download_binary_file(page, result["pdf_url"], "DPIIT_WPI_Latest.pdf")
             result["local_path"] = path
             result["preview_text"] = extract_pdf_preview(path)
@@ -185,7 +185,7 @@ async def scrape_wpi(page):
     return result
 
 # ============================================================
-# 4. MoSPI IIP (Exact Pattern Extractor & Dynamic API Interceptor)
+# 4. MoSPI IIP (100% PURE DYNAMIC - NO HARDCODED URLS)
 # ============================================================
 
 async def scrape_mospi_iip(page):
@@ -195,7 +195,7 @@ async def scrape_mospi_iip(page):
 
     pdf_url = None
 
-    # Step 1: Query MoSPI internal product detail API directly (No React rendering delay)
+    # Step 1: Direct MoSPI Product Backend API
     try:
         api_url = "https://www.mospi.gov.in/api/theme-details/54"
         resp = await page.request.get(api_url, timeout=15000)
@@ -207,37 +207,34 @@ async def scrape_mospi_iip(page):
                 matches = [urljoin("https://www.mospi.gov.in", m) for m in rel]
             if matches:
                 pdf_url = matches[0]
-                print(f"   ⚡ Resolved via MoSPI Backend API: {pdf_url}")
+                print(f"   ⚡ Resolved Dynamically via MoSPI Backend API: {pdf_url}")
     except Exception:
         pass
 
-    # Step 2: If API is blocked, fetch theme page HTML & extract dynamic pattern
+    # Step 2: Live DOM Crawl (agar API me delay ho)
     if not pdf_url:
         try:
             await page.goto(target_url, wait_until="networkidle", timeout=45000)
-            content = await page.content()
-            matches = re.findall(r'(https?://[^\s"\'<>]+latestreleasesfiles[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)', content, re.I)
-            if not matches:
-                rel = re.findall(r'(/uploads/latestreleasesfiles/[^\s"\'<>]*IIP[^\s"\'<>]*\.pdf)', content, re.I)
-                matches = [urljoin("https://www.mospi.gov.in", m) for m in rel]
-            if matches:
-                pdf_url = matches[0]
+            links = await page.eval_on_selector_all(
+                "a[href*='.pdf']",
+                "elements => elements.map(e => e.href).filter(h => /iip/i.test(h) || /latestreleasesfiles/i.test(h))"
+            )
+            if links:
+                pdf_url = links[0]
+                print(f"   ⚡ Resolved Dynamically via Live DOM: {pdf_url}")
         except Exception:
             pass
 
-    # Step 3: Verified Dynamic Endpoint Fallback (August/Current release verified link)
-    if not pdf_url:
-        pdf_url = "https://www.mospi.gov.in/uploads/latestreleasesfiles/1790592096249-IIP%20Press%20Release%20August%202026.pdf"
-
+    # Strictly dynamic download: koi purana hardcoded link nahi
     if pdf_url:
         result["pdf_url"] = pdf_url
         print(f"   🔗 Found: {result['title']}")
-        print(f"   🌐 Link : {result['pdf_url']}")
+        print(f"   🌐 Dynamic Link: {result['pdf_url']}")
         path = await download_binary_file(page, result["pdf_url"], "MoSPI_IIP_Latest.pdf")
         result["local_path"] = path
         result["preview_text"] = extract_pdf_preview(path)
     else:
-        print("   ❌ MoSPI: PDF link could not be captured.")
+        print("   ❌ MoSPI: Latest dynamic PDF link not found.")
 
     return result
 
@@ -247,7 +244,7 @@ async def scrape_mospi_iip(page):
 
 async def main():
     print("=" * 80)
-    print("🚀 TARGETED MACRO DOCUMENT CRAWLER (DOM-ALIGNED)")
+    print("🚀 PURE DYNAMIC MACRO DOCUMENT CRAWLER (ZERO HARDCODING)")
     print(f"📅 Timestamp: {NOW.strftime('%Y-%m-%d %H:%M:%S IST')}")
     print("=" * 80)
 
@@ -277,7 +274,7 @@ async def main():
     print("\n" + "=" * 80)
     print("✅ EXECUTION SUMMARY:")
     for key, val in manifest["reports"].items():
-        status = "✅ Downloaded" if val["local_path"] else "❌ Failed"
+        status = "✅ Downloaded" if val["local_path"] else "❌ Not Released / Failed"
         link_str = val.get("pdf_url") or val.get("file_url")
         print(f"   • {key.upper():<20} : {status} | Link: {link_str}")
     print(f"📁 Manifest Metadata saved to: '{METADATA_FILE}'")
