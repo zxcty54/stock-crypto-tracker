@@ -206,7 +206,7 @@ async def download_ppac_icr(page):
     return res
 
 # ============================================================
-# 5. NETC FASTAG (Exact Working Standalone Logic with Clean Context)
+# 5. NETC FASTAG (Dynamic Form Dispatch - Anti-Cloning)
 # ============================================================
 
 async def scrape_netc_fastag(browser):
@@ -222,7 +222,6 @@ async def scrape_netc_fastag(browser):
         "latest_monthly_metrics": {}
     }
 
-    # Isolated context creates a clean session just like the standalone script
     context = await browser.new_context(
         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     )
@@ -247,28 +246,45 @@ async def scrape_netc_fastag(browser):
 
         for year in years_to_scrape:
             print(f"   📅 Fetching Year: {year}...")
-            year_selected = False
 
+            # Capture previous row state to detect DOM refresh
+            old_first_row = ""
+            first_row_locator = page.locator("table tbody tr").first
+            if await first_row_locator.count() > 0:
+                old_first_row = (await first_row_locator.inner_text()).strip()
+
+            year_select = None
             selects = await page.query_selector_all("select")
             for sel in selects:
                 options = await sel.inner_text()
-                if year in options:
-                    await sel.select_option(label=year)
-                    year_selected = True
+                if "2024" in options or "2025" in options or "2026" in options:
+                    year_select = sel
                     break
 
-            if not year_selected:
-                try:
-                    btn = page.locator(f"button:has-text('{year}'), div:has-text('{year}')").first
-                    if await btn.is_visible():
-                        await btn.click()
-                        year_selected = True
-                except Exception:
-                    pass
+            if year_select:
+                await year_select.select_option(label=year)
+                # Dispatch DOM change & input events so AJAX handlers trigger
+                await year_select.evaluate("el => el.dispatchEvent(new Event('change', { bubbles: true }))")
+                await year_select.evaluate("el => el.dispatchEvent(new Event('input', { bubbles: true }))")
+            else:
+                btn = page.locator(f"button:has-text('{year}'), li:has-text('{year}'), div:has-text('{year}')").first
+                if await btn.is_visible():
+                    await btn.click()
 
-            await page.wait_for_timeout(3000)
+            # Poll until table DOM updates or timeout
+            for _ in range(8):
+                await page.wait_for_timeout(1000)
+                current_first_row = page.locator("table tbody tr").first
+                if await current_first_row.count() > 0:
+                    current_text = (await current_first_row.inner_text()).strip()
+                    if current_text and (year in current_text or current_text != old_first_row):
+                        break
 
-            rows = await page.query_selector_all("table tr")
+            # Parse Table Data
+            rows = await page.query_selector_all("table tbody tr")
+            if not rows:
+                rows = await page.query_selector_all("table tr")
+
             count = 0
             for row in rows:
                 cells = await row.query_selector_all("td")
@@ -276,9 +292,10 @@ async def scrape_netc_fastag(browser):
                     cell_texts = [(await c.inner_text()).strip() for c in cells]
                     month_name = cell_texts[0]
 
-                    if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no"]:
+                    if month_name.lower() in ["month", "particulars", "total", "sl no", "sr no", ""]:
                         continue
 
+                    clean_month = month_name.split("-")[0].strip()
                     nums = [clean_num(t) for t in cell_texts[1:] if clean_num(t) is not None]
 
                     if len(nums) >= 2:
@@ -287,7 +304,7 @@ async def scrape_netc_fastag(browser):
 
                         record = {
                             "year": year,
-                            "month": month_name,
+                            "month": f"{clean_month}-{year}",
                             "volume_million": vol_mn,
                             "volume_crore": round(vol_mn / 10.0, 2) if vol_mn else None,
                             "amount_inr_crore": val_cr,
@@ -300,10 +317,11 @@ async def scrape_netc_fastag(browser):
 
         if all_data:
             df = pd.DataFrame(all_data)
+            df = df.drop_duplicates(subset=["year", "month"])
             df.to_csv(FASTAG_CSV_FILE, index=False)
             res["csv_path"] = FASTAG_CSV_FILE
-            res["total_records"] = len(all_data)
-            res["latest_monthly_metrics"] = all_data[0]
+            res["total_records"] = len(df)
+            res["latest_monthly_metrics"] = df.iloc[0].to_dict()
             print(f"   🎉 Saved successfully to '{FASTAG_CSV_FILE}'!")
         else:
             print("   ⚠️ No FASTag table records were parsed.")
