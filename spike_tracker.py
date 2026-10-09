@@ -1,105 +1,56 @@
 import json
-import urllib.parse
 from datetime import datetime
-import requests
+from playwright.sync_api import sync_playwright
 
-def get_google_breakout_searches():
-    # Google Trends ka naya unified explore endpoint (geo=IN)
-    # Yeh un keywords ko return karta hai jinke volume me achanak spike (Breakout) aaya hai
-    base_url = "https://trends.google.com/trends/api/explore"
-    
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://trends.google.com/trends/explore?geo=IN"
-    }
-
-    session = requests.Session()
-    
-    # Step 1: Token request for Realtime Rising Searches in India (geo: IN)
-    req_payload = {
-        "comparisonItem": [{"geo": {"country": "IN"}, "time": "now 1-d"}],
-        "category": 0,  # All live rising categories
-        "property": ""
-    }
-    
-    params = {
-        "hl": "en-US",
-        "tz": "-330",
-        "req": json.dumps(req_payload)
-    }
-
-    try:
-        res = session.get(base_url, headers=headers, params=params, timeout=12)
-        clean_text = res.text
-        if clean_text.startswith(")]}',"):
-            clean_text = clean_text.replace(")]}',", "", 1).strip()
+def scrape_google_trends():
+    spikes = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        # Real mobile/desktop browser context
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            locale="en-IN"
+        )
+        page = context.new_page()
+        
+        try:
+            # India ke real-time daily trends page par direct navigation
+            page.goto("https://trends.google.com/trending?geo=IN&hl=en-IN", timeout=45000, wait_until="networkidle")
             
-        data = json.loads(clean_text)
-        
-        # RELATED_QUERIES widget ka token nikalna
-        widgets = data.get("widgets", [])
-        related_widget = None
-        for w in widgets:
-            if w.get("id") == "RELATED_QUERIES":
-                related_widget = w
-                break
-                
-        if not related_widget:
-            return []
-
-        # Step 2: Widget se exact Rising/Breakout search queries fetch karna
-        widget_url = "https://trends.google.com/trends/api/widgetdata/relatedsearches"
-        widget_params = {
-            "hl": "en-US",
-            "tz": "-330",
-            "req": json.dumps(related_widget.get("request", {})),
-            "token": related_widget.get("token", "")
-        }
-
-        w_res = session.get(widget_url, headers=headers, params=widget_params, timeout=12)
-        w_text = w_res.text
-        if w_text.startswith(")]}',"):
-            w_text = w_text.replace(")]}',", "", 1).strip()
+            # Table/List items load hone ka wait
+            page.wait_for_selector('tbody tr, [role="row"]', timeout=15000)
             
-        w_data = json.loads(w_text)
-        
-        # rankedList[1] me Google "RISING / BREAKOUT" queries deta hai (jinka volume achanak bada hai)
-        ranked_lists = w_data.get("default", {}).get("rankedList", [])
-        rising_queries = []
-        
-        if len(ranked_lists) > 1:
-            rising_items = ranked_lists[1].get("rankedKeyword", [])
-            for item in rising_items:
-                query = item.get("query", "")
-                # Google metric: "Breakout" ya percentage surge jaise "+4,500%"
-                value = item.get("formattedValue", "Breakout Volume Spike")
-                
-                if query:
-                    rising_queries.append({
-                        "keyword": query,
-                        "search_volume_spike": value,
-                        "source": "Google Realtime Breakout Engine"
+            rows = page.query_selector_all('tbody tr, [role="row"]')
+            for row in rows:
+                text = row.inner_text()
+                lines = [line.strip() for line in text.split("\n") if line.strip()]
+                # Format parsing: Title aur search count
+                if len(lines) >= 2:
+                    keyword = lines[0]
+                    # Filter out header rows
+                    if keyword.lower() in ["search term", "trend", "query", "title"]:
+                        continue
+                    traffic = lines[1] if any(char.isdigit() for char in lines[1]) else "Spike"
+                    spikes.append({
+                        "keyword": keyword,
+                        "search_volume_spike": traffic,
+                        "source": "Google Realtime Trends (Headless)"
                     })
-                    
-        return rising_queries
-
-    except Exception as e:
-        print(f"Error: {e}")
-        return []
+        except Exception as e:
+            print(f"Playwright error: {e}")
+        finally:
+            browser.close()
+            
+    return spikes
 
 if __name__ == "__main__":
-    spikes = get_google_breakout_searches()
-    
+    data = scrape_google_trends()
     output = {
-        "status": "success" if spikes else "empty",
+        "status": "success" if data else "empty",
         "timestamp": datetime.now().isoformat(),
-        "total_hot_spikes": len(spikes),
-        "data": spikes
+        "total_hot_spikes": len(data),
+        "data": data
     }
-    
-    json_data = json.dumps(output, indent=2, ensure_ascii=False)
-    print(json_data)
-    
+    print(json.dumps(output, indent=2, ensure_ascii=False))
     with open("trending_spikes.json", "w", encoding="utf-8") as f:
-        f.write(json_data)
+        f.write(json.dumps(output, indent=2, ensure_ascii=False))
