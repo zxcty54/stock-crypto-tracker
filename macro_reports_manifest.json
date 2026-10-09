@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-09 19:22:36 IST",
+  "timestamp": "2026-10-10 00:12:25 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from September 2026",
@@ -23,15 +23,9 @@
     },
     "netc_fastag": {
       "title": "NETC FASTag Monthly Product Statistics",
-      "csv_path": "netc_fastag_monthly_3years.csv",
-      "total_records": 7,
-      "latest_monthly_metrics": {
-        "month": "October-2026",
-        "volume_million": 2001.47,
-        "volume_crore": 200.15,
-        "amount_inr_crore": 250.18,
-        "ticket_size_inr": 1.25
-      }
+      "csv_path": null,
+      "total_records": 0,
+      "latest_monthly_metrics": {}
     }
   }
 }
