@@ -1,6 +1,4 @@
 {
-  "status": "success",
-  "timestamp": "2026-10-09T19:22:49.542715",
-  "total_spikes": 0,
-  "data": []
+  "status": "error",
+  "message": "HTTP Error 404"
 }
