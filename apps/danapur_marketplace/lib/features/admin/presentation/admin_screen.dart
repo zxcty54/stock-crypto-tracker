@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'cash_operations.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
@@ -424,6 +425,15 @@ class _VerificationPhotoDialogState extends State<VerificationPhotoDialog> {
                     return const Padding(
                       padding: EdgeInsets.all(40),
                       child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state.data!.startsWith('data:image/')) {
+                    return Image.memory(
+                      base64Decode(state.data!.split(',').last),
+                      fit: BoxFit.contain,
+                      errorBuilder: (_, _, _) => const Text(
+                        'Could not display this local sample proof.',
+                      ),
                     );
                   }
                   return Image.network(

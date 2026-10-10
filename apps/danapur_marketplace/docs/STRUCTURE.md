@@ -19,6 +19,11 @@ lib/
     catalog/presentation/    # discovery, shop and product detail UI
     mandi/domain/            # commodity/rate contracts and IST date helpers
     mandi/presentation/      # public vegetable/fruit rates and stale-date labels
+    orders/domain/           # cart, integer quotes, cash order snapshots
+    orders/presentation/     # checkout + participant order status/history
+    expenses/presentation/   # private monthly spend/manual records
+    samples/data/            # explicitly local tagged records, same final app
+    samples/presentation/    # explicit test profiles + remove/restore controls
     seller/presentation/     # account login, onboarding, private proof and catalogue
 supabase/
   migrations/                # deploy in numeric order

@@ -108,7 +108,7 @@ void showInfo(BuildContext context, {bool privacy = false}) {
       content: SingleChildScrollView(
         child: Text(
           privacy
-              ? 'Buyers can browse without an account. Saved products stay on this device. Seller email is used for authentication. Shop business contacts, addresses and product listings become public only after administrator approval and publication. Storefront verification photos are stored privately for the owner and authorised administrators. WhatsApp verification happens in a separate chat governed by WhatsApp policies.\n\nAdministrator photo review is not a government identity, quality or safety certification. Mandi rates are entered by the administrator and show their market date, rate type and unit; old rates are explicitly labelled. Confirm final price, stock and purchase terms with the seller. This app does not process checkout, payments or delivery.\n\nYou can delete your shop or account from My shop. Contact the marketplace operator for privacy requests; the operator must supply reviewed privacy and terms pages before public launch.'
+              ? 'Buyers can browse without an account. Saved products stay on this device. Seller email is used for authentication. Shop business contacts, addresses and product listings become public only after administrator approval and publication. Storefront verification photos are stored privately for the owner and authorised administrators. WhatsApp verification happens in a separate chat governed by WhatsApp policies.\n\nAdministrator photo review is not a government identity, quality or safety certification. Mandi rates are entered by the administrator and show their market date, rate type and unit; old rates are explicitly labelled. Confirm final price, stock and purchase terms with the seller. Cash orders store participant-only address/contact/location. Completed orders create private expenses. This app has no online gateway and does not itself operate deliveries.\n\nYou can delete your shop or account from My shop. Contact the marketplace operator for privacy requests; the operator must supply reviewed privacy and terms pages before public launch.'
               : 'Discover approved Danapur shops, compare product prices, and check administrator-published vegetable and fruit rates. Retailers and wholesalers can apply with a storefront photo. Shops remain private until the administrator checks their photo and WhatsApp proof.\n\nBuyers contact sellers directly; refreshing loads the latest available listings.',
         ),
       ),
@@ -118,7 +118,7 @@ void showInfo(BuildContext context, {bool privacy = false}) {
             onPressed: () => showLicensePage(
               context: ctx,
               applicationName: 'Danapur Bazaar',
-              applicationVersion: '1.0.0',
+              applicationVersion: '1.1.0',
             ),
             child: const Text('Open-source licenses'),
           ),

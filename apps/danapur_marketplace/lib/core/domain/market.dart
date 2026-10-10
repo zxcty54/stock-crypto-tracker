@@ -110,7 +110,7 @@ class Shop {
   final int deliveryBasePaise;
   final bool isPublished;
   final DateTime updatedAt;
-  bool get isExample => ownerId.startsWith('sample-');
+  bool get isExample => isSample || ownerId.startsWith('sample-');
 
   factory Shop.fromJson(Map<String, dynamic> json) => Shop(
     id: json['id'] as String,

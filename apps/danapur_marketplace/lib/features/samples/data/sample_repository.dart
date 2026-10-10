@@ -36,6 +36,21 @@ class SampleRepository extends MarketRepository {
           Map<String, dynamic>.from(data['settings'] as Map? ?? {}),
         );
         _role = data['role'] as String? ?? 'buyer';
+        _commodities = (data['commodities'] as List? ?? [])
+            .map(
+              (row) =>
+                  MandiItem.fromJson(Map<String, dynamic>.from(row as Map)),
+            )
+            .toList();
+        if (_commodities.isEmpty) {
+          _commodities = sampleCatalogue().mandiItems;
+        }
+        _rates = (data['rates'] as List? ?? [])
+            .map(
+              (row) =>
+                  MandiRate.fromJson(Map<String, dynamic>.from(row as Map)),
+            )
+            .toList();
         _requests = Map<String, String>.from(data['requests'] as Map? ?? {});
       } catch (_) {
         _seed();
@@ -52,6 +67,8 @@ class SampleRepository extends MarketRepository {
   List<CashOrder> _orders = [];
   List<OrderLine> _lines = [];
   List<Map<String, dynamic>> _expenseRows = [];
+  List<MandiItem> _commodities = sampleCatalogue().mandiItems;
+  List<MandiRate> _rates = [];
   Map<String, String> _proofs = {};
   Map<String, String> _requests = {};
   String _role = 'buyer';
@@ -63,6 +80,8 @@ class SampleRepository extends MarketRepository {
     _orders = [];
     _lines = [];
     _expenseRows = [];
+    _commodities = sampleCatalogue().mandiItems;
+    _rates = [];
     _proofs = {};
     _requests = {};
     _settings = const MarketSettings();
@@ -107,6 +126,33 @@ class SampleRepository extends MarketRepository {
           'mandi_name': _settings.mandiName,
         },
         'role': _role,
+        'commodities': _commodities
+            .map(
+              (item) => {
+                'id': item.id,
+                'name': item.name,
+                'hindi_name': item.hindiName,
+                'category': item.category,
+                'default_unit': item.defaultUnit,
+                'is_active': item.active,
+              },
+            )
+            .toList(),
+        'rates': _rates
+            .map(
+              (rate) => {
+                'id': rate.id,
+                'item_id': rate.itemId,
+                'price_type': rate.priceType,
+                'unit': rate.unit,
+                'min_paise': rate.minPaise,
+                'max_paise': rate.maxPaise,
+                'effective_date': mandiDateKey(rate.effectiveDate),
+                'updated_at': rate.updatedAt.toIso8601String(),
+                'note': rate.note,
+              },
+            )
+            .toList(),
         'requests': _requests,
       }),
     );
@@ -123,7 +169,8 @@ class SampleRepository extends MarketRepository {
       products: _products,
       isAdmin: _role == 'admin',
       settings: _settings,
-      mandiItems: sampleCatalogue().mandiItems,
+      mandiItems: _commodities,
+      mandiRates: _rates,
       orders: visibleOrders,
       orderLines: _lines.where((l) => ids.contains(l.orderId)).toList(),
       expenses: _expenseRows
@@ -158,6 +205,8 @@ class SampleRepository extends MarketRepository {
     _orders = [];
     _lines = [];
     _expenseRows = [];
+    _commodities = sampleCatalogue().mandiItems;
+    _rates = [];
     _proofs = {};
     _requests = {};
     await _persist();
@@ -529,9 +578,59 @@ class SampleRepository extends MarketRepository {
     DateTime date,
     String note,
   ) async {
-    throw const MarketException(
-      'Configure Supabase to publish shared mandi prices. Sample commodities have no invented rates.',
+    _staff();
+    if (!mandiPriceTypes.contains(type) ||
+        !mandiUnits.contains(unit) ||
+        min < 1 ||
+        max < min ||
+        max > 100000000 ||
+        mandiDateKey(date).compareTo(mandiDateKey(indiaNow())) > 0) {
+      throw const MarketException('Use valid prices, unit and market date.');
+    }
+    final rate = MandiRate(
+      id: const Uuid().v4(),
+      itemId: item.id,
+      priceType: type,
+      unit: unit,
+      minPaise: min,
+      maxPaise: max,
+      effectiveDate: date,
+      updatedAt: DateTime.now().toUtc(),
+      note: note,
     );
+    _rates = [
+      ..._rates.where((r) => r.itemId != item.id || r.priceType != type),
+      rate,
+    ];
+    await _persist();
+  }
+
+  @override
+  Future<void> addMandiItem(
+    String id,
+    String name,
+    String hindi,
+    String category,
+    String unit,
+  ) async {
+    _staff();
+    if (_commodities.any((item) => item.id == id) ||
+        !RegExp(r'^[a-z][a-z0-9_-]{1,49}$').hasMatch(id) ||
+        !['Vegetables', 'Fruits'].contains(category) ||
+        !mandiUnits.contains(unit)) {
+      throw const MarketException('Use a unique valid commodity and unit.');
+    }
+    _commodities = [
+      ..._commodities,
+      MandiItem(
+        id: id,
+        name: name,
+        hindiName: hindi,
+        category: category,
+        defaultUnit: unit,
+      ),
+    ];
+    await _persist();
   }
 
   @override

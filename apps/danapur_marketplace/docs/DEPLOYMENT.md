@@ -1,75 +1,58 @@
-# Production deployment checklist
+# Deployment — actual backend and production launch
 
-This is a real-backend implementation, not a provisioned or independently audited service. Complete these steps before inviting users.
+The final application supports cash orders and removable sample data. Samples are not proof of live Supabase integration or actual fulfilment. Read [CASH_COMMERCE.md](CASH_COMMERCE.md) for the delivery/pricing/privacy/testing contracts.
 
 ## 1. Dedicated Supabase project
 
-Never reuse the StockPulse database or service keys. In SQL Editor run, in order:
+Never reuse StockPulse's backend or service keys. Run in SQL Editor, in order:
 
 1. `supabase/migrations/001_marketplace.sql`
 2. `supabase/migrations/002_verified_marketplace.sql`
-3. `supabase/seeds/001_mandi_items.sql`
+3. `supabase/migrations/003_cash_orders_expenses.sql`
+4. `supabase/seeds/001_mandi_items.sql`
 
-These scripts are idempotent. Migrating old shops makes them **pending**, not automatically approved. The catalogue seed installs 117 common/seasonal vegetables/fruits with Hindi names and units, **no prices**. Administrators can extend it in the app.
+The scripts are idempotent. Old shops require review; no actual shop/product prices are automatically inserted. The mandi seed adds 117 unpriced common/seasonal commodities. **Never run `test/sql/` fixture files in a real project.**
 
-The disposable `test/sql/fixture.sql` and tests are **never** deployed. They are not a Supabase project.
+Optional cloud TEST catalogue: `supabase/seeds/900_sample_catalog.example.sql`. Use a dedicated confirmed test owner UUID and a different confirmed buyer; do not replace a real business owner. Samples are explicitly fictional and must not receive real cash/deliveries. Admin can remove only tagged sample records. Test Auth accounts are not silently fabricated or deleted.
 
-## 2. Authentication
+## 2. Authentication and privacy
 
-Enable email/password signup with email confirmation. Set a reviewed production Site URL and allowed web-origin redirects. Add `in.danapur.bazaar://auth-callback` to allowed redirect URLs for Android signup/recovery links. Optional `DANAPUR_AUTH_REDIRECT_URL` overrides the default callback.
+Enable email/password signup with confirmation and configure a production SMTP sender, password policy and auth rate limits. Buyers sign in to order or store personal expenses; discovery remains public. Set Auth Site URL and allowed web-origin redirects; allow Android `in.danapur.bazaar://auth-callback`. Optional `DANAPUR_AUTH_REDIRECT_URL` overrides the default callback. Test signup/confirmation/recovery on actual devices/origin.
 
-Configure a production SMTP provider, sender identity, delivery limits, password policy and auth rate limits. Test signup, confirmation, sign-in, reset-email and recovery-password update on a real phone and your deployed web origin. The built-in email service is not a production mail guarantee. Mobile/SMS OTP is not silently simulated; it is not enabled in this version.
+Order address, mobile and GPS are private to the buyer/assigned seller. Personal expenses belong only to their user; there is no bank connection. No background GPS tracking. Review retention/export/deletion, cash cancellation/disputes, business contacts, location consent and sample-data wording in operator privacy/terms before public launch.
 
-## 3. Client configuration and APK
+## 3. URL/key configuration
 
-Fill the ignored JSON described in `config/README.md`, or repository Actions secrets:
+Copy `config/app_config.example.json` to ignored `config/app_config.json`. Fill only dedicated HTTPS project URL and **publishable/anon** key. Never embed a secret/service-role/admin key.
 
-- `DANAPUR_SUPABASE_URL`
-- `DANAPUR_SUPABASE_ANON_KEY`
-- optional `DANAPUR_AUTH_REDIRECT_URL`
+For CI set repository Actions secrets `DANAPUR_SUPABASE_URL`, `DANAPUR_SUPABASE_ANON_KEY` and optional `DANAPUR_AUTH_REDIRECT_URL`. Rebuild after changes. Both blank → clearly labelled device-local sample records/test profiles; partial/invalid/live backend failures never fall back to samples. A configured backend has no local test-admin profile switch.
 
-Both absent produces a setup-required screen, **not a demo**. Changes require a rebuild. Only a publishable/anon client key is permitted; all privileges come from server RLS/RPC checks, never a bundled admin secret.
+## 4. First admin and approvals
 
-For stable release signing set all four dedicated secrets:
+Create/confirm your own normal Auth account. Copy its UUID from Supabase Authentication → Users; fill/run `supabase/admin/first_admin.example.sql` in privileged SQL Editor. Refresh/sign in again. There is no public admin self-assignment, hard-coded admin password or magic email.
 
-- `DANAPUR_ANDROID_KEYSTORE_BASE64`
-- `DANAPUR_KEYSTORE_PASSWORD`
-- `DANAPUR_KEY_ALIAS`
-- `DANAPUR_KEY_PASSWORD`
+Admin panel is the final approval authority. Owners upload a private storefront/signboard photo; admin reviews it and approves/rejects/suspends with a reason. WhatsApp is optional extra evidence/contact, not mandatory approval or automatically read/synced. If used, set the operator's WhatsApp number in Admin → Settings and match full request ID/sender/address. No Aadhaar/PAN collection; photo review is not government identity certification or guaranteed fraud prevention.
 
-Without them, the release-optimised APK is debug-signed for installation testing, **not a production-signed Play Store release**. Do not reuse StockPulse's signing key. Keep a securely backed-up stable key; debug keys can change across runners and prevent in-place upgrades.
+Changing identity, proof or shop coordinates resets approval. Verification bucket is private with owner/admin-only signed reads. Require a separate protected admin account and reviewed MFA/security procedures before launch; local sample admin tests do not enforce live security.
 
-## 4. First administrator
+## 5. Shop, delivery, orders and expenses
 
-Create and confirm your account through the app. In Supabase Authentication → Users copy **your account UUID**, edit `supabase/admin/first_admin.example.sql` and run it in SQL Editor. Never share passwords or tokens in chat. Refresh/sign in again. Admin → Settings configures the operator's WhatsApp number, support email, reviewed privacy/terms HTTPS links and mandi name.
+Owners choose retailer/wholesaler/both, category, open/closed status, optional shop delivery and base fee. Capture precise location while standing at the real storefront. Each listing chooses base price, ₹/% discount, delivery eligibility and per-unit handling charge. Decline delivery for heavy/bulky products. Units/prices/tax terms are the seller's responsibility; this is not a GST invoice engine.
 
-Admin status is stored in a server-only table. Sellers cannot assign themselves admin privileges or approve their own shop. Use a separate admin account, strong password, least privilege and protected Supabase/GitHub access. A reviewed MFA requirement is recommended before a public launch; this app does not claim to enforce administrator MFA.
+Home-delivery COD is an inclusive **500 m straight-line** radius, not a route distance. GPS fix must be recent/accurate; denied/imprecise/outside/pickup-only cases use pickup/cash at shop. Client location is not cryptographic proof of presence; sellers confirm real addresses. No courier fleet, ETA promise, reservation or delivery guarantee.
 
-## 5. Shop verification
+One shop per checkout. Backend validates/locks current prices and eligibility, computes totals and snapshots lines. Buyer/seller can complete/cancel; completion is self-reported, not a digital payment receipt. Seller may accept/mark ready. Closed orders cannot change. Completion adds one buyer expense; cancelled/open orders do not. Close orders before deleting shop/account.
 
-Owners choose retailer, wholesaler or both, select a shop category/area, enter business contact/address, upload a private storefront/signboard photo and consent to publication after review. The shop is **pending and invisible publicly**. The WhatsApp button opens the configured operator chat with the full request UUID. The owner manually attaches a current shop photo, from the same registered mobile.
+## 6. Membership (OFF initially)
 
-The administrator matches the request, sender, storefront and address, then approves/rejects/suspends with a note. The app does not read WhatsApp chats or automatically attach photos. Automatic sync would require an authorised WhatsApp Business API integration and webhook. A manual photo review is not government identity verification, proof of ownership or a guarantee against fraud. Reject questionable requests and require further non-sensitive evidence when appropriate.
+Onboarding is free. Admin → Membership & samples toggles the future ₹299/month access policy, with a 30-day grace from first activation. Expired access pauses new orders only. Admin can manually extend dates after offline arrangements/records. **No online gateway, recurring debit or automatic money collection.** Communicate reviewed terms before activation.
 
-Approved shops appear only while published. Changing their identity, business type, category, address/mobile or proof resets approval. Verification images live in a private bucket with owner/admin-only reads and 5-minute signed links. Do not collect Aadhaar, PAN or private identity documents through this flow.
+## 7. Stable signing and Telegram ZIP
 
-## 6. Mandi operations
+Set all dedicated signing secrets: `DANAPUR_ANDROID_KEYSTORE_BASE64`, `DANAPUR_KEYSTORE_PASSWORD`, `DANAPUR_KEY_ALIAS`, `DANAPUR_KEY_PASSWORD`. Without them, release-optimised builds are debug-signed for installation testing—not production-signed Play Store releases. Never reuse StockPulse's signing key. Backup/protect a stable key; runner debug keys may prevent upgrades without uninstalling.
 
-No mandi seller signup. Administrators publish actual rates by commodity, wholesale/retail type, unit, IST market date and optional quality/variety note. Fixed or min/max prices are supported. Unpriced items say **Not published**. Old rates say **Previous rate** and show the date; they are never labelled today's rates. Price history and administrator audit entries are retained.
+Workflow validates genuine Postgres policies/cash commerce, locked Flutter dependencies, analysis/domain/widgets and configuration/ZIP tests. It builds one universal APK, wraps it in `danapur-bazaar.zip` and sends directly from the runner using existing Telegram secrets. **No upload/download Actions artifacts, binary commits or PR notifications.** Token/chat values are not printed; API message confirmation is required. Private Telegram invite links are not Bot API chat IDs.
 
-Confirm real rates with a reliable authorised source. A catalogue entry is not a guarantee that an item is locally in stock. Review rate accuracy, corrections, data backups and price-update frequency.
+## 8. Launch checks still required
 
-## 7. Telegram workflow, no Actions artifacts
-
-The Danapur workflow tests the database, analyses/tests Flutter and builds one compressed-native-library **universal** APK. It wraps that single APK in `danapur-bazaar.zip` and sends the ZIP directly to Telegram from the build runner. There are **no upload/download-artifact steps**, binary commits or web-hosting side effects. Pull-request builds never send messages. Trusted working-branch/main pushes and manual runs deliver after checks pass.
-
-It reuses existing `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` secrets (documented existing aliases are accepted). The bot must be able to post documents. Public `t.me/channel` links, `@channel` or numeric chat IDs work; private invite links are not chat IDs. No secrets are printed. A confirmed Telegram API message ID is required for success; ambiguous failures are not automatically resent.
-
-## 8. Public launch gates
-
-- Provision and verify your real Supabase project, RLS/storage and all end-to-end auth/approval flows.
-- Configure stable signing, SMTP/redirects, operator contact and reviewed privacy/terms pages.
-- Test on physical Android devices and deployed web; check Hindi, accessibility/text scale and slow/offline connections.
-- Establish reporting/moderation, operator response times, backup/restore, error monitoring, quota alerts, storage retention and incident handling.
-- Delete shop/account flows are provided; review audit retention and private-proof orphan cleanup against your privacy policy. Public catalogue images may remain reachable by their known URL until removed; never store private proof there.
-- Conduct security/legal review, Play Store Data Safety and release packaging checks. No claim of full production certification, adoption, guaranteed income or legal compliance is made.
+Real backend/email/role/storage/orders/expense integration; physical Android GPS/permission and HTTPS browser checks; stable signing; legally reviewed location/cash/membership/privacy/tax terms; abuse/reporting/moderation; owner support, cash disputes and refunds outside this app; backups/restore, error monitoring, quota alerts, orphan-media retention and incident procedures. No claim of full production certification, guaranteed fraud prevention, logistics capacity, adoption/income or legal compliance.

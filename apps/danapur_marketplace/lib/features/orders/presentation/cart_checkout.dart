@@ -341,6 +341,28 @@ class _CartCheckoutScreenState extends State<CartCheckoutScreen> {
                       validator: (v) => validateLength(v, 'Address', 6, 300),
                     ),
                   ],
+                  if (market.snapshot.settings.privacyUrl.isNotEmpty ||
+                      market.snapshot.settings.termsUrl.isNotEmpty)
+                    Wrap(
+                      children: [
+                        if (market.snapshot.settings.privacyUrl.isNotEmpty)
+                          TextButton(
+                            onPressed: () => openLink(
+                              ctx,
+                              Uri.parse(market.snapshot.settings.privacyUrl),
+                            ),
+                            child: const Text('Operator privacy policy'),
+                          ),
+                        if (market.snapshot.settings.termsUrl.isNotEmpty)
+                          TextButton(
+                            onPressed: () => openLink(
+                              ctx,
+                              Uri.parse(market.snapshot.settings.termsUrl),
+                            ),
+                            child: const Text('Cash order terms'),
+                          ),
+                      ],
+                    ),
                   CheckboxListTile(
                     contentPadding: EdgeInsets.zero,
                     value: _consent,
