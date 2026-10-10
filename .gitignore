@@ -1,0 +1,25 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android / IDE
+**/android/local.properties
+**/android/.gradle/
+.idea/
+*.iml
+
+# Local secrets and signing material
+.env
+.env.*
+*.jks
+*.keystore
+key.properties
+
+# Supabase CLI local state
+**/supabase/.temp/

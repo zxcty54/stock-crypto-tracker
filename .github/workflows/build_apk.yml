@@ -1,87 +1,168 @@
-name: Build & Release Flutter APK
+name: Aangan — Verify, Build & Send to Telegram
 
 on:
-  workflow_dispatch: # Manual run allow karega testing ke liye
   push:
     branches:
       - main
+      - 'arena/**'
     paths:
-      # 🎯 Sirf tab trigger hoga jab inme se koi file modify hogi:
-      - '**.dart'
-      - 'pubspec.yaml'
-      - 'android/**'
+      - 'aangan/**'
+      - '.github/workflows/build_apk.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'aangan/**'
+      - '.github/workflows/build_apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aangan-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-apk:
+  verify-build-send:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Java (JDK 17)
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
           cache: true
 
-      - name: Restore Keystore from Secret
-        env:
-          KEYSTORE_BASE64: ${{ secrets.STOCKPULSE_KEYSTORE_BASE64 }}
-        run: |
-          mkdir -p android/app/keystore
-          if [ -z "$KEYSTORE_BASE64" ]; then
-            echo "::error::GitHub Secret 'STOCKPULSE_KEYSTORE_BASE64' is missing or empty!"
-            exit 1
-          fi
-
-          echo "$KEYSTORE_BASE64" | tr -d '\r\n ' | base64 --decode > android/app/keystore/upload-keystore.jks
-
-          if [ ! -s android/app/keystore/upload-keystore.jks ]; then
-            echo "::error::Keystore file decoded as 0 bytes. Check secret value!"
-            exit 1
-          fi
-
-          echo "Keystore successfully restored."
-
-      - name: Get Dependencies
+      - name: Resolve Flutter packages
+        working-directory: aangan
         run: flutter pub get
 
-      # 🎨 App Launcher Icons Generation (APK compile hone se pehle mipmap folders create honge)
-      - name: Generate App Launcher Icons
+      - name: Generate Android app icons
+        working-directory: aangan
         run: dart run flutter_launcher_icons
 
-      - name: Build Release APK
+      - name: Format Aangan sources
+        working-directory: aangan
+        run: dart format lib/main.dart lib/app lib/features/rentals test
+
+      - name: Analyze the rental app
+        working-directory: aangan
+        continue-on-error: true
+        run: flutter analyze lib/main.dart lib/app lib/features/rentals test
+
+      - name: Run tests
+        working-directory: aangan
+        run: flutter test
+
+      - name: Build Android arm64 preview APK
+        working-directory: aangan
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          flutter build apk --release --no-tree-shake-icons \
+          set -o pipefail
+          flutter build apk --release --target-platform android-arm64 --no-tree-shake-icons \
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
-            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            2>&1 | tee "$RUNNER_TEMP/aangan-apk-build.log"
 
-      - name: Compress APK to ZIP
+      - name: Surface Android build failure diagnostics
+        if: failure()
+        working-directory: aangan
         run: |
-          cd build/app/outputs/flutter-apk/
-          zip stockpulse-app.zip app-release.apk
+          LOG="$RUNNER_TEMP/aangan-apk-build.log"
+          if [[ ! -s "$LOG" ]]; then
+            echo '::notice::No captured APK build log was available.'
+            exit 0
+          fi
+          python3 - "$LOG" <<'PY'
+          import re
+          import sys
+          from pathlib import Path
 
-      - name: Send ZIP to Telegram
-        env:
-          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          lines = Path(sys.argv[1]).read_text(errors="replace").splitlines()
+          selected = [
+              line.strip()
+              for line in lines
+              if re.search(
+                  r"FAILURE:|What went wrong:|Execution failed|Could not (find|resolve)|error:|^e: |requires|Unsupported|not found",
+                  line,
+                  re.IGNORECASE,
+              )
+          ]
+          if not selected:
+              selected = lines[-30:]
+          for line in selected[-30:]:
+              message = line.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+              print(f"::error title=Android APK build::{message[:900]}")
+          PY
+
+      - name: Package installable APK as ZIP
+        working-directory: aangan
         run: |
-          if [ -z "$BOT_TOKEN" ] || [ -z "$CHAT_ID" ]; then
-            echo "::error::TELEGRAM_BOT_TOKEN ya TELEGRAM_CHAT_ID secret missing hai!"
+          set -euo pipefail
+          APK_SEARCH_ROOT="$(dirname "$(dirname "$GITHUB_WORKSPACE")")"
+          APK_PATH="$(find -L "$APK_SEARCH_ROOT" -type f -iname '*.apk' -print -quit 2>/dev/null || true)"
+          if [[ -z "$APK_PATH" || ! -f "$APK_PATH" ]]; then
+            echo '::error::Flutter succeeded but no APK was found in the runner workspace.'
+            while IFS= read -r path; do
+              echo "::warning title=Android build output directory::$path"
+            done < <(find -L "$APK_SEARCH_ROOT" -type d -name build -print 2>/dev/null | tail -n 30)
             exit 1
           fi
+          PACKAGE_DIR="build/telegram-package"
+          rm -rf "$PACKAGE_DIR"
+          mkdir -p "$PACKAGE_DIR"
+          cp "$APK_PATH" "$PACKAGE_DIR/aangan-bihar-rentals.apk"
+          cat > "$PACKAGE_DIR/INSTALL.txt" <<'EOF'
+          Aangan — Bihar Rentals
 
-          curl -F chat_id="$CHAT_ID" \
-               -F document=@"build/app/outputs/flutter-apk/stockpulse-app.zip" \
-               -F caption="StockPulse (Latest Signed APK Build) 🚀" \
-               https://api.telegram.org/bot$BOT_TOKEN/sendDocument
+          Android package: arm64-v8a
+          Install aangan-bihar-rentals.apk on a compatible Android phone.
+
+          This is a preview build signed with the CI debug key, not a Play Store release.
+          EOF
+          (
+            cd "$PACKAGE_DIR"
+            zip -q -9 ../aangan-bihar-rentals.zip aangan-bihar-rentals.apk INSTALL.txt
+          )
+          test -s build/aangan-bihar-rentals.zip
+
+      - name: Send ZIP directly to Telegram
+        if: github.event_name != 'pull_request'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_ZIP: aangan/build/aangan-bihar-rentals.zip
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${TELEGRAM_BOT_TOKEN:-}" || -z "${TELEGRAM_CHAT_ID:-}" ]]; then
+            echo '::error::Set the TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID GitHub Actions secrets.'
+            exit 1
+          fi
+          test -s "$TELEGRAM_ZIP"
+          response="$(curl --silent --show-error --max-time 300 \
+            --request POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+            --form "chat_id=${TELEGRAM_CHAT_ID}" \
+            --form "caption=Aangan Android preview · run #${GITHUB_RUN_NUMBER} · ${GITHUB_SHA:0:7}" \
+            --form "document=@${TELEGRAM_ZIP};type=application/zip")"
+          printf '%s' "$response" | python3 -c '
+          import json, sys
+          result = json.load(sys.stdin)
+          if not result.get("ok"):
+              raise SystemExit("Telegram rejected the ZIP: " + result.get("description", "unknown error"))
+          '
+          echo 'Aangan ZIP delivered to Telegram.'
