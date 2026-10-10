@@ -107,7 +107,13 @@ class FormSheet extends StatelessWidget {
                   if (compact)
                     fields
                   else
-                    Flexible(child: SingleChildScrollView(child: fields)),
+                    Flexible(
+                      child: SingleChildScrollView(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        child: fields,
+                      ),
+                    ),
                   const SizedBox(height: 18),
                   const Divider(),
                   const SizedBox(height: 10),
@@ -137,7 +143,13 @@ class FormSheet extends StatelessWidget {
               );
               // On short screens/with the keyboard open, scroll the entire form
               // rather than overflowing its pinned heading and action buttons.
-              return compact ? SingleChildScrollView(child: content) : content;
+              return compact
+                  ? SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      child: content,
+                    )
+                  : content;
             },
           ),
         ),

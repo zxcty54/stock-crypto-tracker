@@ -215,7 +215,12 @@ void main() {
       find.byKey(const ValueKey('shop-phone')),
       '9999999999',
     );
-    await tester.ensureVisible(find.byType(CheckboxListTile));
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle();
+    await Scrollable.ensureVisible(
+      tester.element(find.byType(CheckboxListTile)),
+      alignment: 0.5,
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.byType(CheckboxListTile));
     await tester.pumpAndSettle();
