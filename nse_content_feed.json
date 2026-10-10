@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-10 05:14:31 IST",
+  "generated_at": "2026-10-10 08:18:16 IST",
   "worthy_count": 25,
   "skipped_count": 10,
   "content_feed": [
+    {
+      "hash": "30fa7c1e7d1d",
+      "symbol": "KANORICHEM",
+      "company_name": "Kanoria Chemicals & Industries Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "CAPEX",
+      "broadcast_date": "07-Oct-2026 18:13:53",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf",
+      "headline": "Kanoria Chemicals launches new 12 TPD Triacetin manufacturing facility in Gujarat",
+      "content_worthy": true,
+      "worthiness_reason": "Commissioning of a new manufacturing facility with explicit capacity figures.",
+      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Kanoria Chemicals & Industries Limited (NSE: KANORICHEM)</b>\n\n<b>Kanoria Chemicals launches new 12 TPD Triacetin manufacturing facility in Gujarat</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Triacetin (Chemical/Food and Pharma)\n- <b>Capacity:</b> 12 Metric Tons per Day (TPD)\n- <b>Location:</b> GIDC, Ankleshwar, Gujarat\n- <b>Launch Date:</b> 07.10.2026\n- <b>Target Markets:</b> Domestic and International\n\n📌 <b>What happened:</b>\n↳ Kanoria Chemicals & Industries Limited has announced the launch of a new 12 Metric Tons per Day Triacetin manufacturing facility at its existing site in Ankleshwar, Gujarat, to cater to domestic and international markets across various sectors.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-10 08:18:16 IST"
+    },
     {
       "hash": "9b048ea7aa31",
       "symbol": "DIXON",
@@ -338,20 +352,6 @@
       "worthiness_reason": "New commercial order win with value USD 0.7M",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Subex Limited (NSE: SUBEXLTD)</b>\n\n<b>Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSense Fraud Management</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Deal Value:</b> USD 0.7 million\n- <b>Contract Period:</b> 3 years\n- <b>Solution:</b> HyperSense Fraud Management\n- <b>Client:</b> Leading African mobile operator\n\n📌 <b>What happened:</b>\n↳ Subex announced a three‑year engagement to deploy its HyperSense Fraud Management solution with a major African telecom operator, expanding its presence in Africa.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SUBEXLTD_09102026121737_Deal_win_announcement.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-09 12:30:13 IST"
-    },
-    {
-      "hash": "30fa7c1e7d1d",
-      "symbol": "KANORICHEM",
-      "company_name": "Kanoria Chemicals & Industries Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "CAPEX",
-      "broadcast_date": "07-Oct-2026 18:13:53",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf",
-      "headline": "Kanoria Chemicals launches 12 TPD Triacetin plant at Ankleshwar",
-      "content_worthy": true,
-      "worthiness_reason": "Launch of new manufacturing facility with capacity details.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Kanoria Chemicals & Industries Limited (NSE: KANORICHEM)</b>\n\n<b>Launch of 12 TPD Triacetin plant at Ankleshwar</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Triacetin\n- <b>Capacity:</b> 12 Metric Tons per Day\n- <b>Location:</b> GIDC, Ankleshwar, Gujarat\n- <b>Launch Date:</b> 07 Oct 2026\n\n📌 <b>What happened:</b>\n↳ The company inaugurated a new Triacetin manufacturing facility at its existing Ankleshwar site, expanding its specialty chemicals portfolio for domestic and international markets.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-09 06:21:35 IST"
     }
   ],
   "skipped_archive": [
