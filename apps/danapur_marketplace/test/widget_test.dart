@@ -149,7 +149,7 @@ void main() {
         await tester.tap(find.text('My shop'));
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.byKey(const ValueKey('create-shop')));
-      await tester.tap(find.byKey(const ValueKey('create-shop')));
+        await tester.tap(find.byKey(const ValueKey('create-shop')));
         await tester.pumpAndSettle();
         tester.view.viewInsets = FakeViewPadding(
           bottom: size.width > 700 ? 180.0 : 320.0,

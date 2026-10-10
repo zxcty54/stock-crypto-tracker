@@ -61,7 +61,6 @@ jobs:
       run:
         working-directory: apps/danapur_marketplace
     env:
-      DANAPUR_BOOTSTRAP_EXPORT: 'true'
       DANAPUR_SUPABASE_URL: ${{ secrets.DANAPUR_SUPABASE_URL }}
       DANAPUR_SUPABASE_ANON_KEY: ${{ secrets.DANAPUR_SUPABASE_ANON_KEY }}
       DANAPUR_ANDROID_KEYSTORE_BASE64: ${{ secrets.DANAPUR_ANDROID_KEYSTORE_BASE64 }}
@@ -84,31 +83,27 @@ jobs:
         id: config
         run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
       - name: Install Flutter dependencies
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
       - name: Build-config guard tests
         run: python3 -m unittest discover -s test -p 'build_config_test.py' -v
-      - name: Format Dart and capture patch
-        run: |
-          dart format lib test
-          dart fix --apply
-          dart format lib test
-          git diff --binary -- lib test > "$RUNNER_TEMP/danapur-format.patch"
+      - name: Check Dart formatting
+        run: dart format --output=none --set-exit-if-changed lib test
       - name: Analyse
         run: |
           set -o pipefail
-          flutter analyze --fatal-infos 2>&1 | tee "$RUNNER_TEMP/danapur-analysis.log"
+          flutter analyze --no-pub --fatal-infos 2>&1 | tee "$RUNNER_TEMP/danapur-analysis.log"
       - name: Unit and responsive widget tests
         run: |
           set -o pipefail
-          flutter test --coverage 2>&1 | tee "$RUNNER_TEMP/danapur-tests.log"
+          flutter test --no-pub --coverage 2>&1 | tee "$RUNNER_TEMP/danapur-tests.log"
       - name: Build web with local renderer assets
         run: |
           set -o pipefail
-          flutter build web --release --no-web-resources-cdn --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-web.log"
+          flutter build web --no-pub --release --no-web-resources-cdn --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-web.log"
       - name: Build installable Android APKs
         run: |
           set -o pipefail
-          flutter build apk --release --split-per-abi --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
+          flutter build apk --no-pub --release --split-per-abi --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
       - name: Upload web app
         uses: actions/upload-artifact@v6
         with:
@@ -123,25 +118,18 @@ jobs:
           path: apps/danapur_marketplace/build/app/outputs/flutter-apk/*-release.apk
           if-no-files-found: error
           retention-days: 14
-      - name: Upload formatting patch, dependency lock and coverage
+      - name: Upload dependency lock and coverage
         if: always()
         uses: actions/upload-artifact@v6
         with:
           name: danapur-ci-checks
           path: |
-            ${{ runner.temp }}/danapur-format.patch
             apps/danapur_marketplace/pubspec.lock
             apps/danapur_marketplace/coverage/lcov.info
           retention-days: 7
       - name: Safe compiler diagnostics
         if: always()
         run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP"
-      - name: Bootstrap formatted source part 1
-        if: always() && env.DANAPUR_BOOTSTRAP_EXPORT == 'true'
-        run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP" source 0
-      - name: Bootstrap formatted source part 2
-        if: always() && env.DANAPUR_BOOTSTRAP_EXPORT == 'true'
-        run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP" source 9
       - name: Build summary
         if: success()
         run: |
@@ -153,28 +141,3 @@ jobs:
             echo '- Without a dedicated upload keystore these APKs are debug-signed release builds, for testing only.'
             echo '- See apps/danapur_marketplace/README.md for cloud setup and launch limitations.'
           } >> "$GITHUB_STEP_SUMMARY"
-
-
-  preview-handoff:
-    name: Session preview handoff
-    needs: [backend-security, flutter]
-    if: github.ref == 'refs/heads/arena/c2853110-stock-crypto-tracker'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-      actions: read
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v5
-        with:
-          name: danapur-bazaar-web
-          path: .ci-preview/web
-      - uses: actions/download-artifact@v5
-        with:
-          name: danapur-bazaar-apks
-          path: .ci-preview/apks
-      - name: Bounded preview handoff (no branch/tree changes)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 apps/danapur_marketplace/tools/export_preview.py .ci-preview "$RUNNER_TEMP/danapur-preview.zip"

@@ -132,3 +132,12 @@ Before a real public launch, configure the dedicated Supabase project, email
 confirmation/site redirect, an appropriate mail provider and auth rate controls,
 and add operational moderation/reporting plus an auth-account deletion flow.
 The fixture-based SQL tests do not provision or test a real Supabase project.
+
+
+**Verified implementation:** GitHub Actions builds genuine Flutter web output and
+Android split APKs, with 27 Flutter domain/widget tests, 10 offline configuration
+guard tests and the disposable PostgreSQL ownership/visibility tests. The app
+includes keyboard/short-landscape and large-price/narrow-card regression tests.
+CI checks formatting rather than changing source, and enforces the committed
+lockfile. These checks are not a substitute for real-device testing, a provisioned
+Supabase environment or a public-launch security/legal review.
