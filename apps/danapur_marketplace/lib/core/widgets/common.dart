@@ -32,7 +32,9 @@ Color categoryColor(String category) => switch (category) {
   _ => const Color(0xFFEAF1E6),
 };
 void toast(BuildContext context, String message) {
-  if (!context.mounted) return;
+  if (!context.mounted) {
+    return;
+  }
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
 
@@ -43,9 +45,13 @@ Future<void> runAction(
 }) async {
   try {
     await action();
-    if (success != null && context.mounted) toast(context, success);
+    if (success != null && context.mounted) {
+      toast(context, success);
+    }
   } catch (e) {
-    if (context.mounted) toast(context, friendlyError(e));
+    if (context.mounted) {
+      toast(context, friendlyError(e));
+    }
   }
 }
 

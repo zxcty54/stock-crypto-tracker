@@ -23,4 +23,5 @@ for name in ('analysis', 'tests', 'web', 'android'):
         detail = '\n'.join(text.splitlines()[-45:])
     else:
         continue
-    print(f'::error title=Danapur {name} diagnostics::{escaped(detail[-3500:])}')
+    for start in range(0, len(detail), 3000):
+        print(f'::error title=Danapur {name} diagnostics::{escaped(detail[start:start+3000])}')

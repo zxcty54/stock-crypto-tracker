@@ -13,7 +13,9 @@ class SellerDashboard extends StatelessWidget {
   final MarketController controller;
   @override
   Widget build(BuildContext context) {
-    if (controller.ownerId == null) return SellerAuth(controller: controller);
+    if (controller.ownerId == null) {
+      return SellerAuth(controller: controller);
+    }
     final shop = controller.myShop;
     if (shop == null) {
       return Column(
@@ -297,12 +299,13 @@ class SellerDashboard extends StatelessWidget {
                   'Delete your account?',
                   'Your shop, products and login account will be permanently deleted. Administrator audit history may be retained for security. This cannot be undone.',
                 ) &&
-                context.mounted)
+                context.mounted) {
               await runAction(
                 context,
                 controller.repository.deleteAccount,
                 success: 'Account deleted.',
               );
+            }
           },
           icon: const Icon(Icons.person_remove_outlined, size: 17),
           label: const Text('Delete account'),
@@ -403,7 +406,9 @@ class _SellerAuthState extends State<SellerAuth> {
   }
 
   Future<void> _submit() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -428,9 +433,13 @@ class _SellerAuthState extends State<SellerAuth> {
       }
       await widget.controller.reload();
     } catch (e) {
-      if (mounted) setState(() => _error = friendlyError(e));
+      if (mounted) {
+        setState(() => _error = friendlyError(e));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -546,19 +555,22 @@ class _SellerAuthState extends State<SellerAuth> {
                                       try {
                                         await widget.controller.repository
                                             .requestPasswordReset(email);
-                                        if (mounted)
+                                        if (mounted) {
                                           setState(
                                             () => _message =
                                                 'If an account exists, a password-reset email will arrive. Open its link to set a new password.',
                                           );
+                                        }
                                       } catch (error) {
-                                        if (mounted)
+                                        if (mounted) {
                                           setState(
                                             () => _error = friendlyError(error),
                                           );
+                                        }
                                       } finally {
-                                        if (mounted)
+                                        if (mounted) {
                                           setState(() => _busy = false);
+                                        }
                                       }
                                     },
                               child: const Text('Forgot password?'),

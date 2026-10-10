@@ -235,8 +235,9 @@ class ShopDraft {
     'is_published': isPublished,
   };
   void validate() {
-    if (!businessTypes.contains(businessType))
+    if (!businessTypes.contains(businessType)) {
       throw const MarketException('Choose retailer or wholesaler.');
+    }
     final errors = [
       validateLength(name, 'Shop name', 3, 80),
       validateLength(address, 'Address', 6, 180),
@@ -248,7 +249,9 @@ class ShopDraft {
       throw const MarketException('Choose a valid category and Danapur area.');
     }
     for (final error in errors) {
-      if (error != null) throw MarketException(error);
+      if (error != null) {
+        throw MarketException(error);
+      }
     }
   }
 }
@@ -287,7 +290,9 @@ class ProductDraft {
       validateLength(description, 'Description', 0, 800),
       validateLength(unit, 'Unit', 1, 32),
     ]) {
-      if (error != null) throw MarketException(error);
+      if (error != null) {
+        throw MarketException(error);
+      }
     }
     if (!categories.contains(category)) {
       throw const MarketException('Choose a valid category.');
@@ -320,7 +325,9 @@ String? validatePhone(String? value) =>
 
 int? parsePrice(String text) {
   final value = text.trim();
-  if (!RegExp(r'^\d{1,7}(\.\d{1,2})?$').hasMatch(value)) return null;
+  if (!RegExp(r'^\d{1,7}(\.\d{1,2})?$').hasMatch(value)) {
+    return null;
+  }
   final parts = value.split('.');
   final paise =
       int.parse(parts.first) * 100 +
@@ -433,10 +440,11 @@ Uri whatsappUri(Shop shop, [Product? product]) {
 }
 
 Uri verificationWhatsappUri(Shop shop, String phone) {
-  if (validatePhone(phone) != null)
+  if (validatePhone(phone) != null) {
     throw const MarketException(
       'The administrator has not configured verification WhatsApp yet. Your request remains pending.',
     );
+  }
   return Uri.https('wa.me', '91$phone', {
     'text':
         'Namaste! Danapur Bazaar shop verification.\nRequest: ${shop.id}\nShop: ${shop.name}\nType: ${shop.businessType}\nAddress: ${shop.address}\nRegistered mobile: +91${shop.phone}\nI will attach a current storefront photo showing the shop signboard. Please review my onboarding request.',

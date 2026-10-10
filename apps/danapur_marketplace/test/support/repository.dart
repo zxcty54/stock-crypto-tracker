@@ -1,10 +1,10 @@
-import '../../lib/features/mandi/domain/mandi.dart';
-import '../../lib/features/admin/domain/administration.dart';
+import 'package:danapur_marketplace/features/mandi/domain/mandi.dart';
+import 'package:danapur_marketplace/features/admin/domain/administration.dart';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
-import '../../lib/core/domain/market.dart';
-import '../../lib/core/data/local_store.dart';
-import '../../lib/core/data/repository.dart';
+import 'package:danapur_marketplace/core/domain/market.dart';
+import 'package:danapur_marketplace/core/data/local_store.dart';
+import 'package:danapur_marketplace/core/data/repository.dart';
 import 'fixtures.dart';
 
 class FixtureRepository extends MarketRepository {
@@ -37,7 +37,9 @@ class FixtureRepository extends MarketRepository {
   Stream<void> get authChanges => const Stream.empty();
   @override
   Future<MarketSnapshot> load() async {
-    if (_cache != null) return _extras(_cache!);
+    if (_cache != null) {
+      return _extras(_cache!);
+    }
     final raw = store.read(storageKey);
     if (raw == null) {
       _cache = exampleMarket();

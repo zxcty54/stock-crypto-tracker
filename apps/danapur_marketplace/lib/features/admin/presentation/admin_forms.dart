@@ -57,11 +57,17 @@ class _ReviewShopFormState extends State<ReviewShopForm> {
         _whatsapp,
       );
       await widget.controller.reload();
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (error) {
-      if (mounted) setState(() => _error = friendlyError(error));
+      if (mounted) {
+        setState(() => _error = friendlyError(error));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -180,7 +186,9 @@ class _MandiRateFormState extends State<MandiRateForm> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -197,11 +205,17 @@ class _MandiRateFormState extends State<MandiRateForm> {
         _note.text,
       );
       await widget.controller.reload();
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (error) {
-      if (mounted) setState(() => _error = friendlyError(error));
+      if (mounted) {
+        setState(() => _error = friendlyError(error));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -250,7 +264,9 @@ class _MandiRateFormState extends State<MandiRateForm> {
               helperText: 'Optional: leave blank for one fixed price.',
             ),
             validator: (value) {
-              if ((value ?? '').trim().isEmpty) return null;
+              if ((value ?? '').trim().isEmpty) {
+                return null;
+              }
               final max = parsePrice(value!), min = parsePrice(_min.text);
               return max == null || min == null || max < min
                   ? 'Maximum must be valid and at least the minimum.'
@@ -275,8 +291,9 @@ class _MandiRateFormState extends State<MandiRateForm> {
                   firstDate: DateTime(2020),
                   lastDate: DateTime(now.year, now.month, now.day),
                 );
-                if (selected != null && mounted)
+                if (selected != null && mounted) {
                   setState(() => _date = selected);
+                }
               },
               child: const Text('Change'),
             ),
@@ -328,7 +345,9 @@ class _MarketSettingsFormState extends State<MarketSettingsForm> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -344,16 +363,24 @@ class _MarketSettingsFormState extends State<MarketSettingsForm> {
         ),
       );
       await widget.controller.reload();
-      if (mounted) toast(context, 'Marketplace settings saved.');
+      if (mounted) {
+        toast(context, 'Marketplace settings saved.');
+      }
     } catch (error) {
-      if (mounted) setState(() => _error = friendlyError(error));
+      if (mounted) {
+        setState(() => _error = friendlyError(error));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
   String? _url(String? value) {
-    if ((value ?? '').trim().isEmpty) return null;
+    if ((value ?? '').trim().isEmpty) {
+      return null;
+    }
     final uri = Uri.tryParse(value!.trim());
     return uri?.scheme == 'https' &&
             uri!.host.isNotEmpty &&
@@ -477,7 +504,9 @@ class _AddCommodityFormState extends State<AddCommodityForm> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -491,11 +520,17 @@ class _AddCommodityFormState extends State<AddCommodityForm> {
         _unit,
       );
       await widget.controller.reload();
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (error) {
-      if (mounted) setState(() => _error = friendlyError(error));
+      if (mounted) {
+        setState(() => _error = friendlyError(error));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 

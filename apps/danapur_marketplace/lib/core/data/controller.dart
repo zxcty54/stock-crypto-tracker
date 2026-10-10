@@ -47,7 +47,9 @@ class MarketController extends ChangeNotifier {
       .where((p) => p.id == id && visibleShop(p.shopId) != null)
       .firstOrNull;
   void _notify() {
-    if (!_disposed) notifyListeners();
+    if (!_disposed) {
+      notifyListeners();
+    }
   }
 
   Future<void> reload() async {
@@ -57,9 +59,13 @@ class MarketController extends ChangeNotifier {
     _notify();
     try {
       final data = await repository.load();
-      if (!_disposed && generation == _generation) snapshot = data;
+      if (!_disposed && generation == _generation) {
+        snapshot = data;
+      }
     } catch (e) {
-      if (!_disposed && generation == _generation) error = friendlyError(e);
+      if (!_disposed && generation == _generation) {
+        error = friendlyError(e);
+      }
     } finally {
       if (!_disposed && generation == _generation) {
         loading = false;
@@ -71,7 +77,9 @@ class MarketController extends ChangeNotifier {
   Future<void> toggleSaved(String id) {
     final result = _savedQueue.then((_) async {
       final next = {...savedIds};
-      if (!next.remove(id)) next.add(id);
+      if (!next.remove(id)) {
+        next.add(id);
+      }
       try {
         await store.write(savedKey, jsonEncode(next.toList()));
       } catch (_) {
@@ -97,8 +105,9 @@ class MarketController extends ChangeNotifier {
     String? uploaded;
     late Shop shop;
     try {
-      if (photo != null)
+      if (photo != null) {
         uploaded = await repository.uploadVerificationPhoto(photo);
+      }
       final actual = ShopDraft(
         name: draft.name,
         category: draft.category,
@@ -113,14 +122,17 @@ class MarketController extends ChangeNotifier {
       );
       shop = await repository.saveShop(actual, id: id);
     } catch (_) {
-      if (uploaded != null) await repository.removeVerificationPhoto(uploaded);
+      if (uploaded != null) {
+        await repository.removeVerificationPhoto(uploaded);
+      }
       rethrow;
     }
     final previous = myShop;
     if (uploaded != null &&
         previous?.verificationPhotoPath != null &&
-        previous!.verificationPhotoPath != uploaded)
+        previous!.verificationPhotoPath != uploaded) {
       await repository.removeVerificationPhoto(previous.verificationPhotoPath!);
+    }
     _generation++;
     loading = false;
     snapshot = snapshot.copyWith(
@@ -138,13 +150,17 @@ class MarketController extends ChangeNotifier {
     PickedPhoto? photo,
   }) async {
     final shop = myShop;
-    if (shop == null) throw const MarketException('Create your shop first.');
+    if (shop == null) {
+      throw const MarketException('Create your shop first.');
+    }
     final previous = id == null
         ? null
         : snapshot.products.where((p) => p.id == id).firstOrNull;
     String? uploaded;
     try {
-      if (photo != null) uploaded = await repository.uploadPhoto(photo);
+      if (photo != null) {
+        uploaded = await repository.uploadPhoto(photo);
+      }
       final actual = ProductDraft(
         name: draft.name,
         category: draft.category,
@@ -173,7 +189,9 @@ class MarketController extends ChangeNotifier {
       }
       return product;
     } catch (_) {
-      if (uploaded != null) await repository.removePhoto(uploaded);
+      if (uploaded != null) {
+        await repository.removePhoto(uploaded);
+      }
       rethrow;
     }
   }
@@ -192,7 +210,9 @@ class MarketController extends ChangeNotifier {
 
   Future<void> deleteMyShop() async {
     final shop = myShop;
-    if (shop == null) return;
+    if (shop == null) {
+      return;
+    }
     await repository.deleteShop(shop);
     _generation++;
     loading = false;

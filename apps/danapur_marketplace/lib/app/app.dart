@@ -107,7 +107,9 @@ class _AppShellState extends State<AppShell> {
   }
 
   void _searchChanged() {
-    if (mounted) setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -127,7 +129,9 @@ class _AppShellState extends State<AppShell> {
       _area = null;
       _sort = ProductSort.newest;
     });
-    if (_scroll.hasClients) _scroll.jumpTo(0);
+    if (_scroll.hasClients) {
+      _scroll.jumpTo(0);
+    }
   }
 
   void _clearFilters() {
@@ -264,7 +268,9 @@ class _AppShellState extends State<AppShell> {
                               if (value == 'about' && ctx.mounted) {
                                 showInfo(ctx);
                               }
-                              if (value == 'admin') _setTab(5);
+                              if (value == 'admin') {
+                                _setTab(5);
+                              }
                             },
                             itemBuilder: (_) => [
                               const PopupMenuItem(

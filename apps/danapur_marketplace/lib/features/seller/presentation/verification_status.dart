@@ -91,7 +91,9 @@ class VerificationStatusCard extends StatelessWidget {
                 TextButton.icon(
                   onPressed: () async {
                     await Clipboard.setData(ClipboardData(text: shop.id));
-                    if (context.mounted) toast(context, 'Request ID copied.');
+                    if (context.mounted) {
+                      toast(context, 'Request ID copied.');
+                    }
                   },
                   icon: const Icon(Icons.copy_outlined, size: 16),
                   label: const Text('Copy request ID'),

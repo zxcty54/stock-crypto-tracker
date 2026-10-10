@@ -66,9 +66,12 @@ class SupabaseMarketRepository extends MarketRepository {
   String? get ownerId => client.auth.currentUser?.id;
   @override
   Stream<void> get authChanges => client.auth.onAuthStateChange.map((state) {
-    if (state.event == AuthChangeEvent.passwordRecovery)
+    if (state.event == AuthChangeEvent.passwordRecovery) {
       _passwordRecovery = true;
-    if (state.event == AuthChangeEvent.signedOut) _passwordRecovery = false;
+    }
+    if (state.event == AuthChangeEvent.signedOut) {
+      _passwordRecovery = false;
+    }
   });
   String get _owner =>
       ownerId ?? (throw const MarketException('Sign in to manage your shop.'));
@@ -82,7 +85,9 @@ class SupabaseMarketRepository extends MarketRepository {
           .order('id')
           .range(rows.length, rows.length + batchSize - 1);
       rows.addAll(batch);
-      if (batch.length < batchSize) return rows;
+      if (batch.length < batchSize) {
+        return rows;
+      }
     }
   }
 
@@ -121,10 +126,11 @@ class SupabaseMarketRepository extends MarketRepository {
   @override
   Future<Shop> saveShop(ShopDraft draft, {String? id}) async {
     draft.validate();
-    if (id == null && draft.verificationPhotoPath == null)
+    if (id == null && draft.verificationPhotoPath == null) {
       throw const MarketException(
         'Upload a current storefront photo before submitting your shop.',
       );
+    }
     final data = {...draft.toJson(), 'owner_id': _owner};
     final row = id == null
         ? await client.from('shops').insert(data).select().single()
@@ -199,8 +205,9 @@ class SupabaseMarketRepository extends MarketRepository {
     if (rows.isEmpty) {
       throw const MarketException('Shop was not found or is not yours.');
     }
-    if (shop.verificationPhotoPath != null)
+    if (shop.verificationPhotoPath != null) {
       await removeVerificationPhoto(shop.verificationPhotoPath!);
+    }
     for (final row in photos) {
       await removePhoto(row['image_url'] as String?);
     }
@@ -224,11 +231,17 @@ class SupabaseMarketRepository extends MarketRepository {
 
   @override
   Future<void> removePhoto(String? url) async {
-    if (url == null || ownerId == null) return;
+    if (url == null || ownerId == null) {
+      return;
+    }
     final base = client.storage.from('catalog-media').getPublicUrl('');
-    if (!url.startsWith(base)) return;
+    if (!url.startsWith(base)) {
+      return;
+    }
     final path = Uri.decodeComponent(url.substring(base.length));
-    if (!path.startsWith('$ownerId/')) return;
+    if (!path.startsWith('$ownerId/')) {
+      return;
+    }
     // Database writes are already committed. Cleanup is best-effort, never
     // turn a successful deletion into a misleading failed-save message.
     try {
@@ -256,7 +269,9 @@ class SupabaseMarketRepository extends MarketRepository {
 
   String get _authRedirect {
     const configured = String.fromEnvironment('DANAPUR_AUTH_REDIRECT_URL');
-    if (configured.isNotEmpty) return configured;
+    if (configured.isNotEmpty) {
+      return configured;
+    }
     return kIsWeb
         ? Uri.base.replace(path: '/', query: '', fragment: '').toString()
         : 'in.danapur.bazaar://auth-callback';
@@ -280,7 +295,9 @@ class SupabaseMarketRepository extends MarketRepository {
 
   @override
   Future<void> removeVerificationPhoto(String path) async {
-    if (!path.startsWith('$ownerId/')) return;
+    if (!path.startsWith('$ownerId/')) {
+      return;
+    }
     try {
       await client.storage.from('shop-verification').remove([path]);
     } catch (_) {}
@@ -376,16 +393,19 @@ class SupabaseMarketRepository extends MarketRepository {
 
   @override
   Future<void> deleteAccount() async {
-    if (await client.rpc('can_delete_market_account') != true)
+    if (await client.rpc('can_delete_market_account') != true) {
       throw const MarketException(
         'Create another administrator before deleting the last admin account.',
       );
+    }
     final own = await client
         .from('shops')
         .select()
         .eq('owner_id', _owner)
         .maybeSingle();
-    if (own != null) await deleteShop(Shop.fromJson(own));
+    if (own != null) {
+      await deleteShop(Shop.fromJson(own));
+    }
     await client.rpc('delete_market_account');
     await client.auth.signOut();
   }
@@ -395,16 +415,25 @@ class SupabaseMarketRepository extends MarketRepository {
 }
 
 String friendlyError(Object error) {
-  if (error is MarketException) return error.message;
-  if (error is AuthException) return error.message;
+  if (error is MarketException) {
+    return error.message;
+  }
+  if (error is AuthException) {
+    return error.message;
+  }
   if (error is PostgrestException) {
-    if (error.code == '42501')
+    if (error.code == '42501') {
       return 'This account is not permitted to perform that action.';
-    if (error.code == 'PGRST205' || error.code == '42P01')
+    }
+    if (error.code == 'PGRST205' || error.code == '42P01') {
       return 'The Supabase database is not installed. Run the documented migrations and catalogue seed, then refresh.';
-    if (error.code == '23505')
+    }
+    if (error.code == '23505') {
       return 'That shop or commodity already exists. Edit the existing record instead.';
-    if (error.code == 'P0001') return error.message;
+    }
+    if (error.code == 'P0001') {
+      return error.message;
+    }
   }
   return 'Could not complete this request. Check your connection and try again.';
 }

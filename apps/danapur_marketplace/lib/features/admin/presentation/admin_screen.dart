@@ -4,7 +4,6 @@ import '../../../core/data/repository.dart';
 import '../../../core/domain/market.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';
-import '../../mandi/domain/mandi.dart';
 import '../../mandi/presentation/mandi_screen.dart';
 import '../../seller/presentation/seller.dart';
 import 'admin_forms.dart';
@@ -24,13 +23,16 @@ class _AdminScreenState extends State<AdminScreen> {
     listenable: widget.controller,
     builder: (ctx, _) {
       final market = widget.controller;
-      if (market.ownerId == null) return SellerAuth(controller: market);
-      if (market.loading && !market.snapshot.isAdmin)
+      if (market.ownerId == null) {
+        return SellerAuth(controller: market);
+      }
+      if (market.loading && !market.snapshot.isAdmin) {
         return const Padding(
           padding: EdgeInsets.all(40),
           child: Center(child: CircularProgressIndicator()),
         );
-      if (!market.snapshot.isAdmin)
+      }
+      if (!market.snapshot.isAdmin) {
         return EmptyState(
           title: 'Administrator access required',
           message:
@@ -41,6 +43,7 @@ class _AdminScreenState extends State<AdminScreen> {
             child: const Text('Use another account'),
           ),
         );
+      }
       final shops =
           market.snapshot.shops
               .where(
@@ -410,12 +413,15 @@ class _VerificationPhotoDialogState extends State<VerificationPhotoDialog> {
               child: FutureBuilder<String>(
                 future: _url,
                 builder: (_, state) {
-                  if (state.hasError) return Text(friendlyError(state.error!));
-                  if (!state.hasData)
+                  if (state.hasError) {
+                    return Text(friendlyError(state.error!));
+                  }
+                  if (!state.hasData) {
                     return const Padding(
                       padding: EdgeInsets.all(40),
                       child: CircularProgressIndicator(),
                     );
+                  }
                   return Image.network(
                     state.data!,
                     fit: BoxFit.contain,

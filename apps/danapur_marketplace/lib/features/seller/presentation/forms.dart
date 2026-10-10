@@ -190,7 +190,9 @@ class _ShopFormState extends State<ShopForm> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     if (!_consent) {
       setState(
         () => _error =
@@ -226,11 +228,17 @@ class _ShopFormState extends State<ShopForm> {
         id: widget.shop?.id,
         photo: _proof,
       );
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (e) {
-      if (mounted) setState(() => _error = friendlyError(e));
+      if (mounted) {
+        setState(() => _error = friendlyError(e));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -378,18 +386,22 @@ class _ShopFormState extends State<ShopForm> {
                               maxWidth: 1200,
                               imageQuality: 70,
                             );
-                            if (file == null) return;
+                            if (file == null) {
+                              return;
+                            }
                             final photo = PickedPhoto.fromBytes(
                               await file.readAsBytes(),
                             );
-                            if (mounted)
+                            if (mounted) {
                               setState(() {
                                 _proof = photo;
                                 _error = null;
                               });
+                            }
                           } catch (error) {
-                            if (mounted)
+                            if (mounted) {
                               setState(() => _error = friendlyError(error));
+                            }
                           }
                         },
                   icon: const Icon(Icons.add_photo_alternate_outlined),
@@ -408,7 +420,7 @@ class _ShopFormState extends State<ShopForm> {
             title: const Text('Publish after approval'),
             subtitle: const Text(
               'Approval is always required. Turning this off hides an approved shop.',
-              style: const TextStyle(fontSize: 11),
+              style: TextStyle(fontSize: 11),
             ),
             value: _published,
             onChanged: (v) => setState(() => _published = v),
@@ -418,7 +430,7 @@ class _ShopFormState extends State<ShopForm> {
             controlAffinity: ListTileControlAffinity.leading,
             title: const Text(
               'I manage this real shop and agree to display its business address and contact number after approval.',
-              style: const TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
             value: _consent,
             onChanged: (v) => setState(() => _consent = v ?? false),
@@ -478,7 +490,9 @@ class _ProductFormState extends State<ProductForm> {
         maxWidth: 1200,
         imageQuality: 75,
       );
-      if (file == null) return;
+      if (file == null) {
+        return;
+      }
       final photo = PickedPhoto.fromBytes(await file.readAsBytes());
       if (mounted) {
         setState(() {
@@ -498,7 +512,9 @@ class _ProductFormState extends State<ProductForm> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -519,11 +535,17 @@ class _ProductFormState extends State<ProductForm> {
         id: widget.product?.id,
         photo: _photo,
       );
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (e) {
-      if (mounted) setState(() => _error = friendlyError(e));
+      if (mounted) {
+        setState(() => _error = friendlyError(e));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -656,7 +678,9 @@ class _ProductFormState extends State<ProductForm> {
               hintText: 'Optional',
             ),
             validator: (v) {
-              if ((v ?? '').trim().isEmpty) return null;
+              if ((v ?? '').trim().isEmpty) {
+                return null;
+              }
               final mrp = parsePrice(v!), price = parsePrice(_price.text);
               return mrp == null || price == null || mrp < price
                   ? 'MRP must be valid and not below the selling price.'

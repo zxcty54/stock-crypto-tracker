@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 String? validateBackendConfig(String url, String key) {
-  if (url.isEmpty && key.isEmpty)
+  if (url.isEmpty && key.isEmpty) {
     return 'Connect your Supabase project to activate Danapur Bazaar. Fill config/app_config.json or the two DANAPUR_SUPABASE GitHub secrets, then rebuild. No demo data is included.';
+  }
   if (url.isEmpty || key.isEmpty) {
     return 'Set both DANAPUR_SUPABASE_URL and DANAPUR_SUPABASE_ANON_KEY, then rebuild the app.';
   }

@@ -25,7 +25,9 @@ class _PasswordUpdatePanelState extends State<PasswordUpdatePanel> {
   }
 
   Future<void> _save() async {
-    if (!_form.currentState!.validate()) return;
+    if (!_form.currentState!.validate()) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = null;
@@ -39,9 +41,13 @@ class _PasswordUpdatePanelState extends State<PasswordUpdatePanel> {
         toast(context, 'Password updated.');
       }
     } catch (error) {
-      if (mounted) setState(() => _error = friendlyError(error));
+      if (mounted) {
+        setState(() => _error = friendlyError(error));
+      }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+      }
     }
   }
 

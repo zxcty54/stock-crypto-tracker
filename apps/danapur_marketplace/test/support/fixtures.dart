@@ -1,4 +1,4 @@
-import '../../lib/core/domain/market.dart';
+import 'package:danapur_marketplace/core/domain/market.dart';
 
 MarketSnapshot exampleMarket() {
   final time = DateTime.utc(2026, 10, 1);

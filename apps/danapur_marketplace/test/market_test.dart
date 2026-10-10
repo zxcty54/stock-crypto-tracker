@@ -1,4 +1,4 @@
-import '../lib/core/config/backend_config.dart';
+import 'package:danapur_marketplace/core/config/backend_config.dart';
 import 'support/repository.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -6,7 +6,6 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:danapur_marketplace/core/data/controller.dart';
 import 'package:danapur_marketplace/core/data/local_store.dart';
-import 'package:danapur_marketplace/core/data/repository.dart';
 import 'support/fixtures.dart';
 import 'package:danapur_marketplace/core/domain/market.dart';
 
