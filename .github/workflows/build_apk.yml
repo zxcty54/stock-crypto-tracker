@@ -111,14 +111,13 @@ jobs:
         working-directory: aangan
         run: |
           set -euo pipefail
-          APK_SEARCH_PARENT="$(dirname "$GITHUB_WORKSPACE")"
-          APK_PATH="$(find "$GITHUB_WORKSPACE" "$APK_SEARCH_PARENT/build" -name '*.apk' -print -quit 2>/dev/null || true)"
+          APK_SEARCH_ROOT="$(dirname "$(dirname "$GITHUB_WORKSPACE")")"
+          APK_PATH="$(find -L "$APK_SEARCH_ROOT" -type f -iname '*.apk' -print -quit 2>/dev/null || true)"
           if [[ -z "$APK_PATH" || ! -f "$APK_PATH" ]]; then
-            echo '::error::Flutter succeeded but no APK was found in the workspace build outputs.'
+            echo '::error::Flutter succeeded but no APK was found in the runner workspace.'
             while IFS= read -r path; do
               echo "::warning title=Android build output directory::$path"
-            done < <(find "$GITHUB_WORKSPACE" "$APK_SEARCH_PARENT/build" -type d \
-              \( -name build -o -name outputs \) -print 2>/dev/null | tail -n 30)
+            done < <(find -L "$APK_SEARCH_ROOT" -type d -name build -print 2>/dev/null | tail -n 30)
             exit 1
           fi
           PACKAGE_DIR="build/telegram-package"
