@@ -218,6 +218,8 @@ void main() {
     await tester.ensureVisible(find.byType(CheckboxListTile));
     await tester.tap(find.byType(CheckboxListTile));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Submit for review'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Submit for review'));
     await tester.pumpAndSettle();
     expect(controller.myShop, isNull);

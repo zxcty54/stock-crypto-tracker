@@ -66,6 +66,24 @@ class SellerDashboard extends StatelessWidget {
             onPressed: () => runAction(context, controller.repository.signOut),
             child: const Text('Sign out'),
           ),
+          TextButton.icon(
+            onPressed: () async {
+              if (await confirm(
+                    context,
+                    'Delete your account?',
+                    'Your login account will be permanently deleted. This cannot be undone.',
+                  ) &&
+                  context.mounted) {
+                await runAction(
+                  context,
+                  controller.repository.deleteAccount,
+                  success: 'Account deleted.',
+                );
+              }
+            },
+            icon: const Icon(Icons.person_remove_outlined, size: 17),
+            label: const Text('Delete account'),
+          ),
         ],
       );
     }
