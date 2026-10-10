@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-10 15:26:54 IST",
-  "worthy_count": 26,
+  "generated_at": "2026-10-10 15:34:52 IST",
+  "worthy_count": 25,
   "skipped_count": 12,
   "content_feed": [
     {
@@ -11,11 +11,11 @@
       "event_type": "ORDER_WIN",
       "broadcast_date": "09-Oct-2026 07:12:58",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/BEML_09102026071209_intimation_nse_signed.pdf",
-      "headline": "BEML Wins Export and Maintenance Order Worth Rs. 75.58 Crores",
+      "headline": "BEML Limited wins ₹75.58 crore order for export and maintenance of HMV 12x12 & HMV 8x8 to Southeast Asia",
       "content_worthy": true,
-      "worthiness_reason": "Material export order win valued at approximately Rs. 75.58 crores.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>BEML Limited (NSE: BEML)</b>\n\n<b>BEML Receives Export and Maintenance Order for HMV 12x12 & HMV 8x8</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs. 75.58 crores approx.\n- <b>Scope:</b> Export and maintenance of HMV 12x12 & HMV 8x8\n- <b>Geography:</b> Southeast Asian region\n\n📌 <b>What happened:</b>\n↳ BEML Limited has announced the receipt of an export and maintenance order for heavy mobility vehicles from the Southeast Asian region in the normal course of business.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BEML_09102026071209_intimation_nse_signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 15:26:54 IST"
+      "worthiness_reason": "Commercial order win with disclosed value.",
+      "telegram_post": "<b>📜 ORDER_WIN</b> | <b>BEML Limited (NSE: BEML)</b>\n\n<b>BEML Limited wins ₹75.58 crore order for export and maintenance of HMV 12x12 & HMV 8x8 to Southeast Asia</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> ₹75.58 crore\n- <b>Client Region:</b> Southeast Asia\n- <b>Products:</b> HMV 12x12 & HMV 8x8\n- <b>Scope:</b> Export and maintenance\n\n📌 <b>What happened:</b>\n↳ The order is part of BEML’s normal business operations, adding to its export and maintenance portfolio.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BEML_09102026071209_intimation_nse_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-10 15:34:52 IST"
     },
     {
       "hash": "40c30bd98476",
@@ -25,25 +25,11 @@
       "event_type": "ORDER_WIN",
       "broadcast_date": "09-Oct-2026 08:59:10",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/HIGHWAY123_09102026085436_HIL_Velanchettiyur_PR_Wo_08102026.pdf",
-      "headline": "Highway Infrastructure Secures Rs. 24.46 Crore NHAI Toll Contract",
+      "headline": "Highway Infrastructure Limited wins Rs. 24.46 crore toll operations contract from NHAI",
       "content_worthy": true,
-      "worthiness_reason": "Material contract win from NHAI worth Rs. 24.46 crore.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Highway Infrastructure Limited (NSE: HILINFRA)</b>\n\n<b>Highway Infrastructure Receives Work Order for Rs. 24.46 Crore Toll Operations Contract from NHAI</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> National Highways Authority of India (NHAI)\n- <b>Order Value:</b> Rs. 24.46 crore\n- <b>Project:</b> Operation and collection of user fees at Velanchettiyur Fee Plaza (Karur-Dindigul section of NH-7, Tamil Nadu)\n- <b>Execution Period:</b> 90 days\n- <b>Agreement Date:</b> October 08, 2026\n\n📌 <b>What happened:</b>\n↳ Highway Infrastructure Limited has entered into a contract agreement with NHAI for toll operations and maintenance of adjacent toilet facilities at the Velanchettiyur Fee Plaza in Tamil Nadu, strengthening its presence in Southern India.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/HIGHWAY123_09102026085436_HIL_Velanchettiyur_PR_Wo_08102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 15:26:54 IST"
-    },
-    {
-      "hash": "057c8626149f",
-      "symbol": "SUBEXLTD",
-      "company_name": "Subex Limited",
-      "category": "ORDER",
-      "event_type": "ORDER_WIN",
-      "broadcast_date": "09-Oct-2026 12:18:14",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SUBEXLTD_09102026121737_Deal_win_announcement.pdf",
-      "headline": "Subex secures USD 0.7 million deal from African mobile operator",
-      "content_worthy": true,
-      "worthiness_reason": "International order win for deploying AI-powered telecom solutions.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Subex Limited (NSE: SUBEXLTD)</b>\n\n<b>Subex secures USD 0.7 million deal from African mobile operator</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Leading African mobile operator\n- <b>Order Value:</b> USD 0.7 million\n- <b>Scope:</b> Deployment of HyperSense Fraud Management solutions\n- <b>Execution Period:</b> 3 years\n- <b>Geography:</b> International\n\n📌 <b>What happened:</b>\n↳ Subex Limited has secured a new deal with a leading African mobile operator to deploy its HyperSense Fraud Management solution across communications and mobile money operations.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SUBEXLTD_09102026121737_Deal_win_announcement.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 15:26:32 IST"
+      "worthiness_reason": "Commercial order win with disclosed value.",
+      "telegram_post": "<b>📜 ORDER_WIN</b> | <b>Highway Infrastructure Limited (NSE: HILINFRA)</b>\n\n<b>Highway Infrastructure Limited wins Rs. 24.46 crore toll operations contract from NHAI</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Value:</b> Rs. 24.46 crore\n- <b>Client:</b> National Highways Authority of India (NHAI)\n- <b>Location:</b> Velanchettiyur Fee Plaza, Tamil Nadu\n- <b>Duration:</b> 90 days\n- <b>Signed:</b> 08 Oct 2026\n\n📌 <b>What happened:</b>\n↳ HIL entered into a toll‑operations agreement with NHAI to collect user fees and maintain facilities at the Velanchettiyur plaza, expanding its footprint in Southern India.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/HIGHWAY123_09102026085436_HIL_Velanchettiyur_PR_Wo_08102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-10 15:34:52 IST"
     },
     {
       "hash": "e0b73cb1cab9",
@@ -53,11 +39,11 @@
       "event_type": "ORDER_WIN",
       "broadcast_date": "10-Oct-2026 13:30:22",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf",
-      "headline": "Viviana Power Tech bags turnkey contract worth Rs 466.74 crore",
+      "headline": "Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL",
       "content_worthy": true,
-      "worthiness_reason": "Major turnkey order win exceeding Rs 460 crore from a utility client.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech bags turnkey contract worth Rs 466.74 crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Madhya Gujarat Vij Company Limited (MGVCL)\n- <b>Order Value:</b> Rs 466,73,61,738 (inclusive of taxes)\n- <b>Scope:</b> Conversion of HT O/H 11 kv open line to MVCC overhead conductor and underground networking under SI Scheme – Robust-III\n- <b>Execution Period:</b> 18/16 Months from the dates of LOAs\n- <b>Geography:</b> Domestic\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech Limited has received a new turnkey contract from existing client MGVCL for electrical infrastructure works across various divisions.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 15:26:32 IST"
+      "worthiness_reason": "Commercial order win with material value.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs 466.73 crore\n- <b>Client:</b> MGVCL\n- <b>Scope:</b> Conversion of HT O/H 11 kv line to MVCC overhead conductor & underground networking\n- <b>Duration:</b> 18 months\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech has been awarded a new turnkey contract from MGVCL, valued at Rs 466.73 crore, covering conversion of high‑tension lines to medium‑voltage and underground networking across multiple MGVCL divisions.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-10 15:34:29 IST"
     },
     {
       "hash": "30fa7c1e7d1d",
@@ -374,28 +360,28 @@
       "symbol": "PREMIERPOL",
       "company_name": "Premier Polyfilm Limited",
       "category": "RESULT",
-      "event_type": "RESULT",
+      "event_type": "OTHER",
       "broadcast_date": "10-Oct-2026 15:09:32",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/PREMIERPOL_10102026150918_BMOUTCOME.pdf",
       "headline": "Outcome of Board Meeting",
       "content_worthy": false,
-      "worthiness_reason": "The financial results filing snippet does not disclose explicit numeric figures for Revenue and PAT.",
+      "worthiness_reason": "Financial results lack disclosed revenue and PAT figures.",
       "telegram_post": "",
-      "analyzed_at": "2026-10-10 15:26:11 IST"
+      "analyzed_at": "2026-10-10 15:34:08 IST"
     },
     {
       "hash": "3a7fd2fefd6f",
       "symbol": "DMART",
       "company_name": "Avenue Supermarts Limited",
       "category": "RESULT",
-      "event_type": "RESULT",
+      "event_type": "OTHER",
       "broadcast_date": "10-Oct-2026 15:22:43",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/DMART_10102026151828_ASLOutcomeofBM10102026.pdf",
       "headline": "Outcome of Board Meeting",
       "content_worthy": false,
-      "worthiness_reason": "The financial results filing summary and text do not contain explicit numeric values for Revenue and PAT.",
+      "worthiness_reason": "Financial results lack disclosed revenue and PAT figures.",
       "telegram_post": "",
-      "analyzed_at": "2026-10-10 15:26:11 IST"
+      "analyzed_at": "2026-10-10 15:34:08 IST"
     },
     {
       "hash": "10107b52dcc4",
