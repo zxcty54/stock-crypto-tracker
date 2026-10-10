@@ -38,6 +38,7 @@ class DelayedStore extends MemoryStore {
     await super.write(key, value);
   }
 }
+
 class FailOnceStore extends MemoryStore {
   bool failed = false;
   @override
@@ -296,13 +297,19 @@ void main() {
     store.pending[1].complete();
     await second;
     expect(controller.savedIds, {'sample-rice', 'sample-earbuds'});
-    expect((jsonDecode(store.read(MarketController.savedKey)!) as List).toSet(), controller.savedIds);
+    expect(
+      (jsonDecode(store.read(MarketController.savedKey)!) as List).toSet(),
+      controller.savedIds,
+    );
     controller.dispose();
   });
   test('a failed favourite write does not poison the write queue', () async {
     final store = FailOnceStore();
     final controller = MarketController(DemoRepository(store), store);
-    await expectLater(controller.toggleSaved('sample-rice'), throwsA(isA<MarketException>()));
+    await expectLater(
+      controller.toggleSaved('sample-rice'),
+      throwsA(isA<MarketException>()),
+    );
     await controller.toggleSaved('sample-earbuds');
     expect(controller.savedIds, {'sample-earbuds'});
     controller.dispose();
@@ -327,16 +334,34 @@ void main() {
       );
     });
     test('legacy anon JWT is allowed but session/privileged roles are not', () {
-      for (final role in ['anon', 'authenticated', 'postgres', 'supabase_admin']) {
-        final payload = base64Url.encode(utf8.encode(jsonEncode({'role': role}))).replaceAll('=', '');
-        final error = validateBackendConfig('https://example.supabase.co', 'header.$payload.signature');
+      for (final role in [
+        'anon',
+        'authenticated',
+        'postgres',
+        'supabase_admin',
+      ]) {
+        final payload = base64Url
+            .encode(utf8.encode(jsonEncode({'role': role})))
+            .replaceAll('=', '');
+        final error = validateBackendConfig(
+          'https://example.supabase.co',
+          'header.$payload.signature',
+        );
         expect(error == null, role == 'anon');
       }
     });
     test('malformed and opaque keys fail rather than falling back to demo', () {
       final body = base64Url.encode(utf8.encode('[]')).replaceAll('=', '');
-      for (final key in ['unknown-key', 'sb_publishable_', 'sb_publishable_has spaces', 'header.$body.signature']) {
-        expect(validateBackendConfig('https://example.supabase.co', key), isNotNull);
+      for (final key in [
+        'unknown-key',
+        'sb_publishable_',
+        'sb_publishable_has spaces',
+        'header.$body.signature',
+      ]) {
+        expect(
+          validateBackendConfig('https://example.supabase.co', key),
+          isNotNull,
+        );
       }
     });
     test('service-role credentials cannot be embedded', () {

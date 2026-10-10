@@ -16,7 +16,9 @@ Future<void> main() async {
       'Manrope': 'assets/fonts/OFL.txt',
       'Noto Sans Devanagari': 'assets/fonts/NOTO-OFL.txt',
     }.entries) {
-      yield LicenseEntryWithLineBreaks([font.key], await rootBundle.loadString(font.value));
+      yield LicenseEntryWithLineBreaks([
+        font.key,
+      ], await rootBundle.loadString(font.value));
     }
   });
   const url = String.fromEnvironment('DANAPUR_SUPABASE_URL');

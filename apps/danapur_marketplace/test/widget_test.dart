@@ -13,8 +13,12 @@ Future<void> loadFonts() async {
     loader.addFont(rootBundle.load('assets/fonts/Manrope-$weight.ttf'));
   }
   await loader.load();
-  await (FontLoader('Roboto')..addFont(rootBundle.load('assets/fonts/Manrope-400.ttf'))).load();
-  await (FontLoader('NotoSansDevanagari')..addFont(rootBundle.load('assets/fonts/NotoSansDevanagari-400.ttf'))).load();
+  await (FontLoader(
+    'Roboto',
+  )..addFont(rootBundle.load('assets/fonts/Manrope-400.ttf'))).load();
+  await (FontLoader('NotoSansDevanagari')
+        ..addFont(rootBundle.load('assets/fonts/NotoSansDevanagari-400.ttf')))
+      .load();
 }
 
 Future<MarketController> openApp(
@@ -138,42 +142,61 @@ void main() {
     );
   }
   for (final size in [const Size(390, 844), const Size(844, 390)]) {
-    testWidgets('onboarding with keyboard at ${size.width.toInt()}px stays scrollable', (tester) async {
-      await openApp(tester, size: size);
-      await tester.tap(find.text('My shop'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('create-shop')));
-      await tester.pumpAndSettle();
-      tester.view.viewInsets = FakeViewPadding(bottom: size.width > 700 ? 180.0 : 320.0);
-      addTearDown(tester.view.resetViewInsets);
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byKey(const ValueKey('shop-name')));
-      await tester.enterText(find.byKey(const ValueKey('shop-name')), 'दानापुर टेस्ट स्टोर');
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-      await tester.ensureVisible(find.byTooltip('Close form'));
-      await tester.tap(find.byTooltip('Close form'));
-      await tester.pumpAndSettle();
-      expect(find.byKey(const ValueKey('create-shop')), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    });
+    testWidgets(
+      'onboarding with keyboard at ${size.width.toInt()}px stays scrollable',
+      (tester) async {
+        await openApp(tester, size: size);
+        await tester.tap(find.text('My shop'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(const ValueKey('create-shop')));
+        await tester.pumpAndSettle();
+        tester.view.viewInsets = FakeViewPadding(
+          bottom: size.width > 700 ? 180.0 : 320.0,
+        );
+        addTearDown(tester.view.resetViewInsets);
+        await tester.pumpAndSettle();
+        await tester.ensureVisible(find.byKey(const ValueKey('shop-name')));
+        await tester.enterText(
+          find.byKey(const ValueKey('shop-name')),
+          'दानापुर टेस्ट स्टोर',
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.ensureVisible(find.byTooltip('Close form'));
+        await tester.tap(find.byTooltip('Close form'));
+        await tester.pumpAndSettle();
+        expect(find.byKey(const ValueKey('create-shop')), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
   }
 
-  testWidgets('long names and maximum rupee prices fit narrow product cards', (tester) async {
+  testWidgets('long names and maximum rupee prices fit narrow product cards', (
+    tester,
+  ) async {
     final controller = await openApp(tester, size: const Size(390, 844));
-    await controller.saveShop(const ShopDraft(
-      name: 'Local demo grocery', category: 'Grocery', area: 'Danapur Bazaar',
-      address: 'Test street, Danapur', phone: '9999999999',
-    ));
-    await controller.saveProduct(const ProductDraft(
-      name: 'A local product with a deliberately long name to check narrow card wrapping',
-      category: 'Grocery', pricePaise: maxPricePaise, mrpPaise: maxPricePaise,
-      unit: 'large family value pack / box',
-    ));
+    await controller.saveShop(
+      const ShopDraft(
+        name: 'Local demo grocery',
+        category: 'Grocery',
+        area: 'Danapur Bazaar',
+        address: 'Test street, Danapur',
+        phone: '9999999999',
+      ),
+    );
+    await controller.saveProduct(
+      const ProductDraft(
+        name:
+            'A local product with a deliberately long name to check narrow card wrapping',
+        category: 'Grocery',
+        pricePaise: 100000000,
+        mrpPaise: 100000000,
+        unit: 'large family value pack / box',
+      ),
+    );
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('₹10,00,000').first);
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
   });
-
 }

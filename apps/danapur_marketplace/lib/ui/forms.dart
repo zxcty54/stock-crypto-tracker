@@ -49,63 +49,97 @@ class FormSheet extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: 580,
-          maxHeight: (MediaQuery.sizeOf(context).height -
-                  MediaQuery.viewInsetsOf(context).bottom - 48)
-              .clamp(120, 900).toDouble(),
+          maxHeight:
+              (MediaQuery.sizeOf(context).height -
+                      MediaQuery.viewInsetsOf(context).bottom -
+                      48)
+                  .clamp(120, 900)
+                  .toDouble(),
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: LayoutBuilder(builder: (context, constraints) {
-            final scale = (MediaQuery.textScalerOf(context).scale(14) / 14)
-                .clamp(1, 3);
-            final compact = constraints.maxHeight < 320 * scale;
-            final fields = Column(mainAxisSize: MainAxisSize.min, children: [
-              body,
-              if (error != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 14),
-                  child: Text(error!,
-                    style: const TextStyle(color: Color(0xFFB44337)),
-                    textAlign: TextAlign.left,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final scale = (MediaQuery.textScalerOf(context).scale(14) / 14)
+                  .clamp(1, 3);
+              final compact = constraints.maxHeight < 320 * scale;
+              final fields = Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  body,
+                  if (error != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 14),
+                      child: Text(
+                        error!,
+                        style: const TextStyle(color: Color(0xFFB44337)),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                ],
+              );
+              final content = Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: 'Close form',
+                        onPressed: busy ? null : () => Navigator.pop(context),
+                        icon: const Icon(Icons.close_rounded),
+                      ),
+                    ],
                   ),
-                ),
-            ]);
-            final content = Column(mainAxisSize: MainAxisSize.min, children: [
-              Row(children: [
-                Expanded(child: Text(title,
-                  style: Theme.of(context).textTheme.titleLarge)),
-                IconButton(
-                  tooltip: 'Close form',
-                  onPressed: busy ? null : () => Navigator.pop(context),
-                  icon: const Icon(Icons.close_rounded),
-                ),
-              ]),
-              Align(alignment: Alignment.centerLeft, child: Text(subtitle,
-                style: const TextStyle(color: muted, fontSize: 12))),
-              const SizedBox(height: 22),
-              if (compact) fields
-              else Flexible(child: SingleChildScrollView(child: fields)),
-              const SizedBox(height: 18),
-              const Divider(),
-              const SizedBox(height: 10),
-              Row(children: [
-                TextButton(onPressed: busy ? null : () => Navigator.pop(context),
-                  child: const Text('Cancel')),
-                const Spacer(),
-                FilledButton.icon(
-                  onPressed: busy ? null : onSave,
-                  icon: busy
-                    ? const SizedBox(width: 16, height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Icon(Icons.check_rounded, size: 18),
-                  label: Text(busy ? 'Saving…' : saveLabel),
-                ),
-              ]),
-            ]);
-            // On short screens/with the keyboard open, scroll the entire form
-            // rather than overflowing its pinned heading and action buttons.
-            return compact ? SingleChildScrollView(child: content) : content;
-          }),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      subtitle,
+                      style: const TextStyle(color: muted, fontSize: 12),
+                    ),
+                  ),
+                  const SizedBox(height: 22),
+                  if (compact)
+                    fields
+                  else
+                    Flexible(child: SingleChildScrollView(child: fields)),
+                  const SizedBox(height: 18),
+                  const Divider(),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: busy ? null : () => Navigator.pop(context),
+                        child: const Text('Cancel'),
+                      ),
+                      const Spacer(),
+                      FilledButton.icon(
+                        onPressed: busy ? null : onSave,
+                        icon: busy
+                            ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(Icons.check_rounded, size: 18),
+                        label: Text(busy ? 'Saving…' : saveLabel),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+              // On short screens/with the keyboard open, scroll the entire form
+              // rather than overflowing its pinned heading and action buttons.
+              return compact ? SingleChildScrollView(child: content) : content;
+            },
+          ),
         ),
       ),
     ),
@@ -280,7 +314,9 @@ class _ShopFormState extends State<ShopForm> {
           ),
           SwitchListTile.adaptive(
             contentPadding: EdgeInsets.zero,
-            title: Text(widget.controller.isDemo ? 'Show in this demo' : 'Publish shop'),
+            title: Text(
+              widget.controller.isDemo ? 'Show in this demo' : 'Publish shop',
+            ),
             subtitle: Text(
               widget.controller.isDemo
                   ? 'This never publishes your shop to other users.'

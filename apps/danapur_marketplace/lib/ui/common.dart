@@ -99,7 +99,11 @@ void showInfo(
       actions: [
         if (!privacy)
           TextButton(
-            onPressed: () => showLicensePage(context: ctx, applicationName: 'Danapur Bazaar', applicationVersion: '0.1.0'),
+            onPressed: () => showLicensePage(
+              context: ctx,
+              applicationName: 'Danapur Bazaar',
+              applicationVersion: '0.1.0',
+            ),
             child: const Text('Open-source licenses'),
           ),
         TextButton(

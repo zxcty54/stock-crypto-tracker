@@ -468,8 +468,8 @@ class ShopPage extends StatelessWidget {
               shop.isExample
                   ? 'Sample data, not a real shop.'
                   : controller.isDemo
-                      ? 'Local demo shop • Not published to other users.'
-                      : 'Self-reported shop details • Updated ${updatedLabel(shop.updatedAt)}',
+                  ? 'Local demo shop • Not published to other users.'
+                  : 'Self-reported shop details • Updated ${updatedLabel(shop.updatedAt)}',
               style: const TextStyle(color: muted, fontSize: 11),
             ),
             const SizedBox(height: 34),
@@ -615,8 +615,8 @@ class ProductPage extends StatelessWidget {
             shop.isExample
                 ? 'Fictional example product and price.'
                 : controller.isDemo
-                    ? 'Demo product saved only on this device.'
-                    : 'Updated ${updatedLabel(product.updatedAt)} • Confirm price and availability with the shop.',
+                ? 'Demo product saved only on this device.'
+                : 'Updated ${updatedLabel(product.updatedAt)} • Confirm price and availability with the shop.',
             style: const TextStyle(fontSize: 11, color: muted),
           ),
           const SizedBox(height: 10),

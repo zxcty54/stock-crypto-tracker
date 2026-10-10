@@ -150,8 +150,12 @@ class SellerDashboard extends StatelessWidget {
                 ),
                 Tag(
                   controller.isDemo
-                      ? (shop.isPublished ? 'Shown in this demo' : 'Hidden in this demo')
-                      : (shop.isPublished ? 'Shop published' : 'Shop unpublished'),
+                      ? (shop.isPublished
+                            ? 'Shown in this demo'
+                            : 'Hidden in this demo')
+                      : (shop.isPublished
+                            ? 'Shop published'
+                            : 'Shop unpublished'),
                   icon: shop.isPublished
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
