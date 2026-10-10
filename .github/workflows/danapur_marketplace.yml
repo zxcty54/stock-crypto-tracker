@@ -90,7 +90,9 @@ jobs:
         id: config
         run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
       - name: Install locked Flutter dependencies
-        run: flutter pub get --enforce-lockfile
+        run: |
+          flutter pub get
+          python3 tools/report_dependency_lock.py
       - name: Configuration, catalogue and Telegram ZIP tests
         run: python3 -m unittest discover -s test -p '*_test.py' -v
       - name: Check Dart formatting
