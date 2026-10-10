@@ -1,4 +1,4 @@
-package in.aangan.biharrentals
+package `in`.aangan.biharrentals
 
 import io.flutter.embedding.android.FlutterActivity
 
