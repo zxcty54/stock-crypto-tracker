@@ -30,7 +30,7 @@ abstract class MarketRepository {
     String id,
     String decision,
     String note,
-    bool whatsappChecked,
+    bool photoChecked,
   ) async => throw const MarketException('Administrator access required.');
   Future<void> setMandiRate(
     MandiItem item,
@@ -362,7 +362,7 @@ class SupabaseMarketRepository extends MarketRepository {
     String id,
     String decision,
     String note,
-    bool whatsappChecked,
+    bool photoChecked,
   ) async {
     await client.rpc(
       'review_cash_shop',
@@ -370,7 +370,7 @@ class SupabaseMarketRepository extends MarketRepository {
         'p_shop_id': id,
         'p_decision': decision,
         'p_note': note.trim(),
-        'p_photo_checked': whatsappChecked,
+        'p_photo_checked': photoChecked,
       },
     );
   }

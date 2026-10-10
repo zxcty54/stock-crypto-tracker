@@ -310,12 +310,12 @@ class SampleRepository extends MarketRepository {
     String id,
     String decision,
     String note,
-    bool checked,
+    bool photoChecked,
   ) async {
     _staff();
     final shop = _shops.where((s) => s.id == id).first;
     if (decision == 'approved' &&
-        (!checked || shop.verificationPhotoPath == null)) {
+        (!photoChecked || shop.verificationPhotoPath == null)) {
       throw const MarketException('Review the private photo and proof first.');
     }
     _shops = _shops
@@ -573,17 +573,17 @@ class SampleRepository extends MarketRepository {
     MandiItem item,
     String type,
     String unit,
-    int min,
-    int max,
+    int minPaise,
+    int maxPaise,
     DateTime date,
     String note,
   ) async {
     _staff();
     if (!mandiPriceTypes.contains(type) ||
         !mandiUnits.contains(unit) ||
-        min < 1 ||
-        max < min ||
-        max > 100000000 ||
+        minPaise < 1 ||
+        maxPaise < minPaise ||
+        maxPaise > 100000000 ||
         mandiDateKey(date).compareTo(mandiDateKey(indiaNow())) > 0) {
       throw const MarketException('Use valid prices, unit and market date.');
     }
@@ -592,8 +592,8 @@ class SampleRepository extends MarketRepository {
       itemId: item.id,
       priceType: type,
       unit: unit,
-      minPaise: min,
-      maxPaise: max,
+      minPaise: minPaise,
+      maxPaise: maxPaise,
       effectiveDate: date,
       updatedAt: DateTime.now().toUtc(),
       note: note,

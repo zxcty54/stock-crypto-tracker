@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
-import '../../../core/data/repository.dart';
 import '../../../core/domain/market.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/common.dart';

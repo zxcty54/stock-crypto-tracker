@@ -322,10 +322,11 @@ class _AppShellState extends State<AppShell> {
                                 showInfo(ctx);
                               }
                               if ([
-                                'orders',
-                                'expenses',
-                                'samples',
-                              ].contains(value)) {
+                                    'orders',
+                                    'expenses',
+                                    'samples',
+                                  ].contains(value) &&
+                                  ctx.mounted) {
                                 Navigator.pushNamed(ctx, '/$value');
                               }
                               if (value == 'admin') {
