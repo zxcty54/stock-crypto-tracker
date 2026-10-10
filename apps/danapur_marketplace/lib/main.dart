@@ -19,7 +19,7 @@ Future<void> main() async {
     if (url.isEmpty) {
       repository = DemoRepository(store);
     } else {
-      await Supabase.initialize(url: url, anonKey: key);
+      await Supabase.initialize(url: url, publishableKey: key);
       repository = SupabaseMarketRepository(Supabase.instance.client);
     }
     runApp(DanapurApp(controller: MarketController(repository, store)));

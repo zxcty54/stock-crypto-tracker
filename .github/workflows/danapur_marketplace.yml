@@ -89,6 +89,7 @@ jobs:
         run: python3 -m unittest discover -s test -p 'build_config_test.py' -v
       - name: Format Dart and capture patch
         run: |
+          dart format lib test
           dart fix --apply
           dart format lib test
           git diff --binary -- lib test > "$RUNNER_TEMP/danapur-format.patch"
@@ -135,6 +136,12 @@ jobs:
       - name: Safe compiler diagnostics
         if: always()
         run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP"
+      - name: Bootstrap formatted source part 1
+        if: always() && env.DANAPUR_BOOTSTRAP_EXPORT == 'true'
+        run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP" source 0
+      - name: Bootstrap formatted source part 2
+        if: always() && env.DANAPUR_BOOTSTRAP_EXPORT == 'true'
+        run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP" source 9
       - name: Build summary
         if: success()
         run: |
