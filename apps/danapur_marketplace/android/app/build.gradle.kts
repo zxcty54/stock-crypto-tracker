@@ -31,6 +31,13 @@ android {
             }
         }
     }
+    packaging {
+        jniLibs {
+            // Keep the ONE universal APK small enough for direct Telegram upload.
+            // Android extracts the compatible native libraries during installation.
+            useLegacyPackaging = true
+        }
+    }
     buildTypes {
         release {
             // Debug-signed release APKs are for installation/testing, NOT Play Store publication.

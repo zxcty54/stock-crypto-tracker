@@ -51,7 +51,7 @@ flutter run                      # attached Android device
 flutter analyze --fatal-infos
 flutter test --coverage
 flutter build web --release --no-web-resources-cdn
-flutter build apk --release --split-per-abi
+flutter build apk --release
 ```
 
 For cloud builds, create an **ignored** local configuration JSON (do not commit it) and pass:
@@ -71,7 +71,7 @@ Serve compiled web assets with any static host. The default build uses `/` as ba
 
 ## GitHub Actions APKs and signing
 
-The workflow is scoped to `apps/danapur_marketplace/**`, and does not use StockPulse's keystore, Telegram bot or backend secrets. It builds separate ARM32, ARM64 and x86_64 APKs. Download the `danapur-bazaar-apks` artifact; ARM64 suits most recent Android phones.
+The workflow is scoped to `apps/danapur_marketplace/**` and does not use StockPulse's keystore or backend secrets. It builds **one universal APK**, containing ARMv7, ARM64 and x86_64 support. Download the `danapur-bazaar-apk` artifact: it contains a single `danapur-bazaar.apk` file. No architecture selection is needed. Compressed native-library packaging keeps this universal APK below Telegram's public Bot API upload limit.
 
 By default, release-optimised APKs are **debug-signed for testing**, not Play Store publication. For release signing, configure dedicated secrets in GitHub (never in chat or Git):
 
@@ -135,9 +135,34 @@ The fixture-based SQL tests do not provision or test a real Supabase project.
 
 
 **Verified implementation:** GitHub Actions builds genuine Flutter web output and
-Android split APKs, with 27 Flutter domain/widget tests, 10 offline configuration
-guard tests and the disposable PostgreSQL ownership/visibility tests. The app
+one universal Android APK, with 27 Flutter domain/widget tests, 10 offline configuration
+guard tests plus 16 offline Telegram-delivery tests and the disposable PostgreSQL ownership/visibility tests. The app
 includes keyboard/short-landscape and large-price/narrow-card regression tests.
 CI checks formatting rather than changing source, and enforces the committed
 lockfile. These checks are not a substitute for real-device testing, a provisioned
 Supabase environment or a public-launch security/legal review.
+
+
+### Automatic Telegram APK delivery
+
+After **both** Flutter build/tests and database policy checks pass, a separate
+least-privilege job sends `danapur-bazaar.apk` directly as a Telegram document,
+not a ZIP and not three separate APKs. Delivery runs on trusted `main`/working
+branch pushes and manual dispatches; pull-request runs never send to Telegram.
+
+Per the requested integration, it reuses the repository's existing
+`TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` secrets. Existing aliases
+`TELEGRAM_TOKEN`, `TELEGRAM_CHANNEL` and `CHAT_ID` are also supported. Credentials
+are scoped to the send step and are never printed or committed. No new bot or
+sharing of tokens in chat is required.
+
+A destination may be a numeric chat ID (including `-100…` channel/group IDs), an
+`@channel` username or a public `https://t.me/channel` link. **Private invite links
+are not Bot API chat IDs.** The bot needs permission to post documents in the
+configured chat/channel.
+
+The sender validates the Danapur package and all three ABIs, checks the public
+Bot API's 50 MB size limit, and checks Telegram's JSON `ok` plus message ID before
+reporting success. Delivery failures fail that job; the already-built APK stays
+available in Actions artifacts. Only explicit rate-limit responses are retried;
+ambiguous connection failures are not automatically resent to avoid duplicates.

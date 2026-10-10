@@ -55,6 +55,8 @@ jobs:
 
   flutter:
     name: Analyse, test, web and Android
+    outputs:
+      mode: ${{ steps.config.outputs.mode }}
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     defaults:
@@ -84,8 +86,8 @@ jobs:
         run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
       - name: Install Flutter dependencies
         run: flutter pub get --enforce-lockfile
-      - name: Build-config guard tests
-        run: python3 -m unittest discover -s test -p 'build_config_test.py' -v
+      - name: Configuration and Telegram delivery tests
+        run: python3 -m unittest discover -s test -p '*_test.py' -v
       - name: Check Dart formatting
         run: dart format --output=none --set-exit-if-changed lib test
       - name: Analyse
@@ -100,10 +102,11 @@ jobs:
         run: |
           set -o pipefail
           flutter build web --no-pub --release --no-web-resources-cdn --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-web.log"
-      - name: Build installable Android APKs
+      - name: Build one universal Android APK
         run: |
           set -o pipefail
-          flutter build apk --no-pub --release --split-per-abi --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
+          flutter build apk --no-pub --release --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/danapur-bazaar.apk
       - name: Upload web app
         uses: actions/upload-artifact@v6
         with:
@@ -111,11 +114,11 @@ jobs:
           path: apps/danapur_marketplace/build/web/
           if-no-files-found: error
           retention-days: 14
-      - name: Upload Android APKs
+      - name: Upload universal Android APK
         uses: actions/upload-artifact@v6
         with:
-          name: danapur-bazaar-apks
-          path: apps/danapur_marketplace/build/app/outputs/flutter-apk/*-release.apk
+          name: danapur-bazaar-apk
+          path: apps/danapur_marketplace/build/app/outputs/flutter-apk/danapur-bazaar.apk
           if-no-files-found: error
           retention-days: 14
       - name: Upload dependency lock and coverage
@@ -137,7 +140,38 @@ jobs:
             echo '## Danapur Bazaar'
             echo 'Mode: ${{ steps.config.outputs.mode }}'
             echo '- Download `danapur-bazaar-web` for the web app.'
-            echo '- Download `danapur-bazaar-apks`; use arm64-v8a for most recent Android phones.'
-            echo '- Without a dedicated upload keystore these APKs are debug-signed release builds, for testing only.'
+            echo '- Download `danapur-bazaar-apk`: one universal `danapur-bazaar.apk` for ARMv7, ARM64 and x86_64.'
+            echo '- Without a dedicated upload keystore this APK is a debug-signed release build, for testing only.'
             echo '- See apps/danapur_marketplace/README.md for cloud setup and launch limitations.'
           } >> "$GITHUB_STEP_SUMMARY"
+
+
+  telegram:
+    name: Deliver universal APK to Telegram
+    needs: [backend-security, flutter]
+    # Never send from a PR/fork, and wait for both build and policy checks.
+    if: >-
+      github.event_name != 'pull_request' &&
+      (github.ref == 'refs/heads/main' ||
+       github.ref == 'refs/heads/arena/c2853110-stock-crypto-tracker')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download the single APK
+        uses: actions/download-artifact@v7
+        with:
+          name: danapur-bazaar-apk
+          path: apps/danapur_marketplace/build/telegram/
+      - name: Send APK directly using the existing Telegram bot
+        working-directory: apps/danapur_marketplace
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHANNEL || secrets.CHAT_ID }}
+        run: |
+          python3 tools/send_apk_to_telegram.py build/telegram/danapur-bazaar.apk \
+            --mode "${{ needs.flutter.outputs.mode }}" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
