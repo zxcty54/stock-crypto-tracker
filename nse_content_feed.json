@@ -1,8 +1,64 @@
 {
-  "generated_at": "2026-10-10 21:29:35 IST",
-  "worthy_count": 29,
+  "generated_at": "2026-10-11 01:09:44 IST",
+  "worthy_count": 28,
   "skipped_count": 12,
   "content_feed": [
+    {
+      "hash": "03a5ce482831",
+      "symbol": "VRLLOG",
+      "company_name": "VRL Logistics Limited",
+      "category": "BUYBACK",
+      "event_type": "BUYBACK",
+      "broadcast_date": "08-Oct-2026 15:43:28",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026154226_PublicAnnouncementBuyBack.pdf",
+      "headline": "VRL Logistics approves buyback of up to 8.75 million shares",
+      "content_worthy": true,
+      "worthiness_reason": "Buyback approval with share count, price and total consideration disclosed",
+      "telegram_post": "💰 <b>#BUYBACK</b> | <b>VRL Logistics Limited (NSE: VRLLOG)</b>\n\n<b>VRL Logistics approves buyback of up to 8.75 million shares</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares:</b> 87,50,000 fully paid equity shares (face value Rs 10)\n- <b>Buyback price:</b> Rs 320 per share\n- <b>Total consideration:</b> up to ₹28,000/- (as per filing)\n- <b>Route:</b> Tender offer on a proportionate basis\n- <b>Approval:</b> Shareholders approved via postal ballot\n\n📌 <b>What happened:</b>\n↳ The company announced that shareholders have approved a buyback of up to 87.5 lakh shares at Rs 320 each, amounting to a maximum outlay of ₹28,000, to be executed through a tender offer.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026154226_PublicAnnouncementBuyBack.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:09:44 IST"
+    },
+    {
+      "hash": "5289e0e65c31",
+      "symbol": "VRLLOG",
+      "company_name": "VRL Logistics Limited",
+      "category": "BUYBACK",
+      "event_type": "BUYBACK",
+      "broadcast_date": "08-Oct-2026 16:08:36",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026160451_ShareholdersandBoardResBuyback08102026.pdf",
+      "headline": "VRL Logistics approves buyback of 87.5 lakh shares at ₹320 each",
+      "content_worthy": true,
+      "worthiness_reason": "Buyback approval with share count, price and total consideration disclosed.",
+      "telegram_post": "💰 <b>#BUYBACK</b> | <b>VRL Logistics Limited (NSE: VRLLOG)</b>\n\n<b>VRL Logistics approves buyback of 87.5 lakh shares at ₹320 each</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares to be bought back:</b> 87,50,000 fully paid‑up equity shares\n- <b>Buyback price:</b> ₹320 per share\n- <b>Total consideration:</b> up to ₹28,000 lakh (≈₹2,800 crore)\n- <b>Proportion of equity:</b> 5 % of paid‑up share capital; 24.51 % of paid‑up capital + free reserves\n- <b>Method:</b> Tender offer on a proportionate basis\n\n📌 <b>What happened:</b>\n↳ Shareholders approved the buyback via special resolution; the company filed the resolution with the exchange on 8 Oct 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026160451_ShareholdersandBoardResBuyback08102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:09:21 IST"
+    },
+    {
+      "hash": "e9458c488e66",
+      "symbol": "BLSE",
+      "company_name": "BLS E-Services Limited",
+      "category": "SPLIT",
+      "event_type": "STOCK_SPLIT",
+      "broadcast_date": "08-Oct-2026 18:44:13",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PROJECTSEWA_08102026184353_StockExchangeIntimation_08102026_Final_signed.pdf",
+      "headline": "BLS E-Services announces 1‑for‑2 share split (₹10 → ₹5)",
+      "content_worthy": true,
+      "worthiness_reason": "Stock split materially changes share structure and face value.",
+      "telegram_post": "✂️ <b>#STOCK_SPLIT</b> | <b>BLS E-Services Limited (NSE: BLSE)</b>\n\n<b>BLS E-Services announces 1‑for‑2 share split (₹10 → ₹5)</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Split Ratio:</b> 1 share (₹10) split into 2 shares (₹5)\n- <b>Authorized Capital:</b> 11,00,00,000 shares @ ₹10 → 22,00,00,000 shares @ ₹5\n- <b>Paid‑up Capital:</b> 9,08,56,485 shares @ ₹10 (₹90,85,64,850) → 18,17,12,970 shares @ ₹5 (₹90,85,64,850)\n- <b>New ISIN:</b> INE0NLT01028\n\n📌 <b>What happened:</b>\n↳ The company completed a 1‑for‑2 sub‑division of its equity shares, reducing face value from ₹10 to ₹5 and crediting the split shares to depositories.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PROJECTSEWA_08102026184353_StockExchangeIntimation_08102026_Final_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:09:21 IST"
+    },
+    {
+      "hash": "3626f3aa4883",
+      "symbol": "MANINFRA",
+      "company_name": "Man Infraconstruction Limited",
+      "category": "BUYBACK",
+      "event_type": "BUYBACK",
+      "broadcast_date": "08-Oct-2026 18:52:21",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/kunjalparekh_08102026185109_MICL.pdf",
+      "headline": "Man Infraconstruction Extinguishes 69.25 Lakh Shares in Ongoing Buyback",
+      "content_worthy": true,
+      "worthiness_reason": "Buyback extinguishment of 69.25 lakh shares.",
+      "telegram_post": "💰 <b>#BUYBACK</b> | <b>Man Infraconstruction Limited (NSE: MANINFRA)</b>\n\n<b>Man Infraconstruction Extinguishes 69.25 Lakh Shares in Ongoing Buyback</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares Extinguished:</b> 69,25,000\n- <b>Face Value:</b> ₹2\n- <b>Buyback Route:</b> Open Market\n- <b>Period:</b> Sep 9 – Sep 30 2026\n- <b>Post‑Extinguishment Share Capital:</b> 39,67,41,505 shares\n\n📌 <b>What happened:</b>\n↳ The company has completed the extinguishment of shares bought back under its open market buyback, reducing its share capital accordingly.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/kunjalparekh_08102026185109_MICL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:08:55 IST"
+    },
     {
       "hash": "057c8626149f",
       "symbol": "SUBEXLTD",
@@ -338,79 +394,23 @@
       "worthiness_reason": "New joint venture formation with significant shareholding and business scope.",
       "telegram_post": "💰 <b>#JOINT_VENTURE</b> | <b>Mangalore Refinery and Petrochemicals Limited (NSE: MRPL)</b>\n\n<b>MRPL Incorporates Joint Venture OPML with ONGC and OPaL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>JV Company:</b> ONGC Petrochemicals Marketing Limited (OPML)\n- <b>Shareholding:</b> 50% ONGC, 25% MRPL, 25% OPaL\n- <b>Incorporation Date:</b> 7 Oct 2026\n- <b>Authorized Capital:</b> ₹50 crore\n- <b>Business:</b> Integrated marketing & trading of petrochemicals\n\n📌 <b>What happened:</b>\n↳ MRPL announced the incorporation of a new joint venture with ONGC and OPaL to operate in the petrochemicals marketing space.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-10 01:08:57 IST"
-    },
-    {
-      "hash": "03a5ce482831",
-      "symbol": "VRLLOG",
-      "company_name": "VRL Logistics Limited",
-      "category": "BUYBACK",
-      "event_type": "BUYBACK",
-      "broadcast_date": "08-Oct-2026 15:43:28",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026154226_PublicAnnouncementBuyBack.pdf",
-      "headline": "VRL Logistics Announces Share Buyback of up to 87.5 lakh Shares at ₹320 each",
-      "content_worthy": true,
-      "worthiness_reason": "Share buyback approved by shareholders.",
-      "telegram_post": "💰 <b>#BUYBACK</b> | <b>VRL Logistics Limited (NSE: VRLLOG)</b>\n\n<b>VRL Logistics Announces Share Buyback of up to 87.5 lakh Shares at ₹320 each</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares:</b> 87,50,000\n- <b>Price:</b> ₹320 per share\n- <b>Total Consideration:</b> ₹28,000 lakh\n- <b>Route:</b> Tender offer\n\n📌 <b>What happened:</b>\n↳ Shareholders approved a buyback of up to 87.5 lakh fully paid-up equity shares at ₹320 each, to be executed via tender offer.\n\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026154226_PublicAnnouncementBuyBack.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:08:19 IST"
-    },
-    {
-      "hash": "5289e0e65c31",
-      "symbol": "VRLLOG",
-      "company_name": "VRL Logistics Limited",
-      "category": "BUYBACK",
-      "event_type": "BUYBACK",
-      "broadcast_date": "08-Oct-2026 16:08:36",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026160451_ShareholdersandBoardResBuyback08102026.pdf",
-      "headline": "VRL Logistics Limited approves buyback of 87.5 million shares at ₹320 each",
-      "content_worthy": true,
-      "worthiness_reason": "Buyback approved",
-      "telegram_post": "💰 <b>BUYBACK</b> | <b>VRL Logistics Limited (NSE: VRLLOG)</b>\n\n<b>VRL Logistics Limited approves buyback of 87.5 million shares at ₹320 each</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares to be bought back:</b> 87,50,000 equity shares\n- <b>Price per share:</b> ₹320\n- <b>Total consideration:</b> ₹28,000 lakh (₹2,80,000,000)\n- <b>Percentage of equity capital:</b> 5% of paid‑up equity shares\n- <b>Route:</b> Tender offer, proportionate basis\n\n📌 <b>What happened:</b>\n↳ Shareholders approved the buyback via postal ballot; the company will repurchase shares at ₹320 each under the Buy‑Back Regulations.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VRLLOGI_08102026160451_ShareholdersandBoardResBuyback08102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:07:47 IST"
-    },
-    {
-      "hash": "e9458c488e66",
-      "symbol": "BLSE",
-      "company_name": "BLS E-Services Limited",
-      "category": "SPLIT",
-      "event_type": "STOCK_SPLIT",
-      "broadcast_date": "08-Oct-2026 18:44:13",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PROJECTSEWA_08102026184353_StockExchangeIntimation_08102026_Final_signed.pdf",
-      "headline": "BLS E-Services Limited announces 1:2 stock split",
-      "content_worthy": true,
-      "worthiness_reason": "Stock split announced",
-      "telegram_post": "✂️ <b>STOCK_SPLIT</b> | <b>BLS E-Services Limited (NSE: BLSE)</b>\n\n<b>BLS E-Services Limited announces 1:2 stock split</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Pre‑split shares:</b> 11,00,00,000 equity shares, face value ₹10\n- <b>Post‑split shares:</b> 22,00,00,000 equity shares, face value ₹5\n- <b>Authorized capital:</b> ₹110,00,00,000 → ₹110,00,00,000 (unchanged)\n- <b>Issued & paid‑up capital:</b> ₹90,85,64,850 → ₹90,85,64,850 (unchanged)\n\n📌 <b>What happened:</b>\n↳ The company split each equity share into two, reducing face value from ₹10 to ₹5, and credited the new shares under ISIN INE0NLT01028.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PROJECTSEWA_08102026184353_StockExchangeIntimation_08102026_Final_signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:07:47 IST"
-    },
-    {
-      "hash": "7ead20011084",
-      "symbol": "PACEDIGITK",
-      "company_name": "Pace Digitek Limited",
-      "category": "ORDER",
-      "event_type": "ORDER",
-      "broadcast_date": "08-Oct-2026 18:47:58",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf",
-      "headline": "Pace Digitek Secures Rs 1,794 Cr LOI from BSES Rajdhani Power for 57.5 MW BESS",
-      "content_worthy": true,
-      "worthiness_reason": "Order win with LOI disclosed.",
-      "telegram_post": "📜 <b>#ORDER</b> | <b>Pace Digitek Limited (NSE: PACEDIGITK)</b>\n\n<b>Secures Rs 1,794 Cr LOI from BSES Rajdhani Power for 57.5 MW BESS</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>LOI Value:</b> ₹1,794 million\n- <b>Client:</b> BSES Rajdhani Power Limited\n- <b>Project Capacity:</b> 57.5 MW / 115 MWh\n- <b>Model:</b> 12‑year BOOT\n- <b>Capital Outlay:</b> ₹179.4 crore\n- <b>Execution Time:</b> 7 months\n\n📌 <b>What happened:</b>\n↳ Company received a Letter of Intent for a 57.5 MW BESS project under a 12‑year BOOT model, adding to its utility‑scale BOO/BOOT portfolio.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:07:25 IST"
-    },
-    {
-      "hash": "3626f3aa4883",
-      "symbol": "MANINFRA",
-      "company_name": "Man Infraconstruction Limited",
-      "category": "BUYBACK",
-      "event_type": "BUYBACK",
-      "broadcast_date": "08-Oct-2026 18:52:21",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/kunjalparekh_08102026185109_MICL.pdf",
-      "headline": "Man Infraconstruction Limited Extinguishes 69.25 Lakh Shares in Ongoing Buyback",
-      "content_worthy": true,
-      "worthiness_reason": "Buyback extinguishment of shares.",
-      "telegram_post": "💰 <b>#BUYBACK</b> | <b>Man Infraconstruction Limited (NSE: MANINFRA)</b>\n\n<b>Extinguishment of 69.25 lakh shares in ongoing buyback</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Shares Extinguished:</b> 69,25,000\n- <b>Face Value:</b> ₹2 per share\n- <b>Route:</b> Open market\n- <b>Period:</b> 9 Sep – 30 Sep 2026\n\n📌 <b>What happened:</b>\n↳ Company extinguished 69,25,000 fully paid‑up equity shares bought during its open‑market buyback offer.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/kunjalparekh_08102026185109_MICL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:07:25 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "80c06de4ffa7",
+      "symbol": "TCS",
+      "company_name": "Tata Consultancy Services Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "08-Oct-2026 15:40:12",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/TCS_CORPCS_08102026153124_Post_BM_SE_Letter_fin.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results disclosed without revenue or profit figures; only dividend information provided",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-11 01:09:44 IST"
+    },
     {
       "hash": "97549d73d846",
       "symbol": "GMBREW",
@@ -564,20 +564,6 @@
       "worthiness_reason": "Revenue not disclosed in filing.",
       "telegram_post": "",
       "analyzed_at": "2026-10-10 01:09:41 IST"
-    },
-    {
-      "hash": "80c06de4ffa7",
-      "symbol": "TCS",
-      "company_name": "Tata Consultancy Services Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "08-Oct-2026 15:40:12",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/TCS_CORPCS_08102026153124_Post_BM_SE_Letter_fin.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Routine announcement with no financial results disclosed.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-10 01:08:19 IST"
     }
   ]
 }
