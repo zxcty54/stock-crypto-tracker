@@ -36,6 +36,7 @@ class SampleRepository extends MarketRepository {
           Map<String, dynamic>.from(data['settings'] as Map? ?? {}),
         );
         _role = data['role'] as String? ?? 'buyer';
+        _requests = Map<String, String>.from(data['requests'] as Map? ?? {});
       } catch (_) {
         _seed();
       }
@@ -52,6 +53,7 @@ class SampleRepository extends MarketRepository {
   List<OrderLine> _lines = [];
   List<Map<String, dynamic>> _expenseRows = [];
   Map<String, String> _proofs = {};
+  Map<String, String> _requests = {};
   String _role = 'buyer';
   MarketSettings _settings = const MarketSettings();
   void _seed() {
@@ -62,6 +64,7 @@ class SampleRepository extends MarketRepository {
     _lines = [];
     _expenseRows = [];
     _proofs = {};
+    _requests = {};
     _settings = const MarketSettings();
   }
 
@@ -104,6 +107,7 @@ class SampleRepository extends MarketRepository {
           'mandi_name': _settings.mandiName,
         },
         'role': _role,
+        'requests': _requests,
       }),
     );
   }
@@ -155,6 +159,7 @@ class SampleRepository extends MarketRepository {
     _lines = [];
     _expenseRows = [];
     _proofs = {};
+    _requests = {};
     await _persist();
   }
 
@@ -308,6 +313,10 @@ class SampleRepository extends MarketRepository {
     if (ownerId == null) {
       throw const MarketException('Choose the sample buyer profile.');
     }
+    final requestKey = '$ownerId/$requestId';
+    if (_requests.containsKey(requestKey)) {
+      return _requests[requestKey]!;
+    }
     final quote = quoteCart(await load(), items, mode, fix);
     if (quote.shop.ownerId == ownerId) {
       throw const MarketException(
@@ -363,6 +372,7 @@ class SampleRepository extends MarketRepository {
         ),
       );
     }
+    _requests[requestKey] = id;
     await _persist();
     return id;
   }
