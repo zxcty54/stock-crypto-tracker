@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-11 01:09:44 IST",
+  "generated_at": "2026-10-11 01:36:29 IST",
   "worthy_count": 28,
-  "skipped_count": 12,
+  "skipped_count": 11,
   "content_feed": [
+    {
+      "hash": "cf1f2ede393e",
+      "symbol": "MRPL",
+      "company_name": "Mangalore Refinery and Petrochemicals Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "08-Oct-2026 14:19:53",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf",
+      "headline": "MRPL, ONGC and OPaL Incorporate Joint Venture 'ONGC Petrochemicals Marketing Limited'",
+      "content_worthy": true,
+      "worthiness_reason": "Incorporation of a joint venture company for petrochemicals marketing and trading.",
+      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Mangalore Refinery and Petrochemicals Limited (NSE: MRPL)</b>\n\n<b>MRPL, ONGC and OPaL Incorporate Joint Venture 'ONGC Petrochemicals Marketing Limited'</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Entity Name:</b> ONGC Petrochemicals Marketing Limited (OPML)\n- <b>Partners & Ratio:</b> ONGC (50%), MRPL (25%), and OPaL (25%)\n- <b>Authorised & Subscribed Capital:</b> Rs. 50 Crore\n- <b>Business Objective:</b> Integrated marketing and trading of petrochemicals, chemicals and kindred products\n- <b>Date of Incorporation:</b> October 7, 2026\n\n📌 <b>What happened:</b>\n↳ MRPL announced the formal incorporation of ONGC Petrochemicals Marketing Limited as a public limited company in partnership with ONGC and OPaL to establish a single integrated marketing platform.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:36:29 IST"
+    },
+    {
+      "hash": "7ead20011084",
+      "symbol": "PACEDIGITK",
+      "company_name": "Pace Digitek Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "08-Oct-2026 18:47:58",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf",
+      "headline": "Pace Digitek Secures Rs. 179.4 Crore BESS Order from BSES Rajdhani",
+      "content_worthy": true,
+      "worthiness_reason": "Major order win for BESS project worth Rs. 1,794 Million.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Pace Digitek Limited (NSE: PACEDIGITK)</b>\n\n<b>Pace Digitek Secures Rs. 179.4 Crore BESS Order from BSES Rajdhani</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Counterparty:</b> BSES Rajdhani Power Limited (BRPL)\n- <b>Project Value:</b> Rs. 1,794 Million (approx. Rs. 179.4 Crore)\n- <b>Scope:</b> Design, supply, testing, installation, commissioning, operation and maintenance of 57.5 MW / 115 MWh BESS\n- <b>Model & Duration:</b> 12-year BOOT model with 7 months execution timeline\n\n📌 <b>What happened:</b>\n↳ Pace Digitek received a Letter of Intent from BSES Rajdhani Power Limited for developing a standalone Battery Energy Storage System in Delhi under a 12-year BOOT model.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-11 01:36:29 IST"
+    },
     {
       "hash": "03a5ce482831",
       "symbol": "VRLLOG",
@@ -366,34 +394,6 @@
       "worthiness_reason": "Corporate split is a material share‑holding event.",
       "telegram_post": "✂️ <b>#STOCK_SPLIT</b> | <b>Shankara Buildpro Limited (NSE: BUILDPRO)</b>\n\n<b>Shares to be split 1:5 on 8 Oct 2026</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Record Date:</b> 8 Oct 2026\n- <b>Split Ratio:</b> 1:5\n- <b>Old Face Value:</b> Rs 10\n- <b>New Face Value:</b> Rs 2\n\n📌 <b>What happened:</b>\n↳ The company will convert each existing equity share into five new shares, effective from the record date.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BUILDPRO_07102026212127_Letter.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-10 05:13:41 IST"
-    },
-    {
-      "hash": "e42ac9a2b238",
-      "symbol": "SWASTIKAIN",
-      "company_name": "Swastika Infra Limited",
-      "category": "ORDER",
-      "event_type": "ORDER_WIN",
-      "broadcast_date": "07-Oct-2026 10:29:06",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SWASTIKAINFRA_07102026102824_Disclosure_of_Order_win.pdf",
-      "headline": "Swastika Infra Secures ₹615.76 Crore Order from MSEDCL for Distribution Infrastructure Works",
-      "content_worthy": true,
-      "worthiness_reason": "Material order win disclosed.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Swastika Infra Limited (NSE: SWASTIKAIN)</b>\n\n<b>Swastika Infra Secures ₹615.76 Crore Order from MSEDCL for Distribution Infrastructure Works</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> ₹615.76 crore (incl. taxes)\n- <b>Client:</b> Maharashtra State Electricity Distribution Company Limited (MSEDCL)\n- <b>Scope:</b> Distribution Infrastructure & System Strengthening works in Bhandup Zone, Maharashtra\n- <b>Execution Period:</b> 24 months from LOA\n\n📌 <b>What happened:</b>\n↳ Award covers survey, design, engineering, supply, installation, testing and commissioning of distribution infrastructure.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SWASTIKAINFRA_07102026102824_Disclosure_of_Order_win.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:09:41 IST"
-    },
-    {
-      "hash": "cf1f2ede393e",
-      "symbol": "MRPL",
-      "company_name": "Mangalore Refinery and Petrochemicals Limited",
-      "category": "JV",
-      "event_type": "JOINT_VENTURE",
-      "broadcast_date": "08-Oct-2026 14:19:53",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf",
-      "headline": "MRPL Incorporates Joint Venture OPML with ONGC and OPaL",
-      "content_worthy": true,
-      "worthiness_reason": "New joint venture formation with significant shareholding and business scope.",
-      "telegram_post": "💰 <b>#JOINT_VENTURE</b> | <b>Mangalore Refinery and Petrochemicals Limited (NSE: MRPL)</b>\n\n<b>MRPL Incorporates Joint Venture OPML with ONGC and OPaL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>JV Company:</b> ONGC Petrochemicals Marketing Limited (OPML)\n- <b>Shareholding:</b> 50% ONGC, 25% MRPL, 25% OPaL\n- <b>Incorporation Date:</b> 7 Oct 2026\n- <b>Authorized Capital:</b> ₹50 crore\n- <b>Business:</b> Integrated marketing & trading of petrochemicals\n\n📌 <b>What happened:</b>\n↳ MRPL announced the incorporation of a new joint venture with ONGC and OPaL to operate in the petrochemicals marketing space.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 01:08:57 IST"
     }
   ],
   "skipped_archive": [
@@ -550,20 +550,6 @@
       "worthiness_reason": "Routine loan remittance to joint venture; not a material commercial development.",
       "telegram_post": "",
       "analyzed_at": "2026-10-10 05:14:31 IST"
-    },
-    {
-      "hash": "5b3c4d2b81dc",
-      "symbol": "ARCIL",
-      "company_name": "Asset Reconstruction Company (India) Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "07-Oct-2026 14:53:50",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ARCIL_07102026145237_Disclosure_of_Press_Release_June_2026_Signed.pdf",
-      "headline": "Press Release",
-      "content_worthy": false,
-      "worthiness_reason": "Revenue not disclosed in filing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-10 01:09:41 IST"
     }
   ]
 }
