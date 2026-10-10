@@ -1,0 +1,56 @@
+name: stockpulse
+description: Dalal Street Updates, Retail Bullion Terminal & Trader Community Platform
+publish_to: 'none'
+version: 1.0.0+11
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 📡 Networking & CDN JSON Fetching
+  http: ^1.2.0
+  receive_sharing_intent: ^1.8.1
+
+  # 🎨 Google Fonts & Icons
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.8
+  flutter_image_compress: ^2.3.0
+
+  # 💾 Local Storage (Trade Journal & Capital)
+  shared_preferences: ^2.2.2
+
+  # 🌐 Supabase Backend (Anonymous Auth, Database & Storage)
+  supabase_flutter: ^2.8.0
+
+  # 🖼️ Chart Screenshot Selection (Gallery / Camera)
+  image_picker: ^1.1.2
+
+  # ⚡ Fast Network Image Loading with Memory Cache
+  cached_network_image: ^3.4.1
+
+  # ⏳ Relative Time Formatting (e.g. '2m ago', 'Just now')
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
+
+# 📱 App Launcher Icon Configuration
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/data/stockpulse.jpeg"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  # 📂 Bundled Assets
+  assets:
+    - assets/data/bactest.json
+    - assets/data/stockpulse.jpeg
