@@ -143,6 +143,54 @@ class SellerDashboard extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 20),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SwitchListTile.adaptive(
+                  contentPadding: EdgeInsets.zero,
+                  value: shop.isOpen,
+                  title: Text(
+                    shop.isOpen ? 'Shop open for orders' : 'Shop closed today',
+                  ),
+                  subtitle: const Text(
+                    'Changing this does not cancel existing orders.',
+                    style: TextStyle(fontSize: 11),
+                  ),
+                  onChanged: (open) => runAction(context, () async {
+                    await controller.repository.setShopOpen(shop, open);
+                    await controller.reload();
+                  }),
+                ),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/shop-orders'),
+                      icon: const Icon(Icons.receipt_long_outlined),
+                      label: const Text('Incoming cash orders'),
+                    ),
+                    Tag(
+                      shop.offersDelivery
+                          ? 'Delivery enabled • 500 m'
+                          : 'Pickup only',
+                    ),
+                    Tag(
+                      controller.snapshot.settings.billingEnabled
+                          ? 'Membership ₹299/month • ${controller.snapshot.settings.membershipActive(shop) ? 'active' : 'expired'}'
+                          : 'Membership charging OFF',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 24),
         Card(
           child: Padding(
@@ -234,7 +282,7 @@ class SellerDashboard extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  '${money(p.pricePaise)} / ${p.unit}',
+                                  '${money(p.sellingPaise)} / ${p.unit}',
                                   style: const TextStyle(
                                     color: green,
                                     fontWeight: FontWeight.w700,

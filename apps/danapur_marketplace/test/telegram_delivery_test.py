@@ -163,7 +163,7 @@ class TelegramDeliveryTests(unittest.TestCase):
         stdout = io.StringIO()
         summary = Path(self.directory.name) / "summary.md"
         with patch.dict(os.environ, {"BOT_TOKEN": TOKEN, "CHAT_ID": CHAT, "GITHUB_STEP_SUMMARY": str(summary)}, clear=True), patch.object(delivery, "urlopen", return_value=success()), redirect_stdout(stdout):
-            self.assertEqual(delivery.main([str(self.apk), "--mode", "setup"]), 0)
+            self.assertEqual(delivery.main([str(self.apk), "--mode", "sample"]), 0)
         for text in (stdout.getvalue(), summary.read_text()):
             self.assertIn("321", text)
             self.assertIn("one universal APK", text)

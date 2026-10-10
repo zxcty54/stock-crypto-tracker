@@ -1,3 +1,4 @@
+import '../../features/orders/domain/commerce.dart';
 import '../../features/mandi/domain/mandi.dart';
 import '../../features/admin/domain/administration.dart';
 import 'dart:typed_data';
@@ -18,6 +19,30 @@ const categories = [
   'Fresh produce',
   'Sports & toys',
   'Other',
+  'Footwear',
+  'Garments',
+  'Photography',
+  'Mobile & accessories',
+  'Computer & accessories',
+  'Beauty & cosmetics',
+  'Bags & luggage',
+  'Kitchen & appliances',
+  'Dairy',
+  'Meat & fish',
+  'Bakery',
+  'Restaurant & snacks',
+  'Optical',
+  'Watches',
+  'Baby & kids',
+  'Pet supplies',
+  'Agriculture & seeds',
+  'Paints & plumbing',
+  'Tools & machinery',
+  'Handicrafts & gifts',
+  'Tailoring',
+  'Repairs & services',
+  'Printing & signage',
+  'Books & education',
   'Food & sweets',
 ];
 const areas = [
@@ -52,7 +77,14 @@ class Shop {
     required this.phone,
     required this.updatedAt,
     this.businessType = 'Retailer',
+    this.isOpen = true,
+    this.offersDelivery = false,
+    this.latitude,
+    this.longitude,
+    this.deliveryBasePaise = 0,
     this.reviewStatus = 'pending',
+    this.paidThrough,
+    this.isSample = false,
     this.verificationPhotoPath,
     this.reviewNote = '',
     this.description = '',
@@ -70,7 +102,12 @@ class Shop {
       hours;
   final String businessType, reviewStatus, reviewNote;
   final String? verificationPhotoPath;
+  final DateTime? paidThrough;
+  final bool isSample;
   bool get isPublic => isPublished && reviewStatus == 'approved';
+  final bool isOpen, offersDelivery;
+  final double? latitude, longitude;
+  final int deliveryBasePaise;
   final bool isPublished;
   final DateTime updatedAt;
   bool get isExample => ownerId.startsWith('sample-');
@@ -79,6 +116,15 @@ class Shop {
     id: json['id'] as String,
     ownerId: json['owner_id'] as String,
     businessType: json['business_type'] as String? ?? 'Retailer',
+    isOpen: json['is_open'] as bool? ?? true,
+    offersDelivery: json['offers_delivery'] as bool? ?? false,
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
+    deliveryBasePaise: (json['delivery_base_paise'] as num?)?.toInt() ?? 0,
+    paidThrough: json['paid_through'] == null
+        ? null
+        : DateTime.parse(json['paid_through'] as String),
+    isSample: json['is_sample'] as bool? ?? false,
     reviewStatus: json['review_status'] as String? ?? 'pending',
     verificationPhotoPath: json['verification_photo_path'] as String?,
     reviewNote: json['review_note'] as String? ?? '',
@@ -96,7 +142,14 @@ class Shop {
     'id': id,
     'owner_id': ownerId,
     'business_type': businessType,
+    'is_open': isOpen,
+    'offers_delivery': offersDelivery,
+    'latitude': latitude,
+    'longitude': longitude,
+    'delivery_base_paise': deliveryBasePaise,
     'review_status': reviewStatus,
+    'paid_through': paidThrough?.toIso8601String(),
+    'is_sample': isSample,
     'verification_photo_path': verificationPhotoPath,
     'review_note': reviewNote,
     'name': name,
@@ -120,6 +173,9 @@ class Product {
     required this.pricePaise,
     required this.updatedAt,
     this.mrpPaise,
+    this.discountPaise = 0,
+    this.deliveryAllowed = false,
+    this.deliveryExtraPaise = 0,
     this.description = '',
     this.unit = 'each',
     this.imageUrl,
@@ -130,6 +186,9 @@ class Product {
   final String? imageUrl;
   final int pricePaise;
   final int? mrpPaise;
+  final bool deliveryAllowed;
+  final int discountPaise, deliveryExtraPaise;
+  int get sellingPaise => pricePaise - discountPaise;
   final bool isAvailable;
   final DateTime updatedAt;
 
@@ -139,6 +198,9 @@ class Product {
     name: json['name'] as String,
     category: json['category'] as String,
     pricePaise: (json['price_paise'] as num).toInt(),
+    discountPaise: (json['discount_paise'] as num?)?.toInt() ?? 0,
+    deliveryAllowed: json['delivery_allowed'] as bool? ?? false,
+    deliveryExtraPaise: (json['delivery_extra_paise'] as num?)?.toInt() ?? 0,
     mrpPaise: (json['mrp_paise'] as num?)?.toInt(),
     description: json['description'] as String? ?? '',
     unit: json['unit'] as String? ?? 'each',
@@ -153,6 +215,9 @@ class Product {
     'name': name,
     'category': category,
     'price_paise': pricePaise,
+    'discount_paise': discountPaise,
+    'delivery_allowed': deliveryAllowed,
+    'delivery_extra_paise': deliveryExtraPaise,
     'mrp_paise': mrpPaise,
     'description': description,
     'unit': unit,
@@ -172,6 +237,9 @@ class MarketSnapshot {
     this.isAdmin = false,
     this.settings = const MarketSettings(),
     this.audit = const [],
+    this.orders = const [],
+    this.orderLines = const [],
+    this.expenses = const [],
   });
   final List<Shop> shops;
   final List<Product> products;
@@ -180,6 +248,9 @@ class MarketSnapshot {
   final bool isAdmin;
   final MarketSettings settings;
   final List<AuditEntry> audit;
+  final List<CashOrder> orders;
+  final List<OrderLine> orderLines;
+  final List<PersonalExpense> expenses;
   MarketSnapshot copyWith({List<Shop>? shops, List<Product>? products}) =>
       MarketSnapshot(
         shops: shops ?? this.shops,
@@ -189,6 +260,9 @@ class MarketSnapshot {
         isAdmin: isAdmin,
         settings: settings,
         audit: audit,
+        orders: orders,
+        orderLines: orderLines,
+        expenses: expenses,
       );
   factory MarketSnapshot.fromJson(Map<String, dynamic> json) => MarketSnapshot(
     shops: (json['shops'] as List)
@@ -212,6 +286,11 @@ class ShopDraft {
     required this.address,
     required this.phone,
     this.businessType = 'Retailer',
+    this.isOpen = true,
+    this.offersDelivery = false,
+    this.latitude,
+    this.longitude,
+    this.deliveryBasePaise = 0,
     this.verificationPhotoPath,
     this.description = '',
     this.hours = '',
@@ -220,9 +299,17 @@ class ShopDraft {
   final String name, category, area, address, phone, description, hours;
   final String businessType;
   final String? verificationPhotoPath;
+  final bool isOpen, offersDelivery;
+  final double? latitude, longitude;
+  final int deliveryBasePaise;
   final bool isPublished;
   Map<String, dynamic> toJson() => {
     'business_type': businessType,
+    'is_open': isOpen,
+    'offers_delivery': offersDelivery,
+    'latitude': latitude,
+    'longitude': longitude,
+    'delivery_base_paise': deliveryBasePaise,
     if (verificationPhotoPath != null)
       'verification_photo_path': verificationPhotoPath,
     'name': name.trim(),
@@ -235,6 +322,21 @@ class ShopDraft {
     'is_published': isPublished,
   };
   void validate() {
+    if (deliveryBasePaise < 0 ||
+        deliveryBasePaise > 10000000 ||
+        ((latitude == null) != (longitude == null)) ||
+        (latitude != null &&
+            (!latitude!.isFinite ||
+                !longitude!.isFinite ||
+                latitude! < -90 ||
+                latitude! > 90 ||
+                longitude! < -180 ||
+                longitude! > 180)) ||
+        (offersDelivery && latitude == null)) {
+      throw const MarketException(
+        'Choose valid shop coordinates and delivery charges.',
+      );
+    }
     if (!businessTypes.contains(businessType)) {
       throw const MarketException('Choose retailer or wholesaler.');
     }
@@ -262,6 +364,9 @@ class ProductDraft {
     required this.category,
     required this.pricePaise,
     this.mrpPaise,
+    this.discountPaise = 0,
+    this.deliveryAllowed = false,
+    this.deliveryExtraPaise = 0,
     this.description = '',
     this.unit = 'each',
     this.imageUrl,
@@ -272,11 +377,17 @@ class ProductDraft {
   final int pricePaise;
   final int? mrpPaise;
   final String? imageUrl;
+  final bool deliveryAllowed;
+  final int discountPaise, deliveryExtraPaise;
+  int get sellingPaise => pricePaise - discountPaise;
   final bool isAvailable;
   Map<String, dynamic> toJson() => {
     'name': name.trim(),
     'category': category,
     'price_paise': pricePaise,
+    'discount_paise': discountPaise,
+    'delivery_allowed': deliveryAllowed,
+    'delivery_extra_paise': deliveryExtraPaise,
     'mrp_paise': mrpPaise,
     'description': description.trim(),
     'unit': unit.trim(),
@@ -285,6 +396,14 @@ class ProductDraft {
     'is_available': isAvailable,
   };
   void validate() {
+    if (discountPaise < 0 ||
+        discountPaise >= pricePaise ||
+        deliveryExtraPaise < 0 ||
+        deliveryExtraPaise > 10000000) {
+      throw const MarketException(
+        'Discount must be below base price; delivery charge must be valid.',
+      );
+    }
     for (final error in [
       validateLength(name, 'Product name', 3, 100),
       validateLength(description, 'Description', 0, 800),
@@ -422,8 +541,8 @@ List<Product> filterProducts(
   result.sort(
     (a, b) => switch (sort) {
       ProductSort.newest => b.updatedAt.compareTo(a.updatedAt),
-      ProductSort.priceLow => a.pricePaise.compareTo(b.pricePaise),
-      ProductSort.priceHigh => b.pricePaise.compareTo(a.pricePaise),
+      ProductSort.priceLow => a.sellingPaise.compareTo(b.sellingPaise),
+      ProductSort.priceHigh => b.sellingPaise.compareTo(a.sellingPaise),
     },
   );
   return result;
@@ -435,7 +554,7 @@ Uri whatsappUri(Shop shop, [Product? product]) {
   }
   final message = product == null
       ? 'Namaste! I found ${shop.name} on Danapur Bazaar. I would like to enquire about your shop.'
-      : 'Namaste! I found ${product.name} (${money(product.pricePaise)} / ${product.unit}) at ${shop.name} on Danapur Bazaar. Is it available?';
+      : 'Namaste! I found ${product.name} (${money(product.sellingPaise)} / ${product.unit}) at ${shop.name} on Danapur Bazaar. Is it available?';
   return Uri.https('wa.me', '91${shop.phone}', {'text': message});
 }
 
@@ -449,4 +568,30 @@ Uri verificationWhatsappUri(Shop shop, String phone) {
     'text':
         'Namaste! Danapur Bazaar shop verification.\nRequest: ${shop.id}\nShop: ${shop.name}\nType: ${shop.businessType}\nAddress: ${shop.address}\nRegistered mobile: +91${shop.phone}\nI will attach a current storefront photo showing the shop signboard. Please review my onboarding request.',
   });
+}
+
+int? parseCharge(String input) =>
+    input.trim().isEmpty || RegExp(r'^0(?:\.0{1,2})?$').hasMatch(input.trim())
+    ? 0
+    : parsePrice(input);
+int? discountFromInput(String input, int basePaise, {bool percent = false}) {
+  if (!percent) {
+    final value = parseCharge(input);
+    return value != null && value < basePaise ? value : null;
+  }
+  final raw = input.trim();
+  if (raw.isEmpty) {
+    return 0;
+  }
+  if (!RegExp(r'^\d{1,2}(?:\.\d{1,2})?$').hasMatch(raw)) {
+    return null;
+  }
+  final parts = raw.split('.');
+  final basis =
+      int.parse(parts[0]) * 100 +
+      (parts.length == 1 ? 0 : int.parse(parts[1].padRight(2, '0')));
+  if (basis >= 10000) {
+    return null;
+  }
+  return basePaise * basis ~/ 10000;
 }

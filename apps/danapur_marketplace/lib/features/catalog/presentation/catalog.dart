@@ -98,7 +98,7 @@ class ProductCard extends StatelessWidget {
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(
-                          money(product.pricePaise),
+                          money(product.sellingPaise),
                           style: const TextStyle(
                             color: ink,
                             fontSize: 18,
@@ -106,7 +106,7 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                         if (product.mrpPaise != null &&
-                            product.mrpPaise! > product.pricePaise)
+                            product.mrpPaise! > product.sellingPaise)
                           Text(
                             money(product.mrpPaise!),
                             style: const TextStyle(
@@ -461,7 +461,7 @@ class ShopPage extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             Text(
-              '${shop.businessType} • Photo review ${shop.reviewStatus} • Updated ${updatedLabel(shop.updatedAt)}',
+              '${shop.businessType} • ${shop.isOpen ? 'Open' : 'Closed today'} • Photo review ${shop.reviewStatus} • Updated ${updatedLabel(shop.updatedAt)}',
               style: const TextStyle(color: muted, fontSize: 11),
             ),
             const SizedBox(height: 34),
@@ -527,7 +527,7 @@ class ProductPage extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text(
-                money(product.pricePaise),
+                money(product.sellingPaise),
                 style: const TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.w800,
@@ -535,7 +535,7 @@ class ProductPage extends StatelessWidget {
                 ),
               ),
               if (product.mrpPaise != null &&
-                  product.mrpPaise! > product.pricePaise)
+                  product.mrpPaise! > product.sellingPaise)
                 Text(
                   'MRP ${money(product.mrpPaise!)}',
                   style: const TextStyle(
@@ -603,13 +603,53 @@ class ProductPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 18),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              Tag(
+                shop.isOpen ? 'Open for orders' : 'Closed today',
+                icon: shop.isOpen
+                    ? Icons.storefront_outlined
+                    : Icons.lock_clock_outlined,
+              ),
+              Tag(
+                shop.offersDelivery && product.deliveryAllowed
+                    ? 'Home-delivery eligible • within 500 m'
+                    : 'Pickup only',
+              ),
+              if (product.discountPaise > 0)
+                Tag('Discount ${money(product.discountPaise)} / unit'),
+            ],
+          ),
+          const SizedBox(height: 14),
+          FilledButton.icon(
+            key: ValueKey('add-cart-${product.id}'),
+            onPressed:
+                !shop.isOpen ||
+                    !product.isAvailable ||
+                    !controller.snapshot.settings.membershipActive(shop)
+                ? null
+                : () => runAction(ctx, () async {
+                    controller.addToCart(product);
+                    await Navigator.pushNamed(ctx, '/cart');
+                  }),
+            icon: const Icon(Icons.add_shopping_cart),
+            label: const Text('Add to cart / cash checkout'),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Base ${money(product.pricePaise)} − discount ${money(product.discountPaise)} = ${money(product.sellingPaise)} / ${product.unit}. Delivery, when eligible: shop fee ${money(shop.deliveryBasePaise)} per order + ${money(product.deliveryExtraPaise)} per unit.',
+            style: const TextStyle(fontSize: 11, color: muted),
+          ),
+          const SizedBox(height: 18),
           Text(
             'Updated ${updatedLabel(product.updatedAt)} • Confirm price and availability with the shop.',
             style: const TextStyle(fontSize: 11, color: muted),
           ),
           const SizedBox(height: 10),
           const Text(
-            'Discovery only. No in-app checkout, payment or delivery.',
+            'Cash-only ordering. Seller fulfils eligible deliveries / pickup. No online payment gateway or delivery-time guarantee.',
             style: TextStyle(fontSize: 11, color: muted),
           ),
         ],

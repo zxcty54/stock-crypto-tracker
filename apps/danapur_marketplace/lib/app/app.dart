@@ -1,3 +1,8 @@
+import '../features/orders/presentation/cart_checkout.dart';
+import '../features/orders/presentation/orders_screen.dart';
+import '../features/expenses/presentation/expenses_screen.dart';
+import '../features/samples/presentation/sample_controls.dart';
+import '../features/catalog/presentation/category_gallery.dart';
 import '../features/auth/presentation/password_update.dart';
 import '../features/mandi/presentation/mandi_screen.dart';
 import '../features/admin/presentation/admin_screen.dart';
@@ -41,6 +46,41 @@ class _DanapurAppState extends State<DanapurApp> {
       Widget page;
       if (path.isEmpty) {
         page = AppShell(controller: widget.controller);
+      } else if (path.length == 1 &&
+          [
+            'cart',
+            'orders',
+            'expenses',
+            'shop-orders',
+            'samples',
+          ].contains(path[0])) {
+        final body = switch (path[0]) {
+          'cart' => CartCheckoutScreen(controller: widget.controller),
+          'orders' => OrdersScreen(controller: widget.controller),
+          'shop-orders' => OrdersScreen(
+            controller: widget.controller,
+            sellerOnly: true,
+          ),
+          'expenses' => ExpensesScreen(controller: widget.controller),
+          _ => SampleControls(controller: widget.controller),
+        };
+        page = Scaffold(
+          appBar: AppBar(title: const Brand(small: true)),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1000),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: body,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
       } else if (path.length == 1 && path[0] == 'admin') {
         page = Scaffold(
           appBar: AppBar(title: const Brand(small: true)),
@@ -98,7 +138,7 @@ class _AppShellState extends State<AppShell> {
   final _scroll = ScrollController();
   int _tab = 0;
   String? _category, _area;
-  ProductSort _sort = ProductSort.newest;
+  ProductSort _sort = ProductSort.priceLow;
   MarketController get market => widget.controller;
   @override
   void initState() {
@@ -127,7 +167,7 @@ class _AppShellState extends State<AppShell> {
       _search.clear();
       _category = null;
       _area = null;
-      _sort = ProductSort.newest;
+      _sort = ProductSort.priceLow;
     });
     if (_scroll.hasClients) {
       _scroll.jumpTo(0);
@@ -139,7 +179,7 @@ class _AppShellState extends State<AppShell> {
       _search.clear();
       _category = null;
       _area = null;
-      _sort = ProductSort.newest;
+      _sort = ProductSort.priceLow;
     });
   }
 
@@ -255,6 +295,19 @@ class _AppShellState extends State<AppShell> {
                               'DANAPUR',
                               icon: Icons.location_on_outlined,
                             ),
+                          IconButton(
+                            key: const ValueKey('open-cart'),
+                            tooltip: 'Cart (${market.cart.length})',
+                            onPressed: () => Navigator.pushNamed(ctx, '/cart'),
+                            icon: Badge(
+                              isLabelVisible: market.cart.isNotEmpty,
+                              label: Text('${market.cart.length}'),
+                              child: const Icon(
+                                Icons.shopping_cart_outlined,
+                                color: green,
+                              ),
+                            ),
+                          ),
                           PopupMenuButton<String>(
                             tooltip: 'Marketplace menu',
                             icon: const Icon(
@@ -267,6 +320,13 @@ class _AppShellState extends State<AppShell> {
                               }
                               if (value == 'about' && ctx.mounted) {
                                 showInfo(ctx);
+                              }
+                              if ([
+                                'orders',
+                                'expenses',
+                                'samples',
+                              ].contains(value)) {
+                                Navigator.pushNamed(ctx, '/$value');
                               }
                               if (value == 'admin') {
                                 _setTab(5);
@@ -282,6 +342,19 @@ class _AppShellState extends State<AppShell> {
                                 child: Text('About marketplace'),
                               ),
                               const PopupMenuItem(
+                                value: 'orders',
+                                child: Text('My cash orders'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'expenses',
+                                child: Text('Expense manager'),
+                              ),
+                              if (market.repository.sampleProfilesEnabled)
+                                const PopupMenuItem(
+                                  value: 'samples',
+                                  child: Text('Sample data / test profiles'),
+                                ),
+                              const PopupMenuItem(
                                 value: 'admin',
                                 child: Text('Admin panel'),
                               ),
@@ -293,6 +366,33 @@ class _AppShellState extends State<AppShell> {
                   ),
                 ),
               ),
+              if (market.repository.sampleProfilesEnabled)
+                Container(
+                  width: double.infinity,
+                  color: const Color(0xFFFFF0DC),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 10,
+                    children: [
+                      const Text(
+                        'Sample records • device-local testing, not real orders',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF98621E),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(ctx, '/samples'),
+                        child: const Text('Profiles / remove data'),
+                      ),
+                    ],
+                  ),
+                ),
               if (market.loading) const LinearProgressIndicator(minHeight: 2),
               Expanded(
                 child: RefreshIndicator(
@@ -383,14 +483,10 @@ class _AppShellState extends State<AppShell> {
                                       ?.unfocus(),
                                 ),
                                 const SizedBox(height: 22),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      _categoryChip(null),
-                                      ...categories.map(_categoryChip),
-                                    ],
-                                  ),
+                                CategoryGallery(
+                                  selected: _category,
+                                  onSelect: (category) =>
+                                      setState(() => _category = category),
                                 ),
                                 const SizedBox(height: 26),
                                 Wrap(
@@ -512,7 +608,7 @@ class _AppShellState extends State<AppShell> {
                                                         value: ProductSort
                                                             .priceLow,
                                                         child: Text(
-                                                          'Price: low to high',
+                                                          'Lowest item price',
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                           ),
@@ -631,32 +727,6 @@ class _AppShellState extends State<AppShell> {
         ),
       ),
       child: Text(title),
-    ),
-  );
-  Widget _categoryChip(String? category) => Padding(
-    padding: const EdgeInsets.only(right: 10),
-    child: ChoiceChip(
-      key: ValueKey('category-${category ?? 'all'}'),
-      selected: _category == category,
-      showCheckmark: false,
-      selectedColor: green,
-      backgroundColor: Colors.white,
-      side: BorderSide(color: _category == category ? green : line),
-      avatar: Icon(
-        category == null ? Icons.apps_rounded : categoryIcon(category),
-        size: 17,
-        color: _category == category ? Colors.white : green,
-      ),
-      label: Text(
-        category ?? 'Everything',
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: _category == category ? Colors.white : ink,
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      onSelected: (_) => setState(() => _category = category),
     ),
   );
   Widget _hero(bool small) => Container(

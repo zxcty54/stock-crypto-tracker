@@ -1,3 +1,4 @@
+import '../../../core/location/location_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/data/controller.dart';
@@ -172,9 +173,12 @@ class _ShopFormState extends State<ShopForm> {
       _address,
       _phone,
       _description,
-      _hours;
+      _hours,
+      _deliveryFee;
   late String _category, _area, _businessType;
   PickedPhoto? _proof;
+  bool _offersDelivery = false, _open = true, _locating = false;
+  double? _latitude, _longitude;
   bool _consent = false, _published = true, _busy = false;
   String? _error;
   @override
@@ -186,6 +190,13 @@ class _ShopFormState extends State<ShopForm> {
     _phone = TextEditingController(text: shop?.phone);
     _description = TextEditingController(text: shop?.description);
     _hours = TextEditingController(text: shop?.hours);
+    _deliveryFee = TextEditingController(
+      text: priceInput(shop?.deliveryBasePaise ?? 0),
+    );
+    _offersDelivery = shop?.offersDelivery ?? false;
+    _open = shop?.isOpen ?? true;
+    _latitude = shop?.latitude;
+    _longitude = shop?.longitude;
     _businessType = shop?.businessType ?? businessTypes.first;
     _category = shop?.category ?? categories.first;
     _area = shop?.area ?? areas.first;
@@ -195,7 +206,14 @@ class _ShopFormState extends State<ShopForm> {
 
   @override
   void dispose() {
-    for (final c in [_name, _address, _phone, _description, _hours]) {
+    for (final c in [
+      _name,
+      _address,
+      _phone,
+      _description,
+      _hours,
+      _deliveryFee,
+    ]) {
       c.dispose();
     }
     super.dispose();
@@ -228,6 +246,11 @@ class _ShopFormState extends State<ShopForm> {
         ShopDraft(
           name: _name.text,
           businessType: _businessType,
+          isOpen: _open,
+          offersDelivery: _offersDelivery,
+          latitude: _latitude,
+          longitude: _longitude,
+          deliveryBasePaise: parseCharge(_deliveryFee.text) ?? -1,
           verificationPhotoPath: widget.shop?.verificationPhotoPath,
           category: _category,
           area: _area,
@@ -258,7 +281,7 @@ class _ShopFormState extends State<ShopForm> {
   Widget build(BuildContext context) => FormSheet(
     title: widget.shop == null ? 'Create your shop' : 'Edit shop details',
     subtitle:
-        'Private application. Your shop appears to buyers only after photo + WhatsApp review and administrator approval.',
+        'Private application. Your shop appears to buyers only after storefront-photo review and administrator approval.',
     busy: _busy,
     error: _error,
     onSave: _save,
@@ -429,6 +452,78 @@ class _ShopFormState extends State<ShopForm> {
           const SizedBox(height: 18),
           SwitchListTile.adaptive(
             contentPadding: EdgeInsets.zero,
+            value: _open,
+            onChanged: (v) => setState(() => _open = v),
+            title: const Text('Shop open for orders today'),
+            subtitle: const Text(
+              'Closed shops remain discoverable but cannot accept new orders.',
+              style: TextStyle(fontSize: 11),
+            ),
+          ),
+          SwitchListTile.adaptive(
+            contentPadding: EdgeInsets.zero,
+            value: _offersDelivery,
+            onChanged: (v) => setState(() => _offersDelivery = v),
+            title: const Text('Offer home delivery within 500 m'),
+            subtitle: const Text(
+              'Products also need delivery enabled individually. COD eligibility uses straight-line distance.',
+              style: TextStyle(fontSize: 11),
+            ),
+          ),
+          if (_offersDelivery) ...[
+            TextFormField(
+              controller: _deliveryFee,
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              decoration: const InputDecoration(
+                labelText: 'Base delivery charge per order',
+                prefixText: '₹ ',
+                helperText:
+                    '0 for free delivery. Product handling charges can be additional.',
+              ),
+              validator: (v) {
+                final n = parseCharge(v ?? '');
+                return n == null || n > 10000000 ? 'Use ₹0–₹1,00,000.' : null;
+              },
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: _locating
+                  ? null
+                  : () async {
+                      setState(() => _locating = true);
+                      try {
+                        final fix = await currentLocation();
+                        if (mounted) {
+                          setState(() {
+                            _latitude = fix.latitude;
+                            _longitude = fix.longitude;
+                          });
+                        }
+                      } catch (error) {
+                        if (mounted) {
+                          setState(() => _error = friendlyError(error));
+                        }
+                      } finally {
+                        if (mounted) {
+                          setState(() => _locating = false);
+                        }
+                      }
+                    },
+              icon: const Icon(Icons.my_location),
+              label: Text(_locating ? 'Locating…' : 'Capture shop location'),
+            ),
+            Text(
+              _latitude == null
+                  ? 'Stand at your actual storefront and allow precise foreground location.'
+                  : 'Shop coordinates: ${_latitude!.toStringAsFixed(5)}, ${_longitude!.toStringAsFixed(5)}',
+              style: const TextStyle(color: muted, fontSize: 11),
+            ),
+            const SizedBox(height: 12),
+          ],
+          SwitchListTile.adaptive(
+            contentPadding: EdgeInsets.zero,
             title: const Text('Publish after approval'),
             subtitle: const Text(
               'Approval is always required. Turning this off hides an approved shop.',
@@ -463,7 +558,15 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
   final _form = GlobalKey<FormState>();
-  late final TextEditingController _name, _price, _mrp, _unit, _description;
+  late final TextEditingController _name,
+      _price,
+      _mrp,
+      _unit,
+      _description,
+      _discount,
+      _handling;
+  String _discountMode = 'amount';
+  bool _deliveryAllowed = false;
   late String _category;
   String? _imageUrl, _error;
   PickedPhoto? _photo;
@@ -485,11 +588,24 @@ class _ProductFormState extends State<ProductForm> {
         p?.category ?? widget.controller.myShop?.category ?? categories.first;
     _imageUrl = p?.imageUrl;
     _available = p?.isAvailable ?? true;
+    _discount = TextEditingController(text: priceInput(p?.discountPaise ?? 0));
+    _handling = TextEditingController(
+      text: priceInput(p?.deliveryExtraPaise ?? 0),
+    );
+    _deliveryAllowed = p?.deliveryAllowed ?? false;
   }
 
   @override
   void dispose() {
-    for (final c in [_name, _price, _mrp, _unit, _description]) {
+    for (final c in [
+      _name,
+      _price,
+      _mrp,
+      _unit,
+      _description,
+      _discount,
+      _handling,
+    ]) {
       c.dispose();
     }
     super.dispose();
@@ -537,6 +653,15 @@ class _ProductFormState extends State<ProductForm> {
           name: _name.text,
           category: _category,
           pricePaise: parsePrice(_price.text)!,
+          discountPaise:
+              discountFromInput(
+                _discount.text,
+                parsePrice(_price.text)!,
+                percent: _discountMode == 'percent',
+              ) ??
+              -1,
+          deliveryAllowed: _deliveryAllowed,
+          deliveryExtraPaise: parseCharge(_handling.text) ?? -1,
           mrpPaise: _mrp.text.trim().isEmpty ? null : parsePrice(_mrp.text),
           description: _description.text,
           unit: _unit.text,
@@ -672,7 +797,7 @@ class _ProductFormState extends State<ProductForm> {
             controller: _price,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(
-              labelText: 'Selling price *',
+              labelText: 'Base unit price *',
               prefixText: '₹ ',
               hintText: 'e.g. 120.50',
             ),
@@ -680,6 +805,79 @@ class _ProductFormState extends State<ProductForm> {
                 ? 'Enter ₹0.01–₹10,00,000, with up to 2 decimals.'
                 : null,
           ),
+          const SizedBox(height: 18),
+          DropdownButtonFormField<String>(
+            initialValue: _discountMode,
+            decoration: const InputDecoration(labelText: 'Discount style'),
+            items: const [
+              DropdownMenuItem(
+                value: 'amount',
+                child: Text('₹ off each listed unit'),
+              ),
+              DropdownMenuItem(
+                value: 'percent',
+                child: Text('% off base unit price'),
+              ),
+            ],
+            onChanged: (v) => setState(() {
+              _discountMode = v!;
+              _discount.text = '0';
+            }),
+          ),
+          const SizedBox(height: 18),
+          TextFormField(
+            controller: _discount,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            decoration: InputDecoration(
+              labelText: _discountMode == 'percent'
+                  ? 'Discount percentage'
+                  : 'Discount per unit',
+              helperText:
+                  'Optional; 0 means no discount. Percent discounts round down to a paise.',
+            ),
+            validator: (v) {
+              final base = parsePrice(_price.text);
+              return base == null ||
+                      discountFromInput(
+                            v ?? '',
+                            base,
+                            percent: _discountMode == 'percent',
+                          ) ==
+                          null
+                  ? 'Discount must leave a positive selling price.'
+                  : null;
+            },
+          ),
+          const SizedBox(height: 18),
+          SwitchListTile.adaptive(
+            contentPadding: EdgeInsets.zero,
+            value: _deliveryAllowed,
+            onChanged: (v) => setState(() => _deliveryAllowed = v),
+            title: const Text('Allow home delivery for this product'),
+            subtitle: const Text(
+              'Disable for heavy / bulky goods. Shop delivery must also be enabled; 500 m limit applies.',
+              style: TextStyle(fontSize: 11),
+            ),
+          ),
+          if (_deliveryAllowed)
+            TextFormField(
+              controller: _handling,
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              decoration: const InputDecoration(
+                labelText: 'Additional delivery handling per unit',
+                prefixText: '₹ ',
+                helperText:
+                    'Added to the shop delivery fee. 0 for no extra charge.',
+              ),
+              validator: (v) {
+                final fee = parseCharge(v ?? '');
+                return fee == null || fee > 10000000
+                    ? 'Use ₹0–₹1,00,000.'
+                    : null;
+              },
+            ),
           const SizedBox(height: 18),
           TextFormField(
             controller: _mrp,

@@ -1,3 +1,4 @@
+import '../../features/orders/domain/commerce.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -14,16 +15,23 @@ class MarketController extends ChangeNotifier {
     } catch (_) {
       savedIds = {};
     }
+    _observedUser = repository.ownerId;
     _subscription = repository.authChanges.listen((_) {
+      if (_observedUser != repository.ownerId) {
+        cart.clear();
+        _observedUser = repository.ownerId;
+      }
       snapshot = const MarketSnapshot();
       _notify();
       unawaited(reload());
     });
   }
+  String? _observedUser;
   final MarketRepository repository;
   final LocalStore store;
   static const savedKey = 'danapur.saved.v1';
   late Set<String> savedIds;
+  final List<CartLine> cart = [];
   MarketSnapshot snapshot = const MarketSnapshot();
   bool loading = false;
   String? error;
@@ -118,6 +126,11 @@ class MarketController extends ChangeNotifier {
         hours: draft.hours,
         isPublished: draft.isPublished,
         businessType: draft.businessType,
+        isOpen: draft.isOpen,
+        offersDelivery: draft.offersDelivery,
+        latitude: draft.latitude,
+        longitude: draft.longitude,
+        deliveryBasePaise: draft.deliveryBasePaise,
         verificationPhotoPath: uploaded ?? draft.verificationPhotoPath,
       );
       shop = await repository.saveShop(actual, id: id);
@@ -165,6 +178,9 @@ class MarketController extends ChangeNotifier {
         name: draft.name,
         category: draft.category,
         pricePaise: draft.pricePaise,
+        discountPaise: draft.discountPaise,
+        deliveryAllowed: draft.deliveryAllowed,
+        deliveryExtraPaise: draft.deliveryExtraPaise,
         mrpPaise: draft.mrpPaise,
         description: draft.description,
         unit: draft.unit,
@@ -224,11 +240,60 @@ class MarketController extends ChangeNotifier {
     _notify();
   }
 
+  void addToCart(Product product, {int quantity = 1}) {
+    if (quantity < 1 || quantity > 100) {
+      throw const MarketException('Quantity must be 1–100 listed units.');
+    }
+    if (cart.isNotEmpty) {
+      final first = snapshot.products
+          .where((p) => p.id == cart.first.productId)
+          .firstOrNull;
+      if (first != null && first.shopId != product.shopId) {
+        throw const MarketException(
+          'One shop per cart. Clear the current cart before choosing another shop.',
+        );
+      }
+    }
+    final index = cart.indexWhere((line) => line.productId == product.id);
+    final next = quantity + (index < 0 ? 0 : cart[index].quantity);
+    if (next > 100 || (index < 0 && cart.length >= 20)) {
+      throw const MarketException('Cart quantity/line limit reached.');
+    }
+    if (index < 0) {
+      cart.add(CartLine(product.id, next));
+    } else {
+      cart[index] = CartLine(product.id, next);
+    }
+    _notify();
+  }
+
+  void setCartQuantity(String id, int quantity) {
+    if (quantity < 0 || quantity > 100) {
+      return;
+    }
+    final index = cart.indexWhere((line) => line.productId == id);
+    if (index < 0) {
+      return;
+    }
+    if (quantity == 0) {
+      cart.removeAt(index);
+    } else {
+      cart[index] = CartLine(id, quantity);
+    }
+    _notify();
+  }
+
+  void clearCart() {
+    cart.clear();
+    _notify();
+  }
+
   @override
   void dispose() {
     _disposed = true;
     _generation++;
     unawaited(_subscription?.cancel());
+    repository.dispose();
     super.dispose();
   }
 }

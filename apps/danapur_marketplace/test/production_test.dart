@@ -116,8 +116,8 @@ void main() {
     expect(restored.verificationPhotoPath, 'owner/front.jpeg');
     expect(restored.businessType, 'Wholesaler');
   });
-  test('empty backend configuration is setup-required not demo', () {
-    expect(validateBackendConfig('', ''), contains('Connect your Supabase'));
+  test('blank config permits explicit local sample records', () {
+    expect(validateBackendConfig('', ''), isNull);
   });
   test('mandi dates use explicit yyyy-mm-dd values', () {
     expect(mandiDateKey(DateTime(2026, 2, 3)), '2026-02-03');

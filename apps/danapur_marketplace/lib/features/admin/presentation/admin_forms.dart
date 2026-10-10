@@ -35,13 +35,11 @@ class _ReviewShopFormState extends State<ReviewShopForm> {
     final noteError = validateLength(_note.text, 'Review note', 3, 400);
     if (noteError != null ||
         (_decision == 'approved' &&
-            (!_photo ||
-                !_whatsapp ||
-                widget.shop.verificationPhotoPath == null))) {
+            (!_photo || widget.shop.verificationPhotoPath == null))) {
       setState(
         () => _error =
             noteError ??
-            'Review the private storefront photo and match WhatsApp proof before approval.',
+            'Review the private storefront photo before approval. WhatsApp contact is optional extra evidence.',
       );
       return;
     }
@@ -54,7 +52,7 @@ class _ReviewShopFormState extends State<ReviewShopForm> {
         widget.shop.id,
         _decision,
         _note.text,
-        _whatsapp,
+        _photo,
       );
       await widget.controller.reload();
       if (mounted) {
@@ -115,7 +113,7 @@ class _ReviewShopFormState extends State<ReviewShopForm> {
               ? null
               : (value) => setState(() => _whatsapp = value ?? false),
           title: const Text(
-            'WhatsApp sender/photo match this shop and registered mobile',
+            'Optional: extra WhatsApp proof matches this shop',
             style: TextStyle(fontSize: 12),
           ),
         ),

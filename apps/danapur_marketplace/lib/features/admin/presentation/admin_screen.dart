@@ -1,3 +1,4 @@
+import 'cash_operations.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
 import '../../../core/data/repository.dart';
@@ -115,6 +116,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 'Mandi rates',
                 'Settings',
                 'Activity',
+                'Membership & samples',
               ].asMap().entries)
                 ChoiceChip(
                   label: Text(entry.value),
@@ -318,6 +320,8 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           ] else if (_tab == 2)
             MarketSettingsForm(controller: market)
+          else if (_tab == 4)
+            CashOperationsPanel(controller: market)
           else ...[
             Text(
               'Recent administrative activity',

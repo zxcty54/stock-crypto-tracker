@@ -1,3 +1,4 @@
+import '../../features/orders/domain/commerce.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 import '../domain/market.dart';
@@ -6,6 +7,7 @@ import '../../features/mandi/domain/mandi.dart';
 import '../../features/admin/domain/administration.dart';
 
 abstract class MarketRepository {
+  void dispose() {}
   String? get ownerId;
   Stream<void> get authChanges;
   Future<MarketSnapshot> load();
@@ -54,6 +56,43 @@ abstract class MarketRepository {
       throw const MarketException('Password update is unavailable.');
   Future<void> deleteAccount() async =>
       throw const MarketException('Account deletion is unavailable.');
+  bool get sampleProfilesEnabled => false;
+  Future<void> useSampleProfile(String role) async =>
+      throw const MarketException(
+        'Test profiles are available only with device-local sample data.',
+      );
+  Future<void> restoreSampleData() async => throw const MarketException(
+    'Install sample records with the documented SQL template.',
+  );
+  Future<void> removeSampleData() async =>
+      throw const MarketException('Administrator access required.');
+  Future<void> setShopOpen(Shop shop, bool open) async =>
+      throw const MarketException('Sign in as the shop owner.');
+  Future<String> placeCashOrder(
+    String shopId,
+    List<CartLine> items,
+    String mode,
+    String name,
+    String phone,
+    String address,
+    GeoFix? fix,
+    String requestId,
+  ) async => throw const MarketException('Sign in to order.');
+  Future<void> changeOrder(CashOrder order, String status, String note) async =>
+      throw const MarketException('Sign in to update the order.');
+  Future<void> saveExpense(
+    String? id,
+    int paise,
+    String category,
+    String note,
+    DateTime date,
+  ) async => throw const MarketException('Sign in to record expenses.');
+  Future<void> deleteExpense(PersonalExpense expense) async =>
+      throw const MarketException('Sign in to edit expenses.');
+  Future<void> configureBilling(bool enabled) async =>
+      throw const MarketException('Administrator access required.');
+  Future<void> extendMembership(Shop shop, DateTime until, String note) async =>
+      throw const MarketException('Administrator access required.');
 }
 
 class SupabaseMarketRepository extends MarketRepository {
@@ -101,6 +140,15 @@ class SupabaseMarketRepository extends MarketRepository {
       _allRows('mandi_items'),
       _allRows('current_mandi_rates'),
       _allRows('market_settings'),
+      ownerId == null
+          ? Future.value(<Map<String, dynamic>>[])
+          : _allRows('cash_orders'),
+      ownerId == null
+          ? Future.value(<Map<String, dynamic>>[])
+          : _allRows('cash_order_lines'),
+      ownerId == null
+          ? Future.value(<Map<String, dynamic>>[])
+          : _allRows('personal_expenses'),
     ]);
     return MarketSnapshot(
       shops: results[0].map(Shop.fromJson).toList(),
@@ -111,6 +159,9 @@ class SupabaseMarketRepository extends MarketRepository {
           ? const MarketSettings()
           : MarketSettings.fromJson(results[4].first),
       isAdmin: admin,
+      orders: results[5].map(CashOrder.fromJson).toList(),
+      orderLines: results[6].map(OrderLine.fromJson).toList(),
+      expenses: results[7].map(PersonalExpense.fromJson).toList(),
       audit: admin
           ? (await client
                     .from('market_audit')
@@ -314,12 +365,12 @@ class SupabaseMarketRepository extends MarketRepository {
     bool whatsappChecked,
   ) async {
     await client.rpc(
-      'review_market_shop',
+      'review_cash_shop',
       params: {
         'p_shop_id': id,
         'p_decision': decision,
         'p_note': note.trim(),
-        'p_whatsapp_checked': whatsappChecked,
+        'p_photo_checked': whatsappChecked,
       },
     );
   }
@@ -395,7 +446,7 @@ class SupabaseMarketRepository extends MarketRepository {
   Future<void> deleteAccount() async {
     if (await client.rpc('can_delete_market_account') != true) {
       throw const MarketException(
-        'Create another administrator before deleting the last admin account.',
+        'Close active orders first, and keep another administrator if deleting an admin account.',
       );
     }
     final own = await client
@@ -410,6 +461,90 @@ class SupabaseMarketRepository extends MarketRepository {
     await client.auth.signOut();
   }
 
+  @override
+  Future<void> setShopOpen(Shop shop, bool open) async {
+    final rows = await client
+        .from('shops')
+        .update({'is_open': open})
+        .eq('id', shop.id)
+        .eq('owner_id', _owner)
+        .select('id');
+    if (rows.isEmpty) {
+      throw const MarketException('Only the owner can change shop status.');
+    }
+  }
+
+  @override
+  Future<String> placeCashOrder(
+    String shopId,
+    List<CartLine> items,
+    String mode,
+    String name,
+    String phone,
+    String address,
+    GeoFix? fix,
+    String requestId,
+  ) async {
+    final id = await client.rpc(
+      'place_cash_order',
+      params: {
+        'p_shop': shopId,
+        'p_items': items.map((line) => line.toJson()).toList(),
+        'p_mode': mode,
+        'p_name': name.trim(),
+        'p_phone': phone.trim(),
+        'p_address': address.trim(),
+        'p_lat': fix?.latitude,
+        'p_lon': fix?.longitude,
+        'p_accuracy': fix?.accuracy,
+        'p_measured_at': fix?.measuredAt.toUtc().toIso8601String(),
+        'p_request': requestId,
+      },
+    );
+    return id as String;
+  }
+
+  @override
+  Future<void> changeOrder(CashOrder order, String status, String note) async =>
+      client.rpc(
+        'change_cash_order',
+        params: {'p_id': order.id, 'p_status': status, 'p_note': note.trim()},
+      );
+  @override
+  Future<void> saveExpense(
+    String? id,
+    int paise,
+    String category,
+    String note,
+    DateTime date,
+  ) async => client.rpc(
+    'save_personal_expense',
+    params: {
+      'p_id': id,
+      'p_amount': paise,
+      'p_category': category.trim(),
+      'p_note': note.trim(),
+      'p_date': mandiDateKey(date),
+    },
+  );
+  @override
+  Future<void> deleteExpense(PersonalExpense expense) async =>
+      client.rpc('delete_personal_expense', params: {'p_id': expense.id});
+  @override
+  Future<void> configureBilling(bool enabled) async =>
+      client.rpc('configure_cash_billing', params: {'p_enabled': enabled});
+  @override
+  Future<void> extendMembership(Shop shop, DateTime until, String note) async =>
+      client.rpc(
+        'extend_shop_membership',
+        params: {
+          'p_shop': shop.id,
+          'p_until': until.toUtc().toIso8601String(),
+          'p_note': note.trim(),
+        },
+      );
+  @override
+  Future<void> removeSampleData() async => client.rpc('purge_sample_catalog');
   @override
   Future<void> signOut() => client.auth.signOut();
 }

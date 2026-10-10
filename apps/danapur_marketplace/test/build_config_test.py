@@ -20,12 +20,12 @@ class BuildConfigTests(unittest.TestCase):
             mode = output.stat().st_mode & 0o777 if output.exists() else None
             return result, data, mode
 
-    def test_empty_configuration_is_setup_required(self):
+    def test_empty_configuration_uses_local_sample_records(self):
         result, data, mode = self.run_config({})
         self.assertEqual(result.returncode, 0)
         self.assertEqual(data['DANAPUR_SUPABASE_URL'], '')
         self.assertEqual(mode, 0o600)
-        self.assertIn('SETUP REQUIRED', result.stdout)
+        self.assertIn('LOCAL SAMPLE RECORDS', result.stdout)
 
     def test_partial_configuration_fails(self):
         result, data, _ = self.run_config({'DANAPUR_SUPABASE_URL': 'https://example.supabase.co'})

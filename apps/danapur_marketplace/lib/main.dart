@@ -1,3 +1,4 @@
+import 'features/samples/data/sample_repository.dart';
 import 'core/config/backend_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -25,14 +26,19 @@ Future<void> main() async {
   const url = String.fromEnvironment('DANAPUR_SUPABASE_URL');
   const key = String.fromEnvironment('DANAPUR_SUPABASE_ANON_KEY');
   final configError = validateBackendConfig(url, key);
-  if (configError != null) {
+  if (configError != null && !(url.isEmpty && key.isEmpty)) {
     runApp(StartupError(message: configError));
     return;
   }
   try {
     final store = PreferencesStore(await SharedPreferences.getInstance());
-    await Supabase.initialize(url: url, publishableKey: key);
-    final repository = SupabaseMarketRepository(Supabase.instance.client);
+    final MarketRepository repository;
+    if (url.isEmpty && key.isEmpty) {
+      repository = SampleRepository(store);
+    } else {
+      await Supabase.initialize(url: url, publishableKey: key);
+      repository = SupabaseMarketRepository(Supabase.instance.client);
+    }
     runApp(DanapurApp(controller: MarketController(repository, store)));
   } catch (_) {
     runApp(

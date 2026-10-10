@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 url = os.environ.get('DANAPUR_SUPABASE_URL', '').strip()
 key = os.environ.get('DANAPUR_SUPABASE_ANON_KEY', '').strip()
 if bool(url) != bool(key):
-    raise SystemExit('Set BOTH Danapur Supabase secrets, or neither for a setup-required build.')
+    raise SystemExit('Set BOTH Danapur Supabase secrets, or neither for explicitly labelled local sample records.')
 if url and (urlparse(url).scheme != 'https' or not urlparse(url).hostname or urlparse(url).hostname in ('localhost', '127.0.0.1', '::1') or urlparse(url).username is not None):
     raise SystemExit('Danapur backend URL must be HTTPS.')
 if key.startswith('sb_secret_'):
@@ -35,10 +35,10 @@ if redirect and not ((urlparse(redirect).scheme == 'https' and urlparse(redirect
     raise SystemExit('Use an HTTPS or the documented Android auth callback.')
 output.write_text(json.dumps({'DANAPUR_SUPABASE_URL': url, 'DANAPUR_SUPABASE_ANON_KEY': key, 'DANAPUR_AUTH_REDIRECT_URL': redirect}))
 output.chmod(0o600)
-print('Build mode: CLOUD' if url else 'Build mode: SETUP REQUIRED — no demo data or shared backend until configured')
+print('Build mode: CLOUD' if url else 'Build mode: LOCAL SAMPLE RECORDS — device-local testing, not real orders')
 if os.environ.get('GITHUB_OUTPUT'):
     with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
-        stream.write(f'mode={"cloud" if url else "setup"}\n')
+        stream.write(f'mode={"cloud" if url else "sample"}\n')
 
 keystore = os.environ.get('DANAPUR_ANDROID_KEYSTORE_BASE64', '').strip()
 parts = ['DANAPUR_KEYSTORE_PASSWORD', 'DANAPUR_KEY_ALIAS', 'DANAPUR_KEY_PASSWORD']

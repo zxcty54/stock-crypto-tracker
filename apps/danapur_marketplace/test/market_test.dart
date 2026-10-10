@@ -318,7 +318,7 @@ void main() {
   });
   group('backend configuration', () {
     test('demo is explicit; partial cloud config fails', () {
-      expect(validateBackendConfig('', ''), isNotNull);
+      expect(validateBackendConfig('', ''), isNull);
       expect(
         validateBackendConfig('https://example.supabase.co', ''),
         isNotNull,

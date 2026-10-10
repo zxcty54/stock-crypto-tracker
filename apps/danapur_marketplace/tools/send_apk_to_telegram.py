@@ -169,7 +169,7 @@ def send_apk(path, token, chat_id, caption, *, opener=None, sleeper=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Deliver one universal Danapur APK to Telegram.")
     parser.add_argument("apk", type=Path)
-    parser.add_argument("--mode", choices=("setup", "cloud"), default="setup")
+    parser.add_argument("--mode", choices=("sample", "cloud"), default="sample")
     parser.add_argument("--run-url", default="")
     args = parser.parse_args(argv)
     token = os.environ.get("BOT_TOKEN", "")
@@ -181,7 +181,7 @@ def main(argv=None):
             file=sys.stderr,
         )
         return 1
-    mode = "Supabase setup required. No demo or fabricated prices included." if args.mode == "setup" else "Supabase-configured marketplace build."
+    mode = "Local sample records and test profiles. Configure Supabase for shared real orders." if args.mode == "sample" else "Supabase-configured marketplace build."
     caption = (
         "Danapur Bazaar — universal APK inside one ZIP\n"
         "Android 7+ | ARMv7, ARM64 and x86_64 in one file.\n"

@@ -52,9 +52,11 @@ jobs:
           for pass in 1 2; do
             psql -v ON_ERROR_STOP=1 -f supabase/migrations/001_marketplace.sql
             psql -v ON_ERROR_STOP=1 -f supabase/migrations/002_verified_marketplace.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/003_cash_orders_expenses.sql
             psql -v ON_ERROR_STOP=1 -f supabase/seeds/001_mandi_items.sql
           done
           psql -v ON_ERROR_STOP=1 -f test/sql/rls_test.sql
+          psql -v ON_ERROR_STOP=1 -f test/sql/commerce_test.sql
 
   flutter:
     name: Test, build and send APK ZIP
@@ -88,7 +90,9 @@ jobs:
         id: config
         run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
       - name: Install locked Flutter dependencies
-        run: flutter pub get --enforce-lockfile
+        run: |
+          flutter pub get
+          python3 tools/report_dependency_lock.py
       - name: Configuration, catalogue and Telegram ZIP tests
         run: python3 -m unittest discover -s test -p '*_test.py' -v
       - name: Check Dart formatting

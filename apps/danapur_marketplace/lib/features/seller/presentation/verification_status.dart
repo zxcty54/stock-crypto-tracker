@@ -52,7 +52,7 @@ class VerificationStatusCard extends StatelessWidget {
             Text(
               approved
                   ? 'Your shop can be shown publicly while publication is enabled. Editing the shop name, address, category, mobile, business type or verification photo sends it back for review. Approval is a manual photo review, not government identity certification.'
-                  : 'Your shop and products are hidden from buyers. Send a current storefront/signboard photo from your registered business mobile to the verification WhatsApp. The administrator will match it to this request and approve or reject it.',
+                  : 'Your shop and products are hidden from buyers. The administrator reviews your uploaded storefront/signboard photo and request, then approves or rejects it. WhatsApp is optional if the operator requests extra evidence.',
               style: const TextStyle(color: muted, fontSize: 12, height: 1.6),
             ),
             if (shop.reviewNote.isNotEmpty)
@@ -104,7 +104,7 @@ class VerificationStatusCard extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Text(
-                  'The administrator must configure the verification WhatsApp number in Admin → Settings. Your private application is saved and remains pending.',
+                  'Your private application is saved for administrator review. WhatsApp contact is optional and becomes available when the operator configures it.',
                   style: TextStyle(color: muted, fontSize: 11),
                 ),
               ),
