@@ -146,9 +146,9 @@ class _AdminScreenState extends State<AdminScreen> {
       onRefresh: _loadQueue,
       color: AanganColors.forest,
       child: _pending.isEmpty
-          ? const ListView(
-              physics: AlwaysScrollableScrollPhysics(),
-              children: <Widget>[
+          ? ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: const <Widget>[
                 SizedBox(height: 100),
                 EmptyState(
                   icon: Icons.task_alt_rounded,
