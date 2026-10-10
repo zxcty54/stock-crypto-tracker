@@ -1,0 +1,143 @@
+name: Danapur Marketplace — Flutter builds
+
+on:
+  push:
+    branches: [main, arena/c2853110-stock-crypto-tracker]
+    paths:
+      - 'apps/danapur_marketplace/**'
+      - '.github/workflows/danapur_marketplace.yml'
+  pull_request:
+    paths:
+      - 'apps/danapur_marketplace/**'
+      - '.github/workflows/danapur_marketplace.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: danapur-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-security:
+    name: Verified shops, admin and mandi policy tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci-only-not-a-production-password
+          POSTGRES_DB: marketplace_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: ci-only-not-a-production-password
+      PGDATABASE: marketplace_test
+    steps:
+      - uses: actions/checkout@v6
+      - name: Apply migrations twice and test permissions
+        working-directory: apps/danapur_marketplace
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f test/sql/fixture.sql
+          for pass in 1 2; do
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/001_marketplace.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/002_verified_marketplace.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/003_cash_orders_expenses.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/004_completed_order_reviews.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/seeds/001_mandi_items.sql
+          done
+          psql -v ON_ERROR_STOP=1 -f test/sql/rls_test.sql
+          psql -v ON_ERROR_STOP=1 -f test/sql/commerce_test.sql
+          psql -v ON_ERROR_STOP=1 -f test/sql/reviews_test.sql
+
+  flutter:
+    name: Test, build and send APK ZIP
+    needs: backend-security
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: apps/danapur_marketplace
+    env:
+      DANAPUR_SUPABASE_URL: ${{ secrets.DANAPUR_SUPABASE_URL }}
+      DANAPUR_SUPABASE_ANON_KEY: ${{ secrets.DANAPUR_SUPABASE_ANON_KEY }}
+      DANAPUR_AUTH_REDIRECT_URL: ${{ secrets.DANAPUR_AUTH_REDIRECT_URL }}
+      DANAPUR_ANDROID_KEYSTORE_BASE64: ${{ secrets.DANAPUR_ANDROID_KEYSTORE_BASE64 }}
+      DANAPUR_KEYSTORE_PASSWORD: ${{ secrets.DANAPUR_KEYSTORE_PASSWORD }}
+      DANAPUR_KEY_ALIAS: ${{ secrets.DANAPUR_KEY_ALIAS }}
+      DANAPUR_KEY_PASSWORD: ${{ secrets.DANAPUR_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Safe, dedicated app configuration
+        id: config
+        run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
+      - name: Install locked Flutter dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Configuration, catalogue and Telegram ZIP tests
+        run: python3 -m unittest discover -s test -p '*_test.py' -v
+      - name: Check Dart formatting
+        run: dart format --output=none --set-exit-if-changed lib test
+      - name: Analyse
+        run: |
+          set -o pipefail
+          flutter analyze --no-pub --fatal-infos 2>&1 | tee "$RUNNER_TEMP/danapur-analysis.log"
+      - name: Domain and responsive widget tests
+        run: |
+          set -o pipefail
+          flutter test --no-pub --coverage 2>&1 | tee "$RUNNER_TEMP/danapur-tests.log"
+      - name: Build web with bundled renderer assets
+        run: |
+          set -o pipefail
+          flutter build web --no-pub --release --no-web-resources-cdn --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-web.log"
+      - name: Build one universal Android APK
+        run: |
+          set -o pipefail
+          flutter build apk --no-pub --release --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/danapur-bazaar.apk
+      - name: Send one APK inside ZIP directly to Telegram
+        if: >-
+          github.event_name != 'pull_request' &&
+          (github.ref == 'refs/heads/main' ||
+           github.ref == 'refs/heads/arena/c2853110-stock-crypto-tracker')
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHANNEL || secrets.CHAT_ID }}
+        run: |
+          python3 tools/send_apk_to_telegram.py build/app/outputs/flutter-apk/danapur-bazaar.apk \
+            --mode "${{ steps.config.outputs.mode }}" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - name: Safe compiler diagnostics
+        if: always()
+        run: python3 tools/ci_diagnostics.py "$RUNNER_TEMP"
+      - name: Build summary
+        if: success()
+        run: |
+          {
+            echo '## Danapur Bazaar'
+            echo 'Backend configuration: ${{ steps.config.outputs.mode }}'
+            echo '- One universal APK inside `danapur-bazaar.zip`, delivered directly to Telegram on trusted non-PR builds.'
+            echo '- No GitHub Actions artifacts are uploaded; no compiled binaries are committed.'
+            echo '- Empty Supabase values use clearly labelled removable local sample records; invalid/live errors never fall back.'
+            echo '- Without a dedicated upload keystore this is debug-signed for installation testing, not a production-signed release.'
+            echo '- Read apps/danapur_marketplace/docs/DEPLOYMENT.md before public launch.'
+          } >> "$GITHUB_STEP_SUMMARY"

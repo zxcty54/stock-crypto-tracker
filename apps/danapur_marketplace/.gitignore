@@ -1,0 +1,15 @@
+.dart_tool/
+.flutter-plugins*
+build/
+coverage/
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/keystore/
+*.iml
+.idea/
+.env*
+!.env.example
+
+config/app_config.json
+supabase/admin/first_admin.sql
