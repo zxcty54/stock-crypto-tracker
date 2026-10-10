@@ -73,7 +73,39 @@ jobs:
         run: |
           flutter build apk --release --target-platform android-arm64 --no-tree-shake-icons \
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
-            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            2>&1 | tee "$RUNNER_TEMP/aangan-apk-build.log"
+
+      - name: Surface Android build failure diagnostics
+        if: failure()
+        working-directory: aangan
+        run: |
+          LOG="$RUNNER_TEMP/aangan-apk-build.log"
+          if [[ ! -s "$LOG" ]]; then
+            echo '::notice::No captured APK build log was available.'
+            exit 0
+          fi
+          python3 - "$LOG" <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          lines = Path(sys.argv[1]).read_text(errors="replace").splitlines()
+          selected = [
+              line.strip()
+              for line in lines
+              if re.search(
+                  r"FAILURE:|What went wrong:|Execution failed|Could not (find|resolve)|error:|^e: |requires|Unsupported|not found",
+                  line,
+                  re.IGNORECASE,
+              )
+          ]
+          if not selected:
+              selected = lines[-30:]
+          for line in selected[-30:]:
+              message = line.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+              print(f"::error title=Android APK build::{message[:900]}")
+          PY
 
       - name: Package installable APK as ZIP
         working-directory: aangan
