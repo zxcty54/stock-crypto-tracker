@@ -111,7 +111,7 @@ jobs:
         working-directory: aangan
         run: |
           set -euo pipefail
-          APK_PATH="$(find build android -type f -name '*.apk' -print -quit 2>/dev/null || true)"
+          APK_PATH="$(find build android ../build -type f -name '*.apk' -print -quit 2>/dev/null || true)"
           if [[ -z "$APK_PATH" || ! -f "$APK_PATH" ]]; then
             echo '::error::Flutter succeeded but no APK was found under aangan/build or aangan/android.'
             find build android -type f -print 2>/dev/null | tail -n 40 || true
