@@ -103,7 +103,8 @@ drop policy if exists catalog_media_read on storage.objects;
 create policy catalog_media_read on storage.objects for select to anon, authenticated using (bucket_id = 'catalog-media');
 drop policy if exists catalog_media_insert on storage.objects;
 create policy catalog_media_insert on storage.objects for insert to authenticated
-  with check (bucket_id = 'catalog-media' and (storage.foldername(name))[1] = (select auth.uid())::text);
+  with check (bucket_id = 'catalog-media' and (storage.foldername(name))[1] = (select auth.uid())::text
+    and exists (select 1 from public.shops s where s.owner_id = (select auth.uid())));
 drop policy if exists catalog_media_delete on storage.objects;
 create policy catalog_media_delete on storage.objects for delete to authenticated
   using (bucket_id = 'catalog-media' and (storage.foldername(name))[1] = (select auth.uid())::text);
