@@ -1,3 +1,4 @@
+import '../../reviews/domain/order_review.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
@@ -52,6 +53,12 @@ class SampleRepository extends MarketRepository {
             )
             .toList();
         _requests = Map<String, String>.from(data['requests'] as Map? ?? {});
+        _reviews = (data['reviews'] as List? ?? [])
+            .map(
+              (row) =>
+                  OrderReview.fromJson(Map<String, dynamic>.from(row as Map)),
+            )
+            .toList();
       } catch (_) {
         _seed();
       }
@@ -69,6 +76,7 @@ class SampleRepository extends MarketRepository {
   List<Map<String, dynamic>> _expenseRows = [];
   List<MandiItem> _commodities = sampleCatalogue().mandiItems;
   List<MandiRate> _rates = [];
+  List<OrderReview> _reviews = [];
   Map<String, String> _proofs = {};
   Map<String, String> _requests = {};
   String _role = 'buyer';
@@ -84,6 +92,7 @@ class SampleRepository extends MarketRepository {
     _rates = [];
     _proofs = {};
     _requests = {};
+    _reviews = [];
     _settings = const MarketSettings();
   }
 
@@ -154,6 +163,7 @@ class SampleRepository extends MarketRepository {
             )
             .toList(),
         'requests': _requests,
+        'reviews': _reviews.map((review) => review.toJson()).toList(),
       }),
     );
   }
@@ -171,6 +181,24 @@ class SampleRepository extends MarketRepository {
       settings: _settings,
       mandiItems: _commodities,
       mandiRates: _rates,
+      publicReviews: _reviews
+          .where(
+            (review) =>
+                review.status == 'published' &&
+                _shops.any((shop) => shop.id == review.shopId && shop.isPublic),
+          )
+          .map((review) => review.publicProjection())
+          .toList(),
+      privateReviews: _reviews
+          .where(
+            (review) =>
+                review.buyerId == ownerId ||
+                _role == 'admin' ||
+                _shops.any(
+                  (shop) => shop.id == review.shopId && shop.ownerId == ownerId,
+                ),
+          )
+          .toList(),
       orders: visibleOrders,
       orderLines: _lines.where((l) => ids.contains(l.orderId)).toList(),
       expenses: _expenseRows
@@ -209,6 +237,7 @@ class SampleRepository extends MarketRepository {
     _rates = [];
     _proofs = {};
     _requests = {};
+    _reviews = [];
     await _persist();
   }
 
@@ -631,6 +660,84 @@ class SampleRepository extends MarketRepository {
       ),
     ];
     await _persist();
+  }
+
+  @override
+  Future<void> submitOrderReview(
+    CashOrder order,
+    int rating,
+    String comment,
+  ) async {
+    validateOrderReview(rating, comment);
+    final current = _orders.where((o) => o.id == order.id).firstOrNull;
+    if (current == null || current.buyerId != ownerId) {
+      throw const MarketException('Only this order buyer can leave feedback.');
+    }
+    if (current.status != 'completed') {
+      throw const MarketException(
+        'Feedback is available only after the order is completed.',
+      );
+    }
+    if (current.shopId == null ||
+        !_shops.any((shop) => shop.id == current.shopId)) {
+      throw const MarketException('The reviewed shop no longer exists.');
+    }
+    if (_reviews.any((review) => review.orderId == current.id)) {
+      throw const MarketException('You have already reviewed this order.');
+    }
+    final review = OrderReview(
+      id: const Uuid().v4(),
+      orderId: current.id,
+      buyerId: ownerId,
+      shopId: current.shopId!,
+      rating: rating,
+      comment: comment.trim(),
+      createdAt: DateTime.now().toUtc(),
+      status: 'pending',
+      isSample: true,
+    );
+    _reviews = [..._reviews, review];
+    try {
+      await _persist();
+    } catch (_) {
+      _reviews = _reviews.where((r) => r.id != review.id).toList();
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> moderateOrderReview(
+    OrderReview review,
+    bool publish,
+    String reason,
+  ) async {
+    _staff();
+    if (validateLength(reason, 'Moderation reason', 3, 300) != null) {
+      throw const MarketException(
+        'Add a moderation reason of 3–300 characters.',
+      );
+    }
+    if (!_reviews.any((row) => row.id == review.id)) {
+      throw const MarketException('Feedback not found.');
+    }
+    final before = _reviews;
+    _reviews = _reviews
+        .map(
+          (row) => row.id == review.id
+              ? OrderReview.fromJson({
+                  ...row.toJson(),
+                  'moderation_status': publish ? 'published' : 'hidden',
+                  'moderation_note': reason.trim(),
+                })
+              : row,
+        )
+        .toList();
+    try {
+      await _persist();
+    } catch (_) {
+      _reviews = before;
+      rethrow;
+    }
   }
 
   @override

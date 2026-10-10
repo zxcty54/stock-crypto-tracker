@@ -1,3 +1,4 @@
+import '../../reviews/presentation/review_moderation.dart';
 import 'dart:convert';
 import 'cash_operations.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +119,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 'Settings',
                 'Activity',
                 'Membership & samples',
+                'Order feedback',
               ].asMap().entries)
                 ChoiceChip(
                   label: Text(entry.value),
@@ -321,6 +323,8 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           ] else if (_tab == 2)
             MarketSettingsForm(controller: market)
+          else if (_tab == 5)
+            ReviewModerationPanel(controller: market)
           else if (_tab == 4)
             CashOperationsPanel(controller: market)
           else ...[

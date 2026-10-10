@@ -1,3 +1,4 @@
+import '../../features/reviews/domain/order_review.dart';
 import '../../features/orders/domain/commerce.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -91,6 +92,18 @@ abstract class MarketRepository {
       throw const MarketException('Sign in to edit expenses.');
   Future<void> configureBilling(bool enabled) async =>
       throw const MarketException('Administrator access required.');
+  Future<void> submitOrderReview(
+    CashOrder order,
+    int rating,
+    String comment,
+  ) async => throw const MarketException(
+    'Feedback is available only to the buyer after order completion.',
+  );
+  Future<void> moderateOrderReview(
+    OrderReview review,
+    bool publish,
+    String reason,
+  ) async => throw const MarketException('Administrator access required.');
   Future<void> extendMembership(Shop shop, DateTime until, String note) async =>
       throw const MarketException('Administrator access required.');
 }
@@ -149,6 +162,10 @@ class SupabaseMarketRepository extends MarketRepository {
       ownerId == null
           ? Future.value(<Map<String, dynamic>>[])
           : _allRows('personal_expenses'),
+      _allRows('public_shop_reviews'),
+      ownerId == null
+          ? Future.value(<Map<String, dynamic>>[])
+          : _allRows('shop_order_reviews'),
     ]);
     return MarketSnapshot(
       shops: results[0].map(Shop.fromJson).toList(),
@@ -162,6 +179,8 @@ class SupabaseMarketRepository extends MarketRepository {
       orders: results[5].map(CashOrder.fromJson).toList(),
       orderLines: results[6].map(OrderLine.fromJson).toList(),
       expenses: results[7].map(PersonalExpense.fromJson).toList(),
+      publicReviews: results[8].map(OrderReview.fromJson).toList(),
+      privateReviews: results[9].map(OrderReview.fromJson).toList(),
       audit: admin
           ? (await client
                     .from('market_audit')
@@ -545,6 +564,39 @@ class SupabaseMarketRepository extends MarketRepository {
       );
   @override
   Future<void> removeSampleData() async => client.rpc('purge_sample_catalog');
+  @override
+  Future<void> submitOrderReview(
+    CashOrder order,
+    int rating,
+    String comment,
+  ) async {
+    validateOrderReview(rating, comment);
+    await client.rpc(
+      'submit_completed_review',
+      params: {
+        'p_order_id': order.id,
+        'p_rating': rating,
+        'p_comment': comment.trim(),
+      },
+    );
+  }
+
+  @override
+  Future<void> moderateOrderReview(
+    OrderReview review,
+    bool publish,
+    String reason,
+  ) async {
+    await client.rpc(
+      'moderate_order_review',
+      params: {
+        'p_review_id': review.id,
+        'p_publish': publish,
+        'p_note': reason.trim(),
+      },
+    );
+  }
+
   @override
   Future<void> signOut() => client.auth.signOut();
 }

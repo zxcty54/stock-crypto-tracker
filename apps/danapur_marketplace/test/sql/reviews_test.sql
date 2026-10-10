@@ -1,0 +1,97 @@
+-- CI-only post-completion feedback permissions, moderation and public privacy.
+reset role;
+select set_config('request.jwt.claim.sub','',false);
+insert into auth.users values('44444444-4444-4444-8444-444444444444');
+select set_config('review_test.completed_order',(select id::text from public.cash_orders where request_id='cccccccc-0001-4001-8001-cccccccccccc'),false);
+set role authenticated;
+select set_config('request.jwt.claim.sub','22222222-2222-4222-8222-222222222222',false);
+select public.place_cash_order('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','[{"product_id":"aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa","quantity":1}]','pickup','Private customer name','8888888888','Private customer address',null,null,null,null,'dddddddd-0001-4001-8001-dddddddddddd');
+do $$ declare oid uuid; begin
+ select id into oid from public.cash_orders where request_id='dddddddd-0001-4001-8001-dddddddddddd';
+ begin perform public.submit_completed_review(oid,5,'Before completion'); raise exception 'placed order feedback accepted'; exception when raise_exception then if SQLERRM='placed order feedback accepted' then raise; end if; end;
+end $$;
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+select public.change_cash_order((select id from public.cash_orders where request_id='dddddddd-0001-4001-8001-dddddddddddd'),'accepted','Seller accepted test order');
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','22222222-2222-4222-8222-222222222222',false);
+do $$ declare oid uuid; begin
+ select id into oid from public.cash_orders where request_id='dddddddd-0001-4001-8001-dddddddddddd';
+ begin perform public.submit_completed_review(oid,4,'Accepted but not complete'); raise exception 'accepted order feedback accepted'; exception when raise_exception then if SQLERRM='accepted order feedback accepted' then raise; end if; end;
+end $$;
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+select public.change_cash_order((select id from public.cash_orders where request_id='dddddddd-0001-4001-8001-dddddddddddd'),'ready','Seller prepared test order');
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','22222222-2222-4222-8222-222222222222',false);
+do $$ declare oid uuid; begin
+ select id into oid from public.cash_orders where request_id='dddddddd-0001-4001-8001-dddddddddddd';
+ begin perform public.submit_completed_review(oid,3,'Ready but not complete'); raise exception 'ready order feedback accepted'; exception when raise_exception then if SQLERRM='ready order feedback accepted' then raise; end if; end;
+ perform public.change_cash_order(oid,'cancelled','Buyer cancelled test order');
+ begin perform public.submit_completed_review(oid,2,'Cancelled feedback'); raise exception 'cancelled order feedback accepted'; exception when raise_exception then if SQLERRM='cancelled order feedback accepted' then raise; end if; end;
+ select id into oid from public.cash_orders where request_id='cccccccc-0001-4001-8001-cccccccccccc';
+ begin perform public.submit_completed_review(oid,0,'Invalid stars'); raise exception 'invalid stars accepted'; exception when raise_exception then if SQLERRM='invalid stars accepted' then raise; end if; end;
+ begin perform public.submit_completed_review(oid,5,repeat('x',501)); raise exception 'oversized comment accepted'; exception when raise_exception then if SQLERRM='oversized comment accepted' then raise; end if; end;
+ perform public.submit_completed_review(oid,1,'One-star feedback should be treated fairly.');
+ begin perform public.submit_completed_review(oid,5,'Duplicate review'); raise exception 'duplicate order review accepted'; exception when raise_exception then if SQLERRM='duplicate order review accepted' then raise; end if; end;
+ if (select count(*) from public.shop_order_reviews)<>1 then raise exception 'buyer cannot read their pending feedback'; end if;
+ if (select count(*) from public.public_shop_reviews)<>0 then raise exception 'pending feedback went public'; end if;
+ begin update public.shop_order_reviews set moderation_status='published'; raise exception 'buyer published review directly'; exception when insufficient_privilege then null; end;
+ begin perform public.moderate_order_review((select id from public.shop_order_reviews limit 1),true,'self moderation'); raise exception 'buyer moderation succeeded'; exception when insufficient_privilege then null; end;
+ begin insert into public.shop_order_reviews(order_id,buyer_id,shop_id,rating) values(oid,auth.uid(),'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',5); raise exception 'direct review insert accepted'; exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','11111111-1111-4111-8111-111111111111',false);
+do $$ begin
+ begin perform public.submit_completed_review(current_setting('review_test.completed_order')::uuid,5,'Seller posing as buyer'); raise exception 'seller review succeeded'; exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','44444444-4444-4444-8444-444444444444',false);
+do $$ begin
+ if (select count(*) from public.shop_order_reviews)<>0 then raise exception 'outsider read pending customer feedback'; end if;
+ begin perform public.submit_completed_review(current_setting('review_test.completed_order')::uuid,5,'Unrelated account'); raise exception 'outsider review succeeded'; exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role anon;
+select set_config('request.jwt.claim.sub','',false);
+do $$ begin
+ if (select count(*) from public.public_shop_reviews)<>0 then raise exception 'pending review leaked anonymously'; end if;
+ begin perform count(*) from public.shop_order_reviews; raise exception 'anonymous private reviews readable'; exception when insufficient_privilege then null; end;
+ begin perform public.submit_completed_review(current_setting('review_test.completed_order')::uuid,5,'anonymous review'); raise exception 'anonymous review succeeded'; exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+set role authenticated;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333333',false);
+select public.moderate_order_review((select id from public.shop_order_reviews limit 1),true,'No private info or abuse; publish negative feedback fairly');
+reset role;
+set role anon;
+select set_config('request.jwt.claim.sub','',false);
+do $$ begin
+ if (select count(*) from public.public_shop_reviews)<>1 then raise exception 'published review not public'; end if;
+ if (select rating from public.public_shop_reviews limit 1)<>1 then raise exception 'negative rating changed'; end if;
+ begin perform order_id from public.public_shop_reviews; raise exception 'public order identity exposed'; exception when undefined_column then null; end;
+ begin perform buyer_id from public.public_shop_reviews; raise exception 'public buyer identity exposed'; exception when undefined_column then null; end;
+end $$;
+reset role;
+select set_config('request.jwt.claim.sub','',false);
+update public.shops set is_published=false where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+set role anon;
+do $$ begin if (select count(*) from public.public_shop_reviews)<>0 then raise exception 'private-shop review leaked'; end if; end $$;
+reset role;
+select set_config('request.jwt.claim.sub','',false);
+update public.shops set is_published=true where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+set role authenticated;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333333',false);
+select public.moderate_order_review((select id from public.shop_order_reviews limit 1),false,'Hide for moderation test');
+reset role;
+set role anon;
+select set_config('request.jwt.claim.sub','',false);
+do $$ begin if (select count(*) from public.public_shop_reviews)<>0 then raise exception 'hidden review stayed public'; end if; end $$;
+reset role;
+select 'PASS: only completed-order buyer, no early/cancelled/duplicate feedback, 1-5 stars, moderation authority, negative-review equality and public identity privacy' as result;

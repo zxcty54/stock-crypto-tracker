@@ -1,3 +1,4 @@
+import '../../reviews/presentation/order_feedback.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
 import '../../../core/domain/market.dart';
@@ -123,6 +124,8 @@ class OrdersScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 11, color: muted),
                         ),
                       ),
+                    if (!sellerOnly)
+                      OrderFeedbackPanel(controller: controller, order: order),
                     if (!order.closed) ...[
                       const SizedBox(height: 14),
                       Wrap(

@@ -22,6 +22,8 @@ lib/
     orders/domain/           # cart, integer quotes, cash order snapshots
     orders/presentation/     # checkout + participant order status/history
     expenses/presentation/   # private monthly spend/manual records
+    reviews/domain/          # completed-order eligibility and sanitized feedback
+    reviews/presentation/    # buyer-only post-completion form, shop feed, admin moderation
     samples/data/            # explicitly local tagged records, same final app
     samples/presentation/    # explicit test profiles + remove/restore controls
     seller/presentation/     # account login, onboarding, private proof and catalogue

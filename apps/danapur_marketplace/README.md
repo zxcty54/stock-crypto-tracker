@@ -16,6 +16,7 @@ Flutter Android/web marketplace for **Danapur, Bihar**: approved retailers/whole
 - Search/area/category filters, shop/product details and device-local saved products.
 - One-shop cart → cash checkout with base/discount/delivery/handling breakdown; authenticated buyer orders.
 - COD home delivery only where **shop + each product opt in**, accurate/recent location supports ≤500 m straight-line eligibility, shop is open/approved and membership allows orders. Otherwise pickup + cash at shop.
+- Buyer rating/comment **only after order completion**, one per order, server enforced; public shop feedback only after fair admin moderation. No pre-order/cancelled-order feedback or public customer identity.
 - Private order history; buyer or assigned seller completes/cancels open orders. Completion is self-reported, not digitally verified payment.
 - Monthly expense manager: completed orders once + editable manual expenses; cancelled/open orders excluded.
 

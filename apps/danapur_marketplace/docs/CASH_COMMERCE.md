@@ -49,3 +49,10 @@ For an optional cloud test catalogue use `supabase/seeds/900_sample_catalog.exam
 ## Actual launch still requires
 
 Dedicated Supabase migrations/auth/SMTP, real role/storage/order/privacy integration tests, stable Danapur signing, physical GPS/permission testing, reviewed cash cancellation/refund and membership terms, legal/tax policies, backups/monitoring and operational moderation. This is not a claim of Flipkart/Meesho logistics, inventory reservations, verified payments or guaranteed delivery.
+
+
+## Feedback: only after completion
+
+My orders shows **Rate completed order** only to that order's buyer after completion. Choose 1–5 stars, optionally add a comment, then Submit feedback. There is one review per order. Pending/accepted/ready/cancelled orders have no feedback action and the server rejects attempts. Feedback awaits administrator moderation before appearing on the shop page. Use Test admin → Admin → Order feedback to publish/hide local sample feedback; all local test comments disappear when samples are removed.
+
+No customer/order identity fields are public, and comments should never contain private contact/location/identity information. Admin must inspect free text fairly across all ratings. Reviews are order-linked, not proof that cash was digitally verified. No pre-order feedback form was added.

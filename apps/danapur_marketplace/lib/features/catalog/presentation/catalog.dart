@@ -1,3 +1,4 @@
+import '../../reviews/presentation/order_feedback.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
 import '../../../core/domain/market.dart';
@@ -479,6 +480,7 @@ class ShopPage extends StatelessWidget {
               )
             else
               ProductGrid(products: products, controller: controller),
+            ShopFeedbackSection(controller: controller, shopId: shop.id),
           ],
         ),
       );

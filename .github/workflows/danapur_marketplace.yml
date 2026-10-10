@@ -53,10 +53,12 @@ jobs:
             psql -v ON_ERROR_STOP=1 -f supabase/migrations/001_marketplace.sql
             psql -v ON_ERROR_STOP=1 -f supabase/migrations/002_verified_marketplace.sql
             psql -v ON_ERROR_STOP=1 -f supabase/migrations/003_cash_orders_expenses.sql
+            psql -v ON_ERROR_STOP=1 -f supabase/migrations/004_completed_order_reviews.sql
             psql -v ON_ERROR_STOP=1 -f supabase/seeds/001_mandi_items.sql
           done
           psql -v ON_ERROR_STOP=1 -f test/sql/rls_test.sql
           psql -v ON_ERROR_STOP=1 -f test/sql/commerce_test.sql
+          psql -v ON_ERROR_STOP=1 -f test/sql/reviews_test.sql
 
   flutter:
     name: Test, build and send APK ZIP

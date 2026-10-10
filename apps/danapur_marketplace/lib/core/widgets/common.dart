@@ -118,7 +118,7 @@ void showInfo(BuildContext context, {bool privacy = false}) {
             onPressed: () => showLicensePage(
               context: ctx,
               applicationName: 'Danapur Bazaar',
-              applicationVersion: '1.1.0',
+              applicationVersion: '1.2.0',
             ),
             child: const Text('Open-source licenses'),
           ),

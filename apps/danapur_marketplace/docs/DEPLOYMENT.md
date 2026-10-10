@@ -9,7 +9,8 @@ Never reuse StockPulse's backend or service keys. Run in SQL Editor, in order:
 1. `supabase/migrations/001_marketplace.sql`
 2. `supabase/migrations/002_verified_marketplace.sql`
 3. `supabase/migrations/003_cash_orders_expenses.sql`
-4. `supabase/seeds/001_mandi_items.sql`
+4. `supabase/migrations/004_completed_order_reviews.sql`
+5. `supabase/seeds/001_mandi_items.sql`
 
 The scripts are idempotent. Old shops require review; no actual shop/product prices are automatically inserted. The mandi seed adds 117 unpriced common/seasonal commodities. **Never run `test/sql/` fixture files in a real project.**
 
@@ -56,3 +57,12 @@ Workflow validates genuine Postgres policies/cash commerce, locked Flutter depen
 ## 8. Launch checks still required
 
 Real backend/email/role/storage/orders/expense integration; physical Android GPS/permission and HTTPS browser checks; stable signing; legally reviewed location/cash/membership/privacy/tax terms; abuse/reporting/moderation; owner support, cash disputes and refunds outside this app; backups/restore, error monitoring, quota alerts, orphan-media retention and incident procedures. No claim of full production certification, guaranteed fraud prevention, logistics capacity, adoption/income or legal compliance.
+
+
+## Completed-order feedback
+
+Only the order's authenticated buyer can submit 1–5 stars and an optional comment (≤500 Unicode characters), **after status `completed`**. Placed/accepted/ready/cancelled orders, sellers, anonymous users and other buyers cannot submit, even through the API. One immutable submission per order; a pending/hidden review cannot be replaced with a second one.
+
+Feedback starts pending. Admin → Order feedback publishes/hides with an audited reason; apply the same privacy/spam/abuse policy to positive and negative ratings. Do not suppress a review merely because it is negative. Public shop feedback uses an explicit sanitized projection: order IDs, buyer IDs, names, phones, address/location and moderation notes are not public fields. Free-text may still contain personal information, so the operator must inspect it before publication.
+
+The label is **order-linked**, never “verified purchase/payment”: cash-order completion is self-reported. There is no general before-order comment/feedback box, open comment thread or seller rating submission. Sample feedback is labelled and removed with sample records.
