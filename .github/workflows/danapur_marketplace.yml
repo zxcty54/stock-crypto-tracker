@@ -1,0 +1,133 @@
+name: Danapur Marketplace — Flutter builds
+
+on:
+  push:
+    branches: [main, arena/c2853110-stock-crypto-tracker]
+    paths:
+      - 'apps/danapur_marketplace/**'
+      - '.github/workflows/danapur_marketplace.yml'
+  pull_request:
+    paths:
+      - 'apps/danapur_marketplace/**'
+      - '.github/workflows/danapur_marketplace.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: danapur-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-security:
+    name: Database ownership & visibility tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci-only-not-a-production-password
+          POSTGRES_DB: marketplace_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: ci-only-not-a-production-password
+      PGDATABASE: marketplace_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply schema twice and test RLS
+        working-directory: apps/danapur_marketplace
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f test/sql/fixture.sql
+          psql -v ON_ERROR_STOP=1 -f supabase/001_marketplace.sql
+          psql -v ON_ERROR_STOP=1 -f supabase/001_marketplace.sql
+          psql -v ON_ERROR_STOP=1 -f test/sql/rls_test.sql
+
+  flutter:
+    name: Analyse, test, web and Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: apps/danapur_marketplace
+    env:
+      DANAPUR_SUPABASE_URL: ${{ secrets.DANAPUR_SUPABASE_URL }}
+      DANAPUR_SUPABASE_ANON_KEY: ${{ secrets.DANAPUR_SUPABASE_ANON_KEY }}
+      DANAPUR_ANDROID_KEYSTORE_BASE64: ${{ secrets.DANAPUR_ANDROID_KEYSTORE_BASE64 }}
+      DANAPUR_KEYSTORE_PASSWORD: ${{ secrets.DANAPUR_KEYSTORE_PASSWORD }}
+      DANAPUR_KEY_ALIAS: ${{ secrets.DANAPUR_KEY_ALIAS }}
+      DANAPUR_KEY_PASSWORD: ${{ secrets.DANAPUR_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Safe, separate app configuration
+        id: config
+        run: python3 tools/create_build_config.py "$RUNNER_TEMP/danapur-config.json"
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      - name: Format Dart and capture patch
+        run: |
+          dart format lib test
+          git diff --binary -- lib test > "$RUNNER_TEMP/danapur-format.patch"
+      - name: Analyse
+        run: flutter analyze --fatal-infos
+      - name: Unit and responsive widget tests
+        run: flutter test --coverage
+      - name: Build web with local renderer assets
+        run: flutter build web --release --no-web-resources-cdn --dart-define-from-file="$RUNNER_TEMP/danapur-config.json"
+      - name: Build installable Android APKs
+        run: flutter build apk --release --split-per-abi --dart-define-from-file="$RUNNER_TEMP/danapur-config.json"
+      - name: Upload web app
+        uses: actions/upload-artifact@v4
+        with:
+          name: danapur-bazaar-web
+          path: apps/danapur_marketplace/build/web/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload Android APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: danapur-bazaar-apks
+          path: apps/danapur_marketplace/build/app/outputs/flutter-apk/*-release.apk
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload formatting patch, dependency lock and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: danapur-ci-checks
+          path: |
+            ${{ runner.temp }}/danapur-format.patch
+            apps/danapur_marketplace/pubspec.lock
+            apps/danapur_marketplace/coverage/lcov.info
+          retention-days: 7
+      - name: Build summary
+        if: success()
+        run: |
+          {
+            echo '## Danapur Bazaar'
+            echo 'Mode: ${{ steps.config.outputs.mode }}'
+            echo '- Download `danapur-bazaar-web` for the web app.'
+            echo '- Download `danapur-bazaar-apks`; use arm64-v8a for most recent Android phones.'
+            echo '- Without a dedicated upload keystore these APKs are debug-signed release builds, for testing only.'
+            echo '- See apps/danapur_marketplace/README.md for cloud setup and launch limitations.'
+          } >> "$GITHUB_STEP_SUMMARY"
