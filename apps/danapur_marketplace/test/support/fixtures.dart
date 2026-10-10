@@ -1,10 +1,11 @@
-import '../models/market.dart';
+import '../../lib/core/domain/market.dart';
 
 MarketSnapshot exampleMarket() {
   final time = DateTime.utc(2026, 10, 1);
   final shops = [
     Shop(
       id: 'sample-grocery',
+      reviewStatus: 'approved',
       ownerId: 'sample-owner-1',
       name: 'Sample Daily Needs',
       category: 'Grocery',
@@ -18,6 +19,7 @@ MarketSnapshot exampleMarket() {
     ),
     Shop(
       id: 'sample-electronics',
+      reviewStatus: 'approved',
       ownerId: 'sample-owner-2',
       name: 'Sample Gadget Corner',
       category: 'Electronics',
@@ -30,6 +32,7 @@ MarketSnapshot exampleMarket() {
     ),
     Shop(
       id: 'sample-fashion',
+      reviewStatus: 'approved',
       ownerId: 'sample-owner-3',
       name: 'Sample Style Studio',
       category: 'Fashion',
@@ -41,6 +44,7 @@ MarketSnapshot exampleMarket() {
     ),
     Shop(
       id: 'sample-home',
+      reviewStatus: 'approved',
       ownerId: 'sample-owner-4',
       name: 'Sample Home & Kitchen',
       category: 'Home',
@@ -52,6 +56,7 @@ MarketSnapshot exampleMarket() {
     ),
     Shop(
       id: 'sample-food',
+      reviewStatus: 'approved',
       ownerId: 'sample-owner-5',
       name: 'Sample Sweet Shop',
       category: 'Food & sweets',

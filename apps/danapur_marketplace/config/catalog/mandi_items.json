@@ -1,0 +1,821 @@
+[
+  {
+    "id": "potato",
+    "name": "Potato",
+    "hindi_name": "आलू",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "onion",
+    "name": "Onion",
+    "hindi_name": "प्याज",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "tomato",
+    "name": "Tomato",
+    "hindi_name": "टमाटर",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "brinjal",
+    "name": "Brinjal",
+    "hindi_name": "बैंगन",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "round-brinjal",
+    "name": "Round brinjal",
+    "hindi_name": "गोल बैंगन",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "green-peas",
+    "name": "Green peas",
+    "hindi_name": "हरा मटर",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cauliflower",
+    "name": "Cauliflower",
+    "hindi_name": "फूलगोभी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cabbage",
+    "name": "Cabbage",
+    "hindi_name": "पत्तागोभी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "okra",
+    "name": "Okra / bhindi",
+    "hindi_name": "भिंडी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "bottle-gourd",
+    "name": "Bottle gourd",
+    "hindi_name": "लौकी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "bitter-gourd",
+    "name": "Bitter gourd",
+    "hindi_name": "करेला",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "ridge-gourd",
+    "name": "Ridge gourd",
+    "hindi_name": "तोरई",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "sponge-gourd",
+    "name": "Sponge gourd",
+    "hindi_name": "नेनुआ",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "pointed-gourd",
+    "name": "Pointed gourd",
+    "hindi_name": "परवल",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "ivy-gourd",
+    "name": "Ivy gourd",
+    "hindi_name": "कुंदरू",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "snake-gourd",
+    "name": "Snake gourd",
+    "hindi_name": "चिचिंडा",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "ash-gourd",
+    "name": "Ash gourd",
+    "hindi_name": "पेठा",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "pumpkin",
+    "name": "Pumpkin",
+    "hindi_name": "कद्दू",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "apple-gourd",
+    "name": "Apple gourd / tinda",
+    "hindi_name": "टिंडा",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cucumber",
+    "name": "Cucumber",
+    "hindi_name": "खीरा",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "long-cucumber",
+    "name": "Long cucumber",
+    "hindi_name": "ककड़ी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "carrot",
+    "name": "Carrot",
+    "hindi_name": "गाजर",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "radish",
+    "name": "Radish",
+    "hindi_name": "मूली",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "beetroot",
+    "name": "Beetroot",
+    "hindi_name": "चुकंदर",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "turnip",
+    "name": "Turnip",
+    "hindi_name": "शलजम",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "sweet-potato",
+    "name": "Sweet potato",
+    "hindi_name": "शकरकंद",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "colocasia",
+    "name": "Colocasia / arbi",
+    "hindi_name": "अरबी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "elephant-yam",
+    "name": "Elephant foot yam",
+    "hindi_name": "ओल / सूरन",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "yam",
+    "name": "Yam",
+    "hindi_name": "रतालू",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "green-banana",
+    "name": "Raw banana",
+    "hindi_name": "कच्चा केला",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "green-papaya",
+    "name": "Raw papaya",
+    "hindi_name": "कच्चा पपीता",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "raw-jackfruit",
+    "name": "Raw jackfruit",
+    "hindi_name": "कच्चा कटहल",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "drumstick",
+    "name": "Drumstick",
+    "hindi_name": "सहजन",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "french-beans",
+    "name": "French beans",
+    "hindi_name": "फ्रेंच बीन्स",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "broad-beans",
+    "name": "Broad beans",
+    "hindi_name": "बाकला",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cluster-beans",
+    "name": "Cluster beans",
+    "hindi_name": "ग्वार फली",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cowpea-beans",
+    "name": "Cowpea / long beans",
+    "hindi_name": "बोड़ा / लोबिया फली",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "flat-beans",
+    "name": "Flat beans",
+    "hindi_name": "सेम",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "capsicum",
+    "name": "Green capsicum",
+    "hindi_name": "शिमला मिर्च",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "red-capsicum",
+    "name": "Red capsicum",
+    "hindi_name": "लाल शिमला मिर्च",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "yellow-capsicum",
+    "name": "Yellow capsicum",
+    "hindi_name": "पीली शिमला मिर्च",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "green-chilli",
+    "name": "Green chilli",
+    "hindi_name": "हरी मिर्च",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "ginger",
+    "name": "Fresh ginger",
+    "hindi_name": "अदरक",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "garlic",
+    "name": "Garlic",
+    "hindi_name": "लहसुन",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "spring-onion",
+    "name": "Spring onion",
+    "hindi_name": "हरा प्याज",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "lemon",
+    "name": "Lemon",
+    "hindi_name": "नींबू",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "mushroom",
+    "name": "Mushroom",
+    "hindi_name": "मशरूम",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "baby-corn",
+    "name": "Baby corn",
+    "hindi_name": "बेबी कॉर्न",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "sweet-corn",
+    "name": "Sweet corn",
+    "hindi_name": "मक्का",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "broccoli",
+    "name": "Broccoli",
+    "hindi_name": "ब्रोकली",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "lettuce",
+    "name": "Lettuce",
+    "hindi_name": "लेट्यूस",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "celery",
+    "name": "Celery",
+    "hindi_name": "अजमोद",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "zucchini",
+    "name": "Zucchini",
+    "hindi_name": "ज़ुकीनी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "spinach",
+    "name": "Spinach",
+    "hindi_name": "पालक",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "fenugreek-leaves",
+    "name": "Fenugreek leaves",
+    "hindi_name": "मेथी साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "mustard-greens",
+    "name": "Mustard greens",
+    "hindi_name": "सरसों साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "bathua",
+    "name": "Bathua greens",
+    "hindi_name": "बथुआ साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "amaranth-greens",
+    "name": "Amaranth greens",
+    "hindi_name": "चौलाई साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "coriander-leaves",
+    "name": "Coriander leaves",
+    "hindi_name": "हरा धनिया",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "mint",
+    "name": "Mint leaves",
+    "hindi_name": "पुदीना",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "curry-leaves",
+    "name": "Curry leaves",
+    "hindi_name": "करी पत्ता",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "red-amaranth",
+    "name": "Red amaranth",
+    "hindi_name": "लाल साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "water-spinach",
+    "name": "Water spinach",
+    "hindi_name": "कलमी साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "malabar-spinach",
+    "name": "Malabar spinach",
+    "hindi_name": "पोई साग",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "colocasia-leaves",
+    "name": "Colocasia leaves",
+    "hindi_name": "अरबी पत्ता",
+    "category": "Vegetables",
+    "default_unit": "bunch"
+  },
+  {
+    "id": "lotus-stem",
+    "name": "Lotus stem",
+    "hindi_name": "कमल ककड़ी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "kohlrabi",
+    "name": "Kohlrabi",
+    "hindi_name": "गांठगोभी",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "bamboo-shoots",
+    "name": "Bamboo shoots",
+    "hindi_name": "बाँस की कोपल",
+    "category": "Vegetables",
+    "default_unit": "kg"
+  },
+  {
+    "id": "banana",
+    "name": "Banana",
+    "hindi_name": "केला",
+    "category": "Fruits",
+    "default_unit": "dozen"
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "hindi_name": "सेब",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "orange",
+    "name": "Orange",
+    "hindi_name": "संतरा",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "sweet-lime",
+    "name": "Sweet lime / mosambi",
+    "hindi_name": "मौसंबी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "mango",
+    "name": "Mango",
+    "hindi_name": "आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "langra-mango",
+    "name": "Langra mango",
+    "hindi_name": "लंगड़ा आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "malda-mango",
+    "name": "Malda mango",
+    "hindi_name": "मालदा आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "dussehri-mango",
+    "name": "Dussehri mango",
+    "hindi_name": "दशहरी आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "safeda-mango",
+    "name": "Safeda mango",
+    "hindi_name": "सफेदा आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "alphonso-mango",
+    "name": "Alphonso mango",
+    "hindi_name": "अल्फांसो आम",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "guava",
+    "name": "Guava",
+    "hindi_name": "अमरूद",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "papaya",
+    "name": "Papaya",
+    "hindi_name": "पपीता",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "pomegranate",
+    "name": "Pomegranate",
+    "hindi_name": "अनार",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "green-grapes",
+    "name": "Green grapes",
+    "hindi_name": "हरे अंगूर",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "black-grapes",
+    "name": "Black grapes",
+    "hindi_name": "काले अंगूर",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "watermelon",
+    "name": "Watermelon",
+    "hindi_name": "तरबूज",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "muskmelon",
+    "name": "Muskmelon",
+    "hindi_name": "खरबूजा",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "lychee",
+    "name": "Lychee",
+    "hindi_name": "लीची",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "pineapple",
+    "name": "Pineapple",
+    "hindi_name": "अनानास",
+    "category": "Fruits",
+    "default_unit": "piece"
+  },
+  {
+    "id": "coconut",
+    "name": "Coconut",
+    "hindi_name": "नारियल",
+    "category": "Fruits",
+    "default_unit": "piece"
+  },
+  {
+    "id": "tender-coconut",
+    "name": "Tender coconut",
+    "hindi_name": "हरा नारियल",
+    "category": "Fruits",
+    "default_unit": "piece"
+  },
+  {
+    "id": "pear",
+    "name": "Pear",
+    "hindi_name": "नाशपाती",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "peach",
+    "name": "Peach",
+    "hindi_name": "आड़ू",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "plum",
+    "name": "Plum",
+    "hindi_name": "आलूबुखारा",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "apricot",
+    "name": "Apricot",
+    "hindi_name": "खुबानी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "cherry",
+    "name": "Cherry",
+    "hindi_name": "चेरी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "hindi_name": "स्ट्रॉबेरी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "kiwi",
+    "name": "Kiwi",
+    "hindi_name": "कीवी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "chikoo",
+    "name": "Sapodilla / chikoo",
+    "hindi_name": "चीकू",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "custard-apple",
+    "name": "Custard apple",
+    "hindi_name": "सीताफल",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "jackfruit",
+    "name": "Ripe jackfruit",
+    "hindi_name": "पका कटहल",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "jamun",
+    "name": "Jamun",
+    "hindi_name": "जामुन",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "ber",
+    "name": "Indian jujube / ber",
+    "hindi_name": "बेर",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "amla",
+    "name": "Indian gooseberry / amla",
+    "hindi_name": "आंवला",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "bael",
+    "name": "Bael",
+    "hindi_name": "बेल",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "wood-apple",
+    "name": "Wood apple",
+    "hindi_name": "कैथा",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "dates",
+    "name": "Fresh dates",
+    "hindi_name": "खजूर",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "fig",
+    "name": "Fresh fig",
+    "hindi_name": "अंजीर",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "dragon-fruit",
+    "name": "Dragon fruit",
+    "hindi_name": "ड्रैगन फ्रूट",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "passion-fruit",
+    "name": "Passion fruit",
+    "hindi_name": "कृष्ण फल",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "avocado",
+    "name": "Avocado",
+    "hindi_name": "एवोकाडो",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "pomelo",
+    "name": "Pomelo",
+    "hindi_name": "चकोतरा",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "grapefruit",
+    "name": "Grapefruit",
+    "hindi_name": "ग्रेपफ्रूट",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "raspberry",
+    "name": "Raspberry",
+    "hindi_name": "रसभरी",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "mulberry",
+    "name": "Mulberry",
+    "hindi_name": "शहतूत",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "star-fruit",
+    "name": "Star fruit",
+    "hindi_name": "कमरख",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "persimmon",
+    "name": "Persimmon",
+    "hindi_name": "तेंदू फल",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "rambutan",
+    "name": "Rambutan",
+    "hindi_name": "रामबुतान",
+    "category": "Fruits",
+    "default_unit": "kg"
+  },
+  {
+    "id": "longan",
+    "name": "Longan",
+    "hindi_name": "लोंगन",
+    "category": "Fruits",
+    "default_unit": "kg"
+  }
+]

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import '../models/market.dart';
+import '../domain/market.dart';
 import 'local_store.dart';
 import 'repository.dart';
 
@@ -15,6 +15,8 @@ class MarketController extends ChangeNotifier {
       savedIds = {};
     }
     _subscription = repository.authChanges.listen((_) {
+      snapshot = const MarketSnapshot();
+      _notify();
       unawaited(reload());
     });
   }
@@ -29,14 +31,17 @@ class MarketController extends ChangeNotifier {
   Future<void> _savedQueue = Future.value();
   bool _disposed = false;
   StreamSubscription<void>? _subscription;
-  bool get isDemo => repository.isDemo;
   String? get ownerId => repository.ownerId;
   Shop? get myShop =>
       snapshot.shops.where((s) => s.ownerId == ownerId).firstOrNull;
   List<Shop> get publicShops =>
-      snapshot.shops.where((s) => s.isPublished).toList();
+      snapshot.shops.where((s) => s.isPublic).toList();
   Shop? visibleShop(String id) => snapshot.shops
-      .where((s) => s.id == id && (s.isPublished || s.ownerId == ownerId))
+      .where(
+        (s) =>
+            s.id == id &&
+            (s.isPublic || s.ownerId == ownerId || snapshot.isAdmin),
+      )
       .firstOrNull;
   Product? visibleProduct(String id) => snapshot.products
       .where((p) => p.id == id && visibleShop(p.shopId) != null)
@@ -84,11 +89,41 @@ class MarketController extends ChangeNotifier {
     return result;
   }
 
-  Future<Shop> saveShop(ShopDraft draft, {String? id}) async {
-    final shop = await repository.saveShop(draft, id: id);
+  Future<Shop> saveShop(
+    ShopDraft draft, {
+    String? id,
+    PickedPhoto? photo,
+  }) async {
+    String? uploaded;
+    late Shop shop;
+    try {
+      if (photo != null)
+        uploaded = await repository.uploadVerificationPhoto(photo);
+      final actual = ShopDraft(
+        name: draft.name,
+        category: draft.category,
+        area: draft.area,
+        address: draft.address,
+        phone: draft.phone,
+        description: draft.description,
+        hours: draft.hours,
+        isPublished: draft.isPublished,
+        businessType: draft.businessType,
+        verificationPhotoPath: uploaded ?? draft.verificationPhotoPath,
+      );
+      shop = await repository.saveShop(actual, id: id);
+    } catch (_) {
+      if (uploaded != null) await repository.removeVerificationPhoto(uploaded);
+      rethrow;
+    }
+    final previous = myShop;
+    if (uploaded != null &&
+        previous?.verificationPhotoPath != null &&
+        previous!.verificationPhotoPath != uploaded)
+      await repository.removeVerificationPhoto(previous.verificationPhotoPath!);
     _generation++;
     loading = false;
-    snapshot = MarketSnapshot(
+    snapshot = snapshot.copyWith(
       shops: [...snapshot.shops.where((s) => s.id != shop.id), shop],
       products: snapshot.products,
     );
@@ -124,7 +159,7 @@ class MarketController extends ChangeNotifier {
       final product = await repository.saveProduct(shop.id, actual, id: id);
       _generation++;
       loading = false;
-      snapshot = MarketSnapshot(
+      snapshot = snapshot.copyWith(
         shops: snapshot.shops,
         products: [
           ...snapshot.products.where((p) => p.id != product.id),
@@ -148,7 +183,7 @@ class MarketController extends ChangeNotifier {
     _generation++;
     loading = false;
     error = null;
-    snapshot = MarketSnapshot(
+    snapshot = snapshot.copyWith(
       shops: snapshot.shops,
       products: snapshot.products.where((p) => p.id != product.id).toList(),
     );
@@ -162,18 +197,11 @@ class MarketController extends ChangeNotifier {
     _generation++;
     loading = false;
     error = null;
-    snapshot = MarketSnapshot(
+    snapshot = snapshot.copyWith(
       shops: snapshot.shops.where((s) => s.id != shop.id).toList(),
       products: snapshot.products.where((p) => p.shopId != shop.id).toList(),
     );
     _notify();
-  }
-
-  Future<void> resetDemo() async {
-    await repository.resetDemo();
-    await store.remove(savedKey);
-    savedIds = {};
-    await reload();
   }
 
   @override
@@ -183,39 +211,4 @@ class MarketController extends ChangeNotifier {
     unawaited(_subscription?.cancel());
     super.dispose();
   }
-}
-
-String? validateBackendConfig(String url, String key) {
-  if (url.isEmpty && key.isEmpty) return null;
-  if (url.isEmpty || key.isEmpty) {
-    return 'Set both DANAPUR_SUPABASE_URL and DANAPUR_SUPABASE_ANON_KEY, or leave both empty for demo mode.';
-  }
-  final uri = Uri.tryParse(url);
-  if (uri == null ||
-      uri.scheme != 'https' ||
-      uri.host.isEmpty ||
-      uri.userInfo.isNotEmpty ||
-      ['localhost', '127.0.0.1', '::1', '[::1]'].contains(uri.host)) {
-    return 'Use a valid HTTPS Supabase project URL.';
-  }
-  if (key.startsWith('sb_secret_')) {
-    return 'Never embed a Supabase secret/service-role key in this app. Use a publishable or anon key.';
-  }
-  if (key.split('.').length == 3) {
-    try {
-      final body = jsonDecode(
-        utf8.decode(base64Url.decode(base64Url.normalize(key.split('.')[1]))),
-      );
-      if (body is! Map || body['role'] != 'anon') {
-        return 'Only the public anon-role key can be embedded. Do not use service-role or user-session tokens.';
-      }
-    } catch (_) {
-      return 'The Supabase key is not a valid JWT. Use the public anon or publishable key.';
-    }
-  }
-  if (key.split('.').length != 3 &&
-      !RegExp(r'^sb_publishable_[A-Za-z0-9_-]+$').hasMatch(key)) {
-    return 'Use a Supabase publishable key or a legacy public anon JWT.';
-  }
-  return null;
 }

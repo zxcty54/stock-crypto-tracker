@@ -80,11 +80,15 @@ class TelegramDeliveryTests(unittest.TestCase):
             with self.assertRaises(delivery.DeliveryError):
                 delivery.validate_apk(self.apk)
 
-    def test_document_is_direct_apk_not_zip_with_correct_mime(self):
+    def test_document_is_zip_containing_exactly_one_apk(self):
         boundary, data = delivery.multipart_document(self.apk, CHAT, "Demo build")
-        self.assertIn(b'filename="danapur-bazaar.apk"', data)
-        self.assertIn(b"application/vnd.android.package-archive", data)
-        self.assertIn(self.apk.read_bytes(), data)
+        self.assertIn(b'filename="danapur-bazaar.zip"', data)
+        self.assertIn(b"application/zip", data)
+        start = data.index(b'PK\x03\x04')
+        end = data.rfind(f"\r\n--{boundary}--\r\n".encode())
+        with ZipFile(io.BytesIO(data[start:end])) as archive:
+            self.assertEqual(archive.namelist(), ['danapur-bazaar.apk'])
+            self.assertEqual(archive.read('danapur-bazaar.apk'), self.apk.read_bytes())
         self.assertTrue(data.endswith(f"--{boundary}--\r\n".encode()))
         self.assertNotIn(TOKEN.encode(), data)
 
@@ -159,7 +163,7 @@ class TelegramDeliveryTests(unittest.TestCase):
         stdout = io.StringIO()
         summary = Path(self.directory.name) / "summary.md"
         with patch.dict(os.environ, {"BOT_TOKEN": TOKEN, "CHAT_ID": CHAT, "GITHUB_STEP_SUMMARY": str(summary)}, clear=True), patch.object(delivery, "urlopen", return_value=success()), redirect_stdout(stdout):
-            self.assertEqual(delivery.main([str(self.apk), "--mode", "demo"]), 0)
+            self.assertEqual(delivery.main([str(self.apk), "--mode", "setup"]), 0)
         for text in (stdout.getvalue(), summary.read_text()):
             self.assertIn("321", text)
             self.assertIn("one universal APK", text)

@@ -1,12 +1,15 @@
+import '../features/auth/presentation/password_update.dart';
+import '../features/mandi/presentation/mandi_screen.dart';
+import '../features/admin/presentation/admin_screen.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../data/controller.dart';
-import '../models/market.dart';
-import 'catalog.dart';
-import 'common.dart';
-import 'seller.dart';
-import 'theme.dart';
+import '../core/data/controller.dart';
+import '../core/domain/market.dart';
+import '../features/catalog/presentation/catalog.dart';
+import '../core/widgets/common.dart';
+import '../features/seller/presentation/seller.dart';
+import '../core/theme/app_theme.dart';
 
 class DanapurApp extends StatefulWidget {
   const DanapurApp({super.key, required this.controller});
@@ -38,6 +41,26 @@ class _DanapurAppState extends State<DanapurApp> {
       Widget page;
       if (path.isEmpty) {
         page = AppShell(controller: widget.controller);
+      } else if (path.length == 1 && path[0] == 'admin') {
+        page = Scaffold(
+          appBar: AppBar(title: const Brand(small: true)),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: AdminScreen(controller: widget.controller),
+            ),
+          ),
+        );
+      } else if (path.length == 1 && path[0] == 'mandi') {
+        page = Scaffold(
+          appBar: AppBar(title: const Text('Danapur Mandi')),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: MandiScreen(controller: widget.controller),
+            ),
+          ),
+        );
       } else if (path.length == 2 && path[0] == 'shop') {
         page = ShopPage(shopId: path[1], controller: widget.controller);
       } else if (path.length == 2 && path[0] == 'product') {
@@ -203,6 +226,7 @@ class _AppShellState extends State<AppShell> {
                           if (!small) ...[
                             _nav('Explore', 0),
                             _nav('Shops', 1),
+                            _nav('Mandi', 4),
                             _nav(
                               'Saved${savedCount > 0 ? ' ($savedCount)' : ''}',
                               2,
@@ -238,34 +262,9 @@ class _AppShellState extends State<AppShell> {
                                 await market.reload();
                               }
                               if (value == 'about' && ctx.mounted) {
-                                showInfo(ctx, demo: market.isDemo);
+                                showInfo(ctx);
                               }
-                              if (value == 'reset' && ctx.mounted) {
-                                final reset = await showDialog<bool>(
-                                  context: ctx,
-                                  builder: (dialog) => AlertDialog(
-                                    title: const Text('Reset local demo?'),
-                                    content: const Text(
-                                      'Your demo shop, products and saved items on this device will be cleared. Example listings will return.',
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(dialog, false),
-                                        child: const Text('Cancel'),
-                                      ),
-                                      FilledButton(
-                                        onPressed: () =>
-                                            Navigator.pop(dialog, true),
-                                        child: const Text('Reset demo'),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                                if (reset == true && ctx.mounted) {
-                                  await runAction(ctx, market.resetDemo);
-                                }
-                              }
+                              if (value == 'admin') _setTab(5);
                             },
                             itemBuilder: (_) => [
                               const PopupMenuItem(
@@ -276,11 +275,10 @@ class _AppShellState extends State<AppShell> {
                                 value: 'about',
                                 child: Text('About marketplace'),
                               ),
-                              if (market.isDemo)
-                                const PopupMenuItem(
-                                  value: 'reset',
-                                  child: Text('Reset demo'),
-                                ),
+                              const PopupMenuItem(
+                                value: 'admin',
+                                child: Text('Admin panel'),
+                              ),
                             ],
                           ),
                         ],
@@ -289,7 +287,6 @@ class _AppShellState extends State<AppShell> {
                   ),
                 ),
               ),
-              if (market.isDemo) DemoBanner(controller: market),
               if (market.loading) const LinearProgressIndicator(minHeight: 2),
               Expanded(
                 child: RefreshIndicator(
@@ -321,6 +318,12 @@ class _AppShellState extends State<AppShell> {
                                     label: const Text('Try again'),
                                   ),
                                 )
+                              else if (market.repository.needsPasswordUpdate)
+                                PasswordUpdatePanel(controller: market)
+                              else if (_tab == 4)
+                                MandiScreen(controller: market)
+                              else if (_tab == 5)
+                                AdminScreen(controller: market)
                               else if (_tab == 3)
                                 SellerDashboard(controller: market)
                               else ...[
@@ -406,7 +409,7 @@ class _AppShellState extends State<AppShell> {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          '${_tab == 1 ? shops.length : products.length} ${_tab == 1 ? 'shops' : 'products'}${market.isDemo ? ' • demo preview' : ' • listed by shop owners'}',
+                                          '${_tab == 1 ? shops.length : products.length} ${_tab == 1 ? 'shops' : 'products'} • approved shop listings',
                                           style: const TextStyle(
                                             color: muted,
                                             fontSize: 11,
@@ -559,7 +562,7 @@ class _AppShellState extends State<AppShell> {
                                     ),
                                   ),
                               ],
-                              MarketFooter(demo: market.isDemo),
+                              const MarketFooter(),
                             ],
                           ),
                         ),
@@ -573,8 +576,9 @@ class _AppShellState extends State<AppShell> {
         ),
         bottomNavigationBar: small
             ? NavigationBar(
-                selectedIndex: _tab,
-                onDestinationSelected: _setTab,
+                selectedIndex: const [0, 1, 4, 2, 3].indexOf(_tab).clamp(0, 4),
+                onDestinationSelected: (index) =>
+                    _setTab(const [0, 1, 4, 2, 3][index]),
                 height: 72,
                 backgroundColor: Colors.white,
                 destinations: const [
@@ -586,6 +590,11 @@ class _AppShellState extends State<AppShell> {
                   NavigationDestination(
                     icon: Icon(Icons.storefront_outlined),
                     label: 'Shops',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.eco_outlined),
+                    selectedIcon: Icon(Icons.eco_rounded),
+                    label: 'Mandi',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.favorite_border_rounded),
@@ -675,7 +684,7 @@ class _AppShellState extends State<AppShell> {
             ),
             const SizedBox(height: 14),
             const Text(
-              'Find local shops. Compare listed prices.\nConnect directly with the people behind them.',
+              'Approved shops. Retailers and wholesalers.\nLocal products and daily mandi price updates.',
               style: TextStyle(
                 color: Color(0xFF526B57),
                 fontSize: 13,
@@ -697,7 +706,7 @@ class _AppShellState extends State<AppShell> {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      '${market.publicShops.length} ${market.isDemo ? 'example shops' : 'shops listed'}',
+                      '${market.publicShops.length} approved shops',
                       style: const TextStyle(
                         color: green,
                         fontSize: 11,

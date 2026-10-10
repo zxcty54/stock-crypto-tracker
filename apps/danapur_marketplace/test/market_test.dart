@@ -1,12 +1,14 @@
+import '../lib/core/config/backend_config.dart';
+import 'support/repository.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:danapur_marketplace/data/controller.dart';
-import 'package:danapur_marketplace/data/local_store.dart';
-import 'package:danapur_marketplace/data/repository.dart';
-import 'package:danapur_marketplace/data/seed.dart';
-import 'package:danapur_marketplace/models/market.dart';
+import 'package:danapur_marketplace/core/data/controller.dart';
+import 'package:danapur_marketplace/core/data/local_store.dart';
+import 'package:danapur_marketplace/core/data/repository.dart';
+import 'support/fixtures.dart';
+import 'package:danapur_marketplace/core/domain/market.dart';
 
 const shopDraft = ShopDraft(
   name: 'My Test Grocery',
@@ -173,11 +175,12 @@ void main() {
   });
   group('local persistence and ownership', () {
     test('shop and product CRUD survive a new repository instance', () async {
-      final store = MemoryStore(), repository = DemoRepository(MemoryStore());
-      final repo = DemoRepository(store);
+      final store = MemoryStore(),
+          repository = FixtureRepository(MemoryStore());
+      final repo = FixtureRepository(store);
       final shop = await repo.saveShop(shopDraft);
       final product = await repo.saveProduct(shop.id, productDraft);
-      final restored = await DemoRepository(store).load();
+      final restored = await FixtureRepository(store).load();
       expect(
         restored.shops.where((s) => s.id == shop.id).single.name,
         shopDraft.name,
@@ -208,7 +211,7 @@ void main() {
       expect((await repository.load()).shops.length, 5);
     });
     test('cannot edit or delete sample/other-owner records', () async {
-      final repo = DemoRepository(MemoryStore());
+      final repo = FixtureRepository(MemoryStore());
       final initial = await repo.load();
       expect(
         () => repo.saveShop(shopDraft, id: initial.shops.first.id),
@@ -224,7 +227,7 @@ void main() {
       );
     });
     test('one shop per owner and create-before-product is enforced', () async {
-      final repo = DemoRepository(MemoryStore());
+      final repo = FixtureRepository(MemoryStore());
       expect(
         () => repo.saveProduct('missing', productDraft),
         throwsA(isA<MarketException>()),
@@ -233,7 +236,7 @@ void main() {
       expect(() => repo.saveShop(shopDraft), throwsA(isA<MarketException>()));
     });
     test('unpublishing removes the shop and products from discovery', () async {
-      final repo = DemoRepository(MemoryStore());
+      final repo = FixtureRepository(MemoryStore());
       final shop = await repo.saveShop(shopDraft);
       await repo.saveProduct(shop.id, productDraft);
       await repo.saveShop(
@@ -253,7 +256,7 @@ void main() {
       );
     });
     test('failed local writes are not shown as successful listings', () async {
-      final repo = DemoRepository(FailingStore());
+      final repo = FixtureRepository(FailingStore());
       expect(() => repo.saveShop(shopDraft), throwsA(isA<MarketException>()));
       expect((await repo.load()).shops.length, 5);
     });
@@ -261,8 +264,8 @@ void main() {
       'corrupt data is not silently replaced and reset recovers it',
       () async {
         final store = MemoryStore();
-        await store.write(DemoRepository.storageKey, 'not-json');
-        final repo = DemoRepository(store);
+        await store.write(FixtureRepository.storageKey, 'not-json');
+        final repo = FixtureRepository(store);
         expect(repo.load, throwsA(isA<MarketException>()));
         await repo.resetDemo();
         expect((await repo.load()).shops.length, 5);
@@ -270,10 +273,10 @@ void main() {
     );
     test('saved products persist separately from shop data', () async {
       final store = MemoryStore();
-      final controller = MarketController(DemoRepository(store), store);
+      final controller = MarketController(FixtureRepository(store), store);
       await controller.reload();
       await controller.toggleSaved('sample-rice');
-      final restored = MarketController(DemoRepository(store), store);
+      final restored = MarketController(FixtureRepository(store), store);
       expect(restored.savedIds, {'sample-rice'});
       await restored.toggleSaved('sample-rice');
       expect(restored.savedIds, isEmpty);
@@ -283,7 +286,7 @@ void main() {
   });
   test('rapid favourite writes are serialized without lost updates', () async {
     final store = DelayedStore();
-    final controller = MarketController(DemoRepository(store), store);
+    final controller = MarketController(FixtureRepository(store), store);
     final first = controller.toggleSaved('sample-rice');
     final second = controller.toggleSaved('sample-earbuds');
     await Future<void>.delayed(Duration.zero);
@@ -305,7 +308,7 @@ void main() {
   });
   test('a failed favourite write does not poison the write queue', () async {
     final store = FailOnceStore();
-    final controller = MarketController(DemoRepository(store), store);
+    final controller = MarketController(FixtureRepository(store), store);
     await expectLater(
       controller.toggleSaved('sample-rice'),
       throwsA(isA<MarketException>()),
@@ -316,7 +319,7 @@ void main() {
   });
   group('backend configuration', () {
     test('demo is explicit; partial cloud config fails', () {
-      expect(validateBackendConfig('', ''), isNull);
+      expect(validateBackendConfig('', ''), isNotNull);
       expect(
         validateBackendConfig('https://example.supabase.co', ''),
         isNotNull,

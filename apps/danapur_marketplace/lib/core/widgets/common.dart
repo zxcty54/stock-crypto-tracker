@@ -2,16 +2,25 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../data/controller.dart';
 import '../data/repository.dart';
-import '../models/market.dart';
-import 'theme.dart';
+import '../domain/market.dart';
+import '../theme/app_theme.dart';
 
 IconData categoryIcon(String category) => switch (category) {
   'Grocery' => Icons.shopping_basket_outlined,
   'Electronics' => Icons.headphones_outlined,
   'Fashion' => Icons.checkroom_outlined,
   'Home' => Icons.chair_outlined,
+  'Furniture' => Icons.chair_outlined,
+  'Hardware' => Icons.handyman_outlined,
+  'Electrical' => Icons.electrical_services_outlined,
+  'Building materials' => Icons.construction_outlined,
+  'Books & stationery' => Icons.menu_book_outlined,
+  'Pharmacy & healthcare' => Icons.local_pharmacy_outlined,
+  'Automotive' => Icons.directions_car_outlined,
+  'Jewellery' => Icons.diamond_outlined,
+  'Fresh produce' => Icons.eco_outlined,
+  'Sports & toys' => Icons.sports_basketball_outlined,
   'Food & sweets' => Icons.bakery_dining_outlined,
   _ => Icons.storefront_outlined,
 };
@@ -74,26 +83,20 @@ Future<bool> confirm(
       ),
     ) ??
     false;
-void showInfo(
-  BuildContext context, {
-  required bool demo,
-  bool privacy = false,
-}) {
+void showInfo(BuildContext context, {bool privacy = false}) {
   showDialog<void>(
     context: context,
     builder: (ctx) => AlertDialog(
       title: Text(
         privacy
-            ? 'Privacy & listing information'
+            ? 'Privacy & marketplace information'
             : 'Your neighbourhood, online',
       ),
       content: SingleChildScrollView(
         child: Text(
           privacy
-              ? 'Saved products stay on this device. In demo mode, shop details and photos also stay on this device. In cloud mode, email is used for seller authentication; shop contact numbers, addresses, product prices and photos are public. Only publish business details you are authorised to share.\n\nListings are seller-provided, not identity-, quality- or safety-verified. Confirm price, stock and purchase terms directly with the seller. This MVP does not process orders, payments or delivery.'
-              : demo
-              ? 'You are exploring fictional example shops. Your own demo shop and products are saved only on this device—not published to other buyers.\n\nTry My shop → Create your shop → Add product. To launch a shared marketplace, configure a separate Supabase project using the setup guide in apps/danapur_marketplace/README.md.'
-              : 'Discover Danapur shops, compare listed prices, and contact sellers directly. Shop owners can create one shop and manage their product listings.\n\nTap refresh to load the latest listings. Availability and prices should be confirmed with the shop.',
+              ? 'Buyers can browse without an account. Saved products stay on this device. Seller email is used for authentication. Shop business contacts, addresses and product listings become public only after administrator approval and publication. Storefront verification photos are stored privately for the owner and authorised administrators. WhatsApp verification happens in a separate chat governed by WhatsApp policies.\n\nAdministrator photo review is not a government identity, quality or safety certification. Mandi rates are entered by the administrator and show their market date, rate type and unit; old rates are explicitly labelled. Confirm final price, stock and purchase terms with the seller. This app does not process checkout, payments or delivery.\n\nYou can delete your shop or account from My shop. Contact the marketplace operator for privacy requests; the operator must supply reviewed privacy and terms pages before public launch.'
+              : 'Discover approved Danapur shops, compare product prices, and check administrator-published vegetable and fruit rates. Retailers and wholesalers can apply with a storefront photo. Shops remain private until the administrator checks their photo and WhatsApp proof.\n\nBuyers contact sellers directly; refreshing loads the latest available listings.',
         ),
       ),
       actions: [
@@ -102,7 +105,7 @@ void showInfo(
             onPressed: () => showLicensePage(
               context: ctx,
               applicationName: 'Danapur Bazaar',
-              applicationVersion: '0.1.0',
+              applicationVersion: '1.0.0',
             ),
             child: const Text('Open-source licenses'),
           ),
@@ -161,51 +164,6 @@ class Brand extends StatelessWidget {
         ],
       ),
     ],
-  );
-}
-
-class DemoBanner extends StatelessWidget {
-  const DemoBanner({super.key, required this.controller});
-  final MarketController controller;
-  @override
-  Widget build(BuildContext context) => Container(
-    width: double.infinity,
-    color: const Color(0xFFFFF5D9),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: Wrap(
-      alignment: WrapAlignment.center,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      children: [
-        const Icon(Icons.science_outlined, size: 16, color: Color(0xFF826021)),
-        const Text(
-          'DEMO',
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 10,
-            color: Color(0xFF826021),
-          ),
-        ),
-        const Text(
-          'Example shops • Your changes stay on this device',
-          style: TextStyle(fontSize: 11, color: Color(0xFF826021)),
-        ),
-        InkWell(
-          onTap: () => showInfo(context, demo: true),
-          child: const Padding(
-            padding: EdgeInsets.all(4),
-            child: Text(
-              'How it works →',
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF826021),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
   );
 }
 
@@ -336,8 +294,7 @@ class ProductArt extends StatelessWidget {
 }
 
 class MarketFooter extends StatelessWidget {
-  const MarketFooter({super.key, required this.demo});
-  final bool demo;
+  const MarketFooter({super.key});
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 40, bottom: 20),
@@ -359,11 +316,11 @@ class MarketFooter extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextButton(
-                  onPressed: () => showInfo(context, demo: demo),
+                  onPressed: () => showInfo(context),
                   child: const Text('About'),
                 ),
                 TextButton(
-                  onPressed: () => showInfo(context, demo: demo, privacy: true),
+                  onPressed: () => showInfo(context, privacy: true),
                   child: const Text('Privacy'),
                 ),
               ],

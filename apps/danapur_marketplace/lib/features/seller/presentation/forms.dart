@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../data/controller.dart';
-import '../data/repository.dart';
-import '../models/market.dart';
-import 'theme.dart';
+import '../../../core/data/controller.dart';
+import '../../../core/data/repository.dart';
+import '../../../core/domain/market.dart';
+import '../../../core/theme/app_theme.dart';
 
 Future<void> editShop(
   BuildContext context,
@@ -161,7 +161,8 @@ class _ShopFormState extends State<ShopForm> {
       _phone,
       _description,
       _hours;
-  late String _category, _area;
+  late String _category, _area, _businessType;
+  PickedPhoto? _proof;
   bool _consent = false, _published = true, _busy = false;
   String? _error;
   @override
@@ -173,6 +174,7 @@ class _ShopFormState extends State<ShopForm> {
     _phone = TextEditingController(text: shop?.phone);
     _description = TextEditingController(text: shop?.description);
     _hours = TextEditingController(text: shop?.hours);
+    _businessType = shop?.businessType ?? businessTypes.first;
     _category = shop?.category ?? categories.first;
     _area = shop?.area ?? areas.first;
     _published = shop?.isPublished ?? true;
@@ -191,9 +193,15 @@ class _ShopFormState extends State<ShopForm> {
     if (!_form.currentState!.validate()) return;
     if (!_consent) {
       setState(
-        () => _error = widget.controller.isDemo
-            ? 'Confirm that you manage this shop before saving the demo.'
-            : 'Confirm that you manage this shop and agree to publish its business contact.',
+        () => _error =
+            'Confirm that you manage this shop and agree to publish its business contact after approval.',
+      );
+      return;
+    }
+    if (_proof == null && widget.shop?.verificationPhotoPath == null) {
+      setState(
+        () => _error =
+            'Choose a current storefront photo showing your shop signboard.',
       );
       return;
     }
@@ -205,6 +213,8 @@ class _ShopFormState extends State<ShopForm> {
       await widget.controller.saveShop(
         ShopDraft(
           name: _name.text,
+          businessType: _businessType,
+          verificationPhotoPath: widget.shop?.verificationPhotoPath,
           category: _category,
           area: _area,
           address: _address.text,
@@ -214,6 +224,7 @@ class _ShopFormState extends State<ShopForm> {
           isPublished: _published,
         ),
         id: widget.shop?.id,
+        photo: _proof,
       );
       if (mounted) Navigator.pop(context);
     } catch (e) {
@@ -226,17 +237,25 @@ class _ShopFormState extends State<ShopForm> {
   @override
   Widget build(BuildContext context) => FormSheet(
     title: widget.shop == null ? 'Create your shop' : 'Edit shop details',
-    subtitle: widget.controller.isDemo
-        ? 'Demo: saved only on this device.'
-        : 'Your business details will be visible to buyers.',
+    subtitle:
+        'Private application. Your shop appears to buyers only after photo + WhatsApp review and administrator approval.',
     busy: _busy,
     error: _error,
     onSave: _save,
-    saveLabel: widget.shop == null ? 'Create shop' : 'Save shop',
+    saveLabel: widget.shop == null ? 'Submit for review' : 'Save shop',
     body: Form(
       key: _form,
       child: Column(
         children: [
+          DropdownButtonFormField<String>(
+            initialValue: _businessType,
+            decoration: const InputDecoration(labelText: 'Business type *'),
+            items: businessTypes
+                .map((type) => DropdownMenuItem(value: type, child: Text(type)))
+                .toList(),
+            onChanged: (value) => setState(() => _businessType = value!),
+          ),
+          const SizedBox(height: 18),
           TextFormField(
             key: const ValueKey('shop-name'),
             controller: _name,
@@ -287,9 +306,8 @@ class _ShopFormState extends State<ShopForm> {
             decoration: InputDecoration(
               labelText: 'Business mobile number *',
               prefixText: '+91 ',
-              helperText: widget.controller.isDemo
-                  ? 'Stored only on this device in demo mode.'
-                  : 'Public contact number; used for calls and WhatsApp.',
+              helperText:
+                  'Use the same mobile when sending WhatsApp verification. Public after approval.',
             ),
             validator: validatePhone,
           ),
@@ -312,15 +330,84 @@ class _ShopFormState extends State<ShopForm> {
               hintText: 'Tell neighbours what you sell.',
             ),
           ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: canvas,
+              border: Border.all(color: line),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Private storefront photo *',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'Show the real shop entrance and signboard. No Aadhaar, PAN or private identity documents. JPEG, PNG or WebP under 512 KB. Only you and administrators can access it.',
+                  style: TextStyle(color: muted, fontSize: 11),
+                ),
+                const SizedBox(height: 12),
+                if (_proof != null)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.memory(
+                      _proof!.bytes,
+                      height: 140,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) =>
+                          const Icon(Icons.image_outlined),
+                    ),
+                  ),
+                if (_proof == null &&
+                    widget.shop?.verificationPhotoPath != null)
+                  const Text(
+                    'Existing private storefront photo saved.',
+                    style: TextStyle(color: green, fontSize: 12),
+                  ),
+                TextButton.icon(
+                  onPressed: _busy
+                      ? null
+                      : () async {
+                          try {
+                            final file = await ImagePicker().pickImage(
+                              source: ImageSource.gallery,
+                              maxWidth: 1200,
+                              imageQuality: 70,
+                            );
+                            if (file == null) return;
+                            final photo = PickedPhoto.fromBytes(
+                              await file.readAsBytes(),
+                            );
+                            if (mounted)
+                              setState(() {
+                                _proof = photo;
+                                _error = null;
+                              });
+                          } catch (error) {
+                            if (mounted)
+                              setState(() => _error = friendlyError(error));
+                          }
+                        },
+                  icon: const Icon(Icons.add_photo_alternate_outlined),
+                  label: Text(
+                    _proof == null && widget.shop?.verificationPhotoPath == null
+                        ? 'Choose storefront photo'
+                        : 'Replace storefront photo',
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 18),
           SwitchListTile.adaptive(
             contentPadding: EdgeInsets.zero,
-            title: Text(
-              widget.controller.isDemo ? 'Show in this demo' : 'Publish shop',
-            ),
-            subtitle: Text(
-              widget.controller.isDemo
-                  ? 'This never publishes your shop to other users.'
-                  : 'Unpublished shops and products are hidden from buyers.',
+            title: const Text('Publish after approval'),
+            subtitle: const Text(
+              'Approval is always required. Turning this off hides an approved shop.',
               style: const TextStyle(fontSize: 11),
             ),
             value: _published,
@@ -329,10 +416,8 @@ class _ShopFormState extends State<ShopForm> {
           CheckboxListTile(
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,
-            title: Text(
-              widget.controller.isDemo
-                  ? 'I manage this shop. This demo saves its details only on this device.'
-                  : 'I manage this shop and agree to display its business address and contact number publicly.',
+            title: const Text(
+              'I manage this real shop and agree to display its business address and contact number after approval.',
               style: const TextStyle(fontSize: 12),
             ),
             value: _consent,

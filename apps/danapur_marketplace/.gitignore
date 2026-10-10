@@ -10,3 +10,6 @@ android/app/keystore/
 .idea/
 .env*
 !.env.example
+
+config/app_config.json
+supabase/admin/first_admin.sql

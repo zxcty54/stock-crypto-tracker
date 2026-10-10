@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../data/controller.dart';
-import '../models/market.dart';
-import 'common.dart';
-import 'theme.dart';
+import '../../../core/data/controller.dart';
+import '../../../core/domain/market.dart';
+import '../../../core/widgets/common.dart';
+import '../../../core/theme/app_theme.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -326,7 +326,6 @@ class DetailShell extends StatelessWidget {
     ),
     body: Column(
       children: [
-        if (controller.isDemo) DemoBanner(controller: controller),
         Expanded(
           child: SingleChildScrollView(
             child: Center(
@@ -336,10 +335,7 @@ class DetailShell extends StatelessWidget {
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      child,
-                      MarketFooter(demo: controller.isDemo),
-                    ],
+                    children: [child, const MarketFooter()],
                   ),
                 ),
               ),
@@ -444,7 +440,7 @@ class ShopPage extends StatelessWidget {
                         ),
                   icon: const Icon(Icons.call_outlined, size: 18),
                   label: Text(
-                    shop.phone.isEmpty ? 'Example — no contact' : 'Call shop',
+                    shop.phone.isEmpty ? 'Contact unavailable' : 'Call shop',
                   ),
                 ),
                 OutlinedButton.icon(
@@ -465,11 +461,7 @@ class ShopPage extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             Text(
-              shop.isExample
-                  ? 'Sample data, not a real shop.'
-                  : controller.isDemo
-                  ? 'Local demo shop • Not published to other users.'
-                  : 'Self-reported shop details • Updated ${updatedLabel(shop.updatedAt)}',
+              '${shop.businessType} • Photo review ${shop.reviewStatus} • Updated ${updatedLabel(shop.updatedAt)}',
               style: const TextStyle(color: muted, fontSize: 11),
             ),
             const SizedBox(height: 34),
@@ -612,11 +604,7 @@ class ProductPage extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Text(
-            shop.isExample
-                ? 'Fictional example product and price.'
-                : controller.isDemo
-                ? 'Demo product saved only on this device.'
-                : 'Updated ${updatedLabel(product.updatedAt)} • Confirm price and availability with the shop.',
+            'Updated ${updatedLabel(product.updatedAt)} • Confirm price and availability with the shop.',
             style: const TextStyle(fontSize: 11, color: muted),
           ),
           const SizedBox(height: 10),

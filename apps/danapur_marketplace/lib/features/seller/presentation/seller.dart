@@ -1,10 +1,12 @@
+import '../../auth/presentation/password_update.dart';
+import 'verification_status.dart';
 import 'package:flutter/material.dart';
-import '../data/controller.dart';
-import '../data/repository.dart';
-import '../models/market.dart';
-import 'common.dart';
+import '../../../core/data/controller.dart';
+import '../../../core/data/repository.dart';
+import '../../../core/domain/market.dart';
+import '../../../core/widgets/common.dart';
 import 'forms.dart';
-import 'theme.dart';
+import '../../../core/theme/app_theme.dart';
 
 class SellerDashboard extends StatelessWidget {
   const SellerDashboard({super.key, required this.controller});
@@ -18,10 +20,7 @@ class SellerDashboard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 18),
-          Tag(
-            controller.isDemo ? 'TRY THE SELLER EXPERIENCE' : 'SELL LOCALLY',
-            icon: Icons.storefront_outlined,
-          ),
+          Tag('SELL LOCALLY', icon: Icons.storefront_outlined),
           const SizedBox(height: 20),
           Text(
             'Your local shop.\nOne simple online home.',
@@ -47,34 +46,24 @@ class SellerDashboard extends StatelessWidget {
               _step(
                 '01',
                 'Create a shop',
-                'Name, address and business contact.',
+                'Business type, category, address and storefront photo.',
               ),
               _step(
                 '02',
-                'Add your products',
-                'Photos, prices, units and availability.',
+                'Verify on WhatsApp',
+                'Send your request ID and photo from your business mobile.',
               ),
               _step(
                 '03',
-                'Connect directly',
-                'Buyers enquire by call or WhatsApp.',
+                'Get approved',
+                'Administrator review unlocks your public shop and products.',
               ),
             ],
           ),
-          if (controller.isDemo)
-            const Padding(
-              padding: EdgeInsets.only(top: 28),
-              child: Text(
-                'Demo mode: your listings are stored only on this device. Cloud setup is needed for public onboarding.',
-                style: TextStyle(fontSize: 12, color: muted),
-              ),
-            ),
-          if (!controller.isDemo)
-            TextButton(
-              onPressed: () =>
-                  runAction(context, controller.repository.signOut),
-              child: const Text('Sign out'),
-            ),
+          TextButton(
+            onPressed: () => runAction(context, controller.repository.signOut),
+            child: const Text('Sign out'),
+          ),
         ],
       );
     }
@@ -110,7 +99,7 @@ class SellerDashboard extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${shop.area} • ${shop.category}',
+                  '${shop.area} • ${shop.category} • ${shop.businessType}',
                   style: const TextStyle(color: muted),
                 ),
               ],
@@ -149,13 +138,9 @@ class SellerDashboard extends StatelessWidget {
                   'In stock',
                 ),
                 Tag(
-                  controller.isDemo
-                      ? (shop.isPublished
-                            ? 'Shown in this demo'
-                            : 'Hidden in this demo')
-                      : (shop.isPublished
-                            ? 'Shop published'
-                            : 'Shop unpublished'),
+                  shop.isPublic
+                      ? 'Approved & published'
+                      : '${shop.reviewStatus.toUpperCase()} • hidden from buyers',
                   icon: shop.isPublished
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
@@ -170,11 +155,13 @@ class SellerDashboard extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 20),
+        VerificationStatusCard(controller: controller, shop: shop),
         const SizedBox(height: 28),
         Text('Your products', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 6),
         const Text(
-          'Keep prices and availability up to date. Changes appear to buyers after refresh.',
+          'Prepare your catalogue now. Buyers see it only while your shop is approved and published.',
           style: TextStyle(color: muted, fontSize: 12),
         ),
         const SizedBox(height: 20),
@@ -303,16 +290,32 @@ class SellerDashboard extends StatelessWidget {
           ),
         const SizedBox(height: 32),
         const Divider(),
+        TextButton.icon(
+          onPressed: () async {
+            if (await confirm(
+                  context,
+                  'Delete your account?',
+                  'Your shop, products and login account will be permanently deleted. Administrator audit history may be retained for security. This cannot be undone.',
+                ) &&
+                context.mounted)
+              await runAction(
+                context,
+                controller.repository.deleteAccount,
+                success: 'Account deleted.',
+              );
+          },
+          icon: const Icon(Icons.person_remove_outlined, size: 17),
+          label: const Text('Delete account'),
+        ),
         Wrap(
           spacing: 12,
           children: [
-            if (!controller.isDemo)
-              TextButton.icon(
-                onPressed: () =>
-                    runAction(context, controller.repository.signOut),
-                icon: const Icon(Icons.logout_rounded, size: 17),
-                label: const Text('Sign out'),
-              ),
+            TextButton.icon(
+              onPressed: () =>
+                  runAction(context, controller.repository.signOut),
+              icon: const Icon(Icons.logout_rounded, size: 17),
+              label: const Text('Sign out'),
+            ),
             TextButton(
               onPressed: () async {
                 if (await confirm(
@@ -432,120 +435,172 @@ class _SellerAuthState extends State<SellerAuth> {
   }
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 460),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(28),
-            child: Form(
-              key: _form,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.storefront_outlined, color: green, size: 36),
-                  const SizedBox(height: 20),
-                  Text(
-                    _signup
-                        ? 'Start selling locally'
-                        : 'Welcome back, shop owner',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Sign in to manage your shop and prices. Buyers do not need an account.',
-                    style: TextStyle(color: muted, fontSize: 12),
-                  ),
-                  const SizedBox(height: 24),
-                  TextFormField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    autofillHints: const [AutofillHints.email],
-                    decoration: const InputDecoration(labelText: 'Email'),
-                    validator: (v) =>
-                        RegExp(
-                          r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
-                        ).hasMatch((v ?? '').trim())
-                        ? null
-                        : 'Enter a valid email.',
-                  ),
-                  const SizedBox(height: 18),
-                  TextFormField(
-                    controller: _password,
-                    obscureText: _hide,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                        tooltip: _hide ? 'Show password' : 'Hide password',
-                        onPressed: () => setState(() => _hide = !_hide),
-                        icon: Icon(
-                          _hide
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
+  Widget build(BuildContext context) =>
+      widget.controller.repository.needsPasswordUpdate
+      ? PasswordUpdatePanel(controller: widget.controller)
+      : Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 460),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(28),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.storefront_outlined,
+                          color: green,
+                          size: 36,
                         ),
-                      ),
+                        const SizedBox(height: 20),
+                        Text(
+                          _signup
+                              ? 'Start selling locally'
+                              : 'Welcome to Danapur Bazaar',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Sign in to manage your shop and prices. Buyers do not need an account.',
+                          style: TextStyle(color: muted, fontSize: 12),
+                        ),
+                        const SizedBox(height: 24),
+                        TextFormField(
+                          controller: _email,
+                          keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                          decoration: const InputDecoration(labelText: 'Email'),
+                          validator: (v) =>
+                              RegExp(
+                                r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
+                              ).hasMatch((v ?? '').trim())
+                              ? null
+                              : 'Enter a valid email.',
+                        ),
+                        const SizedBox(height: 18),
+                        TextFormField(
+                          controller: _password,
+                          obscureText: _hide,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            suffixIcon: IconButton(
+                              tooltip: _hide
+                                  ? 'Show password'
+                                  : 'Hide password',
+                              onPressed: () => setState(() => _hide = !_hide),
+                              icon: Icon(
+                                _hide
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                              ),
+                            ),
+                          ),
+                          validator: (v) =>
+                              (v ?? '').length < (_signup ? 10 : 1)
+                              ? (_signup
+                                    ? 'Use at least 10 characters.'
+                                    : 'Enter your password.')
+                              : null,
+                        ),
+                        if (_error != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: Text(
+                              _error!,
+                              style: const TextStyle(color: Color(0xFFB44337)),
+                            ),
+                          ),
+                        if (_message != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: Text(
+                              _message!,
+                              style: const TextStyle(color: green),
+                            ),
+                          ),
+                        if (!_signup)
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: _busy
+                                  ? null
+                                  : () async {
+                                      final email = _email.text.trim();
+                                      if (!RegExp(
+                                        r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
+                                      ).hasMatch(email)) {
+                                        setState(
+                                          () => _error =
+                                              'Enter your email above first.',
+                                        );
+                                        return;
+                                      }
+                                      setState(() {
+                                        _busy = true;
+                                        _error = null;
+                                      });
+                                      try {
+                                        await widget.controller.repository
+                                            .requestPasswordReset(email);
+                                        if (mounted)
+                                          setState(
+                                            () => _message =
+                                                'If an account exists, a password-reset email will arrive. Open its link to set a new password.',
+                                          );
+                                      } catch (error) {
+                                        if (mounted)
+                                          setState(
+                                            () => _error = friendlyError(error),
+                                          );
+                                      } finally {
+                                        if (mounted)
+                                          setState(() => _busy = false);
+                                      }
+                                    },
+                              child: const Text('Forgot password?'),
+                            ),
+                          ),
+                        const SizedBox(height: 24),
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton(
+                            onPressed: _busy ? null : _submit,
+                            child: Text(
+                              _busy
+                                  ? 'Please wait…'
+                                  : _signup
+                                  ? 'Create account'
+                                  : 'Sign in',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Center(
+                          child: TextButton(
+                            onPressed: _busy
+                                ? null
+                                : () => setState(() {
+                                    _signup = !_signup;
+                                    _error = null;
+                                    _message = null;
+                                  }),
+                            child: Text(
+                              _signup
+                                  ? 'Already have an account? Sign in'
+                                  : 'New here? Create a seller account',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    validator: (v) => (v ?? '').length < (_signup ? 8 : 1)
-                        ? (_signup
-                              ? 'Use at least 8 characters.'
-                              : 'Enter your password.')
-                        : null,
                   ),
-                  if (_error != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text(
-                        _error!,
-                        style: const TextStyle(color: Color(0xFFB44337)),
-                      ),
-                    ),
-                  if (_message != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text(
-                        _message!,
-                        style: const TextStyle(color: green),
-                      ),
-                    ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _busy ? null : _submit,
-                      child: Text(
-                        _busy
-                            ? 'Please wait…'
-                            : _signup
-                            ? 'Create account'
-                            : 'Sign in',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Center(
-                    child: TextButton(
-                      onPressed: _busy
-                          ? null
-                          : () => setState(() {
-                              _signup = !_signup;
-                              _error = null;
-                              _message = null;
-                            }),
-                      child: Text(
-                        _signup
-                            ? 'Already have an account? Sign in'
-                            : 'New here? Create a seller account',
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    ),
-  );
+        );
 }

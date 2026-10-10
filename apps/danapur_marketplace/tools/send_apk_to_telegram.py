@@ -1,11 +1,11 @@
 """Send one genuine, universal Danapur APK using the existing repository bot.
 
 Credentials are read only from environment variables, never CLI arguments/logs.
-The public Telegram Bot API accepts documents up to 50 MB. APKs are sent directly,
-not zipped, and a successful HTTP response must also confirm `ok: true`.
+The public Telegram Bot API accepts documents up to 50 MB. One APK is wrapped in a ZIP document, and a successful HTTP response must also confirm `ok: true`.
 """
 import argparse
 import json
+import io
 import os
 from pathlib import Path
 import re
@@ -15,7 +15,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlparse
 from urllib.request import Request, urlopen
 from uuid import uuid4
-from zipfile import BadZipFile, ZipFile
+from zipfile import BadZipFile, ZipFile, ZIP_DEFLATED
 
 MAX_APK_BYTES = 50_000_000
 ABIS = ("armeabi-v7a", "arm64-v8a", "x86_64")
@@ -82,10 +82,15 @@ def multipart_document(path, chat_id, caption):
         )
     chunks.append(
         f'--{boundary}\r\nContent-Disposition: form-data; name="document"; '
-        'filename="danapur-bazaar.apk"\r\n'
-        'Content-Type: application/vnd.android.package-archive\r\n\r\n'.encode()
+        'filename="danapur-bazaar.zip"\r\n'
+        'Content-Type: application/zip\r\n\r\n'.encode()
     )
-    chunks.append(Path(path).read_bytes())
+    package = io.BytesIO()
+    with ZipFile(package, 'w', compression=ZIP_DEFLATED, compresslevel=9) as archive:
+        archive.write(path, arcname='danapur-bazaar.apk')
+    if package.tell() > MAX_APK_BYTES:
+        raise DeliveryError('Release ZIP exceeds the Telegram Bot API 50 MB limit.')
+    chunks.append(package.getvalue())
     chunks.append(f"\r\n--{boundary}--\r\n".encode())
     return boundary, b"".join(chunks)
 
@@ -164,7 +169,7 @@ def send_apk(path, token, chat_id, caption, *, opener=None, sleeper=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Deliver one universal Danapur APK to Telegram.")
     parser.add_argument("apk", type=Path)
-    parser.add_argument("--mode", choices=("demo", "cloud"), default="demo")
+    parser.add_argument("--mode", choices=("setup", "cloud"), default="setup")
     parser.add_argument("--run-url", default="")
     args = parser.parse_args(argv)
     token = os.environ.get("BOT_TOKEN", "")
@@ -176,11 +181,11 @@ def main(argv=None):
             file=sys.stderr,
         )
         return 1
-    mode = "Local demo: changes stay on this device." if args.mode == "demo" else "Configured cloud build."
+    mode = "Supabase setup required. No demo or fabricated prices included." if args.mode == "setup" else "Supabase-configured marketplace build."
     caption = (
-        "Danapur Bazaar — one universal Android APK\n"
+        "Danapur Bazaar — universal APK inside one ZIP\n"
         "Android 7+ | ARMv7, ARM64 and x86_64 in one file.\n"
-        f"{mode}\nCI testing build; production signing/setup are separate."
+        f"{mode}\nExtract the ZIP and install danapur-bazaar.apk. Signing/setup checks are separate."
     )
     if args.run_url:
         caption += "\n" + args.run_url
@@ -191,8 +196,8 @@ def main(argv=None):
         return 1
     size = args.apk.stat().st_size / 1_000_000
     confirmation = (
-        f"Telegram confirmed message {message_id}: danapur-bazaar.apk, "
-        f"{size:.1f} MB, one universal APK."
+        f"Telegram confirmed message {message_id}: danapur-bazaar.zip containing one danapur-bazaar.apk, "
+        f"APK {size:.1f} MB, one universal APK."
     )
     print("::notice title=Danapur APK delivered::" + confirmation)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")

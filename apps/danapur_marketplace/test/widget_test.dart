@@ -1,11 +1,15 @@
+import 'package:danapur_marketplace/features/mandi/domain/mandi.dart';
+import 'package:danapur_marketplace/features/admin/presentation/admin_screen.dart';
+import 'package:danapur_marketplace/features/mandi/presentation/mandi_screen.dart';
+import 'package:danapur_marketplace/core/theme/app_theme.dart';
+import 'support/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:danapur_marketplace/data/controller.dart';
-import 'package:danapur_marketplace/data/local_store.dart';
-import 'package:danapur_marketplace/data/repository.dart';
-import 'package:danapur_marketplace/ui/app.dart';
-import 'package:danapur_marketplace/models/market.dart';
+import 'package:danapur_marketplace/core/data/controller.dart';
+import 'package:danapur_marketplace/core/data/local_store.dart';
+import 'package:danapur_marketplace/app/app.dart';
+import 'package:danapur_marketplace/core/domain/market.dart';
 
 Future<void> loadFonts() async {
   final loader = FontLoader('Manrope');
@@ -32,7 +36,7 @@ Future<MarketController> openApp(
   addTearDown(tester.view.resetDevicePixelRatio);
   await loadFonts();
   final storage = store ?? MemoryStore();
-  final controller = MarketController(DemoRepository(storage), storage);
+  final controller = MarketController(FixtureRepository(storage), storage);
   await tester.pumpWidget(DanapurApp(controller: controller));
   await tester.pumpAndSettle();
   return controller;
@@ -46,7 +50,7 @@ void main() {
     expect(find.text('Danapur ki dukaan,\nab online.'), findsOneWidget);
     expect(
       find.text('Example shops • Your changes stay on this device'),
-      findsOneWidget,
+      findsNothing,
     );
     await tester.ensureVisible(
       find.byKey(const ValueKey('category-Electronics')),
@@ -72,30 +76,21 @@ void main() {
     expect(find.text('Wireless earbuds'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
-  testWidgets('owner creates a shop and lists a priced product end to end', (
+  testWidgets('reviewed owner prepares and deletes a priced product', (
     tester,
   ) async {
     final controller = await openApp(tester);
+    await controller.saveShop(
+      const ShopDraft(
+        name: 'My Danapur Store',
+        category: 'Grocery',
+        area: 'Danapur Bazaar',
+        address: 'Test street, Danapur Bazaar',
+        phone: '9999999999',
+        verificationPhotoPath: 'fixture-owner/front.jpeg',
+      ),
+    );
     await tester.tap(find.byKey(const ValueKey('seller-nav')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const ValueKey('create-shop')));
-    await tester.pumpAndSettle();
-    await tester.enterText(
-      find.byKey(const ValueKey('shop-name')),
-      'My Danapur Store',
-    );
-    await tester.enterText(
-      find.byKey(const ValueKey('shop-address')),
-      'Test street, Danapur Bazaar',
-    );
-    await tester.enterText(
-      find.byKey(const ValueKey('shop-phone')),
-      '9999999999',
-    );
-    await tester.ensureVisible(find.byType(CheckboxListTile));
-    await tester.tap(find.byType(CheckboxListTile));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Create shop'));
     await tester.pumpAndSettle();
     expect(controller.myShop?.name, 'My Danapur Store');
     await tester.tap(find.byKey(const ValueKey('add-product')));
@@ -178,7 +173,7 @@ void main() {
     final controller = await openApp(tester, size: const Size(390, 844));
     await controller.saveShop(
       const ShopDraft(
-        name: 'Local demo grocery',
+        name: 'Test grocery',
         category: 'Grocery',
         area: 'Danapur Bazaar',
         address: 'Test street, Danapur',
@@ -199,5 +194,153 @@ void main() {
     await tester.ensureVisible(find.text('₹10,00,000').first);
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
+  });
+  testWidgets('onboarding requires a private storefront photo', (tester) async {
+    final controller = await openApp(tester);
+    await tester.tap(find.byKey(const ValueKey('seller-nav')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('create-shop')));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const ValueKey('shop-name')),
+      'Actual test storefront',
+    );
+    await tester.ensureVisible(find.byKey(const ValueKey('shop-address')));
+    await tester.enterText(
+      find.byKey(const ValueKey('shop-address')),
+      'Test street Danapur',
+    );
+    await tester.ensureVisible(find.byKey(const ValueKey('shop-phone')));
+    await tester.enterText(
+      find.byKey(const ValueKey('shop-phone')),
+      '9999999999',
+    );
+    await tester.ensureVisible(find.byType(CheckboxListTile));
+    await tester.tap(find.byType(CheckboxListTile));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Submit for review'));
+    await tester.pumpAndSettle();
+    expect(controller.myShop, isNull);
+    expect(
+      find.text(
+        'Choose a current storefront photo showing your shop signboard.',
+      ),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets('seller cannot open administrator controls', (tester) async {
+    await loadFonts();
+    final store = MemoryStore();
+    final controller = MarketController(FixtureRepository(store), store);
+    await controller.reload();
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: marketTheme(),
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: AdminScreen(controller: controller),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Administrator access required'), findsOneWidget);
+    expect(find.text('Marketplace control'), findsNothing);
+    expect(tester.takeException(), isNull);
+    controller.dispose();
+  });
+  testWidgets('unpriced mandi entries are not fabricated prices on mobile', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await loadFonts();
+    final store = MemoryStore();
+    final repo = FixtureRepository(
+      store,
+      commodities: const [
+        MandiItem(
+          id: 'potato',
+          name: 'Potato',
+          hindiName: 'आलू',
+          category: 'Vegetables',
+        ),
+      ],
+    );
+    final controller = MarketController(repo, store);
+    await controller.reload();
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: marketTheme(),
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: MandiScreen(controller: controller),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Potato'), findsOneWidget);
+    expect(find.text('आलू'), findsOneWidget);
+    expect(find.text('Not published'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    controller.dispose();
+  });
+  testWidgets('administrator rates and queue layout fit mobile', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await loadFonts();
+    final store = MemoryStore();
+    final controller = MarketController(
+      FixtureRepository(
+        store,
+        staff: true,
+        commodities: const [
+          MandiItem(
+            id: 'potato',
+            name: 'Potato',
+            hindiName: 'आलू',
+            category: 'Vegetables',
+          ),
+        ],
+      ),
+      store,
+    );
+    await controller.reload();
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: marketTheme(),
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: AdminScreen(controller: controller),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Marketplace control'), findsOneWidget);
+    await tester.ensureVisible(find.text('Mandi rates'));
+    await tester.tap(find.text('Mandi rates'));
+    await tester.pumpAndSettle();
+    expect(find.text('Not published'), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const ValueKey('edit-rate-potato')));
+    await tester.tap(find.byKey(const ValueKey('edit-rate-potato')));
+    await tester.pumpAndSettle();
+    expect(find.text('Publish rate'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    controller.dispose();
   });
 }

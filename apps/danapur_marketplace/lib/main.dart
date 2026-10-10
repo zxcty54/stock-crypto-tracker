@@ -1,13 +1,14 @@
+import 'core/config/backend_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'data/controller.dart';
-import 'data/local_store.dart';
-import 'data/repository.dart';
-import 'ui/app.dart';
-import 'ui/theme.dart';
+import 'core/data/controller.dart';
+import 'core/data/local_store.dart';
+import 'core/data/repository.dart';
+import 'app/app.dart';
+import 'core/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +31,8 @@ Future<void> main() async {
   }
   try {
     final store = PreferencesStore(await SharedPreferences.getInstance());
-    final MarketRepository repository;
-    if (url.isEmpty) {
-      repository = DemoRepository(store);
-    } else {
-      await Supabase.initialize(url: url, publishableKey: key);
-      repository = SupabaseMarketRepository(Supabase.instance.client);
-    }
+    await Supabase.initialize(url: url, publishableKey: key);
+    final repository = SupabaseMarketRepository(Supabase.instance.client);
     runApp(DanapurApp(controller: MarketController(repository, store)));
   } catch (_) {
     runApp(
@@ -67,7 +63,7 @@ class StartupError extends StatelessWidget {
                 const Icon(Icons.settings_outlined, color: green, size: 44),
                 const SizedBox(height: 20),
                 const Text(
-                  'Setup needs attention',
+                  'Connect your marketplace',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 16),

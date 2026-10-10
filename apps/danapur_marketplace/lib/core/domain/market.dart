@@ -1,3 +1,5 @@
+import '../../features/mandi/domain/mandi.dart';
+import '../../features/admin/domain/administration.dart';
 import 'dart:typed_data';
 
 const categories = [
@@ -5,6 +7,17 @@ const categories = [
   'Electronics',
   'Fashion',
   'Home',
+  'Hardware',
+  'Furniture',
+  'Electrical',
+  'Building materials',
+  'Books & stationery',
+  'Pharmacy & healthcare',
+  'Automotive',
+  'Jewellery',
+  'Fresh produce',
+  'Sports & toys',
+  'Other',
   'Food & sweets',
 ];
 const areas = [
@@ -17,6 +30,9 @@ const areas = [
   'Bibiganj',
   'Other in Danapur',
 ];
+
+const businessTypes = ['Retailer', 'Wholesaler', 'Retailer & wholesaler'];
+const reviewStatuses = ['pending', 'approved', 'rejected', 'suspended'];
 
 class MarketException implements Exception {
   const MarketException(this.message);
@@ -35,6 +51,10 @@ class Shop {
     required this.address,
     required this.phone,
     required this.updatedAt,
+    this.businessType = 'Retailer',
+    this.reviewStatus = 'pending',
+    this.verificationPhotoPath,
+    this.reviewNote = '',
     this.description = '',
     this.hours = '',
     this.isPublished = true,
@@ -48,6 +68,9 @@ class Shop {
       phone,
       description,
       hours;
+  final String businessType, reviewStatus, reviewNote;
+  final String? verificationPhotoPath;
+  bool get isPublic => isPublished && reviewStatus == 'approved';
   final bool isPublished;
   final DateTime updatedAt;
   bool get isExample => ownerId.startsWith('sample-');
@@ -55,6 +78,10 @@ class Shop {
   factory Shop.fromJson(Map<String, dynamic> json) => Shop(
     id: json['id'] as String,
     ownerId: json['owner_id'] as String,
+    businessType: json['business_type'] as String? ?? 'Retailer',
+    reviewStatus: json['review_status'] as String? ?? 'pending',
+    verificationPhotoPath: json['verification_photo_path'] as String?,
+    reviewNote: json['review_note'] as String? ?? '',
     name: json['name'] as String,
     category: json['category'] as String,
     area: json['area'] as String,
@@ -68,6 +95,10 @@ class Shop {
   Map<String, dynamic> toJson() => {
     'id': id,
     'owner_id': ownerId,
+    'business_type': businessType,
+    'review_status': reviewStatus,
+    'verification_photo_path': verificationPhotoPath,
+    'review_note': reviewNote,
     'name': name,
     'category': category,
     'area': area,
@@ -133,9 +164,32 @@ class Product {
 }
 
 class MarketSnapshot {
-  const MarketSnapshot({this.shops = const [], this.products = const []});
+  const MarketSnapshot({
+    this.shops = const [],
+    this.products = const [],
+    this.mandiItems = const [],
+    this.mandiRates = const [],
+    this.isAdmin = false,
+    this.settings = const MarketSettings(),
+    this.audit = const [],
+  });
   final List<Shop> shops;
   final List<Product> products;
+  final List<MandiItem> mandiItems;
+  final List<MandiRate> mandiRates;
+  final bool isAdmin;
+  final MarketSettings settings;
+  final List<AuditEntry> audit;
+  MarketSnapshot copyWith({List<Shop>? shops, List<Product>? products}) =>
+      MarketSnapshot(
+        shops: shops ?? this.shops,
+        products: products ?? this.products,
+        mandiItems: mandiItems,
+        mandiRates: mandiRates,
+        isAdmin: isAdmin,
+        settings: settings,
+        audit: audit,
+      );
   factory MarketSnapshot.fromJson(Map<String, dynamic> json) => MarketSnapshot(
     shops: (json['shops'] as List)
         .map((e) => Shop.fromJson(Map<String, dynamic>.from(e as Map)))
@@ -157,13 +211,20 @@ class ShopDraft {
     required this.area,
     required this.address,
     required this.phone,
+    this.businessType = 'Retailer',
+    this.verificationPhotoPath,
     this.description = '',
     this.hours = '',
     this.isPublished = true,
   });
   final String name, category, area, address, phone, description, hours;
+  final String businessType;
+  final String? verificationPhotoPath;
   final bool isPublished;
   Map<String, dynamic> toJson() => {
+    'business_type': businessType,
+    if (verificationPhotoPath != null)
+      'verification_photo_path': verificationPhotoPath,
     'name': name.trim(),
     'category': category,
     'area': area,
@@ -174,6 +235,8 @@ class ShopDraft {
     'is_published': isPublished,
   };
   void validate() {
+    if (!businessTypes.contains(businessType))
+      throw const MarketException('Choose retailer or wholesaler.');
     final errors = [
       validateLength(name, 'Shop name', 3, 80),
       validateLength(address, 'Address', 6, 180),
@@ -329,8 +392,7 @@ List<Product> filterProducts(
   Set<String>? savedIds,
 }) {
   final shops = {
-    for (final shop in snapshot.shops.where((s) => s.isPublished))
-      shop.id: shop,
+    for (final shop in snapshot.shops.where((s) => s.isPublic)) shop.id: shop,
   };
   final words = query
       .trim()
@@ -362,12 +424,21 @@ List<Product> filterProducts(
 
 Uri whatsappUri(Shop shop, [Product? product]) {
   if (validatePhone(shop.phone) != null) {
-    throw const MarketException(
-      'Contact is unavailable for this example shop.',
-    );
+    throw const MarketException('The shop contact number is unavailable.');
   }
   final message = product == null
       ? 'Namaste! I found ${shop.name} on Danapur Bazaar. I would like to enquire about your shop.'
       : 'Namaste! I found ${product.name} (${money(product.pricePaise)} / ${product.unit}) at ${shop.name} on Danapur Bazaar. Is it available?';
   return Uri.https('wa.me', '91${shop.phone}', {'text': message});
+}
+
+Uri verificationWhatsappUri(Shop shop, String phone) {
+  if (validatePhone(phone) != null)
+    throw const MarketException(
+      'The administrator has not configured verification WhatsApp yet. Your request remains pending.',
+    );
+  return Uri.https('wa.me', '91$phone', {
+    'text':
+        'Namaste! Danapur Bazaar shop verification.\nRequest: ${shop.id}\nShop: ${shop.name}\nType: ${shop.businessType}\nAddress: ${shop.address}\nRegistered mobile: +91${shop.phone}\nI will attach a current storefront photo showing the shop signboard. Please review my onboarding request.',
+  });
 }

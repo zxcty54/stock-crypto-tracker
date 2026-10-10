@@ -1,168 +1,70 @@
 # Danapur Bazaar
 
-An independent Flutter marketplace MVP for **Danapur, Bihar**. The existing StockPulse application at the repository root is not replaced or connected to this app.
+A Flutter marketplace for **Danapur, Bihar**, with approved local retailers/wholesalers, product listings and administrator-published vegetable/fruit mandi rates. This is independent of the StockPulse app at the repository root.
 
-## Included
+## Start here
 
-- Responsive Android + web interface with local fonts and original illustrations.
-- Product/shop search, category and neighbourhood filters, price sorting.
-- Shop pages and product detail pages (`/#/shop/<id>`, `/#/product/<id>`).
-- Saved products persisted on the current device, without buyer login.
-- One shop per seller, editable business profile, publish/unpublish and shop deletion.
-- Product creation/editing/deletion, exact integer-paise prices, optional MRP, units, stock status.
-- Gallery photo upload (JPEG/PNG/WebP, maximum 512 KB), or a clearly labelled illustration.
-- Direct WhatsApp/call enquiry and Google Maps directions for real seller-entered details.
-- Separate Supabase database/auth/storage integration with owner-only row-level-security policies.
-- GitHub Actions: analysis, unit/widget tests, disposable Postgres security tests, web and Android APK artifacts.
+1. **[Configuration](config/README.md)** — Supabase URL/public key placeholders; never commit filled credentials.
+2. **[Deployment](docs/DEPLOYMENT.md)** — migrations, email auth, first admin, WhatsApp verification, signing and launch gates.
+3. **[Folder map](docs/STRUCTURE.md)** — organised app/features/configuration folders.
 
-**No cart, order processing, payments, delivery, verified-seller badges or paid promotion.** Those are not silently simulated.
+**There is no runtime demo mode.** Without a configured backend, the APK displays a setup-required screen. It does not invent shops, products or mandi prices. Test fixtures exist only under `test/support/` and are never imported by shipping code. Supabase itself is not provisioned automatically.
 
-## Two explicit modes
+## Marketplace
 
-### 1. Local demo — no credentials required
+- Professional responsive Material interface, consistent spacing/cards/status states and bundled English/Hindi fonts.
+- Product/shop discovery, categories/neighbourhood filters, exact integer-paise pricing and saved products on-device.
+- Retailer, wholesaler or both, with expanded categories including hardware, furniture, electrical, building materials, stationery, healthcare, automotive, fresh produce and more.
+- Email/password signup with email confirmation, real password-reset email/recovery UI and Android auth deep links.
+- One shop per owner; product create/edit/delete, photos, stock, unit and optional MRP.
+- Direct seller WhatsApp/call/maps enquiries. **No checkout, payments, delivery or sales guarantees.**
 
-Both Supabase configuration values empty → demo mode. All bundled shops/products/prices are fictional examples. Example shops have no callable phone number. A demo seller can create a shop and manage products, but changes stay on that browser/device. They are **not shared with other users**. Use the menu → Reset demo to clear them.
+## Shop verification
 
-### 2. Shared cloud marketplace
+- Mandatory private storefront/signboard photo on onboarding.
+- New requests are **pending** and hidden publicly, even if the owner enables publication.
+- WhatsApp opens the configured operator chat with the full request ID. The owner attaches a shop photo manually, from their registered business mobile.
+- Restricted admin panel reviews photo/sender and approves, rejects or suspends with an owner-visible reason.
+- Editing identity/contact/category/business type/proof resets approval. Seller-side self-approval and admin self-assignment are rejected by server policies/functions.
+- Private owner/admin-only verification bucket; short-lived signed photo links. **No Aadhaar/PAN collection.** A manual photo review is not government identity certification or absolute fraud prevention.
 
-Use a **dedicated Supabase project**, not the StockPulse backend.
+## Mandi and administrator workspace
 
-1. Run [`supabase/001_marketplace.sql`](supabase/001_marketplace.sql) in Supabase SQL Editor. It creates `shops`, `products`, RLS policies, server-owned timestamps and a `catalog-media` bucket. It intentionally inserts **no sample listings**.
-2. Enable Email/Password authentication and keep email confirmation enabled. Configure your deployed web URL as the Auth Site URL and allowed redirect URL. Sellers create an account, confirm the email, and sign in. An email confirmation is **not business verification**.
-3. Use the project HTTPS URL and **public anon/publishable key**. Never use `service_role` or `sb_secret_…`; the configuration checks reject them.
-4. In GitHub repository Settings → Secrets and variables → Actions, add:
-   - `DANAPUR_SUPABASE_URL`
-   - `DANAPUR_SUPABASE_ANON_KEY`
-5. Push app changes or run the **Danapur Marketplace — Flutter builds** workflow on the working branch.
+- **117 common/seasonal vegetables and fruits**, bilingual English/Hindi names and sensible default units. Not a claim to cover every possible crop/variety; admins can add more.
+- No mandi shop-owner onboarding. Only authorised administrators edit rates.
+- Separate wholesale/retail rates, per kg/dozen/piece/bunch/100 kg, fixed or min/max prices, IST market date and optional variety/quality note.
+- Unpriced items say **Not published**. Old rates show **Previous rate** and a date—not today's price.
+- Private queue, approval/rejection/suspension, rate editor, commodity creation, WhatsApp/support/policy settings and audit log in the same Android/web app.
+- Admin membership is installed only through privileged Supabase SQL Editor using the confirmed account UUID; never an embedded admin password or public role switch.
 
-Partial configuration fails explicitly. A cloud error never falls back to fictional demo shops. Buyers need no account; sellers can only modify their own shop/products. Unpublished shops/products are visible only to their owner. Images are intentionally public, even if their shop is unpublished and someone already knows the image URL—do not upload private documents.
+## Local builds
 
-Listings load in snapshots; buyers refresh to see new prices. This MVP is not a realtime inventory guarantee. Contact the seller to confirm price/stock before buying.
-
-## Local development
-
-Pinned CI toolchain: **Flutter 3.35.7, Dart 3.9, JDK 17**, Android application ID `in.danapur.bazaar`, Android 7+.
+Pinned CI: Flutter **3.35.7**, Dart **3.9**, Java **17**. Android ID `in.danapur.bazaar`, Android 7+.
 
 ```bash
 cd apps/danapur_marketplace
-flutter pub get
-flutter run -d chrome             # local demo
-flutter run                      # attached Android device
+flutter pub get --enforce-lockfile
+# First fill the Git-ignored config/app_config.json, as documented.
+flutter run --dart-define-from-file=config/app_config.json
+flutter run -d chrome --dart-define-from-file=config/app_config.json
 flutter analyze --fatal-infos
 flutter test --coverage
-flutter build web --release --no-web-resources-cdn
-flutter build apk --release
+flutter build web --release --no-web-resources-cdn --dart-define-from-file=config/app_config.json
+flutter build apk --release --dart-define-from-file=config/app_config.json
 ```
 
-For cloud builds, create an **ignored** local configuration JSON (do not commit it) and pass:
+## CI and Telegram delivery
 
-```bash
-flutter run -d chrome --dart-define-from-file=.env.local.json
-```
+`.github/workflows/danapur_marketplace.yml` runs idempotent real Postgres ownership/admin/visibility/private-storage/rate-history tests before Flutter analysis/domain/widget tests. It builds **one universal APK** containing ARMv7, ARM64 and x86_64, wraps it in **`danapur-bazaar.zip`**, and sends the ZIP directly from the build runner using the existing repository Telegram secrets. **No GitHub upload/download artifacts or binary commits.** PR builds never send Telegram messages.
 
-```json
-{
-  "DANAPUR_SUPABASE_URL": "https://YOUR-PROJECT.supabase.co",
-  "DANAPUR_SUPABASE_ANON_KEY": "YOUR-PUBLIC-ANON-OR-PUBLISHABLE-KEY"
-}
-```
+Native libraries are compressed to keep the single APK/ZIP below the public Bot API upload limit. Delivery validates the correct package/ABIs and requires Telegram's JSON success and message ID. No tokens/chat values are printed.
 
-Serve compiled web assets with any static host. The default build uses `/` as base URL. For GitHub Pages under a repository path, build with `--base-href /stock-crypto-tracker/`. The workflow uploads artifacts; **it does not enable or overwrite an existing GitHub Pages site**.
+The APK is release-optimised but **debug-signed for installation testing until dedicated Danapur signing secrets are supplied**. See the deployment guide. Existing StockPulse keystore/backend secrets are not reused. Empty Supabase configuration produces setup-required, not a functioning public service; configure and rebuild before onboarding real users.
 
-## GitHub Actions APKs and signing
+## Security and launch boundaries
 
-The workflow is scoped to `apps/danapur_marketplace/**` and does not use StockPulse's keystore or backend secrets. It builds **one universal APK**, containing ARMv7, ARM64 and x86_64 support. Download the `danapur-bazaar-apk` artifact: it contains a single `danapur-bazaar.apk` file. No architecture selection is needed. Compressed native-library packaging keeps this universal APK below Telegram's public Bot API upload limit.
+RLS and narrow administrator RPCs are the source of authority, not UI visibility. Owner IDs/listing IDs are immutable. Verification media is private; public product media is business content. Role and audit tables have no client-write grants. Mandirates keep history and server-owned authors/timestamps. Account/shop deletion and last-admin protection are implemented.
 
-By default, release-optimised APKs are **debug-signed for testing**, not Play Store publication. For release signing, configure dedicated secrets in GitHub (never in chat or Git):
+CI fixtures do not test your live Supabase project, SMTP, physical device, real WhatsApp sender matching or production legal compliance. Complete the deployment guide's actual backend/device/security/operations/privacy/signing checks before public launch. Admin MFA enforcement, operational abuse/reporting controls, backup/monitoring and a reviewed legal policy remain launch gates, not silently claimed completed services.
 
-- `DANAPUR_ANDROID_KEYSTORE_BASE64`
-- `DANAPUR_KEYSTORE_PASSWORD`
-- `DANAPUR_KEY_ALIAS`
-- `DANAPUR_KEY_PASSWORD`
-
-All four must be supplied together. The workflow restores the keystore only into the runner's temporary directory. Keep the same upload key for subsequent upgrades.
-
-## Validation and security
-
-`test/market_test.dart` covers currency handling, filters, ownership, persistence, invalid storage, image limits and safe configuration. `test/widget_test.dart` exercises discovery, saves, onboarding, product creation/deletion and mobile/tablet layout.
-
-The CI Postgres service simulates Supabase's `auth.uid()` and storage tables solely for policy tests. It applies the schema twice and checks anonymous reads, private visibility, cross-owner write rejection, invalid prices/MRP, photo ownership, and cascade deletion. **These fixtures must never run on a real Supabase project.** They do not replace live-project integration testing.
-
-## Before a public launch
-
-- Configure and test actual Supabase signup, email deliverability and RLS in your project.
-- Add abuse reporting, moderation, business verification and spam/rate controls. Self-reported profiles are not verified businesses.
-- Finish account-deletion support and a reviewed privacy/terms policy before Play Store publication. Shop deletion is implemented; auth-account deletion is not.
-- Product photos and business contact details are public. Publish only authorised content. The app does not collect buyer location or payment details.
-- Treat the in-app privacy copy as an MVP disclosure, not reviewed legal policy.
-- Create crawlable, server-rendered shop/product landing pages if organic search is important. Flutter web alone does not provide strong per-listing SEO. Demo HTML is deliberately `noindex`; do not index example shops.
-- Paginate/search server-side as the catalogue grows; the MVP uses a client-side catalogue snapshot.
-- No guarantee of adoption, current prices, earnings or low competition. The potential moat is genuine local sellers and maintained catalogue data—not the Flutter code.
-
-## Asset credits
-
-Illustrations and icons are original project assets; regenerate using `python tools/generate_assets.py` with Pillow installed. Manrope is bundled under its SIL Open Font License, included in `assets/fonts/OFL.txt`. The Gradle wrapper scripts/JAR come from the official Gradle 8.12 repository.
-
-
-### Bundled fonts and offline display
-
-Manrope and a Noto Sans Devanagari fallback are bundled for English/Hindi names.
-Their SIL Open Font License texts are shipped inside the app and are accessible
-from About → Open-source licenses. A local Manrope face is also registered under
-the engine's `Roboto` fallback alias, avoiding its default Google Fonts request.
-Other scripts/emoji can still depend on platform or web-renderer font fallback.
-
-### Reproducible builds and launch boundaries
-
-Commit `pubspec.lock` for this app; it records the tested dependency set. Public
-configuration accepts a Supabase publishable key or a legacy `anon`-role JWT,
-not user-session, service-role or arbitrary privileged tokens. This is a
-configuration guard, not client-side cryptographic JWT verification.
-
-Pushes on the working branch build automatically. The Actions manual-dispatch
-button may only become available once the workflow is on the default branch;
-this implementation has **not** merged or changed `main`.
-
-Testing APKs use a generated debug key unless the dedicated upload-key secrets
-are supplied. Debug signatures can differ between CI runners; updating such an
-APK may require uninstalling the previous test build (losing device-local demo
-data). Use a stable, protected upload key for production updates.
-
-Before a real public launch, configure the dedicated Supabase project, email
-confirmation/site redirect, an appropriate mail provider and auth rate controls,
-and add operational moderation/reporting plus an auth-account deletion flow.
-The fixture-based SQL tests do not provision or test a real Supabase project.
-
-
-**Verified implementation:** GitHub Actions builds genuine Flutter web output and
-one universal Android APK, with 27 Flutter domain/widget tests, 10 offline configuration
-guard tests plus 16 offline Telegram-delivery tests and the disposable PostgreSQL ownership/visibility tests. The app
-includes keyboard/short-landscape and large-price/narrow-card regression tests.
-CI checks formatting rather than changing source, and enforces the committed
-lockfile. These checks are not a substitute for real-device testing, a provisioned
-Supabase environment or a public-launch security/legal review.
-
-
-### Automatic Telegram APK delivery
-
-After **both** Flutter build/tests and database policy checks pass, a separate
-least-privilege job sends `danapur-bazaar.apk` directly as a Telegram document,
-not a ZIP and not three separate APKs. Delivery runs on trusted `main`/working
-branch pushes and manual dispatches; pull-request runs never send to Telegram.
-
-Per the requested integration, it reuses the repository's existing
-`TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` secrets. Existing aliases
-`TELEGRAM_TOKEN`, `TELEGRAM_CHANNEL` and `CHAT_ID` are also supported. Credentials
-are scoped to the send step and are never printed or committed. No new bot or
-sharing of tokens in chat is required.
-
-A destination may be a numeric chat ID (including `-100…` channel/group IDs), an
-`@channel` username or a public `https://t.me/channel` link. **Private invite links
-are not Bot API chat IDs.** The bot needs permission to post documents in the
-configured chat/channel.
-
-The sender validates the Danapur package and all three ABIs, checks the public
-Bot API's 50 MB size limit, and checks Telegram's JSON `ok` plus message ID before
-reporting success. Delivery failures fail that job; the already-built APK stays
-available in Actions artifacts. Only explicit rate-limit responses are retried;
-ambiguous connection failures are not automatically resent to avoid duplicates.
+Manrope and Noto Sans Devanagari fonts and licenses are bundled and available from About → Open-source licenses; there is no startup font CDN dependency. Original SVG illustrations remain in `assets/`. The Gradle wrapper/license comes from official Gradle 8.12 sources.
