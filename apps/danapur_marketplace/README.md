@@ -102,3 +102,33 @@ The CI Postgres service simulates Supabase's `auth.uid()` and storage tables sol
 ## Asset credits
 
 Illustrations and icons are original project assets; regenerate using `python tools/generate_assets.py` with Pillow installed. Manrope is bundled under its SIL Open Font License, included in `assets/fonts/OFL.txt`. The Gradle wrapper scripts/JAR come from the official Gradle 8.12 repository.
+
+
+### Bundled fonts and offline display
+
+Manrope and a Noto Sans Devanagari fallback are bundled for English/Hindi names.
+Their SIL Open Font License texts are shipped inside the app and are accessible
+from About → Open-source licenses. A local Manrope face is also registered under
+the engine's `Roboto` fallback alias, avoiding its default Google Fonts request.
+Other scripts/emoji can still depend on platform or web-renderer font fallback.
+
+### Reproducible builds and launch boundaries
+
+Commit `pubspec.lock` for this app; it records the tested dependency set. Public
+configuration accepts a Supabase publishable key or a legacy `anon`-role JWT,
+not user-session, service-role or arbitrary privileged tokens. This is a
+configuration guard, not client-side cryptographic JWT verification.
+
+Pushes on the working branch build automatically. The Actions manual-dispatch
+button may only become available once the workflow is on the default branch;
+this implementation has **not** merged or changed `main`.
+
+Testing APKs use a generated debug key unless the dedicated upload-key secrets
+are supplied. Debug signatures can differ between CI runners; updating such an
+APK may require uninstalling the previous test build (losing device-local demo
+data). Use a stable, protected upload key for production updates.
+
+Before a real public launch, configure the dedicated Supabase project, email
+confirmation/site redirect, an appropriate mail provider and auth rate controls,
+and add operational moderation/reporting plus an auth-account deletion flow.
+The fixture-based SQL tests do not provision or test a real Supabase project.

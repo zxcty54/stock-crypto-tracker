@@ -1,9 +1,21 @@
 import 'dart:typed_data';
 
-const categories = ['Grocery', 'Electronics', 'Fashion', 'Home', 'Food & sweets'];
+const categories = [
+  'Grocery',
+  'Electronics',
+  'Fashion',
+  'Home',
+  'Food & sweets',
+];
 const areas = [
-  'Danapur Bazaar', 'Saguna More', 'Gola Road', 'RPS More',
-  'Takiyapar', 'Nasriganj', 'Bibiganj', 'Other in Danapur',
+  'Danapur Bazaar',
+  'Saguna More',
+  'Gola Road',
+  'RPS More',
+  'Takiyapar',
+  'Nasriganj',
+  'Bibiganj',
+  'Other in Danapur',
 ];
 
 class MarketException implements Exception {
@@ -15,37 +27,73 @@ class MarketException implements Exception {
 
 class Shop {
   const Shop({
-    required this.id, required this.ownerId, required this.name,
-    required this.category, required this.area, required this.address,
-    required this.phone, required this.updatedAt,
-    this.description = '', this.hours = '', this.isPublished = true,
+    required this.id,
+    required this.ownerId,
+    required this.name,
+    required this.category,
+    required this.area,
+    required this.address,
+    required this.phone,
+    required this.updatedAt,
+    this.description = '',
+    this.hours = '',
+    this.isPublished = true,
   });
-  final String id, ownerId, name, category, area, address, phone, description, hours;
+  final String id,
+      ownerId,
+      name,
+      category,
+      area,
+      address,
+      phone,
+      description,
+      hours;
   final bool isPublished;
   final DateTime updatedAt;
   bool get isExample => ownerId.startsWith('sample-');
 
   factory Shop.fromJson(Map<String, dynamic> json) => Shop(
-    id: json['id'] as String, ownerId: json['owner_id'] as String,
-    name: json['name'] as String, category: json['category'] as String,
-    area: json['area'] as String, address: json['address'] as String,
-    phone: json['phone'] as String, description: json['description'] as String? ?? '',
-    hours: json['hours'] as String? ?? '', isPublished: json['is_published'] as bool? ?? true,
+    id: json['id'] as String,
+    ownerId: json['owner_id'] as String,
+    name: json['name'] as String,
+    category: json['category'] as String,
+    area: json['area'] as String,
+    address: json['address'] as String,
+    phone: json['phone'] as String,
+    description: json['description'] as String? ?? '',
+    hours: json['hours'] as String? ?? '',
+    isPublished: json['is_published'] as bool? ?? true,
     updatedAt: DateTime.parse(json['updated_at'] as String),
   );
   Map<String, dynamic> toJson() => {
-    'id': id, 'owner_id': ownerId, 'name': name, 'category': category,
-    'area': area, 'address': address, 'phone': phone, 'description': description,
-    'hours': hours, 'is_published': isPublished, 'updated_at': updatedAt.toIso8601String(),
+    'id': id,
+    'owner_id': ownerId,
+    'name': name,
+    'category': category,
+    'area': area,
+    'address': address,
+    'phone': phone,
+    'description': description,
+    'hours': hours,
+    'is_published': isPublished,
+    'updated_at': updatedAt.toIso8601String(),
   };
 }
 
 class Product {
   const Product({
-    required this.id, required this.shopId, required this.name,
-    required this.category, required this.pricePaise, required this.updatedAt,
-    this.mrpPaise, this.description = '', this.unit = 'each',
-    this.imageUrl, this.illustration = 'bag', this.isAvailable = true,
+    required this.id,
+    required this.shopId,
+    required this.name,
+    required this.category,
+    required this.pricePaise,
+    required this.updatedAt,
+    this.mrpPaise,
+    this.description = '',
+    this.unit = 'each',
+    this.imageUrl,
+    this.illustration = 'bag',
+    this.isAvailable = true,
   });
   final String id, shopId, name, category, description, unit, illustration;
   final String? imageUrl;
@@ -55,20 +103,32 @@ class Product {
   final DateTime updatedAt;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    id: json['id'] as String, shopId: json['shop_id'] as String,
-    name: json['name'] as String, category: json['category'] as String,
+    id: json['id'] as String,
+    shopId: json['shop_id'] as String,
+    name: json['name'] as String,
+    category: json['category'] as String,
     pricePaise: (json['price_paise'] as num).toInt(),
     mrpPaise: (json['mrp_paise'] as num?)?.toInt(),
-    description: json['description'] as String? ?? '', unit: json['unit'] as String? ?? 'each',
-    imageUrl: json['image_url'] as String?, illustration: json['illustration'] as String? ?? 'bag',
+    description: json['description'] as String? ?? '',
+    unit: json['unit'] as String? ?? 'each',
+    imageUrl: json['image_url'] as String?,
+    illustration: json['illustration'] as String? ?? 'bag',
     isAvailable: json['is_available'] as bool? ?? true,
     updatedAt: DateTime.parse(json['updated_at'] as String),
   );
   Map<String, dynamic> toJson() => {
-    'id': id, 'shop_id': shopId, 'name': name, 'category': category,
-    'price_paise': pricePaise, 'mrp_paise': mrpPaise, 'description': description,
-    'unit': unit, 'image_url': imageUrl, 'illustration': illustration,
-    'is_available': isAvailable, 'updated_at': updatedAt.toIso8601String(),
+    'id': id,
+    'shop_id': shopId,
+    'name': name,
+    'category': category,
+    'price_paise': pricePaise,
+    'mrp_paise': mrpPaise,
+    'description': description,
+    'unit': unit,
+    'image_url': imageUrl,
+    'illustration': illustration,
+    'is_available': isAvailable,
+    'updated_at': updatedAt.toIso8601String(),
   };
 }
 
@@ -77,8 +137,12 @@ class MarketSnapshot {
   final List<Shop> shops;
   final List<Product> products;
   factory MarketSnapshot.fromJson(Map<String, dynamic> json) => MarketSnapshot(
-    shops: (json['shops'] as List).map((e) => Shop.fromJson(Map<String, dynamic>.from(e as Map))).toList(),
-    products: (json['products'] as List).map((e) => Product.fromJson(Map<String, dynamic>.from(e as Map))).toList(),
+    shops: (json['shops'] as List)
+        .map((e) => Shop.fromJson(Map<String, dynamic>.from(e as Map)))
+        .toList(),
+    products: (json['products'] as List)
+        .map((e) => Product.fromJson(Map<String, dynamic>.from(e as Map)))
+        .toList(),
   );
   Map<String, dynamic> toJson() => {
     'shops': shops.map((e) => e.toJson()).toList(),
@@ -87,20 +151,33 @@ class MarketSnapshot {
 }
 
 class ShopDraft {
-  const ShopDraft({required this.name, required this.category, required this.area,
-    required this.address, required this.phone, this.description = '',
-    this.hours = '', this.isPublished = true});
+  const ShopDraft({
+    required this.name,
+    required this.category,
+    required this.area,
+    required this.address,
+    required this.phone,
+    this.description = '',
+    this.hours = '',
+    this.isPublished = true,
+  });
   final String name, category, area, address, phone, description, hours;
   final bool isPublished;
   Map<String, dynamic> toJson() => {
-    'name': name.trim(), 'category': category, 'area': area, 'address': address.trim(),
-    'phone': phone.trim(), 'description': description.trim(), 'hours': hours.trim(),
+    'name': name.trim(),
+    'category': category,
+    'area': area,
+    'address': address.trim(),
+    'phone': phone.trim(),
+    'description': description.trim(),
+    'hours': hours.trim(),
     'is_published': isPublished,
   };
   void validate() {
     final errors = [
       validateLength(name, 'Shop name', 3, 80),
-      validateLength(address, 'Address', 6, 180), validatePhone(phone),
+      validateLength(address, 'Address', 6, 180),
+      validatePhone(phone),
       validateLength(description, 'Description', 0, 400),
       validateLength(hours, 'Opening hours', 0, 80),
     ];
@@ -114,50 +191,82 @@ class ShopDraft {
 }
 
 class ProductDraft {
-  const ProductDraft({required this.name, required this.category,
-    required this.pricePaise, this.mrpPaise, this.description = '',
-    this.unit = 'each', this.imageUrl, this.illustration = 'bag', this.isAvailable = true});
+  const ProductDraft({
+    required this.name,
+    required this.category,
+    required this.pricePaise,
+    this.mrpPaise,
+    this.description = '',
+    this.unit = 'each',
+    this.imageUrl,
+    this.illustration = 'bag',
+    this.isAvailable = true,
+  });
   final String name, category, description, unit, illustration;
   final int pricePaise;
   final int? mrpPaise;
   final String? imageUrl;
   final bool isAvailable;
   Map<String, dynamic> toJson() => {
-    'name': name.trim(), 'category': category, 'price_paise': pricePaise,
-    'mrp_paise': mrpPaise, 'description': description.trim(), 'unit': unit.trim(),
-    'image_url': imageUrl, 'illustration': illustration, 'is_available': isAvailable,
+    'name': name.trim(),
+    'category': category,
+    'price_paise': pricePaise,
+    'mrp_paise': mrpPaise,
+    'description': description.trim(),
+    'unit': unit.trim(),
+    'image_url': imageUrl,
+    'illustration': illustration,
+    'is_available': isAvailable,
   };
   void validate() {
-    for (final error in [validateLength(name, 'Product name', 3, 100),
-      validateLength(description, 'Description', 0, 800), validateLength(unit, 'Unit', 1, 32)]) {
+    for (final error in [
+      validateLength(name, 'Product name', 3, 100),
+      validateLength(description, 'Description', 0, 800),
+      validateLength(unit, 'Unit', 1, 32),
+    ]) {
       if (error != null) throw MarketException(error);
     }
-    if (!categories.contains(category)) throw const MarketException('Choose a valid category.');
+    if (!categories.contains(category)) {
+      throw const MarketException('Choose a valid category.');
+    }
     if (pricePaise <= 0 || pricePaise > 100000000) {
-      throw const MarketException('Price must be between ₹0.01 and ₹10,00,000.');
+      throw const MarketException(
+        'Price must be between ₹0.01 and ₹10,00,000.',
+      );
     }
     if (mrpPaise != null && (mrpPaise! < pricePaise || mrpPaise! > 100000000)) {
-      throw const MarketException('MRP must be at least the selling price, up to ₹10,00,000.');
+      throw const MarketException(
+        'MRP must be at least the selling price, up to ₹10,00,000.',
+      );
     }
   }
 }
 
 String? validateLength(String? value, String label, int min, int max) {
   final length = (value ?? '').trim().length;
-  if (length < min || length > max) return '$label must be $min–$max characters.';
+  if (length < min || length > max) {
+    return '$label must be $min–$max characters.';
+  }
   return null;
 }
-String? validatePhone(String? value) => RegExp(r'^[6-9]\d{9}$').hasMatch((value ?? '').trim())
-    ? null : 'Enter a valid 10-digit Indian mobile number.';
+
+String? validatePhone(String? value) =>
+    RegExp(r'^[6-9]\d{9}$').hasMatch((value ?? '').trim())
+    ? null
+    : 'Enter a valid 10-digit Indian mobile number.';
 
 int? parsePrice(String text) {
   final value = text.trim();
   if (!RegExp(r'^\d{1,7}(\.\d{1,2})?$').hasMatch(value)) return null;
   final parts = value.split('.');
-  final paise = int.parse(parts.first) * 100 + (parts.length == 2 ? int.parse(parts[1].padRight(2, '0')) : 0);
+  final paise =
+      int.parse(parts.first) * 100 +
+      (parts.length == 2 ? int.parse(parts[1].padRight(2, '0')) : 0);
   return paise > 0 && paise <= 100000000 ? paise : null;
 }
-String priceInput(int paise) => '${paise ~/ 100}${paise % 100 == 0 ? '' : '.${(paise % 100).toString().padLeft(2, '0')}'}';
+
+String priceInput(int paise) =>
+    '${paise ~/ 100}${paise % 100 == 0 ? '' : '.${(paise % 100).toString().padLeft(2, '0')}'}';
 String money(int paise) {
   var digits = (paise ~/ 100).toString();
   if (digits.length > 3) {
@@ -184,37 +293,79 @@ class PickedPhoto {
       throw const MarketException('Choose a photo under 512 KB.');
     }
     String? extension;
-    if (bytes.length >= 8 && bytes[0] == 0x89 && bytes[1] == 0x50 && bytes[2] == 0x4e && bytes[3] == 0x47) extension = 'png';
-    if (bytes.length >= 3 && bytes[0] == 0xff && bytes[1] == 0xd8 && bytes[2] == 0xff) extension = 'jpeg';
-    if (bytes.length >= 12 && String.fromCharCodes(bytes.sublist(0, 4)) == 'RIFF' && String.fromCharCodes(bytes.sublist(8, 12)) == 'WEBP') extension = 'webp';
-    if (extension == null) throw const MarketException('Use a JPEG, PNG or WebP photo.');
+    if (bytes.length >= 8 &&
+        bytes[0] == 0x89 &&
+        bytes[1] == 0x50 &&
+        bytes[2] == 0x4e &&
+        bytes[3] == 0x47) {
+      extension = 'png';
+    }
+    if (bytes.length >= 3 &&
+        bytes[0] == 0xff &&
+        bytes[1] == 0xd8 &&
+        bytes[2] == 0xff) {
+      extension = 'jpeg';
+    }
+    if (bytes.length >= 12 &&
+        String.fromCharCodes(bytes.sublist(0, 4)) == 'RIFF' &&
+        String.fromCharCodes(bytes.sublist(8, 12)) == 'WEBP') {
+      extension = 'webp';
+    }
+    if (extension == null) {
+      throw const MarketException('Use a JPEG, PNG or WebP photo.');
+    }
     return PickedPhoto._(bytes, extension);
   }
 }
 
 enum ProductSort { newest, priceLow, priceHigh }
-List<Product> filterProducts(MarketSnapshot snapshot, {
-  String query = '', String? category, String? area,
-  ProductSort sort = ProductSort.newest, Set<String>? savedIds,
+
+List<Product> filterProducts(
+  MarketSnapshot snapshot, {
+  String query = '',
+  String? category,
+  String? area,
+  ProductSort sort = ProductSort.newest,
+  Set<String>? savedIds,
 }) {
-  final shops = {for (final shop in snapshot.shops.where((s) => s.isPublished)) shop.id: shop};
-  final words = query.trim().toLowerCase().split(RegExp(r'\s+')).where((s) => s.isNotEmpty);
+  final shops = {
+    for (final shop in snapshot.shops.where((s) => s.isPublished))
+      shop.id: shop,
+  };
+  final words = query
+      .trim()
+      .toLowerCase()
+      .split(RegExp(r'\s+'))
+      .where((s) => s.isNotEmpty);
   final result = snapshot.products.where((p) {
     final shop = shops[p.shopId];
-    if (shop == null || (category != null && p.category != category) ||
-        (area != null && shop.area != area) || (savedIds != null && !savedIds.contains(p.id))) return false;
-    final text = '${p.name} ${p.description} ${p.category} ${shop.name} ${shop.area}'.toLowerCase();
+    if (shop == null ||
+        (category != null && p.category != category) ||
+        (area != null && shop.area != area) ||
+        (savedIds != null && !savedIds.contains(p.id))) {
+      return false;
+    }
+    final text =
+        '${p.name} ${p.description} ${p.category} ${shop.name} ${shop.area}'
+            .toLowerCase();
     return words.every(text.contains);
   }).toList();
-  result.sort((a, b) => switch (sort) {
-    ProductSort.newest => b.updatedAt.compareTo(a.updatedAt),
-    ProductSort.priceLow => a.pricePaise.compareTo(b.pricePaise),
-    ProductSort.priceHigh => b.pricePaise.compareTo(a.pricePaise),
-  });
+  result.sort(
+    (a, b) => switch (sort) {
+      ProductSort.newest => b.updatedAt.compareTo(a.updatedAt),
+      ProductSort.priceLow => a.pricePaise.compareTo(b.pricePaise),
+      ProductSort.priceHigh => b.pricePaise.compareTo(a.pricePaise),
+    },
+  );
   return result;
 }
+
 Uri whatsappUri(Shop shop, [Product? product]) {
-  if (validatePhone(shop.phone) != null) throw const MarketException('Contact is unavailable for this example shop.');
+  if (validatePhone(shop.phone) != null) {
+    throw const MarketException(
+      'Contact is unavailable for this example shop.',
+    );
+  }
   final message = product == null
       ? 'Namaste! I found ${shop.name} on Danapur Bazaar. I would like to enquire about your shop.'
       : 'Namaste! I found ${product.name} (${money(product.pricePaise)} / ${product.unit}) at ${shop.name} on Danapur Bazaar. Is it available?';

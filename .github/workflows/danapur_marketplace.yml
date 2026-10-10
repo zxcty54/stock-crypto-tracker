@@ -110,14 +110,14 @@ jobs:
           set -o pipefail
           flutter build apk --release --split-per-abi --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
       - name: Upload web app
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: danapur-bazaar-web
           path: apps/danapur_marketplace/build/web/
           if-no-files-found: error
           retention-days: 14
       - name: Upload Android APKs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: danapur-bazaar-apks
           path: apps/danapur_marketplace/build/app/outputs/flutter-apk/*-release.apk
@@ -125,7 +125,7 @@ jobs:
           retention-days: 14
       - name: Upload formatting patch, dependency lock and coverage
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: danapur-ci-checks
           path: |

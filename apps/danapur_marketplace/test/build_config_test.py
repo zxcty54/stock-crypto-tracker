@@ -49,8 +49,26 @@ class BuildConfigTests(unittest.TestCase):
         result, _, _ = self.run_config({'DANAPUR_SUPABASE_URL': 'https://example.supabase.co', 'DANAPUR_SUPABASE_ANON_KEY': f'header.{body}.signature'})
         self.assertNotEqual(result.returncode, 0)
 
+    def test_user_session_and_other_privileged_jwts_are_rejected(self):
+        for role in ['authenticated', 'postgres', 'supabase_admin']:
+            body = base64.urlsafe_b64encode(json.dumps({'role': role}).encode()).decode().rstrip('=')
+            result, _, _ = self.run_config({'DANAPUR_SUPABASE_URL': 'https://example.supabase.co', 'DANAPUR_SUPABASE_ANON_KEY': f'header.{body}.signature'})
+            self.assertNotEqual(result.returncode, 0)
+
+    def test_legacy_public_anon_jwt_is_allowed(self):
+        body = base64.urlsafe_b64encode(b'{"role":"anon"}').decode().rstrip('=')
+        result, data, _ = self.run_config({'DANAPUR_SUPABASE_URL': 'https://example.supabase.co', 'DANAPUR_SUPABASE_ANON_KEY': f'header.{body}.signature'})
+        self.assertEqual(result.returncode, 0)
+        self.assertIsNotNone(data)
+
+    def test_opaque_and_non_object_keys_are_rejected(self):
+        body = base64.urlsafe_b64encode(b'[]').decode().rstrip('=')
+        for key in ['not-a-public-key', 'sb_publishable_', 'sb_publishable_has spaces', f'header.{body}.signature']:
+            result, _, _ = self.run_config({'DANAPUR_SUPABASE_URL': 'https://example.supabase.co', 'DANAPUR_SUPABASE_ANON_KEY': key})
+            self.assertNotEqual(result.returncode, 0)
+
     def test_localhost_and_insecure_backend_are_rejected(self):
-        for url in ['http://example.supabase.co', 'https://localhost', 'https://127.0.0.1', 'https://user:password@example.supabase.co']:
+        for url in ['http://example.supabase.co', 'https://localhost', 'https://127.0.0.1', 'https://user:password@example.supabase.co', 'https://:password@example.supabase.co']:
             with self.subTest(url=url):
                 result, _, _ = self.run_config({'DANAPUR_SUPABASE_URL': url, 'DANAPUR_SUPABASE_ANON_KEY': 'sb_publishable_example'})
                 self.assertNotEqual(result.returncode, 0)

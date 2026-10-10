@@ -12,7 +12,7 @@ dependencies:
   flutter_svg: ^2.2.1
   image_picker: ^1.2.0
   shared_preferences: ^2.5.3
-  supabase_flutter: ^2.10.2
+  supabase_flutter: ^2.18.2
   url_launcher: ^6.3.2
   uuid: ^4.5.1
 
@@ -25,6 +25,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/illustrations/
+    - assets/fonts/OFL.txt
+    - assets/fonts/NOTO-OFL.txt
   fonts:
     - family: Manrope
       fonts:
@@ -38,3 +40,13 @@ flutter:
           weight: 700
         - asset: assets/fonts/Manrope-800.ttf
           weight: 800
+    - family: NotoSansDevanagari
+      fonts:
+        - asset: assets/fonts/NotoSansDevanagari-400.ttf
+          weight: 400
+    # The web engine expects a Roboto default face. Alias our bundled font
+    # instead of making its otherwise automatic Google Fonts request.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Manrope-400.ttf
+          weight: 400
