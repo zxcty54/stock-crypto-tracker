@@ -216,8 +216,13 @@ void main() {
       '9999999999',
     );
     await tester.ensureVisible(find.byType(CheckboxListTile));
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(CheckboxListTile));
     await tester.pumpAndSettle();
+    expect(
+      tester.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value,
+      true,
+    );
     await tester.ensureVisible(find.text('Submit for review'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Submit for review'));

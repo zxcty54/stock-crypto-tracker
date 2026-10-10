@@ -20,7 +20,7 @@ for name in ('analysis', 'tests', 'web', 'android'):
     if problems:
         detail = '\n'.join(problems)
     elif any(marker in text for marker in ('::error::', 'Test failed.', 'FAILURE: Build failed', 'Error:')):
-        detail = '\n'.join(text.splitlines()[-45:])
+        detail = text if name == 'tests' else '\n'.join(text.splitlines()[-45:])
     else:
         continue
     for start in range(0, len(detail), 3000):
