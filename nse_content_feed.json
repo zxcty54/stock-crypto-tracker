@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-10-12 01:23:34 IST",
-  "worthy_count": 18,
+  "worthy_count": 16,
   "skipped_count": 8,
   "content_feed": [
     {
@@ -226,34 +226,6 @@
       "worthiness_reason": "New commercial order received.",
       "telegram_post": "💜 <b>#ORDER_WIN</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech wins Rs.466.74 crore turnkey contract from MGVCL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs.466,73,61,738.00\n- <b>Client:</b> M/s. Madhya Gujarat Vij Company Limited (MGVCL)\n- <b>Scope:</b> Conversion of HT O/H 11 kv line to MVCC overhead conductor & underground networking under SI Scheme – Robust‑III\n- <b>Duration:</b> 18 months from LOA\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech has been awarded a new turnkey contract from MGVCL, adding a Rs.466.74 crore project to its portfolio.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-11 21:21:38 IST"
-    },
-    {
-      "hash": "cf1f2ede393e",
-      "symbol": "MRPL",
-      "company_name": "Mangalore Refinery and Petrochemicals Limited",
-      "category": "JV",
-      "event_type": "JOINT_VENTURE",
-      "broadcast_date": "08-Oct-2026 14:19:53",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf",
-      "headline": "MRPL Incorporates ONGC Petrochemicals Marketing Limited Joint Venture",
-      "content_worthy": true,
-      "worthiness_reason": "Joint venture incorporation",
-      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Mangalore Refinery and Petrochemicals Limited (NSE: MRPL)</b>\n\n<b>MRPL Incorporates ONGC Petrochemicals Marketing Limited Joint Venture</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Incorporation Date:</b> 7 October 2026\n- <b>Shareholding:</b> 50% ONGC, 25% MRPL, 25% OPaL\n- <b>Authorized Capital:</b> Rs. 50 crore\n- <b>Equity Shares:</b> 5 crore shares of ₹210 each\n\n📌 <b>What happened:</b>\n↳ The newly incorporated JVC will undertake integrated marketing and trading of petrochemicals, chemicals and related products.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRPL_08102026141943_CoveringLetterSD.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-11 04:36:24 IST"
-    },
-    {
-      "hash": "7ead20011084",
-      "symbol": "PACEDIGITK",
-      "company_name": "Pace Digitek Limited",
-      "category": "ORDER",
-      "event_type": "ORDER_WIN",
-      "broadcast_date": "08-Oct-2026 18:47:58",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf",
-      "headline": "Pace Digitek Secures Rs. 1,794 Million BESS Order from BSES Rajdhani Power",
-      "content_worthy": true,
-      "worthiness_reason": "Commercial order win for BESS project",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Pace Digitek Limited (NSE: PACEDIGITK)</b>\n\n<b>Pace Digitek Secures Rs. 1,794 Million BESS Order from BSES Rajdhani Power</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs. 1,794 million\n- <b>Client:</b> BSES Rajdhani Power Limited\n- <b>Project Capacity:</b> 57.5 MW / 115 MWh\n- <b>Execution Period:</b> 7 months\n- <b>Project Capital:</b> Rs. 179.4 crore\n\n📌 <b>What happened:</b>\n↳ Pace Digitek has secured a Letter of Intent for a 57.5 MW/115 MWh BESS under a 12‑year BOOT model, marking its fifth major utility‑scale BOO/BOOT storage project.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PACE_08102026184742_Intimation-_Press_Release_BRPL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-11 04:36:24 IST"
     }
   ],
   "skipped_archive": [
