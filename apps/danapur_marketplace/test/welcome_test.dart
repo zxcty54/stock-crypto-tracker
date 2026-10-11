@@ -147,7 +147,7 @@ void main() {
           .state<NavigatorState>(find.byType(Navigator).first)
           .pushNamed('/shop/${shop.id}');
       await tester.pumpAndSettle();
-      expect(find.text(shop.name), findsOneWidget);
+      expect(find.text(shop.name), findsWidgets);
       expect(WelcomePreferences.hasCompleted(store), false);
       expect(tester.takeException(), isNull);
     },

@@ -121,10 +121,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(22, 18, 16, 10),
-                child: Row(
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 18,
+                  runSpacing: 4,
                   children: [
                     const Brand(small: true),
-                    const Spacer(),
                     TextButton(
                       key: const ValueKey('welcome-skip'),
                       onPressed: _busy ? null : _finish,
