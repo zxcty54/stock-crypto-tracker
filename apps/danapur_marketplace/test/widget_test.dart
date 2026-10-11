@@ -1,3 +1,4 @@
+import 'package:danapur_marketplace/features/onboarding/data/welcome_preferences.dart';
 import 'package:danapur_marketplace/features/mandi/domain/mandi.dart';
 import 'package:danapur_marketplace/features/admin/presentation/admin_screen.dart';
 import 'package:danapur_marketplace/features/mandi/presentation/mandi_screen.dart';
@@ -25,6 +26,9 @@ Future<void> loadFonts() async {
       .load();
 }
 
+Future<void> markWelcomeCompleted(LocalStore store) =>
+    WelcomePreferences.complete(store);
+
 Future<MarketController> openApp(
   WidgetTester tester, {
   Size size = const Size(1280, 1000),
@@ -36,6 +40,7 @@ Future<MarketController> openApp(
   addTearDown(tester.view.resetDevicePixelRatio);
   await loadFonts();
   final storage = store ?? MemoryStore();
+  await markWelcomeCompleted(storage);
   final controller = MarketController(FixtureRepository(storage), storage);
   await tester.pumpWidget(DanapurApp(controller: controller));
   await tester.pumpAndSettle();

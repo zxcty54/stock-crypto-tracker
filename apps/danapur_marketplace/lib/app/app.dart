@@ -1,3 +1,4 @@
+import '../features/onboarding/presentation/welcome_screen.dart';
 import '../features/orders/presentation/cart_checkout.dart';
 import '../features/orders/presentation/orders_screen.dart';
 import '../features/expenses/presentation/expenses_screen.dart';
@@ -45,7 +46,29 @@ class _DanapurAppState extends State<DanapurApp> {
       final path = Uri.tryParse(settings.name ?? '/')?.pathSegments ?? [];
       Widget page;
       if (path.isEmpty) {
-        page = AppShell(controller: widget.controller);
+        page = ListenableBuilder(
+          listenable: widget.controller,
+          builder: (_, _) => FirstLaunchGate(
+            store: widget.controller.store,
+            localSamples: widget.controller.repository.sampleProfilesEnabled,
+            bypass: widget.controller.repository.needsPasswordUpdate,
+            child: AppShell(controller: widget.controller),
+          ),
+        );
+      } else if (path.length == 1 && path[0] == 'welcome') {
+        page = Builder(
+          builder: (ctx) => WelcomeScreen(
+            localSamples: widget.controller.repository.sampleProfilesEnabled,
+            onComplete: () async {
+              final navigator = Navigator.of(ctx);
+              if (navigator.canPop()) {
+                navigator.pop();
+              } else {
+                navigator.pushNamedAndRemoveUntil('/', (_) => false);
+              }
+            },
+          ),
+        );
       } else if (path.length == 1 &&
           [
             'cart',
@@ -322,6 +345,7 @@ class _AppShellState extends State<AppShell> {
                                 showInfo(ctx);
                               }
                               if ([
+                                    'welcome',
                                     'orders',
                                     'expenses',
                                     'samples',
@@ -337,6 +361,10 @@ class _AppShellState extends State<AppShell> {
                               const PopupMenuItem(
                                 value: 'refresh',
                                 child: Text('Refresh listings'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'welcome',
+                                child: Text('Welcome guide'),
                               ),
                               const PopupMenuItem(
                                 value: 'about',

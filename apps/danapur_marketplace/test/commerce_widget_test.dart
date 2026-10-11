@@ -16,6 +16,7 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       await support.loadFonts();
       final store = MemoryStore(), repo = SampleRepository(MemoryStore());
+      await support.markWelcomeCompleted(store);
       final market = MarketController(SampleRepository(store), store);
       await tester.pumpWidget(DanapurApp(controller: market));
       await tester.pumpAndSettle();
@@ -78,6 +79,7 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       await support.loadFonts();
       final store = MemoryStore();
+      await support.markWelcomeCompleted(store);
       final market = MarketController(SampleRepository(store), store);
       await tester.pumpWidget(DanapurApp(controller: market));
       await tester.pumpAndSettle();

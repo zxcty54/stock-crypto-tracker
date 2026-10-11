@@ -7,7 +7,23 @@ Flutter Android/web marketplace for **Danapur, Bihar**: approved retailers/whole
 - [Configuration](config/README.md): Supabase URL/public-key placeholders.
 - [Deployment](docs/DEPLOYMENT.md): migrations, auth, admin, signing and launch gates.
 - **[Cash commerce & sample testing](docs/CASH_COMMERCE.md)**: delivery/pricing/order/expense/membership contracts and how to test/remove sample records.
-- [Folder map](docs/STRUCTURE.md): feature-first source structure.
+- **[File hierarchy & modification guide](docs/STRUCTURE.md)**: har file ka role, data flow aur kis change ke liye kaunsi file edit karni hai.
+
+## First-launch welcome
+
+On the first normal app launch, three welcome pages introduce local shops/mandi,
+cash delivery vs pickup and orders/expenses. Swipe or use Next/Back; Skip intro
+or Get started saves a **device-local** completion preference. Later launches
+open the marketplace directly. Menu → Welcome guide replays it without resetting
+that preference. No forced sign-in, GPS permission or SQL is needed for the intro.
+Password-recovery flows bypass it and deep-link routes remain reachable. Removing
+sample records does not repeat onboarding; clearing app storage/reinstall may.
+The sample-data notice stays explicit on sample builds. Preference write failure
+allows continuing with a warning, rather than trapping the user.
+
+Modify `lib/features/onboarding/presentation/welcome_screen.dart` for content/UI;
+`data/welcome_preferences.dart` owns the namespaced preference. This introduction
+is separate from seller storefront verification and account creation.
 
 ## Buyer experience
 
