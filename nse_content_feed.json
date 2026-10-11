@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-10-11 04:36:24 IST",
-  "worthy_count": 23,
+  "worthy_count": 22,
   "skipped_count": 10,
   "content_feed": [
     {
@@ -310,20 +310,6 @@
       "worthiness_reason": "Commercial order win with material value.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs 466.73 crore\n- <b>Client:</b> MGVCL\n- <b>Scope:</b> Conversion of HT O/H 11 kv line to MVCC overhead conductor & underground networking\n- <b>Duration:</b> 18 months\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech has been awarded a new turnkey contract from MGVCL, valued at Rs 466.73 crore, covering conversion of high‑tension lines to medium‑voltage and underground networking across multiple MGVCL divisions.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-10 15:34:29 IST"
-    },
-    {
-      "hash": "30fa7c1e7d1d",
-      "symbol": "KANORICHEM",
-      "company_name": "Kanoria Chemicals & Industries Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "CAPEX",
-      "broadcast_date": "07-Oct-2026 18:13:53",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf",
-      "headline": "Kanoria Chemicals launches 12 TPD Triacetin plant at Ankleshwar",
-      "content_worthy": true,
-      "worthiness_reason": "New manufacturing capacity launch.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Kanoria Chemicals & Industries Limited (NSE: KANORICHEM)</b>\n\n<b>Kanoria Chemicals launches 12 TPD Triacetin plant at Ankleshwar</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Product:</b> Triacetin\n- <b>Capacity:</b> 12 Metric Tons per Day\n- <b>Location:</b> GIDC, Ankleshwar, Gujarat\n- <b>Launch Date:</b> 07 Oct 2026\n\n📌 <b>What happened:</b>\n↳ The company inaugurated a new Triacetin manufacturing facility at its existing site, expanding its specialty chemicals portfolio for domestic and international markets.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KANORICHEM_07102026181240_Letter.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-10 08:58:25 IST"
     }
   ],
   "skipped_archive": [
