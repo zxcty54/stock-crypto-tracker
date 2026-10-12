@@ -2,322 +2,359 @@ import 'package:flutter/material.dart';
 
 import '../../../app/aangan_app.dart';
 import '../services/onboarding_store.dart';
-import '../widgets/common_widgets.dart';
-import 'app_shell.dart';
 
-/// What a person picked on the last onboarding page.
-enum OnboardingIntent { exploreHomes, listProperty }
-
-/// First-run welcome tour: house rules first, contact and address privacy,
-/// admin review, and then a simple "find a home" or "list a home" choice.
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({
-    super.key,
-    required this.onFinished,
-    this.replay = false,
+class _OnboardingSlide {
+  const _OnboardingSlide({
+    required this.icon,
+    required this.badgeIcon,
+    required this.headline,
+    required this.body,
+    required this.heroGradient,
+    required this.iconColor,
   });
 
-  /// Called once the person skips the tour or makes a choice.
-  final ValueChanged<OnboardingIntent> onFinished;
+  final IconData icon;
+  final IconData badgeIcon;
+  final String headline;
+  final String body;
+  final List<Color> heroGradient;
+  final Color iconColor;
+}
 
-  /// Replay mode (Profile → "How Aangan works") replaces Skip with a close
-  /// button; nothing is written to [OnboardingStore] from here either way.
-  final bool replay;
+/// First-launch welcome flow shown before the rental app shell.
+///
+/// Completion is remembered through [OnboardingStore]; [onCompleted] is
+/// invoked once the user finishes or skips the flow.
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key, required this.onCompleted});
+
+  final VoidCallback onCompleted;
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  static const int _tourPages = 3;
-  static const int _pageCount = _tourPages + 1;
+  static const List<_OnboardingSlide> _slides = <_OnboardingSlide>[
+    _OnboardingSlide(
+      icon: Icons.other_houses_rounded,
+      badgeIcon: Icons.apartment_rounded,
+      headline: 'बिहार का अपना रेंटल आँगन',
+      body: 'Ghar, flat ya room — poore Bihar ki listings ek hi app mein.',
+      heroGradient: <Color>[AanganColors.forest, AanganColors.leaf],
+      iconColor: AanganColors.forest,
+    ),
+    _OnboardingSlide(
+      icon: Icons.forum_rounded,
+      badgeIcon: Icons.lock_rounded,
+      headline: 'सीधा बात कीजिए',
+      body: 'Owner ya broker se private chat — mobile number bhi private.',
+      heroGradient: <Color>[AanganColors.terracotta, AanganColors.gold],
+      iconColor: AanganColors.terracotta,
+    ),
+    _OnboardingSlide(
+      icon: Icons.verified_user_rounded,
+      badgeIcon: Icons.fact_check_rounded,
+      headline: 'जाँची-परखी हर लिस्टिंग',
+      body: 'Har listing admin approval ke baad hi publish hoti hai.',
+      heroGradient: <Color>[AanganColors.forest, AanganColors.leaf],
+      iconColor: AanganColors.forest,
+    ),
+    _OnboardingSlide(
+      icon: Icons.location_on_rounded,
+      badgeIcon: Icons.map_rounded,
+      headline: 'अपना ज़िला चुनिए',
+      body: 'Poore Bihar ke 38 districts — apne area mein ghar khojein.',
+      heroGradient: <Color>[AanganColors.terracotta, AanganColors.gold],
+      iconColor: AanganColors.terracotta,
+    ),
+  ];
 
-  final PageController _controller = PageController();
-  int _page = 0;
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
-  void _goTo(int page) {
-    if (page < 0 || page >= _pageCount) return;
-    _controller.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 320),
+  Future<void> _finish() async {
+    await OnboardingStore.markCompleted();
+    widget.onCompleted();
+  }
+
+  void _goToNextPage() {
+    if (_currentPage >= _slides.length - 1) {
+      _finish();
+      return;
+    }
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 400),
       curve: Curves.easeOutCubic,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool onChoicePage = _page == _tourPages;
+    final bool isLastPage = _currentPage == _slides.length - 1;
+
     return Scaffold(
-      backgroundColor: AanganColors.canvas,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            _header(),
-            Expanded(
-              child: PageView(
-                controller: _controller,
-                onPageChanged: (int page) => setState(() => _page = page),
+      backgroundColor: AanganColors.cream,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Stack(
+              children: <Widget>[
+                PageView.builder(
+                  controller: _pageController,
+                  itemCount: _slides.length,
+                  onPageChanged: (index) =>
+                      setState(() => _currentPage = index),
+                  itemBuilder: (context, index) =>
+                      _OnboardingPage(slide: _slides[index]),
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: SafeArea(
+                    bottom: false,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 8, 16, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const _AanganMark(),
+                          _SkipPill(onPressed: _finish),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(28, 10, 28, 18),
+              child: Column(
                 children: <Widget>[
-                  const _TourPage(
-                    eyebrow: 'WELCOME',
-                    title: 'Bihar ka ghar,\nsaaf rules ke saath.',
-                    body:
-                        'Aangan par owner aur local broker rent, deposit aur house rules pehle hi likh dete hain, taaki call karne se pehle sab clear ho.',
-                    visual: _WelcomeVisual(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (var index = 0; index < _slides.length; index += 1)
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          width: index == _currentPage ? 26 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: index == _currentPage
+                                ? AanganColors.forest
+                                : AanganColors.line,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                    ],
                   ),
-                  const _TourPage(
-                    eyebrow: 'HOUSE RULES',
-                    title: 'Rules pehle,\nphir visit.',
-                    body:
-                        'Pets, bachelors, couples, mehmaan, late entry, smoking — har rule ka saaf jawab: Yes, No ya "Discuss first".',
-                    visual: _RulesVisual(),
-                  ),
-                  const _TourPage(
-                    eyebrow: 'PRIVACY & TRUST',
-                    title: 'Number aur address,\naapke control mein.',
-                    body:
-                        'Mobile number public listing mein kabhi nahi dikhta, exact address host ke show karne par hi khulta hai, aur nayi listing admin review ke baad live hoti hai.',
-                    visual: _PrivacyVisual(),
-                  ),
-                  _ChoicePage(
-                    onChoose: (OnboardingIntent intent) =>
-                        widget.onFinished(intent),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: FilledButton(
+                      onPressed: _goToNextPage,
+                      style: FilledButton.styleFrom(
+                        backgroundColor: AanganColors.forest,
+                        foregroundColor: AanganColors.cream,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      child: isLastPage
+                          ? const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text('शुरू करें'),
+                                SizedBox(width: 8),
+                                Icon(Icons.rocket_launch_rounded, size: 20),
+                              ],
+                            )
+                          : const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text('आगे'),
+                                SizedBox(width: 8),
+                                Icon(Icons.arrow_forward_rounded, size: 20),
+                              ],
+                            ),
+                    ),
                   ),
                 ],
               ),
             ),
-            _dots(),
-            const SizedBox(height: 14),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(22, 0, 22, 18),
-              child: onChoicePage
-                  ? const Text(
-                      'Apna option upar chunein — ye sirf pehla screen set karta hai.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AanganColors.muted,
-                        fontSize: 10,
-                        height: 1.45,
-                      ),
-                    )
-                  : PrimaryButton(
-                      label: 'Aage badhein',
-                      icon: Icons.arrow_forward_rounded,
-                      onPressed: () => _goTo(_page + 1),
-                    ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _header() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 8, 10, 4),
-      child: Row(
-        children: <Widget>[
-          if (_page > 0)
-            IconButton(
-              tooltip: 'Peeche',
-              onPressed: () => _goTo(_page - 1),
-              icon: const Icon(Icons.arrow_back_rounded),
-            )
-          else
-            const SizedBox(width: 48),
-          const Spacer(),
-          const AanganBrand(compact: true),
-          const Spacer(),
-          if (widget.replay)
-            IconButton(
-              tooltip: 'Band karein',
-              onPressed: () => widget.onFinished(OnboardingIntent.exploreHomes),
-              icon: const Icon(Icons.close_rounded),
-            )
-          else
-            TextButton(
-              onPressed: () => widget.onFinished(OnboardingIntent.exploreHomes),
-              child: const Text('Skip'),
-            ),
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget _dots() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+/// A single onboarding page: gradient hero on top, content sheet below.
+class _OnboardingPage extends StatelessWidget {
+  const _OnboardingPage({required this.slide});
+
+  final _OnboardingSlide slide;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: <Widget>[
-        for (int index = 0; index < _pageCount; index++)
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 220),
-            curve: Curves.easeOut,
-            margin: const EdgeInsets.symmetric(horizontal: 3),
-            width: index == _page ? 22 : 7,
-            height: 7,
-            decoration: BoxDecoration(
-              color: index == _page ? AanganColors.forest : AanganColors.line,
-              borderRadius: BorderRadius.circular(99),
+        Expanded(
+          flex: 5,
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: slide.heroGradient,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(36),
+                      bottomRight: Radius.circular(36),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: -46,
+                right: -34,
+                child: _HeroCircle(size: 150, color: const Color(0x1AFFFFFF)),
+              ),
+              Positioned(
+                bottom: 54,
+                left: -38,
+                child: _HeroCircle(size: 104, color: const Color(0x22FFFFFF)),
+              ),
+              Positioned(
+                top: 98,
+                right: 38,
+                child: _HeroCircle(size: 20, color: const Color(0x38FFFFFF)),
+              ),
+              Center(child: _HeroIcon(slide: slide)),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 4,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(32, 18, 32, 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  slide.headline,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AanganColors.ink,
+                    fontSize: 26,
+                    height: 1.25,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.4,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  slide.body,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AanganColors.muted,
+                    fontSize: 15.5,
+                    height: 1.55,
+                  ),
+                ),
+              ],
             ),
           ),
+        ),
       ],
     );
   }
 }
 
-/// Keeps the first-run tour in front of the app until it is finished once.
-class AanganOnboardingGate extends StatefulWidget {
-  const AanganOnboardingGate({super.key, required this.store});
+/// Layered icon composition shown in the middle of the gradient hero.
+class _HeroIcon extends StatelessWidget {
+  const _HeroIcon({required this.slide});
 
-  final OnboardingStore store;
-
-  @override
-  State<AanganOnboardingGate> createState() => _AanganOnboardingGateState();
-}
-
-class _AanganOnboardingGateState extends State<AanganOnboardingGate> {
-  OnboardingIntent? _intent;
-
-  Future<void> _finish(OnboardingIntent intent) async {
-    setState(() => _intent = intent);
-    await widget.store.complete();
-  }
+  final _OnboardingSlide slide;
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.store,
-      builder: (BuildContext context, Widget? child) {
-        if (!widget.store.isCompleted) {
-          return OnboardingScreen(onFinished: _finish);
-        }
-        return AppShell(
-          startWithCreateListing: _intent == OnboardingIntent.listProperty,
-        );
-      },
-    );
-  }
-}
-
-class _TourPage extends StatelessWidget {
-  const _TourPage({
-    required this.eyebrow,
-    required this.title,
-    required this.body,
-    required this.visual,
-  });
-
-  final String eyebrow;
-  final String title;
-  final String body;
-  final Widget visual;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(22, 10, 22, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      width: 196,
+      height: 196,
+      child: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
-          Text(
-            eyebrow,
-            style: const TextStyle(
-              color: AanganColors.leaf,
-              fontSize: 10,
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1.4,
+          Container(
+            width: 196,
+            height: 196,
+            decoration: const BoxDecoration(
+              color: Color(0x14FFFFFF),
+              shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              color: AanganColors.ink,
-              fontSize: 27,
-              height: 1.16,
-              letterSpacing: -1,
-              fontWeight: FontWeight.w800,
+          Container(
+            width: 152,
+            height: 152,
+            decoration: const BoxDecoration(
+              color: Color(0x24FFFFFF),
+              shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            body,
-            style: const TextStyle(
-              color: AanganColors.muted,
-              fontSize: 13,
-              height: 1.55,
+          Container(
+            width: 116,
+            height: 116,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(38),
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color(0x2E000000),
+                  blurRadius: 30,
+                  offset: Offset(0, 14),
+                ),
+              ],
             ),
+            child: Icon(slide.icon, size: 58, color: slide.iconColor),
           ),
-          const SizedBox(height: 22),
-          visual,
-        ],
-      ),
-    );
-  }
-}
-
-class _ChoicePage extends StatelessWidget {
-  const _ChoicePage({required this.onChoose});
-
-  final ValueChanged<OnboardingIntent> onChoose;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(22, 10, 22, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Text(
-            'SHURU KAREIN',
-            style: TextStyle(
-              color: AanganColors.leaf,
-              fontSize: 10,
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1.4,
+          Positioned(
+            right: 2,
+            bottom: 10,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Color(0x24000000),
+                    blurRadius: 14,
+                    offset: Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: Icon(slide.badgeIcon, size: 22, color: slide.iconColor),
             ),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'Aap kya karna chahte hain?',
-            style: TextStyle(
-              color: AanganColors.ink,
-              fontSize: 27,
-              height: 1.16,
-              letterSpacing: -1,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Pehla screen chunein. Owner listing aur renter search dono ek hi app mein chalti hain.',
-            style: TextStyle(
-              color: AanganColors.muted,
-              fontSize: 13,
-              height: 1.55,
-            ),
-          ),
-          const SizedBox(height: 22),
-          _ChoiceCard(
-            icon: Icons.search_rounded,
-            title: 'Ghar dhoondhna hai',
-            subtitle:
-                'Bihar ke live homes, filters aur house rules Explore mein dekhein.',
-            onTap: () => onChoose(OnboardingIntent.exploreHomes),
-          ),
-          const SizedBox(height: 12),
-          _ChoiceCard(
-            icon: Icons.add_home_work_outlined,
-            title: 'Ghar dena hai',
-            subtitle:
-                'Owner ya broker bankar property submit karein — admin review ke saath.',
-            onTap: () => onChoose(OnboardingIntent.listProperty),
           ),
         ],
       ),
@@ -325,330 +362,87 @@ class _ChoicePage extends StatelessWidget {
   }
 }
 
-class _ChoiceCard extends StatelessWidget {
-  const _ChoiceCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-  });
+/// Translucent decorative circle clipped by the hero edges.
+class _HeroCircle extends StatelessWidget {
+  const _HeroCircle({required this.size, required this.color});
 
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final VoidCallback onTap;
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    );
+  }
+}
+
+/// White brand mark shown on the gradient hero.
+class _AanganMark extends StatelessWidget {
+  const _AanganMark();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            color: const Color(0x33FFFFFF),
+            borderRadius: BorderRadius.circular(11),
+          ),
+          child: const Icon(
+            Icons.other_houses_rounded,
+            color: Colors.white,
+            size: 19,
+          ),
+        ),
+        const SizedBox(width: 9),
+        const Text(
+          'aangan',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.5,
+            height: 1,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Translucent skip control on the hero.
+class _SkipPill extends StatelessWidget {
+  const _SkipPill({required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(19),
-        side: const BorderSide(color: AanganColors.line),
-      ),
+      color: const Color(0x2EFFFFFF),
+      borderRadius: BorderRadius.circular(22),
       child: InkWell(
-        borderRadius: BorderRadius.circular(19),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: AanganColors.paleGreen,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: AanganColors.forest, size: 22),
-              ),
-              const SizedBox(width: 13),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: AanganColors.ink,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        color: AanganColors.muted,
-                        fontSize: 11,
-                        height: 1.45,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 6),
-              const Icon(
-                Icons.chevron_right_rounded,
-                color: AanganColors.muted,
-              ),
-            ],
+        borderRadius: BorderRadius.circular(22),
+        onTap: onPressed,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+          child: Text(
+            'Skip',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              height: 1,
+            ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _VisualCard extends StatelessWidget {
-  const _VisualCard({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: AanganColors.paleGreen,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AanganColors.line),
-      ),
-      child: child,
-    );
-  }
-}
-
-class _MiniChip extends StatelessWidget {
-  const _MiniChip({required this.icon, required this.label});
-
-  final IconData icon;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 7),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(99),
-        border: Border.all(color: AanganColors.line),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(icon, size: 14, color: AanganColors.forest),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: const TextStyle(
-              color: AanganColors.ink,
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BulletLine extends StatelessWidget {
-  const _BulletLine({required this.icon, required this.text});
-
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Icon(icon, size: 16, color: AanganColors.forest),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: AanganColors.ink,
-                fontSize: 11.5,
-                height: 1.45,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _WelcomeVisual extends StatelessWidget {
-  const _WelcomeVisual();
-
-  @override
-  Widget build(BuildContext context) {
-    return _VisualCard(
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: 88,
-            height: 88,
-            decoration: BoxDecoration(
-              color: AanganColors.forest,
-              borderRadius: BorderRadius.circular(28),
-            ),
-            child: const Icon(
-              Icons.other_houses_rounded,
-              color: AanganColors.cream,
-              size: 44,
-            ),
-          ),
-          const SizedBox(height: 18),
-          const Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: <Widget>[
-              _MiniChip(icon: Icons.place_outlined, label: '38 districts'),
-              _MiniChip(icon: Icons.tune_rounded, label: 'Clear filters'),
-              _MiniChip(icon: Icons.verified_outlined, label: 'Admin checked'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RulesVisual extends StatelessWidget {
-  const _RulesVisual();
-
-  @override
-  Widget build(BuildContext context) {
-    return _VisualCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(13),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: AanganColors.line),
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  '2 BHK · Danapur, Patna',
-                  style: TextStyle(
-                    color: AanganColors.ink,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  '₹8,500/month · Deposit 1 month · Semi-furnished',
-                  style: TextStyle(
-                    color: AanganColors.terracotta,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            'HOUSE RULES',
-            style: TextStyle(
-              color: AanganColors.muted,
-              fontSize: 9,
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1.2,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: <Widget>[
-              RulePill(label: 'Pets', value: 'allowed'),
-              RulePill(label: 'Bachelors', value: 'not_allowed'),
-              RulePill(label: 'Couples', value: 'discuss'),
-              RulePill(label: 'Visitors', value: 'discuss'),
-              RulePill(label: 'Smoking', value: 'not_allowed'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PrivacyVisual extends StatelessWidget {
-  const _PrivacyVisual();
-
-  @override
-  Widget build(BuildContext context) {
-    return _VisualCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const _BulletLine(
-            icon: Icons.phone_iphone_rounded,
-            text: 'Mobile number public listing mein kabhi nahi.',
-          ),
-          const _BulletLine(
-            icon: Icons.chat_bubble_outline_rounded,
-            text: 'In-app chat se baat karein, number share kiye bina.',
-          ),
-          const _BulletLine(
-            icon: Icons.location_off_outlined,
-            text:
-                'Road, landmark aur PIN host ke show karne par hi dikhte hain.',
-          ),
-          Container(
-            padding: const EdgeInsets.all(13),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: AanganColors.line),
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    StatusPill(status: 'pending'),
-                    SizedBox(width: 8),
-                    Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 15,
-                      color: AanganColors.muted,
-                    ),
-                    SizedBox(width: 8),
-                    StatusPill(status: 'published'),
-                  ],
-                ),
-                SizedBox(height: 9),
-                Text(
-                  'Nayi listing pehle admin review mein jaati hai. Approve hone ke baad hi renter use dekh sakte hain.',
-                  style: TextStyle(
-                    color: AanganColors.muted,
-                    fontSize: 10.5,
-                    height: 1.45,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
