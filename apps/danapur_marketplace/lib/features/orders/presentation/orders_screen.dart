@@ -181,56 +181,10 @@ class OrdersScreen extends StatelessWidget {
     CashOrder order,
     String status,
   ) async {
-    final note = TextEditingController(
-      text: status == 'completed'
-          ? 'Completed; cash settlement self-reported'
-          : status == 'cancelled'
-          ? 'Cancelled by participant'
-          : 'Seller updated fulfilment',
-    );
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(
-          status == 'completed'
-              ? 'Close this order as complete?'
-              : status == 'cancelled'
-              ? 'Cancel this order?'
-              : 'Update order status',
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (status == 'completed')
-                const Text(
-                  'Confirm items were handed over/received. This does not digitally verify cash payment. Closed orders cannot be changed.',
-                ),
-              const SizedBox(height: 14),
-              TextField(
-                controller: note,
-                maxLength: 300,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Status / cancellation note',
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Back'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, note.text),
-            child: const Text('Confirm'),
-          ),
-        ],
-      ),
+      builder: (_) => _ChangeOrderStatusDialog(status: status),
     );
-    note.dispose();
     if (result == null || !context.mounted) {
       return;
     }
@@ -243,4 +197,68 @@ class OrdersScreen extends StatelessWidget {
       await controller.reload();
     }, success: 'Order updated.');
   }
+}
+
+class _ChangeOrderStatusDialog extends StatefulWidget {
+  const _ChangeOrderStatusDialog({required this.status});
+  final String status;
+  @override
+  State<_ChangeOrderStatusDialog> createState() =>
+      _ChangeOrderStatusDialogState();
+}
+
+class _ChangeOrderStatusDialogState extends State<_ChangeOrderStatusDialog> {
+  late final TextEditingController _note = TextEditingController(
+    text: widget.status == 'completed'
+        ? 'Completed; cash settlement self-reported'
+        : widget.status == 'cancelled'
+        ? 'Cancelled by participant'
+        : 'Seller updated fulfilment',
+  );
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(
+      widget.status == 'completed'
+          ? 'Close this order as complete?'
+          : widget.status == 'cancelled'
+          ? 'Cancel this order?'
+          : 'Update order status',
+    ),
+    content: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.status == 'completed')
+            const Text(
+              'Confirm items were handed over/received. This does not digitally verify cash payment. Closed orders cannot be changed.',
+            ),
+          const SizedBox(height: 14),
+          TextField(
+            controller: _note,
+            maxLength: 300,
+            maxLines: 3,
+            decoration: const InputDecoration(
+              labelText: 'Status / cancellation note',
+            ),
+          ),
+        ],
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: const Text('Back'),
+      ),
+      FilledButton(
+        onPressed: () => Navigator.pop(context, _note.text),
+        child: const Text('Confirm'),
+      ),
+    ],
+  );
 }

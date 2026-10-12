@@ -131,44 +131,10 @@ class _ReviewModerationPanelState extends State<ReviewModerationPanel> {
   }
 
   Future<void> _moderate(OrderReview review, bool publish) async {
-    final note = TextEditingController();
     final reason = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(publish ? 'Publish this feedback?' : 'Hide this feedback?'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Check the free-text comment for personal information, spam or abuse. Apply the same policy to every rating.',
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: note,
-                maxLength: 300,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Moderation reason *',
-                  helperText: 'Visible privately to the author.',
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Back'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, note.text),
-            child: const Text('Confirm'),
-          ),
-        ],
-      ),
+      builder: (_) => _ModerateReviewDialog(publish: publish),
     );
-    note.dispose();
     if (reason == null || !mounted) {
       return;
     }
@@ -185,4 +151,57 @@ class _ReviewModerationPanelState extends State<ReviewModerationPanel> {
       await widget.controller.reload();
     }, success: 'Feedback moderation saved.');
   }
+}
+
+class _ModerateReviewDialog extends StatefulWidget {
+  const _ModerateReviewDialog({required this.publish});
+  final bool publish;
+  @override
+  State<_ModerateReviewDialog> createState() => _ModerateReviewDialogState();
+}
+
+class _ModerateReviewDialogState extends State<_ModerateReviewDialog> {
+  late final TextEditingController _note = TextEditingController();
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(
+      widget.publish ? 'Publish this feedback?' : 'Hide this feedback?',
+    ),
+    content: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Check the free-text comment for personal information, spam or abuse. Apply the same policy to every rating.',
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _note,
+            maxLength: 300,
+            maxLines: 3,
+            decoration: const InputDecoration(
+              labelText: 'Moderation reason *',
+              helperText: 'Visible privately to the author.',
+            ),
+          ),
+        ],
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: const Text('Back'),
+      ),
+      FilledButton(
+        onPressed: () => Navigator.pop(context, _note.text),
+        child: const Text('Confirm'),
+      ),
+    ],
+  );
 }

@@ -147,50 +147,10 @@ class _ReportsAdminPanelState extends State<ReportsAdminPanel> {
   }
 
   Future<void> _resolve(ContentReport report, String status) async {
-    final note = TextEditingController();
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(
-          status == 'investigated'
-              ? 'Resolve report violation?'
-              : 'Dismiss report?',
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                status == 'investigated'
-                    ? 'Confirm investigation and action taken on this report (e.g. content removed or seller contacted).'
-                    : 'Confirm this report was evaluated and dismissed as invalid or resolved.',
-                style: const TextStyle(fontSize: 12),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: note,
-                maxLength: 300,
-                maxLines: 2,
-                decoration: const InputDecoration(
-                  labelText: 'Action / resolution note *',
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, note.text),
-            child: const Text('Confirm'),
-          ),
-        ],
-      ),
+      builder: (_) => _ResolveReportDialog(status: status),
     );
-    note.dispose();
     if (result == null || !mounted) {
       return;
     }
@@ -207,4 +167,61 @@ class _ReportsAdminPanelState extends State<ReportsAdminPanel> {
       await widget.controller.reload();
     }, success: 'Report $status.');
   }
+}
+
+class _ResolveReportDialog extends StatefulWidget {
+  const _ResolveReportDialog({required this.status});
+  final String status;
+  @override
+  State<_ResolveReportDialog> createState() => _ResolveReportDialogState();
+}
+
+class _ResolveReportDialogState extends State<_ResolveReportDialog> {
+  late final TextEditingController _note = TextEditingController();
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(
+      widget.status == 'investigated'
+          ? 'Resolve report violation?'
+          : 'Dismiss report?',
+    ),
+    content: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            widget.status == 'investigated'
+                ? 'Confirm investigation and action taken on this report (e.g. content removed or seller contacted).'
+                : 'Confirm this report was evaluated and dismissed as invalid or resolved.',
+            style: const TextStyle(fontSize: 12),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _note,
+            maxLength: 300,
+            maxLines: 2,
+            decoration: const InputDecoration(
+              labelText: 'Action / resolution note *',
+            ),
+          ),
+        ],
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: const Text('Cancel'),
+      ),
+      FilledButton(
+        onPressed: () => Navigator.pop(context, _note.text),
+        child: const Text('Confirm'),
+      ),
+    ],
+  );
 }
