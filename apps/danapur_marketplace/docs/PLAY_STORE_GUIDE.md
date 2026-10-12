@@ -4,17 +4,15 @@ Is guide mein Google Play Console ke policies, review checklist, aur declaration
 
 ---
 
-## 1. Release files: APK vs AAB
+## 1. Release files: Testing APK vs Play Store AAB
 
-Google Play Console naye apps ke liye `.apk` accept nahi karta; **`.aab` (Android App Bundle)** mandatory hai.
+Abhi workflow **sirf universal APK** (`danapur-bazaar.zip`) generate aur deliver karta hai:
+- **`danapur-bazaar.zip` ke andar `danapur-bazaar.apk`**: Apne ya kisi bhi Android phone mein direct install aur testing ke liye.
+- **Signing**: By default Android debug key se signed rehta hai taaki bina kisi base64 keystore setup ke directly install ho sake. Kisi secret ya base64 key ki abhi zaroorat nahi hai.
 
-Aapke Telegram pe aane wale `danapur-bazaar.zip` ke andar **dono files** milti hain:
-- **`danapur-bazaar.apk`**: Apne phone mein install karke testing ke liye.
-- **`danapur-bazaar.aab`**: Google Play Console ke **Production / Closed Testing** track mein upload karne ke liye.
+### Future Play Store Release (Jab publish karna ho)
 
-### Production Signing Keystore
-
-Play Store release ke liye debug key nahi chalegi. Dedicated upload key configure karein:
+Google Play Console production launch ke liye `.aab` (Android App Bundle) aur dedicated signing key mangta hai:
 1. `keytool` se upload keystore banayein:
    ```bash
    keytool -genkey -v -keystore danapur-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias danapur -storetype JKS
@@ -28,6 +26,7 @@ Play Store release ke liye debug key nahi chalegi. Dedicated upload key configur
    - `DANAPUR_KEYSTORE_PASSWORD`
    - `DANAPUR_KEY_ALIAS` (e.g. `danapur`)
    - `DANAPUR_KEY_PASSWORD`
+4. CI workflow mein `flutter build appbundle` enable karein.
 
 ---
 

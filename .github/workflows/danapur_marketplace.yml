@@ -116,12 +116,7 @@ jobs:
           set -o pipefail
           flutter build apk --no-pub --release --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-android.log"
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/danapur-bazaar.apk
-      - name: Build Android App Bundle for Google Play Store
-        run: |
-          set -o pipefail
-          flutter build appbundle --no-pub --release --dart-define-from-file="$RUNNER_TEMP/danapur-config.json" 2>&1 | tee "$RUNNER_TEMP/danapur-aab.log"
-          mv build/app/outputs/bundle/release/app-release.aab build/app/outputs/flutter-apk/danapur-bazaar.aab
-      - name: Send release package inside ZIP directly to Telegram
+      - name: Send APK inside ZIP directly to Telegram
         if: >-
           github.event_name != 'pull_request' &&
           (github.ref == 'refs/heads/main' ||
@@ -131,7 +126,6 @@ jobs:
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHANNEL || secrets.CHAT_ID }}
         run: |
           python3 tools/send_apk_to_telegram.py build/app/outputs/flutter-apk/danapur-bazaar.apk \
-            --aab build/app/outputs/flutter-apk/danapur-bazaar.aab \
             --mode "${{ steps.config.outputs.mode }}" \
             --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
       - name: Safe compiler diagnostics
@@ -146,6 +140,6 @@ jobs:
             echo '- One universal APK inside `danapur-bazaar.zip`, delivered directly to Telegram on trusted non-PR builds.'
             echo '- No GitHub Actions artifacts are uploaded; no compiled binaries are committed.'
             echo '- Empty Supabase values use clearly labelled removable local sample records; invalid/live errors never fall back.'
-            echo '- Without a dedicated upload keystore this is debug-signed for installation testing, not a production-signed release.'
+            echo '- Standard debug signing enabled by default for immediate installation and testing without requiring base64 keystore setup.'
             echo '- Read apps/danapur_marketplace/docs/DEPLOYMENT.md before public launch.'
           } >> "$GITHUB_STEP_SUMMARY"
