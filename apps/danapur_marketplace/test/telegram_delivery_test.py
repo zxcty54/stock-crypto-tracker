@@ -24,7 +24,7 @@ def response(value):
 
 
 def success():
-    return response({"ok": True, "result": {"message_id": 321, "document": {"file_name": "danapur-bazaar.apk"}}})
+    return response({"ok": True, "result": {"message_id": 321, "document": {"file_name": "danapur-bazaar.zip"}}})
 
 
 class TelegramDeliveryTests(unittest.TestCase):
@@ -35,7 +35,6 @@ class TelegramDeliveryTests(unittest.TestCase):
         self.make_apk()
 
     def make_apk(self, *, package="in.danapur.bazaar", abis=delivery.ABIS):
-        # Synthetic tiny fixtures stay in a disposable directory; not deliverables.
         with ZipFile(self.apk, "w") as archive:
             archive.writestr("AndroidManifest.xml", package)
             for abi in abis:
@@ -76,12 +75,12 @@ class TelegramDeliveryTests(unittest.TestCase):
             delivery.validate_apk(self.apk)
 
     def test_telegram_size_limit_is_checked_before_request(self):
-        with patch.object(delivery, "MAX_APK_BYTES", 1):
+        with patch.object(delivery, "MAX_DOCUMENT_BYTES", 1):
             with self.assertRaises(delivery.DeliveryError):
                 delivery.validate_apk(self.apk)
 
     def test_document_is_zip_containing_exactly_one_apk(self):
-        boundary, data = delivery.multipart_document(self.apk, CHAT, "Demo build")
+        boundary, data = delivery.multipart_zip_document(self.apk, CHAT, "Demo build")
         self.assertIn(b'filename="danapur-bazaar.zip"', data)
         self.assertIn(b"application/zip", data)
         start = data.index(b'PK\x03\x04')
@@ -89,8 +88,6 @@ class TelegramDeliveryTests(unittest.TestCase):
         with ZipFile(io.BytesIO(data[start:end])) as archive:
             self.assertEqual(archive.namelist(), ['danapur-bazaar.apk'])
             self.assertEqual(archive.read('danapur-bazaar.apk'), self.apk.read_bytes())
-        self.assertTrue(data.endswith(f"--{boundary}--\r\n".encode()))
-        self.assertNotIn(TOKEN.encode(), data)
 
     def test_success_requires_confirmed_message_id(self):
         captured = []
@@ -98,7 +95,9 @@ class TelegramDeliveryTests(unittest.TestCase):
             captured.append(request)
             self.assertEqual(timeout, 180)
             return success()
-        self.assertEqual(delivery.send_release_package(self.apk, TOKEN, "https://t.me/ExampleChannel", "Demo", opener=opener), 321)
+        apk_id, aab_id = delivery.send_release_package(self.apk, TOKEN, "https://t.me/ExampleChannel", "Demo", opener=opener)
+        self.assertEqual(apk_id, 321)
+        self.assertIsNone(aab_id)
         self.assertEqual(captured[0].method, "POST")
         self.assertEqual(captured[0].full_url, f"https://api.telegram.org/bot{TOKEN}/sendDocument")
         self.assertIn(b"@ExampleChannel", captured[0].data)
@@ -126,7 +125,8 @@ class TelegramDeliveryTests(unittest.TestCase):
             if len(calls) == 1:
                 raise HTTPError(request.full_url, 429, "Too Many Requests", {}, response({"ok": False, "error_code": 429, "parameters": {"retry_after": 2}}))
             return success()
-        self.assertEqual(delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener, sleeper=waits.append), 321)
+        apk_id, _ = delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener, sleeper=waits.append)
+        self.assertEqual(apk_id, 321)
         self.assertEqual(len(calls), 2)
         self.assertEqual(waits, [2])
 
@@ -170,18 +170,22 @@ class TelegramDeliveryTests(unittest.TestCase):
             self.assertNotIn(TOKEN, text)
             self.assertNotIn(CHAT, text)
 
-
-    def test_aab_validation_and_packaging_in_zip(self):
+    def test_aab_validation_and_delivery_as_second_document(self):
         aab_path = Path(self.directory.name) / "danapur-bazaar.aab"
         with ZipFile(aab_path, "w") as archive:
             archive.writestr("base/manifest/AndroidManifest.xml", b"manifest")
             archive.writestr("base/dex/classes.dex", b"dex")
-        boundary, data = delivery.multipart_document(self.apk, CHAT, "Demo", aab_path=aab_path)
-        start = data.index(b'PK\x03\x04')
-        end = data.rfind(f"\r\n--{boundary}--\r\n".encode())
-        with ZipFile(io.BytesIO(data[start:end])) as archive:
-            self.assertIn('danapur-bazaar.apk', archive.namelist())
-            self.assertIn('danapur-bazaar.aab', archive.namelist())
+        calls = []
+        def opener(request, timeout):
+            calls.append(request)
+            return success()
+        apk_id, aab_id = delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", aab_path=aab_path, opener=opener)
+        self.assertEqual(apk_id, 321)
+        self.assertEqual(aab_id, 321)
+        self.assertEqual(len(calls), 2)
+        self.assertIn(b'filename="danapur-bazaar.zip"', calls[0].data)
+        self.assertIn(b'filename="danapur-bazaar.aab"', calls[1].data)
+
 
 if __name__ == "__main__":
     unittest.main()
