@@ -264,20 +264,30 @@ class ShopFeedbackSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 6,
+                          Row(
                             children: [
-                              Tag(
-                                '${review.rating}/5',
-                                icon: Icons.star_rounded,
+                              Expanded(
+                                child: Wrap(
+                                  spacing: 10,
+                                  runSpacing: 6,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Tag(
+                                      '${review.rating}/5',
+                                      icon: Icons.star_rounded,
+                                    ),
+                                    const Text(
+                                      'Order-linked customer',
+                                      style: TextStyle(
+                                        color: muted,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    if (review.isSample)
+                                      const Tag('TEST FEEDBACK'),
+                                  ],
+                                ),
                               ),
-                              const Text(
-                                'Order-linked customer',
-                                style: TextStyle(color: muted, fontSize: 11),
-                              ),
-                              if (review.isSample) const Tag('TEST FEEDBACK'),
-                              const Spacer(),
                               IconButton(
                                 tooltip: 'Report feedback',
                                 icon: const Icon(Icons.flag_outlined, size: 16),
