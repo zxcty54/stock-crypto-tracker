@@ -6,117 +6,94 @@ import 'package:aangan_bihar_rentals/features/rentals/screens/onboarding_screen.
 import 'package:aangan_bihar_rentals/features/rentals/services/onboarding_store.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues(<String, Object>{});
+  });
+
   group('OnboardingStore', () {
-    setUp(() {
-      SharedPreferences.setMockInitialValues(<String, Object>{});
+    test('reports an unfinished flow on a fresh install', () async {
+      expect(await OnboardingStore.isCompleted(), isFalse);
     });
 
-    test('a fresh device has not finished the tour', () async {
-      final store = OnboardingStore();
-      await store.load();
-      expect(store.isCompleted, isFalse);
-    });
-
-    test('finishing the tour is remembered for the next launch', () async {
-      final first = OnboardingStore();
-      await first.load();
-      await first.complete();
-      expect(first.isCompleted, isTrue);
-
-      final next = OnboardingStore();
-      await next.load();
-      expect(next.isCompleted, isTrue);
-    });
-
-    test('restarting brings the tour back and is persisted too', () async {
-      final store = OnboardingStore();
-      await store.load();
-      await store.complete();
-      await store.restart();
-      expect(store.isCompleted, isFalse);
-
-      final next = OnboardingStore();
-      await next.load();
-      expect(next.isCompleted, isFalse);
+    test('remembers the flow as completed once marked', () async {
+      await OnboardingStore.markCompleted();
+      expect(await OnboardingStore.isCompleted(), isTrue);
     });
   });
 
-  group('Onboarding tour', () {
-    testWidgets('skip finishes the tour with the explore intent',
-        (tester) async {
-      OnboardingIntent? chosen;
+  group('OnboardingScreen', () {
+    Future<void> pumpScreen(
+      WidgetTester tester, {
+      required VoidCallback onCompleted,
+    }) async {
+      tester.view.physicalSize = const Size(412, 915);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
       await tester.pumpWidget(
         MaterialApp(
-          home: OnboardingScreen(onFinished: (intent) => chosen = intent),
+          home: OnboardingScreen(onCompleted: onCompleted),
         ),
       );
+    }
 
-      expect(find.textContaining('Bihar ka ghar'), findsOneWidget);
-      expect(find.text('Aage badhein'), findsOneWidget);
+    testWidgets('renders the first slide and skips straight to the app',
+        (tester) async {
+      var completed = false;
+      await pumpScreen(tester, onCompleted: () => completed = true);
+
+      expect(find.text('बिहार का अपना रेंटल आँगन'), findsOneWidget);
+      expect(find.text('Skip'), findsOneWidget);
+      expect(find.text('aangan'), findsOneWidget);
+      expect(completed, isFalse);
 
       await tester.tap(find.text('Skip'));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
-      expect(chosen, OnboardingIntent.exploreHomes);
+      expect(completed, isTrue);
+      expect(await OnboardingStore.isCompleted(), isTrue);
     });
 
-    testWidgets('walking the pages ends on the two-way choice', (tester) async {
-      await tester.binding.setSurfaceSize(const Size(900, 1600));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
+    testWidgets('walks through every slide before finishing', (tester) async {
+      var completed = false;
+      await pumpScreen(tester, onCompleted: () => completed = true);
 
-      OnboardingIntent? chosen;
-      await tester.pumpWidget(
-        MaterialApp(
-          home: OnboardingScreen(onFinished: (intent) => chosen = intent),
-        ),
-      );
+      expect(find.text('शुरू करें'), findsNothing);
 
-      await tester.tap(find.text('Aage badhein'));
-      await tester.pumpAndSettle();
-      expect(find.textContaining('Rules pehle'), findsOneWidget);
-
-      await tester.tap(find.text('Aage badhein'));
-      await tester.pumpAndSettle();
-      expect(find.textContaining('aapke control mein'), findsOneWidget);
-
-      await tester.tap(find.text('Aage badhein'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Ghar dhoondhna hai'), findsOneWidget);
-      expect(find.text('Ghar dena hai'), findsOneWidget);
-
-      await tester.tap(find.text('Ghar dena hai'));
-      await tester.pump();
-
-      expect(chosen, OnboardingIntent.listProperty);
-    });
-
-    testWidgets('replay mode closes instead of skipping', (tester) async {
-      await tester.binding.setSurfaceSize(const Size(900, 1600));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
-
-      OnboardingIntent? chosen;
-      await tester.pumpWidget(
-        MaterialApp(
-          home: OnboardingScreen(
-            replay: true,
-            onFinished: (intent) => chosen = intent,
-          ),
-        ),
-      );
-
-      expect(find.text('Skip'), findsNothing);
-      expect(find.byIcon(Icons.close_rounded), findsOneWidget);
-
-      for (int step = 0; step < 3; step++) {
-        await tester.tap(find.text('Aage badhein'));
+      for (var taps = 1; taps < 4; taps += 1) {
+        await tester.tap(find.text('आगे'));
         await tester.pumpAndSettle();
+        expect(completed, isFalse);
       }
 
-      await tester.tap(find.text('Ghar dhoondhna hai'));
-      await tester.pump();
+      expect(find.text('शुरू करें'), findsOneWidget);
+      await tester.tap(find.text('शुरू करें'));
+      await tester.pumpAndSettle();
 
-      expect(chosen, OnboardingIntent.exploreHomes);
+      expect(completed, isTrue);
+      expect(await OnboardingStore.isCompleted(), isTrue);
+    });
+
+    testWidgets('swiping pages keeps the pinned controls in place',
+        (tester) async {
+      var completed = false;
+      await pumpScreen(tester, onCompleted: () => completed = true);
+
+      await tester.fling(
+        find.byType(PageView),
+        const Offset(-420, 0),
+        900,
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('सीधा बात कीजिए'), findsOneWidget);
+      expect(find.text('Skip'), findsOneWidget);
+      expect(find.text('आगे'), findsOneWidget);
+      expect(completed, isFalse);
     });
   });
 }
