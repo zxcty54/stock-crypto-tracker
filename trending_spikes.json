@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-11T23:33:27.749564",
+  "timestamp": "2026-10-12T05:33:03.486511",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -9,8 +9,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "amitabh bachchan",
-      "search_volume_spike": "20K+",
+      "keyword": "jatin pratap singh bigg boss",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -19,53 +19,68 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "amitabh bachchan death",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "who is nakul dhull",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ദിയ കൃഷ്ണ",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "రామ్ గోపాల్ వర్మ",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "गरबा",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "সৌরভ গঙ্গোপাধ্যায়",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "big boss",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mata ke bhajan",
+      "keyword": "तिलक वर्मा",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "तिलक वर्मा",
+      "keyword": "tobey maguire",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "maharashtra times",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "amitabh bachchan",
       "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "hotstar",
-      "search_volume_spike": "50K+",
+      "keyword": "সৌরভ গঙ্গোপাধ্যায়",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "radhika merchant",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "പൃഥ്വിരാജ് സുകുമാരന്",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "சம்பளம்",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "news in hindi",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "who is nakul dhull",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "out",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ఇల్లు ఇల్లాలు పిల్లలు",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -74,7 +89,12 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "bigg boss",
+      "keyword": "hotstar",
+      "search_volume_spike": "50K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "pati patni aur panga",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -84,48 +104,28 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "karan sharma",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "दुर्गा जी की आरती",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mahi vij",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "dr stone",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "winner of hustle 5",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "jio hotstar",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "బిగ్ బాస్",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "பிக் பாஸ் 10",
+      "keyword": "big boss",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ಬಿಗ್ ಬಾಸ್ - ಸೀಸನ್ 13",
-      "search_volume_spike": "5K+",
+      "keyword": "ദിയ കൃഷ്ണ",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ది విలేజ్",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "bigg boss",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "दीपिका चिखलिया",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
