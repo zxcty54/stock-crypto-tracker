@@ -9,6 +9,7 @@ import '../widgets/common_widgets.dart';
 import 'admin_screen.dart';
 import 'auth_screen.dart';
 import 'my_listings_screen.dart';
+import 'onboarding_screen.dart';
 
 String _profileUsername(User user) {
   final emailName = user.email?.split('@').first.toLowerCase() ?? 'aangan';
@@ -156,7 +157,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _ownerCard(),
             const SizedBox(height: 16),
             _privacyNote(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            Center(
+              child: TextButton.icon(
+                onPressed: _openTour,
+                icon: const Icon(Icons.tips_and_updates_outlined, size: 17),
+                label: const Text('How Aangan works'),
+              ),
+            ),
+            const SizedBox(height: 10),
             const Center(
               child: Text(
                 'AANGAN · BIHAR RENTALS',
@@ -452,6 +461,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
       MaterialPageRoute<bool>(builder: (_) => const AuthScreen()),
     );
     if (result == true && mounted) await _loadProfile();
+  }
+
+  /// Replays the first-run tour without touching the "already seen" flag.
+  Future<void> _openTour() async {
+    final navigator = Navigator.of(context);
+    OnboardingIntent? intent;
+    await navigator.push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => OnboardingScreen(
+          replay: true,
+          onFinished: (OnboardingIntent value) {
+            intent = value;
+            navigator.pop();
+          },
+        ),
+      ),
+    );
+    if (!mounted) return;
+    if (intent == OnboardingIntent.listProperty) widget.onCreateListing();
   }
 
   Future<void> _editProfile() async {

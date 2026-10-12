@@ -11,7 +11,11 @@ import 'profile_screen.dart';
 import 'saved_listings_screen.dart';
 
 class AppShell extends StatefulWidget {
-  const AppShell({super.key});
+  const AppShell({super.key, this.startWithCreateListing = false});
+
+  /// Set when the first-run tour ends on "Ghar dena hai": the shell opens the
+  /// listing form right away instead of the Explore tab.
+  final bool startWithCreateListing;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -19,6 +23,16 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.startWithCreateListing) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _openCreateListing();
+      });
+    }
+  }
 
   void _openListing(RentalListing listing) {
     Navigator.of(context).push<void>(

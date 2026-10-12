@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app/aangan_app.dart';
 import 'features/rentals/services/app_backend.dart';
 import 'features/rentals/services/favorites_store.dart';
+import 'features/rentals/services/onboarding_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,11 @@ Future<void> main() async {
     }
   }
 
-  await FavoritesStore.instance.load();
+  // Device-local state: saved homes and the one-time first-run tour.
+  await Future.wait<void>(<Future<void>>[
+    FavoritesStore.instance.load(),
+    OnboardingStore.instance.load(),
+  ]);
+
   runApp(const AanganApp());
 }
