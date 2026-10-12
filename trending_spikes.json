@@ -1,71 +1,96 @@
 {
   "status": "success",
-  "timestamp": "2026-10-12T05:33:03.486511",
+  "timestamp": "2026-10-12T15:05:52.868169",
   "total_hot_spikes": 25,
   "data": [
     {
-      "keyword": "चित्रा नक्षत्र",
+      "keyword": "मधु कांबीकर",
+      "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "madhu kambikar",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jatin pratap singh bigg boss",
+      "keyword": "सूर्या",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "विनीत सिंह",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "రామ్ గోపాల్ వర్మ",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "तिलक वर्मा",
+      "keyword": "सारा तेंदुलकर",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "tobey maguire",
-      "search_volume_spike": "1K+",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "maharashtra times",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "amitabh bachchan",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "সৌরভ গঙ্গোপাধ্যায়",
+      "keyword": "सारा तेंडुलकर",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "radhika merchant",
-      "search_volume_spike": "200+",
+      "keyword": "நடிகர்",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ജയിലര്",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "నరేష్",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ऐश्वर्या राय बच्चन",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "kannada news – vijay karnataka",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jatin pratap singh bigg boss",
+      "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "sara tendulkar",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "అల్లు అర్జున్",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ಬಿಗ್ ಬಾಸ್ ಕನ್ನಡ",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "radhika ambani",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "12 अक्टूबर राशिफल",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "പൃഥ്വിരാജ് സുകുമാരന്",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "சம்பளம்",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "news in hindi",
-      "search_volume_spike": "500+",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -74,58 +99,33 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "out",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ఇల్లు ఇల్లాలు పిల్లలు",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "indian idol",
+      "keyword": "সৌরভ গঙ্গোপাধ্যায়",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "hotstar",
-      "search_volume_spike": "50K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "pati patni aur panga",
+      "keyword": "ఎస్. ఎస్. రాజమౌళి",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jiohotstar",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "big boss",
+      "keyword": "सोनाली कुलकर्णी",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ദിയ കൃഷ്ണ",
+      "keyword": "jaideep ahlawat",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "radhikka madan katrina kaif support",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ది విలేజ్",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "bigg boss",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "दीपिका चिखलिया",
-      "search_volume_spike": "2K+",
+      "keyword": "drishyam 3 shriya saran interview",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
