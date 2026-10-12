@@ -1,3 +1,4 @@
+import 'package:danapur_marketplace/features/reports/domain/content_report.dart';
 import 'package:danapur_marketplace/features/mandi/domain/mandi.dart';
 import 'package:danapur_marketplace/features/admin/domain/administration.dart';
 import 'dart:convert';
@@ -66,6 +67,48 @@ class FixtureRepository extends MarketRepository {
       );
     }
     _cache = snapshot;
+  }
+
+  List<ContentReport> _fixtureReports = [];
+  @override
+  Future<void> submitReport({
+    required String targetType,
+    required String targetId,
+    required String targetTitle,
+    required String reason,
+    String details = '',
+  }) async {
+    _fixtureReports.add(
+      ContentReport(
+        id: const Uuid().v4(),
+        targetType: targetType,
+        targetId: targetId,
+        targetTitle: targetTitle,
+        reason: reason,
+        details: details,
+        status: 'pending',
+        createdAt: DateTime.now().toUtc(),
+      ),
+    );
+  }
+
+  @override
+  Future<void> resolveReport(
+    String reportId,
+    String status,
+    String note,
+  ) async {
+    _fixtureReports = _fixtureReports
+        .map(
+          (r) => r.id == reportId
+              ? ContentReport.fromJson({
+                  ...r.toJson(),
+                  'status': status,
+                  'status_note': note,
+                })
+              : r,
+        )
+        .toList();
   }
 
   @override

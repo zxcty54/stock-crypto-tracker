@@ -1,11 +1,12 @@
-"""Send one genuine, universal Danapur APK using the existing repository bot.
+"""Send Danapur release artifacts (universal APK + Play Store AAB) in one ZIP via Telegram.
 
 Credentials are read only from environment variables, never CLI arguments/logs.
-The public Telegram Bot API accepts documents up to 50 MB. One APK is wrapped in a ZIP document, and a successful HTTP response must also confirm `ok: true`.
+The public Telegram Bot API accepts documents up to 50 MB. Artifacts are wrapped in
+`danapur-bazaar.zip`, and a successful HTTP response must also confirm `ok: true`.
 """
 import argparse
-import json
 import io
+import json
 import os
 from pathlib import Path
 import re
@@ -73,7 +74,24 @@ def validate_apk(path):
     return size
 
 
-def multipart_document(path, chat_id, caption):
+def validate_aab(path):
+    path = Path(path)
+    if path.suffix.lower() != ".aab" or not path.is_file():
+        raise DeliveryError("The App Bundle file is missing or is not an .aab.")
+    size = path.stat().st_size
+    if size <= 0:
+        raise DeliveryError("The App Bundle file is empty.")
+    try:
+        with ZipFile(path) as aab:
+            names = set(aab.namelist())
+            if not any(n.startswith("base/manifest/") for n in names) and "base/manifest/AndroidManifest.xml" not in names:
+                raise DeliveryError("Expected a valid Android App Bundle archive.")
+    except (BadZipFile, OSError):
+        raise DeliveryError("The App Bundle archive could not be validated.") from None
+    return size
+
+
+def multipart_document(apk_path, chat_id, caption, aab_path=None):
     boundary = "danapur-" + uuid4().hex
     chunks = []
     for name, value in (("chat_id", chat_id), ("caption", caption)):
@@ -87,7 +105,9 @@ def multipart_document(path, chat_id, caption):
     )
     package = io.BytesIO()
     with ZipFile(package, 'w', compression=ZIP_DEFLATED, compresslevel=9) as archive:
-        archive.write(path, arcname='danapur-bazaar.apk')
+        archive.write(apk_path, arcname='danapur-bazaar.apk')
+        if aab_path and Path(aab_path).is_file():
+            archive.write(aab_path, arcname='danapur-bazaar.aab')
     if package.tell() > MAX_APK_BYTES:
         raise DeliveryError('Release ZIP exceeds the Telegram Bot API 50 MB limit.')
     chunks.append(package.getvalue())
@@ -115,15 +135,17 @@ def read_reply(response):
     return reply
 
 
-def send_apk(path, token, chat_id, caption, *, opener=None, sleeper=None):
+def send_release_package(apk_path, token, chat_id, caption, *, aab_path=None, opener=None, sleeper=None):
     token = token.strip()
     if not re.fullmatch(r"[0-9]+:[A-Za-z0-9_-]+", token):
         raise DeliveryError("Telegram bot token is missing or malformed in repository secrets.")
     destination = normalize_chat_id(chat_id)
-    validate_apk(path)
+    validate_apk(apk_path)
+    if aab_path and Path(aab_path).is_file():
+        validate_aab(aab_path)
     if len(caption) > 1024:
         raise DeliveryError("Telegram document caption must not exceed 1024 characters.")
-    boundary, body = multipart_document(path, destination, caption)
+    boundary, body = multipart_document(apk_path, destination, caption, aab_path=aab_path)
     request = Request(
         f"https://api.telegram.org/bot{token}/sendDocument",
         data=body,
@@ -144,8 +166,6 @@ def send_apk(path, token, chat_id, caption, *, opener=None, sleeper=None):
             finally:
                 error.close()
         except (URLError, TimeoutError, OSError):
-            # An ambiguous connection failure might have delivered the file.
-            # Do not automatically resend and produce duplicate Telegram APKs.
             raise DeliveryError(
                 "Telegram connection failed; delivery could not be confirmed. "
                 "Check the chat before rerunning delivery."
@@ -162,13 +182,14 @@ def send_apk(path, token, chat_id, caption, *, opener=None, sleeper=None):
                 sleeper(retry_after)
                 continue
         description = safe_description(reply, token, chat_id.strip(), destination)
-        raise DeliveryError("Telegram APK delivery failed: " + description)
+        raise DeliveryError("Telegram delivery failed: " + description)
     raise DeliveryError("Telegram rate limit prevented delivery.")
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Deliver one universal Danapur APK to Telegram.")
+    parser = argparse.ArgumentParser(description="Deliver Danapur release package to Telegram.")
     parser.add_argument("apk", type=Path)
+    parser.add_argument("--aab", type=Path, default=None)
     parser.add_argument("--mode", choices=("sample", "cloud"), default="sample")
     parser.add_argument("--run-url", default="")
     args = parser.parse_args(argv)
@@ -181,29 +202,33 @@ def main(argv=None):
             file=sys.stderr,
         )
         return 1
+    has_aab = args.aab and Path(args.aab).is_file()
     mode = "Local sample records and test profiles. Configure Supabase for shared real orders." if args.mode == "sample" else "Supabase-configured marketplace build."
+    aab_line = "\n• Includes danapur-bazaar.aab for Google Play Console upload" if has_aab else ""
     caption = (
-        "Danapur Bazaar — universal APK inside one ZIP\n"
-        "Android 7+ | ARMv7, ARM64 and x86_64 in one file.\n"
-        f"{mode}\nExtract the ZIP and install danapur-bazaar.apk. Signing/setup checks are separate."
+        "Danapur Bazaar — release package inside one ZIP\n"
+        "• danapur-bazaar.apk for testing/direct phone installation"
+        f"{aab_line}\n"
+        f"{mode}\nExtract the ZIP to install or publish. Signing/setup checks are separate."
     )
     if args.run_url:
         caption += "\n" + args.run_url
     try:
-        message_id = send_apk(args.apk, token, chat_id, caption)
+        message_id = send_release_package(args.apk, token, chat_id, caption, aab_path=args.aab)
     except DeliveryError as error:
         print("::error::" + str(error), file=sys.stderr)
         return 1
-    size = args.apk.stat().st_size / 1_000_000
+    apk_mb = args.apk.stat().st_size / 1_000_000
+    aab_info = f" + AAB {args.aab.stat().st_size / 1_000_000:.1f} MB" if has_aab else ""
     confirmation = (
-        f"Telegram confirmed message {message_id}: danapur-bazaar.zip containing one danapur-bazaar.apk, "
-        f"APK {size:.1f} MB, one universal APK."
+        f"Telegram confirmed message {message_id}: danapur-bazaar.zip containing danapur-bazaar.apk "
+        f"({apk_mb:.1f} MB, one universal APK){aab_info}."
     )
     print("::notice title=Danapur APK delivered::" + confirmation)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a") as stream:
-            stream.write("## Danapur APK delivered to Telegram\n\n" + confirmation + "\n")
+            stream.write("## Danapur Release Package delivered to Telegram\n\n" + confirmation + "\n")
     return 0
 
 

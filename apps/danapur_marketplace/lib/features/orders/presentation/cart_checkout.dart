@@ -36,7 +36,11 @@ class _CartCheckoutScreenState extends State<CartCheckoutScreen> {
   Future<void> _locate() async {
     setState(() => _locating = true);
     try {
-      final fix = await currentLocation();
+      final fix = await currentLocation(
+        context: context,
+        purpose:
+            'verify if your delivery address is within the 500-metre shop delivery radius for cash on delivery',
+      );
       if (mounted) {
         setState(() => _fix = fix);
       }

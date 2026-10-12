@@ -1,3 +1,4 @@
+import '../../features/reports/domain/content_report.dart';
 import '../../features/reviews/domain/order_review.dart';
 import '../../features/orders/domain/commerce.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -92,6 +93,18 @@ abstract class MarketRepository {
       throw const MarketException('Sign in to edit expenses.');
   Future<void> configureBilling(bool enabled) async =>
       throw const MarketException('Administrator access required.');
+  Future<void> submitReport({
+    required String targetType,
+    required String targetId,
+    required String targetTitle,
+    required String reason,
+    String details = '',
+  }) async => throw const MarketException('Reporting is unavailable.');
+  Future<void> resolveReport(
+    String reportId,
+    String status,
+    String note,
+  ) async => throw const MarketException('Administrator access required.');
   Future<void> submitOrderReview(
     CashOrder order,
     int rating,
@@ -181,6 +194,7 @@ class SupabaseMarketRepository extends MarketRepository {
       expenses: results[7].map(PersonalExpense.fromJson).toList(),
       publicReviews: results[8].map(OrderReview.fromJson).toList(),
       privateReviews: results[9].map(OrderReview.fromJson).toList(),
+      reports: results[10].map(ContentReport.fromJson).toList(),
       audit: admin
           ? (await client
                     .from('market_audit')
@@ -564,6 +578,42 @@ class SupabaseMarketRepository extends MarketRepository {
       );
   @override
   Future<void> removeSampleData() async => client.rpc('purge_sample_catalog');
+  @override
+  Future<void> submitReport({
+    required String targetType,
+    required String targetId,
+    required String targetTitle,
+    required String reason,
+    String details = '',
+  }) async {
+    await client.rpc(
+      'submit_content_report',
+      params: {
+        'p_target_type': targetType,
+        'p_target_id': targetId,
+        'p_target_title': targetTitle,
+        'p_reason': reason,
+        'p_details': details.trim(),
+      },
+    );
+  }
+
+  @override
+  Future<void> resolveReport(
+    String reportId,
+    String status,
+    String note,
+  ) async {
+    await client.rpc(
+      'resolve_content_report',
+      params: {
+        'p_report_id': reportId,
+        'p_status': status,
+        'p_note': note.trim(),
+      },
+    );
+  }
+
   @override
   Future<void> submitOrderReview(
     CashOrder order,

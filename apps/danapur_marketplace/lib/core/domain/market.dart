@@ -1,3 +1,4 @@
+import '../../features/reports/domain/content_report.dart';
 import '../../features/reviews/domain/order_review.dart';
 import '../../features/orders/domain/commerce.dart';
 import '../../features/mandi/domain/mandi.dart';
@@ -243,6 +244,7 @@ class MarketSnapshot {
     this.expenses = const [],
     this.publicReviews = const [],
     this.privateReviews = const [],
+    this.reports = const [],
   });
   final List<Shop> shops;
   final List<Product> products;
@@ -255,6 +257,7 @@ class MarketSnapshot {
   final List<OrderLine> orderLines;
   final List<PersonalExpense> expenses;
   final List<OrderReview> publicReviews, privateReviews;
+  final List<ContentReport> reports;
   MarketSnapshot copyWith({List<Shop>? shops, List<Product>? products}) =>
       MarketSnapshot(
         shops: shops ?? this.shops,
@@ -269,6 +272,7 @@ class MarketSnapshot {
         expenses: expenses,
         publicReviews: publicReviews,
         privateReviews: privateReviews,
+        reports: reports,
       );
   factory MarketSnapshot.fromJson(Map<String, dynamic> json) => MarketSnapshot(
     shops: (json['shops'] as List)

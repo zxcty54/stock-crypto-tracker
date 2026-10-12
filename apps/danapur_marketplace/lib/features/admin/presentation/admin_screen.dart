@@ -1,3 +1,4 @@
+import '../../reports/presentation/reports_admin_panel.dart';
 import '../../reviews/presentation/review_moderation.dart';
 import 'dart:convert';
 import 'cash_operations.dart';
@@ -120,6 +121,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 'Activity',
                 'Membership & samples',
                 'Order feedback',
+                'User reports',
               ].asMap().entries)
                 ChoiceChip(
                   label: Text(entry.value),
@@ -325,6 +327,8 @@ class _AdminScreenState extends State<AdminScreen> {
             MarketSettingsForm(controller: market)
           else if (_tab == 5)
             ReviewModerationPanel(controller: market)
+          else if (_tab == 6)
+            ReportsAdminPanel(controller: market)
           else if (_tab == 4)
             CashOperationsPanel(controller: market)
           else ...[

@@ -1,3 +1,4 @@
+import '../../reports/presentation/report_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
 import '../../../core/data/repository.dart';
@@ -276,6 +277,18 @@ class ShopFeedbackSection extends StatelessWidget {
                                 style: TextStyle(color: muted, fontSize: 11),
                               ),
                               if (review.isSample) const Tag('TEST FEEDBACK'),
+                              const Spacer(),
+                              IconButton(
+                                tooltip: 'Report feedback',
+                                icon: const Icon(Icons.flag_outlined, size: 16),
+                                onPressed: () => showReportDialog(
+                                  context,
+                                  controller: controller,
+                                  targetType: 'review',
+                                  targetId: review.id,
+                                  targetTitle: 'Review on shop',
+                                ),
+                              ),
                             ],
                           ),
                           if (review.comment.isNotEmpty)

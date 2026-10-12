@@ -1,3 +1,4 @@
+import '../../reports/presentation/report_dialog.dart';
 import '../../reviews/presentation/order_feedback.dart';
 import 'package:flutter/material.dart';
 import '../../../core/data/controller.dart';
@@ -458,6 +459,18 @@ class ShopPage extends StatelessWidget {
                   icon: const Icon(Icons.directions_outlined, size: 18),
                   label: const Text('Directions'),
                 ),
+                OutlinedButton.icon(
+                  key: const ValueKey('report-shop-btn'),
+                  onPressed: () => showReportDialog(
+                    ctx,
+                    controller: controller,
+                    targetType: 'shop',
+                    targetId: shop.id,
+                    targetTitle: shop.name,
+                  ),
+                  icon: const Icon(Icons.flag_outlined, size: 16),
+                  label: const Text('Report shop'),
+                ),
               ],
             ),
             const SizedBox(height: 18),
@@ -638,6 +651,22 @@ class ProductPage extends StatelessWidget {
                   }),
             icon: const Icon(Icons.add_shopping_cart),
             label: const Text('Add to cart / cash checkout'),
+          ),
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              key: const ValueKey('report-product-btn'),
+              onPressed: () => showReportDialog(
+                ctx,
+                controller: controller,
+                targetType: 'product',
+                targetId: product.id,
+                targetTitle: '${product.name} at ${shop.name}',
+              ),
+              icon: const Icon(Icons.flag_outlined, size: 16),
+              label: const Text('Report objectionable listing'),
+            ),
           ),
           const SizedBox(height: 12),
           Text(

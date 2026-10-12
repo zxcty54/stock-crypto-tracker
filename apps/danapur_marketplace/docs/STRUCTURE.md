@@ -96,6 +96,13 @@ apps/danapur_marketplace/
 │       │       └── orders_screen.dart  # buyer/seller order history and status actions
 │       ├── expenses/
 │       │   └── presentation/expenses_screen.dart
+│       ├── account/
+│       │   └── presentation/account_screen.dart # in-app account & personal data deletion
+│       ├── reports/
+│       │   ├── domain/content_report.dart # UGC violation report models
+│       │   └── presentation/
+│       │       ├── report_dialog.dart # in-app flag/report form for shops, products & reviews
+│       │       └── reports_admin_panel.dart # admin investigation & resolution
 │       ├── reviews/
 │       │   ├── domain/order_review.dart # completed-buyer eligibility / review model
 │       │   └── presentation/
@@ -119,7 +126,8 @@ apps/danapur_marketplace/
 │   └── admin/
 │       └── first_admin.example.sql    # privileged confirmed-user UUID template
 ├── docs/
-│   ├── STRUCTURE.md                    # this file: what to change, where
+│   ├── STRUCTURE.md
+│   ├── PLAY_STORE_GUIDE.md             # Play Console compliance, Data Safety & review guide                    # this file: what to change, where
 │   ├── DEPLOYMENT.md                   # actual backend/signing/launch setup
 │   └── CASH_COMMERCE.md                # ordering/testing/sample-removal contracts
 ├── tools/

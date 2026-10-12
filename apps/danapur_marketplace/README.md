@@ -6,6 +6,7 @@ Flutter Android/web marketplace for **Danapur, Bihar**: approved retailers/whole
 
 - [Configuration](config/README.md): Supabase URL/public-key placeholders.
 - [Deployment](docs/DEPLOYMENT.md): migrations, auth, admin, signing and launch gates.
+- **[Play Store Review & Compliance Guide](docs/PLAY_STORE_GUIDE.md)**: Google Play policies, Data Safety answers, App Access, account deletion, UGC reporting, and AAB release.
 - **[Cash commerce & sample testing](docs/CASH_COMMERCE.md)**: delivery/pricing/order/expense/membership contracts and how to test/remove sample records.
 - **[File hierarchy & modification guide](docs/STRUCTURE.md)**: har file ka role, data flow aur kis change ke liye kaunsi file edit karni hai.
 

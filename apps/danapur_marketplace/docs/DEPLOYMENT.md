@@ -10,7 +10,8 @@ Never reuse StockPulse's backend or service keys. Run in SQL Editor, in order:
 2. `supabase/migrations/002_verified_marketplace.sql`
 3. `supabase/migrations/003_cash_orders_expenses.sql`
 4. `supabase/migrations/004_completed_order_reviews.sql`
-5. `supabase/seeds/001_mandi_items.sql`
+5. `supabase/migrations/005_content_reporting.sql`
+6. `supabase/seeds/001_mandi_items.sql`
 
 The scripts are idempotent. Old shops require review; no actual shop/product prices are automatically inserted. The mandi seed adds 117 unpriced common/seasonal commodities. **Never run `test/sql/` fixture files in a real project.**
 

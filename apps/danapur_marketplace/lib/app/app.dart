@@ -1,3 +1,4 @@
+import '../features/account/presentation/account_screen.dart';
 import '../features/onboarding/presentation/welcome_screen.dart';
 import '../features/orders/presentation/cart_checkout.dart';
 import '../features/orders/presentation/orders_screen.dart';
@@ -74,6 +75,7 @@ class _DanapurAppState extends State<DanapurApp> {
             'cart',
             'orders',
             'expenses',
+            'account',
             'shop-orders',
             'samples',
           ].contains(path[0])) {
@@ -85,6 +87,7 @@ class _DanapurAppState extends State<DanapurApp> {
             sellerOnly: true,
           ),
           'expenses' => ExpensesScreen(controller: widget.controller),
+          'account' => AccountScreen(controller: widget.controller),
           _ => SampleControls(controller: widget.controller),
         };
         page = Scaffold(
@@ -348,6 +351,7 @@ class _AppShellState extends State<AppShell> {
                                     'welcome',
                                     'orders',
                                     'expenses',
+                                    'account',
                                     'samples',
                                   ].contains(value) &&
                                   ctx.mounted) {
@@ -378,6 +382,11 @@ class _AppShellState extends State<AppShell> {
                                 value: 'expenses',
                                 child: Text('Expense manager'),
                               ),
+                              if (market.ownerId != null)
+                                const PopupMenuItem(
+                                  value: 'account',
+                                  child: Text('My account & privacy'),
+                                ),
                               if (market.repository.sampleProfilesEnabled)
                                 const PopupMenuItem(
                                   value: 'samples',

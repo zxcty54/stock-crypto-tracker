@@ -98,7 +98,7 @@ class TelegramDeliveryTests(unittest.TestCase):
             captured.append(request)
             self.assertEqual(timeout, 180)
             return success()
-        self.assertEqual(delivery.send_apk(self.apk, TOKEN, "https://t.me/ExampleChannel", "Demo", opener=opener), 321)
+        self.assertEqual(delivery.send_release_package(self.apk, TOKEN, "https://t.me/ExampleChannel", "Demo", opener=opener), 321)
         self.assertEqual(captured[0].method, "POST")
         self.assertEqual(captured[0].full_url, f"https://api.telegram.org/bot{TOKEN}/sendDocument")
         self.assertIn(b"@ExampleChannel", captured[0].data)
@@ -107,7 +107,7 @@ class TelegramDeliveryTests(unittest.TestCase):
         def opener(request, timeout):
             return response({"ok": False, "description": f"error {TOKEN} {CHAT}"})
         with self.assertRaises(delivery.DeliveryError) as error:
-            delivery.send_apk(self.apk, TOKEN, CHAT, "Demo", opener=opener)
+            delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener)
         self.assertNotIn(TOKEN, str(error.exception))
         self.assertNotIn(CHAT, str(error.exception))
 
@@ -115,7 +115,7 @@ class TelegramDeliveryTests(unittest.TestCase):
         def opener(request, timeout):
             raise HTTPError(request.full_url, 403, "Forbidden", {}, response({"ok": False, "description": f"forbidden {TOKEN} {CHAT}"}))
         with self.assertRaises(delivery.DeliveryError) as error:
-            delivery.send_apk(self.apk, TOKEN, CHAT, "Demo", opener=opener)
+            delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener)
         self.assertNotIn(TOKEN, str(error.exception))
         self.assertNotIn(CHAT, str(error.exception))
 
@@ -126,7 +126,7 @@ class TelegramDeliveryTests(unittest.TestCase):
             if len(calls) == 1:
                 raise HTTPError(request.full_url, 429, "Too Many Requests", {}, response({"ok": False, "error_code": 429, "parameters": {"retry_after": 2}}))
             return success()
-        self.assertEqual(delivery.send_apk(self.apk, TOKEN, CHAT, "Demo", opener=opener, sleeper=waits.append), 321)
+        self.assertEqual(delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener, sleeper=waits.append), 321)
         self.assertEqual(len(calls), 2)
         self.assertEqual(waits, [2])
 
@@ -136,21 +136,21 @@ class TelegramDeliveryTests(unittest.TestCase):
             calls.append(request)
             raise URLError("offline test")
         with self.assertRaises(delivery.DeliveryError):
-            delivery.send_apk(self.apk, TOKEN, CHAT, "Demo", opener=opener)
+            delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=opener)
         self.assertEqual(len(calls), 1)
 
     def test_invalid_json_or_missing_confirmation_is_not_success(self):
         for raw in [b"not-json", b"[]", b'{"ok":true,"result":{}}']:
             with self.subTest(raw=raw):
                 with self.assertRaises(delivery.DeliveryError):
-                    delivery.send_apk(self.apk, TOKEN, CHAT, "Demo", opener=lambda request, timeout: io.BytesIO(raw))
+                    delivery.send_release_package(self.apk, TOKEN, CHAT, "Demo", opener=lambda request, timeout: io.BytesIO(raw))
 
     def test_invalid_token_and_oversized_caption_do_not_send(self):
         for token, caption in [("", "Demo"), ("not-a-bot-token", "Demo"), (TOKEN, "x" * 1025)]:
             with self.subTest(token=token, length=len(caption)):
                 with patch.object(delivery, "urlopen") as opener:
                     with self.assertRaises(delivery.DeliveryError):
-                        delivery.send_apk(self.apk, token, CHAT, caption)
+                        delivery.send_release_package(self.apk, token, CHAT, caption)
                     opener.assert_not_called()
 
     def test_missing_secrets_fail_without_printing_values(self):
@@ -170,6 +170,18 @@ class TelegramDeliveryTests(unittest.TestCase):
             self.assertNotIn(TOKEN, text)
             self.assertNotIn(CHAT, text)
 
+
+    def test_aab_validation_and_packaging_in_zip(self):
+        aab_path = Path(self.directory.name) / "danapur-bazaar.aab"
+        with ZipFile(aab_path, "w") as archive:
+            archive.writestr("base/manifest/AndroidManifest.xml", b"manifest")
+            archive.writestr("base/dex/classes.dex", b"dex")
+        boundary, data = delivery.multipart_document(self.apk, CHAT, "Demo", aab_path=aab_path)
+        start = data.index(b'PK\x03\x04')
+        end = data.rfind(f"\r\n--{boundary}--\r\n".encode())
+        with ZipFile(io.BytesIO(data[start:end])) as archive:
+            self.assertIn('danapur-bazaar.apk', archive.namelist())
+            self.assertIn('danapur-bazaar.aab', archive.namelist())
 
 if __name__ == "__main__":
     unittest.main()

@@ -494,7 +494,11 @@ class _ShopFormState extends State<ShopForm> {
                   : () async {
                       setState(() => _locating = true);
                       try {
-                        final fix = await currentLocation();
+                        final fix = await currentLocation(
+                          context: context,
+                          purpose:
+                              'capture your storefront coordinates so customers within 500 metres can receive home deliveries',
+                        );
                         if (mounted) {
                           setState(() {
                             _latitude = fix.latitude;

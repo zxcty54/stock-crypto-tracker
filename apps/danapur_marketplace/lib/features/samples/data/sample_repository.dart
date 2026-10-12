@@ -1,3 +1,4 @@
+import '../../reports/domain/content_report.dart';
 import '../../reviews/domain/order_review.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -53,6 +54,12 @@ class SampleRepository extends MarketRepository {
             )
             .toList();
         _requests = Map<String, String>.from(data['requests'] as Map? ?? {});
+        _reports = (data['reports'] as List? ?? [])
+            .map(
+              (row) =>
+                  ContentReport.fromJson(Map<String, dynamic>.from(row as Map)),
+            )
+            .toList();
         _reviews = (data['reviews'] as List? ?? [])
             .map(
               (row) =>
@@ -77,6 +84,7 @@ class SampleRepository extends MarketRepository {
   List<MandiItem> _commodities = sampleCatalogue().mandiItems;
   List<MandiRate> _rates = [];
   List<OrderReview> _reviews = [];
+  List<ContentReport> _reports = [];
   Map<String, String> _proofs = {};
   Map<String, String> _requests = {};
   String _role = 'buyer';
@@ -93,6 +101,7 @@ class SampleRepository extends MarketRepository {
     _proofs = {};
     _requests = {};
     _reviews = [];
+    _reports = [];
     _settings = const MarketSettings();
   }
 
@@ -164,6 +173,7 @@ class SampleRepository extends MarketRepository {
             .toList(),
         'requests': _requests,
         'reviews': _reviews.map((review) => review.toJson()).toList(),
+        'reports': _reports.map((report) => report.toJson()).toList(),
       }),
     );
   }
@@ -189,6 +199,9 @@ class SampleRepository extends MarketRepository {
           )
           .map((review) => review.publicProjection())
           .toList(),
+      reports: _role == 'admin'
+          ? _reports
+          : _reports.where((r) => r.reporterId == ownerId).toList(),
       privateReviews: _reviews
           .where(
             (review) =>
@@ -238,6 +251,7 @@ class SampleRepository extends MarketRepository {
     _proofs = {};
     _requests = {};
     _reviews = [];
+    _reports = [];
     await _persist();
   }
 
@@ -659,6 +673,51 @@ class SampleRepository extends MarketRepository {
         defaultUnit: unit,
       ),
     ];
+    await _persist();
+  }
+
+  @override
+  Future<void> submitReport({
+    required String targetType,
+    required String targetId,
+    required String targetTitle,
+    required String reason,
+    String details = '',
+  }) async {
+    final report = ContentReport(
+      id: const Uuid().v4(),
+      reporterId: ownerId,
+      targetType: targetType,
+      targetId: targetId,
+      targetTitle: targetTitle,
+      reason: reason,
+      details: details.trim(),
+      status: 'pending',
+      createdAt: DateTime.now().toUtc(),
+      isSample: true,
+    );
+    _reports = [..._reports, report];
+    await _persist();
+  }
+
+  @override
+  Future<void> resolveReport(
+    String reportId,
+    String status,
+    String note,
+  ) async {
+    _staff();
+    _reports = _reports
+        .map(
+          (r) => r.id == reportId
+              ? ContentReport.fromJson({
+                  ...r.toJson(),
+                  'status': status,
+                  'status_note': note.trim(),
+                })
+              : r,
+        )
+        .toList();
     await _persist();
   }
 
