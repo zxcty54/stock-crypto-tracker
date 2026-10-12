@@ -4,6 +4,7 @@ Aangan is a Flutter rental app focused on Bihar. It is designed around a simple 
 
 ## What is in the app
 
+- **First-run onboarding:** a short welcome tour explains the house-rules-first promise, contact/address privacy and admin review, and then asks whether the person came to find a home or to list one. It is shown once per device and can be replayed any time from Profile → **How Aangan works**.
 - **Bihar-first search:** all 38 districts, city/town and block suggestions, plus searchable locality, road and landmark fields. Owners can type smaller towns and blocks that are not yet in the starter directory.
 - **Practical rental filters:** rent cap, BHK, home type, pets, bachelors and couples.
 - **Flexible house rules:** Yes / No / Discuss first for pets, bachelors, couples, families, daytime visitors, night-time visitors, unannounced guests, late entry, non-veg cooking and smoking.
@@ -14,6 +15,12 @@ Aangan is a Flutter rental app focused on Bihar. It is designed around a simple 
 - **Owner controls:** see review status, resubmit declined listings, pause a live listing or mark it rented.
 - **Trust features:** admin-reviewed “Aangan checked” label, listing reports, private conversations and a short safe-renting reminder.
 - **Local preview:** with no Supabase settings, Explore uses clearly labelled sample homes so the UI can be tried without a backend.
+
+## Project layout
+
+Everything Aangan needs lives inside `aangan/`: `lib/` (app shell, rental feature, services), `test/`, `android/`, `assets/` and `pubspec.yaml`, plus the Supabase migration. The StockPulse finance app and its assets stay at the repository root in `lib/`, `android/`, `assets/` and `pubspec.yaml`; nothing under `aangan/` imports them, and the tour/rental code never touches the finance screens.
+
+The first-run tour keeps its one-time flag in `lib/features/rentals/services/onboarding_store.dart` (device-local `shared_preferences`, key `aangan.onboarding_completed_v1`). The gate that decides between the tour and the app shell is `AanganOnboardingGate` in `lib/features/rentals/screens/onboarding_screen.dart`.
 
 ## Run locally
 

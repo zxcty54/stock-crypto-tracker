@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../features/rentals/screens/app_shell.dart';
+import '../features/rentals/screens/onboarding_screen.dart';
+import '../features/rentals/services/onboarding_store.dart';
 
 abstract final class AanganColors {
   static const forest = Color(0xFF1E4B3D);
@@ -81,7 +82,7 @@ class AanganApp extends StatelessWidget {
           displayColor: AanganColors.ink,
         ),
       ),
-      home: const AppShell(),
+      home: AanganOnboardingGate(store: OnboardingStore.instance),
     );
   }
 }
