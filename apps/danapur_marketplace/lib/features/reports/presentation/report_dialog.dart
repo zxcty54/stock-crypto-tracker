@@ -98,7 +98,7 @@ class _ReportDialogState extends State<ReportDialog> {
         ),
         const SizedBox(height: 18),
         DropdownButtonFormField<String>(
-          value: _reason,
+          initialValue: _reason,
           decoration: const InputDecoration(labelText: 'Reason for report *'),
           items: reportReasons
               .map(
