@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-13 22:13:45 IST",
-  "worthy_count": 17,
-  "skipped_count": 20,
+  "worthy_count": 14,
+  "skipped_count": 17,
   "content_feed": [
     {
       "hash": "d71cedfe2131",
@@ -198,48 +198,6 @@
       "worthiness_reason": "Financial results with revenue and EBITDA disclosed.",
       "telegram_post": "📊 <b>GTPL Hathway Limited (NSE: GTPL)</b>\n\n<b>Q2 FY27 Revenue ₹11,464 Mn, 19% YoY Growth</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue:</b> ₹11,464 Mn\n- <b>YoY Growth:</b> 19%\n- <b>EBITDA:</b> ₹1,103 Mn\n- <b>EBITDA Margin:</b> 9.6%\n- <b>Active Subscribers:</b> 11 Mn\n\n📌 <b>What happened:</b>\n↳ GTPL Hathway reported consolidated unaudited results for Q2 FY27, showing revenue growth and EBITDA of ₹1,103 Mn.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GTPLHL_13102026201220_Intimation_Media_Release.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-13 22:07:26 IST"
-    },
-    {
-      "hash": "e0b73cb1cab9",
-      "symbol": "VIVIANA",
-      "company_name": "Viviana Power Tech Limited",
-      "category": "ORDER",
-      "event_type": "ORDER",
-      "broadcast_date": "10-Oct-2026 13:30:22",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf",
-      "headline": "Viviana Power Tech wins Rs.466.74 crore turnkey contract from MGVCL",
-      "content_worthy": true,
-      "worthiness_reason": "New turnkey contract awarded with value Rs.466.74 crore.",
-      "telegram_post": "📜 <b>ORDER</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech wins Rs.466.74 crore turnkey contract from MGVCL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs.466,73,61,738.00\n- <b>Client:</b> M/s Madhya Gujarat Vij Company Limited (MGVCL)\n- <b>Scope:</b> Conversion of HT O/H 11 kV open line to MVCC overhead conductor & underground networking\n- <b>Duration:</b> 18/16 months\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech has been awarded a new turnkey contract from MGVCL, covering conversion of high‑tension lines to medium voltage within the SI Scheme – Robust‑III.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VIVIANA_10102026133007_VIVIANA__Intimation_of_Receiving_Order_MGVCL_10102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-13 01:25:17 IST"
-    },
-    {
-      "hash": "64c8e1b9453d",
-      "symbol": "OSWALPUMPS",
-      "company_name": "Oswal Pumps Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "CAPEX",
-      "broadcast_date": "10-Oct-2026 18:07:29",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/OSWALPUMPS_10102026180647_SE_LetterPressReleaseOPL10102026.pdf",
-      "headline": "Oswal Pumps to set up 1.2 GW TOPCon solar cell plant in Karnal, Haryana",
-      "content_worthy": true,
-      "worthiness_reason": "Commercial expansion into solar cell manufacturing.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Oswal Pumps Limited (NSE: OSWALPUMPS)</b>\n\n<b>Oswal Pumps to set up 1.2 GW TOPCon solar cell plant in Karnal, Haryana</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Capacity:</b> 1.2 GW\n- <b>Location:</b> Karnal, Haryana\n- <b>Commercial Production:</b> April 2028\n- <b>Total Cost:</b> ₹456 crore\n- <b>Funding:</b> ₹296 crore debt, ₹159.85 crore equity\n\n📌 <b>What happened:</b>\n↳ Oswal Pumps’ subsidiary OSEPL approved a 1.2 GW TOPCon solar cell plant to secure captive supply and reduce cost.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/OSWALPUMPS_10102026180647_SE_LetterPressReleaseOPL10102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-13 01:24:52 IST"
-    },
-    {
-      "hash": "23b16fae8972",
-      "symbol": "SAATVIKGL",
-      "company_name": "Saatvik Green Energy Limited",
-      "category": "ORDER",
-      "event_type": "ORDER",
-      "broadcast_date": "10-Oct-2026 18:29:47",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SAATVIK_10102026182930_reg30greenorder.pdf",
-      "headline": "Saatvik Green Energy wins Rs. 100 Cr order from MSEDCL for 5,000 solar PV water pumps",
-      "content_worthy": true,
-      "worthiness_reason": "Commercial order win with disclosed value and client.",
-      "telegram_post": "📜 <b>ORDER</b> | <b>Saatvik Green Energy Limited (NSE: SAATVIKGL)</b>\n\n<b>Saatvik Green Energy wins Rs. 100 Cr order from MSEDCL for 5,000 solar PV water pumps</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs. 100 Cr (exclusive of GST)\n- <b>Client:</b> Maharashtra State Electricity Distribution Co. Ltd. (MSEDCL)\n- <b>Scope:</b> Design, manufacture, supply, transport, installation, testing & commissioning of 3 HP, 5 HP & 7.5 HP off‑grid DC solar PV water pumping systems\n- <b>Execution:</b> Installation & commissioning within 60 days from NTP/work order\n- <b>Geography:</b> Maharashtra, India\n\n📌 <b>What happened:</b>\n↳ The company secured a commercial contract under the PM KUSUM B scheme to supply and service 5,000 solar PV water pumps for farmers in Maharashtra.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SAATVIK_10102026182930_reg30greenorder.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-13 01:24:31 IST"
     }
   ],
   "skipped_archive": [
@@ -480,48 +438,6 @@
       "worthiness_reason": "Financial results not disclosed; no revenue or PAT figures present.",
       "telegram_post": "",
       "analyzed_at": "2026-10-13 14:14:15 IST"
-    },
-    {
-      "hash": "46db00fb3e2a",
-      "symbol": "PREMIERPOL",
-      "company_name": "Premier Polyfilm Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "10-Oct-2026 15:09:32",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PREMIERPOL_10102026150918_BMOUTCOME.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results not disclosed; revenue/PAT missing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 01:25:17 IST"
-    },
-    {
-      "hash": "3a7fd2fefd6f",
-      "symbol": "DMART",
-      "company_name": "Avenue Supermarts Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "10-Oct-2026 15:22:43",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/DMART_10102026151828_ASLOutcomeofBM10102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results not disclosed with revenue/PAT.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 01:24:52 IST"
-    },
-    {
-      "hash": "902fa27f1633",
-      "symbol": "LCCINFOTEC",
-      "company_name": "LCC Infotech Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "10-Oct-2026 21:07:26",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/LCCINFOTEC_10102026210242_Outcome_financial_LCC_Final.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results not disclosed with revenue and PAT numbers.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 01:24:31 IST"
     }
   ]
 }
