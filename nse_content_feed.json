@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-13 01:25:17 IST",
+  "generated_at": "2026-10-13 14:14:35 IST",
   "worthy_count": 11,
-  "skipped_count": 8,
+  "skipped_count": 11,
   "content_feed": [
     {
       "hash": "e0b73cb1cab9",
@@ -159,6 +159,48 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "6e3635d9b498",
+      "symbol": "PNBGILTS",
+      "company_name": "PNB Gilts Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:04:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PNBGILTS_13102026130301_stxresult131026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "PAT not disclosed in the filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-13 14:14:35 IST"
+    },
+    {
+      "hash": "67908eca9c25",
+      "symbol": "EIMCOELECO",
+      "company_name": "Eimco Elecon (India) Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:10:18",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/EIMCOELECO_13102026130852_OBM_13102026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results not disclosed; no revenue or PAT figures present.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-13 14:14:15 IST"
+    },
+    {
+      "hash": "1a9253cd05e3",
+      "symbol": "ICICIPRULI",
+      "company_name": "ICICI Prudential Life Insurance Company Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:18:24",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ICICIPRULI_13102026131705_Outcome_BM_October_13_2026_Signed.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results not disclosed; no revenue or PAT figures present.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-13 14:14:15 IST"
+    },
     {
       "hash": "46db00fb3e2a",
       "symbol": "PREMIERPOL",
