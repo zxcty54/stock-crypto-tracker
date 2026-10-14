@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-15 01:28:54 IST",
-  "worthy_count": 20,
-  "skipped_count": 26,
+  "generated_at": "2026-10-15 02:17:54 IST",
+  "worthy_count": 22,
+  "skipped_count": 27,
   "content_feed": [
+    {
+      "hash": "24981ba13c73",
+      "symbol": "GAMMONIND",
+      "company_name": "Gammon India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "12-Oct-2026 14:20:24",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/GAMMONIND_12102026141747_Outcome_of_Board_Meeting_dated_11-06-2025_December_2024_Results.pdf",
+      "headline": "Gammon India Reports Q3 FY25 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results containing explicit numeric Revenue and PAT figures for the quarter ended December 31, 2024.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Gammon India Limited (NSE: GAMMONIND)</b>\n\n<b>Gammon India Reports Q3 FY25 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> ₹5.19 crore (Q3 FY25)\n- <b>Net Profit / (Loss) After Tax:</b> (₹316.29) crore (Q3 FY25)\n- <b>Total Income:</b> ₹5.71 crore (Q3 FY25)\n- <b>Finance Costs:</b> ₹254.09 crore (Q3 FY25)\n\n📌 <b>What happened:</b>\n↳ Gammon India Limited announced its standalone financial results for the quarter and nine months ended December 31, 2024, reporting a net loss after tax of ₹316.29 crore on a revenue from operations of ₹5.19 crore for the quarter.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GAMMONIND_12102026141747_Outcome_of_Board_Meeting_dated_11-06-2025_December_2024_Results.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-15 02:17:54 IST"
+    },
+    {
+      "hash": "90f240aad355",
+      "symbol": "NEULANDLAB",
+      "company_name": "Neuland Laboratories Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "REGULATORY_APPROVAL",
+      "broadcast_date": "14-Oct-2026 21:43:33",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf",
+      "headline": "USFDA Closes Inspection at Unit 3 Manufacturing Facility",
+      "content_worthy": true,
+      "worthiness_reason": "USFDA issued an Establishment Inspection Report (EIR) concluding the inspection of Unit 3 as closed.",
+      "telegram_post": "✅ <b>#REGULATORY_APPROVAL</b> | <b>Neuland Laboratories Limited (NSE: NEULANDLAB)</b>\n\n<b>USFDA Closes Inspection at Unit 3 Facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility Location:</b> Unit 3, Gaddapotharam Village, Jinnaram, Sangareddy District\n- <b>Inspection Dates:</b> August 10, 2026 to August 14, 2026\n- <b>Outcome:</b> Establishment Inspection Report (EIR) issued; inspection concluded as \"closed\"\n\n📌 <b>What happened:</b>\n↳ The United States Food and Drug Administration (USFDA) issued an Establishment Inspection Report (EIR) for the inspection conducted at the company's Unit 3 manufacturing facility and concluded the inspection as closed.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-15 02:17:28 IST"
+    },
     {
       "hash": "d71cedfe2131",
       "symbol": "MOLDTKPAC",
@@ -285,6 +313,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "79159337208e",
+      "symbol": "BHEL",
+      "company_name": "Bharat Heavy Electricals Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 13:38:41",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BHEL_14102026133809_BHELRESULTS.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The financial results filing summary and text do not contain explicit numeric Revenue and PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-15 02:17:28 IST"
+    },
     {
       "hash": "3698380a34da",
       "symbol": "STCINDIA",
