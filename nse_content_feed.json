@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-15 04:22:50 IST",
-  "worthy_count": 21,
-  "skipped_count": 26,
+  "generated_at": "2026-10-15 05:00:38 IST",
+  "worthy_count": 22,
+  "skipped_count": 27,
   "content_feed": [
+    {
+      "hash": "90f240aad355",
+      "symbol": "NEULANDLAB",
+      "company_name": "Neuland Laboratories Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "REGULATORY_APPROVAL",
+      "broadcast_date": "14-Oct-2026 21:43:33",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf",
+      "headline": "USFDA issues EIR and concludes inspection for Unit 3 facility",
+      "content_worthy": true,
+      "worthiness_reason": "USFDA inspection closure with an Establishment Inspection Report (EIR) issued for a manufacturing facility is a material regulatory update.",
+      "telegram_post": "✅ <b>#REGULATORY_APPROVAL</b> | <b>Neuland Laboratories Limited (NSE: NEULANDLAB)</b>\n\n<b>USFDA issues EIR and concludes inspection for Unit 3 facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility:</b> Unit 3 Manufacturing Facility\n- <b>Location:</b> Gaddapotharam Village, Jinnaram, Sangareddy District\n- <b>Inspection Dates:</b> August 10, 2026 to August 14, 2026\n- <b>Outcome:</b> Establishment Inspection Report (EIR) issued; inspection concluded as \"closed\"\n\n📌 <b>What happened:</b>\n↳ The US FDA has issued an Establishment Inspection Report (EIR) for the Unit 3 manufacturing facility and concluded that the inspection conducted in August 2026 is closed.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-15 05:00:38 IST"
+    },
     {
       "hash": "24981ba13c73",
       "symbol": "GAMMONIND",
@@ -299,6 +313,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "79159337208e",
+      "symbol": "BHEL",
+      "company_name": "Bharat Heavy Electricals Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 13:38:41",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BHEL_14102026133809_BHELRESULTS.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The financial results filing summary does not contain the actual numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-15 05:00:38 IST"
+    },
     {
       "hash": "3698380a34da",
       "symbol": "STCINDIA",
