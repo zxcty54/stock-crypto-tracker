@@ -1,21 +1,11 @@
 {
   "status": "success",
-  "timestamp": "2026-10-13T21:08:28.076236",
-  "total_hot_spikes": 24,
+  "timestamp": "2026-10-14T01:03:32.964446",
+  "total_hot_spikes": 25,
   "data": [
     {
       "keyword": "shekhar suman",
       "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "is nakul dhull out of bigg boss",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "rj mitte death reason",
-      "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -29,13 +19,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "the batman part ii",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "koffee with karan",
-      "search_volume_spike": "1K+",
+      "keyword": "is nakul dhull out of bigg boss",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -44,58 +29,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "விஜய் தேவரகொண்டா",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "big boss",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "falguni pathak",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "nita ambani",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "इंडियन आइडल",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ಸುದೀಪ್",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "cricket world cup",
-      "search_volume_spike": "200+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "जो रूट",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "અમિતાભ બચ્ચન",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mary kom",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "മമിത ബൈജു",
-      "search_volume_spike": "5K+",
+      "keyword": "సినిమా",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -104,13 +39,13 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "బాబు మోహన్",
+      "keyword": "മമിത ബൈജു",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "narnia",
-      "search_volume_spike": "100+",
+      "keyword": "ಸುದೀಪ್",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -119,7 +54,77 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "సినిమా",
+      "keyword": "niti taylor",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ஐஸ்வர்யா லட்சுமி",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "इंडियन आइडल",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "जो रूट",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "the batman part ii",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "శ్రియా శరణ్",
+      "search_volume_spike": "100+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "aneet padda",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "અમિતાભ બચ્ચન",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "బాబు మోహన్",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "koffee with karan",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "rajinikanth jailer 2 copyright protection",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ઐશ્વર્યા રાય બચ્ચન",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "राधिका मर्चेंट",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "falguni pathak",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "bigg boss jatin pratap singh",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     }
