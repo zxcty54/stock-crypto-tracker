@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-13 22:13:45 IST",
-  "worthy_count": 14,
-  "skipped_count": 17,
+  "generated_at": "2026-10-14 16:25:28 IST",
+  "worthy_count": 16,
+  "skipped_count": 20,
   "content_feed": [
+    {
+      "hash": "13ef6fe06ef3",
+      "symbol": "ELECON",
+      "company_name": "Elecon Engineering Company Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 13:19:48",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ELECON2_14102026131835_OutcomeBM14102026.pdf",
+      "headline": "Elecon Engineering Reports Unaudited Q3 & H1 Results for FY 2026-27",
+      "content_worthy": true,
+      "worthiness_reason": "Unaudited financial results with disclosed revenue and net profit.",
+      "telegram_post": "💰 <b>#RESULT</b> | <b>Elecon Engineering Company Limited (NSE: ELECON)</b>\n\n<b>Elecon Engineering Reports Unaudited Q3 & H1 Results for FY 2026-27</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue (Q3):</b> ₹53,466 crore\n- <b>Revenue (H1):</b> ₹90,626 crore\n- <b>Net Profit (Q3):</b> ₹7,475 crore\n- <b>Net Profit (H1):</b> ₹31,781 crore\n- <b>Interim Dividend:</b> ₹0.50 per share\n- <b>Record Date:</b> 21 Oct 2026\n- <b>Payment Date:</b> 4 Nov 2026\n\n📌 <b>What happened:</b>\n↳ Board approved unaudited financial results for quarter and half-year ended 30 Sep 2026 and declared a 50% interim dividend.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ELECON2_14102026131835_OutcomeBM14102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-14 16:24:56 IST"
+    },
+    {
+      "hash": "f9c292bf5906",
+      "symbol": "SEAMECLTD",
+      "company_name": "Seamec Limited",
+      "category": "ACQUISITION",
+      "event_type": "ACQUISITION",
+      "broadcast_date": "14-Oct-2026 16:08:31",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SEAMECLTD_14102026160821_NSEBSETakeoverofVesselSEAMECANANT14102026.pdf",
+      "headline": "Seamec Limited acquires vessel SEAMEC ANANT from HAL OFFSHORE LIMITED",
+      "content_worthy": true,
+      "worthiness_reason": "Acquisition of vessel from third party.",
+      "telegram_post": "🤝 <b>#ACQUISITION</b> | <b>Seamec Limited (NSE: SEAMECLTD)</b>\n\n<b>Seamec Limited acquires vessel SEAMEC ANANT from HAL OFFSHORE LIMITED</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Vessel:</b> SEAMEC ANANT\n- <b>Acquisition Date:</b> 14 Oct 2026 13:10 hrs\n- <b>From:</b> HAL OFFSHORE LIMITED\n- <b>Location:</b> Kakinada\n\n📌 <b>What happened:</b>\n↳ The vessel was taken over by Seamec Limited on 14 Oct 2026 at 13:10 hrs in Kakinada.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SEAMECLTD_14102026160821_NSEBSETakeoverofVesselSEAMECANANT14102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-14 16:24:14 IST"
+    },
     {
       "hash": "d71cedfe2131",
       "symbol": "MOLDTKPAC",
@@ -197,13 +225,94 @@
       "content_worthy": true,
       "worthiness_reason": "Financial results with revenue and EBITDA disclosed.",
       "telegram_post": "📊 <b>GTPL Hathway Limited (NSE: GTPL)</b>\n\n<b>Q2 FY27 Revenue ₹11,464 Mn, 19% YoY Growth</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue:</b> ₹11,464 Mn\n- <b>YoY Growth:</b> 19%\n- <b>EBITDA:</b> ₹1,103 Mn\n- <b>EBITDA Margin:</b> 9.6%\n- <b>Active Subscribers:</b> 11 Mn\n\n📌 <b>What happened:</b>\n↳ GTPL Hathway reported consolidated unaudited results for Q2 FY27, showing revenue growth and EBITDA of ₹1,103 Mn.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GTPLHL_13102026201220_Intimation_Media_Release.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-13 22:07:26 IST",
-      "used": true,
-      "posted_at": "2026-10-14 13:30:07 IST",
-      "telegraph_url": "https://telegra.ph/Q2-FY27-Revenue-11464-Mn-19-YoY-Growth--October-2026-10-14"
+      "analyzed_at": "2026-10-13 22:07:26 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "6e3635d9b498",
+      "symbol": "PNBGILTS",
+      "company_name": "PNB Gilts Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:04:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PNBGILTS_13102026130301_stxresult131026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Unaudited results disclosed without revenue and PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:25:28 IST"
+    },
+    {
+      "hash": "67908eca9c25",
+      "symbol": "EIMCOELECO",
+      "company_name": "Eimco Elecon (India) Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:10:18",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/EIMCOELECO_13102026130852_OBM_13102026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Unaudited results disclosed without revenue and PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:25:28 IST"
+    },
+    {
+      "hash": "1a9253cd05e3",
+      "symbol": "ICICIPRULI",
+      "company_name": "ICICI Prudential Life Insurance Company Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "13-Oct-2026 13:18:24",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ICICIPRULI_13102026131705_Outcome_BM_October_13_2026_Signed.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Revenue and PAT not disclosed in filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:24:56 IST"
+    },
+    {
+      "hash": "9d7bec3d52cf",
+      "symbol": "THELEELA",
+      "company_name": "Leela Palaces Hotels & Resorts Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "14-Oct-2026 14:46:34",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/THELEELA_14102026144443_BM_Outcome.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results lack disclosed revenue or PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:24:34 IST"
+    },
+    {
+      "hash": "e6fa3ced6850",
+      "symbol": "HDBFS",
+      "company_name": "HDB Financial Services Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "14-Oct-2026 16:06:57",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/HDBF_14102026160230_Outcome_of_BM.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results lack disclosed revenue or PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:24:34 IST"
+    },
+    {
+      "hash": "9837ce393019",
+      "symbol": "TATATECH",
+      "company_name": "Tata Technologies Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "14-Oct-2026 16:09:15",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/TTLNSE_14102026160636_BMOutcomeQ2.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "No revenue or PAT figures disclosed in the filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 16:24:14 IST"
+    },
     {
       "hash": "3698380a34da",
       "symbol": "STCINDIA",
@@ -399,48 +508,6 @@
       "worthiness_reason": "Missing numeric revenue and PAT in filing.",
       "telegram_post": "",
       "analyzed_at": "2026-10-13 22:07:04 IST"
-    },
-    {
-      "hash": "6e3635d9b498",
-      "symbol": "PNBGILTS",
-      "company_name": "PNB Gilts Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "13-Oct-2026 13:04:07",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PNBGILTS_13102026130301_stxresult131026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "PAT not disclosed in the filing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 14:14:35 IST"
-    },
-    {
-      "hash": "67908eca9c25",
-      "symbol": "EIMCOELECO",
-      "company_name": "Eimco Elecon (India) Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "13-Oct-2026 13:10:18",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/EIMCOELECO_13102026130852_OBM_13102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results not disclosed; no revenue or PAT figures present.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 14:14:15 IST"
-    },
-    {
-      "hash": "1a9253cd05e3",
-      "symbol": "ICICIPRULI",
-      "company_name": "ICICI Prudential Life Insurance Company Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "13-Oct-2026 13:18:24",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ICICIPRULI_13102026131705_Outcome_BM_October_13_2026_Signed.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results not disclosed; no revenue or PAT figures present.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-13 14:14:15 IST"
     }
   ]
 }
