@@ -1,20 +1,85 @@
 {
   "status": "success",
-  "timestamp": "2026-10-14T13:34:02.689666",
+  "timestamp": "2026-10-14T18:28:02.141320",
   "total_hot_spikes": 25,
   "data": [
     {
-      "keyword": "shekhar suman",
-      "search_volume_spike": "20K+",
+      "keyword": "राज योग",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "october 16 2026 ott releases",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "kamlesh sawant",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jailer 2 review",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "love of your life",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jiohotstar",
+      "search_volume_spike": "1L+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jailer",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "mary millben",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "టెలివిజన్",
+      "keyword": "അഹാന കൃഷ്ണ",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "visionquest",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "champions league standings",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "सुबोध भावे",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "karan johar",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "narnia",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ജയിലര്",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "వార్త",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -24,12 +89,22 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "അഹാന കൃഷ്ണ",
-      "search_volume_spike": "2K+",
+      "keyword": "టెలివిజన్",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ಸುದೀಪ್",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "అనుపమ పరమేశ్వరన్",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "साँप",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -39,23 +114,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "mary millben",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "గౌతం రాజు",
+      "keyword": "विजय",
       "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "gullu",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "koffee with karan",
-      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -64,68 +124,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jailer 2 release date",
+      "keyword": "గౌతం రాజు",
       "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ರಶ್ಮಿಕಾ ಮಂದಣ್ಣ",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ekta kapoor",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "david warner",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "visionquest",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ಸುದೀಪ್",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "సినిమా",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "elephant",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "మంగళసూత్రం",
-      "search_volume_spike": "200+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "प्रभास",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "సచిన్ టెండుల్కర్",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "aneet padda",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "सलमान अली",
-      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
