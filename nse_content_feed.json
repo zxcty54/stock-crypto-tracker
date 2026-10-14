@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-14 16:25:28 IST",
-  "worthy_count": 16,
-  "skipped_count": 20,
+  "generated_at": "2026-10-14 17:35:59 IST",
+  "worthy_count": 17,
+  "skipped_count": 22,
   "content_feed": [
+    {
+      "hash": "e27dcf853fc3",
+      "symbol": "TATATECH",
+      "company_name": "Tata Technologies Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 16:28:21",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/TTLNSE_14102026162811_PressReleaseFinancialsQ2.pdf",
+      "headline": "Tata Technologies Reports Q2 FY27 Operating Revenue at ₹16,988 Million",
+      "content_worthy": true,
+      "worthiness_reason": "Company announced quarterly financial results with specific operating revenue and net income figures along with business highlights.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Tata Technologies Limited (NSE: TATATECH)</b>\n\n<b>Tata Technologies Reports Q2 FY27 Operating Revenue at ₹16,988 Million</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Operating Revenue:</b> ₹16,988 million (+28.4% YoY)\n- <b>Services Segment Revenue:</b> ₹13,557 million (+33.9% YoY)\n- <b>Operating EBITDA:</b> ₹2,733 million (+31.5% YoY)\n- <b>Net Income:</b> ₹1,714 million\n- <b>Workforce Strength:</b> 12,895 employees\n\n📌 <b>What happened:</b>\n↳ Tata Technologies Limited announced its unaudited standalone and consolidated financial results for the quarter ended September 30, 2026, reporting an operating revenue of ₹16,988 million and a net income of ₹1,714 million.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/TTLNSE_14102026162811_PressReleaseFinancialsQ2.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-14 17:35:37 IST"
+    },
     {
       "hash": "13ef6fe06ef3",
       "symbol": "ELECON",
@@ -229,6 +243,34 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "79159337208e",
+      "symbol": "BHEL",
+      "company_name": "Bharat Heavy Electricals Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 13:38:41",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BHEL_14102026133809_BHELRESULTS.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results notice lacks numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 17:35:59 IST"
+    },
+    {
+      "hash": "1601c35362b0",
+      "symbol": "RIIL",
+      "company_name": "Reliance Industrial Infrastructure Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Oct-2026 17:23:32",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/mrunalvaidya_14102026172207_RIILUFR14102026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The filing text contains only the cover letter and auditor review report header without the actual financial numeric table for Revenue and PAT.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-14 17:35:37 IST"
+    },
     {
       "hash": "6e3635d9b498",
       "symbol": "PNBGILTS",
