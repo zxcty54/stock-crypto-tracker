@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-10-15 07:23:06 IST",
+  "generated_at": "2026-10-15 11:34:26 IST",
   "worthy_count": 22,
-  "skipped_count": 27,
+  "skipped_count": 26,
   "content_feed": [
     {
-      "hash": "90f240aad355",
-      "symbol": "NEULANDLAB",
-      "company_name": "Neuland Laboratories Limited",
+      "hash": "6d0af5912ca4",
+      "symbol": "ZYDUSLIFE",
+      "company_name": "Zydus Lifesciences Limited",
       "category": "CAPACITY_EXPANSION",
-      "event_type": "REGULATORY_APPROVAL",
-      "broadcast_date": "14-Oct-2026 21:43:33",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf",
-      "headline": "US FDA issues closure report for Unit 3 facility inspection",
+      "event_type": "CAPEX",
+      "broadcast_date": "15-Oct-2026 11:30:32",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/Cadilahc_15102026113006_PressRelease15102026.pdf",
+      "headline": "Zydus Lifesciences to set up pharma plant in Sri Lanka",
       "content_worthy": true,
-      "worthiness_reason": "US FDA issued an Establishment Inspection Report (EIR) concluding the inspection of Unit 3 facility as closed.",
-      "telegram_post": "✅ <b>#REGULATORY_APPROVAL</b> | <b>Neuland Laboratories Limited (NSE: NEULANDLAB)</b>\n\n<b>US FDA issues closure report for Unit 3 facility inspection</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility Location:</b> Unit 3, Gaddapotharam Village, Jinnaram, Sangareddy District\n- <b>Inspection Dates:</b> August 10, 2026 to August 14, 2026\n- <b>Outcome:</b> Establishment Inspection Report (EIR) issued, inspection concluded as closed\n\n📌 <b>What happened:</b>\n↳ The US Food and Drug Administration (US FDA) issued an Establishment Inspection Report (EIR) for the inspection conducted at the company's Unit 3 manufacturing facility, concluding the inspection as closed.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/NEULANDLAB_14102026214251_SignedSEIntimation14102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-15 07:23:06 IST"
+      "worthiness_reason": "Commercial capacity expansion with new manufacturing facility.",
+      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Zydus Lifesciences Limited (NSE: ZYDUSLIFE)</b>\n\n<b>Zydus Lifesciences to set up pharma plant in Sri Lanka</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>JV Partner:</b> Sunshine Healthcare (Sunshine Holdings PLC)\n- <b>Agreement:</b> Board of Investment, Sri Lanka (13 Oct 2026)\n- <b>Investment:</b> > USD 20 million\n- <b>Site:</b> ~4 acres, Horana, Sri Lanka\n- <b>First Phase:</b> Oral solid dosage forms\n- <b>Commercial Ops:</b> Expected 2028\n\n📌 <b>What happened:</b>\n↳ Zydus Lifesciences and Sunshine Healthcare signed a BOI agreement to build a pharma manufacturing facility, marking a new international expansion.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/Cadilahc_15102026113006_PressRelease15102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-15 11:34:26 IST"
     },
     {
       "hash": "24981ba13c73",
@@ -313,20 +313,6 @@
     }
   ],
   "skipped_archive": [
-    {
-      "hash": "79159337208e",
-      "symbol": "BHEL",
-      "company_name": "Bharat Heavy Electricals Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "14-Oct-2026 13:38:41",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/BHEL_14102026133809_BHELRESULTS.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the text extract.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-15 07:23:06 IST"
-    },
     {
       "hash": "3698380a34da",
       "symbol": "STCINDIA",
