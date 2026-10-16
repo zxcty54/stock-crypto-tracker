@@ -1,16 +1,21 @@
 {
   "status": "success",
-  "timestamp": "2026-10-15T21:12:54.478734",
+  "timestamp": "2026-10-16T00:12:50.773681",
   "total_hot_spikes": 25,
   "data": [
     {
-      "keyword": "jailer 2",
-      "search_volume_spike": "2L+",
+      "keyword": "rajinikanth jailer movie review",
+      "search_volume_spike": "1L+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "ரஜினிகாந்த்",
       "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "केतु",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -24,27 +29,12 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "केतु",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "enna vilai",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ramayana movie",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "vidya balan",
+      "keyword": "europa conference league",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "europa conference league",
+      "keyword": "vidya balan",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -54,32 +44,12 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ishita dutta",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "street fighter movie",
+      "keyword": "ramayana movie",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "marvel vision quest",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "uefa europa league",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "करिश्मा कपूर",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ranabaali movie",
+      "keyword": "கயல்",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -89,22 +59,42 @@
       "source": "Google Real-Time Search Trends"
     },
     {
+      "keyword": "ishita dutta",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "करिश्मा कपूर",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "పునీత్ రాజ్కుమార్",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "कार्तिक आर्यन",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "marvel vision quest",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ranabaali review",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
       "keyword": "अनुपम खेर",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "maasranga television",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "atalanta vs pafos",
-      "search_volume_spike": "200+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "nakul dhull re entry",
+      "keyword": "प्रियदर्शन",
       "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
@@ -114,18 +104,28 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "roadies",
-      "search_volume_spike": "200+",
+      "keyword": "kunal kapoor",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "torreense vs sunderland",
+      "keyword": "its a medical miracle",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "పునీత్ రాజ్కుమార్",
+      "keyword": "ranabaali release date",
       "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "मनोज बाजपेयी",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "maasranga television",
+      "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     }
   ]
