@@ -1,111 +1,56 @@
 {
   "status": "success",
-  "timestamp": "2026-10-16T00:12:50.773681",
+  "timestamp": "2026-10-16T06:58:37.125714",
   "total_hot_spikes": 25,
   "data": [
     {
       "keyword": "rajinikanth jailer movie review",
-      "search_volume_spike": "1L+",
+      "search_volume_spike": "50K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ரஜினிகாந்த்",
-      "search_volume_spike": "20K+",
+      "keyword": "ranabaali review",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "केतु",
+      "keyword": "ranabaali",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jailer 2 cast",
+      "keyword": "ramayana movie",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "hrithik roshan",
-      "search_volume_spike": "10K+",
+      "keyword": "ಪುನೀತ್ ರಾಜ್ಕುಮಾರ್",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "europa conference league",
+      "keyword": "mahesh tinaikar",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "vidya balan",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "radhika ambani",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ramayana movie",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "கயல்",
+      "keyword": "prahaar",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ಪುನೀತ್ ರಾಜ್ಕುಮಾರ್",
+      "keyword": "వారణాసి",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ishita dutta",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "करिश्मा कपूर",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "పునీత్ రాజ్కుమార్",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "कार्तिक आर्यन",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "marvel vision quest",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ranabaali review",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "अनुपम खेर",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "प्रियदर्शन",
+      "keyword": "గుండెనిండా గుడిగంటలు",
       "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "தனுஷ்",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "kunal kapoor",
-      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -114,8 +59,63 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ranabaali release date",
+      "keyword": "मेष",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "kunal kapoor",
       "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "गरबा",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "கயல்",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ishita dutta",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "தனுஷ்",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "పునీత్ రాజ్కుమార్",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "steven soderbergh",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "कार्तिक आर्यन",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "কলকাতা",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "marvel vision quest",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "करमचंद",
+      "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -124,8 +124,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "maasranga television",
-      "search_volume_spike": "500+",
+      "keyword": "प्रियदर्शन",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
