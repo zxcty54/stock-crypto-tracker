@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-16T17:55:31.359046",
+  "timestamp": "2026-10-16T20:51:14.081603",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -19,47 +19,52 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "shree charani",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "prahaar",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "गरबा",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "విద్యా బాలన్",
+      "keyword": "kavya maran",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "nayyi naveli",
-      "search_volume_spike": "5K+",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "kavya maran",
-      "search_volume_spike": "2K+",
+      "keyword": "prahaar movie",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "நமோ நாராயணன்",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "nayi naveli yami gautam release date",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "roadies",
+      "keyword": "king",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "bela bajaria netflix",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nakul dhull re entry",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "you can see everything",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "anjali arora",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "sai pallavi",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -69,28 +74,23 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "అబ్సెషన్",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "anjali arora",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "king",
+      "keyword": "arishfa khan",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "enna vilai 2026",
-      "search_volume_spike": "1K+",
+      "keyword": "mahesh tinaikar indus creed",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ஜெயிலர் 2",
-      "search_volume_spike": "2K+",
+      "keyword": "విద్యా బాలన్",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jishad shamsudeen",
+      "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -99,33 +99,33 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "whalefall",
-      "search_volume_spike": "2K+",
+      "keyword": "tenzing",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "street fighter release date",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jailer 3",
+      "search_volume_spike": "100+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "saif ali khan",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "black clover",
+      "search_volume_spike": "200+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "prahar",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "अक्टूबर",
       "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "you can see everything",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "నాగార్జున",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "nakul dhull re entry",
-      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
