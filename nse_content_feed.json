@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-18 00:25:48 IST",
-  "worthy_count": 57,
-  "skipped_count": 59,
+  "generated_at": "2026-10-18 04:59:11 IST",
+  "worthy_count": 58,
+  "skipped_count": 58,
   "content_feed": [
+    {
+      "hash": "d43b87f0f530",
+      "symbol": "MWL",
+      "company_name": "Mangalam Worldwide Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "15-Oct-2026 19:49:46",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MWL_15102026194915_Pressrelease15102026signed.pdf",
+      "headline": "Mangalam Worldwide Q2 FY27 PAT Rises 30.90% YoY to ₹13.82 Crores",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with numeric revenue, PAT, and operational expansion highlights.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Mangalam Worldwide Limited (NSE: MWL)</b>\n\n<b>Mangalam Worldwide Q2 FY27 PAT Rises 30.90% YoY to ₹13.82 Crores</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Profit After Tax (Q2 FY27):</b> ₹13.82 crore\n- <b>Total Income (Q2 FY27):</b> ₹361 crore\n- <b>Export Revenue (Q2 FY27):</b> ₹63.86 crore\n- <b>Adjusted EBITDA (Q2 FY27):</b> ₹40.17 crore\n\n📌 <b>What happened:</b>\n↳ Mangalam Worldwide reported its financial results for the quarter ended September 30, 2026, alongside the incorporation of its wholly owned subsidiary MWL Europe BV in Belgium.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MWL_15102026194915_Pressrelease15102026signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-18 04:59:11 IST"
+    },
+    {
+      "hash": "3596a56a7faf",
+      "symbol": "SBC",
+      "company_name": "SBC Exports Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "15-Oct-2026 19:50:08",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SBC_15102026194843_Result_sept26.pdf",
+      "headline": "SBC Exports Reports Q2 FY27 Standalone Revenue at ₹13,831.19 Lakhs",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results disclosure with detailed standalone revenue and profit figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>SBC Exports Limited (NSE: SBC)</b>\n\n<b>SBC Exports Reports Q2 FY27 Standalone Revenue at ₹13,831.19 Lakhs</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations (Q2 FY27):</b> ₹13,831.19 Lakhs\n- <b>Total Income (Q2 FY27):</b> ₹14,338.72 Lakhs\n- <b>Profit Before Tax (Q2 FY27):</b> ₹1,472.11 Lakhs\n- <b>Revenue from Operations (H1 FY27):</b> ₹24,434.77 Lakhs\n\n📌 <b>What happened:</b>\n↳ The company announced its unaudited standalone and consolidated financial results for the quarter and half year ended September 30, 2026, reporting a quarterly revenue from operations of ₹13,831.19 lakhs.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SBC_15102026194843_Result_sept26.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-18 04:59:11 IST"
+    },
     {
       "hash": "9dc68f8e1a02",
       "symbol": "MILKYMIST",
@@ -786,20 +814,6 @@
       "worthiness_reason": "Financial results disclosed with revenue and PAT.",
       "telegram_post": "💰 <b>#RESULT</b> | <b>Le Travenues Technology Limited (NSE: IXIGO)</b>\n\n<b>ixigo Reports Q2 FY27 Financial Results – PAT Rs.63.42 Cr</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs.320.96 Cr\n- <b>Profit After Tax (PAT):</b> Rs.63.42 Cr\n- <b>Gross Transaction Value (GTV):</b> Rs.5,304.47 Cr\n- <b>Hotels GTV:</b> Rs.111.34 Cr\n\n📌 <b>What happened:</b>\n↳ ixigo delivered resilient growth in Q2 FY27, with Hotels emerging as its fastest‑growing line of business.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/IXIGO_17102026131559_Regulation_30_Media_Release_17102026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-17 14:27:22 IST"
-    },
-    {
-      "hash": "d43b87f0f530",
-      "symbol": "MWL",
-      "company_name": "Mangalam Worldwide Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "15-Oct-2026 19:49:46",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MWL_15102026194915_Pressrelease15102026signed.pdf",
-      "headline": "Mangalam Worldwide Limited reports Q2 FY27 PAT ₹13.82 crore, revenue ₹361 crore",
-      "content_worthy": true,
-      "worthiness_reason": "Includes explicit revenue and PAT figures for Q2 FY27.",
-      "telegram_post": "💰 <b>#RESULT</b> | <b>Mangalam Worldwide Limited (NSE: MWL)</b>\n\n<b>Mangalam Worldwide Limited reports Q2 FY27 PAT ₹13.82 crore, revenue ₹361 crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Quarter:</b> Q2 FY27 (ended 30 Sep 2026)\n- <b>Revenue:</b> ₹361 crore\n- <b>PAT:</b> ₹13.82 crore\n- <b>YoY Revenue Growth:</b> 13.4%\n- <b>Export Revenue:</b> ₹63.86 crore, up 355% YoY\n\n📌 <b>What happened:</b>\n↳ Results show continued export‑led growth with strong PAT and revenue gains.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MWL_15102026194915_Pressrelease15102026signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-17 03:20:48 IST"
     }
   ],
   "skipped_archive": [
@@ -1614,20 +1628,6 @@
       "worthiness_reason": "Financial results lack disclosed revenue and PAT.",
       "telegram_post": "",
       "analyzed_at": "2026-10-17 14:27:43 IST"
-    },
-    {
-      "hash": "3596a56a7faf",
-      "symbol": "SBC",
-      "company_name": "SBC Exports Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "15-Oct-2026 19:50:08",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SBC_15102026194843_Result_sept26.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results lack explicit PAT disclosure.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-17 03:20:48 IST"
     }
   ]
 }
