@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-16T20:51:14.081603",
+  "timestamp": "2026-10-17T00:16:27.851366",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -24,12 +24,7 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "nayyi naveli",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "prahaar movie",
+      "keyword": "విద్యా బాలన్",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -39,27 +34,22 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "king",
-      "search_volume_spike": "2K+",
+      "keyword": "साप्ताहिक राशिफल",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nayyi naveli",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "bela bajaria netflix",
-      "search_volume_spike": "1K+",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "nakul dhull re entry",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "you can see everything",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "anjali arora",
+      "keyword": "అబ్సెషన్",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -69,23 +59,38 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "nayi naveli reviews",
+      "keyword": "వారణాసి",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "arishfa khan",
+      "keyword": "నాగార్జున",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "mahesh tinaikar indus creed",
-      "search_volume_spike": "10K+",
+      "keyword": "ஜெயிலர் 2",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "విద్యా బాలన్",
+      "keyword": "अक्टूबर",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "सोनाली कुलकर्णी",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "prahaar movie",
       "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "anjali arora",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -94,38 +99,33 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "साप्ताहिक राशिफल",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "tenzing",
+      "keyword": "జబర్దస్త్",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "street fighter release date",
-      "search_volume_spike": "1K+",
+      "keyword": "nayi naveli reviews",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "jailer 3",
-      "search_volume_spike": "100+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "saif ali khan",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "black clover",
+      "keyword": "mahesh tinaikar indus creed",
       "search_volume_spike": "200+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "prahar",
-      "search_volume_spike": "2K+",
+      "keyword": "malhar patekar response tanushree dutta",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "you can see everything",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nakul dhull re entry",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
