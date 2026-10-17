@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-17T16:56:56.575472",
+  "timestamp": "2026-10-17T20:26:03.785922",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -9,8 +9,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "anirudh age",
-      "search_volume_spike": "50K+",
+      "keyword": "సుడిగాలి సుధీర్",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -19,23 +19,13 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "సుడిగాలి సుధీర్",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "hotstar",
+      "keyword": "kavya maran net worth",
       "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "शुक्र",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "దేవ",
-      "search_volume_spike": "10K+",
+      "keyword": "anne hathaway",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -45,47 +35,22 @@
     },
     {
       "keyword": "अक्षरा सिंह",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "jio hotstar",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "उज्ज्वल निकम",
-      "search_volume_spike": "2K+",
+      "keyword": "big brother",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "villarreal vs elche",
-      "search_volume_spike": "2K+",
+      "keyword": "love of your life",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ఇళయరాజా",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "anne hathaway",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "स्मिता पाटील",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "garividi lakshmi",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "abp ananda live",
-      "search_volume_spike": "500+",
+      "keyword": "शुक्र",
+      "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -94,13 +59,18 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "black clover episode 3",
-      "search_volume_spike": "2K+",
+      "keyword": "hotstar",
+      "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ರಶ್ಮಿಕಾ ಮಂದಣ್ಣ",
+      "keyword": "yami gautam",
       "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "దేవ",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -109,12 +79,12 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "yami gautam",
+      "keyword": "tenzing",
       "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ఓటీటీ",
+      "keyword": "aaryan on rajinikanth jailer 2",
       "search_volume_spike": "200+",
       "source": "Google Real-Time Search Trends"
     },
@@ -124,8 +94,38 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "chak de india",
+      "keyword": "उज्ज्वल निकम",
       "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "garividi lakshmi",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ఇళయరాజా",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "स्मिता पाटील",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jio hotstar",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "prince narula",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "laliga games",
+      "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     }
   ]
