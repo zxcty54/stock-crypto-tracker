@@ -1,11 +1,26 @@
 {
   "status": "success",
-  "timestamp": "2026-10-18T15:43:45.597929",
+  "timestamp": "2026-10-18T18:34:17.036890",
   "total_hot_spikes": 25,
   "data": [
     {
       "keyword": "tiger shroff",
+      "search_volume_spike": "1L+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nottm forest vs arsenal",
+      "search_volume_spike": "50K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "टाइगर श्रॉफ",
       "search_volume_spike": "20K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "राहुल महाजन",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -15,16 +30,11 @@
     },
     {
       "keyword": "नीति मोहन",
-      "search_volume_spike": "2K+",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "bournemouth vs sunderland",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "सचिन पिळगांवकर",
+      "keyword": "neeti mohan father brij mohan sharma",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -34,13 +44,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "neeti mohan father brij mohan sharma",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "राहुल महाजन",
-      "search_volume_spike": "1K+",
+      "keyword": "मिथुन चक्रवर्ती",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -49,37 +54,7 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "मिथुन चक्रवर्ती",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "திரையரங்கு",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ಧನುಷ್",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mirzapur the movie and season 4",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "dawood ibrahim",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ranabaali box office day 2",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "spirit movie",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -89,23 +64,18 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "वीडियो",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "the mummy 4",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "വിജയ് ദേവരകൊണ്ട",
-      "search_volume_spike": "500+",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "aamir khan",
+      "keyword": "dawood ibrahim",
       "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "நெல்சன் திலீப்குமார்",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -114,18 +84,48 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "వారణాసి",
+      "keyword": "prabhas",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
+      "keyword": "pori moni viral video",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "జైలర్ 2",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "tenzing",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
       "keyword": "sunny deol",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "shaina nc",
+      "search_volume_spike": "200+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "aman gandhi",
       "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "திரைப்படம்",
-      "search_volume_spike": "2K+",
+      "keyword": "सचिन पिळगांवकर",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "maasranga television",
+      "search_volume_spike": "200+",
       "source": "Google Real-Time Search Trends"
     }
   ]
