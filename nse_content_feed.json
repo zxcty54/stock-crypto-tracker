@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-10-18 23:42:46 IST",
-  "worthy_count": 27,
-  "skipped_count": 33,
+  "generated_at": "2026-10-19 13:23:09 IST",
+  "worthy_count": 30,
+  "skipped_count": 36,
   "content_feed": [
+    {
+      "hash": "0dc98d277244",
+      "symbol": "ABDL",
+      "company_name": "Allied Blenders and Distillers Limited",
+      "category": "COMMERCIAL_PRODUCTION",
+      "event_type": "COMMERCIAL_PRODUCTION",
+      "broadcast_date": "19-Oct-2026 10:31:05",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ABDINDIA_19102026103057_SE_Intimation_-_Press_Release_UP_Bottling_Unit_sd.pdf",
+      "headline": "Allied Blenders and Distillers commences commercial operations at Moradabad bottling facility",
+      "content_worthy": true,
+      "worthiness_reason": "Commencement of commercial operations at a new manufacturing/bottling facility with specified capacity and investments.",
+      "telegram_post": "🏭 <b>#COMMERCIAL_PRODUCTION</b> | <b>Allied Blenders and Distillers Limited (NSE: ABDL)</b>\n\n<b>ABD commences operations at Moradabad bottling unit with 6 million cases/annum capacity</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Location:</b> Moradabad, Uttar Pradesh\n- <b>Initial Capacity:</b> 6 million cases per annum\n- <b>Acquisition Cost:</b> ~ ₹70 crore\n- <b>Upgradation Investment:</b> ~ ₹40 crore\n\n📌 <b>What happened:</b>\n↳ Allied Blenders and Distillers has started commercial operations at its new bottling facility in Uttar Pradesh, aimed at enhancing manufacturing footprint and backward integration.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ABDINDIA_19102026103057_SE_Intimation_-_Press_Release_UP_Bottling_Unit_sd.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-19 13:23:09 IST"
+    },
+    {
+      "hash": "77f3c5e81124",
+      "symbol": "TCS",
+      "company_name": "Tata Consultancy Services Limited",
+      "category": "NEW_BUSINESS",
+      "event_type": "CONTRACT",
+      "broadcast_date": "19-Oct-2026 11:30:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/TCS_CORPCS_19102026112258_PR_19Oct26_signed.pdf",
+      "headline": "TCS deploys TCS BaNCS for Treasury at Indian Bank's Colombo branch in Sri Lanka",
+      "content_worthy": true,
+      "worthiness_reason": "New contract win/deployment for TCS BaNCS in Sri Lanka with Indian Bank.",
+      "telegram_post": "📜 <b>#CONTRACT</b> | <b>Tata Consultancy Services Limited (NSE: TCS)</b>\n\n<b>TCS BaNCS for Treasury marks entry into Sri Lanka with Indian Bank</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Indian Bank\n- <b>Deployment Location:</b> Colombo branch, Sri Lanka\n- <b>Platform:</b> TCS BaNCS for Treasury\n- <b>Scope:</b> Money markets, investment management, and foreign exchange\n\n📌 <b>What happened:</b>\n↳ TCS has expanded its partnership with Indian Bank to deploy its integrated treasury platform at the bank's Colombo branch, following previous implementations in India and GIFT City.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/TCS_CORPCS_19102026112258_PR_19Oct26_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-19 13:23:09 IST"
+    },
+    {
+      "hash": "6ea053228d4b",
+      "symbol": "UNIONBANK",
+      "company_name": "Union Bank of India",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "19-Oct-2026 12:25:56",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/UNIONBANK_19102026122544_Press_Release_Sept2026.pdf",
+      "headline": "Union Bank of India Reports Q2 FY27 Net Profit at ₹5,537 Crore",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results disclosure containing net profit, interest income, asset quality metrics, and business growth figures for the quarter ended September 30, 2026.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Union Bank of India (NSE: UNIONBANK)</b>\n\n<b>Union Bank of India Reports Q2 FY27 Net Profit at ₹5,537 Crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Net Profit:</b> ₹5,537 Crore (Q2 FY27)\n- <b>Interest Income:</b> ₹28,158 Crore\n- <b>Total Business:</b> ₹24,75,330 Crore (up 12.01% YoY)\n- <b>Gross NPA:</b> 2.42% (down 87 bps YoY)\n- <b>Net NPA:</b> 0.42% (down 13 bps YoY)\n- <b>CRAR:</b> 17.94% as of Sept 30, 2026\n\n📌 <b>What happened:</b>\n↳ Union Bank of India announced its unaudited financial results for the quarter ended September 30, 2026, reporting a net profit of ₹5,537 crore alongside improvements in asset quality and total business growth.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/UNIONBANK_19102026122544_Press_Release_Sept2026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-19 13:22:26 IST"
+    },
     {
       "hash": "3df9478c7576",
       "symbol": "URBANCO",
@@ -383,6 +425,48 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "6cc24c77b5ea",
+      "symbol": "HFCL",
+      "company_name": "HFCL Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "19-Oct-2026 11:57:40",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/AHMED_19102026115343_HFCL_STX_Outcome_BM_19102026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Outcome of board meeting announcing financial results without explicit numeric revenue and PAT details provided in the text snippet.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-19 13:22:47 IST"
+    },
+    {
+      "hash": "781b5a81863e",
+      "symbol": "HFCL",
+      "company_name": "HFCL Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "19-Oct-2026 12:01:03",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/AHMED_19102026120047_HFCL_STX_Outcome_BM_19102026.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "Press release notice without explicit numeric revenue and PAT figures in the provided filing text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-19 13:22:47 IST"
+    },
+    {
+      "hash": "faf9765525cc",
+      "symbol": "UNIONBANK",
+      "company_name": "Union Bank of India",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "19-Oct-2026 12:03:22",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/UNIONBANK_19102026120305_Results_Sept2026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Duplicate or procedural board meeting outcome notice for financial results already covered in input_id 1.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-19 13:22:26 IST"
+    },
     {
       "hash": "61b177c2a795",
       "symbol": "E2E",
