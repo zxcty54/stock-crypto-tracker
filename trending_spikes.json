@@ -1,60 +1,60 @@
 {
   "status": "success",
-  "timestamp": "2026-10-19T12:49:04.867427",
+  "timestamp": "2026-10-19T19:46:11.529726",
   "total_hot_spikes": 25,
   "data": [
     {
-      "keyword": "tiger shroff",
-      "search_volume_spike": "5L+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "टाइगर श्रॉफ",
-      "search_volume_spike": "50K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "राहुल महाजन",
-      "search_volume_spike": "20K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "याचिका",
+      "keyword": "barbara palvin",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "मगरमच्छ",
-      "search_volume_spike": "5K+",
+      "keyword": "disha patani",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "barbara palvin",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "రజినీకాంత్",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "mamitha baiju",
-      "search_volume_spike": "5K+",
+      "keyword": "अरुणा ईरानी",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "মৌসুমী",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "kex",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "nushrratt bharuccha",
+      "keyword": "daler mehndi",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "साक्षी धोनी",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ജയിലര് 2",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "नमित मल्होत्रा",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ramayana movie north america pre sales",
+      "keyword": "quentin tarantino",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nicole kidman",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -64,23 +64,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ജയിലര് 2",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "sunny deol",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ott release this week",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "aruna irani",
-      "search_volume_spike": "2K+",
+      "keyword": "सलमान खान",
+      "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -89,43 +74,58 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "sarfaraz khan",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "jailer 2 day 4 collection",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "अरुणा ईरानी",
-      "search_volume_spike": "500+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "आज तक",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "ಧನ್ವೀರ್ ಗೌಡ",
+      "keyword": "nushrratt bharuccha",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "लोकसत्ता",
+      "keyword": "ranveer singh",
       "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "బిగ్ బాస్ 10",
+      "keyword": "vidyut jamwal",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "latest ott releases",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "nitesh tiwari",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "sj surya",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "arishfa khan",
       "search_volume_spike": "500+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ಪ್ರಜಾವಾಣಿ",
-      "search_volume_spike": "500+",
+      "keyword": "सनी देओल",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ఆదర్శ కుటుంబం",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "jana nayagan",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "రజినీకాంత్",
+      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
