@@ -13,5 +13,10 @@
   "tools:screener_alerts_setup": "2026-10-12",
   "risk:max_daily_loss_limit": "2026-10-12",
   "tools:tradingview_layout_management": "2026-10-12",
-  "business_model:bank_paisa_kaise_kamata_hai": "2026-10-12"
+  "business_model:bank_paisa_kaise_kamata_hai": "2026-10-12",
+  "market_mechanics:market_breadth_kya_batati_hai": "2026-10-19",
+  "process:trading_journal_ke_columns": "2026-10-19",
+  "business_model:it_company_ka_model": "2026-10-19",
+  "business_model:cement_industry_ka_cycle": "2026-10-19",
+  "technical:volume_ka_matlab": "2026-10-19"
 }
