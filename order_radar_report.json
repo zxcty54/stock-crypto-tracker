@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-19 20:23:41 IST",
+  "last_updated": "2026-10-20 19:02:52 IST",
   "total_scanned": 967,
   "guards_applied": {
     "max_debt_to_mcap": 1.2,
@@ -8,18 +8,18 @@
   },
   "total_prime_hidden_gems": 3,
   "total_paper_backlog_traps": 1,
-  "total_tracked_order_books": 13,
+  "total_tracked_order_books": 18,
   "total_sales_turnaround_gems": 237,
   "prime_hidden_gems": [
     {
       "symbol": "CAPACITE",
       "company_name": "Capacite Infraprojects Ltd",
-      "market_cap_cr": 1429.0,
+      "market_cap_cr": 1428.0,
       "annual_sales_cr": 2662.0,
       "total_debt_cr": 483.0,
       "debt_to_mcap": 0.34,
       "pending_order_book_cr": 13188.1,
-      "order_to_mcap_multiple": 9.23,
+      "order_to_mcap_multiple": 9.24,
       "book_to_bill_ratio": 4.95,
       "execution_runway_years": "4.95 Years",
       "execution_timeline_months": 24,
@@ -30,12 +30,12 @@
     {
       "symbol": "SWSOLAR",
       "company_name": "Sterling & Wilson Renewable Energy Ltd",
-      "market_cap_cr": 3733.0,
+      "market_cap_cr": 3742.0,
       "annual_sales_cr": 7155.0,
       "total_debt_cr": 943.0,
       "debt_to_mcap": 0.25,
       "pending_order_book_cr": 9286.59,
-      "order_to_mcap_multiple": 2.49,
+      "order_to_mcap_multiple": 2.48,
       "book_to_bill_ratio": 1.3,
       "execution_runway_years": "1.3 Years",
       "execution_timeline_months": 24,
@@ -46,7 +46,7 @@
     {
       "symbol": "KNRCON",
       "company_name": "KNR Constructions Ltd",
-      "market_cap_cr": 3141.0,
+      "market_cap_cr": 3136.0,
       "annual_sales_cr": 2673.0,
       "total_debt_cr": 2444.0,
       "debt_to_mcap": 0.78,
@@ -64,12 +64,12 @@
     {
       "symbol": "TERASOFT",
       "company_name": "Tera Software Ltd",
-      "market_cap_cr": 274.0,
+      "market_cap_cr": 272.0,
       "annual_sales_cr": 255.0,
       "total_debt_cr": 39.0,
       "debt_to_mcap": 0.14,
       "pending_order_book_cr": 3841.14,
-      "order_to_mcap_multiple": 14.02,
+      "order_to_mcap_multiple": 14.12,
       "book_to_bill_ratio": 15.06,
       "execution_runway_years": "15.06 Years",
       "execution_timeline_months": 24,
@@ -83,12 +83,12 @@
     {
       "symbol": "TERASOFT",
       "company_name": "Tera Software Ltd",
-      "market_cap_cr": 274.0,
+      "market_cap_cr": 272.0,
       "annual_sales_cr": 255.0,
       "total_debt_cr": 39.0,
       "debt_to_mcap": 0.14,
       "pending_order_book_cr": 3841.14,
-      "order_to_mcap_multiple": 14.02,
+      "order_to_mcap_multiple": 14.12,
       "book_to_bill_ratio": 15.06,
       "execution_runway_years": "15.06 Years",
       "execution_timeline_months": 24,
@@ -100,12 +100,12 @@
     {
       "symbol": "CAPACITE",
       "company_name": "Capacite Infraprojects Ltd",
-      "market_cap_cr": 1429.0,
+      "market_cap_cr": 1428.0,
       "annual_sales_cr": 2662.0,
       "total_debt_cr": 483.0,
       "debt_to_mcap": 0.34,
       "pending_order_book_cr": 13188.1,
-      "order_to_mcap_multiple": 9.23,
+      "order_to_mcap_multiple": 9.24,
       "book_to_bill_ratio": 4.95,
       "execution_runway_years": "4.95 Years",
       "execution_timeline_months": 24,
@@ -116,12 +116,12 @@
     {
       "symbol": "SWSOLAR",
       "company_name": "Sterling & Wilson Renewable Energy Ltd",
-      "market_cap_cr": 3733.0,
+      "market_cap_cr": 3742.0,
       "annual_sales_cr": 7155.0,
       "total_debt_cr": 943.0,
       "debt_to_mcap": 0.25,
       "pending_order_book_cr": 9286.59,
-      "order_to_mcap_multiple": 2.49,
+      "order_to_mcap_multiple": 2.48,
       "book_to_bill_ratio": 1.3,
       "execution_runway_years": "1.3 Years",
       "execution_timeline_months": 24,
@@ -132,7 +132,7 @@
     {
       "symbol": "KNRCON",
       "company_name": "KNR Constructions Ltd",
-      "market_cap_cr": 3141.0,
+      "market_cap_cr": 3136.0,
       "annual_sales_cr": 2673.0,
       "total_debt_cr": 2444.0,
       "debt_to_mcap": 0.78,
@@ -163,7 +163,7 @@
     {
       "symbol": "BAJAJST",
       "company_name": "Bajaj Steel Industries Ltd",
-      "market_cap_cr": 668.0,
+      "market_cap_cr": 665.0,
       "annual_sales_cr": 537.0,
       "total_debt_cr": 63.0,
       "debt_to_mcap": 0.09,
@@ -178,7 +178,7 @@
     {
       "symbol": "SOUTHWEST",
       "company_name": "South West Pinnacle Exploration Ltd",
-      "market_cap_cr": 679.0,
+      "market_cap_cr": 678.0,
       "annual_sales_cr": 264.0,
       "total_debt_cr": 80.0,
       "debt_to_mcap": 0.12,
@@ -193,7 +193,7 @@
     {
       "symbol": "JNKINDIA",
       "company_name": "JNK India Ltd",
-      "market_cap_cr": 2331.0,
+      "market_cap_cr": 2322.0,
       "annual_sales_cr": 899.0,
       "total_debt_cr": 91.0,
       "debt_to_mcap": 0.04,
@@ -204,6 +204,66 @@
       "execution_timeline_months": 24,
       "thesis": "Order backlog of ₹1,961.0 Cr.",
       "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/JNKIndiaLimited_September 23_ 2026_RR_404829.html"
+    },
+    {
+      "symbol": "LASERPOWER",
+      "company_name": "Laser Power & Infra Ltd",
+      "market_cap_cr": 3232.0,
+      "annual_sales_cr": 2326.0,
+      "total_debt_cr": 871.0,
+      "debt_to_mcap": 0.27,
+      "pending_order_book_cr": 2440.0,
+      "order_to_mcap_multiple": 0.75,
+      "book_to_bill_ratio": 1.05,
+      "execution_runway_years": "1.05 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹2,440.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/LASER_POWER_AND_INFRA_LIMITED_(ERSTWHILE_LASER_POWER_AND_INFRA_PRIVATE_LIMITED)/5th_May_26"
+    },
+    {
+      "symbol": "REFEX",
+      "company_name": "Refex Industries Ltd",
+      "market_cap_cr": 3427.0,
+      "annual_sales_cr": 2841.0,
+      "total_debt_cr": 225.0,
+      "debt_to_mcap": 0.07,
+      "pending_order_book_cr": 2518.36,
+      "order_to_mcap_multiple": 0.73,
+      "book_to_bill_ratio": 0.89,
+      "execution_runway_years": "0.89 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹2,518.4 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/REFEX_INDUSTRIES_LIMITED/7th_Aug_26"
+    },
+    {
+      "symbol": "JWL",
+      "company_name": "Jupiter Wagons Ltd",
+      "market_cap_cr": 8408.0,
+      "annual_sales_cr": 3127.0,
+      "total_debt_cr": 996.0,
+      "debt_to_mcap": 0.12,
+      "pending_order_book_cr": 4675.0,
+      "order_to_mcap_multiple": 0.56,
+      "book_to_bill_ratio": 1.5,
+      "execution_runway_years": "1.5 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹4,675.0 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/JUPITER_WAGONS_LIMITED_(ERSTWHILE_COMMERCIAL_ENGINEERS_AND_BODY_BUILDERS_COMPANY_LIMITED)/30th_Sep_26"
+    },
+    {
+      "symbol": "BATLIBOI",
+      "company_name": "Batliboi Ltd",
+      "market_cap_cr": 432.0,
+      "annual_sales_cr": 496.0,
+      "total_debt_cr": 86.0,
+      "debt_to_mcap": 0.2,
+      "pending_order_book_cr": 171.31,
+      "order_to_mcap_multiple": 0.4,
+      "book_to_bill_ratio": 0.35,
+      "execution_runway_years": "0.35 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹171.3 Cr.",
+      "source_doc": "https://connect.acuite.in/fcompany-details/Batliboi_Limited/12th_Jun_26"
     },
     {
       "symbol": "AEROPLANE",
@@ -223,7 +283,7 @@
     {
       "symbol": "TECHNOCRAF",
       "company_name": "Technocraft Ventures Ltd",
-      "market_cap_cr": 1980.0,
+      "market_cap_cr": 1978.0,
       "annual_sales_cr": 345.0,
       "total_debt_cr": 90.0,
       "debt_to_mcap": 0.05,
@@ -238,7 +298,7 @@
     {
       "symbol": "AVANTEL",
       "company_name": "Avantel Ltd",
-      "market_cap_cr": 4037.0,
+      "market_cap_cr": 4033.0,
       "annual_sales_cr": 241.0,
       "total_debt_cr": 34.0,
       "debt_to_mcap": 0.01,
@@ -253,7 +313,7 @@
     {
       "symbol": "XTRANET",
       "company_name": "Xtranet Technologies Ltd",
-      "market_cap_cr": 1568.0,
+      "market_cap_cr": 1571.0,
       "annual_sales_cr": 365.0,
       "total_debt_cr": 86.0,
       "debt_to_mcap": 0.05,
@@ -266,9 +326,24 @@
       "source_doc": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/XtranetTechnologiesLimited_March 31_ 2026_RR_392467.html"
     },
     {
+      "symbol": "SAB",
+      "company_name": "SAB Industries Ltd",
+      "market_cap_cr": 281.0,
+      "annual_sales_cr": 30.0,
+      "total_debt_cr": 77.0,
+      "debt_to_mcap": 0.27,
+      "pending_order_book_cr": 12.25,
+      "order_to_mcap_multiple": 0.04,
+      "book_to_bill_ratio": 0.41,
+      "execution_runway_years": "0.41 Years",
+      "execution_timeline_months": 24,
+      "thesis": "Order backlog of ₹12.2 Cr.",
+      "source_doc": "https://www.careratings.com/upload/CompanyFiles/PR/SAB Industries Limited-11-20-2020.pdf"
+    },
+    {
       "symbol": "TIMETECHNO",
       "company_name": "Time Technoplast Ltd",
-      "market_cap_cr": 8591.0,
+      "market_cap_cr": 8596.0,
       "annual_sales_cr": 6445.0,
       "total_debt_cr": 733.0,
       "debt_to_mcap": 0.09,
@@ -285,11 +360,11 @@
     {
       "symbol": "RAJESHEXPO",
       "company_name": "Rajesh Exports Ltd",
-      "market_cap_cr": 1694.0,
+      "market_cap_cr": 1699.0,
       "total_debt_cr": 1016.0,
       "debt_to_mcap": 0.6,
       "annual_sales_cr": 887510.0,
-      "sales_to_mcap_multiple": 523.91,
+      "sales_to_mcap_multiple": 522.37,
       "ps_ratio": 0.0,
       "catalyst": "P/S: 0.0x + Positive EBITDA + Debt/MCap: 0.6x (Safe)"
     },
@@ -318,33 +393,33 @@
     {
       "symbol": "GTPL",
       "company_name": "GTPL Hathway Ltd",
-      "market_cap_cr": 616.0,
+      "market_cap_cr": 615.0,
       "total_debt_cr": 548.0,
       "debt_to_mcap": 0.89,
       "annual_sales_cr": 4015.0,
-      "sales_to_mcap_multiple": 6.52,
+      "sales_to_mcap_multiple": 6.53,
       "ps_ratio": 0.15,
       "catalyst": "P/S: 0.15x + Positive EBITDA + Debt/MCap: 0.89x (Safe)"
     },
     {
       "symbol": "TRIGYN",
       "company_name": "Trigyn Technologies Ltd",
-      "market_cap_cr": 155.0,
+      "market_cap_cr": 157.0,
       "total_debt_cr": 10.0,
       "debt_to_mcap": 0.06,
       "annual_sales_cr": 1005.0,
-      "sales_to_mcap_multiple": 6.48,
-      "ps_ratio": 0.15,
-      "catalyst": "P/S: 0.15x + Positive EBITDA + Debt/MCap: 0.06x (Safe)"
+      "sales_to_mcap_multiple": 6.4,
+      "ps_ratio": 0.16,
+      "catalyst": "P/S: 0.16x + Positive EBITDA + Debt/MCap: 0.06x (Safe)"
     },
     {
       "symbol": "RPPINFRA",
       "company_name": "RPP Infra Projects Ltd",
-      "market_cap_cr": 244.0,
+      "market_cap_cr": 246.0,
       "total_debt_cr": 105.0,
       "debt_to_mcap": 0.43,
       "annual_sales_cr": 1491.0,
-      "sales_to_mcap_multiple": 6.11,
+      "sales_to_mcap_multiple": 6.06,
       "ps_ratio": 0.16,
       "catalyst": "P/S: 0.16x + Positive EBITDA + Debt/MCap: 0.43x (Safe)"
     },
@@ -362,11 +437,11 @@
     {
       "symbol": "SICAGEN",
       "company_name": "Sicagen India Ltd",
-      "market_cap_cr": 205.0,
+      "market_cap_cr": 204.0,
       "total_debt_cr": 159.0,
       "debt_to_mcap": 0.78,
       "annual_sales_cr": 1055.0,
-      "sales_to_mcap_multiple": 5.15,
+      "sales_to_mcap_multiple": 5.17,
       "ps_ratio": 0.19,
       "catalyst": "P/S: 0.19x + Positive EBITDA + Debt/MCap: 0.78x (Safe)"
     },
@@ -382,59 +457,59 @@
       "catalyst": "P/S: 0.2x + Positive EBITDA + Debt/MCap: 0.68x (Safe)"
     },
     {
-      "symbol": "GKB",
-      "company_name": "GKB Ophthalmics Ltd",
-      "market_cap_cr": 32.0,
-      "total_debt_cr": 12.0,
-      "debt_to_mcap": 0.38,
-      "annual_sales_cr": 150.0,
-      "sales_to_mcap_multiple": 4.69,
-      "ps_ratio": 0.21,
-      "catalyst": "P/S: 0.21x + Positive EBITDA + Debt/MCap: 0.38x (Safe)"
-    },
-    {
       "symbol": "BEDMUTHA",
       "company_name": "Bedmutha Industries Ltd",
-      "market_cap_cr": 364.0,
+      "market_cap_cr": 363.0,
       "total_debt_cr": 208.0,
       "debt_to_mcap": 0.57,
       "annual_sales_cr": 1698.0,
-      "sales_to_mcap_multiple": 4.66,
+      "sales_to_mcap_multiple": 4.68,
       "ps_ratio": 0.21,
       "catalyst": "P/S: 0.21x + Positive EBITDA + Debt/MCap: 0.57x (Safe)"
     },
     {
+      "symbol": "GKB",
+      "company_name": "GKB Ophthalmics Ltd",
+      "market_cap_cr": 32.1,
+      "total_debt_cr": 12.0,
+      "debt_to_mcap": 0.37,
+      "annual_sales_cr": 150.0,
+      "sales_to_mcap_multiple": 4.67,
+      "ps_ratio": 0.21,
+      "catalyst": "P/S: 0.21x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
+    },
+    {
       "symbol": "MAFATIND",
       "company_name": "Mafatlal Industries Ltd",
-      "market_cap_cr": 807.0,
+      "market_cap_cr": 805.0,
       "total_debt_cr": 64.0,
       "debt_to_mcap": 0.08,
       "annual_sales_cr": 3573.0,
-      "sales_to_mcap_multiple": 4.43,
+      "sales_to_mcap_multiple": 4.44,
       "ps_ratio": 0.23,
       "catalyst": "P/S: 0.23x + Positive EBITDA + Debt/MCap: 0.08x (Safe)"
     },
     {
-      "symbol": "GOKULAGRO",
-      "company_name": "Gokul Agro Resources Ltd",
-      "market_cap_cr": 6159.0,
-      "total_debt_cr": 589.0,
-      "debt_to_mcap": 0.1,
-      "annual_sales_cr": 24435.0,
-      "sales_to_mcap_multiple": 3.97,
-      "ps_ratio": 0.25,
-      "catalyst": "P/S: 0.25x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
-    },
-    {
       "symbol": "PTC",
       "company_name": "PTC India Ltd",
-      "market_cap_cr": 4421.0,
+      "market_cap_cr": 4419.0,
       "total_debt_cr": 1769.0,
       "debt_to_mcap": 0.4,
       "annual_sales_cr": 17535.0,
       "sales_to_mcap_multiple": 3.97,
       "ps_ratio": 0.25,
       "catalyst": "P/S: 0.25x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
+    },
+    {
+      "symbol": "GOKULAGRO",
+      "company_name": "Gokul Agro Resources Ltd",
+      "market_cap_cr": 6163.0,
+      "total_debt_cr": 589.0,
+      "debt_to_mcap": 0.1,
+      "annual_sales_cr": 24435.0,
+      "sales_to_mcap_multiple": 3.96,
+      "ps_ratio": 0.25,
+      "catalyst": "P/S: 0.25x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
     },
     {
       "symbol": "KNAGRI",
@@ -450,46 +525,46 @@
     {
       "symbol": "SUPERHOUSE",
       "company_name": "Superhouse Ltd",
-      "market_cap_cr": 174.0,
+      "market_cap_cr": 173.0,
       "total_debt_cr": 181.0,
-      "debt_to_mcap": 1.04,
+      "debt_to_mcap": 1.05,
       "annual_sales_cr": 677.0,
-      "sales_to_mcap_multiple": 3.89,
+      "sales_to_mcap_multiple": 3.91,
       "ps_ratio": 0.26,
-      "catalyst": "P/S: 0.26x + Positive EBITDA + Debt/MCap: 1.04x (Safe)"
-    },
-    {
-      "symbol": "TVSELECT",
-      "company_name": "TVS Electronics Ltd",
-      "market_cap_cr": 722.0,
-      "total_debt_cr": 0.0,
-      "debt_to_mcap": 0.0,
-      "annual_sales_cr": 2761.0,
-      "sales_to_mcap_multiple": 3.82,
-      "ps_ratio": 0.26,
-      "catalyst": "P/S: 0.26x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
+      "catalyst": "P/S: 0.26x + Positive EBITDA + Debt/MCap: 1.05x (Safe)"
     },
     {
       "symbol": "JAYAGROGN",
       "company_name": "Jayant Agro Organics Ltd",
-      "market_cap_cr": 664.0,
+      "market_cap_cr": 654.0,
       "total_debt_cr": 131.0,
       "debt_to_mcap": 0.2,
       "annual_sales_cr": 2530.0,
-      "sales_to_mcap_multiple": 3.81,
+      "sales_to_mcap_multiple": 3.87,
       "ps_ratio": 0.26,
       "catalyst": "P/S: 0.26x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
     },
     {
-      "symbol": "BRIGHTBR",
-      "company_name": "Bright Brothers Ltd",
-      "market_cap_cr": 112.0,
-      "total_debt_cr": 71.0,
-      "debt_to_mcap": 0.63,
-      "annual_sales_cr": 397.0,
-      "sales_to_mcap_multiple": 3.54,
-      "ps_ratio": 0.28,
-      "catalyst": "P/S: 0.28x + Positive EBITDA + Debt/MCap: 0.63x (Safe)"
+      "symbol": "TVSELECT",
+      "company_name": "TVS Electronics Ltd",
+      "market_cap_cr": 724.0,
+      "total_debt_cr": 0.0,
+      "debt_to_mcap": 0.0,
+      "annual_sales_cr": 2761.0,
+      "sales_to_mcap_multiple": 3.81,
+      "ps_ratio": 0.26,
+      "catalyst": "P/S: 0.26x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
+    },
+    {
+      "symbol": "SAYAJIIND",
+      "company_name": "Sayaji Industries Ltd",
+      "market_cap_cr": 293.0,
+      "total_debt_cr": 227.0,
+      "debt_to_mcap": 0.77,
+      "annual_sales_cr": 1088.0,
+      "sales_to_mcap_multiple": 3.71,
+      "ps_ratio": 0.27,
+      "catalyst": "P/S: 0.27x + Positive EBITDA + Debt/MCap: 0.77x (Safe)"
     },
     {
       "symbol": "ELIN",
@@ -503,42 +578,42 @@
       "catalyst": "P/S: 0.28x + Positive EBITDA + Debt/MCap: 0.04x (Safe)"
     },
     {
-      "symbol": "SAYAJIIND",
-      "company_name": "Sayaji Industries Ltd",
-      "market_cap_cr": 310.0,
-      "total_debt_cr": 227.0,
-      "debt_to_mcap": 0.73,
-      "annual_sales_cr": 1088.0,
+      "symbol": "BRIGHTBR",
+      "company_name": "Bright Brothers Ltd",
+      "market_cap_cr": 113.0,
+      "total_debt_cr": 71.0,
+      "debt_to_mcap": 0.63,
+      "annual_sales_cr": 397.0,
       "sales_to_mcap_multiple": 3.51,
       "ps_ratio": 0.28,
-      "catalyst": "P/S: 0.28x + Positive EBITDA + Debt/MCap: 0.73x (Safe)"
+      "catalyst": "P/S: 0.28x + Positive EBITDA + Debt/MCap: 0.63x (Safe)"
     },
     {
       "symbol": "ARCHIDPLY",
       "company_name": "Archidply Industries Ltd",
-      "market_cap_cr": 205.0,
+      "market_cap_cr": 204.0,
       "total_debt_cr": 182.0,
       "debt_to_mcap": 0.89,
       "annual_sales_cr": 712.0,
-      "sales_to_mcap_multiple": 3.47,
+      "sales_to_mcap_multiple": 3.49,
       "ps_ratio": 0.29,
       "catalyst": "P/S: 0.29x + Positive EBITDA + Debt/MCap: 0.89x (Safe)"
     },
     {
       "symbol": "DCMNVL",
       "company_name": "DCM Nouvelle Ltd",
-      "market_cap_cr": 308.0,
+      "market_cap_cr": 316.0,
       "total_debt_cr": 328.0,
-      "debt_to_mcap": 1.06,
+      "debt_to_mcap": 1.04,
       "annual_sales_cr": 1062.0,
-      "sales_to_mcap_multiple": 3.45,
-      "ps_ratio": 0.29,
-      "catalyst": "P/S: 0.29x + Positive EBITDA + Debt/MCap: 1.06x (Safe)"
+      "sales_to_mcap_multiple": 3.36,
+      "ps_ratio": 0.3,
+      "catalyst": "P/S: 0.3x + Positive EBITDA + Debt/MCap: 1.04x (Safe)"
     },
     {
       "symbol": "HITECH",
       "company_name": "Hi-Tech Pipes Ltd",
-      "market_cap_cr": 1442.0,
+      "market_cap_cr": 1444.0,
       "total_debt_cr": 268.0,
       "debt_to_mcap": 0.19,
       "annual_sales_cr": 4822.0,
@@ -558,6 +633,17 @@
       "catalyst": "P/S: 0.3x + Positive EBITDA + Debt/MCap: 0.13x (Safe)"
     },
     {
+      "symbol": "SEMAC",
+      "company_name": "Semac Construction Ltd",
+      "market_cap_cr": 67.0,
+      "total_debt_cr": 28.0,
+      "debt_to_mcap": 0.42,
+      "annual_sales_cr": 222.0,
+      "sales_to_mcap_multiple": 3.31,
+      "ps_ratio": 0.3,
+      "catalyst": "P/S: 0.3x + Positive EBITDA + Debt/MCap: 0.42x (Safe)"
+    },
+    {
       "symbol": "JMA",
       "company_name": "Jullundur Motor Agency (Delhi) Ltd",
       "market_cap_cr": 195.0,
@@ -571,7 +657,7 @@
     {
       "symbol": "RCF",
       "company_name": "Rashtriya Chemicals & Fertilizers Ltd",
-      "market_cap_cr": 5657.0,
+      "market_cap_cr": 5660.0,
       "total_debt_cr": 4128.0,
       "debt_to_mcap": 0.73,
       "annual_sales_cr": 18695.0,
@@ -582,7 +668,7 @@
     {
       "symbol": "QUESS",
       "company_name": "Quess Corp Ltd",
-      "market_cap_cr": 4813.0,
+      "market_cap_cr": 4808.0,
       "total_debt_cr": 124.0,
       "debt_to_mcap": 0.03,
       "annual_sales_cr": 15835.0,
@@ -593,29 +679,18 @@
     {
       "symbol": "ISFT",
       "company_name": "Intrasoft Technologies Ltd",
-      "market_cap_cr": 166.0,
+      "market_cap_cr": 167.0,
       "total_debt_cr": 17.0,
       "debt_to_mcap": 0.1,
       "annual_sales_cr": 545.0,
-      "sales_to_mcap_multiple": 3.28,
-      "ps_ratio": 0.3,
-      "catalyst": "P/S: 0.3x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
-    },
-    {
-      "symbol": "SEMAC",
-      "company_name": "Semac Construction Ltd",
-      "market_cap_cr": 69.0,
-      "total_debt_cr": 28.0,
-      "debt_to_mcap": 0.41,
-      "annual_sales_cr": 222.0,
-      "sales_to_mcap_multiple": 3.22,
+      "sales_to_mcap_multiple": 3.26,
       "ps_ratio": 0.31,
-      "catalyst": "P/S: 0.31x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
+      "catalyst": "P/S: 0.31x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
     },
     {
       "symbol": "SUKHJITS",
       "company_name": "Sukhjit Starch & Chemicals Ltd",
-      "market_cap_cr": 454.0,
+      "market_cap_cr": 455.0,
       "total_debt_cr": 345.0,
       "debt_to_mcap": 0.76,
       "annual_sales_cr": 1459.0,
@@ -635,26 +710,26 @@
       "catalyst": "P/S: 0.32x + Positive EBITDA + Debt/MCap: 0.44x (Safe)"
     },
     {
+      "symbol": "SAURASHCEM",
+      "company_name": "Saurashtra Cement Ltd",
+      "market_cap_cr": 548.0,
+      "total_debt_cr": 107.0,
+      "debt_to_mcap": 0.2,
+      "annual_sales_cr": 1699.0,
+      "sales_to_mcap_multiple": 3.1,
+      "ps_ratio": 0.32,
+      "catalyst": "P/S: 0.32x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
+    },
+    {
       "symbol": "SIS",
       "company_name": "SIS Ltd",
-      "market_cap_cr": 5494.0,
+      "market_cap_cr": 5503.0,
       "total_debt_cr": 1789.0,
       "debt_to_mcap": 0.33,
       "annual_sales_cr": 17037.0,
       "sales_to_mcap_multiple": 3.1,
       "ps_ratio": 0.32,
       "catalyst": "P/S: 0.32x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
-    },
-    {
-      "symbol": "SAURASHCEM",
-      "company_name": "Saurashtra Cement Ltd",
-      "market_cap_cr": 551.0,
-      "total_debt_cr": 107.0,
-      "debt_to_mcap": 0.19,
-      "annual_sales_cr": 1699.0,
-      "sales_to_mcap_multiple": 3.08,
-      "ps_ratio": 0.32,
-      "catalyst": "P/S: 0.32x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
       "symbol": "DIGITIDE",
@@ -670,11 +745,11 @@
     {
       "symbol": "ZUARI",
       "company_name": "Zuari Agro Chemicals Ltd",
-      "market_cap_cr": 857.0,
+      "market_cap_cr": 853.0,
       "total_debt_cr": 642.0,
       "debt_to_mcap": 0.75,
       "annual_sales_cr": 2569.0,
-      "sales_to_mcap_multiple": 3.0,
+      "sales_to_mcap_multiple": 3.01,
       "ps_ratio": 0.33,
       "catalyst": "P/S: 0.33x + Positive EBITDA + Debt/MCap: 0.75x (Safe)"
     },
@@ -714,7 +789,7 @@
     {
       "symbol": "PDSL",
       "company_name": "PDS Ltd",
-      "market_cap_cr": 4730.0,
+      "market_cap_cr": 4728.0,
       "total_debt_cr": 1264.0,
       "debt_to_mcap": 0.27,
       "annual_sales_cr": 13554.0,
@@ -736,29 +811,18 @@
     {
       "symbol": "KRITINUT",
       "company_name": "Kriti Nutrients Ltd",
-      "market_cap_cr": 340.0,
+      "market_cap_cr": 345.0,
       "total_debt_cr": 9.0,
       "debt_to_mcap": 0.03,
       "annual_sales_cr": 940.0,
-      "sales_to_mcap_multiple": 2.76,
-      "ps_ratio": 0.36,
-      "catalyst": "P/S: 0.36x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
-    },
-    {
-      "symbol": "SAPPL",
-      "company_name": "Shree Ajit Pulp and Paper Ltd",
-      "market_cap_cr": 265.0,
-      "total_debt_cr": 256.0,
-      "debt_to_mcap": 0.97,
-      "annual_sales_cr": 725.0,
-      "sales_to_mcap_multiple": 2.74,
+      "sales_to_mcap_multiple": 2.72,
       "ps_ratio": 0.37,
-      "catalyst": "P/S: 0.37x + Positive EBITDA + Debt/MCap: 0.97x (Safe)"
+      "catalyst": "P/S: 0.37x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
     },
     {
       "symbol": "NCC",
       "company_name": "NCC Ltd",
-      "market_cap_cr": 8031.0,
+      "market_cap_cr": 8024.0,
       "total_debt_cr": 3457.0,
       "debt_to_mcap": 0.43,
       "annual_sales_cr": 21456.0,
@@ -767,20 +831,31 @@
       "catalyst": "P/S: 0.37x + Positive EBITDA + Debt/MCap: 0.43x (Safe)"
     },
     {
-      "symbol": "HGS",
-      "company_name": "Hinduja Global Solutions Ltd",
-      "market_cap_cr": 1634.0,
-      "total_debt_cr": 1968.0,
-      "debt_to_mcap": 1.2,
-      "annual_sales_cr": 4301.0,
-      "sales_to_mcap_multiple": 2.63,
+      "symbol": "SAPPL",
+      "company_name": "Shree Ajit Pulp and Paper Ltd",
+      "market_cap_cr": 272.0,
+      "total_debt_cr": 256.0,
+      "debt_to_mcap": 0.94,
+      "annual_sales_cr": 725.0,
+      "sales_to_mcap_multiple": 2.67,
       "ps_ratio": 0.38,
-      "catalyst": "P/S: 0.38x + Positive EBITDA + Debt/MCap: 1.2x (Safe)"
+      "catalyst": "P/S: 0.38x + Positive EBITDA + Debt/MCap: 0.94x (Safe)"
+    },
+    {
+      "symbol": "TEXMOPIPES",
+      "company_name": "Texmo Pipes & Products Ltd",
+      "market_cap_cr": 147.0,
+      "total_debt_cr": 55.0,
+      "debt_to_mcap": 0.37,
+      "annual_sales_cr": 388.0,
+      "sales_to_mcap_multiple": 2.64,
+      "ps_ratio": 0.38,
+      "catalyst": "P/S: 0.38x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
     },
     {
       "symbol": "LANDMARK",
       "company_name": "Landmark Cars Ltd",
-      "market_cap_cr": 1954.0,
+      "market_cap_cr": 1951.0,
       "total_debt_cr": 876.0,
       "debt_to_mcap": 0.45,
       "annual_sales_cr": 5137.0,
@@ -789,26 +864,26 @@
       "catalyst": "P/S: 0.38x + Positive EBITDA + Debt/MCap: 0.45x (Safe)"
     },
     {
-      "symbol": "TEXMOPIPES",
-      "company_name": "Texmo Pipes & Products Ltd",
-      "market_cap_cr": 148.0,
-      "total_debt_cr": 55.0,
-      "debt_to_mcap": 0.37,
-      "annual_sales_cr": 388.0,
-      "sales_to_mcap_multiple": 2.62,
-      "ps_ratio": 0.38,
-      "catalyst": "P/S: 0.38x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
-    },
-    {
       "symbol": "AUTOIND",
       "company_name": "Autoline Industries Ltd",
-      "market_cap_cr": 369.0,
+      "market_cap_cr": 368.0,
       "total_debt_cr": 325.0,
       "debt_to_mcap": 0.88,
       "annual_sales_cr": 938.0,
-      "sales_to_mcap_multiple": 2.54,
+      "sales_to_mcap_multiple": 2.55,
       "ps_ratio": 0.39,
       "catalyst": "P/S: 0.39x + Positive EBITDA + Debt/MCap: 0.88x (Safe)"
+    },
+    {
+      "symbol": "SPIC",
+      "company_name": "Southern Petrochemicals Industries Corporation Ltd",
+      "market_cap_cr": 1189.0,
+      "total_debt_cr": 703.0,
+      "debt_to_mcap": 0.59,
+      "annual_sales_cr": 3024.0,
+      "sales_to_mcap_multiple": 2.54,
+      "ps_ratio": 0.39,
+      "catalyst": "P/S: 0.39x + Positive EBITDA + Debt/MCap: 0.59x (Safe)"
     },
     {
       "symbol": "OMAXAUTO",
@@ -822,35 +897,24 @@
       "catalyst": "P/S: 0.4x + Positive EBITDA + Debt/MCap: 0.74x (Safe)"
     },
     {
-      "symbol": "SPIC",
-      "company_name": "Southern Petrochemicals Industries Corporation Ltd",
-      "market_cap_cr": 1195.0,
-      "total_debt_cr": 703.0,
-      "debt_to_mcap": 0.59,
-      "annual_sales_cr": 3024.0,
-      "sales_to_mcap_multiple": 2.53,
-      "ps_ratio": 0.4,
-      "catalyst": "P/S: 0.4x + Positive EBITDA + Debt/MCap: 0.59x (Safe)"
-    },
-    {
       "symbol": "ASHOKA",
       "company_name": "Ashoka Buildcon Ltd",
-      "market_cap_cr": 2882.0,
+      "market_cap_cr": 2889.0,
       "total_debt_cr": 1608.0,
       "debt_to_mcap": 0.56,
       "annual_sales_cr": 7132.0,
       "sales_to_mcap_multiple": 2.47,
-      "ps_ratio": 0.4,
-      "catalyst": "P/S: 0.4x + Positive EBITDA + Debt/MCap: 0.56x (Safe)"
+      "ps_ratio": 0.41,
+      "catalyst": "P/S: 0.41x + Positive EBITDA + Debt/MCap: 0.56x (Safe)"
     },
     {
       "symbol": "MUNJALAU",
       "company_name": "Munjal Auto Industries Ltd",
-      "market_cap_cr": 1018.0,
+      "market_cap_cr": 1015.0,
       "total_debt_cr": 423.0,
       "debt_to_mcap": 0.42,
       "annual_sales_cr": 2503.0,
-      "sales_to_mcap_multiple": 2.46,
+      "sales_to_mcap_multiple": 2.47,
       "ps_ratio": 0.41,
       "catalyst": "P/S: 0.41x + Positive EBITDA + Debt/MCap: 0.42x (Safe)"
     },
@@ -868,57 +932,68 @@
     {
       "symbol": "AUSTENG",
       "company_name": "Austin Engineering Company Ltd",
-      "market_cap_cr": 50.1,
+      "market_cap_cr": 50.2,
       "total_debt_cr": 1.0,
       "debt_to_mcap": 0.02,
       "annual_sales_cr": 121.0,
-      "sales_to_mcap_multiple": 2.42,
+      "sales_to_mcap_multiple": 2.41,
       "ps_ratio": 0.41,
       "catalyst": "P/S: 0.41x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
     },
     {
-      "symbol": "HERANBA",
-      "company_name": "Heranba Industries Ltd",
-      "market_cap_cr": 635.0,
-      "total_debt_cr": 576.0,
-      "debt_to_mcap": 0.91,
-      "annual_sales_cr": 1526.0,
-      "sales_to_mcap_multiple": 2.4,
-      "ps_ratio": 0.42,
-      "catalyst": "P/S: 0.42x + Positive EBITDA + Debt/MCap: 0.91x (Safe)"
-    },
-    {
       "symbol": "MAWANASUG",
       "company_name": "Mawana Sugars Ltd",
-      "market_cap_cr": 669.0,
+      "market_cap_cr": 663.0,
       "total_debt_cr": 420.0,
       "debt_to_mcap": 0.63,
       "annual_sales_cr": 1586.0,
-      "sales_to_mcap_multiple": 2.37,
+      "sales_to_mcap_multiple": 2.39,
       "ps_ratio": 0.42,
       "catalyst": "P/S: 0.42x + Positive EBITDA + Debt/MCap: 0.63x (Safe)"
     },
     {
+      "symbol": "HERANBA",
+      "company_name": "Heranba Industries Ltd",
+      "market_cap_cr": 640.0,
+      "total_debt_cr": 576.0,
+      "debt_to_mcap": 0.9,
+      "annual_sales_cr": 1526.0,
+      "sales_to_mcap_multiple": 2.38,
+      "ps_ratio": 0.42,
+      "catalyst": "P/S: 0.42x + Positive EBITDA + Debt/MCap: 0.9x (Safe)"
+    },
+    {
       "symbol": "VISAKAIND",
       "company_name": "Visaka Industries Ltd",
-      "market_cap_cr": 747.0,
+      "market_cap_cr": 753.0,
       "total_debt_cr": 303.0,
-      "debt_to_mcap": 0.41,
+      "debt_to_mcap": 0.4,
       "annual_sales_cr": 1762.0,
-      "sales_to_mcap_multiple": 2.36,
-      "ps_ratio": 0.42,
-      "catalyst": "P/S: 0.42x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
+      "sales_to_mcap_multiple": 2.34,
+      "ps_ratio": 0.43,
+      "catalyst": "P/S: 0.43x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
     },
     {
       "symbol": "CONFIPET",
       "company_name": "Confidence Petroleum India Ltd",
-      "market_cap_cr": 2605.0,
+      "market_cap_cr": 2603.0,
       "total_debt_cr": 761.0,
       "debt_to_mcap": 0.29,
       "annual_sales_cr": 6001.0,
-      "sales_to_mcap_multiple": 2.3,
+      "sales_to_mcap_multiple": 2.31,
       "ps_ratio": 0.43,
       "catalyst": "P/S: 0.43x + Positive EBITDA + Debt/MCap: 0.29x (Safe)"
+    },
+    {
+      "symbol": "AMARJOTHI",
+      "company_name": "Amarjothi Spinning Mills Ltd",
+      "market_cap_cr": 107.0,
+      "total_debt_cr": 56.0,
+      "debt_to_mcap": 0.52,
+      "annual_sales_cr": 245.0,
+      "sales_to_mcap_multiple": 2.29,
+      "ps_ratio": 0.44,
+      "catalyst": "P/S: 0.44x + Positive EBITDA + Debt/MCap: 0.52x (Safe)"
     },
     {
       "symbol": "ASPINWALL",
@@ -945,35 +1020,13 @@
     {
       "symbol": "SSDL",
       "company_name": "Saraswati Saree Depot Ltd",
-      "market_cap_cr": 263.0,
+      "market_cap_cr": 264.0,
       "total_debt_cr": 43.0,
       "debt_to_mcap": 0.16,
       "annual_sales_cr": 602.0,
-      "sales_to_mcap_multiple": 2.29,
-      "ps_ratio": 0.44,
-      "catalyst": "P/S: 0.44x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
-    },
-    {
-      "symbol": "DONEAR",
-      "company_name": "Donear Industries Ltd",
-      "market_cap_cr": 407.0,
-      "total_debt_cr": 427.0,
-      "debt_to_mcap": 1.05,
-      "annual_sales_cr": 928.0,
       "sales_to_mcap_multiple": 2.28,
       "ps_ratio": 0.44,
-      "catalyst": "P/S: 0.44x + Positive EBITDA + Debt/MCap: 1.05x (Safe)"
-    },
-    {
-      "symbol": "AMARJOTHI",
-      "company_name": "Amarjothi Spinning Mills Ltd",
-      "market_cap_cr": 109.0,
-      "total_debt_cr": 56.0,
-      "debt_to_mcap": 0.51,
-      "annual_sales_cr": 245.0,
-      "sales_to_mcap_multiple": 2.25,
-      "ps_ratio": 0.44,
-      "catalyst": "P/S: 0.44x + Positive EBITDA + Debt/MCap: 0.51x (Safe)"
+      "catalyst": "P/S: 0.44x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
       "symbol": "MANAKSIA",
@@ -987,9 +1040,20 @@
       "catalyst": "P/S: 0.45x + Positive EBITDA + Debt/MCap: 0.08x (Safe)"
     },
     {
+      "symbol": "DONEAR",
+      "company_name": "Donear Industries Ltd",
+      "market_cap_cr": 418.0,
+      "total_debt_cr": 427.0,
+      "debt_to_mcap": 1.02,
+      "annual_sales_cr": 928.0,
+      "sales_to_mcap_multiple": 2.22,
+      "ps_ratio": 0.45,
+      "catalyst": "P/S: 0.45x + Positive EBITDA + Debt/MCap: 1.02x (Safe)"
+    },
+    {
       "symbol": "GULPOLY",
       "company_name": "Gulshan Polyols Ltd",
-      "market_cap_cr": 1018.0,
+      "market_cap_cr": 1020.0,
       "total_debt_cr": 453.0,
       "debt_to_mcap": 0.44,
       "annual_sales_cr": 2260.0,
@@ -1000,40 +1064,40 @@
     {
       "symbol": "ANDHRSUGAR",
       "company_name": "Andhra Sugars Ltd",
-      "market_cap_cr": 1149.0,
+      "market_cap_cr": 1153.0,
       "total_debt_cr": 1.0,
       "debt_to_mcap": 0.0,
       "annual_sales_cr": 2493.0,
-      "sales_to_mcap_multiple": 2.17,
+      "sales_to_mcap_multiple": 2.16,
       "ps_ratio": 0.46,
       "catalyst": "P/S: 0.46x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
     },
     {
+      "symbol": "MUKANDLTD",
+      "company_name": "Mukand Ltd",
+      "market_cap_cr": 2377.0,
+      "total_debt_cr": 1697.0,
+      "debt_to_mcap": 0.71,
+      "annual_sales_cr": 5121.0,
+      "sales_to_mcap_multiple": 2.15,
+      "ps_ratio": 0.46,
+      "catalyst": "P/S: 0.46x + Positive EBITDA + Debt/MCap: 0.71x (Safe)"
+    },
+    {
       "symbol": "UDS",
       "company_name": "Updater Services Ltd",
-      "market_cap_cr": 1387.0,
+      "market_cap_cr": 1401.0,
       "total_debt_cr": 45.0,
       "debt_to_mcap": 0.03,
       "annual_sales_cr": 3004.0,
-      "sales_to_mcap_multiple": 2.17,
-      "ps_ratio": 0.46,
-      "catalyst": "P/S: 0.46x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
-    },
-    {
-      "symbol": "MUKANDLTD",
-      "company_name": "Mukand Ltd",
-      "market_cap_cr": 2373.0,
-      "total_debt_cr": 1697.0,
-      "debt_to_mcap": 0.72,
-      "annual_sales_cr": 5121.0,
-      "sales_to_mcap_multiple": 2.16,
-      "ps_ratio": 0.46,
-      "catalyst": "P/S: 0.46x + Positive EBITDA + Debt/MCap: 0.72x (Safe)"
+      "sales_to_mcap_multiple": 2.14,
+      "ps_ratio": 0.47,
+      "catalyst": "P/S: 0.47x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
     },
     {
       "symbol": "GSFC",
       "company_name": "Gujarat State Fertilizers & Chemicals Ltd",
-      "market_cap_cr": 5912.0,
+      "market_cap_cr": 5897.0,
       "total_debt_cr": 27.0,
       "debt_to_mcap": 0.0,
       "annual_sales_cr": 12344.0,
@@ -1055,40 +1119,51 @@
     {
       "symbol": "IPRINGLTD",
       "company_name": "IP Rings Ltd",
-      "market_cap_cr": 169.0,
+      "market_cap_cr": 173.0,
       "total_debt_cr": 123.0,
-      "debt_to_mcap": 0.73,
+      "debt_to_mcap": 0.71,
       "annual_sales_cr": 351.0,
-      "sales_to_mcap_multiple": 2.08,
-      "ps_ratio": 0.48,
-      "catalyst": "P/S: 0.48x + Positive EBITDA + Debt/MCap: 0.73x (Safe)"
+      "sales_to_mcap_multiple": 2.03,
+      "ps_ratio": 0.49,
+      "catalyst": "P/S: 0.49x + Positive EBITDA + Debt/MCap: 0.71x (Safe)"
     },
     {
       "symbol": "PARNAXLAB",
       "company_name": "Parnax Lab Ltd",
-      "market_cap_cr": 123.0,
+      "market_cap_cr": 125.0,
       "total_debt_cr": 83.0,
-      "debt_to_mcap": 0.67,
+      "debt_to_mcap": 0.66,
       "annual_sales_cr": 252.0,
-      "sales_to_mcap_multiple": 2.05,
-      "ps_ratio": 0.49,
-      "catalyst": "P/S: 0.49x + Positive EBITDA + Debt/MCap: 0.67x (Safe)"
+      "sales_to_mcap_multiple": 2.02,
+      "ps_ratio": 0.5,
+      "catalyst": "P/S: 0.5x + Positive EBITDA + Debt/MCap: 0.66x (Safe)"
     },
     {
       "symbol": "SHBAJRG",
       "company_name": "Shri Bajrang Alliance Ltd",
-      "market_cap_cr": 141.0,
+      "market_cap_cr": 142.0,
       "total_debt_cr": 104.0,
-      "debt_to_mcap": 0.74,
+      "debt_to_mcap": 0.73,
       "annual_sales_cr": 287.0,
-      "sales_to_mcap_multiple": 2.04,
+      "sales_to_mcap_multiple": 2.02,
       "ps_ratio": 0.49,
-      "catalyst": "P/S: 0.49x + Positive EBITDA + Debt/MCap: 0.74x (Safe)"
+      "catalyst": "P/S: 0.49x + Positive EBITDA + Debt/MCap: 0.73x (Safe)"
+    },
+    {
+      "symbol": "BCONCEPTS",
+      "company_name": "Brand Concepts Ltd",
+      "market_cap_cr": 177.0,
+      "total_debt_cr": 182.0,
+      "debt_to_mcap": 1.03,
+      "annual_sales_cr": 356.0,
+      "sales_to_mcap_multiple": 2.01,
+      "ps_ratio": 0.5,
+      "catalyst": "P/S: 0.5x + Positive EBITDA + Debt/MCap: 1.03x (Safe)"
     },
     {
       "symbol": "INDIAGLYCO",
       "company_name": "India Glycols Ltd",
-      "market_cap_cr": 2135.0,
+      "market_cap_cr": 2140.0,
       "total_debt_cr": 1691.0,
       "debt_to_mcap": 0.79,
       "annual_sales_cr": 4301.0,
@@ -1099,35 +1174,13 @@
     {
       "symbol": "GILLANDERS",
       "company_name": "Gillanders Arbuthnot & Company Ltd",
-      "market_cap_cr": 217.0,
+      "market_cap_cr": 219.0,
       "total_debt_cr": 149.0,
-      "debt_to_mcap": 0.69,
+      "debt_to_mcap": 0.68,
       "annual_sales_cr": 434.0,
-      "sales_to_mcap_multiple": 2.0,
+      "sales_to_mcap_multiple": 1.98,
       "ps_ratio": 0.5,
-      "catalyst": "P/S: 0.5x + Positive EBITDA + Debt/MCap: 0.69x (Safe)"
-    },
-    {
-      "symbol": "BCONCEPTS",
-      "company_name": "Brand Concepts Ltd",
-      "market_cap_cr": 179.0,
-      "total_debt_cr": 182.0,
-      "debt_to_mcap": 1.02,
-      "annual_sales_cr": 356.0,
-      "sales_to_mcap_multiple": 1.99,
-      "ps_ratio": 0.5,
-      "catalyst": "P/S: 0.5x + Positive EBITDA + Debt/MCap: 1.02x (Safe)"
-    },
-    {
-      "symbol": "BLIL",
-      "company_name": "Balmer Lawrie Investment Ltd",
-      "market_cap_cr": 1429.0,
-      "total_debt_cr": 220.0,
-      "debt_to_mcap": 0.15,
-      "annual_sales_cr": 2795.0,
-      "sales_to_mcap_multiple": 1.96,
-      "ps_ratio": 0.51,
-      "catalyst": "P/S: 0.51x + Positive EBITDA + Debt/MCap: 0.15x (Safe)"
+      "catalyst": "P/S: 0.5x + Positive EBITDA + Debt/MCap: 0.68x (Safe)"
     },
     {
       "symbol": "ZODIAC",
@@ -1141,6 +1194,17 @@
       "catalyst": "P/S: 0.51x + Positive EBITDA + Debt/MCap: 0.81x (Safe)"
     },
     {
+      "symbol": "BLIL",
+      "company_name": "Balmer Lawrie Investment Ltd",
+      "market_cap_cr": 1430.0,
+      "total_debt_cr": 220.0,
+      "debt_to_mcap": 0.15,
+      "annual_sales_cr": 2795.0,
+      "sales_to_mcap_multiple": 1.95,
+      "ps_ratio": 0.51,
+      "catalyst": "P/S: 0.51x + Positive EBITDA + Debt/MCap: 0.15x (Safe)"
+    },
+    {
       "symbol": "NCLIND",
       "company_name": "NCL Industries Ltd",
       "market_cap_cr": 738.0,
@@ -1152,31 +1216,9 @@
       "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.32x (Safe)"
     },
     {
-      "symbol": "ROSSELLIND",
-      "company_name": "Rossell India Ltd",
-      "market_cap_cr": 191.0,
-      "total_debt_cr": 194.0,
-      "debt_to_mcap": 1.02,
-      "annual_sales_cr": 371.0,
-      "sales_to_mcap_multiple": 1.94,
-      "ps_ratio": 0.51,
-      "catalyst": "P/S: 0.51x + Positive EBITDA + Debt/MCap: 1.02x (Safe)"
-    },
-    {
-      "symbol": "WCIL",
-      "company_name": "Western Carriers (India) Ltd",
-      "market_cap_cr": 970.0,
-      "total_debt_cr": 226.0,
-      "debt_to_mcap": 0.23,
-      "annual_sales_cr": 1878.0,
-      "sales_to_mcap_multiple": 1.94,
-      "ps_ratio": 0.52,
-      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
-    },
-    {
       "symbol": "INDORAMA",
       "company_name": "Indo Rama Synthetics (India) Ltd",
-      "market_cap_cr": 2417.0,
+      "market_cap_cr": 2409.0,
       "total_debt_cr": 861.0,
       "debt_to_mcap": 0.36,
       "annual_sales_cr": 4661.0,
@@ -1185,20 +1227,20 @@
       "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.36x (Safe)"
     },
     {
-      "symbol": "RMC",
-      "company_name": "RMC Switchgears Ltd",
-      "market_cap_cr": 208.0,
-      "total_debt_cr": 105.0,
-      "debt_to_mcap": 0.5,
-      "annual_sales_cr": 402.0,
+      "symbol": "WCIL",
+      "company_name": "Western Carriers (India) Ltd",
+      "market_cap_cr": 972.0,
+      "total_debt_cr": 226.0,
+      "debt_to_mcap": 0.23,
+      "annual_sales_cr": 1878.0,
       "sales_to_mcap_multiple": 1.93,
       "ps_ratio": 0.52,
-      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.5x (Safe)"
+      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
     },
     {
       "symbol": "RITCO",
       "company_name": "Ritco Logistics Ltd",
-      "market_cap_cr": 786.0,
+      "market_cap_cr": 787.0,
       "total_debt_cr": 474.0,
       "debt_to_mcap": 0.6,
       "annual_sales_cr": 1510.0,
@@ -1207,26 +1249,37 @@
       "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.6x (Safe)"
     },
     {
+      "symbol": "RMC",
+      "company_name": "RMC Switchgears Ltd",
+      "market_cap_cr": 209.0,
+      "total_debt_cr": 105.0,
+      "debt_to_mcap": 0.5,
+      "annual_sales_cr": 402.0,
+      "sales_to_mcap_multiple": 1.92,
+      "ps_ratio": 0.52,
+      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.5x (Safe)"
+    },
+    {
+      "symbol": "MLKFOOD",
+      "company_name": "Milkfood Ltd",
+      "market_cap_cr": 219.0,
+      "total_debt_cr": 128.0,
+      "debt_to_mcap": 0.58,
+      "annual_sales_cr": 419.0,
+      "sales_to_mcap_multiple": 1.91,
+      "ps_ratio": 0.52,
+      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.58x (Safe)"
+    },
+    {
       "symbol": "SWSOLAR",
       "company_name": "Sterling & Wilson Renewable Energy Ltd",
-      "market_cap_cr": 3733.0,
+      "market_cap_cr": 3742.0,
       "total_debt_cr": 943.0,
       "debt_to_mcap": 0.25,
       "annual_sales_cr": 7155.0,
-      "sales_to_mcap_multiple": 1.92,
-      "ps_ratio": 0.52,
-      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
-    },
-    {
-      "symbol": "NATHBIOGEN",
-      "company_name": "Nath Bio-Genes (India) Ltd",
-      "market_cap_cr": 257.0,
-      "total_debt_cr": 138.0,
-      "debt_to_mcap": 0.54,
-      "annual_sales_cr": 490.0,
       "sales_to_mcap_multiple": 1.91,
       "ps_ratio": 0.52,
-      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.54x (Safe)"
+      "catalyst": "P/S: 0.52x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
     },
     {
       "symbol": "BCPL",
@@ -1240,15 +1293,26 @@
       "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.64x (Safe)"
     },
     {
-      "symbol": "MLKFOOD",
-      "company_name": "Milkfood Ltd",
-      "market_cap_cr": 220.0,
-      "total_debt_cr": 128.0,
-      "debt_to_mcap": 0.58,
-      "annual_sales_cr": 419.0,
+      "symbol": "NATHBIOGEN",
+      "company_name": "Nath Bio-Genes (India) Ltd",
+      "market_cap_cr": 258.0,
+      "total_debt_cr": 138.0,
+      "debt_to_mcap": 0.53,
+      "annual_sales_cr": 490.0,
       "sales_to_mcap_multiple": 1.9,
       "ps_ratio": 0.53,
-      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.58x (Safe)"
+      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.53x (Safe)"
+    },
+    {
+      "symbol": "ROSSELLIND",
+      "company_name": "Rossell India Ltd",
+      "market_cap_cr": 195.0,
+      "total_debt_cr": 194.0,
+      "debt_to_mcap": 0.99,
+      "annual_sales_cr": 371.0,
+      "sales_to_mcap_multiple": 1.9,
+      "ps_ratio": 0.53,
+      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.99x (Safe)"
     },
     {
       "symbol": "AIROLAM",
@@ -1275,57 +1339,46 @@
     {
       "symbol": "JAYBARMARU",
       "company_name": "Jay Bharat Maruti Ltd",
-      "market_cap_cr": 1401.0,
+      "market_cap_cr": 1403.0,
       "total_debt_cr": 531.0,
       "debt_to_mcap": 0.38,
       "annual_sales_cr": 2621.0,
       "sales_to_mcap_multiple": 1.87,
-      "ps_ratio": 0.53,
-      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.38x (Safe)"
+      "ps_ratio": 0.54,
+      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.38x (Safe)"
     },
     {
       "symbol": "MAHLOG",
       "company_name": "Mahindra Logistics Ltd",
-      "market_cap_cr": 3949.0,
+      "market_cap_cr": 3946.0,
       "total_debt_cr": 650.0,
       "debt_to_mcap": 0.16,
       "annual_sales_cr": 7378.0,
       "sales_to_mcap_multiple": 1.87,
-      "ps_ratio": 0.54,
-      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
+      "ps_ratio": 0.53,
+      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
       "symbol": "PPAP",
       "company_name": "PPAP Automotive Ltd",
-      "market_cap_cr": 325.0,
+      "market_cap_cr": 324.0,
       "total_debt_cr": 207.0,
       "debt_to_mcap": 0.64,
       "annual_sales_cr": 607.0,
       "sales_to_mcap_multiple": 1.87,
-      "ps_ratio": 0.54,
-      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.64x (Safe)"
+      "ps_ratio": 0.53,
+      "catalyst": "P/S: 0.53x + Positive EBITDA + Debt/MCap: 0.64x (Safe)"
     },
     {
       "symbol": "CAPACITE",
       "company_name": "Capacite Infraprojects Ltd",
-      "market_cap_cr": 1429.0,
+      "market_cap_cr": 1428.0,
       "total_debt_cr": 483.0,
       "debt_to_mcap": 0.34,
       "annual_sales_cr": 2662.0,
       "sales_to_mcap_multiple": 1.86,
       "ps_ratio": 0.54,
       "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
-    },
-    {
-      "symbol": "ITL",
-      "company_name": "ITL Industries Ltd",
-      "market_cap_cr": 109.0,
-      "total_debt_cr": 23.0,
-      "debt_to_mcap": 0.21,
-      "annual_sales_cr": 203.0,
-      "sales_to_mcap_multiple": 1.86,
-      "ps_ratio": 0.54,
-      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.21x (Safe)"
     },
     {
       "symbol": "KRITI",
@@ -1339,26 +1392,26 @@
       "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.31x (Safe)"
     },
     {
+      "symbol": "MEGASTAR",
+      "company_name": "Megastar Foods Ltd",
+      "market_cap_cr": 302.0,
+      "total_debt_cr": 131.0,
+      "debt_to_mcap": 0.43,
+      "annual_sales_cr": 558.0,
+      "sales_to_mcap_multiple": 1.85,
+      "ps_ratio": 0.54,
+      "catalyst": "P/S: 0.54x + Positive EBITDA + Debt/MCap: 0.43x (Safe)"
+    },
+    {
       "symbol": "CMRGREEN",
       "company_name": "CMR Green Technologies Ltd",
-      "market_cap_cr": 4762.0,
+      "market_cap_cr": 4761.0,
       "total_debt_cr": 1426.0,
       "debt_to_mcap": 0.3,
       "annual_sales_cr": 8640.0,
       "sales_to_mcap_multiple": 1.81,
       "ps_ratio": 0.55,
       "catalyst": "P/S: 0.55x + Positive EBITDA + Debt/MCap: 0.3x (Safe)"
-    },
-    {
-      "symbol": "MEGASTAR",
-      "company_name": "Megastar Foods Ltd",
-      "market_cap_cr": 308.0,
-      "total_debt_cr": 131.0,
-      "debt_to_mcap": 0.43,
-      "annual_sales_cr": 558.0,
-      "sales_to_mcap_multiple": 1.81,
-      "ps_ratio": 0.55,
-      "catalyst": "P/S: 0.55x + Positive EBITDA + Debt/MCap: 0.43x (Safe)"
     },
     {
       "symbol": "VASUPRADA",
@@ -1374,11 +1427,11 @@
     {
       "symbol": "HARRMALAYA",
       "company_name": "Harrisons Malayalam Ltd",
-      "market_cap_cr": 308.0,
+      "market_cap_cr": 307.0,
       "total_debt_cr": 111.0,
       "debt_to_mcap": 0.36,
       "annual_sales_cr": 548.0,
-      "sales_to_mcap_multiple": 1.78,
+      "sales_to_mcap_multiple": 1.79,
       "ps_ratio": 0.56,
       "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.36x (Safe)"
     },
@@ -1394,6 +1447,17 @@
       "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
     },
     {
+      "symbol": "SKYWAYS",
+      "company_name": "Skyways Air Services Ltd",
+      "market_cap_cr": 1582.0,
+      "total_debt_cr": 627.0,
+      "debt_to_mcap": 0.4,
+      "annual_sales_cr": 2813.0,
+      "sales_to_mcap_multiple": 1.78,
+      "ps_ratio": 0.56,
+      "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
+    },
+    {
       "symbol": "WEWIN",
       "company_name": "We Win Ltd",
       "market_cap_cr": 52.6,
@@ -1405,37 +1469,15 @@
       "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.06x (Safe)"
     },
     {
-      "symbol": "KHAITANLTD",
-      "company_name": "Khaitan (India) Ltd",
-      "market_cap_cr": 70.2,
-      "total_debt_cr": 5.0,
-      "debt_to_mcap": 0.07,
-      "annual_sales_cr": 124.0,
+      "symbol": "PACIFICI",
+      "company_name": "Pacific Industries Ltd",
+      "market_cap_cr": 95.7,
+      "total_debt_cr": 59.0,
+      "debt_to_mcap": 0.62,
+      "annual_sales_cr": 169.0,
       "sales_to_mcap_multiple": 1.77,
       "ps_ratio": 0.57,
-      "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
-    },
-    {
-      "symbol": "SKYWAYS",
-      "company_name": "Skyways Air Services Ltd",
-      "market_cap_cr": 1586.0,
-      "total_debt_cr": 627.0,
-      "debt_to_mcap": 0.4,
-      "annual_sales_cr": 2813.0,
-      "sales_to_mcap_multiple": 1.77,
-      "ps_ratio": 0.56,
-      "catalyst": "P/S: 0.56x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
-    },
-    {
-      "symbol": "IGCL",
-      "company_name": "Indogulf Cropsciences Ltd",
-      "market_cap_cr": 390.0,
-      "total_debt_cr": 183.0,
-      "debt_to_mcap": 0.47,
-      "annual_sales_cr": 684.0,
-      "sales_to_mcap_multiple": 1.75,
-      "ps_ratio": 0.57,
-      "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.47x (Safe)"
+      "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.62x (Safe)"
     },
     {
       "symbol": "INNOVISION",
@@ -1449,9 +1491,20 @@
       "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.21x (Safe)"
     },
     {
+      "symbol": "IGCL",
+      "company_name": "Indogulf Cropsciences Ltd",
+      "market_cap_cr": 393.0,
+      "total_debt_cr": 183.0,
+      "debt_to_mcap": 0.47,
+      "annual_sales_cr": 684.0,
+      "sales_to_mcap_multiple": 1.74,
+      "ps_ratio": 0.57,
+      "catalyst": "P/S: 0.57x + Positive EBITDA + Debt/MCap: 0.47x (Safe)"
+    },
+    {
       "symbol": "GANDHAR",
       "company_name": "Gandhar Oil Refinery (India) Ltd",
-      "market_cap_cr": 2917.0,
+      "market_cap_cr": 2915.0,
       "total_debt_cr": 315.0,
       "debt_to_mcap": 0.11,
       "annual_sales_cr": 5052.0,
@@ -1473,7 +1526,7 @@
     {
       "symbol": "SENCO",
       "company_name": "Senco Gold Ltd",
-      "market_cap_cr": 5587.0,
+      "market_cap_cr": 5589.0,
       "total_debt_cr": 2699.0,
       "debt_to_mcap": 0.48,
       "annual_sales_cr": 9660.0,
@@ -1484,13 +1537,24 @@
     {
       "symbol": "ADSL",
       "company_name": "Allied Digital Services Ltd",
-      "market_cap_cr": 585.0,
+      "market_cap_cr": 586.0,
       "total_debt_cr": 136.0,
       "debt_to_mcap": 0.23,
       "annual_sales_cr": 1009.0,
       "sales_to_mcap_multiple": 1.72,
       "ps_ratio": 0.58,
       "catalyst": "P/S: 0.58x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
+    },
+    {
+      "symbol": "ITL",
+      "company_name": "ITL Industries Ltd",
+      "market_cap_cr": 118.0,
+      "total_debt_cr": 23.0,
+      "debt_to_mcap": 0.19,
+      "annual_sales_cr": 203.0,
+      "sales_to_mcap_multiple": 1.72,
+      "ps_ratio": 0.58,
+      "catalyst": "P/S: 0.58x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
       "symbol": "RICOAUTO",
@@ -1506,13 +1570,24 @@
     {
       "symbol": "JKTYRE",
       "company_name": "JK Tyre & Industries Ltd",
-      "market_cap_cr": 9573.0,
+      "market_cap_cr": 9574.0,
       "total_debt_cr": 4882.0,
       "debt_to_mcap": 0.51,
       "annual_sales_cr": 16404.0,
       "sales_to_mcap_multiple": 1.71,
       "ps_ratio": 0.58,
       "catalyst": "P/S: 0.58x + Positive EBITDA + Debt/MCap: 0.51x (Safe)"
+    },
+    {
+      "symbol": "KHAITANLTD",
+      "company_name": "Khaitan (India) Ltd",
+      "market_cap_cr": 72.6,
+      "total_debt_cr": 5.0,
+      "debt_to_mcap": 0.07,
+      "annual_sales_cr": 124.0,
+      "sales_to_mcap_multiple": 1.71,
+      "ps_ratio": 0.59,
+      "catalyst": "P/S: 0.59x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
     },
     {
       "symbol": "THOMASCOOK",
@@ -1526,20 +1601,20 @@
       "catalyst": "P/S: 0.58x + Positive EBITDA + Debt/MCap: 0.11x (Safe)"
     },
     {
-      "symbol": "SCHAND",
-      "company_name": "S Chand & Company Ltd",
-      "market_cap_cr": 476.0,
-      "total_debt_cr": 136.0,
-      "debt_to_mcap": 0.29,
-      "annual_sales_cr": 811.0,
+      "symbol": "SHIVATEX",
+      "company_name": "Shiva Texyarn Ltd",
+      "market_cap_cr": 199.0,
+      "total_debt_cr": 73.0,
+      "debt_to_mcap": 0.37,
+      "annual_sales_cr": 338.0,
       "sales_to_mcap_multiple": 1.7,
       "ps_ratio": 0.59,
-      "catalyst": "P/S: 0.59x + Positive EBITDA + Debt/MCap: 0.29x (Safe)"
+      "catalyst": "P/S: 0.59x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
     },
     {
       "symbol": "SURYAROSNI",
       "company_name": "Surya Roshni Ltd",
-      "market_cap_cr": 4707.0,
+      "market_cap_cr": 4697.0,
       "total_debt_cr": 80.0,
       "debt_to_mcap": 0.02,
       "annual_sales_cr": 7982.0,
@@ -1548,15 +1623,26 @@
       "catalyst": "P/S: 0.59x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
     },
     {
-      "symbol": "MANAKSTEEL",
-      "company_name": "Manaksia Steels Ltd",
-      "market_cap_cr": 739.0,
-      "total_debt_cr": 151.0,
-      "debt_to_mcap": 0.2,
-      "annual_sales_cr": 1241.0,
+      "symbol": "SCHAND",
+      "company_name": "S Chand & Company Ltd",
+      "market_cap_cr": 479.0,
+      "total_debt_cr": 136.0,
+      "debt_to_mcap": 0.28,
+      "annual_sales_cr": 811.0,
+      "sales_to_mcap_multiple": 1.69,
+      "ps_ratio": 0.59,
+      "catalyst": "P/S: 0.59x + Positive EBITDA + Debt/MCap: 0.28x (Safe)"
+    },
+    {
+      "symbol": "GODAVARIB",
+      "company_name": "Godavari Biorefineries Ltd",
+      "market_cap_cr": 1199.0,
+      "total_debt_cr": 531.0,
+      "debt_to_mcap": 0.44,
+      "annual_sales_cr": 2013.0,
       "sales_to_mcap_multiple": 1.68,
       "ps_ratio": 0.6,
-      "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
+      "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.44x (Safe)"
     },
     {
       "symbol": "ARMEE",
@@ -1570,17 +1656,6 @@
       "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
     },
     {
-      "symbol": "GODAVARIB",
-      "company_name": "Godavari Biorefineries Ltd",
-      "market_cap_cr": 1205.0,
-      "total_debt_cr": 531.0,
-      "debt_to_mcap": 0.44,
-      "annual_sales_cr": 2013.0,
-      "sales_to_mcap_multiple": 1.67,
-      "ps_ratio": 0.6,
-      "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.44x (Safe)"
-    },
-    {
       "symbol": "JKIL",
       "company_name": "J Kumar Infraprojects Ltd",
       "market_cap_cr": 3442.0,
@@ -1592,37 +1667,26 @@
       "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.18x (Safe)"
     },
     {
-      "symbol": "PACIFICI",
-      "company_name": "Pacific Industries Ltd",
-      "market_cap_cr": 101.0,
-      "total_debt_cr": 59.0,
-      "debt_to_mcap": 0.58,
-      "annual_sales_cr": 169.0,
-      "sales_to_mcap_multiple": 1.67,
+      "symbol": "MANAKSTEEL",
+      "company_name": "Manaksia Steels Ltd",
+      "market_cap_cr": 750.0,
+      "total_debt_cr": 151.0,
+      "debt_to_mcap": 0.2,
+      "annual_sales_cr": 1241.0,
+      "sales_to_mcap_multiple": 1.65,
       "ps_ratio": 0.6,
-      "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.58x (Safe)"
+      "catalyst": "P/S: 0.6x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
     },
     {
       "symbol": "DHAMPURSUG",
       "company_name": "Dhampur Sugar Mills Ltd",
-      "market_cap_cr": 1220.0,
+      "market_cap_cr": 1219.0,
       "total_debt_cr": 899.0,
       "debt_to_mcap": 0.74,
       "annual_sales_cr": 1999.0,
       "sales_to_mcap_multiple": 1.64,
       "ps_ratio": 0.61,
       "catalyst": "P/S: 0.61x + Positive EBITDA + Debt/MCap: 0.74x (Safe)"
-    },
-    {
-      "symbol": "HARIOMPIPE",
-      "company_name": "Hariom Pipe Industries Ltd",
-      "market_cap_cr": 999.0,
-      "total_debt_cr": 404.0,
-      "debt_to_mcap": 0.4,
-      "annual_sales_cr": 1635.0,
-      "sales_to_mcap_multiple": 1.64,
-      "ps_ratio": 0.61,
-      "catalyst": "P/S: 0.61x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
     },
     {
       "symbol": "SONATSOFTW",
@@ -1636,20 +1700,20 @@
       "catalyst": "P/S: 0.61x + Positive EBITDA + Debt/MCap: 0.11x (Safe)"
     },
     {
-      "symbol": "INA",
-      "company_name": "Insolation Energy Ltd",
-      "market_cap_cr": 1553.0,
-      "total_debt_cr": 888.0,
-      "debt_to_mcap": 0.57,
-      "annual_sales_cr": 2525.0,
+      "symbol": "HARIOMPIPE",
+      "company_name": "Hariom Pipe Industries Ltd",
+      "market_cap_cr": 1001.0,
+      "total_debt_cr": 404.0,
+      "debt_to_mcap": 0.4,
+      "annual_sales_cr": 1635.0,
       "sales_to_mcap_multiple": 1.63,
-      "ps_ratio": 0.62,
-      "catalyst": "P/S: 0.62x + Positive EBITDA + Debt/MCap: 0.57x (Safe)"
+      "ps_ratio": 0.61,
+      "catalyst": "P/S: 0.61x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
     },
     {
       "symbol": "ROUTE",
       "company_name": "Route Mobile Ltd",
-      "market_cap_cr": 2767.0,
+      "market_cap_cr": 2768.0,
       "total_debt_cr": 42.0,
       "debt_to_mcap": 0.02,
       "annual_sales_cr": 4509.0,
@@ -1658,26 +1722,48 @@
       "catalyst": "P/S: 0.61x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
     },
     {
-      "symbol": "SHIVATEX",
-      "company_name": "Shiva Texyarn Ltd",
-      "market_cap_cr": 209.0,
-      "total_debt_cr": 73.0,
-      "debt_to_mcap": 0.35,
-      "annual_sales_cr": 338.0,
+      "symbol": "INA",
+      "company_name": "Insolation Energy Ltd",
+      "market_cap_cr": 1555.0,
+      "total_debt_cr": 888.0,
+      "debt_to_mcap": 0.57,
+      "annual_sales_cr": 2525.0,
       "sales_to_mcap_multiple": 1.62,
       "ps_ratio": 0.62,
-      "catalyst": "P/S: 0.62x + Positive EBITDA + Debt/MCap: 0.35x (Safe)"
+      "catalyst": "P/S: 0.62x + Positive EBITDA + Debt/MCap: 0.57x (Safe)"
     },
     {
       "symbol": "PENIND",
       "company_name": "Pennar Industries Ltd",
-      "market_cap_cr": 2269.0,
+      "market_cap_cr": 2265.0,
       "total_debt_cr": 1162.0,
       "debt_to_mcap": 0.51,
       "annual_sales_cr": 3645.0,
       "sales_to_mcap_multiple": 1.61,
       "ps_ratio": 0.62,
       "catalyst": "P/S: 0.62x + Positive EBITDA + Debt/MCap: 0.51x (Safe)"
+    },
+    {
+      "symbol": "KANORICHEM",
+      "company_name": "Kanoria Chemicals & Industries Ltd",
+      "market_cap_cr": 779.0,
+      "total_debt_cr": 291.0,
+      "debt_to_mcap": 0.37,
+      "annual_sales_cr": 1240.0,
+      "sales_to_mcap_multiple": 1.59,
+      "ps_ratio": 0.63,
+      "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
+    },
+    {
+      "symbol": "MANORG",
+      "company_name": "Mangalam Organics Ltd",
+      "market_cap_cr": 413.0,
+      "total_debt_cr": 359.0,
+      "debt_to_mcap": 0.87,
+      "annual_sales_cr": 655.0,
+      "sales_to_mcap_multiple": 1.59,
+      "ps_ratio": 0.63,
+      "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.87x (Safe)"
     },
     {
       "symbol": "UTTAMSUGAR",
@@ -1691,17 +1777,6 @@
       "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.53x (Safe)"
     },
     {
-      "symbol": "KANORICHEM",
-      "company_name": "Kanoria Chemicals & Industries Ltd",
-      "market_cap_cr": 783.0,
-      "total_debt_cr": 291.0,
-      "debt_to_mcap": 0.37,
-      "annual_sales_cr": 1240.0,
-      "sales_to_mcap_multiple": 1.58,
-      "ps_ratio": 0.63,
-      "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
-    },
-    {
       "symbol": "METROGLOBL",
       "company_name": "Metroglobal Ltd",
       "market_cap_cr": 159.0,
@@ -1713,59 +1788,26 @@
       "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
     },
     {
-      "symbol": "EUROBOND",
-      "company_name": "Euro Panel Products Ltd",
-      "market_cap_cr": 330.0,
-      "total_debt_cr": 161.0,
-      "debt_to_mcap": 0.49,
-      "annual_sales_cr": 518.0,
-      "sales_to_mcap_multiple": 1.57,
-      "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.49x (Safe)"
-    },
-    {
-      "symbol": "RTSPOWR",
-      "company_name": "RTS Power Corporation Ltd",
-      "market_cap_cr": 99.2,
-      "total_debt_cr": 31.0,
-      "debt_to_mcap": 0.31,
-      "annual_sales_cr": 156.0,
-      "sales_to_mcap_multiple": 1.57,
-      "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.31x (Safe)"
-    },
-    {
       "symbol": "TNPETRO",
       "company_name": "Tamil Nadu Petro Products Ltd",
-      "market_cap_cr": 1134.0,
+      "market_cap_cr": 1128.0,
       "total_debt_cr": 465.0,
       "debt_to_mcap": 0.41,
       "annual_sales_cr": 1783.0,
-      "sales_to_mcap_multiple": 1.57,
-      "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
+      "sales_to_mcap_multiple": 1.58,
+      "ps_ratio": 0.63,
+      "catalyst": "P/S: 0.63x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
     },
     {
       "symbol": "KHADIM",
       "company_name": "Khadim India Ltd",
-      "market_cap_cr": 224.0,
+      "market_cap_cr": 223.0,
       "total_debt_cr": 249.0,
-      "debt_to_mcap": 1.11,
+      "debt_to_mcap": 1.12,
       "annual_sales_cr": 349.0,
-      "sales_to_mcap_multiple": 1.56,
+      "sales_to_mcap_multiple": 1.57,
       "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 1.11x (Safe)"
-    },
-    {
-      "symbol": "MANORG",
-      "company_name": "Mangalam Organics Ltd",
-      "market_cap_cr": 421.0,
-      "total_debt_cr": 359.0,
-      "debt_to_mcap": 0.85,
-      "annual_sales_cr": 655.0,
-      "sales_to_mcap_multiple": 1.56,
-      "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.85x (Safe)"
+      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 1.12x (Safe)"
     },
     {
       "symbol": "VRAJ",
@@ -1779,17 +1821,6 @@
       "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
     },
     {
-      "symbol": "BEEKAY",
-      "company_name": "Beekay Steel Industries Ltd",
-      "market_cap_cr": 816.0,
-      "total_debt_cr": 332.0,
-      "debt_to_mcap": 0.41,
-      "annual_sales_cr": 1267.0,
-      "sales_to_mcap_multiple": 1.55,
-      "ps_ratio": 0.64,
-      "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
-    },
-    {
       "symbol": "SAGCEM",
       "company_name": "Sagar Cements Ltd",
       "market_cap_cr": 1727.0,
@@ -1799,17 +1830,6 @@
       "sales_to_mcap_multiple": 1.55,
       "ps_ratio": 0.64,
       "catalyst": "P/S: 0.64x + Positive EBITDA + Debt/MCap: 0.99x (Safe)"
-    },
-    {
-      "symbol": "VETO",
-      "company_name": "Veto Switchgears & Cables Ltd",
-      "market_cap_cr": 266.0,
-      "total_debt_cr": 21.0,
-      "debt_to_mcap": 0.08,
-      "annual_sales_cr": 411.0,
-      "sales_to_mcap_multiple": 1.55,
-      "ps_ratio": 0.65,
-      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.08x (Safe)"
     },
     {
       "symbol": "APCL",
@@ -1823,15 +1843,59 @@
       "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 1.05x (Safe)"
     },
     {
+      "symbol": "BEEKAY",
+      "company_name": "Beekay Steel Industries Ltd",
+      "market_cap_cr": 824.0,
+      "total_debt_cr": 332.0,
+      "debt_to_mcap": 0.4,
+      "annual_sales_cr": 1267.0,
+      "sales_to_mcap_multiple": 1.54,
+      "ps_ratio": 0.65,
+      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
+    },
+    {
+      "symbol": "EUROBOND",
+      "company_name": "Euro Panel Products Ltd",
+      "market_cap_cr": 336.0,
+      "total_debt_cr": 161.0,
+      "debt_to_mcap": 0.48,
+      "annual_sales_cr": 518.0,
+      "sales_to_mcap_multiple": 1.54,
+      "ps_ratio": 0.65,
+      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.48x (Safe)"
+    },
+    {
+      "symbol": "RTSPOWR",
+      "company_name": "RTS Power Corporation Ltd",
+      "market_cap_cr": 101.0,
+      "total_debt_cr": 31.0,
+      "debt_to_mcap": 0.31,
+      "annual_sales_cr": 156.0,
+      "sales_to_mcap_multiple": 1.54,
+      "ps_ratio": 0.65,
+      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.31x (Safe)"
+    },
+    {
+      "symbol": "VETO",
+      "company_name": "Veto Switchgears & Cables Ltd",
+      "market_cap_cr": 267.0,
+      "total_debt_cr": 21.0,
+      "debt_to_mcap": 0.08,
+      "annual_sales_cr": 411.0,
+      "sales_to_mcap_multiple": 1.54,
+      "ps_ratio": 0.65,
+      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.08x (Safe)"
+    },
+    {
       "symbol": "IFGLEXPOR",
       "company_name": "IFGL Refractories Ltd",
-      "market_cap_cr": 1280.0,
+      "market_cap_cr": 1278.0,
       "total_debt_cr": 209.0,
       "debt_to_mcap": 0.16,
       "annual_sales_cr": 1953.0,
       "sales_to_mcap_multiple": 1.53,
-      "ps_ratio": 0.66,
-      "catalyst": "P/S: 0.66x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
+      "ps_ratio": 0.65,
+      "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
       "symbol": "INSPIRISYS",
@@ -1843,17 +1907,6 @@
       "sales_to_mcap_multiple": 1.53,
       "ps_ratio": 0.65,
       "catalyst": "P/S: 0.65x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
-    },
-    {
-      "symbol": "RELIABLE",
-      "company_name": "Reliable Data Services Ltd",
-      "market_cap_cr": 136.0,
-      "total_debt_cr": 46.0,
-      "debt_to_mcap": 0.34,
-      "annual_sales_cr": 205.0,
-      "sales_to_mcap_multiple": 1.51,
-      "ps_ratio": 0.66,
-      "catalyst": "P/S: 0.66x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
     },
     {
       "symbol": "REMSONSIND",
@@ -1869,7 +1922,7 @@
     {
       "symbol": "PRSMJOHNSN",
       "company_name": "Prism Johnson Ltd",
-      "market_cap_cr": 5033.0,
+      "market_cap_cr": 5039.0,
       "total_debt_cr": 1677.0,
       "debt_to_mcap": 0.33,
       "annual_sales_cr": 7554.0,
@@ -1878,9 +1931,20 @@
       "catalyst": "P/S: 0.67x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
     },
     {
+      "symbol": "RELIABLE",
+      "company_name": "Reliable Data Services Ltd",
+      "market_cap_cr": 137.0,
+      "total_debt_cr": 46.0,
+      "debt_to_mcap": 0.34,
+      "annual_sales_cr": 205.0,
+      "sales_to_mcap_multiple": 1.5,
+      "ps_ratio": 0.67,
+      "catalyst": "P/S: 0.67x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
+    },
+    {
       "symbol": "ARCL",
       "company_name": "ARCL Organics Ltd",
-      "market_cap_cr": 182.0,
+      "market_cap_cr": 183.0,
       "total_debt_cr": 71.0,
       "debt_to_mcap": 0.39,
       "annual_sales_cr": 272.0,
@@ -1891,35 +1955,35 @@
     {
       "symbol": "BBTCL",
       "company_name": "B&B Triplewall Containers Ltd",
-      "market_cap_cr": 437.0,
+      "market_cap_cr": 434.0,
       "total_debt_cr": 251.0,
-      "debt_to_mcap": 0.57,
+      "debt_to_mcap": 0.58,
       "annual_sales_cr": 645.0,
-      "sales_to_mcap_multiple": 1.48,
-      "ps_ratio": 0.68,
-      "catalyst": "P/S: 0.68x + Positive EBITDA + Debt/MCap: 0.57x (Safe)"
+      "sales_to_mcap_multiple": 1.49,
+      "ps_ratio": 0.67,
+      "catalyst": "P/S: 0.67x + Positive EBITDA + Debt/MCap: 0.58x (Safe)"
+    },
+    {
+      "symbol": "MODINATUR",
+      "company_name": "Modi Naturals Ltd",
+      "market_cap_cr": 484.0,
+      "total_debt_cr": 161.0,
+      "debt_to_mcap": 0.33,
+      "annual_sales_cr": 720.0,
+      "sales_to_mcap_multiple": 1.49,
+      "ps_ratio": 0.67,
+      "catalyst": "P/S: 0.67x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
     },
     {
       "symbol": "ESTER",
       "company_name": "Ester Industries Ltd",
-      "market_cap_cr": 995.0,
+      "market_cap_cr": 992.0,
       "total_debt_cr": 729.0,
       "debt_to_mcap": 0.73,
       "annual_sales_cr": 1469.0,
       "sales_to_mcap_multiple": 1.48,
       "ps_ratio": 0.68,
       "catalyst": "P/S: 0.68x + Positive EBITDA + Debt/MCap: 0.73x (Safe)"
-    },
-    {
-      "symbol": "MODINATUR",
-      "company_name": "Modi Naturals Ltd",
-      "market_cap_cr": 488.0,
-      "total_debt_cr": 161.0,
-      "debt_to_mcap": 0.33,
-      "annual_sales_cr": 720.0,
-      "sales_to_mcap_multiple": 1.48,
-      "ps_ratio": 0.68,
-      "catalyst": "P/S: 0.68x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
     },
     {
       "symbol": "MUKTAARTS",
@@ -1935,7 +1999,7 @@
     {
       "symbol": "BLUSPRING",
       "company_name": "Bluspring Enterprises Ltd",
-      "market_cap_cr": 2416.0,
+      "market_cap_cr": 2414.0,
       "total_debt_cr": 136.0,
       "debt_to_mcap": 0.06,
       "annual_sales_cr": 3534.0,
@@ -1955,53 +2019,42 @@
       "catalyst": "P/S: 0.69x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
     },
     {
-      "symbol": "HMVL",
-      "company_name": "Hindustan Media Ventures Ltd",
-      "market_cap_cr": 547.0,
-      "total_debt_cr": 85.0,
-      "debt_to_mcap": 0.16,
-      "annual_sales_cr": 793.0,
-      "sales_to_mcap_multiple": 1.45,
-      "ps_ratio": 0.69,
-      "catalyst": "P/S: 0.69x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
+      "symbol": "GLOTTIS",
+      "company_name": "Glottis Ltd",
+      "market_cap_cr": 503.0,
+      "total_debt_cr": 53.0,
+      "debt_to_mcap": 0.11,
+      "annual_sales_cr": 723.0,
+      "sales_to_mcap_multiple": 1.44,
+      "ps_ratio": 0.7,
+      "catalyst": "P/S: 0.7x + Positive EBITDA + Debt/MCap: 0.11x (Safe)"
     },
     {
       "symbol": "STARPAPER",
       "company_name": "Star Paper Mills Ltd",
-      "market_cap_cr": 250.0,
+      "market_cap_cr": 252.0,
       "total_debt_cr": 35.0,
       "debt_to_mcap": 0.14,
       "annual_sales_cr": 360.0,
-      "sales_to_mcap_multiple": 1.44,
-      "ps_ratio": 0.69,
-      "catalyst": "P/S: 0.69x + Positive EBITDA + Debt/MCap: 0.14x (Safe)"
-    },
-    {
-      "symbol": "GLOTTIS",
-      "company_name": "Glottis Ltd",
-      "market_cap_cr": 507.0,
-      "total_debt_cr": 53.0,
-      "debt_to_mcap": 0.1,
-      "annual_sales_cr": 723.0,
       "sales_to_mcap_multiple": 1.43,
       "ps_ratio": 0.7,
-      "catalyst": "P/S: 0.7x + Positive EBITDA + Debt/MCap: 0.1x (Safe)"
+      "catalyst": "P/S: 0.7x + Positive EBITDA + Debt/MCap: 0.14x (Safe)"
     },
     {
       "symbol": "BAJEL",
       "company_name": "Bajel Projects Ltd",
-      "market_cap_cr": 1939.0,
+      "market_cap_cr": 1943.0,
       "total_debt_cr": 367.0,
       "debt_to_mcap": 0.19,
       "annual_sales_cr": 2751.0,
       "sales_to_mcap_multiple": 1.42,
-      "ps_ratio": 0.7,
-      "catalyst": "P/S: 0.7x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
+      "ps_ratio": 0.71,
+      "catalyst": "P/S: 0.71x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
       "symbol": "KPEL",
       "company_name": "K.P. Energy Ltd",
-      "market_cap_cr": 1278.0,
+      "market_cap_cr": 1279.0,
       "total_debt_cr": 442.0,
       "debt_to_mcap": 0.35,
       "annual_sales_cr": 1797.0,
@@ -2021,15 +2074,26 @@
       "catalyst": "P/S: 0.71x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
     },
     {
+      "symbol": "HMVL",
+      "company_name": "Hindustan Media Ventures Ltd",
+      "market_cap_cr": 565.0,
+      "total_debt_cr": 85.0,
+      "debt_to_mcap": 0.15,
+      "annual_sales_cr": 793.0,
+      "sales_to_mcap_multiple": 1.4,
+      "ps_ratio": 0.71,
+      "catalyst": "P/S: 0.71x + Positive EBITDA + Debt/MCap: 0.15x (Safe)"
+    },
+    {
       "symbol": "MUFTI",
       "company_name": "Credo Brands Marketing Ltd",
-      "market_cap_cr": 441.0,
+      "market_cap_cr": 442.0,
       "total_debt_cr": 237.0,
       "debt_to_mcap": 0.54,
       "annual_sales_cr": 618.0,
       "sales_to_mcap_multiple": 1.4,
-      "ps_ratio": 0.71,
-      "catalyst": "P/S: 0.71x + Positive EBITDA + Debt/MCap: 0.54x (Safe)"
+      "ps_ratio": 0.72,
+      "catalyst": "P/S: 0.72x + Positive EBITDA + Debt/MCap: 0.54x (Safe)"
     },
     {
       "symbol": "SOLARWORLD",
@@ -2054,9 +2118,20 @@
       "catalyst": "P/S: 0.72x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
+      "symbol": "KCP",
+      "company_name": "K C P Ltd",
+      "market_cap_cr": 1946.0,
+      "total_debt_cr": 664.0,
+      "debt_to_mcap": 0.34,
+      "annual_sales_cr": 2679.0,
+      "sales_to_mcap_multiple": 1.38,
+      "ps_ratio": 0.73,
+      "catalyst": "P/S: 0.73x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
+    },
+    {
       "symbol": "SHOPERSTOP",
       "company_name": "Shoppers Stop Ltd",
-      "market_cap_cr": 3840.0,
+      "market_cap_cr": 3838.0,
       "total_debt_cr": 3457.0,
       "debt_to_mcap": 0.9,
       "annual_sales_cr": 5283.0,
@@ -2067,7 +2142,7 @@
     {
       "symbol": "HERITGFOOD",
       "company_name": "Heritage Foods Ltd",
-      "market_cap_cr": 3597.0,
+      "market_cap_cr": 3602.0,
       "total_debt_cr": 384.0,
       "debt_to_mcap": 0.11,
       "annual_sales_cr": 4934.0,
@@ -2076,20 +2151,9 @@
       "catalyst": "P/S: 0.73x + Positive EBITDA + Debt/MCap: 0.11x (Safe)"
     },
     {
-      "symbol": "KCP",
-      "company_name": "K C P Ltd",
-      "market_cap_cr": 1953.0,
-      "total_debt_cr": 664.0,
-      "debt_to_mcap": 0.34,
-      "annual_sales_cr": 2679.0,
-      "sales_to_mcap_multiple": 1.37,
-      "ps_ratio": 0.73,
-      "catalyst": "P/S: 0.73x + Positive EBITDA + Debt/MCap: 0.34x (Safe)"
-    },
-    {
       "symbol": "SESHAPAPER",
       "company_name": "Seshasayee Paper & Boards Ltd",
-      "market_cap_cr": 1323.0,
+      "market_cap_cr": 1324.0,
       "total_debt_cr": 0.0,
       "debt_to_mcap": 0.0,
       "annual_sales_cr": 1817.0,
@@ -2100,18 +2164,40 @@
     {
       "symbol": "HINDADH",
       "company_name": "Hindustan Adhesives Ltd",
-      "market_cap_cr": 200.0,
+      "market_cap_cr": 199.0,
       "total_debt_cr": 122.0,
       "debt_to_mcap": 0.61,
       "annual_sales_cr": 269.0,
-      "sales_to_mcap_multiple": 1.34,
+      "sales_to_mcap_multiple": 1.35,
       "ps_ratio": 0.74,
       "catalyst": "P/S: 0.74x + Positive EBITDA + Debt/MCap: 0.61x (Safe)"
     },
     {
+      "symbol": "ECOSMOBLTY",
+      "company_name": "Ecos (India) Mobility & Hospitality Ltd",
+      "market_cap_cr": 631.0,
+      "total_debt_cr": 8.0,
+      "debt_to_mcap": 0.01,
+      "annual_sales_cr": 838.0,
+      "sales_to_mcap_multiple": 1.33,
+      "ps_ratio": 0.75,
+      "catalyst": "P/S: 0.75x + Positive EBITDA + Debt/MCap: 0.01x (Safe)"
+    },
+    {
+      "symbol": "PRAKASH",
+      "company_name": "Prakash Industries Ltd",
+      "market_cap_cr": 2215.0,
+      "total_debt_cr": 818.0,
+      "debt_to_mcap": 0.37,
+      "annual_sales_cr": 2935.0,
+      "sales_to_mcap_multiple": 1.33,
+      "ps_ratio": 0.75,
+      "catalyst": "P/S: 0.75x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
+    },
+    {
       "symbol": "TVTODAY",
       "company_name": "T.V. Today Network Ltd",
-      "market_cap_cr": 617.0,
+      "market_cap_cr": 616.0,
       "total_debt_cr": 15.0,
       "debt_to_mcap": 0.02,
       "annual_sales_cr": 818.0,
@@ -2120,31 +2206,9 @@
       "catalyst": "P/S: 0.75x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
     },
     {
-      "symbol": "ECOSMOBLTY",
-      "company_name": "Ecos (India) Mobility & Hospitality Ltd",
-      "market_cap_cr": 634.0,
-      "total_debt_cr": 8.0,
-      "debt_to_mcap": 0.01,
-      "annual_sales_cr": 838.0,
-      "sales_to_mcap_multiple": 1.32,
-      "ps_ratio": 0.76,
-      "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.01x (Safe)"
-    },
-    {
-      "symbol": "PRAKASH",
-      "company_name": "Prakash Industries Ltd",
-      "market_cap_cr": 2218.0,
-      "total_debt_cr": 818.0,
-      "debt_to_mcap": 0.37,
-      "annual_sales_cr": 2935.0,
-      "sales_to_mcap_multiple": 1.32,
-      "ps_ratio": 0.76,
-      "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
-    },
-    {
       "symbol": "BAJAJELEC",
       "company_name": "Bajaj Electricals Ltd",
-      "market_cap_cr": 3414.0,
+      "market_cap_cr": 3421.0,
       "total_debt_cr": 159.0,
       "debt_to_mcap": 0.05,
       "annual_sales_cr": 4487.0,
@@ -2155,7 +2219,7 @@
     {
       "symbol": "DHARMAJ",
       "company_name": "Dharmaj Crop Guard Ltd",
-      "market_cap_cr": 877.0,
+      "market_cap_cr": 879.0,
       "total_debt_cr": 132.0,
       "debt_to_mcap": 0.15,
       "annual_sales_cr": 1153.0,
@@ -2164,20 +2228,9 @@
       "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.15x (Safe)"
     },
     {
-      "symbol": "ENIL",
-      "company_name": "Entertainment Network (India) Ltd",
-      "market_cap_cr": 428.0,
-      "total_debt_cr": 171.0,
-      "debt_to_mcap": 0.4,
-      "annual_sales_cr": 562.0,
-      "sales_to_mcap_multiple": 1.31,
-      "ps_ratio": 0.76,
-      "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
-    },
-    {
       "symbol": "ORIENTBELL",
       "company_name": "Orient Bell Ltd",
-      "market_cap_cr": 572.0,
+      "market_cap_cr": 574.0,
       "total_debt_cr": 31.0,
       "debt_to_mcap": 0.05,
       "annual_sales_cr": 752.0,
@@ -2188,24 +2241,13 @@
     {
       "symbol": "SHK",
       "company_name": "S H Kelkar & Company Ltd",
-      "market_cap_cr": 1864.0,
+      "market_cap_cr": 1867.0,
       "total_debt_cr": 1029.0,
       "debt_to_mcap": 0.55,
       "annual_sales_cr": 2450.0,
       "sales_to_mcap_multiple": 1.31,
       "ps_ratio": 0.76,
       "catalyst": "P/S: 0.76x + Positive EBITDA + Debt/MCap: 0.55x (Safe)"
-    },
-    {
-      "symbol": "CHEMPLASTS",
-      "company_name": "Chemplast Sanmar Ltd",
-      "market_cap_cr": 3276.0,
-      "total_debt_cr": 1952.0,
-      "debt_to_mcap": 0.6,
-      "annual_sales_cr": 4249.0,
-      "sales_to_mcap_multiple": 1.3,
-      "ps_ratio": 0.77,
-      "catalyst": "P/S: 0.77x + Positive EBITDA + Debt/MCap: 0.6x (Safe)"
     },
     {
       "symbol": "EPACK",
@@ -2230,15 +2272,26 @@
       "catalyst": "P/S: 0.77x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
     },
     {
-      "symbol": "KANPRPLA",
-      "company_name": "Kanpur Plastipack Ltd",
-      "market_cap_cr": 575.0,
-      "total_debt_cr": 112.0,
-      "debt_to_mcap": 0.19,
-      "annual_sales_cr": 741.0,
+      "symbol": "CHEMPLASTS",
+      "company_name": "Chemplast Sanmar Ltd",
+      "market_cap_cr": 3287.0,
+      "total_debt_cr": 1952.0,
+      "debt_to_mcap": 0.59,
+      "annual_sales_cr": 4249.0,
       "sales_to_mcap_multiple": 1.29,
-      "ps_ratio": 0.78,
-      "catalyst": "P/S: 0.78x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
+      "ps_ratio": 0.77,
+      "catalyst": "P/S: 0.77x + Positive EBITDA + Debt/MCap: 0.59x (Safe)"
+    },
+    {
+      "symbol": "ENIL",
+      "company_name": "Entertainment Network (India) Ltd",
+      "market_cap_cr": 434.0,
+      "total_debt_cr": 171.0,
+      "debt_to_mcap": 0.39,
+      "annual_sales_cr": 562.0,
+      "sales_to_mcap_multiple": 1.29,
+      "ps_ratio": 0.77,
+      "catalyst": "P/S: 0.77x + Positive EBITDA + Debt/MCap: 0.39x (Safe)"
     },
     {
       "symbol": "INDOAMIN",
@@ -2250,6 +2303,17 @@
       "sales_to_mcap_multiple": 1.28,
       "ps_ratio": 0.78,
       "catalyst": "P/S: 0.78x + Positive EBITDA + Debt/MCap: 0.32x (Safe)"
+    },
+    {
+      "symbol": "KANPRPLA",
+      "company_name": "Kanpur Plastipack Ltd",
+      "market_cap_cr": 577.0,
+      "total_debt_cr": 112.0,
+      "debt_to_mcap": 0.19,
+      "annual_sales_cr": 741.0,
+      "sales_to_mcap_multiple": 1.28,
+      "ps_ratio": 0.78,
+      "catalyst": "P/S: 0.78x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
       "symbol": "MITCON",
@@ -2265,7 +2329,7 @@
     {
       "symbol": "ASAHISONG",
       "company_name": "Asahi Songwon Colors Ltd",
-      "market_cap_cr": 456.0,
+      "market_cap_cr": 455.0,
       "total_debt_cr": 143.0,
       "debt_to_mcap": 0.31,
       "annual_sales_cr": 575.0,
@@ -2276,7 +2340,7 @@
     {
       "symbol": "DOLLAR",
       "company_name": "Dollar Industries Ltd",
-      "market_cap_cr": 1503.0,
+      "market_cap_cr": 1502.0,
       "total_debt_cr": 291.0,
       "debt_to_mcap": 0.19,
       "annual_sales_cr": 1887.0,
@@ -2285,20 +2349,9 @@
       "catalyst": "P/S: 0.8x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
-      "symbol": "EKC",
-      "company_name": "Everest Kanto Cylinder Ltd",
-      "market_cap_cr": 1138.0,
-      "total_debt_cr": 199.0,
-      "debt_to_mcap": 0.17,
-      "annual_sales_cr": 1430.0,
-      "sales_to_mcap_multiple": 1.26,
-      "ps_ratio": 0.8,
-      "catalyst": "P/S: 0.8x + Positive EBITDA + Debt/MCap: 0.17x (Safe)"
-    },
-    {
       "symbol": "SUNLOC",
       "company_name": "Sunil Healthcare Ltd",
-      "market_cap_cr": 66.6,
+      "market_cap_cr": 66.7,
       "total_debt_cr": 59.37,
       "debt_to_mcap": 0.89,
       "annual_sales_cr": 84.07,
@@ -2309,7 +2362,7 @@
     {
       "symbol": "AFCONS",
       "company_name": "Afcons Infrastructure Ltd",
-      "market_cap_cr": 9019.0,
+      "market_cap_cr": 9015.0,
       "total_debt_cr": 3627.0,
       "debt_to_mcap": 0.4,
       "annual_sales_cr": 11249.0,
@@ -2318,9 +2371,20 @@
       "catalyst": "P/S: 0.8x + Positive EBITDA + Debt/MCap: 0.4x (Safe)"
     },
     {
+      "symbol": "EKC",
+      "company_name": "Everest Kanto Cylinder Ltd",
+      "market_cap_cr": 1140.0,
+      "total_debt_cr": 199.0,
+      "debt_to_mcap": 0.17,
+      "annual_sales_cr": 1430.0,
+      "sales_to_mcap_multiple": 1.25,
+      "ps_ratio": 0.8,
+      "catalyst": "P/S: 0.8x + Positive EBITDA + Debt/MCap: 0.17x (Safe)"
+    },
+    {
       "symbol": "ELECTCAST",
       "company_name": "Electrosteel Castings Ltd",
-      "market_cap_cr": 4618.0,
+      "market_cap_cr": 4612.0,
       "total_debt_cr": 1561.0,
       "debt_to_mcap": 0.34,
       "annual_sales_cr": 5786.0,
@@ -2331,29 +2395,18 @@
     {
       "symbol": "NAHARPOLY",
       "company_name": "Nahar Polyfilms Ltd",
-      "market_cap_cr": 537.0,
+      "market_cap_cr": 543.0,
       "total_debt_cr": 79.0,
       "debt_to_mcap": 0.15,
       "annual_sales_cr": 667.0,
-      "sales_to_mcap_multiple": 1.24,
+      "sales_to_mcap_multiple": 1.23,
       "ps_ratio": 0.81,
       "catalyst": "P/S: 0.81x + Positive EBITDA + Debt/MCap: 0.15x (Safe)"
     },
     {
-      "symbol": "DYNPRO",
-      "company_name": "Dynemic Products Ltd",
-      "market_cap_cr": 302.0,
-      "total_debt_cr": 73.0,
-      "debt_to_mcap": 0.24,
-      "annual_sales_cr": 371.0,
-      "sales_to_mcap_multiple": 1.23,
-      "ps_ratio": 0.81,
-      "catalyst": "P/S: 0.81x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
-    },
-    {
       "symbol": "RUPA",
       "company_name": "Rupa & Company Ltd",
-      "market_cap_cr": 1040.0,
+      "market_cap_cr": 1036.0,
       "total_debt_cr": 258.0,
       "debt_to_mcap": 0.25,
       "annual_sales_cr": 1278.0,
@@ -2362,20 +2415,20 @@
       "catalyst": "P/S: 0.81x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
     },
     {
-      "symbol": "HUHTAMAKI",
-      "company_name": "Huhtamaki India Ltd",
-      "market_cap_cr": 1789.0,
-      "total_debt_cr": 408.0,
-      "debt_to_mcap": 0.23,
-      "annual_sales_cr": 2178.0,
+      "symbol": "DYNPRO",
+      "company_name": "Dynemic Products Ltd",
+      "market_cap_cr": 305.0,
+      "total_debt_cr": 73.0,
+      "debt_to_mcap": 0.24,
+      "annual_sales_cr": 371.0,
       "sales_to_mcap_multiple": 1.22,
       "ps_ratio": 0.82,
-      "catalyst": "P/S: 0.82x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
+      "catalyst": "P/S: 0.82x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
     },
     {
       "symbol": "SRM",
       "company_name": "SRM Contractors Ltd",
-      "market_cap_cr": 883.0,
+      "market_cap_cr": 882.0,
       "total_debt_cr": 135.0,
       "debt_to_mcap": 0.15,
       "annual_sales_cr": 1079.0,
@@ -2395,9 +2448,31 @@
       "catalyst": "P/S: 0.83x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
     },
     {
+      "symbol": "HUHTAMAKI",
+      "company_name": "Huhtamaki India Ltd",
+      "market_cap_cr": 1793.0,
+      "total_debt_cr": 408.0,
+      "debt_to_mcap": 0.23,
+      "annual_sales_cr": 2178.0,
+      "sales_to_mcap_multiple": 1.21,
+      "ps_ratio": 0.82,
+      "catalyst": "P/S: 0.82x + Positive EBITDA + Debt/MCap: 0.23x (Safe)"
+    },
+    {
+      "symbol": "MAKERSL",
+      "company_name": "Makers Laboratories Ltd",
+      "market_cap_cr": 123.0,
+      "total_debt_cr": 9.0,
+      "debt_to_mcap": 0.07,
+      "annual_sales_cr": 148.0,
+      "sales_to_mcap_multiple": 1.2,
+      "ps_ratio": 0.83,
+      "catalyst": "P/S: 0.83x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
+    },
+    {
       "symbol": "RELIGARE",
       "company_name": "Religare Enterprises Ltd",
-      "market_cap_cr": 7457.0,
+      "market_cap_cr": 7461.0,
       "total_debt_cr": 493.0,
       "debt_to_mcap": 0.07,
       "annual_sales_cr": 8954.0,
@@ -2408,7 +2483,7 @@
     {
       "symbol": "REPRO",
       "company_name": "Repro India Ltd",
-      "market_cap_cr": 431.0,
+      "market_cap_cr": 430.0,
       "total_debt_cr": 186.0,
       "debt_to_mcap": 0.43,
       "annual_sales_cr": 517.0,
@@ -2419,24 +2494,13 @@
     {
       "symbol": "HPL",
       "company_name": "HPL Electric & Power Ltd",
-      "market_cap_cr": 1634.0,
+      "market_cap_cr": 1635.0,
       "total_debt_cr": 755.0,
       "debt_to_mcap": 0.46,
       "annual_sales_cr": 1943.0,
       "sales_to_mcap_multiple": 1.19,
       "ps_ratio": 0.84,
       "catalyst": "P/S: 0.84x + Positive EBITDA + Debt/MCap: 0.46x (Safe)"
-    },
-    {
-      "symbol": "MAKERSL",
-      "company_name": "Makers Laboratories Ltd",
-      "market_cap_cr": 124.0,
-      "total_debt_cr": 9.0,
-      "debt_to_mcap": 0.07,
-      "annual_sales_cr": 148.0,
-      "sales_to_mcap_multiple": 1.19,
-      "ps_ratio": 0.84,
-      "catalyst": "P/S: 0.84x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
     },
     {
       "symbol": "WEIZMANIND",
@@ -2450,20 +2514,20 @@
       "catalyst": "P/S: 0.84x + Positive EBITDA + Debt/MCap: 0.06x (Safe)"
     },
     {
-      "symbol": "ZEEL",
-      "company_name": "Zee Entertainment Enterprises Ltd",
-      "market_cap_cr": 7009.0,
-      "total_debt_cr": 265.0,
-      "debt_to_mcap": 0.04,
-      "annual_sales_cr": 8181.0,
+      "symbol": "WORTHPERI",
+      "company_name": "Worth Peripherals Ltd",
+      "market_cap_cr": 265.0,
+      "total_debt_cr": 42.0,
+      "debt_to_mcap": 0.16,
+      "annual_sales_cr": 311.0,
       "sales_to_mcap_multiple": 1.17,
-      "ps_ratio": 0.86,
-      "catalyst": "P/S: 0.86x + Positive EBITDA + Debt/MCap: 0.04x (Safe)"
+      "ps_ratio": 0.85,
+      "catalyst": "P/S: 0.85x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
       "symbol": "AWHCL",
       "company_name": "Antony Waste Handling Cell Ltd",
-      "market_cap_cr": 919.0,
+      "market_cap_cr": 918.0,
       "total_debt_cr": 459.0,
       "debt_to_mcap": 0.5,
       "annual_sales_cr": 1067.0,
@@ -2472,15 +2536,37 @@
       "catalyst": "P/S: 0.86x + Positive EBITDA + Debt/MCap: 0.5x (Safe)"
     },
     {
+      "symbol": "EMIL",
+      "company_name": "Electronics Mart India Ltd",
+      "market_cap_cr": 6790.0,
+      "total_debt_cr": 1997.0,
+      "debt_to_mcap": 0.29,
+      "annual_sales_cr": 7863.0,
+      "sales_to_mcap_multiple": 1.16,
+      "ps_ratio": 0.86,
+      "catalyst": "P/S: 0.86x + Positive EBITDA + Debt/MCap: 0.29x (Safe)"
+    },
+    {
       "symbol": "PARAGMILK",
       "company_name": "Parag Milk Foods Ltd",
-      "market_cap_cr": 3382.0,
+      "market_cap_cr": 3385.0,
       "total_debt_cr": 607.0,
       "debt_to_mcap": 0.18,
       "annual_sales_cr": 3911.0,
       "sales_to_mcap_multiple": 1.16,
+      "ps_ratio": 0.87,
+      "catalyst": "P/S: 0.87x + Positive EBITDA + Debt/MCap: 0.18x (Safe)"
+    },
+    {
+      "symbol": "ZEEL",
+      "company_name": "Zee Entertainment Enterprises Ltd",
+      "market_cap_cr": 7024.0,
+      "total_debt_cr": 265.0,
+      "debt_to_mcap": 0.04,
+      "annual_sales_cr": 8181.0,
+      "sales_to_mcap_multiple": 1.16,
       "ps_ratio": 0.86,
-      "catalyst": "P/S: 0.86x + Positive EBITDA + Debt/MCap: 0.18x (Safe)"
+      "catalyst": "P/S: 0.86x + Positive EBITDA + Debt/MCap: 0.04x (Safe)"
     },
     {
       "symbol": "BATLIBOI",
@@ -2494,20 +2580,9 @@
       "catalyst": "P/S: 0.87x + Positive EBITDA + Debt/MCap: 0.2x (Safe)"
     },
     {
-      "symbol": "EMIL",
-      "company_name": "Electronics Mart India Ltd",
-      "market_cap_cr": 6818.0,
-      "total_debt_cr": 1997.0,
-      "debt_to_mcap": 0.29,
-      "annual_sales_cr": 7863.0,
-      "sales_to_mcap_multiple": 1.15,
-      "ps_ratio": 0.87,
-      "catalyst": "P/S: 0.87x + Positive EBITDA + Debt/MCap: 0.29x (Safe)"
-    },
-    {
       "symbol": "NELCAST",
       "company_name": "Nelcast Ltd",
-      "market_cap_cr": 1162.0,
+      "market_cap_cr": 1164.0,
       "total_debt_cr": 257.0,
       "debt_to_mcap": 0.22,
       "annual_sales_cr": 1338.0,
@@ -2527,20 +2602,9 @@
       "catalyst": "P/S: 0.87x + Positive EBITDA + Debt/MCap: 0.11x (Safe)"
     },
     {
-      "symbol": "WORTHPERI",
-      "company_name": "Worth Peripherals Ltd",
-      "market_cap_cr": 270.0,
-      "total_debt_cr": 42.0,
-      "debt_to_mcap": 0.16,
-      "annual_sales_cr": 311.0,
-      "sales_to_mcap_multiple": 1.15,
-      "ps_ratio": 0.87,
-      "catalyst": "P/S: 0.87x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
-    },
-    {
       "symbol": "DLINKINDIA",
       "company_name": "D-Link India Ltd",
-      "market_cap_cr": 1469.0,
+      "market_cap_cr": 1468.0,
       "total_debt_cr": 15.0,
       "debt_to_mcap": 0.01,
       "annual_sales_cr": 1672.0,
@@ -2551,13 +2615,13 @@
     {
       "symbol": "JKLAKSHMI",
       "company_name": "JK Lakshmi Cement Ltd",
-      "market_cap_cr": 6080.0,
+      "market_cap_cr": 6096.0,
       "total_debt_cr": 2586.0,
-      "debt_to_mcap": 0.43,
+      "debt_to_mcap": 0.42,
       "annual_sales_cr": 6926.0,
       "sales_to_mcap_multiple": 1.14,
       "ps_ratio": 0.88,
-      "catalyst": "P/S: 0.88x + Positive EBITDA + Debt/MCap: 0.43x (Safe)"
+      "catalyst": "P/S: 0.88x + Positive EBITDA + Debt/MCap: 0.42x (Safe)"
     },
     {
       "symbol": "TRIVENI",
@@ -2573,24 +2637,13 @@
     {
       "symbol": "BLKASHYAP",
       "company_name": "B.L.Kashyap & Sons Ltd",
-      "market_cap_cr": 1238.0,
+      "market_cap_cr": 1239.0,
       "total_debt_cr": 299.0,
       "debt_to_mcap": 0.24,
       "annual_sales_cr": 1388.0,
       "sales_to_mcap_multiple": 1.12,
       "ps_ratio": 0.89,
       "catalyst": "P/S: 0.89x + Positive EBITDA + Debt/MCap: 0.24x (Safe)"
-    },
-    {
-      "symbol": "DELTAMAGNT",
-      "company_name": "Delta Manufacturing Ltd",
-      "market_cap_cr": 60.5,
-      "total_debt_cr": 40.0,
-      "debt_to_mcap": 0.66,
-      "annual_sales_cr": 67.0,
-      "sales_to_mcap_multiple": 1.11,
-      "ps_ratio": 0.9,
-      "catalyst": "P/S: 0.9x + Positive EBITDA + Debt/MCap: 0.66x (Safe)"
     },
     {
       "symbol": "MAHEPC",
@@ -2606,7 +2659,7 @@
     {
       "symbol": "SHRIRAMPPS",
       "company_name": "Shriram Properties Ltd",
-      "market_cap_cr": 1122.0,
+      "market_cap_cr": 1124.0,
       "total_debt_cr": 616.0,
       "debt_to_mcap": 0.55,
       "annual_sales_cr": 1249.0,
@@ -2615,26 +2668,15 @@
       "catalyst": "P/S: 0.9x + Positive EBITDA + Debt/MCap: 0.55x (Safe)"
     },
     {
-      "symbol": "TOKYOPLAST",
-      "company_name": "Tokyo Plast International Ltd",
-      "market_cap_cr": 73.1,
-      "total_debt_cr": 48.38,
-      "debt_to_mcap": 0.66,
-      "annual_sales_cr": 80.94,
-      "sales_to_mcap_multiple": 1.11,
-      "ps_ratio": 0.9,
-      "catalyst": "P/S: 0.9x + Positive EBITDA + Debt/MCap: 0.66x (Safe)"
-    },
-    {
-      "symbol": "IRMENERGY",
-      "company_name": "IRM Energy Ltd",
-      "market_cap_cr": 1030.0,
-      "total_debt_cr": 73.0,
-      "debt_to_mcap": 0.07,
-      "annual_sales_cr": 1130.0,
+      "symbol": "BODALCHEM",
+      "company_name": "Bodal Chemicals Ltd",
+      "market_cap_cr": 2065.0,
+      "total_debt_cr": 813.0,
+      "debt_to_mcap": 0.39,
+      "annual_sales_cr": 2267.0,
       "sales_to_mcap_multiple": 1.1,
       "ps_ratio": 0.91,
-      "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
+      "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.39x (Safe)"
     },
     {
       "symbol": "PIGL",
@@ -2650,7 +2692,7 @@
     {
       "symbol": "ROSSARI",
       "company_name": "Rossari Biotech Ltd",
-      "market_cap_cr": 2422.0,
+      "market_cap_cr": 2423.0,
       "total_debt_cr": 388.0,
       "debt_to_mcap": 0.16,
       "annual_sales_cr": 2661.0,
@@ -2659,20 +2701,9 @@
       "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.16x (Safe)"
     },
     {
-      "symbol": "STERTOOLS",
-      "company_name": "Sterling Tools Ltd",
-      "market_cap_cr": 773.0,
-      "total_debt_cr": 147.0,
-      "debt_to_mcap": 0.19,
-      "annual_sales_cr": 850.0,
-      "sales_to_mcap_multiple": 1.1,
-      "ps_ratio": 0.91,
-      "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
-    },
-    {
       "symbol": "VAIBHAVGBL",
       "company_name": "Vaibhav Global Ltd",
-      "market_cap_cr": 3451.0,
+      "market_cap_cr": 3454.0,
       "total_debt_cr": 416.0,
       "debt_to_mcap": 0.12,
       "annual_sales_cr": 3795.0,
@@ -2692,20 +2723,31 @@
       "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.33x (Safe)"
     },
     {
-      "symbol": "BODALCHEM",
-      "company_name": "Bodal Chemicals Ltd",
-      "market_cap_cr": 2088.0,
-      "total_debt_cr": 813.0,
-      "debt_to_mcap": 0.39,
-      "annual_sales_cr": 2267.0,
+      "symbol": "IRMENERGY",
+      "company_name": "IRM Energy Ltd",
+      "market_cap_cr": 1033.0,
+      "total_debt_cr": 73.0,
+      "debt_to_mcap": 0.07,
+      "annual_sales_cr": 1130.0,
+      "sales_to_mcap_multiple": 1.09,
+      "ps_ratio": 0.91,
+      "catalyst": "P/S: 0.91x + Positive EBITDA + Debt/MCap: 0.07x (Safe)"
+    },
+    {
+      "symbol": "STERTOOLS",
+      "company_name": "Sterling Tools Ltd",
+      "market_cap_cr": 778.0,
+      "total_debt_cr": 147.0,
+      "debt_to_mcap": 0.19,
+      "annual_sales_cr": 850.0,
       "sales_to_mcap_multiple": 1.09,
       "ps_ratio": 0.92,
-      "catalyst": "P/S: 0.92x + Positive EBITDA + Debt/MCap: 0.39x (Safe)"
+      "catalyst": "P/S: 0.92x + Positive EBITDA + Debt/MCap: 0.19x (Safe)"
     },
     {
       "symbol": "TEMBO",
       "company_name": "Tembo Global Industries Ltd",
-      "market_cap_cr": 1053.0,
+      "market_cap_cr": 1054.0,
       "total_debt_cr": 386.0,
       "debt_to_mcap": 0.37,
       "annual_sales_cr": 1144.0,
@@ -2714,9 +2756,53 @@
       "catalyst": "P/S: 0.92x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
     },
     {
+      "symbol": "TOKYOPLAST",
+      "company_name": "Tokyo Plast International Ltd",
+      "market_cap_cr": 74.2,
+      "total_debt_cr": 48.38,
+      "debt_to_mcap": 0.65,
+      "annual_sales_cr": 80.94,
+      "sales_to_mcap_multiple": 1.09,
+      "ps_ratio": 0.92,
+      "catalyst": "P/S: 0.92x + Positive EBITDA + Debt/MCap: 0.65x (Safe)"
+    },
+    {
+      "symbol": "SHILGRAVQ",
+      "company_name": "Shilp Gravures Ltd",
+      "market_cap_cr": 91.4,
+      "total_debt_cr": 0.29,
+      "debt_to_mcap": 0.0,
+      "annual_sales_cr": 98.25,
+      "sales_to_mcap_multiple": 1.07,
+      "ps_ratio": 0.93,
+      "catalyst": "P/S: 0.93x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
+    },
+    {
+      "symbol": "CGVAK",
+      "company_name": "CG-VAK Software & Exports Ltd",
+      "market_cap_cr": 69.5,
+      "total_debt_cr": 2.44,
+      "debt_to_mcap": 0.04,
+      "annual_sales_cr": 73.94,
+      "sales_to_mcap_multiple": 1.06,
+      "ps_ratio": 0.94,
+      "catalyst": "P/S: 0.94x + Positive EBITDA + Debt/MCap: 0.04x (Safe)"
+    },
+    {
+      "symbol": "DELTAMAGNT",
+      "company_name": "Delta Manufacturing Ltd",
+      "market_cap_cr": 63.2,
+      "total_debt_cr": 40.0,
+      "debt_to_mcap": 0.63,
+      "annual_sales_cr": 67.0,
+      "sales_to_mcap_multiple": 1.06,
+      "ps_ratio": 0.94,
+      "catalyst": "P/S: 0.94x + Positive EBITDA + Debt/MCap: 0.63x (Safe)"
+    },
+    {
       "symbol": "RAMKY",
       "company_name": "Ramky Infrastructure Ltd",
-      "market_cap_cr": 1820.0,
+      "market_cap_cr": 1822.0,
       "total_debt_cr": 591.0,
       "debt_to_mcap": 0.32,
       "annual_sales_cr": 1938.0,
@@ -2738,7 +2824,7 @@
     {
       "symbol": "CAMLINFINE",
       "company_name": "Camlin Fine Sciences Ltd",
-      "market_cap_cr": 1759.0,
+      "market_cap_cr": 1760.0,
       "total_debt_cr": 720.0,
       "debt_to_mcap": 0.41,
       "annual_sales_cr": 1845.0,
@@ -2747,59 +2833,37 @@
       "catalyst": "P/S: 0.95x + Positive EBITDA + Debt/MCap: 0.41x (Safe)"
     },
     {
-      "symbol": "CGVAK",
-      "company_name": "CG-VAK Software & Exports Ltd",
-      "market_cap_cr": 70.6,
-      "total_debt_cr": 2.44,
-      "debt_to_mcap": 0.03,
-      "annual_sales_cr": 73.94,
-      "sales_to_mcap_multiple": 1.05,
-      "ps_ratio": 0.95,
-      "catalyst": "P/S: 0.95x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
-    },
-    {
-      "symbol": "CHEMBOND",
-      "company_name": "Chembond Material Technologies Ltd",
-      "market_cap_cr": 253.0,
-      "total_debt_cr": 4.0,
-      "debt_to_mcap": 0.02,
-      "annual_sales_cr": 265.0,
-      "sales_to_mcap_multiple": 1.05,
-      "ps_ratio": 0.95,
-      "catalyst": "P/S: 0.95x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
-    },
-    {
       "symbol": "JKPAPER",
       "company_name": "JK Paper Ltd",
-      "market_cap_cr": 6996.0,
+      "market_cap_cr": 6987.0,
       "total_debt_cr": 2578.0,
       "debt_to_mcap": 0.37,
       "annual_sales_cr": 7319.0,
       "sales_to_mcap_multiple": 1.05,
-      "ps_ratio": 0.96,
-      "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
+      "ps_ratio": 0.95,
+      "catalyst": "P/S: 0.95x + Positive EBITDA + Debt/MCap: 0.37x (Safe)"
     },
     {
       "symbol": "APTECHT",
       "company_name": "Aptech Ltd",
-      "market_cap_cr": 499.0,
+      "market_cap_cr": 497.0,
       "total_debt_cr": 13.0,
       "debt_to_mcap": 0.03,
       "annual_sales_cr": 517.0,
       "sales_to_mcap_multiple": 1.04,
-      "ps_ratio": 0.97,
-      "catalyst": "P/S: 0.97x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
+      "ps_ratio": 0.96,
+      "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.03x (Safe)"
     },
     {
       "symbol": "ARVINDFASN",
       "company_name": "Arvind Fashions Ltd",
-      "market_cap_cr": 5235.0,
+      "market_cap_cr": 5241.0,
       "total_debt_cr": 1336.0,
-      "debt_to_mcap": 0.26,
+      "debt_to_mcap": 0.25,
       "annual_sales_cr": 5437.0,
       "sales_to_mcap_multiple": 1.04,
       "ps_ratio": 0.96,
-      "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.26x (Safe)"
+      "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.25x (Safe)"
     },
     {
       "symbol": "BALMLAWRIE",
@@ -2815,7 +2879,7 @@
     {
       "symbol": "CEWATER",
       "company_name": "Concord Enviro Systems Ltd",
-      "market_cap_cr": 522.0,
+      "market_cap_cr": 519.0,
       "total_debt_cr": 167.0,
       "debt_to_mcap": 0.32,
       "annual_sales_cr": 541.0,
@@ -2824,20 +2888,31 @@
       "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.32x (Safe)"
     },
     {
-      "symbol": "SHILGRAVQ",
-      "company_name": "Shilp Gravures Ltd",
-      "market_cap_cr": 94.6,
-      "total_debt_cr": 0.29,
-      "debt_to_mcap": 0.0,
-      "annual_sales_cr": 98.25,
+      "symbol": "CHEMBOND",
+      "company_name": "Chembond Material Technologies Ltd",
+      "market_cap_cr": 256.0,
+      "total_debt_cr": 4.0,
+      "debt_to_mcap": 0.02,
+      "annual_sales_cr": 265.0,
       "sales_to_mcap_multiple": 1.04,
-      "ps_ratio": 0.96,
-      "catalyst": "P/S: 0.96x + Positive EBITDA + Debt/MCap: 0.0x (Safe)"
+      "ps_ratio": 0.97,
+      "catalyst": "P/S: 0.97x + Positive EBITDA + Debt/MCap: 0.02x (Safe)"
+    },
+    {
+      "symbol": "VIKRAMSOLR",
+      "company_name": "Vikram Solar Ltd",
+      "market_cap_cr": 5103.0,
+      "total_debt_cr": 617.0,
+      "debt_to_mcap": 0.12,
+      "annual_sales_cr": 5232.0,
+      "sales_to_mcap_multiple": 1.03,
+      "ps_ratio": 0.98,
+      "catalyst": "P/S: 0.98x + Positive EBITDA + Debt/MCap: 0.12x (Safe)"
     },
     {
       "symbol": "KALAMANDIR",
       "company_name": "Sai Silks (Kalamandir) Ltd",
-      "market_cap_cr": 1116.0,
+      "market_cap_cr": 1113.0,
       "total_debt_cr": 0.0,
       "debt_to_mcap": 0.0,
       "annual_sales_cr": 1136.0,
@@ -2848,7 +2923,7 @@
     {
       "symbol": "POCL",
       "company_name": "Pondy Oxides & Chemicals Ltd",
-      "market_cap_cr": 3213.0,
+      "market_cap_cr": 3214.0,
       "total_debt_cr": 152.0,
       "debt_to_mcap": 0.05,
       "annual_sales_cr": 3290.0,
@@ -2857,20 +2932,20 @@
       "catalyst": "P/S: 0.98x + Positive EBITDA + Debt/MCap: 0.05x (Safe)"
     },
     {
-      "symbol": "VIKRAMSOLR",
-      "company_name": "Vikram Solar Ltd",
-      "market_cap_cr": 5105.0,
-      "total_debt_cr": 617.0,
-      "debt_to_mcap": 0.12,
-      "annual_sales_cr": 5232.0,
-      "sales_to_mcap_multiple": 1.02,
-      "ps_ratio": 0.98,
-      "catalyst": "P/S: 0.98x + Positive EBITDA + Debt/MCap: 0.12x (Safe)"
+      "symbol": "PAKKA",
+      "company_name": "Pakka Ltd",
+      "market_cap_cr": 387.0,
+      "total_debt_cr": 460.0,
+      "debt_to_mcap": 1.19,
+      "annual_sales_cr": 392.0,
+      "sales_to_mcap_multiple": 1.01,
+      "ps_ratio": 0.99,
+      "catalyst": "P/S: 0.99x + Positive EBITDA + Debt/MCap: 1.19x (Safe)"
     },
     {
       "symbol": "VIDYAWIRES",
       "company_name": "Vidya Wires Ltd",
-      "market_cap_cr": 1956.0,
+      "market_cap_cr": 1954.0,
       "total_debt_cr": 85.0,
       "debt_to_mcap": 0.04,
       "annual_sales_cr": 1978.0,
