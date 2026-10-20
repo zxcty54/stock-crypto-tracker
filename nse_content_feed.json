@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-20 15:39:16 IST",
-  "worthy_count": 26,
-  "skipped_count": 33,
+  "generated_at": "2026-10-20 20:40:00 IST",
+  "worthy_count": 27,
+  "skipped_count": 35,
   "content_feed": [
+    {
+      "hash": "856faa736ae2",
+      "symbol": "KAPSTON",
+      "company_name": "Kapston Services Limited",
+      "category": "SPLIT",
+      "event_type": "STOCK_SPLIT",
+      "broadcast_date": "20-Oct-2026 18:11:32",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/KAPSTON_20102026181029_KSLOUTCOME.pdf",
+      "headline": "Kapston Services Approves Stock Split from Rs 5 to Rs 1 Face Value",
+      "content_worthy": true,
+      "worthiness_reason": "Company approved stock split from face value of Rs 5 to Rs 1 per share.",
+      "telegram_post": "✂️ <b>#STOCK_SPLIT</b> | <b>Kapston Services Limited (NSE: KAPSTON)</b>\n\n<b>Kapston Services Approves Stock Split from Rs 5 to Rs 1 Face Value</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Existing Face Value:</b> Rs. 5 per share\n- <b>New Face Value:</b> Rs. 1 per share\n- <b>Split Ratio:</b> 5 new equity shares for 1 existing share\n- <b>Approval Required:</b> Shareholder approval via Postal Ballot\n\n📌 <b>What happened:</b>\n↳ The board approved subdividing each existing equity share into five shares, subject to shareholder approval through a postal ballot.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KAPSTON_20102026181029_KSLOUTCOME.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-20 20:39:19 IST"
+    },
     {
       "hash": "0dc98d277244",
       "symbol": "ABDL",
@@ -369,6 +383,34 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "c42a04d2657b",
+      "symbol": "SRTL",
+      "company_name": "Shree Ram Twistex Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "20-Oct-2026 17:28:15",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SRTL_20102026172600_SRTL_BM_Outcome_Complete_20-10-2026_Signed.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The financial results filing lacks the actual numeric values for Revenue and PAT.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-20 20:40:00 IST"
+    },
+    {
+      "hash": "cdef9f814663",
+      "symbol": "KAPSTON",
+      "company_name": "Kapston Services Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "20-Oct-2026 18:07:31",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/KAPSTON_20102026180318_KSLOUTCOME.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Filing mentions financial results were approved but does not contain actual numeric Revenue and PAT values in the text excerpt.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-20 20:39:19 IST"
+    },
     {
       "hash": "6cc24c77b5ea",
       "symbol": "HFCL",
