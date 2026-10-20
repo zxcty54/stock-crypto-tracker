@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-21 00:57:18 IST",
-  "worthy_count": 14,
-  "skipped_count": 26,
+  "generated_at": "2026-10-21 04:13:24 IST",
+  "worthy_count": 13,
+  "skipped_count": 23,
   "content_feed": [
     {
       "hash": "4058bad5c63a",
@@ -184,23 +184,23 @@
       "worthiness_reason": "Letter of intent signed for procurement of major medical equipment.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>PVP Ventures Limited (NSE: PVP)</b>\n\n<b>Evervie Health signs LOI with Elekta Solutions for procurement of ten HARMONY LINAC systems</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Counterparty:</b> Elekta Solutions AB, Sweden\n- <b>Scope:</b> Proposed procurement of 10 HARMONY linear accelerator (LINAC) systems\n- <b>Subsidiary Operation:</b> Systems proposed to be operated by Optimus Oncology Private Limited\n- <b>Consideration:</b> Payable in Swedish krona (SEK) as per definitive agreement\n\n📌 <b>What happened:</b>\n↳ The company signed a Letter of Intent on October 20, 2026, recording its commercial intention to proceed with the equipment procurement subject to definitive agreements and approvals.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/Pvpchennai_20102026142007_Intimation_to_stock_exchanges_-_Linac_Machines.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-20 15:37:50 IST"
-    },
-    {
-      "hash": "37ce33e2dab3",
-      "symbol": "PSB",
-      "company_name": "Punjab & Sind Bank",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "17-Oct-2026 19:12:57",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PSB_17102026191019_bsense17102026pr.pdf",
-      "headline": "Punjab & Sind Bank Q2 Net Profit Rises 39.66% YoY to Rs 412 Cr",
-      "content_worthy": true,
-      "worthiness_reason": "Punjab & Sind Bank reported financial results for Q2 FY27 with detailed net profit, operating profit, asset quality metrics, and business growth figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Punjab & Sind Bank (NSE: PSB)</b>\n\n<b>Punjab & Sind Bank Q2 Net Profit Rises 39.66% YoY to Rs 412 Cr</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Net Profit:</b> Rs 412 Cr vs Rs 295 Cr (YoY up 39.66%)\n- <b>Operating Profit:</b> Rs 618 Cr vs Rs 505 Cr (YoY up 22.38%)\n- <b>Total Income:</b> Rs 3,747 Cr (YoY up 11.06%)\n- <b>Gross NPA:</b> 2.09% vs 2.92% (YoY improved by 83 bps)\n- <b>Net NPA:</b> 0.61% vs 0.83% (YoY improved by 22 bps)\n\n📌 <b>What happened:</b>\n↳ Punjab & Sind Bank announced its financial results for the quarter and half year ended September 30, 2026, reporting improvement in profitability, asset quality metrics, and total business growth.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PSB_17102026191019_bsense17102026pr.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-20 02:14:20 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "e061392070e8",
+      "symbol": "GALLANTT",
+      "company_name": "Gallantt Ispat Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "20-Oct-2026 00:16:05",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/GALLANTT_20102026001428_BM_Outcome_19102026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results disclosure is incomplete in the provided payload text as the PAT figure is missing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-21 04:13:24 IST"
+    },
     {
       "hash": "523854d35789",
       "symbol": "PIRAMALFIN",
@@ -508,62 +508,6 @@
       "worthiness_reason": "The filing announces the submission of financial results for Union Bank of India but does not explicitly contain the numeric Revenue and PAT figures within the provided text summary or details snippet.",
       "telegram_post": "",
       "analyzed_at": "2026-10-20 15:38:33 IST"
-    },
-    {
-      "hash": "7c5fa2f2f0d9",
-      "symbol": "PARIN",
-      "company_name": "Parin Enterprises Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "17-Oct-2026 15:33:57",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PARIN_17102026153021_Outcome_of_BM_17102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The financial results filing contains text from the cover letter and auditor report header, but lacks the actual numeric Revenue and PAT figures required for a material financial results update.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-20 02:15:02 IST"
-    },
-    {
-      "hash": "46945063c308",
-      "symbol": "LAGNAM",
-      "company_name": "Lagnam Spintex Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "17-Oct-2026 16:50:26",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/LAGNAM_17102026164912_OutcomeOfBoardMeeting17102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing mentions financial results were approved but does not contain the actual numeric Revenue and PAT figures in the text.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-20 02:14:41 IST"
-    },
-    {
-      "hash": "aa13fbb4f522",
-      "symbol": "PSB",
-      "company_name": "Punjab & Sind Bank",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "17-Oct-2026 18:41:06",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PSB_17102026183717_bsense17102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing mentions the financial results were reviewed and approved, but the filing text lacks the actual numeric Revenue and PAT figures.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-20 02:14:41 IST"
-    },
-    {
-      "hash": "e061392070e8",
-      "symbol": "GALLANTT",
-      "company_name": "Gallantt Ispat Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "20-Oct-2026 00:16:05",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/GALLANTT_20102026001428_BM_Outcome_19102026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Incomplete financial results data provided in the payload for proper parsing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-20 02:14:20 IST"
     }
   ]
 }
