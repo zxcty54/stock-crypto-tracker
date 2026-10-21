@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-20 17:37:22 IST",
+  "last_updated": "2026-10-21 17:45:36 IST",
   "total_anchors_discovered": 1,
   "prime_discount_opportunities": 1,
   "buffer_safe_entries": 0,
@@ -8,14 +8,14 @@
       "symbol": "PIRAMALFIN",
       "company_name": "Piramal Finance Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 1950.0,
+      "cmp": 2020.0,
       "institutional_floor_price": 2110.0,
       "capital_raised_cr": 2100.0,
-      "market_cap_cr": 46040.23,
-      "deal_size_pct_mcap": 4.56,
-      "delta_to_floor_pct": -7.58,
+      "market_cap_cr": 47682.41,
+      "deal_size_pct_mcap": 4.4,
+      "delta_to_floor_pct": -4.27,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "7.58% Below Anchor",
+      "zone_label": "4.27% Below Anchor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -45,7 +45,7 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
       "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 7.58% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,950.00 (-7.58% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.56% Dilution (MCap: ₹46,040 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 4.27% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹2,020.00 (-4.27% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.4% Dilution (MCap: ₹47,682 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
     }
   ],
   "buffer_setups": [],
@@ -54,14 +54,14 @@
       "symbol": "PIRAMALFIN",
       "company_name": "Piramal Finance Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 1950.0,
+      "cmp": 2020.0,
       "institutional_floor_price": 2110.0,
       "capital_raised_cr": 2100.0,
-      "market_cap_cr": 46040.23,
-      "deal_size_pct_mcap": 4.56,
-      "delta_to_floor_pct": -7.58,
+      "market_cap_cr": 47682.41,
+      "deal_size_pct_mcap": 4.4,
+      "delta_to_floor_pct": -4.27,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "7.58% Below Anchor",
+      "zone_label": "4.27% Below Anchor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -91,7 +91,7 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf",
       "filing_context": "Allotment of Securities Piramal Finance Limited has informed the Exchange regarding Allotment of 99,52,606 equity Shares of face value of Rs. 2 each to Qualifie",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 7.58% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹1,950.00 (-7.58% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.56% Dilution (MCap: ₹46,040 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 4.27% BELOW ANCHOR\n\n📌 Piramal Finance Limited (NSE: PIRAMALFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹2,110.00\n📊 Current CMP:          ₹2,020.00 (-4.27% vs Anchor)\n📦 Capital Infused:      ₹2,100.00 Cr\n🏢 Dilution / MCap:      ~4.4% Dilution (MCap: ₹47,682 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Axis Mutual (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Quant Mutual (Tier-1 DII / MF)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Blackrock (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/Piramalcapital_28082026214037_PFL_SE_Intimation_allotment_sd.pdf"
     }
   ]
 }
