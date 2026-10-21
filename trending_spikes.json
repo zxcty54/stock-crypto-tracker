@@ -1,21 +1,61 @@
 {
   "status": "success",
-  "timestamp": "2026-10-21T00:29:47.735601",
-  "total_hot_spikes": 25,
+  "timestamp": "2026-10-21T07:24:17.094914",
+  "total_hot_spikes": 24,
   "data": [
-    {
-      "keyword": "கார்த்திக் சபேஷ்",
-      "search_volume_spike": "50K+",
-      "source": "Google Real-Time Search Trends"
-    },
     {
       "keyword": "jailer movie box office collection",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "अनंत अंबानी",
+      "keyword": "deepika padukone",
       "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "జైలర్",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "mohanlal body double jailer 2",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ग्रह",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "गुन्हेगार",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "माही विज",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "drishyam 3 movie",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "कुंभ राशिफल",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "சந்தானம்",
+      "search_volume_spike": "1K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "matt henry",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -24,28 +64,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "జైలర్",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "all of us are dead",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "deepika padukone",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "dhanush",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "काइली जेनर",
-      "search_volume_spike": "5K+",
+      "keyword": "കാര്ത്തിക് സബേഷ്",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -54,12 +74,32 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "mohanlal car sequence jailer 2 confirmation",
-      "search_volume_spike": "5K+",
+      "keyword": "शनि",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "కార్తీక దీపం",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ranbir kapoor ramayana",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "divya vinekar",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
       "keyword": "दीपिका रणवीर",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "व्हायरल व्हिडिओ",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -74,58 +114,13 @@
       "source": "Google Real-Time Search Trends"
     },
     {
+      "keyword": "nbt",
+      "search_volume_spike": "500+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
       "keyword": "आलिया भट्ट",
       "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "സിത്താര",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "जम्मू",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "karthik sabesh",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "anita kanwal",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "dil raju ramayana event goof up",
-      "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "divya vinekar",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "allan",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "गुन्हेगार",
-      "search_volume_spike": "200+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "sanju samson books movie theatre",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "बिश्नोई",
-      "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
