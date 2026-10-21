@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": "2026-10-20T21:28:54.277488",
+  "timestamp": "2026-10-21T00:29:47.735601",
   "total_hot_spikes": 25,
   "data": [
     {
@@ -14,22 +14,17 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "karthik sabesh",
-      "search_volume_spike": "10K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "अनंत अंबानी",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "dhanush",
-      "search_volume_spike": "10K+",
+      "keyword": "शुक्र",
+      "search_volume_spike": "20K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "deepika padukone",
+      "keyword": "జైలర్",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -39,12 +34,32 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "జైలర్",
+      "keyword": "deepika padukone",
       "search_volume_spike": "5K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "arshad warsi jolly llb 4",
+      "keyword": "dhanush",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "काइली जेनर",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "ಸೀರೆ",
+      "search_volume_spike": "10K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "mohanlal car sequence jailer 2 confirmation",
+      "search_volume_spike": "5K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "दीपिका रणवीर",
       "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -54,22 +69,27 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "divya vinekar",
-      "search_volume_spike": "1K+",
+      "keyword": "arshad warsi jolly llb 4",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "शुक्र",
-      "search_volume_spike": "20K+",
+      "keyword": "आलिया भट्ट",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "namit malhotra",
-      "search_volume_spike": "1K+",
+      "keyword": "സിത്താര",
+      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "ಸೀರೆ",
+      "keyword": "जम्मू",
+      "search_volume_spike": "2K+",
+      "source": "Google Real-Time Search Trends"
+    },
+    {
+      "keyword": "karthik sabesh",
       "search_volume_spike": "10K+",
       "source": "Google Real-Time Search Trends"
     },
@@ -84,18 +104,18 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "काइली जेनर",
-      "search_volume_spike": "5K+",
+      "keyword": "divya vinekar",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "दीपिका रणवीर",
-      "search_volume_spike": "2K+",
+      "keyword": "allan",
+      "search_volume_spike": "1K+",
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "mohanlal car sequence jailer 2 confirmation",
-      "search_volume_spike": "5K+",
+      "keyword": "गुन्हेगार",
+      "search_volume_spike": "200+",
       "source": "Google Real-Time Search Trends"
     },
     {
@@ -104,28 +124,8 @@
       "source": "Google Real-Time Search Trends"
     },
     {
-      "keyword": "സിത്താര",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
       "keyword": "बिश्नोई",
       "search_volume_spike": "5K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "आलिया भट्ट",
-      "search_volume_spike": "2K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "sara ali khan",
-      "search_volume_spike": "1K+",
-      "source": "Google Real-Time Search Trends"
-    },
-    {
-      "keyword": "dia mirza",
-      "search_volume_spike": "2K+",
       "source": "Google Real-Time Search Trends"
     }
   ]
