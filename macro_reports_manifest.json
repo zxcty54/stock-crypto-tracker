@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-20 23:23:59 IST",
+  "timestamp": "2026-10-21 23:26:37 IST",
   "reports": {
     "ipa_ports_traffic": {
-      "title": "Major Ports Traffic from September 2026",
-      "file_url": "https://ipa.org.in/upload/media/media-2026100714585459577610.xlsx",
-      "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx"
+      "title": null,
+      "file_url": null,
+      "local_path": null
     },
     "dpiit_eight_core": {
       "title": "Press Release",
-      "pdf_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20260921.pdf",
+      "pdf_url": "https://eaindustry.nic.in/eight_core_infra/Press_Release_ICI_20261021.pdf",
       "local_path": "downloaded_macro_pdfs/DPIIT_Eight_Core_Latest.pdf"
     },
     "dpiit_wpi": {
