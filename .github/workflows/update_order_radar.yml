@@ -2,8 +2,8 @@ name: Hunt Smallcap Order Book Hidden Gems
 
 on:
   schedule:
-    # ⏰ Har Monday se Friday raat 7:30 PM IST (14:00 UTC) par execute hoga
-    - cron: '0 14 * * 1-5'
+    # ⏰ Har mahine ki 1 tareekh ko raat 7:30 PM IST (14:00 UTC) par execute hoga
+    - cron: '0 14 1 * *'
   workflow_dispatch: # Manual one-click trigger from GitHub Actions tab
 
 permissions:
