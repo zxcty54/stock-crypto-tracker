@@ -1,51 +1,55 @@
 # 📊 Performance Report
 
-**22-Oct-2026 00:56 IST** | 54 posts tracked | channel avg **2 views**
+**22-Oct-2026 21:53 IST** | 53 posts tracked | channel avg **26 views**
 
-*0 posts pehchaane gaye, 54 ka pillar text se nikala gaya. 6 repackaged cards skip kiye.*
+*33 posts pehchaane gaye, 20 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| psychology | 1 | 2 | 1.0 |
-| process | 3 | 2 | 1.01 |
-| business_model | 1 | 2 | 1.0 |
-| technical | 2 | 2 | 1.0 |
-| market_mechanics | 1 | 2 | 1.0 |
-| lifestyle | 1 | 2 | 1.0 |
-| other | 8 | 2 | 1.01 |
-| corporate | 37 | 2 | 1.0 |
+| lifestyle | 3 | 36 | 1.35 |
+| technical | 6 | 33 | 1.24 |
+| psychology | 2 | 32 | 1.0 |
+| business_model | 4 | 32 | 1.23 |
+| awareness | 1 | 28 | 1.0 |
+| tools | 1 | 28 | 1.0 |
+| process | 1 | 28 | 1.0 |
+| corporate | 24 | 26 | 0.97 |
+| risk | 4 | 21 | 0.8 |
+| other | 5 | 18 | 0.66 |
+| market_mechanics | 2 | 14 | 1.0 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 3** (target 1000)
+**Subscribers: 478** (target 1000)
 
-- Pichhle 7 din me: **+0**
-- Average: **0.0/din**
+- Pichhle 7 din me: **+475**
+- Average: **31.67/din**
+- Isi raftaar se 1000 subs: **~16 din**
 
 
 ## 🏆 Top posts
 
-- **3 views** — GPT Infraprojects Limited (NSE: GPTINFRA)  
-  `corporate`
-- **3 views** — Highway Infrastructure Limited (NSE: HILINFRA)  
-  `corporate`
-- **3 views** — Knack Packaging Limited (NSE: KNACK)  
-  `corporate`
-- **2 views** — JSW Cement Limited (NSE: JSWCEMENT)  
-  `corporate`
-- **2 views** — Godrej Consumer Products Limited (NSE: GODREJCP)  
+- **74 views** — PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain  
+  `technical`
+- **53 views** — 90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔  
+  `psychology`
+- **41 views** — 1% RULE: Capital Bachao Ge Tabhi Kheloge  
+  `lifestyle`
+- **40 views** — The Federal Bank Limited (NSE: FEDERALBNK)  
+  `business_model`
+- **40 views** — Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens  
   `corporate`
 
 ## ⚠️ Kam chale posts
 
-- 1 views — BUYBACK — Transport Corporation of India Limited (NSE: TCI)  
-  `corporate`
-- 1 views — R&B Denims Limited (NSE: RNBDENIMS)  
-  `corporate`
-- 1 views — Transport Corporation of India Limited (NSE: TCI)  
-  `corporate`
+- 4 views — IT SECTOR KA MODEL: Service Aur Margin Ka Ganit  
+  `other`
+- 0 views — Channel created  
+  `other`
+- 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
+  `risk`
 
 ---
 
