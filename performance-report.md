@@ -1,32 +1,32 @@
 # 📊 Performance Report
 
-**22-Oct-2026 21:53 IST** | 53 posts tracked | channel avg **26 views**
+**23-Oct-2026 00:50 IST** | 54 posts tracked | channel avg **26 views**
 
-*33 posts pehchaane gaye, 20 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*34 posts pehchaane gaye, 20 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 36 | 1.35 |
-| technical | 6 | 33 | 1.24 |
+| lifestyle | 3 | 36 | 1.37 |
+| technical | 6 | 33 | 1.26 |
 | psychology | 2 | 32 | 1.0 |
-| business_model | 4 | 32 | 1.23 |
 | awareness | 1 | 28 | 1.0 |
 | tools | 1 | 28 | 1.0 |
 | process | 1 | 28 | 1.0 |
-| corporate | 24 | 26 | 0.97 |
-| risk | 4 | 21 | 0.8 |
-| other | 5 | 18 | 0.66 |
+| business_model | 5 | 26 | 1.01 |
+| corporate | 24 | 26 | 0.99 |
+| risk | 4 | 21 | 0.82 |
+| other | 5 | 18 | 0.68 |
 | market_mechanics | 2 | 14 | 1.0 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 478** (target 1000)
+**Subscribers: 477** (target 1000)
 
-- Pichhle 7 din me: **+475**
-- Average: **31.67/din**
-- Isi raftaar se 1000 subs: **~16 din**
+- Pichhle 7 din me: **+474**
+- Average: **29.62/din**
+- Isi raftaar se 1000 subs: **~17 din**
 
 
 ## 🏆 Top posts
@@ -44,8 +44,8 @@
 
 ## ⚠️ Kam chale posts
 
-- 4 views — IT SECTOR KA MODEL: Service Aur Margin Ka Ganit  
-  `other`
+- 1 views — CEMENT INDUSTRY CYCLE: Demand Aur Cost Ka Khel  
+  `business_model`
 - 0 views — Channel created  
   `other`
 - 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
