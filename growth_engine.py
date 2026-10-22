@@ -15,8 +15,8 @@ USAGE
   python growth_engine.py --status
 
 ENV VARS
-  TELEGRAM_BOT_TOKEN / TELEGRAM_TOKEN
-  TELEGRAM_CHANNEL / TELEGRAM_CHAT_ID
+  TELEGRAM_BOT_TOKEN / TELEGRAM_TOKEN (status indicator only)
+  Channel target is hardcoded below; no channel secret is required.
 """
 
 import os
@@ -43,11 +43,9 @@ CARD_MARKER = "Poora post"
 
 BOT_TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN")
              or os.environ.get("TELEGRAM_TOKEN") or "").strip()
-CHAT_ID = (os.environ.get("TELEGRAM_CHANNEL")
-           or os.environ.get("TELEGRAM_CHAT_ID") or "@bhaga_657").strip()
-CHANNEL_USERNAME = CHAT_ID.lstrip("@")
-
-CHANNEL_LINK = os.environ.get("CHANNEL_LINK", "https://t.me/niftytradingstrategies")
+CHANNEL_USERNAME = "niftytradingstrategies"
+CHAT_ID = f"@{CHANNEL_USERNAME}"
+CHANNEL_LINK = f"https://t.me/{CHANNEL_USERNAME}"
 CHANNEL_NAME = "Nifty & BankNifty Trading Strategies"
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -191,7 +189,7 @@ def parse_views(raw):
 # 1️⃣ PERFORMANCE LOOP
 # ============================================================
 
-def scrape_channel_views(pages=3):
+def scrape_channel_views(pages=5):
     """
     t.me/s/<channel> se posts ke views nikalo.
     (Telegram Bot API views nahi deta — isliye public preview page.)
@@ -274,7 +272,6 @@ def _queue_hit(snippet, idx):
     return None
 
 
-
 def _eta_text(days):
     """9063 din → '24 saal' — insaani bhasha."""
     if days is None:
@@ -346,8 +343,9 @@ def run_perf():
 
     log   = load_json(POSTED_LOG, {})          # optional — sirf dispatcher likhta hai
     queue = load_json(QUEUE_FILE, {"queue": []})
-    views = scrape_channel_views(pages=3)
-    print(f"   Channel se {len(views)} posts ka data mila")
+    views = scrape_channel_views(pages=5)
+    print(f"   Channel se {len(views)} posts scan hue "
+          f"(poora channel — kisi bhi source se aaye posts, sab)")
 
     # (a) exact match: channel post_id ↔ post_log msg_id
     by_msgid = {}
@@ -471,7 +469,7 @@ def run_perf():
                 md.append(f"- Isi raftaar se {growth['target']} subs: **{_eta_text(growth['days_to_target'])}**")
             md.append("")
     else:
-        md.append("_Subscriber data nahi mila (channel public hai?)_\n")
+        md.append("_Subscriber data nahi mila (channel public hai?)\n")
 
     md += ["\n## 🏆 Top posts\n"]
     for m in top:
@@ -489,8 +487,6 @@ def run_perf():
     print(f"   🏆 Best: {top[0]['title'][:50]} ({top[0]['views']} views)")
     print(f"   ⚠️ Weak: {bottom[0]['title'][:50]} ({bottom[0]['views']} views)")
     print(f"\n   Ab content factory in weights ka use karega (agli generate run se).")
-
-
 
 
 # ============================================================
