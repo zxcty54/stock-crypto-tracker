@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-10-24 00:53:11 IST",
+  "generated_at": "2026-10-24 04:10:28 IST",
   "worthy_count": 74,
   "skipped_count": 65,
   "content_feed": [
+    {
+      "hash": "7749025152ab",
+      "symbol": "ANUHPHR",
+      "company_name": "Anuh Pharma Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "CAPEX",
+      "broadcast_date": "21-Oct-2026 18:33:41",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ANUHNSE_21102026183054_Disclosure_under_Regulation_30.pdf",
+      "headline": "Anuh Pharma takes possession of Vanquest Pharma manufacturing facility",
+      "content_worthy": true,
+      "worthiness_reason": "Material acquisition of a manufacturing facility via an Asset Transfer Agreement.",
+      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Anuh Pharma Limited (NSE: ANUHPHR)</b>\n\n<b>Anuh Pharma takes possession of new manufacturing facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Counterparty:</b> M/s. Vanquest Pharma Private Limited (VPPL)\n- <b>Facility Location:</b> F-10, M.I.D.C., Tarapur, Boisar, District Palghar – 401506, Maharashtra\n- <b>Agreement Date:</b> 16th October, 2026\n- <b>Possession Date:</b> 21st October, 2026\n\n📌 <b>What happened:</b>\n↳ Anuh Pharma Limited has received possession of the manufacturing facility of Vanquest Pharma Private Limited pursuant to the Asset Transfer Agreement executed on 16th October, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ANUHNSE_21102026183054_Disclosure_under_Regulation_30.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-24 04:10:28 IST"
+    },
+    {
+      "hash": "5f8f19469e86",
+      "symbol": "WAAREEINDO",
+      "company_name": "Indosolar Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "21-Oct-2026 19:26:24",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/INDOSOLAR20_21102026192117_OUTCOMEBM21102026.pdf",
+      "headline": "Indosolar Limited Reports Q2 FY27 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with explicit quarterly revenue and PAT figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Indosolar Limited (NSE: WAAREEINDO)</b>\n\n<b>Indosolar Limited Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations (Q2 FY27):</b> Rs 15,558.63 Lakhs\n- <b>Profit After Tax (Q2 FY27):</b> Rs 501.85 Lakhs\n- <b>Total Income (Q2 FY27):</b> Rs 15,716.68 Lakhs\n- <b>Profit Before Tax (Q2 FY27):</b> Rs 671.02 Lakhs\n\n📌 <b>What happened:</b>\n↳ Indosolar Limited has submitted its standalone unaudited financial results for the quarter and half year ended September 30, 2026, reporting a net profit of Rs 501.85 lakhs for the quarter.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/INDOSOLAR20_21102026192117_OUTCOMEBM21102026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-24 04:10:06 IST"
+    },
     {
       "hash": "1969b65064b5",
       "symbol": "GOACARBON",
@@ -1010,37 +1038,23 @@
       "worthiness_reason": "Execution of Revenue Sharing Contract for a DSF Bid Round-IV contract area by holding company subject to an ongoing merger.",
       "telegram_post": "📜 <b>#CONTRACT</b> | <b>Asian Energy Services Limited (NSE: ASIANENE)</b>\n\n<b>Holding company executes Revenue Sharing Contract for offshore block under DSF Bid Round-IV</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Area:</b> GK/OSDSF/GKOSN/2025\n- <b>Counterparty:</b> Government of India\n- <b>Executing Entity:</b> Oilmax Energy Private Limited (OEPL)\n- <b>Participating Interest:</b> 50% (Operator)\n- <b>Execution Date:</b> October 22, 2026\n\n📌 <b>What happened:</b>\n↳ Holding company Oilmax Energy executed the Revenue Sharing Contract with the Government of India for a Discovered Small Field block. Rights will vest in Asian Energy Services upon the NCLT-sanctioned merger becoming effective.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ASIANENE_23102026095157_AESL_Disclosure_Kutch_Offshore_RSC_23rdOct_final.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-23 10:28:21 IST"
-    },
-    {
-      "hash": "7749025152ab",
-      "symbol": "ANUHPHR",
-      "company_name": "Anuh Pharma Limited",
-      "category": "CAPACITY_EXPANSION",
-      "event_type": "CAPEX",
-      "broadcast_date": "21-Oct-2026 18:33:41",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ANUHNSE_21102026183054_Disclosure_under_Regulation_30.pdf",
-      "headline": "Anuh Pharma takes possession of Vanquest Pharma manufacturing facility",
-      "content_worthy": true,
-      "worthiness_reason": "Material capacity expansion update involving the acquisition and possession of a manufacturing facility.",
-      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Anuh Pharma Limited (NSE: ANUHPHR)</b>\n\n<b>Anuh Pharma takes possession of Vanquest Pharma manufacturing facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Counterparty:</b> M/s. Vanquest Pharma Private Limited\n- <b>Facility Location:</b> F-10, M.I.D.C., Tarapur, Boisar, District Palghar, Maharashtra\n- <b>Agreement Date:</b> 16th October, 2026\n- <b>Transaction Type:</b> Asset Transfer Agreement (ATA)\n\n📌 <b>What happened:</b>\n↳ Anuh Pharma Limited announced that it has received the physical possession of the manufacturing facility of Vanquest Pharma Private Limited pursuant to an Asset Transfer Agreement executed on 16th October, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ANUHNSE_21102026183054_Disclosure_under_Regulation_30.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-23 03:11:38 IST"
-    },
-    {
-      "hash": "5f8f19469e86",
-      "symbol": "WAAREEINDO",
-      "company_name": "Indosolar Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "21-Oct-2026 19:26:24",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/INDOSOLAR20_21102026192117_OUTCOMEBM21102026.pdf",
-      "headline": "Indosolar Limited Reports Q2 FY27 Financial Results",
-      "content_worthy": true,
-      "worthiness_reason": "The filing reports standalone financial results for the quarter ended September 30, 2026, including explicit revenue and PAT figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Indosolar Limited (NSE: WAAREEINDO)</b>\n\n<b>Indosolar Limited Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 15,558.63 Lakhs\n- <b>Profit Before Tax (PBT):</b> Rs 671.02 Lakhs\n- <b>Profit After Tax (PAT):</b> Rs 501.85 Lakhs\n- <b>Period Ended:</b> September 30, 2026\n\n📌 <b>What happened:</b>\n↳ Indosolar Limited announced its unaudited standalone financial results for the quarter ended September 30, 2026, reporting a net profit after tax of Rs 501.85 Lakhs.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/INDOSOLAR20_21102026192117_OUTCOMEBM21102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-23 03:11:16 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "af7795ed2e36",
+      "symbol": "ADANIENSOL",
+      "company_name": "Adani Energy Solutions Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "23-Oct-2026 00:07:08",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ADANITRANS_23102026000657_Presentation_-_H1.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "The filing is merely an investor presentation submission for financial results without explicitly detailing the core revenue and PAT figures in the text summary.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-24 04:10:06 IST"
+    },
     {
       "hash": "7d1b11a6c332",
       "symbol": "ADANIGREEN",
@@ -1936,20 +1950,6 @@
       "worthiness_reason": "Financial results payload does not explicitly state the complete numeric Revenue and PAT within the provided text snippet.",
       "telegram_post": "",
       "analyzed_at": "2026-10-23 15:40:59 IST"
-    },
-    {
-      "hash": "af7795ed2e36",
-      "symbol": "ADANIENSOL",
-      "company_name": "Adani Energy Solutions Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "23-Oct-2026 00:07:08",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ADANITRANS_23102026000657_Presentation_-_H1.pdf",
-      "headline": "General Updates",
-      "content_worthy": false,
-      "worthiness_reason": "The filing is merely an investor presentation submission for financial results without explicitly detailing the core numeric Revenue and PAT totals within the summary data provided.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-23 03:11:16 IST"
     }
   ]
 }
