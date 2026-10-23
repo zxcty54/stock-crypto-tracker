@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-23 03:11:38 IST",
-  "worthy_count": 53,
-  "skipped_count": 42,
+  "worthy_count": 51,
+  "skipped_count": 41,
   "content_feed": [
     {
       "hash": "7749025152ab",
@@ -716,34 +716,6 @@
       "worthiness_reason": "Company received a material order/rate contract worth Rs. 31.13 crores.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Refex Industries Limited (NSE: REFEX)</b>\n\n<b>Refex Industries secures ash transportation rate contract worth Rs. 31.13 crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Value:</b> Rs. 31,13,05,500/- (incl. GST)\n- <b>Scope:</b> Slab-wise Rate Contract for Ash Transportation to construction site of road projects of NHAI and other Central/State road construction authorities\n- <b>Execution Period:</b> 1 year (extendable by 6 months)\n- <b>Client:</b> Entity based in Maharashtra (Domestic)\n\n📌 <b>What happened:</b>\n↳ Refex Industries Limited has received a slab-wise rate contract for ash transportation with a cumulative maximum award value of Rs. 31.13 crore, valid for one year and extendable by a further six months.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/REFEX2002_22102026121651_RIL_order_Pond_Ash_FlyAsh_22102026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-22 13:09:52 IST"
-    },
-    {
-      "hash": "5f1f63422d4f",
-      "symbol": "MGEL",
-      "company_name": "Mangalam Global Enterprise Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "19-Oct-2026 18:32:17",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MGEL_19102026183106_PRESS_RELEASE_30092026_SIGNED.pdf",
-      "headline": "Mangalam Global Enterprise Reports Q2 FY27 Financial Results",
-      "content_worthy": true,
-      "worthiness_reason": "Quarterly financial results with revenue and profit metrics.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Mangalam Global Enterprise Limited (NSE: MGEL)</b>\n\n<b>Mangalam Global Enterprise Q2 FY27 PBT Rises 41.85% YoY</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 982.56 Crore\n- <b>Profit Before Tax (PBT):</b> Rs 12.27 Crore\n- <b>Adjusted EBITDA:</b> Rs 23.10 Crore\n- <b>YoY PBT Growth:</b> 41.85%\n\n📌 <b>What happened:</b>\n↳ Mangalam Global Enterprise Limited announced its financial results for the quarter ended September 30, 2026, reporting a revenue from operations of Rs 982.56 crore and a PBT of Rs 12.27 crore.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MGEL_19102026183106_PRESS_RELEASE_30092026_SIGNED.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-22 05:13:06 IST"
-    },
-    {
-      "hash": "e061392070e8",
-      "symbol": "GALLANTT",
-      "company_name": "Gallantt Ispat Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "20-Oct-2026 00:16:05",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/GALLANTT_20102026001428_BM_Outcome_19102026.pdf",
-      "headline": "Gallantt Ispat Reports Q2 FY27 Financial Results",
-      "content_worthy": true,
-      "worthiness_reason": "Quarterly financial results containing explicit revenue and profit figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Gallantt Ispat Limited (NSE: GALLANTT)</b>\n\n<b>Gallantt Ispat Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 1,14,589.15 Lakhs (Q2 FY27)\n- <b>Total Income:</b> Rs 1,16,404.39 Lakhs (Q2 FY27)\n\n📌 <b>What happened:</b>\n↳ The company's Board of Directors approved the unaudited financial results for the quarter and half year ended September 30, 2026, during their meeting held on October 19, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GALLANTT_20102026001428_BM_Outcome_19102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-22 05:13:06 IST"
     }
   ],
   "skipped_archive": [
@@ -1320,20 +1292,6 @@
       "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the text extract.",
       "telegram_post": "",
       "analyzed_at": "2026-10-22 13:10:13 IST"
-    },
-    {
-      "hash": "f3bc02fc56c3",
-      "symbol": "MGEL",
-      "company_name": "Mangalam Global Enterprise Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "19-Oct-2026 18:17:13",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MGEL_19102026181653_OUTCOME_OF_BM_19102026_SIGNED.pdf",
-      "headline": "Integrated Filing- Financial",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results summary is incomplete in the provided payload as numeric values for revenue and PAT are truncated or garbled in the text extraction.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-22 05:13:27 IST"
     }
   ]
 }
