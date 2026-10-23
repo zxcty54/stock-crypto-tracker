@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-10-23 03:11:38 IST",
-  "worthy_count": 51,
+  "generated_at": "2026-10-23 10:28:42 IST",
+  "worthy_count": 54,
   "skipped_count": 41,
   "content_feed": [
+    {
+      "hash": "9036cceaab27",
+      "symbol": "CIPLA",
+      "company_name": "Cipla Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "REGULATORY_APPROVAL",
+      "broadcast_date": "23-Oct-2026 09:03:45",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/CIPLA_23102026090259_SE_USFDA_Inspection_Hauppage_20261023_F.pdf",
+      "headline": "Cipla subsidiary receives zero Form 483 observations from USFDA inspection",
+      "content_worthy": true,
+      "worthiness_reason": "USFDA inspection outcome with zero Form 483 observations for a key manufacturing facility.",
+      "telegram_post": "✅ <b>#REGULATORY_APPROVAL</b> | <b>Cipla Limited (NSE: CIPLA)</b>\n\n<b>USFDA inspection concludes with zero observations at US facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility:</b> InvaGen Pharmaceuticals Inc. (wholly owned subsidiary)\n- <b>Location:</b> Hauppauge, Long Island, New York, USA\n- <b>Inspection Dates:</b> 19th October, 2026 to 22nd October, 2026\n- <b>Outcome:</b> Zero Form 483 observations\n\n📌 <b>What happened:</b>\n↳ The USFDA conducted a routine current Good Manufacturing Practices (cGMP) inspection at the subsidiary's manufacturing facility, concluding with no observations.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/CIPLA_23102026090259_SE_USFDA_Inspection_Hauppage_20261023_F.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-23 10:28:42 IST"
+    },
+    {
+      "hash": "beb0eaec6a9b",
+      "symbol": "WELCORP",
+      "company_name": "Welspun Corp Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "23-Oct-2026 09:09:17",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/WELCORP_23102026090904_SEOrder.pdf",
+      "headline": "Welspun Corp bags ~₹5,500 crore order to supply coated line pipes for US natural gas pipeline",
+      "content_worthy": true,
+      "worthiness_reason": "Major order win valued at approximately Rs 5,500 crore to supply coated line pipes for a US natural gas pipeline project.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Welspun Corp Limited (NSE: WELCORP)</b>\n\n<b>US subsidiary secures ~₹5,500 crore order for natural gas pipeline project</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Approx ~₹5,500 crore\n- <b>Scope:</b> Supply coated line pipes\n- <b>Project Geography:</b> USA (Permian Natural gas pipeline)\n- <b>Execution Period:</b> FY29\n- <b>Global Order Book:</b> Approx USD 5.25 billion (~₹50,000 crore)\n\n📌 <b>What happened:</b>\n↳ Welspun Tubular LLC secured an order from a major midstream company for a pipeline project serving a data centre complex, taking the company's global order book to an all-time high.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/WELCORP_23102026090904_SEOrder.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-23 10:28:21 IST"
+    },
+    {
+      "hash": "f634fe2b0d74",
+      "symbol": "ASIANENE",
+      "company_name": "Asian Energy Services Limited",
+      "category": "ORDER",
+      "event_type": "CONTRACT",
+      "broadcast_date": "23-Oct-2026 09:52:10",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ASIANENE_23102026095157_AESL_Disclosure_Kutch_Offshore_RSC_23rdOct_final.pdf",
+      "headline": "Asian Energy Services: Holding company executes Revenue Sharing Contract for Kutch Offshore block",
+      "content_worthy": true,
+      "worthiness_reason": "Execution of Revenue Sharing Contract for a DSF Bid Round-IV contract area by holding company subject to an ongoing merger.",
+      "telegram_post": "📜 <b>#CONTRACT</b> | <b>Asian Energy Services Limited (NSE: ASIANENE)</b>\n\n<b>Holding company executes Revenue Sharing Contract for offshore block under DSF Bid Round-IV</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Contract Area:</b> GK/OSDSF/GKOSN/2025\n- <b>Counterparty:</b> Government of India\n- <b>Executing Entity:</b> Oilmax Energy Private Limited (OEPL)\n- <b>Participating Interest:</b> 50% (Operator)\n- <b>Execution Date:</b> October 22, 2026\n\n📌 <b>What happened:</b>\n↳ Holding company Oilmax Energy executed the Revenue Sharing Contract with the Government of India for a Discovered Small Field block. Rights will vest in Asian Energy Services upon the NCLT-sanctioned merger becoming effective.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ASIANENE_23102026095157_AESL_Disclosure_Kutch_Offshore_RSC_23rdOct_final.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-23 10:28:21 IST"
+    },
     {
       "hash": "7749025152ab",
       "symbol": "ANUHPHR",
