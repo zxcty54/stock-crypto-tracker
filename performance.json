@@ -1,38 +1,44 @@
 {
- "generated_at": "2026-10-23 00:50 IST",
- "sample_size": 54,
- "identified": 34,
- "inferred": 20,
+ "generated_at": "2026-10-24 00:55 IST",
+ "sample_size": 58,
+ "identified": 35,
+ "inferred": 23,
  "cards_skipped": 0,
- "channel_avg_views": 26.0,
+ "channel_avg_views": 25.4,
  "growth": {
-  "today": 477,
-  "snapshots": 16,
-  "delta_7d": 474,
-  "per_day": 29.62,
-  "days_to_target": 17,
+  "today": 476,
+  "snapshots": 17,
+  "delta_7d": 473,
+  "per_day": 27.82,
+  "days_to_target": 18,
   "target": 1000,
-  "days_span": 16
+  "days_span": 17
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
-   "avg_views": 35.7,
-   "weight": 1.37,
-   "low_sample": false
-  },
-  "technical": {
-   "posts": 6,
-   "avg_views": 32.8,
-   "weight": 1.26,
+   "avg_views": 36.0,
+   "weight": 1.41,
    "low_sample": false
   },
   "psychology": {
    "posts": 2,
-   "avg_views": 32.5,
+   "avg_views": 33.0,
    "weight": 1.0,
    "low_sample": true
+  },
+  "technical": {
+   "posts": 6,
+   "avg_views": 33.0,
+   "weight": 1.3,
+   "low_sample": false
+  },
+  "business_model": {
+   "posts": 5,
+   "avg_views": 28.4,
+   "weight": 1.12,
+   "low_sample": false
   },
   "awareness": {
    "posts": 1,
@@ -52,33 +58,27 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "business_model": {
-   "posts": 5,
-   "avg_views": 26.2,
-   "weight": 1.01,
-   "low_sample": false
-  },
   "corporate": {
-   "posts": 24,
-   "avg_views": 25.8,
-   "weight": 0.99,
+   "posts": 28,
+   "avg_views": 23.6,
+   "weight": 0.93,
    "low_sample": false
   },
   "risk": {
    "posts": 4,
-   "avg_views": 21.2,
-   "weight": 0.82,
+   "avg_views": 22.2,
+   "weight": 0.87,
    "low_sample": false
   },
   "other": {
    "posts": 5,
-   "avg_views": 17.8,
-   "weight": 0.68,
+   "avg_views": 18.8,
+   "weight": 0.74,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 2,
-   "avg_views": 14.0,
+   "avg_views": 16.5,
    "weight": 1.0,
    "low_sample": true
   }
@@ -96,25 +96,25 @@
   },
   {
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
-   "views": 41,
+   "views": 42,
    "pillar": "lifestyle"
   },
   {
-   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 40,
-   "pillar": "business_model"
+   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
+   "views": 41,
+   "pillar": "corporate"
   },
   {
-   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
-   "views": 40,
-   "pillar": "corporate"
+   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
+   "views": 41,
+   "pillar": "business_model"
   }
  ],
  "weak_posts": [
   {
-   "title": "CEMENT INDUSTRY CYCLE: Demand Aur Cost Ka Khel",
-   "views": 1,
-   "pillar": "business_model"
+   "title": "Triveni Power Transmission Limited (NSE: TRIVENIPT)",
+   "views": 5,
+   "pillar": "corporate"
   },
   {
    "title": "Channel created",
