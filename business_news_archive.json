@@ -1,0 +1,463 @@
+{
+  "stories": [
+    {
+      "id": "newstcehxuonsy",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Demeter's Ashwini Agarwal sees value in largecaps, financial services and consumer stocks; avoids IT and OMCs",
+      "url": "https://www.cnbctv18.com/market/largecaps-financials-exporters-it-stocks-omcs-market-earnings-outlook-ashwini-agarwal-alpha-article-20018459.htm",
+      "published_at": "2026-10-24T13:19:22+05:30",
+      "published_ist": "2026-10-24 13:19 IST",
+      "summary": "Financial services, offline retail and exporters offer significant value pockets in the current market, while policy uncertainty makes oil marketing companies unattractive, according to Ashwini Agarwal of Demeter Advisors.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market corrections can widen valuation gaps between large-cap and small-cap stocks, leading some analysts to argue that large-caps offer better risk-reward ratios due to more stable earnings growth. If a market downturn pulls down stock prices despite steady underlying business performance, investors might find entry opportunities in sectors like consumer staples and financial services. However, global energy costs, raw material fluctuations, and sector-specific stresses could still impact these projections.",
+        "what_to_watch": [
+          "Quarterly earnings reports and credit quality disclosures for private-sector banks and NBFCs.",
+          "Official consumption data and volume growth numbers for consumer staples and offline retail companies.",
+          "Movements in global crude oil prices and raw material indices."
+        ],
+        "evergreen_lesson": "Top-down allocation decisions often weigh relative valuation gaps and index earnings yields over bottom-up stock picking during periods of macroeconomic uncertainty."
+      }
+    },
+    {
+      "id": "newsniktmokuwx",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "S&P set to change how it classifies US growth and value stocks",
+      "url": "https://www.cnbctv18.com/market/sp-set-to-change-how-it-classifies-us-growth-and-value-stocks-20018460.htm",
+      "published_at": "2026-10-24T12:05:06+05:30",
+      "published_ist": "2026-10-24 12:05 IST",
+      "summary": "S&P Dow Jones Indices is updating its classification of US stocks as growth or value, dropping momentum for growth and adding free cash flow for value, effective December 21, 2026.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Index providers modifying their classification rules for growth and value stocks can directly impact how passive funds allocate capital across market segments. When momentum factors are dropped for growth and free cash flow or intangibles-adjusted book values are added for value, constituent lists might undergo structural shifts. If portfolio managers rely on these indices for benchmark tracking, they would likely rebalance their holdings ahead of the implementation date.",
+        "what_to_watch": [
+          "Preliminary index files and rebalancing announcements published by index providers ahead of the effective date.",
+          "Trading volume and tracking error disclosures of exchange-traded funds linked to the affected indices around the reconstitution date."
+        ],
+        "evergreen_lesson": "Index methodology changes alter the fundamental definitions of style investing, forcing passive capital pools to adapt to new quantitative metrics."
+      }
+    },
+    {
+      "id": "newsffbyrhbvec",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Sebi orders Avadhut Sathe, academy to refund Rs 546 crore",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-orders-avadhut-sathe-academy-to-refund-rs-546-crore/articleshow/135162877.cms",
+      "published_at": "2026-10-24T11:01:13+05:30",
+      "published_ist": "2026-10-24 11:01 IST",
+      "summary": "The Securities and Exchange Board of India has directed Avadhut Sathe Trading Academy to refund ₹546.18 crore to investors. Avadhut Sathe and his academy provided unregistered investment advisory services under the pretext of education. The regulator found that misleading testimonials were circulated while concealing overall trading losses. A penalty of ₹11.5 crore was imposed on Sathe and the academy for their actions.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regulatory enforcement actions against unregistered advisory services operating under the guise of education establish legal boundaries between permissible training and regulated investment advice. If entities bundle trade recommendations, entry targets, and stock-specific tips with educational programs, regulators may classify those operations as unregistered advisory services. Compliance with disgorgement orders and penalty payments will determine whether such entities can fulfill financial redressal mandates.",
+        "what_to_watch": [
+          "Compliance disclosures regarding the deposit of refund amounts and interest into the Investor Protection and Education Fund.",
+          "Appellate tribunal filings or subsequent legal challenges against the regulator's final order."
+        ],
+        "evergreen_lesson": "Providing specific stock recommendations and entry-exit targets under the label of education does not exempt an entity from investment advisory regulations."
+      }
+    },
+    {
+      "id": "newsxkkdoichdg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Growth, value stocks set for reshuffle as S&P adopts new rules",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/growth-value-stocks-set-for-reshuffle-as-sp-adopts-new-rules/articleshow/135161737.cms",
+      "published_at": "2026-10-24T09:51:59+05:30",
+      "published_ist": "2026-10-24 09:51 IST",
+      "summary": "S&P Dow Jones Indices will soon change its rules for classifying growth and value shares. The new criteria will incorporate intangible assets, forward earnings, and free cash flow instead of relying on 12-month price momentum. These changes are expected to affect approximately $375 billion of passive funds linked to the index. FTSE Russell is also considering adjustments due to the dominance of technology companies.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When index providers overhaul the criteria for sorting equities into growth and value styles, it can resolve long-standing distortions caused by traditional metrics like price-to-book ratios. If accounting rules treat intangible assets and intellectual property investments as expenses rather than balance-sheet assets, conventional models may misclassify profitable companies. Consequently, updating style definitions with forward earnings and free cash flow could alter the constituent weights of major benchmarks.",
+        "what_to_watch": [
+          "Portfolio rebalancing disclosures and transaction volumes from passive funds managing assets tied to the affected indices.",
+          "Consultation outcome reports and final rule implementations by other index providers facing similar market dominance issues."
+        ],
+        "evergreen_lesson": "Style index definitions must evolve alongside corporate spending patterns, shifting from physical assets toward intellectual property and internally developed intangibles."
+      }
+    },
+    {
+      "id": "newsjqgvdvpdgf",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Radhakishan Damani portfolio: Top 10 stock holdings of the ace investor",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/radhakishan-damani-portfolio-top-10-stock-holdings-of-the-ace-investor/slideshow/135161767.cms",
+      "published_at": "2026-10-24T09:41:55+05:30",
+      "published_ist": "2026-10-24 09:41 IST",
+      "summary": "Damani’s other top stock holdings in terms of holding value are United Breweries, TSF Investments, Horizon Industrial Parks, Blue Dart Express and Bhagiradha Chemicals.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsdehqhgmfki",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Small and midcap indices post worst weekly decline in two years",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/small-and-midcap-indices-post-worst-weekly-decline-in-two-years/articleshow/135160009.cms",
+      "published_at": "2026-10-24T08:06:47+05:30",
+      "published_ist": "2026-10-24 08:06 IST",
+      "summary": "Mid-cap and small-cap stocks in India have faced major declines, indicating a shift in market sentiment. The Nifty MidCap 150 and Small-cap 250 indices reported their worst weekly falls in two years. Domestic retail investors initially supported these segments by increasing mutual fund contributions. However, concerns over rising oil prices and fiscal deficits are adding to market uncertainties.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Retail investors shifting sentiment away from smaller companies can cause sharp corrections in broader segments like mid and small-cap indices. When blue-chip equities face protracted selling, retail mutual fund flows that previously supported riskier segments might slow down if broader market confidence wanes. If macroeconomic headwinds like rising oil prices persist, smaller stocks with weaker earnings profiles could face prolonged valuation pressures.",
+        "what_to_watch": [
+          "Changes in monthly equity mutual fund inflow data reported by AMFI.",
+          "Subsequent quarterly earnings delivery and margin reports of small-cap and mid-cap companies.",
+          "Foreign portfolio investor (FPI) net flow data in Indian equities."
+        ],
+        "evergreen_lesson": "Broad market indices are vulnerable to swift corrections when liquidity tightens and valuations decouple from fundamental earnings delivery during shifts in market sentiment."
+      }
+    },
+    {
+      "id": "newsemlkbijudv",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI’s forward dollar sales surge to record $200 billion in August",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/rbi-net-forex-buys-hit-a-record-43-billion-in-august-balances-it-with-swaps/articleshow/135159794.cms",
+      "published_at": "2026-10-24T07:50:15+05:30",
+      "published_ist": "2026-10-24 07:50 IST",
+      "summary": "The Reserve Bank of India recorded a net purchase of $43.26 billion in August's foreign exchange market. This was done to manage significant dollar inflows from the FCNR(B) scheme and overseas borrowings. Despite the net purchase, foreign exchange reserves did not increase due to large forex sell/buy swaps. By August 31, measures attracted over $127 billion, aiding the RBI's operations.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When a central bank absorbs large dollar inflows through spot purchases while simultaneously executing foreign exchange sell/buy swaps, its forward liabilities increase significantly. If substantial dollar inflows are sterilized through swaps, the spot reserves may not reflect the actual extent of future foreign exchange commitments. Should geopolitical pressures or capital outflows intensify, a high forward dollar sales position could constrain future central bank interventions.",
+        "what_to_watch": [
+          "Changes in the RBI's monthly Bulletin data on net forward liabilities and outstanding forward books.",
+          "Official updates on the utilization and redemption schedule of FCNR(B) and overseas borrowing schemes.",
+          "Movements in foreign exchange reserve figures reported in the RBI's weekly statistical supplements."
+        ],
+        "evergreen_lesson": "Headline foreign exchange reserve figures do not capture off-balance-sheet forward commitments, which expand when a central bank manages heavy short-term capital inflows."
+      }
+    },
+    {
+      "id": "newsxopmjqcsrn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Silver hits 11-month low of ₹1.95 lakh as crude stokes inflation fears",
+      "url": "https://economictimes.indiatimes.com/markets/commodities/news/silver-hits-11-month-low-of-1-95-lakh-as-crude-stokes-inflation-fears/articleshow/135161699.cms",
+      "published_at": "2026-10-23T23:33:12+05:30",
+      "published_ist": "2026-10-23 23:33 IST",
+      "summary": "On the Multi Commodity Exchange (MCX), silver futures fell ₹6,799 per kg, or 3.4%, to ₹1,92,800 per kg on Friday. Prices have plunged ₹32,955, or more than 14%, over the past 10 sessions. A recent appreciation in the rupee has provided only limited relief against the decline in international prices.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Surging crude oil prices can stoke broader inflation fears and drive up global interest rate expectations, reducing the appeal of non-yielding precious metals. When macroeconomic pressures increase discount rates, assets that do not generate interest income often experience aggressive liquidations. If industrial demand slows down concurrently, industrial-linked precious metals can face compounded downward price adjustments.",
+        "what_to_watch": [
+          "Global Brent crude price movements and upcoming US Federal Reserve rate decisions.",
+          "MCX and spot market price trends for gold and silver in domestic retail markets.",
+          "Manufacturing activity and industrial demand metrics from key sectors like solar-panel and semiconductor production."
+        ],
+        "evergreen_lesson": "Precious metals act as non-yielding assets whose valuations react inversely to rising real interest rates and inflation shocks driven by commodity price spikes."
+      }
+    },
+    {
+      "id": "newsqmznlioira",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI flags rising inflation risks from West Asia conflict, El Nino despite resilient Indian economy",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/rbi-flags-rising-inflation-risks-from-west-asia-conflict-el-nino-despite-resilient-indian-economy/articleshow/135160910.cms",
+      "published_at": "2026-10-23T21:24:19+05:30",
+      "published_ist": "2026-10-23 21:24 IST",
+      "summary": "India's external sector shows resilience due to a narrowing trade gap and comfortable foreign exchange reserves. Inflationary pressures have intensified due to geopolitical tensions and supply-side bottlenecks. The RBI reported an increase in both industry and services indicators, showcasing economic strength. The IMF has revised India's growth projection for 2026-27 to 7% based on resilient domestic demand. Global financial volatility has increased amid global challenges and rising inflation risks.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Strong external sector metrics and high-frequency industrial indicators can coexist with rising domestic food and fuel inflation driven by supply-side bottlenecks. When geopolitical conflicts and weather patterns like El Nino push up input costs, headline inflation can rise even if domestic demand remains resilient. If external buffers such as low debt-to-GDP ratios remain stable, the economy can absorb external shocks better than nations with weak external accounts.",
+        "what_to_watch": [
+          "Consumer Price Index (CPI) inflation prints and rural versus urban inflation divergence.",
+          "Merchandise export growth and trade deficit numbers published monthly.",
+          "Developments in global crude oil prices and West Asian geopolitical conditions."
+        ],
+        "evergreen_lesson": "An economy with robust external buffers and comfortable import cover can maintain growth momentum during global volatility, but remains vulnerable to supply-driven local food and fuel inflation."
+      }
+    },
+    {
+      "id": "newsllgmgcfwkg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI governor reiterates listing requirement for top NBFCs as focus intensifies on Tata Sons",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/rbi-governor-reiterates-listing-requirement-for-top-nbfcs-as-focus-intensifies-on-tata-sons/articleshow/135149631.cms",
+      "published_at": "2026-10-23T20:55:41+05:30",
+      "published_ist": "2026-10-23 20:55 IST",
+      "summary": "India's central bank governor said on Friday non-bank finance companies classified in the upper layer are required to list on the stock market, reiterating the Reserve Bank of India's stance on the listing of Tata Sons without commenting directly on the company.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsqrqkgizqrz",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Sebi proposes automatic approval route for stock exchanges, depositories to ease compliance burden",
+      "url": "https://www.cnbctv18.com/market/sebi-proposes-automatic-approval-route-for-stock-exchanges-depositories-to-ease-compliance-burden-20017645.htm",
+      "published_at": "2026-10-23T19:53:15+05:30",
+      "published_ist": "2026-10-23 19:53 IST",
+      "summary": "The proposal seeks to reduce compliance requirements for market infrastructure institutions (MIIs) and improve ease of doing business. SEBI has invited public comments on the proposed framework until November 12.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsnmiiimkfiy",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI does not target any specific Rupee level, focuses on curbing volatility, says Governor Sanjay Malhotra",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/rbi-does-not-target-any-specific-rupee-level-focuses-on-curbing-volatility-says-governor-sanjay-malhotra/articleshow/135148201.cms",
+      "published_at": "2026-10-23T19:38:55+05:30",
+      "published_ist": "2026-10-23 19:38 IST",
+      "summary": "Reserve Bank of India (RBI) Governor Sanjay Malhotra on Friday said the central bank does not target any specific exchange rate or level for the rupee against the US dollar, stressing that its primary objective is to ensure orderly conditions in the foreign exchange market and prevent excessive volatility.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newskctbbmgqis",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "China stocks sink deeper into bear market despite state buying",
+      "url": "https://www.cnbctv18.com/market/china-stocks-sink-deeper-into-bear-market-despite-state-buying-20017592.htm",
+      "published_at": "2026-10-23T08:07:11+05:30",
+      "published_ist": "2026-10-23 08:07 IST",
+      "summary": "Chinese stocks sank deeper into a bear market on Friday as state-backed rescue efforts failed to restore investor confidence, with the CSI 300 Index sliding further amid persistent momentum issues.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsthfrjzxzaz",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Stock Crash: Australian company shares tank 50% after flagging $7.1 million US fraud",
+      "url": "https://www.cnbctv18.com/market/stock-crash-australian-company-shares-tank-50-after-flagging-dollar-7-1-million-us-fraud-zip-co-20017521.htm",
+      "published_at": "2026-10-23T07:11:33+05:30",
+      "published_ist": "2026-10-23 07:11 IST",
+      "summary": "Zip Co. shares fell up to 50% after disclosing A$10.1 million in fraud-related costs in the United States, prompting concerns about transparency and onboarding.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab ek fintech ya payments company me fraud hota hai, toh market turant uske onboarding controls aur risk management systems par sawal uthata hai. Jaise is case me Zip Co. ke shares 50% gir gaye kyunki unke US business me coordinated individuals ne fraudulent accounts banaye the. Yeh headline yeh establish nahi karti ki yeh nuksan long-term me company ke business model ko permanently damage karega ya nahi, lekin agar fraud-prevention ke naye rules strict kiye gaye, toh short-term me customer acquisition slow ho sakta hai aur operating costs badh sakti hain.",
+        "what_to_watch": [
+          "Company ke quarterly disclosures me net credit losses aur transaction volumes ka trend kya rehta hai",
+          "US division ke leadership changes (jaise interim CEO ka appointment) ke baad execution stability kitni hai"
+        ],
+        "evergreen_lesson": "Payments aur lending business me top-line growth ya market share expansion keval tabhi sustainable hoti hai jab onboarding aur KYC controls utne hi strong ho, warna ek chota fraud bhi investor confidence ko poori tarah hila sakta hai."
+      }
+    },
+    {
+      "id": "newsgbiqtxkptt",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "SEBI allows margin relief against early pay-in of securities for subsequent trades",
+      "url": "https://www.cnbctv18.com/market/sebi-allows-margin-relief-against-early-pay-in-of-securities-for-subsequent-trades-20017412.htm",
+      "published_at": "2026-10-22T21:18:26+05:30",
+      "published_ist": "2026-10-22 21:18 IST",
+      "summary": "SEBI announced that clearing corporations will not collect margins from trading and clearing members on clients subsequent cash segment positions up to the value of successfully accepted early pay-in",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "SEBI ke is new framework se clearing corporations ab clients ko early pay-in (EPI) ke against margin relief dengi, jisse cash segment me capital efficiency badhti hai. Is mechanism se traders ko apne net sell obligations ke badle subsequent trades ke liye extra margin block nahi karna padega. Halanki, yeh announcement apne aap me yeh guarantee nahi karti ki market volumes me turant bohot bada jump aayega, kyunki brokers aur trading members ko apne risk management systems ko is real-time adjustment ke mutabiq update karna padega.",
+        "what_to_watch": [
+          "Trading members aur brokers ke system updates ki implementation speed aur client margin utilization data",
+          "Clearing corporations ki taraf se real-time EPI value calculation me koi technical lag ya operational friction report hoti hai ya nahi"
+        ],
+        "evergreen_lesson": "Regulatory changes jo settlement or margin framework ko streamline karti hain, woh working capital ki efficiency ko badhati hain, lekin unka actual benefit is baat par nirbhar karta hai ki intermediaries apne backend systems ko kitni jaldi integrate karte hain."
+      }
+    },
+    {
+      "id": "newsyimtzdsojc",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Nippon AMC pays ₹96.76 crore to settle SEBI case over Yes Bank bonds",
+      "url": "https://www.cnbctv18.com/business/companies/nippon-amc-pays-rs96-76-crore-to-settle-sebi-case-over-yes-bank-bonds-20017090.htm",
+      "published_at": "2026-10-22T15:56:58+05:30",
+      "published_ist": "2026-10-22 15:56 IST",
+      "summary": "Nippon Life India Asset Management has paid ₹96.76 crore to settle a SEBI case over mutual fund investments in Yes Bank’s AT-1 bonds. The regulator’s final settlement order is awaited.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-24 13:59:43 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab koi asset management company (AMC) regulatory proceedings ko settle karne ke liye exception items me badi amount pay karti hai, toh woh immediate cash outflow ko reflect karta hai bina guilt admit kiye. Nippon AMC ne SEBI ko Yes Bank AT-1 bonds ke mamle me settlement ke taur par ₹96.76 crore diye hain, jisme management fees ka reversal bhi shamil hai. Yeh headline yeh establish nahi karti ki unke funds ke unitholders ko kitna final recovery milega, kyunki Supreme Court aur High Court ke judgements ke baad legal aur trustee actions abhi bhi chal rahe hain.",
+        "what_to_watch": [
+          "SEBI ka final settlement order aane ke baad official communication aur conditions",
+          "Yes Bank AT-1 bonds ke case me court aur debenture trustees (jaise Axis Trusteeship) ke through unitholders ke liye koi actual recovery hoti hai ya nahi"
+        ],
+        "evergreen_lesson": "Mutual fund houses me regulatory compliance aur historical debt investments ki oversight sirf fee income ko hi nahi balki balance sheet aur exceptional provisions ko bhi severely impact kar sakti hai."
+      }
+    },
+    {
+      "id": "newsbcaczbevwm",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Bond market volatility drags largest sovereign wealth fund to $30 billion loss",
+      "url": "https://www.cnbctv18.com/market/bond-market-volatility-drags-largest-sovereign-wealth-fund-to-30-billion-loss-20016992.htm",
+      "published_at": "2026-10-22T14:24:03+05:30",
+      "published_ist": "2026-10-22 14:24 IST",
+      "summary": "Norges Bank Investment Management (NBIM) manages the $2.3 trillion fund. It said accounting return for the period was at a loss of 27.8 billion kroner or $29.7 billion. About 70% of its fixed income portfolio is allocated to the government's bonds while the remaining is invested in corporate debt.",
+      "first_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "last_seen_at": "2026-10-24T13:59:43.717130+05:30",
+      "first_seen_ist": "2026-10-24 13:59:43 IST",
+      "last_seen_ist": "2026-10-24 13:59:43 IST",
+      "status": "new",
+      "topic": "capital_market"
+    }
+  ],
+  "last_scraped_at": "2026-10-24T13:59:43.717130+05:30",
+  "last_scraped_ist": "2026-10-24 13:59:43 IST",
+  "feed_status": {
+    "CNBC-TV18": {
+      "checked_ist": "2026-10-24 13:59:43 IST",
+      "http_status": 200,
+      "fresh_items": 128,
+      "accepted_items": 9,
+      "filtered_items": 119,
+      "error": null
+    },
+    "Economic Times": {
+      "checked_ist": "2026-10-24 13:59:43 IST",
+      "http_status": 200,
+      "fresh_items": 50,
+      "accepted_items": 9,
+      "filtered_items": 41,
+      "error": null
+    },
+    "The Hindu BusinessLine": {
+      "checked_ist": "2026-10-24 13:59:43 IST",
+      "http_status": 200,
+      "fresh_items": 28,
+      "accepted_items": 0,
+      "filtered_items": 28,
+      "error": null
+    }
+  },
+  "retention_days": 30,
+  "curation": {
+    "version": 7,
+    "scope": [
+      "economy",
+      "capital_market",
+      "stock_market"
+    ],
+    "excludes": [
+      "financial_results",
+      "opinions_and_recommendations",
+      "generic_market_wraps",
+      "company_corporate_announcements",
+      "commercial_order_and_contract_wins",
+      "ipo_and_fpo_related_news",
+      "fii_fpi_dii_related_news",
+      "routine_price_moves_without_material_catalyst",
+      "low_materiality_announcements"
+    ],
+    "newsworthiness_rule": "Exclude issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
+    "near_duplicate_window_hours": 72,
+    "last_curated_ist": "2026-10-24 13:59:43 IST"
+  },
+  "last_run_stats": {
+    "updated_ist": "2026-10-24 13:59:43 IST",
+    "fetched_items": 206,
+    "accepted_feed_items": 18,
+    "filtered_feed_items": 188,
+    "new_unique_stories": 17,
+    "duplicate_items_collapsed": 1,
+    "archive_items_removed_by_curation": 0,
+    "stories_total": 17
+  }
+}
