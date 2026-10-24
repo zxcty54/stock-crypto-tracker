@@ -92,13 +92,15 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(removed, 0)
         self.assertEqual(duplicates, 0)
         self.assertEqual(len(curated), len(archive["stories"]))
-        self.assertEqual(archive["curation"]["version"], 7)
+        self.assertEqual(archive["curation"]["version"], 8)
         self.assertIn("ipo_and_fpo_related_news", archive["curation"]["excludes"])
         self.assertIn("fii_fpi_dii_related_news", archive["curation"]["excludes"])
+        self.assertIn("stock_portfolio_and_wealth_listicles", archive["curation"]["excludes"])
         for story in archive["stories"]:
             with self.subTest(title=story["headline"]):
                 self.assertFalse(news._is_ipo_related_headline(story["headline"]))
                 self.assertFalse(news._is_fii_dii_related_headline(story["headline"]))
+                self.assertFalse(news._is_stock_portfolio_listicle_headline(story["headline"]))
 
     def test_archive_ai_enrichment_adds_durable_notes_once(self):
         source_context = self.archive_insight_candidate()["reported_context"]
@@ -427,6 +429,30 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         ):
             with self.subTest(title=title):
                 self.assertIsNone(news.classify_news_story(title))
+
+    def test_excludes_stock_portfolio_and_wealth_loss_listicles(self):
+        excluded = (
+            "Portfolio Killers: 10 US stocks that wiped out up to 66% of investors’ wealth in 2026",
+            "Radhakishan Damani portfolio: Top 10 stock holdings of the ace investor",
+            "Top 10 stocks in Mukesh Ambani’s portfolio",
+            "Portfolio holdings: 5 shares held by a famous investor",
+            "Stocks that wiped out investors’ wealth this year",
+        )
+        for title in excluded:
+            with self.subTest(title=title):
+                self.assertTrue(news._is_stock_portfolio_listicle_headline(title))
+                self.assertIsNone(news.classify_news_story(title))
+
+        # Market or policy reporting that merely mentions a portfolio remains eligible.
+        self.assertEqual(
+            news.classify_news_story("RBI tightens portfolio concentration rules for banks"),
+            "economy",
+        )
+        self.assertFalse(
+            news._is_stock_portfolio_listicle_headline(
+                "Share holdings at banks shift in new ownership data"
+            )
+        )
 
     def test_filters_routine_price_moves_but_keeps_material_market_events(self):
         for title in (
