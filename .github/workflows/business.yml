@@ -1,4 +1,4 @@
-name: Daily Business News Archive & Preview
+name: Daily Business News Archive & Telegram Queue
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: "Scrape and enrich the archive, enrich existing stories without scraping, or run a preview"
+        description: "Scrape/enrich and queue a news post, backfill existing stories, or run a preview"
         required: true
         type: choice
         options:
@@ -49,7 +49,7 @@ jobs:
       - name: Install dependency
         run: pip install --quiet requests
 
-      - name: Scrape RSS and add source-grounded AI value notes to the archive
+      - name: Scrape RSS, enrich the archive, and queue a post-ready news draft
         if: ${{ github.event_name == 'schedule' || github.event.inputs.task == 'archive' }}
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -79,15 +79,18 @@ jobs:
           NEWS_ARCHIVE_AI_BATCH_SIZE: "4"
         run: python daily_business_news.py enrich
 
-      - name: Commit updated archive
+      - name: Commit updated archive and Telegram queue
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add business_news_archive.json
+          git add business_news_archive.json content_queue.json
+          if [ -f daily_news_state.json ]; then
+            git add daily_news_state.json
+          fi
           if git diff --cached --quiet; then
-            echo "No archive changes to commit."
+            echo "No archive or queue changes to commit."
           else
-            git commit -m "data(news): update daily business news archive [skip ci]"
+            git commit -m "data(news): update business archive and Telegram queue [skip ci]"
             git push origin "HEAD:${GITHUB_REF}"
           fi
 

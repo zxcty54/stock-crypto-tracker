@@ -1,9 +1,10 @@
 import importlib.util
 import json
 import sys
+import tempfile
 import types
 import unittest
-from datetime import timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from unittest.mock import patch
 from pathlib import Path
@@ -446,6 +447,105 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 4)
         self.assertEqual(updated["last_run_stats"]["duplicate_items_collapsed"], 1)
         self.assertEqual(updated["last_run_stats"]["archive_items_removed_by_curation"], 1)
+
+    def test_daily_archive_run_enqueues_a_formatted_news_post(self):
+        fixed_now = datetime(2026, 10, 24, 18, 30, tzinfo=news.IST)
+        story = self.item(
+            "RBI keeps repo rate unchanged as inflation eases",
+            hours_ago=1,
+            summary="The central bank kept its policy rate unchanged while inflation pressure eased.",
+        )
+        story["published"] = fixed_now - timedelta(hours=1)
+        body = (
+            "📰 Kya hua: RBI ne repo rate ko unchanged rakha, jabki official update mein inflation "
+            "pressure kam hone ki baat kahi gayi. 🧩 News ko kaise padhein: rate ka decision policy "
+            "stance batata hai; yeh apne aap loan rates ya kisi company ke results mein turant badlav "
+            "ka proof nahi hai. 💡 Business mein iska matlab: borrowing conditions par asar tab samajh "
+            "aayega jab banks ke lending rates aur credit demand mein actual movement dikhe. Isliye "
+            "headline ko policy signal samjhein, guaranteed business outcome nahi. 🔭 Aage kya dekhein: "
+            "agla official inflation data, RBI ka communication, bank lending rates aur credit growth "
+            "track karein. Agar inflation pressure kam rehta hai, policy debate badal sakti hai; agar "
+            "wapas badhta hai, rate stance lamba samay steady reh sakta hai. Aap is decision ko kis "
+            "signal ke saath compare karenge?"
+        )
+        body += " Policy ko samajhne ke liye ek update ke bajay data aur baad ke decisions ka trend dekhein."
+        ai_response = json.dumps({
+            "skip": False,
+            "selected_story_id": "story_1",
+            "headline": "RBI holds repo rate as inflation pressure eases",
+            "body": body,
+        })
+
+        with tempfile.TemporaryDirectory() as directory:
+            archive_path = Path(directory) / "business_news_archive.json"
+            queue_path = Path(directory) / "content_queue.json"
+            state_path = Path(directory) / "daily_news_state.json"
+            archive_path.write_text(json.dumps({
+                "stories": [],
+                "last_scraped_at": (fixed_now - timedelta(hours=3)).isoformat(),
+            }), encoding="utf-8")
+            queue_path.write_text(json.dumps({"queue": []}), encoding="utf-8")
+
+            def fake_ai(prompt):
+                self.assertIn("company/commercial order or contract wins", prompt)
+                self.assertIn("FII/FPI/DII/institutional-flow stories", prompt)
+                self.assertIn("Regulator, government, and court orders remain eligible", prompt)
+                return ai_response
+
+            with (
+                patch.object(news, "NOW", fixed_now),
+                patch.object(news, "ARCHIVE_FILE", str(archive_path)),
+                patch.object(news, "QUEUE_FILE", str(queue_path)),
+                patch.object(news, "STATE_FILE", str(state_path)),
+                patch.object(news, "GEMINI_KEYS", ("test-key",)),
+                patch.object(news, "GROQ_KEYS", ()),
+                patch.object(news, "fetch_feeds", return_value={
+                    "items": [story],
+                    "status": {"CNBC-TV18": {"fresh_items": 1, "filtered_items": 0}},
+                    "any_success": True,
+                }),
+                patch.object(news, "enrich_archive_stories", return_value={
+                    "enriched": 0,
+                    "insufficient_context": 0,
+                    "not_added": 0,
+                    "deferred_stories": 0,
+                }),
+                patch.object(news, "fetch_article_context", return_value=(
+                    "The RBI policy statement describes the rate decision and its reasoning, "
+                    "while noting inflation conditions and the balance with economic activity. "
+                ) * 8),
+                patch.object(news, "call_ai", side_effect=fake_ai),
+            ):
+                result = news.run_archive_and_queue()
+
+            self.assertEqual(result, 0)
+            queue = json.loads(queue_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(queue["queue"]), 1)
+            item = queue["queue"][0]
+            self.assertEqual(item["kind"], "business_news_insight")
+            self.assertEqual(item["slot"], "C")
+            self.assertEqual(item["scheduled_ist"], "2026-10-24 20:30")
+            self.assertFalse(item["used"])
+            self.assertIn("📊 <b>RBI holds repo rate", item["text"])
+            self.assertIn("🔗 Source: <a href=", item["text"])
+            self.assertIn("AI-assisted analysis of public business news", item["text"])
+            self.assertIn("Educational only. Not investment advice.", item["text"])
+            archive = json.loads(archive_path.read_text(encoding="utf-8"))
+            self.assertEqual(archive["stories"][0]["status"], "queued")
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(state["generated_slots"], ["2026-10-24 18"])
+
+    def test_business_post_queueing_obeys_existing_posting_window(self):
+        queue = {"queue": []}
+        state = {"generated_slots": [], "seen_story_keys": [], "seen_story_titles": []}
+        midday = datetime(2026, 10, 24, 12, 0, tzinfo=news.IST)
+        with patch.object(news, "NOW", midday), patch.object(
+            news, "call_ai", side_effect=AssertionError("must not call AI outside the window")
+        ):
+            self.assertEqual(
+                news._queue_business_news_post({}, queue, state, None, set()),
+                (False, False),
+            )
 
 
 if __name__ == "__main__":

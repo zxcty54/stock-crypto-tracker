@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Daily Indian business-news RSS archive with an optional insight workflow.
+"""Daily Indian business-news RSS archive and Telegram queue integration.
 
-The ``archive`` mode updates business_news_archive.json from publisher RSS
-feeds and, when an AI key is configured, adds cached, source-grounded analysis
-without editing content_queue.json or sending Telegram messages. The existing
-hourly mode can create a separate source-linked educational post for the queue;
-the Telegram poster handles delivery separately.
+The ``archive`` mode updates and enriches business_news_archive.json, then—
+inside the existing posting window—may add one validated, source-linked news
+post to content_queue.json. It never sends Telegram messages itself; the
+existing poster handles delivery. The ``enrich`` mode only backfills archive
+insights, while ``hourly`` retains its standalone RSS-to-queue behavior.
 """
 
 from __future__ import annotations
@@ -1421,16 +1421,16 @@ def make_prompt(candidates):
 
 CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
-Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets, including a listed-company development when it materially relates to those areas. Prefer policy/regulation, macro data, IPO/subscription/listing mechanics, market structure, financing/debt, or verified company actions such as major orders, contracts, capex and acquisitions. Do NOT choose financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap filler, or repeated coverage/update stories. Do not choose a story already posted in an earlier hourly slot. If nothing is strong enough, return skip=true.
+Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets. Prefer meaningful policy/regulation, macro data, market structure, financing/debt, and other material economy- or market-level developments. The supplied candidates have already passed the channel's filters; do NOT choose or introduce financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap filler, routine price-only moves, issuer corporate announcements, leadership/board appointments, company/commercial order or contract wins, any IPO/FPO/listing/subscription coverage, or FII/FPI/DII/institutional-flow stories. Regulator, government, and court orders remain eligible. Do not choose a story already posted in an earlier slot. If nothing is strong enough, return skip=true.
 
 Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts:
 1. 📰 Kya hua: the essential reported facts.
-2. 🧩 News ko kaise padhein: explain the relevant number/term/structure (for example order win vs revenue recognition, fresh issue vs OFS, debt repayment, subscription vs listing gain) only when relevant to this story.
-3. 💡 Business mein iska matlab: explain the business mechanism and why it could matter to the company, sector, market liquidity, or economy. Tie the lesson to the supplied facts.
-4. 🔭 Aage kya dekhein: name concrete follow-up events/metrics and, where useful, explain conditional scenarios (“agar X dikhe toh…; agar Y ho toh…”). No confident prediction.
+2. 🧩 News ko kaise padhein: explain a relevant number, term, or structure only when it is actually relevant to this story.
+3. 💡 Business mein iska matlab: explain the business mechanism and why it could matter to the sector, market, or economy. Tie the lesson to the supplied facts.
+4. 🔭 Aage kya dekhein: name concrete follow-up events or metrics and, where useful, explain conditional scenarios. No confident prediction.
 5. End with one thoughtful reader question.
 
-Separate reported fact from interpretation. Explain what the news does NOT prove when relevant (e.g. an IPO subscription figure is not a guaranteed listing gain; an announced MoU is not automatically a firm order). Keep it specific and practical for an Indian market reader.
+Separate reported fact from interpretation. Explain what the news does NOT prove when relevant. Keep it specific and practical for an Indian market reader.
 
 STRICT RULES:
 - Each candidate includes the context source and context length. Use the article context—not just the headline. If the supplied context does not support a meaningful, story-specific explanation, return skip=true rather than padding with generic content.
@@ -2019,9 +2019,16 @@ def write_preview_report(
 
 
 def current_queue_slot():
-    """Stamp the current hourly posting window; the queue consumer sends it now."""
-    when = NOW.replace(minute=0, second=0, microsecond=0)
-    return f"H{NOW.hour:02d}", when
+    """Assign the next slot already used by the Telegram poster and content queue."""
+    slots = (("A", 8, 15), ("B", 12, 45), ("C", 20, 30))
+    for slot, hour, minute in slots:
+        when = NOW.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        if when > NOW:
+            return slot, when
+    next_day = (NOW + timedelta(days=1)).replace(
+        hour=slots[0][1], minute=slots[0][2], second=0, microsecond=0
+    )
+    return slots[0][0], next_day
 
 
 def add_to_queue(queue, draft, candidates):
@@ -2083,19 +2090,87 @@ def _print_archive_enrichment_stats(stats):
     )
 
 
-def run_archive_only():
-    """Fetch RSS, persist the curated archive, then add cached AI value notes."""
+def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_urls):
+    """Draft and enqueue at most one source-grounded business story per run."""
+    if NOW.hour not in POSTING_HOURS_IST:
+        print("ℹ️ Outside the existing afternoon/evening posting window; archive updated without queueing")
+        return False, False
+
+    slot_key = NOW.strftime("%Y-%m-%d %H")
+    if slot_key in state.get("generated_slots", []):
+        print("ℹ️ This news-post slot was already processed; preventing a duplicate draft")
+        return False, False
+
+    candidate_items = archive_to_items(archive, previous_scraped_at, fresh_urls)
+    groups = group_stories(candidate_items)
+    candidates = build_candidates(groups, state)
+    if not candidates:
+        print("ℹ️ No fresh story passed the source-detail and educational-value filters; nothing queued")
+        return False, False
+
+    if not GEMINI_KEYS and not GROQ_KEYS:
+        print("❌ No Gemini/Google or Groq API key is configured; archive saved, no post queued")
+        return False, False
+
+    try:
+        raw = call_ai(make_prompt(candidates))
+    except Exception as exc:
+        print(f"⚠️ News-post AI failed ({type(exc).__name__}); archive saved, nothing queued")
+        return False, False
+    parsed = parse_ai_json(raw)
+    if not raw:
+        print("❌ AI provider unavailable; stories remain archived for a later retry")
+        return False, False
+
+    if isinstance(parsed, dict) and parsed.get("skip"):
+        for candidate in candidates:
+            mark_archive_group(archive, candidate, "rejected")
+        reason = str(parsed.get("reason", "no candidate had enough reader value"))[:160]
+        print(f"⏭️ AI quality gate: {reason}; skipping this run, no filler post")
+        return False, False
+
+    draft = validate_draft(parsed, candidates)
+    if not draft:
+        print("⏭️ Draft failed source, number, or recommendation checks; nothing queued")
+        return False, False
+
+    rendered, selected = render_post(draft, candidates)
+    print("\n--- READY-TO-POST BUSINESS NEWS ---\n")
+    print(re.sub(r"<[^>]+>", "", rendered))
+    print(f"\nSelected: {selected['headline']} | Source: {selected['source']}")
+
+    added, item = add_to_queue(queue, draft, candidates)
+    queue_changed = False
+    if added:
+        mark_archive_group(archive, selected, "queued", item["id"])
+        queue_changed = True
+        print(f"✅ Added post-ready news item {item['id']} to {QUEUE_FILE} for {item['scheduled_ist']} IST")
+    else:
+        existing = next((queued for queued in queue["queue"]
+                         if queued.get("source_url") == selected["source_url"]
+                         or queued.get("story_key") == selected["story_key"]), None)
+        if existing:
+            mark_archive_group(archive, selected, "queued", existing.get("id"))
+        print("ℹ️ Matching news item is already in the queue; duplicate not added")
+
+    _update_news_state(state, slot_key, selected)
+    return queue_changed, True
+
+
+def run_archive_and_queue():
+    """Update/enrich the archive and enqueue one ready post in posting hours."""
     archive = load_json(ARCHIVE_FILE, {"stories": []})
     if not isinstance(archive, dict) or not isinstance(archive.get("stories", []), list):
         print("❌ News archive has an unexpected schema; refusing to overwrite it")
         return 1
 
+    previous_scraped_at = _parse_archive_time(archive.get("last_scraped_at"))
     feed_result = fetch_feeds()
     if not feed_result.get("any_success"):
         print("❌ All RSS feeds unavailable; existing archive left unchanged")
         return 1
 
-    archive, added_count, _ = merge_archive(archive, feed_result)
+    archive, added_count, fresh_urls = merge_archive(archive, feed_result)
     save_json(ARCHIVE_FILE, archive)  # Preserve the RSS archive even if AI is unavailable.
     stats = archive.get("last_run_stats", {})
     print(
@@ -2110,6 +2185,43 @@ def run_archive_only():
         _print_archive_enrichment_stats(insight_stats)
     except Exception as exc:
         print(f"⚠️ RSS archive is safe; AI enrichment failed without stopping the scrape: {str(exc)[:160]}")
+
+    try:
+        queue = load_json(QUEUE_FILE, {"queue": []})
+        if not isinstance(queue, dict) or not isinstance(queue.get("queue"), list):
+            print("⚠️ content_queue.json has an unexpected schema; archive saved, queue left unchanged")
+            return 0
+        state = load_json(STATE_FILE, {
+            "generated_slots": [], "seen_story_keys": [], "seen_story_titles": []
+        })
+        if (not isinstance(state, dict)
+                or not isinstance(state.get("generated_slots", []), list)
+                or not isinstance(state.get("seen_story_keys", []), list)
+                or not isinstance(state.get("seen_story_titles", []), list)):
+            print("⚠️ Daily news state has an unexpected schema; archive saved, queue left unchanged")
+            return 0
+    except Exception as exc:
+        print(f"⚠️ Queue/state could not be read ({type(exc).__name__}); archive saved, queue left unchanged")
+        return 0
+
+    archive = reconcile_archive_with_queue(archive, queue)
+    try:
+        queue_changed, state_changed = _queue_business_news_post(
+            archive, queue, state, previous_scraped_at, fresh_urls
+        )
+    except Exception as exc:
+        print(f"⚠️ Queue generation failed ({type(exc).__name__}); archive remains saved")
+        save_json(ARCHIVE_FILE, archive)
+        return 0
+
+    # Reconciliation and queue statuses are part of the archive's durable state.
+    save_json(ARCHIVE_FILE, archive)
+    if queue_changed:
+        save_json(QUEUE_FILE, queue)
+    if state_changed:
+        save_json(STATE_FILE, state)
+    if queue_changed:
+        print("📨 Existing Telegram poster will deliver the queued item on its normal schedule.")
     return 0
 
 
@@ -2139,7 +2251,7 @@ def main():
     set_action_output("post_ready", False)
     print("=" * 72)
     if mode == "archive":
-        heading = "BUSINESS NEWS RSS ARCHIVE + AI VALUE NOTES"
+        heading = "BUSINESS NEWS ARCHIVE + AI VALUE NOTES + TELEGRAM QUEUE"
     elif mode == "enrich":
         heading = "BUSINESS NEWS ARCHIVE → AI VALUE NOTES (NO RSS FETCH)"
     else:
@@ -2149,7 +2261,7 @@ def main():
     print("=" * 72)
 
     if mode == "archive":
-        return run_archive_only()
+        return run_archive_and_queue()
     if mode == "enrich":
         return run_archive_enrichment_only()
 
