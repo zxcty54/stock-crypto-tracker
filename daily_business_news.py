@@ -837,6 +837,107 @@ def save_json(path, data):
     os.replace(temp_path, path)
 
 
+def write_preview_report(feed_result, groups, candidates, draft, ai_status, write_summary=True):
+    top_stories = []
+    for group in groups[:20]:
+        items = group.get("items", [])
+        if not items:
+            continue
+        primary = items[0]
+        top_stories.append({
+            "headline": primary["title"],
+            "source": primary["source"],
+            "published_ist": primary["published"].strftime("%Y-%m-%d %H:%M IST"),
+            "url": primary["url"],
+            "rss_summary": primary.get("summary", "")[:900],
+            "screening_score": round(group.get("score", 0), 2),
+            "other_coverage": [
+                {"source": item["source"], "headline": item["title"], "url": item["url"]}
+                for item in items[1:4]
+            ],
+        })
+
+    selected = None
+    ai_preview = None
+    if draft and candidates:
+        selected = next((item for item in candidates if item["id"] == draft["story_id"]), None)
+        if selected:
+            ai_preview = {
+                "headline": draft["title"],
+                "body": draft["body"],
+                "source": selected["source"],
+                "source_url": selected["source_url"],
+                "other_sources": selected.get("other_coverage", [])[:2],
+            }
+
+    report = {
+        "generated_at_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+        "preview_only": True,
+        "telegram_sent": False,
+        "queue_changed": False,
+        "archive_changed": False,
+        "lookback_hours": 12,
+        "feed_status": feed_result.get("status", {}),
+        "screened_story_count": len(groups),
+        "top_stories": top_stories,
+        "ai_status": ai_status,
+        "ai_educational_draft": ai_preview,
+    }
+    json_path = os.environ.get("NEWS_PREVIEW_JSON", "business_news_preview.json")
+    md_path = os.environ.get("NEWS_PREVIEW_MARKDOWN", "business_news_preview.md")
+    save_json(json_path, report)
+
+    lines = [
+        "# Business-news preview (no Telegram post)",
+        f"Generated: {report['generated_at_ist']}",
+        "",
+        "## RSS feed check",
+    ]
+    for source, status in report["feed_status"].items():
+        count = status.get("fresh_items", 0)
+        code = status.get("http_status") or "unavailable"
+        lines.append(f"- **{source}:** {count} recent items; HTTP {code}")
+    lines.extend(["", f"## Screened stories ({len(top_stories)} shown; {len(groups)} groups)"])
+    if top_stories:
+        for index, story in enumerate(top_stories, 1):
+            lines.append(
+                f"{index}. **{story['headline']}** â€” {story['source']}, "
+                f"{story['published_ist']} (screen score {story['screening_score']})"
+            )
+            lines.append(f"   Source: {story['url']}")
+            if story.get("rss_summary"):
+                lines.append(f"   RSS: {story['rss_summary']}")
+    else:
+        lines.append("No recent eligible stories were returned by the feeds.")
+
+    lines.extend(["", f"## AI draft status: {ai_status}"])
+    if ai_preview:
+        lines.extend([
+            "",
+            f"### {ai_preview['headline']}",
+            "",
+            ai_preview["body"],
+            "",
+            f"Source: {ai_preview['source_url']}",
+            "",
+            "This is a preview only. It was not added to the production queue or sent to Telegram.",
+        ])
+    else:
+        lines.extend(["", "No AI post was created for this preview run."])
+
+    markdown = "\n".join(lines) + "\n"
+    with open(md_path, "w", encoding="utf-8") as file:
+        file.write(markdown)
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if write_summary:
+        if summary_path:
+            with open(summary_path, "a", encoding="utf-8") as summary:
+                summary.write(markdown)
+        else:
+            print(markdown)
+    print(f"ðŸ“Ž Preview files created: {json_path}, {md_path}; no production files changed")
+
+
 def current_queue_slot():
     """Stamp the current hourly posting window; the queue consumer sends it now."""
     when = NOW.replace(minute=0, second=0, microsecond=0)
@@ -895,15 +996,60 @@ def _update_news_state(state, slot_key, selected):
 
 def main():
     mode = (sys.argv[1].strip().lower() if len(sys.argv) > 1 else "hourly") or "hourly"
-    if mode not in {"hourly", "process", "dry-run"}:
-        print("Usage: python daily_business_news.py [hourly|process|dry-run]")
+    if mode not in {"hourly", "process", "preview", "dry-run"}:
+        print("Usage: python daily_business_news.py [hourly|process|preview]")
         return 2
 
     set_action_output("post_ready", False)
     print("=" * 72)
-    print(f"ðŸ“° HOURLY NEWS â†’ EDUCATIONAL INSIGHT | {NOW.strftime('%d-%b-%Y %H:%M IST')}")
+    print(f"ðŸ“° BUSINESS NEWS â†’ EDUCATIONAL INSIGHT | {NOW.strftime('%d-%b-%Y %H:%M IST')}")
     print(f"Mode: {mode} | Archive: {ARCHIVE_FILE} | Queue: {QUEUE_FILE}")
     print("=" * 72)
+
+    if mode in {"preview", "dry-run"}:
+        feed_result = fetch_feeds()
+        if not feed_result["any_success"]:
+            write_preview_report(feed_result, [], [], None, "Feed fetch failed")
+            return 0
+        preview_cutoff = NOW - timedelta(hours=POST_CANDIDATE_MAX_AGE_HOURS)
+        preview_items = [item for item in feed_result["items"]
+                         if preview_cutoff <= item["published"] <= NOW + timedelta(hours=2)]
+        preview_groups = group_stories(preview_items)
+        preview_candidates = []
+        preview_draft = None
+        want_ai = os.environ.get("NEWS_PREVIEW_AI", "true").strip().lower() not in {"false", "0", "no"}
+        ai_status = "No AI key configured; raw news preview only"
+        if preview_groups:
+            if not want_ai:
+                preliminary_status = "AI preview disabled by selection"
+            elif GEMINI_KEYS or GROQ_KEYS:
+                preliminary_status = "AI draft pending"
+            else:
+                preliminary_status = "No AI key configured; raw news preview only"
+            write_preview_report(feed_result, preview_groups, [], None, preliminary_status, write_summary=False)
+        if preview_groups and not want_ai:
+            ai_status = "AI preview disabled by selection"
+        elif preview_groups and (GEMINI_KEYS or GROQ_KEYS):
+            preview_candidates = build_candidates(
+                preview_groups,
+                {"seen_story_keys": [], "seen_story_titles": []},
+            )
+            if preview_candidates:
+                raw = call_ai(make_prompt(preview_candidates))
+                parsed = parse_ai_json(raw)
+                if isinstance(parsed, dict) and parsed.get("skip"):
+                    ai_status = "Quality gate skipped: " + str(parsed.get("reason", "no suitable story"))[:120]
+                elif not raw:
+                    ai_status = "AI provider unavailable; raw news preview only"
+                else:
+                    preview_draft = validate_draft(parsed, preview_candidates)
+                    ai_status = "Draft preview generated" if preview_draft else "Draft rejected by source/recommendation checks"
+            else:
+                ai_status = "No article context was available for an AI draft"
+        elif not preview_groups:
+            ai_status = "No fresh candidate in the preview window"
+        write_preview_report(feed_result, preview_groups, preview_candidates, preview_draft, ai_status)
+        return 0
 
     state = load_json(STATE_FILE, {
         "generated_slots": [], "seen_story_keys": [], "seen_story_titles": []
@@ -932,8 +1078,7 @@ def main():
 
     # Scheduled hourly runs persist every fresh RSS item, even when no post is
     # suitable. Dry-run is deliberately read-only.
-    if mode != "dry-run":
-        save_json(ARCHIVE_FILE, archive)
+    save_json(ARCHIVE_FILE, archive)
     print(f"ðŸ—ƒï¸ Archive now contains {len(archive.get('stories', []))} items; {added_count} new URLs this run")
 
     in_window = NOW.hour in POSTING_HOURS_IST
@@ -942,27 +1087,6 @@ def main():
         print("âŒ All RSS feeds unavailable; archive status saved, no post this hour")
         set_action_output("post_ready", pending_due)
         return 1
-
-    if mode == "dry-run":
-        candidate_items = archive_to_items(archive, previous_scraped_at, new_or_updated_urls)
-        candidates = build_candidates(group_stories(candidate_items), state)
-        if not candidates:
-            print("â„¹ï¸ No fresh, unprocessed story suitable for an educational post")
-            return 0
-        if not GEMINI_KEYS and not GROQ_KEYS:
-            print("âŒ No Gemini/Google or Groq API key is configured")
-            return 1
-        raw = call_ai(make_prompt(candidates))
-        parsed = parse_ai_json(raw)
-        draft = validate_draft(parsed, candidates)
-        if draft:
-            rendered, selected = render_post(draft, candidates)
-            print("\n--- DRY-RUN DRAFT (not queued or sent) ---\n")
-            print(re.sub(r"<[^>]+>", "", rendered))
-            print(f"\nStory: {selected['headline']} | Source: {selected['source']}")
-        else:
-            print("â„¹ï¸ Dry-run produced no publishable draft")
-        return 0
 
     if not in_window:
         print("â„¹ï¸ Outside the 4â€“9 PM IST posting window: archive updated; no post queued")
@@ -996,8 +1120,7 @@ def main():
     if isinstance(parsed, dict) and parsed.get("skip"):
         for candidate in candidates:
             mark_archive_group(archive, candidate, "rejected")
-        if mode != "dry-run":
-            save_json(ARCHIVE_FILE, archive)
+        save_json(ARCHIVE_FILE, archive)
         reason = str(parsed.get("reason", "no candidate had enough reader value"))[:160]
         print(f"â­ï¸ AI quality gate: {reason}; skipping this hour, no filler post")
         set_action_output("post_ready", pending_due)
