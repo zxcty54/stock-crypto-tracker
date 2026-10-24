@@ -679,6 +679,36 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             state = json.loads(state_path.read_text(encoding="utf-8"))
             self.assertEqual(state["generated_slots"], ["2026-10-24 18"])
 
+    def test_archive_queue_retries_unprocessed_stories_since_previous_scrape(self):
+        fixed_now = datetime(2026, 10, 24, 18, 40, tzinfo=news.IST)
+
+        def story(title, hours_ago):
+            item = self.item(title, hours_ago=hours_ago)
+            item["published"] = fixed_now - timedelta(hours=hours_ago)
+            return item
+
+        pending = story("RBI policy update remains in scope", 4)
+        queued = story("SEBI market structure circular remains in scope", 3)
+        posted = story("Court order affects financial-market participants", 2)
+        stale = story("Older RBI policy update is outside the freshness limit", 13)
+        archive = {
+            "stories": [
+                self.record(pending),
+                self.record(queued, status="queued", post_id="already-queued"),
+                self.record(posted, status="posted", post_id="already-posted"),
+                self.record(stale),
+            ]
+        }
+        previous_scraped_at = fixed_now - timedelta(hours=2)
+
+        with patch.object(news, "NOW", fixed_now):
+            candidates = news.archive_to_items(
+                archive, previous_scraped_at=previous_scraped_at, fresh_urls=set()
+            )
+
+        self.assertEqual([item["title"] for item in candidates], [pending["title"]])
+        self.assertEqual(candidates[0]["published"], fixed_now - timedelta(hours=4))
+
     def test_business_post_queueing_obeys_existing_posting_window(self):
         queue = {"queue": []}
         state = {"generated_slots": [], "seen_story_keys": [], "seen_story_titles": []}
