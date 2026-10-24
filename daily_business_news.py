@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Hourly business news â†’ educational insight â†’ existing Telegram queue.
+"""Hourly business news → educational insight → existing Telegram queue.
 
 Each run archives fresh RSS metadata to business_news_archive.json. During the
-16:00â€“21:00 IST window it may add one source-linked, news-based explainer to
+16:00–21:00 IST window it may add one source-linked, news-based explainer to
 content_queue.json. The existing Telegram poster publishes it; this script
 never sends a Telegram message. If no fresh, useful story is available, it
 skips that hour rather than inventing filler.
@@ -38,6 +38,7 @@ ARCHIVE_RETENTION_DAYS = 30
 ARCHIVE_MAX_ITEMS = 3000
 MAX_CANDIDATES = 6
 MAX_ARTICLE_CHARS = 3000
+MIN_AI_CONTEXT_CHARS = int(os.environ.get("NEWS_MIN_AI_CONTEXT_CHARS", "600"))
 POSTING_HOURS_IST = set(range(16, 22))  # 4 PM through 9 PM inclusive
 
 UA = {
@@ -68,12 +69,20 @@ FEEDS = [
 ]
 
 POSITIVE_TERMS = (
-    "ipo", "q1", "q2", "q3", "q4", "results", "earnings", "profit", "loss",
-    "revenue", "guidance", "outlook", "rbi", "sebi", "policy", "rate", "tariff",
+    "ipo", "guidance", "outlook", "rbi", "sebi", "policy", "rate", "tariff",
     "debt", "capex", "order", "acquisition", "merger", "buyback", "dividend",
     "liquidity", "fundraise", "funding", "default", "npa", "crude", "rupee",
     "export", "import", "regulation", "approval", "capacity", "market share",
     "subscription", "listing", "layoff", "restructuring", "withdrawal", "investment",
+)
+
+# Exclude quarterly/financial performance stories as well as broker calls. This
+# preview is for material business events, policy, IPO, funding, orders, capex
+# and regulation—not earnings-result roundups or profit/revenue headlines.
+RESULTS_EXCLUDE_TERMS = (
+    "result", "results", "earning", "earnings", "q1", "q2", "q3", "q4",
+    "profit", "profits", "loss", "losses", "revenue", "revenues",
+    "ebitda", "eps", "net interest income", "net profit", "pat", "nim",
 )
 
 # Exclude broker calls and generic stock-pick headlines. The goal is business
@@ -213,7 +222,7 @@ def parse_rss(xml_bytes: bytes, source: dict):
     try:
         root = ET.fromstring(xml_bytes)
     except ET.ParseError as exc:
-        print(f"   âš ï¸ RSS parse error ({source['name']}): {exc}")
+        print(f"   ⚠️ RSS parse error ({source['name']}): {exc}")
         return []
 
     output = []
@@ -241,9 +250,16 @@ def parse_rss(xml_bytes: bytes, source: dict):
     return output
 
 
+def _contains_any_phrase(text, phrases):
+    normalized = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    padded = f" {normalized} "
+    return any(f" {phrase} " in padded for phrase in phrases)
+
+
 def _item_score(item):
     title = item["title"].lower()
-    if any(term in title for term in EXCLUDE_TERMS):
+    if (_contains_any_phrase(title, RESULTS_EXCLUDE_TERMS)
+            or any(term in title for term in EXCLUDE_TERMS)):
         return -100
     score = item["source_priority"]
     score += sum(2 for term in POSITIVE_TERMS if term in title)
@@ -310,7 +326,7 @@ def fetch_feeds():
                 "fresh_items": len(fresh),
                 "error": None,
             }
-            print(f"   ðŸ“° {source['name']}: {len(fresh)} fresh items")
+            print(f"   📰 {source['name']}: {len(fresh)} fresh items")
             all_items.extend(fresh)
         except Exception as exc:
             feed_status[source["name"]] = {
@@ -319,7 +335,7 @@ def fetch_feeds():
                 "fresh_items": 0,
                 "error": str(exc)[:160],
             }
-            print(f"   âš ï¸ Feed unavailable ({source['name']}): {str(exc)[:120]}")
+            print(f"   ⚠️ Feed unavailable ({source['name']}): {str(exc)[:120]}")
     return {"items": all_items, "status": feed_status, "any_success": successful_feeds > 0}
 
 
@@ -404,7 +420,7 @@ def merge_archive(archive, feed_result):
 def archive_to_items(archive, previous_scraped_at=None, fresh_urls=None):
     """Return only unprocessed stories from the latest hourly polling interval.
 
-    The first run in the 4â€“9 PM window gets a wider same-day lookback. Later
+    The first run in the 4–9 PM window gets a wider same-day lookback. Later
     runs use the prior scrape timestamp with a 45-minute overlap for feed/action
     delays. Newly discovered URLs may still qualify up to the 12-hour age cap.
     """
@@ -517,7 +533,7 @@ def fetch_article_context(url: str) -> str:
         response.raise_for_status()
         document = response.text[:2_500_000]
     except Exception as exc:
-        print(f"   â„¹ï¸ Article body unavailable: {str(exc)[:100]}")
+        print(f"   ℹ️ Article body unavailable: {str(exc)[:100]}")
         return ""
 
     # Prefer schema.org articleBody when the publisher exposes it.
@@ -573,11 +589,20 @@ def build_candidates(groups, state):
         if any(_title_similarity(primary["title"], old_title) >= 0.78
                for old_title in seen_titles if isinstance(old_title, str)):
             continue
-        context = fetch_article_context(primary["url"])
-        if not context:
-            context = primary.get("summary", "")
-        if len(context) < 100:
-            print(f"   â­ï¸ Insufficient source detail; skipping: {primary['title'][:90]}")
+        article_context = fetch_article_context(primary["url"])
+        rss_context = primary.get("summary", "")
+        if len(article_context) >= MIN_AI_CONTEXT_CHARS:
+            context = article_context
+            context_source = "publisher article page"
+        elif len(rss_context) >= MIN_AI_CONTEXT_CHARS:
+            context = rss_context
+            context_source = "RSS excerpt (article page was too short/unavailable)"
+        else:
+            print(
+                f"   ⏭️ Insufficient source context ({len(article_context)} article / "
+                f"{len(rss_context)} RSS chars; need {MIN_AI_CONTEXT_CHARS}); "
+                f"skipping: {primary['title'][:90]}"
+            )
             continue
         story_id = f"story_{len(output) + 1}"
         output.append({
@@ -593,6 +618,8 @@ def build_candidates(groups, state):
                 for item in items[1:3]
             ],
             "reported_context": context[:MAX_ARTICLE_CHARS],
+            "context_source": context_source,
+            "context_chars": len(context[:MAX_ARTICLE_CHARS]),
         })
         if len(output) >= MAX_CANDIDATES:
             break
@@ -611,30 +638,33 @@ def make_prompt(candidates):
                 {"source": related.get("source"), "headline": related.get("headline")}
                 for related in item.get("other_coverage", [])
             ],
+            "context_source": item.get("context_source", "source article context"),
+            "context_chars": item.get("context_chars", len(item["reported_context"])),
             "reported_context": item["reported_context"],
         })
     payload = json.dumps(public_candidates, ensure_ascii=False, separators=(",", ":"))
-    return f"""You are the business-news editor for a Hindi/Hinglish Telegram channel for Indian retail traders. The channel wants useful, current company/business contextâ€”not generic textbook lessons and not stock tips.
+    return f"""You are the business-news editor for a Hindi/Hinglish Telegram channel for Indian retail traders. The channel wants useful, current company/business context—not generic textbook lessons and not stock tips.
 
 CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
-Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Prefer material company/business events, results, IPO mechanics, policy/regulation, financing/debt, capex/orders, or macro changes with a concrete business link. Skip brokerage opinion, broker/analyst buy-sell calls, targets, rumours, generic market-wrap filler, and stories too thin to explain. Do not choose a story already posted in an earlier hourly slot. If nothing is strong enough, return skip=true.
+Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Prefer material company/business events such as IPO mechanics, policy/regulation, financing/debt, capex/orders, acquisitions, product launches, or macro changes with a concrete business link. Do NOT choose quarterly earnings/results or headlines about profit, loss, revenue, EPS, or EBITDA. Skip brokerage opinion, broker/analyst buy-sell calls, targets, rumours, generic market-wrap filler, and stories too thin to explain. Do not choose a story already posted in an earlier hourly slot. If nothing is strong enough, return skip=true.
 
-Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160â€“220 words). This must teach the reader how to interpret THIS newsâ€”not just repeat the headline, and not paste a generic trading lesson. Use these parts:
-1. ðŸ“° Kya hua: the essential reported facts.
-2. ðŸ§© News ko kaise padhein: explain the key number/term/structure (for example YoY vs QoQ, revenue vs profit, order win vs revenue recognition, fresh issue vs OFS, debt repayment, subscription vs listing gain) only when relevant to this story.
-3. ðŸ’¡ Business mein iska matlab: explain the business mechanism and why it could matter to the company, sector, market liquidity, or economy. Tie the lesson to the supplied facts.
-4. ðŸ”­ Aage kya dekhein: name concrete follow-up metrics/events and, where useful, explain conditional scenarios (â€œagar X dikhe tohâ€¦; agar Y ho tohâ€¦â€). No confident prediction.
+Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts:
+1. 📰 Kya hua: the essential reported facts.
+2. 🧩 News ko kaise padhein: explain the relevant number/term/structure (for example order win vs revenue recognition, fresh issue vs OFS, debt repayment, subscription vs listing gain) only when relevant to this story.
+3. 💡 Business mein iska matlab: explain the business mechanism and why it could matter to the company, sector, market liquidity, or economy. Tie the lesson to the supplied facts.
+4. 🔭 Aage kya dekhein: name concrete follow-up events/metrics and, where useful, explain conditional scenarios (“agar X dikhe toh…; agar Y ho toh…”). No confident prediction.
 5. End with one thoughtful reader question.
 
-Separate reported fact from interpretation. Explain what the news does NOT prove when relevant (e.g. strong demand is not a guaranteed listing gain; one quarter is not automatically a long-term trend). Keep it specific and practical for an Indian market reader.
+Separate reported fact from interpretation. Explain what the news does NOT prove when relevant (e.g. an IPO subscription figure is not a guaranteed listing gain; an announced MoU is not automatically a firm order). Keep it specific and practical for an Indian market reader.
 
 STRICT RULES:
+- Each candidate includes the context source and context length. Use the article context—not just the headline. If the supplied context does not support a meaningful, story-specific explanation, return skip=true rather than padding with generic content.
 - Use company-specific facts and numbers ONLY from the supplied story's reported_context/headline. Do not invent figures, dates, company relationships, causes, or future outcomes. A numeric grounding check will reject unsupported digits.
 - General business concepts may be explained in your own words, but never present an unverified company-specific effect as fact.
 - No broker/analyst recommendations, buy/sell/subscribe calls, target prices, entry/stop-loss levels, guaranteed gains, or price predictions. Do not use grey-market premium as a signal.
 - Do not copy source sentences. Paraphrase; do not reproduce long excerpts.
-- Do not invent an â€œofficial sourceâ€ if the link is a news publisher.
+- Do not invent an “official source” if the link is a news publisher.
 - Do not include source URLs or disclaimer in the body; the script adds credited links and a disclaimer.
 
 Return ONLY valid JSON with these keys:
@@ -666,22 +696,22 @@ def _call_gemini(prompt):
                         timeout=90,
                     )
                 except Exception as exc:
-                    print(f"   âš ï¸ Gemini network error: {str(exc)[:100]}")
+                    print(f"   ⚠️ Gemini network error: {str(exc)[:100]}")
                     time.sleep(3)
                     continue
                 if response.status_code == 200:
                     try:
                         return response.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
                     except Exception:
-                        print("   âš ï¸ Gemini returned an unexpected response")
+                        print("   ⚠️ Gemini returned an unexpected response")
                         break
                 if response.status_code == 404:
-                    print(f"   â„¹ï¸ Gemini model {model} unavailable; trying fallback")
+                    print(f"   ℹ️ Gemini model {model} unavailable; trying fallback")
                     break
                 if response.status_code in (429, 500, 503):
                     time.sleep(4 * (attempt + 1))
                     continue
-                print(f"   âš ï¸ Gemini HTTP {response.status_code}: {response.text[:160]}")
+                print(f"   ⚠️ Gemini HTTP {response.status_code}: {response.text[:160]}")
                 break
     return None
 
@@ -704,14 +734,14 @@ def _call_groq(prompt):
                 timeout=90,
             )
         except Exception as exc:
-            print(f"   âš ï¸ Groq network error: {str(exc)[:100]}")
+            print(f"   ⚠️ Groq network error: {str(exc)[:100]}")
             continue
         if response.status_code == 200:
             try:
                 return response.json()["choices"][0]["message"]["content"].strip()
             except Exception:
                 continue
-        print(f"   âš ï¸ Groq HTTP {response.status_code}: {response.text[:160]}")
+        print(f"   ⚠️ Groq HTTP {response.status_code}: {response.text[:160]}")
     return None
 
 
@@ -719,7 +749,7 @@ def call_ai(prompt):
     raw = _call_gemini(prompt)
     if raw:
         return raw
-    print("   ðŸ” Gemini unavailable; trying Groq fallback")
+    print("   🔁 Gemini unavailable; trying Groq fallback")
     return _call_groq(prompt)
 
 
@@ -745,29 +775,29 @@ def _numeric_tokens(text: str):
 def validate_draft(draft, candidates):
     if not isinstance(draft, dict) or draft.get("skip"):
         reason = draft.get("reason", "AI decided no story meets the quality bar") if isinstance(draft, dict) else "AI output was not valid JSON"
-        print(f"   â­ï¸ No post created: {reason}")
+        print(f"   ⏭️ No post created: {reason}")
         return None
     allowed = {item["id"] for item in candidates}
     story_id = str(draft.get("selected_story_id", ""))
     title = _clean_text(str(draft.get("headline", "")))
     body = str(draft.get("body", "")).strip()
     if story_id not in allowed:
-        print("   âš ï¸ AI selected a story not in the supplied source list; rejecting")
+        print("   ⚠️ AI selected a story not in the supplied source list; rejecting")
         return None
     if len(title) < 8 or len(title) > 130 or len(body) < 450 or len(body) > 2500:
-        print("   âš ï¸ AI draft length/title outside safe limits; rejecting")
+        print("   ⚠️ AI draft length/title outside safe limits; rejecting")
         return None
     unsafe = re.compile(
         r"\b(?:buy|sell)\s+(?:this\s+|the\s+)?(?:stocks?|shares?|now|above|below|at|on\s+dips|on\s+rise)\b|"
         r"\bsubscribe\s+(?:to\s+)?(?:this\s+|the\s+)?(?:ipo|issue|offer)\b|"
         r"\b(?:investor|trader)s?\s+should\s+(?:buy|sell|subscribe)\b|"
-        r"\b(?:target|entry|stop[- ]?loss|sl)\s*[:=\-]\s*â‚¹?\s*\d+|"
+        r"\b(?:target|entry|stop[- ]?loss|sl)\s*[:=\-]\s*₹?\s*\d+|"
         r"\b(?:price\s+target|target\s+price|buy\s+call|sell\s+call|buy\s+recommendation|sell\s+recommendation|strong\s+buy|strong\s+sell)\b|"
         r"\bguaranteed\s+(?:return|profit|gain)\b",
         re.I,
     )
     if unsafe.search(title + "\n" + body):
-        print("   âš ï¸ AI draft contains a direct trading call/level; rejecting")
+        print("   ⚠️ AI draft contains a direct trading call/level; rejecting")
         return None
     selected = next(item for item in candidates if item["id"] == story_id)
     source_text = " ".join([
@@ -781,7 +811,7 @@ def validate_draft(draft, candidates):
     ])
     unsupported_numbers = _numeric_tokens(title + "\n" + body) - _numeric_tokens(source_text)
     if unsupported_numbers:
-        print(f"   âš ï¸ AI draft introduced numbers absent from source: {sorted(unsupported_numbers)}; rejecting")
+        print(f"   ⚠️ AI draft introduced numbers absent from source: {sorted(unsupported_numbers)}; rejecting")
         return None
     return {"story_id": story_id, "title": title, "body": body}
 
@@ -807,14 +837,14 @@ def render_post(draft, candidates):
         if len(sources) >= 2:
             break
 
-    links = " Â· ".join(_source_html(src["source"], src["url"]) for src in sources)
+    links = " · ".join(_source_html(src["source"], src["url"]) for src in sources)
     title = html.escape(draft["title"], quote=False)
     body = html.escape(draft["body"], quote=False)
     text = (
-        f"ðŸ“Š <b>{title}</b>\n\n{body}\n\n"
-        f"ðŸ”— Source: {links}\n"
-        "ðŸ¤– <i>AI-assisted analysis of public business news.</i>\n"
-        "âš ï¸ <i>Educational only. Not investment advice. Not SEBI registered.</i>"
+        f"📊 <b>{title}</b>\n\n{body}\n\n"
+        f"🔗 Source: {links}\n"
+        "🤖 <i>AI-assisted analysis of public business news.</i>\n"
+        "⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>"
     )
     return text[:3900], selected
 
@@ -837,7 +867,10 @@ def save_json(path, data):
     os.replace(temp_path, path)
 
 
-def write_preview_report(feed_result, groups, candidates, draft, ai_status, write_summary=True):
+def write_preview_report(
+    feed_result, groups, candidates, draft, ai_status, write_summary=True,
+    ai_requested=False, ai_provider_configured=False,
+):
     top_stories = []
     for group in groups[:20]:
         items = group.get("items", [])
@@ -878,8 +911,25 @@ def write_preview_report(feed_result, groups, candidates, draft, ai_status, writ
         "archive_changed": False,
         "lookback_hours": 12,
         "feed_status": feed_result.get("status", {}),
+        "filters_applied": [
+            "Quarterly/financial results and earnings headlines (including profit, loss, revenue, EPS and EBITDA) excluded",
+            "Broker/analyst recommendations, targets and stock-pick headlines excluded",
+        ],
         "screened_story_count": len(groups),
         "top_stories": top_stories,
+        "minimum_ai_context_chars": MIN_AI_CONTEXT_CHARS,
+        "ai_preview_requested": bool(ai_requested),
+        "ai_provider_configured": bool(ai_provider_configured),
+        "context_sent_to_ai": bool(ai_requested and ai_provider_configured and candidates),
+        "ai_source_context_check": [
+            {
+                "headline": item.get("headline", ""),
+                "source": item.get("source", ""),
+                "context_source": item.get("context_source", "unknown"),
+                "context_chars": item.get("context_chars", len(item.get("reported_context", ""))),
+            }
+            for item in candidates
+        ],
         "ai_status": ai_status,
         "ai_educational_draft": ai_preview,
     }
@@ -897,11 +947,18 @@ def write_preview_report(feed_result, groups, candidates, draft, ai_status, writ
         count = status.get("fresh_items", 0)
         code = status.get("http_status") or "unavailable"
         lines.append(f"- **{source}:** {count} recent items; HTTP {code}")
-    lines.extend(["", f"## Screened stories ({len(top_stories)} shown; {len(groups)} groups)"])
+    lines.extend([
+        "",
+        "## Filters applied",
+        "- Quarterly/financial results, earnings and profit/loss/revenue/EPS/EBITDA headlines excluded.",
+        "- Broker/analyst recommendations, targets and stock-pick headlines excluded.",
+        "",
+        f"## Screened stories ({len(top_stories)} shown; {len(groups)} groups)",
+    ])
     if top_stories:
         for index, story in enumerate(top_stories, 1):
             lines.append(
-                f"{index}. **{story['headline']}** â€” {story['source']}, "
+                f"{index}. **{story['headline']}** — {story['source']}, "
                 f"{story['published_ist']} (screen score {story['screening_score']})"
             )
             lines.append(f"   Source: {story['url']}")
@@ -909,6 +966,27 @@ def write_preview_report(feed_result, groups, candidates, draft, ai_status, writ
                 lines.append(f"   RSS: {story['rss_summary']}")
     else:
         lines.append("No recent eligible stories were returned by the feeds.")
+
+    lines.extend([
+        "",
+        f"## Source-context check ({len(candidates)} AI-eligible candidates)",
+        f"- Minimum context required: {MIN_AI_CONTEXT_CHARS} characters.",
+        f"- Context sent to AI: {'Yes' if report['context_sent_to_ai'] else 'No'}.",
+    ])
+    if candidates:
+        for candidate in candidates:
+            lines.append(
+                f"- **{candidate['headline']}** — {candidate['context_source']}; "
+                f"{candidate['context_chars']} chars"
+            )
+    elif ai_status == "AI preview disabled by selection":
+        lines.append("Article pages were checked locally, but no context was sent to an AI because AI preview was off.")
+    elif not ai_provider_configured:
+        lines.append("Article pages were checked locally, but no AI provider key is configured; nothing was sent to an AI.")
+    elif groups:
+        lines.append(f"No story met the {MIN_AI_CONTEXT_CHARS}-character source-context minimum; no AI draft was made.")
+    else:
+        lines.append("No eligible story was available to inspect for an AI draft.")
 
     lines.extend(["", f"## AI draft status: {ai_status}"])
     if ai_preview:
@@ -935,7 +1013,7 @@ def write_preview_report(feed_result, groups, candidates, draft, ai_status, writ
                 summary.write(markdown)
         else:
             print(markdown)
-    print(f"ðŸ“Ž Preview files created: {json_path}, {md_path}; no production files changed")
+    print(f"📎 Preview files created: {json_path}, {md_path}; no production files changed")
 
 
 def current_queue_slot():
@@ -954,7 +1032,7 @@ def add_to_queue(queue, draft, candidates):
            or (item.get("source_headline") and
                _title_similarity(selected["headline"], item["source_headline"]) >= 0.78)
            for item in items):
-        print("   â„¹ï¸ This story is already in the content queue; not adding a duplicate")
+        print("   ℹ️ This story is already in the content queue; not adding a duplicate")
         return False, None
 
     slot, when = current_queue_slot()
@@ -1002,14 +1080,19 @@ def main():
 
     set_action_output("post_ready", False)
     print("=" * 72)
-    print(f"ðŸ“° BUSINESS NEWS â†’ EDUCATIONAL INSIGHT | {NOW.strftime('%d-%b-%Y %H:%M IST')}")
+    print(f"📰 BUSINESS NEWS → EDUCATIONAL INSIGHT | {NOW.strftime('%d-%b-%Y %H:%M IST')}")
     print(f"Mode: {mode} | Archive: {ARCHIVE_FILE} | Queue: {QUEUE_FILE}")
     print("=" * 72)
 
     if mode in {"preview", "dry-run"}:
+        want_ai = os.environ.get("NEWS_PREVIEW_AI", "true").strip().lower() not in {"false", "0", "no"}
+        has_ai_provider = bool(GEMINI_KEYS or GROQ_KEYS)
         feed_result = fetch_feeds()
         if not feed_result["any_success"]:
-            write_preview_report(feed_result, [], [], None, "Feed fetch failed")
+            write_preview_report(
+                feed_result, [], [], None, "Feed fetch failed",
+                ai_requested=want_ai, ai_provider_configured=has_ai_provider,
+            )
             return 0
         preview_cutoff = NOW - timedelta(hours=POST_CANDIDATE_MAX_AGE_HOURS)
         preview_items = [item for item in feed_result["items"]
@@ -1017,38 +1100,35 @@ def main():
         preview_groups = group_stories(preview_items)
         preview_candidates = []
         preview_draft = None
-        want_ai = os.environ.get("NEWS_PREVIEW_AI", "true").strip().lower() not in {"false", "0", "no"}
-        ai_status = "No AI key configured; raw news preview only"
         if preview_groups:
-            if not want_ai:
-                preliminary_status = "AI preview disabled by selection"
-            elif GEMINI_KEYS or GROQ_KEYS:
-                preliminary_status = "AI draft pending"
-            else:
-                preliminary_status = "No AI key configured; raw news preview only"
-            write_preview_report(feed_result, preview_groups, [], None, preliminary_status, write_summary=False)
-        if preview_groups and not want_ai:
-            ai_status = "AI preview disabled by selection"
-        elif preview_groups and (GEMINI_KEYS or GROQ_KEYS):
+            # Always audit publisher context for the strongest stories. If AI is
+            # off, this is a local read-only check only; no text is sent to a model.
             preview_candidates = build_candidates(
                 preview_groups,
                 {"seen_story_keys": [], "seen_story_titles": []},
             )
-            if preview_candidates:
-                raw = call_ai(make_prompt(preview_candidates))
-                parsed = parse_ai_json(raw)
-                if isinstance(parsed, dict) and parsed.get("skip"):
-                    ai_status = "Quality gate skipped: " + str(parsed.get("reason", "no suitable story"))[:120]
-                elif not raw:
-                    ai_status = "AI provider unavailable; raw news preview only"
-                else:
-                    preview_draft = validate_draft(parsed, preview_candidates)
-                    ai_status = "Draft preview generated" if preview_draft else "Draft rejected by source/recommendation checks"
+        if not want_ai:
+            ai_status = "AI preview disabled by selection"
+        elif not has_ai_provider:
+            ai_status = "No AI key configured; source-context audit only"
+        elif preview_groups and preview_candidates:
+            raw = call_ai(make_prompt(preview_candidates))
+            parsed = parse_ai_json(raw)
+            if isinstance(parsed, dict) and parsed.get("skip"):
+                ai_status = "Quality gate skipped: " + str(parsed.get("reason", "no suitable story"))[:120]
+            elif not raw:
+                ai_status = "AI provider unavailable; raw news preview only"
             else:
-                ai_status = "No article context was available for an AI draft"
-        elif not preview_groups:
+                preview_draft = validate_draft(parsed, preview_candidates)
+                ai_status = "Draft preview generated" if preview_draft else "Draft rejected by source/recommendation checks"
+        elif preview_groups:
+            ai_status = f"No story met the {MIN_AI_CONTEXT_CHARS}-character source-context minimum"
+        else:
             ai_status = "No fresh candidate in the preview window"
-        write_preview_report(feed_result, preview_groups, preview_candidates, preview_draft, ai_status)
+        write_preview_report(
+            feed_result, preview_groups, preview_candidates, preview_draft, ai_status,
+            ai_requested=want_ai, ai_provider_configured=has_ai_provider,
+        )
         return 0
 
     state = load_json(STATE_FILE, {
@@ -1058,17 +1138,17 @@ def main():
             or not isinstance(state.get("generated_slots", []), list)
             or not isinstance(state.get("seen_story_keys", []), list)
             or not isinstance(state.get("seen_story_titles", []), list)):
-        print("âŒ News state has an unexpected schema; no queue changes made")
+        print("❌ News state has an unexpected schema; no queue changes made")
         return 1
 
     archive = load_json(ARCHIVE_FILE, {"stories": []})
     if not isinstance(archive, dict) or not isinstance(archive.get("stories", []), list):
-        print("âŒ News archive has an unexpected schema; refusing to overwrite it")
+        print("❌ News archive has an unexpected schema; refusing to overwrite it")
         return 1
 
     queue = load_json(QUEUE_FILE, {"queue": []})
     if not isinstance(queue, dict) or not isinstance(queue.get("queue"), list):
-        print("âŒ content_queue.json has an unexpected schema; refusing to overwrite it")
+        print("❌ content_queue.json has an unexpected schema; refusing to overwrite it")
         return 1
 
     previous_scraped_at = _parse_archive_time(archive.get("last_scraped_at"))
@@ -1079,22 +1159,22 @@ def main():
     # Scheduled hourly runs persist every fresh RSS item, even when no post is
     # suitable. Dry-run is deliberately read-only.
     save_json(ARCHIVE_FILE, archive)
-    print(f"ðŸ—ƒï¸ Archive now contains {len(archive.get('stories', []))} items; {added_count} new URLs this run")
+    print(f"🗃️ Archive now contains {len(archive.get('stories', []))} items; {added_count} new URLs this run")
 
     in_window = NOW.hour in POSTING_HOURS_IST
     pending_due = in_window and has_due_news(queue)
     if not feed_result["any_success"]:
-        print("âŒ All RSS feeds unavailable; archive status saved, no post this hour")
+        print("❌ All RSS feeds unavailable; archive status saved, no post this hour")
         set_action_output("post_ready", pending_due)
         return 1
 
     if not in_window:
-        print("â„¹ï¸ Outside the 4â€“9 PM IST posting window: archive updated; no post queued")
+        print("ℹ️ Outside the 4–9 PM IST posting window: archive updated; no post queued")
         return 0
 
     slot_key = NOW.strftime("%Y-%m-%d %H")
     if slot_key in state.get("generated_slots", []):
-        print("â„¹ï¸ This hourly slot was already processed; preventing a duplicate post")
+        print("ℹ️ This hourly slot was already processed; preventing a duplicate post")
         set_action_output("post_ready", pending_due)
         return 0
 
@@ -1102,18 +1182,18 @@ def main():
     groups = group_stories(candidate_items)
     candidates = build_candidates(groups, state)
     if not candidates:
-        print("â„¹ï¸ No new, fresh story passed the educational-value/source-detail filters; skipping this hour")
+        print("ℹ️ No new, fresh story passed the educational-value/source-detail filters; skipping this hour")
         set_action_output("post_ready", pending_due)
         return 0
 
     if not GEMINI_KEYS and not GROQ_KEYS:
-        print("âŒ No Gemini/Google or Groq API key is configured; archive saved, no post queued")
+        print("❌ No Gemini/Google or Groq API key is configured; archive saved, no post queued")
         return 1
 
     raw = call_ai(make_prompt(candidates))
     parsed = parse_ai_json(raw)
     if not raw:
-        print("âŒ AI provider unavailable; stories remain archived for the next hourly retry")
+        print("❌ AI provider unavailable; stories remain archived for the next hourly retry")
         set_action_output("post_ready", pending_due)
         return 1
 
@@ -1122,13 +1202,13 @@ def main():
             mark_archive_group(archive, candidate, "rejected")
         save_json(ARCHIVE_FILE, archive)
         reason = str(parsed.get("reason", "no candidate had enough reader value"))[:160]
-        print(f"â­ï¸ AI quality gate: {reason}; skipping this hour, no filler post")
+        print(f"⏭️ AI quality gate: {reason}; skipping this hour, no filler post")
         set_action_output("post_ready", pending_due)
         return 0
 
     draft = validate_draft(parsed, candidates)
     if not draft:
-        print("â­ï¸ Draft failed source/number/recommendation checks; skipping this hour")
+        print("⏭️ Draft failed source/number/recommendation checks; skipping this hour")
         set_action_output("post_ready", pending_due)
         return 0
 
@@ -1141,14 +1221,14 @@ def main():
     if added:
         mark_archive_group(archive, selected, "queued", item["id"])
         save_json(QUEUE_FILE, queue)
-        print(f"âœ… Queued {item['id']} for the {item['scheduled_ist']} IST hourly slot")
+        print(f"✅ Queued {item['id']} for the {item['scheduled_ist']} IST hourly slot")
     else:
         existing = next((q for q in queue["queue"]
                          if q.get("source_url") == selected["source_url"]
                          or q.get("story_key") == selected["story_key"]), None)
         if existing:
             mark_archive_group(archive, selected, "queued", existing.get("id"))
-        print("â„¹ï¸ Existing queue item found; no duplicate item added")
+        print("ℹ️ Existing queue item found; no duplicate item added")
 
     _update_news_state(state, slot_key, selected)
     save_json(STATE_FILE, state)
@@ -1157,7 +1237,7 @@ def main():
     ready = in_window and (added or has_due_news(queue))
     set_action_output("post_ready", ready)
     if ready:
-        print("ðŸ“¨ Existing Telegram poster will handle delivery; no direct Telegram send from this script.")
+        print("📨 Existing Telegram poster will handle delivery; no direct Telegram send from this script.")
     return 0
 
 
