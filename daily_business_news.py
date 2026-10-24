@@ -606,6 +606,33 @@ def _is_opinion_headline(title):
     return False
 
 
+def _is_stock_portfolio_listicle_headline(title):
+    """Reject stock-picking/portfolio listicles rather than reported market news."""
+    normalized = _normalized_words(title)
+    has_stock_subject = _contains_any_phrase(title, ("stock", "stocks", "share", "shares"))
+    if not has_stock_subject:
+        return False
+
+    wealth_loss_listicle = _contains_any_phrase(
+        title, ("portfolio killers", "stocks that wiped out", "shares that wiped out")
+    )
+    has_portfolio_context = _contains_any_phrase(title, ("portfolio",)) or (
+        _contains_any_phrase(title, ("investor", "investors"))
+        and _contains_any_phrase(title, ("holdings", "held by"))
+    )
+    has_ranked_list = bool(
+        re.search(r"\b(?:top|best|worst)\s+\d+\b", normalized)
+        or re.search(r"\b\d+\s+(?:us\s+)?(?:stocks?|shares?)\b", normalized)
+    )
+    has_holdings_list = _contains_any_phrase(
+        title,
+        ("stock holdings", "stock holding", "holdings of", "stocks held by", "shares held by"),
+    )
+    return wealth_loss_listicle or (
+        has_portfolio_context and (has_ranked_list or has_holdings_list)
+    )
+
+
 def _is_low_materiality_headline(title):
     """Reject tiny property announcements that do not support a useful post."""
     normalized = _normalized_words(title)
@@ -713,6 +740,7 @@ def _is_worthwhile_news_headline(title):
     """Apply corporate, IPO, institutional-flow and price-move quality gates."""
     if (
         _is_low_materiality_headline(title)
+        or _is_stock_portfolio_listicle_headline(title)
         or _is_corporate_announcement_headline(title)
         or _is_ipo_related_headline(title)
         or _is_fii_dii_related_headline(title)
@@ -1270,18 +1298,20 @@ def merge_archive(archive, feed_result):
     archive["retention_days"] = ARCHIVE_RETENTION_DAYS
     old_curation = archive.get("curation", {})
     archive["curation"] = {
-        "version": 7,
+        "version": 8,
         "scope": ["economy", "capital_market", "stock_market"],
         "excludes": [
             "financial_results", "opinions_and_recommendations", "generic_market_wraps",
-            "company_corporate_announcements", "commercial_order_and_contract_wins",
-            "ipo_and_fpo_related_news", "fii_fpi_dii_related_news",
-            "routine_price_moves_without_material_catalyst", "low_materiality_announcements",
+            "stock_portfolio_and_wealth_listicles", "company_corporate_announcements",
+            "commercial_order_and_contract_wins", "ipo_and_fpo_related_news",
+            "fii_fpi_dii_related_news", "routine_price_moves_without_material_catalyst",
+            "low_materiality_announcements",
         ],
         "newsworthiness_rule": (
-            "Exclude issuer corporate announcements, commercial order/contract wins, all IPO/FPO "
-            "coverage, and FII/FPI/DII-related stories; retain regulator/court directives and "
-            "price-action stories with material catalysts or exceptional broad-market context."
+            "Exclude stock portfolio/wealth-loss listicles, issuer corporate announcements, "
+            "commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; "
+            "retain regulator/court directives and price-action stories with material catalysts or "
+            "exceptional broad-market context."
         ),
         "near_duplicate_window_hours": ARCHIVE_DEDUPE_WINDOW_HOURS,
         "last_curated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
