@@ -68,33 +68,142 @@ FEEDS = [
 ]
 
 POSITIVE_TERMS = (
-    "ipo", "guidance", "outlook", "rbi", "sebi", "policy", "rate", "tariff",
-    "debt", "capex", "order", "acquisition", "merger", "buyback", "dividend",
+    "ipo", "rbi", "sebi", "policy", "repo rate", "tariff", "debt", "capex",
+    "order", "contract", "acquisition", "merger", "buyback", "dividend",
     "liquidity", "fundraise", "funding", "default", "npa", "crude", "rupee",
-    "export", "import", "regulation", "approval", "capacity", "market share",
-    "subscription", "listing", "layoff", "restructuring", "withdrawal", "investment",
+    "export", "import", "regulation", "approval", "capacity", "subscription",
+    "listing", "withdrawal", "investment", "inflation", "gdp", "fii", "fpi",
+    "dii", "bond", "stock exchange", "settlement",
 )
 
-# Exclude quarterly/financial performance stories as well as broker calls. This
-# preview is for material business events, policy, IPO, funding, orders, capex
-# and regulation—not earnings-result roundups or profit/revenue headlines.
+# Hard result markers plus common result metrics/verbs. Metrics are checked in
+# context so macro stories about tax revenue, for example, are not mistaken for
+# company earnings releases.
 RESULTS_EXCLUDE_TERMS = (
     "result", "results", "earning", "earnings", "q1", "q2", "q3", "q4",
-    "profit", "profits", "loss", "losses", "revenue", "revenues",
-    "ebitda", "eps", "net interest income", "net profit", "pat", "nim",
+    "quarterly", "quarter results", "financial results", "annual results",
+    "half-year results", "ebitda", "eps", "net interest income", "pat", "nim",
+)
+RESULT_METRIC_TERMS = (
+    "profit", "profits", "net profit", "loss", "losses", "net loss", "revenue",
+    "revenues", "operating income", "net income", "earnings per share",
+)
+RESULT_REPORTING_VERBS = (
+    "reports", "reported", "posts", "posted", "declares", "announces", "records",
+    "recorded", "beats", "misses", "rose", "rises", "fell", "falls", "surges",
+    "surged", "jumps", "jumped", "drops", "dropped", "grew", "grows", "declines",
+    "declined", "dips", "slumps", "slumped", "up", "down", "increases", "increased",
+    "increase", "decreases", "decreased", "decrease", "climbs", "climbed", "soars", "soared",
+    "doubles", "doubled", "triples", "tripled", "narrows", "narrowed", "widens", "widened",
+    "shrinks", "shrunk", "surpasses", "surpassed",
+)
+ECONOMY_CONTEXT_TERMS = (
+    "economy", "economic", "gdp", "gva", "cpi", "wpi", "inflation", "repo rate",
+    "monetary policy", "interest rate", "rupee", "currency", "forex", "foreign exchange",
+    "trade deficit", "current account", "exports", "imports", "fiscal deficit",
+    "gst collection", "tax collection", "budget", "industrial production", "iip", "pmi",
+    "government borrowing", "government spending", "manufacturing", "employment",
+    "unemployment", "bond yield", "bond yields", "treasury yield", "treasury yields",
+    "crude", "crude oil", "oil prices", "rbi", "reserve bank", "central bank",
+    "bank indonesia", "federal reserve", "fed rate", "credit growth",
+    "debt concerns", "commodity prices", "trade policy", "trade deal", "trade agreement",
+    "economic policy", "monetary policy", "tax revenue", "government revenue", "gst revenue",
+    "customs revenue",
+)
+CAPITAL_MARKET_CONTEXT_TERMS = (
+    "capital market", "capital markets", "ipo", "fpo", "qip", "rights issue",
+    "offer for sale", "anchor investor", "stock exchange", "sebi", "nse", "bse",
+    "depository", "mutual fund", "fii", "fiis", "fpi", "dii", "equity market",
+    "share market", "liquidity", "market liquidity", "market infrastructure", "securities",
+    "settlement", "margin", "corporate bond", "government bond", "bond market",
+    "bond markets", "bonds", "bond", "buyback", "dividend", "stock split", "bonus issue",
+    "listing", "delisting", "market capitalisation", "market capitalization", "nifty",
+    "sensex", "futures", "options", "index", "indices", "shareholding", "market value",
+)
+STOCK_MARKET_CONTEXT_TERMS = (
+    "stock market", "stock markets", "stocks", "stock", "shares", "share price",
+    "stock price", "equity", "listed company", "listed companies", "listed firm",
+    "listed firms",
+)
+LISTED_COMPANY_EVENT_TERMS = (
+    "order", "contract", "acquisition", "acquires", "acquired", "merger", "takeover",
+    "joint venture", "jv agreement", "capex", "capacity", "commission", "commissioned",
+    "commercial production", "new plant", "facility", "fundraise", "funding", "stake sale",
+    "divestment", "asset sale", "buyback", "dividend", "stock split", "bonus issue",
+    "hotel", "property", "fleet expansion", "gas carrier", "vessel", "partnership",
+    "signs", "signed", "buys", "acquires",
 )
 
-# Exclude broker calls and generic stock-pick headlines. The goal is business
-# context, not a buy/sell recommendation or a recycled tips post.
+# News formats and framing that are routinely repetitive or opinion-led.
 EXCLUDE_TERMS = (
-    "broker", "analyst", "recommendation", "recommended", "stocks to buy", "stock to buy",
-    "stocks to sell", "stock to sell", "should you buy", "should you sell",
-    "top stocks to buy", "buy call", "sell call", "target price", "price target",
-    "buy rating", "sell rating", "buy on dips", "sell on rise", "stocks to watch today",
+    "broker", "analyst", "recommendation", "recommendations", "recommended", "opinion", "editorial",
+    "commentary", "op-ed", "op ed", "viewpoint", "analysis", "market view", "company view",
+    "stocks to buy", "stock to buy",
+    "stocks to sell", "stock to sell", "stocks to buy today", "stocks to buy now", "should you buy", "should you sell",
+    "top stocks to buy", "best stocks", "stock tips", "share tips", "buy call", "sell call",
+    "target price", "target prices", "price target", "price targets", "buy rating", "sell rating",
+    "buy on dips", "sell on rise", "stocks to watch today",
     "top pick", "stock pick", "prefers", "overweight", "underweight", "upgrades",
-    "downgrades", "rating upgrade", "rating downgrade", "recommends",
-    "accumulate", "outperform", "underperform", "top brokerage pick",
+    "downgrades", "rating upgrade", "rating downgrade", "recommends", "accumulate",
+    "outperform", "underperform", "top brokerage pick", "outlook", "forecast", "forecasts",
+    "estimate", "estimates", "estimated", "expects", "expected", "predicts", "prediction",
+    "potential", "expert view", "experts say", "experts weigh in", "expert says",
+    "buying opportunity", "buying the dip", "more pain ahead", "could mean", "could threaten",
+    "may not recover", "better value", "undervalued", "overvalued", "expensive stocks",
+    "cheap stocks", "why", "what should", "better value overseas", "sees slowdown",
+    "mutual fund slowdown", "dents investor bandwidth", "weighs on markets", "weighs on market",
+    "sell these", "buy these", "avoid these", "sell this stock", "buy this stock",
+    "flags ipo slowdown",
 )
+NEWS_FORMAT_EXCLUDE_TERMS = (
+    "market wrap", "markets today", "stock market today", "live update", "live updates",
+    "live blog", "liveblog", "highlights", "roundup", "round-up", "stocks to watch",
+    "market pulse", "key triggers to watch", "stocks in focus",
+)
+IPO_DEDUPE_GENERIC_TERMS = {
+    "ipo", "fpo", "issue", "issues", "public", "offer", "anchor", "investor", "investors",
+    "demand", "subscription", "subscribed", "application", "applications", "bid", "bids",
+    "qib", "retail", "record", "records", "first", "global", "globally", "largest",
+    "day", "highlights", "live", "update", "updates", "crore", "lakh", "million",
+    "times", "opens", "open", "opening", "cross", "crosses", "breaks", "jumps",
+    "milestone", "milestones", "markets", "market", "stock", "stocks", "shares", "share",
+    "equity", "india", "indian", "the", "and", "for", "from", "with", "into", "price",
+    "prices", "band", "premium", "debut", "debuted", "list", "listing", "listed", "trading", "trades",
+    "nse", "bse", "at", "up", "down", "make", "makes", "made", "rise", "rises", "fell", "falls",
+    "jump", "jumps", "flat", "bumper", "stellar", "market", "day", "public", "sale",
+    "oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep",
+}
+DEDUPE_GENERIC_TERMS = {
+    "the", "and", "for", "from", "with", "into", "after", "ahead", "over", "under",
+    "amid", "as", "at", "by", "in", "on", "to", "of", "a", "an", "is", "are",
+    "was", "were", "be", "been", "being", "will", "its", "it", "this", "that", "their",
+    "they", "them", "has", "have", "had", "says", "said", "saying", "reports", "reported",
+    "latest", "today", "live", "update", "updates", "highlights", "day", "new", "news",
+    "market", "markets", "stock", "stocks", "share", "shares", "equity", "price", "prices",
+    "debut", "debuted", "list", "lists", "listing", "listed", "premium",
+    "india", "indian", "global", "globally", "first", "record", "records", "crore", "lakh",
+    "million", "billion", "thousand", "more", "less", "after", "before", "could", "would",
+    "should", "may", "might", "via", "now", "top", "all", "one", "two", "three", "four",
+    "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "oct", "nov", "dec",
+}
+EVENT_DEDUPE_GENERIC_TERMS = DEDUPE_GENERIC_TERMS | {
+    "order", "orders", "contract", "contracts", "work", "win", "wins", "won", "bag", "bags",
+    "bagged", "award", "awards", "awarded", "secure", "secures", "secured", "capex",
+    "capacity", "commission", "commissioned", "commissioning", "commercial", "production",
+    "plant", "facility", "acquisition", "acquisitions", "acquire", "acquires", "acquired",
+    "merger", "mergers", "merges", "merged", "takeover", "joint", "venture", "agreement",
+    "buyback", "buybacks", "dividend", "dividends", "split", "bonus", "issue", "issues",
+    "rights", "stake", "stakes", "sale", "asset", "assets", "company", "companies", "firm",
+    "firms", "group", "limited", "ltd", "inc", "corporation", "industries", "technology",
+    "sebi", "rbi", "nse", "bse",
+}
+DUPLICATE_EVENT_FAMILIES = (
+    ("order_contract", ("order", "orders", "contract", "contracts", "work order")),
+    ("capacity_capex", ("capex", "capacity", "commission", "commissioned", "commercial production", "plant", "facility")),
+    ("acquisition_jv", ("acquisition", "acquisitions", "acquires", "acquired", "merger", "mergers", "takeover", "joint venture", "jv agreement")),
+    ("capital_action", ("buyback", "buybacks", "dividend", "dividends", "stock split", "bonus issue", "rights issue")),
+)
+ARCHIVE_DEDUPE_WINDOW_HOURS = 72
 
 GEMINI_KEYS = list(dict.fromkeys(filter(None, [
     os.environ.get("GEMINI_API_KEY", "").strip(),
@@ -249,23 +358,93 @@ def parse_rss(xml_bytes: bytes, source: dict):
     return output
 
 
+def _normalized_words(text):
+    return re.sub(r"[^a-z0-9]+", " ", str(text or "").lower()).strip()
+
+
 def _contains_any_phrase(text, phrases):
-    normalized = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    normalized = _normalized_words(text)
     padded = f" {normalized} "
-    return any(f" {phrase} " in padded for phrase in phrases)
+    return any(f" {_normalized_words(phrase)} " in padded for phrase in phrases)
+
+
+def _is_financial_results_headline(title):
+    if _contains_any_phrase(title, RESULTS_EXCLUDE_TERMS):
+        return True
+    if not _contains_any_phrase(title, RESULT_METRIC_TERMS):
+        return False
+    if _contains_any_phrase(title, ("tax revenue", "gst revenue", "government revenue", "customs revenue", "budget revenue")):
+        return False
+    return _contains_any_phrase(title, RESULT_REPORTING_VERBS)
+
+
+def _is_opinion_headline(title):
+    normalized = _normalized_words(title)
+    if _contains_any_phrase(normalized, EXCLUDE_TERMS):
+        return True
+    if re.search(r"\b(?:analysts?|brokers?|brokerages?)\b", normalized):
+        return True
+    if re.search(
+        r"\b(?:may|might|could|should|can)\s+(?:not\s+)?"
+        r"(?:rise|fall|gain|drop|surge|soar|decline|recover|weaken|strengthen|boost|hurt|"
+        r"lead|drive|trigger|reach|cross|double|halve|grow|increase|decrease|tighten|ease|"
+        r"cut|raise|benefit|deliver|become|remain|face|threaten|improve|worsen|stay|"
+        r"prioritise|prioritize|outperform|underperform)\b",
+        normalized,
+    ):
+        return True
+    if re.search(r"\bsees?\s+(?:a\s+|the\s+)?(?:slowdown|growth|recovery|rally|correction|decline|fall|rise|increase|decrease|expansion)\b", normalized):
+        return True
+    if re.search(r"\b(?:likely|unlikely|expected|expects|predicts|forecast|estimates?)\b", normalized):
+        return True
+    # Question-framed analysis is usually a recommendation or interpretation,
+    # rather than a reported economic/market event.
+    if "?" in str(title) and _contains_any_phrase(
+        normalized, ("why", "what", "should", "could", "would", "can", "will")
+    ):
+        return True
+    return False
+
+
+def classify_news_story(title, summary="", url=""):
+    """Return the in-scope topic, or ``None`` for results, opinion or noise.
+
+    Scope is determined from the headline, not the RSS summary: publisher
+    excerpts can mention unrelated terms and otherwise pull consumer/tech items
+    into an economy or market archive.
+    """
+    headline = _clean_text(str(title or ""))
+    if not headline or _is_financial_results_headline(headline):
+        return None
+    if _is_opinion_headline(headline) or _contains_any_phrase(headline, NEWS_FORMAT_EXCLUDE_TERMS):
+        return None
+
+    if _contains_any_phrase(headline, ECONOMY_CONTEXT_TERMS):
+        return "economy"
+    if _contains_any_phrase(headline, CAPITAL_MARKET_CONTEXT_TERMS):
+        return "capital_market"
+    if _contains_any_phrase(headline, STOCK_MARKET_CONTEXT_TERMS):
+        return "stock_market"
+
+    path = urlsplit(str(url or "")).path.lower()
+    if (_contains_any_phrase(headline, LISTED_COMPANY_EVENT_TERMS)
+            and ("/market/" in path or "/markets/" in path)):
+        return "stock_market"
+    return None
 
 
 def _item_score(item):
-    title = item["title"].lower()
-    if (_contains_any_phrase(title, RESULTS_EXCLUDE_TERMS)
-            or any(term in title for term in EXCLUDE_TERMS)):
+    title = str(item.get("title", ""))
+    if not classify_news_story(title, item.get("summary", ""), item.get("url", "")):
         return -100
-    score = item["source_priority"]
-    score += sum(2 for term in POSITIVE_TERMS if term in title)
+    score = int(item.get("source_priority", 1))
+    score += sum(2 for term in POSITIVE_TERMS if _contains_any_phrase(title, (term,)))
     if len(item.get("summary", "")) > 120:
         score += 2
-    age_hours = max(0, (NOW - item["published"]).total_seconds() / 3600)
-    score += max(0, 3 - age_hours / 12)
+    published = item.get("published")
+    if published:
+        age_hours = max(0, (NOW - published).total_seconds() / 3600)
+        score += max(0, 3 - age_hours / 12)
     return score
 
 
@@ -281,28 +460,165 @@ def _title_similarity(left: str, right: str) -> float:
                jaccard, containment * 0.88)
 
 
+def _dedupe_title_tokens(title):
+    return {
+        token for token in re.findall(r"[a-z0-9]+", str(title or "").lower())
+        if len(token) > 2 and not re.search(r"\d", token) and token not in DEDUPE_GENERIC_TERMS
+    }
+
+
+def _duplicate_event_family(title):
+    for family, terms in DUPLICATE_EVENT_FAMILIES:
+        if _contains_any_phrase(title, terms):
+            return family
+    return None
+
+
+def _event_entity_tokens(title):
+    return _dedupe_title_tokens(title) - EVENT_DEDUPE_GENERIC_TERMS
+
+
+def _ipo_event_type(title):
+    if _contains_any_phrase(title, ("market liquidity", "liquidity shift", "investor bandwidth", "listed stocks", "market impact")):
+        return "market_impact"
+    if _contains_any_phrase(title, ("debut", "debuted", "listing", "listed at", "shares list", "share listing")):
+        return "listing"
+    if _contains_any_phrase(title, ("subscription", "subscribed", "oversubscribed", "bids", "applications", "demand", "investor demand", "crosses demand")):
+        return "subscription"
+    if _contains_any_phrase(title, ("opens", "opening", "price band", "anchor investor", "anchor book")):
+        return "offer"
+    return "ipo_misc"
+
+
+def _is_listing_story(title):
+    return _contains_any_phrase(title, ("debut", "debuted", "listing", "listed at", "shares list", "shares debut"))
+
+
+def _story_datetime(story):
+    if isinstance(story.get("published"), datetime):
+        return story["published"]
+    return _parse_archive_time(story.get("published_at"))
+
+
+def _stories_are_duplicates(left, right):
+    left_url = _canonical_url(left.get("url", ""))
+    right_url = _canonical_url(right.get("url", ""))
+    if left_url and left_url == right_url:
+        return True
+
+    left_title = str(left.get("title", left.get("headline", "")))
+    right_title = str(right.get("title", right.get("headline", "")))
+    left_tokens = _dedupe_title_tokens(left_title)
+    right_tokens = _dedupe_title_tokens(right_title)
+    shared_tokens = left_tokens & right_tokens
+    similarity = _title_similarity(left_title, right_title)
+    left_date, right_date = _story_datetime(left), _story_datetime(right)
+    hours_apart = (
+        abs((left_date - right_date).total_seconds()) / 3600
+        if left_date and right_date else None
+    )
+    left_is_ipo = _contains_any_phrase(left_title, ("ipo", "fpo", "initial public offering"))
+    right_is_ipo = _contains_any_phrase(right_title, ("ipo", "fpo", "initial public offering"))
+
+    if hours_apart is not None and hours_apart > ARCHIVE_DEDUPE_WINDOW_HOURS:
+        if not (left_is_ipo and right_is_ipo and hours_apart <= 14 * 24):
+            return False
+
+    if (_is_listing_story(left_title) and _is_listing_story(right_title)
+            and (hours_apart is None or hours_apart <= ARCHIVE_DEDUPE_WINDOW_HOURS)):
+        listing_entities_left = left_tokens - IPO_DEDUPE_GENERIC_TERMS
+        listing_entities_right = right_tokens - IPO_DEDUPE_GENERIC_TERMS
+        if listing_entities_left & listing_entities_right:
+            return True
+
+    # Group repeated updates only for the same issuer and IPO phase: subscription
+    # coverage should not erase a distinct listing or market-impact story.
+    if left_is_ipo and right_is_ipo:
+        ipo_entities_left = left_tokens - IPO_DEDUPE_GENERIC_TERMS
+        ipo_entities_right = right_tokens - IPO_DEDUPE_GENERIC_TERMS
+        overlap = ipo_entities_left & ipo_entities_right
+        same_phase = _ipo_event_type(left_title) == _ipo_event_type(right_title)
+        if overlap:
+            if same_phase and (hours_apart is None or hours_apart <= 14 * 24):
+                return True
+            return False
+        # Never merge different issuers' IPOs based on generic words such as
+        # "debut", "premium", or the issue month.
+        if ipo_entities_left and ipo_entities_right:
+            return False
+        if similarity >= 0.88 and len(shared_tokens) >= 3 and same_phase:
+            return True
+
+    # Same-event company disclosures need a shared issuer/project token; a
+    # common phrase like "wins NHAI contract" alone must not merge two firms.
+    left_family = _duplicate_event_family(left_title)
+    right_family = _duplicate_event_family(right_title)
+    if left_family and left_family == right_family:
+        shared_entities = _event_entity_tokens(left_title) & _event_entity_tokens(right_title)
+        if not shared_entities:
+            return False
+        if similarity >= 0.70 or (len(shared_entities) >= 2 and similarity >= 0.58):
+            return True
+
+    # Same-session currency/commodity updates are often republished with
+    # different wording. Collapse only same-day moves in the same lead instrument.
+    if left_date and right_date and left_date.date() == right_date.date():
+        def leading_instrument(title):
+            normalized = _normalized_words(title)
+            if normalized.startswith("rupee "):
+                return "rupee"
+            if normalized.startswith(("crude ", "brent ", "oil prices ")):
+                return "crude"
+            return None
+
+        movement_terms = (
+            "rise", "rises", "rose", "fall", "falls", "fell", "drop", "drops", "dropped",
+            "gain", "gains", "gained", "edge", "edges", "slip", "slips", "tumble", "tumbles",
+            "sink", "sinks", "little changed", "weaken", "weakens", "strengthen", "strengthens",
+            "snap", "snaps", "lower", "higher", "surge", "surges", "decline", "declines",
+        )
+        left_instrument = leading_instrument(left_title)
+        right_instrument = leading_instrument(right_title)
+        if (left_instrument and left_instrument == right_instrument
+                and _contains_any_phrase(left_title, movement_terms)
+                and _contains_any_phrase(right_title, movement_terms)):
+            return True
+
+    if similarity >= 0.80 and len(shared_tokens) >= 2:
+        return True
+    return similarity >= 0.74 and len(shared_tokens) >= 3
+
+
 def group_stories(items):
-    """Combine near-identical cross-publisher headlines into one story."""
+    """Filter to the requested topics and group repeated event coverage."""
     groups = []
-    for item in sorted(items, key=lambda x: (x["published"], _item_score(x)), reverse=True):
+    for item in sorted(items, key=lambda x: (x.get("published") or NOW, _item_score(x)), reverse=True):
         if _item_score(item) < 0:
             continue
-        match = None
-        for group in groups:
-            if _title_similarity(item["title"], group["items"][0]["title"]) >= 0.70:
-                match = group
-                break
+        match = next((group for group in groups
+                      if _stories_are_duplicates(item, group["items"][0])), None)
         if match:
-            if all(item["url"] != old["url"] for old in match["items"]):
+            if all(item.get("url") != old.get("url") for old in match["items"]):
                 match["items"].append(item)
         else:
-            story_key = hashlib.sha256((item["url"] + "|" + item["title"].lower()).encode()).hexdigest()
+            story_key = hashlib.sha256(
+                (item.get("url", "") + "|" + item.get("title", "").lower()).encode()
+            ).hexdigest()
             groups.append({"key": story_key, "items": [item]})
 
     for group in groups:
-        group["items"].sort(key=lambda x: (x["source_priority"], x["published"]), reverse=True)
-        group["score"] = max(_item_score(item) for item in group["items"]) + min(3, len(group["items"]) - 1) * 1.5
-    groups.sort(key=lambda x: (x["score"], x["items"][0]["published"]), reverse=True)
+        group["items"].sort(
+            key=lambda x: (x.get("source_priority", 1), x.get("published") or NOW),
+            reverse=True,
+        )
+        primary = group["items"][0]
+        group["topic"] = classify_news_story(
+            primary.get("title", ""), primary.get("summary", ""), primary.get("url", "")
+        )
+        group["score"] = max(_item_score(item) for item in group["items"]) + min(
+            3, len(group["items"]) - 1
+        ) * 1.5
+    groups.sort(key=lambda x: (x["score"], x["items"][0].get("published") or NOW), reverse=True)
     return groups
 
 
@@ -319,19 +635,33 @@ def fetch_feeds():
             items = parse_rss(response.content, source)
             fresh = [item for item in items
                      if cutoff <= item["published"] <= NOW + timedelta(hours=2)]
+            accepted = []
+            for item in fresh:
+                topic = classify_news_story(item["title"], item.get("summary", ""), item.get("url", ""))
+                if not topic:
+                    continue
+                item["topic"] = topic
+                accepted.append(item)
             feed_status[source["name"]] = {
                 "checked_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
                 "http_status": response.status_code,
                 "fresh_items": len(fresh),
+                "accepted_items": len(accepted),
+                "filtered_items": len(fresh) - len(accepted),
                 "error": None,
             }
-            print(f"   📰 {source['name']}: {len(fresh)} fresh items")
-            all_items.extend(fresh)
+            print(
+                f"   📰 {source['name']}: {len(accepted)} in-scope stories "
+                f"({len(fresh) - len(accepted)} filtered from {len(fresh)} fresh)"
+            )
+            all_items.extend(accepted)
         except Exception as exc:
             feed_status[source["name"]] = {
                 "checked_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
                 "http_status": None,
                 "fresh_items": 0,
+                "accepted_items": 0,
+                "filtered_items": 0,
                 "error": str(exc)[:160],
             }
             print(f"   ⚠️ Feed unavailable ({source['name']}): {str(exc)[:120]}")
@@ -350,69 +680,262 @@ def _parse_archive_time(value):
         return _parse_datetime(value)
 
 
+def _safe_int(value, default=1):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _archive_status_priority(record):
+    return {"posted": 3, "queued": 2, "rejected": 1, "new": 0}.get(record.get("status"), 0)
+
+
+def _archive_rank(record):
+    published = _story_datetime(record)
+    return (
+        _archive_status_priority(record),
+        published.timestamp() if published else 0,
+        _safe_int(record.get("source_priority", 1), 1),
+        len(str(record.get("summary", "") or "")),
+    )
+
+
+def _archive_stamp_datetime(record, field):
+    return _parse_archive_time(record.get(field))
+
+
+def _format_archive_stamp(value):
+    return value.strftime("%Y-%m-%d %H:%M:%S IST") if value else None
+
+
+def _merge_duplicate_records(keeper, duplicate):
+    """Keep one event record, preserving processed state and the latest facts."""
+    update_latest = _archive_rank(duplicate)[1:] > _archive_rank(keeper)[1:]
+    if update_latest:
+        for key in (
+            "source", "source_priority", "headline", "url", "published_at", "published_ist",
+            "summary", "topic",
+        ):
+            if key in duplicate:
+                keeper[key] = duplicate[key]
+
+    if _archive_status_priority(duplicate) > _archive_status_priority(keeper):
+        for key in ("status", "post_id", "processed_ist", "posted_at"):
+            if key in duplicate:
+                keeper[key] = duplicate[key]
+
+    for field, choose_earlier in (("first_seen_at", True), ("last_seen_at", False)):
+        dates = [dt for dt in (_archive_stamp_datetime(keeper, field),
+                               _archive_stamp_datetime(duplicate, field)) if dt]
+        if dates:
+            chosen = min(dates) if choose_earlier else max(dates)
+            keeper[field] = chosen.isoformat()
+            ist_field = field.replace("_at", "_ist")
+            keeper[ist_field] = _format_archive_stamp(chosen)
+
+    if not keeper.get("id"):
+        keeper["id"] = duplicate.get("id")
+
+
+def _curate_archive_stories(stories):
+    """Remove out-of-scope records and collapse one event to one archive row."""
+    accepted = []
+    removed = 0
+    for source_record in stories:
+        if not isinstance(source_record, dict):
+            removed += 1
+            continue
+        record = dict(source_record)
+        title = record.get("headline", record.get("title", ""))
+        url = _canonical_url(record.get("url", ""))
+        topic = classify_news_story(title, record.get("summary", ""), url)
+        if not topic or not url:
+            removed += 1
+            continue
+        record["headline"] = _clean_text(str(title))
+        record["url"] = url
+        record["topic"] = topic
+        record.setdefault("status", "new")
+        accepted.append(record)
+
+    accepted.sort(key=_archive_rank, reverse=True)
+    curated = []
+    duplicates = 0
+    for record in accepted:
+        match = next((old for old in curated if _stories_are_duplicates(record, old)), None)
+        if match:
+            _merge_duplicate_records(match, record)
+            duplicates += 1
+        else:
+            curated.append(record)
+
+    curated.sort(
+        key=lambda item: (_story_datetime(item).timestamp() if _story_datetime(item) else 0),
+        reverse=True,
+    )
+    return curated, removed, duplicates
+
+
+def _new_archive_record(feed_item, topic):
+    url = _canonical_url(feed_item.get("url", ""))
+    published = feed_item["published"].astimezone(IST)
+    now_iso = NOW.isoformat()
+    now_ist = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
+    return {
+        "id": _alpha_id(url),
+        "source": feed_item.get("source", "News source"),
+        "source_priority": int(feed_item.get("source_priority", 1) or 1),
+        "headline": _clean_text(feed_item.get("title", "")),
+        "url": url,
+        "published_at": published.isoformat(),
+        "published_ist": published.strftime("%Y-%m-%d %H:%M IST"),
+        "summary": _clean_text(feed_item.get("summary", ""))[:900],
+        "first_seen_at": now_iso,
+        "last_seen_at": now_iso,
+        "first_seen_ist": now_ist,
+        "last_seen_ist": now_ist,
+        "status": "new",
+        "topic": topic,
+    }
+
+
+def _refresh_archive_record(record, feed_item, topic):
+    """Refresh a canonical event row without resetting queued/posted state."""
+    url = _canonical_url(feed_item.get("url", ""))
+    published = feed_item["published"].astimezone(IST)
+    old_published = _parse_archive_time(record.get("published_at"))
+    old_summary = record.get("summary", "")
+    new_summary = _clean_text(feed_item.get("summary", ""))[:900]
+    should_refresh = (
+        old_published is None
+        or published > old_published
+        or (
+            published == old_published
+            and (
+                int(feed_item.get("source_priority", 1) or 1) > int(record.get("source_priority", 1) or 1)
+                or len(new_summary) > len(old_summary)
+            )
+        )
+    )
+    before = (record.get("headline"), record.get("url"), record.get("published_at"), old_summary)
+    now_iso = NOW.isoformat()
+    now_ist = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
+    record.setdefault("first_seen_at", now_iso)
+    record.setdefault("first_seen_ist", now_ist)
+    record["last_seen_at"] = now_iso
+    record["last_seen_ist"] = now_ist
+    record.setdefault("status", "new")
+
+    if should_refresh:
+        record["source"] = feed_item.get("source", record.get("source", "News source"))
+        record["source_priority"] = int(feed_item.get("source_priority", 1) or 1)
+        record["headline"] = _clean_text(feed_item.get("title", record.get("headline", "")))
+        record["url"] = url or record.get("url", "")
+        record["published_at"] = published.isoformat()
+        record["published_ist"] = published.strftime("%Y-%m-%d %H:%M IST")
+        if new_summary:
+            record["summary"] = new_summary
+    elif new_summary and not old_summary:
+        record["summary"] = new_summary
+    record["topic"] = topic
+    after = (record.get("headline"), record.get("url"), record.get("published_at"), record.get("summary", ""))
+    return before != after
+
+
 def merge_archive(archive, feed_result):
-    """Append/update RSS metadata in the archive; never store full article text."""
+    """Filter, deduplicate and merge RSS metadata; never store full article text."""
     if not isinstance(archive, dict) or not isinstance(archive.get("stories", []), list):
         raise ValueError("business_news_archive.json has an unexpected schema")
 
-    stories = archive.setdefault("stories", [])
-    by_url = {item.get("url"): item for item in stories if isinstance(item, dict) and item.get("url")}
+    stories, removed_existing, existing_duplicates = _curate_archive_stories(
+        archive.setdefault("stories", [])
+    )
+    by_url = {item.get("url"): item for item in stories if item.get("url")}
     added = 0
+    filtered_feed_items = 0
+    feed_duplicates = 0
     new_or_updated_urls = set()
-    for feed_item in feed_result["items"]:
-        url = feed_item["url"]
-        published_at = feed_item["published"].isoformat()
+    feed_items = feed_result.get("items", [])
+
+    for feed_item in feed_items:
+        topic = classify_news_story(
+            feed_item.get("title", ""), feed_item.get("summary", ""), feed_item.get("url", "")
+        )
+        url = _canonical_url(feed_item.get("url", ""))
+        if not topic or not url or not feed_item.get("published"):
+            filtered_feed_items += 1
+            continue
+
+        normalized_item = dict(feed_item)
+        normalized_item["url"] = url
         record = by_url.get(url)
         if record:
-            now_iso = NOW.isoformat()
-            record.setdefault("first_seen_at", now_iso)
-            record["last_seen_at"] = now_iso
-            record["last_seen_ist"] = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
-            old_published = _parse_archive_time(record.get("published_at"))
-            if old_published and feed_item["published"] > old_published:
-                record["published_at"] = published_at
-                record["published_ist"] = feed_item["published"].strftime("%Y-%m-%d %H:%M IST")
-                record["headline"] = feed_item["title"]
+            changed = _refresh_archive_record(record, normalized_item, topic)
+            if changed:
                 new_or_updated_urls.add(url)
-            if feed_item.get("summary"):
-                summary = feed_item["summary"][:900]
-                if summary != record.get("summary", ""):
-                    record["summary"] = summary
-                    # A materially updated feed excerpt can represent new information.
-                    new_or_updated_urls.add(url)
+                new_or_updated_urls.add(record.get("url", url))
             continue
-        record = {
-            "id": _alpha_id(url),
-            "source": feed_item["source"],
-            "source_priority": feed_item["source_priority"],
-            "headline": feed_item["title"],
-            "url": url,
-            "published_at": published_at,
-            "published_ist": feed_item["published"].strftime("%Y-%m-%d %H:%M IST"),
-            "summary": feed_item.get("summary", "")[:900],
-            "first_seen_at": NOW.isoformat(),
-            "last_seen_at": NOW.isoformat(),
-            "first_seen_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-            "last_seen_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
-            "status": "new",
-        }
-        stories.append(record)
-        by_url[url] = record
+
+        candidate = _new_archive_record(normalized_item, topic)
+        duplicate = next((old for old in stories if _stories_are_duplicates(candidate, old)), None)
+        if duplicate:
+            feed_duplicates += 1
+            old_url = duplicate.get("url", "")
+            changed = _refresh_archive_record(duplicate, normalized_item, topic)
+            by_url[url] = duplicate
+            by_url[old_url] = duplicate
+            if changed:
+                new_or_updated_urls.add(url)
+                new_or_updated_urls.add(duplicate.get("url", url))
+            continue
+
+        stories.append(candidate)
+        by_url[url] = candidate
         added += 1
         new_or_updated_urls.add(url)
 
+    stories, removed_final, final_duplicates = _curate_archive_stories(stories)
     retention_cutoff = NOW - timedelta(days=ARCHIVE_RETENTION_DAYS)
     retained = []
     for item in stories:
-        published = _parse_archive_time(item.get("published_at")) if isinstance(item, dict) else None
+        published = _parse_archive_time(item.get("published_at"))
         if published is None or published >= retention_cutoff:
             retained.append(item)
     retained.sort(key=lambda item: item.get("published_at", ""), reverse=True)
     archive["stories"] = retained[:ARCHIVE_MAX_ITEMS]
     archive["last_scraped_at"] = NOW.isoformat()
     archive["last_scraped_ist"] = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
-    archive["feed_status"] = feed_result["status"]
+    archive["feed_status"] = feed_result.get("status", {})
     archive["retention_days"] = ARCHIVE_RETENTION_DAYS
+    old_curation = archive.get("curation", {})
+    archive["curation"] = {
+        "version": 1,
+        "scope": ["economy", "capital_market", "stock_market"],
+        "excludes": ["financial_results", "opinions_and_recommendations", "generic_market_wraps"],
+        "near_duplicate_window_hours": ARCHIVE_DEDUPE_WINDOW_HOURS,
+        "ipo_phase_window_days": 14,
+        "last_curated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+    }
+    if isinstance(old_curation, dict) and old_curation.get("initial_cleanup_stats"):
+        archive["curation"]["initial_cleanup_stats"] = old_curation["initial_cleanup_stats"]
+
+    status = archive["feed_status"] if isinstance(archive["feed_status"], dict) else {}
+    fetched_items = sum(_safe_int(value.get("fresh_items", 0), 0)
+                        for value in status.values() if isinstance(value, dict))
+    filtered_at_fetch = sum(_safe_int(value.get("filtered_items", 0), 0)
+                            for value in status.values() if isinstance(value, dict))
+    accepted_at_merge = max(0, len(feed_items) - filtered_feed_items)
+    archive["last_run_stats"] = {
+        "updated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+        "fetched_items": fetched_items or len(feed_items),
+        "accepted_feed_items": accepted_at_merge,
+        "filtered_feed_items": filtered_at_fetch + filtered_feed_items,
+        "new_unique_stories": added,
+        "duplicate_items_collapsed": existing_duplicates + feed_duplicates + final_duplicates,
+        "out_of_scope_archive_items_removed": removed_existing + removed_final,
+        "stories_total": len(archive["stories"]),
+    }
     return archive, added, new_or_updated_urls
 
 
@@ -447,6 +970,7 @@ def archive_to_items(archive, previous_scraped_at=None, fresh_urls=None):
             "title": record.get("headline", ""),
             "url": record.get("url", ""),
             "summary": record.get("summary", ""),
+            "topic": record.get("topic"),
             "published": published,
         })
     return output
@@ -607,6 +1131,7 @@ def build_candidates(groups, state):
         output.append({
             "id": story_id,
             "story_key": group["key"],
+            "topic": group.get("topic") or primary.get("topic"),
             "headline": primary["title"],
             "published_ist": primary["published"].strftime("%Y-%m-%d %H:%M IST"),
             "source": primary["source"],
@@ -630,6 +1155,7 @@ def make_prompt(candidates):
     for item in candidates:
         public_candidates.append({
             "id": item["id"],
+            "topic": item.get("topic"),
             "headline": item["headline"],
             "published_ist": item["published_ist"],
             "source": item["source"],
@@ -646,7 +1172,7 @@ def make_prompt(candidates):
 
 CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
-Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Prefer material company/business events such as IPO mechanics, policy/regulation, financing/debt, capex/orders, acquisitions, product launches, or macro changes with a concrete business link. Do NOT choose quarterly earnings/results or headlines about profit, loss, revenue, EPS, or EBITDA. Skip brokerage opinion, broker/analyst buy-sell calls, targets, rumours, generic market-wrap filler, and stories too thin to explain. Do not choose a story already posted in an earlier hourly slot. If nothing is strong enough, return skip=true.
+Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets, including a listed-company development when it materially relates to those areas. Prefer policy/regulation, macro data, IPO/subscription/listing mechanics, market structure, financing/debt, or verified company actions such as major orders, contracts, capex and acquisitions. Do NOT choose financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap filler, or repeated coverage/update stories. Do not choose a story already posted in an earlier hourly slot. If nothing is strong enough, return skip=true.
 
 Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts:
 1. 📰 Kya hua: the essential reported facts.
@@ -878,6 +1404,7 @@ def write_preview_report(
         primary = items[0]
         top_stories.append({
             "headline": primary["title"],
+            "topic": group.get("topic"),
             "source": primary["source"],
             "published_ist": primary["published"].strftime("%Y-%m-%d %H:%M IST"),
             "url": primary["url"],
@@ -911,8 +1438,10 @@ def write_preview_report(
         "lookback_hours": 12,
         "feed_status": feed_result.get("status", {}),
         "filters_applied": [
-            "Quarterly/financial results and earnings headlines (including profit, loss, revenue, EPS and EBITDA) excluded",
-            "Broker/analyst recommendations, targets and stock-pick headlines excluded",
+            "Only economy, capital-market and stock-market headlines retained",
+            "Company financial results and earnings stories excluded",
+            "Opinions, analyst/broker commentary, forecasts, recommendations and price targets excluded",
+            "Generic market wraps and repeated/near-duplicate coverage excluded",
         ],
         "screened_story_count": len(groups),
         "top_stories": top_stories,
@@ -943,22 +1472,29 @@ def write_preview_report(
         "## RSS feed check",
     ]
     for source, status in report["feed_status"].items():
-        count = status.get("fresh_items", 0)
+        fresh_count = status.get("fresh_items", 0)
+        accepted_count = status.get("accepted_items", fresh_count)
+        filtered_count = status.get("filtered_items", max(0, fresh_count - accepted_count))
         code = status.get("http_status") or "unavailable"
-        lines.append(f"- **{source}:** {count} recent items; HTTP {code}")
+        lines.append(
+            f"- **{source}:** {accepted_count} in-scope / {fresh_count} recent "
+            f"({filtered_count} filtered); HTTP {code}"
+        )
     lines.extend([
         "",
         "## Filters applied",
-        "- Quarterly/financial results, earnings and profit/loss/revenue/EPS/EBITDA headlines excluded.",
-        "- Broker/analyst recommendations, targets and stock-pick headlines excluded.",
+        "- Only economy, capital-market and stock-market stories are retained.",
+        "- Financial results/earnings, opinions, forecasts, analyst/broker commentary, recommendations and price targets are excluded.",
+        "- Generic market wraps and repeated/near-duplicate coverage are collapsed.",
         "",
         f"## Screened stories ({len(top_stories)} shown; {len(groups)} groups)",
     ])
     if top_stories:
         for index, story in enumerate(top_stories, 1):
             lines.append(
-                f"{index}. **{story['headline']}** — {story['source']}, "
-                f"{story['published_ist']} (screen score {story['screening_score']})"
+                f"{index}. **{story['headline']}** — {story.get('topic') or 'in scope'}; "
+                f"{story['source']}, {story['published_ist']} "
+                f"(screen score {story['screening_score']})"
             )
             lines.append(f"   Source: {story['url']}")
             if story.get("rss_summary"):
@@ -1085,9 +1621,11 @@ def run_archive_only():
 
     archive, added_count, _ = merge_archive(archive, feed_result)
     save_json(ARCHIVE_FILE, archive)
+    stats = archive.get("last_run_stats", {})
     print(
-        f"🗃️ Archive saved to {ARCHIVE_FILE}: "
-        f"{len(archive.get('stories', []))} stories total, {added_count} new URLs this run"
+        f"🗃️ Archive saved to {ARCHIVE_FILE}: {len(archive.get('stories', []))} stories total; "
+        f"{added_count} new unique stories, {stats.get('duplicate_items_collapsed', 0)} duplicates collapsed, "
+        f"{stats.get('filtered_feed_items', 0)} feed items filtered"
     )
     return 0
 
@@ -1183,7 +1721,11 @@ def main():
     # Scheduled hourly runs persist every fresh RSS item, even when no post is
     # suitable. Dry-run is deliberately read-only.
     save_json(ARCHIVE_FILE, archive)
-    print(f"🗃️ Archive now contains {len(archive.get('stories', []))} items; {added_count} new URLs this run")
+    stats = archive.get("last_run_stats", {})
+    print(
+        f"🗃️ Archive now contains {len(archive.get('stories', []))} curated stories; "
+        f"{added_count} new unique, {stats.get('duplicate_items_collapsed', 0)} duplicates collapsed"
+    )
 
     in_window = NOW.hour in POSTING_HOURS_IST
     pending_due = in_window and has_due_news(queue)
