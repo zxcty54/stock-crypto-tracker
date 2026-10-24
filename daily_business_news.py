@@ -68,12 +68,12 @@ FEEDS = [
 ]
 
 POSITIVE_TERMS = (
-    "ipo", "rbi", "sebi", "policy", "repo rate", "tariff", "debt", "capex",
+    "rbi", "sebi", "policy", "repo rate", "tariff", "debt", "capex",
     "order", "contract", "acquisition", "merger", "buyback", "dividend",
     "liquidity", "fundraise", "funding", "default", "npa", "crude", "rupee",
     "export", "import", "regulation", "approval", "capacity", "subscription",
-    "listing", "withdrawal", "investment", "inflation", "gdp", "fii", "fpi",
-    "dii", "bond", "stock exchange", "settlement",
+    "listing", "withdrawal", "investment", "inflation", "gdp", "bond",
+    "stock exchange", "settlement",
 )
 
 # Hard result markers plus common result metrics/verbs. Metrics are checked in
@@ -212,6 +212,35 @@ EXCEPTIONAL_MARKET_EVENT_TERMS = (
     "longest", "market correction", "market crash", "market rout", "sell off", "selloff",
     "meltdown", "plunge", "plunges", "plunged",
 )
+IPO_EXPLICIT_TERMS = (
+    "ipo", "ipos", "fpo", "fpos", "initial public offer", "initial public offering",
+    "public issue", "public offering", "drhp", "draft red herring prospectus",
+    "red herring prospectus", "anchor investor", "anchor investors", "anchor book",
+    "price band", "issue price", "ipo price", "issue opens", "issue to open",
+    "issue closes", "issue to close",
+)
+IPO_LISTING_EVENT_TERMS = (
+    "market debut", "trading debut", "makes market debut", "made market debut",
+    "shares debut", "shares debuted", "share debut", "share debuted", "stock debut", "stock debuted",
+    "shares make debut", "shares make a debut", "makes debut", "made debut",
+    "shares list", "shares listed", "share listed", "stock listed", "debut at", "debut on",
+    "debuted at", "debuted on", "listed at a premium", "list at a premium", "listing day",
+    "shares begin trading", "shares start trading", "starts trading on nse", "starts trading on bse",
+    "begins trading on nse", "begins trading on bse",
+)
+IPO_SUBSCRIPTION_ACTIVITY_TERMS = (
+    "subscription", "subscribed", "oversubscribed", "oversubscription", "applications", "bids",
+)
+IPO_SUBSCRIPTION_CONTEXT_TERMS = (
+    "issue", "public", "shares", "qib", "retail", "anchor", "day 1", "day 2", "day 3",
+)
+FII_DII_EXCLUDE_TERMS = (
+    "fii", "fiis", "fpi", "fpis", "dii", "diis", "foreign institutional", "foreign portfolio",
+    "domestic institutional", "domestic institutions", "foreign investors", "domestic investors",
+    "foreign funds", "domestic funds", "overseas investors", "institutional investors",
+    "institutional flows", "institutional outflows", "institutional inflows",
+    "institutional buying", "institutional selling", "foreign fund flows", "domestic fund flows",
+)
 LEADERSHIP_ROLE_TERMS = (
     "ceo", "chief executive", "managing director", "md ceo", "director", "directors",
     "chairman", "chairperson", "board member",
@@ -270,19 +299,6 @@ REGULATORY_MARKET_EVENT_TERMS = (
     "digital rupee", "currency", "monetary", "forex", "financial inclusion", "index", "indices",
 )
 
-IPO_DEDUPE_GENERIC_TERMS = {
-    "ipo", "fpo", "issue", "issues", "public", "offer", "anchor", "investor", "investors",
-    "demand", "subscription", "subscribed", "application", "applications", "bid", "bids",
-    "qib", "retail", "record", "records", "first", "global", "globally", "largest",
-    "day", "highlights", "live", "update", "updates", "crore", "lakh", "million",
-    "times", "opens", "open", "opening", "cross", "crosses", "breaks", "jumps",
-    "milestone", "milestones", "markets", "market", "stock", "stocks", "shares", "share",
-    "equity", "india", "indian", "the", "and", "for", "from", "with", "into", "price",
-    "prices", "band", "premium", "debut", "debuted", "list", "listing", "listed", "trading", "trades",
-    "nse", "bse", "at", "up", "down", "make", "makes", "made", "rise", "rises", "fell", "falls",
-    "jump", "jumps", "flat", "bumper", "stellar", "market", "day", "public", "sale",
-    "oct", "nov", "dec", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep",
-}
 DEDUPE_GENERIC_TERMS = {
     "the", "and", "for", "from", "with", "into", "after", "ahead", "over", "under",
     "amid", "as", "at", "by", "in", "on", "to", "of", "a", "an", "is", "are",
@@ -592,9 +608,41 @@ def _is_corporate_announcement_headline(title):
     )
 
 
+def _is_ipo_related_headline(title):
+    """Reject IPO/FPO lifecycle coverage, including unnamed listing-day stories."""
+    if _contains_any_phrase(title, IPO_EXPLICIT_TERMS):
+        return True
+    if (_contains_any_phrase(title, IPO_LISTING_EVENT_TERMS)
+            and _contains_any_phrase(title, ("share", "shares", "stock", "premium", "nse", "bse"))):
+        return True
+    return (
+        _contains_any_phrase(title, IPO_SUBSCRIPTION_ACTIVITY_TERMS)
+        and _contains_any_phrase(title, IPO_SUBSCRIPTION_CONTEXT_TERMS)
+    )
+
+
+def _is_fii_dii_related_headline(title):
+    """Reject FII/FPI/DII and institutional-flow stories."""
+    if _contains_any_phrase(title, FII_DII_EXCLUDE_TERMS):
+        return True
+    return (
+        _contains_any_phrase(title, ("mutual fund", "mutual funds"))
+        and _contains_any_phrase(title, (
+            "inflow", "inflows", "outflow", "outflows", "net buying", "net selling",
+            "buy", "buys", "bought", "sell", "sells", "sold", "pour", "pours",
+            "pump", "pumps", "invest", "invests", "invested",
+        ))
+    )
+
+
 def _is_worthwhile_news_headline(title):
-    """Apply corporate-announcement and price-move materiality gates."""
-    if _is_low_materiality_headline(title) or _is_corporate_announcement_headline(title):
+    """Apply corporate, IPO, institutional-flow and price-move quality gates."""
+    if (
+        _is_low_materiality_headline(title)
+        or _is_corporate_announcement_headline(title)
+        or _is_ipo_related_headline(title)
+        or _is_fii_dii_related_headline(title)
+    ):
         return False
 
     has_price_move = _contains_any_phrase(title, MARKET_PRICE_ACTION_TERMS)
@@ -615,10 +663,10 @@ def classify_news_story(title, summary="", url=""):
 
     Scope and newsworthiness are determined from the headline, not the RSS
     summary: publisher excerpts can mention unrelated terms and otherwise pull
-    consumer/tech items into an economy or market archive. Issuer announcements
-    and commercial order/contract wins handled by separate flows are excluded.
-    Regulatory directives remain eligible; routine price moves need a material
-    catalyst, while exceptional broad-market events remain eligible.
+    consumer/tech items into an economy or market archive. Issuer announcements,
+    commercial order wins, IPO/FPO coverage and FII/DII institutional-flow stories
+    are excluded. Regulatory directives remain eligible; routine price moves need
+    a material catalyst, while exceptional broad-market events remain eligible.
     """
     headline = _clean_text(str(title or ""))
     if not headline or _is_financial_results_headline(headline):
@@ -687,44 +735,12 @@ def _event_entity_tokens(title):
     return _dedupe_title_tokens(title) - EVENT_DEDUPE_GENERIC_TERMS
 
 
-def _foreign_investor_flow_period(title):
-    """Return a coarse period for FII/FPI flow headlines, if recognizable."""
-    if not (
-        _contains_any_phrase(title, ("fii", "fiis", "fpi", "fpis", "foreign investors", "foreign institutional investors"))
-        and _contains_any_phrase(title, ("sell", "sells", "sold", "outflow", "outflows", "pull out", "pulls out", "net seller", "net sellers", "net selling"))
-    ):
-        return None
-    if _contains_any_phrase(title, ("this week", "last week", "weekly", "week to date", "for the week")):
-        return "week"
-    if _contains_any_phrase(title, ("this month", "last month", "monthly", "month to date")):
-        return "month"
-    if _contains_any_phrase(title, ("today", "session", "on monday", "on tuesday", "on wednesday", "on thursday", "on friday")):
-        return "day"
-    return "unspecified"
-
-
 def _is_china_bear_market_event(title):
     is_china_market = _contains_any_phrase(
         title, ("china stocks", "chinese stocks", "china stock market", "chinese stock market")
     )
     is_bear_market = _contains_any_phrase(title, ("bear market", "bear territory"))
     return is_china_market and is_bear_market
-
-
-def _ipo_event_type(title):
-    if _contains_any_phrase(title, ("market liquidity", "liquidity shift", "investor bandwidth", "listed stocks", "market impact")):
-        return "market_impact"
-    if _contains_any_phrase(title, ("debut", "debuted", "listing", "listed at", "shares list", "share listing")):
-        return "listing"
-    if _contains_any_phrase(title, ("subscription", "subscribed", "oversubscribed", "bids", "applications", "demand", "investor demand", "crosses demand")):
-        return "subscription"
-    if _contains_any_phrase(title, ("opens", "opening", "price band", "anchor investor", "anchor book")):
-        return "offer"
-    return "ipo_misc"
-
-
-def _is_listing_story(title):
-    return _contains_any_phrase(title, ("debut", "debuted", "listing", "listed at", "shares list", "shares debut"))
 
 
 def _story_datetime(story):
@@ -750,47 +766,7 @@ def _stories_are_duplicates(left, right):
         abs((left_date - right_date).total_seconds()) / 3600
         if left_date and right_date else None
     )
-    left_is_ipo = _contains_any_phrase(left_title, ("ipo", "fpo", "initial public offering"))
-    right_is_ipo = _contains_any_phrase(right_title, ("ipo", "fpo", "initial public offering"))
-
     if hours_apart is not None and hours_apart > ARCHIVE_DEDUPE_WINDOW_HOURS:
-        if not (left_is_ipo and right_is_ipo and hours_apart <= 14 * 24):
-            return False
-
-    if (_is_listing_story(left_title) and _is_listing_story(right_title)
-            and (hours_apart is None or hours_apart <= ARCHIVE_DEDUPE_WINDOW_HOURS)):
-        listing_entities_left = left_tokens - IPO_DEDUPE_GENERIC_TERMS
-        listing_entities_right = right_tokens - IPO_DEDUPE_GENERIC_TERMS
-        if listing_entities_left & listing_entities_right:
-            return True
-
-    # Group repeated updates only for the same issuer and IPO phase: subscription
-    # coverage should not erase a distinct listing or market-impact story.
-    if left_is_ipo and right_is_ipo:
-        ipo_entities_left = left_tokens - IPO_DEDUPE_GENERIC_TERMS
-        ipo_entities_right = right_tokens - IPO_DEDUPE_GENERIC_TERMS
-        overlap = ipo_entities_left & ipo_entities_right
-        same_phase = _ipo_event_type(left_title) == _ipo_event_type(right_title)
-        if overlap:
-            if same_phase and (hours_apart is None or hours_apart <= 14 * 24):
-                return True
-            return False
-        # Never merge different issuers' IPOs based on generic words such as
-        # "debut", "premium", or the issue month.
-        if ipo_entities_left and ipo_entities_right:
-            return False
-        if similarity >= 0.88 and len(shared_tokens) >= 3 and same_phase:
-            return True
-
-    # A weekly FII/FPI flow summary can supersede a daily session recap. Do not
-    # merge two daily flow reports or two monthly reports as separate periods.
-    left_flow_period = _foreign_investor_flow_period(left_title)
-    right_flow_period = _foreign_investor_flow_period(right_title)
-    if left_flow_period or right_flow_period:
-        if left_flow_period and right_flow_period:
-            periods = {left_flow_period, right_flow_period}
-            if "week" in periods and "month" not in periods and len(periods) > 1:
-                return True
         return False
 
     # Different publishers often describe the same China bear-market threshold
@@ -1161,20 +1137,20 @@ def merge_archive(archive, feed_result):
     archive["retention_days"] = ARCHIVE_RETENTION_DAYS
     old_curation = archive.get("curation", {})
     archive["curation"] = {
-        "version": 6,
+        "version": 7,
         "scope": ["economy", "capital_market", "stock_market"],
         "excludes": [
             "financial_results", "opinions_and_recommendations", "generic_market_wraps",
             "company_corporate_announcements", "commercial_order_and_contract_wins",
+            "ipo_and_fpo_related_news", "fii_fpi_dii_related_news",
             "routine_price_moves_without_material_catalyst", "low_materiality_announcements",
         ],
         "newsworthiness_rule": (
-            "Exclude issuer corporate announcements and commercial order/contract wins already "
-            "covered separately; retain regulator/court directives and price-action stories with "
-            "material catalysts or exceptional broad-market context."
+            "Exclude issuer corporate announcements, commercial order/contract wins, all IPO/FPO "
+            "coverage, and FII/FPI/DII-related stories; retain regulator/court directives and "
+            "price-action stories with material catalysts or exceptional broad-market context."
         ),
         "near_duplicate_window_hours": ARCHIVE_DEDUPE_WINDOW_HOURS,
-        "ipo_phase_window_days": 14,
         "last_curated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
     }
     if isinstance(old_curation, dict):

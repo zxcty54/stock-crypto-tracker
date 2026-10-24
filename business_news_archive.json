@@ -49,22 +49,6 @@
       "topic": "stock_market"
     },
     {
-      "id": "newsdlhqvfygvw",
-      "source": "Economic Times",
-      "source_priority": 3,
-      "headline": "Friday blockbuster for Jio IPO: Rs 7.4 lakh crore bids, 22x subscription",
-      "url": "https://economictimes.indiatimes.com/markets/ipos/fpos/friday-blockbuster-for-jio-ipo-rs-7-4-lakh-crore-bids-22x-subscription/articleshow/135160249.cms",
-      "published_at": "2026-10-24T08:16:08+05:30",
-      "published_ist": "2026-10-24 08:16 IST",
-      "summary": "Jio Platforms has experienced a surge in demand for its initial public offering, garnering roughly ₹7.41 lakh crore in bids. The subscription soared to 22.19 times, mainly due to robust involvement from institutional investors, including domestic mutual funds and foreign entities. This enthusiasm contrasts with current trends in the secondary market, and shares are scheduled for listing on October 28, showcasing Jio's strides in the digital and telecommunications arenas.",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
       "id": "newsdehqhgmfki",
       "source": "Economic Times",
       "source_priority": 3,
@@ -113,22 +97,6 @@
       "topic": "economy"
     },
     {
-      "id": "newsmznomgdzgl",
-      "source": "Economic Times",
-      "source_priority": 3,
-      "headline": "EAAA India Alternatives mops up Rs 360 crore from anchor investors; IPO opens on Oct 26",
-      "url": "https://economictimes.indiatimes.com/markets/ipos/fpos/eaaa-india-alternatives-mops-up-rs-360-crore-from-anchor-investors-ipo-opens-on-oct-26/articleshow/135150980.cms",
-      "published_at": "2026-10-23T22:20:32+05:30",
-      "published_ist": "2026-10-23 22:20 IST",
-      "summary": "EAAA India Alternatives has successfully raised approximately Rs 360 crore from anchor investors prior to its IPO. This IPO is set to open for public subscription on October 26. The company will not receive any proceeds from the issue as it is an offer for sale. Prominent institutional investors and major domestic mutual fund houses participated in the anchor allocation.",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
       "id": "newsqmznlioira",
       "source": "Economic Times",
       "source_priority": 3,
@@ -159,22 +127,6 @@
       "last_seen_ist": "2026-10-24 11:22:53 IST",
       "status": "new",
       "topic": "economy"
-    },
-    {
-      "id": "newsdjiwaoxouw",
-      "source": "CNBC-TV18",
-      "source_priority": 3,
-      "headline": "FIIs pull out ₹2,697 crore this week; DIIs pump in nearly ₹11,000 crore",
-      "url": "https://www.cnbctv18.com/market/fiis-pull-out-rs2697-crore-this-week-diis-pump-in-nearly-rs11000-crore-20018283.htm",
-      "published_at": "2026-10-23T20:00:42+05:30",
-      "published_ist": "2026-10-23 20:00 IST",
-      "summary": "Midcap and smallcap stocks fell 6% and 7%, respectively, this week wiping over ₹20 lakh crore off BSE-listed companies’ market value despite sustained domestic institutional buying.",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
     },
     {
       "id": "newsqrqkgizqrz",
@@ -225,102 +177,6 @@
       "topic": "capital_market"
     },
     {
-      "id": "newsvudpxskfrc",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "Paras Healthcare IPO fully subscribed on day 3",
-      "url": "https://www.thehindubusinessline.com/markets/paras-healthcare-ipo-fully-subscribed-on-day-3/article71615571.ece",
-      "published_at": "2026-10-23T16:16:26+05:30",
-      "published_ist": "2026-10-23 16:16 IST",
-      "summary": "The retail investors' category is subscribed 1.80 times, while the portion for qualified institutional buyers receives 1.41 times subscription",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
-      "id": "newsshfldyfqfa",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "Bombay Coated and Special Steels IPO to open on Oct 29; price band set at ₹78-82",
-      "url": "https://www.thehindubusinessline.com/markets/stock-markets/bombay-coated-and-special-steels-ipo-to-open-on-oct-29-price-band-set-at-78-82/article71615097.ece",
-      "published_at": "2026-10-23T13:29:06+05:30",
-      "published_ist": "2026-10-23 13:29 IST",
-      "summary": "The IPO, which is entirely a fresh issue of equity shares, will close on November 2",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
-      "id": "newszhebdmzzwh",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "Tonbo Imaging shares make stellar market debut; jump 66%",
-      "url": "https://www.thehindubusinessline.com/markets/stock-markets/tonbo-imaging-shares-make-stellar-market-debut-jump-66/article71614837.ece",
-      "published_at": "2026-10-23T12:05:25+05:30",
-      "published_ist": "2026-10-23 12:05 IST",
-      "summary": "The stock made its debut at ₹1,162 apiece, registering a premium of 66% from the issue price on the BSE",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "stock_market"
-    },
-    {
-      "id": "newschrnkekifp",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "India's Zetwerk rises over 5% in trading debut after $518 million IPO",
-      "url": "https://www.thehindubusinessline.com/markets/stock-markets/indias-zetwerk-rises-over-5-in-trading-debut-after-518-million-ipo/article71614554.ece",
-      "published_at": "2026-10-23T10:37:26+05:30",
-      "published_ist": "2026-10-23 10:37 IST",
-      "summary": "Zetwerk stock ‌listed at ₹159.25 on ⁠the NSE, compared with its issue ‌price of ₹151 per share",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
-      "id": "newsriftgvzlpe",
-      "source": "CNBC-TV18",
-      "source_priority": 3,
-      "headline": "Sahajanand Medical Technologies shares debut at up to 8% premium over IPO price",
-      "url": "https://www.cnbctv18.com/market/sahajanand-medical-technologies-ipo-listing-today-share-price-nse-bse-gmp-issue-subscription-20017599.htm",
-      "published_at": "2026-10-23T09:57:13+05:30",
-      "published_ist": "2026-10-23 09:57 IST",
-      "summary": "The IPO closed on October 19 with bids for 13,84,72,771 shares against 97,50,482 shares on offer, according to data from the National Stock Exchange (NSE).",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
-      "id": "newsedevrmwjib",
-      "source": "CNBC-TV18",
-      "source_priority": 3,
-      "headline": "Bonfiglioli Transmission shares make flat debut despite 46x IPO subscription",
-      "url": "https://www.cnbctv18.com/market/bonfiglioli-transmission-ipo-listing-today-nse-bse-gmp-issue-subscription-20017586.htm",
-      "published_at": "2026-10-23T09:51:50+05:30",
-      "published_ist": "2026-10-23 09:51 IST",
-      "summary": "The IPO opened for subscription on October 15 and closed on October 19. The Qualified Institutional Buyers (QIBs) category, excluding anchor investors, was subscribed 120.78 times, while the Non-Institutional Investors (NIIs) segment saw 40.39 times subscription. The Retail Individual Investors (RIIs) category was subscribed 5.90 times.",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
       "id": "newskctbbmgqis",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -335,22 +191,6 @@
       "last_seen_ist": "2026-10-24 11:22:53 IST",
       "status": "new",
       "topic": "stock_market"
-    },
-    {
-      "id": "newsaerapkwcqc",
-      "source": "CNBC-TV18",
-      "source_priority": 3,
-      "headline": "SK Hynix says Solidigm suspends review of US IPO, citing market volatility",
-      "url": "https://www.cnbctv18.com/market/sk-hynix-says-solidigm-suspends-review-of-us-ipo-citing-market-volatility-20017545.htm",
-      "published_at": "2026-10-23T07:55:09+05:30",
-      "published_ist": "2026-10-23 07:55 IST",
-      "summary": "South Korean chipmaker SK Hynix suspended its review of a US initial public offering for its Solidigm subsidiary, citing market volatility and domestic dual-listing regulations.",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
     },
     {
       "id": "newsthfrjzxzaz",
@@ -449,22 +289,6 @@
       "topic": "stock_market"
     },
     {
-      "id": "newsdverpvehvb",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "Fusion CX shares list at 5.5% premium over IPO price on NSE",
-      "url": "https://www.thehindubusinessline.com/markets/stock-markets/fusion-cx-shares-list-at-55-premium-over-ipo-price-on-nse/article71610398.ece",
-      "published_at": "2026-10-22T12:16:29+05:30",
-      "published_ist": "2026-10-22 12:16 IST",
-      "summary": "The stock debuted at ₹292, marking a 1.04% premium on the BSE, while it opened at ₹305 apiece, up by 5.54% on the NSE",
-      "first_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "last_seen_at": "2026-10-24T11:22:53.135551+05:30",
-      "first_seen_ist": "2026-10-24 11:22:53 IST",
-      "last_seen_ist": "2026-10-24 11:22:53 IST",
-      "status": "new",
-      "topic": "capital_market"
-    },
-    {
       "id": "newsqkrijvlmfr",
       "source": "The Hindu BusinessLine",
       "source_priority": 2,
@@ -511,7 +335,7 @@
   },
   "retention_days": 30,
   "curation": {
-    "version": 6,
+    "version": 7,
     "scope": [
       "economy",
       "capital_market",
@@ -523,13 +347,22 @@
       "generic_market_wraps",
       "company_corporate_announcements",
       "commercial_order_and_contract_wins",
+      "ipo_and_fpo_related_news",
+      "fii_fpi_dii_related_news",
       "routine_price_moves_without_material_catalyst",
       "low_materiality_announcements"
     ],
-    "newsworthiness_rule": "Exclude issuer corporate announcements and commercial order/contract wins already covered separately; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
+    "newsworthiness_rule": "Exclude issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "ipo_phase_window_days": 14,
-    "last_curated_ist": "2026-10-24 11:22:53 IST"
+    "last_curated_ist": "2026-10-24 11:35:55 IST",
+    "quality_cleanup_stats": {
+      "input_stories": 30,
+      "quality_filtered": 11,
+      "duplicates_collapsed": 0,
+      "retained_stories": 19,
+      "curated_at_ist": "2026-10-24 11:35:55 IST",
+      "method": "offline recuration of latest available archive snapshot; no feed fetch or AI preview"
+    }
   },
   "last_run_stats": {
     "updated_ist": "2026-10-24 11:22:53 IST",

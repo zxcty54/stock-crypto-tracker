@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import sys
 import types
 import unittest
@@ -49,15 +50,27 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             "post_id": post_id,
         }
 
+    def test_checked_in_archive_has_no_ipo_or_fii_dii_stories(self):
+        archive = json.loads((ROOT / "business_news_archive.json").read_text(encoding="utf-8"))
+        curated, removed, duplicates = news._curate_archive_stories(archive["stories"])
+
+        self.assertEqual(removed, 0)
+        self.assertEqual(duplicates, 0)
+        self.assertEqual(len(curated), len(archive["stories"]))
+        self.assertEqual(archive["curation"]["version"], 7)
+        self.assertIn("ipo_and_fpo_related_news", archive["curation"]["excludes"])
+        self.assertIn("fii_fpi_dii_related_news", archive["curation"]["excludes"])
+        for story in archive["stories"]:
+            with self.subTest(title=story["headline"]):
+                self.assertFalse(news._is_ipo_related_headline(story["headline"]))
+                self.assertFalse(news._is_fii_dii_related_headline(story["headline"]))
+
     def test_accepts_economy_capital_markets_and_stock_events(self):
         self.assertEqual(
             news.classify_news_story("RBI keeps repo rate unchanged as inflation eases"),
             "economy",
         )
-        self.assertEqual(
-            news.classify_news_story("SEBI approves new IPO norms for NSE"),
-            "capital_market",
-        )
+        self.assertIsNone(news.classify_news_story("SEBI approves new IPO norms for NSE"))
         self.assertEqual(
             news.classify_news_story("SEBI orders Avadhut Academy to refund ₹546 crore and pay a penalty"),
             "capital_market",
@@ -116,6 +129,14 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
                     <link>https://{host}/markets/defence-order-test.html</link>
                     <pubDate>{pub_date}</pubDate>
                     <description>Commercial order award for a listed supplier.</description></item>
+                <item><title>Jio Platforms IPO opens with a price band of ₹1,200 to ₹1,300</title>
+                    <link>https://{host}/markets/jio-ipo-test.html</link>
+                    <pubDate>{pub_date}</pubDate>
+                    <description>Initial public offering opens for subscription.</description></item>
+                <item><title>FIIs sell ₹3,459 crore of Indian stocks as market falls</title>
+                    <link>https://{host}/markets/fii-selling-test.html</link>
+                    <pubDate>{pub_date}</pubDate>
+                    <description>Foreign institutional flows were negative.</description></item>
             </channel></rss>""".encode()
             return types.SimpleNamespace(
                 status_code=200,
@@ -129,9 +150,9 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(len(result["items"]), len(news.FEEDS))
         self.assertTrue(all(item["topic"] == "economy" for item in result["items"]))
         for status in result["status"].values():
-            self.assertEqual(status["fresh_items"], 3)
+            self.assertEqual(status["fresh_items"], 5)
             self.assertEqual(status["accepted_items"], 1)
-            self.assertEqual(status["filtered_items"], 2)
+            self.assertEqual(status["filtered_items"], 4)
 
     def test_rejects_company_results_and_opinion_or_recommendation_stories(self):
         for title in (
@@ -146,6 +167,35 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         ):
             with self.subTest(title=title):
                 self.assertIsNone(news.classify_news_story(title))
+
+    def test_excludes_all_ipo_fpo_and_fii_dii_related_headlines(self):
+        excluded = (
+            "Jio Platforms IPO opens with a price band of ₹1,200 to ₹1,300",
+            "Paras Healthcare IPO fully subscribed on day 3",
+            "Tonbo Imaging shares make stellar market debut; jump 66%",
+            "Fusion CX shares list at 5.5% premium over IPO price on NSE",
+            "Zetwerk rises over 5% in trading debut after $518 million IPO",
+            "Company files DRHP with SEBI for proposed public issue",
+            "New company shares debuted at a premium on the NSE",
+            "SEBI approves new IPO norms for NSE",
+            "Solidigm suspends review of US IPO, citing market volatility",
+            "FIIs pull out ₹2,697 crore this week; DIIs pump in nearly ₹11,000 crore",
+            "FPI investors sell Indian equities for a third straight session",
+            "Foreign institutional investors increase selling in Indian markets",
+            "Domestic institutions pump ₹11,000 crore into Indian stocks",
+            "Foreign funds trim their Indian equity exposure",
+            "Domestic funds pour money into Indian shares",
+            "Mutual funds post record inflows into Indian equities",
+            "Institutional investors record strong inflows into equities",
+        )
+        for title in excluded:
+            with self.subTest(title=title):
+                self.assertIsNone(news.classify_news_story(title))
+
+        # Foreign direct investment is not the same as FII/FPI market flows.
+        self.assertFalse(
+            news._is_fii_dii_related_headline("Foreign direct investment inflows hit a record in August")
+        )
 
     def test_government_tax_revenue_is_not_misclassified_as_company_results(self):
         self.assertEqual(
@@ -206,19 +256,7 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             with self.subTest(title=title):
                 self.assertEqual(news.classify_news_story(title), expected_topic)
 
-    def test_collapses_weekly_fii_summary_and_same_china_bear_market_event(self):
-        fii_weekly = self.item(
-            "FIIs pull out ₹2,697 crore this week; DIIs pump in nearly ₹11,000 crore",
-            hours_ago=8,
-        )
-        fii_daily = self.item(
-            "FIIs sell ₹3,459 crore of Indian stocks as market falls for third straight session",
-            hours_ago=32,
-        )
-        other_fii_day = self.item(
-            "FIIs sell ₹1,200 crore of Indian stocks on Friday",
-            hours_ago=7,
-        )
+    def test_deduplicates_same_china_bear_market_event_but_not_other_markets(self):
         china_older = self.item(
             "Chinese stock market in bear territory after 20% fall from June peak",
             hours_ago=32,
@@ -232,39 +270,8 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             hours_ago=7,
         )
 
-        self.assertTrue(news._stories_are_duplicates(fii_weekly, fii_daily))
-        self.assertFalse(news._stories_are_duplicates(fii_daily, other_fii_day))
         self.assertTrue(news._stories_are_duplicates(china_older, china_newer))
         self.assertFalse(news._stories_are_duplicates(china_newer, unrelated_bear_market))
-
-    def test_deduplicates_same_ipo_phase_but_keeps_distinct_phase_and_issuer(self):
-        day_two = self.item("Jio Platforms IPO Day 2 draws ₹3 lakh crore demand", hours_ago=40)
-        day_three = self.item("Jio Platforms IPO Day 3 crosses 1 crore applications", hours_ago=10)
-        liquidity_impact = self.item(
-            "Jio Platforms IPO dents investor bandwidth for listed stocks",
-            hours_ago=8,
-        )
-        other_issuer = self.item(
-            "Tonbo Imaging shares debut at a premium over IPO price",
-            hours_ago=9,
-        )
-        unrelated_issuer = self.item(
-            "Fusion CX shares list at a premium over IPO price",
-            hours_ago=9,
-        )
-        tonbo_first = self.item(
-            "Tonbo Imaging shares make stellar market debut; jump 66%",
-            hours_ago=12,
-        )
-        tonbo_second = self.item(
-            "Tonbo Imaging shares make bumper debut, list at 66% premium over IPO price",
-            hours_ago=10,
-        )
-
-        self.assertTrue(news._stories_are_duplicates(day_two, day_three))
-        self.assertFalse(news._stories_are_duplicates(day_three, liquidity_impact))
-        self.assertFalse(news._stories_are_duplicates(other_issuer, unrelated_issuer))
-        self.assertTrue(news._stories_are_duplicates(tonbo_first, tonbo_second))
 
     def test_near_duplicate_news_collapses_but_separate_days_do_not(self):
         first = self.item("SEBI proposes automatic approval route for stock exchanges", hours_ago=2)
@@ -278,7 +285,10 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertFalse(news._stories_are_duplicates(first, old))
 
     def test_merge_filters_and_deduplicates_without_resetting_queue_status(self):
-        existing_item = self.item("Jio Platforms IPO Day 2 draws ₹3 lakh crore demand", hours_ago=30)
+        existing_item = self.item(
+            "SEBI proposes automatic approval route for stock exchanges",
+            hours_ago=30,
+        )
         existing = self.record(existing_item, status="queued", post_id="queued-news-id")
         results = self.record(
             self.item("Tata Motors Q2 profit rises 18%", hours_ago=20),
@@ -286,17 +296,19 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         )
         archive = {"stories": [existing, results]}
         feed_items = [
-            self.item("Jio Platforms IPO Day 3 crosses 1 crore applications", hours_ago=5),
+            self.item("SEBI proposes an automatic approval route for stock exchanges", hours_ago=5),
             self.item("RBI keeps repo rate unchanged as inflation eases", hours_ago=2),
             self.item("Sell these defence stocks, says Goldman Sachs", hours_ago=1),
             self.item("Defence manufacturer bags 2000 crore order from MoD", hours_ago=1),
+            self.item("Jio Platforms IPO opens with a price band of ₹1,200 to ₹1,300", hours_ago=1),
+            self.item("FIIs sell ₹3,459 crore of Indian stocks as market falls", hours_ago=1),
         ]
 
         updated, added, changed_urls = news.merge_archive(
             archive,
             {
                 "items": feed_items,
-                "status": {"CNBC-TV18": {"fresh_items": 4, "filtered_items": 0}},
+                "status": {"CNBC-TV18": {"fresh_items": 6, "filtered_items": 0}},
                 "any_success": True,
             },
         )
@@ -304,12 +316,12 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(added, 1)
         self.assertEqual(len(updated["stories"]), 2)
         self.assertEqual(len({story["url"] for story in updated["stories"]}), 2)
-        jio = next(story for story in updated["stories"] if "Jio Platforms IPO" in story["headline"])
-        self.assertIn("Day 3", jio["headline"])
-        self.assertEqual(jio["status"], "queued")
-        self.assertEqual(jio["post_id"], "queued-news-id")
-        self.assertIn(jio["url"], changed_urls)
-        self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 2)
+        sebi = next(story for story in updated["stories"] if "SEBI proposes" in story["headline"])
+        self.assertIn("automatic approval route", sebi["headline"])
+        self.assertEqual(sebi["status"], "queued")
+        self.assertEqual(sebi["post_id"], "queued-news-id")
+        self.assertIn(sebi["url"], changed_urls)
+        self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 4)
         self.assertEqual(updated["last_run_stats"]["duplicate_items_collapsed"], 1)
         self.assertEqual(updated["last_run_stats"]["archive_items_removed_by_curation"], 1)
 
