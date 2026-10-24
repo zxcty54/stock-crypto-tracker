@@ -59,11 +59,33 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             "capital_market",
         )
         self.assertEqual(
+            news.classify_news_story("SEBI orders Avadhut Academy to refund ₹546 crore and pay a penalty"),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story("Government launches new subsidy scheme for exporters"),
+            "economy",
+        )
+        self.assertEqual(
+            news.classify_news_story("BSE launches new settlement system for trading"),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story("NSE updates rules for Nifty futures contracts"),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story(
+                "Amagi Media shares slip after company flags cybersecurity threat",
+                url="https://www.cnbctv18.com/market/stocks/amagi-cybersecurity.htm",
+            ),
+            "stock_market",
+        )
+        self.assertIsNone(
             news.classify_news_story(
                 "Highway Infrastructure wins ₹340 crore NHAI contract",
                 url="https://www.cnbctv18.com/market/stocks/highway-infra.htm",
-            ),
-            "stock_market",
+            )
         )
 
     def test_headline_scope_is_not_inferred_from_unrelated_rss_summary(self):
@@ -90,6 +112,10 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
                     <link>https://{host}/markets/iphone-display-test.html</link>
                     <pubDate>{pub_date}</pubDate>
                     <description>Consumer technology report.</description></item>
+                <item><title>Defence manufacturer bags 2000 crore order from MoD</title>
+                    <link>https://{host}/markets/defence-order-test.html</link>
+                    <pubDate>{pub_date}</pubDate>
+                    <description>Commercial order award for a listed supplier.</description></item>
             </channel></rss>""".encode()
             return types.SimpleNamespace(
                 status_code=200,
@@ -103,9 +129,9 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(len(result["items"]), len(news.FEEDS))
         self.assertTrue(all(item["topic"] == "economy" for item in result["items"]))
         for status in result["status"].values():
-            self.assertEqual(status["fresh_items"], 2)
+            self.assertEqual(status["fresh_items"], 3)
             self.assertEqual(status["accepted_items"], 1)
-            self.assertEqual(status["filtered_items"], 1)
+            self.assertEqual(status["filtered_items"], 2)
 
     def test_rejects_company_results_and_opinion_or_recommendation_stories(self):
         for title in (
@@ -135,6 +161,81 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         ):
             with self.subTest(title=title):
                 self.assertIsNone(news.classify_news_story(title))
+
+    def test_filters_routine_price_moves_but_keeps_material_market_events(self):
+        for title in (
+            "US Treasury yields rise but 10-year stays below 5% as AI jitters persist",
+            "US stocks fall as AI spending worries hit tech shares, oil tops $112",
+            "Rupee little changed this week as oil-fueled declines wipe out early gains",
+            "Wall Street futures dip after AI rout, telecoms slide",
+            "Sensex, Nifty end lower as Midcaps tumble; Swiggy suffers biggest single-day fall",
+            "Stock Crash: This specialty chemical stock has seen its worst weekly fall in nearly two decades",
+            "Stock Crash: eMudhra shares down 34% in three sessions; Management says one-off incident",
+            "Nifty Smallcap Crash: Index set for worst week in 20 months; Here are the worst performers",
+            "Lemon Tree Hotels signs 63-room Keys Lite property in Bhilwara, Rajasthan",
+            "BSE begins hunt for MD & CEO successor ahead of 2027 exit",
+            "A company names a new director to its board",
+            "Highway Infrastructure wins ₹340 crore NHAI contract",
+            "KEC International bags ₹1,006 crore in orders, shares hit 52-week low",
+            "Defence manufacturer bags ₹2,000 crore order from MoD",
+            "Listed engineering company wins ₹700 crore highway project",
+            "Manufacturer secures a multi-year supply contract",
+            "Company order book crosses ₹10,000 crore",
+            "Balkrishna Industries shares rise on proposed 50:50 Pirelli JV",
+            "GE Shipping to buy gas carrier as fleet expansion gathers pace",
+            "Angel One rolls out US stock investing for investors",
+            "Infosys announces Rs 26 per share dividend",
+            "Ola Electric rights issue draws applications from investors",
+            "UBS acquires a 4.8% stake in a listed wealth manager",
+            "NCDEX forays into equity markets with launch of two new indices",
+            "Persistent Systems launches QIP to raise capital",
+            "HDFC Bank shares hover near a 52-week low ahead of CEO handover",
+        ):
+            with self.subTest(title=title):
+                self.assertIsNone(news.classify_news_story(title))
+
+        retained = {
+            "Amagi Media shares slip after company flags cybersecurity threat": "stock_market",
+            "eMudhra shares crash 20% to a 52-week low after govt orders security probe": "stock_market",
+            "Stock Crash: Australian company shares tank 50% after flagging US fraud": "stock_market",
+            "Small and midcap indices post worst weekly decline in two years": "capital_market",
+            "Sensex plunges 8% in a market crash after an emergency decision": "capital_market",
+            "China stocks sink deeper into bear market despite state buying": "stock_market",
+        }
+        for title, expected_topic in retained.items():
+            with self.subTest(title=title):
+                self.assertEqual(news.classify_news_story(title), expected_topic)
+
+    def test_collapses_weekly_fii_summary_and_same_china_bear_market_event(self):
+        fii_weekly = self.item(
+            "FIIs pull out ₹2,697 crore this week; DIIs pump in nearly ₹11,000 crore",
+            hours_ago=8,
+        )
+        fii_daily = self.item(
+            "FIIs sell ₹3,459 crore of Indian stocks as market falls for third straight session",
+            hours_ago=32,
+        )
+        other_fii_day = self.item(
+            "FIIs sell ₹1,200 crore of Indian stocks on Friday",
+            hours_ago=7,
+        )
+        china_older = self.item(
+            "Chinese stock market in bear territory after 20% fall from June peak",
+            hours_ago=32,
+        )
+        china_newer = self.item(
+            "China stocks sink deeper into bear market despite state buying",
+            hours_ago=8,
+        )
+        unrelated_bear_market = self.item(
+            "Australian stocks enter bear territory after a 20% decline",
+            hours_ago=7,
+        )
+
+        self.assertTrue(news._stories_are_duplicates(fii_weekly, fii_daily))
+        self.assertFalse(news._stories_are_duplicates(fii_daily, other_fii_day))
+        self.assertTrue(news._stories_are_duplicates(china_older, china_newer))
+        self.assertFalse(news._stories_are_duplicates(china_newer, unrelated_bear_market))
 
     def test_deduplicates_same_ipo_phase_but_keeps_distinct_phase_and_issuer(self):
         day_two = self.item("Jio Platforms IPO Day 2 draws ₹3 lakh crore demand", hours_ago=40)
@@ -188,13 +289,14 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             self.item("Jio Platforms IPO Day 3 crosses 1 crore applications", hours_ago=5),
             self.item("RBI keeps repo rate unchanged as inflation eases", hours_ago=2),
             self.item("Sell these defence stocks, says Goldman Sachs", hours_ago=1),
+            self.item("Defence manufacturer bags 2000 crore order from MoD", hours_ago=1),
         ]
 
         updated, added, changed_urls = news.merge_archive(
             archive,
             {
                 "items": feed_items,
-                "status": {"CNBC-TV18": {"fresh_items": 3, "filtered_items": 0}},
+                "status": {"CNBC-TV18": {"fresh_items": 4, "filtered_items": 0}},
                 "any_success": True,
             },
         )
@@ -207,9 +309,9 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(jio["status"], "queued")
         self.assertEqual(jio["post_id"], "queued-news-id")
         self.assertIn(jio["url"], changed_urls)
-        self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 1)
+        self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 2)
         self.assertEqual(updated["last_run_stats"]["duplicate_items_collapsed"], 1)
-        self.assertEqual(updated["last_run_stats"]["out_of_scope_archive_items_removed"], 1)
+        self.assertEqual(updated["last_run_stats"]["archive_items_removed_by_curation"], 1)
 
 
 if __name__ == "__main__":

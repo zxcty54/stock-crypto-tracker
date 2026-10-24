@@ -102,7 +102,8 @@ ECONOMY_CONTEXT_TERMS = (
     "monetary policy", "interest rate", "rupee", "currency", "forex", "foreign exchange",
     "trade deficit", "current account", "exports", "imports", "fiscal deficit",
     "gst collection", "tax collection", "budget", "industrial production", "iip", "pmi",
-    "government borrowing", "government spending", "manufacturing", "employment",
+    "government borrowing", "government spending", "government policy", "government scheme",
+    "subsidy scheme", "subsidies", "manufacturing", "employment",
     "unemployment", "bond yield", "bond yields", "treasury yield", "treasury yields",
     "crude", "crude oil", "oil prices", "rbi", "reserve bank", "central bank",
     "bank indonesia", "federal reserve", "fed rate", "credit growth",
@@ -158,8 +159,117 @@ EXCLUDE_TERMS = (
 NEWS_FORMAT_EXCLUDE_TERMS = (
     "market wrap", "markets today", "stock market today", "live update", "live updates",
     "live blog", "liveblog", "highlights", "roundup", "round-up", "stocks to watch",
-    "market pulse", "key triggers to watch", "stocks in focus",
+    "market pulse", "key triggers to watch", "stocks in focus", "worst performers",
+    "top losers", "biggest losers", "top gainers", "best performers",
 )
+
+# A move in a quoted price is not automatically a worthwhile story. Keep it
+# only when the headline identifies a material catalyst or an exceptional,
+# broad-market event. This suppresses daily recaps and single-stock movers that
+# have no new business, policy, regulatory or market-structure development.
+MARKET_PRICE_ACTION_TERMS = (
+    "fall", "falls", "fell", "drop", "drops", "dropped", "down", "slip", "slips",
+    "slipped", "tumble", "tumbles", "tumbled", "sink", "sinks", "sank", "crash",
+    "crashes", "crashed", "tank", "tanks", "tanked", "decline", "declines", "declined",
+    "lower", "higher", "rise", "rises", "rose", "surge", "surges", "surged", "dip",
+    "dips", "dipped", "little changed", "hover", "hovers", "hovering", "retreat",
+    "retreats", "slide", "slides", "slid", "snap", "snaps", "gives up", "intraday gains",
+    "52 week low", "52 week lows", "52 week high", "52 week highs", "record low",
+    "record high", "bear market", "bear territory", "correction",
+    "pull out", "pulls out", "sell", "sells", "sold", "outflow", "outflows",
+    "net seller", "net sellers",
+)
+MARKET_PRICE_SUBJECT_TERMS = (
+    "stock", "stocks", "share", "shares", "nifty", "sensex", "midcap", "smallcap",
+    "index", "indices", "market", "markets", "rupee", "currency", "forex", "dollar",
+    "crude", "brent", "oil", "oil price", "bond", "bonds", "treasury", "yield", "yields",
+    "futures", "equities", "fii", "fiis", "fpi", "fpis", "dii", "diis", "foreign investors",
+)
+MATERIAL_MARKET_EVENT_TERMS = (
+    "rbi", "sebi", "central bank", "federal reserve", "fed", "fomc", "rate cut", "rate hike",
+    "interest rate", "monetary policy", "regulator", "regulation", "regulatory", "policy",
+    "tariff", "trade deal", "trade data", "inflation data", "gdp data", "pmi", "employment data",
+    "jobs report", "budget", "opec", "sanctions", "ceasefire", "geopolitical", "war", "conflict",
+    "supply disruption", "fii", "fiis", "fpi", "fpis", "dii", "diis", "foreign institutional investors",
+    "institutional flows", "probe", "investigation", "fraud", "cybersecurity", "security threat",
+    "insider leak", "ceo", "managing director", "md ceo", "chairman", "board", "order", "orders",
+    "contract", "contracts", "acquisition", "merger", "joint venture", "jv", "capex", "capacity",
+    "commission", "commercial production", "plant", "facility", "fleet expansion", "fundraise", "funding",
+    "stake sale", "divestment", "buyback", "dividend", "stock split", "bonus issue", "rights issue",
+    "qip", "ipo", "fpo", "offer for sale", "anchor investor", "subscription", "listing", "debut",
+    "lock in", "unlock", "rolls out", "launch", "launches", "takeover", "partnership", "investment",
+    "share sale", "margin relief",
+)
+BROAD_MARKET_SUBJECT_TERMS = (
+    "sensex", "nifty", "indices", "index", "midcap", "smallcap", "stock market", "markets",
+    "market", "china stocks", "chinese stocks", "china stock market", "chinese stock market",
+    "us stocks", "wall street", "bond market", "treasury yields", "rupee", "currency", "crude",
+    "oil prices", "10 year bond", "10 year bonds",
+)
+EXCEPTIONAL_MARKET_EVENT_TERMS = (
+    "worst", "record", "bear market", "bear territory", "in two years", "in 20 months",
+    "10th week", "20%", "decade", "historic", "all time high", "all time low", "since 2008",
+    "longest", "market correction", "market crash", "market rout", "sell off", "selloff",
+    "meltdown", "plunge", "plunges", "plunged",
+)
+LEADERSHIP_ROLE_TERMS = (
+    "ceo", "chief executive", "managing director", "md ceo", "director", "directors",
+    "chairman", "chairperson", "board member",
+)
+LEADERSHIP_CHANGE_TERMS = (
+    "appoint", "appoints", "appointed", "appointment", "names", "named", "successor",
+    "succeeds", "takes over", "joins as", "handover", "hand over", "replaces", "replacement",
+    "resigns", "resignation", "steps down", "retires", "retirement",
+)
+ORDER_WIN_ACTION_TERMS = (
+    "wins", "win", "won", "bags", "bagged", "secures", "secured", "lands", "landed",
+    "receives", "received", "awarded", "awards", "gets", "got", "nabs", "clinches",
+    "signs", "signed", "inks", "selected", "chosen", "renews", "renewed", "extends", "extended",
+    "l1 bidder", "lowest bidder", "lowest bid",
+)
+ORDER_RELATED_TERMS = (
+    "order", "orders", "order book", "order books", "work order", "work orders",
+    "purchase order", "purchase orders", "supply order", "supply orders", "letter of award",
+    "loa", "letter of intent", "loi",
+)
+CORPORATE_CONTRACT_TERMS = ("contract", "contracts", "contract award", "contract win", "contract wins")
+PROJECT_AWARD_TERMS = ("project", "projects", "mandate", "work", "job")
+REGULATORY_ORDER_ACTORS = (
+    "rbi", "sebi", "reserve bank", "central bank", "court", "supreme court", "high court",
+    "tribunal", "government", "govt", "ministry", "department", "cabinet", "competition commission",
+    "cci", "nclt", "nclat", "enforcement directorate", "ed", "cbi",
+)
+REGULATORY_ORDER_ACTION_TERMS = (
+    "orders", "ordered", "directs", "directed", "bars", "barred", "prohibits", "prohibited",
+    "restrains", "restrained", "imposes", "imposed", "penalty", "penalties", "refund", "refunds",
+    "refunded", "settlement", "settles", "settled", "issues order", "issue order", "rbi order",
+    "sebi order", "court order", "government order", "executive order",
+)
+DERIVATIVE_ORDER_CONTEXT_TERMS = (
+    "market order", "limit order", "order type", "order execution", "order flow", "order matching",
+    "order book imbalance", "order routing", "futures", "options", "derivative", "derivatives",
+    "contract expiry", "contract rollover", "lot size",
+)
+LABOUR_CONTRACT_CONTEXT_TERMS = (
+    "contract worker", "contract workers", "contract labour", "contract labor", "employment contract",
+    "labour contract", "labor contract",
+)
+CORPORATE_ANNOUNCEMENT_TERMS = (
+    "joint venture", "jv", "jv agreement", "merger", "acquisition", "acquires", "acquired", "takeover",
+    "partnership", "fleet expansion", "to buy", "buys", "capex", "capacity expansion",
+    "expands capacity", "adds capacity", "commissioned", "commercial production",
+    "new plant", "new facility", "divestment", "asset sale", "stake sale", "stake acquisition",
+    "acquires stake", "buys stake", "rolls out", "product launch", "launches", "launch of",
+    "market launch", "dividend", "buyback", "rights issue", "qip", "bonus issue", "stock split",
+)
+REGULATORY_MARKET_EVENT_TERMS = (
+    "policy", "regulation", "regulatory", "rule", "rules", "norms", "guideline", "guidelines",
+    "compliance", "approval route", "margin relief", "settlement", "market infrastructure",
+    "stock exchange", "depository", "trading", "securities market", "listing requirement", "scheme",
+    "subsidy", "tax", "budget", "investor protection", "investor awareness", "payment system",
+    "digital rupee", "currency", "monetary", "forex", "financial inclusion", "index", "indices",
+)
+
 IPO_DEDUPE_GENERIC_TERMS = {
     "ipo", "fpo", "issue", "issues", "public", "offer", "anchor", "investor", "investors",
     "demand", "subscription", "subscribed", "application", "applications", "bid", "bids",
@@ -406,17 +516,116 @@ def _is_opinion_headline(title):
     return False
 
 
-def classify_news_story(title, summary="", url=""):
-    """Return the in-scope topic, or ``None`` for results, opinion or noise.
+def _is_low_materiality_headline(title):
+    """Reject tiny property announcements that do not support a useful post."""
+    normalized = _normalized_words(title)
+    room_match = re.search(r"\b(\d{1,3})\s+room\b", normalized)
+    return bool(
+        room_match
+        and int(room_match.group(1)) < 100
+        and _contains_any_phrase(title, ("hotel", "hotels", "hospitality", "property"))
+    )
 
-    Scope is determined from the headline, not the RSS summary: publisher
-    excerpts can mention unrelated terms and otherwise pull consumer/tech items
-    into an economy or market archive.
+
+def _is_order_related_headline(title):
+    """Reject commercial order wins; retain regulator/court orders and market mechanics."""
+    has_order_term = _contains_any_phrase(title, ORDER_RELATED_TERMS)
+    has_contract = _contains_any_phrase(title, ("contract", "contracts"))
+    is_derivative_contract = has_contract and _contains_any_phrase(
+        title, DERIVATIVE_ORDER_CONTEXT_TERMS
+    )
+    has_contract_announcement = has_contract and not is_derivative_contract and not _contains_any_phrase(
+        title, LABOUR_CONTRACT_CONTEXT_TERMS
+    )
+    has_contract_award = has_contract_announcement and _contains_any_phrase(
+        title, ORDER_WIN_ACTION_TERMS
+    )
+    has_project_award = (
+        _contains_any_phrase(title, PROJECT_AWARD_TERMS)
+        and _contains_any_phrase(title, ORDER_WIN_ACTION_TERMS)
+    )
+    is_noncommercial_order_context = _contains_any_phrase(title, DERIVATIVE_ORDER_CONTEXT_TERMS)
+
+    if is_noncommercial_order_context and not has_project_award and not has_contract_announcement:
+        return False
+    if not (has_order_term or has_contract_announcement or has_project_award):
+        return False
+
+    # The separate corporate-news flow covers commercial orders, not legal or
+    # regulatory directives issued by courts and public authorities.
+    is_regulatory_order = (
+        _contains_any_phrase(title, REGULATORY_ORDER_ACTORS)
+        and _contains_any_phrase(title, REGULATORY_ORDER_ACTION_TERMS)
+    )
+    has_commercial_award = (
+        has_contract_award
+        or has_project_award
+        or (
+            has_order_term
+            and _contains_any_phrase(title, ("wins", "won", "bags", "bagged", "secures", "secured", "lands", "receives", "gets", "nabs", "clinches"))
+        )
+    )
+    return not (is_regulatory_order and not has_commercial_award)
+
+
+def _is_corporate_announcement_headline(title):
+    """Exclude issuer announcements covered by the separate corporate-news flow."""
+    if _is_order_related_headline(title):
+        return True
+    if (_contains_any_phrase(title, LEADERSHIP_ROLE_TERMS)
+            and _contains_any_phrase(title, LEADERSHIP_CHANGE_TERMS)):
+        return True
+    if (_contains_any_phrase(title, ("signs", "signed"))
+            and _contains_any_phrase(title, ("property", "hotel"))):
+        return True
+
+    if not _contains_any_phrase(title, CORPORATE_ANNOUNCEMENT_TERMS):
+        return False
+
+    # Preserve market-wide rule, settlement and infrastructure announcements
+    # from regulators and exchanges; operational issuer announcements stay out.
+    return not (
+        _contains_any_phrase(title, (
+            "rbi", "sebi", "nse", "bse", "reserve bank", "government", "ministry", "department", "cabinet"
+        ))
+        and _contains_any_phrase(title, REGULATORY_MARKET_EVENT_TERMS)
+    )
+
+
+def _is_worthwhile_news_headline(title):
+    """Apply corporate-announcement and price-move materiality gates."""
+    if _is_low_materiality_headline(title) or _is_corporate_announcement_headline(title):
+        return False
+
+    has_price_move = _contains_any_phrase(title, MARKET_PRICE_ACTION_TERMS)
+    has_market_subject = _contains_any_phrase(title, MARKET_PRICE_SUBJECT_TERMS)
+    if not (has_price_move and has_market_subject):
+        return True
+
+    if _contains_any_phrase(title, MATERIAL_MARKET_EVENT_TERMS):
+        return True
+
+    is_broad_market = _contains_any_phrase(title, BROAD_MARKET_SUBJECT_TERMS)
+    is_exceptional = _contains_any_phrase(title, EXCEPTIONAL_MARKET_EVENT_TERMS)
+    return is_broad_market and is_exceptional
+
+
+def classify_news_story(title, summary="", url=""):
+    """Return an in-scope topic, or ``None`` for excluded announcements/noise.
+
+    Scope and newsworthiness are determined from the headline, not the RSS
+    summary: publisher excerpts can mention unrelated terms and otherwise pull
+    consumer/tech items into an economy or market archive. Issuer announcements
+    and commercial order/contract wins handled by separate flows are excluded.
+    Regulatory directives remain eligible; routine price moves need a material
+    catalyst, while exceptional broad-market events remain eligible.
     """
     headline = _clean_text(str(title or ""))
     if not headline or _is_financial_results_headline(headline):
         return None
-    if _is_opinion_headline(headline) or _contains_any_phrase(headline, NEWS_FORMAT_EXCLUDE_TERMS):
+    if (_is_opinion_headline(headline)
+            or _contains_any_phrase(headline, NEWS_FORMAT_EXCLUDE_TERMS)
+            or not _is_worthwhile_news_headline(headline)):
         return None
 
     if _contains_any_phrase(headline, ECONOMY_CONTEXT_TERMS):
@@ -476,6 +685,30 @@ def _duplicate_event_family(title):
 
 def _event_entity_tokens(title):
     return _dedupe_title_tokens(title) - EVENT_DEDUPE_GENERIC_TERMS
+
+
+def _foreign_investor_flow_period(title):
+    """Return a coarse period for FII/FPI flow headlines, if recognizable."""
+    if not (
+        _contains_any_phrase(title, ("fii", "fiis", "fpi", "fpis", "foreign investors", "foreign institutional investors"))
+        and _contains_any_phrase(title, ("sell", "sells", "sold", "outflow", "outflows", "pull out", "pulls out", "net seller", "net sellers", "net selling"))
+    ):
+        return None
+    if _contains_any_phrase(title, ("this week", "last week", "weekly", "week to date", "for the week")):
+        return "week"
+    if _contains_any_phrase(title, ("this month", "last month", "monthly", "month to date")):
+        return "month"
+    if _contains_any_phrase(title, ("today", "session", "on monday", "on tuesday", "on wednesday", "on thursday", "on friday")):
+        return "day"
+    return "unspecified"
+
+
+def _is_china_bear_market_event(title):
+    is_china_market = _contains_any_phrase(
+        title, ("china stocks", "chinese stocks", "china stock market", "chinese stock market")
+    )
+    is_bear_market = _contains_any_phrase(title, ("bear market", "bear territory"))
+    return is_china_market and is_bear_market
 
 
 def _ipo_event_type(title):
@@ -548,6 +781,24 @@ def _stories_are_duplicates(left, right):
             return False
         if similarity >= 0.88 and len(shared_tokens) >= 3 and same_phase:
             return True
+
+    # A weekly FII/FPI flow summary can supersede a daily session recap. Do not
+    # merge two daily flow reports or two monthly reports as separate periods.
+    left_flow_period = _foreign_investor_flow_period(left_title)
+    right_flow_period = _foreign_investor_flow_period(right_title)
+    if left_flow_period or right_flow_period:
+        if left_flow_period and right_flow_period:
+            periods = {left_flow_period, right_flow_period}
+            if "week" in periods and "month" not in periods and len(periods) > 1:
+                return True
+        return False
+
+    # Different publishers often describe the same China bear-market threshold
+    # in different language; group those reports only for the same short window.
+    left_china_bear = _is_china_bear_market_event(left_title)
+    right_china_bear = _is_china_bear_market_event(right_title)
+    if left_china_bear or right_china_bear:
+        return left_china_bear and right_china_bear
 
     # Same-event company disclosures need a shared issuer/project token; a
     # common phrase like "wins NHAI contract" alone must not merge two firms.
@@ -910,15 +1161,26 @@ def merge_archive(archive, feed_result):
     archive["retention_days"] = ARCHIVE_RETENTION_DAYS
     old_curation = archive.get("curation", {})
     archive["curation"] = {
-        "version": 1,
+        "version": 6,
         "scope": ["economy", "capital_market", "stock_market"],
-        "excludes": ["financial_results", "opinions_and_recommendations", "generic_market_wraps"],
+        "excludes": [
+            "financial_results", "opinions_and_recommendations", "generic_market_wraps",
+            "company_corporate_announcements", "commercial_order_and_contract_wins",
+            "routine_price_moves_without_material_catalyst", "low_materiality_announcements",
+        ],
+        "newsworthiness_rule": (
+            "Exclude issuer corporate announcements and commercial order/contract wins already "
+            "covered separately; retain regulator/court directives and price-action stories with "
+            "material catalysts or exceptional broad-market context."
+        ),
         "near_duplicate_window_hours": ARCHIVE_DEDUPE_WINDOW_HOURS,
         "ipo_phase_window_days": 14,
         "last_curated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
     }
-    if isinstance(old_curation, dict) and old_curation.get("initial_cleanup_stats"):
-        archive["curation"]["initial_cleanup_stats"] = old_curation["initial_cleanup_stats"]
+    if isinstance(old_curation, dict):
+        for stats_key in ("initial_cleanup_stats", "quality_cleanup_stats"):
+            if old_curation.get(stats_key):
+                archive["curation"][stats_key] = old_curation[stats_key]
 
     status = archive["feed_status"] if isinstance(archive["feed_status"], dict) else {}
     fetched_items = sum(_safe_int(value.get("fresh_items", 0), 0)
@@ -933,7 +1195,7 @@ def merge_archive(archive, feed_result):
         "filtered_feed_items": filtered_at_fetch + filtered_feed_items,
         "new_unique_stories": added,
         "duplicate_items_collapsed": existing_duplicates + feed_duplicates + final_duplicates,
-        "out_of_scope_archive_items_removed": removed_existing + removed_final,
+        "archive_items_removed_by_curation": removed_existing + removed_final,
         "stories_total": len(archive["stories"]),
     }
     return archive, added, new_or_updated_urls
