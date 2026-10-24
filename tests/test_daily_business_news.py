@@ -224,6 +224,99 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             )
         )
 
+    def test_official_regulator_feed_context_keeps_orders_and_preserves_exclusions(self):
+        sebi_source = "SEBI RSS"
+        self.assertEqual(
+            news.classify_news_story(
+                "Order in the matter of Avadhut Sathe Trading Academy Private Limited",
+                source_name=sebi_source,
+            ),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story(
+                "Review of regulatory requirement for maintenance of call records of institutional clients by Research Analysts",
+                source_name=sebi_source,
+            ),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story(
+                "Auction of State Government Securities",
+                source_name="RBI Press Releases",
+            ),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story(
+                "Order in the matter of a cooperative bank",
+                source_name="RBI Notifications",
+            ),
+            "economy",
+        )
+        self.assertEqual(
+            news.classify_news_story("Supreme Court orders a company to refund investors"),
+            "capital_market",
+        )
+        self.assertEqual(
+            news.classify_news_story("Government orders banks to submit new lending data"),
+            "economy",
+        )
+        self.assertEqual(
+            news.classify_news_story(
+                "CCI orders a company to pay a penalty for competition violations"
+            ),
+            "capital_market",
+        )
+        for title, source in (
+            ("SEBI approves new IPO norms for NSE", sebi_source),
+            ("Foreign institutional investors increase selling in Indian markets", sebi_source),
+            ("Highway Infrastructure wins ₹340 crore NHAI contract", sebi_source),
+            ("SEBI teams win at IOSCO TechSprint on investor education", sebi_source),
+            ("Research analysts recommend these stocks as a buy", sebi_source),
+            ("Tata Motors Q2 profit rises 18%", "RBI Press Releases"),
+        ):
+            with self.subTest(title=title, source=source):
+                self.assertIsNone(news.classify_news_story(title, source_name=source))
+
+    def test_official_regulator_rss_dates_are_parsed_in_ist(self):
+        rbi_source = next(feed for feed in news.FEEDS if feed["name"] == "RBI Press Releases")
+        rbi_xml = b"""<rss><channel><item>
+            <title>Auction of State Government Securities</title>
+            <link>https://rbi.org.in/markets/state-security-auction.htm</link>
+            <pubDate>Fri, 23 Oct 2026 17:10:00</pubDate>
+        </item></channel></rss>"""
+        rbi_items = news.parse_rss(rbi_xml, rbi_source)
+        self.assertEqual(len(rbi_items), 1)
+        self.assertEqual(
+            rbi_items[0]["published"],
+            datetime(2026, 10, 23, 17, 10, tzinfo=news.IST),
+        )
+
+        sebi_source = next(feed for feed in news.FEEDS if feed["name"] == "SEBI RSS")
+        sebi_xml = b"""<rss><channel>
+        <item>
+            <title>Order in the matter of a market participant</title>
+            <link>https://www.sebi.gov.in/enforcement/orders/test-order.html</link>
+            <pubDate>23 Oct, 2026 +0530</pubDate>
+        </item>
+        <item>
+            <title>SEBI issues a new market circular</title>
+            <link>https://www.sebi.gov.in/legal/circulars/test-circular.html</link>
+            <pubDate>24 Oct 2026 14:00:02</pubDate>
+        </item>
+        </channel></rss>"""
+        sebi_items = news.parse_rss(sebi_xml, sebi_source)
+        self.assertEqual(len(sebi_items), 2)
+        self.assertEqual(
+            sebi_items[0]["published"],
+            datetime(2026, 10, 23, 0, 0, tzinfo=news.IST),
+        )
+        self.assertEqual(
+            sebi_items[1]["published"],
+            datetime(2026, 10, 24, 14, 0, 2, tzinfo=news.IST),
+        )
+
     def test_headline_scope_is_not_inferred_from_unrelated_rss_summary(self):
         self.assertIsNone(
             news.classify_news_story(
@@ -447,6 +540,31 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(updated["last_run_stats"]["filtered_feed_items"], 4)
         self.assertEqual(updated["last_run_stats"]["duplicate_items_collapsed"], 1)
         self.assertEqual(updated["last_run_stats"]["archive_items_removed_by_curation"], 1)
+
+    def test_merge_archive_retains_sebi_regulatory_order_from_official_feed(self):
+        item = self.item(
+            "Order in the matter of Avadhut Sathe Trading Academy Private Limited",
+            source="SEBI RSS",
+            priority=3,
+            url="https://www.sebi.gov.in/enforcement/orders/official-order.html",
+        )
+        updated, added, _changed_urls = news.merge_archive(
+            {"stories": []},
+            {
+                "items": [item],
+                "status": {"SEBI RSS": {"fresh_items": 1, "filtered_items": 0}},
+                "any_success": True,
+            },
+        )
+
+        self.assertEqual(added, 1)
+        self.assertEqual(len(updated["stories"]), 1)
+        self.assertEqual(updated["stories"][0]["source"], "SEBI RSS")
+        self.assertEqual(
+            updated["stories"][0]["headline"],
+            "Order in the matter of Avadhut Sathe Trading Academy Private Limited",
+        )
+        self.assertEqual(updated["stories"][0]["topic"], "capital_market")
 
     def test_daily_archive_run_enqueues_a_formatted_news_post(self):
         fixed_now = datetime(2026, 10, 24, 18, 30, tzinfo=news.IST)

@@ -48,8 +48,8 @@ UA = {
     "User-Agent": "Mozilla/5.0 (compatible; DailyBusinessNewsInsight/1.0; +https://github.com/)"
 }
 
-# Publisher RSS feeds. Only titles, short excerpts and links are used; the AI
-# is instructed to write original commentary and cite the source.
+# Publisher and regulator RSS feeds. No HTML scraping is needed for these
+# sources; each feed is parsed as RSS/Atom and original item links are retained.
 FEEDS = [
     {
         "name": "CNBC-TV18",
@@ -69,7 +69,54 @@ FEEDS = [
         "priority": 2,
         "domains": ("thehindubusinessline.com",),
     },
+    {
+        "name": "RBI Press Releases",
+        "url": "https://rbi.org.in/pressreleases_rss.xml",
+        "priority": 3,
+        "domains": ("rbi.org.in",),
+        "naive_date_timezone": IST,
+    },
+    {
+        "name": "RBI Notifications",
+        "url": "https://rbi.org.in/notifications_rss.xml",
+        "priority": 3,
+        "domains": ("rbi.org.in",),
+        "naive_date_timezone": IST,
+    },
+    {
+        "name": "SEBI RSS",
+        "url": "https://www.sebi.gov.in/sebirss.xml",
+        "priority": 3,
+        "domains": ("sebi.gov.in",),
+        "naive_date_timezone": IST,
+    },
 ]
+
+SEBI_LOW_SIGNAL_HEADLINE_TERMS = (
+    "techsprint", "wins at iosco", "wins first place", "hackathon", "award",
+    "opens a local office", "investor education campaign", "investor awareness campaign",
+    "foundation day", "celebrates its",
+)
+
+RBI_REGULATORY_CONTEXT_TERMS = (
+    "notification", "notifications", "master direction", "directions", "direction",
+    "regulatory", "regulation", "regulations", "compounding", "contravention",
+    "contraventions", "adjudication", "proceedings", "order in the matter",
+    "penalty", "penalties", "cancellation of registration", "certificate of registration",
+    "suspension of registration", "fema", "nbfc", "non-banking financial company",
+    "co-operative bank", "cooperative bank", "payment system operator",
+)
+
+SEBI_REGULATORY_CONTEXT_TERMS = (
+    "order", "ruling", "adjudication", "circular", "regulatory", "regulation",
+    "rules", "requirement", "guideline", "framework", "amendment", "proceedings",
+    "recovery", "show cause", "debarred", "debarment", "penalty", "settlement",
+    "unregistered", "investor", "broker", "trading", "market", "securities",
+    "stock exchange", "mutual fund", "depository", "investment adviser",
+    "research analyst", "portfolio", "derivative", "futures", "options", "margin",
+    "intermediary", "disclosure", "takeover", "insider", "fraud", "warning",
+    "caution", "notice", "surveillance", "certificate of registration",
+)
 
 POSITIVE_TERMS = (
     "rbi", "sebi", "policy", "repo rate", "tariff", "debt", "capex",
@@ -141,7 +188,8 @@ LISTED_COMPANY_EVENT_TERMS = (
 
 # News formats and framing that are routinely repetitive or opinion-led.
 EXCLUDE_TERMS = (
-    "broker", "analyst", "recommendation", "recommendations", "recommended", "opinion", "editorial",
+    "broker", "analyst", "recommend", "recommends", "recommending", "recommendation",
+    "recommendations", "recommended", "opinion", "editorial",
     "commentary", "op-ed", "op ed", "viewpoint", "analysis", "market view", "company view",
     "stocks to buy", "stock to buy",
     "stocks to sell", "stock to sell", "stocks to buy today", "stocks to buy now", "should you buy", "should you sell",
@@ -149,7 +197,7 @@ EXCLUDE_TERMS = (
     "target price", "target prices", "price target", "price targets", "buy rating", "sell rating",
     "buy on dips", "sell on rise", "stocks to watch today",
     "top pick", "stock pick", "prefers", "overweight", "underweight", "upgrades",
-    "downgrades", "rating upgrade", "rating downgrade", "recommends", "accumulate",
+    "downgrades", "rating upgrade", "rating downgrade", "accumulate",
     "outperform", "underperform", "top brokerage pick", "outlook", "forecast", "forecasts",
     "estimate", "estimates", "estimated", "expects", "expected", "predicts", "prediction",
     "potential", "expert view", "experts say", "experts weigh in", "expert says",
@@ -420,25 +468,45 @@ def _canonical_url(url: str) -> str:
         return ""
 
 
-def _parse_datetime(value: str | None):
+def _parse_datetime(value: str | None, default_timezone=timezone.utc):
+    """Parse feed timestamps, interpreting timezone-less values per source."""
     if not value:
         return None
     value = value.strip()
-    try:
-        dt = parsedate_to_datetime(value)
+
+    def as_ist(dt):
         if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
+            dt = dt.replace(tzinfo=default_timezone or timezone.utc)
         return dt.astimezone(IST)
-    except Exception:
+
+    try:
+        return as_ist(parsedate_to_datetime(value))
+    except (TypeError, ValueError, OverflowError):
         pass
     try:
         normalized = value.replace("Z", "+00:00")
-        dt = datetime.fromisoformat(normalized)
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(IST)
-    except Exception:
-        return None
+        return as_ist(datetime.fromisoformat(normalized))
+    except (TypeError, ValueError, OverflowError):
+        pass
+
+    # SEBI's RSS also publishes dates in the non-RFC form "23 Oct, 2026
+    # +0530". Include the no-time and common timestamp variants, while still
+    # applying the source's configured timezone to naive values.
+    for date_format in (
+        "%d %b, %Y %H:%M:%S %z",
+        "%d %b %Y %H:%M:%S %z",
+        "%d %b, %Y %z",
+        "%d %b %Y %z",
+        "%d %b, %Y %H:%M:%S",
+        "%d %b %Y %H:%M:%S",
+        "%d %b, %Y",
+        "%d %b %Y",
+    ):
+        try:
+            return as_ist(datetime.strptime(value, date_format))
+        except (TypeError, ValueError, OverflowError):
+            continue
+    return None
 
 
 def _child_text(element, names):
@@ -471,7 +539,9 @@ def parse_rss(xml_bytes: bytes, source: dict):
         link = _canonical_url(_child_text(element, {"link"}))
         summary = _clean_text(_child_text(element, {"description", "summary", "encoded", "content"}))
         raw_date = _child_text(element, {"pubdate", "published", "updated", "date"})
-        published = _parse_datetime(raw_date)
+        published = _parse_datetime(
+            raw_date, source.get("naive_date_timezone", timezone.utc)
+        )
         if not title or not link or not published:
             continue
         host = (urlsplit(link).hostname or "").lower()
@@ -662,20 +732,51 @@ def _is_worthwhile_news_headline(title):
     return is_broad_market and is_exceptional
 
 
-def classify_news_story(title, summary="", url=""):
+def classify_news_story(title, summary="", url="", source_name=""):
     """Return an in-scope topic, or ``None`` for excluded announcements/noise.
 
     Scope and newsworthiness are determined from the headline, not the RSS
     summary: publisher excerpts can mention unrelated terms and otherwise pull
     consumer/tech items into an economy or market archive. Issuer announcements,
     commercial order wins, IPO/FPO coverage and FII/DII institutional-flow stories
-    are excluded. Regulatory directives remain eligible; routine price moves need
-    a material catalyst, while exceptional broad-market events remain eligible.
+    are excluded. Official regulator feeds supply agency context when it is
+    omitted from an item headline; low-signal SEBI institutional PR is skipped.
+    Regulatory directives remain eligible; routine price moves need a material
+    catalyst, while exceptional broad-market events remain eligible.
     """
     headline = _clean_text(str(title or ""))
+    if (source_name == "SEBI RSS"
+            and _contains_any_phrase(headline, SEBI_LOW_SIGNAL_HEADLINE_TERMS)):
+        return None
+    is_rbi_regulatory_item = (
+        source_name in {"RBI Press Releases", "RBI Notifications"}
+        and _contains_any_phrase(headline, RBI_REGULATORY_CONTEXT_TERMS)
+    )
+    if (is_rbi_regulatory_item
+            and not any(term in headline.lower() for term in ("rbi", "reserve bank"))):
+        headline = f"RBI {headline}"
+    sebi_path = urlsplit(str(url or "")).path.lower()
+    is_sebi_regulatory_item = (
+        source_name == "SEBI RSS"
+        and (
+            _contains_any_phrase(headline, SEBI_REGULATORY_CONTEXT_TERMS)
+            or "/enforcement/" in sebi_path
+            or "/legal/circulars/" in sebi_path
+        )
+    )
+    if is_sebi_regulatory_item and "sebi" not in headline.lower():
+        headline = f"SEBI {headline}"
     if not headline or _is_financial_results_headline(headline):
         return None
-    if (_is_opinion_headline(headline)
+    opinion_headline = headline
+    if is_sebi_regulatory_item:
+        # Research Analysts are regulated entities/roles in SEBI circulars, not
+        # analyst commentary. Keep opinion language in the headline subject to
+        # the usual opinion filter after removing only that role designation.
+        opinion_headline = re.sub(
+            r"\bresearch\s+analysts?\b", " ", opinion_headline, flags=re.IGNORECASE
+        )
+    if (_is_opinion_headline(opinion_headline)
             or _contains_any_phrase(headline, NEWS_FORMAT_EXCLUDE_TERMS)
             or not _is_worthwhile_news_headline(headline)):
         return None
@@ -687,6 +788,19 @@ def classify_news_story(title, summary="", url=""):
     if _contains_any_phrase(headline, STOCK_MARKET_CONTEXT_TERMS):
         return "stock_market"
 
+    if (
+        _contains_any_phrase(headline, REGULATORY_ORDER_ACTORS)
+        and _contains_any_phrase(headline, REGULATORY_ORDER_ACTION_TERMS)
+    ):
+        economy_order_actors = (
+            "rbi", "reserve bank", "central bank", "government", "govt",
+            "ministry", "department", "cabinet",
+        )
+        return (
+            "economy" if _contains_any_phrase(headline, economy_order_actors)
+            else "capital_market"
+        )
+
     path = urlsplit(str(url or "")).path.lower()
     if (_contains_any_phrase(headline, LISTED_COMPANY_EVENT_TERMS)
             and ("/market/" in path or "/markets/" in path)):
@@ -696,7 +810,9 @@ def classify_news_story(title, summary="", url=""):
 
 def _item_score(item):
     title = str(item.get("title", ""))
-    if not classify_news_story(title, item.get("summary", ""), item.get("url", "")):
+    if not classify_news_story(
+        title, item.get("summary", ""), item.get("url", ""), item.get("source", "")
+    ):
         return -100
     score = int(item.get("source_priority", 1))
     score += sum(2 for term in POSITIVE_TERMS if _contains_any_phrase(title, (term,)))
@@ -844,7 +960,8 @@ def group_stories(items):
         )
         primary = group["items"][0]
         group["topic"] = classify_news_story(
-            primary.get("title", ""), primary.get("summary", ""), primary.get("url", "")
+            primary.get("title", ""), primary.get("summary", ""), primary.get("url", ""),
+            primary.get("source", ""),
         )
         group["score"] = max(_item_score(item) for item in group["items"]) + min(
             3, len(group["items"]) - 1
@@ -868,7 +985,9 @@ def fetch_feeds():
                      if cutoff <= item["published"] <= NOW + timedelta(hours=2)]
             accepted = []
             for item in fresh:
-                topic = classify_news_story(item["title"], item.get("summary", ""), item.get("url", ""))
+                topic = classify_news_story(
+                    item["title"], item.get("summary", ""), item.get("url", ""), item.get("source", "")
+                )
                 if not topic:
                     continue
                 item["topic"] = topic
@@ -984,7 +1103,9 @@ def _curate_archive_stories(stories):
         record = dict(source_record)
         title = record.get("headline", record.get("title", ""))
         url = _canonical_url(record.get("url", ""))
-        topic = classify_news_story(title, record.get("summary", ""), url)
+        topic = classify_news_story(
+            title, record.get("summary", ""), url, record.get("source", "")
+        )
         if not topic or not url:
             removed += 1
             continue
@@ -1098,7 +1219,8 @@ def merge_archive(archive, feed_result):
 
     for feed_item in feed_items:
         topic = classify_news_story(
-            feed_item.get("title", ""), feed_item.get("summary", ""), feed_item.get("url", "")
+            feed_item.get("title", ""), feed_item.get("summary", ""), feed_item.get("url", ""),
+            feed_item.get("source", ""),
         )
         url = _canonical_url(feed_item.get("url", ""))
         if not topic or not url or not feed_item.get("published"):
@@ -1719,7 +1841,8 @@ def enrich_archive_stories(archive, article_fetcher=None, ai_caller=None, max_st
         if isinstance(record, dict)
         and not _has_current_archive_insight(record.get("ai_insight"))
         and classify_news_story(
-            record.get("headline", ""), record.get("summary", ""), record.get("url", "")
+            record.get("headline", ""), record.get("summary", ""), record.get("url", ""),
+            record.get("source", ""),
         )
     ]
     stats["pending_stories"] = len(pending)
