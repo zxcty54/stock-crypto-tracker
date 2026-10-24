@@ -2215,7 +2215,9 @@ def add_to_queue(queue, draft, candidates):
 
 def _update_news_state(state, slot_key, selected):
     state.setdefault("generated_slots", [])
-    state["generated_slots"] = (state["generated_slots"] + [slot_key])[-180:]
+    state["generated_slots"] = list(dict.fromkeys(
+        state["generated_slots"] + [slot_key]
+    ))[-180:]
     if selected:
         state.setdefault("seen_story_keys", [])
         state["seen_story_keys"] = (state["seen_story_keys"] + [selected["story_key"]])[-500:]
@@ -2236,15 +2238,8 @@ def _print_archive_enrichment_stats(stats):
 
 
 def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_urls):
-    """Draft and enqueue at most one source-grounded business story per run."""
-    if NOW.hour not in POSTING_HOURS_IST:
-        print("ℹ️ Outside the existing afternoon/evening posting window; archive updated without queueing")
-        return False, False
-
+    """Queue a validated AI draft; schedule it at the next existing queue slot."""
     slot_key = NOW.strftime("%Y-%m-%d %H")
-    if slot_key in state.get("generated_slots", []):
-        print("ℹ️ This news-post slot was already processed; preventing a duplicate draft")
-        return False, False
 
     candidate_items = archive_to_items(archive, previous_scraped_at, fresh_urls)
     groups = group_stories(candidate_items)
@@ -2310,7 +2305,7 @@ def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_
 
 
 def run_archive_and_queue():
-    """Update/enrich the archive and enqueue one ready post in posting hours."""
+    """Update/enrich the archive and enqueue a validated draft at the next queue slot."""
     archive = load_json(ARCHIVE_FILE, {"stories": []})
     if not isinstance(archive, dict) or not isinstance(archive.get("stories", []), list):
         print("❌ News archive has an unexpected schema; refusing to overwrite it")

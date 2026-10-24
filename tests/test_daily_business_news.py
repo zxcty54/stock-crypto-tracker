@@ -709,17 +709,65 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual([item["title"] for item in candidates], [pending["title"]])
         self.assertEqual(candidates[0]["published"], fixed_now - timedelta(hours=4))
 
-    def test_business_post_queueing_obeys_existing_posting_window(self):
-        queue = {"queue": []}
-        state = {"generated_slots": [], "seen_story_keys": [], "seen_story_titles": []}
+    def test_ai_validated_story_queues_outside_posting_window_and_existing_slot(self):
         midday = datetime(2026, 10, 24, 12, 0, tzinfo=news.IST)
-        with patch.object(news, "NOW", midday), patch.object(
-            news, "call_ai", side_effect=AssertionError("must not call AI outside the window")
+        source_url = "https://www.cnbctv18.com/market/rbi-policy-test.html"
+        candidate = {
+            "id": "story_1",
+            "story_key": "story-key-1",
+            "topic": "economy",
+            "headline": "RBI keeps repo rate unchanged as inflation eases",
+            "published_ist": "2026-10-24 11:00 IST",
+            "source": "CNBC-TV18",
+            "source_url": source_url,
+            "source_urls": [source_url],
+            "other_coverage": [],
+            "reported_context": "RBI policy context.",
+            "context_source": "publisher article page",
+            "context_chars": 1200,
+        }
+        feed_item = {
+            "title": candidate["headline"],
+            "source": candidate["source"],
+            "url": source_url,
+            "published": midday - timedelta(hours=1),
+        }
+        draft = {
+            "story_id": candidate["id"],
+            "title": "RBI holds repo rate as inflation eases",
+            "body": "Validated educational Hinglish explanation.",
+        }
+        queue = {"queue": []}
+        # A prior attempt in this hour must not block a newly AI-approved item.
+        state = {
+            "generated_slots": [midday.strftime("%Y-%m-%d %H")],
+            "seen_story_keys": [],
+            "seen_story_titles": [],
+        }
+
+        with (
+            patch.object(news, "NOW", midday),
+            patch.object(news, "GEMINI_KEYS", ("test-key",)),
+            patch.object(news, "GROQ_KEYS", ()),
+            patch.object(news, "archive_to_items", return_value=[feed_item]),
+            patch.object(news, "group_stories", return_value=[{
+                "key": candidate["story_key"], "items": [feed_item], "topic": "economy",
+            }]),
+            patch.object(news, "build_candidates", return_value=[candidate]),
+            patch.object(news, "call_ai", return_value='{"skip":false}'),
+            patch.object(news, "validate_draft", return_value=draft),
         ):
-            self.assertEqual(
-                news._queue_business_news_post({}, queue, state, None, set()),
-                (False, False),
+            result = news._queue_business_news_post(
+                {"stories": []}, queue, state, None, set()
             )
+
+        self.assertEqual(result, (True, True))
+        self.assertEqual(len(queue["queue"]), 1)
+        queued_item = queue["queue"][0]
+        self.assertEqual(queued_item["source_url"], source_url)
+        self.assertEqual(queued_item["scheduled_ist"], "2026-10-24 12:45")
+        self.assertEqual(queued_item["kind"], "business_news_insight")
+        self.assertIn("Educational only", queued_item["text"])
 
 
 if __name__ == "__main__":
