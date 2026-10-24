@@ -7,12 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: "Archive fresh RSS headlines, or run the existing preview"
+        description: "Scrape and enrich the archive, enrich existing stories without scraping, or run a preview"
         required: true
         type: choice
         options:
           - preview
           - archive
+          - enrich
         default: preview
       include_ai:
         description: "For preview only: generate an educational Hinglish draft when an AI key is configured"
@@ -29,9 +30,9 @@ permissions:
 
 jobs:
   archive:
-    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.task == 'archive') }}
+    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.task == 'archive' || github.event.inputs.task == 'enrich')) }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       contents: write
     steps:
@@ -48,8 +49,35 @@ jobs:
       - name: Install dependency
         run: pip install --quiet requests
 
-      - name: Scrape RSS feeds into the JSON archive
+      - name: Scrape RSS and add source-grounded AI value notes to the archive
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.task == 'archive' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
+          GOOGLE_API_KEY2: ${{ secrets.GOOGLE_API_KEY2 }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+          NEWS_ARCHIVE_AI_MAX_STORIES: "24"
+          NEWS_ARCHIVE_AI_BATCH_SIZE: "4"
         run: python daily_business_news.py archive
+
+      - name: Enrich the existing archive without scraping RSS
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task == 'enrich' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
+          GOOGLE_API_KEY2: ${{ secrets.GOOGLE_API_KEY2 }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+          NEWS_ARCHIVE_AI_MAX_STORIES: "24"
+          NEWS_ARCHIVE_AI_BATCH_SIZE: "4"
+        run: python daily_business_news.py enrich
 
       - name: Commit updated archive
         run: |
@@ -64,7 +92,7 @@ jobs:
           fi
 
   preview:
-    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task != 'archive' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task == 'preview' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

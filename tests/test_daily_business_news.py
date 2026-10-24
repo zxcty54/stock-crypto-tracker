@@ -50,6 +50,40 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             "post_id": post_id,
         }
 
+    def archive_insight_candidate(self, story_id="story_1"):
+        context = (
+            "The central bank kept its policy rate unchanged while the latest official commentary "
+            "described easing inflation pressure. The decision leaves the policy stance steady, but "
+            "does not guarantee cheaper borrowing or a change in any listed company's earnings. "
+            "Future inflation readings, policy communication and credit conditions will help show "
+            "whether the balance between price stability and economic activity is changing. "
+        ) * 3
+        return {
+            "story_id": story_id,
+            "headline": "RBI keeps repo rate unchanged as inflation eases",
+            "rss_summary": "Official policy update on rates and inflation.",
+            "reported_context": context,
+        }
+
+    def good_archive_insight(self, story_id="story_1"):
+        return {
+            "story_id": story_id,
+            "why_it_matters": (
+                "Repo rate ko stable rakhna policy stance mein continuity dikhata hai; source ke "
+                "mutabik inflation eases, isliye decision ko price stability aur growth ke balance "
+                "ke lens se samajhna useful hai. Isse kisi company ki borrowing cost ya earnings "
+                "automatically badalne ka proof nahi milta."
+            ),
+            "what_to_watch": [
+                "Aage ke RBI policy communication mein inflation aur growth ke balance par diya gaya rationale dekho.",
+                "Official inflation readings aur credit conditions se check karo ki easing broad-based rehti hai ya nahi.",
+            ],
+            "evergreen_lesson": (
+                "Policy headlines ko ek single decision se nahi, inflation trend, growth conditions "
+                "aur baad ke implementation evidence ke saath compare karo."
+            ),
+        }
+
     def test_checked_in_archive_has_no_ipo_or_fii_dii_stories(self):
         archive = json.loads((ROOT / "business_news_archive.json").read_text(encoding="utf-8"))
         curated, removed, duplicates = news._curate_archive_stories(archive["stories"])
@@ -64,6 +98,94 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             with self.subTest(title=story["headline"]):
                 self.assertFalse(news._is_ipo_related_headline(story["headline"]))
                 self.assertFalse(news._is_fii_dii_related_headline(story["headline"]))
+
+    def test_archive_ai_enrichment_adds_durable_notes_once(self):
+        source_context = self.archive_insight_candidate()["reported_context"]
+        item = self.item(
+            "RBI keeps repo rate unchanged as inflation eases",
+            summary="Official policy update on rates and inflation.",
+        )
+        record = self.record(item)
+        archive = {"stories": [record]}
+        calls = []
+
+        def ai_caller(prompt):
+            calls.append(prompt)
+            self.assertIn("evergreen_lesson", prompt)
+            self.assertIn("RBI keeps repo rate unchanged", prompt)
+            return json.dumps({"insights": [self.good_archive_insight(news._alpha_id(item["url"]))]})
+
+        stats = news.enrich_archive_stories(
+            archive,
+            article_fetcher=lambda _url: source_context,
+            ai_caller=ai_caller,
+        )
+
+        self.assertEqual(stats["enriched"], 1)
+        self.assertEqual(stats["batches"], 1)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(record["ai_insight"]["version"], news.ARCHIVE_AI_INSIGHT_VERSION)
+        self.assertEqual(record["ai_insight"]["context_source"], "publisher article page")
+        self.assertTrue(news._has_current_archive_insight(record["ai_insight"]))
+
+        second_run = news.enrich_archive_stories(
+            archive,
+            article_fetcher=lambda _url: self.fail("current insights should not refetch source pages"),
+            ai_caller=lambda _prompt: self.fail("current insights should not call AI again"),
+        )
+        self.assertEqual(second_run["pending_stories"], 0)
+
+    def test_archive_ai_validation_rejects_unsupported_numbers_and_trading_calls(self):
+        candidate = self.archive_insight_candidate()
+        unsupported_number = self.good_archive_insight()
+        unsupported_number["why_it_matters"] += " Inflation fell by 20%."
+        direct_call = self.good_archive_insight()
+        direct_call["what_to_watch"][0] = "Buy this stock now because the policy stance is supportive."
+
+        self.assertEqual(
+            news.validate_archive_insights({"insights": [unsupported_number]}, [candidate]),
+            {},
+        )
+        self.assertEqual(
+            news.validate_archive_insights({"insights": [direct_call]}, [candidate]),
+            {},
+        )
+        self.assertEqual(
+            len(news.validate_archive_insights({"insights": [self.good_archive_insight()]}, [candidate])),
+            1,
+        )
+
+    def test_manual_archive_enrichment_does_not_fetch_rss(self):
+        archive = {"stories": []}
+        stats = {
+            "enriched": 0,
+            "insufficient_context": 0,
+            "not_added": 0,
+            "deferred_stories": 0,
+        }
+        with (
+            patch.object(news, "load_json", return_value=archive),
+            patch.object(news, "enrich_archive_stories", return_value=stats),
+            patch.object(news, "fetch_feeds", side_effect=AssertionError("enrich mode must not scrape")) as fetch,
+        ):
+            self.assertEqual(news.run_archive_enrichment_only(), 0)
+        fetch.assert_not_called()
+
+    def test_archive_record_refresh_invalidates_stale_ai_insight(self):
+        item = self.item("RBI keeps repo rate unchanged as inflation eases")
+        record = self.record(item)
+        record["ai_insight"] = {
+            "version": news.ARCHIVE_AI_INSIGHT_VERSION,
+            "why_it_matters": "Previously generated note with enough detail to be considered current.",
+            "what_to_watch": ["One follow-up signal to inspect.", "Another follow-up signal to inspect."],
+            "evergreen_lesson": "A reusable lesson grounded in the earlier article details.",
+        }
+        refreshed = dict(item)
+        refreshed["published"] = item["published"] + timedelta(minutes=5)
+        refreshed["summary"] = "Updated source summary with material new details."
+
+        self.assertTrue(news._refresh_archive_record(record, refreshed, "economy"))
+        self.assertNotIn("ai_insight", record)
 
     def test_accepts_economy_capital_markets_and_stock_events(self):
         self.assertEqual(
