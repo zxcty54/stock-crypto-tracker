@@ -529,18 +529,13 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
       }
     }
 
-    final wins = _tradeHistory.where((t) => t.isWin).length;
-    final winRate = _tradeHistory.isNotEmpty
-        ? ((wins / _tradeHistory.length) * 100).toStringAsFixed(0)
-        : "0";
-
     return Scaffold(
       backgroundColor: const Color(0xFF070B12),
       endDrawer: _buildHistoryDrawer(),
       body: SafeArea(
         child: Column(
           children: [
-            _buildTopBar(winRate),
+            _buildTopBar(),
             _buildOHLCVHud(activeCandle, activeVolEma, isInspecting: _crosshairPosition != null),
 
             Expanded(
@@ -682,136 +677,19 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
                     ),
                   ),
 
-                  // Always-On Top Floating Buy/Sell Dock
-                  Positioned(
-                    top: 12,
-                    left: 14,
-                    child: _buildFloatingTradingViewOrderDock(currentLtp),
-                  ),
                 ],
               ),
             ),
 
             if (_positionSide != null) _buildActivePositionBanner(currentLtp, unrealized),
-            _buildBottomControls(),
+            _buildBottomControls(currentLtp),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFloatingTradingViewOrderDock(double ltp) {
-    final bool hasActivePosition = _positionSide != null;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF131B2A).withOpacity(0.95),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF2B3A52), width: 1.2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          InkWell(
-            onTap: hasActivePosition ? null : () => _executeQuickTrade('SHORT'),
-            borderRadius: BorderRadius.circular(8),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: hasActivePosition ? const Color(0xFF1A2230) : const Color(0xFFFF2A6D),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'SELL',
-                    style: TextStyle(
-                      color: hasActivePosition ? Colors.white30 : Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 10,
-                    ),
-                  ),
-                  Text(
-                    '₹${ltp.toStringAsFixed(1)}',
-                    style: GoogleFonts.robotoMono(
-                      color: hasActivePosition ? Colors.white38 : Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${_orderQty.toInt()}',
-                  style: GoogleFonts.robotoMono(
-                    color: const Color(0xFF00F0FF),
-                    fontWeight: FontWeight.w900,
-                    fontSize: 12,
-                  ),
-                ),
-                const Text(
-                  'QTY',
-                  style: TextStyle(color: Color(0xFF8896AB), fontSize: 8, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: hasActivePosition ? null : () => _executeQuickTrade('LONG'),
-            borderRadius: BorderRadius.circular(8),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: hasActivePosition ? const Color(0xFF1A2230) : const Color(0xFF00F5A0),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'BUY',
-                    style: TextStyle(
-                      color: hasActivePosition ? Colors.white30 : Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 10,
-                    ),
-                  ),
-                  Text(
-                    '₹${ltp.toStringAsFixed(1)}',
-                    style: GoogleFonts.robotoMono(
-                      color: hasActivePosition ? Colors.white38 : Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   _PainterBounds _calculateChartBounds(List<ReplayCandle> displayCandles) {
     double maxPrice = displayCandles.map((c) => c.high).reduce(max);
@@ -849,76 +727,142 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     return minPrice + (fraction * range);
   }
 
-  Widget _buildTopBar(String winRate) {
+  Widget _buildSymbolSelector({required bool expanded}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      color: const Color(0xFF0F1726),
+      constraints: const BoxConstraints(minHeight: 42),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: const Color(0xFF162032),
+        borderRadius: BorderRadius.circular(9),
+        border: Border.all(color: const Color(0xFF25334A)),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: _selectedSymbol,
+          isExpanded: expanded,
+          isDense: true,
+          dropdownColor: const Color(0xFF0F1726),
+          iconEnabledColor: const Color(0xFF94A3B8),
+          style: GoogleFonts.plusJakartaSans(
+            color: const Color(0xFF00F0FF),
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
+          items: _masterDatabase.keys
+              .map((sym) => DropdownMenuItem(
+                    value: sym,
+                    child: Text(sym, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  ))
+              .toList(),
+          onChanged: (sym) {
+            if (sym != null) {
+              setState(() => _selectedSymbol = sym);
+              _initSession(sym);
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showChartGestureGuide() {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF0F1726),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          border: Border(top: BorderSide(color: Color(0xFF26354C))),
+        ),
+        child: SafeArea(
+          top: false,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Chart gestures',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
+                          ),
+                          SizedBox(height: 3),
+                          Text(
+                            'Quick guide to the replay chart',
+                            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: 'Close guide',
+                      onPressed: () => Navigator.of(sheetContext).pop(),
+                      icon: const Icon(Icons.close_rounded, color: Colors.white70),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                _buildGestureTip(
+                  Icons.touch_app_rounded,
+                  'Inspect a candle',
+                  'Long-press the chart to inspect its OHLC and volume values.',
+                ),
+                _buildGestureTip(
+                  Icons.zoom_in_rounded,
+                  'Zoom and pan',
+                  'Pinch to zoom; drag sideways to move across the visible bars.',
+                ),
+                _buildGestureTip(
+                  Icons.tune_rounded,
+                  'Adjust the price scale',
+                  'Drag the right price scale vertically. Double-tap it to reset.',
+                ),
+                _buildGestureTip(
+                  Icons.swap_vert_rounded,
+                  'Move SL / TP levels',
+                  'When a paper position is open, drag its SL or TP line on the chart.',
+                ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGestureTip(IconData icon, String title, String detail) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            width: 34,
+            height: 34,
             decoration: BoxDecoration(
-              color: const Color(0xFF162032),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF25334A)),
+              color: const Color(0xFF00F0FF).withOpacity(0.10),
+              borderRadius: BorderRadius.circular(9),
             ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: _selectedSymbol,
-                dropdownColor: const Color(0xFF0F1726),
-                style: GoogleFonts.plusJakartaSans(
-                  color: const Color(0xFF00F0FF),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-                items: _masterDatabase.keys
-                    .map((sym) => DropdownMenuItem(value: sym, child: Text(sym)))
-                    .toList(),
-                onChanged: (sym) {
-                  if (sym != null) {
-                    setState(() => _selectedSymbol = sym);
-                    _initSession(sym);
-                  }
-                },
-              ),
-            ),
+            child: Icon(icon, color: const Color(0xFF00F0FF), size: 18),
           ),
-          const SizedBox(width: 8),
-
-          IconButton(
-            icon: const Icon(Icons.shuffle_rounded, color: Colors.white70, size: 20),
-            tooltip: 'Random Time Slice',
-            onPressed: () {
-              if (_selectedSymbol != null) _initSession(_selectedSymbol!);
-            },
-          ),
-
-          IconButton(
-            icon: Icon(
-              _isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded,
-              color: Colors.white70,
-              size: 20,
-            ),
-            tooltip: 'Rotate View',
-            onPressed: _toggleOrientation,
-          ),
-          const Spacer(),
-          Builder(
-            builder: (ctx) => TextButton.icon(
-              style: TextButton.styleFrom(
-                backgroundColor: const Color(0xFF162032),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              ),
-              onPressed: () => Scaffold.of(ctx).openEndDrawer(),
-              icon: const Icon(Icons.history_edu_rounded, size: 16, color: Color(0xFF00F0FF)),
-              label: Text(
-                'Journal (${_tradeHistory.length})',
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 11,
-                ),
-              ),
+          const SizedBox(width: 11),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700)),
+                const SizedBox(height: 2),
+                Text(detail, style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11, height: 1.35)),
+              ],
             ),
           ),
         ],
@@ -926,66 +870,238 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
     );
   }
 
-  Widget _buildOHLCVHud(ReplayCandle c, double volEma, {bool isInspecting = false}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-      color: isInspecting ? const Color(0xFF141F33) : const Color(0xFF0A0F1A),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+  Widget _buildTopBar() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxWidth < 640;
+        final titleBlock = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'STRATEGY REPLAY',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.35,
+              ),
+            ),
+            const SizedBox(height: 2),
+            const Text(
+              'PAPER SIMULATION',
+              style: TextStyle(color: Color(0xFF7F8DA3), fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 0.55),
+            ),
+          ],
+        );
+
+        final backButton = IconButton(
+          tooltip: 'Back',
+          visualDensity: VisualDensity.compact,
+          onPressed: () {
+            Navigator.of(context).maybePop();
+          },
+          icon: const Icon(Icons.arrow_back_rounded, color: Colors.white70, size: 20),
+        );
+        final journalButton = TextButton.icon(
+          style: TextButton.styleFrom(
+            backgroundColor: const Color(0xFF162032),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+            minimumSize: const Size(0, 40),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+          ),
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
+          icon: const Icon(Icons.history_edu_rounded, size: 16, color: Color(0xFF00F0FF)),
+          label: Text(
+            'Journal ${_tradeHistory.length}',
+            style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w700, fontSize: 10),
+          ),
+        );
+        final shuffleButton = IconButton(
+          tooltip: 'Random time slice',
+          onPressed: () {
+            if (_selectedSymbol != null) _initSession(_selectedSymbol!);
+          },
+          icon: const Icon(Icons.shuffle_rounded, color: Colors.white70, size: 20),
+        );
+        final orientationButton = IconButton(
+          tooltip: _isLandscape ? 'Return to portrait' : 'Use landscape view',
+          onPressed: _toggleOrientation,
+          icon: Icon(
+            _isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded,
+            color: Colors.white70,
+            size: 20,
+          ),
+        );
+        final helpButton = IconButton(
+          tooltip: 'Chart gesture guide',
+          onPressed: _showChartGestureGuide,
+          icon: const Icon(Icons.help_outline_rounded, color: Colors.white70, size: 20),
+        );
+        final moreButton = PopupMenuButton<String>(
+          tooltip: 'More replay options',
+          icon: const Icon(Icons.more_vert_rounded, color: Colors.white70),
+          onSelected: (value) {
+            if (value == 'orientation') {
+              _toggleOrientation();
+            } else if (value == 'gestures') {
+              _showChartGestureGuide();
+            }
+          },
+          itemBuilder: (context) => [
+            PopupMenuItem<String>(
+              value: 'orientation',
               child: Row(
                 children: [
-                  _hudLabel('O', c.open.toStringAsFixed(1)),
-                  _hudLabel('H', c.high.toStringAsFixed(1)),
-                  _hudLabel('L', c.low.toStringAsFixed(1)),
-                  _hudLabel('C', c.close.toStringAsFixed(1),
-                      color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
-                  _hudLabel(
-                    'Vol',
-                    '${_formatCompactVolume(c.volume)} (${_formatExactVolume(c.volume)})',
-                    color: const Color(0xFF00F0FF),
-                  ),
-                  _hudLabel('V-EMA20', _formatCompactVolume(volEma), color: const Color(0xFFFF9800)),
-                  if (isInspecting)
-                    Container(
-                      margin: const EdgeInsets.only(left: 6),
-                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF00F0FF).withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Text('CURSOR',
-                          style: TextStyle(color: Color(0xFF00F0FF), fontSize: 8, fontWeight: FontWeight.w900)),
-                    ),
+                  Icon(_isLandscape ? Icons.screen_lock_portrait_rounded : Icons.screen_lock_landscape_rounded, size: 18),
+                  const SizedBox(width: 10),
+                  Text(_isLandscape ? 'Portrait view' : 'Landscape view'),
                 ],
               ),
             ),
+            const PopupMenuItem<String>(
+              value: 'gestures',
+              child: Row(
+                children: [
+                  Icon(Icons.help_outline_rounded, size: 18),
+                  SizedBox(width: 10),
+                  Text('Chart gestures'),
+                ],
+              ),
+            ),
+          ],
+        );
+
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: compact ? 8 : 6),
+          decoration: const BoxDecoration(
+            color: Color(0xFF0F1726),
+            border: Border(bottom: BorderSide(color: Color(0xFF1E2B3E))),
           ),
-          Text(c.date,
-              style: GoogleFonts.robotoMono(fontSize: 10, color: const Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
+          child: compact
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        backButton,
+                        const SizedBox(width: 4),
+                        Expanded(child: titleBlock),
+                        journalButton,
+                      ],
+                    ),
+                    const SizedBox(height: 7),
+                    Row(
+                      children: [
+                        Expanded(child: _buildSymbolSelector(expanded: true)),
+                        const SizedBox(width: 4),
+                        shuffleButton,
+                        moreButton,
+                      ],
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    backButton,
+                    const SizedBox(width: 6),
+                    SizedBox(width: 132, child: titleBlock),
+                    const SizedBox(width: 10),
+                    SizedBox(width: 150, child: _buildSymbolSelector(expanded: true)),
+                    const SizedBox(width: 3),
+                    shuffleButton,
+                    orientationButton,
+                    helpButton,
+                    const Spacer(),
+                    journalButton,
+                  ],
+                ),
+        );
+      },
+    );
+  }
+
+  Widget _buildOHLCVHud(ReplayCandle c, double volEma, {bool isInspecting = false}) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(14, 8, 14, 9),
+      decoration: BoxDecoration(
+        color: isInspecting ? const Color(0xFF141F33) : const Color(0xFF0A0F1A),
+        border: const Border(bottom: BorderSide(color: Color(0xFF182234))),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                decoration: BoxDecoration(
+                  color: isInspecting ? const Color(0xFF00F0FF).withOpacity(0.12) : const Color(0xFF182234),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Text(
+                  isInspecting ? 'INSPECTING BAR' : 'REPLAY BAR',
+                  style: TextStyle(
+                    color: isInspecting ? const Color(0xFF00F0FF) : const Color(0xFF94A3B8),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.35,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Text(
+                c.date,
+                style: GoogleFonts.robotoMono(
+                  fontSize: 11,
+                  color: const Color(0xFFCBD5E1),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 7),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              _hudLabel('O', c.open.toStringAsFixed(1)),
+              _hudLabel('H', c.high.toStringAsFixed(1)),
+              _hudLabel('L', c.low.toStringAsFixed(1)),
+              _hudLabel('C', c.close.toStringAsFixed(1),
+                  color: c.isBull ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)),
+              _hudLabel(
+                'Vol',
+                '${_formatCompactVolume(c.volume)} (${_formatExactVolume(c.volume)})',
+                color: const Color(0xFF00F0FF),
+              ),
+              _hudLabel('V-EMA20', _formatCompactVolume(volEma), color: const Color(0xFFFF9800)),
+            ],
+          ),
         ],
       ),
     );
   }
 
   Widget _hudLabel(String tag, String val, {Color? color}) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF121B2A),
+        borderRadius: BorderRadius.circular(7),
+        border: Border.all(color: const Color(0xFF1D2A3D)),
+      ),
       child: RichText(
         text: TextSpan(
-          text: '$tag ',
-          style: const TextStyle(color: Color(0xFF5A6882), fontSize: 10, fontWeight: FontWeight.bold),
+          text: '$tag  ',
+          style: const TextStyle(color: Color(0xFF8492A8), fontSize: 10, fontWeight: FontWeight.w700),
           children: [
             TextSpan(
               text: val,
-              style: TextStyle(
-                color: color ?? Colors.white70,
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(color: color ?? Colors.white, fontSize: 12, fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -995,137 +1111,252 @@ class _StrategyBuilderScreenState extends State<StrategyBuilderScreen>
 
   Widget _buildActivePositionBanner(double currentLtp, double unrealized) {
     final isProfit = unrealized >= 0;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      color: const Color(0xFF141D2D),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: _positionSide == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
-                  borderRadius: BorderRadius.circular(4),
+    final positionBadge = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+      decoration: BoxDecoration(
+        color: _positionSide == 'LONG' ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Text(
+        _positionSide!,
+        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.black),
+      ),
+    );
+    final entryDetails = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('Entry: ₹${_entryPrice!.toStringAsFixed(1)}',
+            style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
+        const SizedBox(height: 2),
+        const Text(
+          'Drag SL / TP lines on chart',
+          style: TextStyle(color: Color(0xFF00F0FF), fontSize: 9, fontWeight: FontWeight.w700),
+        ),
+      ],
+    );
+    final pnlLabel = Text(
+      '${isProfit ? "+" : ""}₹${unrealized.toStringAsFixed(1)}',
+      style: TextStyle(
+        color: isProfit ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
+        fontWeight: FontWeight.w800,
+        fontSize: 15,
+      ),
+    );
+    final closeButton = ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFFFF2A6D),
+        foregroundColor: Colors.white,
+        minimumSize: const Size(72, 36),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      onPressed: () => _closeTrade(currentLtp, 'MANUAL EXIT'),
+      child: const Text('Close', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+    );
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxWidth < 390;
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          color: const Color(0xFF141D2D),
+          child: compact
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        positionBadge,
+                        const SizedBox(width: 8),
+                        Expanded(child: entryDetails),
+                        const SizedBox(width: 6),
+                        pnlLabel,
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Align(alignment: Alignment.centerRight, child: closeButton),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        positionBadge,
+                        const SizedBox(width: 8),
+                        entryDetails,
+                      ],
+                    ),
+                    pnlLabel,
+                    closeButton,
+                  ],
                 ),
-                child: Text(
-                  _positionSide!,
-                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black),
-                ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPlaybackControls() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Tooltip(
+          message: 'Change replay speed',
+          child: InkWell(
+            onTap: _cycleSpeed,
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1C273C),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFF2A3A56)),
               ),
-              const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Entry: ₹${_entryPrice!.toStringAsFixed(1)}',
-                      style: const TextStyle(color: Colors.white70, fontSize: 11)),
-                  const Text(
-                    'Drag SL & TP lines on chart',
-                    style: TextStyle(color: Color(0xFF00F0FF), fontSize: 9, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              child: Text(
+                '${_selectedSpeedMultiplier}x',
+                style: const TextStyle(color: Color(0xFF00F0FF), fontWeight: FontWeight.w800, fontSize: 11),
               ),
-            ],
-          ),
-          Text(
-            '${isProfit ? "+" : ""}₹${unrealized.toStringAsFixed(1)}',
-            style: TextStyle(
-              color: isProfit ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
-              fontWeight: FontWeight.w800,
-              fontSize: 15,
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFF2A6D),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            ),
-            onPressed: () => _closeTrade(currentLtp, 'MANUAL EXIT'),
-            child: const Text('Close', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+        ),
+        const SizedBox(width: 2),
+        IconButton(
+          tooltip: 'Go back five bars',
+          icon: const Icon(Icons.fast_rewind_rounded, color: Colors.white60),
+          onPressed: () {
+            if (_cursor > 40) setState(() => _cursor -= 5);
+          },
+        ),
+        Tooltip(
+          message: _isPlaying ? 'Pause replay' : 'Play replay',
+          child: FloatingActionButton.small(
+            heroTag: 'strategy_replay_play_pause',
+            backgroundColor: const Color(0xFF00F0FF),
+            onPressed: _togglePlay,
+            child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.black),
           ),
-        ],
+        ),
+        IconButton(
+          tooltip: 'Advance one bar',
+          icon: const Icon(Icons.skip_next_rounded, color: Color(0xFF00F0FF), size: 28),
+          onPressed: _stepOneBar,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPaperTradeButton({required bool isLong, required double currentLtp}) {
+    final background = isLong ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D);
+    final foreground = isLong ? Colors.black : Colors.white;
+    return SizedBox(
+      height: 54,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: background,
+          foregroundColor: foreground,
+          disabledBackgroundColor: const Color(0xFF202A3B),
+          disabledForegroundColor: Colors.white38,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        onPressed: _positionSide == null
+            ? () => _executeQuickTrade(isLong ? 'LONG' : 'SHORT')
+            : null,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              isLong ? 'BUY / LONG' : 'SELL / SHORT',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: foreground, fontWeight: FontWeight.w900, fontSize: 11),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              '₹${currentLtp.toStringAsFixed(1)}  ·  QTY ${_orderQty.toInt()}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: foreground.withOpacity(0.78), fontSize: 9, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildBottomControls() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(14, 10, 14, 92),
-      decoration: const BoxDecoration(
-        color: Color(0xFF0F1726),
-        border: Border(top: BorderSide(color: Color(0xFF1E2B3E))),
-      ),
-      child: Row(
-        children: [
-          Row(
-            children: [
-              InkWell(
-                onTap: _cycleSpeed,
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1C273C),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF2A3A56)),
-                  ),
-                  child: Text(
-                    '${_selectedSpeedMultiplier}x',
-                    style: const TextStyle(
-                      color: Color(0xFF00F0FF),
-                      fontWeight: FontWeight.w800,
-                      fontSize: 11,
+  Widget _buildBottomControls(double currentLtp) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxWidth < 680;
+        final longButton = Expanded(child: _buildPaperTradeButton(isLong: true, currentLtp: currentLtp));
+        final shortButton = Expanded(child: _buildPaperTradeButton(isLong: false, currentLtp: currentLtp));
+
+        return Container(
+          padding: const EdgeInsets.fromLTRB(14, 9, 14, 12),
+          decoration: const BoxDecoration(
+            color: Color(0xFF0F1726),
+            border: Border(top: BorderSide(color: Color(0xFF1E2B3E))),
+          ),
+          child: compact
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'REPLAY CONTROLS',
+                          style: TextStyle(color: Color(0xFF7F8DA3), fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.45),
+                        ),
+                        const Spacer(),
+                        Text(
+                          'PAPER  ·  QTY ${_orderQty.toInt()}',
+                          style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 9, fontWeight: FontWeight.w800),
+                        ),
+                      ],
                     ),
-                  ),
+                    Center(child: _buildPlaybackControls()),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        shortButton,
+                        const SizedBox(width: 8),
+                        longButton,
+                      ],
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    _buildPlaybackControls(),
+                    const SizedBox(width: 10),
+                    Container(width: 1, height: 42, color: const Color(0xFF2A3A56)),
+                    const SizedBox(width: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF162032),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: const Color(0xFF25334A)),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text('PAPER', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 9, fontWeight: FontWeight.w800)),
+                          Text('QTY ${_orderQty.toInt()}', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    shortButton,
+                    const SizedBox(width: 8),
+                    longButton,
+                  ],
                 ),
-              ),
-              const SizedBox(width: 4),
-              IconButton(
-                icon: const Icon(Icons.fast_rewind_rounded, color: Colors.white60),
-                onPressed: () {
-                  if (_cursor > 40) setState(() => _cursor -= 5);
-                },
-              ),
-              FloatingActionButton.small(
-                backgroundColor: const Color(0xFF00F0FF),
-                onPressed: _togglePlay,
-                child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.black),
-              ),
-              IconButton(
-                icon: const Icon(Icons.skip_next_rounded, color: Color(0xFF00F0FF), size: 28),
-                onPressed: _stepOneBar,
-              ),
-            ],
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF00F5A0),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              onPressed: _positionSide == null ? () => _executeQuickTrade('LONG') : null,
-              child: const Text('BUY / LONG',
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 12)),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF2A6D),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              onPressed: _positionSide == null ? () => _executeQuickTrade('SHORT') : null,
-              child: const Text('SELL / SHORT',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12)),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
