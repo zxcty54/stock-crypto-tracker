@@ -1,24 +1,24 @@
 # 📊 Performance Report
 
-**24-Oct-2026 00:55 IST** | 58 posts tracked | channel avg **25 views**
+**24-Oct-2026 23:46 IST** | 60 posts tracked | channel avg **26 views**
 
-*35 posts pehchaane gaye, 23 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*36 posts pehchaane gaye, 24 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 36 | 1.41 |
-| psychology | 2 | 33 | 1.0 |
-| technical | 6 | 33 | 1.3 |
-| business_model | 5 | 28 | 1.12 |
+| lifestyle | 3 | 37 | 1.43 |
+| psychology | 2 | 34 | 1.0 |
+| technical | 6 | 34 | 1.31 |
+| business_model | 5 | 29 | 1.13 |
+| process | 1 | 29 | 1.0 |
 | awareness | 1 | 28 | 1.0 |
 | tools | 1 | 28 | 1.0 |
-| process | 1 | 28 | 1.0 |
-| corporate | 28 | 24 | 0.93 |
-| risk | 4 | 22 | 0.87 |
-| other | 5 | 19 | 0.74 |
-| market_mechanics | 2 | 16 | 1.0 |
+| corporate | 30 | 24 | 0.92 |
+| risk | 4 | 23 | 0.89 |
+| other | 5 | 20 | 0.76 |
+| market_mechanics | 2 | 18 | 1.0 |
 
 ## 📈 Channel Growth
 
@@ -31,20 +31,20 @@
 
 ## 🏆 Top posts
 
-- **74 views** — PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain  
+- **76 views** — PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain  
   `technical`
 - **53 views** — 90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔  
   `psychology`
 - **42 views** — 1% RULE: Capital Bachao Ge Tabhi Kheloge  
   `lifestyle`
+- **42 views** — The Federal Bank Limited (NSE: FEDERALBNK)  
+  `business_model`
 - **41 views** — Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens  
   `corporate`
-- **41 views** — The Federal Bank Limited (NSE: FEDERALBNK)  
-  `business_model`
 
 ## ⚠️ Kam chale posts
 
-- 5 views — Triveni Power Transmission Limited (NSE: TRIVENIPT)  
+- 6 views — Oracle Financial Services Software Limited (NSE: OFSS)  
   `corporate`
 - 0 views — Channel created  
   `other`
