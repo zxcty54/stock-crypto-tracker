@@ -511,7 +511,7 @@
   },
   "retention_days": 30,
   "curation": {
-    "version": 8,
+    "version": 9,
     "scope": [
       "economy",
       "capital_market",
@@ -521,6 +521,8 @@
       "financial_results",
       "opinions_and_recommendations",
       "generic_market_wraps",
+      "generic_stock_movers_and_shakers_roundups",
+      "routine_corporate_action_ex_date_calendars",
       "stock_portfolio_and_wealth_listicles",
       "company_corporate_announcements",
       "commercial_order_and_contract_wins",
@@ -529,9 +531,9 @@
       "routine_price_moves_without_material_catalyst",
       "low_materiality_announcements"
     ],
-    "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
+    "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-24 15:57:56 IST"
+    "last_curated_ist": "2026-10-25 13:07:10 IST"
   },
   "last_run_stats": {
     "updated_ist": "2026-10-24 11:48:57 IST",

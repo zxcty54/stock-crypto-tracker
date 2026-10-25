@@ -92,10 +92,12 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(removed, 0)
         self.assertEqual(duplicates, 0)
         self.assertEqual(len(curated), len(archive["stories"]))
-        self.assertEqual(archive["curation"]["version"], 8)
+        self.assertEqual(archive["curation"]["version"], news.ARCHIVE_CURATION_VERSION)
         self.assertIn("ipo_and_fpo_related_news", archive["curation"]["excludes"])
         self.assertIn("fii_fpi_dii_related_news", archive["curation"]["excludes"])
         self.assertIn("stock_portfolio_and_wealth_listicles", archive["curation"]["excludes"])
+        self.assertIn("routine_corporate_action_ex_date_calendars", archive["curation"]["excludes"])
+        self.assertIn("generic_stock_movers_and_shakers_roundups", archive["curation"]["excludes"])
         for story in archive["stories"]:
             with self.subTest(title=story["headline"]):
                 self.assertFalse(news._is_ipo_related_headline(story["headline"]))
@@ -429,6 +431,37 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         ):
             with self.subTest(title=title):
                 self.assertIsNone(news.classify_news_story(title))
+
+    def test_excludes_corporate_action_calendars_and_stock_mover_roundups_from_archive(self):
+        excluded_titles = (
+            "Dividends &amp; stock splits: L&amp;T Tech, Shriram Finance among 24 stocks turning ex-record date this week. Do you own?",
+            "Movers &amp; Shakers: Stocks that will see action this week",
+            "Corporate action calendar: 12 stocks turning ex-dividend this week",
+            "Bonus shares: stocks that will go ex-date tomorrow",
+        )
+        for title in excluded_titles:
+            with self.subTest(title=title):
+                self.assertIsNone(news.classify_news_story(title))
+
+        # Keep regulatory changes to record-date rules; this filter targets
+        # routine ticker calendars, not substantive market-wide policy.
+        self.assertEqual(
+            news.classify_news_story("SEBI issues new rules for dividend record-date disclosures"),
+            "capital_market",
+        )
+
+        existing_archive = {
+            "stories": [self.record(self.item(title)) for title in excluded_titles]
+        }
+        curated, _added, _fresh_urls = news.merge_archive(
+            existing_archive, {"items": [], "status": {}}
+        )
+        self.assertEqual(curated["stories"], [])
+        self.assertEqual(
+            curated["last_run_stats"]["archive_items_removed_by_curation"],
+            len(excluded_titles),
+        )
+        self.assertEqual(curated["curation"]["version"], news.ARCHIVE_CURATION_VERSION)
 
     def test_excludes_stock_portfolio_and_wealth_loss_listicles(self):
         excluded = (
