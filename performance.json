@@ -1,54 +1,42 @@
 {
- "generated_at": "2026-10-24 23:46 IST",
- "sample_size": 60,
- "identified": 36,
- "inferred": 24,
+ "generated_at": "2026-10-26 00:00 IST",
+ "sample_size": 63,
+ "identified": 38,
+ "inferred": 25,
  "cards_skipped": 0,
- "channel_avg_views": 25.6,
+ "channel_avg_views": 26.2,
  "growth": {
-  "today": 476,
-  "snapshots": 17,
-  "delta_7d": 473,
-  "per_day": 27.82,
-  "days_to_target": 18,
+  "today": 475,
+  "snapshots": 18,
+  "delta_7d": 472,
+  "per_day": 24.84,
+  "days_to_target": 21,
   "target": 1000,
-  "days_span": 17
+  "days_span": 19
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
-   "avg_views": 36.7,
+   "avg_views": 37.3,
    "weight": 1.43,
    "low_sample": false
   },
   "psychology": {
    "posts": 2,
-   "avg_views": 33.5,
+   "avg_views": 35.5,
    "weight": 1.0,
    "low_sample": true
   },
   "technical": {
    "posts": 6,
-   "avg_views": 33.5,
-   "weight": 1.31,
-   "low_sample": false
-  },
-  "business_model": {
-   "posts": 5,
-   "avg_views": 29.0,
-   "weight": 1.13,
+   "avg_views": 34.8,
+   "weight": 1.33,
    "low_sample": false
   },
   "process": {
    "posts": 1,
-   "avg_views": 29.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
-  "awareness": {
-   "posts": 1,
-   "avg_views": 28.0,
+   "avg_views": 31.0,
    "weight": 1.0,
    "low_sample": true
   },
@@ -58,27 +46,39 @@
    "weight": 1.0,
    "low_sample": true
   },
+  "awareness": {
+   "posts": 1,
+   "avg_views": 28.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "business_model": {
+   "posts": 7,
+   "avg_views": 24.7,
+   "weight": 0.94,
+   "low_sample": false
+  },
   "corporate": {
-   "posts": 30,
-   "avg_views": 23.5,
-   "weight": 0.92,
+   "posts": 31,
+   "avg_views": 24.5,
+   "weight": 0.94,
    "low_sample": false
   },
   "risk": {
    "posts": 4,
-   "avg_views": 22.8,
-   "weight": 0.89,
+   "avg_views": 23.5,
+   "weight": 0.9,
    "low_sample": false
   },
   "other": {
    "posts": 5,
-   "avg_views": 19.6,
-   "weight": 0.76,
+   "avg_views": 20.4,
+   "weight": 0.78,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 2,
-   "avg_views": 17.5,
+   "avg_views": 20.0,
    "weight": 1.0,
    "low_sample": true
   }
@@ -86,23 +86,23 @@
  "top_posts": [
   {
    "title": "PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain",
-   "views": 76,
+   "views": 77,
    "pillar": "technical"
   },
   {
    "title": "90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔",
-   "views": 53,
+   "views": 54,
    "pillar": "psychology"
   },
   {
-   "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
-   "views": 42,
-   "pillar": "lifestyle"
+   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
+   "views": 43,
+   "pillar": "business_model"
   },
   {
-   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 42,
-   "pillar": "business_model"
+   "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
+   "views": 43,
+   "pillar": "lifestyle"
   },
   {
    "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
@@ -112,19 +112,19 @@
  ],
  "weak_posts": [
   {
-   "title": "Oracle Financial Services Software Limited (NSE: OFSS)",
-   "views": 6,
-   "pillar": "corporate"
-  },
-  {
-   "title": "Channel created",
-   "views": 0,
-   "pillar": "other"
+   "title": "Yes Bank AT-1 Bonds Coupon Discretion Update",
+   "views": 9,
+   "pillar": "business_model"
   },
   {
    "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
    "views": 0,
    "pillar": "risk"
+  },
+  {
+   "title": "Channel created",
+   "views": 0,
+   "pillar": "other"
   }
  ]
 }
