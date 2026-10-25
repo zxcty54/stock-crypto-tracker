@@ -3,7 +3,7 @@
 CHANNEL DISPATCHER (GitHub Actions Native)
 ===========================================
 - Hardcoded Target: @bhaga_657 (No secret dependency for chat target)
-- Telegra.ph web publishing for SEO/Google indexing
+- Public Telegraph pages; search-engine indexing is not guaranteed
 - Telegram broadcast with HTML formatting & rate-limit handling
 - Duplicate guard & JSON state management
 """
@@ -17,6 +17,8 @@ import html as html_lib
 from datetime import datetime, timezone, timedelta
 
 import requests
+
+from telegraph_cache import find_cached_page, remember_page
 
 # ============================================================
 # CONFIG
@@ -113,6 +115,12 @@ def publish_to_telegraph(token, title, text):
         t = line.strip()
         if not t:
             continue
+        t = re.sub(
+            r"<a\b[^>]*href\s*=\s*([\"'])(.*?)\1[^>]*>(.*?)</a\s*>",
+            lambda match: f"{match.group(3)} ({match.group(2)})",
+            t,
+            flags=re.I | re.S,
+        )
         t = re.sub(r"<[^>]+>", "", t)
         t = html_lib.unescape(t)
         t = t.strip()
@@ -317,7 +325,10 @@ def main():
     queue = load_json(QUEUE_FILE, {"queue": []})
     feed  = load_json(FEED_FILE, {"content_feed": []})
     state = load_json(STATE_FILE, {})
-    state.setdefault("published", {})
+    if not isinstance(state, dict):
+        state = {}
+    if not isinstance(state.get("published"), dict):
+        state["published"] = {}
     log   = load_json(POSTED_LOG, {})
 
     if STATUS:
@@ -372,15 +383,22 @@ def main():
 
     # 1. Telegraph
     print(f"\n🌐 Telegraph publish [{pid}]...")
-    existing = (state.get("published", {}) or {}).get(pid)
-    if existing and existing.get("url"):
-        t_url, t_err = existing["url"], None
-        print(f"   ♻️ Page pehle se hai — wahi use kar rahe hain")
+    existing_url = find_cached_page(state, pid, title, raw)
+    if existing_url:
+        t_url, t_err = existing_url, None
+        print("   ♻️ Matching Telegraph page already exists — reusing it")
     else:
         token = get_telegraph_token(state)
         t_url, t_err = publish_to_telegraph(token, title, raw)
     if t_url:
         print(f"   ✅ {t_url}")
+        if not DRY_RUN:
+            remember_page(
+                state, pid, title, raw, t_url, source,
+                NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+            )
+            # Persist before Telegram delivery so a retry reuses the same page.
+            save_json(STATE_FILE, state)
     else:
         print(f"   ⚠️ Web publish fail: {t_err} (Telegram post phir bhi jaayega)")
 
@@ -419,9 +437,6 @@ def main():
             queue["queue"][idx]["telegraph_url"] = t_url
             save_json(QUEUE_FILE, queue)
 
-        if t_url:
-            state["published"][pid] = {"url": t_url, "kind": source,
-                                       "at": NOW.strftime("%Y-%m-%d %H:%M:%S IST")}
         state["last_run"] = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
         save_json(STATE_FILE, state)
 

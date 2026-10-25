@@ -2284,9 +2284,8 @@ def _print_archive_enrichment_stats(stats):
 
 
 def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_urls):
-    """Queue a validated AI draft; schedule it at the next existing queue slot."""
+    """Queue one new validated archive story on each scrape when a candidate exists."""
     slot_key = NOW.strftime("%Y-%m-%d %H")
-
     candidate_items = archive_to_items(archive, previous_scraped_at, fresh_urls)
     groups = group_stories(candidate_items)
     print(
@@ -2378,11 +2377,6 @@ def run_archive_and_queue():
         _print_archive_enrichment_stats(insight_stats)
     except Exception as exc:
         print(f"⚠️ RSS archive is safe; AI enrichment failed without stopping the scrape: {str(exc)[:160]}")
-
-    queue_post_enabled = os.environ.get("NEWS_QUEUE_POST_ENABLED", "true").strip().lower()
-    if queue_post_enabled in {"false", "0", "no", "off"}:
-        print("🌙 Quiet-hours scrape: archive refreshed; queue and Telegram were left untouched")
-        return 0
 
     try:
         queue = load_json(QUEUE_FILE, {"queue": []})

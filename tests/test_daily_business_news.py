@@ -625,8 +625,8 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         )
         self.assertEqual(updated["stories"][0]["topic"], "capital_market")
 
-    def test_daily_archive_run_enqueues_a_formatted_news_post(self):
-        fixed_now = datetime(2026, 10, 24, 18, 30, tzinfo=news.IST)
+    def test_scrape_enqueues_a_formatted_business_news_post_even_during_quiet_hours(self):
+        fixed_now = datetime(2026, 10, 24, 2, 30, tzinfo=news.IST)
         story = self.item(
             "RBI keeps repo rate unchanged as inflation eases",
             hours_ago=1,
@@ -670,6 +670,7 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
                 return ai_response
 
             with (
+                patch.dict("os.environ", {"NEWS_QUEUE_POST_ENABLED": "false"}),
                 patch.object(news, "NOW", fixed_now),
                 patch.object(news, "ARCHIVE_FILE", str(archive_path)),
                 patch.object(news, "QUEUE_FILE", str(queue_path)),
@@ -700,8 +701,8 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             self.assertEqual(len(queue["queue"]), 1)
             item = queue["queue"][0]
             self.assertEqual(item["kind"], "business_news_insight")
-            self.assertEqual(item["slot"], "F")
-            self.assertEqual(item["scheduled_ist"], "2026-10-24 18:00")
+            self.assertEqual(item["slot"], "A")
+            self.assertEqual(item["scheduled_ist"], "2026-10-24 08:00")
             self.assertFalse(item["used"])
             self.assertIn("📊 <b>RBI holds repo rate", item["text"])
             self.assertIn("🔗 Source: <a href=", item["text"])
@@ -710,7 +711,7 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             archive = json.loads(archive_path.read_text(encoding="utf-8"))
             self.assertEqual(archive["stories"][0]["status"], "queued")
             state = json.loads(state_path.read_text(encoding="utf-8"))
-            self.assertEqual(state["generated_slots"], ["2026-10-24 18"])
+            self.assertEqual(state["generated_slots"], ["2026-10-24 02"])
 
     def test_archive_queue_retries_unprocessed_stories_since_previous_scrape(self):
         fixed_now = datetime(2026, 10, 24, 18, 40, tzinfo=news.IST)
@@ -756,35 +757,6 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
                 self.assertEqual(slot, expected_slot)
                 self.assertEqual(when.strftime("%Y-%m-%d %H:%M"), expected_time)
 
-    def test_quiet_hours_scrape_does_not_add_to_queue(self):
-        fixed_now = datetime(2026, 10, 24, 2, 0, tzinfo=news.IST)
-        with tempfile.TemporaryDirectory() as directory:
-            archive_path = Path(directory) / "business_news_archive.json"
-            queue_path = Path(directory) / "content_queue.json"
-            state_path = Path(directory) / "daily_news_state.json"
-            queue = {"queue": [{"id": "keep-this-queued-item", "used": False}]}
-            archive_path.write_text(json.dumps({"stories": []}), encoding="utf-8")
-            queue_path.write_text(json.dumps(queue), encoding="utf-8")
-
-            with (
-                patch.dict("os.environ", {"NEWS_QUEUE_POST_ENABLED": "false"}),
-                patch.object(news, "NOW", fixed_now),
-                patch.object(news, "ARCHIVE_FILE", str(archive_path)),
-                patch.object(news, "QUEUE_FILE", str(queue_path)),
-                patch.object(news, "STATE_FILE", str(state_path)),
-                patch.object(news, "fetch_feeds", return_value={
-                    "items": [], "status": {}, "any_success": True,
-                }),
-                patch.object(news, "enrich_archive_stories", return_value={
-                    "enriched": 0, "insufficient_context": 0,
-                    "not_added": 0, "deferred_stories": 0,
-                }),
-            ):
-                self.assertEqual(news.run_archive_and_queue(), 0)
-
-            self.assertEqual(json.loads(queue_path.read_text(encoding="utf-8")), queue)
-            self.assertFalse(state_path.exists())
-
     def test_ai_validated_story_queues_outside_posting_window_and_existing_slot(self):
         midday = datetime(2026, 10, 24, 12, 0, tzinfo=news.IST)
         source_url = "https://www.cnbctv18.com/market/rbi-policy-test.html"
@@ -813,8 +785,16 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             "title": "RBI holds repo rate as inflation eases",
             "body": "Validated educational Hinglish explanation.",
         }
-        queue = {"queue": []}
-        # A prior attempt in this hour must not block a newly AI-approved item.
+        queue = {"queue": [{
+            "id": "pending-news-item",
+            "kind": "business_news_insight",
+            "source_url": "https://www.cnbctv18.com/market/previous-policy-story.html",
+            "story_key": "previous-policy-story",
+            "source_headline": "Earlier RBI policy update",
+            "scheduled_ist": "2026-10-24 10:00",
+            "used": False,
+        }]}
+        # A prior pending item must not block this scrape's distinct new story.
         state = {
             "generated_slots": [midday.strftime("%Y-%m-%d %H")],
             "seen_story_keys": [],
@@ -838,8 +818,10 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             )
 
         self.assertEqual(result, (True, True))
-        self.assertEqual(len(queue["queue"]), 1)
-        queued_item = queue["queue"][0]
+        self.assertEqual(len(queue["queue"]), 2)
+        queued_item = next(
+            item for item in queue["queue"] if item.get("source_url") == source_url
+        )
         self.assertEqual(queued_item["source_url"], source_url)
         self.assertEqual(queued_item["slot"], "C")
         self.assertEqual(queued_item["scheduled_ist"], "2026-10-24 12:00")

@@ -56,7 +56,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          [ -f telegram_posted_log.json ] && git add telegram_posted_log.json
+          for file in telegram_posted_log.json nse_telegraph_state.json; do
+            if [ -f "$file" ]; then
+              git add "$file"
+            fi
+          done
 
           if git diff --staged --quiet; then
             echo "ℹ️ Koi naya post deliver nahi hua. Skipping commit."
