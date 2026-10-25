@@ -3,7 +3,7 @@
 CHANNEL DISPATCHER (GitHub Actions Native)
 ===========================================
 - Hardcoded Target: @bhaga_657 (No secret dependency for chat target)
-- Telegra.ph web publishing for SEO/Google indexing
+- Public Telegraph pages; search-engine indexing is not guaranteed
 - Telegram broadcast with HTML formatting & rate-limit handling
 - Duplicate guard & JSON state management
 """
@@ -17,6 +17,8 @@ import html as html_lib
 from datetime import datetime, timezone, timedelta
 
 import requests
+
+from telegraph_cache import find_cached_page, remember_page
 
 # ============================================================
 # CONFIG
@@ -41,6 +43,8 @@ SHORT_NAME   = "StockPulse"
 # Corporate slot — 12 PM, 1 PM, 2 PM IST me corporate news prefer kare
 CORPORATE_HOURS = [12, 13, 14]
 DUPLICATE_WINDOW_HOURS = 2      # itne ghante me same post dobara nahi
+POSTING_START_HOUR_IST = 8
+POSTING_END_HOUR_IST = 22      # 10 PM ke baad aur 8 AM se pehle quiet hours
 
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
@@ -48,6 +52,7 @@ NOW = datetime.now(IST)
 DRY_RUN = "--dry-run" in sys.argv
 STATUS  = "--status" in sys.argv
 TEST    = "--test" in sys.argv
+QUEUE_ONLY = "--queue-only" in sys.argv
 
 DISCLAIMER = "\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>"
 AI_NOTICE  = "\n🤖 <i>AI-assisted summary of public corporate filing.</i>"
@@ -110,6 +115,12 @@ def publish_to_telegraph(token, title, text):
         t = line.strip()
         if not t:
             continue
+        t = re.sub(
+            r"<a\b[^>]*href\s*=\s*([\"'])(.*?)\1[^>]*>(.*?)</a\s*>",
+            lambda match: f"{match.group(3)} ({match.group(2)})",
+            t,
+            flags=re.I | re.S,
+        )
         t = re.sub(r"<[^>]+>", "", t)
         t = html_lib.unescape(t)
         t = t.strip()
@@ -235,6 +246,11 @@ def is_duplicate(post_id, log):
         return True
 
 
+def is_posting_window(now=None):
+    now = now or NOW
+    return POSTING_START_HOUR_IST <= now.hour < POSTING_END_HOUR_IST
+
+
 def pick_corporate_post(feed_data, log):
     items = (feed_data or {}).get("content_feed", [])
     for idx in range(len(items) - 1, -1, -1):
@@ -252,23 +268,27 @@ def pick_corporate_post(feed_data, log):
 def pick_evergreen_post(queue_data, log):
     items = (queue_data or {}).get("queue", [])
     now_str = NOW.strftime("%Y-%m-%d %H:%M")
-
-    # 1. Jo time cross kar gaya ho
+    available = []
     for idx, item in enumerate(items):
-        if item.get("used"):
+        if item.get("used") or is_duplicate(item.get("id", ""), log):
             continue
-        if item.get("scheduled_ist", "9999") <= now_str:
-            if is_duplicate(item.get("id", ""), log):
-                continue
+        available.append((idx, item))
+
+    due = [(idx, item) for idx, item in available
+           if item.get("scheduled_ist", "9999") <= now_str]
+    # The just-scraped, source-grounded business story should not sit behind
+    # old evergreen entries when both are due in the same posting slot.
+    for pool in (due, available):
+        business_news = next(
+            ((item, idx) for idx, item in pool
+             if item.get("kind") == "business_news_insight"),
+            None,
+        )
+        if business_news:
+            return business_news
+        if pool:
+            idx, item = pool[0]
             return item, idx
-
-    # 2. Agla unused fallback
-    for idx, item in enumerate(items):
-        if item.get("used"):
-            continue
-        if is_duplicate(item.get("id", ""), log):
-            continue
-        return item, idx
 
     return None, -1
 
@@ -283,7 +303,10 @@ def show_status(queue, feed, state, log):
     print(f"   Telegraph token  : {'✅ hai' if state.get('access_token') else '❌ nahi'}")
     print(f"   Pages published  : {len(state.get('published', {}))}")
     print(f"   Posts (log)      : {len(log)}")
-    print(f"   Aaj ka slot      : {'CORPORATE' if NOW.hour in CORPORATE_HOURS else 'EVERGREEN'}")
+    slot_label = "QUEUE ONLY" if QUEUE_ONLY else (
+        "CORPORATE" if NOW.hour in CORPORATE_HOURS else "EVERGREEN"
+    )
+    print(f"   Aaj ka slot      : {slot_label}")
     nxt = pick_evergreen_post(queue, log)
     if nxt[0]:
         print(f"   Agla post        : {nxt[0].get('scheduled_ist')} — {nxt[0].get('title','')[:45]}")
@@ -299,22 +322,32 @@ def main():
     print(f"📅 {NOW.strftime('%Y-%m-%d %H:%M:%S IST')} | channel: {CHAT_ID}")
     print("=" * 76)
 
-    if not BOT_TOKEN and not DRY_RUN:
-        print("❌ TELEGRAM_BOT_TOKEN missing.")
-        sys.exit(1)
-
     queue = load_json(QUEUE_FILE, {"queue": []})
     feed  = load_json(FEED_FILE, {"content_feed": []})
     state = load_json(STATE_FILE, {})
-    state.setdefault("published", {})
+    if not isinstance(state, dict):
+        state = {}
+    if not isinstance(state.get("published"), dict):
+        state["published"] = {}
     log   = load_json(POSTED_LOG, {})
 
     if STATUS:
         show_status(queue, feed, state, log)
         return
 
-    is_corporate_slot = NOW.hour in CORPORATE_HOURS
-    print(f"⏰ Slot: {'CORPORATE preferred' if is_corporate_slot else 'EVERGREEN'}")
+    if not is_posting_window():
+        print("🌙 Quiet hours (22:00–08:00 IST); no Telegram post sent")
+        return
+
+    if not BOT_TOKEN and not DRY_RUN:
+        print("❌ TELEGRAM_BOT_TOKEN missing.")
+        sys.exit(1)
+
+    is_corporate_slot = NOW.hour in CORPORATE_HOURS and not QUEUE_ONLY
+    slot_label = "QUEUE ONLY" if QUEUE_ONLY else (
+        "CORPORATE preferred" if is_corporate_slot else "EVERGREEN"
+    )
+    print(f"⏰ Slot: {slot_label}")
 
     chosen, source, idx = None, None, -1
 
@@ -350,15 +383,22 @@ def main():
 
     # 1. Telegraph
     print(f"\n🌐 Telegraph publish [{pid}]...")
-    existing = (state.get("published", {}) or {}).get(pid)
-    if existing and existing.get("url"):
-        t_url, t_err = existing["url"], None
-        print(f"   ♻️ Page pehle se hai — wahi use kar rahe hain")
+    existing_url = find_cached_page(state, pid, title, raw)
+    if existing_url:
+        t_url, t_err = existing_url, None
+        print("   ♻️ Matching Telegraph page already exists — reusing it")
     else:
         token = get_telegraph_token(state)
         t_url, t_err = publish_to_telegraph(token, title, raw)
     if t_url:
         print(f"   ✅ {t_url}")
+        if not DRY_RUN:
+            remember_page(
+                state, pid, title, raw, t_url, source,
+                NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
+            )
+            # Persist before Telegram delivery so a retry reuses the same page.
+            save_json(STATE_FILE, state)
     else:
         print(f"   ⚠️ Web publish fail: {t_err} (Telegram post phir bhi jaayega)")
 
@@ -370,6 +410,12 @@ def main():
             raw += f"\n\n⚡ <b>Read on Web:</b> {t_url}"
     elif t_url and DRY_RUN:
         raw += f"\n\n⚡ <b>Read on Web:</b> {t_url}"
+
+    if not is_posting_window(datetime.now(IST)):
+        print("🌙 Quiet hours started before Telegram dispatch; leaving the queue item untouched")
+        if not DRY_RUN:
+            save_json(STATE_FILE, state)
+        return
 
     print(f"\n🚀 Dispatching to {CHAT_ID}...")
     ok, msg_id, err = send_telegram_message(raw)
@@ -391,9 +437,6 @@ def main():
             queue["queue"][idx]["telegraph_url"] = t_url
             save_json(QUEUE_FILE, queue)
 
-        if t_url:
-            state["published"][pid] = {"url": t_url, "kind": source,
-                                       "at": NOW.strftime("%Y-%m-%d %H:%M:%S IST")}
         state["last_run"] = NOW.strftime("%Y-%m-%d %H:%M:%S IST")
         save_json(STATE_FILE, state)
 
