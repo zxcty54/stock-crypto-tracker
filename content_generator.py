@@ -39,7 +39,7 @@ USED_FILE    = "content_topics_used.json"
 PERF_FILE    = "performance.json"      # 🆕 growth_engine.py isse banata hai
 
 BATCH_SIZE        = 6         # Safe token limit (6 posts per prompt prevents truncated JSON)
-DEFAULT_COUNT     = 18        # Default 18 posts (~6 days buffer @ 3 posts/day)
+DEFAULT_COUNT     = 18        # Default 18 posts (~2.5 active days @ 7 posts/day)
 MIN_RUNWAY_DAYS   = 20        # Skip generation if queue already has >= 20 days runway
 SIMILARITY_MAX    = 0.72      # Reject posts if similarity > 72%
 REUSE_AFTER_DAYS  = 180       # Cycle old topics only after 6 months
@@ -440,7 +440,10 @@ def call_ai(topics, angles):
 # ============================================================
 # QUEUE SCHEDULER
 # ============================================================
-SLOTS = [("A", 8, 15), ("B", 12, 45), ("C", 20, 30)]
+SLOTS = [
+    ("A", 8, 0), ("B", 10, 0), ("C", 12, 0), ("D", 14, 0),
+    ("E", 16, 0), ("F", 18, 0), ("G", 20, 0),
+]
 
 def load_json(path, default):
     if not os.path.exists(path):
@@ -468,48 +471,50 @@ def calculate_runway_days(queue):
     except Exception:
         return 0
 
+def _queue_datetime(day, slot_index):
+    _slot, hour, minute = SLOTS[slot_index]
+    return datetime.combine(day, datetime.min.time()).replace(
+        hour=hour, minute=minute, tzinfo=IST
+    )
+
+
+def _next_slot_after(moment):
+    day = moment.date()
+    for index in range(len(SLOTS)):
+        scheduled = _queue_datetime(day, index)
+        if scheduled > moment:
+            return day, index, scheduled
+    day += timedelta(days=1)
+    return day, 0, _queue_datetime(day, 0)
+
+
 def append_to_queue(queue, accepted):
     items = queue.setdefault("queue", [])
     last_id = max([int(re.sub(r"\D", "", i["id"]) or 0) for i in items] or [0])
 
+    cursor = NOW + timedelta(minutes=5)
     if items:
-        last_sched = datetime.strptime(items[-1]["scheduled_ist"], "%Y-%m-%d %H:%M").replace(tzinfo=IST)
-        day = last_sched.date()
         try:
-            slot_i = [s[0] for s in SLOTS].index(items[-1].get("slot", "A")) + 1
-        except Exception:
-            slot_i = 0
-    else:
-        day = NOW.date()
-        slot_i = 0
+            last_sched = datetime.strptime(
+                items[-1]["scheduled_ist"], "%Y-%m-%d %H:%M"
+            ).replace(tzinfo=IST)
+            cursor = max(cursor, last_sched)
+        except (KeyError, TypeError, ValueError):
+            pass
+    day, slot_i, scheduled = _next_slot_after(cursor)
 
     added = []
     for i, post in enumerate(accepted, 1):
-        if slot_i >= len(SLOTS):
-            slot_i = 0
-            day += timedelta(days=1)
-
-        slot, hh, mm = SLOTS[slot_i]
-        dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
-
-        # 🔧 GUARD: bhoot me schedule na ho (warna dispatcher ek saath sab bhej dega)
-        while dt <= NOW + timedelta(minutes=5):
-            slot_i += 1
-            if slot_i >= len(SLOTS):
-                slot_i = 0
-                day += timedelta(days=1)
-            slot, hh, mm = SLOTS[slot_i]
-            dt = datetime.combine(day, datetime.min.time()).replace(hour=hh, minute=mm, tzinfo=IST)
-
+        slot, _hour, _minute = SLOTS[slot_i]
         new_id = f"ai{last_id + i:04d}"
-
-        # Clean title for logging
-        clean_title = re.sub(r"<[^>]+>", "", post["text"].split("\n")[0]).replace("📌", "").strip()
+        clean_title = re.sub(
+            r"<[^>]+>", "", post["text"].split("\n")[0]
+        ).replace("📌", "").strip()
 
         items.append({
             "id": new_id,
             "slot": slot,
-            "scheduled_ist": dt.strftime("%Y-%m-%d %H:%M"),
+            "scheduled_ist": scheduled.strftime("%Y-%m-%d %H:%M"),
             "title": clean_title[:80],
             "text": post["text"],
             "used": False,
@@ -517,7 +522,8 @@ def append_to_queue(queue, accepted):
             "generated_at": NOW.strftime("%Y-%m-%d %H:%M:%S IST")
         })
         added.append(new_id)
-        slot_i += 1
+        cursor = scheduled
+        day, slot_i, scheduled = _next_slot_after(cursor)
 
     queue["total"] = len(items)
     queue["last_scheduled"] = items[-1]["scheduled_ist"] if items else None
