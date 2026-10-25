@@ -1,21 +1,13 @@
 name: 📢 Post Content to Telegram
 
 on:
-  schedule:
-    # Din me 3 slots (IST = UTC + 5:30):
-    # 08:15 AM IST = 02:45 UTC
-    # 12:45 PM IST = 07:15 UTC
-    # 08:30 PM IST = 15:00 UTC
-    - cron: '45 2 * * *'
-    - cron: '15 7 * * *'
-    - cron: '0 15 * * *'
-  workflow_dispatch: # Test karne ke liye manual run button
+  workflow_dispatch: # Manual queue-post test; automatic sends run after each scrape.
 
 permissions:
   contents: write
 
 concurrency:
-  group: telegram-poster
+  group: content-queue-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -41,7 +33,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python telegram_poster.py
+          python telegram_poster.py --queue-only
 
       - name: 💾 Commit Updated Queue and State Files
         run: |
@@ -55,9 +47,9 @@ jobs:
           [ -f telegraph_state.json ] && cp telegraph_state.json /tmp/state_backup/
           [ -f post_log.json ] && cp post_log.json /tmp/state_backup/
 
-          # 2. Remote repo se hard sync karein (merge conflict eliminate karne ke liye)
-          git fetch origin main
-          git reset --hard origin/main
+          # 2. Current workflow ref se hard sync karein (selected branch ko hi update karein)
+          git fetch origin "${GITHUB_REF_NAME}"
+          git reset --hard "origin/${GITHUB_REF_NAME}"
 
           # 3. Updated state files ko wapas restore karein
           [ -f /tmp/state_backup/content_queue.json ] && cp /tmp/state_backup/content_queue.json content_queue.json
@@ -72,6 +64,6 @@ jobs:
             echo "ℹ️ No changes to commit."
           else
             git commit -m "🤖 Update: Dispatched post & synced Telegraph state [skip ci]"
-            git push origin main
+            git push origin "HEAD:${GITHUB_REF}"
             echo "✅ Queue and state files cleanly committed."
           fi

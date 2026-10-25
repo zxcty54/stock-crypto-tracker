@@ -19,6 +19,8 @@ CHAT_ID = "@niftytradingstrategies"
 
 IST = timezone(timedelta(hours=5, minutes=30))
 MAX_ANNOUNCEMENT_AGE = timedelta(minutes=30)
+POSTING_START_HOUR_IST = 8
+POSTING_END_HOUR_IST = 22
 
 
 def parse_broadcast_datetime(value):
@@ -79,8 +81,12 @@ def send_to_telegram(text_payload):
 # DISPATCH ENGINE
 # ============================================================
 
-def dispatch_feed():
-    now = datetime.now(IST)
+def is_posting_window(now):
+    return POSTING_START_HOUR_IST <= now.hour < POSTING_END_HOUR_IST
+
+
+def dispatch_feed(now=None):
+    now = now or datetime.now(IST)
 
     print("=" * 80)
     print("🚀 TELEGRAM INSTITUTIONAL FEED DISPATCHER")
@@ -88,6 +94,10 @@ def dispatch_feed():
     print(f"🎯 Target Channel: {CHAT_ID}")
     print(f"📂 Reading Feed: {INPUT_FILE}")
     print("=" * 80)
+
+    if not is_posting_window(now):
+        print("🌙 Quiet hours (22:00–08:00 IST); NSE announcement sending is paused")
+        return
 
     if not BOT_TOKEN:
         print("❌ FATAL: 'TELEGRAM_TOKEN' or 'TELEGRAM_BOT_TOKEN' missing in GitHub environment.")
@@ -160,6 +170,10 @@ def dispatch_feed():
     dispatched = 0
 
     for card in pending:
+        if not is_posting_window(datetime.now(IST)):
+            print("🌙 Quiet hours started; pausing remaining NSE announcement sends")
+            break
+
         c_hash = card.get("hash")
         sym = card.get("symbol", "")
         post_text = card.get("telegram_post", "")

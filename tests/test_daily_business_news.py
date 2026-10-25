@@ -700,8 +700,8 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             self.assertEqual(len(queue["queue"]), 1)
             item = queue["queue"][0]
             self.assertEqual(item["kind"], "business_news_insight")
-            self.assertEqual(item["slot"], "C")
-            self.assertEqual(item["scheduled_ist"], "2026-10-24 20:30")
+            self.assertEqual(item["slot"], "F")
+            self.assertEqual(item["scheduled_ist"], "2026-10-24 18:00")
             self.assertFalse(item["used"])
             self.assertIn("📊 <b>RBI holds repo rate", item["text"])
             self.assertIn("🔗 Source: <a href=", item["text"])
@@ -741,6 +741,49 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
 
         self.assertEqual([item["title"] for item in candidates], [pending["title"]])
         self.assertEqual(candidates[0]["published"], fixed_now - timedelta(hours=4))
+
+    def test_queue_slots_run_every_two_hours_with_a_quiet_window(self):
+        cases = (
+            (datetime(2026, 10, 24, 6, 0, tzinfo=news.IST), "A", "2026-10-24 08:00"),
+            (datetime(2026, 10, 24, 8, 15, tzinfo=news.IST), "A", "2026-10-24 08:00"),
+            (datetime(2026, 10, 24, 10, 0, tzinfo=news.IST), "B", "2026-10-24 10:00"),
+            (datetime(2026, 10, 24, 21, 45, tzinfo=news.IST), "G", "2026-10-24 20:00"),
+            (datetime(2026, 10, 24, 22, 0, tzinfo=news.IST), "A", "2026-10-25 08:00"),
+        )
+        for now, expected_slot, expected_time in cases:
+            with self.subTest(now=now), patch.object(news, "NOW", now):
+                slot, when = news.current_queue_slot()
+                self.assertEqual(slot, expected_slot)
+                self.assertEqual(when.strftime("%Y-%m-%d %H:%M"), expected_time)
+
+    def test_quiet_hours_scrape_does_not_add_to_queue(self):
+        fixed_now = datetime(2026, 10, 24, 2, 0, tzinfo=news.IST)
+        with tempfile.TemporaryDirectory() as directory:
+            archive_path = Path(directory) / "business_news_archive.json"
+            queue_path = Path(directory) / "content_queue.json"
+            state_path = Path(directory) / "daily_news_state.json"
+            queue = {"queue": [{"id": "keep-this-queued-item", "used": False}]}
+            archive_path.write_text(json.dumps({"stories": []}), encoding="utf-8")
+            queue_path.write_text(json.dumps(queue), encoding="utf-8")
+
+            with (
+                patch.dict("os.environ", {"NEWS_QUEUE_POST_ENABLED": "false"}),
+                patch.object(news, "NOW", fixed_now),
+                patch.object(news, "ARCHIVE_FILE", str(archive_path)),
+                patch.object(news, "QUEUE_FILE", str(queue_path)),
+                patch.object(news, "STATE_FILE", str(state_path)),
+                patch.object(news, "fetch_feeds", return_value={
+                    "items": [], "status": {}, "any_success": True,
+                }),
+                patch.object(news, "enrich_archive_stories", return_value={
+                    "enriched": 0, "insufficient_context": 0,
+                    "not_added": 0, "deferred_stories": 0,
+                }),
+            ):
+                self.assertEqual(news.run_archive_and_queue(), 0)
+
+            self.assertEqual(json.loads(queue_path.read_text(encoding="utf-8")), queue)
+            self.assertFalse(state_path.exists())
 
     def test_ai_validated_story_queues_outside_posting_window_and_existing_slot(self):
         midday = datetime(2026, 10, 24, 12, 0, tzinfo=news.IST)
@@ -798,7 +841,8 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         self.assertEqual(len(queue["queue"]), 1)
         queued_item = queue["queue"][0]
         self.assertEqual(queued_item["source_url"], source_url)
-        self.assertEqual(queued_item["scheduled_ist"], "2026-10-24 12:45")
+        self.assertEqual(queued_item["slot"], "C")
+        self.assertEqual(queued_item["scheduled_ist"], "2026-10-24 12:00")
         self.assertEqual(queued_item["kind"], "business_news_insight")
         self.assertIn("Educational only", queued_item["text"])
 

@@ -43,7 +43,11 @@ ARCHIVE_AI_INSIGHT_VERSION = 1
 ARCHIVE_CURATION_VERSION = 9
 ARCHIVE_AI_MAX_STORIES_PER_RUN = int(os.environ.get("NEWS_ARCHIVE_AI_MAX_STORIES", "24"))
 ARCHIVE_AI_BATCH_SIZE = int(os.environ.get("NEWS_ARCHIVE_AI_BATCH_SIZE", "4"))
-POSTING_HOURS_IST = set(range(16, 22))  # 4 PM through 9 PM inclusive
+QUEUE_POST_SLOTS_IST = (
+    ("A", 8, 0), ("B", 10, 0), ("C", 12, 0), ("D", 14, 0),
+    ("E", 16, 0), ("F", 18, 0), ("G", 20, 0),
+)
+POSTING_HOURS_IST = {hour for _slot, hour, _minute in QUEUE_POST_SLOTS_IST}
 
 UA = {
     "User-Agent": "Mozilla/5.0 (compatible; DailyBusinessNewsInsight/1.0; +https://github.com/)"
@@ -2199,16 +2203,23 @@ def write_preview_report(
 
 
 def current_queue_slot():
-    """Assign the next slot already used by the Telegram poster and content queue."""
-    slots = (("A", 8, 15), ("B", 12, 45), ("C", 20, 30))
-    for slot, hour, minute in slots:
-        when = NOW.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if when > NOW:
-            return slot, when
-    next_day = (NOW + timedelta(days=1)).replace(
-        hour=slots[0][1], minute=slots[0][2], second=0, microsecond=0
-    )
-    return slots[0][0], next_day
+    """Assign this run to the current two-hour slot, or the next morning slot."""
+    if NOW.hour < 8:
+        slot, hour, minute = QUEUE_POST_SLOTS_IST[0]
+        day = NOW.date()
+    elif NOW.hour >= 22:
+        slot, hour, minute = QUEUE_POST_SLOTS_IST[0]
+        day = NOW.date() + timedelta(days=1)
+    else:
+        slot, hour, minute = next(
+            entry for entry in reversed(QUEUE_POST_SLOTS_IST)
+            if entry[1] <= NOW.hour
+        )
+        day = NOW.date()
+
+    when = NOW.replace(year=day.year, month=day.month, day=day.day,
+                       hour=hour, minute=minute, second=0, microsecond=0)
+    return slot, when
 
 
 def add_to_queue(queue, draft, candidates):
@@ -2368,6 +2379,11 @@ def run_archive_and_queue():
     except Exception as exc:
         print(f"⚠️ RSS archive is safe; AI enrichment failed without stopping the scrape: {str(exc)[:160]}")
 
+    queue_post_enabled = os.environ.get("NEWS_QUEUE_POST_ENABLED", "true").strip().lower()
+    if queue_post_enabled in {"false", "0", "no", "off"}:
+        print("🌙 Quiet-hours scrape: archive refreshed; queue and Telegram were left untouched")
+        return 0
+
     try:
         queue = load_json(QUEUE_FILE, {"queue": []})
         if not isinstance(queue, dict) or not isinstance(queue.get("queue"), list):
@@ -2403,7 +2419,7 @@ def run_archive_and_queue():
     if state_changed:
         save_json(STATE_FILE, state)
     if queue_changed:
-        print("📨 Existing Telegram poster will deliver the queued item on its normal schedule.")
+        print("📨 Queue poster will handle delivery; this script never sends Telegram directly.")
     return 0
 
 

@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: content-factory
+  group: content-queue-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
