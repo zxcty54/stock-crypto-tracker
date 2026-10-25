@@ -1,0 +1,539 @@
+{
+  "stories": [
+    {
+      "id": "newsvgdkwyrouw",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "F&O Talk: Nifty plunged 2% this week. Do charts indicate a bearish picture for coming week?",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/fo-talk-nifty-plunged-2-this-week-do-charts-indicate-a-bearish-picture-for-coming-week/articleshow/135186474.cms",
+      "published_at": "2026-10-25T13:44:31+05:30",
+      "published_ist": "2026-10-25 13:44 IST",
+      "summary": "SBI Securities’ Sudeep Shah expects continued weakness in Indian equities as FII positioning, rising volatility and technical indicators point to further pressure. He identifies key Nifty support and resistance levels and flags IT as a relatively stronger sector.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "rejected",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A sharp correction in headline indices accompanied by underperformance in broader small and midcap segments typically reflects shifting institutional sentiment and tightening risk appetite. If foreign institutional investor (FII) outflows persist alongside subdued index futures long-short ratios, downward price momentum could be sustained across high-beta segments. However, technical retracement levels and RSI indicators only signal historical price behavior and momentum shifts, and they do not guarantee future direction.",
+        "what_to_watch": [
+          "FII net cash flows and index futures long-short positioning data from exchanges",
+          "Daily moving average crossovers and volume trends around Nifty support zones",
+          "Changes in the India VIX trajectory following its recent breakout and retest"
+        ],
+        "evergreen_lesson": "Broader market segments often experience sharper corrections than frontline indices during periods of institutional risk-off, highlighting the divergence between high-beta volatility and large-cap stability."
+      },
+      "processed_ist": "2026-10-25 15:32:49 IST"
+    },
+    {
+      "id": "newssecllahihm",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Yes Bank makes an important announcement with regards to its AT-1 bonds; Here's what it said",
+      "url": "https://www.cnbctv18.com/market/yes-bank-share-price-at-1-bond-issue-repayment-decision-assessment-implications-20018667.htm",
+      "published_at": "2026-10-25T10:06:21+05:30",
+      "published_ist": "2026-10-25 10:06 IST",
+      "summary": "In a disclosure dated October 24, the private sector lender said it was continuing to examine the judgment and evaluate all available options and suitable steps going forward.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "queued",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A lender evaluating coupon discretion on Additional Tier-1 (AT-1) bonds following a judicial ruling highlights the complex risk-return tradeoff of quasi-equity debt instruments. If the bank decides to withhold coupon payments, it would preserve internal capital reserves but could heighten borrowing costs and test retail investor confidence in subordinated bank debt. Conversely, proceeding with payments would signal balance-sheet comfort but deplete capital buffers. The legal evaluation phase alone does not establish a final default or payout outcome.",
+        "what_to_watch": [
+          "Official regulatory filings and stock exchange disclosures regarding the final coupon payment decision",
+          "Subsequent disclosures on legal review progress or Supreme Court petitions",
+          "Retail investor participation trends in bank hybrid debt issuances"
+        ],
+        "evergreen_lesson": "AT-1 bonds carry structural coupon discretion clauses tied to regulatory capital thresholds, meaning that legal precedents can directly alter the expected cash flow certainty for retail holders."
+      },
+      "post_id": "newstgncbknvkz"
+    },
+    {
+      "id": "newsripnhqlupz",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Sebi to revamp short-selling, securities lending rules",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-to-revamp-short-selling-securities-lending-rules/articleshow/135182788.cms",
+      "published_at": "2026-10-25T09:28:23+05:30",
+      "published_ist": "2026-10-25 09:28 IST",
+      "summary": "Sebi is reviewing short-selling and securities lending rules to improve liquidity and price discovery. The regulator is also planning reforms in clearing, broker compliance, custodial services and corporate bond market-making to deepen capital markets and reduce compliance costs.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "queued",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regulatory reforms targeting short-selling, securities lending and borrowing (SLB), and broker compliance structures are designed to enhance market liquidity and operational capital efficiency. If implemented effectively, streamlined reporting frameworks and automated facilities could lower compliance overheads and improve price discovery mechanisms. However, proposed regulatory reviews do not automatically translate into immediate improvements in secondary market liquidity until brokers and custodians fully adopt the updated workflows.",
+        "what_to_watch": [
+          "Circulars and operational guidelines issued by SEBI detailing the implementation timelines for SLB and short-selling changes",
+          "Adoption rates of automated give-up and take-up facilities among custodial clients",
+          "Growth in corporate bond secondary market trading volumes following the introduction of the new market-making framework"
+        ],
+        "evergreen_lesson": "Lowering compliance burdens and modernizing post-trade infrastructure can reduce systemic drag in capital markets, but execution depends on broker and custodian adoption speeds."
+      },
+      "post_id": "newswbwtxmulab"
+    },
+    {
+      "id": "newstcehxuonsy",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Demeter's Ashwini Agarwal sees value in largecaps, financial services and consumer stocks; avoids IT and OMCs",
+      "url": "https://www.cnbctv18.com/market/largecaps-financials-exporters-it-stocks-omcs-market-earnings-outlook-ashwini-agarwal-alpha-article-20018459.htm",
+      "published_at": "2026-10-24T13:19:22+05:30",
+      "published_ist": "2026-10-24 13:19 IST",
+      "summary": "Financial services, offline retail and exporters offer significant value pockets in the current market, while policy uncertainty makes oil marketing companies unattractive, according to Ashwini Agarwal of Demeter Advisors.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsniktmokuwx",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "S&P set to change how it classifies US growth and value stocks",
+      "url": "https://www.cnbctv18.com/market/sp-set-to-change-how-it-classifies-us-growth-and-value-stocks-20018460.htm",
+      "published_at": "2026-10-24T12:05:06+05:30",
+      "published_ist": "2026-10-24 12:05 IST",
+      "summary": "S&P Dow Jones Indices is updating its classification of US stocks as growth or value, dropping momentum for growth and adding free cash flow for value, effective December 21, 2026.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Index providers revising growth and value classification rules can alter how passive funds and ETFs allocate capital across sectors. By replacing share price momentum with free cash flow and intangibles-adjusted book value, index mechanics shift from rewarding past price trends to favoring fundamental cash generation. If asset managers rebalance their portfolios accordingly, companies that score poorly on cash generation could see capital outflows regardless of their historical style category.",
+        "what_to_watch": [
+          "Preliminary index rebalancing files released ahead of the effective date",
+          "Actual portfolio adjustments and trading volumes of index-tracking funds on the implementation date"
+        ],
+        "evergreen_lesson": "Index rules are not static; changes in classification methodologies directly force institutional fund rebalancing, altering structural demand for underlying equities."
+      }
+    },
+    {
+      "id": "newsffbyrhbvec",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Sebi orders Avadhut Sathe, academy to refund Rs 546 crore",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-orders-avadhut-sathe-academy-to-refund-rs-546-crore/articleshow/135162877.cms",
+      "published_at": "2026-10-24T11:01:13+05:30",
+      "published_ist": "2026-10-24 11:01 IST",
+      "summary": "The Securities and Exchange Board of India has directed Avadhut Sathe Trading Academy to refund ₹546.18 crore to investors. Avadhut Sathe and his academy provided unregistered investment advisory services under the pretext of education. The regulator found that misleading testimonials were circulated while concealing overall trading losses. A penalty of ₹11.5 crore was imposed on Sathe and the academy for their actions.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regulatory crackdowns on unregistered investment advisory services operating under the garb of education address information asymmetry and retail mis-selling in digital spaces. When regulators penalize entities for hiding trading losses while highlighting selective gains, it establishes strict boundaries between formal education and personalized stock recommendations. If compliance costs and refund orders escalate, digital finfluencers might alter their monetization models away from subscription-based stock tips.",
+        "what_to_watch": [
+          "Compliance disclosures regarding the deposit of refund amounts and interest into the investor protection fund",
+          "Subsequent regulatory circulars or enforcement actions targeting similar education-to-advisory grey areas"
+        ],
+        "evergreen_lesson": "Content delivery formats do not exempt providers from fiduciary regulations if recommendations involve specific security entry, exit, or stop-loss levels."
+      }
+    },
+    {
+      "id": "newsxkkdoichdg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Growth, value stocks set for reshuffle as S&P adopts new rules",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/growth-value-stocks-set-for-reshuffle-as-sp-adopts-new-rules/articleshow/135161737.cms",
+      "published_at": "2026-10-24T09:51:59+05:30",
+      "published_ist": "2026-10-24 09:51 IST",
+      "summary": "S&P Dow Jones Indices will soon change its rules for classifying growth and value shares. The new criteria will incorporate intangible assets, forward earnings, and free cash flow instead of relying on 12-month price momentum. These changes are expected to affect approximately $375 billion of passive funds linked to the index. FTSE Russell is also considering adjustments due to the dominance of technology companies.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When major index providers overhaul style definitions, billions of dollars in passive assets are forced to migrate between growth and value categories. Accounting for intangible assets and forward earnings addresses long-standing distortions where asset-light or research-heavy businesses looked artificially expensive on price-to-book metrics. If multiple index providers follow suit, style-based performance benchmarks and fund mandates will reflect updated definitions of corporate value.",
+        "what_to_watch": [
+          "Final implementation notices and constituent lists published by index providers prior to reconstitution",
+          "Corresponding consultation outcomes from other major benchmark providers regarding style index splits"
+        ],
+        "evergreen_lesson": "Accounting conventions that expense intangible investments can distort traditional valuation metrics, prompting periodic structural fixes by index compilers."
+      }
+    },
+    {
+      "id": "newsdehqhgmfki",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Small and midcap indices post worst weekly decline in two years",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/small-and-midcap-indices-post-worst-weekly-decline-in-two-years/articleshow/135160009.cms",
+      "published_at": "2026-10-24T08:06:47+05:30",
+      "published_ist": "2026-10-24 08:06 IST",
+      "summary": "Mid-cap and small-cap stocks in India have faced major declines, indicating a shift in market sentiment. The Nifty MidCap 150 and Small-cap 250 indices reported their worst weekly falls in two years. Domestic retail investors initially supported these segments by increasing mutual fund contributions. However, concerns over rising oil prices and fiscal deficits are adding to market uncertainties.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A sharp weekly correction in mid-cap and small-cap indices indicates that risk-off sentiment is spreading beyond blue-chip stocks into broader segments. When liquidity tightens and foreign portfolio outflows continue, retail-driven domestic segments become vulnerable to sudden sentiment reversals. If primary market supply and negative calendar returns persist, retail investors might moderate their systematic investment flows into higher-risk equity categories.",
+        "what_to_watch": [
+          "Monthly mutual fund inflow data to check if retail systematic investment plan contributions remain steady or slow down",
+          "Foreign portfolio investor flow trends and primary market issuance volumes"
+        ],
+        "evergreen_lesson": "Retail liquidity can cushion broader market segments temporarily, but persistent macro headwinds and stretched valuations eventually trigger sharp mean reversion across risk tiers."
+      }
+    },
+    {
+      "id": "newsemlkbijudv",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI’s forward dollar sales surge to record $200 billion in August",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/rbi-net-forex-buys-hit-a-record-43-billion-in-august-balances-it-with-swaps/articleshow/135159794.cms",
+      "published_at": "2026-10-24T07:50:15+05:30",
+      "published_ist": "2026-10-24 07:50 IST",
+      "summary": "The Reserve Bank of India recorded a net purchase of $43.26 billion in August's foreign exchange market. This was done to manage significant dollar inflows from the FCNR(B) scheme and overseas borrowings. Despite the net purchase, foreign exchange reserves did not increase due to large forex sell/buy swaps. By August 31, measures attracted over $127 billion, aiding the RBI's operations.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsxopmjqcsrn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Silver hits 11-month low of ₹1.95 lakh as crude stokes inflation fears",
+      "url": "https://economictimes.indiatimes.com/markets/commodities/news/silver-hits-11-month-low-of-1-95-lakh-as-crude-stokes-inflation-fears/articleshow/135161699.cms",
+      "published_at": "2026-10-23T23:33:12+05:30",
+      "published_ist": "2026-10-23 23:33 IST",
+      "summary": "On the Multi Commodity Exchange (MCX), silver futures fell ₹6,799 per kg, or 3.4%, to ₹1,92,800 per kg on Friday. Prices have plunged ₹32,955, or more than 14%, over the past 10 sessions. A recent appreciation in the rupee has provided only limited relief against the decline in international prices.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsqrqkgizqrz",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Sebi proposes automatic approval route for stock exchanges, depositories to ease compliance burden",
+      "url": "https://www.cnbctv18.com/market/sebi-proposes-automatic-approval-route-for-stock-exchanges-depositories-to-ease-compliance-burden-20017645.htm",
+      "published_at": "2026-10-23T19:53:15+05:30",
+      "published_ist": "2026-10-23 19:53 IST",
+      "summary": "The proposal seeks to reduce compliance requirements for market infrastructure institutions (MIIs) and improve ease of doing business. SEBI has invited public comments on the proposed framework until November 12.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsdviejzugzv",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "RBI to conduct 4-day Variable Rate Repo (VRR) auction under LAF on October 26, 2026",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63861",
+      "published_at": "2026-10-23T19:25:00+05:30",
+      "published_ist": "2026-10-23 19:25 IST",
+      "summary": "On a review of current and evolving liquidity conditions in the near term, it has been decided to conduct a Variable Rate Repo (VRR) auction on Monday, October 26, 2026, as under: Sl. No. Notified Amount (₹ crore) Tenor (day) Window Timing Date of Reversal 1 1,50,000 4 9:30 AM to 10:00 AM October 30, 2026 (Friday) 2. The operational guidelines for the auction will be same as given in Reserve Bank’s Press Release 2021-2022/1572 dated January 20, 2022 . Ajit Prasad Deputy General Manager (Communications) Press Release: 2026-2027/1383",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsytnjydptip",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "Auction of State Government Securities",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63860",
+      "published_at": "2026-10-23T18:40:00+05:30",
+      "published_ist": "2026-10-23 18:40 IST",
+      "summary": "The following State Governments have offered to sell stock by way of auction, for an aggregate amount of ₹23,300.00 Crore (Face Value). Sr. No. State Amount to be raised (₹ Crore) Tenor (Year) Type of Auction 1. Assam 1000 09 Yield 2. Bihar 1000 09 Yield 2000 Re-issue of 7.66% Bihar SGS 2041, issued on July 22, 2026 Price 3. Chhattisgarh 600 Re-issue of 7.83% Chhattisgarh SGS 2040, issued on April 15, 2026 Price 600 Re-issue of 7.82% Chhattisgarh SGS 2048, issued on April 29, 2026 Price 4. Gujarat 1000 Re-issue of 7.96% Gujarat SGS 2035, issued on October 14, 2026 Price 1000 Re-issue of 8.06% Gujarat SGS 2038, issued on October 21, 2026 Price 5. Himachal Pradesh 400 Re-issue of 7.77% Himachal Pradesh SGS 2049, issued on June 24, 2026 Price 6. Jharkhand 200 Re-issue of 7.30% Jharkhand SGS 2033, issued on July 08, 2026 Price 7. Keralam 1500 14 Yield 8. Manipur 300 Re-issue of 7.79% Manipur",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsuetxexcvjx",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "RBI Bulletin – October 2026",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63859",
+      "published_at": "2026-10-23T17:50:00+05:30",
+      "published_ist": "2026-10-23 17:50 IST",
+      "summary": "Today, the Reserve Bank released the October 2026 issue of its monthly Bulletin. The Bulletin includes two speeches, four articles and current statistics. The four articles are: I. State of the Economy ; II. Transmission to Lending Rates of SCBs: Price versus Composition Effects in WALR ; III. Performance of the NBFC Sector: Review for 2025 ; and IV. Nowcasting State-Level Economic Activity in India with Night-Time Light and Google Trends . I. State of the Economy Renewed geopolitical frictions in West Asia and supply chain disruptions have amplified inflationary pressures, prompting major central banks to raise policy rates. Elevated sovereign bond yields in advanced economies (AEs) have also brought into focus concerns about fiscal sustainability and its implications for financial stability. The Indian economy continued to demonstrate strength as evidenced by high-frequency indicators ",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The Reserve Bank's monthly bulletin combines high-frequency economic activity checks with sector-level deep dives, such as credit transmission and NBFC performance tracking. When policy rates shift, commercial banks pass on costs unevenly due to both pure interest rate changes and shifts in loan portfolio composition across sectors. If global supply disruptions push inflation higher, domestic lending rates could face upward pressure, impacting credit-dependent sectors.",
+        "what_to_watch": [
+          "Subsequent RBI reports on weighted average lending rates (WALR) and fresh lending spreads.",
+          "Quarterly credit growth disclosures by non-banking financial companies (NBFCs).",
+          "High-frequency industrial and service sector prints for signs of demand moderation."
+        ],
+        "evergreen_lesson": "Aggregate lending rate movements reflect a combination of direct rate repricing and underlying changes in credit mix across borrower risk profiles."
+      }
+    },
+    {
+      "id": "newsejlpgjuvpo",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "RBI issues Reserve Bank of India (Commercial Banks – Forthcoming Instructions) Second Amendment Directions, 2026 on Minimum Capital Requirements for Operational Risk",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63858",
+      "published_at": "2026-10-23T17:30:00+05:30",
+      "published_ist": "2026-10-23 17:30 IST",
+      "summary": "The Reserve Bank of India had issued Reserve Bank of India (Commercial Banks – Forthcoming Instructions) Directions, 2025 on November 28, 2025 . 2. Chapter IV of these Directions prescribed the Minimum Capital Requirements for Operational Risk, wherein it was specified that the effective date of implementation and indicative mapping of the components of the Business Indicator (BI) to the schedules and line items of the financial statements shall be provided in due course. Subsequently, Governor in his Statement dated October 01, 2025 , announced that the revised Basel III capital adequacy framework for Commercial Banks (excluding Small Finance Banks (SFBs), Payment Banks (PBs), Regional Rural Banks(RRBs)) would come into effect from April 01, 2027. Further, post issuance of these Directions, certain additional clarifications have been issued by the Basel Committee on Banking Supervision.",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Updating regulatory frameworks for operational risk capital requirements under Basel III standardises how commercial banks cushion against unexpected losses. Clear mapping of business indicator components to financial statements helps institutions calculate capital charges uniformly ahead of enforcement dates. If implementation timelines hold, affected banks would need to reallocate capital buffers internally, potentially influencing their lending capacity for specific business segments.",
+        "what_to_watch": [
+          "Bank disclosures regarding capital adequacy ratios (CAR) under the revised Basel III framework.",
+          "Operational risk capital charge computations in upcoming annual financial statements.",
+          "Official circulars regarding any further clarifications from the Basel Committee."
+        ],
+        "evergreen_lesson": "Regulatory updates to risk-weighted assets directly alter capital allocation priorities, shifting balance sheet efficiency metrics for commercial lenders."
+      }
+    },
+    {
+      "id": "newsnzkokxsodx",
+      "source": "RBI Notifications",
+      "source_priority": 3,
+      "headline": "Delegation of Compounding of certain Contraventions under FEMA, 1999 to Regional Offices of the Reserve Bank",
+      "url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13745&Mode=0",
+      "published_at": "2026-10-23T17:10:00+05:30",
+      "published_ist": "2026-10-23 17:10 IST",
+      "summary": "RBI/FED/2026-27/298 A.P. (DIR Series) Circular. No 28/2026-27 October 23, 2026 To, All Authorised Dealer Category-I banks and other Authorised Persons Madam / Sir, Delegation of Compounding of certain Contraventions under FEMA, 1999 to Regional Offices of the Reserve Bank Attention of Authorised Dealer (AD) Category - I banks and other Authorised Persons is invited to A.P. (DIR Series) Circular No. 17/2024-25 dated October 1, 2024 and Master Directions on Compounding of Contraventions under FEMA, 1999, dated April 22, 2025 2. As laid down in the above directions, the applications for compounding of contraventions pertaining to transactions related to Overseas Investments and Borrowing and Lending, and Guarantees are currently being received at Central Office of the Reserve Bank. The compounding of contraventions related to certain categories of transactions related to foreign direct inve",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Decentralising the compounding of specific FEMA contraventions from the central office to regional offices aims to improve administrative efficiency for foreign exchange transactions. When processing powers move closer to regional hubs, adjudication timelines for overseas investments and borrowing transactions could shorten. If execution scales smoothly, corporate compliance turnaround times for cross-border transactions would improve significantly.",
+        "what_to_watch": [
+          "Volume and clearance speed of compounding applications handled by designated Regional Offices.",
+          "Subsequent operational circulars or feedback from Authorised Dealer (AD) category-I banks.",
+          "Compliance compliance disclosures by entities holding unique identification numbers (UIN) for overseas joint ventures."
+        ],
+        "evergreen_lesson": "Delegating regulatory oversight to regional offices reduces institutional bottlenecks, decentralising routine dispute resolution for cross-border commerce."
+      }
+    },
+    {
+      "id": "newsopgrcwttzm",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63855",
+      "published_at": "2026-10-23T17:00:00+05:30",
+      "published_ist": "2026-10-23 17:00 IST",
+      "summary": "1. Reserve Bank of India - Liabilities and Assets* (₹ Crore) Item 2025 2026 Variation Oct. 17 Oct. 9 Oct. 16 Week Year 1 2 3 4 5 4 Loans and Advances 4.1 Central Government - 0 0 0 0 4.2 State Governments 30095 58569 29700 -28869 -395 * Data are provisional; difference, if any, is due to rounding off. 2. Foreign Exchange Reserves* Item As on October 16, 2026 Variation over Week End-March 2026 Year ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. 1 2 3 4 5 6 7 8 1 Total Reserves 6846160 721016 -176258 -5011 292298 29909 668188 18736 1.1 Foreign Currency Assets # 5619655 591847 -160658 -5758 382288 39565 601720 21437 1.2 Gold 1004583 105800 -11937 706 -89726 -9595 49697 -2746 1.3 SDRs 176396 18578 -3008 30 -193 -44 11700 -144 1.4 Reserve Position in the IMF 45525 4791 -655 11 -70 -17 5072 189 * Difference, if any, is due to rounding off. # Excludes (a) SDR holdings of the Reserve Ba",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "RSS excerpt (publisher page unavailable or too short)",
+        "why_it_matters": "Weekly statistical supplements provide provisional snapshots of central bank liabilities, state government borrowings, and foreign exchange reserves. Fluctuations in foreign currency assets and gold reserves mirror intervention strategies and valuation changes driven by global currency movements. If reserve balances experience sustained outflows, domestic liquidity conditions and foreign exchange market stability could face tightened domestic monetary management.",
+        "what_to_watch": [
+          "Weekly updates to foreign currency assets and gold valuation entries in subsequent statistical supplements.",
+          "State government ways and means advances (WMA) and loan utilisation figures.",
+          "Banking system liquidity data reflecting shifts in central bank assets and liabilities."
+        ],
+        "evergreen_lesson": "High-frequency central bank balance sheet data reveals immediate liquidity adjustments long before quarterly macroeconomic prints are published."
+      }
+    },
+    {
+      "id": "newszugjvbbonc",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "RBI issues guidelines on the implementation of Leverage Ratio 2017 Standard",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63854",
+      "published_at": "2026-10-23T16:30:00+05:30",
+      "published_ist": "2026-10-23 16:30 IST",
+      "summary": "The Reserve Bank of India had issued the draft Reserve Bank of India (Commercial Banks – Prudential Norms on Capital Adequacy) Eleventh Amendment Directions, 2026 on August 7, 2026 , inviting feedback from stakeholders until August 28, 2026. The draft Amendment Directions proposed to implement the latest leverage ratio framework ('Leverage Ratio 2017 Standard') issued by the Basel Committee on Banking Supervision. 2. Feedback received on the draft Directions has been examined and consequent modifications have been suitably incorporated in the final Amendment Directions. The statement on the feedback received on the draft Directions is provided in the Annex . 3. Accordingly, the Reserve Bank has today released the Reserve Bank of India (Commercial Banks – Prudential Norms on Capital Adequacy) Eleventh Amendment Directions, 2026 . 4. These instructions will come into effect from April 1, 2",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-25 15:32:49 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "RBI ne commercial banks ke liye Basel Committee ke Leverage Ratio 2017 Standard ko implement karne ke liye final guidelines jaari kar di hain, jo April 1, 2027 se effective hongi. Yeh regulations banks ki capital adequacy aur leverage exposure ko control karne ke liye design kiye gaye hain. Agar banks apni capital aur exposure measure ke beech required balance maintain nahi karte hain, toh unhe lending growth par constraints face karne pad sakte hain. Yeh announcement abhi sirf regulatory framework set karti hai, aur iska exact impact banks ke balance sheet management par tabhi dikhega jab yeh rules ground par implement honge.",
+        "what_to_watch": [
+          "Banks ki upcoming quarterly financial disclosures aur capital adequacy reports jisme leverage ratio ka current status dikhe.",
+          "April 1, 2027 se pehle banks dwara apni balance sheet aur exposure measure ko adjust karne ke liye uthaye gaye steps.",
+          "RBI ya Basel Committee ke guidelines ke execution mein koi further clarification ya amendments aate hain ya nahi."
+        ],
+        "evergreen_lesson": "Regulatory guidelines ka announcement hona aur unka actual operational implementation hona alag baatein hain; real economic impact tabhi shuru hota hai jab prescribed effective date par rules enforce hote hain."
+      }
+    },
+    {
+      "id": "newshviqblhhln",
+      "source": "RBI Notifications",
+      "source_priority": 3,
+      "headline": "Reserve Bank of India (Commercial Banks – Prudential Norms on Capital Adequacy) Eleventh Amendment Directions, 2026",
+      "url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13743&Mode=0",
+      "published_at": "2026-10-23T16:30:00+05:30",
+      "published_ist": "2026-10-23 16:30 IST",
+      "summary": "RBI/2026-27/297 DOR.CAP.REC.251/21-02-002/2026-27 October 23, 2026 Reserve Bank of India (Commercial Banks – Prudential Norms on Capital Adequacy) Eleventh Amendment Directions, 2026 Please refer to 'Chapter VII: Leverage Ratio framework' of the Reserve Bank of India (Commercial Banks – Prudential Norms on Capital Adequacy) Directions, 2025 (hereinafter referred to as 'the Directions'). To ensure alignment with the latest leverage ratio framework ('leverage ratio 2017 standard') issued by the Basel Committee on Banking Supervision, there is a felt need to amend these Directions. 2. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and all other provisions / laws enabling the Reserve Bank of India to issue instructions in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public interest so to do, hereb",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-25 15:32:49 IST",
+      "status": "new",
+      "topic": "economy"
+    }
+  ],
+  "last_scraped_at": "2026-10-25T15:32:49.582641+05:30",
+  "last_scraped_ist": "2026-10-25 15:32:49 IST",
+  "feed_status": {
+    "CNBC-TV18": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 55,
+      "accepted_items": 5,
+      "filtered_items": 50,
+      "error": null
+    },
+    "Economic Times": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 50,
+      "accepted_items": 7,
+      "filtered_items": 43,
+      "error": null
+    },
+    "The Hindu BusinessLine": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 13,
+      "accepted_items": 0,
+      "filtered_items": 13,
+      "error": null
+    },
+    "RBI Press Releases": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 9,
+      "accepted_items": 6,
+      "filtered_items": 3,
+      "error": null
+    },
+    "RBI Notifications": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 3,
+      "accepted_items": 3,
+      "filtered_items": 0,
+      "error": null
+    },
+    "SEBI RSS": {
+      "checked_ist": "2026-10-25 15:32:49 IST",
+      "http_status": 200,
+      "fresh_items": 0,
+      "accepted_items": 0,
+      "filtered_items": 0,
+      "error": null
+    }
+  },
+  "retention_days": 30,
+  "curation": {
+    "version": 9,
+    "scope": [
+      "economy",
+      "capital_market",
+      "stock_market"
+    ],
+    "excludes": [
+      "financial_results",
+      "opinions_and_recommendations",
+      "generic_market_wraps",
+      "generic_stock_movers_and_shakers_roundups",
+      "routine_corporate_action_ex_date_calendars",
+      "stock_portfolio_and_wealth_listicles",
+      "company_corporate_announcements",
+      "commercial_order_and_contract_wins",
+      "ipo_and_fpo_related_news",
+      "fii_fpi_dii_related_news",
+      "routine_price_moves_without_material_catalyst",
+      "low_materiality_announcements"
+    ],
+    "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
+    "near_duplicate_window_hours": 72,
+    "last_curated_ist": "2026-10-25 15:32:49 IST"
+  },
+  "last_run_stats": {
+    "updated_ist": "2026-10-25 15:32:49 IST",
+    "fetched_items": 130,
+    "accepted_feed_items": 21,
+    "filtered_feed_items": 109,
+    "new_unique_stories": 19,
+    "duplicate_items_collapsed": 2,
+    "archive_items_removed_by_curation": 0,
+    "stories_total": 19
+  }
+}
