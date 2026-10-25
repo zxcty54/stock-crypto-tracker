@@ -325,8 +325,24 @@
       "source_headline": "Sebi to revamp short-selling, securities lending rules",
       "story_key": "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
       "generated_at": "2026-10-25 13:00:36 IST"
+    },
+    {
+      "id": "newsqurusiscit",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-26 08:00",
+      "scheduled_ist": "2026-10-26 08:00",
+      "title": "RBI Ka Naya Data Centre & Cybersecurity Institute: Banking System Ke Liye Kya Ma",
+      "text": "📊 <b>RBI Ka Naya Data Centre &amp; Cybersecurity Institute: Banking System Ke Liye Kya Mayne Rakhta Hai?</b>\n\n📰 Kya hua: Prime Minister ne Bhubaneswar, Odisha mein Reserve Bank of India (RBI) ke naye Data Centre aur Cybersecurity Training Institute ka inauguration kiya hai. Is naye facility mein RBI ke mission-critical systems jaise ki RTGS aur NEFT ko house kiya jayega, jabki training institute cybersecurity, AI aur emerging technologies par focus karega.\n\n🧩 News ko kaise padhein: 'RTGS' (Real-Time Gross Settlement) aur 'NEFT' (National Electronic Funds Transfer) desh ki financial system ki backbone hain, jinke zariye daily crores ke transactions process hote hain. Inhe run karne ke liye massive computing power aur ultra-secure infrastructure ki zaroorat hoti hai.\n\n💡 Business mein iska matlab: Jaise-jaise digital payments badh rahe hain, banking sector par cyber threats aur technical failures ka risk bhi exponential rate par badh raha hai. Ek centralized, high-tech data centre hone se systemic resilience strong hoti hai aur downtime ya data breaches ka risk minimize hota hai. Isse banking sector, fintechs, aur overall digital economy ko ek secure framework milta hai.\n\n🔭 Aage kya dekhein: Yeh observe karein ki financial institutions aur banks kis tarah naye cybersecurity frameworks adopt karte hain aur kya RBI apne digital infrastructure ko aur decentralize karta hai. Yeh bhi dekhein ki training institutes se talent pool mein kitna improvement aata hai.\n\nAapke hisaab se, digital banking expansion ke is daur mein sabse bada operational risk kya hona chahiye?\n\n🔗 Source: <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63862\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:1ea7af4f9953",
+      "kind": "business_news_insight",
+      "source_name": "RBI Press Releases",
+      "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63862",
+      "source_headline": "Hon’ble Prime Minister of India inaugurates the Reserve Bank of India’s Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha",
+      "story_key": "1ea7af4f995346a01863e60a70b50327062b1de14138d445e0590abbaafdf70f",
+      "generated_at": "2026-10-25 23:16:50 IST"
     }
   ],
-  "total": 26,
-  "last_scheduled": "2026-10-25 20:30"
+  "total": 27,
+  "last_scheduled": "2026-10-26 08:00"
 }
