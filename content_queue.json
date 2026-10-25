@@ -283,14 +283,32 @@
       "scheduled_ist": "2026-10-25 14:00",
       "title": "Yes Bank AT-1 Bonds Coupon Discretion Update",
       "text": "📊 <b>Yes Bank AT-1 Bonds Coupon Discretion Update</b>\n\n📰 Kya hua: Yes Bank ne exchange disclosure mein bataya hai ki October 24 ko unhe 9% AT-1 bonds ke coupon payment (jo October 18, 2026 ko due tha) par queries mil rahi hain. Bank ne Supreme Court ke judgment ke baad available options ka evaluation abhi complete nahi kiya hai. Bank ne kaha hai ki assessment poora hone ke baad hi coupon discretion exercise karne par final decision communicate kiya jayega, jabki retail investors ko pehle hi payment na milne ki shikayat thi.\n\n🧩 News ko kaise padhein: 'AT-1 (Additional Tier-1) bonds' aise unsecured, perpetual bonds hote hain jo banks apni capital adequacy (Tier-1 capital) strengthen karne ke liye issue karte hain. Inme 'coupon discretion' ka feature hota hai, yaani bank ke paas yeh legal right hota hai ki agar capital buffer ya financial health allow na kare, toh woh us saal ka interest (coupon) rok bhi sakta hai.\n\n💡 Business mein iska matlab: Jab koi bank coupon payment rokne ka option evaluate karta hai ya delay karta hai, toh yeh un investors ke liye direct cash-flow impact hota hai jo regular income expect kar rahe the. Yeh situation batati hai ki perpetual aur high-yield instruments mein equity jaisa risk chhupa hota hai, kyunki high coupon sirf isliye milta hai kyunki yeh bonds loss-absorbing cushion ki tarah design kiye gaye hain.\n\n🔭 Aage kya dekhein: Aage dekhein ki Yes Bank apni formal evaluation ke baad kya disclosure deta hai aur Supreme Court ruling ke review par kya kadam uthata hai. Kya aapko lagta hai ki retail investors ko complex debt instruments ki risk-understanding ke liye aur strict guidelines milni chahiye?\n\n🔗 Source: <a href=\"https://www.cnbctv18.com/market/yes-bank-share-price-at-1-bond-issue-repayment-decision-assessment-implications-20018667.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:9fa931bcacef",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/market/yes-bank-share-price-at-1-bond-issue-repayment-decision-assessment-implications-20018667.htm",
       "source_headline": "Yes Bank makes an important announcement with regards to its AT-1 bonds; Here's what it said",
       "story_key": "9fa931bcacefbdcc6e4717cf50f8ccbbbcdc1dc38921d0c61392283b3a33a156",
-      "generated_at": "2026-10-25 14:58:39 IST"
+      "generated_at": "2026-10-25 14:58:39 IST",
+      "posted_at": "2026-10-25 19:59:21 IST",
+      "telegraph_url": "https://telegra.ph/Yes-Bank-AT-1-Bonds-Coupon-Discretion-Update--October-2026-10-25"
+    },
+    {
+      "id": "newsvoywtydxzs",
+      "slot": "F",
+      "hourly_slot_ist": "2026-10-25 18:00",
+      "scheduled_ist": "2026-10-25 18:00",
+      "title": "Market correction: Nifty, Sensex slide as crude, FII outflows and VIX pressure D",
+      "text": "📊 <b>Market correction: Nifty, Sensex slide as crude, FII outflows and VIX pressure Dalal Street</b>\n\n📰 Kya hua: Indian stock markets faced heavy selling pressure last week, with the Sensex and Nifty 50 dropping more than 2% and snapping a two-week winning streak. On Friday, the Sensex closed at 73,124 (down 126 points) and the Nifty 50 settled at 22,600 (down 88 points). Broader markets saw sharper cuts, as the Nifty Midcap 100 and Nifty Smallcap 100 fell up to 3%. FII outflows, rising crude oil prices due to Middle East tensions, and higher India VIX levels weighed heavily on sentiment.\n\n🧩 News ko kaise padhein: Yeh fall sirf ek headline number nahi hai. Jab India VIX (Volatility Index) upar jata hai, iska matlab hai ki options market mein fear aur uncertainty badh gayi hai. Iske alawa, jab midcaps aur smallcaps main index se zyada girte hain (up to 3%), toh yeh unprivileged ya leveraged positions ke unwinding ki taraf ishara karta hai jahan retail participation zyada hoti hai.\n\n💡 Business mein iska matlab: Crude oil ke daam badhne se India jaise import-dependent desh ka import bill badhta hai, jisse macroeconomic pressure create hota hai. Sath hi, foreign institutional investor (FII) outflows se liquidity kam hoti hai, jo heavyweights aur broader market dono par dabav banati hai. Is tarah ke correction mein, market yeh check karta hai ki kaun si companies earnings visibility aur valuation comfort offer karti hain.\n\n🔭 Aage kya dekhein: Monday ke session aur uske baad, India VIX ki movement, foreign fund flows ke data, aur crude oil price trends par nazar rakhein. Yeh dekhna zaroori hoga ki kya mid-smallcap segment mein selling pressure thami hai ya volatility aur badhti hai.\n\nAapke portfolio mein risk management ke liye kaunse factors sabse zaroori hain jab volatility aisi high ho?\n\n🔗 Source: <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/ahead-of-market-10-things-that-will-decide-stock-market-action-on-monday/articleshow/135189090.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:d830e6a2fba6",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/ahead-of-market-10-things-that-will-decide-stock-market-action-on-monday/articleshow/135189090.cms",
+      "source_headline": "Ahead of Market: 10 things that will decide stock market action on Monday",
+      "story_key": "d830e6a2fba6ba57d158af740b19526a216970a5d4758734c3182d4a6c37f027",
+      "generated_at": "2026-10-25 19:58:58 IST"
     },
     {
       "id": "newswbwtxmulab",
@@ -309,6 +327,6 @@
       "generated_at": "2026-10-25 13:00:36 IST"
     }
   ],
-  "total": 25,
+  "total": 26,
   "last_scheduled": "2026-10-25 20:30"
 }
