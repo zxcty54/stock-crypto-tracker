@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Daily Indian business-news RSS archive and Telegram queue integration.
 
-The ``archive`` mode updates and enriches business_news_archive.json, then—
-inside the existing posting window—may add one validated, source-linked news
-post to content_queue.json. It never sends Telegram messages itself; the
+The ``archive`` mode updates and enriches business_news_archive.json, then
+may add one validated, source-linked news post to content_queue.json using the
+queue's existing scheduling. It never sends Telegram messages itself; the
 existing poster handles delivery. The ``enrich`` mode only backfills archive
 insights, while ``hourly`` retains its standalone RSS-to-queue behavior.
 """
@@ -40,9 +40,14 @@ MAX_CANDIDATES = 6
 MAX_ARTICLE_CHARS = 3000
 MIN_AI_CONTEXT_CHARS = int(os.environ.get("NEWS_MIN_AI_CONTEXT_CHARS", "600"))
 ARCHIVE_AI_INSIGHT_VERSION = 1
+ARCHIVE_CURATION_VERSION = 9
 ARCHIVE_AI_MAX_STORIES_PER_RUN = int(os.environ.get("NEWS_ARCHIVE_AI_MAX_STORIES", "24"))
 ARCHIVE_AI_BATCH_SIZE = int(os.environ.get("NEWS_ARCHIVE_AI_BATCH_SIZE", "4"))
-POSTING_HOURS_IST = set(range(16, 22))  # 4 PM through 9 PM inclusive
+QUEUE_POST_SLOTS_IST = (
+    ("A", 8, 0), ("B", 10, 0), ("C", 12, 0), ("D", 14, 0),
+    ("E", 16, 0), ("F", 18, 0), ("G", 20, 0),
+)
+POSTING_HOURS_IST = {hour for _slot, hour, _minute in QUEUE_POST_SLOTS_IST}
 
 UA = {
     "User-Agent": "Mozilla/5.0 (compatible; DailyBusinessNewsInsight/1.0; +https://github.com/)"
@@ -213,6 +218,19 @@ NEWS_FORMAT_EXCLUDE_TERMS = (
     "live blog", "liveblog", "highlights", "roundup", "round-up", "stocks to watch",
     "market pulse", "key triggers to watch", "stocks in focus", "worst performers",
     "top losers", "biggest losers", "top gainers", "best performers",
+    "movers & shakers", "movers and shakers", "stocks that will see action",
+    "shares that will see action", "stocks to see action", "shares to see action",
+    "stocks set to see action", "stocks likely to see action",
+)
+
+CORPORATE_ACTION_CALENDAR_ACTION_TERMS = (
+    "dividend", "dividends", "stock split", "stock splits", "bonus issue", "bonus shares",
+    "rights issue", "buyback", "buybacks",
+)
+CORPORATE_ACTION_CALENDAR_DATE_TERMS = (
+    "ex date", "ex dates", "ex record date", "record date", "ex dividend", "ex split",
+    "ex bonus", "ex rights", "turning ex", "turns ex", "going ex", "go ex",
+    "dividend calendar", "stock split calendar", "corporate action calendar",
 )
 
 # A move in a quoted price is not automatically a worthwhile story. Keep it
@@ -633,6 +651,22 @@ def _is_stock_portfolio_listicle_headline(title):
     )
 
 
+def _is_corporate_action_calendar_headline(title):
+    """Reject routine ex-date/record-date calendars, not market-wide rule changes."""
+    has_action = _contains_any_phrase(title, CORPORATE_ACTION_CALENDAR_ACTION_TERMS)
+    has_date = _contains_any_phrase(title, CORPORATE_ACTION_CALENDAR_DATE_TERMS)
+    if not (has_action and has_date):
+        return False
+
+    # A regulator's rule change about record-date disclosures is substantive
+    # market news, unlike a list of individual stocks going ex this week.
+    is_regulatory_development = (
+        _contains_any_phrase(title, REGULATORY_ORDER_ACTORS)
+        and _contains_any_phrase(title, REGULATORY_MARKET_EVENT_TERMS)
+    )
+    return not is_regulatory_development
+
+
 def _is_low_materiality_headline(title):
     """Reject tiny property announcements that do not support a useful post."""
     normalized = _normalized_words(title)
@@ -741,6 +775,7 @@ def _is_worthwhile_news_headline(title):
     if (
         _is_low_materiality_headline(title)
         or _is_stock_portfolio_listicle_headline(title)
+        or _is_corporate_action_calendar_headline(title)
         or _is_corporate_announcement_headline(title)
         or _is_ipo_related_headline(title)
         or _is_fii_dii_related_headline(title)
@@ -766,9 +801,10 @@ def classify_news_story(title, summary="", url="", source_name=""):
     Scope and newsworthiness are determined from the headline, not the RSS
     summary: publisher excerpts can mention unrelated terms and otherwise pull
     consumer/tech items into an economy or market archive. Issuer announcements,
-    commercial order wins, IPO/FPO coverage and FII/DII institutional-flow stories
-    are excluded. Official regulator feeds supply agency context when it is
-    omitted from an item headline; low-signal SEBI institutional PR is skipped.
+    corporate-action date calendars, generic stock-mover roundups, commercial
+    order wins, IPO/FPO coverage and FII/DII institutional-flow stories are
+    excluded. Official regulator feeds supply agency context when it is omitted
+    from an item headline; low-signal SEBI institutional PR is skipped.
     Regulatory directives remain eligible; routine price moves need a material
     catalyst, while exceptional broad-market events remain eligible.
     """
@@ -1298,20 +1334,23 @@ def merge_archive(archive, feed_result):
     archive["retention_days"] = ARCHIVE_RETENTION_DAYS
     old_curation = archive.get("curation", {})
     archive["curation"] = {
-        "version": 8,
+        "version": ARCHIVE_CURATION_VERSION,
         "scope": ["economy", "capital_market", "stock_market"],
         "excludes": [
             "financial_results", "opinions_and_recommendations", "generic_market_wraps",
+            "generic_stock_movers_and_shakers_roundups",
+            "routine_corporate_action_ex_date_calendars",
             "stock_portfolio_and_wealth_listicles", "company_corporate_announcements",
             "commercial_order_and_contract_wins", "ipo_and_fpo_related_news",
             "fii_fpi_dii_related_news", "routine_price_moves_without_material_catalyst",
             "low_materiality_announcements",
         ],
         "newsworthiness_rule": (
-            "Exclude stock portfolio/wealth-loss listicles, issuer corporate announcements, "
-            "commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; "
-            "retain regulator/court directives and price-action stories with material catalysts or "
-            "exceptional broad-market context."
+            "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, "
+            "routine dividend/stock-split/other corporate-action ex-date calendars, issuer "
+            "corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and "
+            "FII/FPI/DII-related stories; retain regulator/court directives and price-action stories "
+            "with material catalysts or exceptional broad-market context."
         ),
         "near_duplicate_window_hours": ARCHIVE_DEDUPE_WINDOW_HOURS,
         "last_curated_ist": NOW.strftime("%Y-%m-%d %H:%M:%S IST"),
@@ -1565,7 +1604,7 @@ def make_prompt(candidates):
 
 CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
-Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets. Prefer meaningful policy/regulation, macro data, market structure, financing/debt, and other material economy- or market-level developments. The supplied candidates have already passed the channel's filters; do NOT choose or introduce financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap filler, routine price-only moves, issuer corporate announcements, leadership/board appointments, company/commercial order or contract wins, any IPO/FPO/listing/subscription coverage, or FII/FPI/DII/institutional-flow stories. Regulator, government, and court orders remain eligible. Do not choose a story already posted in an earlier slot. If nothing is strong enough, return skip=true.
+Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets. Prefer meaningful policy/regulation, macro data, market structure, financing/debt, and other material economy- or market-level developments. The supplied candidates have already passed the channel's filters; do NOT choose or introduce financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap or Movers & Shakers filler, routine price-only moves, dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, leadership/board appointments, company/commercial order or contract wins, any IPO/FPO/listing/subscription coverage, or FII/FPI/DII/institutional-flow stories. Regulator, government, and court orders remain eligible. Do not choose a story already posted in an earlier slot. If nothing is strong enough, return skip=true.
 
 Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts:
 1. 📰 Kya hua: the essential reported facts.
@@ -2053,7 +2092,7 @@ def write_preview_report(
             "Only economy, capital-market and stock-market headlines retained",
             "Company financial results and earnings stories excluded",
             "Opinions, analyst/broker commentary, forecasts, recommendations and price targets excluded",
-            "Generic market wraps and repeated/near-duplicate coverage excluded",
+            "Generic market wraps, Movers & Shakers roundups, ex-date calendars and repeated/near-duplicate coverage excluded",
         ],
         "screened_story_count": len(groups),
         "top_stories": top_stories,
@@ -2097,7 +2136,7 @@ def write_preview_report(
         "## Filters applied",
         "- Only economy, capital-market and stock-market stories are retained.",
         "- Financial results/earnings, opinions, forecasts, analyst/broker commentary, recommendations and price targets are excluded.",
-        "- Generic market wraps and repeated/near-duplicate coverage are collapsed.",
+        "- Generic market wraps, Movers & Shakers roundups and corporate-action ex-date calendars are excluded; near-duplicate coverage is collapsed.",
         "",
         f"## Screened stories ({len(top_stories)} shown; {len(groups)} groups)",
     ])
@@ -2164,16 +2203,23 @@ def write_preview_report(
 
 
 def current_queue_slot():
-    """Assign the next slot already used by the Telegram poster and content queue."""
-    slots = (("A", 8, 15), ("B", 12, 45), ("C", 20, 30))
-    for slot, hour, minute in slots:
-        when = NOW.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if when > NOW:
-            return slot, when
-    next_day = (NOW + timedelta(days=1)).replace(
-        hour=slots[0][1], minute=slots[0][2], second=0, microsecond=0
-    )
-    return slots[0][0], next_day
+    """Assign this run to the current two-hour slot, or the next morning slot."""
+    if NOW.hour < 8:
+        slot, hour, minute = QUEUE_POST_SLOTS_IST[0]
+        day = NOW.date()
+    elif NOW.hour >= 22:
+        slot, hour, minute = QUEUE_POST_SLOTS_IST[0]
+        day = NOW.date() + timedelta(days=1)
+    else:
+        slot, hour, minute = next(
+            entry for entry in reversed(QUEUE_POST_SLOTS_IST)
+            if entry[1] <= NOW.hour
+        )
+        day = NOW.date()
+
+    when = NOW.replace(year=day.year, month=day.month, day=day.day,
+                       hour=hour, minute=minute, second=0, microsecond=0)
+    return slot, when
 
 
 def add_to_queue(queue, draft, candidates):
@@ -2333,6 +2379,11 @@ def run_archive_and_queue():
     except Exception as exc:
         print(f"⚠️ RSS archive is safe; AI enrichment failed without stopping the scrape: {str(exc)[:160]}")
 
+    queue_post_enabled = os.environ.get("NEWS_QUEUE_POST_ENABLED", "true").strip().lower()
+    if queue_post_enabled in {"false", "0", "no", "off"}:
+        print("🌙 Quiet-hours scrape: archive refreshed; queue and Telegram were left untouched")
+        return 0
+
     try:
         queue = load_json(QUEUE_FILE, {"queue": []})
         if not isinstance(queue, dict) or not isinstance(queue.get("queue"), list):
@@ -2368,7 +2419,7 @@ def run_archive_and_queue():
     if state_changed:
         save_json(STATE_FILE, state)
     if queue_changed:
-        print("📨 Existing Telegram poster will deliver the queued item on its normal schedule.")
+        print("📨 Queue poster will handle delivery; this script never sends Telegram directly.")
     return 0
 
 
