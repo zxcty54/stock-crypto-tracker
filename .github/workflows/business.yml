@@ -2,8 +2,8 @@ name: Daily Business News Archive & Telegram Queue
 
 on:
   schedule:
-    # Every 2 hours at :00 IST (UTC cron uses :30); scrape overnight too.
-    # Telegram delivery is separately suppressed from 22:00 to 08:00 IST.
+    # Every 2 hours at :00 IST (UTC cron uses :30); scrape and queue overnight too.
+    # telegram_poster.py enforces the 08:00–22:00 IST delivery window.
     - cron: '30 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
   workflow_dispatch:
     inputs:
@@ -51,21 +51,6 @@ jobs:
       - name: Install dependency
         run: pip install --quiet requests
 
-      - name: Determine IST posting window
-        id: posting_window
-        run: |
-          python - <<'PY'
-          from datetime import datetime
-          from zoneinfo import ZoneInfo
-          import os
-
-          now = datetime.now(ZoneInfo("Asia/Kolkata"))
-          allowed = 8 <= now.hour < 22
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
-              output.write(f"allowed={str(allowed).lower()}\n")
-          print(f"IST now: {now:%Y-%m-%d %H:%M}; queue/posting allowed: {allowed}")
-          PY
-
       - name: Scrape RSS, enrich the archive, and queue a post-ready news draft
         id: scrape_queue
         if: ${{ github.event_name == 'schedule' || github.event.inputs.task == 'archive' }}
@@ -80,7 +65,6 @@ jobs:
           GROQ_MODEL: ${{ vars.GROQ_MODEL }}
           NEWS_ARCHIVE_AI_MAX_STORIES: "24"
           NEWS_ARCHIVE_AI_BATCH_SIZE: "4"
-          NEWS_QUEUE_POST_ENABLED: ${{ steps.posting_window.outputs.allowed }}
         run: python daily_business_news.py archive
 
       - name: Post one queued Telegram item
