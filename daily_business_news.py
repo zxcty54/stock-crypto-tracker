@@ -1341,17 +1341,14 @@ def merge_archive(archive, feed_result):
 
 
 def archive_to_items(archive, previous_scraped_at=None, fresh_urls=None):
-    """Return only unprocessed stories from the latest hourly polling interval.
+    """Return pending in-scope stories still within the post freshness limit.
 
-    The first run in the 4–9 PM window gets a wider same-day lookback. Later
-    runs use the prior scrape timestamp with a 45-minute overlap for feed/action
-    delays. Newly discovered URLs may still qualify up to the 12-hour age cap.
+    Retry unprocessed archive stories across runs: narrowing candidates to only
+    items newer than the previous scrape can permanently lose them after an
+    off-window run, source-context failure, or transient AI error. The freshness
+    cap plus archive/queue statuses and seen-story state prevent stale or duplicate
+    posts. The prior-scrape arguments remain for compatibility with callers.
     """
-    fresh_urls = fresh_urls or set()
-    if previous_scraped_at:
-        cutoff = previous_scraped_at - timedelta(minutes=45)
-    else:
-        cutoff = NOW - timedelta(hours=6)
     hard_cutoff = NOW - timedelta(hours=POST_CANDIDATE_MAX_AGE_HOURS)
     output = []
     for record in archive.get("stories", []):
@@ -1359,11 +1356,6 @@ def archive_to_items(archive, previous_scraped_at=None, fresh_urls=None):
             continue
         published = _parse_archive_time(record.get("published_at"))
         if not published or published > NOW + timedelta(hours=2) or published < hard_cutoff:
-            continue
-        if previous_scraped_at:
-            if published < cutoff and record.get("url") not in fresh_urls:
-                continue
-        elif published < cutoff:
             continue
         output.append({
             "source": record.get("source", "News source"),
@@ -2223,7 +2215,9 @@ def add_to_queue(queue, draft, candidates):
 
 def _update_news_state(state, slot_key, selected):
     state.setdefault("generated_slots", [])
-    state["generated_slots"] = (state["generated_slots"] + [slot_key])[-180:]
+    state["generated_slots"] = list(dict.fromkeys(
+        state["generated_slots"] + [slot_key]
+    ))[-180:]
     if selected:
         state.setdefault("seen_story_keys", [])
         state["seen_story_keys"] = (state["seen_story_keys"] + [selected["story_key"]])[-500:]
@@ -2244,21 +2238,21 @@ def _print_archive_enrichment_stats(stats):
 
 
 def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_urls):
-    """Draft and enqueue at most one source-grounded business story per run."""
-    if NOW.hour not in POSTING_HOURS_IST:
-        print("ℹ️ Outside the existing afternoon/evening posting window; archive updated without queueing")
-        return False, False
-
+    """Queue a validated AI draft; schedule it at the next existing queue slot."""
     slot_key = NOW.strftime("%Y-%m-%d %H")
-    if slot_key in state.get("generated_slots", []):
-        print("ℹ️ This news-post slot was already processed; preventing a duplicate draft")
-        return False, False
 
     candidate_items = archive_to_items(archive, previous_scraped_at, fresh_urls)
     groups = group_stories(candidate_items)
+    print(
+        f"🔎 Queue screening: {len(candidate_items)} unprocessed stories within "
+        f"{POST_CANDIDATE_MAX_AGE_HOURS}h; {len(groups)} deduplicated event groups"
+    )
     candidates = build_candidates(groups, state)
     if not candidates:
-        print("ℹ️ No fresh story passed the source-detail and educational-value filters; nothing queued")
+        print(
+            f"ℹ️ No post-ready candidate passed duplicate, source-context, and "
+            f"educational-value checks across {len(groups)} fresh event groups; nothing queued"
+        )
         return False, False
 
     if not GEMINI_KEYS and not GROQ_KEYS:
@@ -2311,7 +2305,7 @@ def _queue_business_news_post(archive, queue, state, previous_scraped_at, fresh_
 
 
 def run_archive_and_queue():
-    """Update/enrich the archive and enqueue one ready post in posting hours."""
+    """Update/enrich the archive and enqueue a validated draft at the next queue slot."""
     archive = load_json(ARCHIVE_FILE, {"stories": []})
     if not isinstance(archive, dict) or not isinstance(archive.get("stories", []), list):
         print("❌ News archive has an unexpected schema; refusing to overwrite it")
