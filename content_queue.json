@@ -275,8 +275,24 @@
       "generated_at": "2026-10-19 13:38:39 IST",
       "posted_at": "2026-10-23 00:31:59 IST",
       "telegraph_url": "https://telegra.ph/CEMENT-INDUSTRY-CYCLE-Demand-Aur-Cost-Ka-Khel--October-2026-10-22"
+    },
+    {
+      "id": "newswbwtxmulab",
+      "slot": "C",
+      "hourly_slot_ist": "2026-10-25 20:30",
+      "scheduled_ist": "2026-10-25 20:30",
+      "title": "Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayne",
+      "text": "📊 <b>Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayne</b>\n\n📰 Kya hua: Securities and Exchange Board of India (Sebi) ke chairman Tuhin Kanta Pandey ne announce kiya hai ki regulator short selling aur Securities Lending and Borrowing (SLB) ke framework ko review kar raha hai. Iska maqsad market liquidity aur price discovery ko behtar karna hai. Saath hi, tender offers, buybacks, aur offer for sale mein parallel clearing laane par bhi kaam ho raha hai taaki compliance cost kam ho. Brokerages ke liye scale aur tech reliance ke basis par graded compliance, custodial clients ke liye automated give-up/take-up facility aur corporate bonds ke liye market-making framework laane ki bhi taiyaari hai.\n\n🧩 News ko kaise padhein: yahan 'SLB' (Securities Lending and Borrowing) ek aisi mechanism hai jahan investors apne shares udhaar par de sakte hain taaki short sellers unhe bech sakein. Iska data batata hai ki market mein borrowing-lending kitni active hai. Corporate bonds ka market size 61 lakh crore rupees ke aas-paas hai, jiske liye naya market making framework laya ja raha hai.\n\n💡 Business mein iska matlab: Jab short-selling aur SLB ke rules aasan hote hain, toh institutional aur retail participants dono ke liye hedging aur position banana smooth ho jata hai. Custodial clients ke funds jo pehle confirmation ke intezaar mein block rehte the, unke free hone se capital efficiency badhegi. Chote brokers ke liye graded compliance compliance burden ko ghatata hai, jisse market mein participation expand ho sakta hai.\n\n🔭 Aage kya dekhein: Yeh dekhna hoga ki Sebi final guidelines mein short-selling aur SLB ke process ko kitna transparent banata hai. Corporate bonds ke liye market-making framework kaise liquidity generate karta hai, yeh secondary market data se pata chalega.\n\nKya aapko lagta hai ki naye rules se corporate bond market mein retail participation badhegi?\n\n🔗 Source: <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-to-revamp-short-selling-securities-lending-rules/articleshow/135182788.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:f2900070e222",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-to-revamp-short-selling-securities-lending-rules/articleshow/135182788.cms",
+      "source_headline": "Sebi to revamp short-selling, securities lending rules",
+      "story_key": "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
+      "generated_at": "2026-10-25 13:00:36 IST"
     }
   ],
-  "total": 23,
-  "last_scheduled": "2026-10-22 08:15"
+  "total": 24,
+  "last_scheduled": "2026-10-25 20:30"
 }
