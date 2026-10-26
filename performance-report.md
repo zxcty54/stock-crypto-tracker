@@ -1,32 +1,32 @@
 # 📊 Performance Report
 
-**26-Oct-2026 00:00 IST** | 63 posts tracked | channel avg **26 views**
+**27-Oct-2026 02:09 IST** | 66 posts tracked | channel avg **26 views**
 
-*38 posts pehchaane gaye, 25 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*40 posts pehchaane gaye, 26 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 37 | 1.43 |
+| lifestyle | 3 | 37 | 1.46 |
 | psychology | 2 | 36 | 1.0 |
-| technical | 6 | 35 | 1.33 |
+| technical | 6 | 35 | 1.36 |
 | process | 1 | 31 | 1.0 |
 | tools | 1 | 28 | 1.0 |
-| awareness | 1 | 28 | 1.0 |
-| business_model | 7 | 25 | 0.94 |
-| corporate | 31 | 24 | 0.94 |
-| risk | 4 | 24 | 0.9 |
-| other | 5 | 20 | 0.78 |
-| market_mechanics | 2 | 20 | 1.0 |
+| business_model | 7 | 25 | 0.99 |
+| corporate | 32 | 24 | 0.95 |
+| risk | 4 | 24 | 0.92 |
+| other | 5 | 21 | 0.82 |
+| awareness | 2 | 17 | 1.0 |
+| market_mechanics | 3 | 16 | 0.64 |
 
 ## 📈 Channel Growth
 
 **Subscribers: 475** (target 1000)
 
 - Pichhle 7 din me: **+472**
-- Average: **24.84/din**
-- Isi raftaar se 1000 subs: **~21 din**
+- Average: **23.6/din**
+- Isi raftaar se 1000 subs: **~22 din**
 
 
 ## 🏆 Top posts
@@ -44,8 +44,8 @@
 
 ## ⚠️ Kam chale posts
 
-- 9 views — Yes Bank AT-1 Bonds Coupon Discretion Update  
-  `business_model`
+- 6 views — Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayn  
+  `awareness`
 - 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
   `risk`
 - 0 views — Channel created  
