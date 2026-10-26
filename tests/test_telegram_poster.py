@@ -25,6 +25,26 @@ class TelegramPosterScheduleTests(unittest.TestCase):
             with self.subTest(now=now):
                 self.assertEqual(poster.is_posting_window(now), expected)
 
+    def test_business_news_bold_markup_is_sent_in_html_mode(self):
+        response = Mock()
+        response.json.return_value = {"ok": True, "result": {"message_id": 456}}
+        message = (
+            "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n"
+            "📍 <b>KEY DEVELOPMENT</b>\nReported update"
+        )
+
+        with (
+            patch.object(poster, "DRY_RUN", False),
+            patch.object(poster, "BOT_TOKEN", "test-token"),
+            patch.object(poster.requests, "post", return_value=response, create=True) as request,
+        ):
+            result = poster.send_telegram_message(message)
+
+        self.assertEqual(result, (True, 456, None))
+        payload = request.call_args.kwargs["json"]
+        self.assertEqual(payload["parse_mode"], "HTML")
+        self.assertIn("<b>KEY DEVELOPMENT</b>", payload["text"])
+
     def test_due_business_news_is_selected_before_older_queue_posts(self):
         now = datetime(2026, 10, 24, 12, 0, tzinfo=poster.IST)
         queue = {"queue": [

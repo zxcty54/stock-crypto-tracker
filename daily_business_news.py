@@ -1606,12 +1606,12 @@ CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
 Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets. Prefer meaningful policy/regulation, macro data, market structure, financing/debt, and other material economy- or market-level developments. The supplied candidates have already passed the channel's filters; do NOT choose or introduce financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap or Movers & Shakers filler, routine price-only moves, dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, leadership/board appointments, company/commercial order or contract wins, any IPO/FPO/listing/subscription coverage, or FII/FPI/DII/institutional-flow stories. Regulator, government, and court orders remain eligible. Do not choose a story already posted in an earlier slot. If nothing is strong enough, return skip=true.
 
-Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts, each as a separate paragraph with the exact heading shown:
-1. 📰 Kya hua: the essential reported facts.
-2. 🧩 News ko kaise padhein: explain a relevant number, term, or structure only when it is actually relevant to this story.
-3. 💡 Business mein iska matlab: explain the business mechanism and why it could matter to the sector, market, or economy. Tie the lesson to the supplied facts.
-4. 🔭 Aage kya dekhein: name concrete follow-up events or metrics and, where useful, explain conditional scenarios. No confident prediction.
-5. End with one thoughtful reader question on its own final line, prefixed with 💬. Do not number the sections.
+Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words), with a concise, professional editorial tone. Explain how to interpret THIS news—not just repeat the headline or add a generic trading lesson. Use these exact section headings, each on its own paragraph; do not number them:
+📍 Key development: the essential reported facts.
+🧭 Market context: explain a relevant number, term, or structure only when it matters to this story.
+🏦 Business implications: explain the evidence-based mechanism and why it could matter to the sector, market, or economy. Keep implications conditional.
+🔎 Key watchpoints: name concrete follow-up events or metrics; do not make confident predictions.
+Finish with one thoughtful reader question on its own final line, prefixed with 💬.
 
 Separate reported fact from interpretation. Explain what the news does NOT prove when relevant. Keep it specific and practical for an Indian market reader.
 
@@ -2005,16 +2005,22 @@ def _source_html(name: str, url: str) -> str:
 
 
 NEWS_BODY_SECTION_PATTERN = re.compile(
-    r"(?<!\w)(?:[1-4][.)]\s*)?(?:[📰🧩💡🔭]\s*)?"
-    r"(?P<label>Kya\s+hua|News\s+ko\s+kaise\s+padhein|"
+    r"(?<!\w)(?:[1-4][.)]\s*)?(?:[📰🧩💡🔭📍🧭🏦🔎]\s*)?"
+    r"(?P<label>Key\s+development|Market\s+context|Business\s+implications|"
+    r"Key\s+watchpoints|Kya\s+hua|News\s+ko\s+kaise\s+padhein|"
     r"Business\s+mein\s+iska\s+matlab|Aage\s+kya\s+dekhein)\s*[:：]\s*",
     re.IGNORECASE,
 )
 NEWS_BODY_SECTION_HEADINGS = {
-    "kya hua": "📰 <b>Kya hua</b>",
-    "news ko kaise padhein": "🧩 <b>News ko kaise padhein</b>",
-    "business mein iska matlab": "💡 <b>Business mein iska matlab</b>",
-    "aage kya dekhein": "🔭 <b>Aage kya dekhein</b>",
+    "key development": "📍 <b>KEY DEVELOPMENT</b>",
+    "market context": "🧭 <b>MARKET CONTEXT</b>",
+    "business implications": "🏦 <b>BUSINESS IMPLICATIONS</b>",
+    "key watchpoints": "🔎 <b>KEY WATCHPOINTS</b>",
+    # Normalize older draft wording to the current editorial labels.
+    "kya hua": "📍 <b>KEY DEVELOPMENT</b>",
+    "news ko kaise padhein": "🧭 <b>MARKET CONTEXT</b>",
+    "business mein iska matlab": "🏦 <b>BUSINESS IMPLICATIONS</b>",
+    "aage kya dekhein": "🔎 <b>KEY WATCHPOINTS</b>",
 }
 
 
@@ -2033,8 +2039,11 @@ def _format_news_section_content(text):
         question = html.escape(question_match.group(1).strip(), quote=False)
         lead = _clean_news_body_chunk(content[:question_match.start()])
         if lead:
-            return f"{html.escape(lead, quote=False)}\n\n💬 <b>{question}</b>"
-        return f"💬 <b>{question}</b>"
+            return (
+                f"{html.escape(lead, quote=False)}\n\n"
+                f"💬 <b>DISCUSSION POINT</b>\n<b>{question}</b>"
+            )
+        return f"💬 <b>DISCUSSION POINT</b>\n<b>{question}</b>"
     return html.escape(content, quote=False)
 
 
@@ -2076,12 +2085,12 @@ def render_post(draft, candidates):
     title = html.escape(draft["title"], quote=False)
     body = _format_business_news_body(draft["body"])
     text = (
-        "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n"
-        f"📊 <b>{title}</b>\n"
+        "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n"
+        f"📌 <b>{title}</b>\n"
         "━━━━━━━━━━━━━━━━━━\n\n"
         f"{body}\n\n"
         "━━━━━━━━━━━━━━━━━━\n"
-        f"🔗 <b>Source:</b> {links}\n"
+        f"🔗 <b>SOURCES</b> · {links}\n"
         "🤖 <i>AI-assisted analysis of public business news.</i>\n\n"
         "⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>"
     )
