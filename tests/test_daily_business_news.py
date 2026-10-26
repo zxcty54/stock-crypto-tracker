@@ -625,6 +625,36 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
         )
         self.assertEqual(updated["stories"][0]["topic"], "capital_market")
 
+    def test_render_post_curates_sections_and_escapes_untrusted_text(self):
+        candidate = {
+            "id": "story_1",
+            "source": "CNBC-TV18",
+            "source_url": "https://example.com/story?a=1&b=2",
+            "other_coverage": [],
+        }
+        draft = {
+            "story_id": "story_1",
+            "title": "RBI update <important>",
+            "body": (
+                "📰 Kya hua: RBI issued <directive>. "
+                "🧩 News ko kaise padhein: Rate policy is a signal, not an outcome. "
+                "💡 Business mein iska matlab: Lending conditions depend on follow-through. "
+                "🔭 Aage kya dekhein: Check the next data release.\n"
+                "💬 Aap kaunsa signal track karenge?"
+            ),
+        }
+
+        text, selected = news.render_post(draft, [candidate])
+
+        self.assertIs(selected, candidate)
+        self.assertIn("🗞️ <b>BUSINESS NEWS • EXPLAINED</b>", text)
+        self.assertIn("📊 <b>RBI update &lt;important&gt;</b>", text)
+        self.assertIn("📰 <b>Kya hua</b>\nRBI issued &lt;directive&gt;.", text)
+        self.assertIn("💬 <b>Aap kaunsa signal track karenge?</b>", text)
+        self.assertIn('href="https://example.com/story?a=1&amp;b=2"', text)
+        self.assertNotIn("<directive>", text)
+        self.assertNotIn("<important>", text)
+
     def test_scrape_enqueues_a_formatted_business_news_post_even_during_quiet_hours(self):
         fixed_now = datetime(2026, 10, 24, 2, 30, tzinfo=news.IST)
         story = self.item(
@@ -642,10 +672,10 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             "headline ko policy signal samjhein, guaranteed business outcome nahi. 🔭 Aage kya dekhein: "
             "agla official inflation data, RBI ka communication, bank lending rates aur credit growth "
             "track karein. Agar inflation pressure kam rehta hai, policy debate badal sakti hai; agar "
-            "wapas badhta hai, rate stance lamba samay steady reh sakta hai. Aap is decision ko kis "
-            "signal ke saath compare karenge?"
+            "wapas badhta hai, rate stance lamba samay steady reh sakta hai. Policy ko samajhne ke liye "
+            "ek update ke bajay data aur baad ke decisions ka trend dekhein.\n"
+            "💬 Aap is decision ko kis signal ke saath compare karenge?"
         )
-        body += " Policy ko samajhne ke liye ek update ke bajay data aur baad ke decisions ka trend dekhein."
         ai_response = json.dumps({
             "skip": False,
             "selected_story_id": "story_1",
@@ -704,8 +734,15 @@ class DailyBusinessNewsFilterTests(unittest.TestCase):
             self.assertEqual(item["slot"], "A")
             self.assertEqual(item["scheduled_ist"], "2026-10-24 08:00")
             self.assertFalse(item["used"])
+            self.assertIn("🗞️ <b>BUSINESS NEWS • EXPLAINED</b>", item["text"])
             self.assertIn("📊 <b>RBI holds repo rate", item["text"])
-            self.assertIn("🔗 Source: <a href=", item["text"])
+            self.assertIn("━━━━━━━━━━━━━━━━━━", item["text"])
+            self.assertIn("📰 <b>Kya hua</b>", item["text"])
+            self.assertIn("🧩 <b>News ko kaise padhein</b>", item["text"])
+            self.assertIn("💡 <b>Business mein iska matlab</b>", item["text"])
+            self.assertIn("🔭 <b>Aage kya dekhein</b>", item["text"])
+            self.assertIn("💬 <b>Aap is decision", item["text"])
+            self.assertIn("🔗 <b>Source:</b> <a href=", item["text"])
             self.assertIn("AI-assisted analysis of public business news", item["text"])
             self.assertIn("Educational only. Not investment advice.", item["text"])
             archive = json.loads(archive_path.read_text(encoding="utf-8"))
