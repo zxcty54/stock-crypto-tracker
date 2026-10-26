@@ -1,6 +1,208 @@
 {
   "stories": [
     {
+      "id": "newssbjmtlrrdg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global equity funds attract $28.16 billion as easing yields boost sentiment",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/global-equity-funds-attract-28-16-billion-as-easing-yields-boost-sentiment/articleshow/135206114.cms",
+      "published_at": "2026-10-26T13:13:14+05:30",
+      "published_ist": "2026-10-26 13:13 IST",
+      "summary": "Global equity funds attracted $28.16 billion in weekly inflows as easing US Treasury yields and strong corporate earnings lifted investor sentiment. Asian equities led regional allocations, while technology, bond and precious metals funds also drew fresh investments.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsvufnepspny",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Sensex today | Stock Market Live: Sensex in volatile trade, Nifty holds above 22,600",
+      "url": "https://www.thehindubusinessline.com/markets/sensex-nifty50-today-stock-market-live-updates-26-october-2026/article71622964.ece",
+      "published_at": "2026-10-26T12:43:23+05:30",
+      "published_ist": "2026-10-26 12:43 IST",
+      "summary": "Sensex, Nifty, Share Prices Live: By 12 noon, benchmarks traded largely flat. Sensex at 73,153.63, and Nifty 50 at 22,596.90.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newskntbuxyjxn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market: China stocks slip as tech shares fall ahead of central bank meetings",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-china-stocks-slip-as-tech-shares-fall-ahead-of-central-bank-meetings/articleshow/135205364.cms",
+      "published_at": "2026-10-26T12:39:52+05:30",
+      "published_ist": "2026-10-26 12:39 IST",
+      "summary": "Chinese stocks declined as technology shares weakened and investors adopted a cautious stance ahead of major central bank meetings and corporate earnings. Concerns about the AI-driven rally, slowing economic conditions and possible trust-sector selling added to market pressure, while investors watched for support from state-backed funds.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsesszgqfijg",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "US stock investing expands on Indian apps: What Groww, Zerodha, Angel One offer",
+      "url": "https://www.cnbctv18.com/personal-finance/us-stock-investing-expands-indian-apps-groww-zerodha-angel-one-offer-20019233.htm",
+      "published_at": "2026-10-26T12:11:10+05:30",
+      "published_ist": "2026-10-26 12:11 IST",
+      "summary": "Indian investment platforms including Groww, Zerodha, Angel One, and Upstox are expanding access to US stocks and ETFs through GIFT City framework, supporting fractional investing.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 13:29:55 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Indian retail brokerage apps expanding access to US equities via GIFT City infrastructure indicate a structural push to channel domestic retail capital into overseas markets. If platforms scale these pathways successfully, retail investors could increasingly diversify asset allocations globally without navigating complex direct foreign outward remittance hurdles. However, an expansion in app features does not guarantee sustained retail demand or profitability for brokerages, given variable brokerage rates, foreign exchange charges, and regulatory compliance costs.",
+        "what_to_watch": [
+          "Actual transaction volumes and foreign exchange flows routed through GIFT City entities for international investing.",
+          "Quarterly disclosures by brokerages regarding active user adoption rates and fee structures post-promotional periods.",
+          "Updates to Liberalised Remittance Scheme (LRS) limits or regulatory circulars from the International Financial Services Centres Authority."
+        ],
+        "evergreen_lesson": "Regulatory sandboxes and special zones like GIFT City enable domestic intermediaries to bridge international market access, shifting the competitive bottleneck from license acquisition to user acquisition costs and foreign exchange efficiency."
+      }
+    },
+    {
+      "id": "newswrarequzlc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market: Japan bond yields edge higher ahead of key central bank meetings",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-japan-bond-yields-edge-higher-ahead-of-key-central-bank-meetings/articleshow/135204344.cms",
+      "published_at": "2026-10-26T11:39:59+05:30",
+      "published_ist": "2026-10-26 11:39 IST",
+      "summary": "Japanese government bond yields edged higher as investors assessed the monetary-policy outlook ahead of meetings by the Bank of Japan and the US Federal Reserve. Markets expected both central banks to keep rates unchanged while monitoring signals about possible December rate increases, inflation and economic growth.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 13:29:55 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Japanese government bond yields edged higher as investors reassessed global monetary policy expectations ahead of central bank meetings. While the reported fact shows rising yields and a hawkish stance by the Bank of Japan, the underlying market mechanism implies that persistent global inflation or slowing tech investments could trigger further monetary tightening. If central banks raise rates as anticipated, borrowing costs for corporations and governments would increase globally.",
+        "what_to_watch": [
+          "Official policy rate announcements and statements from the Bank of Japan and US Federal Reserve meetings.",
+          "Subsequent adjustments in domestic bond yields and foreign portfolio capital flows."
+        ],
+        "evergreen_lesson": "Bond yields move inversely to prices, reflecting shifting macroeconomic expectations rather than isolated asset performance."
+      }
+    },
+    {
+      "id": "newsioxxtrujjc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Tonbo Imaging shares soar another 17% after a 64% listing pop. Buy, sell or hold the stock?",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/tonbo-imaging-shares-soar-another-17-after-a-64-listing-pop-buy-sell-or-hold-the-stock/articleshow/135204062.cms",
+      "published_at": "2026-10-26T11:23:41+05:30",
+      "published_ist": "2026-10-26 11:23 IST",
+      "summary": "Tonbo Imaging shares rallied after a strong stock market debut, following heavy demand for its IPO. Investors will track revenue growth, order execution, profitability, working capital and cash flows to assess the defence electronics company’s long-term prospects.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 13:29:55 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Tonbo Imaging shares rallied significantly following a strong market debut driven by heavy institutional and retail subscription. While the reported numbers reflect high initial listing gains and oversubscription, this mechanism implies that high market valuations increase the pressure on the company to deliver rapid revenue growth and margin expansion. If execution falters against elevated expectations, price volatility could intensify.",
+        "what_to_watch": [
+          "Quarterly financial disclosures tracking revenue growth, EBITDA margins, and operating cash flows.",
+          "Actual execution of the order book and sustained demand for defence electronics products."
+        ],
+        "evergreen_lesson": "An initial public offering premium reflects market sentiment and subscription demand, which must eventually be validated by sustained operational cash flows and earnings growth."
+      }
+    },
+    {
+      "id": "newslgqcrqrfig",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Oil, US Treasuries prop up Indian bonds",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/oil-us-treasuries-prop-up-indian-bonds/articleshow/135203917.cms",
+      "published_at": "2026-10-26T11:12:30+05:30",
+      "published_ist": "2026-10-26 11:12 IST",
+      "summary": "Indian government bonds increased in early trading as oil prices declined, following a previous rally. The Brent crude price slipped significantly after hitting a six-month high last week, which impacted the debt market. Foreign investors have sold a substantial amount of Indian government debt since August, contributing to a prolonged rise in benchmark yields. Concerns over inflation and the Reserve Bank of India's rate decisions are influencing market sentiments.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "queued",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 13:29:55 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Indian government bonds inched higher as global crude oil prices retreated from recent highs and US Treasuries advanced. The reported easing of yields implies that domestic debt markets remain highly sensitive to external commodity price shocks and foreign capital outflows. If oil prices remain volatile, imported inflation pressures could persist and influence central bank rate decisions.",
+        "what_to_watch": [
+          "Brent crude price movements and weekly foreign portfolio investor debt outflow or inflow data.",
+          "Reserve Bank of India policy pronouncements and domestic inflation trajectory updates."
+        ],
+        "evergreen_lesson": "For energy-importing economies, external commodity price movements act as a primary transmission channel for domestic debt market sentiment."
+      },
+      "processed_ist": "2026-10-26 13:29:55 IST",
+      "post_id": "newsgcczncgvtq"
+    },
+    {
+      "id": "newsxwjpdtmius",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "ICICI Securities favours data center, defence stocks; says market better placed than in March",
+      "url": "https://www.cnbctv18.com/market/icici-securities-bets-data-center-defence-stocks-market-better-placed-than-march-correction-analysts-infosys-it-financials-geopolitical-tensions-nifty-sensex-bse-nse-cg-power-crude-oil-prices-alpha-article-20019054.htm",
+      "published_at": "2026-10-26T10:05:43+05:30",
+      "published_ist": "2026-10-26 10:05 IST",
+      "summary": "ICICI Securities' Pankaj Pandey says India's market is in a stronger position than during the March correction as earnings remain healthy and valuations have turned attractive. He prefers data center infrastructure, defence and select financial stocks, while staying cautious on Tier-1 IT and most cement companies.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsaosgtfrihl",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "PMS Talk: AI, defence and electronics manufacturing are the next growth engines, says Vaibhav Agarwal",
+      "url": "https://economictimes.indiatimes.com/markets/expert-view/pms-talk-ai-defence-and-electronics-manufacturing-are-the-next-growth-engines-says-vaibhav-agarwal/articleshow/135201983.cms",
+      "published_at": "2026-10-26T09:06:39+05:30",
+      "published_ist": "2026-10-26 09:06 IST",
+      "summary": "In this edition of ETMarkets PMS Talk, we speak with Vaibhav Agarwal, Founder & CIO, Accelt Asset Management LLP, about how his team’s bottom-up stock-picking approach identifies businesses capable of delivering sustained earnings growth. He explains why smallcaps offer opportunities among companies growing earnings at 25–30%, how the GMCV framework — Growth, Management, Capital Efficiency and Valuation — helps separate potential compounders from value traps, and why paying the right price matters even when a business has a compelling growth story.",
+      "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "first_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 13:29:55 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Portfolio managers increasingly point to structural themes like precision manufacturing, defence, and AI ancillaries as primary growth drivers amidst rangebound headline indices. The stated outperformance implies that bottom-up stock selection in high-growth smallcap segments can generate alpha when broader macroeconomic indices stall. If underlying earnings fail to match high growth expectations, valuation multiples could compress sharply.",
+        "what_to_watch": [
+          "Reported quarterly earnings growth rates for smallcap portfolio holdings against projected targets.",
+          "Execution metrics on capital efficiency and return ratios across emerging manufacturing sectors."
+        ],
+        "evergreen_lesson": "Sustained alpha generation relies on identifying structural earnings growth rather than broad market momentum."
+      }
+    },
+    {
       "id": "newsmnlankraks",
       "source": "RBI Press Releases",
       "source_priority": 3,
@@ -10,9 +212,9 @@
       "published_ist": "2026-10-25 19:50 IST",
       "summary": "The Hon’ble Prime Minister of India, Shri Narendra Modi, today inaugurated the Reserve Bank of India’s newly established Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha. This marks a significant milestone in strengthening the technological foundation of India’s financial system. Hon’ble Governor of Odisha, Shri Brajmohan Ram, Hon’ble Chief Minister of Odisha, Shri Mohan Charan Majhi; Hon’ble Union Finance and Corporate Affairs Minister, Smt. Nirmala Sitharaman; Hon’ble Union Minister for Tribal Affairs, Shri Jual Oram; Hon’ble Deputy Chief Ministers of Odisha, Shri Kanak Vardhan Singh Deo and Smt. Pravati Parida, and Hon’ble Members of Parliament, Shri Manmohan Samal and Smt. Aparajita Sarangi, also graced the event. 2. In his address, the Hon’ble Prime Minister highlighted the significance of the institutions inaugurated today - the Data Centre and the Cybersecur",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-26T06:02:05.303730+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-26 06:02:05 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -69,9 +271,9 @@
       "published_ist": "2026-10-25 16:05 IST",
       "summary": "The sharp rise in government bond yields since the Reserve Bank of India's (RBI) October monetary policy review threatens to increase the government's borrowing costs and put pressure on its interest expenditure, potentially squeezing fiscal flexibility, according to experts.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-26T06:02:05.303730+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-26 06:02:05 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -143,9 +345,9 @@
       "published_ist": "2026-10-25 10:06 IST",
       "summary": "In a disclosure dated October 24, the private sector lender said it was continuing to examine the judgment and evaluate all available options and suitable steps going forward.",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-26T06:02:05.303730+05:30",
+      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-26 06:02:05 IST",
+      "last_seen_ist": "2026-10-26 13:29:55 IST",
       "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
@@ -622,43 +824,43 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-26T06:02:05.303730+05:30",
-  "last_scraped_ist": "2026-10-26 06:02:05 IST",
+  "last_scraped_at": "2026-10-26T13:29:55.870502+05:30",
+  "last_scraped_ist": "2026-10-26 13:29:55 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
-      "fresh_items": 22,
+      "fresh_items": 48,
       "accepted_items": 4,
-      "filtered_items": 18,
+      "filtered_items": 44,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
-      "fresh_items": 48,
-      "accepted_items": 8,
-      "filtered_items": 40,
+      "fresh_items": 50,
+      "accepted_items": 6,
+      "filtered_items": 44,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
-      "fresh_items": 7,
-      "accepted_items": 0,
-      "filtered_items": 7,
+      "fresh_items": 17,
+      "accepted_items": 1,
+      "filtered_items": 16,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
-      "fresh_items": 1,
+      "fresh_items": 5,
       "accepted_items": 1,
-      "filtered_items": 0,
+      "filtered_items": 4,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -666,7 +868,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-26 06:02:05 IST",
+      "checked_ist": "2026-10-26 13:29:55 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -698,16 +900,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-26 06:02:05 IST"
+    "last_curated_ist": "2026-10-26 13:29:55 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-26 06:02:05 IST",
-    "fetched_items": 78,
-    "accepted_feed_items": 13,
-    "filtered_feed_items": 65,
-    "new_unique_stories": 0,
+    "updated_ist": "2026-10-26 13:29:55 IST",
+    "fetched_items": 120,
+    "accepted_feed_items": 12,
+    "filtered_feed_items": 108,
+    "new_unique_stories": 9,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 23
+    "stories_total": 32
   }
 }
