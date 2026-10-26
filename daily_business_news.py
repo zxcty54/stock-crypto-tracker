@@ -1606,12 +1606,12 @@ CURRENT TIME: {NOW.strftime('%Y-%m-%d %H:%M IST')}
 
 Choose ONE distinct, unseen story from the supplied candidate list with clear reader value. Only choose factual news directly about the economy, capital markets, or stock markets. Prefer meaningful policy/regulation, macro data, market structure, financing/debt, and other material economy- or market-level developments. The supplied candidates have already passed the channel's filters; do NOT choose or introduce financial results/earnings, opinion or editorial pieces, analyst/broker commentary, recommendations, forecasts, target prices, rumours, generic market-wrap or Movers & Shakers filler, routine price-only moves, dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, leadership/board appointments, company/commercial order or contract wins, any IPO/FPO/listing/subscription coverage, or FII/FPI/DII/institutional-flow stories. Regulator, government, and court orders remain eligible. Do not choose a story already posted in an earlier slot. If nothing is strong enough, return skip=true.
 
-Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts:
+Write an original educational Telegram post in natural Hinglish, mostly Roman script (about 160–220 words). This must teach the reader how to interpret THIS news—not just repeat the headline, and not paste a generic trading lesson. Use these parts, each as a separate paragraph with the exact heading shown:
 1. 📰 Kya hua: the essential reported facts.
 2. 🧩 News ko kaise padhein: explain a relevant number, term, or structure only when it is actually relevant to this story.
 3. 💡 Business mein iska matlab: explain the business mechanism and why it could matter to the sector, market, or economy. Tie the lesson to the supplied facts.
 4. 🔭 Aage kya dekhein: name concrete follow-up events or metrics and, where useful, explain conditional scenarios. No confident prediction.
-5. End with one thoughtful reader question.
+5. End with one thoughtful reader question on its own final line, prefixed with 💬. Do not number the sections.
 
 Separate reported fact from interpretation. Explain what the news does NOT prove when relevant. Keep it specific and practical for an Indian market reader.
 
@@ -2004,6 +2004,65 @@ def _source_html(name: str, url: str) -> str:
     return f'<a href="{safe_url}">{safe_name}</a>'
 
 
+NEWS_BODY_SECTION_PATTERN = re.compile(
+    r"(?<!\w)(?:[1-4][.)]\s*)?(?:[📰🧩💡🔭]\s*)?"
+    r"(?P<label>Kya\s+hua|News\s+ko\s+kaise\s+padhein|"
+    r"Business\s+mein\s+iska\s+matlab|Aage\s+kya\s+dekhein)\s*[:：]\s*",
+    re.IGNORECASE,
+)
+NEWS_BODY_SECTION_HEADINGS = {
+    "kya hua": "📰 <b>Kya hua</b>",
+    "news ko kaise padhein": "🧩 <b>News ko kaise padhein</b>",
+    "business mein iska matlab": "💡 <b>Business mein iska matlab</b>",
+    "aage kya dekhein": "🔭 <b>Aage kya dekhein</b>",
+}
+
+
+def _clean_news_body_chunk(text):
+    text = re.sub(r"[ \t]+\n", "\n", str(text or ""))
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = re.sub(r"(?m)^\s*[1-4][.)]\s*", "", text)
+    return text.strip(" \t\r\n:;")
+
+
+def _format_news_section_content(text):
+    """Escape source text and give a final, explicitly marked question emphasis."""
+    content = _clean_news_body_chunk(text)
+    question_match = re.search(r"(?m)^\s*💬\s*(.+?)\s*$", content)
+    if question_match and not content[question_match.end():].strip():
+        question = html.escape(question_match.group(1).strip(), quote=False)
+        lead = _clean_news_body_chunk(content[:question_match.start()])
+        if lead:
+            return f"{html.escape(lead, quote=False)}\n\n💬 <b>{question}</b>"
+        return f"💬 <b>{question}</b>"
+    return html.escape(content, quote=False)
+
+
+def _format_business_news_body(body):
+    """Render the AI's plain-text sections as a tidy, Telegram-safe layout."""
+    body = str(body or "").replace("\r\n", "\n").replace("\r", "\n").strip()
+    matches = list(NEWS_BODY_SECTION_PATTERN.finditer(body))
+    if not matches:
+        return _format_news_section_content(body)
+
+    blocks = []
+    prelude = _clean_news_body_chunk(body[:matches[0].start()])
+    if prelude:
+        blocks.append(html.escape(prelude, quote=False))
+
+    for index, match in enumerate(matches):
+        label = re.sub(r"\s+", " ", match.group("label")).casefold()
+        heading = NEWS_BODY_SECTION_HEADINGS.get(label)
+        if not heading:
+            continue
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(body)
+        content = _clean_news_body_chunk(body[match.end():end])
+        if content:
+            blocks.append(f"{heading}\n{_format_news_section_content(content)}")
+
+    return "\n\n".join(blocks)
+
+
 def render_post(draft, candidates):
     selected = next(item for item in candidates if item["id"] == draft["story_id"])
     sources = [{"source": selected["source"], "url": selected["source_url"]}]
@@ -2015,11 +2074,15 @@ def render_post(draft, candidates):
 
     links = " · ".join(_source_html(src["source"], src["url"]) for src in sources)
     title = html.escape(draft["title"], quote=False)
-    body = html.escape(draft["body"], quote=False)
+    body = _format_business_news_body(draft["body"])
     text = (
-        f"📊 <b>{title}</b>\n\n{body}\n\n"
-        f"🔗 Source: {links}\n"
-        "🤖 <i>AI-assisted analysis of public business news.</i>\n"
+        "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n"
+        f"📊 <b>{title}</b>\n"
+        "━━━━━━━━━━━━━━━━━━\n\n"
+        f"{body}\n\n"
+        "━━━━━━━━━━━━━━━━━━\n"
+        f"🔗 <b>Source:</b> {links}\n"
+        "🤖 <i>AI-assisted analysis of public business news.</i>\n\n"
         "⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>"
     )
     return text[:3900], selected
