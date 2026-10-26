@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-25 22:31:54 IST",
+  "timestamp": "2026-10-27 00:34:39 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": null,
@@ -18,7 +18,7 @@
     },
     "ppac_petroleum_icr": {
       "title": " Industry Consumption Report",
-      "pdf_url": "https://ppac.gov.in/download.php?file=menu/1790073184_ICR_August_26.pdf",
+      "pdf_url": "https://ppac.gov.in/download.php?file=menu/1792999364_ICR_September 26.pdf",
       "local_path": "downloaded_macro_pdfs/PPAC_Petroleum_Consumption_Latest.pdf"
     },
     "netc_fastag": {
