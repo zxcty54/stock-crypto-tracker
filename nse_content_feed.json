@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-10-26 02:25:41 IST",
   "worthy_count": 45,
-  "skipped_count": 45,
+  "skipped_count": 44,
   "content_feed": [
     {
       "hash": "02b87e7e7a49",
@@ -1250,20 +1250,6 @@
       "worthiness_reason": "The filing only contains introductory presentation text and standard accounting basis notes without disclosing actual numeric Revenue and PAT figures.",
       "telegram_post": "",
       "analyzed_at": "2026-10-25 15:41:41 IST"
-    },
-    {
-      "hash": "af7795ed2e36",
-      "symbol": "ADANIENSOL",
-      "company_name": "Adani Energy Solutions Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "23-Oct-2026 00:07:08",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ADANITRANS_23102026000657_Presentation_-_H1.pdf",
-      "headline": "General Updates",
-      "content_worthy": false,
-      "worthiness_reason": "The filing is merely a submission of an investor presentation on financial results, not the financial results filing itself containing explicit numeric revenue and PAT figures.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-25 06:04:20 IST"
     }
   ]
 }
