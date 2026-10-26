@@ -359,8 +359,68 @@
       "source_headline": "Oil, US Treasuries prop up Indian bonds",
       "story_key": "06373fbe4627948923b5bbc6b0e6108527f726d7a69a39a10051d245456a3392",
       "generated_at": "2026-10-26 13:29:55 IST"
+    },
+    {
+      "id": "ai0024",
+      "slot": "D",
+      "scheduled_ist": "2026-10-26 14:00",
+      "title": "PRE-TRADE CHECKLIST: Bina Plan Koodna Band Karo!",
+      "text": "📌 <b>PRE-TRADE CHECKLIST: Bina Plan Koodna Band Karo!</b>\n\nBina soche-samjhe trade button dabane se capital kab zero ho jata hai pata bhi nahi chalta.\n\n• <b>The Trap:</b> Traders ₹1,00,000 ke capital mein se bina kisi risk management ke ek hi trade mein ₹20,000 risk kar dete hain.\n• <b>The Damage:</b> Agar aapka max risk per trade ₹1,000 (1%) hona chahiye, toh ₹20,000 ka risk aapka pura account 5 galat trades mein saaf kar dega.\n• <b>The Fix:</b> Hamesha pre-trade checklist follow karo jisme max risk ₹1,00,000 capital ka sirf 1% yaani ₹1,000 fix ho.\n\n💡 <b>Golden Rule:</b> Trade lene se pehle exit kahan karna hai, yeh likhna zaroori hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "pre_trade_checklist",
+      "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "ai0025",
+      "slot": "E",
+      "scheduled_ist": "2026-10-26 16:00",
+      "title": "EXCEL TRACKING: Sirf Feelings Pe Trade Mat Karo",
+      "text": "📌 <b>EXCEL TRACKING: Sirf Feelings Pe Trade Mat Karo</b>\n\nMahine ke ant mein lagta hai ki profit hua hai, par account ka balance kyun kam dikh raha hai?\n\n• <b>The Trap:</b> Retail traders sirf winning trades yaad rakhte hain aur losing trades ko excel mein enter karna bhool jaate hain.\n• <b>The Damage:</b> Agar aapke ₹1,00,000 capital par hidden brokerage aur charges milakar mahine ka loss ₹15,000 ho raha hai, toh aapko pata hi nahi chalega ki capital kahan jaa raha hai.\n• <b>The Fix:</b> Roz ek simple excel sheet banao jisme entry, exit, charges, aur hit rate ka data strictness ke sath update ho.\n\n💡 <b>Golden Rule:</b> Jo data aap measure nahi karte, use aap improve nahi kar sakte.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "excel_pl_tracking",
+      "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "ai0026",
+      "slot": "F",
+      "scheduled_ist": "2026-10-26 18:00",
+      "title": "BID-ASK SPREAD: Hidden Kharcha Jo Profit Kha Jata Hai",
+      "text": "📌 <b>BID-ASK SPREAD: Hidden Kharcha Jo Profit Kha Jata Hai</b>\n\nTrade execute hote hi negative mein kyu dikhne lagta hai? Yeh samajhna sabse zaroori hai.\n\n• <b>The Trap:</b> Traders illiquid instruments mein trade karte hain jahan buyer aur seller ke price mein bada gap hota hai.\n• <b>The Damage:</b> Agar ₹1,00,000 ke capital se aapne aisi jagah entry li jahan bid-ask spread ₹2 ka hai, toh aapka trade turant ₹2,000 minus mein open hoga.\n• <b>The Fix:</b> Hamesha tight spread wale liquid counters chuno jahan buying aur selling price mein sirf kuch paise ka farq ho.\n\n💡 <b>Golden Rule:</b> Wide spread matlab entry se pehle hi nuksaan shuru.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "bid_ask_spread",
+      "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "ai0027",
+      "slot": "G",
+      "scheduled_ist": "2026-10-26 20:00",
+      "title": "LIQUIDITY KI TAKAT: Asan Bhasha Me Samjho",
+      "text": "📌 <b>LIQUIDITY KI TAKAT: Asan Bhasha Me Samjho</b>\n\nKya fayda us profit ka jo screen pe toh dikhe par jeb mein cash bankar na aaye?\n\n• <b>The Trap:</b> Beginners aisi jagah trade karte hain jahan volume kam hota hai aur apne bade order ko exit nahi kar pate.\n• <b>The Damage:</b> Agar aapke ₹1,00,000 capital ki position fass gayi aur samne buyer nahi hai, toh aapko panic mein aakar 5% niche bechna padega.\n• <b>The Fix:</b> Hamesha high daily volume wale instruments mein kaam karo jahan ek click par entry aur exit milti ho.\n\n💡 <b>Golden Rule:</b> Wahan trade karo jahan dukan par bheed zyada ho, taaki maal turant bike.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "liquidity_meaning",
+      "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "ai0028",
+      "slot": "A",
+      "scheduled_ist": "2026-10-27 08:00",
+      "title": "CIRCUIT LIMIT: Jab Market Aapko Rok Deti Hai",
+      "text": "📌 <b>CIRCUIT LIMIT: Jab Market Aapko Rok Deti Hai</b>\n\nAchanak se price ruk gaya aur na koi buy ho raha hai na sell, yeh kya chakkar hai?\n\n• <b>The Trap:</b> Traders circuit limit wali news aur percentage ko ignore karke aisi position le lete hain jo fas jaati hai.\n• <b>The Damage:</b> Agar kisi stock mein 10% ya 20% ka lower circuit lag gaya, toh aapka ₹1,00,000 capital wahi freeze ho jayega aur aap bech nahi paoge.\n• <b>The Fix:</b> Trade lene se pehle us din ki circuit limit check karo aur extreme volatile dinon mein position size choti rakho.\n\n💡 <b>Golden Rule:</b> Market jab khud brake lagaye, toh zabardasti steer mat ghumao.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "circuit_limit",
+      "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "ai0029",
+      "slot": "B",
+      "scheduled_ist": "2026-10-27 10:00",
+      "title": "FAKE SCREENSHOTS: Social Media Ke Jhoot Se Bacho",
+      "text": "📌 <b>FAKE SCREENSHOTS: Social Media Ke Jhoot Se Bacho</b>\n\nRoz bade-bade profit ke screenshots dekh kar lagta hai ki aap hi piche reh gaye ho?\n\n• <b>The Trap:</b> Retail traders edited ya inspected element wale screenshots par andha vishwas karke unka paid group join kar lete hain.\n• <b>The Damage:</b> Aise fake screenshots ke chakkar mein aakar agar aapne apna ₹1,00,000 capital kisi scammer ko de diya, toh 100% paisa doob jayega.\n• <b>The Fix:</b> Verified P&amp;L links par dhyan do aur social media ke show-off se door rehkar sirf apni process par focus karo.\n\n💡 <b>Golden Rule:</b> Jo internet par asani se dikhe, zaroori nahi ki woh sach ho.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "fake_profit_screenshots",
+      "generated_at": "2026-10-26 13:41:12 IST"
     }
   ],
-  "total": 28,
-  "last_scheduled": "2026-10-26 12:00"
+  "total": 34,
+  "last_scheduled": "2026-10-27 10:00"
 }
