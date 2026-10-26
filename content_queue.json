@@ -319,14 +319,16 @@
       "scheduled_ist": "2026-10-25 20:30",
       "title": "Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayne",
       "text": "📊 <b>Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayne</b>\n\n📰 Kya hua: Securities and Exchange Board of India (Sebi) ke chairman Tuhin Kanta Pandey ne announce kiya hai ki regulator short selling aur Securities Lending and Borrowing (SLB) ke framework ko review kar raha hai. Iska maqsad market liquidity aur price discovery ko behtar karna hai. Saath hi, tender offers, buybacks, aur offer for sale mein parallel clearing laane par bhi kaam ho raha hai taaki compliance cost kam ho. Brokerages ke liye scale aur tech reliance ke basis par graded compliance, custodial clients ke liye automated give-up/take-up facility aur corporate bonds ke liye market-making framework laane ki bhi taiyaari hai.\n\n🧩 News ko kaise padhein: yahan 'SLB' (Securities Lending and Borrowing) ek aisi mechanism hai jahan investors apne shares udhaar par de sakte hain taaki short sellers unhe bech sakein. Iska data batata hai ki market mein borrowing-lending kitni active hai. Corporate bonds ka market size 61 lakh crore rupees ke aas-paas hai, jiske liye naya market making framework laya ja raha hai.\n\n💡 Business mein iska matlab: Jab short-selling aur SLB ke rules aasan hote hain, toh institutional aur retail participants dono ke liye hedging aur position banana smooth ho jata hai. Custodial clients ke funds jo pehle confirmation ke intezaar mein block rehte the, unke free hone se capital efficiency badhegi. Chote brokers ke liye graded compliance compliance burden ko ghatata hai, jisse market mein participation expand ho sakta hai.\n\n🔭 Aage kya dekhein: Yeh dekhna hoga ki Sebi final guidelines mein short-selling aur SLB ke process ko kitna transparent banata hai. Corporate bonds ke liye market-making framework kaise liquidity generate karta hai, yeh secondary market data se pata chalega.\n\nKya aapko lagta hai ki naye rules se corporate bond market mein retail participation badhegi?\n\n🔗 Source: <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-to-revamp-short-selling-securities-lending-rules/articleshow/135182788.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:f2900070e222",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-to-revamp-short-selling-securities-lending-rules/articleshow/135182788.cms",
       "source_headline": "Sebi to revamp short-selling, securities lending rules",
       "story_key": "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
-      "generated_at": "2026-10-25 13:00:36 IST"
+      "generated_at": "2026-10-25 13:00:36 IST",
+      "posted_at": "2026-10-26 20:53:42 IST",
+      "telegraph_url": "https://telegra.ph/Sebi-rules-overhaul-Short-selling-SLB-aur-compliance-revamp-ke-maayne--October-2026-10-26"
     },
     {
       "id": "newsqurusiscit",
@@ -401,6 +403,22 @@
       "generated_at": "2026-10-26 13:41:12 IST"
     },
     {
+      "id": "newsjdgxnsuhtb",
+      "slot": "G",
+      "hourly_slot_ist": "2026-10-26 20:00",
+      "scheduled_ist": "2026-10-26 20:00",
+      "title": "China ka Naya Bond Swap Facility: Liquidity Crisis se Nippatne ka Tarika",
+      "text": "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n📊 <b>China ka Naya Bond Swap Facility: Liquidity Crisis se Nippatne ka Tarika</b>\n━━━━━━━━━━━━━━━━━━\n\n📰 <b>Kya hua</b>\nChina's central bank ne bond market stability maintain karne ke liye ek naya facility announce kiya hai jiska naam Bond Market NBFI Swap Facility (BNSF) hai. Is facility ke zariye asset managers aur public fund managers, jab collective liquidity risk ya systemic stress face karenge, toh central bank bills borrow kar sakenge taaki funding raise ki ja sake.\n\n🧩 <b>News ko kaise padhein</b>\nJab mutual fund products par redemption ka pressure badhta hai aur market mein cash ki kami hoti hai, toh institutions apne pas ke assets ko central bank ke paas pledge karke cash raise karte hain. Is mechanism se non-bank financial institutions ko direct liquidity milti hai taaki woh distress mein assets fire-sale na karein.\n\n💡 <b>Business mein iska matlab</b>\nFinancial markets mein jab NBFI sector par dabav aata hai, toh uska asar broader credit conditions aur asset prices par padta hai. Is tarah ke central bank interventions market confidence ko support karne aur systemic panic ko rokne ke liye design kiye jaate hain, jisse financial contagion ka risk kam ho sake.\n\n🔭 <b>Aage kya dekhein</b>\nYeh dekhna hoga ki is facility ka actual utilization kitna hota hai aur kya yeh bond market ke yields ya redemption pressures ko stabilize karne mein kargar saabit hota hai. Global central bank policies aur liquidity flows par bhi nazar rakhni chahiye.\n\n💬 <b>Kya aapko lagta hai ki aise liquidity backstops global markets mein systemic risks ko effectively control kar sakte hain?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>Source:</b> <a href=\"https://economictimes.indiatimes.com/markets/bonds/chinas-central-bank-sets-up-non-bank-financial-institution-bond-market-swap-facility/articleshow/135210676.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:644306c5c38d",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/chinas-central-bank-sets-up-non-bank-financial-institution-bond-market-swap-facility/articleshow/135210676.cms",
+      "source_headline": "China's central bank sets up non-bank financial institution bond market swap facility",
+      "story_key": "644306c5c38d2eb9ec37e253b7574e193937b5f34b4dd771e1b89004786236e1",
+      "generated_at": "2026-10-26 20:51:34 IST"
+    },
+    {
       "id": "ai0028",
       "slot": "A",
       "scheduled_ist": "2026-10-27 08:00",
@@ -421,6 +439,6 @@
       "generated_at": "2026-10-26 13:41:12 IST"
     }
   ],
-  "total": 34,
+  "total": 35,
   "last_scheduled": "2026-10-27 10:00"
 }

@@ -1,6 +1,284 @@
 {
   "stories": [
     {
+      "id": "newsytnjydptip",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "Auction of Government of India Dated Securities",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63868",
+      "published_at": "2026-10-26T18:20:00+05:30",
+      "published_ist": "2026-10-26 18:20 IST",
+      "summary": "Government of India (GoI) has announced the sale (re-issue) of four dated securities for a notified amount of ₹33,000 crore as per the following details: Sr No Security Date of Repayment Notified Amount (₹ Crore) GoI specific Notification Auction Date Settlement Date 1 6.20% GS 2029 Aug 17, 2029 9,000 F.No.4(1)-B(W&M)/2026 dated October 26, 2026 October 30, 2026 (Friday) November 02, 2026 (Monday) 2 6.57% GS 2033 Aug 17, 2033 12,000 3 7.63% GS 2056 Sep 15, 2056 9,000 4 7.50% GOI SGrB 2056 Apr 27, 2056 3,000 Total 33,000 2. GoI will have the option to retain additional subscription up to ₹2,000 crore against each security mentioned above. 3. The securities will be sold through Reserve Bank of India Mumbai Office, Fort, Mumbai – 400001. The sale will be subject to the terms and conditions spelt out in the ‘Specific Notification’ mentioned above and the General Notification F.No.4(2)–B(W&M)",
+      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-25 15:32:49 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regular government securities auctions allow the Centre to finance its fiscal deficit through market borrowings, influencing overall debt supply and systemic liquidity. If institutional demand at these auctions weakens, secondary market yields could face upward pressure, raising borrowing costs for both the government and corporates. However, a single announcement of a dated securities re-issue does not establish the final clearing yields or the total long-term appetite of primary dealers.",
+        "what_to_watch": [
+          "Cut-off yields and bid-cover ratios reported in the RBI auction results on the auction date.",
+          "Subscription volumes under the Retail Direct portal and non-competitive bidding schemes.",
+          "Primary dealer underwriting commitment levels during the pre-auction window."
+        ],
+        "evergreen_lesson": "Sovereign debt supply events test market absorption capacity; tracking cut-off yields relative to secondary market expectations reveals true institutional demand better than notified amounts alone."
+      }
+    },
+    {
+      "id": "newsbxrvynnykp",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Stock Market Holidays November 2026: NSE, BSE, MCX holiday list, Muhurat Trading date and timings",
+      "url": "https://www.cnbctv18.com/market/stock-market-holidays-november-2026-nse-bse-mcx-holiday-list-muhurat-trading-date-and-timings-20019524.htm",
+      "published_at": "2026-10-26T17:29:03+05:30",
+      "published_ist": "2026-10-26 17:29 IST",
+      "summary": "Indian stock markets will observe two weekday trading holidays in November 2026 for Diwali-Balipratipada and Prakash Gurpurb Sri Guru Nanak Dev, along with a special Muhurat Trading session on Novembe",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Scheduled trading holidays alter market liquidity cycles and settlement schedules for equity and commodity segments, potentially compressing weekly trading volumes. While special sessions like Muhurat Trading invite retail participation to mark the traditional calendar year, they do not inherently alter underlying medium-term corporate earnings or macroeconomic trends. Lower trading days in a month might prompt institutional rebalancing ahead of the closures.",
+        "what_to_watch": [
+          "Aggregate cash market volumes and delivery percentages in the weeks containing weekday exchange holidays.",
+          "Specific timings and clearing procedures announced for special holiday trading sessions.",
+          "Operational adjustments by commodity exchanges such as MCX for morning versus evening sessions."
+        ],
+        "evergreen_lesson": "Exchange holiday calendars dictate institutional cash-flow planning and settlement cycles, making volume compression during holiday-shortened weeks a structural feature rather than an indicator of sentiment."
+      }
+    },
+    {
+      "id": "newszexrbdvzzz",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Brigade Enterprises signs Hyatt Hotels to manage two hotels in Bengaluru",
+      "url": "https://economictimes.indiatimes.com/markets/digital-real-estate/realty-news/brigade-enterprises-signs-hyatt-hotels-to-manage-two-hotels-in-bengaluru/articleshow/135211293.cms",
+      "published_at": "2026-10-26T17:23:07+05:30",
+      "published_ist": "2026-10-26 17:23 IST",
+      "summary": "Brigade Enterprises Ltd has forged a partnership with Hyatt Hotels Corporation to launch two new hotels in Bengaluru, including the Hyatt Regency Bengaluru at Brigade Global Park and an additional property on Whitefield-Kadugodi Road. With a combined total of 600 rooms, this collaboration further enhances Brigade's commitment to developing hospitality within mixed-use spaces, leveraging Bengaluru's strong business travel market for growth.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Asset-light hotel management partnerships allow real estate developers to monetize large mixed-use land parcels while outsourcing hospitality operations to global hospitality brands. This arrangement lets developers tap into urban business travel demand without shouldering direct daily operational risks. However, signing management agreements does not guarantee immediate occupancy levels, room rate realization, or timely completion of the mixed-use properties.",
+        "what_to_watch": [
+          "Subsequent regulatory disclosures on construction milestones and capital expenditure allocations for the township projects.",
+          "Reported operational metrics such as average daily rate (ADR) and revenue per available room (RevPAR) once the properties open.",
+          "Progress updates on other components within the mixed-use developments, such as commercial or residential spaces."
+        ],
+        "evergreen_lesson": "Brand partnerships in real estate expand mixed-use project appeal, but long-term value creation depends on execution speed and sustained end-market demand in specific micro-markets."
+      }
+    },
+    {
+      "id": "newsuzwcwnztpf",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "India bonds give up gains as high oil prices weigh",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-give-up-gains-as-high-oil-prices-weigh/articleshow/135211224.cms",
+      "published_at": "2026-10-26T17:21:01+05:30",
+      "published_ist": "2026-10-26 17:21 IST",
+      "summary": "Indian government bonds declined on Monday due to rising oil prices affecting market sentiment and the rupee. The rupee fell for the third consecutive day, adding pressure on bond yields and currency. India's central bank is expected to consider interest rate hikes to stabilize the currency amidst inflation concerns. The Reserve Bank of India has raised its inflation forecast, anticipating a peak of 6% in consumer prices.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "As a major energy importer, rising crude oil prices directly strain India's trade balance and domestic currency, which can trigger expectations of monetary tightening to anchor inflation and currency stability. If persistent oil inflation passes through to broader consumer prices, central bank policy rate adjustments could drive up corporate and sovereign borrowing costs. A single session's market movement or shifting OIS rates, however, does not guarantee that the projected rate hikes will materialize in upcoming policy reviews.",
+        "what_to_watch": [
+          "Official Consumer Price Index (CPI) prints and central bank statements regarding inflation forecasts and tolerance bands.",
+          "Movements in overnight indexed swap (OIS) rates and benchmark government bond yields.",
+          "Trends in the foreign exchange rate of the rupee against the US dollar and Brent crude oil futures."
+        ],
+        "evergreen_lesson": "External commodity price shocks transmit rapidly to domestic bond yields and currency valuations, forcing central banks to balance growth support against currency and inflation defense."
+      }
+    },
+    {
+      "id": "newsleifiblerd",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "China's central bank sets up non-bank financial institution bond market swap facility",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/chinas-central-bank-sets-up-non-bank-financial-institution-bond-market-swap-facility/articleshow/135210676.cms",
+      "published_at": "2026-10-26T17:00:48+05:30",
+      "published_ist": "2026-10-26 17:00 IST",
+      "summary": "China's central bank has introduced the Bond Market NBFI Swap Facility as of Monday. This initiative is designed to stabilize the bond market amid potential systemic stress or liquidity issues. Bank wealth management subsidiaries and public fund managers will gain access to central bank bills, enabling them to finance the purchase of qualifying bonds or units facing redemption, which can be pledged for central bank support.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "queued",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Central banks introduce swap facilities to prevent liquidity crunches in non-bank financial institutions from triggering fire sales in bond markets. If mutual fund redemptions surge, asset managers might otherwise have to sell bonds at a loss, deepening systemic stress. This facility provides a backstop, but it does not mean underlying asset quality risks have disappeared.",
+        "what_to_watch": [
+          "Check official central bank data for actual usage volumes of the Bond Market NBFI Swap Facility.",
+          "Monitor whether public fund managers and wealth management subsidiaries utilize the bills to absorb bond redemptions during market stress periods."
+        ],
+        "evergreen_lesson": "Central bank liquidity facilities act as financial shock absorbers during redemption pressures, but their existence highlights underlying solvency or liquidity strains in shadow banking sectors."
+      },
+      "processed_ist": "2026-10-26 20:51:34 IST",
+      "post_id": "newsjdgxnsuhtb"
+    },
+    {
+      "id": "newsltbydqpoig",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "E2E Networks proposes to expand capacity by around 5.4 MW for NVIDIA HGX B300 systems and other GPUs",
+      "url": "https://www.cnbctv18.com/market/e2e-networks-share-price-proposes-expand-capacity-nvidia-hgx-b300-systems-other-gpus-20019414.htm",
+      "published_at": "2026-10-26T15:12:37+05:30",
+      "published_ist": "2026-10-26 15:12 IST",
+      "summary": "E2E Networks said the proposed capacity addition would help it cater to the demand for GPUs and related services. The rollout will be guided by its infrastructure deployment plan and anticipated demand for AI computing services.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Capacity expansion proposals in GPU-heavy cloud infrastructure indicate that firms are trying to capture rising enterprise demand for artificial intelligence workloads. However, an exchange filing regarding a proposed capacity addition does not establish execution timelines, final capital expenditure outlays, or secured customer contracts. If demand slows or financing costs rise, the actual deployment could be delayed or scaled down.",
+        "what_to_watch": [
+          "Monitor subsequent exchange disclosures for specific timelines, commissioning dates, and the final debt-to-equity funding breakdown.",
+          "Track operational data or financial results for actual utilization rates and revenue realization from the expanded capacity once deployed."
+        ],
+        "evergreen_lesson": "A corporate announcement to expand capital-intensive infrastructure is only a plan; tangible execution depends entirely on confirmed funding, clear timelines, and verified customer demand."
+      }
+    },
+    {
+      "id": "newsjtnlodvone",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "French bond selloff eases as country spared ratings downgrade",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/french-bond-selloff-eases-as-country-spared-ratings-downgrade/articleshow/135206922.cms",
+      "published_at": "2026-10-26T14:01:56+05:30",
+      "published_ist": "2026-10-26 14:01 IST",
+      "summary": "On Monday, the selloff in French government bonds paused after Moody's maintained its rating of Aa3. Weekend protests were mostly peaceful, reducing tensions in the country. France's 10-year OAT yield fell following a rise to its highest level since June 2002. The focus now turns to the European Central Bank's upcoming policy decision on Thursday. Analysts expect the ECB to monitor the rising yields closely and evaluate their impact.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A sovereign credit rating pause can temporarily halt a government bond selloff by reassuring institutional investors about debt sustainability. However, a spared downgrade does not fix underlying fiscal deficits or political fragmentation. If structural budget deficits persist, sovereign bond yields can face renewed upward pressure.",
+        "what_to_watch": [
+          "Track official fiscal deficit announcements and upcoming budget execution reports from the government.",
+          "Observe subsequent bond yield spreads and rating agency review schedules to see if fiscal risks resurface."
+        ],
+        "evergreen_lesson": "Ratings agency decisions offer only temporary relief from market sentiment shifts; structural fiscal health remains the ultimate determinant of sovereign debt yields."
+      }
+    },
+    {
+      "id": "newsuhsbfkpsop",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market: BOJ nears historic inflation milestone, shifts focus to rate hikes",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/global-market-boj-nears-historic-inflation-milestone-shifts-focus-to-rate-hikes/articleshow/135206926.cms",
+      "published_at": "2026-10-26T13:59:45+05:30",
+      "published_ist": "2026-10-26 13:59 IST",
+      "summary": "The Bank of Japan is expected to declare its nearly 14-year battle to achieve 2% inflation successful while keeping interest rates unchanged at 1.25%. With wage growth and inflation expectations strengthening, policymakers may signal further tightening, potentially in December, as they balance persistent price pressures against economic growth and financial stability.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A central bank shifting focus from stimulating inflation to sustaining it signals a structural pivot away from decades of loose monetary policy. If wage gains and inflation expectations remain firmly entrenched, borrowing costs will likely rise toward neutral levels. However, signaling a shift in policy stance is not the same as committing to a fixed rate-hike schedule.",
+        "what_to_watch": [
+          "Examine the Bank of Japan's quarterly outlook reports and official statements for adjustments to inflation forecasts.",
+          "Track subsequent policy meeting outcomes and short-term interest rate decisions to verify if gradual tightening materializes."
+        ],
+        "evergreen_lesson": "When a central bank declares victory over chronic low inflation, the policy regime shifts from supporting asset prices to managing domestic cost pressures, altering borrowing conditions across the economy."
+      }
+    },
+    {
+      "id": "newszwfaaqtsnd",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "ECB Meeting: Five key questions on rates, inflation and Lagarde's exit",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/ecb-meeting-five-key-questions-on-rates-inflation-and-lagardes-exit/articleshow/135206869.cms",
+      "published_at": "2026-10-26T13:56:09+05:30",
+      "published_ist": "2026-10-26 13:56 IST",
+      "summary": "The European Central Bank is widely expected to hold interest rates at 2.5% amid elevated energy prices, eurozone inflation and France’s financial instability. With inflation reaching 3.8% in September, markets anticipate further rate hikes. Policymakers will assess economic risks, bond market pressures and leadership changes before signalling future monetary policy decisions.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When energy prices surge due to supply shocks like the Iran war, central banks face a policy dilemma: whether to hike rates to fight imported inflation or hold them to protect slowing growth. If energy costs persist above $100 a barrel, central banks might be forced into aggressive tightening even as domestic financial instability—such as French public debt pressures—worsens borrowing costs. However, a rate hold alone does not guarantee that consumer inflation expectations will anchor, nor does it establish that policymakers will follow through on anticipated hikes if growth deteriorates further.",
+        "what_to_watch": [
+          "Upcoming official eurozone inflation prints and core inflation readings to check for second-round wage pressures.",
+          "Official statements from ECB policymakers regarding the balance between French bond yields and euro zone price stability.",
+          "Actual execution of rate decisions at the next scheduled central bank meeting."
+        ],
+        "evergreen_lesson": "Central banks balancing imported commodity shocks and sovereign debt stress typically rely on incoming data rather than forward guidance, rendering pre-announced market rate trajectories conditional."
+      }
+    },
+    {
+      "id": "newsmuikuoxarr",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Meta to create non-voting shares to fund AI expansion, retain Zuckerberg’s control",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/meta-to-create-non-voting-shares-to-fund-ai-expansion-retain-zuckerbergs-control/articleshow/135206256.cms",
+      "published_at": "2026-10-26T13:36:26+05:30",
+      "published_ist": "2026-10-26 13:36 IST",
+      "summary": "Meta Platforms plans to introduce publicly traded non-voting Class C shares to fund AI investments, acquisitions and employee compensation while preserving Mark Zuckerberg’s voting control. The proposed one-for-one share distribution is expected to begin trading in January 2027.",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Capital-intensive sectors like artificial intelligence create immense funding pressures that can stretch corporate balance sheets if financed purely through debt. By introducing non-voting equity classes, founder-led firms can raise massive capital for data centers and compute capacity without diluting the primary promoter's voting authority. If executed successfully, this mechanism provides ongoing financing flexibility, though it remains unproven whether public markets will value non-voting shares at par with voting counterparts over long holding periods.",
+        "what_to_watch": [
+          "The official SEC filing details regarding the final distribution ratio and trading commencement date for Class C shares.",
+          "Actual capital expenditure deployment figures against the forecasted range for AI infrastructure.",
+          "Secondary market pricing and liquidity differentials between Meta's voting and non-voting stock classes once trading begins."
+        ],
+        "evergreen_lesson": "Dual-class and multi-class share recapitalizations allow high-growth founders to fund capital-heavy infrastructure pivots while walling off voting control from public equity investors."
+      }
+    },
+    {
       "id": "newssbjmtlrrdg",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,11 +288,23 @@
       "published_ist": "2026-10-26 13:13 IST",
       "summary": "Global equity funds attracted $28.16 billion in weekly inflows as easing US Treasury yields and strong corporate earnings lifted investor sentiment. Asian equities led regional allocations, while technology, bond and precious metals funds also drew fresh investments.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
-      "topic": "stock_market"
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Global capital flows respond dynamically to shifts in benchmark interest rates and risk sentiment, with easing US Treasury yields acting as a primary catalyst for capital rotation into riskier asset classes. When short-term yields drop, institutional allocators tend to move out of cash equivalents and reallocate toward emerging market and tech equities. However, a weekly influx of capital does not guarantee a permanent trend reversal, as persistent sector-specific outflows in consumer discretionary indicate selective rather than broad-based conviction.",
+        "what_to_watch": [
+          "LSEG Lipper weekly fund flow reports for sustained multi-week streaks rather than isolated spikes.",
+          "Benchmark U.S. 10-year Treasury yield movements around key psychological thresholds.",
+          "Subsequent institutional block deal data and regional currency valuations across emerging markets."
+        ],
+        "evergreen_lesson": "Falling sovereign debt yields lower the opportunity cost of holding risk assets, triggering short-term liquidity surges into equities and emerging markets before fundamental earnings catch up."
+      }
     },
     {
       "id": "newsvufnepspny",
@@ -42,11 +332,23 @@
       "published_ist": "2026-10-26 12:39 IST",
       "summary": "Chinese stocks declined as technology shares weakened and investors adopted a cautious stance ahead of major central bank meetings and corporate earnings. Concerns about the AI-driven rally, slowing economic conditions and possible trust-sector selling added to market pressure, while investors watched for support from state-backed funds.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
-      "topic": "economy"
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-26 20:51:34 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market drops ahead of central bank meetings and tech earnings dikhaate hain ki global liquidity aur sentiment kitna sensitive ho gaya hai. Jab tech shares aur growth indices (jaise STAR50) girte hain, toh yeh imply karta hai ki investors high valuations par risk reduce kar rahe hain, especially jab macroeconomic slowdown aur policy uncertainty ka pressure ho. Lekin yeh headline yeh establish nahi karti ki state-backed funds ka actual support kitna effective hoga ya trust-sector taxation ka long-term impact kya padega.",
+        "what_to_watch": [
+          "State-backed funds (National Team) ki actual buying activity ETFs mein kitni badhti hai.",
+          "Major central banks aur upcoming corporate earnings ke official policy statements aur guidance.",
+          "Trust-sector taxation ya regulatory changes se related official notifications."
+        ],
+        "evergreen_lesson": "Macro-level sentiment aur policy anticipation ke samay sector-specific corrections broader market trend ko temporarily override kar sakte hain, jab tak institutional support ya clear earnings data confirm na ho."
+      }
     },
     {
       "id": "newsesszgqfijg",
@@ -58,9 +360,9 @@
       "published_ist": "2026-10-26 12:11 IST",
       "summary": "Indian investment platforms including Groww, Zerodha, Angel One, and Upstox are expanding access to US stocks and ETFs through GIFT City framework, supporting fractional investing.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -86,9 +388,9 @@
       "published_ist": "2026-10-26 11:39 IST",
       "summary": "Japanese government bond yields edged higher as investors assessed the monetary-policy outlook ahead of meetings by the Bank of Japan and the US Federal Reserve. Markets expected both central banks to keep rates unchanged while monitoring signals about possible December rate increases, inflation and economic growth.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -113,9 +415,9 @@
       "published_ist": "2026-10-26 11:23 IST",
       "summary": "Tonbo Imaging shares rallied after a strong stock market debut, following heavy demand for its IPO. Investors will track revenue growth, order execution, profitability, working capital and cash flows to assess the defence electronics company’s long-term prospects.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -140,9 +442,9 @@
       "published_ist": "2026-10-26 11:12 IST",
       "summary": "Indian government bonds increased in early trading as oil prices declined, following a previous rally. The Brent crude price slipped significantly after hitting a six-month high last week, which impacted the debt market. Foreign investors have sold a substantial amount of Indian government debt since August, contributing to a prolonged rise in benchmark yields. Concerns over inflation and the Reserve Bank of India's rate decisions are influencing market sentiments.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -169,9 +471,9 @@
       "published_ist": "2026-10-26 10:05 IST",
       "summary": "ICICI Securities' Pankaj Pandey says India's market is in a stronger position than during the March correction as earnings remain healthy and valuations have turned attractive. He prefers data center infrastructure, defence and select financial stocks, while staying cautious on Tier-1 IT and most cement companies.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -203,6 +505,22 @@
       }
     },
     {
+      "id": "newswqbblkmqup",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "SEBI Order for Compliance – Completion Order for Recovery Certificate No. 8484 of 2024 against NARENDRABHAI AMIN (PAN- AMGPA3864Q) in the matter of M/s Austral Coke and Projects Limited - II",
+      "url": "https://www.sebi.gov.in/enforcement/recovery-proceedings/oct-2026/sebi-order-for-compliance-completion-order-for-recovery-certificate-no-8484-of-2024-against-narendrabhai-amin-pan-amgpa3864q-in-the-matter-of-m-s-austral-coke-and-projects-limited-ii_105437.html",
+      "published_at": "2026-10-26T00:00:00+05:30",
+      "published_ist": "2026-10-26 00:00 IST",
+      "summary": "SEBI Order for Compliance – Completion Order for Recovery Certificate No. 8484 of 2024 against NARENDRABHAI AMIN (PAN- AMGPA3864Q) in the matter of M/s Austral Coke and Projects Limited - II",
+      "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
+      "first_seen_ist": "2026-10-26 20:51:34 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
       "id": "newsmnlankraks",
       "source": "RBI Press Releases",
       "source_priority": 3,
@@ -212,9 +530,9 @@
       "published_ist": "2026-10-25 19:50 IST",
       "summary": "The Hon’ble Prime Minister of India, Shri Narendra Modi, today inaugurated the Reserve Bank of India’s newly established Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha. This marks a significant milestone in strengthening the technological foundation of India’s financial system. Hon’ble Governor of Odisha, Shri Brajmohan Ram, Hon’ble Chief Minister of Odisha, Shri Mohan Charan Majhi; Hon’ble Union Finance and Corporate Affairs Minister, Smt. Nirmala Sitharaman; Hon’ble Union Minister for Tribal Affairs, Shri Jual Oram; Hon’ble Deputy Chief Ministers of Odisha, Shri Kanak Vardhan Singh Deo and Smt. Pravati Parida, and Hon’ble Members of Parliament, Shri Manmohan Samal and Smt. Aparajita Sarangi, also graced the event. 2. In his address, the Hon’ble Prime Minister highlighted the significance of the institutions inaugurated today - the Data Centre and the Cybersecur",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -244,7 +562,7 @@
       "last_seen_at": "2026-10-26T06:02:05.303730+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
       "last_seen_ist": "2026-10-26 06:02:05 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "stock_market",
       "ai_insight": {
         "version": 1,
@@ -259,7 +577,8 @@
         "evergreen_lesson": "Broad market corrections driven by macro risk-off sentiment frequently penalize strong and weak businesses alike, making valuation comfort and fundamental earnings visibility critical differentiators."
       },
       "processed_ist": "2026-10-25 19:58:58 IST",
-      "post_id": "newsvoywtydxzs"
+      "post_id": "newsvoywtydxzs",
+      "posted_at": "2026-10-26 13:30:18 IST"
     },
     {
       "id": "newsuucqmpsqrh",
@@ -271,9 +590,9 @@
       "published_ist": "2026-10-25 16:05 IST",
       "summary": "The sharp rise in government bond yields since the Reserve Bank of India's (RBI) October monetary policy review threatens to increase the government's borrowing costs and put pressure on its interest expenditure, potentially squeezing fiscal flexibility, according to experts.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -345,9 +664,9 @@
       "published_ist": "2026-10-25 10:06 IST",
       "summary": "In a disclosure dated October 24, the private sector lender said it was continuing to examine the judgment and evaluate all available options and suitable steps going forward.",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-26T13:29:55.870502+05:30",
+      "last_seen_at": "2026-10-26T20:51:34.502063+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-26 13:29:55 IST",
+      "last_seen_ist": "2026-10-26 20:51:34 IST",
       "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
@@ -630,33 +949,6 @@
       "topic": "economy"
     },
     {
-      "id": "newsytnjydptip",
-      "source": "RBI Press Releases",
-      "source_priority": 3,
-      "headline": "Auction of State Government Securities",
-      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63860",
-      "published_at": "2026-10-23T18:40:00+05:30",
-      "published_ist": "2026-10-23 18:40 IST",
-      "summary": "The following State Governments have offered to sell stock by way of auction, for an aggregate amount of ₹23,300.00 Crore (Face Value). Sr. No. State Amount to be raised (₹ Crore) Tenor (Year) Type of Auction 1. Assam 1000 09 Yield 2. Bihar 1000 09 Yield 2000 Re-issue of 7.66% Bihar SGS 2041, issued on July 22, 2026 Price 3. Chhattisgarh 600 Re-issue of 7.83% Chhattisgarh SGS 2040, issued on April 15, 2026 Price 600 Re-issue of 7.82% Chhattisgarh SGS 2048, issued on April 29, 2026 Price 4. Gujarat 1000 Re-issue of 7.96% Gujarat SGS 2035, issued on October 14, 2026 Price 1000 Re-issue of 8.06% Gujarat SGS 2038, issued on October 21, 2026 Price 5. Himachal Pradesh 400 Re-issue of 7.77% Himachal Pradesh SGS 2049, issued on June 24, 2026 Price 6. Jharkhand 200 Re-issue of 7.30% Jharkhand SGS 2033, issued on July 08, 2026 Price 7. Keralam 1500 14 Yield 8. Manipur 300 Re-issue of 7.79% Manipur",
-      "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-25 15:32:49 IST",
-      "status": "new",
-      "topic": "capital_market",
-      "ai_insight": {
-        "version": 1,
-        "generated_at_ist": "2026-10-25 23:16:50 IST",
-        "context_source": "publisher article page",
-        "why_it_matters": "Regular auctions of State Government Securities (SGS) provide states with crucial market-based debt financing while supplying institutional and retail investors with sovereign-backed fixed-income instruments. If these multi-crore auctions experience sustained high demand and stable cut-off yields, state borrowing costs would remain predictable. However, an announced auction schedule alone does not establish final clearing yields or total market absorption until bidding results are finalized.",
-        "what_to_watch": [
-          "The auction results announcement detailing the notified amounts versus actual bids received for each state",
-          "The cut-off yields and spread movements on re-issued versus newly tenured State Government Securities"
-        ],
-        "evergreen_lesson": "Sovereign and sub-sovereign debt auctions reflect broader market liquidity and risk appetite, where pricing is determined dynamically through competitive bidding rather than issuance announcements alone."
-      }
-    },
-    {
       "id": "newsuetxexcvjx",
       "source": "RBI Press Releases",
       "source_priority": 3,
@@ -824,43 +1116,43 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-26T13:29:55.870502+05:30",
-  "last_scraped_ist": "2026-10-26 13:29:55 IST",
+  "last_scraped_at": "2026-10-26T20:51:34.502063+05:30",
+  "last_scraped_ist": "2026-10-26 20:51:34 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
-      "fresh_items": 48,
-      "accepted_items": 4,
-      "filtered_items": 44,
+      "fresh_items": 85,
+      "accepted_items": 6,
+      "filtered_items": 79,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 6,
-      "filtered_items": 44,
+      "accepted_items": 12,
+      "filtered_items": 38,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
-      "fresh_items": 17,
-      "accepted_items": 1,
-      "filtered_items": 16,
+      "fresh_items": 20,
+      "accepted_items": 0,
+      "filtered_items": 20,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
-      "fresh_items": 5,
-      "accepted_items": 1,
-      "filtered_items": 4,
+      "fresh_items": 7,
+      "accepted_items": 2,
+      "filtered_items": 5,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -868,11 +1160,11 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-26 13:29:55 IST",
+      "checked_ist": "2026-10-26 20:51:34 IST",
       "http_status": 200,
-      "fresh_items": 0,
-      "accepted_items": 0,
-      "filtered_items": 0,
+      "fresh_items": 4,
+      "accepted_items": 3,
+      "filtered_items": 1,
       "error": null
     }
   },
@@ -900,16 +1192,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-26 13:29:55 IST"
+    "last_curated_ist": "2026-10-26 20:51:34 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-26 13:29:55 IST",
-    "fetched_items": 120,
-    "accepted_feed_items": 12,
-    "filtered_feed_items": 108,
-    "new_unique_stories": 9,
-    "duplicate_items_collapsed": 0,
+    "updated_ist": "2026-10-26 20:51:34 IST",
+    "fetched_items": 166,
+    "accepted_feed_items": 23,
+    "filtered_feed_items": 143,
+    "new_unique_stories": 10,
+    "duplicate_items_collapsed": 3,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 32
+    "stories_total": 42
   }
 }
