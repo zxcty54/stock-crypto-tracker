@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-27 02:08:06 IST",
-  "worthy_count": 33,
-  "skipped_count": 39,
+  "generated_at": "2026-10-27 10:42:15 IST",
+  "worthy_count": 34,
+  "skipped_count": 40,
   "content_feed": [
+    {
+      "hash": "cc7f4464a078",
+      "symbol": "WABAG",
+      "company_name": "VA Tech Wabag Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "27-Oct-2026 08:26:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf",
+      "headline": "VA Tech Wabag secures mega order from Reliance Industries for Jamnagar plant",
+      "content_worthy": true,
+      "worthiness_reason": "Company secured a mega order/contract from Reliance Industries Limited for a desalination and remineralisation plant.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>VA Tech Wabag Limited (NSE: WABAG)</b>\n\n<b>VA Tech Wabag secures mega order from RIL to deliver Desalination and Remineralisation Plant at Jamnagar</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Reliance Industries Limited (RIL)\n- <b>Order Type:</b> Mega Order\n- <b>Project:</b> Desalination Plant (8,400 m3/hr capacity, expandable to 12,600 m3/hr / 302 MLD) & Remineralization Plant (3,000 m3/hr)\n- <b>Location:</b> Jamnagar, Gujarat\n- <b>Scope:</b> Design, Engineering, Supply, Installation, Pre-Commissioning, Commissioning and Performance Guarantee Test Run (PGTR)\n\n📌 <b>What happened:</b>\n↳ VA Tech Wabag has bagged a mega order from Reliance Industries Limited to deliver a large-scale desalination and remineralisation plant at Jamnagar, Gujarat.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-27 10:42:15 IST"
+    },
     {
       "hash": "987a0ae5399b",
       "symbol": "IDFCFIRSTB",
@@ -467,6 +481,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "7ef2cc5671fa",
+      "symbol": "ONESOURCE",
+      "company_name": "Onesource Specialty Pharma Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "27-Oct-2026 10:07:54",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ONESOURCECDMO_27102026100700_OS_Intimation_Outcome_of_BM_27Oct2026_s.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The filing provides procedural submission of financial results without disclosing actual numeric Revenue and PAT figures in the text extract.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-27 10:42:15 IST"
+    },
     {
       "hash": "f6d422cefa7e",
       "symbol": "CASTROLIND",
