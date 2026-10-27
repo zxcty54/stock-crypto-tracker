@@ -457,8 +457,24 @@
       "source_headline": "Indian bonds tick up on calm oil before Fed verdict",
       "story_key": "30835a8cb4d21a0dd37775c1e2d940da882178fce8354051e2da8dddbcb09b3b",
       "generated_at": "2026-10-27 13:40:27 IST"
+    },
+    {
+      "id": "newscuzucxbpxx",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-28 08:00",
+      "scheduled_ist": "2026-10-28 08:00",
+      "title": "Sebi extends debenture trustees' compliance deadline to April 2027 amid framewor",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi extends debenture trustees' compliance deadline to April 2027 amid framework review</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSebi has extended the deadline by six months, pushing the final compliance date to April 27, 2027, for debenture trustees (DTs) to move non-regulated activities into separate business units (SBUs) under Regulation 9C of the Sebi (Debenture Trustees) Regulations, 1993.\n\n🧭 <b>MARKET CONTEXT</b>\nIntroduced via amendments in October 2025, Regulation 9C mandates that DTs structurally isolate commercial operations falling outside Sebi's regulatory perimeter into distinct business units to prevent conflicts of interest.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis operational breather lowers near-term compliance friction for DT entities while an Expert Working Group reviews the overall regulatory architecture. If the review results in relaxed structural mandates, institutional overhead costs for trustees could moderate, potentially stabilizing debt market issuance processing fees conditionally.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the Expert Working Group's upcoming recommendations on the SBU framework and subsequent circulars regarding operational perimeter definitions.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do structural compliance adjustments like SBU segregation impact the operational efficiency of debt market intermediaries over time?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-extends-deadline-for-debenture-trustees-to-comply-with-norms-till-april-2027/articleshow/135235986.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:4b02d97becc1",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-extends-deadline-for-debenture-trustees-to-comply-with-norms-till-april-2027/articleshow/135235986.cms",
+      "source_headline": "Sebi extends deadline for debenture trustees to comply with norms till April 2027",
+      "story_key": "4b02d97becc17ff4638e831e0776425ce7234fe297687efdf3c7a37897edb3d6",
+      "generated_at": "2026-10-28 02:19:56 IST"
     }
   ],
-  "total": 36,
-  "last_scheduled": "2026-10-27 12:00"
+  "total": 37,
+  "last_scheduled": "2026-10-28 08:00"
 }
