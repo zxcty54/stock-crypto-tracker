@@ -1,32 +1,32 @@
 # 📊 Performance Report
 
-**27-Oct-2026 02:09 IST** | 66 posts tracked | channel avg **26 views**
+**28-Oct-2026 01:39 IST** | 72 posts tracked | channel avg **25 views**
 
-*40 posts pehchaane gaye, 26 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*42 posts pehchaane gaye, 30 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 37 | 1.46 |
+| lifestyle | 3 | 37 | 1.5 |
 | psychology | 2 | 36 | 1.0 |
-| technical | 6 | 35 | 1.36 |
-| process | 1 | 31 | 1.0 |
+| technical | 6 | 36 | 1.43 |
 | tools | 1 | 28 | 1.0 |
-| business_model | 7 | 25 | 0.99 |
-| corporate | 32 | 24 | 0.95 |
-| risk | 4 | 24 | 0.92 |
-| other | 5 | 21 | 0.82 |
-| awareness | 2 | 17 | 1.0 |
-| market_mechanics | 3 | 16 | 0.64 |
+| business_model | 7 | 27 | 1.08 |
+| risk | 4 | 24 | 0.94 |
+| corporate | 36 | 23 | 0.94 |
+| awareness | 2 | 20 | 1.0 |
+| process | 2 | 20 | 1.0 |
+| other | 6 | 19 | 0.76 |
+| market_mechanics | 3 | 17 | 0.7 |
 
 ## 📈 Channel Growth
 
 **Subscribers: 475** (target 1000)
 
 - Pichhle 7 din me: **+472**
-- Average: **23.6/din**
-- Isi raftaar se 1000 subs: **~22 din**
+- Average: **22.48/din**
+- Isi raftaar se 1000 subs: **~23 din**
 
 
 ## 🏆 Top posts
@@ -44,12 +44,12 @@
 
 ## ⚠️ Kam chale posts
 
-- 6 views — Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayn  
-  `awareness`
-- 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
-  `risk`
+- 5 views — Waaree Energies Limited (NSE: WAAREEENER)  
+  `corporate`
 - 0 views — Channel created  
   `other`
+- 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
+  `risk`
 
 ---
 

@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-27 02:09 IST",
- "sample_size": 66,
- "identified": 40,
- "inferred": 26,
+ "generated_at": "2026-10-28 01:39 IST",
+ "sample_size": 72,
+ "identified": 42,
+ "inferred": 30,
  "cards_skipped": 0,
- "channel_avg_views": 25.7,
+ "channel_avg_views": 24.9,
  "growth": {
   "today": 475,
-  "snapshots": 19,
+  "snapshots": 20,
   "delta_7d": 472,
-  "per_day": 23.6,
-  "days_to_target": 22,
+  "per_day": 22.48,
+  "days_to_target": 23,
   "target": 1000,
-  "days_span": 20
+  "days_span": 21
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 37.3,
-   "weight": 1.46,
+   "weight": 1.5,
    "low_sample": false
   },
   "psychology": {
@@ -30,15 +30,9 @@
   },
   "technical": {
    "posts": 6,
-   "avg_views": 35.0,
-   "weight": 1.36,
+   "avg_views": 35.5,
+   "weight": 1.43,
    "low_sample": false
-  },
-  "process": {
-   "posts": 1,
-   "avg_views": 31.0,
-   "weight": 1.0,
-   "low_sample": true
   },
   "tools": {
    "posts": 1,
@@ -48,38 +42,44 @@
   },
   "business_model": {
    "posts": 7,
-   "avg_views": 25.4,
-   "weight": 0.99,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 32,
-   "avg_views": 24.4,
-   "weight": 0.95,
+   "avg_views": 26.9,
+   "weight": 1.08,
    "low_sample": false
   },
   "risk": {
    "posts": 4,
    "avg_views": 23.5,
-   "weight": 0.92,
+   "weight": 0.94,
    "low_sample": false
   },
-  "other": {
-   "posts": 5,
-   "avg_views": 21.0,
-   "weight": 0.82,
+  "corporate": {
+   "posts": 36,
+   "avg_views": 23.4,
+   "weight": 0.94,
    "low_sample": false
   },
   "awareness": {
    "posts": 2,
-   "avg_views": 17.0,
+   "avg_views": 20.5,
    "weight": 1.0,
    "low_sample": true
   },
+  "process": {
+   "posts": 2,
+   "avg_views": 19.5,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "other": {
+   "posts": 6,
+   "avg_views": 18.8,
+   "weight": 0.76,
+   "low_sample": false
+  },
   "market_mechanics": {
    "posts": 3,
-   "avg_views": 16.3,
-   "weight": 0.64,
+   "avg_views": 17.3,
+   "weight": 0.7,
    "low_sample": false
   }
  },
@@ -112,19 +112,19 @@
  ],
  "weak_posts": [
   {
-   "title": "Sebi rules overhaul: Short-selling, SLB aur compliance revamp ke maayn",
-   "views": 6,
-   "pillar": "awareness"
-  },
-  {
-   "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
-   "views": 0,
-   "pillar": "risk"
+   "title": "Waaree Energies Limited (NSE: WAAREEENER)",
+   "views": 5,
+   "pillar": "corporate"
   },
   {
    "title": "Channel created",
    "views": 0,
    "pillar": "other"
+  },
+  {
+   "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
+   "views": 0,
+   "pillar": "risk"
   }
  ]
 }
