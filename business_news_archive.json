@@ -1,6 +1,296 @@
 {
   "stories": [
     {
+      "id": "newsvpfwouyzyh",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Transformers and Rectifiers shares snap seven-day losing streak as it announces ₹1,250 crore investment",
+      "url": "https://www.cnbctv18.com/market/transformers-and-rectifiers-share-price-breaks-7-day-losing-streak-1250-crore-rupees-investment-gujarat-manufacturing-plants-20020129.htm",
+      "published_at": "2026-10-27T12:47:02+05:30",
+      "published_ist": "2026-10-27 12:47 IST",
+      "summary": "Transformers and Rectifiers, in an exchange filing, said to meet the rising electricity demand, renewable energy integration and transmission network modernisation, it will invest ₹1,250 crore to establish three greenfield manufacturing plants at its Chiyada manufacturing complex in Gujarat.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsyfwsanqklv",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Jio’s big-bang listing may give it stock market’s No.2 crown after Reliance Industries",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/jios-big-bang-listing-may-give-it-stock-markets-no-2-crown-after-reliance-industries/articleshow/135227418.cms",
+      "published_at": "2026-10-27T12:46:38+05:30",
+      "published_ist": "2026-10-27 12:46 IST",
+      "summary": "Jio Platforms could overtake Bharti Airtel to become India’s second-largest listed company after its October 28 debut, with a 22% grey market premium implying a market capitalisation of Rs 12.5 lakh crore. Its Rs 30,213-crore IPO drew 22.2 times subscription, while brokerages highlighted growth opportunities in broadband, enterprise technology and AI.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jio Platforms ka ₹30,213 crore ka IPO aur iska anticipated market capitalization Rs 12.5 lakh crore tak pahunchna yeh dikhata hai ki Indian capital markets mein large-scale institutional aur retail liquidity ki koi kami nahi hai. Agar listing ke baad ye valuations sustain hoti hain, toh yeh dominant telecom players ko non-core segments jaise broadband, enterprise tech, aur AI mein aggressively invest karne ke liye ek strong currency provide kar sakti hai. Lekin, yeh yaad rakhna zaroori hai ki grey market premiums sirf speculative sentiment hote hain aur actual listing price ya long-term cash flows ki guarantee nahi dete.",
+        "what_to_watch": [
+          "BSE aur NSE par official listing ke baad actual opening price aur trading volume.",
+          "Company ke balance sheet disclosures mein Rs 27,500 crore ke proceeds se borrowings ka actual prepayment.",
+          "Broadband, enterprise technology, aur AI segments se revenue diversification ke quarterly milestones."
+        ],
+        "evergreen_lesson": "Ek mega-size IPO ki strong subscription aur high valuation debut yeh prove nahi karti ki underlying operational cash flows turant expand ho jayenge; actual execution aur debt reduction par hi long-term value depend karti hai."
+      }
+    },
+    {
+      "id": "newsgpqjgvfkba",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Sensex today | Stock Market Live: Sensex flat, Nifty near 22,700 on expiry day blues; Tata Consumer stock up 5.8%",
+      "url": "https://www.thehindubusinessline.com/markets/sensex-nifty50-today-stock-market-live-updates-27-october-2026/article71626702.ece",
+      "published_at": "2026-10-27T12:41:03+05:30",
+      "published_ist": "2026-10-27 12:41 IST",
+      "summary": "Sensex, Nifty, Share Prices Live: Benchmark indices opened lower on Tuesday, October 27, 2026, dragged by selling in information technology and metals stocks even as fast-moving consumer goods and defence counters held firm.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsqcfizssgdn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Jio Platforms shares to list on BSE, NSE tomorrow; GMP signals 22% premium",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/jio-platforms-shares-to-list-on-bse-nse-tomorrow-gmp-signals-22-premium/articleshow/135226292.cms",
+      "published_at": "2026-10-27T11:46:21+05:30",
+      "published_ist": "2026-10-27 11:46 IST",
+      "summary": "Jio Platforms shares are set to list on the BSE and NSE on October 28, with the IPO commanding a grey market premium of around 22%. The Rs 30,213-crore issue was subscribed 22.19 times, led by strong institutional demand. Investors will watch the listing amid Jio’s growth ambitions and financial performance.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newshkkhtnacsc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Indian bonds tick up on calm oil before Fed verdict",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/indian-bonds-tick-up-on-calm-oil-before-fed-verdict/articleshow/135225679.cms",
+      "published_at": "2026-10-27T11:14:11+05:30",
+      "published_ist": "2026-10-27 11:14 IST",
+      "summary": "In early trade, Indian government bonds improved as oil prices found stability after last week's surge. Traders remained cautious ahead of a significant policy decision by the US Federal Reserve on Wednesday. India's bond yields decreased slightly, although overall demand for longer maturities has declined amid inflation concerns. The Indian rupee remained stable as fears of further rate hikes from the Reserve Bank of India persisted.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "queued",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Global crude prices mein stability aur US Federal Reserve ke policy verdict se pehle Indian government bonds mein slight recovery yeh darshati hai ki local debt markets global macro triggers ke liye kitne sensitive hain. Agar Brent crude high levels par bana raha aur rupee weaken hota raha, toh imported inflation ka pressure badh jayega, jisse RBI ke inter-meeting rate hikes ki probability badh sakti hai. Halanki, yeh bond yield ticks sirf immediate sentiment-driven movements hain aur long-term duration appetite mein structural weakness ko solve nahi karte.",
+        "what_to_watch": [
+          "State-loan auctions mein bid-to-cover ratios aur cut-off yields ki demand status.",
+          "RBI ki taraf se official interest rate announcements aur liquidity adjustment operations.",
+          "Brent crude oil prices ka trajectory aur USD-INR exchange rate movements."
+        ],
+        "evergreen_lesson": "Jab macro variables jaise crude oil aur currency unstable hote hain, tab short-term bond yield easing ko structural demand recovery nahi maana chahiye jab tak long-duration borrowing appetite improve na ho."
+      },
+      "processed_ist": "2026-10-27 13:40:27 IST",
+      "post_id": "newshhcpfqqjdv"
+    },
+    {
+      "id": "newsvdtadbvzig",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "HDFC Bank shares steady as Bagchi takes charge as MD & CEO",
+      "url": "https://www.thehindubusinessline.com/markets/stock-markets/why-are-hdfc-bank-shares-steady-as-bagchi-officially-takes-charge-as-md-ceo/article71629819.ece",
+      "published_at": "2026-10-27T10:42:48+05:30",
+      "published_ist": "2026-10-27 10:42 IST",
+      "summary": "The stock remains under significant pressure, down 30.45 per cent year-to-date against the Nifty 50’s 12.86 per cent decline",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Management changes at large private banks can trigger shifts in retail lending focus and operational priorities. If the new CEO executes strategic adjustments successfully, the stock valuation might find fundamental support. However, a regulatory filing confirming leadership transition does not instantly alter asset quality pressures or historical performance trends.",
+        "what_to_watch": [
+          "Quarterly credit growth and net interest margin disclosures under the new leadership",
+          "Official commentary on asset quality and provisioning trends in upcoming earnings calls",
+          "Institutional delivery volumes and foreign institutional investor holding reports"
+        ],
+        "evergreen_lesson": "Leadership succession events alter governance signals, but underlying asset quality and credit demand dictate long-term valuation recovery."
+      }
+    },
+    {
+      "id": "newsdizqksvdsy",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Markets may stabilise in coming months; Paytm, defence stocks among top picks: Marketsmith India",
+      "url": "https://www.cnbctv18.com/market/mayuresh-joshi-paytm-solar-industries-zen-technologies-market-analysts-crude-oil-prices-geopolitical-tensions-defence-stocks-alpha-article-20020008.htm",
+      "published_at": "2026-10-27T10:30:28+05:30",
+      "published_ist": "2026-10-27 10:30 IST",
+      "summary": "Marketsmith India's Mayuresh Joshi expects Paytm to benefit from proposed MDR changes, saying they could improve revenue growth, margins and cash flows. He also sees Pine Labs gaining from the policy. What could MDR mean for India's payment companies?",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsfhuzrhhvck",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Crude oil at $115 has risk premium built in, prices may soften if tensions ease: 3R Investment",
+      "url": "https://www.cnbctv18.com/market/crude-oil-prices-us-bond-yields-ai-investment-outlook-neeraj-seth-alpha-article-20019937.htm",
+      "published_at": "2026-10-27T10:11:03+05:30",
+      "published_ist": "2026-10-27 10:11 IST",
+      "summary": "Neeraj Seth, Founder and CIO of 3R Investment Management explains why crude oil prices at $115 a barrel could soften if geopolitical tensions ease, while flagging risks from US bond yields and the outlook for AI investments.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "High crude oil prices embed geopolitical risk premiums that directly squeeze corporate operating margins across oil-importing economies like India. If political shifts materialize to de-escalate conflicts, input cost pressures could recede and provide relief to domestic equities. Conversely, persistent fiscal deficits and sticky inflation would keep long-term bond yields elevated regardless of headline oil dips.",
+        "what_to_watch": [
+          "Official Brent crude spot prices and weekly US petroleum inventory data",
+          "US Treasury long-end yield movements and Federal Reserve rate action announcements",
+          "Hyperscaler capital expenditure guidance and free cash flow reports in upcoming tech earnings"
+        ],
+        "evergreen_lesson": "Commodity price spikes driven by geopolitical risk premiums often reverse quickly if diplomatic resolutions occur, whereas macro bond yield pressures depend on structural fiscal deficits."
+      }
+    },
+    {
+      "id": "newsvupwbhhwze",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Expiry day nerves: Sensex, Nifty open in red as IT drags; FMCG, Defence buck the trend",
+      "url": "https://www.thehindubusinessline.com/markets/expiry-day-nerves-sensex-nifty-open-in-red-as-it-drags-fmcg-defence-buck-the-trend/article71629719.ece",
+      "published_at": "2026-10-27T09:44:26+05:30",
+      "published_ist": "2026-10-27 09:44 IST",
+      "summary": "Sensex opened at 73,484.38 and was trading at 73,276.08 at 9.20 am, down 330.67 points or 0.45%; Nifty50 opened at 22,708.80 and fell to 22,671.25, a loss of 81.95 points or 0.36% as of 9.20 am",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Monthly derivatives expiry dates frequently cause artificial intraday volatility and sharp index swings due to position unwinding rather than fundamental economic shifts. If broader sector divergence persists, defensive segments like FMCG and defence may cushion market corrections while IT counters react to global cues. A gap-down opening or initial market slide does not establish a permanent medium-term downtrend.",
+        "what_to_watch": [
+          "Intraday turnover and derivatives roll-over data following expiry sessions",
+          "Foreign portfolio investor daily net buy/sell figures in cash markets",
+          "Domestic IT sector client deal wins and management margin guidance independent of Wall Street sentiment"
+        ],
+        "evergreen_lesson": "Derivatives expiry cycles amplify short-term intraday volatility, making it vital to separate tactical option unwinding from structural sector trends."
+      }
+    },
+    {
+      "id": "newsvlmylugypv",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market: South Korean shares jump over 4% as AI chip rally lifts Samsung, SK Hynix",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-south-korean-shares-jump-over-4-as-ai-chip-rally-lifts-samsung-sk-hynix/articleshow/135224057.cms",
+      "published_at": "2026-10-27T09:34:15+05:30",
+      "published_ist": "2026-10-27 09:34 IST",
+      "summary": "South Korean shares surged 4.39% as AI investment optimism, strong semiconductor demand and better-than-expected third-quarter economic growth boosted investor sentiment. Samsung Electronics and SK Hynix led gains, while foreign investors purchased shares worth 597.3 billion won. The Korean won strengthened slightly, reflecting positive market momentum and improving confidence in technology-driven growth prospects.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Strong export demand for specialized components like AI chips can rapidly improve national trade balances and boost domestic equity benchmarks. If foreign capital inflows continue alongside positive macroeconomic growth prints, local currency stability is likely to improve. However, heavy reliance on cyclical semiconductor demand leaves broad market indices vulnerable to global technology spending slowdowns.",
+        "what_to_watch": [
+          "Bank of Korea advance quarterly GDP and current account balance data releases",
+          "Net daily foreign investor trading activity figures on the exchange",
+          "Global semiconductor shipment indices and leading tech manufacturer order books"
+        ],
+        "evergreen_lesson": "Export-oriented open economies leverage global technology cycles quickly, but their market breadth remains tightly correlated with foreign institutional capital flows."
+      }
+    },
+    {
+      "id": "newsvtbipgnxqj",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Bond market is a buy right now, JP Morgan Asset Management's fixed income head says",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/bond-market-is-a-buy-right-now-jp-morgan-asset-managements-fixed-income-head-says/articleshow/135223602.cms",
+      "published_at": "2026-10-27T08:58:08+05:30",
+      "published_ist": "2026-10-27 08:58 IST",
+      "summary": "According to Bob Michele of J.P. Morgan Asset Management, investors should take advantage of the current bond market opportunities without delay. He estimates returns of up to 8% over the next year, emphasizing the promising yield potential, especially in US treasuries. Michele reassures that a recession seems unlikely at this time while also alerting that inflation concerns could compel the Federal Reserve to implement larger rate hikes than expected.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab real yields high hote hain aur recession ki probability low maani jaati hai, tab fixed income assets attract karte hain kyunki carry aur price appreciation dono ka scope rehta hai. Source kehta hai ki US mein 7% to 8% return mil sakta hai aur Fed funds rate 4.5% par converge kar sakta hai, lekin agar inflation badhi toh Fed ko expected se zyada rate hikes karne padenge. Iska implication yeh hai ki agar inflation sticky rahi, toh bond yields aur upar jaa sakte hain, jisse near-term price volatility badh sakti hai.",
+        "what_to_watch": [
+          "US Federal Reserve ke official rate decisions aur statement updates",
+          "US 10-year Treasury yields aur real yield data points",
+          "Global inflation print aur core CPI disclosures"
+        ],
+        "evergreen_lesson": "Ek rate hiking cycle ke ant mein flat yield curve aur high real yields usually ek generational entry window banate hain, jab tak ki inflation surprise risk control mein rahe."
+      }
+    },
+    {
+      "id": "newsxryczizdff",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "HSBC is no longer bullish on US stocks ahead of mid-term elections",
+      "url": "https://www.cnbctv18.com/market/hsbc-is-no-longer-bullish-on-us-stocks-ahead-of-mid-term-elections-20019886.htm",
+      "published_at": "2026-10-27T07:21:18+05:30",
+      "published_ist": "2026-10-27 07:21 IST",
+      "summary": "The HSBC Holdings Plc chief multi-asset strategist, who has described his stance in previous client notes as “Max Bullish,” on Monday tactically reduced his stock allocation to neutral from maximum overweight for the first time since mid-March.",
+      "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
+      "first_seen_ist": "2026-10-27 13:40:27 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab market sentiments mein rapid shifts aate hain aur geopolitical ya regulatory uncertainties badhti hain, toh institutional strategists tactical asset allocation reduce karke neutral stand le lete hain. Source ne bataya ki HSBC ne US stocks ko maximum overweight se neutral kar diya hai due to upcoming mid-term elections, potential AI regulations, aur Iran war risks. Iska implication yeh ho sakta hai ki jab tak yeh binary political aur geopolitical events clear nahi hote, institutional inflows cautious rahenge aur volatility bani rahegi.",
+        "what_to_watch": [
+          "US mid-term election outcomes aur related policy announcements",
+          "Long-term oil price movements aur Middle East conflict updates",
+          "US hyperscalers ke free-cash-flow disclosures aur earnings reports"
+        ],
+        "evergreen_lesson": "Narrative-driven market shifts mein conviction level tabhi sustain hoti hai jab macro risks clear hon; binary political events ke pehle tactical caution lena institutional behavior ka standard part hota hai."
+      }
+    },
+    {
       "id": "newsxzytkgenaw",
       "source": "The Hindu BusinessLine",
       "source_priority": 2,
@@ -14,7 +304,19 @@
       "first_seen_ist": "2026-10-27 07:04:17 IST",
       "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
-      "topic": "stock_market"
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Cross-border acquisitions aur large infrastructure orders companies ke scale aur revenue mix ko expand karte hain, jisse corporate execution capability par dhyan dena zaroori ho jata hai. Source ke mutabiq, Tata Motors ne Iveco acquisition ke liye shareholder approval pa liya hai aur Bajel Projects ko transmission projects ke liye ₹1,500 crore ke LOAs mile hain. Iska implication yeh hai ki agar yeh companies integration aur execution smooth rakhein, toh inka combined scale aur order book long-term revenue growth ko support kar sakta hai.",
+        "what_to_watch": [
+          "Tata Motors aur Iveco ke merger integration milestones aur debt/cash flow disclosures",
+          "Bajel Projects ke transmission project execution timelines aur milestone billing data",
+          "HCL Technologies ke acquired robotic process automation unit se revenue contribution disclosures"
+        ],
+        "evergreen_lesson": "Ek announcement ya shareholder vote sirf structural corporate deal ka pehla step hota hai; real economic value tabhi create hoti hai jab cross-border integration aur large order execution successfully deliver ho."
+      }
     },
     {
       "id": "newsltwsznynfn",
@@ -58,7 +360,19 @@
       "first_seen_ist": "2026-10-27 07:04:17 IST",
       "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
-      "topic": "stock_market"
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Government ka defence procurement approvals dena aur companies ka quarterly earnings report karna market sentiment ko drive karta hai, jismein top-line growth aur bottom-line performance alag-alag ho sakti hai. Source report karta hai ki Defence Acquisition Council ne ₹2.12 lakh crore ke proposals approve kiye hain jismein 82% domestic sourcing hai, jabki alag-alag companies ne mixed Q2 results report kiye hain jaise Paytm ka profit badhna aur Dalmia Bharat ka one-time exceptional loss ke chalte net loss mein aana. Iska implication yeh hai ki policy approvals aur headline revenue growth ke bawajood, actual cash flows aur margins operational cost pressures par depend karte hain.",
+        "what_to_watch": [
+          "Ministry of Defence ke official procurement contracts aur execution orders ki progress",
+          "Companies ke subsequent quarter ke operating margins, EBITDA growth aur cash flow statements",
+          "Dalmia Bharat ke exceptional charges aur demand recovery data in cement segment"
+        ],
+        "evergreen_lesson": "Ek policy proposal ya defense approval sirf long-term opportunity create karta hai, jabki quarterly earnings mein one-time exceptional items yeh yaad dilate hain ki headline numbers ke peeche ke underlying margins par dhyan dena zaroori hai."
+      }
     },
     {
       "id": "newspjijfbpdsn",
@@ -74,7 +388,19 @@
       "first_seen_ist": "2026-10-27 07:04:17 IST",
       "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
-      "topic": "economy"
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market indices recover due to low-level buying after consecutive sessions of declines, but external pressures like high crude prices and global interest rate concerns continue to impact sentiment. While foreign investors remain net sellers, domestic institutional buyers provide structural support. However, this rebound does not establish a permanent trend, as persistent geopolitical issues and inflation risks could easily reverse these gains if oil supply concerns escalate further.",
+        "what_to_watch": [
+          "Daily trade data tracking net flows of Foreign Portfolio Investors (FPIs) versus Domestic Institutional Investors (DIIs)",
+          "Brent crude oil price movements and subsequent updates on global supply disruptions or geopolitical tensions",
+          "Upcoming corporate earnings and individual guidance updates from major lenders and consumer firms regarding credit costs and loan demand"
+        ],
+        "evergreen_lesson": "Market rebounds driven by dip-buying after a selloff do not eliminate macro headwinds such as rising input costs or foreign capital outflows."
+      }
     },
     {
       "id": "newsgdwgdvgtoo",
@@ -144,9 +470,9 @@
       "published_ist": "2026-10-26 18:20 IST",
       "summary": "Government of India (GoI) has announced the sale (re-issue) of four dated securities for a notified amount of ₹33,000 crore as per the following details: Sr No Security Date of Repayment Notified Amount (₹ Crore) GoI specific Notification Auction Date Settlement Date 1 6.20% GS 2029 Aug 17, 2029 9,000 F.No.4(1)-B(W&M)/2026 dated October 26, 2026 October 30, 2026 (Friday) November 02, 2026 (Monday) 2 6.57% GS 2033 Aug 17, 2033 12,000 3 7.63% GS 2056 Sep 15, 2056 9,000 4 7.50% GOI SGrB 2056 Apr 27, 2056 3,000 Total 33,000 2. GoI will have the option to retain additional subscription up to ₹2,000 crore against each security mentioned above. 3. The securities will be sold through Reserve Bank of India Mumbai Office, Fort, Mumbai – 400001. The sale will be subject to the terms and conditions spelt out in the ‘Specific Notification’ mentioned above and the General Notification F.No.4(2)–B(W&M)",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -172,9 +498,9 @@
       "published_ist": "2026-10-26 17:29 IST",
       "summary": "Indian stock markets will observe two weekday trading holidays in November 2026 for Diwali-Balipratipada and Prakash Gurpurb Sri Guru Nanak Dev, along with a special Muhurat Trading session on Novembe",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -285,9 +611,9 @@
       "published_ist": "2026-10-26 15:12 IST",
       "summary": "E2E Networks said the proposed capacity addition would help it cater to the demand for GPUs and related services. The rollout will be guided by its infrastructure deployment plan and anticipated demand for AI computing services.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -454,7 +780,19 @@
       "first_seen_ist": "2026-10-26 13:29:55 IST",
       "last_seen_ist": "2026-10-26 13:29:55 IST",
       "status": "new",
-      "topic": "capital_market"
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 13:40:27 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Benchmark indices snap a four-day losing streak as value buying lifts select metal, telecom, and healthcare stocks alongside a modest decline in crude prices. At the same time, the domestic currency depreciates against the US dollar, reflecting broader external currency pressures. This single-day recovery highlights that headline index movements do not confirm a steady market direction while currency volatility and sector-specific policy shifts persist.",
+        "what_to_watch": [
+          "Daily exchange rate data for the Indian rupee against the US dollar",
+          "Official notification updates regarding duty-free cotton import extensions and regulatory trade-margin caps",
+          "Execution timelines and capital allocation disclosures for announced subsidiary investments and infrastructure projects"
+        ],
+        "evergreen_lesson": "A single day's sectoral rally and benchmark rebound can co-exist with currency depreciation and external cost pressures, showing that short-term price action is not a proxy for economic stability."
+      }
     },
     {
       "id": "newskntbuxyjxn",
@@ -494,9 +832,9 @@
       "published_ist": "2026-10-26 12:11 IST",
       "summary": "Indian investment platforms including Groww, Zerodha, Angel One, and Upstox are expanding access to US stocks and ETFs through GIFT City framework, supporting fractional investing.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -605,9 +943,9 @@
       "published_ist": "2026-10-26 10:05 IST",
       "summary": "ICICI Securities' Pankaj Pandey says India's market is in a stronger position than during the March correction as earnings remain healthy and valuations have turned attractive. He prefers data center infrastructure, defence and select financial stocks, while staying cautious on Tier-1 IT and most cement companies.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -648,9 +986,9 @@
       "published_ist": "2026-10-26 00:00 IST",
       "summary": "SEBI Order for Compliance – Completion Order for Recovery Certificate No. 8484 of 2024 against NARENDRABHAI AMIN (PAN- AMGPA3864Q) in the matter of M/s Austral Coke and Projects Limited - II",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -664,9 +1002,9 @@
       "published_ist": "2026-10-25 19:50 IST",
       "summary": "The Hon’ble Prime Minister of India, Shri Narendra Modi, today inaugurated the Reserve Bank of India’s newly established Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha. This marks a significant milestone in strengthening the technological foundation of India’s financial system. Hon’ble Governor of Odisha, Shri Brajmohan Ram, Hon’ble Chief Minister of Odisha, Shri Mohan Charan Majhi; Hon’ble Union Finance and Corporate Affairs Minister, Smt. Nirmala Sitharaman; Hon’ble Union Minister for Tribal Affairs, Shri Jual Oram; Hon’ble Deputy Chief Ministers of Odisha, Shri Kanak Vardhan Singh Deo and Smt. Pravati Parida, and Hon’ble Members of Parliament, Shri Manmohan Samal and Smt. Aparajita Sarangi, also graced the event. 2. In his address, the Hon’ble Prime Minister highlighted the significance of the institutions inaugurated today - the Data Centre and the Cybersecur",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -693,9 +1031,9 @@
       "published_ist": "2026-10-25 16:05 IST",
       "summary": "The sharp rise in government bond yields since the Reserve Bank of India's (RBI) October monetary policy review threatens to increase the government's borrowing costs and put pressure on its interest expenditure, potentially squeezing fiscal flexibility, according to experts.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T13:40:27.942052+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 13:40:27 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -1220,51 +1558,51 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-27T07:04:17.897609+05:30",
-  "last_scraped_ist": "2026-10-27 07:04:17 IST",
+  "last_scraped_at": "2026-10-27T13:40:27.942052+05:30",
+  "last_scraped_ist": "2026-10-27 13:40:27 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
-      "fresh_items": 99,
-      "accepted_items": 6,
-      "filtered_items": 93,
+      "fresh_items": 128,
+      "accepted_items": 9,
+      "filtered_items": 119,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 8,
-      "filtered_items": 42,
+      "accepted_items": 5,
+      "filtered_items": 45,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
-      "fresh_items": 18,
-      "accepted_items": 1,
-      "filtered_items": 17,
+      "fresh_items": 26,
+      "accepted_items": 3,
+      "filtered_items": 23,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
-      "fresh_items": 7,
+      "fresh_items": 8,
       "accepted_items": 2,
-      "filtered_items": 5,
+      "filtered_items": 6,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
-      "fresh_items": 0,
+      "fresh_items": 1,
       "accepted_items": 0,
-      "filtered_items": 0,
+      "filtered_items": 1,
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-27 07:04:17 IST",
+      "checked_ist": "2026-10-27 13:40:27 IST",
       "http_status": 200,
       "fresh_items": 4,
       "accepted_items": 3,
@@ -1296,16 +1634,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-27 07:04:17 IST"
+    "last_curated_ist": "2026-10-27 13:40:27 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-27 07:04:17 IST",
-    "fetched_items": 178,
-    "accepted_feed_items": 20,
-    "filtered_feed_items": 158,
-    "new_unique_stories": 5,
+    "updated_ist": "2026-10-27 13:40:27 IST",
+    "fetched_items": 217,
+    "accepted_feed_items": 22,
+    "filtered_feed_items": 195,
+    "new_unique_stories": 12,
     "duplicate_items_collapsed": 2,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 47
+    "stories_total": 59
   }
 }

@@ -337,14 +337,16 @@
       "scheduled_ist": "2026-10-26 08:00",
       "title": "RBI Ka Naya Data Centre & Cybersecurity Institute: Banking System Ke Liye Kya Ma",
       "text": "📊 <b>RBI Ka Naya Data Centre &amp; Cybersecurity Institute: Banking System Ke Liye Kya Mayne Rakhta Hai?</b>\n\n📰 Kya hua: Prime Minister ne Bhubaneswar, Odisha mein Reserve Bank of India (RBI) ke naye Data Centre aur Cybersecurity Training Institute ka inauguration kiya hai. Is naye facility mein RBI ke mission-critical systems jaise ki RTGS aur NEFT ko house kiya jayega, jabki training institute cybersecurity, AI aur emerging technologies par focus karega.\n\n🧩 News ko kaise padhein: 'RTGS' (Real-Time Gross Settlement) aur 'NEFT' (National Electronic Funds Transfer) desh ki financial system ki backbone hain, jinke zariye daily crores ke transactions process hote hain. Inhe run karne ke liye massive computing power aur ultra-secure infrastructure ki zaroorat hoti hai.\n\n💡 Business mein iska matlab: Jaise-jaise digital payments badh rahe hain, banking sector par cyber threats aur technical failures ka risk bhi exponential rate par badh raha hai. Ek centralized, high-tech data centre hone se systemic resilience strong hoti hai aur downtime ya data breaches ka risk minimize hota hai. Isse banking sector, fintechs, aur overall digital economy ko ek secure framework milta hai.\n\n🔭 Aage kya dekhein: Yeh observe karein ki financial institutions aur banks kis tarah naye cybersecurity frameworks adopt karte hain aur kya RBI apne digital infrastructure ko aur decentralize karta hai. Yeh bhi dekhein ki training institutes se talent pool mein kitna improvement aata hai.\n\nAapke hisaab se, digital banking expansion ke is daur mein sabse bada operational risk kya hona chahiye?\n\n🔗 Source: <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63862\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:1ea7af4f9953",
       "kind": "business_news_insight",
       "source_name": "RBI Press Releases",
       "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63862",
       "source_headline": "Hon’ble Prime Minister of India inaugurates the Reserve Bank of India’s Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha",
       "story_key": "1ea7af4f995346a01863e60a70b50327062b1de14138d445e0590abbaafdf70f",
-      "generated_at": "2026-10-25 23:16:50 IST"
+      "generated_at": "2026-10-25 23:16:50 IST",
+      "posted_at": "2026-10-27 13:40:58 IST",
+      "telegraph_url": "https://telegra.ph/RBI-Ka-Naya-Data-Centre--Cybersecurity-Institute-Banking-System-Ke-Liye-Kya-Ma--October-2026-10-27"
     },
     {
       "id": "newsgcczncgvtq",
@@ -437,8 +439,24 @@
       "used": false,
       "topic_key": "fake_profit_screenshots",
       "generated_at": "2026-10-26 13:41:12 IST"
+    },
+    {
+      "id": "newshhcpfqqjdv",
+      "slot": "C",
+      "hourly_slot_ist": "2026-10-27 12:00",
+      "scheduled_ist": "2026-10-27 12:00",
+      "title": "Indian bonds firm up as Brent crude dips; macro risks persist",
+      "text": "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n📊 <b>Indian bonds firm up as Brent crude dips; macro risks persist</b>\n━━━━━━━━━━━━━━━━━━\n\n📰 <b>Kya hua</b>\nIndian government bonds firmed slightly in early trade, with the benchmark 6.94% 2036 bond yield easing 1 basis point to 7.4732%. This move came as Brent crude dipped about 1% to $114.5 a barrel, finding temporary relief after surging more than 6% last week. Meanwhile, traders remained cautious ahead of a 233 billion rupee state-loan auction and the upcoming US Federal Reserve policy decision.\n\n🧩 <b>News ko kaise padhein</b>\nBond yields and bond prices move inversely—when yields fall, bond prices rise. The 1-year overnight indexed swap (OIS) rate eased marginally to 6.65%, but it still prices in expectations of over 100 basis points of rate hikes over the next year. Market participants are closely tracking external pressures like crude prices hovering above $100/bbl and a frail rupee trading near 95.22 per dollar.\n\n💡 <b>Business mein iska matlab</b>\nCrude oil prices are a major imported inflation driver for India. When crude stays elevated, it threatens domestic inflation and worsens the fiscal balance, forcing both federal and state governments into heavy borrowing schedules. This heavy supply of debt, coupled with a weak rupee, drains liquidity and diminishes appetite for long-dated maturities. If the rupee continues to weaken toward 96, analysts warn that the Reserve Bank of India might be forced into aggressive tightening or inter-meeting rate hikes to defend the currency.\n\n🔭 <b>Aage kya dekhein</b>\nWatch the outcome of the US Federal Reserve's policy verdict and any hawkish signals on inflation. Domestically, monitor absorption at the state-loan auctions, the trajectory of Brent crude, and USD-INR movements for signs of central bank intervention.\n\n💬 <b>Kya aapko lagta hai ki domestic bond markets mein long-duration yields ka dabav aane wale dino mein aur badhega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>Source:</b> <a href=\"https://economictimes.indiatimes.com/markets/bonds/indian-bonds-tick-up-on-calm-oil-before-fed-verdict/articleshow/135225679.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:30835a8cb4d2",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/indian-bonds-tick-up-on-calm-oil-before-fed-verdict/articleshow/135225679.cms",
+      "source_headline": "Indian bonds tick up on calm oil before Fed verdict",
+      "story_key": "30835a8cb4d21a0dd37775c1e2d940da882178fce8354051e2da8dddbcb09b3b",
+      "generated_at": "2026-10-27 13:40:27 IST"
     }
   ],
-  "total": 35,
-  "last_scheduled": "2026-10-27 10:00"
+  "total": 36,
+  "last_scheduled": "2026-10-27 12:00"
 }
