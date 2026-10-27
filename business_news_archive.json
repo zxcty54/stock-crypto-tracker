@@ -1,6 +1,109 @@
 {
   "stories": [
     {
+      "id": "newsxzytkgenaw",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Buzzing stocks: Tata Motors, TVS Holdings, Basel Projects, HCL Technologies, Global Infra, Sigma Adanced, Highway Infra, Genus Power, Gabion Tech",
+      "url": "https://www.thehindubusinessline.com/markets/buzzing-stocks-tata-motors-tvs-holdings-basel-projects-hcl-technologies-global-infra-sigma-adanced-highway-infra-genus-power-gabion-tech/article71629586.ece",
+      "published_at": "2026-10-27T06:52:21+05:30",
+      "published_ist": "2026-10-27 06:52 IST",
+      "summary": "Global deal moves and fresh orders boost infra, tech, and defense manufacturing activity across Tata Motors, HCL Tech, Sigma Advanced, and more.",
+      "first_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "first_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsltwsznynfn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market Today: Wall Street gains lift Asian stocks as Fed decision looms",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today-wall-street-gains-lift-asian-stocks-as-fed-decision-looms/articleshow/135222218.cms",
+      "published_at": "2026-10-27T06:17:41+05:30",
+      "published_ist": "2026-10-27 06:17 IST",
+      "summary": "Gauges in Japan and South Korea advanced, helping the broader MSCI Inc.’s Asia Pacific equities gauge rise 0.6%. Equity-index futures for US stocks also climbed in early trading.",
+      "first_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "first_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 07:04:17 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Massive capital raises and IPO filings by artificial intelligence firms indicate that primary markets are driving liquidity concentration towards tech infrastructure. If high-value capital commitments translate into sustained enterprise spending, semiconductor and cloud suppliers could maintain strong revenue pipelines; however, if returns on these heavy investments lag, broader market sentiment might face severe valuation corrections.",
+        "what_to_watch": [
+          "Official S-1 filing details regarding cash burn rates and customer concentration metrics",
+          "Execution timelines and drawdown schedules for chip-financing facilities and equipment leases",
+          "Subsequent quarterly capital expenditure guidance from major technology platforms"
+        ],
+        "evergreen_lesson": "Primary market liquidity events and debt-financed infrastructure expansions in nascent sectors reflect capital availability rather than immediate profitability, requiring close tracking of cash conversion cycles."
+      }
+    },
+    {
+      "id": "newsvmdlbpxaxx",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Stocks in news: Paytm, Tata Consumer, Dalmia Bharat, REC and DCM Shriram",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/stocks-in-news-paytm-tata-consumer-dalmia-bharat-rec-and-dcm-shriram/articleshow/135216594.cms",
+      "published_at": "2026-10-27T06:00:00+05:30",
+      "published_ist": "2026-10-27 06:00 IST",
+      "summary": "Indian equity markets showed recovery with a rise in NSE Nifty 50, ending a four-session losing streak. Several companies reported their September-quarter earnings, highlighting varying financial performances. Paytm experienced significant profit growth, while Dalmia Bharat reported a net loss due to an exceptional charge. Defence stocks are also in focus following government procurement approvals. Investors continue to track earnings reports and related developments in the market.",
+      "first_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "first_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newspjijfbpdsn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Indian markets rebound, but rising oil prices keep investors cautious",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/d-st-makes-a-comeback-after-weeks-of-decline-yet-investors-remain-cautious-amid-ongoing-market-concerns/articleshow/135221724.cms",
+      "published_at": "2026-10-27T05:45:14+05:30",
+      "published_ist": "2026-10-27 05:45 IST",
+      "summary": "On Monday, Indian equity markets staged a comeback following four days of losses, with both the BSE Sensex and NSE Nifty seeing notable gains as investors sought to take advantage of cheaper stock prices. However, analysts warn that this recovery is precarious, influenced by global geopolitical issues and high crude oil prices.",
+      "first_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "first_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
+      "id": "newsgdwgdvgtoo",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Rising concentration in AI stocks poses a risk: Kunal Kapoor, Morningstar CEO",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/rising-concentration-in-ai-stocks-poses-a-risk-kunal-kapoor-morningstar-ceo/articleshow/135221935.cms",
+      "published_at": "2026-10-27T05:42:21+05:30",
+      "published_ist": "2026-10-27 05:42 IST",
+      "summary": "Kunal Kapoor, the CEO of Morningstar, voiced unease about the dangers of focusing investments heavily on AI stocks during his Mumbai trip. He stressed that lofty expectations might not always reflect in company profits, potentially leading to disappointing market outcomes. While praising India's compelling growth story, he remarked that its investment valuations do not stand up favorably against those in emerging markets.",
+      "first_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
+      "first_seen_ist": "2026-10-27 07:04:17 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-27 07:04:17 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab market concentration badhta hai aur saara focus sirf ek theme jaise AI par ho, toh systemic risk create hota hai kyunki valuations future earnings par depend karti hain, execution par nahi. Agar companies ka revenue expectations ke hisaab se nahi aaya, toh correction sharp ho sakta hai. Isse yeh implication nikalta hai ki sirf economic growth strong hone se investors ko automatically achhe returns nahi milte, agar entry price ya valuation pehle se hi high ho.",
+        "what_to_watch": [
+          "Quarterly earnings reports of major AI-linked tech companies to track if capital spending translates into actual revenue and margin expansion.",
+          "Data on Foreign Portfolio Investor (FPI) net flows and overall domestic equity valuation multiples compared to other emerging markets."
+        ],
+        "evergreen_lesson": "A strong macroeconomic growth story does not automatically guarantee superior investment returns if high valuations have already priced in the optimism."
+      }
+    },
+    {
       "id": "newsrimaqsaqhg",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +113,9 @@
       "published_ist": "2026-10-26 22:08 IST",
       "summary": "Indian stock markets saw a notable recovery after early losses on Monday. Sensex rose nearly 483 points, while Nifty gained over 153 points during the trading session. This rebound followed a four-day decline that significantly impacted investor wealth. Analysts noted value buying supported the recovery, particularly in sectors like power, healthcare, and metals. Despite this, caution prevailed due to geopolitical uncertainties and upcoming policy decisions from major global banks.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "posted",
       "topic": "stock_market",
       "processed_ist": "2026-10-25 19:58:58 IST",
@@ -41,9 +144,9 @@
       "published_ist": "2026-10-26 18:20 IST",
       "summary": "Government of India (GoI) has announced the sale (re-issue) of four dated securities for a notified amount of ₹33,000 crore as per the following details: Sr No Security Date of Repayment Notified Amount (₹ Crore) GoI specific Notification Auction Date Settlement Date 1 6.20% GS 2029 Aug 17, 2029 9,000 F.No.4(1)-B(W&M)/2026 dated October 26, 2026 October 30, 2026 (Friday) November 02, 2026 (Monday) 2 6.57% GS 2033 Aug 17, 2033 12,000 3 7.63% GS 2056 Sep 15, 2056 9,000 4 7.50% GOI SGrB 2056 Apr 27, 2056 3,000 Total 33,000 2. GoI will have the option to retain additional subscription up to ₹2,000 crore against each security mentioned above. 3. The securities will be sold through Reserve Bank of India Mumbai Office, Fort, Mumbai – 400001. The sale will be subject to the terms and conditions spelt out in the ‘Specific Notification’ mentioned above and the General Notification F.No.4(2)–B(W&M)",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -69,9 +172,9 @@
       "published_ist": "2026-10-26 17:29 IST",
       "summary": "Indian stock markets will observe two weekday trading holidays in November 2026 for Diwali-Balipratipada and Prakash Gurpurb Sri Guru Nanak Dev, along with a special Muhurat Trading session on Novembe",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -97,9 +200,9 @@
       "published_ist": "2026-10-26 17:23 IST",
       "summary": "Brigade Enterprises Ltd has forged a partnership with Hyatt Hotels Corporation to launch two new hotels in Bengaluru, including the Hyatt Regency Bengaluru at Brigade Global Park and an additional property on Whitefield-Kadugodi Road. With a combined total of 600 rooms, this collaboration further enhances Brigade's commitment to developing hospitality within mixed-use spaces, leveraging Bengaluru's strong business travel market for growth.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -125,9 +228,9 @@
       "published_ist": "2026-10-26 17:21 IST",
       "summary": "Indian government bonds declined on Monday due to rising oil prices affecting market sentiment and the rupee. The rupee fell for the third consecutive day, adding pressure on bond yields and currency. India's central bank is expected to consider interest rate hikes to stabilize the currency amidst inflation concerns. The Reserve Bank of India has raised its inflation forecast, anticipating a peak of 6% in consumer prices.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -153,9 +256,9 @@
       "published_ist": "2026-10-26 17:00 IST",
       "summary": "China's central bank has introduced the Bond Market NBFI Swap Facility as of Monday. This initiative is designed to stabilize the bond market amid potential systemic stress or liquidity issues. Bank wealth management subsidiaries and public fund managers will gain access to central bank bills, enabling them to finance the purchase of qualifying bonds or units facing redemption, which can be pledged for central bank support.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -182,9 +285,9 @@
       "published_ist": "2026-10-26 15:12 IST",
       "summary": "E2E Networks said the proposed capacity addition would help it cater to the demand for GPUs and related services. The rollout will be guided by its infrastructure deployment plan and anticipated demand for AI computing services.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -391,9 +494,9 @@
       "published_ist": "2026-10-26 12:11 IST",
       "summary": "Indian investment platforms including Groww, Zerodha, Angel One, and Upstox are expanding access to US stocks and ETFs through GIFT City framework, supporting fractional investing.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -502,9 +605,9 @@
       "published_ist": "2026-10-26 10:05 IST",
       "summary": "ICICI Securities' Pankaj Pandey says India's market is in a stronger position than during the March correction as earnings remain healthy and valuations have turned attractive. He prefers data center infrastructure, defence and select financial stocks, while staying cautious on Tier-1 IT and most cement companies.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -545,9 +648,9 @@
       "published_ist": "2026-10-26 00:00 IST",
       "summary": "SEBI Order for Compliance – Completion Order for Recovery Certificate No. 8484 of 2024 against NARENDRABHAI AMIN (PAN- AMGPA3864Q) in the matter of M/s Austral Coke and Projects Limited - II",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -561,9 +664,9 @@
       "published_ist": "2026-10-25 19:50 IST",
       "summary": "The Hon’ble Prime Minister of India, Shri Narendra Modi, today inaugurated the Reserve Bank of India’s newly established Data Centre and Cybersecurity Training Institute in Bhubaneswar, Odisha. This marks a significant milestone in strengthening the technological foundation of India’s financial system. Hon’ble Governor of Odisha, Shri Brajmohan Ram, Hon’ble Chief Minister of Odisha, Shri Mohan Charan Majhi; Hon’ble Union Finance and Corporate Affairs Minister, Smt. Nirmala Sitharaman; Hon’ble Union Minister for Tribal Affairs, Shri Jual Oram; Hon’ble Deputy Chief Ministers of Odisha, Shri Kanak Vardhan Singh Deo and Smt. Pravati Parida, and Hon’ble Members of Parliament, Shri Manmohan Samal and Smt. Aparajita Sarangi, also graced the event. 2. In his address, the Hon’ble Prime Minister highlighted the significance of the institutions inaugurated today - the Data Centre and the Cybersecur",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -590,9 +693,9 @@
       "published_ist": "2026-10-25 16:05 IST",
       "summary": "The sharp rise in government bond yields since the Reserve Bank of India's (RBI) October monetary policy review threatens to increase the government's borrowing costs and put pressure on its interest expenditure, potentially squeezing fiscal flexibility, according to experts.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -664,9 +767,9 @@
       "published_ist": "2026-10-25 10:06 IST",
       "summary": "In a disclosure dated October 24, the private sector lender said it was continuing to examine the judgment and evaluate all available options and suitable steps going forward.",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-27T02:37:46.339576+05:30",
+      "last_seen_at": "2026-10-27T07:04:17.897609+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-27 02:37:46 IST",
+      "last_seen_ist": "2026-10-27 07:04:17 IST",
       "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
@@ -1117,35 +1220,35 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-27T02:37:46.339576+05:30",
-  "last_scraped_ist": "2026-10-27 02:37:46 IST",
+  "last_scraped_at": "2026-10-27T07:04:17.897609+05:30",
+  "last_scraped_ist": "2026-10-27 07:04:17 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
-      "fresh_items": 92,
+      "fresh_items": 99,
       "accepted_items": 6,
-      "filtered_items": 86,
+      "filtered_items": 93,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 10,
-      "filtered_items": 40,
+      "accepted_items": 8,
+      "filtered_items": 42,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
-      "fresh_items": 16,
-      "accepted_items": 0,
-      "filtered_items": 16,
+      "fresh_items": 18,
+      "accepted_items": 1,
+      "filtered_items": 17,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
       "fresh_items": 7,
       "accepted_items": 2,
@@ -1153,7 +1256,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -1161,7 +1264,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-27 02:37:46 IST",
+      "checked_ist": "2026-10-27 07:04:17 IST",
       "http_status": 200,
       "fresh_items": 4,
       "accepted_items": 3,
@@ -1193,16 +1296,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-27 02:37:46 IST"
+    "last_curated_ist": "2026-10-27 07:04:17 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-27 02:37:46 IST",
-    "fetched_items": 169,
-    "accepted_feed_items": 21,
-    "filtered_feed_items": 148,
-    "new_unique_stories": 0,
-    "duplicate_items_collapsed": 3,
+    "updated_ist": "2026-10-27 07:04:17 IST",
+    "fetched_items": 178,
+    "accepted_feed_items": 20,
+    "filtered_feed_items": 158,
+    "new_unique_stories": 5,
+    "duplicate_items_collapsed": 2,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 42
+    "stories_total": 47
   }
 }
