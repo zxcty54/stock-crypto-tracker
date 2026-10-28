@@ -523,8 +523,24 @@
       "source_headline": "SEBI signs MoU with Bank of England on clearing corporations",
       "story_key": "521ef0a5a1a664d2474a88526e6237929059b6a89e05adfbf084bd80c69f9d51",
       "generated_at": "2026-10-28 22:15:34 IST"
+    },
+    {
+      "id": "newsdirtfwtbzx",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-29 08:00",
+      "scheduled_ist": "2026-10-29 08:00",
+      "title": "World Bank projects 23% surge in 2026 global commodity prices amid Middle East c",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>World Bank projects 23% surge in 2026 global commodity prices amid Middle East conflict</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nGlobal commodity prices are projected to jump 23% in 2026, driven by Middle East war disruptions affecting energy supplies and shipping. The World Bank warns that energy prices will rise 32% this year, reaching their highest level since 2022, while oil supply is expected to fall 5.2%. Food and metals face similar upward pressures, with metal prices expected to climb 25% and precious metals surging 40% due to safe-haven demand.\n\n🧭 <b>MARKET CONTEXT</b>\nWhen global energy and metal prices experience simultaneous shocks, import-heavy emerging economies like India face direct pressure on domestic manufacturing costs, current account balances, and imported inflation metrics.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nHigher crude oil and industrial metal costs squeeze operating margins for domestic sectors dependent on raw materials, such as paints, autos, chemicals, and capital goods. If input cost inflation cannot be passed on through product price hikes, corporate earnings in these sectors could see margin contractions. Conversely, upstream energy and metal producers may experience shifting cost-realisation dynamics.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack domestic wholesale price index (WPI) prints, currency fluctuations affecting import bills, and corporate management commentary on margin sustainability across upcoming quarterly updates.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do Indian manufacturing firms typically manage sudden spikes in imported raw material costs during global supply shocks?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/world-bank-sees-commodity-prices-surging-23-in-2026-on-middle-east-war/articleshow/135274754.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:9e3b4ea18a58",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/world-bank-sees-commodity-prices-surging-23-in-2026-on-middle-east-war/articleshow/135274754.cms",
+      "source_headline": "World Bank sees commodity prices surging 23% in 2026 on Middle East war",
+      "story_key": "9e3b4ea18a5852cd77f6b2b8457de415b032fa3b4c05ea9faffc5bab96538c43",
+      "generated_at": "2026-10-29 04:14:38 IST"
     }
   ],
-  "total": 40,
+  "total": 41,
   "last_scheduled": "2026-10-29 08:00"
 }
