@@ -413,14 +413,16 @@
       "scheduled_ist": "2026-10-26 20:00",
       "title": "China ka Naya Bond Swap Facility: Liquidity Crisis se Nippatne ka Tarika",
       "text": "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n📊 <b>China ka Naya Bond Swap Facility: Liquidity Crisis se Nippatne ka Tarika</b>\n━━━━━━━━━━━━━━━━━━\n\n📰 <b>Kya hua</b>\nChina's central bank ne bond market stability maintain karne ke liye ek naya facility announce kiya hai jiska naam Bond Market NBFI Swap Facility (BNSF) hai. Is facility ke zariye asset managers aur public fund managers, jab collective liquidity risk ya systemic stress face karenge, toh central bank bills borrow kar sakenge taaki funding raise ki ja sake.\n\n🧩 <b>News ko kaise padhein</b>\nJab mutual fund products par redemption ka pressure badhta hai aur market mein cash ki kami hoti hai, toh institutions apne pas ke assets ko central bank ke paas pledge karke cash raise karte hain. Is mechanism se non-bank financial institutions ko direct liquidity milti hai taaki woh distress mein assets fire-sale na karein.\n\n💡 <b>Business mein iska matlab</b>\nFinancial markets mein jab NBFI sector par dabav aata hai, toh uska asar broader credit conditions aur asset prices par padta hai. Is tarah ke central bank interventions market confidence ko support karne aur systemic panic ko rokne ke liye design kiye jaate hain, jisse financial contagion ka risk kam ho sake.\n\n🔭 <b>Aage kya dekhein</b>\nYeh dekhna hoga ki is facility ka actual utilization kitna hota hai aur kya yeh bond market ke yields ya redemption pressures ko stabilize karne mein kargar saabit hota hai. Global central bank policies aur liquidity flows par bhi nazar rakhni chahiye.\n\n💬 <b>Kya aapko lagta hai ki aise liquidity backstops global markets mein systemic risks ko effectively control kar sakte hain?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>Source:</b> <a href=\"https://economictimes.indiatimes.com/markets/bonds/chinas-central-bank-sets-up-non-bank-financial-institution-bond-market-swap-facility/articleshow/135210676.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:644306c5c38d",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/bonds/chinas-central-bank-sets-up-non-bank-financial-institution-bond-market-swap-facility/articleshow/135210676.cms",
       "source_headline": "China's central bank sets up non-bank financial institution bond market swap facility",
       "story_key": "644306c5c38d2eb9ec37e253b7574e193937b5f34b4dd771e1b89004786236e1",
-      "generated_at": "2026-10-26 20:51:34 IST"
+      "generated_at": "2026-10-26 20:51:34 IST",
+      "posted_at": "2026-10-28 14:20:29 IST",
+      "telegraph_url": "https://telegra.ph/China-ka-Naya-Bond-Swap-Facility-Liquidity-Crisis-se-Nippatne-ka-Tarika--October-2026-10-28"
     },
     {
       "id": "ai0028",
@@ -489,8 +491,24 @@
       "source_headline": "Icra sees bank credit growth slowing to 15-16% in FY27 as rates rise",
       "story_key": "b744a07989acf836027923935ffdb8e498e7200c1fec8eb1cf647bb6fc695d61",
       "generated_at": "2026-10-28 07:01:54 IST"
+    },
+    {
+      "id": "newsursfjvydpk",
+      "slot": "D",
+      "hourly_slot_ist": "2026-10-28 14:00",
+      "scheduled_ist": "2026-10-28 14:00",
+      "title": "India bonds tumble as oil spikes and US yields harden ahead of Fed outcome",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds tumble as oil spikes and US yields harden ahead of Fed outcome</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds faced a sharp selloff on Wednesday, wiping out the gains from the previous session. The benchmark 6.94% 2036 bond yield rose 4 basis points to 7.4772%, driven by a 1.5% jump in Brent crude to $115.40 a barrel following supply disruption concerns in West Asia. Simultaneously, US 10-year Treasury yields climbed to 5.0238%, narrowing the yield differential for emerging-market debt.\n\n🧭 <b>MARKET CONTEXT</b>\nBond prices and yields move inversely. When crude oil prices surge in an import-dependent economy like India, inflationary pressures mount, forcing local debt markets to reprice risk. Additionally, overnight indexed swap (OIS) rates spiked, with the one-year OIS rising 5.5 bps to 6.69% and pricing in aggressive rate hike expectations over the next 12 months.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nHigher domestic bond yields directly increase borrowing costs for the central government, corporates, and banks looking to raise capital via debt instruments. If sustained, elevated yields can squeeze corporate margins, weigh on debt-heavy sectors, and influence broader lending rates across the banking system, though this outcome depends heavily on subsequent crude trajectories.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the upcoming US Federal Reserve policy decision and its forward guidance, upcoming domestic inflation prints, and daily movements in international crude oil benchmarks.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you factor sudden global commodity shocks into your duration risk management for fixed-income assets?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-sink-on-oil-spike-before-fed-decision/articleshow/135253447.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:0649725f7db1",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-sink-on-oil-spike-before-fed-decision/articleshow/135253447.cms",
+      "source_headline": "India bonds sink on oil spike before Fed decision",
+      "story_key": "0649725f7db193ba4100e862d8e8d815ae4a0e63122b62ddd2e98cd171abb0d5",
+      "generated_at": "2026-10-28 14:20:02 IST"
     }
   ],
-  "total": 38,
-  "last_scheduled": "2026-10-28 08:00"
+  "total": 39,
+  "last_scheduled": "2026-10-28 14:00"
 }
