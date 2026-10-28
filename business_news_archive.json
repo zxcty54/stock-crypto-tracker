@@ -1,6 +1,136 @@
 {
   "stories": [
     {
+      "id": "newsqqdjmmyadc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Bond market doubts gridlock will ease deficit woes this time",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/bond-market-doubts-gridlock-will-ease-deficit-woes-this-time/articleshow/135248828.cms",
+      "published_at": "2026-10-28T06:47:25+05:30",
+      "published_ist": "2026-10-28 06:47 IST",
+      "summary": "Amidst the backdrop of upcoming midterm elections, bond investors are voicing skepticism about the effects on fiscal policy. Polls indicate that Democrats could seize control of one Congress chamber but might lack a veto-proof majority. Historical data shows that a divided Congress generally reduces Treasury yields, yet anxiety persists this time around.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-28 07:01:54 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market sentiment often assumes that political gridlock acts as a natural fiscal brake by preventing large spending bills, historically helping lower bond yields. However, if structural budget deficits remain exceptionally wide relative to the overall economy, legislative paralysis might fail to ease supply pressures on sovereign debt. If investors persist in demanding higher risk premia, benchmark yields could remain elevated despite a divided legislature.",
+        "what_to_watch": [
+          "Subsequent Treasury auction bid-to-cover ratios and dealer absorption levels",
+          "Official monthly budget deficit releases from the Treasury Department",
+          "Actual legislative proposals or spending bills introduced in Congress post-election"
+        ],
+        "evergreen_lesson": "Political gridlock does not automatically reduce sovereign borrowing costs if underlying fiscal deficits are structurally large enough to require continuous heavy issuance."
+      }
+    },
+    {
+      "id": "newsuwuljtohzk",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "AI stocks have rattled US and emerging markets. Japan and Europe could help investors diversify",
+      "url": "https://www.cnbctv18.com/access/ai-stocks-have-rattled-us-and-emerging-markets-japan-and-europe-could-help-investors-diversify-20020840.htm",
+      "published_at": "2026-10-28T06:31:21+05:30",
+      "published_ist": "2026-10-28 06:31 IST",
+      "summary": "Turbulence in the tech sector underscores the importance of a more diversified portfolio.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newswtwcfzmryu",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market Today: Asian stocks advance on resurgent AI optimism",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today-asian-stocks-advance-on-resurgent-ai-optimism/articleshow/135248594.cms",
+      "published_at": "2026-10-28T06:21:10+05:30",
+      "published_ist": "2026-10-28 06:21 IST",
+      "summary": "The MSCI Asia Pacific Index rose 0.6%, as benchmarks in Australia, Japan and South Korea advanced. The Kospi Index rose 2.6%, with SK Hynix Inc.’s stock climbing after the company reported operating profit that beat estimates. The chipmaker is planning a total of 100 trillion won ($75.4 billion) in shareholder returns for 2026.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-28 07:01:54 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A wave of major corporate capital raises, massive equipment-finance leases, and strong earnings reports from sector leaders can trigger a broad relief rally across technology equities. This dynamic suggests that large-scale firms continue to commit capital to high-growth themes despite broader pressures on smaller competitors. If these heavy investments fail to yield proportional revenue growth over subsequent quarters, market confidence in the secular trade could face renewed corrections.",
+        "what_to_watch": [
+          "Upcoming quarterly earnings reports and capital expenditure guidance from major technology firms",
+          "Official Federal Reserve interest rate decisions and accompanying policy statements",
+          "Subsequent disclosures regarding corporate debt issuance and equity offerings"
+        ],
+        "evergreen_lesson": "Heavy capital expenditure by market leaders in a high-growth sector can temporarily restore risk appetite, but sustainable valuations ultimately depend on proof of operational returns."
+      }
+    },
+    {
+      "id": "newsrhcnykavpe",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Icra sees bank credit growth slowing to 15-16% in FY27 as rates rise",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/credit-growth-to-moderate-in-h2-fy27-icra/articleshow/135248523.cms",
+      "published_at": "2026-10-28T06:04:54+05:30",
+      "published_ist": "2026-10-28 06:04 IST",
+      "summary": "Credit growth is projected to ease to 15-16% for FY27, impacted by hardening policy rates. Fresh slippages for public sector banks are estimated to increase to ₹1 lakh crore in FY27. Private banks may experience fresh slippages amounting to ₹1.3 lakh crore. While banks' asset quality may deteriorate slightly, net interest margins should improve. The overall banking sector faces challenges amid these credit growth expectations and market conditions.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "queued",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-28 07:01:54 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "As central banks progress through rate-hiking cycles, higher borrowing costs typically cool consumer consumption demand and slow overall bank credit expansion from previous peaks. While this monetary tightening can support net interest margins for lenders, the rising interest burden may simultaneously pressure borrowers and increase fresh asset slippages across both public and private portfolios. If credit growth moderates faster than anticipated, bank profitability could face compression despite widening margins.",
+        "what_to_watch": [
+          "Quarterly scheduled commercial bank credit growth data published by the central bank",
+          "Reported fresh NPA slippages and credit cost figures in upcoming bank earnings disclosures",
+          "Changes in retail and corporate deposit rates relative to lending rate adjustments"
+        ],
+        "evergreen_lesson": "Higher policy rates can enhance lending margins in the short term, but they eventually elevate credit risk and moderate volume growth as borrower stress materializes."
+      },
+      "processed_ist": "2026-10-28 07:01:54 IST",
+      "post_id": "newsmmnsqtwpqv"
+    },
+    {
+      "id": "newsygwrlwfuzv",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Stocks in news: Jio Platforms, RIL, Infosys, L&T, Tata Capital, Waaree Energies and Vedanta Iron",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/stocks-in-news-jio-platforms-ril-infosys-lt-tata-capital-waaree-energies-and-vedanta-iron/articleshow/135245790.cms",
+      "published_at": "2026-10-28T06:00:00+05:30",
+      "published_ist": "2026-10-28 06:00 IST",
+      "summary": "Indian benchmark indices saw a volatile session amid the Nifty and Bank Nifty monthly expiry. Stocks like Jio Platforms made headlines following its IPO debut after raising significant funds. Reliance Industries remained a focus as its financial results and fundraising plans were announced. Infosys successfully implemented a transformation project for Syngenta, enhancing operations and governance. Tata Capital reported a substantial profit increase, driven by loan growth and higher interest income.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-28 07:01:54 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Large corporate capital raises through major initial public offerings bring substantial liquidity into equity markets while concentrating investor attention on upcoming quarterly financial results and board fundraising announcements. When major engineering or financial services firms report strong profit growth backed by higher net income and lower credit costs, it highlights robust sectoral execution. However, broader macroeconomic headwinds such as elevated crude oil prices can continue to cap index-level gains regardless of individual corporate performance.",
+        "what_to_watch": [
+          "Post-listing trading volume and secondary market price stability of newly debuted large-cap shares",
+          "Upcoming quarterly financial results and debt-raise proposals declared by major conglomerates",
+          "Macroeconomic indicators such as domestic inflation prints and international crude oil benchmarks"
+        ],
+        "evergreen_lesson": "High-profile public offerings and strong corporate earnings can drive selective stock focus, but overarching macroeconomic cost pressures will continue to cap broader market momentum."
+      }
+    },
+    {
       "id": "newsgwjugjyjkq",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +140,9 @@
       "published_ist": "2026-10-28 01:46 IST",
       "summary": "US stocks saw gains as renewed optimism about artificial intelligence lifted chipmakers while corporate earnings were evaluated. Although concerns about AI spending persist, news of Anthropic's IPO provided a relief rally for the sector. The Federal Reserve began its policy meeting, with expectations for interest rates to remain unchanged. Nearly half of S&P 500 companies reported earnings, with many exceeding estimates while some major firms faced declines.",
       "first_seen_at": "2026-10-28T02:19:56.913935+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-28 02:19:56 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -38,9 +168,9 @@
       "published_ist": "2026-10-28 00:48 IST",
       "summary": "NYSE is preparing to launch binary return options that will let investors make all-or-nothing bets on whether stocks and ETFs finish above or below set prices. The exchange is also seeking approval for KPI options linked to company earnings metrics, expanding the range of event-driven trading products available to investors.",
       "first_seen_at": "2026-10-28T02:19:56.913935+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-28 02:19:56 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -56,6 +186,22 @@
       }
     },
     {
+      "id": "newsbzbfuotjfd",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "India in striking distance of 8% growth as reforms boost economy: Shaktikanta Das",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/india-in-striking-distance-of-8-growth-as-reforms-boost-economy-shaktikanta-das/articleshow/135248583.cms",
+      "published_at": "2026-10-28T00:42:22+05:30",
+      "published_ist": "2026-10-28 00:42 IST",
+      "summary": "Das said the BFSI sector has a crucial role to play in India's journey from a lower-middle-income economy to a high-income economy, through its intermediation in allocation of financial resources. He said the sector would be required to support India's next-gen Digital Public Infrastructure (DPI), be the frontline of green and transition finance and become the catalyst for democratising financial inclusion to support this journey.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
       "id": "newsagfrgrtnau",
       "source": "Economic Times",
       "source_priority": 3,
@@ -65,9 +211,9 @@
       "published_ist": "2026-10-28 00:00 IST",
       "summary": "Boeing has announced a cut in its 737 Max delivery target for this year, which raises concerns. The company now aims to increase 737 production to 52 jets per month in the second half of next year. Boeing reported a wider than expected loss in its commercial airplane division but posted positive free cash flow results. Despite delays, the company plans to begin deliveries of its 777-9 jets next year.",
       "first_seen_at": "2026-10-28T02:19:56.913935+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-28 02:19:56 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -93,11 +239,27 @@
       "published_ist": "2026-10-27 22:44 IST",
       "summary": "General Motors made an announcement on Tuesday that they’re moving their common stock listing from the New York Stock Exchange over to Nasdaq. This change is part of their strategy to better position themselves in the market. Investors and analysts are keeping a close eye on how this move will affect GM's stock performance and reputation.",
       "first_seen_at": "2026-10-28T02:19:56.913935+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-28 02:19:56 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market"
+    },
+    {
+      "id": "newsrihranzmtu",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "India's growth momentum stays resilient despite global headwinds: RBI Deputy Governor Poonam Gupta",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/indias-growth-momentum-stays-resilient-despite-global-headwinds-rbi-deputy-governor-poonam-gupta/articleshow/135248487.cms",
+      "published_at": "2026-10-27T22:33:42+05:30",
+      "published_ist": "2026-10-27 22:33 IST",
+      "summary": "Reserve Bank Deputy Governor Poonam Gupta indicated that India's real GDP growth fell short due to external shocks. She highlighted that India has managed over 7 percent growth despite challenging circumstances in recent years. Additionally, Gupta expressed confidence that improved global conditions could enhance growth by another percentage point. She discussed the importance of diversifying economic activities to mitigate risks and emphasized that food security remains stable amid El Nino.",
+      "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
+      "first_seen_ist": "2026-10-28 07:01:54 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
+      "status": "new",
+      "topic": "economy"
     },
     {
       "id": "newsrimaqsaqhg",
@@ -109,9 +271,9 @@
       "published_ist": "2026-10-27 21:07 IST",
       "summary": "Sensex and Nifty closed marginally lower as elevated crude oil prices and Fed uncertainty tempered sentiment. Smallcaps surged over 2%, midcaps gained over 1%, and market breadth favoured bulls, with 2,455 NSE stocks advancing.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "posted",
       "topic": "stock_market",
       "processed_ist": "2026-10-25 19:58:58 IST",
@@ -128,9 +290,9 @@
       "published_ist": "2026-10-27 19:42 IST",
       "summary": "In 2027, global bond issuance is expected to rise by a mere 2.7%, marking a stark decline compared to this year's growth. According to S&P Global Ratings, factors like increasing interest rates and geopolitical tensions contribute to this slowdown. Additionally, with both governments and firms facing heightened funding needs, borrowing appetites may wane.",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -156,9 +318,9 @@
       "published_ist": "2026-10-27 19:07 IST",
       "summary": "US stocks are experiencing an uptick with the S&P 500 and Nasdaq gaining due to easing oil prices. The Federal Reserve is expected to maintain rates steady in its upcoming decision after last month's hike. Investors are keenly anticipating earnings results from major technology firms, which will provide insights into AI investments. Boeing and Xylem faced losses, while Royal Caribbean and General Motors reported positive forecasts.",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -183,9 +345,9 @@
       "published_ist": "2026-10-27 18:53 IST",
       "summary": "Sebi has extended the deadline for debenture trustees to comply with regulatory requirements by six months. The new deadline for compliance is now set for April 27, 2027. This extension was granted after receiving industry feedback about operational challenges faced by debenture trustees. The regulator is currently reviewing the regulatory framework related to debenture trustees through an Expert Working Group.",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -213,9 +375,9 @@
       "published_ist": "2026-10-27 18:15 IST",
       "summary": "The 36 th Conference of State Finance Secretaries was held on October 27, 2026 at RBI, Mumbai. The theme of the Conference was ‘Role of Quality of Expenditure, Effective Cash and Prudent Debt Management in Enhancing States’ Fiscal Sustainability’. The Conference was attended by the Finance Secretaries of 27 States and three Union Territories as well as senior officials from the Ministry of Finance, Government of India, Controller General of Accounts and the Comptroller and Auditor General of India. Governor, Reserve Bank of India inaugurated the Conference. Addressing the participants, the Governor emphasised the importance of maintaining the quality of expenditure to ensure the long-term fiscal health of the States. He also emphasised on the need for the States to adopt prudent borrowing strategies and efficient cash management practices. The Governor urged the States to onboard onto th",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -241,9 +403,9 @@
       "published_ist": "2026-10-27 17:50 IST",
       "summary": "In terms of GOI notification F.No. 4(4)-B(W&M)/2020 dated April 13, 2020 (SGB 2020-21 Series I - Issue date April 28, 2020) on Sovereign Gold Bond Scheme, premature redemption of Gold Bond may be permitted after fifth year from the date of issue of such Gold Bond on the date on which interest is payable. Accordingly, the next due date of premature redemption of the above tranche shall be on October 28, 2026. 2. Further, the redemption price of SGB shall be based on simple average of closing price of gold of 999 purity of previous three business days from the date of redemption, as published by the India Bullion and Jewellers Association Ltd (IBJA). Accordingly, the redemption price for premature redemption due on October 28, 2026, shall be ₹14,159/- (Rupees Fourteen Thousand One Hundred and Fifty-Nine Only) per unit of SGB based on the simple average of closing price of gold for the thre",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -269,9 +431,9 @@
       "published_ist": "2026-10-27 17:36 IST",
       "summary": "Investors weighed corporate earnings concerns against policy developments, while upcoming market events are expected to influence trading direction on Wednesday",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -297,9 +459,9 @@
       "published_ist": "2026-10-27 17:11 IST",
       "summary": "Britain conducted a sale of £4.5 billion worth of 5-year debt at a yield of 5.036%. This yield reflects the highest rate seen since the year 2008, indicating market pressures on the government. Investors showed robust interest, bidding 3.51 times the amount available during the gilt auction. Experts anticipate only a modest rise in debt issuance as projected figures indicate increased financing requirements.",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -325,9 +487,9 @@
       "published_ist": "2026-10-27 16:58 IST",
       "summary": "Bitcoin slipped near $79,000 as investors awaited the Federal Reserve’s policy decision. ETF outflows, macroeconomic uncertainty and selling pressure weakened sentiment, while traders monitored $78,000 support, inflation data and institutional demand for potential market direction.",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -453,9 +615,9 @@
       "published_ist": "2026-10-27 12:47 IST",
       "summary": "Transformers and Rectifiers, in an exchange filing, said to meet the rising electricity demand, renewable energy integration and transmission network modernisation, it will invest ₹1,250 crore to establish three greenfield manufacturing plants at its Chiyada manufacturing complex in Gujarat.",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -583,9 +745,9 @@
       "published_ist": "2026-10-27 10:42 IST",
       "summary": "The stock remains under significant pressure, down 30.45 per cent year-to-date against the Nifty 50’s 12.86 per cent decline",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -611,9 +773,9 @@
       "published_ist": "2026-10-27 10:30 IST",
       "summary": "Marketsmith India's Mayuresh Joshi expects Paytm to benefit from proposed MDR changes, saying they could improve revenue growth, margins and cash flows. He also sees Pine Labs gaining from the policy. What could MDR mean for India's payment companies?",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -627,9 +789,9 @@
       "published_ist": "2026-10-27 10:11 IST",
       "summary": "Neeraj Seth, Founder and CIO of 3R Investment Management explains why crude oil prices at $115 a barrel could soften if geopolitical tensions ease, while flagging risks from US bond yields and the outlook for AI investments.",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -655,9 +817,9 @@
       "published_ist": "2026-10-27 09:44 IST",
       "summary": "Sensex opened at 73,484.38 and was trading at 73,276.08 at 9.20 am, down 330.67 points or 0.45%; Nifty50 opened at 22,708.80 and fell to 22,671.25, a loss of 81.95 points or 0.36% as of 9.20 am",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -739,9 +901,9 @@
       "published_ist": "2026-10-27 07:21 IST",
       "summary": "The HSBC Holdings Plc chief multi-asset strategist, who has described his stance in previous client notes as “Max Bullish,” on Monday tactically reduced his stock allocation to neutral from maximum overweight for the first time since mid-March.",
       "first_seen_at": "2026-10-27T13:40:27.942052+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 13:40:27 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -906,9 +1068,9 @@
       "published_ist": "2026-10-27 00:00 IST",
       "summary": "Extension of timeline for compliance with terms and conditions by Debenture Trustees (DTs) for carrying out activities outside the purview of SEBI",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -922,9 +1084,9 @@
       "published_ist": "2026-10-26 18:20 IST",
       "summary": "Government of India (GoI) has announced the sale (re-issue) of four dated securities for a notified amount of ₹33,000 crore as per the following details: Sr No Security Date of Repayment Notified Amount (₹ Crore) GoI specific Notification Auction Date Settlement Date 1 6.20% GS 2029 Aug 17, 2029 9,000 F.No.4(1)-B(W&M)/2026 dated October 26, 2026 October 30, 2026 (Friday) November 02, 2026 (Monday) 2 6.57% GS 2033 Aug 17, 2033 12,000 3 7.63% GS 2056 Sep 15, 2056 9,000 4 7.50% GOI SGrB 2056 Apr 27, 2056 3,000 Total 33,000 2. GoI will have the option to retain additional subscription up to ₹2,000 crore against each security mentioned above. 3. The securities will be sold through Reserve Bank of India Mumbai Office, Fort, Mumbai – 400001. The sale will be subject to the terms and conditions spelt out in the ‘Specific Notification’ mentioned above and the General Notification F.No.4(2)–B(W&M)",
       "first_seen_at": "2026-10-25T15:32:49.582641+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-25 15:32:49 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -950,9 +1112,9 @@
       "published_ist": "2026-10-26 17:29 IST",
       "summary": "Indian stock markets will observe two weekday trading holidays in November 2026 for Diwali-Balipratipada and Prakash Gurpurb Sri Guru Nanak Dev, along with a special Muhurat Trading session on Novembe",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -1063,9 +1225,9 @@
       "published_ist": "2026-10-26 15:12 IST",
       "summary": "E2E Networks said the proposed capacity addition would help it cater to the demand for GPUs and related services. The rollout will be guided by its infrastructure deployment plan and anticipated demand for AI computing services.",
       "first_seen_at": "2026-10-26T20:51:34.502063+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-26 20:51:34 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1284,9 +1446,9 @@
       "published_ist": "2026-10-26 12:11 IST",
       "summary": "Indian investment platforms including Groww, Zerodha, Angel One, and Upstox are expanding access to US stocks and ETFs through GIFT City framework, supporting fractional investing.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1396,9 +1558,9 @@
       "published_ist": "2026-10-26 10:05 IST",
       "summary": "ICICI Securities' Pankaj Pandey says India's market is in a stronger position than during the March correction as earnings remain healthy and valuations have turned attractive. He prefers data center infrastructure, defence and select financial stocks, while staying cautious on Tier-1 IT and most cement companies.",
       "first_seen_at": "2026-10-26T13:29:55.870502+05:30",
-      "last_seen_at": "2026-10-28T02:19:56.913935+05:30",
+      "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-26 13:29:55 IST",
-      "last_seen_ist": "2026-10-28 02:19:56 IST",
+      "last_seen_ist": "2026-10-28 07:01:54 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -2012,27 +2174,27 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-28T02:19:56.913935+05:30",
-  "last_scraped_ist": "2026-10-28 02:19:56 IST",
+  "last_scraped_at": "2026-10-28T07:01:54.504068+05:30",
+  "last_scraped_ist": "2026-10-28 07:01:54 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
-      "fresh_items": 172,
-      "accepted_items": 8,
+      "fresh_items": 173,
+      "accepted_items": 9,
       "filtered_items": 164,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 13,
-      "filtered_items": 37,
+      "accepted_items": 16,
+      "filtered_items": 34,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
       "fresh_items": 33,
       "accepted_items": 3,
@@ -2040,7 +2202,7 @@
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
       "fresh_items": 10,
       "accepted_items": 3,
@@ -2048,7 +2210,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
       "fresh_items": 3,
       "accepted_items": 0,
@@ -2056,7 +2218,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-28 02:19:56 IST",
+      "checked_ist": "2026-10-28 07:01:54 IST",
       "http_status": 200,
       "fresh_items": 2,
       "accepted_items": 1,
@@ -2088,16 +2250,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-28 02:19:56 IST"
+    "last_curated_ist": "2026-10-28 07:01:54 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-28 02:19:56 IST",
-    "fetched_items": 270,
-    "accepted_feed_items": 28,
-    "filtered_feed_items": 242,
-    "new_unique_stories": 4,
-    "duplicate_items_collapsed": 1,
+    "updated_ist": "2026-10-28 07:01:54 IST",
+    "fetched_items": 271,
+    "accepted_feed_items": 32,
+    "filtered_feed_items": 239,
+    "new_unique_stories": 7,
+    "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 76
+    "stories_total": 83
   }
 }

@@ -473,8 +473,24 @@
       "source_headline": "Sebi extends deadline for debenture trustees to comply with norms till April 2027",
       "story_key": "4b02d97becc17ff4638e831e0776425ce7234fe297687efdf3c7a37897edb3d6",
       "generated_at": "2026-10-28 02:19:56 IST"
+    },
+    {
+      "id": "newsmmnsqtwpqv",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-28 08:00",
+      "scheduled_ist": "2026-10-28 08:00",
+      "title": "Icra projects credit growth moderation to 15-16% for FY27 as interest rates hard",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Icra projects credit growth moderation to 15-16% for FY27 as interest rates harden</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nRating agency Icra expects credit growth to moderate to 15-16% for the full year FY27, coming down from the current 18-19% range. This slowdown is projected to extend into the second half of the fiscal year and persist into the next, driven by hardening policy rates weighing on retail consumption demand along with a higher base effect.\n\n🧭 <b>MARKET CONTEXT</b>\nBank credit growth tracks how rapidly commercial banks expand their loan books across retail, corporate, and MSME segments. When policy interest rates rise, the cost of funds increases for lenders, which they eventually pass on to borrowers through higher lending rates, cooling credit demand.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nSlower loan expansion could impact top-line growth for commercial banks and non-banking financial companies if credit offtake drops. However, rising policy rates and a progressive rate-hiking cycle can support net interest margins for lenders. Meanwhile, asset quality could face slight pressure, with public sector bank fresh slippages estimated at about ₹1 lakh crore and private players at ₹1.3 lakh crore in FY27.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming Reserve Bank of India rate decisions, individual bank quarterly credit-deposit ratios, and reported fresh slippage numbers to gauge asset quality trends.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you think a shift from 19% to 15% credit growth will alter the competitive dynamics between large private lenders and public sector banks?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/credit-growth-to-moderate-in-h2-fy27-icra/articleshow/135248523.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:b744a07989ac",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/credit-growth-to-moderate-in-h2-fy27-icra/articleshow/135248523.cms",
+      "source_headline": "Icra sees bank credit growth slowing to 15-16% in FY27 as rates rise",
+      "story_key": "b744a07989acf836027923935ffdb8e498e7200c1fec8eb1cf647bb6fc695d61",
+      "generated_at": "2026-10-28 07:01:54 IST"
     }
   ],
-  "total": 37,
+  "total": 38,
   "last_scheduled": "2026-10-28 08:00"
 }
