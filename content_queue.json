@@ -507,8 +507,24 @@
       "source_headline": "India bonds sink on oil spike before Fed decision",
       "story_key": "0649725f7db193ba4100e862d8e8d815ae4a0e63122b62ddd2e98cd171abb0d5",
       "generated_at": "2026-10-28 14:20:02 IST"
+    },
+    {
+      "id": "newsljtgkqvmyh",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-29 08:00",
+      "scheduled_ist": "2026-10-29 08:00",
+      "title": "SEBI signs MoU with Bank of England for clearing cooperation",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI signs MoU with Bank of England for clearing cooperation</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Securities and Exchange Board of India (SEBI) has signed a memorandum of understanding with the Bank of England (BoE). The agreement establishes a cooperative framework for information sharing and regulatory oversight relating to clearing corporations recognized by the Indian capital markets regulator.\n\n🧭 <b>MARKET CONTEXT</b>\nCentral counterparties and clearing corporations act as intermediaries between buyers and sellers, guaranteeing trade settlement to mitigate default risks in financial markets.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis cross-border arrangement allows the Bank of England to rely on SEBI's supervisory framework while maintaining UK financial stability. If implemented effectively, such bilateral regulatory frameworks could streamline compliance for international institutional participants and reduce operational friction in cross-border financial market clearing operations.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future operational guidelines issued by SEBI or the BoE regarding mutual recognition frameworks, and watch for similar bilateral pacts with other major global financial jurisdictions.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do cross-border regulatory pacts between central banks and domestic market watchdogs typically impact institutional capital flows over the medium term?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-signs-mou-with-bank-of-england-on-clearing-corporations-20021826.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:521ef0a5a1a6",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/sebi-signs-mou-with-bank-of-england-on-clearing-corporations-20021826.htm",
+      "source_headline": "SEBI signs MoU with Bank of England on clearing corporations",
+      "story_key": "521ef0a5a1a664d2474a88526e6237929059b6a89e05adfbf084bd80c69f9d51",
+      "generated_at": "2026-10-28 22:15:34 IST"
     }
   ],
-  "total": 39,
-  "last_scheduled": "2026-10-28 14:00"
+  "total": 40,
+  "last_scheduled": "2026-10-29 08:00"
 }
