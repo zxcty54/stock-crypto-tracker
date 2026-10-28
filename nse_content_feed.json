@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-10-29 00:34:19 IST",
-  "worthy_count": 50,
-  "skipped_count": 63,
+  "generated_at": "2026-10-29 04:46:56 IST",
+  "worthy_count": 51,
+  "skipped_count": 65,
   "content_feed": [
+    {
+      "hash": "66d47e3d71fc",
+      "symbol": "GENUSPOWER",
+      "company_name": "Genus Power Infrastructures Limited",
+      "category": "BUYBACK",
+      "event_type": "BUYBACK",
+      "broadcast_date": "26-Oct-2026 18:49:21",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/GENUSPOWER_26102026184906_Record_Date_signed.pdf",
+      "headline": "Genus Power Infrastructures Fixes Record Date for Share Buyback",
+      "content_worthy": true,
+      "worthiness_reason": "Record date fixed for equity shares buyback through tender offer route.",
+      "telegram_post": "💰 <b>#BUYBACK</b> | <b>Genus Power Infrastructures Limited (NSE: GENUSPOWER)</b>\n\n<b>Genus Power Infrastructures Fixes Record Date for Share Buyback</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Record Date:</b> October 30, 2026\n- <b>Route:</b> Tender Offer Route\n- <b>Eligible:</b> Equity shareholders holding shares of Re. 1/- each\n\n📌 <b>What happened:</b>\n↳ The company has fixed Friday, October 30, 2026, as the record date to determine eligible shareholders for participation in the approved equity shares buyback.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GENUSPOWER_26102026184906_Record_Date_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-29 04:46:35 IST"
+    },
+    {
+      "hash": "865f3519f60b",
+      "symbol": "FDC",
+      "company_name": "FDC Limited",
+      "category": "RESULT",
+      "event_type": "BUYBACK",
+      "broadcast_date": "27-Oct-2026 19:57:16",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/FDC_27102026195652_OUTCOME27102026Signed.pdf",
+      "headline": "FDC Limited Board Approves Share Buyback Worth Up to Rs 120 Crores",
+      "content_worthy": true,
+      "worthiness_reason": "Board approved a share buyback proposal for up to Rs 120 crores.",
+      "telegram_post": "💰 <b>#BUYBACK</b> | <b>FDC Limited (NSE: FDC)</b>\n\n<b>FDC Limited Board Approves Share Buyback Worth Up to Rs 120 Crores</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Maximum Buyback Size:</b> Rs 120.00 Crores\n- <b>Shares:</b> Up to 24,00,000 Equity Shares (1.47% of total paid-up capital)\n- <b>Buyback Price:</b> Rs 500 per equity share\n- <b>Route:</b> Tender Offer route\n\n📌 <b>What happened:</b>\n↳ The Board of Directors of FDC Limited approved a proposal to buy back fully paid-up equity shares at Rs 500 per share for an aggregate amount not exceeding Rs 120 crores.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/FDC_27102026195652_OUTCOME27102026Signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-29 04:46:14 IST"
+    },
+    {
+      "hash": "bba347449db3",
+      "symbol": "VAIBHAVGBL",
+      "company_name": "Vaibhav Global Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "29-Oct-2026 00:32:56",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf",
+      "headline": "Vaibhav Global Reports Q2 FY27 Revenue at ₹938.4 Crore and Declares Interim Dividend",
+      "content_worthy": true,
+      "worthiness_reason": "Company announced Q2/H1 financial performance alongside a second interim dividend declaration.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Vaibhav Global Limited (NSE: VAIBHAVGBL)</b>\n\n<b>Vaibhav Global Reports Q2 FY27 Revenue at ₹938.4 Crore and Declares Interim Dividend</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 Revenue:</b> ₹938.4 crore (+7.0% YoY)\n- <b>Q2 EBITDA:</b> ₹76.2 crore (Margin: 8.1%)\n- <b>H1 Revenue:</b> ₹1,855.4 crore (+9.7% YoY)\n- <b>H1 EBITDA:</b> ₹178.3 crore (Margin: 9.6%)\n- <b>Interim Dividend:</b> ₹1.50 per share\n- <b>Record Date:</b> November 4, 2026\n\n📌 <b>What happened:</b>\n↳ The board approved the unaudited financial results for the quarter and half year ended September 30, 2026, and declared the 2nd interim dividend of ₹1.50 per equity share.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-29 04:45:53 IST"
+    },
     {
       "hash": "d9f6acff5a57",
       "symbol": "ASTEC",
@@ -674,37 +716,65 @@
       "worthiness_reason": "VA Tech Wabag secured a major mega order from Reliance Industries Limited for a desalination and remineralisation plant.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>VA Tech Wabag Limited (NSE: WABAG)</b>\n\n<b>VA Tech Wabag secures mega order from Reliance Industries for Jamnagar plant</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Reliance Industries Limited (RIL)\n- <b>Project:</b> Desalination Plant (8,400 m3/hr expandable to 12,600 m3/hr / 302 MLD) & Remineralization Plant (3,000 m3/hr)\n- <b>Location:</b> Jamnagar, Gujarat\n- <b>Scope:</b> Design, Engineering, Supply, Installation, Pre-Commissioning, Commissioning and PGTR\n\n📌 <b>What happened:</b>\n↳ VA Tech Wabag has bagged a mega order from Reliance Industries Limited to deliver a large-scale desalination and remineralisation plant at Jamnagar, Gujarat.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-28 11:19:07 IST"
-    },
-    {
-      "hash": "6f4b8f844c72",
-      "symbol": "RAILTEL",
-      "company_name": "Railtel Corporation Of India Limited",
-      "category": "RESULT",
-      "event_type": "DIVIDEND",
-      "broadcast_date": "25-Oct-2026 14:24:26",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/RAILTEL_25102026142158_Intimation_outcome_bodmeeting.pdf",
-      "headline": "RailTel Corporation declares interim dividend of Rs 1 per share",
-      "content_worthy": true,
-      "worthiness_reason": "Company announced financial results outcome along with a declared interim dividend of Rs 1 per share with a specific record date.",
-      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>Railtel Corporation Of India Limited (NSE: RAILTEL)</b>\n\n<b>RailTel Corporation declares interim dividend of Rs 1 per share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend Amount:</b> Rs 1 per share (10% of paid-up share capital)\n- <b>Dividend Type:</b> Interim Dividend\n- <b>Record Date:</b> October 30, 2026\n- <b>Payment Date:</b> November 20, 2026\n\n📌 <b>What happened:</b>\n↳ The board of directors approved the unaudited financial results for the quarter and half year ended September 30, 2026, and declared an interim dividend.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/RAILTEL_25102026142158_Intimation_outcome_bodmeeting.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-28 02:15:25 IST"
-    },
-    {
-      "hash": "66d47e3d71fc",
-      "symbol": "GENUSPOWER",
-      "company_name": "Genus Power Infrastructures Limited",
-      "category": "BUYBACK",
-      "event_type": "BUYBACK",
-      "broadcast_date": "26-Oct-2026 18:49:21",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/GENUSPOWER_26102026184906_Record_Date_signed.pdf",
-      "headline": "Genus Power Infrastructures Fixes Record Date for Share Buyback",
-      "content_worthy": true,
-      "worthiness_reason": "Record date intimation for share buyback via tender offer route.",
-      "telegram_post": "💰 <b>#BUYBACK</b> | <b>Genus Power Infrastructures Limited (NSE: GENUSPOWER)</b>\n\n<b>Genus Power Infrastructures Fixes Record Date for Share Buyback</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Route:</b> Tender Offer\n- <b>Record Date:</b> October 30, 2026\n- <b>Purpose:</b> Determining eligible equity shareholders for buyback entitlement\n\n📌 <b>What happened:</b>\n↳ The company has fixed Friday, October 30, 2026, as the record date for its previously approved equity shares buyback.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GENUSPOWER_26102026184906_Record_Date_signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-28 02:15:04 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "4dfbc38fa315",
+      "symbol": "TATACONSUM",
+      "company_name": "TATA CONSUMER PRODUCTS LIMITED",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "26-Oct-2026 16:39:36",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/Sukhvinder_26102026163912_RESULTS.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing lacks explicit numeric figures for Revenue and PAT within the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-29 04:46:56 IST"
+    },
+    {
+      "hash": "0d68cf56cc0f",
+      "symbol": "SRIT",
+      "company_name": "SRIT India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "26-Oct-2026 19:13:11",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SRIT_26102026191237_Stock_Exchange_Intimation_Outcome_of_BM_Final_Signed.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing omits numeric Revenue and PAT details in the provided summary/details text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-29 04:46:35 IST"
+    },
+    {
+      "hash": "9f01c0b4bda5",
+      "symbol": "SCHAEFFLER",
+      "company_name": "Schaeffler India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "27-Oct-2026 19:56:57",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/SCHAEFFLERUSER1_27102026195542_Schaeffler_Reg30_BMOutcome_Oct272026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing does not explicitly state numeric Revenue and PAT values in the provided text snippet.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-29 04:46:14 IST"
+    },
+    {
+      "hash": "22974a7d78f1",
+      "symbol": "VAIBHAVGBL",
+      "company_name": "Vaibhav Global Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "29-Oct-2026 01:36:38",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026013439_Press_Release_Final.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "Press release detailing financial results already covered in the primary financial results filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-29 04:45:53 IST"
+    },
     {
       "hash": "d3502211f308",
       "symbol": "SONACOMS",
@@ -1558,34 +1628,6 @@
       "worthiness_reason": "The filing provides procedural submission details and auditor review text without explicitly disclosing actual numeric values for Revenue and PAT in the text provided.",
       "telegram_post": "",
       "analyzed_at": "2026-10-28 11:19:07 IST"
-    },
-    {
-      "hash": "4dfbc38fa315",
-      "symbol": "TATACONSUM",
-      "company_name": "TATA CONSUMER PRODUCTS LIMITED",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "26-Oct-2026 16:39:36",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/Sukhvinder_26102026163912_RESULTS.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing text does not contain explicit numeric Revenue and PAT figures in the provided snippet.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-28 02:15:25 IST"
-    },
-    {
-      "hash": "0d68cf56cc0f",
-      "symbol": "SRIT",
-      "company_name": "SRIT India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "26-Oct-2026 19:13:11",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SRIT_26102026191237_Stock_Exchange_Intimation_Outcome_of_BM_Final_Signed.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing omits actual numeric values for Revenue and PAT in the provided text.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-28 02:15:04 IST"
     }
   ]
 }
