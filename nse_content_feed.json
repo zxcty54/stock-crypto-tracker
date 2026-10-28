@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-28 02:15:25 IST",
+  "generated_at": "2026-10-28 11:19:07 IST",
   "worthy_count": 43,
   "skipped_count": 49,
   "content_feed": [
+    {
+      "hash": "cc7f4464a078",
+      "symbol": "WABAG",
+      "company_name": "VA Tech Wabag Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "27-Oct-2026 08:26:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf",
+      "headline": "VA Tech Wabag secures mega order from Reliance Industries for Jamnagar plant",
+      "content_worthy": true,
+      "worthiness_reason": "VA Tech Wabag secured a major mega order from Reliance Industries Limited for a desalination and remineralisation plant.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>VA Tech Wabag Limited (NSE: WABAG)</b>\n\n<b>VA Tech Wabag secures mega order from Reliance Industries for Jamnagar plant</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Reliance Industries Limited (RIL)\n- <b>Project:</b> Desalination Plant (8,400 m3/hr expandable to 12,600 m3/hr / 302 MLD) & Remineralization Plant (3,000 m3/hr)\n- <b>Location:</b> Jamnagar, Gujarat\n- <b>Scope:</b> Design, Engineering, Supply, Installation, Pre-Commissioning, Commissioning and PGTR\n\n📌 <b>What happened:</b>\n↳ VA Tech Wabag has bagged a mega order from Reliance Industries Limited to deliver a large-scale desalination and remineralisation plant at Jamnagar, Gujarat.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-28 11:19:07 IST"
+    },
     {
       "hash": "6f4b8f844c72",
       "symbol": "RAILTEL",
@@ -590,23 +604,23 @@
       "worthiness_reason": "Company reported financial results for the quarter ended September 30, 2026, including standalone revenue and net profit figures.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Kirloskar Brothers Limited (NSE: KIRLOSBROS)</b>\n\n<b>Kirloskar Brothers Ltd Reports Standalone Revenue of Rs 7,991 Million for Q2 FY27</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 7,991 Million (vs Rs 6,505 Million YoY)\n- <b>Total Income:</b> Rs 8,138 Million (vs Rs 6,635 Million YoY)\n- <b>Profit Before Tax (PBT):</b> Rs 730 Million (vs Rs 507 Million YoY)\n- <b>Period Ended:</b> September 30, 2026\n\n📌 <b>What happened:</b>\n↳ Kirloskar Brothers Limited has submitted its unaudited standalone financial results for the quarter and half-year ended September 30, 2026, showing an increase in revenue from operations compared to the corresponding quarter of the previous year.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/KIRLOSBROS_27102026155041_UFR_30092026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-27 16:11:10 IST"
-    },
-    {
-      "hash": "cc7f4464a078",
-      "symbol": "WABAG",
-      "company_name": "VA Tech Wabag Limited",
-      "category": "ORDER",
-      "event_type": "ORDER_WIN",
-      "broadcast_date": "27-Oct-2026 08:26:07",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf",
-      "headline": "VA Tech Wabag secures mega order from Reliance Industries for Jamnagar plant",
-      "content_worthy": true,
-      "worthiness_reason": "Company secured a mega order/contract from Reliance Industries Limited for a desalination and remineralisation plant.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>VA Tech Wabag Limited (NSE: WABAG)</b>\n\n<b>VA Tech Wabag secures mega order from RIL to deliver Desalination and Remineralisation Plant at Jamnagar</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Reliance Industries Limited (RIL)\n- <b>Order Type:</b> Mega Order\n- <b>Project:</b> Desalination Plant (8,400 m3/hr capacity, expandable to 12,600 m3/hr / 302 MLD) & Remineralization Plant (3,000 m3/hr)\n- <b>Location:</b> Jamnagar, Gujarat\n- <b>Scope:</b> Design, Engineering, Supply, Installation, Pre-Commissioning, Commissioning and Performance Guarantee Test Run (PGTR)\n\n📌 <b>What happened:</b>\n↳ VA Tech Wabag has bagged a mega order from Reliance Industries Limited to deliver a large-scale desalination and remineralisation plant at Jamnagar, Gujarat.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VATECH_27102026082542_SI_RIL_27102026v2.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-27 10:42:15 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "7ef2cc5671fa",
+      "symbol": "ONESOURCE",
+      "company_name": "Onesource Specialty Pharma Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "27-Oct-2026 10:07:54",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/ONESOURCECDMO_27102026100700_OS_Intimation_Outcome_of_BM_27Oct2026_s.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The filing provides procedural submission details and auditor review text without explicitly disclosing actual numeric values for Revenue and PAT in the text provided.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-28 11:19:07 IST"
+    },
     {
       "hash": "4dfbc38fa315",
       "symbol": "TATACONSUM",
@@ -1278,20 +1292,6 @@
       "worthiness_reason": "Financial results filing lacks explicit numeric figures for Revenue and PAT in the provided snippet.",
       "telegram_post": "",
       "analyzed_at": "2026-10-27 16:10:48 IST"
-    },
-    {
-      "hash": "7ef2cc5671fa",
-      "symbol": "ONESOURCE",
-      "company_name": "Onesource Specialty Pharma Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "27-Oct-2026 10:07:54",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ONESOURCECDMO_27102026100700_OS_Intimation_Outcome_of_BM_27Oct2026_s.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing provides procedural submission of financial results without disclosing actual numeric Revenue and PAT figures in the text extract.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-27 10:42:15 IST"
     }
   ]
 }
