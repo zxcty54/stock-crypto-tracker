@@ -1,32 +1,32 @@
 # 📊 Performance Report
 
-**28-Oct-2026 01:39 IST** | 72 posts tracked | channel avg **25 views**
+**29-Oct-2026 01:56 IST** | 74 posts tracked | channel avg **25 views**
 
-*42 posts pehchaane gaye, 30 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*43 posts pehchaane gaye, 31 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 37 | 1.5 |
+| lifestyle | 3 | 38 | 1.5 |
 | psychology | 2 | 36 | 1.0 |
-| technical | 6 | 36 | 1.43 |
+| technical | 6 | 36 | 1.41 |
 | tools | 1 | 28 | 1.0 |
-| business_model | 7 | 27 | 1.08 |
-| risk | 4 | 24 | 0.94 |
-| corporate | 36 | 23 | 0.94 |
-| awareness | 2 | 20 | 1.0 |
-| process | 2 | 20 | 1.0 |
-| other | 6 | 19 | 0.76 |
-| market_mechanics | 3 | 17 | 0.7 |
+| business_model | 7 | 28 | 1.09 |
+| corporate | 37 | 24 | 0.94 |
+| risk | 4 | 24 | 0.93 |
+| awareness | 2 | 22 | 1.0 |
+| process | 2 | 22 | 1.0 |
+| other | 6 | 20 | 0.8 |
+| market_mechanics | 4 | 16 | 0.63 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 475** (target 1000)
+**Subscribers: 473** (target 1000)
 
-- Pichhle 7 din me: **+472**
-- Average: **22.48/din**
-- Isi raftaar se 1000 subs: **~23 din**
+- Pichhle 7 din me: **-5**
+- Average: **21.36/din**
+- Isi raftaar se 1000 subs: **~24 din**
 
 
 ## 🏆 Top posts
@@ -44,7 +44,7 @@
 
 ## ⚠️ Kam chale posts
 
-- 5 views — Waaree Energies Limited (NSE: WAAREEENER)  
+- 9 views — PNC Infratech Limited (NSE: PNCINFRA)  
   `corporate`
 - 0 views — Channel created  
   `other`

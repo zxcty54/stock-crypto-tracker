@@ -1,24 +1,24 @@
 {
- "generated_at": "2026-10-28 01:39 IST",
- "sample_size": 72,
- "identified": 42,
- "inferred": 30,
+ "generated_at": "2026-10-29 01:56 IST",
+ "sample_size": 74,
+ "identified": 43,
+ "inferred": 31,
  "cards_skipped": 0,
- "channel_avg_views": 24.9,
+ "channel_avg_views": 25.2,
  "growth": {
-  "today": 475,
-  "snapshots": 20,
-  "delta_7d": 472,
-  "per_day": 22.48,
-  "days_to_target": 23,
+  "today": 473,
+  "snapshots": 21,
+  "delta_7d": -5,
+  "per_day": 21.36,
+  "days_to_target": 24,
   "target": 1000,
-  "days_span": 21
+  "days_span": 22
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
-   "avg_views": 37.3,
+   "avg_views": 37.7,
    "weight": 1.5,
    "low_sample": false
   },
@@ -31,7 +31,7 @@
   "technical": {
    "posts": 6,
    "avg_views": 35.5,
-   "weight": 1.43,
+   "weight": 1.41,
    "low_sample": false
   },
   "tools": {
@@ -42,44 +42,44 @@
   },
   "business_model": {
    "posts": 7,
-   "avg_views": 26.9,
-   "weight": 1.08,
+   "avg_views": 27.6,
+   "weight": 1.09,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 37,
+   "avg_views": 23.8,
+   "weight": 0.94,
    "low_sample": false
   },
   "risk": {
    "posts": 4,
    "avg_views": 23.5,
-   "weight": 0.94,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 36,
-   "avg_views": 23.4,
-   "weight": 0.94,
+   "weight": 0.93,
    "low_sample": false
   },
   "awareness": {
    "posts": 2,
-   "avg_views": 20.5,
+   "avg_views": 22.0,
    "weight": 1.0,
    "low_sample": true
   },
   "process": {
    "posts": 2,
-   "avg_views": 19.5,
+   "avg_views": 22.0,
    "weight": 1.0,
    "low_sample": true
   },
   "other": {
    "posts": 6,
-   "avg_views": 18.8,
-   "weight": 0.76,
+   "avg_views": 20.2,
+   "weight": 0.8,
    "low_sample": false
   },
   "market_mechanics": {
-   "posts": 3,
-   "avg_views": 17.3,
-   "weight": 0.7,
+   "posts": 4,
+   "avg_views": 15.8,
+   "weight": 0.63,
    "low_sample": false
   }
  },
@@ -112,8 +112,8 @@
  ],
  "weak_posts": [
   {
-   "title": "Waaree Energies Limited (NSE: WAAREEENER)",
-   "views": 5,
+   "title": "PNC Infratech Limited (NSE: PNCINFRA)",
+   "views": 9,
    "pillar": "corporate"
   },
   {
