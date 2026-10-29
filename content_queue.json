@@ -451,14 +451,16 @@
       "scheduled_ist": "2026-10-27 12:00",
       "title": "Indian bonds firm up as Brent crude dips; macro risks persist",
       "text": "🗞️ <b>BUSINESS NEWS • EXPLAINED</b>\n\n📊 <b>Indian bonds firm up as Brent crude dips; macro risks persist</b>\n━━━━━━━━━━━━━━━━━━\n\n📰 <b>Kya hua</b>\nIndian government bonds firmed slightly in early trade, with the benchmark 6.94% 2036 bond yield easing 1 basis point to 7.4732%. This move came as Brent crude dipped about 1% to $114.5 a barrel, finding temporary relief after surging more than 6% last week. Meanwhile, traders remained cautious ahead of a 233 billion rupee state-loan auction and the upcoming US Federal Reserve policy decision.\n\n🧩 <b>News ko kaise padhein</b>\nBond yields and bond prices move inversely—when yields fall, bond prices rise. The 1-year overnight indexed swap (OIS) rate eased marginally to 6.65%, but it still prices in expectations of over 100 basis points of rate hikes over the next year. Market participants are closely tracking external pressures like crude prices hovering above $100/bbl and a frail rupee trading near 95.22 per dollar.\n\n💡 <b>Business mein iska matlab</b>\nCrude oil prices are a major imported inflation driver for India. When crude stays elevated, it threatens domestic inflation and worsens the fiscal balance, forcing both federal and state governments into heavy borrowing schedules. This heavy supply of debt, coupled with a weak rupee, drains liquidity and diminishes appetite for long-dated maturities. If the rupee continues to weaken toward 96, analysts warn that the Reserve Bank of India might be forced into aggressive tightening or inter-meeting rate hikes to defend the currency.\n\n🔭 <b>Aage kya dekhein</b>\nWatch the outcome of the US Federal Reserve's policy verdict and any hawkish signals on inflation. Domestically, monitor absorption at the state-loan auctions, the trajectory of Brent crude, and USD-INR movements for signs of central bank intervention.\n\n💬 <b>Kya aapko lagta hai ki domestic bond markets mein long-duration yields ka dabav aane wale dino mein aur badhega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>Source:</b> <a href=\"https://economictimes.indiatimes.com/markets/bonds/indian-bonds-tick-up-on-calm-oil-before-fed-verdict/articleshow/135225679.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:30835a8cb4d2",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/bonds/indian-bonds-tick-up-on-calm-oil-before-fed-verdict/articleshow/135225679.cms",
       "source_headline": "Indian bonds tick up on calm oil before Fed verdict",
       "story_key": "30835a8cb4d21a0dd37775c1e2d940da882178fce8354051e2da8dddbcb09b3b",
-      "generated_at": "2026-10-27 13:40:27 IST"
+      "generated_at": "2026-10-27 13:40:27 IST",
+      "posted_at": "2026-10-29 11:41:19 IST",
+      "telegraph_url": "https://telegra.ph/Indian-bonds-firm-up-as-Brent-crude-dips-macro-risks-persist--October-2026-10-29"
     },
     {
       "id": "newscuzucxbpxx",
@@ -539,8 +541,24 @@
       "source_headline": "World Bank sees commodity prices surging 23% in 2026 on Middle East war",
       "story_key": "9e3b4ea18a5852cd77f6b2b8457de415b032fa3b4c05ea9faffc5bab96538c43",
       "generated_at": "2026-10-29 04:14:38 IST"
+    },
+    {
+      "id": "newsizjcbusjzm",
+      "slot": "B",
+      "hourly_slot_ist": "2026-10-29 10:00",
+      "scheduled_ist": "2026-10-29 10:00",
+      "title": "SEBI mandates direct mutual fund plans as default on AMC apps from Nov 1",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI mandates direct mutual fund plans as default on AMC apps from Nov 1</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSecurities and Exchange Board of India Chairman Tuhin Kanta Pandey announced that direct mutual fund plans will become the default option on asset management companies' digital platforms starting November 1. Investors opting for regular plans must be explicitly informed about higher expense ratios.\n\n🧭 <b>MARKET CONTEXT</b>\nMutual funds offer direct and regular plans investing in the same underlying portfolios managed by the same fund managers. Regular plans route investments via intermediaries, incorporating distributor commissions into their expense ratios—the annual fee deducted from fund assets to manage operations.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nMaking direct plans the default choice on AMC applications could accelerate the shift of retail capital away from traditional distributor-led regular channels, potentially compressing commission pools for intermediaries. Over long investment horizons, lower expense ratios compound to impact net investor returns, though platform choice may still depend on whether an investor requires advisory services.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor whether this default presentation extends to third-party digital investment platforms and observe adoption trends in regular versus direct inflows across AMCs.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki default change hone se regular plans ki demand mein tezi se giraavat aayegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/personal-finance/mutual-fund-direct-plans-to-become-default-on-amc-apps-nov-1-20021997.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:aba68c1b5d5c",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/personal-finance/mutual-fund-direct-plans-to-become-default-on-amc-apps-nov-1-20021997.htm",
+      "source_headline": "Mutual fund direct plans to become default on AMC apps from November 1",
+      "story_key": "aba68c1b5d5c48f29ac1b4a976103144d37472f161a6c6f1e376830bbf548bb1",
+      "generated_at": "2026-10-29 11:40:41 IST"
     }
   ],
-  "total": 41,
-  "last_scheduled": "2026-10-29 08:00"
+  "total": 42,
+  "last_scheduled": "2026-10-29 10:00"
 }
