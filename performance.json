@@ -1,25 +1,31 @@
 {
- "generated_at": "2026-10-29 01:56 IST",
- "sample_size": 74,
- "identified": 43,
- "inferred": 31,
+ "generated_at": "2026-10-30 01:55 IST",
+ "sample_size": 77,
+ "identified": 45,
+ "inferred": 32,
  "cards_skipped": 0,
- "channel_avg_views": 25.2,
+ "channel_avg_views": 24.9,
  "growth": {
   "today": 473,
-  "snapshots": 21,
-  "delta_7d": -5,
-  "per_day": 21.36,
-  "days_to_target": 24,
+  "snapshots": 22,
+  "delta_7d": -4,
+  "per_day": 20.43,
+  "days_to_target": 25,
   "target": 1000,
-  "days_span": 22
+  "days_span": 23
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 37.7,
-   "weight": 1.5,
+   "weight": 1.51,
+   "low_sample": false
+  },
+  "technical": {
+   "posts": 6,
+   "avg_views": 35.8,
+   "weight": 1.44,
    "low_sample": false
   },
   "psychology": {
@@ -28,10 +34,10 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "technical": {
-   "posts": 6,
-   "avg_views": 35.5,
-   "weight": 1.41,
+  "business_model": {
+   "posts": 7,
+   "avg_views": 28.3,
+   "weight": 1.13,
    "low_sample": false
   },
   "tools": {
@@ -40,53 +46,47 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "business_model": {
-   "posts": 7,
-   "avg_views": 27.6,
-   "weight": 1.09,
+  "corporate": {
+   "posts": 38,
+   "avg_views": 23.8,
+   "weight": 0.95,
    "low_sample": false
   },
-  "corporate": {
-   "posts": 37,
-   "avg_views": 23.8,
-   "weight": 0.94,
-   "low_sample": false
+  "process": {
+   "posts": 2,
+   "avg_views": 23.5,
+   "weight": 1.0,
+   "low_sample": true
   },
   "risk": {
    "posts": 4,
    "avg_views": 23.5,
-   "weight": 0.93,
+   "weight": 0.94,
    "low_sample": false
   },
-  "awareness": {
-   "posts": 2,
-   "avg_views": 22.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
-  "process": {
-   "posts": 2,
-   "avg_views": 22.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
   "other": {
-   "posts": 6,
-   "avg_views": 20.2,
-   "weight": 0.8,
+   "posts": 7,
+   "avg_views": 19.0,
+   "weight": 0.76,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 4,
-   "avg_views": 15.8,
-   "weight": 0.63,
+   "avg_views": 17.2,
+   "weight": 0.69,
+   "low_sample": false
+  },
+  "awareness": {
+   "posts": 3,
+   "avg_views": 16.3,
+   "weight": 0.65,
    "low_sample": false
   }
  },
  "top_posts": [
   {
    "title": "PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain",
-   "views": 77,
+   "views": 78,
    "pillar": "technical"
   },
   {
@@ -95,14 +95,14 @@
    "pillar": "psychology"
   },
   {
-   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 43,
-   "pillar": "business_model"
-  },
-  {
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
    "views": 43,
    "pillar": "lifestyle"
+  },
+  {
+   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
+   "views": 43,
+   "pillar": "business_model"
   },
   {
    "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
@@ -112,9 +112,9 @@
  ],
  "weak_posts": [
   {
-   "title": "PNC Infratech Limited (NSE: PNCINFRA)",
-   "views": 9,
-   "pillar": "corporate"
+   "title": "Sebi extends debenture trustees' compliance deadline to April 2027 ami",
+   "views": 4,
+   "pillar": "awareness"
   },
   {
    "title": "Channel created",
