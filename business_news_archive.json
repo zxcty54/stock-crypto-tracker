@@ -1,6 +1,93 @@
 {
   "stories": [
     {
+      "id": "newsrimaqsaqhg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Ahead of Market: 10 things that will decide stock market action on Friday",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/ahead-of-market-10-things-that-will-decide-stock-market-action-on-friday/articleshow/135322160.cms",
+      "published_at": "2026-10-29T21:08:44+05:30",
+      "published_ist": "2026-10-29 21:08 IST",
+      "summary": "Indian equities rallied over 1% on Thursday as the Federal Reserve held interest rates steady, crude prices eased and institutional buying strengthened sentiment. Sensex gained 905 points, while Nifty rose 238 points, adding nearly ₹5 lakh crore in market value.",
+      "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "first_seen_ist": "2026-10-25 19:58:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
+      "status": "posted",
+      "topic": "stock_market",
+      "processed_ist": "2026-10-25 19:58:58 IST",
+      "post_id": "newsvoywtydxzs",
+      "posted_at": "2026-10-26 13:30:18 IST",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-30 01:15:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market rallies triggered by external rate pauses reflect sudden shifts in risk appetite rather than immediate changes in corporate cash flows. While a drop in crude prices and steady domestic buying improve liquidity conditions, headline gains do not automatically establish sustained margin expansion across sectors. If input costs remain elevated, subsequent earnings disclosures could reveal compression in corporate profitability despite positive index-level movements.",
+        "what_to_watch": [
+          "Quarterly earnings reports to check if revenue growth translates into actual net margin expansion.",
+          "Future foreign institutional investor (FII) and domestic institutional investor (DII) flow data to verify liquidity continuity.",
+          "Brent crude price movements and domestic bond yield data to track macro risk exposure."
+        ],
+        "evergreen_lesson": "Broad market surges driven by external rate announcements measure short-term sentiment shifts rather than fundamental improvements in underlying business cash flows."
+      }
+    },
+    {
+      "id": "newskpjavictov",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "US inflation heats up in September; consumer spending rises",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/us-inflation-heats-up-in-september-consumer-spending-rises/articleshow/135317736.cms",
+      "published_at": "2026-10-29T19:04:37+05:30",
+      "published_ist": "2026-10-29 19:04 IST",
+      "summary": "In September, the US experienced a notable rise in inflation, driven by surging gasoline prices and other consumer goods. The Personal Consumption Expenditures Price Index climbed to 0.5%, up from 0.3% previously. Despite inflation-adjusted consumer spending remaining flat, it still rose by 0.5%, reflecting a resilient economic activity. The Federal Reserve opted to keep interest rates steady, though considerable inflationary pressures have analysts anticipating a possible rate hike in December.",
+      "first_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "first_seen_ist": "2026-10-30 01:15:20 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-30 01:15:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "An acceleration in headline and core personal consumption expenditures price indices indicates that consumer price pressures are broadening rather than fading. Although nominal spending numbers appear resilient, flat inflation-adjusted spending implies that volume growth is slowing down as higher gasoline and goods prices absorb consumer budgets. If these pressures persist, discretionary sectors could witness softer volume off-take in upcoming quarters.",
+        "what_to_watch": [
+          "Upcoming Bureau of Economic Analysis releases on real (inflation-adjusted) personal consumption expenditures.",
+          "CME FedWatch Tool probability metrics regarding future central bank rate adjustments.",
+          "Retail sector earnings reports for commentary on volume growth versus price-led revenue growth."
+        ],
+        "evergreen_lesson": "Nominal increases in consumer spending can mask stagnation in actual purchasing volume when inflation erodes household purchasing power."
+      }
+    },
+    {
+      "id": "newsnohyqoayed",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "ECB keeps rates unchanged but points to mounting inflation risk",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/ecb-keeps-rates-unchanged-but-points-to-mounting-inflation-risk/articleshow/135317600.cms",
+      "published_at": "2026-10-29T19:02:52+05:30",
+      "published_ist": "2026-10-29 19:02 IST",
+      "summary": "The European Central Bank has decided to maintain its current interest rates, signaling concerns over inflation driven by escalating energy costs. Meanwhile, borrowing expenses in France have seen a sharp rise, creating anxiety about the nation’s economic outlook amid political upheaval. ECB President Christine Lagarde's early resignation raises questions about the potential investigation into growing French debt.",
+      "first_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "first_seen_ist": "2026-10-30 01:15:20 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-30 01:15:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When central banks hold rates steady while warning of energy-driven inflation risks, they attempt to balance imported cost shocks against cooling economic growth. Diverging sovereign borrowing costs, such as rising risk premiums for specific member nations, indicate that regional credit transmission is uneven. If financing conditions tighten excessively in stressed regions, commercial credit growth to businesses could slow down regardless of official benchmark rates.",
+        "what_to_watch": [
+          "Spreads between benchmark German bonds and higher-risk sovereign yields like French borrowing costs.",
+          "Commercial bank lending growth data and credit flow surveys across the eurozone.",
+          "Official energy commodity price benchmarks for sustained spikes that could trigger second-round wage effects."
+        ],
+        "evergreen_lesson": "Headline monetary policy pauses do not prevent localized credit tightening or rising sovereign risk premiums from impacting regional economic growth."
+      }
+    },
+    {
       "id": "newscralqfgbzx",
       "source": "RBI Press Releases",
       "source_priority": 3,
@@ -10,10 +97,10 @@
       "published_ist": "2026-10-29 17:45 IST",
       "summary": "In terms of GOI notification F.No. 4(7)-B(W&M)/2019 dated September 30, 2019 (SGB 2019-20 Series VI - Issue date October 30, 2019) on Sovereign Gold Bond Scheme, premature redemption of Gold Bond may be permitted after fifth year from the date of issue of such Gold Bond on the date on which interest is payable. Accordingly, the next due date of premature redemption of the above tranche shall be on October 30, 2026. 2. Further, the redemption price of SGB shall be based on simple average of closing price of gold of 999 purity of previous three business days from the date of redemption, as published by the India Bullion and Jewellers Association Ltd (IBJA). Accordingly, the redemption price for premature redemption due on October 30, 2026, shall be ₹14,213/- (Rupees Fourteen Thousand Two Hundred and Thirteen Only) per unit of SGB based on the simple average of closing price of gold for the",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
-      "status": "new",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
+      "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
         "version": 1,
@@ -25,7 +112,9 @@
           "Official Reserve Bank of India data on total payouts disbursed for this specific tranche"
         ],
         "evergreen_lesson": "Sovereign gold bond exit values depend entirely on preceding multi-day spot averages rather than face value, meaning market volatility directly impacts government redemption liabilities."
-      }
+      },
+      "processed_ist": "2026-10-30 01:15:20 IST",
+      "post_id": "newsuqqgjjhqxm"
     },
     {
       "id": "newsflvndesqml",
@@ -37,9 +126,9 @@
       "published_ist": "2026-10-29 17:44 IST",
       "summary": "India VIX declines over 6% to around 15.14, signalling a meaningful easing in near-term volatility expectations",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -64,9 +153,9 @@
       "published_ist": "2026-10-29 17:43 IST",
       "summary": "In the current economic climate, AAA-rated corporations are opting to secure financing via the bond market, finding it more cost-effective than traditional bank loans. The recent interest rate hikes by the Reserve Bank of India have further enhanced the appeal of bonds. Companies like REC and SIDBI have successfully tapped into this market.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -93,9 +182,9 @@
       "published_ist": "2026-10-29 17:41 IST",
       "summary": "In a notable market shift, Indian government bonds experienced a significant rise as the benchmark 10-year bond yield dropped considerably. This trend followed a favorable boost from Treasuries and decreasing crude prices. Additionally, the Federal Reserve's more dovish approach has had a generally positive effect on the bond landscape. Anticipation builds for the upcoming bond auction, with many investors eyeing potential attractive buy opportunities due to the current yield levels.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -120,9 +209,9 @@
       "published_ist": "2026-10-29 17:39 IST",
       "summary": "Yields on India's battered government bonds may be approaching territory that more investors consider a \"buy\", with that on the benchmark 10-year approaching 7.50%, a level not seen in four years.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -148,9 +237,9 @@
       "published_ist": "2026-10-29 17:20 IST",
       "summary": "The rate of interest on Government of India Floating Rate Bond 2034 (FRB 2034) applicable for the half year October 30, 2026 to April 29, 2027 shall be 7.26 per cent per annum. It may be recalled that FRB 2034 carries a coupon, which has a base rate equivalent to the average of the Weighted Average Yield (WAY) of last three auctions (from the rate fixing day i.e., October 30, 2026) of 182 Day T-Bills, plus a fixed spread (0.98 per cent). Ajit Prasad Deputy General Manager (Communications) Press Release: 2026-2027/1405",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -164,9 +253,9 @@
       "published_ist": "2026-10-29 17:05 IST",
       "summary": "The Reserve Bank of India issued Directions under Section 35A read with Section 56 of the Banking Regulation Act, 1949 to The Irinjalakuda Town Co-operative Bank Ltd., Kerala vide Directive No. CO.DOS.SED.No.D-01/12-22-350/2025-2026 dated July 29, 2025 for a period of six months up to close of business on January 30, 2026, which was last extended up to close of business on October 30, 2026 vide Directive No. DOR.MON.No.D-27/12.26.061/2026-27 dated July 21, 2026. The Reserve Bank of India is satisfied that in the public interest, it is necessary to further extend the period of operation of the Directive beyond close of business on October 30, 2026. 2. Accordingly, the Reserve Bank of India, in the exercise of powers vested in it under sub-section (1) of Section 35A read with Section 56 of the Banking Regulation Act, 1949, hereby extends the Directive for a further period of three months f",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -192,9 +281,9 @@
       "published_ist": "2026-10-29 17:05 IST",
       "summary": "The Reserve Bank of India has today released the data on External Commercial Borrowings (ECB), Foreign Currency Convertible Bonds (FCCB) and Rupee Denominated Bonds (RDB) through General Permission and Special Permission for the month of August 2026. Ajit Prasad Deputy General Manager (Communications) Press Release: 2026-2027/1403",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -208,9 +297,9 @@
       "published_ist": "2026-10-29 16:21 IST",
       "summary": "India’s defence stocks have outperformed the Nifty 50 in FY27, with the sector index rising 22%. The top 10 performers gained 43–513%, including five multibagger stocks.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -224,9 +313,9 @@
       "published_ist": "2026-10-29 16:05 IST",
       "summary": "Indian equity benchmarks ended at the day’s highs, with the Sensex rising 905 points and the Nifty gaining 1%. FMCG, PSU banks and realty led sectoral gains.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -252,9 +341,9 @@
       "published_ist": "2026-10-29 15:53 IST",
       "summary": "European shares edged higher as gains in energy and aerospace stocks offset weakness in technology shares ahead of the ECB’s policy decision. Shell and Airbus advanced following their earnings updates, while investors awaited signals from ECB President Christine Lagarde on the interest-rate outlook.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -280,9 +369,9 @@
       "published_ist": "2026-10-29 15:05 IST",
       "summary": "Japanese investors extended their selling streak in foreign long-term bonds to six weeks, although falling US Treasury yields slowed outflows. Meanwhile, they increased short-term bill purchases and foreign stock investments, while overseas investors returned to Japanese equities.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -308,9 +397,9 @@
       "published_ist": "2026-10-29 14:50 IST",
       "summary": "Japanese government bond yields remained largely steady ahead of the Bank of Japan’s policy decision on Friday, supported by strong demand at a two-year bond auction and gains in US Treasuries. Markets expect the BOJ to hold rates steady, while a Reuters poll points to a possible 25-basis-point hike in December.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -336,9 +425,9 @@
       "published_ist": "2026-10-29 13:35 IST",
       "summary": "The US Treasury yield curve steepened after Fed Chair Kevin Warsh’s press conference, as investors weighed inflation risks, fiscal concerns and the outlook for interest rates. Longer-dated bond yields faced pressure amid worries over government borrowing and the term premium. Mixed economic signals also raised questions about the Fed’s growth assessment, while markets continued to price in the possibility of further rate hikes.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -364,9 +453,9 @@
       "published_ist": "2026-10-29 13:04 IST",
       "summary": "Chinese stocks declined as a sharp selloff in technology and AI-related shares outweighed the US Federal Reserve’s decision to keep interest rates unchanged. The Shanghai Composite fell 0.9%, while the CSI300 dropped 1.2% and the STAR50 tumbled 4.2%.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -435,9 +524,9 @@
       "published_ist": "2026-10-29 12:05 IST",
       "summary": "Government of India has announced the sale (re-issue) of Government Securities, as detailed below, through auction to be held on October 30, 2026 (Friday). As per the extant scheme of underwriting commitment notified on November 14, 2007, the amounts of Minimum Underwriting Commitment (MUC) and the minimum bidding commitment under Additional Competitive Underwriting (ACU) auction, applicable to each Primary Dealer (PD), are as under: (₹ crore) Security Notified Amount MUC amount per PD Minimum bidding commitment per PD under ACU auction 6.20% GS 2029 9,000 215 215 6.57% GS 2033 12,000 286 286 7.63% GS 2056 9,000 215 215 7.50% GOI SGrB 2056 3,000 72 72 The underwriting auction will be conducted through multiple price-based method on October 30, 2026 (Friday). PDs may submit their bids for ACU auction electronically through Reserve Bank of India’s Core Banking Solution (e-Kuber system) bet",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -532,9 +621,9 @@
       "published_ist": "2026-10-29 09:22 IST",
       "summary": "Jio Platforms’ debut generated combined turnover of ₹26,571 crore on the NSE and BSE, making it the most actively traded stock during Wednesday’s session.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -603,9 +692,9 @@
       "published_ist": "2026-10-29 08:13 IST",
       "summary": "Stock-specific action will continue",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -631,9 +720,9 @@
       "published_ist": "2026-10-29 07:48 IST",
       "summary": "KPIT Technologies’ stock had declined 21% over the past four months, while the Nifty IT index gained 22% over the same period. At around 16 times its two-year forward price-to-earnings multiple, the stock is among the relatively inexpensive names in the sector.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -647,9 +736,9 @@
       "published_ist": "2026-10-29 07:48 IST",
       "summary": "Ford Motor Co. expects profits to plateau next year as inflation, driven by the war in Iran, creates a multi-billion dollar headwind affecting logistics and raw materials.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -675,9 +764,9 @@
       "published_ist": "2026-10-29 07:38 IST",
       "summary": "SEBI announced that direct mutual fund plans will become the default option on AMC digital platforms starting November 1 to improve transparency and investor protection.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -705,9 +794,9 @@
       "published_ist": "2026-10-29 06:55 IST",
       "summary": "Japan’s Nikkei and South Korea’s Kospi advance as Alphabet tumbles 10% in extended trading, while investors assess tech earnings and the Federal Reserve’s decision to hold rates at 3.75%-4%. GIFT Nifty signals a muted start for Indian equities.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -733,9 +822,9 @@
       "published_ist": "2026-10-29 06:48 IST",
       "summary": "SBI Securities has come out with a list of 11 stocks it is recommending investors to buy as part of its Diwali stock picks for Samvat 2083. The stocks in this list include names like Tata Steel, Indian Hotels, MCX, Jyoti CNC, Sky Gold, Genus Power, Power Mech Projects, Centum Electronics, Stylam Industries, Sambhv Steel and Lumax Industries.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -749,9 +838,9 @@
       "published_ist": "2026-10-29 06:36 IST",
       "summary": "Free cash flow is projected to reach $30 billion in the fiscal year concluding in May 2029, according to Chief Financial Officer Hilary Maxson, who disclosed this information Wednesday at the company's annual conference in Las Vegas, a Bloomberg report said.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -765,9 +854,9 @@
       "published_ist": "2026-10-29 06:26 IST",
       "summary": "Investors may not have to worry about Federal Reserve rate hikes for much longer, according to Goldman Sachs.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -800,6 +889,22 @@
       }
     },
     {
+      "id": "newsjvclzfhpbd",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Notice of Demand dated October 29, 2026 issued under RC No. 9308 of 2026 drawn against Niranjan D Agarwal in the matter of Kalahridhaan Trendz Limited",
+      "url": "https://www.sebi.gov.in/enforcement/recovery-proceedings/oct-2026/notice-of-demand-dated-october-29-2026-issued-under-rc-no-9308-of-2026-drawn-against-niranjan-d-agarwal-in-the-matter-of-kalahridhaan-trendz-limited_105487.html",
+      "published_at": "2026-10-29T00:00:00+05:30",
+      "published_ist": "2026-10-29 00:00 IST",
+      "summary": "Notice of Demand dated October 29, 2026 issued under RC No. 9308 of 2026 drawn against Niranjan D Agarwal in the matter of Kalahridhaan Trendz Limited",
+      "first_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
+      "first_seen_ist": "2026-10-30 01:15:20 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
       "id": "newszkgijvflkq",
       "source": "SEBI RSS",
       "source_priority": 3,
@@ -809,9 +914,9 @@
       "published_ist": "2026-10-29 00:00 IST",
       "summary": "Appeal No. 7117 of 2026 filed by Goutam Mohanta",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -883,9 +988,9 @@
       "published_ist": "2026-10-28 21:19 IST",
       "summary": "SEBI has signed an MoU with the Bank of England to facilitate cooperation and information exchange on clearing corporations, supporting cross-border regulatory coordination and international clearing activities.",
       "first_seen_at": "2026-10-28T22:15:34.980659+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 22:15:34 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -901,36 +1006,6 @@
       },
       "processed_ist": "2026-10-28 22:15:34 IST",
       "post_id": "newsljtgkqvmyh"
-    },
-    {
-      "id": "newsrimaqsaqhg",
-      "source": "Economic Times",
-      "source_priority": 3,
-      "headline": "Ahead of Market: 10 things that will decide stock market action on Wednesday",
-      "url": "https://economictimes.indiatimes.com/markets/stocks/news/ahead-of-market-10-things-that-will-decide-stock-market-action-on-wednesday/articleshow/135271636.cms",
-      "published_at": "2026-10-28T21:08:47+05:30",
-      "published_ist": "2026-10-28 21:08 IST",
-      "summary": "Indian markets closed lower on Wednesday as rising crude oil prices and Middle East tensions hurt sentiment. Sensex fell 353 points to 73,246, while Nifty slipped 51 points to 22,699 despite a late recovery.",
-      "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-10-29T04:14:38.450126+05:30",
-      "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-10-29 04:14:38 IST",
-      "status": "posted",
-      "topic": "stock_market",
-      "processed_ist": "2026-10-25 19:58:58 IST",
-      "post_id": "newsvoywtydxzs",
-      "posted_at": "2026-10-26 13:30:18 IST",
-      "ai_insight": {
-        "version": 1,
-        "generated_at_ist": "2026-10-28 22:15:34 IST",
-        "context_source": "publisher article page",
-        "why_it_matters": "Broader equity indices often experience sharp intraday volatility when external macroeconomic shocks, such as rising crude prices and geopolitical tensions, intersect with local market sentiment. Although indices can recover a portion of their losses due to value buying or sector resilience, headline price movements alone do not establish a permanent shift in institutional capital allocation trends. Sustained index direction typically depends on macroeconomic variables like commodity pricing stability rather than isolated recovery sessions.",
-        "what_to_watch": [
-          "Sustained trends in crude oil pricing and foreign institutional investor (FII) net cash flows.",
-          "Official macroeconomic data updates regarding domestic inflation and central bank monetary policy stances."
-        ],
-        "evergreen_lesson": "Intraday index recoveries from macro shocks reflect short-term tactical dip-buying rather than structural resolution of underlying risks."
-      }
     },
     {
       "id": "newscyhnplyabp",
@@ -1080,9 +1155,9 @@
       "published_ist": "2026-10-28 15:56 IST",
       "summary": "Indian equities ended lower, with the Sensex falling 353 points, even as broader markets outperformed. Jio Platforms debuted strongly, while IT stocks remained under pressure and pharma gained.",
       "first_seen_at": "2026-10-28T22:15:34.980659+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 22:15:34 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -1136,9 +1211,9 @@
       "published_ist": "2026-10-28 15:17 IST",
       "summary": "The digital services arm made a blockbuster market debut, surging sharply to claim a spot among the country's most valuable firms. The listing underscored family continuity as the next generation pledged a unified commitment to carry forward the group's legacy.",
       "first_seen_at": "2026-10-28T22:15:34.980659+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 22:15:34 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -1180,9 +1255,9 @@
       "published_ist": "2026-10-28 12:56 IST",
       "summary": "Nifty Pharma is the best-performing sectoral index of the session, while Nifty IT remains the worst",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1268,9 +1343,9 @@
       "published_ist": "2026-10-28 10:14 IST",
       "summary": "Taher Badshah of Invesco Mutual Fund said Jio Platforms' listing gives investors access to a business that was previously embedded within Reliance Industries. He also expects telecom to deliver steady growth and said the IPO's pricing helped drive institutional demand.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -1284,9 +1359,9 @@
       "published_ist": "2026-10-28 10:03 IST",
       "summary": "With a market capitalisation of ₹12.5 lakh crore, Jio Platforms ranks second only to its parent, Reliance Industries Ltd. (RIL), making the Reliance Group home to India’s two most valuable listed companies.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -1354,9 +1429,9 @@
       "published_ist": "2026-10-28 09:26 IST",
       "summary": "The Indian rupee opened 10 paise higher at 95.02 against the US dollar as investors awaited the US Federal Reserve decision and monitored crude oil prices.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -1381,9 +1456,9 @@
       "published_ist": "2026-10-28 09:24 IST",
       "summary": "Pankaj Pandey, Head of Retail Research at ICICI Securities, expects another 16-20% telecom tariff hike to improve 5G monetisation and cash flows, while limited competition could support long-term growth. The brokerage also highlighted Radico Khaitan's premiumisation strategy and Piramal Pharma's expanding CDMO business as key investment themes. Disclaimer: The views and tips expressed by investment experts on CNBCTV18.com are their own, not of the website or its management. CNBCTV18.com advises users to check with certified experts before taking any investment decisions.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -1397,9 +1472,9 @@
       "published_ist": "2026-10-28 09:20 IST",
       "summary": "While HSBC sees valuations as reasonable and expects commodity prices to be a key trigger for the stock, Nomura flagged the risk of a slowdown in FY28. CLSA highlighted cost-control measures and the company’s confident domestic volume growth outlook.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1424,9 +1499,9 @@
       "published_ist": "2026-10-28 07:25 IST",
       "summary": "Global deal activity and strategic partnerships drive momentum across tech, manufacturing, and energy sectors, with major investments, MoUs, and contract wins shaping growth prospects for Infosys, Choice Intl, MIDHANI, Subros, Gulf Oil, Exide, and more.",
       "first_seen_at": "2026-10-28T14:20:02.178332+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1480,9 +1555,9 @@
       "published_ist": "2026-10-28 06:31 IST",
       "summary": "Turbulence in the tech sector underscores the importance of a more diversified portfolio.",
       "first_seen_at": "2026-10-28T07:01:54.504068+05:30",
-      "last_seen_at": "2026-10-29T18:59:58.241947+05:30",
+      "last_seen_at": "2026-10-30T01:15:20.377801+05:30",
       "first_seen_ist": "2026-10-28 07:01:54 IST",
-      "last_seen_ist": "2026-10-29 18:59:58 IST",
+      "last_seen_ist": "2026-10-30 01:15:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -1843,7 +1918,7 @@
       "last_seen_at": "2026-10-28T07:01:54.504068+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
       "last_seen_ist": "2026-10-28 07:01:54 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
         "version": 1,
@@ -1858,7 +1933,8 @@
         "evergreen_lesson": "Regulatory deadline extensions reflect operational realities during structural transitions, but they do not signal a permanent waiver of compliance obligations."
       },
       "processed_ist": "2026-10-28 02:19:56 IST",
-      "post_id": "newscuzucxbpxx"
+      "post_id": "newscuzucxbpxx",
+      "posted_at": "2026-10-29 19:02:44 IST"
     },
     {
       "id": "newscydyqhjype",
@@ -3627,27 +3703,27 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-29T18:59:58.241947+05:30",
-  "last_scraped_ist": "2026-10-29 18:59:58 IST",
+  "last_scraped_at": "2026-10-30T01:15:20.377801+05:30",
+  "last_scraped_ist": "2026-10-30 01:15:20 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
-      "fresh_items": 181,
+      "fresh_items": 173,
       "accepted_items": 18,
-      "filtered_items": 163,
+      "filtered_items": 155,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 11,
-      "filtered_items": 39,
+      "accepted_items": 12,
+      "filtered_items": 38,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
       "fresh_items": 36,
       "accepted_items": 4,
@@ -3655,7 +3731,7 @@
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
       "fresh_items": 10,
       "accepted_items": 7,
@@ -3663,7 +3739,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -3671,11 +3747,11 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-29 18:59:58 IST",
+      "checked_ist": "2026-10-30 01:15:20 IST",
       "http_status": 200,
-      "fresh_items": 7,
-      "accepted_items": 5,
-      "filtered_items": 2,
+      "fresh_items": 3,
+      "accepted_items": 3,
+      "filtered_items": 0,
       "error": null
     }
   },
@@ -3703,16 +3779,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-29 18:59:58 IST"
+    "last_curated_ist": "2026-10-30 01:15:20 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-29 18:59:58 IST",
-    "fetched_items": 284,
-    "accepted_feed_items": 45,
-    "filtered_feed_items": 239,
-    "new_unique_stories": 16,
-    "duplicate_items_collapsed": 5,
+    "updated_ist": "2026-10-30 01:15:20 IST",
+    "fetched_items": 272,
+    "accepted_feed_items": 44,
+    "filtered_feed_items": 228,
+    "new_unique_stories": 3,
+    "duplicate_items_collapsed": 4,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 142
+    "stories_total": 145
   }
 }

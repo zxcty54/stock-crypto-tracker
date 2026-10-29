@@ -575,8 +575,24 @@
       "source_headline": "Companies with high credit ratings shifting to bond market as bank loans become dearer",
       "story_key": "0e3db45141280fb0e27a3a274b7463f574fe02491272fecb9ff70afdc950e130",
       "generated_at": "2026-10-29 18:59:58 IST"
+    },
+    {
+      "id": "newsuqqgjjhqxm",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-30 08:00",
+      "scheduled_ist": "2026-10-30 08:00",
+      "title": "RBI Announces Premature Redemption Price for SGB 2019-20 Series VI",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI Announces Premature Redemption Price for SGB 2019-20 Series VI</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Reserve Bank of India has fixed the premature redemption price at ₹14,213 per unit for the Sovereign Gold Bond 2019-20 Series VI, which is due on October 30, 2026, marking completion of its mandatory five-year holding period.\n\n🧭 <b>MARKET CONTEXT</b>\nSGB premature redemption values are calculated using the simple average of the closing price of 999 purity gold over the previous three business days, as published by the India Bullion and Jewellers Association.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis mechanism allows early exits directly with the sovereign without relying on secondary market liquidity, where gold bonds often trade at discounts or thin volumes. It provides a clean liquidity window for investors holding this specific 2019 tranche, though opting for premature exit forfeits subsequent sovereign interest payouts.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch for upcoming IBJA gold price trends and subsequent sovereign gold bond redemption announcements to gauge comparative yields against physical gold or exchange-traded funds.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki SGBs ki liquidity secondary market mein improve honi chahiye ya sovereign redemption hi behtar option hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63884\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:28bc9f0115e5",
+      "kind": "business_news_insight",
+      "source_name": "RBI Press Releases",
+      "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63884",
+      "source_headline": "Premature redemption under Sovereign Gold Bond (SGB) Scheme - Redemption Price for premature redemption of SGB 2019-20 Series VI due on October 30, 2026",
+      "story_key": "28bc9f0115e51e53352ea7d667f7ec9a7012a4b06d8d9a5dcf43527ecf1f3ae3",
+      "generated_at": "2026-10-30 01:15:20 IST"
     }
   ],
-  "total": 43,
-  "last_scheduled": "2026-10-29 18:00"
+  "total": 44,
+  "last_scheduled": "2026-10-30 08:00"
 }
