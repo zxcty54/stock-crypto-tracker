@@ -469,14 +469,16 @@
       "scheduled_ist": "2026-10-28 08:00",
       "title": "Sebi extends debenture trustees' compliance deadline to April 2027 amid framewor",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi extends debenture trustees' compliance deadline to April 2027 amid framework review</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSebi has extended the deadline by six months, pushing the final compliance date to April 27, 2027, for debenture trustees (DTs) to move non-regulated activities into separate business units (SBUs) under Regulation 9C of the Sebi (Debenture Trustees) Regulations, 1993.\n\n🧭 <b>MARKET CONTEXT</b>\nIntroduced via amendments in October 2025, Regulation 9C mandates that DTs structurally isolate commercial operations falling outside Sebi's regulatory perimeter into distinct business units to prevent conflicts of interest.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis operational breather lowers near-term compliance friction for DT entities while an Expert Working Group reviews the overall regulatory architecture. If the review results in relaxed structural mandates, institutional overhead costs for trustees could moderate, potentially stabilizing debt market issuance processing fees conditionally.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the Expert Working Group's upcoming recommendations on the SBU framework and subsequent circulars regarding operational perimeter definitions.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do structural compliance adjustments like SBU segregation impact the operational efficiency of debt market intermediaries over time?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-extends-deadline-for-debenture-trustees-to-comply-with-norms-till-april-2027/articleshow/135235986.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:4b02d97becc1",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-extends-deadline-for-debenture-trustees-to-comply-with-norms-till-april-2027/articleshow/135235986.cms",
       "source_headline": "Sebi extends deadline for debenture trustees to comply with norms till April 2027",
       "story_key": "4b02d97becc17ff4638e831e0776425ce7234fe297687efdf3c7a37897edb3d6",
-      "generated_at": "2026-10-28 02:19:56 IST"
+      "generated_at": "2026-10-28 02:19:56 IST",
+      "posted_at": "2026-10-29 19:02:44 IST",
+      "telegraph_url": "https://telegra.ph/Sebi-extends-debenture-trustees-compliance-deadline-to-April-2027-amid-framewor--October-2026-10-29"
     },
     {
       "id": "newsmmnsqtwpqv",
@@ -557,8 +559,24 @@
       "source_headline": "Mutual fund direct plans to become default on AMC apps from November 1",
       "story_key": "aba68c1b5d5c48f29ac1b4a976103144d37472f161a6c6f1e376830bbf548bb1",
       "generated_at": "2026-10-29 11:40:41 IST"
+    },
+    {
+      "id": "newsxrkbqtdeun",
+      "slot": "F",
+      "hourly_slot_ist": "2026-10-29 18:00",
+      "scheduled_ist": "2026-10-29 18:00",
+      "title": "AAA Corporates Bond Market Shift: Bank Loan Cost Advantage Bad for Banks?",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>AAA Corporates Bond Market Shift: Bank Loan Cost Advantage Bad for Banks?</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nHigh credit rating companies are shifting away from traditional bank loans toward the domestic bond market to secure lower funding costs. Following the RBI's recent repo rate hike and calibrated tightening stance, AAA-rated corporates have raised over ₹27,500 crore via bond issuances in October at coupon rates between 8.13% and 8.85%.\n\n🧭 <b>MARKET CONTEXT</b>\nBank loans linked to external benchmarks carry additional premiums such as Credit Risk Premium and Business Strategy Premium. For instance, SBI's effective lending rate works out to 8.65% including its 8.15% EBLR. In contrast, state-run REC raised ₹4,000 crore via a five-year bond at an 8.30% coupon rate, offering a clear cost advantage.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis trend highlights how tight banking liquidity and higher benchmark rates alter corporate borrowing patterns. When top-rated borrowers bypass banks for cheaper money market instruments, commercial banks face slower corporate credit offtake growth, which can pressure their net interest margins if low-cost deposit growth fails to keep pace.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming credit growth data from scheduled commercial banks, corporate bond issuance volumes on NSE and BSE electronic book provider platforms, and changes in the spread between bank lending benchmarks and corporate bond yields.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya yeh corporate shift banking sector ke credit growth aur margins par bada asar daal sakta hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/companies-with-high-credit-ratings-shifting-to-bond-market-as-bank-loans-become-dearer/articleshow/135309264.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:0e3db4514128",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/companies-with-high-credit-ratings-shifting-to-bond-market-as-bank-loans-become-dearer/articleshow/135309264.cms",
+      "source_headline": "Companies with high credit ratings shifting to bond market as bank loans become dearer",
+      "story_key": "0e3db45141280fb0e27a3a274b7463f574fe02491272fecb9ff70afdc950e130",
+      "generated_at": "2026-10-29 18:59:58 IST"
     }
   ],
-  "total": 42,
-  "last_scheduled": "2026-10-29 10:00"
+  "total": 43,
+  "last_scheduled": "2026-10-29 18:00"
 }
