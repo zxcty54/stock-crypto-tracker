@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-10-29 00:16:55 IST",
+    "timestamp": "2026-10-30 00:25:55 IST",
     "total_files_extracted": 6,
     "file_names": [
       "DPIIT_Eight_Core_Latest.pdf",
@@ -15581,10 +15581,10 @@
       "records": [
         {
           "month": "October-2026",
-          "volume_million": 5472.08,
-          "volume_crore": 547.21,
-          "amount_inr_crore": 248.73,
-          "ticket_size_inr": 0.45
+          "volume_million": 6749.69,
+          "volume_crore": 674.97,
+          "amount_inr_crore": 249.99,
+          "ticket_size_inr": 0.37
         },
         {
           "month": "September-2026",
