@@ -505,14 +505,16 @@
       "scheduled_ist": "2026-10-28 14:00",
       "title": "India bonds tumble as oil spikes and US yields harden ahead of Fed outcome",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds tumble as oil spikes and US yields harden ahead of Fed outcome</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds faced a sharp selloff on Wednesday, wiping out the gains from the previous session. The benchmark 6.94% 2036 bond yield rose 4 basis points to 7.4772%, driven by a 1.5% jump in Brent crude to $115.40 a barrel following supply disruption concerns in West Asia. Simultaneously, US 10-year Treasury yields climbed to 5.0238%, narrowing the yield differential for emerging-market debt.\n\n🧭 <b>MARKET CONTEXT</b>\nBond prices and yields move inversely. When crude oil prices surge in an import-dependent economy like India, inflationary pressures mount, forcing local debt markets to reprice risk. Additionally, overnight indexed swap (OIS) rates spiked, with the one-year OIS rising 5.5 bps to 6.69% and pricing in aggressive rate hike expectations over the next 12 months.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nHigher domestic bond yields directly increase borrowing costs for the central government, corporates, and banks looking to raise capital via debt instruments. If sustained, elevated yields can squeeze corporate margins, weigh on debt-heavy sectors, and influence broader lending rates across the banking system, though this outcome depends heavily on subsequent crude trajectories.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the upcoming US Federal Reserve policy decision and its forward guidance, upcoming domestic inflation prints, and daily movements in international crude oil benchmarks.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you factor sudden global commodity shocks into your duration risk management for fixed-income assets?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-sink-on-oil-spike-before-fed-decision/articleshow/135253447.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:0649725f7db1",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-sink-on-oil-spike-before-fed-decision/articleshow/135253447.cms",
       "source_headline": "India bonds sink on oil spike before Fed decision",
       "story_key": "0649725f7db193ba4100e862d8e8d815ae4a0e63122b62ddd2e98cd171abb0d5",
-      "generated_at": "2026-10-28 14:20:02 IST"
+      "generated_at": "2026-10-28 14:20:02 IST",
+      "posted_at": "2026-10-30 18:48:34 IST",
+      "telegraph_url": "https://telegra.ph/India-bonds-tumble-as-oil-spikes-and-US-yields-harden-ahead-of-Fed-outcome--October-2026-10-30"
     },
     {
       "id": "newsljtgkqvmyh",
