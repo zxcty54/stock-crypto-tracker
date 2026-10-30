@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-10-30 01:55 IST",
- "sample_size": 77,
- "identified": 45,
- "inferred": 32,
+ "generated_at": "2026-10-31 01:28 IST",
+ "sample_size": 81,
+ "identified": 47,
+ "inferred": 34,
  "cards_skipped": 0,
- "channel_avg_views": 24.9,
+ "channel_avg_views": 25.0,
  "growth": {
   "today": 473,
-  "snapshots": 22,
-  "delta_7d": -4,
-  "per_day": 20.43,
-  "days_to_target": 25,
+  "snapshots": 23,
+  "delta_7d": -3,
+  "per_day": 19.58,
+  "days_to_target": 26,
   "target": 1000,
-  "days_span": 23
+  "days_span": 24
  },
  "status": "ok",
  "pillars": {
@@ -24,13 +24,13 @@
   },
   "technical": {
    "posts": 6,
-   "avg_views": 35.8,
-   "weight": 1.44,
+   "avg_views": 37.2,
+   "weight": 1.49,
    "low_sample": false
   },
   "psychology": {
    "posts": 2,
-   "avg_views": 35.5,
+   "avg_views": 37.0,
    "weight": 1.0,
    "low_sample": true
   },
@@ -46,8 +46,14 @@
    "weight": 1.0,
    "low_sample": true
   },
+  "risk": {
+   "posts": 4,
+   "avg_views": 24.0,
+   "weight": 0.96,
+   "low_sample": false
+  },
   "corporate": {
-   "posts": 38,
+   "posts": 40,
    "avg_views": 23.8,
    "weight": 0.95,
    "low_sample": false
@@ -58,41 +64,40 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "risk": {
+  "market_mechanics": {
    "posts": 4,
-   "avg_views": 23.5,
-   "weight": 0.94,
-   "low_sample": false
-  },
-  "other": {
-   "posts": 7,
    "avg_views": 19.0,
    "weight": 0.76,
    "low_sample": false
   },
-  "market_mechanics": {
-   "posts": 4,
-   "avg_views": 17.2,
-   "weight": 0.69,
-   "low_sample": false
-  },
   "awareness": {
    "posts": 3,
-   "avg_views": 16.3,
-   "weight": 0.65,
+   "avg_views": 19.0,
+   "weight": 0.76,
+   "low_sample": false
+  },
+  "other": {
+   "posts": 9,
+   "avg_views": 17.8,
+   "weight": 0.71,
    "low_sample": false
   }
  },
  "top_posts": [
   {
    "title": "PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain",
-   "views": 78,
+   "views": 81,
    "pillar": "technical"
   },
   {
    "title": "90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔",
-   "views": 54,
+   "views": 56,
    "pillar": "psychology"
+  },
+  {
+   "title": "Voltamp Transformers Limited (NSE: VOLTAMP)",
+   "views": 44,
+   "pillar": "corporate"
   },
   {
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
@@ -103,28 +108,23 @@
    "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
    "views": 43,
    "pillar": "business_model"
-  },
-  {
-   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
-   "views": 41,
-   "pillar": "corporate"
   }
  ],
  "weak_posts": [
   {
    "title": "Sebi extends debenture trustees' compliance deadline to April 2027 ami",
-   "views": 4,
+   "views": 8,
    "pillar": "awareness"
-  },
-  {
-   "title": "Channel created",
-   "views": 0,
-   "pillar": "other"
   },
   {
    "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
    "views": 0,
    "pillar": "risk"
+  },
+  {
+   "title": "Channel created",
+   "views": 0,
+   "pillar": "other"
   }
  ]
 }
