@@ -1,6 +1,34 @@
 {
   "stories": [
     {
+      "id": "newsoktgmcycfz",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Intel stock plunges 30% as weak PC demand and AI costs trigger global chip selloff",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/intel-plunges-25-as-weak-pc-demand-and-ai-costs-trigger-global-chip-selloff/articleshow/135371230.cms",
+      "published_at": "2026-10-30T22:37:17+05:30",
+      "published_ist": "2026-10-30 22:37 IST",
+      "summary": "Intel shares plunged 30% after the chipmaker issued a weak fourth-quarter revenue forecast and warned of negative cash flow for the year. The warning triggered a global semiconductor selloff, with Nvidia, AMD and other chip stocks declining as weak PC demand and rising AI infrastructure costs weighed on sentiment.",
+      "first_seen_at": "2026-10-31T01:04:36.530994+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
+      "first_seen_ist": "2026-10-31 01:04:36 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-10-31 01:04:36 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Intel ke weak revenue forecast aur negative cash flow warning se yeh pata chalta hai ki legacy PC market ki sluggish demand aur aggressive AI infrastructure investments ka heavy financial pressure ek sath intersect kar raha hai. Yeh broader selloff market ke us sentiment ko reflect karta hai jahan investors capital-intensive tech cycles aur near-term margin erosion ko lekar cautious ho rahe hain. Agar semiconductor demand aage bhi slow rehti hai, toh chipmakers ko apne manufacturing expansion aur capacity allocation ke plans ko review karna pad sakta hai.",
+        "what_to_watch": [
+          "Intel ka actual quarterly revenue aur cash flow generation subsequent financial disclosures mein",
+          "PC chip segment sales aur high bandwidth memory supply constraints ke operational updates",
+          "Broader semiconductor ecosystem mein capital expenditure ya production shifts ki announcements"
+        ],
+        "evergreen_lesson": "Jab ek capital-intensive industry mein legacy demand contraction aur new technology infrastructure ki high cost ek sath aati hai, toh market near-term earnings pressure par aggressively react karta hai, chaaye long-term structural demand kitni bhi strong kyun na ho."
+      }
+    },
+    {
       "id": "newscralqfgbzx",
       "source": "RBI Press Releases",
       "source_priority": 3,
@@ -10,9 +38,9 @@
       "published_ist": "2026-10-30 18:40 IST",
       "summary": "In terms of GOI notification F.No. 4(5)-B(W&M)/2021 dated October 21, 2021 (SGB 2021-22 Series VII - Issue date November 02, 2021) on Sovereign Gold Bond Scheme, premature redemption of Gold Bond may be permitted after fifth year from the date of issue of such Gold Bond on the date on which interest is payable. Accordingly, the due date of premature redemption of the above tranche shall be on November 02, 2026. 2. Further, the redemption price of SGB shall be based on simple average of closing price of gold of 999 purity of previous three business days from the date of redemption, as published by the India Bullion and Jewellers Association Ltd (IBJA). Accordingly, the redemption price for premature redemption due on November 02, 2026, shall be ₹14,167/- (Rupees Fourteen Thousand One Hundred and Sixty-Seven Only) per unit of SGB based on the simple average of closing price of gold for the",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "queued",
       "topic": "capital_market",
       "processed_ist": "2026-10-30 01:15:20 IST",
@@ -39,9 +67,9 @@
       "published_ist": "2026-10-30 18:15 IST",
       "summary": "Several US stocks offer dividend yields exceeding 10%, led by mortgage REITs Annaly Capital Management and AGNC Investment above 16%. However, significant share-price declines highlight risks surrounding dividend sustainability, payout ratios, debt and overall investment returns.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -66,9 +94,9 @@
       "published_ist": "2026-10-30 18:10 IST",
       "summary": "The following State Governments have offered to sell stock by way of auction, for an aggregate amount of ₹29,900 Crore (Face Value). Sr. No. State/UT Amount to be raised (₹ Crore) Additional Borrowing (Greenshoe) Option (₹ Crore) Tenor (Year) Type of Auction 1. Andhra Pradesh 1000 - Re-issue of 7.46% Andhra Pradesh SGS 2035, issued on August 12, 2026 Price 2000 - Re-issue of 7.81% Andhra Pradesh SGS 2056, issued on April 22, 2026 Price 2. Delhi 500 - Re-issue of 7.57% Delhi SGS 2036, issued on June 24, 2026 Price 500 - 15 Yield 3. Goa 100 - Re-issue of 7.85% Goa SGS 2034, issued on October 07, 2026 Price 4. Gujarat 1000 500 Re-issue of 7.96% Gujarat SGS 2035, issued on October 14, 2026 Price 1000 - Re-issue of 8.06% Gujarat SGS 2038, issued on October 21, 2026 Price 5. Karnataka 2000 - Re-issue of 7.86% Karnataka SGS 2034, issued on October 07, 2026 Price 6. Madhya Pradesh 1000 - Re-issu",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -93,9 +121,9 @@
       "published_ist": "2026-10-30 17:52 IST",
       "summary": "Indian government bonds ended October with losses, marking a fourth consecutive decline in bond yields. Brent crude oil prices surged, raising inflation concerns for the country. The Reserve Bank of India raised its policy rate for the first time in nearly four years this month. Foreign investments in Indian bonds fell to a four-month low, causing further concerns about the rupee's performance.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -120,9 +148,9 @@
       "published_ist": "2026-10-30 17:10 IST",
       "summary": "The 625 th meeting of the Central Board of Directors of Reserve Bank of India was held today in Mumbai under the Chairmanship of Shri Sanjay Malhotra, Governor. The Central Board took the Integrity Pledge as part of the observance of Vigilance Awareness Week 2026. The Board in its meeting deliberated on the prevailing economic conditions and associated challenges and evaluated the potential risks to the economic outlook. The Board reviewed the activities of Deposit Insurance and Credit Guarantee Corporation and activities of select Central Office Departments of the Bank. Deputy Governors, Shri Swaminathan J., Dr. Poonam Gupta, Shri Shirish Chandra Murmu, Shri Rohit Jain, and other Directors of the Central Board, viz., Ms. Anuradha Thakur, Secretary, Department of Economic Affairs; Shri Anand Gopal Mahindra, Shri Janmejaya Kumar Sinha, Shri Syed Akbaruddin and Ms. Annie George Mathew atte",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -136,9 +164,9 @@
       "published_ist": "2026-10-30 17:00 IST",
       "summary": "1. Reserve Bank of India - Liabilities and Assets* (₹ Crore) Item 2025 2026 Variation Oct. 24 Oct. 16 Oct. 23 Week Year 1 2 3 4 5 4 Loans and Advances 4.1 Central Government - 0 0 0 0 4.2 State Governments 23777 29700 21074 -8626 -2703 * Data are provisional; difference, if any, is due to rounding off. 2. Foreign Exchange Reserves* Item As on October 23, 2026 Variation over Week End-March 2026 Year ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. 1 2 3 4 5 6 7 8 1 Total Reserves 6833505 719748 -12655 -1269 279644 28640 725206 24392 1.1 Foreign Currency Assets # 5632074 593205 12419 1358 394707 40923 655221 26657 1.2 Gold 979339 103150 -25244 -2650 -114970 -12245 52259 -2386 1.3 SDRs 176639 18605 243 27 50 -17 12686 -59 1.4 Reserve Position in the IMF 45453 4787 -73 -4 -143 -21 5040 180 * Difference, if any, is due to rounding off. # Excludes (a) SDR holdings of the Reserve Bank, a",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -152,9 +180,9 @@
       "published_ist": "2026-10-30 16:36 IST",
       "summary": "Eight NSE midcap stocks recorded over 100% year-on-year profit growth in Q2FY27, led by Max Financial Services, One97 Communications and Poonawalla Fincorp, according to StockEdge data.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -168,10 +196,10 @@
       "published_ist": "2026-10-30 16:15 IST",
       "summary": "SEBI has issued a regulatory censure against Axis Capital, concluding proceedings linked to September 2024 restrictions. The regulator noted no recorded investor harm or fraudulent default, while Axis Bank expects no material business impact.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
-      "status": "new",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
+      "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
         "version": 1,
@@ -183,7 +211,9 @@
           "Client retention aur institutional deal pipeline par is regulatory order ka koi long-term impact padta hai ya nahi."
         ],
         "evergreen_lesson": "Regulatory censure ya compliance penalty aana ek operational risk hota hai, lekin jab tak direct investor harm ya financial fraud prove nahi hota, tab tak business fundamentals par uska impact restricted compliance costs ya temporary processing delays tak hi limited ho sakta hai."
-      }
+      },
+      "processed_ist": "2026-10-31 01:04:36 IST",
+      "post_id": "newsteqjqpowjz"
     },
     {
       "id": "newslqwhinyuun",
@@ -195,9 +225,9 @@
       "published_ist": "2026-10-30 15:47 IST",
       "summary": "Sensex and Nifty extended their gains for a second consecutive session on Friday, rising 308.5 points and 116.3 points, respectively. IT stocks led the advance, while midcaps and banking stocks underperformed. Navin Fluorine, Laurus Labs and Borosil rallied on Q2 results, while Suzlon Energy slumped nearly 8% after a guidance cut.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -211,9 +241,9 @@
       "published_ist": "2026-10-30 12:46 IST",
       "summary": "With the fall seen by shares of eClerx this week, the stock has slipped below all of its key moving averages. The 200-Day Moving Average is now at ₹1,743, from which the stock is now significantly below.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -238,9 +268,9 @@
       "published_ist": "2026-10-30 12:06 IST",
       "summary": "The Bank of Japan declared its long-standing 2% inflation target achieved after more than 13 years, but kept its benchmark interest rate unchanged at 1.25%. Persistent inflation, rising oil and semiconductor prices, and yen weakness have fuelled expectations of another rate hike in December as policymakers gradually tighten monetary policy.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -266,9 +296,9 @@
       "published_ist": "2026-10-30 11:29 IST",
       "summary": "China's CSI300 index fell to a one-year low, extending its losing streak to 12 weeks as a global AI stock selloff weighed on technology shares. The index is down 14% over 12 weeks and on track for its steepest monthly decline since July, while Hong Kong's Hang Seng advanced.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -294,9 +324,9 @@
       "published_ist": "2026-10-30 10:14 IST",
       "summary": "Sun Pharmaceutical Industries Ltd. received US FDA approval for ILUMYA to treat adults with active psoriatic arthritis, expanding its use from plaque psoriasis.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -366,9 +396,9 @@
       "published_ist": "2026-10-30 09:11 IST",
       "summary": "The Bank of Japan kept rates unchanged at 1.25 percent but signaled inflation hit its 2 percent target, paving the way for a potential rate hike in December.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -441,9 +471,9 @@
       "published_ist": "2026-10-30 06:57 IST",
       "summary": "Essex noted that businesses are increasingly adopting technology from Palantir in order to get better returns on their AI investments. \"Palantir is already delivering ROI by leveraging its platform to fundamentally transform the business operations of its customers, and growth is accelerating,\" Essex wrote.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -457,9 +487,9 @@
       "published_ist": "2026-10-30 00:00 IST",
       "summary": "Notice of Demand dated October 30, 2026 against Sunitadevi Niranjan Agarwal (PAN: ADRPS3295H) in the matter of Kalahridhaan Trendz Limited under RC No. 9311 of 2026",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -473,9 +503,25 @@
       "published_ist": "2026-10-30 00:00 IST",
       "summary": "Order in the matter of Inspection of Veena Sharma, Proprietor Research Guru Investment Adviser",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsrkspafrzof",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Extension of timeline with respect to compliance of Digital Accessibility Circulars",
+      "url": "https://www.sebi.gov.in/legal/circulars/oct-2026/extension-of-timeline-with-respect-to-compliance-of-digital-accessibility-circulars_105523.html",
+      "published_at": "2026-10-30T00:00:00+05:30",
+      "published_ist": "2026-10-30 00:00 IST",
+      "summary": "Extension of timeline with respect to compliance of Digital Accessibility Circulars",
+      "first_seen_at": "2026-10-31T01:04:36.530994+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
+      "first_seen_ist": "2026-10-31 01:04:36 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -489,9 +535,9 @@
       "published_ist": "2026-10-30 00:00 IST",
       "summary": "Appeal No. 7120 of 2026 filed by Rahul Bagrecha",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -505,9 +551,9 @@
       "published_ist": "2026-10-30 00:00 IST",
       "summary": "Appeal No. 7119 of 2026 filed by Furkan Salmani",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -608,9 +654,9 @@
       "published_ist": "2026-10-29 17:44 IST",
       "summary": "India VIX declines over 6% to around 15.14, signalling a meaningful easing in near-term volatility expectations",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -797,9 +843,9 @@
       "published_ist": "2026-10-29 16:05 IST",
       "summary": "Indian equity benchmarks ended at the day’s highs, with the Sensex rising 905 points and the Nifty gaining 1%. FMCG, PSU banks and realty led sectoral gains.",
       "first_seen_at": "2026-10-29T18:59:58.241947+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 18:59:58 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -1105,9 +1151,9 @@
       "published_ist": "2026-10-29 09:22 IST",
       "summary": "Jio Platforms’ debut generated combined turnover of ₹26,571 crore on the NSE and BSE, making it the most actively traded stock during Wednesday’s session.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1176,9 +1222,9 @@
       "published_ist": "2026-10-29 08:13 IST",
       "summary": "Stock-specific action will continue",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -1204,9 +1250,9 @@
       "published_ist": "2026-10-29 07:48 IST",
       "summary": "KPIT Technologies’ stock had declined 21% over the past four months, while the Nifty IT index gained 22% over the same period. At around 16 times its two-year forward price-to-earnings multiple, the stock is among the relatively inexpensive names in the sector.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -1220,9 +1266,9 @@
       "published_ist": "2026-10-29 07:48 IST",
       "summary": "Ford Motor Co. expects profits to plateau next year as inflation, driven by the war in Iran, creates a multi-billion dollar headwind affecting logistics and raw materials.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -1248,9 +1294,9 @@
       "published_ist": "2026-10-29 07:38 IST",
       "summary": "SEBI announced that direct mutual fund plans will become the default option on AMC digital platforms starting November 1 to improve transparency and investor protection.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -1278,9 +1324,9 @@
       "published_ist": "2026-10-29 06:55 IST",
       "summary": "Japan’s Nikkei and South Korea’s Kospi advance as Alphabet tumbles 10% in extended trading, while investors assess tech earnings and the Federal Reserve’s decision to hold rates at 3.75%-4%. GIFT Nifty signals a muted start for Indian equities.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -1306,9 +1352,9 @@
       "published_ist": "2026-10-29 06:48 IST",
       "summary": "SBI Securities has come out with a list of 11 stocks it is recommending investors to buy as part of its Diwali stock picks for Samvat 2083. The stocks in this list include names like Tata Steel, Indian Hotels, MCX, Jyoti CNC, Sky Gold, Genus Power, Power Mech Projects, Centum Electronics, Stylam Industries, Sambhv Steel and Lumax Industries.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -1322,9 +1368,9 @@
       "published_ist": "2026-10-29 06:36 IST",
       "summary": "Free cash flow is projected to reach $30 billion in the fiscal year concluding in May 2029, according to Chief Financial Officer Hilary Maxson, who disclosed this information Wednesday at the company's annual conference in Las Vegas, a Bloomberg report said.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -1338,9 +1384,9 @@
       "published_ist": "2026-10-29 06:26 IST",
       "summary": "Investors may not have to worry about Federal Reserve rate hikes for much longer, according to Goldman Sachs.",
       "first_seen_at": "2026-10-29T11:40:41.512178+05:30",
-      "last_seen_at": "2026-10-30T18:47:49.123343+05:30",
+      "last_seen_at": "2026-10-31T01:04:36.530994+05:30",
       "first_seen_ist": "2026-10-29 11:40:41 IST",
-      "last_seen_ist": "2026-10-30 18:47:49 IST",
+      "last_seen_ist": "2026-10-31 01:04:36 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -1833,7 +1879,7 @@
       "last_seen_at": "2026-10-28T14:20:02.178332+05:30",
       "first_seen_ist": "2026-10-28 14:20:02 IST",
       "last_seen_ist": "2026-10-28 14:20:02 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
         "version": 1,
@@ -1847,7 +1893,8 @@
         "evergreen_lesson": "For net-importing economies, external commodity shocks act as a primary transmission channel that rapidly reverses local debt rallies."
       },
       "processed_ist": "2026-10-28 14:20:02 IST",
-      "post_id": "newsursfjvydpk"
+      "post_id": "newsursfjvydpk",
+      "posted_at": "2026-10-30 18:48:34 IST"
     },
     {
       "id": "newszolkrrfqgp",
@@ -4220,19 +4267,19 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-30T18:47:49.123343+05:30",
-  "last_scraped_ist": "2026-10-30 18:47:49 IST",
+  "last_scraped_at": "2026-10-31T01:04:36.530994+05:30",
+  "last_scraped_ist": "2026-10-31 01:04:36 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
-      "fresh_items": 173,
-      "accepted_items": 15,
-      "filtered_items": 158,
+      "fresh_items": 167,
+      "accepted_items": 14,
+      "filtered_items": 153,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
       "fresh_items": 50,
       "accepted_items": 7,
@@ -4240,7 +4287,7 @@
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
       "fresh_items": 40,
       "accepted_items": 2,
@@ -4248,7 +4295,7 @@
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
       "fresh_items": 10,
       "accepted_items": 4,
@@ -4256,7 +4303,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
       "fresh_items": 1,
       "accepted_items": 0,
@@ -4264,10 +4311,10 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-30 18:47:49 IST",
+      "checked_ist": "2026-10-31 01:04:36 IST",
       "http_status": 200,
-      "fresh_items": 17,
-      "accepted_items": 13,
+      "fresh_items": 11,
+      "accepted_items": 7,
       "filtered_items": 4,
       "error": null
     }
@@ -4296,16 +4343,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-30 18:47:49 IST"
+    "last_curated_ist": "2026-10-31 01:04:36 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-30 18:47:49 IST",
-    "fetched_items": 291,
-    "accepted_feed_items": 41,
-    "filtered_feed_items": 250,
-    "new_unique_stories": 18,
-    "duplicate_items_collapsed": 6,
+    "updated_ist": "2026-10-31 01:04:36 IST",
+    "fetched_items": 279,
+    "accepted_feed_items": 34,
+    "filtered_feed_items": 245,
+    "new_unique_stories": 2,
+    "duplicate_items_collapsed": 2,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 170
+    "stories_total": 172
   }
 }
