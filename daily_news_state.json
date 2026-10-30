@@ -17,7 +17,8 @@
     "2026-10-30 01",
     "2026-10-30 05",
     "2026-10-30 11",
-    "2026-10-31 01"
+    "2026-10-31 01",
+    "2026-10-31 05"
   ],
   "seen_story_keys": [
     "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
@@ -37,7 +38,8 @@
     "28bc9f0115e51e53352ea7d667f7ec9a7012a4b06d8d9a5dcf43527ecf1f3ae3",
     "f346ddf4f39817e07a0a5dbde08772eb05d8833b9401219338c0faab793b7810",
     "3f318fb0e9535eee5ff68c8e6cfbc63fb482c438f151a80564963ac3157686ac",
-    "e4f71c07144383b535947ee7ad63b9361f977609627296fe8d8ba5ddd30082d2"
+    "e4f71c07144383b535947ee7ad63b9361f977609627296fe8d8ba5ddd30082d2",
+    "36f8bf48a168d79cc5533545236ccba8330f3fee3f902184ec3fbb9032d22301"
   ],
   "seen_story_titles": [
     "Sebi to revamp short-selling, securities lending rules",
@@ -57,9 +59,10 @@
     "Premature redemption under Sovereign Gold Bond (SGB) Scheme - Redemption Price for premature redemption of SGB 2019-20 Series VI due on October 30, 2026",
     "India's 10-year bond has best day in 3 months on Treasury rally, easing oil",
     "Sun Pharma shares extend 4-day rally after USFDA approval for ILUMYA in arthritis patients",
-    "Sebi issues final order against Axis Capital, imposes regulatory censure; Axis Bank shares fall over 1%"
+    "Sebi issues final order against Axis Capital, imposes regulatory censure; Axis Bank shares fall over 1%",
+    "India bonds buckle for fourth straight month on oil's climb"
   ],
-  "last_story_title": "Sebi issues final order against Axis Capital, imposes regulatory censure; Axis Bank shares fall over 1%",
-  "last_story_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-issues-final-order-against-axis-capital-imposes-regulatory-censure-axis-bank-shares-fall-over-1/articleshow/135357153.cms",
-  "last_generated_at": "2026-10-31 01:04:36 IST"
+  "last_story_title": "India bonds buckle for fourth straight month on oil's climb",
+  "last_story_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-buckle-for-fourth-straight-month-on-oils-climb/articleshow/135361502.cms",
+  "last_generated_at": "2026-10-31 05:26:18 IST"
 }

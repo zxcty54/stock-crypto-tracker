@@ -643,8 +643,24 @@
       "source_headline": "Sebi issues final order against Axis Capital, imposes regulatory censure; Axis Bank shares fall over 1%",
       "story_key": "e4f71c07144383b535947ee7ad63b9361f977609627296fe8d8ba5ddd30082d2",
       "generated_at": "2026-10-31 01:04:36 IST"
+    },
+    {
+      "id": "newskdvqzifker",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-31 08:00",
+      "scheduled_ist": "2026-10-31 08:00",
+      "title": "India bonds buckle for fourth straight month as crude surge and RBI tightening h",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds buckle for fourth straight month as crude surge and RBI tightening hurt fixed income</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds suffered a fourth consecutive monthly decline in October, pushing the benchmark 6.94% 2036 bond yield up by 2.5 basis points to 7.4139%, for a total monthly rise of 22.5 bps. Brent crude rallied nearly 14% over the month, hitting $117.55 on Friday due to escalating geopolitical tensions. Meanwhile, foreign investors trimmed exposure to index-eligible local notes to a four-month low, compounding pressure alongside the Reserve Bank of India's recent policy rate hike to 5.50% and liquidity-siphoning operations.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields move inversely to prices. When crude oil prices climb sharply in a major importing nation like India, it directly fuels inflation fears and heightens domestic borrowing costs, causing existing fixed-income asset prices to drop.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nPersistent upward pressure on bond yields could raise the overall cost of capital for corporate borrowers and banks. If fixed-income yields remain elevated or rise further toward 7.75% amid outflows and tightening liquidity, equity valuations across rate-sensitive sectors like banking, auto, and real estate might face compression if funding costs translate into lower corporate margins.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack weekly Brent crude price trajectories, forthcoming FPI debt flow data, and domestic overnight indexed swap (OIS) rate movements for signals on RBI's next policy moves.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya yeh lagataar bond yield mein badhotri aane wale samay mein corporate borrowing costs aur equity valuations par dabav banayegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-buckle-for-fourth-straight-month-on-oils-climb/articleshow/135361502.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:36f8bf48a168",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-buckle-for-fourth-straight-month-on-oils-climb/articleshow/135361502.cms",
+      "source_headline": "India bonds buckle for fourth straight month on oil's climb",
+      "story_key": "36f8bf48a168d79cc5533545236ccba8330f3fee3f902184ec3fbb9032d22301",
+      "generated_at": "2026-10-31 05:26:18 IST"
     }
   ],
-  "total": 47,
+  "total": 48,
   "last_scheduled": "2026-10-31 08:00"
 }
