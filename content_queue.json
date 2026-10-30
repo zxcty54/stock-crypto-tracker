@@ -591,8 +591,24 @@
       "source_headline": "Premature redemption under Sovereign Gold Bond (SGB) Scheme - Redemption Price for premature redemption of SGB 2019-20 Series VI due on October 30, 2026",
       "story_key": "28bc9f0115e51e53352ea7d667f7ec9a7012a4b06d8d9a5dcf43527ecf1f3ae3",
       "generated_at": "2026-10-30 01:15:20 IST"
+    },
+    {
+      "id": "newsmjtrzszfcm",
+      "slot": "A",
+      "hourly_slot_ist": "2026-10-30 08:00",
+      "scheduled_ist": "2026-10-30 08:00",
+      "title": "India 10-year bond posts strong gains as global yields and crude ease",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India 10-year bond posts strong gains as global yields and crude ease</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds rallied sharply, pushing the benchmark 10-year bond yield down by 5 basis points to 7.3902%. This marked its largest single-day decline since July, driven by sliding US Treasury yields and a 1.3% drop in Brent crude prices to $113.70 a barrel.\n\n🧭 <b>MARKET CONTEXT</b>\nBond prices move inversely to yields. The global backdrop improved as the US 10-year Treasury yield eased to 5.00% during Asian trading hours, dampening immediate global borrowing-cost pressures.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nEasing global yields and crude prices can provide temporary relief to domestic fixed-income sentiment, potentially giving the Reserve Bank of India more breathing room on policy pacing. However, domestic debt markets remain sensitive to domestic inflation pressures and supply dynamics.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch the upcoming government bond auction scheduled for Friday, along with evolving crude oil trajectories and upcoming domestic inflation prints.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki global bond yield ki yeh naram chaal domestic interest rate cycle ko lamba aaram degi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/indias-10-year-bond-has-best-day-in-3-months-on-treasury-rally-easing-oil/articleshow/135308975.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:f346ddf4f398",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/indias-10-year-bond-has-best-day-in-3-months-on-treasury-rally-easing-oil/articleshow/135308975.cms",
+      "source_headline": "India's 10-year bond has best day in 3 months on Treasury rally, easing oil",
+      "story_key": "f346ddf4f39817e07a0a5dbde08772eb05d8833b9401219338c0faab793b7810",
+      "generated_at": "2026-10-30 05:33:58 IST"
     }
   ],
-  "total": 44,
+  "total": 45,
   "last_scheduled": "2026-10-30 08:00"
 }
