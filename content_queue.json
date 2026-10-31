@@ -695,8 +695,24 @@
       "source_headline": "Yes Bank under pressure: Axis Trustee may seek contempt action against bank over AT1 bonds",
       "story_key": "3a02fda31822f257ea1ecb0d4819eb8ac5c3337b6016ceddf8a18652663a2fde",
       "generated_at": "2026-10-31 18:25:26 IST"
+    },
+    {
+      "id": "newscpnciqfmik",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-01 08:00",
+      "scheduled_ist": "2026-11-01 08:00",
+      "title": "SEBI highlights capital market resilience and compliance reforms",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI highlights capital market resilience and compliance reforms</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI Chairman Tuhin Kanta Pandey stated that the regulator's core approach focuses on facilitating capital formation, improving ease of doing business, and strengthening investor protection. Highlighting market expansion, he noted that companies raise over Rs 10 lakh crore annually on average through equity and debt issuances. Furthermore, regulatory steps have been introduced to streamline fundraising, including shorter rights issue timelines, simplified IPO processes, and relaxed merchant banking norms for eligible private placements.\n\n🧭 <b>MARKET CONTEXT</b>\nCapital market resilience refers to a market's ability to absorb external shocks without severe liquidity disruptions or systemic failures. Regulatory frameworks balance this stability with lower friction for capital raising.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nStreamlined compliance and reduced listing timelines could lower capital-raising costs for issuers, potentially encouraging more mid-sized and regional firms to tap public markets. However, these structural changes do not guarantee favorable listing performance or continuous investor participation across all market cycles.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future circulars detailing the implementation of relaxed compliance norms, changes in primary market issuance volumes, and updates on retail investor participation metrics.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do structural adjustments in primary market compliance typically influence the execution speed of corporate funding rounds?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-pushes-for-resilient-capital-markets-focuses-on-investor-protection-chairman/articleshow/135393379.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:5624175aa408",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-pushes-for-resilient-capital-markets-focuses-on-investor-protection-chairman/articleshow/135393379.cms",
+      "source_headline": "Sebi pushes for resilient capital markets, focuses on investor protection: Chairman",
+      "story_key": "5624175aa408aa3e262c53d88a056fbf5a8bc7d8b2d564f71952d2bc18099f78",
+      "generated_at": "2026-11-01 00:11:29 IST"
     }
   ],
-  "total": 50,
-  "last_scheduled": "2026-10-31 18:00"
+  "total": 51,
+  "last_scheduled": "2026-11-01 08:00"
 }

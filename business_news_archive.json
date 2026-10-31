@@ -10,9 +10,9 @@
       "published_ist": "2026-10-31 17:11 IST",
       "summary": "The regulator’s remarks come amid questions over the holding company’s leadership, proposed listing and governance, as its listed entities remain under scrutiny.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -37,9 +37,9 @@
       "published_ist": "2026-10-31 15:40 IST",
       "summary": "S Naren of ICICI Prudential Mutual Fund highlights how only six companies from the 1990 Sensex remain in the benchmark today. At ET Wealth Expo, he explained why beaten-down stocks may never recover and urged investors to distinguish between asset allocation and stock selection, while cautioning against chasing strong past returns.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -64,9 +64,9 @@
       "published_ist": "2026-10-31 15:07 IST",
       "summary": "Axis Trustee Services Limited demanded that Yes Bank reinstate AT1 bonds worth 8,415 crore rupees within three days following a Supreme Court judgment, threatening contempt action for non-compliance.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -93,9 +93,9 @@
       "published_ist": "2026-10-31 14:22 IST",
       "summary": "Eight Nifty 500 stocks, including IndusInd Bank, Tata Motors and Delhivery, moved from losses to profits in the September 2026 quarter, according to StockEdge's profitability scan.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -109,11 +109,25 @@
       "published_ist": "2026-10-31 13:11 IST",
       "summary": "SEBI Chairman Tuhin Kanta Pandey emphasized the importance of accessible and efficient capital markets at a recent forum. He highlighted the growth in market capitalisation with significant annual fundraising through equity and debt. The number of investors in West Bengal has dramatically increased, indicating regional market participation. Additionally, various steps have been taken to streamline compliance and fundraising processes for issuers.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
-      "status": "new",
-      "topic": "capital_market"
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
+      "status": "queued",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-01 00:11:29 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "SEBI's push for compliance ease and simplified fundraising mechanism aims to lower the cost of capital for issuers while widening retail and regional participation. Regulatory streamlining can reduce compliance friction, which would theoretically help smaller enterprises and regional firms tap public capital more efficiently. However, a regulatory statement of intent does not automatically translate into improved risk management or sustained liquidity during market stress. If compliance relaxations outpace adequate safeguards, market vulnerability could increase alongside higher retail participation.",
+        "what_to_watch": [
+          "Actual reduction in average timelines and cost filings for SME IPOs and rights issues",
+          "Official grievance data and dispute resolution metrics concerning newer retail investor segments",
+          "Subsequent circulars detailing the exact operational conditions for relaxed merchant banking and listing norms"
+        ],
+        "evergreen_lesson": "Regulatory focus on ease of doing business must be balanced against systemic resilience and robust investor protection during stress cycles."
+      },
+      "processed_ist": "2026-11-01 00:11:29 IST",
+      "post_id": "newscpnciqfmik"
     },
     {
       "id": "newsckdinvjbbu",
@@ -125,9 +139,9 @@
       "published_ist": "2026-10-31 12:30 IST",
       "summary": "Eight BSE 500 stocks gained in each of the five sessions between October 26 and 30, delivering cumulative returns of 10% to 21%.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -141,9 +155,9 @@
       "published_ist": "2026-10-31 11:45 IST",
       "summary": "Nifty could extend its recovery towards 23,500 if it decisively breaks above the 23,150–23,200 resistance zone, says SBI Securities' Sudeep Shah. He also shares his outlook on IT, midcap and smallcap indices, sector trends and six stocks, including TVS Motor, Coforge and ICICI Bank, ahead of Diwali.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -169,9 +183,9 @@
       "published_ist": "2026-10-31 09:18 IST",
       "summary": "European stock markets slid as a global selloff in technology rattled investors, with the pan-European STOXX 600 index closing in negative territory. Concerns over soaring AI infrastructure costs loomed large. However, to add a silver lining, euro zone growth exceeded forecasts amid climbing inflation and borrowing costs, while firms such as Universal Music Group and Sanofi flaunted impressive earnings in these challenging times.",
       "first_seen_at": "2026-10-31T11:35:52.534832+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 11:35:52 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -196,9 +210,9 @@
       "published_ist": "2026-10-31 06:20 IST",
       "summary": "Wall Street’s tech sell-off deepened on Friday as investors questioned whether massive spending on artificial intelligence will deliver enough returns to justify lofty valuations. The S&P 500 fell 1.8% and the Nasdaq 2.9%, with Intel plunging nearly 29% and Nvidia down 4.2%, while bitcoin also slid after a major hack at Binance.",
       "first_seen_at": "2026-10-31T11:35:52.534832+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 11:35:52 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -225,9 +239,9 @@
       "published_ist": "2026-10-31 01:49 IST",
       "summary": "US stocks tumbled on Friday as disappointing results from Intel and Amazon reignited concerns over rising artificial intelligence spending and uncertain returns. The Nasdaq recorded its biggest single-day percentage decline since June 5. Technology stocks led losses, while the S&P 500 and Nasdaq also ended October in negative territory.",
       "first_seen_at": "2026-10-31T05:26:18.377407+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 05:26:18 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -253,9 +267,9 @@
       "published_ist": "2026-10-31 00:03 IST",
       "summary": "Reddit shares plunged 23% after the company warned that Google's AI powered search features were hurting referral traffic and could lead to a decline in daily active users. Pinterest also fell after issuing a weaker revenue outlook, as pressure on European cross border sellers weighed on its business and growth expectations.",
       "first_seen_at": "2026-10-31T05:26:18.377407+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 05:26:18 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -281,9 +295,9 @@
       "published_ist": "2026-10-30 22:37 IST",
       "summary": "Intel shares plunged 30% after the chipmaker issued a weak fourth-quarter revenue forecast and warned of negative cash flow for the year. The warning triggered a global semiconductor selloff, with Nvidia, AMD and other chip stocks declining as weak PC demand and rising AI infrastructure costs weighed on sentiment.",
       "first_seen_at": "2026-10-31T01:04:36.530994+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-31 01:04:36 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -309,9 +323,9 @@
       "published_ist": "2026-10-30 18:40 IST",
       "summary": "In terms of GOI notification F.No. 4(5)-B(W&M)/2021 dated October 21, 2021 (SGB 2021-22 Series VII - Issue date November 02, 2021) on Sovereign Gold Bond Scheme, premature redemption of Gold Bond may be permitted after fifth year from the date of issue of such Gold Bond on the date on which interest is payable. Accordingly, the due date of premature redemption of the above tranche shall be on November 02, 2026. 2. Further, the redemption price of SGB shall be based on simple average of closing price of gold of 999 purity of previous three business days from the date of redemption, as published by the India Bullion and Jewellers Association Ltd (IBJA). Accordingly, the redemption price for premature redemption due on November 02, 2026, shall be ₹14,167/- (Rupees Fourteen Thousand One Hundred and Sixty-Seven Only) per unit of SGB based on the simple average of closing price of gold for the",
       "first_seen_at": "2026-10-27T20:17:14.858539+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-27 20:17:14 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "queued",
       "topic": "capital_market",
       "processed_ist": "2026-10-30 01:15:20 IST",
@@ -365,9 +379,9 @@
       "published_ist": "2026-10-30 18:10 IST",
       "summary": "The following State Governments have offered to sell stock by way of auction, for an aggregate amount of ₹29,900 Crore (Face Value). Sr. No. State/UT Amount to be raised (₹ Crore) Additional Borrowing (Greenshoe) Option (₹ Crore) Tenor (Year) Type of Auction 1. Andhra Pradesh 1000 - Re-issue of 7.46% Andhra Pradesh SGS 2035, issued on August 12, 2026 Price 2000 - Re-issue of 7.81% Andhra Pradesh SGS 2056, issued on April 22, 2026 Price 2. Delhi 500 - Re-issue of 7.57% Delhi SGS 2036, issued on June 24, 2026 Price 500 - 15 Yield 3. Goa 100 - Re-issue of 7.85% Goa SGS 2034, issued on October 07, 2026 Price 4. Gujarat 1000 500 Re-issue of 7.96% Gujarat SGS 2035, issued on October 14, 2026 Price 1000 - Re-issue of 8.06% Gujarat SGS 2038, issued on October 21, 2026 Price 5. Karnataka 2000 - Re-issue of 7.86% Karnataka SGS 2034, issued on October 07, 2026 Price 6. Madhya Pradesh 1000 - Re-issu",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -421,9 +435,9 @@
       "published_ist": "2026-10-30 17:10 IST",
       "summary": "The 625 th meeting of the Central Board of Directors of Reserve Bank of India was held today in Mumbai under the Chairmanship of Shri Sanjay Malhotra, Governor. The Central Board took the Integrity Pledge as part of the observance of Vigilance Awareness Week 2026. The Board in its meeting deliberated on the prevailing economic conditions and associated challenges and evaluated the potential risks to the economic outlook. The Board reviewed the activities of Deposit Insurance and Credit Guarantee Corporation and activities of select Central Office Departments of the Bank. Deputy Governors, Shri Swaminathan J., Dr. Poonam Gupta, Shri Shirish Chandra Murmu, Shri Rohit Jain, and other Directors of the Central Board, viz., Ms. Anuradha Thakur, Secretary, Department of Economic Affairs; Shri Anand Gopal Mahindra, Shri Janmejaya Kumar Sinha, Shri Syed Akbaruddin and Ms. Annie George Mathew atte",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -449,9 +463,9 @@
       "published_ist": "2026-10-30 17:00 IST",
       "summary": "1. Reserve Bank of India - Liabilities and Assets* (₹ Crore) Item 2025 2026 Variation Oct. 24 Oct. 16 Oct. 23 Week Year 1 2 3 4 5 4 Loans and Advances 4.1 Central Government - 0 0 0 0 4.2 State Governments 23777 29700 21074 -8626 -2703 * Data are provisional; difference, if any, is due to rounding off. 2. Foreign Exchange Reserves* Item As on October 23, 2026 Variation over Week End-March 2026 Year ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. ₹ Cr. US$ Mn. 1 2 3 4 5 6 7 8 1 Total Reserves 6833505 719748 -12655 -1269 279644 28640 725206 24392 1.1 Foreign Currency Assets # 5632074 593205 12419 1358 394707 40923 655221 26657 1.2 Gold 979339 103150 -25244 -2650 -114970 -12245 52259 -2386 1.3 SDRs 176639 18605 243 27 50 -17 12686 -59 1.4 Reserve Position in the IMF 45453 4787 -73 -4 -143 -21 5040 180 * Difference, if any, is due to rounding off. # Excludes (a) SDR holdings of the Reserve Bank, a",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -522,9 +536,9 @@
       "published_ist": "2026-10-30 15:47 IST",
       "summary": "Sensex and Nifty extended their gains for a second consecutive session on Friday, rising 308.5 points and 116.3 points, respectively. IT stocks led the advance, while midcaps and banking stocks underperformed. Navin Fluorine, Laurus Labs and Borosil rallied on Q2 results, while Suzlon Energy slumped nearly 8% after a guidance cut.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -538,9 +552,9 @@
       "published_ist": "2026-10-30 12:46 IST",
       "summary": "With the fall seen by shares of eClerx this week, the stock has slipped below all of its key moving averages. The 200-Day Moving Average is now at ₹1,743, from which the stock is now significantly below.",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -621,9 +635,9 @@
       "published_ist": "2026-10-30 10:14 IST",
       "summary": "Sun Pharmaceutical Industries Ltd. received US FDA approval for ILUMYA to treat adults with active psoriatic arthritis, expanding its use from plaque psoriasis.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -693,9 +707,9 @@
       "published_ist": "2026-10-30 09:11 IST",
       "summary": "The Bank of Japan kept rates unchanged at 1.25 percent but signaled inflation hit its 2 percent target, paving the way for a potential rate hike in December.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -768,9 +782,9 @@
       "published_ist": "2026-10-30 06:57 IST",
       "summary": "Essex noted that businesses are increasingly adopting technology from Palantir in order to get better returns on their AI investments. \"Palantir is already delivering ROI by leveraging its platform to fundamentally transform the business operations of its customers, and growth is accelerating,\" Essex wrote.",
       "first_seen_at": "2026-10-30T11:40:31.120179+05:30",
-      "last_seen_at": "2026-10-31T18:25:26.664171+05:30",
+      "last_seen_at": "2026-11-01T00:11:29.189060+05:30",
       "first_seen_ist": "2026-10-30 11:40:31 IST",
-      "last_seen_ist": "2026-10-31 18:25:26 IST",
+      "last_seen_ist": "2026-11-01 00:11:29 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -1836,7 +1850,7 @@
       "last_seen_at": "2026-10-29T04:14:38.450126+05:30",
       "first_seen_ist": "2026-10-29 04:14:38 IST",
       "last_seen_ist": "2026-10-29 04:14:38 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "economy",
       "processed_ist": "2026-10-29 04:14:38 IST",
       "post_id": "newsdirtfwtbzx",
@@ -1851,7 +1865,8 @@
           "Metals (jaise aluminium, copper) aur precious metals ke price movements aur industrial demand trends."
         ],
         "evergreen_lesson": "Geopolitical conflicts aur supply chain bottlenecks jab multiple sectors (energy, food, metals) ko ek sath hit karte hain, toh inflationary pressures localized nahi rehti balki cross-sector input costs badha deti hain."
-      }
+      },
+      "posted_at": "2026-10-31 18:26:07 IST"
     },
     {
       "id": "newsbysqywuvrv",
@@ -4565,35 +4580,35 @@
       }
     }
   ],
-  "last_scraped_at": "2026-10-31T18:25:26.664171+05:30",
-  "last_scraped_ist": "2026-10-31 18:25:26 IST",
+  "last_scraped_at": "2026-11-01T00:11:29.189060+05:30",
+  "last_scraped_ist": "2026-11-01 00:11:29 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
-      "fresh_items": 121,
+      "fresh_items": 109,
       "accepted_items": 6,
-      "filtered_items": 115,
+      "filtered_items": 103,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 11,
-      "filtered_items": 39,
+      "accepted_items": 10,
+      "filtered_items": 40,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
-      "fresh_items": 27,
+      "fresh_items": 26,
       "accepted_items": 1,
-      "filtered_items": 26,
+      "filtered_items": 25,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
       "fresh_items": 10,
       "accepted_items": 4,
@@ -4601,7 +4616,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
       "fresh_items": 1,
       "accepted_items": 0,
@@ -4609,11 +4624,11 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-10-31 18:25:26 IST",
+      "checked_ist": "2026-11-01 00:11:29 IST",
       "http_status": 200,
-      "fresh_items": 12,
-      "accepted_items": 7,
-      "filtered_items": 5,
+      "fresh_items": 0,
+      "accepted_items": 0,
+      "filtered_items": 0,
       "error": null
     }
   },
@@ -4641,15 +4656,15 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-10-31 18:25:26 IST"
+    "last_curated_ist": "2026-11-01 00:11:29 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-10-31 18:25:26 IST",
-    "fetched_items": 221,
-    "accepted_feed_items": 29,
-    "filtered_feed_items": 192,
-    "new_unique_stories": 7,
-    "duplicate_items_collapsed": 2,
+    "updated_ist": "2026-11-01 00:11:29 IST",
+    "fetched_items": 196,
+    "accepted_feed_items": 21,
+    "filtered_feed_items": 175,
+    "new_unique_stories": 0,
+    "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
     "stories_total": 183
   }
