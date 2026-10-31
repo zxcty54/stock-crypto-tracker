@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-10-31 04:48:19 IST",
-  "worthy_count": 47,
-  "skipped_count": 69,
+  "generated_at": "2026-10-31 08:15:32 IST",
+  "worthy_count": 46,
+  "skipped_count": 68,
   "content_feed": [
+    {
+      "hash": "bba347449db3",
+      "symbol": "VAIBHAVGBL",
+      "company_name": "Vaibhav Global Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "29-Oct-2026 00:32:56",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf",
+      "headline": "Vaibhav Global Reports Q2 FY27 Revenue at ₹938.4 Crore; Declares Interim Dividend of ₹1.50",
+      "content_worthy": true,
+      "worthiness_reason": "Company announced Q2 FY27 financial results along with a 2nd interim dividend declaration.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Vaibhav Global Limited (NSE: VAIBHAVGBL)</b>\n\n<b>Vaibhav Global Reports Q2 FY27 Revenue at ₹938.4 Crore; Declares Interim Dividend of ₹1.50</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 FY27 Revenue:</b> ₹938.4 crore (up 7.0% YoY)\n- <b>H1 FY27 Revenue:</b> ₹1,855.4 crore (up 9.7% YoY)\n- <b>Q2 FY27 EBITDA:</b> ₹76.2 crore (Margin: 8.1%)\n- <b>Interim Dividend:</b> ₹1.50 per share (Face value ₹2/-)\n- <b>Dividend Record Date:</b> Wednesday, 4th November 2026\n\n📌 <b>What happened:</b>\n↳ The Board of Directors approved the unaudited financial results for the quarter and half year ended September 30, 2026, and declared the 2nd interim dividend for the financial year 2026-27.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-10-31 08:15:32 IST"
+    },
     {
       "hash": "bef5384a2b15",
       "symbol": "VASCONEQ",
@@ -632,37 +646,23 @@
       "worthiness_reason": "Subex secured a material strategic contract valued at USD 0.72 million from a Tier-1 African telecom operator.",
       "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Subex Limited (NSE: SUBEXLTD)</b>\n\n<b>Subex Secures Strategic AI Agents Contract with Tier-1 African Telecom Operator</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Tier-1 African Telecom Operator\n- <b>Order Value:</b> USD 0.72 million\n- <b>Scope:</b> Deployment of AI Agents solutions for fraud investigation and Revenue Assurance Root Cause Analysis\n- <b>Execution Period:</b> 1 Year\n- <b>Entity Type:</b> International\n\n📌 <b>What happened:</b>\n↳ Subex has been awarded a contract to deploy its AI Agent Squads to strengthen the operator's core fraud management and revenue assurance capabilities.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SUBEXLTD_30102026124234_Deal_win_announcement_30102026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-30 12:44:12 IST"
-    },
-    {
-      "hash": "865f3519f60b",
-      "symbol": "FDC",
-      "company_name": "FDC Limited",
-      "category": "RESULT",
-      "event_type": "BUYBACK",
-      "broadcast_date": "27-Oct-2026 19:57:16",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/FDC_27102026195652_OUTCOME27102026Signed.pdf",
-      "headline": "FDC Limited Board Approves Share Buyback Worth Rs 120 Crores",
-      "content_worthy": true,
-      "worthiness_reason": "Company approved buyback of equity shares worth up to Rs 120 crores via tender offer route.",
-      "telegram_post": "💰 <b>#BUYBACK</b> | <b>FDC Limited (NSE: FDC)</b>\n\n<b>FDC Limited Board Approves Share Buyback Worth Rs 120 Crores</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Buyback Size:</b> Up to Rs 120.00 Crores\n- <b>Shares:</b> Up to 24,00,000 Equity Shares (1.47% of paid-up equity)\n- <b>Price:</b> Rs 500 per equity share\n- <b>Route:</b> Tender Offer\n\n📌 <b>What happened:</b>\n↳ The board of FDC Limited approved a proposal to buy back fully paid-up equity shares at Rs 500 per share for an aggregate amount not exceeding Rs 120 crores.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/FDC_27102026195652_OUTCOME27102026Signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-30 06:36:27 IST"
-    },
-    {
-      "hash": "bba347449db3",
-      "symbol": "VAIBHAVGBL",
-      "company_name": "Vaibhav Global Limited",
-      "category": "RESULT",
-      "event_type": "DIVIDEND",
-      "broadcast_date": "29-Oct-2026 00:32:56",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf",
-      "headline": "Vaibhav Global Declares 2nd Interim Dividend of Rs. 1.50 per Share",
-      "content_worthy": true,
-      "worthiness_reason": "Company announced financial results alongside a second interim dividend declaration.",
-      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>Vaibhav Global Limited (NSE: VAIBHAVGBL)</b>\n\n<b>Vaibhav Global Declares 2nd Interim Dividend of Rs. 1.50 per Share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend Per Share:</b> Rs. 1.50\n- <b>Face Value:</b> Rs. 2/-\n- <b>Record Date:</b> November 4, 2026\n- <b>Payment Timeline:</b> Within 30 days from declaration\n\n📌 <b>What happened:</b>\n↳ The Board of Directors approved the unaudited financial results for the quarter and half year ended September 30, 2026, and declared the 2nd interim dividend for the financial year 2026-27.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-30 06:36:05 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "22974a7d78f1",
+      "symbol": "VAIBHAVGBL",
+      "company_name": "Vaibhav Global Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "29-Oct-2026 01:36:38",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026013439_Press_Release_Final.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "The filing is a press release providing qualitative commentary and partial financial highlights, while the complete financial numbers are covered in the core outcome filing.",
+      "telegram_post": "",
+      "analyzed_at": "2026-10-31 08:15:32 IST"
+    },
     {
       "hash": "fd4890ef67a2",
       "symbol": "ADROITIND",
@@ -1600,34 +1600,6 @@
       "worthiness_reason": "Post-buyback public announcement summarizing a previously known and approved buyback process.",
       "telegram_post": "",
       "analyzed_at": "2026-10-30 12:44:12 IST"
-    },
-    {
-      "hash": "9f01c0b4bda5",
-      "symbol": "SCHAEFFLER",
-      "company_name": "Schaeffler India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "27-Oct-2026 19:56:57",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SCHAEFFLERUSER1_27102026195542_Schaeffler_Reg30_BMOutcome_Oct272026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the summary text, and the outcome contains only routine cost auditor appointment.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-30 06:36:27 IST"
-    },
-    {
-      "hash": "22974a7d78f1",
-      "symbol": "VAIBHAVGBL",
-      "company_name": "Vaibhav Global Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "29-Oct-2026 01:36:38",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026013439_Press_Release_Final.pdf",
-      "headline": "Press Release",
-      "content_worthy": false,
-      "worthiness_reason": "Press release detailing operational updates and financial highlights already covered in the official financial results filing.",
-      "telegram_post": "",
-      "analyzed_at": "2026-10-30 06:36:05 IST"
     }
   ]
 }
