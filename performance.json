@@ -1,43 +1,37 @@
 {
- "generated_at": "2026-10-31 01:28 IST",
- "sample_size": 81,
- "identified": 47,
- "inferred": 34,
+ "generated_at": "2026-11-01 00:55 IST",
+ "sample_size": 85,
+ "identified": 49,
+ "inferred": 36,
  "cards_skipped": 0,
- "channel_avg_views": 25.0,
+ "channel_avg_views": 24.7,
  "growth": {
-  "today": 473,
-  "snapshots": 23,
-  "delta_7d": -3,
-  "per_day": 19.58,
-  "days_to_target": 26,
+  "today": 471,
+  "snapshots": 24,
+  "delta_7d": -5,
+  "per_day": 18.72,
+  "days_to_target": 28,
   "target": 1000,
-  "days_span": 24
+  "days_span": 25
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 37.7,
-   "weight": 1.51,
-   "low_sample": false
-  },
-  "technical": {
-   "posts": 6,
-   "avg_views": 37.2,
-   "weight": 1.49,
+   "weight": 1.52,
    "low_sample": false
   },
   "psychology": {
    "posts": 2,
-   "avg_views": 37.0,
+   "avg_views": 37.5,
    "weight": 1.0,
    "low_sample": true
   },
-  "business_model": {
-   "posts": 7,
-   "avg_views": 28.3,
-   "weight": 1.13,
+  "technical": {
+   "posts": 6,
+   "avg_views": 37.2,
+   "weight": 1.5,
    "low_sample": false
   },
   "tools": {
@@ -48,14 +42,20 @@
   },
   "risk": {
    "posts": 4,
-   "avg_views": 24.0,
-   "weight": 0.96,
+   "avg_views": 24.2,
+   "weight": 0.98,
+   "low_sample": false
+  },
+  "business_model": {
+   "posts": 9,
+   "avg_views": 24.2,
+   "weight": 0.98,
    "low_sample": false
   },
   "corporate": {
-   "posts": 40,
-   "avg_views": 23.8,
-   "weight": 0.95,
+   "posts": 42,
+   "avg_views": 23.6,
+   "weight": 0.96,
    "low_sample": false
   },
   "process": {
@@ -66,20 +66,20 @@
   },
   "market_mechanics": {
    "posts": 4,
-   "avg_views": 19.0,
-   "weight": 0.76,
+   "avg_views": 20.2,
+   "weight": 0.82,
    "low_sample": false
   },
   "awareness": {
    "posts": 3,
-   "avg_views": 19.0,
-   "weight": 0.76,
+   "avg_views": 20.0,
+   "weight": 0.81,
    "low_sample": false
   },
   "other": {
    "posts": 9,
-   "avg_views": 17.8,
-   "weight": 0.71,
+   "avg_views": 18.7,
+   "weight": 0.75,
    "low_sample": false
   }
  },
@@ -100,21 +100,21 @@
    "pillar": "corporate"
   },
   {
-   "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
-   "views": 43,
-   "pillar": "lifestyle"
-  },
-  {
    "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
    "views": 43,
    "pillar": "business_model"
+  },
+  {
+   "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
+   "views": 43,
+   "pillar": "lifestyle"
   }
  ],
  "weak_posts": [
   {
-   "title": "Sebi extends debenture trustees' compliance deadline to April 2027 ami",
-   "views": 8,
-   "pillar": "awareness"
+   "title": "World Bank projects 23% surge in 2026 global commodity prices amid Mid",
+   "views": 7,
+   "pillar": "business_model"
   },
   {
    "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
