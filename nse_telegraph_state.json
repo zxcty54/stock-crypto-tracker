@@ -70,6 +70,20 @@
       "at": "2026-10-30 19:59:15 IST",
       "title": "Reliance Industries posts Q2 FY27 gross revenue of ₹362,268 crore and PAT of ₹29,550 crore",
       "content_hash": "1524ff1d1f1e9d3aac48c09b65a3ff67872d9e58e6f4098a4d59dcf5219f8485"
+    },
+    "nse:3785c11831f9": {
+      "url": "https://telegra.ph/Nitin-Spinners-Limited-reports-Q2-FY27-standalone-revenue-from-operations-at-Rs-9851511-Lakhs--October-2026-10-31",
+      "kind": "nse_announcement",
+      "at": "2026-10-31 14:32:35 IST",
+      "title": "Nitin Spinners Limited reports Q2 FY27 standalone revenue from operations at Rs. 98,515.11 Lakhs",
+      "content_hash": "6cda180551880b06e65b47f9e932321f250fae04e98437ced82255364e14bfff"
+    },
+    "nse:60a7e4a6d1bd": {
+      "url": "https://telegra.ph/Sarda-Energy--Minerals-Ltd-Reports-Q2-FY27-Standalone-Revenue-at-105742-Cr--October-2026-10-31",
+      "kind": "nse_announcement",
+      "at": "2026-10-31 14:32:39 IST",
+      "title": "Sarda Energy & Minerals Ltd Reports Q2 FY27 Standalone Revenue at ₹1,057.42 Cr",
+      "content_hash": "a351ac00b05f25cc04345502597fa1df10bd378e4bae388378868a41d1198195"
     }
   }
 }
