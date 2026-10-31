@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-31 00:02:30 IST",
+  "timestamp": "2026-10-31 23:03:22 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": null,
@@ -27,10 +27,10 @@
       "total_records": 7,
       "latest_monthly_metrics": {
         "month": "October-2026",
-        "volume_million": 6749.69,
-        "volume_crore": 674.97,
-        "amount_inr_crore": 249.99,
-        "ticket_size_inr": 0.37
+        "volume_million": 7256.89,
+        "volume_crore": 725.69,
+        "amount_inr_crore": 250.24,
+        "ticket_size_inr": 0.34
       }
     }
   }
