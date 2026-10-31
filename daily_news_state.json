@@ -19,7 +19,8 @@
     "2026-10-30 11",
     "2026-10-31 01",
     "2026-10-31 05",
-    "2026-10-31 11"
+    "2026-10-31 11",
+    "2026-10-31 18"
   ],
   "seen_story_keys": [
     "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
@@ -41,7 +42,8 @@
     "3f318fb0e9535eee5ff68c8e6cfbc63fb482c438f151a80564963ac3157686ac",
     "e4f71c07144383b535947ee7ad63b9361f977609627296fe8d8ba5ddd30082d2",
     "36f8bf48a168d79cc5533545236ccba8330f3fee3f902184ec3fbb9032d22301",
-    "c41fd5a113ffedf26b804a89311441f04c5f336673c3e86b6b8cc692df70c1da"
+    "c41fd5a113ffedf26b804a89311441f04c5f336673c3e86b6b8cc692df70c1da",
+    "3a02fda31822f257ea1ecb0d4819eb8ac5c3337b6016ceddf8a18652663a2fde"
   ],
   "seen_story_titles": [
     "Sebi to revamp short-selling, securities lending rules",
@@ -63,9 +65,10 @@
     "Sun Pharma shares extend 4-day rally after USFDA approval for ILUMYA in arthritis patients",
     "Sebi issues final order against Axis Capital, imposes regulatory censure; Axis Bank shares fall over 1%",
     "India bonds buckle for fourth straight month on oil's climb",
-    "Wall Street drops to its worst day since June after the sell-off for tech stocks deepens"
+    "Wall Street drops to its worst day since June after the sell-off for tech stocks deepens",
+    "Yes Bank under pressure: Axis Trustee may seek contempt action against bank over AT1 bonds"
   ],
-  "last_story_title": "Wall Street drops to its worst day since June after the sell-off for tech stocks deepens",
-  "last_story_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/wall-street-drops-to-its-worst-day-since-june-after-the-sell-off-for-tech-stocks-deepens/articleshow/135382776.cms",
-  "last_generated_at": "2026-10-31 11:35:52 IST"
+  "last_story_title": "Yes Bank under pressure: Axis Trustee may seek contempt action against bank over AT1 bonds",
+  "last_story_url": "https://www.cnbctv18.com/business/yes-bank-under-pressure-axis-trustee-may-seek-contempt-action-against-bank-over-at1-bonds-20024025.htm",
+  "last_generated_at": "2026-10-31 18:25:26 IST"
 }
