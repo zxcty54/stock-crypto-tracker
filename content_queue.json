@@ -523,14 +523,16 @@
       "scheduled_ist": "2026-10-29 08:00",
       "title": "SEBI signs MoU with Bank of England for clearing cooperation",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI signs MoU with Bank of England for clearing cooperation</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Securities and Exchange Board of India (SEBI) has signed a memorandum of understanding with the Bank of England (BoE). The agreement establishes a cooperative framework for information sharing and regulatory oversight relating to clearing corporations recognized by the Indian capital markets regulator.\n\n🧭 <b>MARKET CONTEXT</b>\nCentral counterparties and clearing corporations act as intermediaries between buyers and sellers, guaranteeing trade settlement to mitigate default risks in financial markets.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis cross-border arrangement allows the Bank of England to rely on SEBI's supervisory framework while maintaining UK financial stability. If implemented effectively, such bilateral regulatory frameworks could streamline compliance for international institutional participants and reduce operational friction in cross-border financial market clearing operations.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future operational guidelines issued by SEBI or the BoE regarding mutual recognition frameworks, and watch for similar bilateral pacts with other major global financial jurisdictions.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do cross-border regulatory pacts between central banks and domestic market watchdogs typically impact institutional capital flows over the medium term?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-signs-mou-with-bank-of-england-on-clearing-corporations-20021826.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:521ef0a5a1a6",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/market/sebi-signs-mou-with-bank-of-england-on-clearing-corporations-20021826.htm",
       "source_headline": "SEBI signs MoU with Bank of England on clearing corporations",
       "story_key": "521ef0a5a1a664d2474a88526e6237929059b6a89e05adfbf084bd80c69f9d51",
-      "generated_at": "2026-10-28 22:15:34 IST"
+      "generated_at": "2026-10-28 22:15:34 IST",
+      "posted_at": "2026-10-31 11:36:27 IST",
+      "telegraph_url": "https://telegra.ph/SEBI-signs-MoU-with-Bank-of-England-for-clearing-cooperation--October-2026-10-31"
     },
     {
       "id": "newsdirtfwtbzx",
@@ -659,8 +661,24 @@
       "source_headline": "India bonds buckle for fourth straight month on oil's climb",
       "story_key": "36f8bf48a168d79cc5533545236ccba8330f3fee3f902184ec3fbb9032d22301",
       "generated_at": "2026-10-31 05:26:18 IST"
+    },
+    {
+      "id": "newsexlcaicbot",
+      "slot": "B",
+      "hourly_slot_ist": "2026-10-31 10:00",
+      "scheduled_ist": "2026-10-31 10:00",
+      "title": "Wall Street Tech Sell-Off Deepens on AI Cash Burn Concerns",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Wall Street Tech Sell-Off Deepens on AI Cash Burn Concerns</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nWall Street experienced a steep tech-led selloff, with the S&amp;P 500 tumbling 1.8% and the Nasdaq composite dropping 2.9%. Major companies like Amazon reported burning through $42.4 billion in free cash flow over 12 months due to massive property and equipment investments in artificial intelligence, while Alphabet faced prior pressures from similar expenditures. Intel shares also plunged 28.6% following a disappointing profit forecast.\n\n🧭 <b>MARKET CONTEXT</b>\nMarkets are transitioning from an early speculative phase of AI adoption to a valuation phase where investors demand proof of tangible financial returns relative to capital expenditure, often referred to as free cash flow.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhen global tech giants face capital-efficiency scrutiny, risk aversion can spill over into emerging markets like India, potentially prompting foreign institutional portfolio adjustments in local technology and IT service providers.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor forthcoming corporate capital expenditure guidance, quarterly free cash flow metrics of major infrastructure spenders, and risk sentiment shifts across global equity indices.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in global technology capital expenditure cycles typically influence domestic institutional capital flows in India?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/wall-street-drops-to-its-worst-day-since-june-after-the-sell-off-for-tech-stocks-deepens/articleshow/135382776.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:c41fd5a113ff",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/wall-street-drops-to-its-worst-day-since-june-after-the-sell-off-for-tech-stocks-deepens/articleshow/135382776.cms",
+      "source_headline": "Wall Street drops to its worst day since June after the sell-off for tech stocks deepens",
+      "story_key": "c41fd5a113ffedf26b804a89311441f04c5f336673c3e86b6b8cc692df70c1da",
+      "generated_at": "2026-10-31 11:35:52 IST"
     }
   ],
-  "total": 48,
-  "last_scheduled": "2026-10-31 08:00"
+  "total": 49,
+  "last_scheduled": "2026-10-31 10:00"
 }
