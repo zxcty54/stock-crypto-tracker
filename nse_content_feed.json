@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-11-01 04:21:27 IST",
-  "worthy_count": 56,
+  "generated_at": "2026-11-01 07:46:55 IST",
+  "worthy_count": 53,
   "skipped_count": 71,
   "content_feed": [
+    {
+      "hash": "7bf67111d165",
+      "symbol": "JNPR",
+      "company_name": "Juniper Green Energy Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "31-Oct-2026 01:01:15",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/JGEL2025_31102026010052_2026_10_31_Reg_30_Press_release_Q2_FY_2027_JGEL.pdf",
+      "headline": "Juniper Green Energy Reports Q2 FY27 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with explicit numeric Revenue/Total Income and PAT for Q2 FY27.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Juniper Green Energy Limited (NSE: JNPR)</b>\n\n<b>Juniper Green Energy Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income:</b> ₹371.64 Cr (up 132% YoY)\n- <b>EBITDA:</b> ₹339.55 Cr (up 162% YoY)\n- <b>PAT:</b> ₹53.56 Cr (vs loss of ₹18.40 Cr in Q2 FY26)\n- <b>EBITDA Margin:</b> 91.36%\n\n📌 <b>What happened:</b>\n↳ The company reported its financial results for the quarter and half year ended September 30, 2026, alongside operational capacity reaching 2,844 MWp of renewable energy and 604 MWh of BESS.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/JGEL2025_31102026010052_2026_10_31_Reg_30_Press_release_Q2_FY_2027_JGEL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-01 07:46:55 IST"
+    },
     {
       "hash": "d9a11ae9680d",
       "symbol": "ARCIL",
@@ -730,62 +744,6 @@
       "worthiness_reason": "Company announced Q2 FY27 financial results along with a 2nd interim dividend declaration.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Vaibhav Global Limited (NSE: VAIBHAVGBL)</b>\n\n<b>Vaibhav Global Reports Q2 FY27 Revenue at ₹938.4 Crore; Declares Interim Dividend of ₹1.50</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 FY27 Revenue:</b> ₹938.4 crore (up 7.0% YoY)\n- <b>H1 FY27 Revenue:</b> ₹1,855.4 crore (up 9.7% YoY)\n- <b>Q2 FY27 EBITDA:</b> ₹76.2 crore (Margin: 8.1%)\n- <b>Interim Dividend:</b> ₹1.50 per share (Face value ₹2/-)\n- <b>Dividend Record Date:</b> Wednesday, 4th November 2026\n\n📌 <b>What happened:</b>\n↳ The Board of Directors approved the unaudited financial results for the quarter and half year ended September 30, 2026, and declared the 2nd interim dividend for the financial year 2026-27.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VAIBHAVGBL_29102026002436_Outcome_SEs.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-10-31 08:15:32 IST"
-    },
-    {
-      "hash": "bef5384a2b15",
-      "symbol": "VASCONEQ",
-      "company_name": "Vascon Engineers Limited",
-      "category": "ORDER",
-      "event_type": "ORDER_WIN",
-      "broadcast_date": "28-Oct-2026 18:14:43",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VASCONEQ_28102026181417_28102026LetterofIntent_Raveshia_72_Sd.pdf",
-      "headline": "Vascon Engineers Receives Rs. 72 Crore Construction Order",
-      "content_worthy": true,
-      "worthiness_reason": "Letter of intent received for a construction contract worth Rs. 72 crores.",
-      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Vascon Engineers Limited (NSE: VASCONEQ)</b>\n\n<b>Vascon Engineers Receives Rs. 72 Crore Construction Order</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Order Value:</b> Rs. 72.00 Crores (excluding taxes)\n- <b>Client:</b> Neobridge Realty LLP\n- <b>Project:</b> Construction of Residential Building \"Astoria\" at Bandra, Mumbai\n- <b>Execution Period:</b> 25 months\n\n📌 <b>What happened:</b>\n↳ The company secured a Letter of Intent for executing shell and core work, RCC, and allied works for a residential project in Mumbai.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VASCONEQ_28102026181417_28102026LetterofIntent_Raveshia_72_Sd.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-31 04:48:19 IST"
-    },
-    {
-      "hash": "eb1e89bded83",
-      "symbol": "PNCINFRA",
-      "company_name": "PNC Infratech Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "28-Oct-2026 18:20:59",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PNCINFRA_28102026181908_PressRelease28102026.pdf",
-      "headline": "PNC Infratech Reports Q2 FY27 Financial Results",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with explicit standalone and consolidated revenue and PAT figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>PNC Infratech Limited (NSE: PNCINFRA)</b>\n\n<b>PNC Infratech Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Standalone Revenue:</b> Rs. 1,146 Cr\n- <b>Standalone PAT:</b> Rs. 73 Cr\n- <b>Consolidated Revenue:</b> Rs. 1,322 Cr\n- <b>Consolidated PAT:</b> Rs. 115 Cr\n\n📌 <b>What happened:</b>\n↳ The company announced its un-audited standalone and consolidated financial results for the quarter and half year ended September 30, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/PNCINFRA_28102026181908_PressRelease28102026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-31 04:48:19 IST"
-    },
-    {
-      "hash": "0320445806b9",
-      "symbol": "GMRAIRPORT",
-      "company_name": "GMR AIRPORTS LIMITED",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "29-Oct-2026 00:10:26",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/GMRINFRA_29102026000839_Press_Release.pdf",
-      "headline": "GMR Airports Limited Reports Q2 FY27 Total Income of INR 4,188 Cr and PAT of INR 65 Cr",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with explicit Total Income and PAT numbers.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>GMR AIRPORTS LIMITED (NSE: GMRAIRPORT)</b>\n\n<b>GMR Airports Limited Reports Q2 FY27 Total Income of INR 4,188 Cr and PAT of INR 65 Cr</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income:</b> INR 4,188 Cr (up 12% YoY)\n- <b>EBITDA:</b> INR 1,569 Cr (up 2% YoY)\n- <b>PAT:</b> INR 65 Cr\n- <b>Passenger Traffic:</b> 28 million passengers across owned airports (up 1% YoY)\n\n📌 <b>What happened:</b>\n↳ The company marked its fifth consecutive quarter of positive PAT, driven by improvements in aero and non-aero revenues despite muted traffic.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GMRINFRA_29102026000839_Press_Release.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-31 04:47:57 IST"
-    },
-    {
-      "hash": "7bf67111d165",
-      "symbol": "JNPR",
-      "company_name": "Juniper Green Energy Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "31-Oct-2026 01:01:15",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/JGEL2025_31102026010052_2026_10_31_Reg_30_Press_release_Q2_FY_2027_JGEL.pdf",
-      "headline": "Juniper Green Energy Reports Q2 FY27 Results with Revenue of INR 344.66 Cr and PAT of INR 53.56 Cr",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with explicit Revenue and PAT numbers, along with operational highlights.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Juniper Green Energy Limited (NSE: JNPR)</b>\n\n<b>Juniper Green Energy Reports Q2 FY27 Results with Revenue of INR 344.66 Cr and PAT of INR 53.56 Cr</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income:</b> INR 371.64 Cr (up 132% YoY)\n- <b>EBITDA:</b> INR 339.55 Cr (up 162% YoY)\n- <b>EBITDA Margin:</b> 91.36%\n- <b>PAT:</b> INR 53.56 Cr (vs loss of INR 18.40 Cr in Q2 FY26)\n- <b>Operational Capacity:</b> 2,844 MWp RE + 604 MWh BESS\n\n📌 <b>What happened:</b>\n↳ The company reported its highest ever quarterly Total Income and EBITDA for Q2 FY27, backed by expansion in operational capacity and a 91.36% EBITDA margin.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/JGEL2025_31102026010052_2026_10_31_Reg_30_Press_release_Q2_FY_2027_JGEL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-10-31 04:47:57 IST"
     }
   ],
   "skipped_archive": [
