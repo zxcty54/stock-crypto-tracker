@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-01 00:55 IST",
- "sample_size": 85,
- "identified": 49,
+ "generated_at": "2026-11-02 01:20 IST",
+ "sample_size": 87,
+ "identified": 51,
  "inferred": 36,
  "cards_skipped": 0,
- "channel_avg_views": 24.7,
+ "channel_avg_views": 24.9,
  "growth": {
   "today": 471,
-  "snapshots": 24,
-  "delta_7d": -5,
-  "per_day": 18.72,
-  "days_to_target": 28,
+  "snapshots": 25,
+  "delta_7d": -4,
+  "per_day": 18.0,
+  "days_to_target": 29,
   "target": 1000,
-  "days_span": 25
+  "days_span": 26
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 37.7,
-   "weight": 1.52,
+   "weight": 1.51,
    "low_sample": false
   },
   "psychology": {
@@ -31,55 +31,55 @@
   "technical": {
    "posts": 6,
    "avg_views": 37.2,
-   "weight": 1.5,
+   "weight": 1.49,
    "low_sample": false
   },
   "tools": {
    "posts": 1,
-   "avg_views": 28.0,
+   "avg_views": 29.0,
    "weight": 1.0,
    "low_sample": true
   },
   "risk": {
    "posts": 4,
    "avg_views": 24.2,
-   "weight": 0.98,
-   "low_sample": false
-  },
-  "business_model": {
-   "posts": 9,
-   "avg_views": 24.2,
-   "weight": 0.98,
+   "weight": 0.97,
    "low_sample": false
   },
   "corporate": {
    "posts": 42,
-   "avg_views": 23.6,
-   "weight": 0.96,
+   "avg_views": 24.2,
+   "weight": 0.97,
    "low_sample": false
   },
   "process": {
    "posts": 2,
-   "avg_views": 23.5,
+   "avg_views": 24.0,
    "weight": 1.0,
    "low_sample": true
   },
+  "business_model": {
+   "posts": 11,
+   "avg_views": 22.0,
+   "weight": 0.88,
+   "low_sample": false
+  },
   "market_mechanics": {
    "posts": 4,
-   "avg_views": 20.2,
-   "weight": 0.82,
+   "avg_views": 21.0,
+   "weight": 0.84,
    "low_sample": false
   },
   "awareness": {
    "posts": 3,
-   "avg_views": 20.0,
-   "weight": 0.81,
+   "avg_views": 20.3,
+   "weight": 0.82,
    "low_sample": false
   },
   "other": {
    "posts": 9,
-   "avg_views": 18.7,
-   "weight": 0.75,
+   "avg_views": 19.6,
+   "weight": 0.79,
    "low_sample": false
   }
  },
@@ -101,7 +101,7 @@
   },
   {
    "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 43,
+   "views": 44,
    "pillar": "business_model"
   },
   {
@@ -112,19 +112,19 @@
  ],
  "weak_posts": [
   {
-   "title": "World Bank projects 23% surge in 2026 global commodity prices amid Mid",
-   "views": 7,
+   "title": "AAA Corporates Bond Market Shift: Bank Loan Cost Advantage Bad for Ban",
+   "views": 8,
    "pillar": "business_model"
-  },
-  {
-   "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
-   "views": 0,
-   "pillar": "risk"
   },
   {
    "title": "Channel created",
    "views": 0,
    "pillar": "other"
+  },
+  {
+   "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
+   "views": 0,
+   "pillar": "risk"
   }
  ]
 }
