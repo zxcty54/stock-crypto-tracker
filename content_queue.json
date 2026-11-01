@@ -559,14 +559,16 @@
       "scheduled_ist": "2026-10-29 10:00",
       "title": "SEBI mandates direct mutual fund plans as default on AMC apps from Nov 1",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI mandates direct mutual fund plans as default on AMC apps from Nov 1</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSecurities and Exchange Board of India Chairman Tuhin Kanta Pandey announced that direct mutual fund plans will become the default option on asset management companies' digital platforms starting November 1. Investors opting for regular plans must be explicitly informed about higher expense ratios.\n\n🧭 <b>MARKET CONTEXT</b>\nMutual funds offer direct and regular plans investing in the same underlying portfolios managed by the same fund managers. Regular plans route investments via intermediaries, incorporating distributor commissions into their expense ratios—the annual fee deducted from fund assets to manage operations.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nMaking direct plans the default choice on AMC applications could accelerate the shift of retail capital away from traditional distributor-led regular channels, potentially compressing commission pools for intermediaries. Over long investment horizons, lower expense ratios compound to impact net investor returns, though platform choice may still depend on whether an investor requires advisory services.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor whether this default presentation extends to third-party digital investment platforms and observe adoption trends in regular versus direct inflows across AMCs.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki default change hone se regular plans ki demand mein tezi se giraavat aayegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/personal-finance/mutual-fund-direct-plans-to-become-default-on-amc-apps-nov-1-20021997.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:aba68c1b5d5c",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/personal-finance/mutual-fund-direct-plans-to-become-default-on-amc-apps-nov-1-20021997.htm",
       "source_headline": "Mutual fund direct plans to become default on AMC apps from November 1",
       "story_key": "aba68c1b5d5c48f29ac1b4a976103144d37472f161a6c6f1e376830bbf548bb1",
-      "generated_at": "2026-10-29 11:40:41 IST"
+      "generated_at": "2026-10-29 11:40:41 IST",
+      "posted_at": "2026-11-01 12:06:00 IST",
+      "telegraph_url": "https://telegra.ph/SEBI-mandates-direct-mutual-fund-plans-as-default-on-AMC-apps-from-Nov-1--November-2026-11-01"
     },
     {
       "id": "newsxrkbqtdeun",
@@ -727,8 +729,24 @@
       "source_headline": "SEBI monitoring Tata Sons governance developments, says chairman Tuhin Kanta Pandey",
       "story_key": "660abf2e74b28e70492ad9ecafdecdda93b43c3e22dc38b76c7763edfa3eedc5",
       "generated_at": "2026-11-01 05:01:56 IST"
+    },
+    {
+      "id": "newsmecssxkgoo",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-01 12:00",
+      "scheduled_ist": "2026-11-01 12:00",
+      "title": "Sebi penalises EKI Energy and top execs over revenue misstatement",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi penalises EKI Energy and top execs over revenue misstatement</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSebi ne EKI Energy Services aur uske MD Manish Kumar Dabkara ko securities market se क्रमशः 2 aur 12 mahine ke liye ban kar diya hai. Regulator ne company aur individuals par total Rs 88 lakh ka monetary penalty bhi lagaya hai.\n\n🧭 <b>MARKET CONTEXT</b>\nIs action ka mukhya karan financial misrepresentation hai. Order ke mutabiq, company ne FY23 ke pehle teen quarters mein Rs 197.04 crore ka revenue prematurely recognise kiya tha, aur FY22-FY23 ke dauran fictitious expenses dikhakar Rs 26.34 crore divert kiye the.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nJab listed companies financial statements mein prematurely revenue dikhati hain ya expenses overstate karti hain, toh yeh investor decisions ko misguide karta hai. Aise regulatory orders se corporate governance standards par scrutiny badhti hai, jo ki governance practices ke liye strict message deta hai.\n\n🔎 <b>KEY WATCHPOINTS</b>\nAapko yeh dekhna hoga ki affected entities 45 days ke andar penalties pay karti hain ya nahi, aur MD Dabkara diverted funds ko recoup karne ke liye kya steps lete hain.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapke hisaab se audit committees ko quarterly financials mein premature revenue recognition roknay ke liye aur strict checks rakhne chahiye?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-bars-eki-energy-md-dabkara-others-from-market-imposes-penalty/articleshow/135416947.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:f9039bbd4f96",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-bars-eki-energy-md-dabkara-others-from-market-imposes-penalty/articleshow/135416947.cms",
+      "source_headline": "Sebi bars EKI Energy, MD Dabkara, others from market; imposes penalty",
+      "story_key": "f9039bbd4f96d843785cd10f8c2c8b43f030d6bd80497cecc1d45b8fcc45b811",
+      "generated_at": "2026-11-01 12:05:26 IST"
     }
   ],
-  "total": 52,
-  "last_scheduled": "2026-11-01 08:00"
+  "total": 53,
+  "last_scheduled": "2026-11-01 12:00"
 }
