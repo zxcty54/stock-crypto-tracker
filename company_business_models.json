@@ -1,110 +1,110 @@
 {
   "metadata": {
-    "generated_at": "2026-10-05 12:45:37",
-    "total_companies": 210,
+    "generated_at": "2026-11-01 04:29:41",
+    "total_companies": 233,
     "macro_snapshot": {
       "brent_crude": {
         "name": "Brent Crude Oil",
         "category": "COMMODITY",
-        "current_val": 102.07,
+        "current_val": 113.43,
         "unit": "USD/bbl",
         "52w_low": 58.72,
         "52w_high": 126.1,
         "deltas": {
-          "1M": 6.86,
-          "6M": -6.59,
-          "1Y_YoY": 55.9
+          "1M": 10.87,
+          "6M": -0.88,
+          "1Y_YoY": 74.8
         }
       },
       "copper": {
         "name": "Refined Copper",
         "category": "COMMODITY",
-        "current_val": 6.61,
+        "current_val": 6.48,
         "unit": "USD/lb",
-        "52w_low": 4.83,
+        "52w_low": 4.92,
         "52w_high": 6.83,
         "deltas": {
-          "1M": 0.46,
-          "6M": 19.31,
-          "1Y_YoY": 32.46
+          "1M": 0.0,
+          "6M": 11.72,
+          "1Y_YoY": 28.32
         }
       },
       "natural_gas": {
         "name": "Natural Gas",
         "category": "COMMODITY",
-        "current_val": 3.03,
+        "current_val": 2.9,
         "unit": "USD/MMBtu",
         "52w_low": 2.48,
         "52w_high": 7.83,
         "deltas": {
-          "1M": 4.12,
-          "6M": 5.57,
-          "1Y_YoY": -9.82
+          "1M": -2.36,
+          "6M": 1.05,
+          "1Y_YoY": -32.08
         }
       },
       "aluminium": {
         "name": "Aluminium",
         "category": "COMMODITY",
-        "current_val": 3245.0,
+        "current_val": 3167.5,
         "unit": "USD/MT",
-        "52w_low": 2603.5,
+        "52w_low": 2684.0,
         "52w_high": 4195.0,
         "deltas": {
-          "1M": -6.3,
-          "6M": -4.47,
-          "1Y_YoY": 23.09
+          "1M": -0.95,
+          "6M": -9.23,
+          "1Y_YoY": 11.05
         }
       },
       "cotton": {
         "name": "Cotton",
         "category": "COMMODITY",
-        "current_val": 79.89,
+        "current_val": 77.83,
         "unit": "USc/lb",
         "52w_low": 60.71,
         "52w_high": 92.15,
         "deltas": {
-          "1M": -4.16,
-          "6M": 12.03,
-          "1Y_YoY": 27.42
+          "1M": 5.13,
+          "6M": -3.41,
+          "1Y_YoY": 18.5
         }
       },
       "iron_ore": {
         "name": "Iron Ore Proxy",
         "category": "COMMODITY",
-        "current_val": 91.35,
+        "current_val": 90.71,
         "unit": "USD/dmt",
-        "52w_low": 91.35,
+        "52w_low": 90.57,
         "52w_high": 111.42,
         "deltas": {
-          "1M": -8.03,
-          "6M": -14.98,
-          "1Y_YoY": -12.57
+          "1M": -1.51,
+          "6M": -16.14,
+          "1Y_YoY": -14.3
         }
       },
       "usd_inr": {
         "name": "USD-INR Currency Pair",
         "category": "CURRENCY",
-        "current_val": 96.29,
+        "current_val": 94.95,
         "unit": "INR/USD",
         "52w_low": 85.86,
         "52w_high": 97.05,
         "deltas": {
-          "1M": 1.9,
-          "6M": 1.88,
-          "1Y_YoY": 8.51
+          "1M": -1.32,
+          "6M": 0.55,
+          "1Y_YoY": 7.47
         }
       },
       "us_10y_yield": {
         "name": "US 10-Year Bond Yield",
         "category": "YIELD",
-        "current_val": 5.28,
+        "current_val": 4.93,
         "unit": "%",
-        "52w_low": 3.95,
-        "52w_high": 5.34,
+        "52w_low": 3.96,
+        "52w_high": 5.36,
         "deltas": {
-          "1M": 10.0,
-          "6M": 21.66,
-          "1Y_YoY": 29.1
+          "1M": -5.92,
+          "6M": 10.79,
+          "1Y_YoY": 20.54
         }
       }
     }
@@ -20444,6 +20444,2281 @@
         },
         "efficiency_ratios": {
           "ROE %": -9.0
+        }
+      }
+    },
+    "AETHER": {
+      "symbol": "AETHER",
+      "company_name": "Aether Industries Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Aether advanced chemicals, speciality chemicals aur pharmaceuticals ke intermediates banati hai. Yeh company R&D (Research & Development) par bahut focus karti hai aur naye complex molecules banakar global clients ko bechti hai jisse achha munafa (OPM 29.0%) milta hai.",
+        "sourcing_and_cost_defense": "Kacche maal ki lagat aur energy prices company ke kharche badhate hain. Mar 2026 mein Total Expenses 598.0 Crore rahe hain. Company ke paas Pricing Power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat) hai tabhi yeh apne operating margins ko 29% par maintain kar payi hai.",
+        "channel_moat_vulnerability": "Speciality chemicals market mein global aur domestic competitors hain, lekin Aether ki complex chemistry banane ki capability aur long-term client relationships iske moat ko bachakar rakhti hai.",
+        "working_capital_physics": "Working Capital Days (Rozmarra ka business chalane ke liye zaroori din) bahut high hain (239 days). Inventory Days 356 din hai aur Debtor Days 125 din hain, iska matlab hai ki company ka kaafi paisa maal banane aur bechne mein fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil & USD-INR Currency Pair (Kacche tel ke daam aur dollar ki keemat)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Brent Crude 113.43 USD/bbl ke aas-paas chal raha hai aur USD-INR 94.95 par hai. Crude mehenga hone se petro-based raw materials mehnge hote hain, lekin Aether apni technology aur value-add products ki wajah se apne margins (29.0%) bachane mein safal rahi hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit 158.0 Crore dikhaya gaya hai, jabki Cash from Operating Activity sirf 100.0 Crore hai. CFO/EBITDA 64% hai, iska matlab hai ki munafa hone ke bawajud poora paisa cash ki roop mein bank mein nahi aaya hai kyunki paisa inventory aur working capital mein fasa hua hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Cash Ki Tangi"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Naye Capex aur expansion projects se Sales growth (Mar 2026 mein Sales badhkar 841.0 Crore ho gayi hai)",
+        "CWIP (Capital Work in Progress) mein 363.0 Crore ka naya nivesh jo future mein revenue dega",
+        "Advanced R&D ke zariye naye high-margin specialty chemicals ki launching"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "367 days (Mar 2026)",
+          "analytical_significance": "Is number ko track karna zaroori hai kyunki agar inventory aur debtor days aur badhe, toh company ko cash ki tangi aur borrowings (jo abhi 200.0 Crore hain) badhani pad sakti hain."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar R&D se naye products market mein bikna band ho jayein aur Working Capital days aur zyada badh jayein jisse Free Cash Flow permanently negative rahe.",
+        "numerical_breach_benchmark": "Operating Profit Margin (OPM %) agar 20% ke neeche gir jaye",
+        "strategic_implication": "Pricing power ka khatam hona / Dhandhe ka aam commodity ban jana"
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent Crude aur raw material prices ke achanak badhne se short-term mein input costs badh sakti hain agar grahak turant daam badhane ke liye na maane."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Working Capital ki high requirement (367 days conversion cycle) ki wajah se cash flow par dabav rehna aur naye global competitors ka pressure."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 841.0,
+          "Expenses": 598.0,
+          "Operating Profit": 243.0,
+          "OPM %": 29.0,
+          "Other Income": 28.0,
+          "Interest": 13.0,
+          "Depreciation": 45.0,
+          "Profit before tax": 213.0,
+          "Tax %": 26.0,
+          "Net Profit": 158.0,
+          "EPS in Rs": 11.95,
+          "Dividend Payout %": 0.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 133.0,
+          "Reserves": 2093.0,
+          "Borrowings": 200.0,
+          "Other Liabilities": 218.0,
+          "Total Liabilities": 2644.0,
+          "Fixed Assets": 1117.0,
+          "CWIP": 363.0,
+          "Investments": 0.0,
+          "Other Assets": 1163.0,
+          "Total Assets": 2644.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 100.0,
+          "Cash from Investing Activity": -418.0,
+          "Cash from Financing Activity": 1.0,
+          "Net Cash Flow": -317.0,
+          "Free Cash Flow": -352.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 64.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 125.0,
+          "Inventory Days": 356.0,
+          "Days Payable": 114.0,
+          "Cash Conversion Cycle": 367.0,
+          "Working Capital Days": 239.0,
+          "ROCE %": 10.0
+        }
+      }
+    },
+    "BERGEPAINT": {
+      "symbol": "BERGEPAINT",
+      "company_name": "Berger Paints India Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company crude oil aur chemical derivatives se banne wale kacche maal ko factories mein process karke decorative aur industrial paints banati hai. Yeh maal distribution network aur dealers ke zariye retail counters tak pahunchta hai, jahan se end consumers aur contractors tak bikta hai.",
+        "sourcing_and_cost_defense": "Kacche maal ki keematein Brent Crude (current 113.43 USD/bbl) par nirbhar karti hain. Mehengaai badhne par company apni Pricing Power (grahak par daam badhane ki taakat) ka istemal karke OPM % (Operating Profit Margin - maal bechkar factory level par bacha hua munafa) ko 16% par maintain rakhne mein kamyaab rahi hai.",
+        "channel_moat_vulnerability": "Mazboot dealer network aur wide distribution ki wajah se company ki market position strong hai, lekin naye players ke aane se retail dukaano par competition aur margin pressure badh raha hai.",
+        "working_capital_physics": "Inventory Days 143 din aur Debtor Days 49 din ke sath Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 86 din hai, jiska matlab hai ki kaafi paisa stock aur udhari mein fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil & USD-INR Currency Pair",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Brent crude 113.43 USD/bbl par hone ke bawajud company ne 16% OPM aur Rs 1,856 crore ka Operating Profit banaya hai, jo iski strong margin defense capability ko dikhata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO/EBITDA conversion 89% hai, yani P&L ka dikhaya gaya munafa kaafi hadd tak sach mein bank account mein cash bankar aa raha hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine / Naye Plants Me Kharch Hone Wala"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Tier-2 aur Tier-3 cities mein painting services aur waterproofing products ki badhti maang.",
+        "Industrial aur protective coatings segment mein naye contracts aur expansion.",
+        "Supply chain efficiency aur automation se inventory days ko kam karna."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin)",
+          "reported_value": "16% (Mar 2026)",
+          "analytical_significance": "Isse pata chalta hai ki mehenge crude oil ke bawajud company apne munafe ko kitna bacha pa rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Naye market players ki aggressive pricing ki wajah se company ki pricing power ka poori tarah khatam ho jana.",
+        "numerical_breach_benchmark": "OPM % ka 12% se neeche gir jana aur Inventory Days ka 160 din se upar chala jana.",
+        "strategic_implication": "Paint ka dhandha ek aam commodity ban jana jahan margin poori tarah khatam ho jaye."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent crude ke daam aur zyada badhne par margins par dabav aa sakta hai kyunki poori mehengaai ek sath grahak par transfer karna mushkil hota hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Market mein naye aur bade players ke aane se advertising cost badh sakti hai aur dealers ke liye competition tikh ho sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 11545.0,
+          "Expenses": 9688.0,
+          "Operating Profit": 1856.0,
+          "OPM %": 16.0,
+          "Other Income": 129.0,
+          "Interest": 63.0,
+          "Depreciation": 354.0,
+          "Profit before tax": 1568.0,
+          "Tax %": 25.0,
+          "Net Profit": 1183.0,
+          "EPS in Rs": 10.12,
+          "Dividend Payout %": 38.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 117.0,
+          "Reserves": 6038.0,
+          "Borrowings": 670.0,
+          "Other Liabilities": 2300.0,
+          "Total Liabilities": 9125.0,
+          "Fixed Assets": 3677.0,
+          "CWIP": 125.0,
+          "Investments": 533.0,
+          "Other Assets": 4790.0,
+          "Total Assets": 9125.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 1269.0,
+          "Cash from Investing Activity": -650.0,
+          "Cash from Financing Activity": -606.0,
+          "Net Cash Flow": 14.0,
+          "Free Cash Flow": 845.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 89.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 49.0,
+          "Inventory Days": 143.0,
+          "Days Payable": 105.0,
+          "Cash Conversion Cycle": 86.0,
+          "Working Capital Days": 53.0,
+          "ROCE %": 25.0
+        }
+      }
+    },
+    "CAPLIPOINT": {
+      "symbol": "CAPLIPOINT",
+      "company_name": "Caplin Point Laboratories Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company dawa/pharmaceutical products banakar Latin America aur doosre emerging markets mein bechti hai. Kaccha maal (APIs) khareedkar factory mein finish medicines (tablets, syrups etc.) banti hain aur local distributors ke zariye bikti hain.",
+        "sourcing_and_cost_defense": "Company ka Operating Profit Margin (OPM %) 34% par strong hai, jiska matlab hai ki yeh mehengaai ka bojha kafi hadd tak apne grahakon par daalne ki taakat (Pricing Power) rakhti hai.",
+        "channel_moat_vulnerability": "International markets mein established distribution network hai, par naye generic competitors ke aane se margin par thoda dabav aa sakta hai.",
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 175 din hai, yaani kaafi paisa inventory aur dukaandar ki udhari mein fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR Currency Pair (Dollar-Rupee)",
+        "margin_defense_capability": "HIGH",
+        "strategic_rationale": "Dollar ke majboot hone ya stable rehne se export-oriented business ko currency ka faayda milta hai, jisse OPM 34% par barkarar hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L ka dikhaya gaya munafa kaafi hadd tak real cash mein convert ho raha hai. CFO/EBITDA 86% hai, yaani Operating profit ka bada hissa sach mein bank account mein cash ban kar aa raha hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Latin America ke alawa naye regulated markets (jaise US) mein entry aur expansion.",
+        "In-house manufacturing capacity aur CWIP (144 crore) ko jaldi chalu karke production badhana.",
+        "R&D aur naye complex generic products ka portfolio expand karna."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "175 Days (Mar 2026)",
+          "analytical_significance": "Is number ko track karna isliye zaroori hai taaki pata chale ki inventory aur debtor days mein paisa jyada toh nahi atak raha."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Working capital days ka behad zyada badh jana aur Cash Conversion Cycle kaout of control ho jana.",
+        "numerical_breach_benchmark": "OPM % dropping below 25% consistently",
+        "strategic_implication": "Pricing power ka khatam hona aur dhandhe ka aam commodity ban jana jahan margin oppress ho jayein."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Currency Risk",
+          "analysis": "USD-INR ya target countries ki currencies mein utaar-chadhaw se profit margins par asar pad sakta hai."
+        },
+        {
+          "risk_type": "Competitive / Regulatory Risk",
+          "analysis": "Foreign regulators (USFDA ya local authorities) ki taraf se compliance issues ya naye local players ki competition se price cutting ho sakti hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 1937.0,
+          "Expenses": 1287.0,
+          "Operating Profit": 651.0,
+          "OPM %": 34.0,
+          "Other Income": 92.0,
+          "Interest": 1.0,
+          "Depreciation": 66.0,
+          "Profit before tax": 677.0,
+          "Tax %": 20.0,
+          "Net Profit": 541.0,
+          "EPS in Rs": 70.56,
+          "Dividend Payout %": 8.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 15.0,
+          "Reserves": 2619.0,
+          "Borrowings": 222.0,
+          "Other Liabilities": 352.0,
+          "Total Liabilities": 3208.0,
+          "Fixed Assets": 546.0,
+          "CWIP": 144.0,
+          "Investments": 590.0,
+          "Other Assets": 1928.0,
+          "Total Assets": 3208.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 432.0,
+          "Cash from Investing Activity": -333.0,
+          "Cash from Financing Activity": -38.0,
+          "Net Cash Flow": 61.0,
+          "Free Cash Flow": 241.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 86.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 119.0,
+          "Inventory Days": 159.0,
+          "Days Payable": 103.0,
+          "Cash Conversion Cycle": 175.0,
+          "Working Capital Days": 174.0,
+          "ROCE %": 26.0
+        }
+      }
+    },
+    "CARBORUNIV": {
+      "symbol": "CARBORUNIV",
+      "company_name": "Carborundum Universal Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Carborundum Universal ka core business abrasives (sandpaper, grinding wheels), ceramics, aur electrominerals banane ka hai. FY26 mein sales badhkar 4,894 crore ho gayi hain, jo demand ki strength dikhati hai.",
+        "sourcing_and_cost_defense": "Company raw materials aur energy pardepend karti hai. Brent crude (113 USD/bbl) aur aluminium ke high prices ke chalte OPM thoda compress hokar 15% par aa gaya hai.",
+        "channel_moat_vulnerability": "Industrial and engineering segments mein strong brand loyalty hai, lekin heavy inventory days (215 days) supply chain inefficiencies ko highlight karte hain.",
+        "working_capital_physics": "Working capital cycle kaafi heavy hai. Inventory 215 days par run ho rahi hai aur Cash Conversion Cycle 201 days hai, jisse cash block ho jata hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude aur Aluminium prices",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "High input costs aur 36% tax rate ke karan FY26 mein Net Profit girkar 299 crore ho gaya aur EPS 15.37 par aa gaya."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "Operating profit 717 crore hai jabki CFO (Cash from Operations) sirf 304 crore hai. Yeh earnings ki quality ko thoda weak banata hai kyunki profit cash mein convert nahi ho pa raha.",
+        "free_cash_flow_profile": "FCF sirf 28 crore hai, jo ki kaafi low hai kyunki company ne heavy investments (-371 crore) mein paisa lagaya hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Industrial automation aur manufacturing sector ki growth se abrasives demand mein tezi",
+        "Advanced ceramics aur electrominerals segment ka global expansion"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Inventory Days",
+          "reported_value": "215 Days",
+          "analytical_significance": "Working capital inefficiency aur slow-moving stock ko track karne ke liye."
+        },
+        {
+          "metric": "ROCE %",
+          "reported_value": "16.0%",
+          "analytical_significance": "Capital allocation aur returns ki efficiency check karne ke liye."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Working capital cycle ka aur zyada kharab hona aur CFO-to-EBITDA conversion ka 50% se niche girna.",
+        "numerical_breach_benchmark": "Inventory Days > 240 days & FCF remaining negative for consecutive years",
+        "strategic_implication": "Company ki liquidity tight ho sakti hai aur growth ke liye debt lena pad sakta hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Commodity & Inflation Risk",
+          "analysis": "Brent crude aur raw material prices high hone se operating margins par pressure rehta hai."
+        },
+        {
+          "risk_type": "Working Capital Risk",
+          "analysis": "Lamba cash conversion cycle (201 days) free cash flow generation ko rokta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 4894.0,
+          "Expenses": 4178.0,
+          "Operating Profit": 717.0,
+          "OPM %": 15.0,
+          "Other Income": -23.0,
+          "Interest": 14.0,
+          "Depreciation": 212.0,
+          "Profit before tax": 468.0,
+          "Tax %": 36.0,
+          "Net Profit": 299.0,
+          "EPS in Rs": 15.37,
+          "Dividend Payout %": 26.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 19.0,
+          "Reserves": 3510.0,
+          "Borrowings": 216.0,
+          "Other Liabilities": 835.0,
+          "Total Liabilities": 4580.0,
+          "Fixed Assets": 1716.0,
+          "CWIP": 118.0,
+          "Investments": 201.0,
+          "Other Assets": 2544.0,
+          "Total Assets": 4580.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 304.0,
+          "Cash from Investing Activity": -371.0,
+          "Cash from Financing Activity": -110.0,
+          "Net Cash Flow": -177.0,
+          "Free Cash Flow": 28.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 70.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 57.0,
+          "Inventory Days": 215.0,
+          "Days Payable": 71.0,
+          "Cash Conversion Cycle": 201.0,
+          "Working Capital Days": 97.0,
+          "ROCE %": 16.0
+        }
+      }
+    },
+    "CENTURYPLY": {
+      "symbol": "CENTURYPLY",
+      "company_name": "Century Plyboards (India) Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Century Plyboards ka core business plywood, laminates, MDF, aur particle boards banane aur bechne ka hai. Topline (revenue) steady grow ho rahi hai, FY26 me sales badhkar Rs 4,528 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "Raw materials jaise timber aur chemicals par margin kaafi depend karta hai. Brent crude aur supply chain cost badhne se expenses spike huye hain, jisse operating margins par pressure aaya hai.",
+        "channel_moat_vulnerability": "Dealer aur distributor network kaafi strong hai, par local unorganised players se intense competition milti hai jo aggressive pricing rakhte hain.",
+        "working_capital_physics": "Working capital management me pressure dikh raha hai. Inventory days 148 days par high hain aur Cash Conversion Cycle badhakar 135 days ho gaya hai, jiska matlab hai ki paisa inventory me block ho raha hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Real estate demand, construction activity, aur timber/raw material prices",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "FY26 me OPM drop hokar 11% par aa gaya hai kyunki expenses tezi se bade hain aur company raw material cost ko poori tarah customer par pass on nahi kar paayi."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L me net profit Rs 186 crore dikh raha hai, par Cash from Operations (CFO) negative (Rs -3 crore) ho gaya hai. Yeh quality of earnings par bada sawal khada karta hai kyunki profit cash me convert nahi ho raha.",
+        "free_cash_flow_profile": "Heavy capital expenditure (capex) aur working capital blockage ki wajah se Free Cash Flow (FCF) negative (Rs -666 crore) hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "MDF aur Particle Board capacities ka successful ramp-up",
+        "Real estate demand me recovery aur housing sector ka growth"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Profit Margin (OPM %)",
+          "reported_value": "11%",
+          "analytical_significance": "Margin compression aur cost inflation ko track karne ke liye."
+        },
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "135 Days",
+          "analytical_significance": "Inventory aur debtors me kitna working capital fasa hai yeh batata hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating cash flow ka lagataar negative rehna jabki P&L me profit dikh raha ho.",
+        "numerical_breach_benchmark": "CFO negative for consecutive years aur ROCE < 10%",
+        "strategic_implication": "Agar cash generation improve nahi hua toh expansion ke liye debt lena padega aur balance sheet par load badhega."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Raw material (timber/chemicals) ki inflation aur high interest rates se margin dabna."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "Unorganised sector aur naye organized players se price war, jisse margins aur compress ho sakte hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 4528.0,
+          "Expenses": 4041.0,
+          "Operating Profit": 487.0,
+          "OPM %": 11.0,
+          "Other Income": -4.0,
+          "Interest": 69.0,
+          "Depreciation": 137.0,
+          "Profit before tax": 277.0,
+          "Tax %": 33.0,
+          "Net Profit": 186.0,
+          "EPS in Rs": 8.34,
+          "Dividend Payout %": 12.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 22.0,
+          "Reserves": 2343.0,
+          "Borrowings": 1586.0,
+          "Other Liabilities": 617.0,
+          "Total Liabilities": 4568.0,
+          "Fixed Assets": 2042.0,
+          "CWIP": 730.0,
+          "Investments": 3.0,
+          "Other Assets": 1793.0,
+          "Total Assets": 4568.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -3.0,
+          "Cash from Investing Activity": -678.0,
+          "Cash from Financing Activity": 660.0,
+          "Net Cash Flow": -21.0,
+          "Free Cash Flow": -666.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 22.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 40.0,
+          "Inventory Days": 148.0,
+          "Days Payable": 54.0,
+          "Cash Conversion Cycle": 135.0,
+          "Working Capital Days": 5.0,
+          "ROCE %": 10.0
+        }
+      }
+    },
+    "CROMPTON": {
+      "symbol": "CROMPTON",
+      "company_name": "Crompton Greaves Consumer Electricals Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Crompton ka operational engine mainly fans, pumps, lighting aur appliances (jaise water heaters aur coolers) par chal raha hai. Mar 2026 mein sales badhkar Rs 7,864 crore ho gayi hai, jo ki steady growth dikhata hai.",
+        "sourcing_and_cost_defense": "Company raw material costs (jaise copper, aluminium) ko manage karne ke liye pricing power aur operational efficiencies ka use karti hai. Mar 2026 mein Operating Profit sudhar kar Rs 901 crore (OPM 11%) ho gaya hai.",
+        "channel_moat_vulnerability": "Strong distributor aur dealer network (distribution moat) hai, par low-cost unorganized players aur aggressive e-commerce competitors se price wars ka pressure bana rehta hai.",
+        "working_capital_physics": "Working capital management bahut hi badiya hai! Debtor days 33 din aur inventory days 61 din hain, jabki days payable 97 din hain. Isse Cash Conversion Cycle negative (-3 days) aur Working Capital Days -17 din par chal rahe hain, matlab company suppliers ka paisa use karke business chala rahi hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Copper aur Aluminium jaise raw material commodities ki price movement aur rural-urban demand.",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Company ne pichle saalo mein margin pressure jhelne ke baad FY26 mein OPM ko wapas 11% par stabilize kiya hai, jo cost control aur brand power dikhata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L aur Cash flow bilkul solid hain. CFO (Cash from Operations before tax) aur Operating Profit ka conversion 103% hai, matlab profit real cash mein convert ho raha hai.",
+        "free_cash_flow_profile": "Healthy FCF Profile. Mar 2026 mein Free Cash Flow Rs 647 crore raha, jo expansion aur dividends ke liye bahut accha hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Rural demand recovery aur infrastructure/housing push se fans aur pumps ki demand badhna",
+        "Butterfly Gandhimathi acquisition ke baad kitchen appliances segment mein synergy aur cross-selling"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Profit Margin (OPM %)",
+          "reported_value": "11.0%",
+          "analytical_significance": "Ye check karne ke liye ki raw material inflation ke beech margins sustain ho rahe hain ya nahi"
+        },
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "-3.0 days",
+          "analytical_significance": "Working capital ki efficiency aur supply chain strength track karne ke liye"
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating margins ka dobara single-digit (below 9%) mein girna aur working capital cycle ka negative se positive mein badalna",
+        "numerical_breach_benchmark": "OPM < 9% aur CCC > +20 days",
+        "strategic_implication": "Matlab company competitive intensity aur high input costs ke aage haar rahi hai aur pricing power khatam ho rahi hai"
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Commodity prices (copper, aluminium, crude) mein sharp spike aane se margins par dabav aa sakta hai."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "Local aur unorganized players se heavy price competition ki wajah se market share maintain rakhna mushkil ho jata hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 7864.0,
+          "Expenses": 6963.0,
+          "Operating Profit": 901.0,
+          "OPM %": 11.0,
+          "Other Income": 68.0,
+          "Interest": 60.0,
+          "Depreciation": 153.0,
+          "Profit before tax": 756.0,
+          "Tax %": 25.0,
+          "Net Profit": 564.0,
+          "EPS in Rs": 8.64,
+          "Dividend Payout %": 35.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 129.0,
+          "Reserves": 3261.0,
+          "Borrowings": 479.0,
+          "Other Liabilities": 2472.0,
+          "Total Liabilities": 6341.0,
+          "Fixed Assets": 3295.0,
+          "CWIP": 34.0,
+          "Investments": 721.0,
+          "Other Assets": 2291.0,
+          "Total Assets": 6341.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 750.0,
+          "Cash from Investing Activity": -131.0,
+          "Cash from Financing Activity": -587.0,
+          "Net Cash Flow": 32.0,
+          "Free Cash Flow": 647.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 103.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 33.0,
+          "Inventory Days": 61.0,
+          "Days Payable": 97.0,
+          "Cash Conversion Cycle": -3.0,
+          "Working Capital Days": -17.0,
+          "ROCE %": 19.0
+        }
+      }
+    },
+    "CYIENT": {
+      "symbol": "CYIENT",
+      "company_name": "Cyient Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Cyient ka core engine ER&D (Engineering, Research and Development) aur digital services par chalta hai. FY26 mein sales badhkar 7360 crore hui hai, lekin Operating Profit (OPM) thoda gir kar 15% par aa gaya hai kyunki expenses bade hain.",
+        "sourcing_and_cost_defense": "Company global clients ko high-end engineering solutions deti hai. Wage inflation aur talent cost badhne ki wajah se margins par thoda pressure aaya hai, jisse OPM 18% se drop hua hai.",
+        "channel_moat_vulnerability": "Aerospace, defense aur telecom sectors mein inka strong client relationship hai, lekin global tech spending slow hone par orders par asar pad sakta hai.",
+        "working_capital_physics": "Working capital days 64 days hain aur Debtor days 70 days par hain. Cash conversion cycle thoda lamba hai (128 days), jisse cash collection mein thoda time lagta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR exchange rate aur US/Europe ki IT aur engineering spending.",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "Operating profit margin 18% se gajhkar 15% par aa gaya hai, jisse pata chalta hai ki cost pressures ke samne pricing power thodi compress hui hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L Net Profit 648 crore hai aur CFO achha 790 crore hai, jiska matlab earnings ki quality solid hai aur conversion healthy (92%) hai.",
+        "free_cash_flow_profile": "Free Cash Flow (FCF) positive aur strong hai (688 crore), jo business ki cash generation capability ko dikhata hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 - Detailed segment breakdown not provided in current snapshot.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Aerospace aur defense engineering demand mein recovery.",
+        "Digital transformation aur semiconductor/embedded systems mein growth."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Profit Margin (OPM %)",
+          "reported_value": "15.0%",
+          "analytical_significance": "Margin compression track karne ke liye zaroori hai ki cost efficiency wapas aa rahi hai ya nahi."
+        },
+        {
+          "metric": "ROCE %",
+          "reported_value": "17.0%",
+          "analytical_significance": "Capital allocation kitna efficient hai, yeh janne ke liye track karna zaroori hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating margins ka 12% se niche girna aur free cash flow ka negative hona.",
+        "numerical_breach_benchmark": "OPM < 12%",
+        "strategic_implication": "Agar margins lagataar girte hain, toh iska matlab hai ki company cost control lose kar rahi hai aur long-term compounding thesis fail ho rahi hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Developed markets (US/Europe) mein recession ya tech spending cut hone se revenue growth slow ho sakti hai."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "IT aur ER&D space mein badhti competition ki wajah se pricing pressure aur talent retention costs badh sakti hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 7360.0,
+          "Expenses": 6222.0,
+          "Operating Profit": 1138.0,
+          "OPM %": 15.0,
+          "Other Income": 97.0,
+          "Interest": 93.0,
+          "Depreciation": 267.0,
+          "Profit before tax": 875.0,
+          "Tax %": 26.0,
+          "Net Profit": 648.0,
+          "EPS in Rs": 55.45,
+          "Dividend Payout %": 47.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 56.0,
+          "Reserves": 5254.0,
+          "Borrowings": 513.0,
+          "Other Liabilities": 1798.0,
+          "Total Liabilities": 7621.0,
+          "Fixed Assets": 2929.0,
+          "CWIP": 79.0,
+          "Investments": 502.0,
+          "Other Assets": 4112.0,
+          "Total Assets": 7621.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 790.0,
+          "Cash from Investing Activity": -134.0,
+          "Cash from Financing Activity": -58.0,
+          "Net Cash Flow": 598.0,
+          "Free Cash Flow": 688.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 92.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 70.0,
+          "Inventory Days": 185.0,
+          "Days Payable": 126.0,
+          "Cash Conversion Cycle": 128.0,
+          "Working Capital Days": 64.0,
+          "ROCE %": 17.0
+        }
+      }
+    },
+    "EPL": {
+      "symbol": "EPL",
+      "company_name": "EPL Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company ne strong turnaround dikhaya hai, sales growth 4213 Cr tak pahunch gayi hai aur OPM wapas 20% par settle ho gaya hai, jo operational efficiency ka sign hai.",
+        "sourcing_and_cost_defense": "Raw material costs manage ho rahe hain, lekin global commodity prices (like aluminium/plastics) ka impact margin par padta hai. Scale badhne se cost absorption behtar hua hai.",
+        "channel_moat_vulnerability": "Packaging sector mein inka strong hold hai, lekin client concentration aur global supply chain disruptions inke liye risk factor hain.",
+        "working_capital_physics": "Cash conversion cycle 87 days ka hai, jo thoda high side par hai. Inventory days (151) indicate karte hain ki stock management par focus ki zaroorat hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil prices (raw material input costs)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Company ne 20% OPM maintain kiya hai, jo dikhata hai ki ye raw material price hikes ko customers par pass-on karne mein capable hain."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "Excellent. CFO/EBITDA 103% hai, matlab jo profit dikh raha hai wo actual cash mein convert ho raha hai.",
+        "free_cash_flow_profile": "Strong positive FCF of 439 Cr, jo debt reduction aur capex ke liye healthy hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Operating leverage se margin expansion",
+        "Debt reduction se interest cost mein kami"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM %",
+          "reported_value": "20.0%",
+          "analytical_significance": "Profitability sustain ho rahi hai ya nahi, ye check karne ke liye."
+        },
+        {
+          "metric": "Inventory Days",
+          "reported_value": "151",
+          "analytical_significance": "Working capital efficiency aur stock pile-up track karne ke liye."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "OPM ka 15% ke niche girna",
+        "numerical_breach_benchmark": "OPM < 15%",
+        "strategic_implication": "Pricing power khatam ho rahi hai aur competition margin kha raha hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Crude oil prices mein volatility se input costs badh sakte hain, jo margins ko squeeze kar sakte hain."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "Packaging industry mein intense competition aur pricing pressure se market share loss ka khatra."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 4213.0,
+          "Expenses": 3376.0,
+          "Operating Profit": 837.0,
+          "OPM %": 20.0,
+          "Other Income": 41.0,
+          "Interest": 114.0,
+          "Depreciation": 343.0,
+          "Profit before tax": 422.0,
+          "Tax %": 14.0,
+          "Net Profit": 364.0,
+          "EPS in Rs": 11.23,
+          "Dividend Payout %": 44.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 64.0,
+          "Reserves": 2291.0,
+          "Borrowings": 802.0,
+          "Other Liabilities": 795.0,
+          "Total Liabilities": 3952.0,
+          "Fixed Assets": 1970.0,
+          "CWIP": 73.0,
+          "Investments": 39.0,
+          "Other Assets": 1870.0,
+          "Total Assets": 3952.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 795.0,
+          "Cash from Investing Activity": -374.0,
+          "Cash from Financing Activity": -431.0,
+          "Net Cash Flow": -10.0,
+          "Free Cash Flow": 439.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 103.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 61.0,
+          "Inventory Days": 151.0,
+          "Days Payable": 125.0,
+          "Cash Conversion Cycle": 87.0,
+          "Working Capital Days": 31.0,
+          "ROCE %": 17.0
+        }
+      }
+    },
+    "GICRE": {
+      "symbol": "GICRE",
+      "company_name": "General Insurance Corporation of India",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "GIC Re ek Indian reinsurer hai, jo dusri insurance companies (primary insurers) ka risk share karta hai. Iska operational engine underwriting (insurance risk lena) aur investments par chalta hai.",
+        "sourcing_and_cost_defense": "Company ka expense ratio improve ho raha hai, jisse OPM (Operating Profit Margin) FY26 me badhkar 18% par pahunch gaya hai, jo FY22 me sirf 6% tha.",
+        "channel_moat_vulnerability": "Domestic market me monopoly jaisi position hai kyunki yeh India ki sabse badi reinsurance company hai, lekin global cat losses (natural disasters) aur pricing pressure ek vulnerability hain.",
+        "working_capital_physics": "Financial sector hone ke kaaran traditional working capital days applicable nahi hote, par balance sheet me 1,43,280 crore ke investments strong asset base dikhate hain."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Global reinsurance pricing cycles aur investment yields (interest rates)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Pichle kuch saalon me GIC Re ne underwriting discipline improve kiya hai, jisse net profit FY26 me badhkar 7,432 crore ho gaya hai aur ROE/ROCE (Return on Capital Employed) bhi 16% par solid hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "Operating profit FY26 me 8,795 crore hai, jabki cash from operating activity (CFO before tax) 1,976 crore hai. CFO/EBITDA conversion 48% par hai jo ki reinsurance business ke asset-liability matching model ke hisaab se normal hai.",
+        "free_cash_flow_profile": "Company ke paas consistent free cash flow (FY26 me ~1,952 crore) generate hota hai jo investments aur dividend payout (24% payout ratio) ko support karta hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Global reinsurance rates (hard market conditions) ka continuation",
+        "India me insurance penetration badhne se domestic premium growth"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Combined Ratio (Underwriting performance)",
+          "reported_value": "Normalized below 100%",
+          "analytical_significance": "Yeh batata hai ki core insurance business profit me hai ya nahi."
+        },
+        {
+          "metric": "Investment Income",
+          "reported_value": "1.43 Lakh Crore Portfolio",
+          "analytical_significance": "Company ki total earnings me investment returns ka bada haath hota hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Bade natural disasters (Catastrophe losses) ki wajah se underwriting losses me behad sharp spike aana.",
+        "numerical_breach_benchmark": "OPM drop below 10% or Net Profit falling below 3,000 crore",
+        "strategic_implication": "Agar core underwriting loss badhta hai aur investment income use cover nahi kar paati, toh company ki profitability par severe pressure aayega."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Catastrophe Risk",
+          "analysis": "Global ya domestic level par badhte natural disasters (jaise floods, earthquakes) se claims achanak bahut zyada badh sakte hain."
+        },
+        {
+          "risk_type": "Investment Yield Volatility",
+          "analysis": "Bond yields ya equity market me fluctuation hone se investment portfolio ki value aur income par asar padta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 49617.0,
+          "Expenses": 40822.0,
+          "Operating Profit": 8795.0,
+          "OPM %": 18.0,
+          "Other Income": 324.0,
+          "Interest": -0.0,
+          "Depreciation": 15.0,
+          "Profit before tax": 9105.0,
+          "Tax %": 23.0,
+          "Net Profit": 7432.0,
+          "EPS in Rs": 42.36,
+          "Dividend Payout %": 24.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 877.0,
+          "Reserves": 60622.0,
+          "Borrowings": -0.0,
+          "Other Liabilities": 133268.0,
+          "Total Liabilities": 194768.0,
+          "Fixed Assets": 327.0,
+          "CWIP": 8.0,
+          "Investments": 143280.0,
+          "Other Assets": 51153.0,
+          "Total Assets": 194768.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 1976.0,
+          "Cash from Investing Activity": -275.0,
+          "Cash from Financing Activity": -1754.0,
+          "Net Cash Flow": -53.0,
+          "Free Cash Flow": 1952.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 48.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": -0.0,
+          "Inventory Days": "Disclosed Nahi Hai",
+          "Days Payable": "Disclosed Nahi Hai",
+          "Cash Conversion Cycle": -0.0,
+          "Working Capital Days": -595.0,
+          "ROCE %": 16.0
+        }
+      }
+    },
+    "GLENMARK": {
+      "symbol": "GLENMARK",
+      "company_name": "Glenmark Pharmaceuticals Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Glenmark ka core business formulations aur APIs (Active Pharmaceutical Ingredients) banane aur bechne ka hai. FY26 mein sales badhkar Rs 13,322 crore ho gayi aur Operating Profit margin improve hokar 18% (Rs 2,351 crore) par aa gaya, jo ki pichle saal 10% tha.",
+        "sourcing_and_cost_defense": "Company raw materials aur input costs ko manage karti hai, lekin global currency movements (USD-INR) aur commodity/chemical prices ka thoda asar cost structure par padta hai.",
+        "channel_moat_vulnerability": "Domestic aur international markets (US, Europe, emerging markets) mein strong presence hai, lekin USFDA inspections aur compliance issues channel ki ek potential vulnerability hain.",
+        "working_capital_physics": "Working capital cycle thoda tight hai. Debtor days 92, Inventory days 254, aur Days Payable 256 hain. Cash conversion cycle roughly 90 days par maintain ho raha hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR exchange rate aur global pharmaceutical pricing pressure (specially US generic market).",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Company ne FY26 mein apne margins ko wapas 18% par la khada kiya hai, jo dikhata hai ki cost optimization aur product mix improve karne ki capability strong hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit Rs 1,047 crore dikh raha hai, lekin Cash Flow from Operating Activities negative (-Rs 828 crore) hai, kyunki working capital mein cash block hua hai aur kuch non-operating items (-Rs 259 crore other income/loss) hain.",
+        "free_cash_flow_profile": "Negative Free Cash Flow (-Rs 1,576 crore) kyunki capex aur working capital ki wajah se cash outflow jyada raha."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "US market mein naye complex generics aur specialty portfolio ka launch",
+        "Debt reduction aur balance sheet ko aur strong karna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Profit Margin (OPM %)",
+          "reported_value": "18.0%",
+          "analytical_significance": "Yeh track karna zaroori hai ki company apne margins 15-18% range mein maintain kar paati hai ya nahi."
+        },
+        {
+          "metric": "Cash Flow from Operations (CFO)",
+          "reported_value": "-Rs 828 crore",
+          "analytical_significance": "Accounting profit tabhi meaningful hai jab woh positive operating cash flow mein convert ho."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating cash flow ka लगातार negative rehna aur USFDA compliance issues ki wajah se import alerts aana.",
+        "numerical_breach_benchmark": "OPM% ka wapas 10% se niche girna ya CFO ka negative trend continue rehna.",
+        "strategic_implication": "Agar yeh triggers hue, toh company ki earnings quality par bada question mark lag jayega aur stock underperform karega."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Regulatory Risk",
+          "analysis": "USFDA ya other global health authorities ki taraf se manufacturing plants par inspection/warning letters aane ka risk hamesha rehta hai."
+        },
+        {
+          "risk_type": "Working Capital & Cash Flow Risk",
+          "analysis": "High inventory days (254 days) aur negative operating cash flow company ki liquidity par pressure daal sakte hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 13322.0,
+          "Expenses": 10970.0,
+          "Operating Profit": 2351.0,
+          "OPM %": 18.0,
+          "Other Income": -259.0,
+          "Interest": 207.0,
+          "Depreciation": 486.0,
+          "Profit before tax": 1399.0,
+          "Tax %": 25.0,
+          "Net Profit": 1047.0,
+          "EPS in Rs": 37.11,
+          "Dividend Payout %": 7.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 28.0,
+          "Reserves": 8821.0,
+          "Borrowings": 2473.0,
+          "Other Liabilities": 4669.0,
+          "Total Liabilities": 15991.0,
+          "Fixed Assets": 4487.0,
+          "CWIP": 835.0,
+          "Investments": 56.0,
+          "Other Assets": 10613.0,
+          "Total Assets": 15991.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -828.0,
+          "Cash from Investing Activity": 58.0,
+          "Cash from Financing Activity": 787.0,
+          "Net Cash Flow": 17.0,
+          "Free Cash Flow": -1576.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": -6.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 92.0,
+          "Inventory Days": 254.0,
+          "Days Payable": 256.0,
+          "Cash Conversion Cycle": 90.0,
+          "Working Capital Days": 44.0,
+          "ROCE %": 19.0
+        }
+      }
+    },
+    "HAPPSTMNDS": {
+      "symbol": "HAPPSTMNDS",
+      "company_name": "Happiest Minds Technologies Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company IT services aur digital solutions bechti hai. Global clients se projects milte hain, jisme engineers code likhte hain aur service deliver karte hain. Sales badh kar Rs 2,061 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "Yahan kaccha maal nahi balki employee cost (wages/salaries) hi main kharcha hai. Expenses badh kar Rs 1,706 crore ho gaye hain, jisse OPM % gir kar 17% par aa gaya hai, yaani company ke kharche tezi se badhe hain.",
+        "channel_moat_vulnerability": "Digital engineering aur cloud security mein competition bahut tagda hai. Naye aur purane IT players ke aane se margin par dabaav bana hua hai.",
+        "working_capital_physics": "Debtor Days 63 din hain, yaani customer se paisa aane mein lagbhag 2 mahine lagte hain. Inventory aur Days Payable ka data disclose nahi hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "US 10-Year Bond Yield & USD-INR Currency Pair",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "Dollar-Rupee aur US ki economic halat IT spend ko asar karti hai. Interest (Rs 99 crore) aur Depreciation (Rs 89 crore) badhne ki wajah se Net Profit ghat kar Rs 185 crore reh gaya hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO/EBITDA conversion 95% hai, iska matlab operating profit ka bada hissa sach mein cash ban kar bank account mein aa raha hai.",
+        "free_cash_flow_profile": "Free Cash Flow Rs 225 crore hai, yaani company theek-thaak cash generate kar rahi hai par investing activity mein heavy outflow (-Rs 731 crore) hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Digital transformation aur AI-led projects ki demand badhna",
+        "New enterprise clients ko jodna aur existing accounts ko bada karna",
+        "Specialized tech services ke zariye pricing pressure ko counter karna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin - Maal bechkar bachne wala munafa)",
+          "reported_value": "17.0% (Mar 2026)",
+          "analytical_significance": "Isse pata chalta hai ki employee aur operating kharche badhne ke baad company kitna margin bacha pa rahi hai. Yeh lagataar gir raha hai (25% se 17%)."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating Margin (OPM %) ka lagataar girna aur Net Profit mein saalo-saal ki thigravat ya girawat aana.",
+        "numerical_breach_benchmark": "OPM % ka 15% ke niche chale jaana aur Interest burden ka Net Profit ko kha jana.",
+        "strategic_implication": "Pricing power ka khatam hona aur high-value IT services ka aam commodity ban jana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Demand Risk",
+          "analysis": "US aur global markets mein IT budgets kam hone se revenue growth par break lag sakta hai."
+        },
+        {
+          "risk_type": "Competitive / Cost Risk",
+          "analysis": "Employee salaries aur hiring cost badhne se margins aur jyada compress ho sakte hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 2061.0,
+          "Expenses": 1706.0,
+          "Operating Profit": 354.0,
+          "OPM %": 17.0,
+          "Other Income": 89.0,
+          "Interest": 99.0,
+          "Depreciation": 89.0,
+          "Profit before tax": 255.0,
+          "Tax %": 28.0,
+          "Net Profit": 185.0,
+          "EPS in Rs": 12.13,
+          "Dividend Payout %": 49.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 30.0,
+          "Reserves": 1545.0,
+          "Borrowings": 1244.0,
+          "Other Liabilities": 505.0,
+          "Total Liabilities": 3323.0,
+          "Fixed Assets": 1211.0,
+          "CWIP": 0.0,
+          "Investments": 350.0,
+          "Other Assets": 1761.0,
+          "Total Assets": 3323.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 236.0,
+          "Cash from Investing Activity": -731.0,
+          "Cash from Financing Activity": 499.0,
+          "Net Cash Flow": 4.0,
+          "Free Cash Flow": 225.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 95.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 63.0,
+          "Inventory Days": "Disclosed Nahi Hai",
+          "Days Payable": "Disclosed Nahi Hai",
+          "Cash Conversion Cycle": 63.0,
+          "Working Capital Days": -109.0,
+          "ROCE %": 15.0
+        }
+      }
+    },
+    "HFCL": {
+      "symbol": "HFCL",
+      "company_name": "HFCL Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company optical fiber cables, fiber optic connectivity solutions aur telecom equipment banati hai. Yeh telecom operators ko direct aur distributors ke through maal bechti hai jisse infrastructure upgrade hota hai.",
+        "sourcing_and_cost_defense": "Kacche maal ki lagat aur operational expenses total sales ka ek bada hissa hain (Expenses Rs 3,615 crore on Sales of Rs 4,065 crore). Mehengaai ka poora bojha grahak par dalna mushkil hota hai kyunki OPM girkar 11% par aa gaya hai.",
+        "channel_moat_vulnerability": "Bade telecom operators ke sath long-term ties hain, par naye competitors aur price war ki wajah se margins par pressure rehta hai.",
+        "working_capital_physics": "Cash Conversion Cycle 141 din ka hai. Debtor Days 170 din aur Inventory Days 145 din hain, matlab bada paisa dukaandar aur stock mein fasa rehta hai, jo ki working capital par dabav banata hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Interest Rate (US 10-Year Bond Yield / Borrowing Cost) aur USD-INR Currency Pair",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "High interest rates ki wajah se Interest cost badhakar Rs 185 crore ho gayi hai, aur OPM 11% par aane se net profit kam hokar Rs 173 crore reh gaya hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "Operating profit ka cash conversion theek hai (CFO before tax / Operating Profit 89%), aur CFO Rs 396 crore positive hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Cash Ki Tangi (Free Cash Flow Rs -12 crore hai kyunki CWIP Rs 602 crore par chal raha hai aur investing outflow Rs -518 crore hai)."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Bharat mein 5G rollout aur Fiber-to-the-Home (FTTH) expansion ki demand.",
+        "CWIP (Rs 602 crore) ke poora hone par naye manufacturing plants se production badhna.",
+        "Global markets mein optical fiber ki supply chain diversification se export growth."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle & Working Capital Days",
+          "reported_value": "Cash Conversion Cycle 141 din, Working Capital Days 179 din",
+          "analytical_significance": "Yeh track karna zaroori hai kyunki agar udhari aur inventory mein paisa fasa rahega toh company ko naye projects ke liye karz lena padega."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar operating margins lagataar girte rahe aur working capital cycle aur lambi ho gayi toh core business pressure mein aa jayega.",
+        "numerical_breach_benchmark": "OPM % ka 9% se niche girna aur Interest coverage ratio ka kamzor hona.",
+        "strategic_implication": "Pricing power khatam hona aur dhandhe ka commodity type low-margin business ban jana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Global supply chain mein raw material volatility aur badhte interest rates (Interest Rs 185 crore) ki wajah se munafe par direct asar padta hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Telecom sector mein bade players ki bargaining power aur local/global competitors ke aane se margins compress ho rahe hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 4065.0,
+          "Expenses": 3615.0,
+          "Operating Profit": 449.0,
+          "OPM %": 11.0,
+          "Other Income": 58.0,
+          "Interest": 185.0,
+          "Depreciation": 106.0,
+          "Profit before tax": 217.0,
+          "Tax %": 20.0,
+          "Net Profit": 173.0,
+          "EPS in Rs": 1.23,
+          "Dividend Payout %": 8.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 144.0,
+          "Reserves": 3935.0,
+          "Borrowings": 1522.0,
+          "Other Liabilities": 1945.0,
+          "Total Liabilities": 7546.0,
+          "Fixed Assets": 852.0,
+          "CWIP": 602.0,
+          "Investments": 158.0,
+          "Other Assets": 5935.0,
+          "Total Assets": 7546.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 396.0,
+          "Cash from Investing Activity": -518.0,
+          "Cash from Financing Activity": 170.0,
+          "Net Cash Flow": 47.0,
+          "Free Cash Flow": -12.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 89.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 170.0,
+          "Inventory Days": 145.0,
+          "Days Payable": 174.0,
+          "Cash Conversion Cycle": 141.0,
+          "Working Capital Days": 179.0,
+          "ROCE %": 8.0
+        }
+      }
+    },
+    "IRCON": {
+      "symbol": "IRCON",
+      "company_name": "Ircon International Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Ircon ek PSU (Public Sector Undertaking) construction company hai jo mainly railway projects, highways aur infrastructure works execute karti hai. FY26 mein sales drop hokar Rs 10,760 crore ho gayi (previous year Rs 12,514 crore thi), jisse revenue execution mein thodi slow-down dikh rahi hai.",
+        "sourcing_and_cost_defense": "Company ka Operating Profit Margin (OPM %) FY26 mein 8% raha hai. Raw materials aur construction inputs ke cost pressure ko ye apne contracts mein escalation clauses ke through handle karti hai, lekin competitive bidding ki wajah se margins narrow range mein hi rehte hain.",
+        "channel_moat_vulnerability": "Government aur railway orders par heavy dependency inka sabse bada moat bhi hai aur vulnerability bhi. Private sector ki tarah retail diversification nahi hai, isliye government capex cycle par pura business depend karta hai.",
+        "working_capital_physics": "Working capital management kaafi unique hai. Debtor days 45 days hain, lekin Days Payable 687 days hai! Iska matlab company apne vendors/suppliers ko payment karne mein kaafi lamba time leti hai, jisse Cash Conversion Cycle negative (-592 days) ho jata hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Government Infrastructure Capex and Commodity Prices (Steel, Cement, Copper)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Halanki revenue fluctuate hua hai, lekin OPM stable 8% par maintain kiya hai kyunki contracts mein cost pass-through mechanisms hote hain."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit Rs 728 crore dikh raha hai, lekin Cash from Operating Activity negative (-Rs 1,110 crore) hai. Iska matlab profit paper par accha hai par cash real mein collect nahi ho pa raha hai.",
+        "free_cash_flow_profile": "Negative Free Cash Flow (-Rs 2,161 crore) hai kyunki working capital adjustments aur projects mein capital deployment ki wajah se cash outflow high hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Indian Railways ka continuous capital expenditure aur modernization drive",
+        "International projects aur EPC contracts ki execution speed increase hona"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Cash Flow (CFO)",
+          "reported_value": "-Rs 1,110 Crore",
+          "analytical_significance": "Track karna zaroori hai ki profits real cash mein convert ho rahe hain ya nahi."
+        },
+        {
+          "metric": "Days Payable",
+          "reported_value": "687 Days",
+          "analytical_significance": "Ye dekhne ke liye ki company apne suppliers ko payment kitna delay kar rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar operating cash flows लगातार negative rehte hain aur execution delays ki wajah se order book shrink hoti hai.",
+        "numerical_breach_benchmark": "CFO consistently negative for 3 consecutive years aur Sales growth drop below -10%.",
+        "strategic_implication": "Company ke financial health par pressure pad sakta hai aur cash liquidity crunch aa sakta hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Execution & Receivables Risk",
+          "analysis": "Government clients se payments mein delay hone ki wajah se working capital block hoti hai aur negative operating cash flow banta hai."
+        },
+        {
+          "risk_type": "Concentration Risk",
+          "analysis": "Railway aur public sector projects par excessive dependency hone ki wajah se private sector capex boom ka benefit nahi mil pata."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 10760.0,
+          "Expenses": 9912.0,
+          "Operating Profit": 847.0,
+          "OPM %": 8.0,
+          "Other Income": 431.0,
+          "Interest": 221.0,
+          "Depreciation": 118.0,
+          "Profit before tax": 939.0,
+          "Tax %": 22.0,
+          "Net Profit": 728.0,
+          "EPS in Rs": 7.73,
+          "Dividend Payout %": 34.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 188.0,
+          "Reserves": 6081.0,
+          "Borrowings": 4299.0,
+          "Other Liabilities": 8896.0,
+          "Total Liabilities": 19464.0,
+          "Fixed Assets": 2453.0,
+          "CWIP": 976.0,
+          "Investments": 1239.0,
+          "Other Assets": 14796.0,
+          "Total Assets": 19464.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -1110.0,
+          "Cash from Investing Activity": 54.0,
+          "Cash from Financing Activity": 1156.0,
+          "Net Cash Flow": 100.0,
+          "Free Cash Flow": -2161.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": -95.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 45.0,
+          "Inventory Days": 50.0,
+          "Days Payable": 687.0,
+          "Cash Conversion Cycle": -592.0,
+          "Working Capital Days": -41.0,
+          "ROCE %": 12.0
+        }
+      }
+    },
+    "JKCEMENT": {
+      "symbol": "JKCEMENT",
+      "company_name": "JK Cement Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "JK Cement limestone aur coal/petcoke ka use karke factory mein grey aur white cement banata hai. Yeh maal dealers aur channel partners ke zariye retail aur institutional construction sites tak pahunchta hai. Sales Mar 2026 mein badh kar 11,879 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "Company ka Expenses Mar 2026 mein 9,845 crore raha hai. Brent Crude (113.43 USD/bbl) aur energy ki high cost ki wajah se transportation aur manufacturing cost par pressure rehta hai, jise company kuch hadd tak cement pricing badhakar defend karti hai.",
+        "channel_moat_vulnerability": "Dealer network strong hai, lekin construction materials sector mein local aur unorganized players ke sath-sath bade national competitors ka dabav hamesha rehta hai jo pricing ko control karte hain.",
+        "working_capital_physics": "Cash Conversion Cycle 38 din ka hai. Inventory Days 213 din aur Days Payable 199 din hain, jiska matlab hai ki company apna stock lambe samay tak hold rakhti hai aur suppliers ko bhi payment karne ke liye lamba samay milta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil & Energy Prices",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Crude aur energy mehenge hone se furnace chalane ki lagat badh jaati hai. Halanki Mar 2026 mein OPM % 17% par maintain raha, jisse pata chalta hai ki company cost control aur thodi bohot pricing power use kar rahi hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "Cash from Operating Activity 1,939 crore hai aur CFO/EBITDA ratio 105% hai, jo yeh dikhata hai ki P&L ka 872 crore ka Net Profit asli bank cash mein achhi tarah convert ho raha hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Moderate Free Cash Flow"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "White cement aur wall putty segment mein market share badhana",
+        "Naye capacity expansions aur green energy (WHRS/Solar) ke zariye power cost kam karna",
+        "Housing and infrastructure demand ka steady growth"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin - Maal bechkar factory level par bacha hua munafa)",
+          "reported_value": "17% in Mar 2026",
+          "analytical_significance": "Isse pata chalta hai ki mehenge fuel aur input costs ke bawajud company kitna core operating profit bacha pa rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar cement ki demand girne ke bawajud company apni prices na badha paye aur OPM lagataar niche girne lage.",
+        "numerical_breach_benchmark": "OPM % ka 13% ke niche chale jana",
+        "strategic_implication": "Pricing power ka poori tarah khatam ho jana aur dhandhe ka aam commodity ban jana jahan sirf price war bache."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent crude aur petcoke ke daam badhne se manufacturing aur freight cost par direct asar padta hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Naye players ya regional oversupply ki wajah se cement prices mein cut-throat competition ho sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 11879.0,
+          "Expenses": 9845.0,
+          "Operating Profit": 2034.0,
+          "OPM %": 17.0,
+          "Other Income": 269.0,
+          "Interest": 459.0,
+          "Depreciation": 601.0,
+          "Profit before tax": 1242.0,
+          "Tax %": 30.0,
+          "Net Profit": 872.0,
+          "EPS in Rs": 111.45,
+          "Dividend Payout %": 13.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 77.0,
+          "Reserves": 6012.0,
+          "Borrowings": 6028.0,
+          "Other Liabilities": 4564.0,
+          "Total Liabilities": 16682.0,
+          "Fixed Assets": 9519.0,
+          "CWIP": 1317.0,
+          "Investments": 601.0,
+          "Other Assets": 5244.0,
+          "Total Assets": 16682.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 1939.0,
+          "Cash from Investing Activity": -1890.0,
+          "Cash from Financing Activity": 74.0,
+          "Net Cash Flow": 123.0,
+          "Free Cash Flow": 241.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 105.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 24.0,
+          "Inventory Days": 213.0,
+          "Days Payable": 199.0,
+          "Cash Conversion Cycle": 38.0,
+          "Working Capital Days": -23.0,
+          "ROCE %": 14.0
+        }
+      }
+    },
+    "JKLAKSHMI": {
+      "symbol": "JKLAKSHMI",
+      "company_name": "JK Lakshmi Cement Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "JK Lakshmi Cement ki manufacturing plants northern aur western regions mein hain. Yeh clinker aur cement banakar dealer network ke zariye market mein bechte hain. Mar 2026 mein Sales 6,193 crore darj ki gayi.",
+        "sourcing_and_cost_defense": "Total Expenses Mar 2026 mein 5,329 crore rahe. Mehnge fuel aur logistics ki vajah se operating profit gathkar 864 crore (OPM 14%) par aa gaya hai, jisse yeh saaf hai ki mehengai ka poora bojh grahak par daalna mushkil raha hai.",
+        "channel_moat_vulnerability": "Regional markets mein strong dealer network hai, par local players se price competition ki wajah se margins par dabav rehta hai.",
+        "working_capital_physics": "Cash Conversion Cycle 128 din ka hai, jisme Inventory Days 256 din aur Days Payable 134 din hain. Iska matlab working capital (Rozmarra ka business chalane ke liye zaroori cash) mein kaafi stock block hota hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil & Freight Costs",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "Sales aur Operating profit dono mein Mar 2025 ke mukable Mar 2026 mein kami aayi hai (Sales 6,788 se gathkar 6,193 crore hui), jo kamzor realization aur badhti cost ko darshata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "CFO 784 crore hai aur CFO/EBITDA 95% hai, jisse Net Profit (276 crore) ke mukable cash generation behtar dikhta hai, halanki investing activities mein 1,152 crore ka bada kharch hua hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Expansion Heavy"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Operational efficiency aur waste heat recovery plants ke through power cost kam karna",
+        "Geographical expansion aur volume growth through debottlenecking",
+        "Infrastructure spending in North/West India"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "ROCE % (Return on Capital Employed - Lagayi gayi poonji par kitna return mil raha hai)",
+          "reported_value": "10% in Mar 2026",
+          "analytical_significance": "Isse pata chalta hai ki company apneassets aur capital ko kitne efficient tareeqe se use karke profit kama rahi hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar cost pressure aur low realization ki wajah se operating profit aur Net Profit lagataar do saal tak aur niche girte rahe.",
+        "numerical_breach_benchmark": "Operating Profit ka 700 crore ke niche chale jana",
+        "strategic_implication": "Company ka market share loss aur pricing power ka poori tarah se gayab ho jana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Energy aur fuel ki badhti keemat aur high freight rates company ke margins ko compress kar dete hain."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Regional cement markets mein aggressive pricing by larger peers."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 6193.0,
+          "Expenses": 5329.0,
+          "Operating Profit": 864.0,
+          "OPM %": 14.0,
+          "Other Income": 11.0,
+          "Interest": 181.0,
+          "Depreciation": 299.0,
+          "Profit before tax": 394.0,
+          "Tax %": 30.0,
+          "Net Profit": 276.0,
+          "EPS in Rs": 23.53,
+          "Dividend Payout %": 28.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 59.0,
+          "Reserves": 3495.0,
+          "Borrowings": 2614.0,
+          "Other Liabilities": 2277.0,
+          "Total Liabilities": 8445.0,
+          "Fixed Assets": 5554.0,
+          "CWIP": 278.0,
+          "Investments": 633.0,
+          "Other Assets": 1979.0,
+          "Total Assets": 8445.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 784.0,
+          "Cash from Investing Activity": -1152.0,
+          "Cash from Financing Activity": 318.0,
+          "Net Cash Flow": -51.0,
+          "Free Cash Flow": 132.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 95.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 6.0,
+          "Inventory Days": 256.0,
+          "Days Payable": 134.0,
+          "Cash Conversion Cycle": 128.0,
+          "Working Capital Days": -48.0,
+          "ROCE %": 10.0
+        }
+      }
+    },
+    "JYOTHYLAB": {
+      "symbol": "JYOTHYLAB",
+      "company_name": "Jyothy Labs Ltd.",
+      "data_period": "Mar 2025 (Audited)",
+      "business_company_model_architecture": {
+        "operational_engine_analysis": "Jyothy Labs ka dhandha FMCG (Fast Moving Consumer Goods) sector ka hai, jahan ghar mein roz use hone wale items jaise dishwash, fabric care, aur household insecticides banaye aur beche jaate hain. Company kaccha maal (jaise chemicals aur packaging material) khareed kar factories mein products tayar karti hai aur phir distributors aur modern retail ke zariye aam grahak tak pahunchati hai. Mar 2025 mein sales badhkar 2,757 crore tak pahunch gayi hai.",
+        "sourcing_and_cost_defense": "Kacche maal ki keematein macro factors jaise Brent Crude Oil (jo ki 113.43 USD/bbl par chal raha hai) se direct asar khati hain kyunki packaging aur petro-based chemicals mehenge ho jaate hain. Lekin company ki strong brand value aur Pricing Power (graahakon par daam badhane ki taakat) ki wajah se operating profit improve hokar 480 crore ho gaya hai aur OPM 17% par aa gaya hai.",
+        "channel_moat_vulnerability": "Company ka distribution network rural aur urban dono jagah strong hai, jisse local dukaanon aur supermarkets mein inke products aasani se milte hain. Halanki, bade FMCG players aur local unorganised brands se takkar milne ke bawajood inka brand loyalty acchi tarah defend ho raha hai.",
+        "working_capital_physics": "Working capital (Rozmarra ka business chalane ke liye zaroori cash) kaafi control mein hai. Debtor Days 27 hain aur Inventory Days 74 hain, jabki Days Payable 72 din hai. Iska Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) sirf 29 din ka hai, jo ki kaafi healthy hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude Oil",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Brent Crude ke high hone ke bawajood company ne apne kharche control mein rakhe hain aur OPM ko 13% se badha kar 17% kar liya hai. Isse yeh saabit hota hai ki company ke paas inflation ko absorb karne ya aage pass karne ki taakat hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L ka dikhaya gaya munafa sach mein bank account mein Cash bankar aa raha hai. CFO/EBITDA 112% hai, matlab operating profit ka poora hissa aur usse zyada actual cash mein convert ho raha hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Rural demand mein sudhar aane se volume growth tezi se badhna",
+        "Premium segment ke products (jaise liquid dishwash aur fabric care) par zyada focus karna",
+        "Operating efficiency aur cost control se margins ko 17% ya usse upar banaye rakhna"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin)",
+          "reported_value": "17.0% (Mar 2025)",
+          "analytical_significance": "Yeh batata hai ki company maal bechkar kitna factory-level munafa kama rahi hai bina extra kharchon ke."
+        },
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "29 Days",
+          "analytical_significance": "Isse pata chalta hai ki inventory aur udhaar kitni tezi se cash mein badal rahe hain."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar crude oil ke daam badhne ki wajah se margins lagataar girne lagein aur company apne daam na badha paaye.",
+        "numerical_breach_benchmark": "OPM % ka 13% se niche girna",
+        "strategic_implication": "Pricing power ka khatam ho jana aur competition ki wajah se profitability par dabav aana."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Brent Crude aur chemical prices ke zyada hone se packaging aur input cost mehengi ho sakti hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Bade FMCG giants aur local players ki taraf se aggressive pricing ki wajah se market share par asar pad sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 2757.0,
+          "Expenses": 2277.0,
+          "Operating Profit": 480.0,
+          "OPM %": 17.0,
+          "Other Income": 54.0,
+          "Interest": 5.0,
+          "Depreciation": 50.0,
+          "Profit before tax": 479.0,
+          "Tax %": 23.0,
+          "Net Profit": 369.0,
+          "EPS in Rs": 10.06,
+          "Dividend Payout %": 35.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 37.0,
+          "Reserves": 1772.0,
+          "Borrowings": 51.0,
+          "Other Liabilities": 542.0,
+          "Total Liabilities": 2401.0,
+          "Fixed Assets": 1125.0,
+          "CWIP": 13.0,
+          "Investments": 192.0,
+          "Other Assets": 1071.0,
+          "Total Assets": 2401.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 458.0,
+          "Cash from Investing Activity": -344.0,
+          "Cash from Financing Activity": -135.0,
+          "Net Cash Flow": -21.0,
+          "Free Cash Flow": 443.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 112.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 27.0,
+          "Inventory Days": 74.0,
+          "Days Payable": 72.0,
+          "Cash Conversion Cycle": 29.0,
+          "Working Capital Days": 40.0,
+          "ROCE %": 27.0
+        }
+      }
+    },
+    "JYOTICNC": {
+      "symbol": "JYOTICNC",
+      "company_name": "Jyoti CNC Automation Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Jyoti CNC Automation Capital Goods sector ki company hai jo complex CNC machines (Computer Numerical Control machines) banati hai. Yeh machines automobile, aerospace, aur manufacturing industries mein heavy engineering ke liye use hoti hain. Company raw materials (jaise metals aur electronic components) import ya source karke heavy machinery assemble karti hai aur direct industrial clients ko sell karti hai. Sales Mar 2026 mein badhkar 1,818 crore ho gayi hai.",
+        "sourcing_and_cost_defense": "Kacche maal aur metals ki keematon ke alawa yeh high-tech engineering business hai jahan R&D aur specialised parts ki zaroorat hoti hai. Operating profit mein shandar jump aayi hai aur OPM badhkar 27% ho gaya hai, jo ki strong execution ko dikhata hai.",
+        "channel_moat_vulnerability": "Industrial B2B segment hone ki wajah se direct client relationships aur after-sales service sabse bada moat hai. Naye competitors ke liye aisi heavy CNC technology banana aasan nahi hota, isliye inki market positioning acchi hai.",
+        "working_capital_physics": "Working capital physics kaafi heavy aur challenging hai. Debtor Days 98 hain aur Inventory Days 378 hain, jabki Days Payable 172 din hai. Inka Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 304 din ka hai, matlab paisa lambe samay tak inventory aur receivables mein fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Interest Rate & Capital Expenditure Cycle",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Industrial capex aur interest rates (US 10Y Yield 4.93%) ke chalte global manufacturing demand par asar padta hai, par company ne OPM ko 27% par pahuncha diya hai jo ki strong pricing power dikhata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein dikhaya gaya munafa (Net Profit 316 crore) aur actual cash flow alag hain. Cash from Operating Activity negative (-105 crore) hai aur CFO/EBITDA -4% hai, iska matlab hai ki profit kitabon mein toh ban raha hai par poora paisa abhi working capital (inventory aur udhaar) mein atka hua hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Cash Ki Tangi (Working Capital Blocked)"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Defense, aerospace aur EV sectors se CNC machines ki heavy demand",
+        "Order book ka tezi se execution hona aur revenue growth ko maintain rakhna",
+        "Debt kam hone ke baad interest cost ka ghatna (Interest Mar 2026 mein kam hokar 42 crore ho gaya hai)"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "304 Days (Mar 2026)",
+          "analytical_significance": "Yeh batata hai ki inventory aur udhaar mein kitna lamba paisa fasa hua hai, jo cash flow par dabav dalta hai."
+        },
+        {
+          "metric": "OPM %",
+          "reported_value": "27.0%",
+          "analytical_significance": "Factory level par high margin sustain karna company ki pricing power aur product mix ki taakat ko dikhata hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar industrial capex cycle slow ho jaye aur inventory days aur zyada badh jayein jisse cash flow aur negative ho jaye.",
+        "numerical_breach_benchmark": "OPM % ka 20% se niche girna ya negative cash flow ka aur deep hona",
+        "strategic_implication": "Demand slow hone ki wajah se margins compress ho jana aur working capital cycle ka aur kharab hona."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Capital Goods Cycle Risk",
+          "analysis": "Global ya domestic manufacturing capex mein kami aane se order book aur new orders par bada asar pad sakta hai."
+        },
+        {
+          "risk_type": "Working Capital & Cash Flow Risk",
+          "analysis": "Inventory 378 days aur Debtor 98 days hone ki wajah se cash flow negative (-105 crore) rehta hai, jo liquidity par dabav dalta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 1818.0,
+          "Expenses": 1327.0,
+          "Operating Profit": 491.0,
+          "OPM %": 27.0,
+          "Other Income": 5.0,
+          "Interest": 42.0,
+          "Depreciation": 36.0,
+          "Profit before tax": 418.0,
+          "Tax %": 24.0,
+          "Net Profit": 316.0,
+          "EPS in Rs": 13.9,
+          "Dividend Payout %": 0.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 45.0,
+          "Reserves": 1641.0,
+          "Borrowings": 497.0,
+          "Other Liabilities": 609.0,
+          "Total Liabilities": 2792.0,
+          "Fixed Assets": 469.0,
+          "CWIP": 184.0,
+          "Investments": 0.0,
+          "Other Assets": 2139.0,
+          "Total Assets": 2792.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -105.0,
+          "Cash from Investing Activity": -329.0,
+          "Cash from Financing Activity": 145.0,
+          "Net Cash Flow": -289.0,
+          "Free Cash Flow": -415.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": -4.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 98.0,
+          "Inventory Days": 378.0,
+          "Days Payable": 172.0,
+          "Cash Conversion Cycle": 304.0,
+          "Working Capital Days": 203.0,
+          "ROCE %": 24.0
+        }
+      }
+    },
+    "KAJARIACER": {
+      "symbol": "KAJARIACER",
+      "company_name": "Kajari Ceramics Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Kajaria ka operational engine solid hai, tiles manufacturing aur distribution mein market leader hone ka fayda milta hai. FY26 mein sales badh kar 4635 crore tak pahunch gayi, lekin cost pressure ki wajah se operating margins thode dab gaye.",
+        "sourcing_and_cost_defense": "Gas aur energy costs ka ceramic industry mein bada impact hota hai. Global market mein crude aur energy volatility ki wajah se expenses control mein rakhna company ke liye challenge raha hai, jisse OPM 14% par aa gaya.",
+        "channel_moat_vulnerability": "Dealer network aur brand recall Kajaria ki sabse badi taakat hai. Par construction sector ki slow demand aur local players ki tough competition ki wajah se pricing power thodi compress ho sakti hai.",
+        "working_capital_physics": "Working capital cycle thoda lamba hai. Inventory days 126 days aur debtor days 45 days hain, jisse cash conversion cycle 102 days par chal raha hai. Iska matlab working capital mein accha khasa paisa fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Natural Gas Prices aur Brent Crude ki movement, kyunki ye tile baking aur freight cost ko direct affect karte hain.",
+        "margin_defense_capability": "COMPRESSED",
+        "strategic_rationale": "FY26 mein Operating Profit margin 14% par aa gaya aur tax % bhi badhkar 31% ho gaya, jisse Net Profit 300 crore par settle hua. Input costs aur tax ki wajah se margins par pressure clearly visible hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L aur Cash flow kaafi healthy hain. CFO (before tax) to Operating Profit conversion 97% hai, jo ki excellent earnings quality ko dikhata hai — matlab paper profits real cash mein convert ho rahe hain.",
+        "free_cash_flow_profile": "Company positive FCF (Free Cash Flow) generate kar rahi hai (305 crore in FY26), jisse capex aur dividend payout (49%) aasaani se fund ho rahe hain."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108 shows primary business focus heavily concentrated on tiles and allied products.",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Real estate sector mein recovery aur housing demand ka badhna",
+        "Gas prices mein agar correction aaye toh margins expand hone ka mauka"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Operating Profit Margin (OPM %)",
+          "reported_value": "14.0%",
+          "analytical_significance": "Track karna zaroori hai ki company apne input costs aur gas prices ke saamne pricing power maintain kar pa rahi hai ya nahi."
+        },
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "102 Days",
+          "analytical_significance": "Inventory aur debtors mein kitna fund block ho raha hai, ye check karne ke liye vital metric hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar working capital cycle aur lamba ho jaye aur Free Cash Flow consistently negative mein jaane lage.",
+        "numerical_breach_benchmark": "OPM < 11% or FCF < 100 Crore",
+        "strategic_implication": "Agar margins aur cash generation is level se neeche girte hain, toh iska matlab company ki competitive pricing power khatam ho rahi hai aur cost inflation ko pass on nahi kar pa rahe."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Energy prices (Natural Gas & Crude oil) mein sharp spike aane se manufacturing costs badh sakti hain aur margins aur compress ho sakte hain."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "Unorganised aur regional ceramic players se aggressive pricing pressure milne ki wajah se market share aur margins defend karna mushkil ho sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 4635.0,
+          "Expenses": 4000.0,
+          "Operating Profit": 635.0,
+          "OPM %": 14.0,
+          "Other Income": -14.0,
+          "Interest": 20.0,
+          "Depreciation": 165.0,
+          "Profit before tax": 436.0,
+          "Tax %": 31.0,
+          "Net Profit": 300.0,
+          "EPS in Rs": 18.48,
+          "Dividend Payout %": 49.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 16.0,
+          "Reserves": 2728.0,
+          "Borrowings": 274.0,
+          "Other Liabilities": 737.0,
+          "Total Liabilities": 3755.0,
+          "Fixed Assets": 1717.0,
+          "CWIP": 109.0,
+          "Investments": 34.0,
+          "Other Assets": 1895.0,
+          "Total Assets": 3755.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 501.0,
+          "Cash from Investing Activity": -372.0,
+          "Cash from Financing Activity": -209.0,
+          "Net Cash Flow": -79.0,
+          "Free Cash Flow": 305.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 97.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 45.0,
+          "Inventory Days": 126.0,
+          "Days Payable": 69.0,
+          "Cash Conversion Cycle": 102.0,
+          "Working Capital Days": 42.0,
+          "ROCE %": 17.0
+        }
+      }
+    },
+    "KAYNES": {
+      "symbol": "KAYNES",
+      "company_name": "Kaynes Technology India Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company ka asli dhandha electronics system design aur manufacturing (ESDM) ka hai. Yeh alag-alag sectors jaise ki automotive, industrial, aur aerospace ke liye electronic components aur printed circuit boards (PCBs) banakar deti hai, jisse unhe high-tech manufacturing mein madad milti hai.",
+        "sourcing_and_cost_defense": "Kaccha maal global market se import hota hai. Inventory Days 156 din aur Days Payable 131 din hain, iska matlab company ko lambe samay tak maal hold rakhna padta hai aur supply chain par dhyan dena zaroori hota hai.",
+        "channel_moat_vulnerability": "B2B client relationships aur long-term orders par depend karta hai. Naye EMS (Electronic Manufacturing Services) players ke market mein aane se pricing pressure ban sakta hai.",
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) 102 din hai, jisse yeh saaf hai ki rozmarra ka dhandha chalane ke liye kaafi working capital block rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR Currency Pair aur Global Semiconductor Supply Chain",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Dollar-Rupee ke fluctuate hone aur global component costs ka asar company ke import-heavy raw materials par padta hai, lekin OPM % 15% par stable hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit 293 crore dikhaya gaya hai, lekin Cash from Operating Activity -82 crore aur Free Cash Flow -1031 crore hai, iska matlab munafa sirf kitabon mein hai aur cash business mein hi fasa hua hai.",
+        "free_cash_flow_profile": "Naye Plants Me Kharch Hone Wala / Cash Ki Tangi"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Badhti hui sales jo ki Mar 2022 ke 420 crore se badhkar Mar 2026 mein 2722 crore ho gayi hai.",
+        "Industrial aur automotive sectors se high-value electronic manufacturing contracts ka milna.",
+        "In-house design aur turnkey manufacturing capabilities ko aur expand karna."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din)",
+          "reported_value": "102 din (Mar 2026)",
+          "analytical_significance": "Is number ko track karna isliye zaroori hai kyunki agar ye din aur badhe, toh company ko aur zyada udhaar (Borrowings 903 crore) par nirbhar rehna padega."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating cash flow ka lagataar negative rehna aur Working Capital cycle ka behad kharab ho jana.",
+        "numerical_breach_benchmark": "CFO/EBITDA conversion ratio negative mein rehna aur ROCE % ka 10% se niche gir jana.",
+        "strategic_implication": "Company bina external funding ke apne naye plants aur operations ko fund nahi kar payegi, jisse growth ruk sakti hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Kacche Maal Ka Risk",
+          "analysis": "Global electronic components aur raw material ke daam badhne ya currency rate badalne se import cost mehngi ho sakti hai."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "EMS sector mein badhte competition ki wajah se margins par dabav aa sakta hai agar naye players saste daam par contracts lene lagein."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 2722.0,
+          "Expenses": 2305.0,
+          "Operating Profit": 416.0,
+          "OPM %": 15.0,
+          "Other Income": 106.0,
+          "Interest": 106.0,
+          "Depreciation": 45.0,
+          "Profit before tax": 372.0,
+          "Tax %": 21.0,
+          "Net Profit": 293.0,
+          "EPS in Rs": 45.8,
+          "Dividend Payout %": 0.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 64.0,
+          "Reserves": 2776.0,
+          "Borrowings": 903.0,
+          "Other Liabilities": 898.0,
+          "Total Liabilities": 4641.0,
+          "Fixed Assets": 845.0,
+          "CWIP": 391.0,
+          "Investments": 132.0,
+          "Other Assets": 3273.0,
+          "Total Assets": 4641.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -82.0,
+          "Cash from Investing Activity": -355.0,
+          "Cash from Financing Activity": 465.0,
+          "Net Cash Flow": 28.0,
+          "Free Cash Flow": -1031.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": -4.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 77.0,
+          "Inventory Days": 156.0,
+          "Days Payable": 131.0,
+          "Cash Conversion Cycle": 102.0,
+          "Working Capital Days": -7.0,
+          "ROCE %": 14.0
+        }
+      }
+    },
+    "LTTS": {
+      "symbol": "LTTS",
+      "company_name": "L&T Technology Services Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Company engineering, research and development (ER&D) services deti hai. Yahan koi physical kaccha maal nahi khareeda jata, balki engineers ki expertise se technology solutions banakar clients ko beche jate hain aur wahan se revenue banta hai.",
+        "sourcing_and_cost_defense": "Main kharcha employee/worker cost (delivery expenses) ka hota hai. Company wage inflation ke samay apni pricing power ke zariye clients se rates badhwane ki koshish karti hai, jisse OPM 19% par maintain hai.",
+        "channel_moat_vulnerability": "Global manufacturing, transport aur medical devices companies ke sath long-term contracts hain. Naye IT/ER&D players ke aane se margin par thoda dabav aa sakta hai, lekin domain expertise ki wajah se moat strong hai.",
+        "working_capital_physics": "Debtor Days 95 din hain, yaani customer se paisa aane mein lagbhag 3 mahine lagte hain. Isse working capital (Rozmarra ka business chalane ke liye zaroori cash) thoda fasa rehta hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "USD-INR Currency Pair (Kyunki zyadatar revenue foreign currency mein aata hai)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Dollar ke majboot hone se IT export companies ko faayda milta hai, halaanki high wage cost ki wajah se OPM is saal 20% se ghatkar 19% par aaya hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L ka dikhaya gaya munafa kaafi hadd tak asli cash mein convert ho raha hai. CFO/Operating Profit conversion 110% hai, yaani profit se zyada cash generate hua hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Digital Engineering aur AI-led R&D services ki badhti maang",
+        "Transportation aur Medical sectors se naye global clients ka judna",
+        "Strong Free Cash Flow (1,379 Crore) ke zariye business expansion ya shareholder payout"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Debtor Days (Customer se udhari ka paisa vasool hone ke din)",
+          "reported_value": "95 din",
+          "analytical_significance": "Is number ko track karna isliye zaroori hai taaki yeh pata chale ki clients samay par payment kar rahe hain ya working capital fasa hua hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Debtor days ka behad zyada badh jana aur CFO (Cash from Operations) ka lagataar Net Profit se kam rehna.",
+        "numerical_breach_benchmark": "OPM % ka 15% ke niche girna",
+        "strategic_implication": "Engineering services ka commodity ban jana aur clients ka pricing par dabav daalna."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Currency Risk",
+          "analysis": "USD-INR exchange rate mein sudden badlaav ya US/Europe ke clients ka R&D budget cut karna."
+        },
+        {
+          "risk_type": "Competitive / Talent Risk",
+          "analysis": "Acche engineers ki cost badhna aur attrition (employee chhodkar jana) se delivery cost par asar."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 9642.0,
+          "Expenses": 7852.0,
+          "Operating Profit": 1790.0,
+          "OPM %": 19.0,
+          "Other Income": 283.0,
+          "Interest": 56.0,
+          "Depreciation": 303.0,
+          "Profit before tax": 1713.0,
+          "Tax %": 26.0,
+          "Net Profit": 1264.0,
+          "EPS in Rs": 119.64,
+          "Dividend Payout %": 46.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 21.0,
+          "Reserves": 6059.0,
+          "Borrowings": 578.0,
+          "Other Liabilities": 2970.0,
+          "Total Liabilities": 9627.0,
+          "Fixed Assets": 2245.0,
+          "CWIP": 28.0,
+          "Investments": 1310.0,
+          "Other Assets": 6045.0,
+          "Total Assets": 9627.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 1481.0,
+          "Cash from Investing Activity": -509.0,
+          "Cash from Financing Activity": -718.0,
+          "Net Cash Flow": 254.0,
+          "Free Cash Flow": 1379.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 110.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 95.0,
+          "Inventory Days": "Disclosed Nahi Hai",
+          "Days Payable": "Disclosed Nahi Hai",
+          "Cash Conversion Cycle": 95.0,
+          "Working Capital Days": 36.0,
+          "ROCE %": 27.0
+        }
+      }
+    },
+    "MUTHOOTFIN": {
+      "symbol": "MUTHOOTFIN",
+      "company_name": "Muthoot Finance Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Muthoot Finance ka main dhandha gold loan (Sone ke badle karz dena) dena hai. Company bank ya doosre zariye se saste byaaj par paisa uthati hai (Borrowing: 99,383 crore Rs) aur phir usey aam logon ko sona girvi rakh kar mehenge byaaj par karz ke roop mein deti hai. Isse inki Financing Margin % (Byaaj se hone wala munafa) 36% par chal rahi hai.",
+        "sourcing_and_cost_defense": "Company ka cost main taur par borrowing cost (Karz par chukaya jane wala byaaj) aur employee expenses par chalta hai. Jaise-jaise byaaj darein badhti hain, company ko mehnat karke grahak par bhi byaaj ka bojh transfer karna padta hai, jiska asar Financing Margin % par padta hai (jo pehle 45% tha aur ab ghatkar 36% reh gaya hai).",
+        "channel_moat_vulnerability": "Inka poora dhandha desh bhar mein phile hue branches aur trusted branch network par tika hai. Halanki, naye banks aur fintech companies ke aane se competition thoda bada hai, par gold loan mein barson ka vishwas aur quick processing inka sabse bada moat (suraksha kavach) hai.",
+        "working_capital_physics": "Financial companies ke liye working capital ki jagah assets (loans given) aur liabilities (borrowings) hoti hain. Mar 2026 mein Cash from Operating Activity -26,525 crore Rs raha hai kyunki company ka zyadatar paisa naye loan baantne mein (Loans/Other Assets mein) lag raha hai, jise yeh financing activities (30,041 crore Rs ka naya karz utha kar) se balance karte hain."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Interest Rate aur Gold Prices",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Jaise-jaise byaaj darein ya market liquidity badalti hai, company ki financing cost par asar padta hai. Muthoot ne 20,214 crore Rs ka revenue aur 5,352 crore Rs ka net profit banaya hai, jo yeh dikhata hai ki mehenge byaaj ke bawajood demand strong bani hui hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein dikhaya gaya 5,352 crore Rs ka Net Profit strong business growth ko darshata hai, halanki Cash from Operating Activity -26,525 crore Rs negative hai kyunki NBFCS mein loan book expand hone par cash loan dene mein chala jata hai, jo ki financial business ka natural pattern hai.",
+        "free_cash_flow_profile": "Naye Loans aur Asset Growth Mein Invest Hone Wala Cash"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Gold loan ki maang mein lagataar tezi aur branch network ka vistaar.",
+        "Non-gold loan segments (jaise microfinance, housing finance) mein diversification se growth.",
+        "Sone ki keematon mein utaar-chadhaw ke sath loan-to-value (LTV) discipline maintain karna."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "Financing Margin % (Byaaj se hone wala margin)",
+          "reported_value": "36% (Mar 2026)",
+          "analytical_significance": "Is number se pata chalta hai ki company saste mein paisa utha kar kitne munafey par aage karz de pa rahi hai. Yeh pehle 45% thi jo ab kam hokar 36% ho gayi hai, isliye is par nazar rakhna zaroori hai."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar gold ki keematon mein achanak bhari giraavat aaye aur NPA (Doobte hue karz) be-hisaab badh jayein.",
+        "numerical_breach_benchmark": "Financing Margin % ka 30% ke neeche girna ya Net Profit mein lagataar saalon ki thohrav sthiti.",
+        "strategic_implication": "Muthoot ka gold loan model commodity risk aur strict regulatory changes ki wajah se dabav mein aa sakta hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Interest Rate Risk",
+          "analysis": "Byaaj darein badhne se company ki udhaar lene ki cost badh jaati hai, jisse margins par dabav padta hai (Financing Margin 45% se ghatkar 36% aa chuka hai)."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Banks aur doosri NBFCs dwara aggressive gold loan bhent karne se market share aur interest rates par competitive pressure ban sakta hai."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Revenue": 20214.0,
+          "Interest": 7461.0,
+          "Expenses": 5422.0,
+          "Financing Profit": 7331.0,
+          "Financing Margin %": 36.0,
+          "Other Income": 51.0,
+          "Depreciation": 116.0,
+          "Profit before tax": 7266.0,
+          "Tax %": 26.0,
+          "Net Profit": 5352.0,
+          "EPS in Rs": 132.84,
+          "Dividend Payout %": 20.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 401.0,
+          "Reserves": 28965.0,
+          "Borrowing": 99383.0,
+          "Other Liabilities": 4085.0,
+          "Total Liabilities": 132835.0,
+          "Fixed Assets": 682.0,
+          "CWIP": 13.0,
+          "Investments": 2401.0,
+          "Other Assets": 129739.0,
+          "Total Assets": 132835.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": -26525.0,
+          "Cash from Investing Activity": -1375.0,
+          "Cash from Financing Activity": 30041.0,
+          "Net Cash Flow": 2142.0,
+          "Free Cash Flow": -26740.0
+        },
+        "efficiency_ratios": {
+          "ROE %": 20.0
+        }
+      }
+    },
+    "PRUDENT": {
+      "symbol": "PRUDENT",
+      "company_name": "Prudent Corporate Advisory Services Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Prudent ek financial services aur wealth management platform hai jo mutual funds aur doosre financial products ko distribution partners (mutual fund distributors / advisors) aur direct clients ke zariye bechta hai. Yeh company commission ya brokerage ke roop mein kamaai karti hai jab log iske platform par invest karte hain.",
+        "sourcing_and_cost_defense": "Company ka main kharcha employees, technology aur distribution partners ko commission dene mein hota hai. Expenses Mar 2026 mein badh kar 841 crore ho gaye hain, jabki Sales 1133 crore rahi hai. OPM (Operating Profit Margin - Maal ya service bechkar level par bacha hua munafa) 26% par stable hai, jisse lagta hai ki company apni laagat ko control rakhne mein kamyaab rahi hai.",
+        "channel_moat_vulnerability": "Company ka poora dhandha partner network (FundzBazaar aur advisors) par tikha hai. Jaise-jaise market mein naye fintech platforms aa rahe hain, commission rates par pressure aa sakta hai, lekin Prudent ka bada network ek achhi taakat bana hua hai.",
+        "working_capital_physics": "Debtor Days (Customer ya clients se paisa vasool karne mein lagne wale din) 45 din hain. Working Capital (Rozmarra ka business chalane ke liye zaroori cash) -1 din par hai, yaani company ko apna business chalane ke liye zyada working capital block nahi karni padti."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Interest Rate & Capital Markets Growth",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Company ki aamdani direct taur par stock market ki halat aur mutual fund aum (Assets Under Management) par nirbhar karti hai. Sales Mar 2022 ke 295 crore se badh kar Mar 2026 mein 1133 crore ho chuki hai, jisse yeh saaf hai ki market growth ka isse bada faayda mil raha hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L ka dikhaya gaya munafa kaafi hadd tak sach mein bank account mein cash ke roop mein aa raha hai. CFO/EBITDA (Operating profit ka cash mein badalne ka anupaat) 77% hai, jo ki ek badiya cash conversion dikhata hai.",
+        "free_cash_flow_profile": "Khud Se Cash Banane Wali Machine"
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "Bharat mein mutual fund aur wealth management products ki badhti hui maang aur retail participation.",
+        "FundzBazaar aur digital platforms ka expansion jisse naye clients asani se jud rahe hain.",
+        "Non-mutual fund products jaise insurance aur loan against securities ki cross-selling se aamdani mein badhotri."
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "OPM % (Operating Profit Margin)",
+          "reported_value": "26.0% (Mar 2026)",
+          "analytical_significance": "Isse pata chalta hai ki company apne kharche control karte hue kitna munafa kama rahi hai. Agar yeh girta hai toh competition ki wajah se margins par dabaav mana jayega."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Agar commission rates mein regulatory cuts ki wajah se ya competition ke chalte OPM aur Net Profit margin mein lagataar bhari giraawat aane lage.",
+        "numerical_breach_benchmark": "OPM % ka 20% se niche chale jana ya Debtor Days ka 60 din se upar nikal jana.",
+        "strategic_implication": "Company ki pricing power aur commission structure kamzor ho chuka hai, jisse growth ruk sakti hai."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro / Capital Market Risk",
+          "analysis": "Agar stock market mein lamba manda (bear phase) aata hai, toh mutual fund inflows kam ho jayenge aur company ki commission income tezi se ghategi."
+        },
+        {
+          "risk_type": "Competitive / Market Ka Khatra",
+          "analysis": "Naye digital discount brokers aur fintech apps ke aane se commission margins par dabav pad sakta hai aur agents/clients shift ho sakte hain."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 1133.0,
+          "Expenses": 841.0,
+          "Operating Profit": 292.0,
+          "OPM %": 26.0,
+          "Other Income": 0.0,
+          "Interest": 2.0,
+          "Depreciation": 28.0,
+          "Profit before tax": 262.0,
+          "Tax %": 25.0,
+          "Net Profit": 196.0,
+          "EPS in Rs": 47.25,
+          "Dividend Payout %": 5.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 21.0,
+          "Reserves": 647.0,
+          "Borrowings": 31.0,
+          "Other Liabilities": 245.0,
+          "Total Liabilities": 944.0,
+          "Fixed Assets": 162.0,
+          "CWIP": 0.0,
+          "Investments": 365.0,
+          "Other Assets": 416.0,
+          "Total Assets": 944.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 161.0,
+          "Cash from Investing Activity": -142.0,
+          "Cash from Financing Activity": -18.0,
+          "Net Cash Flow": 0.0,
+          "Free Cash Flow": 143.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 77.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 45.0,
+          "Inventory Days": "Disclosed Nahi Hai",
+          "Days Payable": "Disclosed Nahi Hai",
+          "Cash Conversion Cycle": 45.0,
+          "Working Capital Days": -1.0,
+          "ROCE %": 44.0
+        }
+      }
+    },
+    "SANSERA": {
+      "symbol": "SANSERA",
+      "company_name": "Sansera Engineering Ltd.",
+      "data_period": "Mar 2026 (Audited)",
+      "business_model_architecture": {
+        "operational_engine_analysis": "Sansera ek high-precision engineering components banane wali company hai, jo complex critical components jaise connecting rods, rocker arms, aur crankshafts auto aur non-auto sectors ke liye supply karti hai. Topline consistent grow kar rahi hai, Mar 2022 ke 1,549 crore se badh kar Mar 2026 mein 3,017 crore tak pahunch gayi hai.",
+        "sourcing_and_cost_defense": "Company raw materials ke liye metals (jaise aluminium aur copper) par nirbhar hai. Jaise ki global dashboard mein aluminium aur copper high levels par trade kar rahe hain, Sansera apne operating margins ko 17% par stable rakhne mein कामयाब rahi hai, kyunki ye apne cost increases ko pass-on karne ki capability rakhti hai.",
+        "channel_moat_vulnerability": "Inka moat inke long-term customer relationships aur complex engineering capabilities mein hai jise replicate karna mushkil hai. Lekin, automotive sector cyclical hone ke karan demand slowdown hone par vulnerability ban sakti hai.",
+        "working_capital_physics": "Working capital cycle thodi heavy hai. Inventory days 147 days aur debtor days 55 days hain, jabki days payable 107 days hain, jisse cash conversion cycle 96 days par bani hui hai. Isse working capital mein kafi paisa block hota hai."
+      },
+      "pricing_and_macro_sensitivity": {
+        "primary_macro_driver": "Brent Crude (USD 113/bbl) aur Industrial Metals (Aluminium & Copper)",
+        "margin_defense_capability": "RESILIENT",
+        "strategic_rationale": "Company ne inflation aur commodity price volatility ke bawajood apne operating profit margin ko 17% par maintain kiya hai, jo inki strong pricing power ko dikhata hai."
+      },
+      "cash_flow_reality": {
+        "earnings_quality_assessment": "P&L mein Net Profit 217 crore hai, aur Operating Cash Flow (CFO before tax) operating profit ka 84% convert ho raha hai (377 crore CFO from operating activity), jo ki healthy earnings quality ko darshata hai.",
+        "free_cash_flow_profile": "Free Cash Flow negative (-219 crore) hai kyunki company ne FY26 mein Fixed Assets aur CWIP mein bhari capex kiya hai (Investing cash flow -957 crore), jo future growth ke liye investment ko reflect karta hai."
+      },
+      "revenue_breakdown": {
+        "has_disclosed_segments": false,
+        "segment_disclosure_note": "Statutory reporting under Ind AS 108",
+        "segments": [],
+        "geographic_split": null
+      },
+      "strategic_catalysts": [
+        "EV aur non-auto segments mein product portfolio ka expansion",
+        "Global Tier-1 OEMs ke sath naye export orders aur client addition"
+      ],
+      "must_watch_metrics": [
+        {
+          "metric": "ROCE %",
+          "reported_value": "14.0%",
+          "analytical_significance": "Capital allocation ki efficiency aur returns ko measure karne ke liye track karna zaroori hai."
+        },
+        {
+          "metric": "Cash Conversion Cycle",
+          "reported_value": "96 Days",
+          "analytical_significance": "Working capital ki efficiency aur cash blocking check karne ke liye."
+        }
+      ],
+      "thesis_invalidation_trigger": {
+        "structural_red_flag": "Operating margins mein lagataar sharp decline aur cash conversion cycle ka 120 days se upar jana",
+        "numerical_breach_benchmark": "OPM < 14% aur ROCE < 11%",
+        "strategic_implication": "Agar margins girte hain aur working capital aur kharab hoti hai, toh iska matlab hai ki company apni pricing power kho rahi hai aur heavy capex se return nahi ban pa raha."
+      },
+      "core_risks": [
+        {
+          "risk_type": "Macro Risk",
+          "analysis": "Global commodity prices (Aluminium, Copper, Crude) mein zyada volatility aur high USD-INR exchange rate (94.95) ka import-export costs par impact pad sakta hai."
+        },
+        {
+          "risk_type": "Competitive Risk",
+          "analysis": "Automotive sector mein demand cyclic hone ke karan agar vehicle sales slowdown hoti hai, toh topline growth par direct asar padega."
+        }
+      ],
+      "audited_statement_snapshot": {
+        "profit_and_loss": {
+          "Sales": 3017.0,
+          "Expenses": 2489.0,
+          "Operating Profit": 528.0,
+          "OPM %": 17.0,
+          "Other Income": 10.0,
+          "Interest": 72.0,
+          "Depreciation": 174.0,
+          "Profit before tax": 292.0,
+          "Tax %": 26.0,
+          "Net Profit": 217.0,
+          "EPS in Rs": 34.75,
+          "Dividend Payout %": 9.0
+        },
+        "balance_sheet": {
+          "Equity Capital": 12.0,
+          "Reserves": 2738.0,
+          "Borrowings": 407.0,
+          "Other Liabilities": 578.0,
+          "Total Liabilities": 3736.0,
+          "Fixed Assets": 1938.0,
+          "CWIP": 195.0,
+          "Investments": 52.0,
+          "Other Assets": 1552.0,
+          "Total Assets": 3736.0
+        },
+        "cash_flow": {
+          "Cash from Operating Activity": 377.0,
+          "Cash from Investing Activity": -957.0,
+          "Cash from Financing Activity": 583.0,
+          "Net Cash Flow": 3.0,
+          "Free Cash Flow": -219.0,
+          "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": 84.0
+        },
+        "efficiency_ratios": {
+          "Debtor Days": 55.0,
+          "Inventory Days": 147.0,
+          "Days Payable": 107.0,
+          "Cash Conversion Cycle": 96.0,
+          "Working Capital Days": 56.0,
+          "ROCE %": 14.0
         }
       }
     }
