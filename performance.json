@@ -1,24 +1,24 @@
 {
- "generated_at": "2026-11-02 01:20 IST",
- "sample_size": 87,
- "identified": 51,
+ "generated_at": "2026-11-03 04:40 IST",
+ "sample_size": 88,
+ "identified": 52,
  "inferred": 36,
  "cards_skipped": 0,
- "channel_avg_views": 24.9,
+ "channel_avg_views": 25.2,
  "growth": {
   "today": 471,
-  "snapshots": 25,
+  "snapshots": 26,
   "delta_7d": -4,
-  "per_day": 18.0,
-  "days_to_target": 29,
+  "per_day": 17.33,
+  "days_to_target": 30,
   "target": 1000,
-  "days_span": 26
+  "days_span": 27
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
-   "avg_views": 37.7,
+   "avg_views": 38.0,
    "weight": 1.51,
    "low_sample": false
   },
@@ -31,7 +31,7 @@
   "technical": {
    "posts": 6,
    "avg_views": 37.2,
-   "weight": 1.49,
+   "weight": 1.47,
    "low_sample": false
   },
   "tools": {
@@ -42,44 +42,44 @@
   },
   "risk": {
    "posts": 4,
-   "avg_views": 24.2,
-   "weight": 0.97,
+   "avg_views": 24.8,
+   "weight": 0.98,
    "low_sample": false
   },
   "corporate": {
    "posts": 42,
-   "avg_views": 24.2,
-   "weight": 0.97,
+   "avg_views": 24.7,
+   "weight": 0.98,
    "low_sample": false
   },
   "process": {
    "posts": 2,
-   "avg_views": 24.0,
+   "avg_views": 24.5,
    "weight": 1.0,
    "low_sample": true
   },
   "business_model": {
    "posts": 11,
-   "avg_views": 22.0,
-   "weight": 0.88,
+   "avg_views": 23.4,
+   "weight": 0.93,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 4,
    "avg_views": 21.0,
-   "weight": 0.84,
+   "weight": 0.83,
    "low_sample": false
   },
   "awareness": {
    "posts": 3,
-   "avg_views": 20.3,
-   "weight": 0.82,
+   "avg_views": 21.0,
+   "weight": 0.83,
    "low_sample": false
   },
   "other": {
-   "posts": 9,
-   "avg_views": 19.6,
-   "weight": 0.79,
+   "posts": 10,
+   "avg_views": 18.8,
+   "weight": 0.75,
    "low_sample": false
   }
  },
@@ -112,9 +112,9 @@
  ],
  "weak_posts": [
   {
-   "title": "AAA Corporates Bond Market Shift: Bank Loan Cost Advantage Bad for Ban",
-   "views": 8,
-   "pillar": "business_model"
+   "title": "RBI Announces Premature Redemption Price for SGB 2019-20 Series VI",
+   "views": 7,
+   "pillar": "other"
   },
   {
    "title": "Channel created",
