@@ -595,14 +595,16 @@
       "scheduled_ist": "2026-10-30 08:00",
       "title": "RBI Announces Premature Redemption Price for SGB 2019-20 Series VI",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI Announces Premature Redemption Price for SGB 2019-20 Series VI</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Reserve Bank of India has fixed the premature redemption price at ₹14,213 per unit for the Sovereign Gold Bond 2019-20 Series VI, which is due on October 30, 2026, marking completion of its mandatory five-year holding period.\n\n🧭 <b>MARKET CONTEXT</b>\nSGB premature redemption values are calculated using the simple average of the closing price of 999 purity gold over the previous three business days, as published by the India Bullion and Jewellers Association.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nThis mechanism allows early exits directly with the sovereign without relying on secondary market liquidity, where gold bonds often trade at discounts or thin volumes. It provides a clean liquidity window for investors holding this specific 2019 tranche, though opting for premature exit forfeits subsequent sovereign interest payouts.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch for upcoming IBJA gold price trends and subsequent sovereign gold bond redemption announcements to gauge comparative yields against physical gold or exchange-traded funds.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki SGBs ki liquidity secondary market mein improve honi chahiye ya sovereign redemption hi behtar option hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63884\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:28bc9f0115e5",
       "kind": "business_news_insight",
       "source_name": "RBI Press Releases",
       "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63884",
       "source_headline": "Premature redemption under Sovereign Gold Bond (SGB) Scheme - Redemption Price for premature redemption of SGB 2019-20 Series VI due on October 30, 2026",
       "story_key": "28bc9f0115e51e53352ea7d667f7ec9a7012a4b06d8d9a5dcf43527ecf1f3ae3",
-      "generated_at": "2026-10-30 01:15:20 IST"
+      "generated_at": "2026-10-30 01:15:20 IST",
+      "posted_at": "2026-11-02 15:17:14 IST",
+      "telegraph_url": "https://telegra.ph/RBI-Announces-Premature-Redemption-Price-for-SGB-2019-20-Series-VI--November-2026-11-02"
     },
     {
       "id": "newsmjtrzszfcm",
@@ -747,8 +749,24 @@
       "source_headline": "Sebi bars EKI Energy, MD Dabkara, others from market; imposes penalty",
       "story_key": "f9039bbd4f96d843785cd10f8c2c8b43f030d6bd80497cecc1d45b8fcc45b811",
       "generated_at": "2026-11-01 12:05:26 IST"
+    },
+    {
+      "id": "newsibmgyapndl",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-02 14:00",
+      "scheduled_ist": "2026-11-02 14:00",
+      "title": "IndiGo shares in focus as Centre notifies Rule 192 under Bharatiya Vayuyan Niyam",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>IndiGo shares in focus as Centre notifies Rule 192 under Bharatiya Vayuyan Niyam, 2026</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Central government has notified new airfare pricing rules under Rule 192 of the Bharatiya Vayuyan Niyam, 2026. Airlines are now empowered to set their own tariffs factoring in operating costs, but must submit them to the Directorate General of Civil Aviation. The rules mandate strict disclosure of base fares, taxes, cancellation charges, and refund conditions, while keeping pricing flexibility intact with no blanket fare caps defined.\n\n🧭 <b>MARKET CONTEXT</b>\nAirline tariffs directly impact passenger yields and capacity utilisation. While pricing flexibility allows carriers to adjust fares dynamically, enhanced disclosure norms and open-ended provisions regarding \"extraordinary\" circumstances leave room for regulatory oversight in public interest.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nClearer tariff disclosures and lack of blanket caps are generally constructive for dominant carriers like InterGlobe Aviation, preserving operational agility. However, because the rules do not explicitly clarify whether temporary or route-specific fare caps can be imposed, regulatory ambiguity remains a variable during peak travel demand seasons.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future DGCA circulars regarding route-specific interpretations, upcoming quarterly yield trends, and passenger revenue per available seat kilometre metrics.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do regulatory disclosures on cancellation and refund rules structurally affect an airline's ancillary revenue streams?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/interglobe-aviation-indigo-share-price-new-airfare-pricing-rules-airline-tariffs-dgca-20024472.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:d56fb4e54808",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/interglobe-aviation-indigo-share-price-new-airfare-pricing-rules-airline-tariffs-dgca-20024472.htm",
+      "source_headline": "InterGlobe Aviation shares gain after Centre notifies new airfare pricing rules — Check details",
+      "story_key": "d56fb4e54808e67e3cbc5d166c8d8a97a61e864ea06a3c128c599abc1988ee42",
+      "generated_at": "2026-11-02 15:15:42 IST"
     }
   ],
-  "total": 53,
-  "last_scheduled": "2026-11-01 12:00"
+  "total": 54,
+  "last_scheduled": "2026-11-02 14:00"
 }

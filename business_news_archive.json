@@ -1,6 +1,175 @@
 {
   "stories": [
     {
+      "id": "newsmctsrzijhn",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Spandana Sphoorty flags nearly ₹8 crore cyber fraud; shares slip",
+      "url": "https://www.cnbctv18.com/market/spandana-sphoorty-flags-rs-8-crore-cyber-fraud-shares-price-slip-20024794.htm",
+      "published_at": "2026-11-02T13:55:45+05:30",
+      "published_ist": "2026-11-02 13:55 IST",
+      "summary": "Spandana Sphoorty shares slipped after confirming a cyber fraud incident resulting in the unauthorized debit of nearly 8 crore rupees from its bank account.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 15:15:42 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A cyber fraud incident resulting in unauthorized debits highlights vulnerability in digital banking operations for financial lenders. While the company stated that it has lodged complaints and initiated insurance claims, actual financial impact would depend on the success of the bank recovery process and the final insurance payout. If recovery or insurance claims fail, the reported amount could directly hit profitability.",
+        "what_to_watch": [
+          "Official disclosures regarding successful recovery or reversal of the unauthorized debit amounts by the bank.",
+          "Updates on the final settlement status of the cyber fraud insurance claim."
+        ],
+        "evergreen_lesson": "Operational and cyber risk incidents in financial firms can trigger immediate stock volatility, but the ultimate net loss is dictated by insurance coverage efficacy and direct fund recovery timelines rather than the initial stolen amount."
+      }
+    },
+    {
+      "id": "newsgfdgkglhyq",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Coal India shares jump 4% after firm records highest-ever monthly coal supplies in October",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/coal-india-shares-jump-4-after-firm-records-highest-ever-monthly-coal-supplies-in-october/articleshow/135449740.cms",
+      "published_at": "2026-11-02T12:57:01+05:30",
+      "published_ist": "2026-11-02 12:57 IST",
+      "summary": "Coal India shares jumped more than 4% after the state-run miner reported record monthly coal production and supplies in October. Total supplies crossed 70 million tonnes for the first time, while deliveries to the power sector reached an all-time high of 57.1 million tonnes.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 15:15:42 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Record-high monthly coal supplies and production during October indicate strong operational execution for the state-run miner despite seasonal disruptions like unseasonal rainfall and cyclones. If sustained, higher offtake and rake loading could improve inventory accretion at thermal power plants and boost revenues. However, higher volume alone does not guarantee margin expansion if realization prices fluctuate.",
+        "what_to_watch": [
+          "Subsequent monthly production and rake loading data published by the company or railways.",
+          "Official data on thermal power plant coal stock levels to verify actual inventory accretion."
+        ],
+        "evergreen_lesson": "Volume growth during traditionally challenging monsoon or post-monsoon months signals robust supply-chain resilience, but investors must track realization rates to gauge bottom-line impact."
+      }
+    },
+    {
+      "id": "newsikbkuimmmc",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "SML Mahindra shares jump 2.5% ahead of November 6 board meet to consider fundraise",
+      "url": "https://www.cnbctv18.com/market/sml-mahindra-share-price-rise-board-consider-fundraise-via-equity-q2-results-20024717.htm",
+      "published_at": "2026-11-02T12:48:32+05:30",
+      "published_ist": "2026-11-02 12:48 IST",
+      "summary": "A meeting of the Board of Directors of SML Mahindra Limited is slated to be held on Friday, 6th November, to evaluate the proposal to raise funds through equity shares or other securities via permissible methods.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 15:15:42 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "An upcoming board meeting to evaluate fundraising proposals suggests the company may be looking to strengthen its capital structure amid declining quarterly net profit and operating margins. While fundraising can provide necessary liquidity for operations or expansion, equity dilution could impact existing shareholders if capital is not deployed efficiently. The announcement alone only signifies an evaluation phase, not actual capital raised.",
+        "what_to_watch": [
+          "The specific outcome and board approval details regarding the mode and quantum of fundraising on November 6.",
+          "Subsequent exchange filings on capital deployment and utilization plans."
+        ],
+        "evergreen_lesson": "A board's intent to consider fundraising highlights a need for capital, but the ultimate valuation impact depends heavily on the chosen instrument—debt versus equity dilution—and the projected return on capital employed."
+      }
+    },
+    {
+      "id": "newskeeieomgsz",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Asian Market Securities sees FY28 growth slowdown for insurers; SBI & HDFC Life better positioned",
+      "url": "https://www.cnbctv18.com/market/life-insurers-face-growth-slowdown-new-regulations-sbi-life-hdfc-pbfintech-policy-bazaar-alpha-article-20024637.htm",
+      "published_at": "2026-11-02T11:26:35+05:30",
+      "published_ist": "2026-11-02 11:26 IST",
+      "summary": "ew insurance regulations expected from April 2027 could slow life insurers' growth in FY28. SBI Life and HDFC Life may be better placed to manage the transition, while PB Fintech has limited downside, says Harshal Mehta, Vice President-Equity Research at Asian Markets Securities.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsywipnhnzlz",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Dixon Technologies shares may correct another 5-10%, says Chola's Dharmesh Kant",
+      "url": "https://www.cnbctv18.com/market/dixon-technologies-share-price-may-correct-another-5-10-says-cholas-dharmesh-kant-alpha-article-20024559.htm",
+      "published_at": "2026-11-02T10:12:43+05:30",
+      "published_ist": "2026-11-02 10:12 IST",
+      "summary": "Kant flags continued margin pressure at Dixon Technologies, with the benefits from its Vivo partnership likely to come only in FY28. He also remains cautious about Muthoot Finance, warning that asset quality and collections could remain under pressure over the next two quarters.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsxcwuhproin",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "InterGlobe Aviation shares gain after Centre notifies new airfare pricing rules — Check details",
+      "url": "https://www.cnbctv18.com/market/interglobe-aviation-indigo-share-price-new-airfare-pricing-rules-airline-tariffs-dgca-20024472.htm",
+      "published_at": "2026-11-02T09:37:47+05:30",
+      "published_ist": "2026-11-02 09:37 IST",
+      "summary": "The Rule 192 of the Bharatiya Vayuyan Niyam, 2026 deals with airline tariffs. Airlines can set their own tariffs, which are to factor in operating costs. Airlines are required to submit the tariffs to the DGCA.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "queued",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 15:15:42 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The notification of new airfare pricing rules under Rule 192 allows airlines to retain pricing flexibility based on operating costs while increasing mandatory tariff disclosures to the DGCA. Since the rules leave room for government intervention in public interest without explicitly defining extraordinary circumstances, potential regulatory caps remain an uncertainty. If strict fare caps are introduced later, airline yields could face pressure.",
+        "what_to_watch": [
+          "Compliance filings and tariff disclosures submitted by airlines to the DGCA.",
+          "Any subsequent circulars or clarifications from the Centre regarding route-specific or temporary fare caps."
+        ],
+        "evergreen_lesson": "Regulatory frameworks that emphasize transparency and pricing flexibility still leave open the risk of discretionary government intervention during periods of high consumer inflation or crisis."
+      },
+      "processed_ist": "2026-11-02 15:15:42 IST",
+      "post_id": "newsibmgyapndl"
+    },
+    {
+      "id": "newsuzohwtvvtn",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "NSE shares can rally 30%, Morgan Stanley says on India's capital market growth",
+      "url": "https://www.cnbctv18.com/market/nse-share-price-can-rally-morgan-stanley-says-on-india-capital-market-growth-national-stock-exchange-20024570.htm",
+      "published_at": "2026-11-02T09:31:15+05:30",
+      "published_ist": "2026-11-02 09:31 IST",
+      "summary": "Morgan Stanley described NSE as an attractive play on India's expanding capital markets, citing its dominant market position, deep liquidity, scalable technology infrastructure and strong business economics.",
+      "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
+      "first_seen_ist": "2026-11-02 15:15:42 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 15:15:42 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Brokerage target prices reflect projected financialisation of household savings and strong historical earnings growth, but an initiation note does not guarantee future execution. If market share in index options stabilises and new revenue streams scale up, then exchange profitability could match the projected 15% CAGR through FY29. However, retail readers should note that the headline does not establish whether potential regulatory tightening or a decline in trading volumes might compress margins before those projections materialise.",
+        "what_to_watch": [
+          "Track subsequent quarterly disclosures for actual transaction revenue growth and stability in index options market share.",
+          "Monitor official circulars from regulators regarding any policy changes or trading curbs that could impact exchange fees."
+        ],
+        "evergreen_lesson": "Brokerage growth projections highlight structural tailwinds like financialisation, but investors must separate analyst target models from guaranteed operational execution."
+      }
+    },
+    {
       "id": "newszofxwglurl",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -10,9 +179,9 @@
       "published_ist": "2026-11-02 07:02 IST",
       "summary": "South Korea's Kospi falls 1.06% and Japan's Nikkei 225 slips 0.39%, extending Friday's Wall Street losses as concerns grow over rising AI spending and weakening core businesses at US technology companies. The Nasdaq 100 tumbled 3.5% in its worst session since June.",
       "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
-      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
       "first_seen_ist": "2026-11-02 07:12:06 IST",
-      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -55,9 +224,9 @@
       "published_ist": "2026-11-02 04:59 IST",
       "summary": "Axis Securities advises a staggered, stock-specific accumulation strategy in quality large, mid and smallcap stocks, with 22,100 as a key level to watch. The firm has recommended 12 stocks, whose long-term charts have a potential to gain as much as 50% during the new Samvat. Here's a look at their 12 stock recommendations.",
       "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
-      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
       "first_seen_ist": "2026-11-02 07:12:06 IST",
-      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -129,9 +298,9 @@
       "published_ist": "2026-11-01 16:11 IST",
       "summary": "KIMS has doubled the bed capacity of its Saveera Hospital in Anantapur from 250 to 500 beds. The expansion includes an Oncology Block with advanced cancer diagnosis and treatment facilities, and a dedicated Mother and Child Block with neonatal intensive care facilities.",
       "first_seen_at": "2026-11-01T20:52:30.979064+05:30",
-      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
       "first_seen_ist": "2026-11-01 20:52:30 IST",
-      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -220,9 +389,9 @@
       "published_ist": "2026-10-31 17:11 IST",
       "summary": "The regulator’s remarks come amid questions over the holding company’s leadership, proposed listing and governance, as its listed entities remain under scrutiny.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 15:15:42 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -4763,43 +4932,43 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-02T07:12:06.399305+05:30",
-  "last_scraped_ist": "2026-11-02 07:12:06 IST",
+  "last_scraped_at": "2026-11-02T15:15:42.492391+05:30",
+  "last_scraped_ist": "2026-11-02 15:15:42 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
-      "fresh_items": 54,
-      "accepted_items": 4,
-      "filtered_items": 50,
+      "fresh_items": 78,
+      "accepted_items": 9,
+      "filtered_items": 69,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 11,
-      "filtered_items": 39,
+      "accepted_items": 1,
+      "filtered_items": 49,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
-      "fresh_items": 9,
+      "fresh_items": 24,
       "accepted_items": 1,
-      "filtered_items": 8,
+      "filtered_items": 23,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
-      "fresh_items": 0,
+      "fresh_items": 3,
       "accepted_items": 0,
-      "filtered_items": 0,
+      "filtered_items": 3,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -4807,7 +4976,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-02 07:12:06 IST",
+      "checked_ist": "2026-11-02 15:15:42 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -4839,16 +5008,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-02 07:12:06 IST"
+    "last_curated_ist": "2026-11-02 15:15:42 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-02 07:12:06 IST",
-    "fetched_items": 113,
-    "accepted_feed_items": 16,
-    "filtered_feed_items": 97,
-    "new_unique_stories": 4,
+    "updated_ist": "2026-11-02 15:15:42 IST",
+    "fetched_items": 155,
+    "accepted_feed_items": 11,
+    "filtered_feed_items": 144,
+    "new_unique_stories": 7,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 191
+    "stories_total": 198
   }
 }
