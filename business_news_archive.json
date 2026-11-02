@@ -1,6 +1,95 @@
 {
   "stories": [
     {
+      "id": "newszofxwglurl",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Asia markets fall as AI sell-off hits tech stocks; Kospi, Nikkei open lower",
+      "url": "https://www.cnbctv18.com/market/asia-markets-fall-as-ai-sell-off-hits-tech-stocks-kospi-nikkei-open-lower-20024432.htm",
+      "published_at": "2026-11-02T07:02:49+05:30",
+      "published_ist": "2026-11-02 07:02 IST",
+      "summary": "South Korea's Kospi falls 1.06% and Japan's Nikkei 225 slips 0.39%, extending Friday's Wall Street losses as concerns grow over rising AI spending and weakening core businesses at US technology companies. The Nasdaq 100 tumbled 3.5% in its worst session since June.",
+      "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "first_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsgeijumggdj",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Stocks in news: Reliance Industries, Jio Platforms, M&M, CDSL, ITC, NTPC, IOCL and Hero MotoCorp",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/stocks-in-news-reliance-industries-jio-platforms-mm-cdsl-itc-ntpc-iocl-and-hero-motocorp/articleshow/135432220.cms",
+      "published_at": "2026-11-02T06:00:00+05:30",
+      "published_ist": "2026-11-02 06:00 IST",
+      "summary": "Indian equity benchmarks closed higher on Friday, with significant gains recorded in the Nifty 50 and BSE Sensex. Several major companies, including Reliance Industries and Jio Platforms, published positive quarterly earnings results. Reliance Industries saw a 41% increase in net profit, supported by strong performances in various sectors. Other companies like Sun Pharma and Indian Oil Corporation also reported significant changes in their net profits.",
+      "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "first_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "status": "rejected",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 07:12:06 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab companies quarterly earnings report karti hain, toh headline profit growth ya decline ek single point in time dikhata hai, lekin yeh automatically sustainable operating margins ya future cash flows establish nahi karta. Jaise ki Sun Pharma ke case mein, exceptional charges (jaise US litigation ya acquisitions) ki wajah se profit decline hua, jo ki operating failure ke badle ek one-off accounting impact ho sakta hai. Agar yeh charges transient hain, toh core business health par long-term asar nahi padega, lekin agar yeh recurring litigation bane rahe, toh valuation multiples compress ho sakte hain.",
+        "what_to_watch": [
+          "Next quarters mein exceptional charges ya litigation costs repeat hote hain ya nahi.",
+          "Company ke segment-wise revenue breakdown aur operating margins (jaise O2C ya digital services ke liye).",
+          "Management commentary on future capital expenditure aur volume growth."
+        ],
+        "evergreen_lesson": "Quarterly profit growth ya contraction ko evaluate karte waqt, headline net profit ko core operating performance se alag dekhna zaroori hai taaki one-off exceptional items ko long-term trend se distinguish kiya ja sake."
+      },
+      "processed_ist": "2026-11-02 07:12:06 IST"
+    },
+    {
+      "id": "newsecrofcrpid",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Top Technical Stock Picks: Axis Securities names 12 stocks for Samvat 2083 and up to 50% upside",
+      "url": "https://www.cnbctv18.com/photos/market/top-technical-picks-for-samvat-2083-axis-securities-up-to-49-percent-upside-aurobindo-sona-blw-kotak-bank-tech-mah-share-price-20024406.htm",
+      "published_at": "2026-11-02T04:59:19+05:30",
+      "published_ist": "2026-11-02 04:59 IST",
+      "summary": "Axis Securities advises a staggered, stock-specific accumulation strategy in quality large, mid and smallcap stocks, with 22,100 as a key level to watch. The firm has recommended 12 stocks, whose long-term charts have a potential to gain as much as 50% during the new Samvat. Here's a look at their 12 stock recommendations.",
+      "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "first_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsnoehsxnghk",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Sebi to delist penny stocks: Market regulator plans AI-based surveillance of such firms",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/market-regulator-plans-ai-based-surveillance-of-such-firms/articleshow/135441629.cms",
+      "published_at": "2026-11-01T18:49:51+05:30",
+      "published_ist": "2026-11-01 18:49 IST",
+      "summary": "The Securities and Exchange Board of India plans to delist companies that have no economic activity. This move aims to protect investors, especially those investing in penny stocks. The regulator highlights the potential dangers posed by such inactive companies in the market. Additionally, Sebi intends to announce compliance requirements for foreign institutional investors soon.",
+      "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
+      "first_seen_ist": "2026-11-02 07:12:06 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-02 07:12:06 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab regulator (SEBI) inactive ya shell companies ko delist karne aur AI-based surveillance laane ki planning karta hai, toh iska maqsad retail investors ko high-risk manipulation se bachana hota hai. Regulatory announcements ya plans se market cleaning ka intention pata chalta hai, lekin actual execution aur timelines par depend karta hai ki kitni jaldi inactive firms exchange se bahar hoti hain. Agar AI-based surveillance successfully implement hoti hai, toh price manipulation aur abnormal volatility kam ho sakti hai, jisse market quality improve hogi.",
+        "what_to_watch": [
+          "Kitni jaldi aur kis criteria ke tahat AI-based surveillance system deploy kiya jata hai.",
+          "Inactive companies ko delist karne ke liye formal circulars ya timelines release hote hain ya nahi.",
+          "FII compliance requirements par aane wale consultation paper ke final norms."
+        ],
+        "evergreen_lesson": "Regulatory proposals ya surveillance upgrades ek structural shift ka signal dete hain, lekin unka actual impact compliance enforcement ki speed aur formal rules ke implementation par nirbhar karta hai."
+      }
+    },
+    {
       "id": "newsrimaqsaqhg",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +99,9 @@
       "published_ist": "2026-11-01 17:16 IST",
       "summary": "Sensex and Nifty ended the week up about 0.5%, supported by resilient large-cap, IT and healthcare stocks. However, midcap and smallcap indices fell as much as 2% amid rising crude oil prices, inflation concerns and a global technology sell-off.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "posted",
       "topic": "stock_market",
       "processed_ist": "2026-10-25 19:58:58 IST",
@@ -40,9 +129,9 @@
       "published_ist": "2026-11-01 16:11 IST",
       "summary": "KIMS has doubled the bed capacity of its Saveera Hospital in Anantapur from 250 to 500 beds. The expansion includes an Oncology Block with advanced cancer diagnosis and treatment facilities, and a dedicated Mother and Child Block with neonatal intensive care facilities.",
       "first_seen_at": "2026-11-01T20:52:30.979064+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-11-01 20:52:30 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -56,9 +145,9 @@
       "published_ist": "2026-11-01 12:53 IST",
       "summary": "Ten actively traded penny stocks have fallen between 34% and 73% over the past three months, highlighting the risks associated with low-priced shares. Cropster Agro recorded the steepest decline at 73%, followed by Bridge Securities and Empower India, which dropped 55% and 50%, respectively.",
       "first_seen_at": "2026-11-01T20:52:30.979064+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-11-01 20:52:30 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -72,9 +161,9 @@
       "published_ist": "2026-11-01 11:25 IST",
       "summary": "Nifty IT’s 18% October rally could signal a sustained leadership cycle, supported by improving momentum, a bullish RSI crossover and capital rotation from global AI stocks. Analyst Vatsal Bhuva sees the index targeting 35,000. He remains cautious on Swiggy, bullish on Acutaas Chemicals, and recommends buying Persistent Systems and Eternal based on positive technical setups.",
       "first_seen_at": "2026-11-01T12:05:26.998410+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-11-01 12:05:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "rejected",
       "topic": "capital_market",
       "ai_insight": {
@@ -101,9 +190,9 @@
       "published_ist": "2026-11-01 09:23 IST",
       "summary": "The Securities and Exchange Board of India (Sebi) has taken serious action against EKI Energy Services Ltd and its Managing Director due to financial misreporting. The regulatory body discovered that the company recognized revenue too early and inflated expenses, distorting profit reports. In addition to the company's penalties totaling Rs 88 lakh, several executives were also fined for their complicity in these discrepancies.",
       "first_seen_at": "2026-11-01T12:05:26.998410+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-11-01 12:05:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -131,9 +220,9 @@
       "published_ist": "2026-10-31 17:11 IST",
       "summary": "The regulator’s remarks come amid questions over the holding company’s leadership, proposed listing and governance, as its listed entities remain under scrutiny.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -160,9 +249,9 @@
       "published_ist": "2026-10-31 15:40 IST",
       "summary": "S Naren of ICICI Prudential Mutual Fund highlights how only six companies from the 1990 Sensex remain in the benchmark today. At ET Wealth Expo, he explained why beaten-down stocks may never recover and urged investors to distinguish between asset allocation and stock selection, while cautioning against chasing strong past returns.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -187,9 +276,9 @@
       "published_ist": "2026-10-31 15:07 IST",
       "summary": "Axis Trustee Services Limited demanded that Yes Bank reinstate AT1 bonds worth 8,415 crore rupees within three days following a Supreme Court judgment, threatening contempt action for non-compliance.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -216,9 +305,9 @@
       "published_ist": "2026-10-31 14:22 IST",
       "summary": "Eight Nifty 500 stocks, including IndusInd Bank, Tata Motors and Delhivery, moved from losses to profits in the September 2026 quarter, according to StockEdge's profitability scan.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -232,9 +321,9 @@
       "published_ist": "2026-10-31 13:11 IST",
       "summary": "SEBI Chairman Tuhin Kanta Pandey emphasized the importance of accessible and efficient capital markets at a recent forum. He highlighted the growth in market capitalisation with significant annual fundraising through equity and debt. The number of investors in West Bengal has dramatically increased, indicating regional market participation. Additionally, various steps have been taken to streamline compliance and fundraising processes for issuers.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -262,9 +351,9 @@
       "published_ist": "2026-10-31 12:30 IST",
       "summary": "Eight BSE 500 stocks gained in each of the five sessions between October 26 and 30, delivering cumulative returns of 10% to 21%.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -278,9 +367,9 @@
       "published_ist": "2026-10-31 11:45 IST",
       "summary": "Nifty could extend its recovery towards 23,500 if it decisively breaks above the 23,150–23,200 resistance zone, says SBI Securities' Sudeep Shah. He also shares his outlook on IT, midcap and smallcap indices, sector trends and six stocks, including TVS Motor, Coforge and ICICI Bank, ahead of Diwali.",
       "first_seen_at": "2026-10-31T18:25:26.664171+05:30",
-      "last_seen_at": "2026-11-02T02:11:25.875944+05:30",
+      "last_seen_at": "2026-11-02T07:12:06.399305+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
-      "last_seen_ist": "2026-11-02 02:11:25 IST",
+      "last_seen_ist": "2026-11-02 07:12:06 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -4674,35 +4763,35 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-02T02:11:25.875944+05:30",
-  "last_scraped_ist": "2026-11-02 02:11:25 IST",
+  "last_scraped_at": "2026-11-02T07:12:06.399305+05:30",
+  "last_scraped_ist": "2026-11-02 07:12:06 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
-      "fresh_items": 43,
-      "accepted_items": 2,
-      "filtered_items": 41,
+      "fresh_items": 54,
+      "accepted_items": 4,
+      "filtered_items": 50,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
-      "fresh_items": 46,
+      "fresh_items": 50,
       "accepted_items": 11,
-      "filtered_items": 35,
+      "filtered_items": 39,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
-      "fresh_items": 7,
+      "fresh_items": 9,
       "accepted_items": 1,
-      "filtered_items": 6,
+      "filtered_items": 8,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -4710,7 +4799,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -4718,7 +4807,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-02 02:11:25 IST",
+      "checked_ist": "2026-11-02 07:12:06 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -4750,16 +4839,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-02 02:11:25 IST"
+    "last_curated_ist": "2026-11-02 07:12:06 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-02 02:11:25 IST",
-    "fetched_items": 96,
-    "accepted_feed_items": 14,
-    "filtered_feed_items": 82,
-    "new_unique_stories": 0,
+    "updated_ist": "2026-11-02 07:12:06 IST",
+    "fetched_items": 113,
+    "accepted_feed_items": 16,
+    "filtered_feed_items": 97,
+    "new_unique_stories": 4,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 187
+    "stories_total": 191
   }
 }
