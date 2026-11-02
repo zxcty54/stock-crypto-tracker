@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-11-01 22:06:35 IST",
   "worthy_count": 37,
-  "skipped_count": 40,
+  "skipped_count": 39,
   "content_feed": [
     {
       "hash": "65401d31c2eb",
@@ -1068,20 +1068,6 @@
       "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the provided text snippet.",
       "telegram_post": "",
       "analyzed_at": "2026-11-01 14:54:10 IST"
-    },
-    {
-      "hash": "b92870249733",
-      "symbol": "CAPITALSFB",
-      "company_name": "Capital Small Finance Bank Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "29-Oct-2026 18:42:14",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/CAPITALSFB_29102026183915_outcomesigned.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results announcement lacks explicit numeric values for Revenue and PAT in the text summary, and the filing primarily discusses meeting outcomes, deferred bond issuance, and routine appointments.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-01 04:21:27 IST"
     }
   ]
 }
