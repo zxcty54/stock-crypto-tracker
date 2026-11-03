@@ -631,14 +631,16 @@
       "scheduled_ist": "2026-10-30 10:00",
       "title": "Sun Pharma shares rise after USFDA approves ILUMYA for arthritis",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sun Pharma shares rise after USFDA approves ILUMYA for arthritis</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSun Pharmaceutical Industries Ltd. shares gained over 2 percent, extending a four-day winning streak following US Food and Drug Administration approval for its drug ILUMYA to treat adults with active psoriatic arthritis. The regulatory decision approves a supplemental Biologics License Application, expanding the drug's use from plaque psoriasis to a joint condition.\n\n🧭 <b>MARKET CONTEXT</b>\nILUMYA is an interleukin-23 inhibitor, a biological therapy targeting a signalling protein that regulates immune inflammation. Psoriatic arthritis is a chronic condition causing joint pain and stiffness, affecting about 2.4 million Americans and roughly one in three psoriasis patients.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nRegulatory approvals for label expansions allow pharmaceutical companies to address broader patient populations with existing approved molecules, which can drive commercial growth in regulated markets like North America. Such approvals validate clinical trial data and can strengthen a firm's product portfolio in specialty segments, though commercial success depends on physician adoption and market competition.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future quarterly earnings reports for revenue contributions from the expanded indication, ongoing prescription trends in international markets, and updates on any additional regulatory submissions.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki specialty pharma companies ki US markets mein growth ab traditional generics se zyada important ho gayi hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sun-pharmaceutical-share-price-extends-four-day-rally-us-fda-approval-ilumya-psoriatic-arthritis-treatment-20023019.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:3f318fb0e953",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/market/sun-pharmaceutical-share-price-extends-four-day-rally-us-fda-approval-ilumya-psoriatic-arthritis-treatment-20023019.htm",
       "source_headline": "Sun Pharma shares extend 4-day rally after USFDA approval for ILUMYA in arthritis patients",
       "story_key": "3f318fb0e9535eee5ff68c8e6cfbc63fb482c438f151a80564963ac3157686ac",
-      "generated_at": "2026-10-30 11:40:31 IST"
+      "generated_at": "2026-10-30 11:40:31 IST",
+      "posted_at": "2026-11-03 17:41:36 IST",
+      "telegraph_url": "https://telegra.ph/Sun-Pharma-shares-rise-after-USFDA-approves-ILUMYA-for-arthritis--November-2026-11-03"
     },
     {
       "id": "newsteqjqpowjz",
@@ -849,8 +851,24 @@
       "used": false,
       "topic_key": "boredom_trades",
       "generated_at": "2026-11-02 15:40:19 IST"
+    },
+    {
+      "id": "newswyleduqfpc",
+      "slot": "E",
+      "hourly_slot_ist": "2026-11-03 16:00",
+      "scheduled_ist": "2026-11-03 16:00",
+      "title": "RBI updates FEMA export-import rules, eases service reporting thresholds to ₹10 ",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI updates FEMA export-import rules, eases service reporting thresholds to ₹10 Lakh</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nRBI ne Foreign Exchange Management (Export and Import of Goods and Services) (Second Amendment) Regulations, 2026 notify kiye hain, jo October 1, 2026 se effective hain. Resident individuals aur non-individuals ke liye service exports aur imports ki reporting requirements mein badlav kiya gaya hai.\n\n🧭 <b>MARKET CONTEXT</b>\n'Export Declaration Form' (EDF) aur 'Import Data Processing and Monitoring System' (IDPMS) woh systems hain jinke zariye RBI cross-border trade transactions ko track karta hai. Naye rules ke mutabik, non-resident individual exporters ya any entity other than resident individuals ke liye ₹10 lakh tak ke inward remittances par EDF submission deem ho jayegi, aur ₹10 lakh se zyada ke import of services ke details IDPMS mein enter karne honge.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nYeh amendment small service exporters aur importers ke liye compliance burden ko streamline kar sakta hai, kyunki chote value ke transactions par reporting process automate ya simplify ho jata hai. Agar cross-border settlements fast hote hain, toh IT, consulting, aur digital service export sectors ki working capital efficiency improve ho sakti hai, though yeh sabhi entities ke transaction sizes par depend karega.\n\n🔎 <b>KEY WATCHPOINTS</b>\nAuthorised Dealer (AD) banks ke circulars, compliance turnaround times, aur kya chote service exporters ko actual practice mein documentation ease milti hai, yeh metrics track karne honge.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki yeh compliance threshold relaxation service-focused micro and small enterprises (MSMEs) ke liye cash flow management aasan karegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13750&amp;Mode=0\">RBI Notifications</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:0e70b6bbe9f1",
+      "kind": "business_news_insight",
+      "source_name": "RBI Notifications",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13750&Mode=0",
+      "source_headline": "Foreign Exchange Management (Export and Import of Goods and Services) (Second Amendment) Regulations, 2026",
+      "story_key": "0e70b6bbe9f1202646c44fa28ac5d9b790eee7e172645ddcc6de32f4929767ac",
+      "generated_at": "2026-11-03 17:40:53 IST"
     }
   ],
-  "total": 61,
-  "last_scheduled": "2026-11-03 10:00"
+  "total": 62,
+  "last_scheduled": "2026-11-03 16:00"
 }
