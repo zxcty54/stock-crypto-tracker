@@ -1,32 +1,32 @@
 # 📊 Performance Report
 
-**03-Nov-2026 04:40 IST** | 88 posts tracked | channel avg **25 views**
+**04-Nov-2026 02:40 IST** | 91 posts tracked | channel avg **25 views**
 
-*52 posts pehchaane gaye, 36 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*54 posts pehchaane gaye, 37 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 38 | 1.51 |
+| lifestyle | 3 | 38 | 1.53 |
 | psychology | 2 | 38 | 1.0 |
-| technical | 6 | 37 | 1.47 |
+| technical | 6 | 37 | 1.49 |
 | tools | 1 | 29 | 1.0 |
-| risk | 4 | 25 | 0.98 |
-| corporate | 42 | 25 | 0.98 |
-| process | 2 | 24 | 1.0 |
-| business_model | 11 | 23 | 0.93 |
-| market_mechanics | 4 | 21 | 0.83 |
-| awareness | 3 | 21 | 0.83 |
-| other | 10 | 19 | 0.75 |
+| process | 2 | 25 | 1.0 |
+| risk | 4 | 25 | 0.99 |
+| corporate | 43 | 24 | 0.98 |
+| business_model | 12 | 22 | 0.9 |
+| awareness | 3 | 22 | 0.88 |
+| market_mechanics | 4 | 21 | 0.84 |
+| other | 11 | 19 | 0.76 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 471** (target 1000)
+**Subscribers: 470** (target 1000)
 
-- Pichhle 7 din me: **-4**
-- Average: **17.33/din**
-- Isi raftaar se 1000 subs: **~30 din**
+- Pichhle 7 din me: **-5**
+- Average: **16.68/din**
+- Isi raftaar se 1000 subs: **~31 din**
 
 
 ## 🏆 Top posts
@@ -44,8 +44,8 @@
 
 ## ⚠️ Kam chale posts
 
-- 7 views — RBI Announces Premature Redemption Price for SGB 2019-20 Series VI  
-  `other`
+- 5 views — Utkarsh Small Finance Bank Limited (NSE: UTKARSHBNK)  
+  `corporate`
 - 0 views — Channel created  
   `other`
 - 0 views — Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful  
