@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-11-03 05:34:20 IST",
-  "worthy_count": 39,
-  "skipped_count": 41,
+  "generated_at": "2026-11-03 12:25:17 IST",
+  "worthy_count": 41,
+  "skipped_count": 44,
   "content_feed": [
+    {
+      "hash": "793241262b06",
+      "symbol": "NATIONALUM",
+      "company_name": "National Aluminium Company Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "03-Nov-2026 08:08:23",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/bharatsahu_03112026080806_SELETTER.pdf",
+      "headline": "National Aluminium Company Reports Record H1 FY27 Financial Results with PAT at Rs. 3,837 Crore",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with numeric Revenue, EBITDA, PBT and PAT for H1 FY 2026-27.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>National Aluminium Company Limited (NSE: NATIONALUM)</b>\n\n<b>National Aluminium Company Reports Record H1 FY27 Financial Results with PAT at Rs. 3,837 Crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>H1 Total Income:</b> Rs. 11,143 Crore (up 33% YoY)\n- <b>H1 EBITDA:</b> Rs. 5,539 Crore (up 50% YoY)\n- <b>H1 PBT:</b> Rs. 5,160 Crore (up 55% YoY)\n- <b>H1 PAT:</b> Rs. 3,837 Crore (up 54% YoY)\n- <b>Q2 Net Profit:</b> Rs. 1,835 Crore (up 28% YoY)\n\n📌 <b>What happened:</b>\n↳ National Aluminium Company Limited announced its financial results for the first half of FY 2026-27, registering record all-time high figures across total income, EBITDA, PBT, and PAT since its inception.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/bharatsahu_03112026080806_SELETTER.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-03 12:25:17 IST"
+    },
+    {
+      "hash": "f9e0d7e86c82",
+      "symbol": "MCLOUD",
+      "company_name": "Magellanic Cloud Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "03-Nov-2026 09:15:34",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MCLOUD_03112026091422_Press_Release.pdf",
+      "headline": "Magellanic Cloud Announces Facility Readiness for UAV Joint Venture",
+      "content_worthy": true,
+      "worthiness_reason": "Material update regarding joint venture facility readiness and phased operational rollout for UAV manufacturing.",
+      "telegram_post": "🏭 <b>#JOINT_VENTURE</b> | <b>Magellanic Cloud Limited (NSE: MCLOUD)</b>\n\n<b>Magellanic Cloud Announces Readiness of UAV Facility Premises (Counter Drone) Under Joint Venture</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Joint Venture:</b> MCRAY XTEND INDIA PRIVATE LIMITED (MCRAY)\n- <b>Partners:</b> Rayonix Tech in collaboration with Israel-based XTEND\n- <b>Company Stake:</b> 60% equity stake held by Magellanic Cloud\n- <b>Facility Scope:</b> Advanced UAV manufacturing, calibration, system integration, and flight-testing\n- <b>Operational Rollout:</b> Phased deployment of production capabilities and commercial operations\n\n📌 <b>What happened:</b>\n↳ Magellanic Cloud announced that the physical premises for its advanced Unmanned Aerial Vehicle (UAV) manufacturing and testing facility under its joint venture MCRAY are ready. The facility will support tactical drone systems powered by XTEND’s XOS autonomy platform.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MCLOUD_03112026091422_Press_Release.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-03 12:24:54 IST"
+    },
     {
       "hash": "23a17fc50c6f",
       "symbol": "POWERGRID",
@@ -551,6 +579,48 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "ebaeac0f3a83",
+      "symbol": "MCLOUD",
+      "company_name": "Magellanic Cloud Limited",
+      "category": "JV",
+      "event_type": "OTHER",
+      "broadcast_date": "03-Nov-2026 09:06:46",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MCLOUD_03112026090627_Intimation__2_.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Duplicate filing covering the exact same corporate update as input_id 1.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 12:24:54 IST"
+    },
+    {
+      "hash": "82dbbb8d20ac",
+      "symbol": "JYOTICNC",
+      "company_name": "Jyoti CNC Automation Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "03-Nov-2026 12:04:51",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/JYOTICNC_NSE_03112026115810_Outcome_of_BM_03112026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing details lack explicit numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 12:24:33 IST"
+    },
+    {
+      "hash": "5f9a863c3cd1",
+      "symbol": "JAINREC",
+      "company_name": "Jain Resource Recycling Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "03-Nov-2026 12:08:52",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/JAINMETAL_03112026120820_NSEBSEOUT.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing details lack explicit numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 12:24:33 IST"
+    },
     {
       "hash": "c9831e268f53",
       "symbol": "PURVA",
