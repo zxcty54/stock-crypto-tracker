@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-11-02 23:20:57 IST",
-  "worthy_count": 38,
-  "skipped_count": 37,
+  "generated_at": "2026-11-03 05:34:20 IST",
+  "worthy_count": 39,
+  "skipped_count": 41,
   "content_feed": [
+    {
+      "hash": "23a17fc50c6f",
+      "symbol": "POWERGRID",
+      "company_name": "Power Grid Corporation of India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "01-Nov-2026 20:11:02",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/POWERGRID1_01112026200821_BSENSEReg30FileFinal.pdf",
+      "headline": "Power Grid Corporation Reports Q2 FY27 Financial Results and Declares Interim Dividend",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with explicit revenue and PAT along with interim dividend announcement.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Power Grid Corporation of India Limited (NSE: POWERGRID)</b>\n\n<b>Power Grid Corporation Reports Q2 FY27 Financial Results and Declares Interim Dividend</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> ₹10,048.43 Crore (Q2 FY27)\n- <b>Interim Dividend:</b> ₹3.00 per share (30%)\n- <b>Record Date:</b> November 6, 2026\n- <b>Payment Date:</b> November 30, 2026\n\n📌 <b>What happened:</b>\n↳ The company's Board of Directors approved the unaudited standalone and consolidated financial results for the quarter ended September 30, 2026, alongside declaring a 1st interim dividend of ₹3.00 per equity share for FY 2026-27.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/POWERGRID1_01112026200821_BSENSEReg30FileFinal.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-03 05:34:20 IST"
+    },
     {
       "hash": "13e123723bf4",
       "symbol": "SHYAMMETL",
@@ -537,6 +551,62 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "c9831e268f53",
+      "symbol": "PURVA",
+      "company_name": "Puravankara Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "02-Nov-2026 20:15:16",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/PURVA_02112026201310_SE-intimation.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Filing text is incomplete and lacks explicit numeric Revenue and PAT figures.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 05:33:58 IST"
+    },
+    {
+      "hash": "df8b18b619fd",
+      "symbol": "LLOYDSENGG",
+      "company_name": "LLOYDS ENGINEERING WORKS LIMITED",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "02-Nov-2026 21:46:31",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/LSIL_02112026214210_FINANCIALSRESULTSSIGNED.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Filing lacks explicit numeric PAT data for the period.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 05:33:58 IST"
+    },
+    {
+      "hash": "e67dedfd6d8f",
+      "symbol": "DIGITIDE",
+      "company_name": "Digitide Solutions Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "02-Nov-2026 21:59:57",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/DIGITIDE_02112026215817_Digitide_Outcome_02112026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing does not contain explicit numeric values for Revenue and PAT in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 05:33:37 IST"
+    },
+    {
+      "hash": "db050cb1f058",
+      "symbol": "EFCIL",
+      "company_name": "EFC (I) Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "03-Nov-2026 01:57:20",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/EFCILTD_03112026015659_EFC_Financial_Results_Q2.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing does not contain explicit numeric values for Revenue and PAT in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-03 05:33:37 IST"
+    },
     {
       "hash": "8e4061eb1da2",
       "symbol": "NILAINFRA",
