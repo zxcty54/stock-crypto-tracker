@@ -613,14 +613,16 @@
       "scheduled_ist": "2026-10-30 08:00",
       "title": "India 10-year bond posts strong gains as global yields and crude ease",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India 10-year bond posts strong gains as global yields and crude ease</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds rallied sharply, pushing the benchmark 10-year bond yield down by 5 basis points to 7.3902%. This marked its largest single-day decline since July, driven by sliding US Treasury yields and a 1.3% drop in Brent crude prices to $113.70 a barrel.\n\n🧭 <b>MARKET CONTEXT</b>\nBond prices move inversely to yields. The global backdrop improved as the US 10-year Treasury yield eased to 5.00% during Asian trading hours, dampening immediate global borrowing-cost pressures.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nEasing global yields and crude prices can provide temporary relief to domestic fixed-income sentiment, potentially giving the Reserve Bank of India more breathing room on policy pacing. However, domestic debt markets remain sensitive to domestic inflation pressures and supply dynamics.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch the upcoming government bond auction scheduled for Friday, along with evolving crude oil trajectories and upcoming domestic inflation prints.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki global bond yield ki yeh naram chaal domestic interest rate cycle ko lamba aaram degi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/indias-10-year-bond-has-best-day-in-3-months-on-treasury-rally-easing-oil/articleshow/135308975.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:f346ddf4f398",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/bonds/indias-10-year-bond-has-best-day-in-3-months-on-treasury-rally-easing-oil/articleshow/135308975.cms",
       "source_headline": "India's 10-year bond has best day in 3 months on Treasury rally, easing oil",
       "story_key": "f346ddf4f39817e07a0a5dbde08772eb05d8833b9401219338c0faab793b7810",
-      "generated_at": "2026-10-30 05:33:58 IST"
+      "generated_at": "2026-10-30 05:33:58 IST",
+      "posted_at": "2026-11-03 08:04:20 IST",
+      "telegraph_url": "https://telegra.ph/India-10-year-bond-posts-strong-gains-as-global-yields-and-crude-ease--November-2026-11-03"
     },
     {
       "id": "newsgdggeikepw",
@@ -823,6 +825,22 @@
       "generated_at": "2026-11-03 01:57:42 IST"
     },
     {
+      "id": "newssbzxmrdzli",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-03 08:00",
+      "scheduled_ist": "2026-11-03 08:00",
+      "title": "Banks raise deposit rates as systemic liquidity drops and credit demand picks up",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Banks raise deposit rates as systemic liquidity drops and credit demand picks up</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nDomestic banks are raising deposit rates as liquidity tightens and credit demand surges. Bank of India increased deposit rates by 10 to 35 basis points for maturities between one and below three years, offering 6.60% to 6.85% on select tenures, following Indian Bank's recent rate hikes on special term deposits.\n\n🧭 <b>MARKET CONTEXT</b>\nBanking system liquidity has dropped sharply from over ₹11 lakh crore in early September to about ₹1.96 lakh crore, driven by bond sales and variable reverse repo auctions, while certificate of deposit rates crossed 8% for the first time since early 2023.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhen liquidity dries up and credit offtake rises during the busy season, banks compete harder for retail funds to protect their liability profiles. If deposit growth lags credit growth, lenders face higher funding costs, which can eventually pressure net interest margins unless lending rates are adjusted upward.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming credit-to-deposit ratios, fortnightly RBI liquidity data, and certificate of deposit issuance yields to gauge further funding stress.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in systemic liquidity directly impact your assessment of bank margins in the coming quarters?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/a-month-after-rbis-rate-hike-banks-start-raising-deposit-rates-as-liquidity-shrinks-bank-of-india-the-latest-to-move/articleshow/135478028.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:f94e3a459c05",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/a-month-after-rbis-rate-hike-banks-start-raising-deposit-rates-as-liquidity-shrinks-bank-of-india-the-latest-to-move/articleshow/135478028.cms",
+      "source_headline": "A month after RBI’s rate hike, banks start raising deposit rates as liquidity shrinks, Bank of India the latest to move",
+      "story_key": "f94e3a459c0500aed492b6a249d74ad281520d3a3754f12faabfb58e096cdd5c",
+      "generated_at": "2026-11-03 08:03:30 IST"
+    },
+    {
       "id": "ai0034",
       "slot": "B",
       "scheduled_ist": "2026-11-03 10:00",
@@ -833,6 +851,6 @@
       "generated_at": "2026-11-02 15:40:19 IST"
     }
   ],
-  "total": 60,
+  "total": 61,
   "last_scheduled": "2026-11-03 10:00"
 }

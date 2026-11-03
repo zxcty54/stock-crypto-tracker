@@ -1,6 +1,182 @@
 {
   "stories": [
     {
+      "id": "newsimwmwlecby",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Positive Breakout: These 10 stocks cross above their 200 DMAs",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/positive-breakout-these-10-stocks-cross-above-their-200-dmas/slideshow/135479126.cms",
+      "published_at": "2026-11-03T07:45:16+05:30",
+      "published_ist": "2026-11-03 07:45 IST",
+      "summary": "As long as a stock's price remains above its 200-day moving average on the daily timeframe, it is generally interpreted as being in an overall uptrend.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsjalgjrizdg",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Dollar under pressure as oil prices slump, Australia rate decision awaited",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/dollar-under-pressure-as-oil-prices-slump-australia-rate-decision-awaited/articleshow/135478890.cms",
+      "published_at": "2026-11-03T07:42:44+05:30",
+      "published_ist": "2026-11-03 07:42 IST",
+      "summary": "The dollar experienced fluctuations as oil prices dropped amid potential US-Iran diplomatic developments. Meanwhile, the Reserve Bank of Australia is expected to announce an interest rate hike this week. Central banks in Britain, Norway, and Sweden are also set to provide policy statements. The Australian dollar remains steady as economic indicators suggest mixed growth. Market sentiment is influenced by ongoing AI-related stock market concerns and upcoming US midterm elections.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Lower crude oil prices and ongoing diplomatic developments can ease energy import costs and inflationary pressures, which in turn can influence sovereign bond yields and foreign exchange rates. If central banks proceed with anticipated interest rate hikes or policy adjustments, domestic borrowing costs could shift across global markets. However, market sentiment remains susceptible to simultaneous pressures from technology sector concerns and political events like elections, meaning currency stability cannot be assumed from energy relief alone.",
+        "what_to_watch": [
+          "Official interest rate announcements and policy statements from the Reserve Bank of Australia and other central banks",
+          "Subsequent prints of inflation data and benchmark government bond yields",
+          "Developments regarding US-Iran diplomatic talks and their sustained impact on Brent crude futures"
+        ],
+        "evergreen_lesson": "A sharp drop in commodity prices provides temporary macroeconomic relief, but it does not automatically neutralize parallel risks like sector-specific equity corrections or geopolitical uncertainty."
+      }
+    },
+    {
+      "id": "newsmiudhooayc",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Buzzing stocks: GRSE, Dr Reddy’s, Lupin, NBCC, HPCL, Belrise and Datakosa in focus",
+      "url": "https://www.thehindubusinessline.com/markets/buzzing-stocks-grse-dr-reddys-lupin-nbcc-hpcl-belrise-and-datakosa-in-focus/article71659200.ece",
+      "published_at": "2026-11-03T07:19:48+05:30",
+      "published_ist": "2026-11-03 07:19 IST",
+      "summary": "From GRSE’s ₹32,000-crore Indian Navy contract and USFDA approvals for pharma companies to fresh infrastructure, AI automation and laptop supply orders, several companies announced significant business developments",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Corporate announcements regarding large infrastructure contracts, regulatory approvals, and joint ventures indicate active order inflows and business expansion pipelines for individual firms. Such developments signal potential capacity utilization and revenue scaling if execution proceeds smoothly. However, securing an order or regulatory clearance is only an initial milestone; actual financial realization depends on timely project execution and commercial rollout.",
+        "what_to_watch": [
+          "Company disclosures on project execution milestones, commercial production timelines, and order book conversions",
+          "Quarterly financial results reflecting cash flow generation from newly executed contracts",
+          "Official updates on regulatory compliance and market launch progress for approved pharmaceutical products"
+        ],
+        "evergreen_lesson": "An announced contract win or regulatory nod highlights business potential, but long-term value creation depends entirely on flawless operational execution and cash conversion."
+      }
+    },
+    {
+      "id": "newsvkcqekerfm",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Three energy stocks on Josh Brown's list are outperforming as M&A activity ramps up",
+      "url": "https://www.cnbctv18.com/access/three-energy-stocks-on-josh-browns-list-are-outperforming-as-ma-activity-ramps-up-20025415.htm",
+      "published_at": "2026-11-03T06:39:25+05:30",
+      "published_ist": "2026-11-03 06:39 IST",
+      "summary": "Josh Brown and Sean Russo break down these three energy names on their Best Stocks list.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsrutzinhdrs",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Jubilant Pharmova plans to raise Rs 800 crore via maiden bond issue",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/jubilant-pharmova-plans-to-raise-rs-800-crore-via-maiden-bond-issue/articleshow/135478180.cms",
+      "published_at": "2026-11-03T06:36:05+05:30",
+      "published_ist": "2026-11-03 06:36 IST",
+      "summary": "Jubilant Pharmova has announced plans to secure ₹800 crore via its first bond issuance within the local market, featuring ₹400 crore as the base amount and an equal greenshoe option. The capital raised will be primarily allocated to the company’s capital expenditure and upcoming expansion efforts. Subscriptions are anticipated chiefly from mutual funds and asset managers, making this a significant moment in the company's bond market debut.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "When a company taps the domestic corporate bond market for the first time, it diversifies its capital sources beyond traditional bank loans, which can optimize its cost of capital for future expansion. If institutional investors like mutual funds heavily subscribe to such maiden issuances, it reflects market confidence in the issuer's credit profile and balance sheet strength. However, the indicative pricing and tenure set during book-building will establish a new benchmark for the company's future debt servicing costs.",
+        "what_to_watch": [
+          "Final subscription numbers and allocation details between mutual funds and asset managers during book-building",
+          "Official exchange filings confirming the final coupon rate, tenure, and total amount raised",
+          "Execution updates on how the raised capital is deployed toward stated capital expenditure and expansion plans"
+        ],
+        "evergreen_lesson": "A company's maiden bond issue tests its credit credibility in public debt markets, replacing private bank negotiations with transparent market pricing."
+      }
+    },
+    {
+      "id": "newsubmfgezumc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Global Market Today: Asian stocks slide as US chip selloff deepens",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/global-market-today-asian-stocks-slide-as-us-chip-selloff-deepens/articleshow/135478154.cms",
+      "published_at": "2026-11-03T06:33:28+05:30",
+      "published_ist": "2026-11-03 06:33 IST",
+      "summary": "The MSCI Asia Pacific gauge dropped 0.4% with South Korea’s Kospi Index sliding almost 3%. In the US, a gauge of chipmakers extended a three-day rout to 12% and the Nasdaq 100 sank 10% from its peak, entering a technical correction. In a sign some investors are looking to buy on dips, US stock futures gained. Japan is closed for a holiday.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A sharp correction in technology and chipmaker stocks can dent broader risk appetite across global equity markets, even when positive macroeconomic catalysts like falling oil prices occur simultaneously. When tech valuations face deep routs and mixed corporate earnings outlooks, investor caution often spills over into regional indices. However, policy interventions or stimulus announcements by central authorities may provide temporary support, though their ability to trigger a sustained market rally remains dependent on fundamental economic demand.",
+        "what_to_watch": [
+          "Subsequent trading sessions to observe whether dip-buying stabilizes technology indices or if the selloff deepens",
+          "Implementation details and financial institution uptake regarding central bank stock-support tools",
+          "Quarterly earnings execution and profit margin trends reported by major technology companies"
+        ],
+        "evergreen_lesson": "Sector-specific equity corrections can overpower favorable macro tailwinds like cheaper energy when market conviction is low and valuations are viewed as stretched."
+      }
+    },
+    {
+      "id": "newsgtkhkuleoe",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Stocks in news: ITC, Marico, SBI, Yatra Online, NSE, Container Corp and Sun Pharma",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/stocks-in-news-itc-marico-sbi-yatra-online-nse-container-corp-and-sun-pharma/articleshow/135474354.cms",
+      "published_at": "2026-11-03T06:00:00+05:30",
+      "published_ist": "2026-11-03 06:00 IST",
+      "summary": "Indian equity benchmarks experienced gains, with Nifty nearing the 23,500 resistance level and strong corporate earnings reported. ITC faced a decline in consolidated net profit, impacted by the cigarette business, despite revenue growth. Marico saw a significant rise in net profit and expanding EBITDA margins during the quarter. Container Corporation of India reported a subdued performance with a slight decline in net profit compared to last year.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsmzdislmsdb",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "D-Street poised for positive start as GIFT Nifty signals gains",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/pre-market-action-heres-the-trade-setup-for-todays-session/articleshow/135468397.cms",
+      "published_at": "2026-11-03T06:00:00+05:30",
+      "published_ist": "2026-11-03 06:00 IST",
+      "summary": "Indian equity markets enjoyed a rally, spurred by robust buying in major stocks such as Reliance Industries. Analysts pegged immediate support for Nifty at 23,200, with resistance encountered at 23,500 and 23,700. Foreign portfolio investors were active buyers, netting Rs 3,115 crore, while domestic institutional investors offloaded shares worth Rs 392 crore. Meanwhile, the rupee dipped by 10 paise to close at 94.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
       "id": "newspqdybzzltd",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +186,9 @@
       "published_ist": "2026-11-03 01:31 IST",
       "summary": "A San Francisco Fed study warns the current strong El Niño could drive US inflation up by 1 percentage point in 2027, despite temporarily boosting jobs. With inflation already above the 2% target, the climate shock adds further pressure on the Fed to raise interest rates.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -38,9 +214,9 @@
       "published_ist": "2026-11-03 00:47 IST",
       "summary": "US manufacturing activity accelerated in October, with the ISM manufacturing PMI rising to 55.5 from 54.5 in September, beating Reuters-polled economists' expectations. Strong consumer and AI-related business spending supported growth, but factory input prices remained elevated at 75.2, reinforcing concerns that US inflation could stay above the Federal Reserve's 2% target.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -66,9 +242,9 @@
       "published_ist": "2026-11-03 00:30 IST",
       "summary": "The US midterm elections on November 3 will determine control of Congress, but their impact could extend to global financial markets. From Wall Street and oil prices to the US dollar, here's what investors will be watching.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -85,6 +261,35 @@
       }
     },
     {
+      "id": "newsayfyixrqyq",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "A month after RBI’s rate hike, banks start raising deposit rates as liquidity shrinks, Bank of India the latest to move",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/a-month-after-rbis-rate-hike-banks-start-raising-deposit-rates-as-liquidity-shrinks-bank-of-india-the-latest-to-move/articleshow/135478028.cms",
+      "published_at": "2026-11-03T00:20:31+05:30",
+      "published_ist": "2026-11-03 00:20 IST",
+      "summary": "Domestic banks are beginning to increase their deposit rates due to shrinking liquidity conditions in the market. Bank of India recently announced a rate hike on deposits for various maturities, including a special 500-day option. This decision reflects the growing cost of deposits in the banking system as demand for credit rises. Banking system liquidity has significantly decreased from its peak in early September.",
+      "first_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
+      "first_seen_ist": "2026-11-03 08:03:30 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
+      "status": "queued",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab banking system mein liquidity shrink hoti hai aur credit demand badhti hai, toh banks ke beech deposits attract karne ki competition shuru ho jaati hai. Jaise Bank of India ne kiya, jab systemic liquidity peak se gir kar kam hoti hai, banks ko apni liability profile adjust karne ke liye deposit rates badhane padte hain. Is mechanism se banks ki cost of funds badh sakti hai, jisse unke net interest margins (NIMs) par pressure aa sakta hai agar wo lending rates ko uss speed se na badha paayein.",
+        "what_to_watch": [
+          "Bank ke subsequent quarterly financial results mein Net Interest Margin (NIM) aur Cost of Deposits ke आंकड़े",
+          "Certificate of Deposit (CD) market mein issuance rates aur systemic liquidity deficit ke official RBI data updates"
+        ],
+        "evergreen_lesson": "Jab bhi banking system mein liquidity tight hoti hai, deposit rates mein hike credit cost aur margin pressure ka early indicator banta hai."
+      },
+      "processed_ist": "2026-11-03 08:03:30 IST",
+      "post_id": "newssbzxmrdzli"
+    },
+    {
       "id": "newsdxmbuwdpbn",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -94,9 +299,9 @@
       "published_ist": "2026-11-02 23:47 IST",
       "summary": "Trident has approved a ₹4,650 crore expansion and modernisation plan covering yarn, sheeting, paper and renewable energy. Key projects include a new 1,99,680-spindle yarn facility in Dhar, expansion at Budhni, 336 additional looms, 28 TPD of paper capacity and a 60 MW hybrid renewable energy project. The projects are scheduled for completion between December 2027 and September 2029.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -110,9 +315,9 @@
       "published_ist": "2026-11-02 21:55 IST",
       "summary": "The move gives real estate and infrastructure investment trusts another route to tap foreign investors, subject to SEBI’s approval, eligibility and disclosure requirements.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -138,9 +343,9 @@
       "published_ist": "2026-11-02 21:21 IST",
       "summary": "Oracle has announced its ambitious plan to generate $20 billion through bond and share sales, focusing on both corporate needs and essential infrastructure development. The raised funds are earmarked for advancing initiatives in AI and cloud computing, projecting substantial growth soon. This fundraising will also assist with capital expenses, debt repayment, acquisitions, and share buybacks. Despite a 3.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -166,9 +371,9 @@
       "published_ist": "2026-11-02 21:17 IST",
       "summary": "Indian stock markets surged nearly 2% on November 2, with Sensex gaining 1,233 points and Nifty rising 388 points. Falling crude oil prices, strong corporate earnings, positive global cues and foreign investor buying boosted sentiment.",
       "first_seen_at": "2026-10-25T19:58:58.181227+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-10-25 19:58:58 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "posted",
       "topic": "stock_market",
       "processed_ist": "2026-10-25 19:58:58 IST",
@@ -185,9 +390,9 @@
       "published_ist": "2026-11-02 21:15 IST",
       "summary": "EAAA India Alternatives attracted Rs 316.3 crore in listing-day bulk deals from HDFC Mutual Fund, Carnelian Asset Management and L&T. The stock listed at a marginal premium before gaining 3.8% over its IPO price.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -213,9 +418,9 @@
       "published_ist": "2026-11-02 20:29 IST",
       "summary": "Sebi has announced a reduction in the cooling-off period for illiquid private listed InvITs. The previous cooling-off period was set at 12 weeks, which has now been changed to 8 weeks. This decision comes in response to feedback from market participants and aims to enhance the ease of doing business. Illiquid InvITs typically face challenges due to low trading volumes and large lot sizes.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -241,9 +446,9 @@
       "published_ist": "2026-11-02 20:17 IST",
       "summary": "India's market regulator has unveiled a new framework enabling foreign investors to invest in REITs and InvITs, aiming to boost foreign capital in these sectors. To issue depositary receipts, REITs and InvITs must gain approvals from both local and international exchanges, requiring a minimum of 75% consent from unitholders for any fresh offerings. Currently, established REITs and InvITs in India are already open to foreign investments under certain regulations.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -269,11 +474,23 @@
       "published_ist": "2026-11-02 18:37 IST",
       "summary": "Finance Minister Nirmala Sitharaman acknowledged concerns over equity taxation amid foreign investment outflows, while calling for a speedy, amicable resolution of the Tata Group dispute.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
-      "topic": "capital_market"
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Finance Minister Nirmala Sitharaman acknowledging equity tax concerns and foreign outflows points to potential policy review, but an acknowledgment does not guarantee tax cuts or structural changes. If foreign outflows continue to pressure capital markets, the government may weigh adjustments to capital gains taxation to incentivize equity investments over debt. However, a call for an amicable internal settlement in the Tata dispute means the state prefers private corporate resolution over regulatory or judicial intervention.",
+        "what_to_watch": [
+          "Official announcements regarding amendments to capital gains tax structures or parity with debt instruments in upcoming fiscal policies.",
+          "Statements or disclosures from Tata Group leadership indicating internal dispute resolution progress.",
+          "Trends in FII inflow and outflow data published by SEBI or depositories following the Finance Minister's statements."
+        ],
+        "evergreen_lesson": "A policymaker acknowledging market pressure signals a willingness to listen, but investors must distinguish between verbal receptiveness to tax reform and actual legislative amendments."
+      }
     },
     {
       "id": "newsimykvnbvpk",
@@ -285,11 +502,23 @@
       "published_ist": "2026-11-02 18:25 IST",
       "summary": "Government of India (GoI) has announced the sale (re-issue) of two dated securities for a notified amount of ₹36,000 crore as per the following details: Sr No Security Date of Repayment Notified Amount (₹ Crore) GoI specific Notification Auction Date Settlement Date 1 7.06% GS 2041 Jul 27, 2041 23,000 F.No.4(1)-B(W&M)/2026 dated November 02, 2026 November 06, 2026 (Friday) November 09, 2026 (Monday) 2 7.43% GS 2076 Jan 19, 2076 13,000 Total 36,000 2. GoI will have the option to retain additional subscription up to ₹2,000 crore against each security mentioned above. 3. The securities will be sold through Reserve Bank of India Mumbai Office, Fort, Mumbai – 400001. The sale will be subject to the terms and conditions spelt out in the ‘Specific Notification’ mentioned above and the General Notification F.No.4(2)–B(W&M)/2018, dated March 26, 2025 . 4. The auction will be conducted using multi",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
-      "topic": "capital_market"
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The Reserve Bank of India conducting a re-issue of dated securities worth ₹36,000 crore demonstrates how the sovereign continuously manages its fiscal deficit and government borrowing calendar through the debt market. Multiple price auctions require successful bidders to pay their respective quoted yields, shifting price discovery risk directly to primary dealers and institutional investors. While this mechanism ensures the government raises necessary capital, sustained high-volume issuances can influence overall systemic liquidity and long-term benchmark yields.",
+        "what_to_watch": [
+          "Cut-off yields and bid-to-cover ratios announced in the RBI auction results on the bidding date.",
+          "Primary dealer underwriting commitment levels and participation in the e-Kuber system.",
+          "Secondary market trading volumes and yields on the 'When Issued' platform for the specific 2041 and 2076 dated securities."
+        ],
+        "evergreen_lesson": "Sovereign debt auctions reflect ongoing fiscal borrowing requirements; tracking auction cut-off yields and bid-to-cover ratios provides a clearer picture of market appetite than the headline notified borrowing amount alone."
+      }
     },
     {
       "id": "newsfmmrfiguuy",
@@ -305,7 +534,19 @@
       "first_seen_ist": "2026-11-03 01:57:42 IST",
       "last_seen_ist": "2026-11-03 01:57:42 IST",
       "status": "new",
-      "topic": "stock_market"
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-03 08:03:30 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A sharp single-day surge in a conglomerate's stock price driven by better-than-expected quarterly earnings can significantly alter benchmark index levels due to heavy index weightage. However, a strong operational performance in cyclical segments like oil-to-chemicals and telecom does not automatically resolve headwinds in other divisions like retail or green energy. While paper wealth fluctuations capture media attention, sustainable equity recovery depends on multi-segment operational execution rather than a single quarter's earnings beat.",
+        "what_to_watch": [
+          "Subsequent quarterly earnings reports to track margin sustainability in the oil-to-chemicals and telecom segments.",
+          "Retail segment profitability metrics and demand recovery indicators in future disclosures.",
+          "Capital expenditure updates and clarity on cash flow returns from new energy investments."
+        ],
+        "evergreen_lesson": "Index-level rallies driven by a single heavyweight stock's earnings beat do not eliminate underlying segment-specific weaknesses across the broader enterprise."
+      }
     },
     {
       "id": "newsiehsfnhpta",
@@ -317,9 +558,9 @@
       "published_ist": "2026-11-02 16:32 IST",
       "summary": "The central bank's forward dollar position increased by more than $39 billion in just one month and has more than doubled since June, when it stood at around $103.3 billion.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -347,9 +588,9 @@
       "published_ist": "2026-11-02 16:01 IST",
       "summary": "Reliance Industries' latest rally has lifted hopes of a broader market recovery, but the technical outlook remains uncertain. Market analyst Jai Bala explains why the Nifty's ability to cross 23,750 will be crucial and identifies capital goods and real estate as potential outperformers.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -391,9 +632,9 @@
       "published_ist": "2026-11-02 13:55 IST",
       "summary": "Spandana Sphoorty shares slipped after confirming a cyber fraud incident resulting in the unauthorized debit of nearly 8 crore rupees from its bank account.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -445,9 +686,9 @@
       "published_ist": "2026-11-02 12:48 IST",
       "summary": "A meeting of the Board of Directors of SML Mahindra Limited is slated to be held on Friday, 6th November, to evaluate the proposal to raise funds through equity shares or other securities via permissible methods.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -472,9 +713,9 @@
       "published_ist": "2026-11-02 11:26 IST",
       "summary": "ew insurance regulations expected from April 2027 could slow life insurers' growth in FY28. SBI Life and HDFC Life may be better placed to manage the transition, while PB Fintech has limited downside, says Harshal Mehta, Vice President-Equity Research at Asian Markets Securities.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -488,9 +729,9 @@
       "published_ist": "2026-11-02 10:12 IST",
       "summary": "Kant flags continued margin pressure at Dixon Technologies, with the benefits from its Vivo partnership likely to come only in FY28. He also remains cautious about Muthoot Finance, warning that asset quality and collections could remain under pressure over the next two quarters.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -504,9 +745,9 @@
       "published_ist": "2026-11-02 09:37 IST",
       "summary": "The Rule 192 of the Bharatiya Vayuyan Niyam, 2026 deals with airline tariffs. Airlines can set their own tariffs, which are to factor in operating costs. Airlines are required to submit the tariffs to the DGCA.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -533,9 +774,9 @@
       "published_ist": "2026-11-02 09:31 IST",
       "summary": "Morgan Stanley described NSE as an attractive play on India's expanding capital markets, citing its dominant market position, deep liquidity, scalable technology infrastructure and strong business economics.",
       "first_seen_at": "2026-11-02T15:15:42.492391+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 15:15:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -560,9 +801,9 @@
       "published_ist": "2026-11-02 07:02 IST",
       "summary": "South Korea's Kospi falls 1.06% and Japan's Nikkei 225 slips 0.39%, extending Friday's Wall Street losses as concerns grow over rising AI spending and weakening core businesses at US technology companies. The Nasdaq 100 tumbled 3.5% in its worst session since June.",
       "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 07:12:06 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -605,9 +846,9 @@
       "published_ist": "2026-11-02 04:59 IST",
       "summary": "Axis Securities advises a staggered, stock-specific accumulation strategy in quality large, mid and smallcap stocks, with 22,100 as a key level to watch. The firm has recommended 12 stocks, whose long-term charts have a potential to gain as much as 50% during the new Samvat. Here's a look at their 12 stock recommendations.",
       "first_seen_at": "2026-11-02T07:12:06.399305+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-02 07:12:06 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -621,9 +862,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "SEBI Order for Compliance - Release Order for Recovery Certificate No. 9226 of 2026 against Jigar Bhailalbhai Khalash (PAN: ESZPK4415E) in the matter of Trading activity in the scrip of ANI Integrated Services Limited.",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -637,9 +878,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Framework for Issuance of Depository Receipts on Units of InvITs",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -653,9 +894,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Cooling off period for offer for sale by Private listed InvITs",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -669,9 +910,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7126 of 2026 filed by Suriyanarayanan Ramachandran",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -685,9 +926,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7128 of 2026 filed by P. Sachithanantham",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -701,9 +942,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7125 of 2026 filed by Kamal Naini Sharma",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -717,9 +958,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7122 of 2026 filed by Amit Vilas Jadhav",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -733,9 +974,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7129 of 2026 filed by Nikul Prajapati",
       "first_seen_at": "2026-10-30T18:47:49.123343+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-10-30 18:47:49 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -749,9 +990,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7124 of 2026 filed by Bhupinder Singh",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -765,9 +1006,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7130 of 2026 filed by Mohammad Akbar",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -781,9 +1022,9 @@
       "published_ist": "2026-11-02 00:00 IST",
       "summary": "Appeal No. 7127 of 2026 filed by Himanshu Soni",
       "first_seen_at": "2026-11-03T01:57:42.244996+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 01:57:42 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -825,9 +1066,9 @@
       "published_ist": "2026-11-01 16:11 IST",
       "summary": "KIMS has doubled the bed capacity of its Saveera Hospital in Anantapur from 250 to 500 beds. The expansion includes an Oncology Block with advanced cancer diagnosis and treatment facilities, and a dedicated Mother and Child Block with neonatal intensive care facilities.",
       "first_seen_at": "2026-11-01T20:52:30.979064+05:30",
-      "last_seen_at": "2026-11-03T01:57:42.244996+05:30",
+      "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-01 20:52:30 IST",
-      "last_seen_ist": "2026-11-03 01:57:42 IST",
+      "last_seen_ist": "2026-11-03 08:03:30 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -5444,35 +5685,35 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-03T01:57:42.244996+05:30",
-  "last_scraped_ist": "2026-11-03 01:57:42 IST",
+  "last_scraped_at": "2026-11-03T08:03:30.392017+05:30",
+  "last_scraped_ist": "2026-11-03 08:03:30 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
-      "fresh_items": 105,
-      "accepted_items": 15,
-      "filtered_items": 90,
+      "fresh_items": 115,
+      "accepted_items": 16,
+      "filtered_items": 99,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 10,
-      "filtered_items": 40,
+      "accepted_items": 14,
+      "filtered_items": 36,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
-      "fresh_items": 24,
-      "accepted_items": 0,
-      "filtered_items": 24,
+      "fresh_items": 27,
+      "accepted_items": 1,
+      "filtered_items": 26,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
       "fresh_items": 5,
       "accepted_items": 1,
@@ -5480,7 +5721,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -5488,7 +5729,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-03 01:57:42 IST",
+      "checked_ist": "2026-11-03 08:03:30 IST",
       "http_status": 200,
       "fresh_items": 18,
       "accepted_items": 15,
@@ -5520,16 +5761,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-03 01:57:42 IST"
+    "last_curated_ist": "2026-11-03 08:03:30 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-03 01:57:42 IST",
-    "fetched_items": 202,
-    "accepted_feed_items": 41,
-    "filtered_feed_items": 161,
-    "new_unique_stories": 26,
-    "duplicate_items_collapsed": 6,
+    "updated_ist": "2026-11-03 08:03:30 IST",
+    "fetched_items": 215,
+    "accepted_feed_items": 47,
+    "filtered_feed_items": 168,
+    "new_unique_stories": 9,
+    "duplicate_items_collapsed": 4,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 223
+    "stories_total": 232
   }
 }
