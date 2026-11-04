@@ -91,6 +91,48 @@
       "at": "2026-11-03 21:01:05 IST",
       "title": "Utkarsh Small Finance Bank Reports Q2 FY27 Net Loss of ₹70 Crore",
       "content_hash": "bbc8e77e60d43b1a078c62cc89136886a1903fd3de3810fd0c035f9b78196c16"
+    },
+    "nse:de30a7e1424f": {
+      "url": "https://telegra.ph/Century-Plyboards-Reports-Standalone-Financial-Results-for-Q2-FY27--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:38 IST",
+      "title": "Century Plyboards Reports Standalone Financial Results for Q2 FY27",
+      "content_hash": "b2a7bec3256553dd0f9eb44399609b6feb9c78efefeb57978f0b0eb58e5698d0"
+    },
+    "nse:20b5ae355df7": {
+      "url": "https://telegra.ph/Dr-Lal-Path-Labs-Declares-2nd-Interim-Dividend-and-Approves-Subsidiary-Investment--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:42 IST",
+      "title": "Dr. Lal Path Labs Declares 2nd Interim Dividend and Approves Subsidiary Investment",
+      "content_hash": "1f00d50f1435b7abcc317a5b314d848c57ce7ad76cd0f6a55d32e8417210c588"
+    },
+    "nse:d6c5124d96ca": {
+      "url": "https://telegra.ph/Jtekt-India-Approves-Investment-in-Captive-Solar-Power-SPV--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:46 IST",
+      "title": "Jtekt India Approves Investment in Captive Solar Power SPV",
+      "content_hash": "9464188ce789be2cd1e6295e2faba0c3ea7ffafd6edbb69d1c4b44607c26d167"
+    },
+    "nse:71cd13dbf4a2": {
+      "url": "https://telegra.ph/Ndr-Auto-Components-Approves-Capex-of-Rs-1853-Crore-for-Plant-Expansions--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:51 IST",
+      "title": "Ndr Auto Components Approves Capex of Rs. 18.53 Crore for Plant Expansions",
+      "content_hash": "8d8a1b650a75054c8c6adb6c48c28a26d50f92a3817f0230a35af00426b07b9a"
+    },
+    "nse:7e2bbf2bddf8": {
+      "url": "https://telegra.ph/Biocon-Q2-FY27-Total-Income-at-Rs-4423-Cr-Net-Profit-at-Rs-41-Cr--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:55 IST",
+      "title": "Biocon Q2 FY27 Total Income at Rs 4,423 Cr; Net Profit at Rs 41 Cr",
+      "content_hash": "2f3f19444ca91c3eca4072c4f235131edc3b44a78ca787dcc2d43c586985ea8b"
+    },
+    "nse:db4c3a748126": {
+      "url": "https://telegra.ph/Keystone-Realtors-Reports-Highest-Ever-Quarterly-PAT-of-INR-101-Crore-in-Q2FY27--November-2026-11-04",
+      "kind": "nse_announcement",
+      "at": "2026-11-04 13:41:59 IST",
+      "title": "Keystone Realtors Reports Highest Ever Quarterly PAT of INR 101 Crore in Q2FY27",
+      "content_hash": "74a5d8909dedaf7772c3f6885a7b1f04c0b3cfab4c101fb9434c25e30e9eb2c2"
     }
   }
 }
