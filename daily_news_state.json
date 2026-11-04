@@ -28,7 +28,8 @@
     "2026-11-03 01",
     "2026-11-03 08",
     "2026-11-03 17",
-    "2026-11-04 01"
+    "2026-11-04 01",
+    "2026-11-04 15"
   ],
   "seen_story_keys": [
     "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
@@ -59,7 +60,8 @@
     "7196410bf648550ef9275afcd9430a876aa987fbf67b05249636e9c354c5ee5d",
     "f94e3a459c0500aed492b6a249d74ad281520d3a3754f12faabfb58e096cdd5c",
     "0e70b6bbe9f1202646c44fa28ac5d9b790eee7e172645ddcc6de32f4929767ac",
-    "c4b40784df2d3c9f46bc8aeece63bbfc22f93934e6bf6f470efaf7753e52c151"
+    "c4b40784df2d3c9f46bc8aeece63bbfc22f93934e6bf6f470efaf7753e52c151",
+    "22c77f3d846a199954d0ee3d3dcb8104512f2c99c5fdb79926474583d810aee0"
   ],
   "seen_story_titles": [
     "Sebi to revamp short-selling, securities lending rules",
@@ -90,9 +92,10 @@
     "RBI's forward dollar position hits record $239.2 billion as rupee stays under pressure",
     "A month after RBI’s rate hike, banks start raising deposit rates as liquidity shrinks, Bank of India the latest to move",
     "Foreign Exchange Management (Export and Import of Goods and Services) (Second Amendment) Regulations, 2026",
-    "Sebi levies Rs 40 lakh penalty on four entities in Axis MF front-running case"
+    "Sebi levies Rs 40 lakh penalty on four entities in Axis MF front-running case",
+    "Meta raises $15 billion through bond sale to fund AI infrastructure expansion"
   ],
-  "last_story_title": "Sebi levies Rs 40 lakh penalty on four entities in Axis MF front-running case",
-  "last_story_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-levies-rs-40-lakh-penalty-on-four-entities-in-axis-mf-front-running-case/articleshow/135506148.cms",
-  "last_generated_at": "2026-11-04 01:12:37 IST"
+  "last_story_title": "Meta raises $15 billion through bond sale to fund AI infrastructure expansion",
+  "last_story_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/meta-raises-15-billion-through-bond-sale-to-fund-ai-infrastructure-expansion/articleshow/135530378.cms",
+  "last_generated_at": "2026-11-04 15:07:47 IST"
 }
