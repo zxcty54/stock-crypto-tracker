@@ -901,8 +901,24 @@
       "source_headline": "Meta raises $15 billion through bond sale to fund AI infrastructure expansion",
       "story_key": "22c77f3d846a199954d0ee3d3dcb8104512f2c99c5fdb79926474583d810aee0",
       "generated_at": "2026-11-04 15:07:47 IST"
+    },
+    {
+      "id": "newsgpxmknpslv",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-05 08:00",
+      "scheduled_ist": "2026-11-05 08:00",
+      "title": "SEBI forms 18-member panel to revamp Innovators Growth Platform for startups",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI forms 18-member panel to revamp Innovators Growth Platform for startups</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI has constituted an 18-member working group to review the regulatory framework of the Innovators Growth Platform (IGP). The panel aims to improve capital market access for startups and innovation-led companies across sectors like deep-tech, biotechnology, semiconductors, and space.\n\n🧭 <b>MARKET CONTEXT</b>\nIntroduced originally as the Institutional Trading Platform in 2015 and rebranded in 2019, the IGP was designed to help new-age firms list locally. However, the platform has faced limited participation due to stringent eligibility, profitability, and investor requirement norms.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA streamlined IGP could provide domestic venture capital and private equity investors a viable domestic exit route rather than relying solely on overseas listings. If listing and disclosure rules are relaxed for pre-revenue or long R&amp;D-cycle firms, more homegrown technology enterprises might consider public fundraising, altering tech funding ecosystems conditional on balanced investor protection.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the panel's eventual recommendations regarding offer-for-sale rules, pricing flexibility, minimum subscription norms, and migration criteria to the main board.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might relaxed listing norms on specialized platforms impact the valuation and liquidity dynamics of early-stage tech investments in India?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-forms-working-group-to-review-igp-framework-ease-capital-access-for-start-ups-20027402.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:31cd68cb6f79",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/sebi-forms-working-group-to-review-igp-framework-ease-capital-access-for-start-ups-20027402.htm",
+      "source_headline": "SEBI sets up panel to ease market access for startups, deep-tech firms",
+      "story_key": "31cd68cb6f79b3b2ee3c4f2599045121cbf4b454bc16f8a879ae2813233527a5",
+      "generated_at": "2026-11-04 23:39:24 IST"
     }
   ],
-  "total": 64,
-  "last_scheduled": "2026-11-04 14:00"
+  "total": 65,
+  "last_scheduled": "2026-11-05 08:00"
 }
