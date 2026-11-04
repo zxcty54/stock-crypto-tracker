@@ -1,37 +1,37 @@
 {
- "generated_at": "2026-11-04 02:40 IST",
- "sample_size": 91,
- "identified": 54,
- "inferred": 37,
+ "generated_at": "2026-11-05 02:53 IST",
+ "sample_size": 98,
+ "identified": 55,
+ "inferred": 43,
  "cards_skipped": 0,
- "channel_avg_views": 25.0,
+ "channel_avg_views": 24.3,
  "growth": {
-  "today": 470,
-  "snapshots": 27,
+  "today": 468,
+  "snapshots": 28,
   "delta_7d": -5,
-  "per_day": 16.68,
-  "days_to_target": 31,
+  "per_day": 16.03,
+  "days_to_target": 33,
   "target": 1000,
-  "days_span": 28
+  "days_span": 29
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 38.3,
-   "weight": 1.53,
+   "weight": 1.58,
    "low_sample": false
   },
   "psychology": {
    "posts": 2,
-   "avg_views": 37.5,
+   "avg_views": 38.0,
    "weight": 1.0,
    "low_sample": true
   },
   "technical": {
    "posts": 6,
-   "avg_views": 37.2,
-   "weight": 1.49,
+   "avg_views": 37.3,
+   "weight": 1.54,
    "low_sample": false
   },
   "tools": {
@@ -49,49 +49,49 @@
   "risk": {
    "posts": 4,
    "avg_views": 24.8,
-   "weight": 0.99,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 43,
-   "avg_views": 24.5,
-   "weight": 0.98,
+   "weight": 1.02,
    "low_sample": false
   },
   "business_model": {
    "posts": 12,
-   "avg_views": 22.4,
-   "weight": 0.9,
+   "avg_views": 23.1,
+   "weight": 0.95,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 50,
+   "avg_views": 22.7,
+   "weight": 0.94,
    "low_sample": false
   },
   "awareness": {
    "posts": 3,
-   "avg_views": 22.0,
-   "weight": 0.88,
+   "avg_views": 22.7,
+   "weight": 0.93,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 4,
-   "avg_views": 21.0,
-   "weight": 0.84,
+   "avg_views": 21.5,
+   "weight": 0.88,
    "low_sample": false
   },
   "other": {
    "posts": 11,
-   "avg_views": 19.1,
-   "weight": 0.76,
+   "avg_views": 20.2,
+   "weight": 0.83,
    "low_sample": false
   }
  },
  "top_posts": [
   {
    "title": "PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain",
-   "views": 81,
+   "views": 82,
    "pillar": "technical"
   },
   {
    "title": "90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔",
-   "views": 56,
+   "views": 57,
    "pillar": "psychology"
   },
   {
@@ -112,8 +112,8 @@
  ],
  "weak_posts": [
   {
-   "title": "Utkarsh Small Finance Bank Limited (NSE: UTKARSHBNK)",
-   "views": 5,
+   "title": "Sebi ka final order Axis Capital par: Regulatory censure jari, Axis Ba",
+   "views": 7,
    "pillar": "corporate"
   },
   {

@@ -1,39 +1,39 @@
 # 📊 Performance Report
 
-**04-Nov-2026 02:40 IST** | 91 posts tracked | channel avg **25 views**
+**05-Nov-2026 02:53 IST** | 98 posts tracked | channel avg **24 views**
 
-*54 posts pehchaane gaye, 37 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*55 posts pehchaane gaye, 43 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 3 | 38 | 1.53 |
+| lifestyle | 3 | 38 | 1.58 |
 | psychology | 2 | 38 | 1.0 |
-| technical | 6 | 37 | 1.49 |
+| technical | 6 | 37 | 1.54 |
 | tools | 1 | 29 | 1.0 |
 | process | 2 | 25 | 1.0 |
-| risk | 4 | 25 | 0.99 |
-| corporate | 43 | 24 | 0.98 |
-| business_model | 12 | 22 | 0.9 |
-| awareness | 3 | 22 | 0.88 |
-| market_mechanics | 4 | 21 | 0.84 |
-| other | 11 | 19 | 0.76 |
+| risk | 4 | 25 | 1.02 |
+| business_model | 12 | 23 | 0.95 |
+| corporate | 50 | 23 | 0.94 |
+| awareness | 3 | 23 | 0.93 |
+| market_mechanics | 4 | 22 | 0.88 |
+| other | 11 | 20 | 0.83 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 470** (target 1000)
+**Subscribers: 468** (target 1000)
 
 - Pichhle 7 din me: **-5**
-- Average: **16.68/din**
-- Isi raftaar se 1000 subs: **~31 din**
+- Average: **16.03/din**
+- Isi raftaar se 1000 subs: **~33 din**
 
 
 ## 🏆 Top posts
 
-- **81 views** — PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain  
+- **82 views** — PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain  
   `technical`
-- **56 views** — 90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔  
+- **57 views** — 90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔  
   `psychology`
 - **44 views** — Voltamp Transformers Limited (NSE: VOLTAMP)  
   `corporate`
@@ -44,7 +44,7 @@
 
 ## ⚠️ Kam chale posts
 
-- 5 views — Utkarsh Small Finance Bank Limited (NSE: UTKARSHBNK)  
+- 7 views — Sebi ka final order Axis Capital par: Regulatory censure jari, Axis Ba  
   `corporate`
 - 0 views — Channel created  
   `other`
