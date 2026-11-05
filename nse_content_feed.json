@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-05 03:49:47 IST",
-  "worthy_count": 59,
-  "skipped_count": 68,
+  "generated_at": "2026-11-05 08:04:13 IST",
+  "worthy_count": 58,
+  "skipped_count": 64,
   "content_feed": [
     {
       "hash": "1db6e332281f",
@@ -814,23 +814,37 @@
       "worthiness_reason": "Quarterly financial results containing explicit revenue and PAT numbers.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Century Plyboards (India) Limited (NSE: CENTURYPLY)</b>\n\n<b>Century Plyboards Reports Standalone Financial Results for Q2 FY27</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 153,036.44 Lakhs\n- <b>Total Income:</b> Rs 154,274.70 Lakhs\n- <b>Profit Before Tax (PBT):</b> Rs 13,605.74 Lakhs\n- <b>Net Profit for the Period:</b> Rs 10,007.74 Lakhs\n\n📌 <b>What happened:</b>\n↳ The company's Board of Directors considered and approved the unaudited standalone and consolidated financial results for the quarter and half year ended September 30, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/CENTURYPLY_04112026132751_SE_letter__results.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-04 13:36:14 IST"
-    },
-    {
-      "hash": "23a17fc50c6f",
-      "symbol": "POWERGRID",
-      "company_name": "Power Grid Corporation of India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "01-Nov-2026 20:11:02",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/POWERGRID1_01112026200821_BSENSEReg30FileFinal.pdf",
-      "headline": "Power Grid Corporation reports Q2 FY27 standalone revenue at Rs. 10,048.43 crore and declares interim dividend of Rs. 3.00 per share",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with numeric Revenue and PAT, accompanied by an interim dividend announcement.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Power Grid Corporation of India Limited (NSE: POWERGRID)</b>\n\n<b>Power Grid Corporation reports Q2 FY27 standalone revenue at Rs. 10,048.43 crore and declares interim dividend of Rs. 3.00 per share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs. 10,048.43 crore\n- <b>Interim Dividend:</b> Rs. 3.00 per share (30%)\n- <b>Dividend Record Date:</b> November 6, 2026\n- <b>Dividend Payment Date:</b> November 30, 2026\n\n📌 <b>What happened:</b>\n↳ The company's board approved the standalone and consolidated financial results for the quarter and half year ended September 30, 2026, alongside declaring the first interim dividend for FY 2026-27.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/POWERGRID1_01112026200821_BSENSEReg30FileFinal.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-04 06:57:40 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "6edc11864da9",
+      "symbol": "BELDING",
+      "company_name": "Belding India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "04-Nov-2026 03:31:51",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BELDING_04112026033012_SE_Intimation.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-05 08:04:13 IST"
+    },
+    {
+      "hash": "425bf22edeba",
+      "symbol": "BELDING",
+      "company_name": "Belding India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "04-Nov-2026 03:37:13",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BELDING_04112026033651_SE_Intimation.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-05 08:04:13 IST"
+    },
     {
       "hash": "1ad5f28fcc90",
       "symbol": "NARMADA",
@@ -1698,90 +1712,6 @@
       "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the provided text.",
       "telegram_post": "",
       "analyzed_at": "2026-11-04 13:36:36 IST"
-    },
-    {
-      "hash": "c9831e268f53",
-      "symbol": "PURVA",
-      "company_name": "Puravankara Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "02-Nov-2026 20:15:16",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PURVA_02112026201310_SE-intimation.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing text is incomplete and does not disclose the actual numeric Revenue and PAT figures.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:57:17 IST"
-    },
-    {
-      "hash": "df8b18b619fd",
-      "symbol": "LLOYDSENGG",
-      "company_name": "LLOYDS ENGINEERING WORKS LIMITED",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "02-Nov-2026 21:46:31",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/LSIL_02112026214210_FINANCIALSRESULTSSIGNED.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing is incomplete and does not contain the required explicit PAT figures for the results.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:57:17 IST"
-    },
-    {
-      "hash": "e67dedfd6d8f",
-      "symbol": "DIGITIDE",
-      "company_name": "Digitide Solutions Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "02-Nov-2026 21:59:57",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/DIGITIDE_02112026215817_Digitide_Outcome_02112026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the provided text snippet.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:56:56 IST"
-    },
-    {
-      "hash": "db050cb1f058",
-      "symbol": "EFCIL",
-      "company_name": "EFC (I) Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "03-Nov-2026 01:57:20",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/EFCILTD_03112026015659_EFC_Financial_Results_Q2.pdf",
-      "headline": "General Updates",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the provided text snippet.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:56:56 IST"
-    },
-    {
-      "hash": "6edc11864da9",
-      "symbol": "BELDING",
-      "company_name": "Belding India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "04-Nov-2026 03:31:51",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/BELDING_04112026033012_SE_Intimation.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks numeric Revenue and PAT details.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:56:35 IST"
-    },
-    {
-      "hash": "425bf22edeba",
-      "symbol": "BELDING",
-      "company_name": "Belding India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "04-Nov-2026 03:37:13",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/BELDING_04112026033651_SE_Intimation.pdf",
-      "headline": "General Updates",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing lacks numeric Revenue and PAT details.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-04 06:56:35 IST"
     }
   ]
 }
