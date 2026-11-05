@@ -133,6 +133,34 @@
       "at": "2026-11-04 13:41:59 IST",
       "title": "Keystone Realtors Reports Highest Ever Quarterly PAT of INR 101 Crore in Q2FY27",
       "content_hash": "74a5d8909dedaf7772c3f6885a7b1f04c0b3cfab4c101fb9434c25e30e9eb2c2"
+    },
+    "nse:60d554074e33": {
+      "url": "https://telegra.ph/Ice-Make-Refrigeration-Reports-Q2-FY27-Financial-Results--November-2026-11-05",
+      "kind": "nse_announcement",
+      "at": "2026-11-05 15:35:22 IST",
+      "title": "Ice Make Refrigeration Reports Q2 FY27 Financial Results",
+      "content_hash": "470c596bd88aedef1c72fd7ad983b5be6a32431efc27a66246cfb819117150aa"
+    },
+    "nse:e7b181d3638c": {
+      "url": "https://telegra.ph/Insecticides-India-Limited-Declares-Interim-Dividend-of-Rs-5-Per-Share--November-2026-11-05",
+      "kind": "nse_announcement",
+      "at": "2026-11-05 15:35:27 IST",
+      "title": "Insecticides (India) Limited Declares Interim Dividend of Rs. 5 Per Share",
+      "content_hash": "f93de19eb073b040aa8092c6725a411c3e94baf5ab72cac104b48c62c2ead901"
+    },
+    "nse:ef8a8b02c3ec": {
+      "url": "https://telegra.ph/NBCC-Declares-2nd-Interim-Dividend-of-Rs-025-Per-Share--November-2026-11-05",
+      "kind": "nse_announcement",
+      "at": "2026-11-05 15:35:31 IST",
+      "title": "NBCC Declares 2nd Interim Dividend of Rs. 0.25 Per Share",
+      "content_hash": "39873e9e1c49aa88855af689e94d00f07170960e2e34138357ad52b5bd281adf"
+    },
+    "nse:c63537608f7a": {
+      "url": "https://telegra.ph/Samvardhana-Motherson-approves-setting-up-new-manufacturing-facility-in-Paraguay-via-100-stake-acquisition--November-2026-11-05",
+      "kind": "nse_announcement",
+      "at": "2026-11-05 15:35:35 IST",
+      "title": "Samvardhana Motherson approves setting up new manufacturing facility in Paraguay via 100% stake acquisition",
+      "content_hash": "bfec753727fd3cdf23685f75ad3914cd44efc211e68be875f6d44d5aa3d8cff8"
     }
   }
 }
