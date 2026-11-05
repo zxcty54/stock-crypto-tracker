@@ -951,8 +951,24 @@
       "source_headline": "Rupee strengthens to 15-day high of 94.33 against dollar: Key factors explained",
       "story_key": "57db4f978466886c87fa20bbfdb790529ec52cac19576ec234ff691c55b38b99",
       "generated_at": "2026-11-05 12:39:26 IST"
+    },
+    {
+      "id": "newsqtzccbbcpq",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-06 08:00",
+      "scheduled_ist": "2026-11-06 08:00",
+      "title": "Sebi allows net settlement for mutual funds in cash market trades",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi allows net settlement for mutual funds in cash market trades</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nCapital markets regulator SEBI has permitted mutual fund schemes to settle cash market trades on a net basis starting April 1, 2027. Transactions eligible for net settlement must be either a sale or a purchase in a security, but not both, and netting will not be permitted across different schemes of the same fund.\n\n🧭 <b>MARKET CONTEXT</b>\nNet settlement, or netting, allows institutional participants to offset buy and sell transactions against each other so that only the net balance requires actual funds or share delivery on settlement day, lowering daily working capital and liquidity lock-ups.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nBy reducing overall funding requirements, this operational flexibility could improve capital efficiency for asset management companies and their underlying portfolios. However, this regulatory update does not guarantee higher fund inflows or directly alter individual stock fundamentals.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch for operational guidelines and circulars from clearing corporations regarding implementation mechanics ahead of the April 2027 deadline.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya mutual funds ke liye net settlement se retail traders ke liye trade execution cost par koi direct farak padega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-approves-net-settlement-of-cash-market-trades-for-mutual-funds/articleshow/135572968.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:e516bf3c549d",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-approves-net-settlement-of-cash-market-trades-for-mutual-funds/articleshow/135572968.cms",
+      "source_headline": "Sebi approves net settlement of cash market trades for mutual funds",
+      "story_key": "e516bf3c549df39c506c33c0ce289b4425bd1f8d63015e7e384734b5f0924ec9",
+      "generated_at": "2026-11-06 05:16:07 IST"
     }
   ],
-  "total": 67,
-  "last_scheduled": "2026-11-05 12:00"
+  "total": 68,
+  "last_scheduled": "2026-11-06 08:00"
 }
