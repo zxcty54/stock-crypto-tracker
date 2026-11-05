@@ -667,14 +667,16 @@
       "scheduled_ist": "2026-10-31 08:00",
       "title": "India bonds buckle for fourth straight month as crude surge and RBI tightening h",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds buckle for fourth straight month as crude surge and RBI tightening hurt fixed income</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds suffered a fourth consecutive monthly decline in October, pushing the benchmark 6.94% 2036 bond yield up by 2.5 basis points to 7.4139%, for a total monthly rise of 22.5 bps. Brent crude rallied nearly 14% over the month, hitting $117.55 on Friday due to escalating geopolitical tensions. Meanwhile, foreign investors trimmed exposure to index-eligible local notes to a four-month low, compounding pressure alongside the Reserve Bank of India's recent policy rate hike to 5.50% and liquidity-siphoning operations.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields move inversely to prices. When crude oil prices climb sharply in a major importing nation like India, it directly fuels inflation fears and heightens domestic borrowing costs, causing existing fixed-income asset prices to drop.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nPersistent upward pressure on bond yields could raise the overall cost of capital for corporate borrowers and banks. If fixed-income yields remain elevated or rise further toward 7.75% amid outflows and tightening liquidity, equity valuations across rate-sensitive sectors like banking, auto, and real estate might face compression if funding costs translate into lower corporate margins.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack weekly Brent crude price trajectories, forthcoming FPI debt flow data, and domestic overnight indexed swap (OIS) rate movements for signals on RBI's next policy moves.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya yeh lagataar bond yield mein badhotri aane wale samay mein corporate borrowing costs aur equity valuations par dabav banayegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-buckle-for-fourth-straight-month-on-oils-climb/articleshow/135361502.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:36f8bf48a168",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-buckle-for-fourth-straight-month-on-oils-climb/articleshow/135361502.cms",
       "source_headline": "India bonds buckle for fourth straight month on oil's climb",
       "story_key": "36f8bf48a168d79cc5533545236ccba8330f3fee3f902184ec3fbb9032d22301",
-      "generated_at": "2026-10-31 05:26:18 IST"
+      "generated_at": "2026-10-31 05:26:18 IST",
+      "posted_at": "2026-11-05 12:40:16 IST",
+      "telegraph_url": "https://telegra.ph/India-bonds-buckle-for-fourth-straight-month-as-crude-surge-and-RBI-tightening-h--November-2026-11-05"
     },
     {
       "id": "newsexlcaicbot",
@@ -933,8 +935,24 @@
       "source_headline": "Property giant Vonovia 'concerned' over Berlin left's housing plans",
       "story_key": "e89cd84d487f1e184bbfb646e12ba43e30494cb02cb2f1c2e93cc16f74d232e6",
       "generated_at": "2026-11-05 05:21:38 IST"
+    },
+    {
+      "id": "newsxjeslhpsil",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-05 12:00",
+      "scheduled_ist": "2026-11-05 12:00",
+      "title": "Rupee hits 15-day high against dollar on oil drop and FPI flows",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Rupee hits 15-day high against dollar on oil drop and FPI flows</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Indian rupee appreciated against the US dollar, opening at 94.35 and touching a 15-day high of 94.33 per dollar compared to its previous close of 94.64. This movement was supported by falling crude oil prices and foreign portfolio investor (FPI) inflows.\n\n🧭 <b>MARKET CONTEXT</b>\nBrent crude dropped roughly 8.5% in Asian trade to $94.20 per barrel following political shifts in the US after midterm elections, which led markets to re-evaluate geopolitical risk premiums and potential supply negotiations regarding Iran.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIndia imports a large portion of its crude oil, which requires substantial dollar outlays. When crude prices decline, the overall import bill and domestic demand for US dollars ease, reducing downward pressure on the rupee. However, this currency recovery remains conditional and heavily tethered to sustained trends in international crude pricing rather than domestic factors alone.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack ongoing movements in international crude benchmarks like Brent, foreign capital flow trends, and domestic macroeconomic indicators like trade deficit data.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki crude oil ki ye tezi se giravat aane wale dino mein Indian inflation aur current account deficit ko sambhalne mein madad karegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/currency/rupee-strengthens-15-day-high-against-dollar-factors-explained-20027611.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:57db4f978466",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/currency/rupee-strengthens-15-day-high-against-dollar-factors-explained-20027611.htm",
+      "source_headline": "Rupee strengthens to 15-day high of 94.33 against dollar: Key factors explained",
+      "story_key": "57db4f978466886c87fa20bbfdb790529ec52cac19576ec234ff691c55b38b99",
+      "generated_at": "2026-11-05 12:39:26 IST"
     }
   ],
-  "total": 66,
-  "last_scheduled": "2026-11-05 08:00"
+  "total": 67,
+  "last_scheduled": "2026-11-05 12:00"
 }
