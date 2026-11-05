@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-11-05 01:53:54 IST",
+  "timestamp": "2026-11-06 02:00:33 IST",
   "reports": {
     "ipa_ports_traffic": {
-      "title": null,
-      "file_url": null,
-      "local_path": null
+      "title": "Major Ports Traffic from October 2026",
+      "file_url": "https://ipa.org.in/upload/media/media-2026110514505786350193.xlsx",
+      "local_path": "downloaded_macro_pdfs/IPA_Traffic_Latest.xlsx"
     },
     "dpiit_eight_core": {
       "title": "Press Release",
@@ -23,15 +23,9 @@
     },
     "netc_fastag": {
       "title": "NETC FASTag Monthly Product Statistics",
-      "csv_path": "netc_fastag_monthly_3years.csv",
-      "total_records": 8,
-      "latest_monthly_metrics": {
-        "month": "November-2026",
-        "volume_million": 519.41,
-        "volume_crore": 51.94,
-        "amount_inr_crore": 259.71,
-        "ticket_size_inr": 5.0
-      }
+      "csv_path": null,
+      "total_records": 0,
+      "latest_monthly_metrics": {}
     }
   }
 }
