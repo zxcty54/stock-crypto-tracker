@@ -1,37 +1,25 @@
 {
- "generated_at": "2026-11-05 02:53 IST",
- "sample_size": 98,
- "identified": 55,
- "inferred": 43,
+ "generated_at": "2026-11-06 03:00 IST",
+ "sample_size": 100,
+ "identified": 56,
+ "inferred": 44,
  "cards_skipped": 0,
- "channel_avg_views": 24.3,
+ "channel_avg_views": 23.2,
  "growth": {
-  "today": 468,
-  "snapshots": 28,
-  "delta_7d": -5,
-  "per_day": 16.03,
-  "days_to_target": 33,
+  "today": 467,
+  "snapshots": 29,
+  "delta_7d": -6,
+  "per_day": 15.47,
+  "days_to_target": 34,
   "target": 1000,
-  "days_span": 29
+  "days_span": 30
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
    "posts": 3,
    "avg_views": 38.3,
-   "weight": 1.58,
-   "low_sample": false
-  },
-  "psychology": {
-   "posts": 2,
-   "avg_views": 38.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
-  "technical": {
-   "posts": 6,
-   "avg_views": 37.3,
-   "weight": 1.54,
+   "weight": 1.66,
    "low_sample": false
   },
   "tools": {
@@ -39,6 +27,12 @@
    "avg_views": 29.0,
    "weight": 1.0,
    "low_sample": true
+  },
+  "technical": {
+   "posts": 5,
+   "avg_views": 28.4,
+   "weight": 1.23,
+   "low_sample": false
   },
   "process": {
    "posts": 2,
@@ -49,51 +43,47 @@
   "risk": {
    "posts": 4,
    "avg_views": 24.8,
-   "weight": 1.02,
+   "weight": 1.07,
    "low_sample": false
   },
   "business_model": {
    "posts": 12,
-   "avg_views": 23.1,
-   "weight": 0.95,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 50,
-   "avg_views": 22.7,
-   "weight": 0.94,
+   "avg_views": 24.1,
+   "weight": 1.04,
    "low_sample": false
   },
   "awareness": {
    "posts": 3,
    "avg_views": 22.7,
-   "weight": 0.93,
+   "weight": 0.98,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 54,
+   "avg_views": 21.9,
+   "weight": 0.95,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 4,
-   "avg_views": 21.5,
-   "weight": 0.88,
+   "avg_views": 21.8,
+   "weight": 0.94,
    "low_sample": false
   },
   "other": {
    "posts": 11,
-   "avg_views": 20.2,
-   "weight": 0.83,
+   "avg_views": 21.3,
+   "weight": 0.92,
    "low_sample": false
+  },
+  "psychology": {
+   "posts": 1,
+   "avg_views": 19.0,
+   "weight": 1.0,
+   "low_sample": true
   }
  },
  "top_posts": [
-  {
-   "title": "PRICE ACTION BASICS: Support & Resistance — 3 rules jo kaam karte hain",
-   "views": 82,
-   "pillar": "technical"
-  },
-  {
-   "title": "90% TRADERS LOSE KYUN HOTE HAIN — asli reason 🤔",
-   "views": 57,
-   "pillar": "psychology"
-  },
   {
    "title": "Voltamp Transformers Limited (NSE: VOLTAMP)",
    "views": 44,
@@ -108,18 +98,28 @@
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
    "views": 43,
    "pillar": "lifestyle"
+  },
+  {
+   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
+   "views": 41,
+   "pillar": "corporate"
+  },
+  {
+   "title": "POSITION SIZER KA USE: Andhaadhundh Quantity Mat Uthao",
+   "views": 41,
+   "pillar": "risk"
   }
  ],
  "weak_posts": [
   {
-   "title": "Sebi ka final order Axis Capital par: Regulatory censure jari, Axis Ba",
-   "views": 7,
+   "title": "NBCC (India) Limited (NSE: NBCC)",
+   "views": 6,
    "pillar": "corporate"
   },
   {
-   "title": "Channel created",
-   "views": 0,
-   "pillar": "other"
+   "title": "Insecticides (India) Limited (NSE: INSECTICID)",
+   "views": 5,
+   "pillar": "corporate"
   },
   {
    "title": "Nifty & BankNifty Trading Strategies — Price Action & Risk pinned «Ful",
