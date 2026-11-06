@@ -161,6 +161,20 @@
       "at": "2026-11-05 15:35:35 IST",
       "title": "Samvardhana Motherson approves setting up new manufacturing facility in Paraguay via 100% stake acquisition",
       "content_hash": "bfec753727fd3cdf23685f75ad3914cd44efc211e68be875f6d44d5aa3d8cff8"
+    },
+    "nse:24535d93ef9f": {
+      "url": "https://telegra.ph/Voltas-Reports-Q2-FY27-Consolidated-Total-Income-at-2746-Crores--November-2026-11-06",
+      "kind": "nse_announcement",
+      "at": "2026-11-06 17:19:43 IST",
+      "title": "Voltas Reports Q2 FY27 Consolidated Total Income at ₹2,746 Crores",
+      "content_hash": "05d913ec621395278794a5369a39d7e23f00df100edd72c79d209c023a876112"
+    },
+    "nse:82f8c0c4994f": {
+      "url": "https://telegra.ph/Sigma-Advanced-Systems-Approves-Fund-Raising-up-to-INR-3000-Crores--November-2026-11-06",
+      "kind": "nse_announcement",
+      "at": "2026-11-06 17:19:47 IST",
+      "title": "Sigma Advanced Systems Approves Fund Raising up to INR 3,000 Crores",
+      "content_hash": "90926bb1757a1b19bd24fb96ca86d355121a0c585692e955e0d6bfcdacdc59ef"
     }
   }
 }
