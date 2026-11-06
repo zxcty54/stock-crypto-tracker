@@ -685,14 +685,16 @@
       "scheduled_ist": "2026-10-31 10:00",
       "title": "Wall Street Tech Sell-Off Deepens on AI Cash Burn Concerns",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Wall Street Tech Sell-Off Deepens on AI Cash Burn Concerns</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nWall Street experienced a steep tech-led selloff, with the S&amp;P 500 tumbling 1.8% and the Nasdaq composite dropping 2.9%. Major companies like Amazon reported burning through $42.4 billion in free cash flow over 12 months due to massive property and equipment investments in artificial intelligence, while Alphabet faced prior pressures from similar expenditures. Intel shares also plunged 28.6% following a disappointing profit forecast.\n\n🧭 <b>MARKET CONTEXT</b>\nMarkets are transitioning from an early speculative phase of AI adoption to a valuation phase where investors demand proof of tangible financial returns relative to capital expenditure, often referred to as free cash flow.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhen global tech giants face capital-efficiency scrutiny, risk aversion can spill over into emerging markets like India, potentially prompting foreign institutional portfolio adjustments in local technology and IT service providers.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor forthcoming corporate capital expenditure guidance, quarterly free cash flow metrics of major infrastructure spenders, and risk sentiment shifts across global equity indices.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in global technology capital expenditure cycles typically influence domestic institutional capital flows in India?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/wall-street-drops-to-its-worst-day-since-june-after-the-sell-off-for-tech-stocks-deepens/articleshow/135382776.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:c41fd5a113ff",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/wall-street-drops-to-its-worst-day-since-june-after-the-sell-off-for-tech-stocks-deepens/articleshow/135382776.cms",
       "source_headline": "Wall Street drops to its worst day since June after the sell-off for tech stocks deepens",
       "story_key": "c41fd5a113ffedf26b804a89311441f04c5f336673c3e86b6b8cc692df70c1da",
-      "generated_at": "2026-10-31 11:35:52 IST"
+      "generated_at": "2026-10-31 11:35:52 IST",
+      "posted_at": "2026-11-06 12:39:54 IST",
+      "telegraph_url": "https://telegra.ph/Wall-Street-Tech-Sell-Off-Deepens-on-AI-Cash-Burn-Concerns--November-2026-11-06"
     },
     {
       "id": "newshnyeavmqxt",
@@ -967,8 +969,24 @@
       "source_headline": "Sebi approves net settlement of cash market trades for mutual funds",
       "story_key": "e516bf3c549df39c506c33c0ce289b4425bd1f8d63015e7e384734b5f0924ec9",
       "generated_at": "2026-11-06 05:16:07 IST"
+    },
+    {
+      "id": "newskdssqwchur",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-06 12:00",
+      "scheduled_ist": "2026-11-06 12:00",
+      "title": "Rupee touches six-month high of 94.08 against US dollar amid mixed global cues",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Rupee touches six-month high of 94.08 against US dollar amid mixed global cues</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Indian rupee touched a six-month high of 94.08 against the US dollar, marking its strongest intraday level since May 7. The domestic currency opened weaker at 94.50 before recovering. Forex traders noted that overnight gains in crude oil prices and a recovery in the US dollar index, which traded higher at 101.71, weighed initially on the currency.\n\n🧭 <b>MARKET CONTEXT</b>\nThe dollar index measures the greenback's strength against a basket of six currencies, while Brent crude traded up at $100.30 per barrel. Foreign institutional investors were net buyers of Indian equities, purchasing shares worth Rs 14,974.68 crore on Thursday.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA stronger rupee can reduce import bills for dollar-denominated purchases like crude oil and electronics, potentially easing domestic cost pressures if sustained. However, currency appreciation can concurrently impact export-heavy sectors like IT and textiles by lowering rupee-denominated export realizations. These effects remain conditional on broader global currency trends and sustained capital flows.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack ongoing movements in the US dollar index, Brent crude price trajectories, and the sustainability of foreign institutional investor capital flows into domestic equities.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you factor currency volatility into your sector allocation and risk management strategy for large-cap portfolios?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/currency/rupee-flat-against-dollar-after-hitting-two-week-high-20028580.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:e4b000725edd",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/currency/rupee-flat-against-dollar-after-hitting-two-week-high-20028580.htm",
+      "source_headline": "Rupee hits six-month high of 94.08 against dollar",
+      "story_key": "e4b000725eddadd4c15733f2c0875d2e1864ffd6c478f188c3133f51015ec712",
+      "generated_at": "2026-11-06 12:39:00 IST"
     }
   ],
-  "total": 68,
-  "last_scheduled": "2026-11-06 08:00"
+  "total": 69,
+  "last_scheduled": "2026-11-06 12:00"
 }
