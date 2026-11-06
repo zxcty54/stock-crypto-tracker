@@ -703,14 +703,16 @@
       "scheduled_ist": "2026-10-31 18:00",
       "title": "Yes Bank faces trustee pressure over AT1 bonds",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Yes Bank faces trustee pressure over AT1 bonds</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nAxis Trustee Services, representing Additional Tier 1 bondholders worth ₹8,415 crore, has given Yes Bank a three-day deadline to reinstate the disputed bonds and complete necessary corporate actions. The trustee warned that non-compliance could lead to contempt proceedings before the Supreme Court for alleged wilful disobedience of its judgment.\n\n🧭 <b>MARKET CONTEXT</b>\nAT1 bonds are unsecured, perpetual instruments issued by banks to shore up capital. In March 2020, during Yes Bank's reconstruction scheme, these specific bonds were written off entirely, triggering prolonged legal battles before higher courts intervened.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf a bank is legally compelled to reinstate historical debt write-offs, it forces a re-evaluation of capital structures and contingent liabilities across the banking sector. While debt reinstatement alters balance-sheet provisions, the actual financial impact depends on final judicial interpretations and how depository systems execute the reversal.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor exchange filings regarding Yes Bank's formal responses to the trustee, subsequent updates from depositories like NSDL and CDSL, and any formal petitions filed in the Supreme Court.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you think retroactive judicial rulings on write-off instruments change risk calculations for perpetual bank debt?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/business/yes-bank-under-pressure-axis-trustee-may-seek-contempt-action-against-bank-over-at1-bonds-20024025.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:3a02fda31822",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/business/yes-bank-under-pressure-axis-trustee-may-seek-contempt-action-against-bank-over-at1-bonds-20024025.htm",
       "source_headline": "Yes Bank under pressure: Axis Trustee may seek contempt action against bank over AT1 bonds",
       "story_key": "3a02fda31822f257ea1ecb0d4819eb8ac5c3337b6016ceddf8a18652663a2fde",
-      "generated_at": "2026-10-31 18:25:26 IST"
+      "generated_at": "2026-10-31 18:25:26 IST",
+      "posted_at": "2026-11-06 21:37:02 IST",
+      "telegraph_url": "https://telegra.ph/Yes-Bank-faces-trustee-pressure-over-AT1-bonds--November-2026-11-06"
     },
     {
       "id": "newscpnciqfmik",
@@ -985,8 +987,24 @@
       "source_headline": "Rupee hits six-month high of 94.08 against dollar",
       "story_key": "e4b000725eddadd4c15733f2c0875d2e1864ffd6c478f188c3133f51015ec712",
       "generated_at": "2026-11-06 12:39:00 IST"
+    },
+    {
+      "id": "newsnxblltlrfn",
+      "slot": "G",
+      "hourly_slot_ist": "2026-11-06 20:00",
+      "scheduled_ist": "2026-11-06 20:00",
+      "title": "RBI data shows NBFC credit grew 15.4% YoY in September 2026",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI data shows NBFC credit grew 15.4% YoY in September 2026</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nRBI released sectoral deployment data for non-banking financial companies for September 2026, showing overall credit growth rising to 15.4 percent year-on-year compared to 13.3 percent a year ago, backed by accelerated retail and agricultural lending.\n\n🧭 <b>MARKET CONTEXT</b>\nSectoral deployment figures track how institutional credit flows across different economic segments like retail, industry, and services, offering a window into credit demand trends in the non-banking financial sector.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nAccelerated growth in retail loans reaching 21.9 percent and robust traction in housing, gold, and vehicle loans suggest sustained domestic consumption appetite. However, a slowdown in industry credit growth down to 7.4 percent points to subdued corporate capital expenditure demand, implying uneven credit off-take across the broader economy.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor subsequent monthly asset quality metrics, credit-deposit ratios, and borrowing cost trends across mid and upper-layer NBFCs to check for stress accumulation in high-growth retail segments.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might divergence between surging retail lending and slowing industrial credit deployment impact the earnings trajectory of mid-tier NBFCs?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:b00e4440f144",
+      "kind": "business_news_insight",
+      "source_name": "RBI Press Releases",
+      "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940",
+      "source_headline": "Sectoral Deployment of Credit by NBFC – September 2026",
+      "story_key": "b00e4440f14408dfc39314440680e697dccdb8f0d8386d1703f08cc75d17e489",
+      "generated_at": "2026-11-06 21:36:05 IST"
     }
   ],
-  "total": 69,
-  "last_scheduled": "2026-11-06 12:00"
+  "total": 70,
+  "last_scheduled": "2026-11-06 20:00"
 }
