@@ -1003,8 +1003,24 @@
       "source_headline": "Sectoral Deployment of Credit by NBFC – September 2026",
       "story_key": "b00e4440f14408dfc39314440680e697dccdb8f0d8386d1703f08cc75d17e489",
       "generated_at": "2026-11-06 21:36:05 IST"
+    },
+    {
+      "id": "newsdxllrcvvis",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-07 08:00",
+      "scheduled_ist": "2026-11-07 08:00",
+      "title": "US Wall Street rebound mein chip stocks ki wapasi, par US jobs data ne rate hike",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>US Wall Street rebound mein chip stocks ki wapasi, par US jobs data ne rate hike ki chinta fir badhayi</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nWall Street ke tech-heavy Nasdaq ne recovery dikhayi, jisme semiconductor index 4.6% badha aur Nvidia, AMD, Intel, Micron mein tezi aayi. Yeh bounce-back pichle session ke bhari giravat ke baad aaya hai jo regulatory chintaon aur AI selloff se hui thi. Lekin October nonfarm payrolls 165,000 aane aur unemployment rate 4.1% girne se Federal Reserve ke rate hike ki chinta fir se gehra gayi hai.\n\n🧭 <b>MARKET CONTEXT</b>\nJab macroeconomic data jaise jobs report expectations se zyada strong aate hain, toh central bank ke hawkish stance ka darr badh jata hai. Yahan traders ne December mein rate hike ki probability ko 78% tak maan liya hai, jo market volatility ko sidhe prabhavit karta hai.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nGlobal tech volatility aur US interest rate trajectories ka asar Indian IT services, semiconductor supply chain, aur broader emerging market capital flows par pad sakta hai. Agar US mein borrowing costs unchi rehti hain, toh global liquidity par dabav aa sakta hai, jo conditional hai ki Fed aage kya action leta hai.\n\n🔎 <b>KEY WATCHPOINTS</b>\nUS inflation prints, Federal Reserve officials ke statements, aur global tech sector ke price action par nazar rakhein.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki US macroeconomic data ka yeh volatility Indian market ke current sentiment ko zyaada asar karega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/us-stocks-today-nasdaq-opens-higher-as-chips-pare-losses-rate-hike-fears-linger/articleshow/135611515.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:0a82cb7b2cac",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/us-stocks-today-nasdaq-opens-higher-as-chips-pare-losses-rate-hike-fears-linger/articleshow/135611515.cms",
+      "source_headline": "US stocks today: Nasdaq rebounds as chip stocks recover from steep losses, rate fears persist",
+      "story_key": "0a82cb7b2cac1a7530a4796e19eac7881e25bb312afb232ff4711869ca629b81",
+      "generated_at": "2026-11-07 07:39:19 IST"
     }
   ],
-  "total": 70,
-  "last_scheduled": "2026-11-06 20:00"
+  "total": 71,
+  "last_scheduled": "2026-11-07 08:00"
 }

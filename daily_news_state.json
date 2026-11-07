@@ -35,7 +35,8 @@
     "2026-11-05 12",
     "2026-11-06 05",
     "2026-11-06 12",
-    "2026-11-06 21"
+    "2026-11-06 21",
+    "2026-11-07 07"
   ],
   "seen_story_keys": [
     "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
@@ -73,7 +74,8 @@
     "57db4f978466886c87fa20bbfdb790529ec52cac19576ec234ff691c55b38b99",
     "e516bf3c549df39c506c33c0ce289b4425bd1f8d63015e7e384734b5f0924ec9",
     "e4b000725eddadd4c15733f2c0875d2e1864ffd6c478f188c3133f51015ec712",
-    "b00e4440f14408dfc39314440680e697dccdb8f0d8386d1703f08cc75d17e489"
+    "b00e4440f14408dfc39314440680e697dccdb8f0d8386d1703f08cc75d17e489",
+    "0a82cb7b2cac1a7530a4796e19eac7881e25bb312afb232ff4711869ca629b81"
   ],
   "seen_story_titles": [
     "Sebi to revamp short-selling, securities lending rules",
@@ -111,9 +113,10 @@
     "Rupee strengthens to 15-day high of 94.33 against dollar: Key factors explained",
     "Sebi approves net settlement of cash market trades for mutual funds",
     "Rupee hits six-month high of 94.08 against dollar",
-    "Sectoral Deployment of Credit by NBFC – September 2026"
+    "Sectoral Deployment of Credit by NBFC – September 2026",
+    "US stocks today: Nasdaq rebounds as chip stocks recover from steep losses, rate fears persist"
   ],
-  "last_story_title": "Sectoral Deployment of Credit by NBFC – September 2026",
-  "last_story_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940",
-  "last_generated_at": "2026-11-06 21:36:05 IST"
+  "last_story_title": "US stocks today: Nasdaq rebounds as chip stocks recover from steep losses, rate fears persist",
+  "last_story_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/us-stocks-today-nasdaq-opens-higher-as-chips-pare-losses-rate-hike-fears-linger/articleshow/135611515.cms",
+  "last_generated_at": "2026-11-07 07:39:19 IST"
 }
