@@ -1053,8 +1053,24 @@
       "source_headline": "SEBI's new settlement rules kick in: Fees, 90-day deadline and application process explained",
       "story_key": "8a6ffd1888377be9465b3ddbe665b73fe4e5aba0966978d097d0019ca760fb78",
       "generated_at": "2026-11-07 22:04:18 IST"
+    },
+    {
+      "id": "newslulugngnot",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-08 08:00",
+      "scheduled_ist": "2026-11-08 08:00",
+      "title": "Sunil Singhania on Equities vs Gold Ahead of Muhurat Trading",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sunil Singhania on Equities vs Gold Ahead of Muhurat Trading</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nAhead of the Muhurat trading session, Abakkus Asset Manager founder Sunil Singhania highlighted that Indian equities continue to offer superior wealth creation over non-productive assets like gold. He noted opportunities in platform businesses, niche manufacturing, and the liquor sector, while emphasizing that modern market efficiency makes finding completely hidden stock ideas difficult.\n\n🧭 <b>MARKET CONTEXT</b>\nPlatform businesses operate on a winner-takes-all model where the dominant player secures the vast majority of market share while others struggle. In contrast, gold lacks compounding corporate earnings and yields no interest or dividends over long periods, though currency depreciation and import duties can cushion domestic price drops.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf a platform company successfully captures dominant market share, its earnings could scale substantially over time. However, this dynamic depends strictly on execution. High market transparency and analyst tracking mean stock prices react to performance relative to expectations rather than absolute numbers alone, which could increase volatility for retail portfolios.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor how consumption-driven sectors handle near-term challenges like rising input costs, deficit monsoons, and state-specific regulatory hurdles such as Telangana receivable bills.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki modern market transparency aur minute-to-minute tracking retail investors ki psychology par negative asar dalti hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/stocks-create-wealth-gold-does-not-compound-sunil-singhania-alpha-article-20029507.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:031c3af50e7e",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/stocks-create-wealth-gold-does-not-compound-sunil-singhania-alpha-article-20029507.htm",
+      "source_headline": "Platform and liquor stocks offer growth while gold remains non-productive, says Sunil Singhania",
+      "story_key": "031c3af50e7e89740a059442391bd0da8a5a4c772ef1866decfebbb4de529d14",
+      "generated_at": "2026-11-08 03:40:11 IST"
     }
   ],
-  "total": 73,
+  "total": 74,
   "last_scheduled": "2026-11-08 08:00"
 }
