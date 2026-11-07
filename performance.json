@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-07 02:28 IST",
+ "generated_at": "2026-11-08 01:00 IST",
  "sample_size": 100,
- "identified": 56,
- "inferred": 44,
+ "identified": 57,
+ "inferred": 43,
  "cards_skipped": 0,
- "channel_avg_views": 22.5,
+ "channel_avg_views": 22.4,
  "growth": {
   "today": 467,
-  "snapshots": 30,
-  "delta_7d": -6,
-  "per_day": 14.97,
-  "days_to_target": 35,
+  "snapshots": 31,
+  "delta_7d": -4,
+  "per_day": 14.5,
+  "days_to_target": 36,
   "target": 1000,
-  "days_span": 31
+  "days_span": 32
  },
  "status": "ok",
  "pillars": {
@@ -37,7 +37,7 @@
   "technical": {
    "posts": 5,
    "avg_views": 28.4,
-   "weight": 1.26,
+   "weight": 1.27,
    "low_sample": false
   },
   "process": {
@@ -46,20 +46,14 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "awareness": {
-   "posts": 3,
-   "avg_views": 22.7,
+  "business_model": {
+   "posts": 13,
+   "avg_views": 22.8,
    "weight": 1.01,
    "low_sample": false
   },
-  "business_model": {
-   "posts": 13,
-   "avg_views": 22.5,
-   "weight": 1.0,
-   "low_sample": false
-  },
   "corporate": {
-   "posts": 55,
+   "posts": 54,
    "avg_views": 22.0,
    "weight": 0.98,
    "low_sample": false
@@ -76,10 +70,16 @@
    "weight": 1.0,
    "low_sample": true
   },
+  "awareness": {
+   "posts": 4,
+   "avg_views": 18.5,
+   "weight": 0.82,
+   "low_sample": false
+  },
   "other": {
    "posts": 12,
-   "avg_views": 17.8,
-   "weight": 0.79,
+   "avg_views": 18.2,
+   "weight": 0.81,
    "low_sample": false
   }
  },
@@ -112,19 +112,19 @@
  ],
  "weak_posts": [
   {
-   "title": "Wall Street Tech Sell-Off Deepens on AI Cash Burn Concerns",
-   "views": 7,
-   "pillar": "other"
-  },
-  {
    "title": "Insecticides (India) Limited (NSE: INSECTICID)",
    "views": 6,
    "pillar": "corporate"
   },
   {
    "title": "Yes Bank faces trustee pressure over AT1 bonds",
-   "views": 3,
+   "views": 6,
    "pillar": "business_model"
+  },
+  {
+   "title": "SEBI highlights capital market resilience and compliance reforms",
+   "views": 6,
+   "pillar": "awareness"
   }
  ]
 }
