@@ -1037,8 +1037,24 @@
       "source_headline": "NSE to revise closing auction session, F&O trading hours from December 7",
       "story_key": "bca8d9ddce7c60919a7daebb9ef46220fabded9942e0adfe99633f0847e4453d",
       "generated_at": "2026-11-07 14:31:47 IST"
+    },
+    {
+      "id": "newshwihawgskl",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-08 08:00",
+      "scheduled_ist": "2026-11-08 08:00",
+      "title": "SEBI's revised settlement norms kick in: What the 2026 framework changes for ent",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI's revised settlement norms kick in: What the 2026 framework changes for entities</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI's updated Settlement of Administrative and Civil Proceedings Regulations, 2026, became effective on November 7, replacing the 2018 framework. The rules prescribe non-refundable application fees of ₹25,000 for natural persons and ₹35,000 for others, alongside a formula-based settlement amount where first-time applicants face a minimum of ₹3 lakh and others face ₹7 lakh.\n\n🧭 <b>MARKET CONTEXT</b>\nA settlement mechanism allows entities facing regulatory scrutiny to resolve disputes without an admission or denial of guilt, subject to clearance. The new framework introduces a 90-day strict deadline from the service of a show-cause notice and a pre-show-cause settlement notice option giving entities 60 days to apply.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nClearer timelines and standardized formulas could reduce prolonged litigation overhang for listed companies and market intermediaries facing regulatory inquiries. If utilized efficiently, faster resolutions may cut legal compliance costs and improve governance visibility, though outcomes remain conditional on individual case merits and SEBI approval.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the rate of pre-show-cause settlements accepted by SEBI, the volume of transitional applications filed within the 90-day window, and how strictly the 20% surcharge on transitional cases is applied.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might standardized pre-show-cause notices change how corporate legal teams approach disclosure and compliance disputes?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-new-settlement-rules-fees-90-day-deadline-application-process-20029539.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:8a6ffd188837",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/sebi-new-settlement-rules-fees-90-day-deadline-application-process-20029539.htm",
+      "source_headline": "SEBI's new settlement rules kick in: Fees, 90-day deadline and application process explained",
+      "story_key": "8a6ffd1888377be9465b3ddbe665b73fe4e5aba0966978d097d0019ca760fb78",
+      "generated_at": "2026-11-07 22:04:18 IST"
     }
   ],
-  "total": 72,
-  "last_scheduled": "2026-11-07 14:00"
+  "total": 73,
+  "last_scheduled": "2026-11-08 08:00"
 }
