@@ -721,14 +721,16 @@
       "scheduled_ist": "2026-11-01 08:00",
       "title": "SEBI highlights capital market resilience and compliance reforms",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI highlights capital market resilience and compliance reforms</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI Chairman Tuhin Kanta Pandey stated that the regulator's core approach focuses on facilitating capital formation, improving ease of doing business, and strengthening investor protection. Highlighting market expansion, he noted that companies raise over Rs 10 lakh crore annually on average through equity and debt issuances. Furthermore, regulatory steps have been introduced to streamline fundraising, including shorter rights issue timelines, simplified IPO processes, and relaxed merchant banking norms for eligible private placements.\n\n🧭 <b>MARKET CONTEXT</b>\nCapital market resilience refers to a market's ability to absorb external shocks without severe liquidity disruptions or systemic failures. Regulatory frameworks balance this stability with lower friction for capital raising.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nStreamlined compliance and reduced listing timelines could lower capital-raising costs for issuers, potentially encouraging more mid-sized and regional firms to tap public markets. However, these structural changes do not guarantee favorable listing performance or continuous investor participation across all market cycles.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future circulars detailing the implementation of relaxed compliance norms, changes in primary market issuance volumes, and updates on retail investor participation metrics.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do structural adjustments in primary market compliance typically influence the execution speed of corporate funding rounds?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-pushes-for-resilient-capital-markets-focuses-on-investor-protection-chairman/articleshow/135393379.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:5624175aa408",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-pushes-for-resilient-capital-markets-focuses-on-investor-protection-chairman/articleshow/135393379.cms",
       "source_headline": "Sebi pushes for resilient capital markets, focuses on investor protection: Chairman",
       "story_key": "5624175aa408aa3e262c53d88a056fbf5a8bc7d8b2d564f71952d2bc18099f78",
-      "generated_at": "2026-11-01 00:11:29 IST"
+      "generated_at": "2026-11-01 00:11:29 IST",
+      "posted_at": "2026-11-07 14:32:29 IST",
+      "telegraph_url": "https://telegra.ph/SEBI-highlights-capital-market-resilience-and-compliance-reforms--November-2026-11-07"
     },
     {
       "id": "newsffgeofuged",
@@ -1019,8 +1021,24 @@
       "source_headline": "US stocks today: Nasdaq rebounds as chip stocks recover from steep losses, rate fears persist",
       "story_key": "0a82cb7b2cac1a7530a4796e19eac7881e25bb312afb232ff4711869ca629b81",
       "generated_at": "2026-11-07 07:39:19 IST"
+    },
+    {
+      "id": "newswjxmimyedk",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-07 14:00",
+      "scheduled_ist": "2026-11-07 14:00",
+      "title": "NSE changes closing auction session and derivatives trading hours from December ",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>NSE changes closing auction session and derivatives trading hours from December 7</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe National Stock Exchange announced modifications to the Closing Auction Session in the equity cash segment and trading modalities in the derivatives segment, effective December 7. The changes shorten the closing auction session to 10 minutes, set a revised volume-weighted average price framework between 3:15 pm and 3:30 pm to determine reference prices, and extend equity derivatives trading hours until 3:45 pm.\n\n🧭 <b>MARKET CONTEXT</b>\nThe Closing Auction Session operates from 3:30 pm to 3:40 pm, allowing specific windows for order entry, limit modifications, and equilibrium price matching. A tighter 3% price band above or below the reference price governs securities during this auction.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA truncated auction window and extended derivatives trading hours could alter execution dynamics near market close. Modifying how closing and expiry-day settlement prices are calculated might impact intraday volatility management for institutional and retail participants, though outcomes depend on individual broker infrastructure readiness.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor exchange circulars regarding broker system integration, post-3:30 pm liquidity patterns, and execution spreads during the revised auction slots.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might shifting the derivatives trading window closer to the cash market close alter execution strategies on expiry days?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/nse-revise-closing-auction-session-f-and-o-trading-hours-december-7-20029410.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:bca8d9ddce7c",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/nse-revise-closing-auction-session-f-and-o-trading-hours-december-7-20029410.htm",
+      "source_headline": "NSE to revise closing auction session, F&O trading hours from December 7",
+      "story_key": "bca8d9ddce7c60919a7daebb9ef46220fabded9942e0adfe99633f0847e4453d",
+      "generated_at": "2026-11-07 14:31:47 IST"
     }
   ],
-  "total": 71,
-  "last_scheduled": "2026-11-07 08:00"
+  "total": 72,
+  "last_scheduled": "2026-11-07 14:00"
 }
