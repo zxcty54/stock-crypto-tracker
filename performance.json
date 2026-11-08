@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-08 01:00 IST",
+ "generated_at": "2026-11-09 01:21 IST",
  "sample_size": 100,
- "identified": 57,
- "inferred": 43,
+ "identified": 59,
+ "inferred": 41,
  "cards_skipped": 0,
- "channel_avg_views": 22.4,
+ "channel_avg_views": 22.2,
  "growth": {
   "today": 467,
-  "snapshots": 31,
+  "snapshots": 32,
   "delta_7d": -4,
-  "per_day": 14.5,
-  "days_to_target": 36,
+  "per_day": 14.06,
+  "days_to_target": 37,
   "target": 1000,
-  "days_span": 32
+  "days_span": 33
  },
  "status": "ok",
  "pillars": {
@@ -22,14 +22,14 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "tools": {
-   "posts": 1,
+  "risk": {
+   "posts": 2,
    "avg_views": 29.0,
    "weight": 1.0,
    "low_sample": true
   },
-  "risk": {
-   "posts": 2,
+  "tools": {
+   "posts": 1,
    "avg_views": 29.0,
    "weight": 1.0,
    "low_sample": true
@@ -37,7 +37,7 @@
   "technical": {
    "posts": 5,
    "avg_views": 28.4,
-   "weight": 1.27,
+   "weight": 1.28,
    "low_sample": false
   },
   "process": {
@@ -48,19 +48,19 @@
   },
   "business_model": {
    "posts": 13,
-   "avg_views": 22.8,
-   "weight": 1.01,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 54,
-   "avg_views": 22.0,
-   "weight": 0.98,
+   "avg_views": 23.2,
+   "weight": 1.05,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 4,
    "avg_views": 21.8,
+   "weight": 0.98,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 52,
+   "avg_views": 21.6,
    "weight": 0.97,
    "low_sample": false
   },
@@ -70,29 +70,29 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "awareness": {
-   "posts": 4,
-   "avg_views": 18.5,
-   "weight": 0.82,
-   "low_sample": false
-  },
   "other": {
    "posts": 12,
-   "avg_views": 18.2,
-   "weight": 0.81,
+   "avg_views": 18.8,
+   "weight": 0.85,
+   "low_sample": false
+  },
+  "awareness": {
+   "posts": 6,
+   "avg_views": 17.0,
+   "weight": 0.77,
    "low_sample": false
   }
  },
  "top_posts": [
   {
+   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
+   "views": 45,
+   "pillar": "business_model"
+  },
+  {
    "title": "Voltamp Transformers Limited (NSE: VOLTAMP)",
    "views": 44,
    "pillar": "corporate"
-  },
-  {
-   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 44,
-   "pillar": "business_model"
   },
   {
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
@@ -112,19 +112,19 @@
  ],
  "weak_posts": [
   {
+   "title": "Ice Make Refrigeration Limited (NSE: ICEMAKE)",
+   "views": 7,
+   "pillar": "corporate"
+  },
+  {
    "title": "Insecticides (India) Limited (NSE: INSECTICID)",
    "views": 6,
    "pillar": "corporate"
   },
   {
-   "title": "Yes Bank faces trustee pressure over AT1 bonds",
-   "views": 6,
-   "pillar": "business_model"
-  },
-  {
-   "title": "SEBI highlights capital market resilience and compliance reforms",
-   "views": 6,
-   "pillar": "awareness"
+   "title": "Alkem Laboratories Limited (NSE: ALKEM)",
+   "views": 5,
+   "pillar": "corporate"
   }
  ]
 }
