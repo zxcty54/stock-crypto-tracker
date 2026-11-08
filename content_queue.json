@@ -1087,8 +1087,24 @@
       "source_headline": "Diwali Muhurat Trading 2026: NSE, BSE to open for special session today; check timings",
       "story_key": "01c79ee74bede1ca9f3b2005253825c22e438614c9844fe4f4df92f676b3c6c4",
       "generated_at": "2026-11-08 14:49:05 IST"
+    },
+    {
+      "id": "newsqksddvbyvr",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-09 08:00",
+      "scheduled_ist": "2026-11-09 08:00",
+      "title": "Brent crude may find support at $70-$90 as global oil inventories rebuild: Saxo ",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Brent crude may find support at $70-$90 as global oil inventories rebuild: Saxo Bank</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSaxo Bank projects Brent crude to settle in the $70-$90 per barrel range, higher than pre-conflict levels of $60-$70. While easing West Asia tensions could normalize supplies and remove security or shipping costs, rebuilding global oil stockpiles will likely limit downside price moves in coming quarters.\n\n🧭 <b>MARKET CONTEXT</b>\nOil inventory rebuilding refers to the process where consuming nations and producers replenish depleted strategic and commercial reserves. When geopolitical conflicts disrupt supply chains, inventories fall, creating a buffer requirement that keeps baseline demand firm even after immediate fighting cools.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nSustained higher crude ranges imply that input cost pressures for diesel, jet fuel, and marine fuel may persist for Indian consumers and transport-heavy sectors. If refining and Middle Eastern supply normalization takes longer, downstream margins across manufacturing and logistics could remain constrained under higher energy costs.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack official weekly inventory data from major storage hubs, ongoing geopolitical updates regarding West Asia production, and domestic retail fuel price trends.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in baseline global crude ranges typically impact your tracking of domestic transport and manufacturing margins?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/commodities/oil-price-outlook-brent-crude-support-usd-70-to-usd-90-ole-hansen-saxo-bank-alpha-article-20029854.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:9b3100e386d1",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/commodities/oil-price-outlook-brent-crude-support-usd-70-to-usd-90-ole-hansen-saxo-bank-alpha-article-20029854.htm",
+      "source_headline": "Brent crude may find support at $70-$90 as global oil inventories rebuild: Saxo Bank",
+      "story_key": "9b3100e386d111fdbcd03b03d04d62d418e541fef66ba9fd43be5d85ac9bf1af",
+      "generated_at": "2026-11-09 03:49:57 IST"
     }
   ],
-  "total": 75,
-  "last_scheduled": "2026-11-08 14:00"
+  "total": 76,
+  "last_scheduled": "2026-11-09 08:00"
 }

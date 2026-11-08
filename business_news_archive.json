@@ -10,9 +10,9 @@
       "published_ist": "2026-11-08 19:43 IST",
       "summary": "Sriram Krishnan, Chief Business Development Officer (CBDO) at the NSE, said the exchange is encouraging investors to shift from physical gold to regulated digital gold. So far, EGRs have been created entirely using domestic recycled gold. The larger goal is to reduce India's gold imports and eventually help the country emerge as a global price setter in the bullion market.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -26,9 +26,9 @@
       "published_ist": "2026-11-08 17:08 IST",
       "summary": "The transition gives the Mumbai-based company a wider capital-market platform as it looks to expand its outdoor advertising network, increase its digital billboard portfolio",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -53,10 +53,10 @@
       "published_ist": "2026-11-08 16:35 IST",
       "summary": "Saxo Bank's Ole Hansen sees Brent crude settling at $70-$90 even if West Asia tensions ease, while expecting gold to recover and copper to retain its long-term appeal.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
-      "status": "new",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
+      "status": "queued",
       "topic": "economy",
       "ai_insight": {
         "version": 1,
@@ -68,7 +68,9 @@
           "Subsequent pricing trends in refined fuels such as diesel, jet fuel, and marine fuel across Asian and European markets."
         ],
         "evergreen_lesson": "Downstream consumer cost pressures can decouple from spot crude volatility due to the lagging impact of refinery operations and inventory replenishment cycles."
-      }
+      },
+      "processed_ist": "2026-11-09 03:49:57 IST",
+      "post_id": "newsqksddvbyvr"
     },
     {
       "id": "newswidzdhrlgn",
@@ -80,9 +82,9 @@
       "published_ist": "2026-11-08 16:02 IST",
       "summary": "Can India’s stock market sustain its growth momentum? BSE MD & CEO Sundararaman Ramamurthy is optimistic, citing strong GDP growth, regulatory support and a favourable policy environment as key drivers of investor confidence and market participation.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -107,9 +109,9 @@
       "published_ist": "2026-11-08 15:58 IST",
       "summary": "Indian Oil Corporation is trading below its book value and stands to benefit as nearly 15 million tons of capacity and a huge petrochemical complex come on stream, according to Dipan Mehta of Paisasmart.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -134,9 +136,9 @@
       "published_ist": "2026-11-08 15:10 IST",
       "summary": "India's economy is projected to experience faster growth due to strong macroeconomic fundamentals and increased foreign interest. The Managing Director of the National Stock Exchange highlighted that the country is managing fiscal pressures effectively. Domestic financial savings have significantly increased, reaching nearly USD 1.4 trillion annually. Furthermore, foreign institutional investors are showing renewed enthusiasm for Indian markets ahead of the new Samvat year.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -162,9 +164,9 @@
       "published_ist": "2026-11-08 10:58 IST",
       "summary": "Despite the Nifty 50 declining nearly 3% since Diwali 2025, eight BSE 500 stocks more than doubled investors' wealth. Data from ACE Equities shows Aditya Infotech, HFCL, and Welspun Corp leading the rally with returns of up to 191% over the past year.",
       "first_seen_at": "2026-11-08T14:49:05.794476+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 14:49:05 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -178,9 +180,9 @@
       "published_ist": "2026-11-08 08:09 IST",
       "summary": "NSE and BSE will conduct the annual one-hour special Diwali Muhurat trading session for Vikram Samvat 2083, marking a traditional market start for financial prosperity.",
       "first_seen_at": "2026-11-08T14:49:05.794476+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-08 14:49:05 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -207,9 +209,9 @@
       "published_ist": "2026-11-07 17:31 IST",
       "summary": "Sunil Singhania, Founder of Abakkus Asset Manager explains why he prefers equities for long-term wealth creation and highlights platform businesses, niche manufacturing and liquor as areas to watch.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -237,9 +239,9 @@
       "published_ist": "2026-11-07 16:46 IST",
       "summary": "The SEBI Settlement of Administrative and Civil Proceedings Regulations, 2026, come into force on November 7, providing a revised framework for eligible persons to apply for settlements.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "queued",
       "topic": "capital_market",
       "processed_ist": "2026-11-07 22:04:18 IST",
@@ -295,9 +297,9 @@
       "published_ist": "2026-11-07 16:36 IST",
       "summary": "Sunil Singhania, Founder of Abakkus Asset Manager, believes the Nifty could underperform the broader market as many of its traditional heavyweight sectors may struggle to match India's GDP growth. He sees opportunities in capital market businesses, hospitals, diagnostics, differentiated pharma companies and select platform businesses. Singhania also remains positive on microcaps, despite the higher risks, citing the potential of entrepreneurial companies operating in niche growth areas.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -311,9 +313,9 @@
       "published_ist": "2026-11-07 14:30 IST",
       "summary": "Kirloskar-backed Arka Fincap has signed definitive agreements with TPG's The Rise Funds for an investment of up to ₹800 crore to expand its secured retail lending business.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -339,9 +341,9 @@
       "published_ist": "2026-11-07 14:18 IST",
       "summary": "The record trading milestone highlights growing investor interest in exchange-traded gold and efforts to bring domestic physical and recycled supplies into the formal financial system",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -367,9 +369,9 @@
       "published_ist": "2026-11-07 13:44 IST",
       "summary": "Electronic Gold Receipts worth about ₹23.34 crore traded on the National Stock Exchange on November 6, marking the opening day of activity in the segment backed by Augmont Enterprises.",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -411,9 +413,9 @@
       "published_ist": "2026-11-07 11:47 IST",
       "summary": "The National Stock Exchange announced changes to the Closing Auction Session and derivatives trading hours, effective December 7, following SEBI guidelines.",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-09T03:49:57.735371+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-09 03:49:57 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -9101,19 +9103,19 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-08T22:14:58.823033+05:30",
-  "last_scraped_ist": "2026-11-08 22:14:58 IST",
+  "last_scraped_at": "2026-11-09T03:49:57.735371+05:30",
+  "last_scraped_ist": "2026-11-09 03:49:57 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
-      "fresh_items": 41,
-      "accepted_items": 13,
-      "filtered_items": 28,
+      "fresh_items": 33,
+      "accepted_items": 11,
+      "filtered_items": 22,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
       "fresh_items": 50,
       "accepted_items": 2,
@@ -9121,7 +9123,7 @@
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
       "fresh_items": 6,
       "accepted_items": 2,
@@ -9129,7 +9131,7 @@
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9137,7 +9139,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9145,7 +9147,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-08 22:14:58 IST",
+      "checked_ist": "2026-11-09 03:49:57 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9177,14 +9179,14 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-08 22:14:58 IST"
+    "last_curated_ist": "2026-11-09 03:49:57 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-08 22:14:58 IST",
-    "fetched_items": 97,
-    "accepted_feed_items": 17,
-    "filtered_feed_items": 80,
-    "new_unique_stories": 6,
+    "updated_ist": "2026-11-09 03:49:57 IST",
+    "fetched_items": 89,
+    "accepted_feed_items": 15,
+    "filtered_feed_items": 74,
+    "new_unique_stories": 0,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
     "stories_total": 377
