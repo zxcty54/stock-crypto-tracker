@@ -739,14 +739,16 @@
       "scheduled_ist": "2026-11-01 08:00",
       "title": "SEBI monitors governance developments at Tata Sons holding company level",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI monitors governance developments at Tata Sons holding company level</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nMarket regulator SEBI is closely watching holding company-level governance developments within the Tata Group, according to Chairman Tuhin Kanta Pandey. While Tata Sons itself is unlisted, the group features 26 publicly listed entities with a combined market cap of USD 328 billion as of March 31, 2025, and over 1.77 crore shareholder accounts.\n\n🧭 <b>MARKET CONTEXT</b>\nUnder SEBI regulations, listed operating companies and their promoters must adhere strictly to Listing Obligations and Disclosure Requirements (LODR) norms. However, holding companies operate with a different structural layer, creating regulatory complexity when internal disagreements arise.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf holding-level disputes impact capital allocation, cross-holdings, or subsidiary valuations—especially since seven listed group firms hold a combined 11.92% stake in Tata Sons—minority shareholders in operating companies could experience indirect sentiment ripples. However, monitoring alone does not indicate any formal regulatory violation or impending punitive action.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack official updates regarding leadership continuity like chairman reappointments, holding structure roadmaps, and any formal disclosure filings from listed Tata subsidiaries.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya holding company ke internal governance issues operating companies ke minority shareholders ko affect kar sakte hain?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.thehindubusinessline.com/markets/sebi-monitoring-tata-sons-governance-developments-says-chairman-tuhin-kanta-pandey/article71649211.ece\">The Hindu BusinessLine</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:660abf2e74b2",
       "kind": "business_news_insight",
       "source_name": "The Hindu BusinessLine",
       "source_url": "https://www.thehindubusinessline.com/markets/sebi-monitoring-tata-sons-governance-developments-says-chairman-tuhin-kanta-pandey/article71649211.ece",
       "source_headline": "SEBI monitoring Tata Sons governance developments, says chairman Tuhin Kanta Pandey",
       "story_key": "660abf2e74b28e70492ad9ecafdecdda93b43c3e22dc38b76c7763edfa3eedc5",
-      "generated_at": "2026-11-01 05:01:56 IST"
+      "generated_at": "2026-11-01 05:01:56 IST",
+      "posted_at": "2026-11-08 14:50:05 IST",
+      "telegraph_url": "https://telegra.ph/SEBI-monitors-governance-developments-at-Tata-Sons-holding-company-level--November-2026-11-08"
     },
     {
       "id": "newsmecssxkgoo",
@@ -1069,8 +1071,24 @@
       "source_headline": "Platform and liquor stocks offer growth while gold remains non-productive, says Sunil Singhania",
       "story_key": "031c3af50e7e89740a059442391bd0da8a5a4c772ef1866decfebbb4de529d14",
       "generated_at": "2026-11-08 03:40:11 IST"
+    },
+    {
+      "id": "newsuxlhapwkqo",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-08 14:00",
+      "scheduled_ist": "2026-11-08 14:00",
+      "title": "Diwali Muhurat Trading 2026: NSE and BSE timings announced for Vikram Samvat 208",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Diwali Muhurat Trading 2026: NSE and BSE timings announced for Vikram Samvat 2083</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nNSE aur BSE aaj, Sunday, November 8, 2026 ko Vikram Samvat 2083 ki shuruat par annual one-hour special Diwali Muhurat trading session conduct kar rahe hain. Market trading afternoon mein 2:20 pm se 3:30 pm tak active rahegi, jiske pehle pre-open session 2:05 pm se 2:15 pm tak chalega.\n\n🧭 <b>MARKET CONTEXT</b>\nMuhurat trading ek symbolic tradition hai jahan exchanges par naye Samvat saal ke swagat ke liye ek ghante ki special window milti hai. Pichle Samvat mein headline indices jaise Nifty mein lagbhag 4% aur Sensex mein 5% ki decline aayi thi, jabki pharma aur metals sectors ne strong double-digit annual gains record kiye.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nYeh session ek ceremonial milestone hota hai. Is special hour ke volume ya price action se aane wale poore saal ke structural trend ka direct evidence nahi milta, kyuki yeh zyadatar traditional token buying aur low-liquidity environment tak limited hota hai.\n\n🔎 <b>KEY WATCHPOINTS</b>\nAaj ke session ke baad regular market reopening aur broad market sentiment mein FII/DII participation ko track karna zaroori hoga.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki pichle Samvat ki sector-specific divergence naye saal mein bhi continue karegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/diwali-muhurat-trading-2026-nse-bse-to-open-for-special-session-today-check-timings-20029679.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:01c79ee74bed",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/diwali-muhurat-trading-2026-nse-bse-to-open-for-special-session-today-check-timings-20029679.htm",
+      "source_headline": "Diwali Muhurat Trading 2026: NSE, BSE to open for special session today; check timings",
+      "story_key": "01c79ee74bede1ca9f3b2005253825c22e438614c9844fe4f4df92f676b3c6c4",
+      "generated_at": "2026-11-08 14:49:05 IST"
     }
   ],
-  "total": 74,
-  "last_scheduled": "2026-11-08 08:00"
+  "total": 75,
+  "last_scheduled": "2026-11-08 14:00"
 }
