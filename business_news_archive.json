@@ -1,6 +1,158 @@
 {
   "stories": [
     {
+      "id": "newsbplcgsnpto",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "NSE targets 300 tonne of digital gold, aims to cut India's import dependence",
+      "url": "https://www.cnbctv18.com/market/commodities/nse-digital-gold-egr-target-300-tonnes-reduce-gold-imports-alpha-article-20029860.htm",
+      "published_at": "2026-11-08T19:43:15+05:30",
+      "published_ist": "2026-11-08 19:43 IST",
+      "summary": "Sriram Krishnan, Chief Business Development Officer (CBDO) at the NSE, said the exchange is encouraging investors to shift from physical gold to regulated digital gold. So far, EGRs have been created entirely using domestic recycled gold. The larger goal is to reduce India's gold imports and eventually help the country emerge as a global price setter in the bullion market.",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newskbyhffycgw",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Bright Outdoor Media moves to BSE, NSE main boards, eyes expansion in digital advertising",
+      "url": "https://www.thehindubusinessline.com/markets/bright-outdoor-media-moves-to-bse-nse-main-boards-eyes-expansion-in-digital-advertising/article71680870.ece",
+      "published_at": "2026-11-08T17:08:30+05:30",
+      "published_ist": "2026-11-08 17:08 IST",
+      "summary": "The transition gives the Mumbai-based company a wider capital-market platform as it looks to expand its outdoor advertising network, increase its digital billboard portfolio",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-08 22:14:58 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A transition from an SME exchange to main boards widens a company's capital-market access by appealing to a broader base of institutional and retail investors. For an outdoor and digital advertising firm, this public platform could theoretically lower its cost of capital as it pursues large-scale infrastructure and transit advertising projects. However, the listing itself does not guarantee project wins or successful execution of its digital and sustainability initiatives.",
+        "what_to_watch": [
+          "Quarterly disclosures on advertising contract wins, particularly from government and transport authorities like railways and metro lines.",
+          "Actual deployment of capital raised towards digital LED billboard inventory and solar-powered advertising infrastructure."
+        ],
+        "evergreen_lesson": "A stock exchange main-board migration expands financing access, but operational scaling and execution remain the primary drivers of sustainable business value."
+      }
+    },
+    {
+      "id": "newskubbhumrvq",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Brent crude may find support at $70-$90 as global oil inventories rebuild: Saxo Bank",
+      "url": "https://www.cnbctv18.com/market/commodities/oil-price-outlook-brent-crude-support-usd-70-to-usd-90-ole-hansen-saxo-bank-alpha-article-20029854.htm",
+      "published_at": "2026-11-08T16:35:27+05:30",
+      "published_ist": "2026-11-08 16:35 IST",
+      "summary": "Saxo Bank's Ole Hansen sees Brent crude settling at $70-$90 even if West Asia tensions ease, while expecting gold to recover and copper to retain its long-term appeal.",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-08 22:14:58 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Commodity price floors are often sustained by structural supply adjustments and inventory rebuilding cycles rather than short-term geopolitical headlines alone. If global oil inventories require restocking, crude prices could remain elevated even if immediate conflict premiums dissipate, keeping fuel and logistics costs sticky for downstream economies like India. Conversely, prolonged supply normalization could erode these inventory-driven price supports faster than anticipated.",
+        "what_to_watch": [
+          "Official weekly or monthly inventory data from agencies like the EIA or OPEC regarding global crude stock levels.",
+          "Subsequent pricing trends in refined fuels such as diesel, jet fuel, and marine fuel across Asian and European markets."
+        ],
+        "evergreen_lesson": "Downstream consumer cost pressures can decouple from spot crude volatility due to the lagging impact of refinery operations and inventory replenishment cycles."
+      }
+    },
+    {
+      "id": "newswidzdhrlgn",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Strong GDP, policy support to drive India’s market growth: BSE CEO",
+      "url": "https://www.cnbctv18.com/videos/market/bse-market-outlook-investment-growth-participation-sundararaman-ramamurthy-20029852.htm",
+      "published_at": "2026-11-08T16:02:31+05:30",
+      "published_ist": "2026-11-08 16:02 IST",
+      "summary": "Can India’s stock market sustain its growth momentum? BSE MD & CEO Sundararaman Ramamurthy is optimistic, citing strong GDP growth, regulatory support and a favourable policy environment as key drivers of investor confidence and market participation.",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-08 22:14:58 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market sentiment discussions by exchange executives often highlight macroeconomic aggregates like GDP growth and regulatory frameworks as foundational drivers of retail and institutional participation. While a strong macroeconomic backdrop can support investor confidence, it does not mechanically dictate short-term equity returns or company-level earnings performance. Market momentum relies heavily on sustained capital inflows and corporate earnings growth rather than broad policy optimism alone.",
+        "what_to_watch": [
+          "Official quarterly GDP growth data and Index of Industrial Production (IIP) releases.",
+          "Trends in domestic mutual fund monthly SIP inflows and retail demat account additions published by depositories."
+        ],
+        "evergreen_lesson": "Macroeconomic stability provides the fertile ground for capital markets, but individual asset valuations ultimately depend on micro-level earnings execution."
+      }
+    },
+    {
+      "id": "newstfnamsgjir",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Samvat 2083 - Three stocks that Dipan Mehta is betting on for the new year",
+      "url": "https://www.cnbctv18.com/market/dipan-mehta-stock-picks-for-samvat-2083-muhurat-trading-indian-oil-ge-vernova-garware-films-share-price-alpha-article-20029833.htm",
+      "published_at": "2026-11-08T15:58:15+05:30",
+      "published_ist": "2026-11-08 15:58 IST",
+      "summary": "Indian Oil Corporation is trading below its book value and stands to benefit as nearly 15 million tons of capacity and a huge petrochemical complex come on stream, according to Dipan Mehta of Paisasmart.",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-08 22:14:58 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Analyst stock recommendations often tie discounted asset valuations to upcoming capital expenditure completions and capacity scaling, particularly in capital-intensive sectors like oil refining and power transmission. If anticipated brownfield capacities and massive capex programs successfully ramp up, they can alter a company's revenue trajectory over multi-year periods. However, execution delays or cost overruns can render book-value discounts persistent rather than temporary mispricings.",
+        "what_to_watch": [
+          "Company announcements regarding the commercial commissioning dates of upcoming petrochemical complexes and capacity expansions.",
+          "Subsequent quarterly financial results tracking capital expenditure utilization and realization rates."
+        ],
+        "evergreen_lesson": "Trading below book value is not an automatic value buy unless concrete capacity additions and operational scaling timelines are successfully executed."
+      }
+    },
+    {
+      "id": "newsixmevvyucj",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Indian economy to grow faster, foreign capital returning to markets: NSE CEO Ashishkumar Chauhan",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/indian-economy-to-grow-faster-foreign-capital-returning-to-markets-nse-ceo-ashishkumar-chauhan/articleshow/135656058.cms",
+      "published_at": "2026-11-08T15:10:45+05:30",
+      "published_ist": "2026-11-08 15:10 IST",
+      "summary": "India's economy is projected to experience faster growth due to strong macroeconomic fundamentals and increased foreign interest. The Managing Director of the National Stock Exchange highlighted that the country is managing fiscal pressures effectively. Domestic financial savings have significantly increased, reaching nearly USD 1.4 trillion annually. Furthermore, foreign institutional investors are showing renewed enthusiasm for Indian markets ahead of the new Samvat year.",
+      "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
+      "first_seen_ist": "2026-11-08 22:14:58 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-08 22:14:58 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A leader's public commentary links macroeconomic strength—such as tax buoyancy, fiscal deficit management, and high domestic savings—to sustained capital allocation into markets. While the source reports rising domestic savings and foreign institutional interest, an announcement or sentiment indicator does not automatically establish sustained long-term capital flows or insulate markets from external shocks. If macroeconomic fundamentals and tax collections remain resilient, domestic and foreign inflows could structurally lower the cost of capital for Indian businesses.",
+        "what_to_watch": [
+          "Official fiscal deficit and tax collection data to verify if fiscal strength is maintained amidst global headwinds.",
+          "Monthly FII and DII flow data to track whether renewed foreign interest translates into durable capital allocation.",
+          "Actual retail participation trends and trading volume shifts away from intraday derivatives toward long-term delivery investments."
+        ],
+        "evergreen_lesson": "Executive sentiment and macroeconomic optimism indicate structural potential, but durable market liquidity depends on sustained cash flows and actual domestic saving conversion rather than festive or seasonal sentiment shifts."
+      }
+    },
+    {
       "id": "newsloxesrgysf",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +162,9 @@
       "published_ist": "2026-11-08 10:58 IST",
       "summary": "Despite the Nifty 50 declining nearly 3% since Diwali 2025, eight BSE 500 stocks more than doubled investors' wealth. Data from ACE Equities shows Aditya Infotech, HFCL, and Welspun Corp leading the rally with returns of up to 191% over the past year.",
       "first_seen_at": "2026-11-08T14:49:05.794476+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-08 14:49:05 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -26,9 +178,9 @@
       "published_ist": "2026-11-08 08:09 IST",
       "summary": "NSE and BSE will conduct the annual one-hour special Diwali Muhurat trading session for Vikram Samvat 2083, marking a traditional market start for financial prosperity.",
       "first_seen_at": "2026-11-08T14:49:05.794476+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-08 14:49:05 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -55,9 +207,9 @@
       "published_ist": "2026-11-07 17:31 IST",
       "summary": "Sunil Singhania, Founder of Abakkus Asset Manager explains why he prefers equities for long-term wealth creation and highlights platform businesses, niche manufacturing and liquor as areas to watch.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -85,9 +237,9 @@
       "published_ist": "2026-11-07 16:46 IST",
       "summary": "The SEBI Settlement of Administrative and Civil Proceedings Regulations, 2026, come into force on November 7, providing a revised framework for eligible persons to apply for settlements.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "queued",
       "topic": "capital_market",
       "processed_ist": "2026-11-07 22:04:18 IST",
@@ -143,9 +295,9 @@
       "published_ist": "2026-11-07 16:36 IST",
       "summary": "Sunil Singhania, Founder of Abakkus Asset Manager, believes the Nifty could underperform the broader market as many of its traditional heavyweight sectors may struggle to match India's GDP growth. He sees opportunities in capital market businesses, hospitals, diagnostics, differentiated pharma companies and select platform businesses. Singhania also remains positive on microcaps, despite the higher risks, citing the potential of entrepreneurial companies operating in niche growth areas.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -159,9 +311,9 @@
       "published_ist": "2026-11-07 14:30 IST",
       "summary": "Kirloskar-backed Arka Fincap has signed definitive agreements with TPG's The Rise Funds for an investment of up to ₹800 crore to expand its secured retail lending business.",
       "first_seen_at": "2026-11-07T22:04:18.538328+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 22:04:18 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -187,9 +339,9 @@
       "published_ist": "2026-11-07 14:18 IST",
       "summary": "The record trading milestone highlights growing investor interest in exchange-traded gold and efforts to bring domestic physical and recycled supplies into the formal financial system",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -215,9 +367,9 @@
       "published_ist": "2026-11-07 13:44 IST",
       "summary": "Electronic Gold Receipts worth about ₹23.34 crore traded on the National Stock Exchange on November 6, marking the opening day of activity in the segment backed by Augmont Enterprises.",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -259,9 +411,9 @@
       "published_ist": "2026-11-07 11:47 IST",
       "summary": "The National Stock Exchange announced changes to the Closing Auction Session and derivatives trading hours, effective December 7, following SEBI guidelines.",
       "first_seen_at": "2026-11-07T14:31:47.105734+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 14:31:47 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -345,9 +497,9 @@
       "published_ist": "2026-11-07 00:13 IST",
       "summary": "Rising volatility, surging credit default swap premiums and a flight to safer assets are putting investors on alert as confidence in the AI boom weakens. While some indicators are flashing amber, bond markets and funding conditions have yet to show signs of severe stress.",
       "first_seen_at": "2026-11-07T03:11:53.760226+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 03:11:53 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -361,9 +513,9 @@
       "published_ist": "2026-11-06 23:34 IST",
       "summary": "Aarti Drugs said its subsidiary Pinnacle Life Science received three Form 483 observations from the US FDA after an inspection of its Baddi formulations facility between November 2 and 6. None of the observations was related to data integrity, and the company said there was no financial or operational impact.",
       "first_seen_at": "2026-11-07T03:11:53.760226+05:30",
-      "last_seen_at": "2026-11-08T14:49:05.794476+05:30",
+      "last_seen_at": "2026-11-08T22:14:58.823033+05:30",
       "first_seen_ist": "2026-11-07 03:11:53 IST",
-      "last_seen_ist": "2026-11-08 14:49:05 IST",
+      "last_seen_ist": "2026-11-08 22:14:58 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -4416,7 +4568,7 @@
       "last_seen_at": "2026-11-02T15:15:42.492391+05:30",
       "first_seen_ist": "2026-10-31 18:25:26 IST",
       "last_seen_ist": "2026-11-02 15:15:42 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "capital_market",
       "ai_insight": {
         "version": 1,
@@ -4430,7 +4582,8 @@
         "evergreen_lesson": "Unlisted holding companies that control a vast network of listed operating firms remain implicitly tied to regulatory scrutiny because decisions at the parent level directly affect listed subsidiary disclosures and shareholder interests."
       },
       "processed_ist": "2026-11-01 05:01:56 IST",
-      "post_id": "newsffgeofuged"
+      "post_id": "newsffgeofuged",
+      "posted_at": "2026-11-08 14:50:05 IST"
     },
     {
       "id": "newsefgyvftaps",
@@ -8948,43 +9101,43 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-08T14:49:05.794476+05:30",
-  "last_scraped_ist": "2026-11-08 14:49:05 IST",
+  "last_scraped_at": "2026-11-08T22:14:58.823033+05:30",
+  "last_scraped_ist": "2026-11-08 22:14:58 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
-      "fresh_items": 57,
+      "fresh_items": 41,
       "accepted_items": 13,
-      "filtered_items": 44,
+      "filtered_items": 28,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 1,
-      "filtered_items": 49,
+      "accepted_items": 2,
+      "filtered_items": 48,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
-      "fresh_items": 12,
-      "accepted_items": 3,
-      "filtered_items": 9,
+      "fresh_items": 6,
+      "accepted_items": 2,
+      "filtered_items": 4,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
-      "fresh_items": 7,
-      "accepted_items": 4,
-      "filtered_items": 3,
+      "fresh_items": 0,
+      "accepted_items": 0,
+      "filtered_items": 0,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -8992,7 +9145,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-08 14:49:05 IST",
+      "checked_ist": "2026-11-08 22:14:58 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9024,16 +9177,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-08 14:49:05 IST"
+    "last_curated_ist": "2026-11-08 22:14:58 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-08 14:49:05 IST",
-    "fetched_items": 126,
-    "accepted_feed_items": 21,
-    "filtered_feed_items": 105,
-    "new_unique_stories": 2,
-    "duplicate_items_collapsed": 1,
+    "updated_ist": "2026-11-08 22:14:58 IST",
+    "fetched_items": 97,
+    "accepted_feed_items": 17,
+    "filtered_feed_items": 80,
+    "new_unique_stories": 6,
+    "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 371
+    "stories_total": 377
   }
 }
