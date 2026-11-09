@@ -1,8 +1,8 @@
 # 📊 Performance Report
 
-**09-Nov-2026 01:21 IST** | 100 posts tracked | channel avg **22 views**
+**10-Nov-2026 05:19 IST** | 100 posts tracked | channel avg **22 views**
 
-*59 posts pehchaane gaye, 41 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*60 posts pehchaane gaye, 40 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
@@ -13,20 +13,20 @@
 | tools | 1 | 29 | 1.0 |
 | technical | 5 | 28 | 1.28 |
 | process | 2 | 25 | 1.0 |
-| business_model | 13 | 23 | 1.05 |
+| business_model | 14 | 22 | 1.01 |
 | market_mechanics | 4 | 22 | 0.98 |
-| corporate | 52 | 22 | 0.97 |
+| corporate | 51 | 22 | 0.97 |
+| other | 12 | 19 | 0.86 |
 | psychology | 1 | 19 | 1.0 |
-| other | 12 | 19 | 0.85 |
-| awareness | 6 | 17 | 0.77 |
+| awareness | 6 | 18 | 0.81 |
 
 ## 📈 Channel Growth
 
 **Subscribers: 467** (target 1000)
 
 - Pichhle 7 din me: **-4**
-- Average: **14.06/din**
-- Isi raftaar se 1000 subs: **~37 din**
+- Average: **13.65/din**
+- Isi raftaar se 1000 subs: **~39 din**
 
 
 ## 🏆 Top posts
@@ -37,18 +37,18 @@
   `corporate`
 - **43 views** — 1% RULE: Capital Bachao Ge Tabhi Kheloge  
   `lifestyle`
-- **41 views** — Pace Digitek Limited (NSE: PACEDIGITK)  
+- **42 views** — Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens  
   `corporate`
-- **41 views** — Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens  
+- **41 views** — Pace Digitek Limited (NSE: PACEDIGITK)  
   `corporate`
 
 ## ⚠️ Kam chale posts
 
-- 7 views — Ice Make Refrigeration Limited (NSE: ICEMAKE)  
-  `corporate`
+- 9 views — Yes Bank faces trustee pressure over AT1 bonds  
+  `business_model`
+- 8 views — Sebi penalises EKI Energy and top execs over revenue misstatement  
+  `business_model`
 - 6 views — Insecticides (India) Limited (NSE: INSECTICID)  
-  `corporate`
-- 5 views — Alkem Laboratories Limited (NSE: ALKEM)  
   `corporate`
 
 ---

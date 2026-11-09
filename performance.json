@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-09 01:21 IST",
+ "generated_at": "2026-11-10 05:19 IST",
  "sample_size": 100,
- "identified": 59,
- "inferred": 41,
+ "identified": 60,
+ "inferred": 40,
  "cards_skipped": 0,
  "channel_avg_views": 22.2,
  "growth": {
   "today": 467,
-  "snapshots": 32,
+  "snapshots": 33,
   "delta_7d": -4,
-  "per_day": 14.06,
-  "days_to_target": 37,
+  "per_day": 13.65,
+  "days_to_target": 39,
   "target": 1000,
-  "days_span": 33
+  "days_span": 34
  },
  "status": "ok",
  "pillars": {
@@ -47,9 +47,9 @@
    "low_sample": true
   },
   "business_model": {
-   "posts": 13,
-   "avg_views": 23.2,
-   "weight": 1.05,
+   "posts": 14,
+   "avg_views": 22.4,
+   "weight": 1.01,
    "low_sample": false
   },
   "market_mechanics": {
@@ -59,9 +59,15 @@
    "low_sample": false
   },
   "corporate": {
-   "posts": 52,
+   "posts": 51,
    "avg_views": 21.6,
    "weight": 0.97,
+   "low_sample": false
+  },
+  "other": {
+   "posts": 12,
+   "avg_views": 19.0,
+   "weight": 0.86,
    "low_sample": false
   },
   "psychology": {
@@ -70,16 +76,10 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "other": {
-   "posts": 12,
-   "avg_views": 18.8,
-   "weight": 0.85,
-   "low_sample": false
-  },
   "awareness": {
    "posts": 6,
-   "avg_views": 17.0,
-   "weight": 0.77,
+   "avg_views": 18.0,
+   "weight": 0.81,
    "low_sample": false
   }
  },
@@ -100,30 +100,30 @@
    "pillar": "lifestyle"
   },
   {
-   "title": "Pace Digitek Limited (NSE: PACEDIGITK)",
-   "views": 41,
+   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
+   "views": 42,
    "pillar": "corporate"
   },
   {
-   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
+   "title": "Pace Digitek Limited (NSE: PACEDIGITK)",
    "views": 41,
    "pillar": "corporate"
   }
  ],
  "weak_posts": [
   {
-   "title": "Ice Make Refrigeration Limited (NSE: ICEMAKE)",
-   "views": 7,
-   "pillar": "corporate"
+   "title": "Yes Bank faces trustee pressure over AT1 bonds",
+   "views": 9,
+   "pillar": "business_model"
+  },
+  {
+   "title": "Sebi penalises EKI Energy and top execs over revenue misstatement",
+   "views": 8,
+   "pillar": "business_model"
   },
   {
    "title": "Insecticides (India) Limited (NSE: INSECTICID)",
    "views": 6,
-   "pillar": "corporate"
-  },
-  {
-   "title": "Alkem Laboratories Limited (NSE: ALKEM)",
-   "views": 5,
    "pillar": "corporate"
   }
  ]
