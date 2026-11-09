@@ -1137,8 +1137,48 @@
       "source_headline": "Indian bonds drift with oil; inflation data in focus",
       "story_key": "18d98bb653bcca9f970bc9f08dbb038f14586e315cb0a851a57049599c338746",
       "generated_at": "2026-11-09 15:32:32 IST"
+    },
+    {
+      "id": "ai0035",
+      "slot": "F",
+      "scheduled_ist": "2026-11-09 18:00",
+      "title": "CANDLESTICK ANATOMY: Asli Story Samjho",
+      "text": "📌 <b>CANDLESTICK ANATOMY: Asli Story Samjho</b>\n\nPehle hum sirf green candle dekh kar blindly buy karte thay aur sochte thay ki ab toh paisa ban hi jayega.\n\n• <b>The Trap:</b> Sirf candle ka color dekhna aur uska Open, High, Low, Close (OHLC) structure ignore karna sabse badi galti hai.\n• <b>The Damage:</b> ₹1,00,000 ka trade bina wick rejection samjhe lene par, market turant reversal dekar ₹10,000 ka nuksan kara deta hai.\n• <b>The Fix:</b> Har candle ke peeche buyers aur sellers ki ladai dekho—body batati hai kiska zor hai aur wick batati hai kahan rejection mila.\n\n💡 <b>Golden Rule:</b> Rangi-birangi candles ke piche mat bhago, unke banne ki kahani padho.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "candlestick_anatomy",
+      "generated_at": "2026-11-09 15:59:09 IST"
+    },
+    {
+      "id": "ai0036",
+      "slot": "G",
+      "scheduled_ist": "2026-11-09 20:00",
+      "title": "STOCK SPLIT VS BONUS: Fokat Ke Share Ka Dhokha",
+      "text": "📌 <b>STOCK SPLIT VS BONUS: Fokat Ke Share Ka Dhokha</b>\n\nHumein lagta hai ki bonus aur split aane se company ke shares saste ho gaye hain aur yeh ek free ki lottery hai.\n\n• <b>The Trap:</b> Sirf split ya bonus news sunkar fundamental check kiye bina us stock mein heavy quantity buy kar lena.\n• <b>The Damage:</b> ₹1,00,000 ka investment split ke baad value mein utna hi rehta hai, bas shares ki sankhya badh jati hai aur price proportional gir jata hai.\n• <b>The Fix:</b> Corporate action ko wealth creation mat samjho, yeh sirf liquidity aur face value manage karne ka tarika hota hai.\n\n💡 <b>Golden Rule:</b> Split ya bonus se share sasta nahi hota, sirf pizza ke zyada tukde ho jaate hain.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "stock_split_vs_bonus",
+      "generated_at": "2026-11-09 15:59:09 IST"
+    },
+    {
+      "id": "ai0037",
+      "slot": "A",
+      "scheduled_ist": "2026-11-10 08:00",
+      "title": "LOSS ACCEPTANCE: Haar Maan na Bhi Ek Kala Hai",
+      "text": "📌 <b>LOSS ACCEPTANCE: Haar Maan na Bhi Ek Kala Hai</b>\n\nJab trade galat ho jata hai, toh hum screen band karke bhag jaate hain aur sochte hain ki market wapas hamare bhaav par aayega.\n\n• <b>The Trap:</b> Chote loss ko accept na karna aur hope trading ke chakkar mein usko ek bade disaster mein badal dena.\n• <b>The Damage:</b> ₹1,00,000 ke account mein ek chote loss ko na kaatne ki zid ki wajah se poora account wipeout ho sakta hai.\n• <b>The Fix:</b> Loss ko business ka ek chhota kharcha (expense) maano, jaise dukan ka bijli ka bill hota hai.\n\n💡 <b>Golden Rule:</b> Waqt par loss accept karna hi asli trader ki sabse badi jeet hoti hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "loss_acceptance",
+      "generated_at": "2026-11-09 15:59:09 IST"
+    },
+    {
+      "id": "ai0038",
+      "slot": "B",
+      "scheduled_ist": "2026-11-10 10:00",
+      "title": "MOVING AVERAGE KA SAHI USE: Trend Pehchano",
+      "text": "📌 <b>MOVING AVERAGE KA SAHI USE: Trend Pehchano</b>\n\nHum har indicator ki tarah Moving Average ko bhi magic line samajh lete hain jo humein exact top aur bottom bata degi.\n\n• <b>The Trap:</b> Sideways market mein Moving Average ke crossover par bar-bar entry lena aur har baar brokerage dena.\n• <b>The Damage:</b> ₹1,00,000 capital choppy market mein galat MA signals ki wajah se chote-chote cuts kha kar aadhi ho sakti hai.\n• <b>The Fix:</b> Moving Average ka use sirf trending market mein direction dekhne ke liye karo, chop zone mein isko ignore karo.\n\n💡 <b>Golden Rule:</b> Moving Average dost tabhi hai jab market trend mein ho, sideways mein yeh dushman ban jata hai.\n\n━━━━━━━━━━━━━━━━━━━━━\n#TradingPsychology #RiskManagement\n⚠️ Educational only. Not investment advice. Not SEBI registered.",
+      "used": false,
+      "topic_key": "moving_average_ka_sahi_use",
+      "generated_at": "2026-11-09 15:59:09 IST"
     }
   ],
-  "total": 78,
-  "last_scheduled": "2026-11-09 14:00"
+  "total": 82,
+  "last_scheduled": "2026-11-10 10:00"
 }
