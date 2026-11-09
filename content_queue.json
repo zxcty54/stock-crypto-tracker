@@ -757,14 +757,16 @@
       "scheduled_ist": "2026-11-01 12:00",
       "title": "Sebi penalises EKI Energy and top execs over revenue misstatement",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi penalises EKI Energy and top execs over revenue misstatement</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSebi ne EKI Energy Services aur uske MD Manish Kumar Dabkara ko securities market se क्रमशः 2 aur 12 mahine ke liye ban kar diya hai. Regulator ne company aur individuals par total Rs 88 lakh ka monetary penalty bhi lagaya hai.\n\n🧭 <b>MARKET CONTEXT</b>\nIs action ka mukhya karan financial misrepresentation hai. Order ke mutabiq, company ne FY23 ke pehle teen quarters mein Rs 197.04 crore ka revenue prematurely recognise kiya tha, aur FY22-FY23 ke dauran fictitious expenses dikhakar Rs 26.34 crore divert kiye the.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nJab listed companies financial statements mein prematurely revenue dikhati hain ya expenses overstate karti hain, toh yeh investor decisions ko misguide karta hai. Aise regulatory orders se corporate governance standards par scrutiny badhti hai, jo ki governance practices ke liye strict message deta hai.\n\n🔎 <b>KEY WATCHPOINTS</b>\nAapko yeh dekhna hoga ki affected entities 45 days ke andar penalties pay karti hain ya nahi, aur MD Dabkara diverted funds ko recoup karne ke liye kya steps lete hain.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapke hisaab se audit committees ko quarterly financials mein premature revenue recognition roknay ke liye aur strict checks rakhne chahiye?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-bars-eki-energy-md-dabkara-others-from-market-imposes-penalty/articleshow/135416947.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:f9039bbd4f96",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-bars-eki-energy-md-dabkara-others-from-market-imposes-penalty/articleshow/135416947.cms",
       "source_headline": "Sebi bars EKI Energy, MD Dabkara, others from market; imposes penalty",
       "story_key": "f9039bbd4f96d843785cd10f8c2c8b43f030d6bd80497cecc1d45b8fcc45b811",
-      "generated_at": "2026-11-01 12:05:26 IST"
+      "generated_at": "2026-11-01 12:05:26 IST",
+      "posted_at": "2026-11-09 15:33:46 IST",
+      "telegraph_url": "https://telegra.ph/Sebi-penalises-EKI-Energy-and-top-execs-over-revenue-misstatement--November-2026-11-09"
     },
     {
       "id": "newsibmgyapndl",
@@ -1119,8 +1121,24 @@
       "source_headline": "Gold edges up as softer crude tempers inflation concerns",
       "story_key": "2a86093b3cfe7b3c71a4d4856b87495e35990a35b31b5fc02812b1b3012734fc",
       "generated_at": "2026-11-09 07:19:34 IST"
+    },
+    {
+      "id": "newspybbcyczgf",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-09 14:00",
+      "scheduled_ist": "2026-11-09 14:00",
+      "title": "Indian bonds react to crude and US trends; domestic inflation print awaited",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Indian bonds react to crude and US trends; domestic inflation print awaited</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds traded in a narrow range as calmer crude oil prices provided underlying support, while participants awaited upcoming US and domestic inflation metrics. Brent crude hovered near $98 a barrel following political developments in the US. Additionally, state governments scheduled a debt auction worth 290.5 billion rupees, increasing local supply before a holiday closure.\n\n🧭 <b>MARKET CONTEXT</b>\nThe benchmark 6.94% 2036 bond yielded 7.1752%, holding steady after experiencing a notable weekly decline previously driven by an easing in crude prices. Bond yields move inversely to prices; when crude prices fall, domestic inflation and fiscal worries typically moderate, lowering yield pressures.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nSustained lower crude prices and stable yields could ease borrowing costs for corporations and the sovereign if macroeconomic parameters remain favourable. However, these outcomes depend heavily on upcoming consumer inflation prints and global central bank rate paths.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack the October consumer inflation data release, upcoming sovereign debt absorption capacity, and movement in global crude benchmarks.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in sovereign bond yields typically influence corporate borrowing costs in domestic credit markets?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/indian-bonds-drift-with-oil-inflation-data-in-focus/articleshow/135674915.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:18d98bb653bc",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/indian-bonds-drift-with-oil-inflation-data-in-focus/articleshow/135674915.cms",
+      "source_headline": "Indian bonds drift with oil; inflation data in focus",
+      "story_key": "18d98bb653bcca9f970bc9f08dbb038f14586e315cb0a851a57049599c338746",
+      "generated_at": "2026-11-09 15:32:32 IST"
     }
   ],
-  "total": 77,
-  "last_scheduled": "2026-11-09 08:00"
+  "total": 78,
+  "last_scheduled": "2026-11-09 14:00"
 }
