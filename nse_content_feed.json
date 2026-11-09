@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-09 00:07:56 IST",
-  "worthy_count": 33,
+  "generated_at": "2026-11-09 15:22:49 IST",
+  "worthy_count": 32,
   "skipped_count": 33,
   "content_feed": [
     {
@@ -450,23 +450,23 @@
       "worthiness_reason": "Incorporation of a new international joint venture subsidiary with disclosed capital and shareholding percentage.",
       "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Alkem Laboratories Limited (NSE: ALKEM)</b>\n\n<b>Alkem Laboratories Incorporates Saudi Arabia Joint Venture Subsidiary</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Entity Name:</b> Alkem Pharma Company\n- <b>Geography:</b> Kingdom of Saudi Arabia\n- <b>Total Capital:</b> 7,500,000 SAR\n- <b>Investment Cost:</b> 3,825,000 SAR for 38,250 shares\n- <b>Shareholding:</b> 51%\n\n📌 <b>What happened:</b>\n↳ Alkem Laboratories announced the incorporation of its subsidiary in the form of a joint venture named 'Alkem Pharma Company' in the Kingdom of Saudi Arabia, holding a 51% stake with a cash consideration of 3,825,000 SAR.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ALKEM_08112026184401_Draft_Reg_30_Incorporation_of_JV_signed.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-08 19:01:50 IST"
-    },
-    {
-      "hash": "c893a3a5478d",
-      "symbol": "SAILIFE",
-      "company_name": "Sai Life Sciences Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "06-Nov-2026 00:12:52",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SAILIFE_06112026001244_Stx_Press_Release_05112026_Signed.pdf",
-      "headline": "Sai Life Sciences Reports Q2 FY27 Revenue at ₹659 Crore",
-      "content_worthy": true,
-      "worthiness_reason": "Company announced financial results with explicit numeric Revenue and PAT figures for Q2 FY27.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Sai Life Sciences Limited (NSE: SAILIFE)</b>\n\n<b>Sai Life Sciences Reports Q2 FY27 Revenue at ₹659 Crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 FY27 Revenue:</b> ₹659 Crore (up 23% YoY)\n- <b>Q2 FY27 EBITDA:</b> ₹187 Crore (up 20% YoY)\n- <b>Q2 FY27 PAT:</b> ₹98 Crore (up 17% YoY)\n- <b>EBITDA Margin:</b> 28%\n\n📌 <b>What happened:</b>\n↳ Sai Life Sciences Limited announced its financial results for the quarter ended September 30, 2026, reporting a 23% year-on-year growth in operating revenue to ₹659 crore along with a PAT of ₹98 crore.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SAILIFE_06112026001244_Stx_Press_Release_05112026_Signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-08 11:39:39 IST"
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "6a978e75f292",
+      "symbol": "RMDRIP",
+      "company_name": "R M Drip and Sprinklers Systems Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "09-Nov-2026 14:46:21",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/RMDRIP_09112026144600_Outcome.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results payload is incomplete and cuts off before disclosing PAT (Profit After Tax).",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-09 15:22:49 IST"
+    },
     {
       "hash": "734e5ad988ae",
       "symbol": "SIEMENS",
@@ -914,20 +914,6 @@
       "worthiness_reason": "Financial results payload lacks actual numeric values for Revenue and PAT.",
       "telegram_post": "",
       "analyzed_at": "2026-11-08 19:02:12 IST"
-    },
-    {
-      "hash": "e2ca2b046294",
-      "symbol": "PROZONER",
-      "company_name": "Prozone Realty Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "06-Nov-2026 02:18:16",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/PROZONINTU_06112026021655_OutcomePRLF.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results announcement filing does not contain the actual numeric revenue and PAT values within the provided text.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-08 11:39:39 IST"
     }
   ]
 }
