@@ -1103,8 +1103,24 @@
       "source_headline": "Brent crude may find support at $70-$90 as global oil inventories rebuild: Saxo Bank",
       "story_key": "9b3100e386d111fdbcd03b03d04d62d418e541fef66ba9fd43be5d85ac9bf1af",
       "generated_at": "2026-11-09 03:49:57 IST"
+    },
+    {
+      "id": "newsbqjpgauyjj",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-09 08:00",
+      "scheduled_ist": "2026-11-09 08:00",
+      "title": "Gold prices edge up on soft crude while global rate hike worries cap gains",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Gold prices edge up on soft crude while global rate hike worries cap gains</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nGold prices edged slightly higher to $4,073.59 per ounce following a softening in crude oil prices, which eased near-term inflation worries. However, gains remained capped as robust US payrolls data for October pushed the unemployment rate down to 4.1% and strengthened expectations that the US Federal Reserve may raise interest rates further in December. Meanwhile, local retail demand in India saw some traction as prices touched a seven-month low during festival season.\n\n🧭 <b>MARKET CONTEXT</b>\nHigher interest rates raise the opportunity cost of holding non-yielding assets like bullion, making debt instruments more attractive. When global central banks signal tighter monetary policy, gold often faces headwinds despite broader macroeconomic uncertainty.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nFor Indian retail participants, global bullion price trends heavily influence domestic retail and jewellery demand dynamics. If global interest rate expectations drive up yields, capital flows can pivot away from precious metals and emerging market risk assets, though domestic festival demand can occasionally create localized cushions.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming US inflation prints, CME FedWatch rate probabilities, and currency movements between the US dollar and the rupee for directional cues on domestic bullion pricing.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya global interest rate expectations aur domestic festive demand ka yeh balancing act aapke portfolio allocation ko kaise affect karta hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/commodities/news/gold-edges-up-as-softer-crude-tempers-inflation-concerns/articleshow/135667365.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:2a86093b3cfe",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-edges-up-as-softer-crude-tempers-inflation-concerns/articleshow/135667365.cms",
+      "source_headline": "Gold edges up as softer crude tempers inflation concerns",
+      "story_key": "2a86093b3cfe7b3c71a4d4856b87495e35990a35b31b5fc02812b1b3012734fc",
+      "generated_at": "2026-11-09 07:19:34 IST"
     }
   ],
-  "total": 76,
+  "total": 77,
   "last_scheduled": "2026-11-09 08:00"
 }
