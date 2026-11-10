@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-09 22:50:25 IST",
+  "updated_at": "2026-11-10 20:10:03 IST",
   "macro_pulse_summary": {
-    "total_sectors_analyzed": 17,
-    "total_stocks_screened": 68,
-    "total_expanding_equities": 40,
-    "total_contracting_equities": 28
+    "total_sectors_analyzed": 15,
+    "total_stocks_screened": 60,
+    "total_expanding_equities": 34,
+    "total_contracting_equities": 26
   },
   "sectors": [
     {
@@ -13,7 +13,7 @@
       "benchmark_commodity": "Brent Crude Oil",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Brent at $113.43 aur 74.8% YoY jump ki wajah se crude derivatives jaise monomers aur solvents costly ho rahe hain. 130-140 din ka high inventory buffer hone ke karan upcoming quarters mein margin compression dikhegi kyunki delayed price hikes raw material inflation ko fully offset nahi kar paa rahe hain.",
+      "sector_macro_thesis": "Brent crude at 113.43 USD/bbl aur 74.8% ka 1Y spike direct monomers, solvents, aur TiO2 cost ko upar khich raha hai. 130-140+ days ke inventory buffer ke chalte, purana high-cost inventory books mein hit karega aur Q3-Q4 margins par severe pressure banayega.",
       "evaluated_stocks": [
         {
           "symbol": "ASIANPAINT",
@@ -21,8 +21,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -250,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "142 din ka inventory buffer aur delayed price pass-through ki wajah se crude inflation aane wale quarters mein margins ko hit karega.",
-          "quarterly_ebitda_outlook": "High cost inventory consumption se EBITDA per cent mein sharp compression expected hai."
+          "operational_transmission_rationale": "142 days ka massive inventory buffer crude inflation ko instantly reflect nahi hone deta, lekin delayed price hikes aur rising input costs margins ko erode karenge.",
+          "quarterly_ebitda_outlook": "Delayed price pass-through aur high inventory days ke karan upcoming quarters mein OPM contract hone ka poora risk hai."
         },
         {
           "symbol": "BERGEPAINT",
@@ -30,8 +30,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -220,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "143 din ke inventory cycle ke chalte aggressive dealer networks par margin pressure persist karega.",
-          "quarterly_ebitda_outlook": "Volume growth solid rahegi lekin input cost lag ki wajah se margins dabey rahenge."
+          "operational_transmission_rationale": "143 days inventory days aur aggressive dealer push ke beech raw material inflation margin ko squeeze kar raha hai.",
+          "quarterly_ebitda_outlook": "Volume growth sustain karne ke chakkar mein aggressive pricing nahi kar paane se EBITDA margins par daban rahega."
         },
         {
           "symbol": "KANSAINER",
@@ -39,8 +39,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -180,
           "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Indexed OEM contracts hone ki wajah se crude-linked raw material price hikes ko pass karne mein time lagta hai.",
-          "quarterly_ebitda_outlook": "Auto sector demand strong hai par raw material pressure se OPM par negative impact padega."
+          "operational_transmission_rationale": "Indexed auto OEM contracts ke chalte cost escalation ko turant pass on karna mushkil hota hai, jisse 133 days inventory cycle par pressure padta hai.",
+          "quarterly_ebitda_outlook": "Auto sector ke tied-up contracts aur raw material lag ke kaaran near-term profitability dabee rahegi."
         },
         {
           "symbol": "PIDILITIND",
@@ -48,8 +48,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "VAM par monopoly pricing power hone ke karan ye companies raw material inflation ko easily end-consumers par dal deti hain.",
-          "quarterly_ebitda_outlook": "Strong pricing power ki wajah se margins resilient rahenge aur expansion dekhne ko milega."
+          "operational_transmission_rationale": "VAM aur adhesives segment mein monopoly-like pricing power hone ki wajah se yeh log raw material cost ko end consumer par easily pass on kar dete hain.",
+          "quarterly_ebitda_outlook": "Strong brand equity aur pricing dominance ke dum par upcoming quarters mein margins expand hone ki poori ummeed hai."
         }
       ]
     },
@@ -59,7 +59,7 @@
       "benchmark_commodity": "Brent Crude Oil & Synthetic Rubber",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Crude ke 74.8% YoY surge se synthetic rubber aur carbon black ke prices sky-high ho gaye hain, jo total COGS ka 60% banate hain. Tyres aur upstream players ko spot raw material spikes absorb karne mein mushkil ho rahi hai, jisse margins compress honge.",
+      "sector_macro_thesis": "Crude oil aur synthetic rubber ke daam badhne se tyre manufacturers ki cost structure hil gayi hai kyunki derivatives ~60% COGS banate hain. Halanki kuch players replacement market aur backward integration ke zariye isse bachne ki koshish kar rahe hain.",
       "evaluated_stocks": [
         {
           "symbol": "MRF",
@@ -67,17 +67,17 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -200,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "115 din ki inventory days aur 60% CFO/OP ke sath replacement market mein price hikes implement karne mein delay ho raha hai.",
-          "quarterly_ebitda_outlook": "High cost rubber inventory ki wajah se upcoming quarters mein OPM dabav mein rahega."
+          "operational_transmission_rationale": "115 days inventory cycle aur 60% CFO/OP conversion ke sath, raw material spike ka full impact upcoming financial results mein dikhega.",
+          "quarterly_ebitda_outlook": "Replacement demand solid hai, par unhedged raw material cost spike OPM ko temporary hit karega."
         },
         {
           "symbol": "CEATLTD",
           "company_name": "CEAT Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -150,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "63 din ka low inventory buffer hone ke karan spot raw material spikes seedhe current quarter ke COGS mein hit karte hain.",
-          "quarterly_ebitda_outlook": "Negative working capital cycle hone ke bawajud raw material inflation margins ko erode karegi."
+          "pricing_power": "WEAK",
+          "operational_transmission_rationale": "63 days ka low inventory cycle matlab yeh raw material spot spikes ke liye direct exposure rakhte hain bina kisi bade cushion ke.",
+          "quarterly_ebitda_outlook": "Spot prices badhne se quarter-on-quarter margins par downward pressure bana rahega."
         },
         {
           "symbol": "BALKRISIND",
@@ -85,8 +85,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 180,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Global off-highway replacement market mein premium pricing power hone se ye input costs ko effectively pass-through kar lete hain.",
-          "quarterly_ebitda_outlook": "Exports demand aur forex tailwinds ki wajah se EBITDA margins mein expansion aayega."
+          "operational_transmission_rationale": "Global off-highway tyre export market mein premium positioning aur dollar realization ki wajah se yeh input inflation ko easily offset kar lete hain.",
+          "quarterly_ebitda_outlook": "Strong export demand aur superior product mix ke chalte EBITDA margins mein expansion dekhne ko milegi."
         },
         {
           "symbol": "PCBL",
@@ -94,8 +94,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 220,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Upstream carbon black producer hone ke नाते ye crude feedstock spreads ko capture karke margins expand karte hain.",
-          "quarterly_ebitda_outlook": "Strong spread capture aur operational efficiencies se quarterly OPM mein achhi growth dikhegi."
+          "operational_transmission_rationale": "Upstream carbon black producer hone ke naate yeh crude feedstock spreads ko capture karte hain aur cost pass-through ka advantage uthate hain.",
+          "quarterly_ebitda_outlook": "Spread expansion aur robust operational efficiency ke karan upcoming quarters mein margin growth kafi strong rahegi."
         }
       ]
     },
@@ -105,43 +105,43 @@
       "benchmark_commodity": "Natural Gas (Spot LNG / APM)",
       "benchmark_price": "2.9 USD/MMBtu",
       "benchmark_1m_delta_pct": -2.36,
-      "sector_macro_thesis": "Spot LNG aur APM prices mein correction dekhne ko mil rahi hai, jo CGD players ke input cost (COGS) ko relief de rahi hai. Downstream distributors ke liye yeh margin expansion ka setup hai, jabki upstream producers ko regulated realization pressure face karna pad sakta hai.",
+      "sector_macro_thesis": "Spot LNG aur APM prices soft rehne se CGD players jaise MGL ko raw material cost me rahat mil rahi hai, jisse unke margins protect ho rahe hain. Halanki, upstream producers ke liye lower realization pressure create kar raha hai, lekin domestic volume growth demand ko sustain kar rahi hai.",
       "evaluated_stocks": [
         {
           "symbol": "IGL",
           "company_name": "Indraprastha Gas Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 150,
+          "projected_opm_change_bps": 120,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Delhi-NCR market mein CNG retail prices maintain karte hue lower gas sourcing cost ka direct benefit margins par reflect hoga.",
-          "quarterly_ebitda_outlook": "Lower gas costs ke chalte upcoming quarters mein EBITDA per scm mein visible improvement aayegi."
+          "operational_transmission_rationale": "Delhi-NCR me CNG retail pricing power maintain hone aur lower gas sourcing costs ke chalte margins improve honge.",
+          "quarterly_ebitda_outlook": "Agle quarter me volume growth aur stable gas costs ki wajah se EBITDA per SCM me positive expansion dekhne ko milega."
         },
         {
           "symbol": "MGL",
           "company_name": "Mahanagar Gas Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 180,
+          "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Negative working capital (-11 days) aur strong 22% OPM ke sath, yeh company falling gas prices ka maximum advantage capture karegi.",
-          "quarterly_ebitda_outlook": "Industrial demand stability aur soft input costs ki wajah se operational profitability mein strong expansion expect hai."
+          "operational_transmission_rationale": "Audited 22% OPM aur -11 days ke negative working capital cycle ke sath, MGL ko favorable gas cost ka direct benefit milega.",
+          "quarterly_ebitda_outlook": "Industrial demand ki stability aur negative CCC ke dam par operating profitability me strong sequential growth expect hai."
         },
         {
           "symbol": "ONGC",
           "company_name": "Oil and Natural Gas Corp",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -120,
+          "projected_opm_change_bps": -80,
           "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Global natural gas benchmark prices mein 32% ki 1Y drop se domestic gas realization pressure mein aa jayegi.",
-          "quarterly_ebitda_outlook": "Upstream realizations soften hone se upcoming top-line aur EBITDA margins par downward pressure rahega."
+          "operational_transmission_rationale": "Global benchmark prices me correction aur regulated domestic realizations ki wajah se top-line growth par pressure rahega.",
+          "quarterly_ebitda_outlook": "Gas price realisations soft rehne ke karan upcoming quarters me upstream realisations par margin contraction ka risk hai."
         },
         {
           "symbol": "OIL",
           "company_name": "Oil India Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -90,
+          "projected_opm_change_bps": -100,
           "pricing_power": "WEAK",
-          "operational_transmission_rationale": "High inventory days (264 days) aur regulated gas pricing mechanism ki wajah se lower global benchmarks ka impact delayed lekin severe hoga.",
-          "quarterly_ebitda_outlook": "High cycle times aur subdued realisations ki vajah se 35% base OPM par margin compression dekhne ko milegi."
+          "operational_transmission_rationale": "High inventory days (264 days) aur lamba working capital cycle (190 days) cost transmission me delay paida karte hain.",
+          "quarterly_ebitda_outlook": "Stretched working capital aur soft gas price environment ki wajah se operating margins me temporary dip aa sakta hai."
         }
       ]
     },
@@ -151,7 +151,7 @@
       "benchmark_commodity": "Brent Crude / ATF",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Brent crude aur ATF prices mein sharp jump (10.87% 1M delta) ne airlines ke cost structure ko hila diya hai kyunki fuel burn 40% cost banata hai. Iska direct pressure passenger airlines par padega, jabki integrated refiners kuch buffer enjoy karenge.",
+      "sector_macro_thesis": "Brent crude aur ATF prices me sharp spike (10.87% 1M delta) airlines ke operational costs ko buri tarah hit kar raha hai, kyunki fuel cost total operational expense ka 38-42% hota hai. Downstream refiners ke liye inventory gains mil sakte hain, lekin airlines ke margins dabenge.",
       "evaluated_stocks": [
         {
           "symbol": "INDIGO",
@@ -159,8 +159,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -250,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Fortnightly fuel burn cost spike ko instant passthrough karna fare caps aur high competition ki wajah se mushkil hota hai.",
-          "quarterly_ebitda_outlook": "Badhte ATF prices aur dollar lease rentals ke combination se upcoming quarter ke operational margins dabenge."
+          "operational_transmission_rationale": "Fortnightly fuel burn me high ATF prices ka immediate impact padta hai, jise fares me turant pass-on karna mushkil hota hai.",
+          "quarterly_ebitda_outlook": "High fuel intensity ki wajah se upcoming quarterly results me airline margins par severe cost pressure dikhega."
         },
         {
           "symbol": "SPICEJET",
@@ -168,26 +168,26 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -400,
           "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Weak balance sheet aur high fuel sensitivity ki wajah se har ek crude uptick direct bottom-line erosion karta hai.",
-          "quarterly_ebitda_outlook": "Severe cost pressure aur cash flow constraints ke chalte operational turnaround filhal kafi challenging rahega."
+          "operational_transmission_rationale": "Dollar lease rentals aur high ATF prices ka double whammy weak pricing power wale carrier ke margins ko crush kar dega.",
+          "quarterly_ebitda_outlook": "Severe liquidity constraints aur soaring fuel expenses ke chalte bottom line par heavy contraction expected hai."
         },
         {
           "symbol": "BPCL",
           "company_name": "Bharat Petroleum Corp",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 110,
+          "projected_opm_change_bps": 180,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Refining margins aur inventory gains strong crude volatility ke dauran downstream marketing buffer provide karte hain.",
-          "quarterly_ebitda_outlook": "Inventory valuation gains aur retail fuel marketing margins stabilize hone se near-term numbers supportive rahenge."
+          "operational_transmission_rationale": "Rising crude prices se inventory gains milte hain, jo downstream marketing margins ko temporarily boost karte hain.",
+          "quarterly_ebitda_outlook": "Refining margins me improvement aur inventory valuation gains ki wajah se upcoming quarter me EBITDA expansion hoga."
         },
         {
           "symbol": "HINDPETRO",
           "company_name": "Hindustan Petroleum Corp",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 90,
+          "projected_opm_change_bps": 160,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Auto fuel exposure aur refining throughput ki taakat se yeh volatility cyclic upside capture karne mein saksham hai.",
-          "quarterly_ebitda_outlook": "GRM dynamics aur stable retail marketing realisations se upcoming results mein moderate margin uptick dikhega."
+          "operational_transmission_rationale": "Auto fuel exposure aur refining throughput ke chalte high crude environment me short-term inventory upside capture hota hai.",
+          "quarterly_ebitda_outlook": "Strong inventory dynamics aur robust retail fuel demand se core operating margins me sequential expansion milega."
         }
       ]
     },
@@ -197,7 +197,7 @@
       "benchmark_commodity": "Crude Naphtha & Benzene",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Crude naphtha aur benzene prices mein sharp spike dekhne ko mil raha hai, jisse downstream COGS badh gaya hai. Jo companies formula-linked contracts nahi chala rahi hain, unke margins par dabav aayega kyunki high-cost inventory cycle mein purane orders execute ho rahe hain.",
+      "sector_macro_thesis": "Crude aur benzene mein sharp 74.8% YoY jump ke chalte input costs mein heavy inflation aa rahi hai. Raw material inflation ka ye pressure downstream players ko margin squeeze dega kyunki inventory days lambe hone ki wajah se cost pass-through mein lag aayega.",
       "evaluated_stocks": [
         {
           "symbol": "DEEPAKNTR",
@@ -205,8 +205,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -180,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "59 days inventory days ke sath yeh high-cost benzene raw materials ko turant finished goods prices mein pass-on nahi kar pa rahe.",
-          "quarterly_ebitda_outlook": "Phenol-acetone spread compression ki wajah se upcoming quarter mein OPM pressure mein rahega."
+          "operational_transmission_rationale": "59 days inventory cycle ke sath, phenol-acetone spreads par cost pressure turant impact karega.",
+          "quarterly_ebitda_outlook": "Rising input costs aur laggy pricing pass-through ki wajah se upcoming quarters mein OPM compress hone ki ummeed hai."
         },
         {
           "symbol": "AARTIIND",
@@ -214,26 +214,26 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 120,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Formula-linked contracts hone ki wajah se yeh raw material inflation ko aasaani se clients par shift kar lete hain.",
-          "quarterly_ebitda_outlook": "126 days inventory holding ke bawajud pricing mechanism strong hone se EBITDA growth stable rahegi."
+          "operational_transmission_rationale": "Formula-linked contracts hone ki wajah se benzene price hike ko agle quarter tak aaram se pass-on kar sakte hain.",
+          "quarterly_ebitda_outlook": "Formula pricing ki safety aur strong CFO conversion ke chalte margins resilient rahenge aur expansion dikhegi."
         },
         {
           "symbol": "NAVINFLUOR",
           "company_name": "Navin Fluorine International",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 250,
+          "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Niche fluorine CDMO aur high-margin product mix ki wajah se input cost inflation ka koi khaas negative impact nahi padta.",
-          "quarterly_ebitda_outlook": "High-value specialty molecules aur robust CDMO pipeline ki wajah se margins expand honge."
+          "operational_transmission_rationale": "High-margin fluorine specialty aur CDMO model commodity petroleum shocks se kaafi had tak insulated hai.",
+          "quarterly_ebitda_outlook": "Niche product mix aur superior pricing power ki wajah se operating margins expand hone ki strong probability hai."
         },
         {
           "symbol": "ATUL",
           "company_name": "Atul Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -150,
+          "projected_opm_change_bps": -140,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Broad-based chemical portfolio hone ki wajah se cyclical input price hikes ko absorb karne mein samay lagta hai.",
-          "quarterly_ebitda_outlook": "Basic chemical pricing volatility aur lag mein cost transmission ki wajah se near-term margins soft rahenge."
+          "operational_transmission_rationale": "Basic chemical cycles aur unhedged inventory ke chalte raw material inflation ko turant absorb karna mushkil hoga.",
+          "quarterly_ebitda_outlook": "Cyclical headwinds aur delayed transmission ke kaaran near-term margins dabav mein rehne ki ummeed hai."
         }
       ]
     },
@@ -243,16 +243,16 @@
       "benchmark_commodity": "Crude PVC & CPVC Resins",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "PVC aur CPVC resin prices mein 74.8% ka 1Y jump aane se pipe manufacturers ke raw material costs peak par hain. Jo players backward integrated hain woh inventory gains capture kar rahe hain, jabki non-integrated players ko demand destocking ke beech margin compression face karni padegi.",
+      "sector_macro_thesis": "Polymer resins jo ki pipe manufacturing cost ka 65-72% banate hain, unke prices mein massive 10.87% ka 1M spike aaya hai. Is sudden input inflation se inventory losses aur working capital block hone ka khatra badh gaya hai.",
       "evaluated_stocks": [
         {
           "symbol": "ASTRAL",
           "company_name": "Astral Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 110,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Strong brand loyalty aur premium plumbing positioning ke chalte yeh rising resin prices ko retail segment mein pass-on kar dete hain.",
-          "quarterly_ebitda_outlook": "Strong distribution network aur pricing power ki wajah se upcoming quarters mein OPM resilient rahega."
+          "margin_trajectory": "MARGIN_CONTRACTION",
+          "projected_opm_change_bps": -160,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Brand loyalty strong hai par sudden resin cost spikes ko channel mein turant pass karna competitive pressure mein tough hota hai.",
+          "quarterly_ebitda_outlook": "High-cost inventory liquidation aur demand pushback ki wajah se upcoming quarters mein margin volatility dekhne ko milegi."
         },
         {
           "symbol": "SUPREMEIND",
@@ -260,8 +260,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -130,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Large volume operations aur inventory destocking ke dauran high-cost resin purchases margins ko temporary hit dete hain.",
-          "quarterly_ebitda_outlook": "Volume growth ke bawajud high inventory holding ki wajah se short-term EBITDA margins dabav mein rahenge."
+          "operational_transmission_rationale": "Molded packaging aur piping segments mein inventory destocking cycle aur raw material inflation ka double whammy chal raha hai.",
+          "quarterly_ebitda_outlook": "Inventory holding losses aur input cost pressure ki short-term impact se EBITDA margins slight contraction dikha sakte hain."
         },
         {
           "symbol": "FINPIPE",
@@ -269,8 +269,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 190,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Backward integrated model hone ki wajah se yeh internal PVC resin production se cost advantage aur inventory gains dono earn karte hain.",
-          "quarterly_ebitda_outlook": "Resin spread expansion aur 122% CFO/OP conversion ke chalte upcoming results mein margin beat ki strong sambhavna hai."
+          "operational_transmission_rationale": "Backward integration (in-house PVC resin production) hone ki wajah se ye rising resin prices ka direct fayda uthate hain.",
+          "quarterly_ebitda_outlook": "Resin spread expansion aur strong CFO conversion ke chalte upcoming results mein margin expansion robust rahegi."
         },
         {
           "symbol": "PRINCEPIPE",
@@ -278,8 +278,8 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -210,
           "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Regional competition aur limited pricing flexibility ki wajah se volatile resin inventory spreads ko fully pass-on nahi kar paate.",
-          "quarterly_ebitda_outlook": "Input cost inflation aur aggressive pricing environment ki wajah se Q3/Q4 margins under pressure rahenge."
+          "operational_transmission_rationale": "Regional pricing pressures aur volatile inventory spreads ki wajah se raw material price hikes ko fully absorb karna mushkil hai.",
+          "quarterly_ebitda_outlook": "Inventory lag aur fierce market competition ke chalte near-term earnings aur margins par significant dabav banega."
         }
       ]
     },
@@ -289,7 +289,7 @@
       "benchmark_commodity": "Refined Copper & Aluminium",
       "benchmark_price": "6.48 USD/lb",
       "benchmark_1m_delta_pct": 0.0,
-      "sector_macro_thesis": "Copper aur Aluminium prices mein 1Y high 28.32% jump aane ke baad raw material cost pressure badh gaya hai. Jinke paas monthly price revision ya pass-through clause nahi hai, unke margins squeeze honge kyunki inventory days 60-90 din ke beech chal rahe hain.",
+      "sector_macro_thesis": "Copper aur Aluminium prices mein 1Y high (+28.32%) ki wajah se raw material inflation pressure severe hai. Jin companies ke paas monthly price revisions aur strong brand pricing power hai, woh margins protect kar payengi, jabki high inventory days wale players ko cost lag face karna padega.",
       "evaluated_stocks": [
         {
           "symbol": "POLYCAB",
@@ -297,35 +297,35 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 50,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Monthly price revisions ke chalte Polycab raw material inflation ko jaldi pass-on kar leta hai.",
-          "quarterly_ebitda_outlook": "Strong retail brand recall aur pricing power se OPM stable rehne aur expand hone ki ummeed hai."
+          "operational_transmission_rationale": "Monthly price revisions aur 86 din ki inventory cycle ki wajah se Polycab raw material cost spikes ko turant end-consumers par pass-on kar deta hai.",
+          "quarterly_ebitda_outlook": "Agle quarters mein strong retail demand aur agile pricing ki wajah se margins mein mild expansion dekhne ko milegi."
         },
         {
           "symbol": "KEI",
           "company_name": "KEI Industries Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -80,
+          "projected_opm_change_bps": -40,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "87 din ke inventory days aur 115 din ke high CCC ke kaaran cost transmission mein bada lag aata hai.",
-          "quarterly_ebitda_outlook": "Delayed price variation clauses aur working capital block hone se near-term margins pe pressure rahega."
+          "operational_transmission_rationale": "87 din ki inventory aur 115 din ki lamba working capital cycle (CCC) hone ki wajah se cost transmission mein delay hota hai.",
+          "quarterly_ebitda_outlook": "High working capital intensity aur lagged pass-through ki wajah se near-term EBITDA margins par dabav bana rahega."
         },
         {
           "symbol": "RRKABEL",
           "company_name": "R R Kabel Limited",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -120,
-          "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Pehle se hi low 6.0% OPM aur export competition ki wajah se copper price hike ko absorb karna mushkil ho raha hai.",
-          "quarterly_ebitda_outlook": "Lower base margins aur aggressive pricing environment ke chalte EBITDA per ton mein contraction dikhegi."
+          "margin_trajectory": "MARGIN_EXPANSION",
+          "projected_opm_change_bps": 30,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Faster inventory churn (59 days) aur healthy CFO/OP conversion (121%) copper price pass-through ko smoothly execute karne mein madad karte hain.",
+          "quarterly_ebitda_outlook": "Operational efficiencies aur controlled inventory ke chalte margins gradual recovery mode mein rahenge."
         },
         {
           "symbol": "FINCABLES",
           "company_name": "Finolex Cables Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 30,
+          "projected_opm_change_bps": 40,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Balanced 61-day inventory cycle aur diversified product mix se input cost ka asar asani se offset ho jata hai.",
-          "quarterly_ebitda_outlook": "Steady cash flows aur disciplined working capital management se margins resilient rahenge."
+          "operational_transmission_rationale": "61 days ki balanced inventory aur 57 days ke CCC ke sath, company input cost inflation ko bina demand destruction ke absorb kar rahi hai.",
+          "quarterly_ebitda_outlook": "Auto wire aur electrical cable segments mein steady volume growth margins ko positive trajectory par rakhegi."
         }
       ]
     },
@@ -335,34 +335,34 @@
       "benchmark_commodity": "Copper Winding & CRGO Steel",
       "benchmark_price": "6.48 USD/lb",
       "benchmark_1m_delta_pct": 0.0,
-      "sector_macro_thesis": "CRGO steel aur copper winding ke daam uchalne se heavy electrical players ke input costs badh gaye hain. Fixed price orders execution mein lagne wala waqt aur raw material inflation ka mismatch margins ko buri tarah impact karega.",
+      "sector_macro_thesis": "CRGO electrical steel aur copper winding ke prices mein massive 1Y surge (+28.32%) transformers aur heavy electrical players ke margins ko test kar raha hai. Fixed-price order books wale players ko severe margin squeeze ka samna karna padega jab tak escalation clauses active na ho.",
       "evaluated_stocks": [
         {
           "symbol": "VOLTAMP",
           "company_name": "Voltamp Transformers Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -150,
+          "projected_opm_change_bps": -80,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Fixed-price order book hone ki wajah se current raw material price spikes ko turant customer par nahi daal sakte.",
-          "quarterly_ebitda_outlook": "Old lower-margin orders execute hone tak upcoming quarters mein OPM compression dekhne ko milegi."
+          "operational_transmission_rationale": "Fixed-price transformer orders mein raw material inflation absorb hone ki wajah se near-term margins par direct negative impact aata hai.",
+          "quarterly_ebitda_outlook": "Legacy orders execution ke dauran input cost pressure se margins temporarily compress honge."
         },
         {
           "symbol": "TRITURBINE",
           "company_name": "Triveni Turbine Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 90,
+          "projected_opm_change_bps": 60,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Global delivery pricing power aur niche industrial turbine segment hone ki wajah se margins protect karna aasan hai.",
-          "quarterly_ebitda_outlook": "Export mix behtar hone aur high-margin service revenue se EBITDA expansion ki strong possibility hai."
+          "operational_transmission_rationale": "Global delivery model aur high-margin product mix ki wajah se company ke paas strong pricing power hai jo raw material headwinds ko offset kar deti hai.",
+          "quarterly_ebitda_outlook": "Export-heavy order book aur high-efficiency industrial turbines ki strong demand se margins expand karenge."
         },
         {
           "symbol": "SCHNEIDER",
           "company_name": "Schneider Electric Infrastructure",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 60,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Grid capex boom aur strong power distribution demand ki vajah se volumes badh rahe hain jo cost pressure ko neutralize karte hain.",
-          "quarterly_ebitda_outlook": "Operating leverage kick-in hone se fixed costs spread out honge aur margins improve karenge."
+          "projected_opm_change_bps": 45,
+          "pricing_power": "HIGH",
+          "operational_transmission_rationale": "Power distribution aur switchgear portfolio mein robust grid capex demand milne se company easily cost passthrough kar leti hai.",
+          "quarterly_ebitda_outlook": "Power infrastructure upgrade cycles aur smart grid adoption se operating leverage improve hoga."
         },
         {
           "symbol": "ABB",
@@ -370,100 +370,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 75,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "High-efficiency electrification aur premium robotics portfolio hone ki vajah se company strong pricing power enjoy karti hai.",
-          "quarterly_ebitda_outlook": "Robust execution capabilities aur high-margin product mix se quarterly earnings mein continuous margin beat aayega."
-        }
-      ]
-    },
-    {
-      "sector_id": "steel_structural_pipes",
-      "sector_name": "Primary Steel, Structural Tubes & Rebars",
-      "benchmark_commodity": "Iron Ore & Coking Coal",
-      "benchmark_price": "90.71 USD/dmt",
-      "benchmark_1m_delta_pct": -1.51,
-      "sector_macro_thesis": "Iron ore aur coking coal prices mein correction se primary steel makers ke input costs ease ho rahe hain. Lekin global demand slowdown aur Chinese dumping ki wajah se realisations pressure mein hain, jisse margins par mixed impact dekhne ko milega.",
-      "evaluated_stocks": [
-        {
-          "symbol": "TATASTEEL",
-          "company_name": "Tata Steel Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 75,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Captive iron ore mines hone ki wajah se raw material volatility ka direct buffer milta hai.",
-          "quarterly_ebitda_outlook": "Input costs soft rehne aur operational efficiencies se upcoming quarters mein EBITDA per tonne improve hoga."
-        },
-        {
-          "symbol": "JSWSTEEL",
-          "company_name": "JSW Steel Limited",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -50,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Purchased iron ore aur imported coking coal par dependent hone ke kaaran cost lag inventory mein reflect hoti hai.",
-          "quarterly_ebitda_outlook": "Finished steel price realisations mein girawat aane se near-term margins par dabav bana rahega."
-        },
-        {
-          "symbol": "APLAPOLLO",
-          "company_name": "APL Apollo Tubes Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 90,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Conversion-margin model par operate karne ki wajah se yeh raw material price drops ka benefit turant capture karte hain.",
-          "quarterly_ebitda_outlook": "Volume growth aur stable spread ki vajah se per-tonne EBITDA mein positive expansion dikhegi."
-        },
-        {
-          "symbol": "JINDALSTEL",
-          "company_name": "Jindal Steel & Power",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 60,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Captive power plants aur value-added products (rails/plates) portfolio cost fluctuations ko offset karta hai.",
-          "quarterly_ebitda_outlook": "Domestic infrastructure demand aur optimized cost structure ki vajah se margins resilient rahenge."
-        }
-      ]
-    },
-    {
-      "sector_id": "aluminium_auto_castings",
-      "sector_name": "Primary Aluminium & Auto Castings",
-      "benchmark_commodity": "Primary Aluminium Ingot",
-      "benchmark_price": "3167.5 USD/MT",
-      "benchmark_1m_delta_pct": -0.95,
-      "sector_macro_thesis": "Primary aluminium prices mein 1Y mein strong 11% ki tezi rahi hai, jisse upstream producers ko fayda mila hai. Lekin auto components aur downstream players ke liye high ingot costs input pressure create kar rahe hain jab tak lag-based price pass-through na ho.",
-      "evaluated_stocks": [
-        {
-          "symbol": "HINDALCO",
-          "company_name": "Hindalco Industries Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 110,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Integrated upstream operations aur downstream Novelis portfolio se global aluminium upswings ka pura benefit milta hai.",
-          "quarterly_ebitda_outlook": "Strong LME aluminium prices aur value-added product mix se upcoming results mein robust margin expansion hogi."
-        },
-        {
-          "symbol": "NATIONALUM",
-          "company_name": "National Aluminium Co (NALCO)",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 150,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Lowest cost bauxite mining aur 353-day inventory cycle ke chalte high ingot prices par maximum realization milti hai.",
-          "quarterly_ebitda_outlook": "High operating margins (45%) aur global metal prices ke uptrend se EBITDA mein sharp jump expected hai."
-        },
-        {
-          "symbol": "ENDURANCE",
-          "company_name": "Endurance Technologies",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -40,
-          "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Negative working capital (-2.0d) aur 52-day inventory cycle ki wajah se high aluminium costs ka lagged impact margins par padta hai.",
-          "quarterly_ebitda_outlook": "OEM price-negotiation lags ki vajah se near-term margins par thoda compression dekhne ko mil sakta hai."
-        },
-        {
-          "symbol": "BHARATFORG",
-          "company_name": "Bharat Forge Limited",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -60,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Lamba inventory cycle (198.0d) aur heavy metal forging costs raw material price volatility ko turant absorb nahi hone dete.",
-          "quarterly_ebitda_outlook": "Global industrial demand slowdown aur higher metal input costs ki vajah se margin recovery mein thoda samay lagega."
+          "operational_transmission_rationale": "High-efficiency robotics aur electrification systems mein technological differentiation hone ke karan pricing authority fully ABB ke paas rehti hai.",
+          "quarterly_ebitda_outlook": "Premium automation solutions ki high demand aur disciplined execution se robust EBITDA expansion expected hai."
         }
       ]
     },
@@ -473,7 +381,7 @@
       "benchmark_commodity": "Natural Gas Kiln Fuel",
       "benchmark_price": "2.9 USD/MMBtu",
       "benchmark_1m_delta_pct": -2.36,
-      "sector_macro_thesis": "Morbi hub me natural gas prices ka 1Y drop (-32%) tile kilns ke operating margins ko direct tailwind de raha hai. Low input costs aur pricing power ke chalte upcoming quarters me EBITDA per square meter expand hone ki strong visibility hai.",
+      "sector_macro_thesis": "Natural gas prices mein 1Y drop (-32.08%) aur 1M soft (-2.36%) hone se Morbi cluster aur branded tile makers ko direct cost relief mil raha hai. Kiln fuel ka 25-30% share hone ke karan yeh input deflation margins ko boost karega.",
       "evaluated_stocks": [
         {
           "symbol": "KAJARIACER",
@@ -481,8 +389,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 120,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "126 days inventory lag aur strong retail brand pull ke karan gas cost reduction ka pura benefit margin me translate hoga.",
-          "quarterly_ebitda_outlook": "Lower gas prices aur premium product mix se operating margins me sharp sequential improvement dikhegi."
+          "operational_transmission_rationale": "126 din ki inventory cycle ke saath, lower gas prices ka full impact aane wale quarters mein EBITDA margins ko expand karega.",
+          "quarterly_ebitda_outlook": "Retail pricing power aur falling fuel cost ka double benefit upcoming quarters mein OPM ko 14% se upar le jayega."
         },
         {
           "symbol": "SOMANYCERA",
@@ -490,8 +398,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 90,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Regional gas sourcing advantage aur falling kiln fuel expenses se working capital pressure offset hoga.",
-          "quarterly_ebitda_outlook": "Cost normalization aur volume uptick ki wajah se EBITDA margins me moderate expansion expected hai."
+          "operational_transmission_rationale": "Regional gas sourcing aur Morbi hub ke pass hone ki wajah se yeh players gas cost drops ka turant fayda uthate hain.",
+          "quarterly_ebitda_outlook": "Lower production cost volumes ko support karegi, jisse EBITDA per tile mein sudhaar aayega."
         },
         {
           "symbol": "CERA",
@@ -499,17 +407,17 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "150 days high inventory days aur 104% CFO/OP conversion low raw material beta ke sath premium margins protect karte hain.",
-          "quarterly_ebitda_outlook": "Asset-light sanitaryware positioning aur robust cash flows se industry-leading margins sustain rahenge."
+          "operational_transmission_rationale": "150 din ki inventory aur 104% CFO/OP conversion ke sath, premium sanitaryware player low raw material beta ka pura advantage lega.",
+          "quarterly_ebitda_outlook": "Strong brand equity aur soft input costs ki wajah se OPM 16% ke benchmark ko cross karne ke liye poised hai."
         },
         {
           "symbol": "GUJGASLTD",
           "company_name": "Gujarat Gas Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 80,
+          "projected_opm_change_bps": 75,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Morbi ceramic clusters ko gas supply volume badhne se industrial off-take aur transmission margins improve honge.",
-          "quarterly_ebitda_outlook": "Volume growth recovery ke chalte profitability me stable sequential expansion milegi."
+          "operational_transmission_rationale": "Industrial gas supplier hone ke nate, volume off-take Morbi hub mein badhega kyunki tile makers ki operating economics improve ho rahi hain.",
+          "quarterly_ebitda_outlook": "Volume recovery aur gas sourcing margins mein steady growth deliver karegi."
         }
       ]
     },
@@ -519,16 +427,16 @@
       "benchmark_commodity": "Imported Petcoke & Thermal Coal",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Petcoke aur thermal coal prices me 1M spike (+10.87%) aur 1Y surge (+74.8%) cement makers ke power and fuel cost structure par severe pressure dal rahe hain. Freight aur energy inflation ko realizations me pass-on karna critical rahega.",
+      "sector_macro_thesis": "Petcoke aur thermal coal prices mein 1M spike (+10.87%) aur 1Y surge (+74.8%) ne cement makers ke power & fuel cost par pressure daal diya hai. Logistics freight ke sath yeh expenses total production cost ka 45% se zyada banate hain.",
       "evaluated_stocks": [
         {
           "symbol": "ULTRACEMCO",
           "company_name": "UltraTech Cement Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -110,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Captive WHRS energy efficiency fuel inflation ke impact ko cushion karti hai par petcoke jump se margins thode compress honge.",
-          "quarterly_ebitda_outlook": "Scale benefits ke bavajud high energy costs near-term EBITDA per tonne par thoda pressure dalenge."
+          "projected_opm_change_bps": -80,
+          "pricing_power": "HIGH",
+          "operational_transmission_rationale": "Captive WHRS aur scale efficiency ke bawajud, petcoke ki sharp monthly rally short-term cost pressure banayegi.",
+          "quarterly_ebitda_outlook": "Realizations mein moderate improvement ke karan cost inflation ka thoda impact absorb ho jayega par OPM par dabav rahega."
         },
         {
           "symbol": "AMBUJACEM",
@@ -536,26 +444,26 @@
           "margin_trajectory": "MARGIN_CONTRACTION",
           "projected_opm_change_bps": -95,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Supply chain optimization aur green power transition cost headwinds ko partially absorb kar rahe hain.",
-          "quarterly_ebitda_outlook": "Input cost inflation ke chalte operating margins me slight near-term contraction dekhne ko milegi."
+          "operational_transmission_rationale": "Green power integration aur supply chain optimization ke ongoing efforts ke baad bhi high fuel costs margins ko test karenge.",
+          "quarterly_ebitda_outlook": "Near-term quarters mein fuel inflation ka lag dikhega jab tak cost synergies poori tarah scale na ho jayein."
         },
         {
           "symbol": "DALBHARAT",
           "company_name": "Dalmia Bharat Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -130,
-          "pricing_power": "WEAK",
-          "operational_transmission_rationale": "High blending ratios aur regional demand headwinds ke karan petcoke price hike ka pura pass-through mushkil hai.",
-          "quarterly_ebitda_outlook": "Eastern/Southern markets me pricing pressure aur input inflation se margins par thodi saggi rhegi."
+          "projected_opm_change_bps": -110,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Eastern aur southern markets mein regional pricing headwinds ke sath high petcoke prices margins par severe drag dalenge.",
+          "quarterly_ebitda_outlook": "Blending ratios high rakhne ke bawajud energy cost inflation EBITDA per ton ko compress karegi."
         },
         {
           "symbol": "SHREECEM",
           "company_name": "Shree Cement Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -85,
+          "projected_opm_change_bps": -70,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Agile fuel procurement flexibility aur lowest-cost operational model industry peers ke mukable headwind ko behtar manage karega.",
-          "quarterly_ebitda_outlook": "Operational efficiencies fuel cost spike ke impact ko limit karengi, jisse margin hit minimal rahega."
+          "operational_transmission_rationale": "Industry-leading fuel flexibility aur low-cost operations hone ke karan yeh peers ke mukable cost spike ko behtar manage karega.",
+          "quarterly_ebitda_outlook": "Agile fuel procurement ki wajah se contraction minimal rahegi, fir bhi quarterly margins par slight negative impact ayega."
         }
       ]
     },
@@ -565,89 +473,90 @@
       "benchmark_commodity": "Raw Cotton & Combed Yarn",
       "benchmark_price": "77.83 USc/lb",
       "benchmark_1m_delta_pct": 5.13,
-      "sector_macro_thesis": "Raw cotton mein 5.1% ka 1-month spike aur 18.5% ka 1-year jump spinners ke liye input cost pressure badha raha hai. Jo companies vertically integrated hain aur green energy use karti hain, woh margin hit ko absorb kar lengi, lekin pure spinners ko inventory lag ke chalte margin compression face karni padegi.",
+      "sector_macro_thesis": "Raw cotton prices mein recent uptick aur 18.5% yearly increase ki wajah se spinning mills ki cost pressure badh gayi hai. Inventory days high hone ke karan yeh input cost jump immediate pass-on nahi ho pa raha hai, jisse margins pe thoda dabav ayega.",
       "evaluated_stocks": [
         {
           "symbol": "PAGEIND",
           "company_name": "Page Industries (Jockey)",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 150,
+          "projected_opm_change_bps": 50,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Inelastic consumer pricing power ke karan raw material inflation ko yeh easily end consumers par pass on kar dete hain.",
-          "quarterly_ebitda_outlook": "Strong volume growth aur sticky retail pricing ki wajah se upcoming quarters mein OPM mein achhi expansion dekhne ko milegi."
+          "operational_transmission_rationale": "Branded innerwear segment mein inelastic demand aur strong pricing power hone ke karan yeh cost increase easily absorb ho jati hai.",
+          "quarterly_ebitda_outlook": "Premium positioning aur sticky retail pricing ki wajah se margins stable to positive rahenge."
         },
         {
           "symbol": "KPRMILL",
           "company_name": "K.P.R. Mill Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 80,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Vertical integration aur captive green energy usage high inventory days (175 days) ke bawajud cost efficiency maintain karte hain.",
-          "quarterly_ebitda_outlook": "Captive power benefits aur garment export realization ki wajah se EBITDA margins 20% ke upar sustain karenge."
+          "margin_trajectory": "MARGIN_CONTRACTION",
+          "projected_opm_change_bps": -120,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "175 days ke high inventory cycle aur 5.13% monthly cotton spike ki wajah se low-cost inventory khatam hote hi margins par temporary squeeze ayega.",
+          "quarterly_ebitda_outlook": "Captive green energy ke bawajूद high cotton cost inventory transmission lag ki wajah se short-term EBITDA mein slight contraction dekhne ko milegi."
         },
         {
           "symbol": "VTL",
           "company_name": "Vardhman Textiles Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -110,
+          "projected_opm_change_bps": -90,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Pure yarn spinner hone ke nate, domestic cotton MSP aur global cotton spread badhne par cost turant bottom line par hit karti hai.",
-          "quarterly_ebitda_outlook": "Rising raw cotton costs aur lagging yarn realisations ki wajah se near-term quarters mein margin pressure bana rahega."
+          "operational_transmission_rationale": "Pure yarn spinners ke liye domestic cotton MSP aur global spread ke beech gap badhne se realisations turant match nahi ho pati.",
+          "quarterly_ebitda_outlook": "Upcoming quarters mein high cost raw material consumption ki wajah se operating margins dabav mein rahenge."
         },
         {
           "symbol": "TRIDENT",
           "company_name": "Trident Limited",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -90,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Home textiles aur export freight volatility ke exposure ki wajah se cost pass-through mein delay hota hai.",
-          "quarterly_ebitda_outlook": "Export market headwinds aur volatile cotton prices ke chalte upcoming results mein margins par thoda dabav rahega."
+          "projected_opm_change_bps": -70,
+          "pricing_power": "WEAK",
+          "operational_transmission_rationale": "Home textiles export market mein fierce competition aur high cotton input costs margins ko severely restrict karte hain.",
+          "quarterly_ebitda_outlook": "Export freight volatility aur raw material cost inflation ke chalte EBITDA growth muted rehne ki ummeed hai."
         }
       ]
     },
     {
       "sector_id": "sugar_distilleries_fmcg",
       "sector_name": "Sugar Mills, Bio-Ethanol & Sweeteners",
-      "benchmark_commodity": "Crude Oil & Energy (Ethanol Link)",
+      "benchmark_commodity": "Ethanol Pricing Linked to Energy",
       "benchmark_price": "113.43 USD/bbl",
       "benchmark_1m_delta_pct": 10.87,
-      "sector_macro_thesis": "Energy prices mein 10.8% ka 1-month jump aur 74.8% ka yearly surge ethanol blending economics ko direct boost de raha hai. Integrated sugar mills jo grain aur syrup se ethanol banati hain, unke liye diversification margins ko safeguard karega, jabki pure refiners aur food giants ko cost inflation face karni padegi.",
+      "benchmark_1y_delta_pct": 74.8,
+      "sector_macro_thesis": "Global crude oil prices aur energy benchmarks mein sharp surge (74.8% YoY) hone se ethanol blending economics kafi strong ho gaye hain. Integrated mills jo grain aur syrup se ethanol banati hain, unke liye yeh ek bada revenue diversification aur margin expansion catalyst hai.",
       "evaluated_stocks": [
         {
           "symbol": "BALRAMCHIN",
           "company_name": "Balrampur Chini Mills",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 120,
+          "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Large grain aur syrup-based ethanol distilleries high energy benchmark ka pura fayda utha kar realisations improve kar rahi hain.",
-          "quarterly_ebitda_outlook": "Ethanol volume ramp-up aur improved realisations ki wajah se upcoming Q3/Q4 mein OPM expand hone ki strong umeed hai."
+          "operational_transmission_rationale": "Large-scale distillery capacities aur high energy/ethanol linkage ke chalte company ko booming realization ka direct benefit mil raha hai.",
+          "quarterly_ebitda_outlook": "Ethanol realisations strong hone se upcoming quarters mein margin profile aur behtar hoga."
         },
         {
           "symbol": "EIDPARRY",
           "company_name": "E.I.D. - Parry (India)",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 60,
+          "projected_opm_change_bps": 80,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "South India mein balanced sugar, nutraceuticals aur distillery operations ke chalte low cash conversion cycle (8 days) ka benefit milta hai.",
-          "quarterly_ebitda_outlook": "Distillery segment ki steady performance ki wajah se overall EBITDA margins mein modest improvement dekhne ko milegi."
+          "operational_transmission_rationale": "Low working capital cycle (8 days CCC) aur South India operations mein efficient sugar-to-ethanol diversion margins ko support kar raha hai.",
+          "quarterly_ebitda_outlook": "Nutraceuticals segment aur robust distillery operations ki wajah se steady EBITDA growth expected hai."
         },
         {
           "symbol": "SHREERAMA",
           "company_name": "Shree Renuka Sugars",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -70,
-          "pricing_power": "WEAK",
-          "operational_transmission_rationale": "Port-based raw sugar refining margins global white sugar trade flows aur imported raw material cost volatility par depend karte hain.",
-          "quarterly_ebitda_outlook": "Global trade spreads mein tightness aur high input costs ke karan near-term margin recovery mein thodi der lagegi."
+          "margin_trajectory": "MARGIN_EXPANSION",
+          "projected_opm_change_bps": 110,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Port-based refining model global white sugar trade flows aur rising energy-linked domestic ethanol demand ka double benefit capture kar raha hai.",
+          "quarterly_ebitda_outlook": "Global trade spreads favorable hone se operational efficiency aur margins mein positive momentum banega."
         },
         {
           "symbol": "BRITANNIA",
           "company_name": "Britannia Industries",
           "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -80,
+          "projected_opm_change_bps": -60,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Industrial sugar aur palm oil ke heavy consumption ke karan raw material basket inflation ka direct lagged impact padta hai.",
-          "quarterly_ebitda_outlook": "Input cost pressures ko offset karne ke liye price hikes lene padenge, jisse upcoming quarters mein margin par nominal dabav rahega."
+          "operational_transmission_rationale": "Packaged food giant hone ke naate, industrial sugar aur edible oils ke inflationary trends direct input cost pressure create karte hain.",
+          "quarterly_ebitda_outlook": "Volume growth ke bawajूद input basket inflation ki wajah se margins par slight headwind dekhne ko mil sakta hai."
         }
       ]
     },
@@ -657,43 +566,43 @@
       "benchmark_commodity": "Natural Gas (Ammonia Feedstock)",
       "benchmark_price": "2.9 USD/MMBtu",
       "benchmark_1m_delta_pct": -2.36,
-      "sector_macro_thesis": "Natural gas prices mein 1M -2.36% aur 1Y -32.08% ki steep decline ke chalte, pooled gas costs lower ho rahe hain. Iska direct positive impact urea aur phosphatic manufacturers ke input costs par padega, jisse subsidies aur operating margins dono optimize honge.",
+      "sector_macro_thesis": "Natural gas prices mein ongoing correction (-32% YoY) ki wajah se raw material input costs low hain, jo fertilizer producers ke margins ke liye positive hai. Pooled gas mechanism ke chalte urea aur phosphatic players ko cost relief mil raha hai, jisse upcoming quarters mein margin expansion dekhne ko mil sakta hai.",
       "evaluated_stocks": [
         {
           "symbol": "COROMANDEL",
           "company_name": "Coromandel International",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 75,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "98 days ki inventory days aur -7 days ke negative CCC ke sath, low gas costs ka benefit jaldi inventory mein reflect hoga.",
-          "quarterly_ebitda_outlook": "DAP/NPK realisations stable rehne aur input costs girne se EBITDA margins mein healthy expansion dekhne ko milegi."
+          "projected_opm_change_bps": 120,
+          "pricing_power": "HIGH",
+          "operational_transmission_rationale": "98 days ki inventory aur negative CCC (-7 din) ke sath, yeh company cheaper raw materials ko jaldi finished goods mein convert karke margin expand kar rahi hai.",
+          "quarterly_ebitda_outlook": "Strong CFO/OP (123%) aur phosphatic demand support ki wajah se Q3 mein robust EBITDA growth expect hai."
         },
         {
           "symbol": "CHAMBLFERT",
           "company_name": "Chambal Fertilisers and Chemicals",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 90,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Urea producer hone ke naate, 71 days inventory aur gas pooling mechanism ke through falling feedstock costs ka direct margin expansion mil raha hai.",
-          "quarterly_ebitda_outlook": "Subsidized pricing regime aur lower gas input costs ke combination se upcoming quarters mein strong earnings profile dikhegi."
+          "projected_opm_change_bps": 85,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Urea producer hone ke naate, subsidized gas pooling aur declining input costs ka direct benefit iske 15% audited OPM ko aur boost karega.",
+          "quarterly_ebitda_outlook": "Moderate inventory days (71d) ke sath stable cash conversions aur lower gas cost upcoming quarters mein margins ko protect karenge."
         },
         {
           "symbol": "GNFC",
           "company_name": "Gujarat Narmada Valley Fertilizers",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 50,
-          "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Industrial chemicals aur urea mix ke sath, falling gas prices raw material cost pressure ko significantly ease karengีย.",
-          "quarterly_ebitda_outlook": "Chemical segment cyclicality ke bawajود, lower feedstock expenses operational profitability ko support karenge."
+          "margin_trajectory": "MARGIN_CONTRACTION",
+          "projected_opm_change_bps": -50,
+          "pricing_power": "WEAK",
+          "operational_transmission_rationale": "Industrial chemicals segment mein weak pricing pressure aur global oversupply ki wajah se input cost savings neutralize ho rahi hain.",
+          "quarterly_ebitda_outlook": "Chemical demand softness ki chalte near-term realizations dabav mein rahengi."
         },
         {
           "symbol": "PIIND",
           "company_name": "PI Industries Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 60,
+          "projected_opm_change_bps": 150,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Complex custom synthesis aur patent agrochem business hone ke karan commodity gas price volatility se low reliance hai.",
-          "quarterly_ebitda_outlook": "Export-led custom synthesis demand aur high-margin product mix ki wajah se steady OPM expansion maintain rahega."
+          "operational_transmission_rationale": "Custom synthesis aur patent agrochemicals mein strong pricing power hone ki wajah se commodity gas price fluctuations ka minimal negative impact hai.",
+          "quarterly_ebitda_outlook": "Export-led custom synthesis orders ke chalte high-margin revenue mix sustain karega."
         }
       ]
     },
@@ -703,43 +612,43 @@
       "benchmark_commodity": "USD-INR Currency Pair",
       "benchmark_price": "94.95 INR/USD",
       "benchmark_1m_delta_pct": -1.32,
-      "sector_macro_thesis": "USD-INR rate 94.95 par hai jisme 1Y delta 7.47% ki rupee depreciation dikha raha hai, jo IT exporters ke liye ek massive revenue tailwind hai. Halanki 1M delta -1.32% hai, lekin overall weak rupee cost structures ke mukable dollar realizations ko strongly boost karta hai.",
+      "sector_macro_thesis": "Rupee ki weakness (-1.32% MoM) aur strong USD-INR levels IT exporters ke liye direct revenue tailwind hain, kyunki majority revenues dollar meindenominate hote hain jabki cost base INR mein hai. Yeh currency depreciation operating margins ko 30-40 bps tak expand karne mein madad kareਗੀ.",
       "evaluated_stocks": [
         {
           "symbol": "TCS",
           "company_name": "Tata Consultancy Services",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 40,
+          "projected_opm_change_bps": 75,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Low subcontractor dependence aur 84 days CCC ke sath, high dollar revenue realization margins ko direct push deta hai.",
-          "quarterly_ebitda_outlook": "Tier-1 scale aur favorable currency dynamics ki wajah se operating margins upper band mein sustain karenge."
+          "operational_transmission_rationale": "Low subcontractor dependence aur industry-leading 26% OPM ke sath, TCS currency depreciation ka pura benefit bottom line mein translate kar raha hai.",
+          "quarterly_ebitda_outlook": "Stable execution aur forex tailwinds ke chalte Tier-1 peers ke mukable margin defense aur expansion strong rahega."
         },
         {
           "symbol": "INFY",
           "company_name": "Infosys Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 45,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "US BFSI discretionary tech spend mein stabilization aur rupee depreciation ka dual benefit margins ko expand karega.",
-          "quarterly_ebitda_outlook": "Large deal ramp-ups aur currency tailwinds ke chalte operating margins guided range ke upper end par rahenge."
+          "projected_opm_change_bps": 60,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "US BFSI tech spending mein stabilization aur favorable cross-currency movements digital deal execution ko support kar rahe hain.",
+          "quarterly_ebitda_outlook": "Large deals ramp-up aur currency benefits operational efficiencies ko improve karenge."
         },
         {
           "symbol": "KPITTECH",
           "company_name": "KPIT Technologies",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 60,
+          "projected_opm_change_bps": 110,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Automotive ER&D contracts me long-term dollar/euro realization aur 56 days CCC ke sath strong cash conversion milta hai.",
-          "quarterly_ebitda_outlook": "Niche software engineering demand aur favorable forex movement se OPM mein solid expansion expected hai."
+          "operational_transmission_rationale": "Automotive ER&D mein specialized dollar/euro contracts hone ki wajah se 21% OPM aur 130% CFO/OP conversion ke sath high-margin growth mil rahi hai.",
+          "quarterly_ebitda_outlook": "Niche software engineering demand robust hone se upcoming quarters mein margin expansion jari rahega."
         },
         {
           "symbol": "COFORGE",
           "company_name": "Coforge Limited",
           "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 50,
+          "projected_opm_change_bps": 90,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Travel aur insurance verticals mein high-value dollar realizations 78 days CCC ke sath efficiently translate ho rahe hain.",
-          "quarterly_ebitda_outlook": "Strong execution and sequential revenue growth ke sath currency tailwinds margins ko further bolster karengi."
+          "operational_transmission_rationale": "Travel aur insurance verticals mein high dollar realization aur 78 days ki working capital cycle ke sath execution strong hai.",
+          "quarterly_ebitda_outlook": "Midcap IT space mein strong order book aur currency tailwind margins ko 14% OPM benchmark se upar drive karenge."
         }
       ]
     },
@@ -749,7 +658,7 @@
       "benchmark_commodity": "10Y Bond Yields & Systemic Cost of Funds",
       "benchmark_price": "4.93 %",
       "benchmark_1m_delta_pct": -5.92,
-      "sector_macro_thesis": "Systemic cost of funds mein easing aur bond yields ke correction se banks aur NBFCs ke liability pressure mein thodi raahat mil rahi hai. Halanki, deposit repricing lag aur floating loan book ki re-pricing ka net impact alag-alag lenders ke NIMs par alag tarike se dikhega.",
+      "sector_macro_thesis": "Systemic cost of funds mein easing aur 10Y bond yields ke 1M contraction (-5.92%) se banks aur NBFCs ko funding cost pressure se thodi rahat mil rahi hai. Halanki, 1Y jump (20.54%) ke chalte deposit re-pricing lag abhi bhi margins par thoda asar daal raha hai, jisse asset-liability management key ban gaya hai.",
       "evaluated_stocks": [
         {
           "symbol": "HDFCBANK",
@@ -757,8 +666,8 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 15,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Post-merger liability mix ko stable karne ke baad, cost of funds normalize hone se NIM mein mild expansion dekhne ko milega.",
-          "quarterly_ebitda_outlook": "Deposit mobilization aur credit-deposit ratio improve hone se core operating profitability mein gradual sudhaar aayega."
+          "operational_transmission_rationale": "Post-merger liability mix stabilize ho rahi hai aur funding cost easing se NIM trough se recover hone laga hai.",
+          "quarterly_ebitda_outlook": "Agle quarters mein deposit re-pricing lag khatam hone par net interest margins mein gradual sudhaar dekhne ko milega."
         },
         {
           "symbol": "ICICIBANK",
@@ -766,41 +675,31 @@
           "margin_trajectory": "MARGIN_EXPANSION",
           "projected_opm_change_bps": 20,
           "pricing_power": "HIGH",
-          "operational_transmission_rationale": "High floating-rate EBLR loan mix ke chalte, lower cost of funds ka benefit margins mein tezi se reflect hoga.",
-          "quarterly_ebitda_outlook": "Strong asset quality aur superior loan pricing power ki wajah se margins industry peers ke comparison mein resilient rahenge."
+          "operational_transmission_rationale": "High floating-rate EBLR loan mix aur strong CASA franchise ki wajah se yield expansion ka benefit turant milta hai.",
+          "quarterly_ebitda_outlook": "Behtar loan book pricing aur asset quality ki taakat se core operating profitability strong bani rahegi."
         },
         {
           "symbol": "FEDERALBNK",
           "company_name": "Federal Bank Limited",
-          "margin_trajectory": "MARGIN_CONTRACTION",
-          "projected_opm_change_bps": -10,
+          "margin_trajectory": "MARGIN_EXPANSION",
+          "projected_opm_change_bps": 10,
           "pricing_power": "MODERATE",
-          "operational_transmission_rationale": "Sticky high-cost deposits aur retail credit competition ki vajah se near-term cost of funds par thoda dabav bana rahega.",
-          "quarterly_ebitda_outlook": "CFO/OP ratio ke moderation ke beech, NIM compression aane wale quarters mein margins ko thoda restrict kar sakta hai."
+          "operational_transmission_rationale": "Low-cost NRI foreign remittances aur granular retail credit momentum se cost of funds control mein hain.",
+          "quarterly_ebitda_outlook": "Stable deposit franchise aur retail credit growth ki wajah se NIMs resilient rahenge."
         },
         {
           "symbol": "BAJFINANCE",
           "company_name": "Bajaj Finance Limited",
-          "margin_trajectory": "MARGIN_EXPANSION",
-          "projected_opm_change_bps": 25,
-          "pricing_power": "HIGH",
-          "operational_transmission_rationale": "Wholesale bond market mein yields soft hone se borrowing costs ghatengi, jisse high-yielding retail book par spreads widen honge.",
-          "quarterly_ebitda_outlook": "Agile loan pricing transmission aur robust consumer demand ki wajah se profitability margins strong expand karenge."
+          "margin_trajectory": "MARGIN_CONTRACTION",
+          "projected_opm_change_bps": -25,
+          "pricing_power": "MODERATE",
+          "operational_transmission_rationale": "Wholesale bond market par zyada nirbharta hone ke karan 1Y high interest rate environment ka lagged impact borrowing cost par padta hai.",
+          "quarterly_ebitda_outlook": "High cost of borrowings ke chalte upcoming quarters mein margins par thoda dabav banta rahega."
         }
       ]
     }
   ],
   "margin_expanding_tailwinds": [
-    {
-      "symbol": "NAVINFLUOR",
-      "company_name": "Navin Fluorine International",
-      "sector": "Specialty Chemicals, Phenol & Aromatics",
-      "macro_driver": "Crude Naphtha & Benzene",
-      "bps_impact": 250,
-      "pricing_power": "HIGH",
-      "rationale": "Niche fluorine CDMO aur high-margin product mix ki wajah se input cost inflation ka koi khaas negative impact nahi padta.",
-      "outlook": "High-value specialty molecules aur robust CDMO pipeline ki wajah se margins expand honge."
-    },
     {
       "symbol": "PCBL",
       "company_name": "PCBL Chemical Limited",
@@ -808,8 +707,8 @@
       "macro_driver": "Brent Crude Oil & Synthetic Rubber",
       "bps_impact": 220,
       "pricing_power": "HIGH",
-      "rationale": "Upstream carbon black producer hone ke नाते ye crude feedstock spreads ko capture karke margins expand karte hain.",
-      "outlook": "Strong spread capture aur operational efficiencies se quarterly OPM mein achhi growth dikhegi."
+      "rationale": "Upstream carbon black producer hone ke naate yeh crude feedstock spreads ko capture karte hain aur cost pass-through ka advantage uthate hain.",
+      "outlook": "Spread expansion aur robust operational efficiency ke karan upcoming quarters mein margin growth kafi strong rahegi."
     },
     {
       "symbol": "FINPIPE",
@@ -818,8 +717,8 @@
       "macro_driver": "Crude PVC & CPVC Resins",
       "bps_impact": 190,
       "pricing_power": "HIGH",
-      "rationale": "Backward integrated model hone ki wajah se yeh internal PVC resin production se cost advantage aur inventory gains dono earn karte hain.",
-      "outlook": "Resin spread expansion aur 122% CFO/OP conversion ke chalte upcoming results mein margin beat ki strong sambhavna hai."
+      "rationale": "Backward integration (in-house PVC resin production) hone ki wajah se ye rising resin prices ka direct fayda uthate hain.",
+      "outlook": "Resin spread expansion aur strong CFO conversion ke chalte upcoming results mein margin expansion robust rahegi."
     },
     {
       "symbol": "BALKRISIND",
@@ -828,18 +727,28 @@
       "macro_driver": "Brent Crude Oil & Synthetic Rubber",
       "bps_impact": 180,
       "pricing_power": "HIGH",
-      "rationale": "Global off-highway replacement market mein premium pricing power hone se ye input costs ko effectively pass-through kar lete hain.",
-      "outlook": "Exports demand aur forex tailwinds ki wajah se EBITDA margins mein expansion aayega."
+      "rationale": "Global off-highway tyre export market mein premium positioning aur dollar realization ki wajah se yeh input inflation ko easily offset kar lete hain.",
+      "outlook": "Strong export demand aur superior product mix ke chalte EBITDA margins mein expansion dekhne ko milegi."
     },
     {
-      "symbol": "MGL",
-      "company_name": "Mahanagar Gas Limited",
-      "sector": "City Gas Distribution & Gas Upstream",
-      "macro_driver": "Natural Gas (Spot LNG / APM)",
+      "symbol": "BPCL",
+      "company_name": "Bharat Petroleum Corp",
+      "sector": "Aviation Logistics & Downstream Fuel",
+      "macro_driver": "Brent Crude / ATF",
       "bps_impact": 180,
-      "pricing_power": "HIGH",
-      "rationale": "Negative working capital (-11 days) aur strong 22% OPM ke sath, yeh company falling gas prices ka maximum advantage capture karegi.",
-      "outlook": "Industrial demand stability aur soft input costs ki wajah se operational profitability mein strong expansion expect hai."
+      "pricing_power": "MODERATE",
+      "rationale": "Rising crude prices se inventory gains milte hain, jo downstream marketing margins ko temporarily boost karte hain.",
+      "outlook": "Refining margins me improvement aur inventory valuation gains ki wajah se upcoming quarter me EBITDA expansion hoga."
+    },
+    {
+      "symbol": "HINDPETRO",
+      "company_name": "Hindustan Petroleum Corp",
+      "sector": "Aviation Logistics & Downstream Fuel",
+      "macro_driver": "Brent Crude / ATF",
+      "bps_impact": 160,
+      "pricing_power": "MODERATE",
+      "rationale": "Auto fuel exposure aur refining throughput ke chalte high crude environment me short-term inventory upside capture hota hai.",
+      "outlook": "Strong inventory dynamics aur robust retail fuel demand se core operating margins me sequential expansion milega."
     },
     {
       "symbol": "PIDILITIND",
@@ -848,28 +757,28 @@
       "macro_driver": "Brent Crude Oil",
       "bps_impact": 150,
       "pricing_power": "HIGH",
-      "rationale": "VAM par monopoly pricing power hone ke karan ye companies raw material inflation ko easily end-consumers par dal deti hain.",
-      "outlook": "Strong pricing power ki wajah se margins resilient rahenge aur expansion dekhne ko milega."
+      "rationale": "VAM aur adhesives segment mein monopoly-like pricing power hone ki wajah se yeh log raw material cost ko end consumer par easily pass on kar dete hain.",
+      "outlook": "Strong brand equity aur pricing dominance ke dum par upcoming quarters mein margins expand hone ki poori ummeed hai."
     },
     {
-      "symbol": "IGL",
-      "company_name": "Indraprastha Gas Limited",
+      "symbol": "MGL",
+      "company_name": "Mahanagar Gas Limited",
       "sector": "City Gas Distribution & Gas Upstream",
       "macro_driver": "Natural Gas (Spot LNG / APM)",
       "bps_impact": 150,
-      "pricing_power": "MODERATE",
-      "rationale": "Delhi-NCR market mein CNG retail prices maintain karte hue lower gas sourcing cost ka direct benefit margins par reflect hoga.",
-      "outlook": "Lower gas costs ke chalte upcoming quarters mein EBITDA per scm mein visible improvement aayegi."
+      "pricing_power": "HIGH",
+      "rationale": "Audited 22% OPM aur -11 days ke negative working capital cycle ke sath, MGL ko favorable gas cost ka direct benefit milega.",
+      "outlook": "Industrial demand ki stability aur negative CCC ke dam par operating profitability me strong sequential growth expect hai."
     },
     {
-      "symbol": "NATIONALUM",
-      "company_name": "National Aluminium Co (NALCO)",
-      "sector": "Primary Aluminium & Auto Castings",
-      "macro_driver": "Primary Aluminium Ingot",
+      "symbol": "NAVINFLUOR",
+      "company_name": "Navin Fluorine International",
+      "sector": "Specialty Chemicals, Phenol & Aromatics",
+      "macro_driver": "Crude Naphtha & Benzene",
       "bps_impact": 150,
       "pricing_power": "HIGH",
-      "rationale": "Lowest cost bauxite mining aur 353-day inventory cycle ke chalte high ingot prices par maximum realization milti hai.",
-      "outlook": "High operating margins (45%) aur global metal prices ke uptrend se EBITDA mein sharp jump expected hai."
+      "rationale": "High-margin fluorine specialty aur CDMO model commodity petroleum shocks se kaafi had tak insulated hai.",
+      "outlook": "Niche product mix aur superior pricing power ki wajah se operating margins expand hone ki strong probability hai."
     },
     {
       "symbol": "CERA",
@@ -878,18 +787,38 @@
       "macro_driver": "Natural Gas Kiln Fuel",
       "bps_impact": 150,
       "pricing_power": "HIGH",
-      "rationale": "150 days high inventory days aur 104% CFO/OP conversion low raw material beta ke sath premium margins protect karte hain.",
-      "outlook": "Asset-light sanitaryware positioning aur robust cash flows se industry-leading margins sustain rahenge."
+      "rationale": "150 din ki inventory aur 104% CFO/OP conversion ke sath, premium sanitaryware player low raw material beta ka pura advantage lega.",
+      "outlook": "Strong brand equity aur soft input costs ki wajah se OPM 16% ke benchmark ko cross karne ke liye poised hai."
     },
     {
-      "symbol": "PAGEIND",
-      "company_name": "Page Industries (Jockey)",
-      "sector": "Textile Spinning, Denim & Branded Garments",
-      "macro_driver": "Raw Cotton & Combed Yarn",
+      "symbol": "BALRAMCHIN",
+      "company_name": "Balrampur Chini Mills",
+      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
+      "macro_driver": "Ethanol Pricing Linked to Energy",
       "bps_impact": 150,
       "pricing_power": "HIGH",
-      "rationale": "Inelastic consumer pricing power ke karan raw material inflation ko yeh easily end consumers par pass on kar dete hain.",
-      "outlook": "Strong volume growth aur sticky retail pricing ki wajah se upcoming quarters mein OPM mein achhi expansion dekhne ko milegi."
+      "rationale": "Large-scale distillery capacities aur high energy/ethanol linkage ke chalte company ko booming realization ka direct benefit mil raha hai.",
+      "outlook": "Ethanol realisations strong hone se upcoming quarters mein margin profile aur behtar hoga."
+    },
+    {
+      "symbol": "PIIND",
+      "company_name": "PI Industries Limited",
+      "sector": "Fertilizers, Urea & Crop Protection",
+      "macro_driver": "Natural Gas (Ammonia Feedstock)",
+      "bps_impact": 150,
+      "pricing_power": "HIGH",
+      "rationale": "Custom synthesis aur patent agrochemicals mein strong pricing power hone ki wajah se commodity gas price fluctuations ka minimal negative impact hai.",
+      "outlook": "Export-led custom synthesis orders ke chalte high-margin revenue mix sustain karega."
+    },
+    {
+      "symbol": "IGL",
+      "company_name": "Indraprastha Gas Limited",
+      "sector": "City Gas Distribution & Gas Upstream",
+      "macro_driver": "Natural Gas (Spot LNG / APM)",
+      "bps_impact": 120,
+      "pricing_power": "MODERATE",
+      "rationale": "Delhi-NCR me CNG retail pricing power maintain hone aur lower gas sourcing costs ke chalte margins improve honge.",
+      "outlook": "Agle quarter me volume growth aur stable gas costs ki wajah se EBITDA per SCM me positive expansion dekhne ko milega."
     },
     {
       "symbol": "AARTIIND",
@@ -898,8 +827,8 @@
       "macro_driver": "Crude Naphtha & Benzene",
       "bps_impact": 120,
       "pricing_power": "HIGH",
-      "rationale": "Formula-linked contracts hone ki wajah se yeh raw material inflation ko aasaani se clients par shift kar lete hain.",
-      "outlook": "126 days inventory holding ke bawajud pricing mechanism strong hone se EBITDA growth stable rahegi."
+      "rationale": "Formula-linked contracts hone ki wajah se benzene price hike ko agle quarter tak aaram se pass-on kar sakte hain.",
+      "outlook": "Formula pricing ki safety aur strong CFO conversion ke chalte margins resilient rahenge aur expansion dikhegi."
     },
     {
       "symbol": "KAJARIACER",
@@ -908,78 +837,38 @@
       "macro_driver": "Natural Gas Kiln Fuel",
       "bps_impact": 120,
       "pricing_power": "HIGH",
-      "rationale": "126 days inventory lag aur strong retail brand pull ke karan gas cost reduction ka pura benefit margin me translate hoga.",
-      "outlook": "Lower gas prices aur premium product mix se operating margins me sharp sequential improvement dikhegi."
+      "rationale": "126 din ki inventory cycle ke saath, lower gas prices ka full impact aane wale quarters mein EBITDA margins ko expand karega.",
+      "outlook": "Retail pricing power aur falling fuel cost ka double benefit upcoming quarters mein OPM ko 14% se upar le jayega."
     },
     {
-      "symbol": "BALRAMCHIN",
-      "company_name": "Balrampur Chini Mills",
-      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
-      "macro_driver": "Crude Oil & Energy (Ethanol Link)",
+      "symbol": "COROMANDEL",
+      "company_name": "Coromandel International",
+      "sector": "Fertilizers, Urea & Crop Protection",
+      "macro_driver": "Natural Gas (Ammonia Feedstock)",
       "bps_impact": 120,
       "pricing_power": "HIGH",
-      "rationale": "Large grain aur syrup-based ethanol distilleries high energy benchmark ka pura fayda utha kar realisations improve kar rahi hain.",
-      "outlook": "Ethanol volume ramp-up aur improved realisations ki wajah se upcoming Q3/Q4 mein OPM expand hone ki strong umeed hai."
+      "rationale": "98 days ki inventory aur negative CCC (-7 din) ke sath, yeh company cheaper raw materials ko jaldi finished goods mein convert karke margin expand kar rahi hai.",
+      "outlook": "Strong CFO/OP (123%) aur phosphatic demand support ki wajah se Q3 mein robust EBITDA growth expect hai."
     },
     {
-      "symbol": "BPCL",
-      "company_name": "Bharat Petroleum Corp",
-      "sector": "Aviation Logistics & Downstream Fuel",
-      "macro_driver": "Brent Crude / ATF",
+      "symbol": "SHREERAMA",
+      "company_name": "Shree Renuka Sugars",
+      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
+      "macro_driver": "Ethanol Pricing Linked to Energy",
       "bps_impact": 110,
       "pricing_power": "MODERATE",
-      "rationale": "Refining margins aur inventory gains strong crude volatility ke dauran downstream marketing buffer provide karte hain.",
-      "outlook": "Inventory valuation gains aur retail fuel marketing margins stabilize hone se near-term numbers supportive rahenge."
+      "rationale": "Port-based refining model global white sugar trade flows aur rising energy-linked domestic ethanol demand ka double benefit capture kar raha hai.",
+      "outlook": "Global trade spreads favorable hone se operational efficiency aur margins mein positive momentum banega."
     },
     {
-      "symbol": "ASTRAL",
-      "company_name": "Astral Limited",
-      "sector": "Plastic Pipes & Building Polymers",
-      "macro_driver": "Crude PVC & CPVC Resins",
+      "symbol": "KPITTECH",
+      "company_name": "KPIT Technologies",
+      "sector": "IT Services & Digital Engineering",
+      "macro_driver": "USD-INR Currency Pair",
       "bps_impact": 110,
       "pricing_power": "HIGH",
-      "rationale": "Strong brand loyalty aur premium plumbing positioning ke chalte yeh rising resin prices ko retail segment mein pass-on kar dete hain.",
-      "outlook": "Strong distribution network aur pricing power ki wajah se upcoming quarters mein OPM resilient rahega."
-    },
-    {
-      "symbol": "HINDALCO",
-      "company_name": "Hindalco Industries Limited",
-      "sector": "Primary Aluminium & Auto Castings",
-      "macro_driver": "Primary Aluminium Ingot",
-      "bps_impact": 110,
-      "pricing_power": "HIGH",
-      "rationale": "Integrated upstream operations aur downstream Novelis portfolio se global aluminium upswings ka pura benefit milta hai.",
-      "outlook": "Strong LME aluminium prices aur value-added product mix se upcoming results mein robust margin expansion hogi."
-    },
-    {
-      "symbol": "HINDPETRO",
-      "company_name": "Hindustan Petroleum Corp",
-      "sector": "Aviation Logistics & Downstream Fuel",
-      "macro_driver": "Brent Crude / ATF",
-      "bps_impact": 90,
-      "pricing_power": "MODERATE",
-      "rationale": "Auto fuel exposure aur refining throughput ki taakat se yeh volatility cyclic upside capture karne mein saksham hai.",
-      "outlook": "GRM dynamics aur stable retail marketing realisations se upcoming results mein moderate margin uptick dikhega."
-    },
-    {
-      "symbol": "TRITURBINE",
-      "company_name": "Triveni Turbine Limited",
-      "sector": "Heavy Electricals & Power Transformers",
-      "macro_driver": "Copper Winding & CRGO Steel",
-      "bps_impact": 90,
-      "pricing_power": "HIGH",
-      "rationale": "Global delivery pricing power aur niche industrial turbine segment hone ki wajah se margins protect karna aasan hai.",
-      "outlook": "Export mix behtar hone aur high-margin service revenue se EBITDA expansion ki strong possibility hai."
-    },
-    {
-      "symbol": "APLAPOLLO",
-      "company_name": "APL Apollo Tubes Limited",
-      "sector": "Primary Steel, Structural Tubes & Rebars",
-      "macro_driver": "Iron Ore & Coking Coal",
-      "bps_impact": 90,
-      "pricing_power": "HIGH",
-      "rationale": "Conversion-margin model par operate karne ki wajah se yeh raw material price drops ka benefit turant capture karte hain.",
-      "outlook": "Volume growth aur stable spread ki vajah se per-tonne EBITDA mein positive expansion dikhegi."
+      "rationale": "Automotive ER&D mein specialized dollar/euro contracts hone ki wajah se 21% OPM aur 130% CFO/OP conversion ke sath high-margin growth mil rahi hai.",
+      "outlook": "Niche software engineering demand robust hone se upcoming quarters mein margin expansion jari rahega."
     },
     {
       "symbol": "SOMANYCERA",
@@ -988,38 +877,38 @@
       "macro_driver": "Natural Gas Kiln Fuel",
       "bps_impact": 90,
       "pricing_power": "MODERATE",
-      "rationale": "Regional gas sourcing advantage aur falling kiln fuel expenses se working capital pressure offset hoga.",
-      "outlook": "Cost normalization aur volume uptick ki wajah se EBITDA margins me moderate expansion expected hai."
+      "rationale": "Regional gas sourcing aur Morbi hub ke pass hone ki wajah se yeh players gas cost drops ka turant fayda uthate hain.",
+      "outlook": "Lower production cost volumes ko support karegi, jisse EBITDA per tile mein sudhaar aayega."
+    },
+    {
+      "symbol": "COFORGE",
+      "company_name": "Coforge Limited",
+      "sector": "IT Services & Digital Engineering",
+      "macro_driver": "USD-INR Currency Pair",
+      "bps_impact": 90,
+      "pricing_power": "MODERATE",
+      "rationale": "Travel aur insurance verticals mein high dollar realization aur 78 days ki working capital cycle ke sath execution strong hai.",
+      "outlook": "Midcap IT space mein strong order book aur currency tailwind margins ko 14% OPM benchmark se upar drive karenge."
     },
     {
       "symbol": "CHAMBLFERT",
       "company_name": "Chambal Fertilisers and Chemicals",
       "sector": "Fertilizers, Urea & Crop Protection",
       "macro_driver": "Natural Gas (Ammonia Feedstock)",
-      "bps_impact": 90,
-      "pricing_power": "HIGH",
-      "rationale": "Urea producer hone ke naate, 71 days inventory aur gas pooling mechanism ke through falling feedstock costs ka direct margin expansion mil raha hai.",
-      "outlook": "Subsidized pricing regime aur lower gas input costs ke combination se upcoming quarters mein strong earnings profile dikhegi."
+      "bps_impact": 85,
+      "pricing_power": "MODERATE",
+      "rationale": "Urea producer hone ke naate, subsidized gas pooling aur declining input costs ka direct benefit iske 15% audited OPM ko aur boost karega.",
+      "outlook": "Moderate inventory days (71d) ke sath stable cash conversions aur lower gas cost upcoming quarters mein margins ko protect karenge."
     },
     {
-      "symbol": "GUJGASLTD",
-      "company_name": "Gujarat Gas Limited",
-      "sector": "Ceramic Tiles & Vitrified Sanitaryware",
-      "macro_driver": "Natural Gas Kiln Fuel",
+      "symbol": "EIDPARRY",
+      "company_name": "E.I.D. - Parry (India)",
+      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
+      "macro_driver": "Ethanol Pricing Linked to Energy",
       "bps_impact": 80,
       "pricing_power": "MODERATE",
-      "rationale": "Morbi ceramic clusters ko gas supply volume badhne se industrial off-take aur transmission margins improve honge.",
-      "outlook": "Volume growth recovery ke chalte profitability me stable sequential expansion milegi."
-    },
-    {
-      "symbol": "KPRMILL",
-      "company_name": "K.P.R. Mill Limited",
-      "sector": "Textile Spinning, Denim & Branded Garments",
-      "macro_driver": "Raw Cotton & Combed Yarn",
-      "bps_impact": 80,
-      "pricing_power": "HIGH",
-      "rationale": "Vertical integration aur captive green energy usage high inventory days (175 days) ke bawajud cost efficiency maintain karte hain.",
-      "outlook": "Captive power benefits aur garment export realization ki wajah se EBITDA margins 20% ke upar sustain karenge."
+      "rationale": "Low working capital cycle (8 days CCC) aur South India operations mein efficient sugar-to-ethanol diversion margins ko support kar raha hai.",
+      "outlook": "Nutraceuticals segment aur robust distillery operations ki wajah se steady EBITDA growth expected hai."
     },
     {
       "symbol": "ABB",
@@ -1028,78 +917,48 @@
       "macro_driver": "Copper Winding & CRGO Steel",
       "bps_impact": 75,
       "pricing_power": "HIGH",
-      "rationale": "High-efficiency electrification aur premium robotics portfolio hone ki vajah se company strong pricing power enjoy karti hai.",
-      "outlook": "Robust execution capabilities aur high-margin product mix se quarterly earnings mein continuous margin beat aayega."
+      "rationale": "High-efficiency robotics aur electrification systems mein technological differentiation hone ke karan pricing authority fully ABB ke paas rehti hai.",
+      "outlook": "Premium automation solutions ki high demand aur disciplined execution se robust EBITDA expansion expected hai."
     },
     {
-      "symbol": "TATASTEEL",
-      "company_name": "Tata Steel Limited",
-      "sector": "Primary Steel, Structural Tubes & Rebars",
-      "macro_driver": "Iron Ore & Coking Coal",
+      "symbol": "GUJGASLTD",
+      "company_name": "Gujarat Gas Limited",
+      "sector": "Ceramic Tiles & Vitrified Sanitaryware",
+      "macro_driver": "Natural Gas Kiln Fuel",
       "bps_impact": 75,
       "pricing_power": "MODERATE",
-      "rationale": "Captive iron ore mines hone ki wajah se raw material volatility ka direct buffer milta hai.",
-      "outlook": "Input costs soft rehne aur operational efficiencies se upcoming quarters mein EBITDA per tonne improve hoga."
+      "rationale": "Industrial gas supplier hone ke nate, volume off-take Morbi hub mein badhega kyunki tile makers ki operating economics improve ho rahi hain.",
+      "outlook": "Volume recovery aur gas sourcing margins mein steady growth deliver karegi."
     },
     {
-      "symbol": "COROMANDEL",
-      "company_name": "Coromandel International",
-      "sector": "Fertilizers, Urea & Crop Protection",
-      "macro_driver": "Natural Gas (Ammonia Feedstock)",
+      "symbol": "TCS",
+      "company_name": "Tata Consultancy Services",
+      "sector": "IT Services & Digital Engineering",
+      "macro_driver": "USD-INR Currency Pair",
       "bps_impact": 75,
-      "pricing_power": "MODERATE",
-      "rationale": "98 days ki inventory days aur -7 days ke negative CCC ke sath, low gas costs ka benefit jaldi inventory mein reflect hoga.",
-      "outlook": "DAP/NPK realisations stable rehne aur input costs girne se EBITDA margins mein healthy expansion dekhne ko milegi."
+      "pricing_power": "HIGH",
+      "rationale": "Low subcontractor dependence aur industry-leading 26% OPM ke sath, TCS currency depreciation ka pura benefit bottom line mein translate kar raha hai.",
+      "outlook": "Stable execution aur forex tailwinds ke chalte Tier-1 peers ke mukable margin defense aur expansion strong rahega."
     },
     {
-      "symbol": "SCHNEIDER",
-      "company_name": "Schneider Electric Infrastructure",
+      "symbol": "TRITURBINE",
+      "company_name": "Triveni Turbine Limited",
       "sector": "Heavy Electricals & Power Transformers",
       "macro_driver": "Copper Winding & CRGO Steel",
       "bps_impact": 60,
-      "pricing_power": "MODERATE",
-      "rationale": "Grid capex boom aur strong power distribution demand ki vajah se volumes badh rahe hain jo cost pressure ko neutralize karte hain.",
-      "outlook": "Operating leverage kick-in hone se fixed costs spread out honge aur margins improve karenge."
-    },
-    {
-      "symbol": "JINDALSTEL",
-      "company_name": "Jindal Steel & Power",
-      "sector": "Primary Steel, Structural Tubes & Rebars",
-      "macro_driver": "Iron Ore & Coking Coal",
-      "bps_impact": 60,
-      "pricing_power": "MODERATE",
-      "rationale": "Captive power plants aur value-added products (rails/plates) portfolio cost fluctuations ko offset karta hai.",
-      "outlook": "Domestic infrastructure demand aur optimized cost structure ki vajah se margins resilient rahenge."
-    },
-    {
-      "symbol": "EIDPARRY",
-      "company_name": "E.I.D. - Parry (India)",
-      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
-      "macro_driver": "Crude Oil & Energy (Ethanol Link)",
-      "bps_impact": 60,
-      "pricing_power": "MODERATE",
-      "rationale": "South India mein balanced sugar, nutraceuticals aur distillery operations ke chalte low cash conversion cycle (8 days) ka benefit milta hai.",
-      "outlook": "Distillery segment ki steady performance ki wajah se overall EBITDA margins mein modest improvement dekhne ko milegi."
-    },
-    {
-      "symbol": "PIIND",
-      "company_name": "PI Industries Limited",
-      "sector": "Fertilizers, Urea & Crop Protection",
-      "macro_driver": "Natural Gas (Ammonia Feedstock)",
-      "bps_impact": 60,
       "pricing_power": "HIGH",
-      "rationale": "Complex custom synthesis aur patent agrochem business hone ke karan commodity gas price volatility se low reliance hai.",
-      "outlook": "Export-led custom synthesis demand aur high-margin product mix ki wajah se steady OPM expansion maintain rahega."
+      "rationale": "Global delivery model aur high-margin product mix ki wajah se company ke paas strong pricing power hai jo raw material headwinds ko offset kar deti hai.",
+      "outlook": "Export-heavy order book aur high-efficiency industrial turbines ki strong demand se margins expand karenge."
     },
     {
-      "symbol": "KPITTECH",
-      "company_name": "KPIT Technologies",
+      "symbol": "INFY",
+      "company_name": "Infosys Limited",
       "sector": "IT Services & Digital Engineering",
       "macro_driver": "USD-INR Currency Pair",
       "bps_impact": 60,
-      "pricing_power": "HIGH",
-      "rationale": "Automotive ER&D contracts me long-term dollar/euro realization aur 56 days CCC ke sath strong cash conversion milta hai.",
-      "outlook": "Niche software engineering demand aur favorable forex movement se OPM mein solid expansion expected hai."
+      "pricing_power": "MODERATE",
+      "rationale": "US BFSI tech spending mein stabilization aur favorable cross-currency movements digital deal execution ko support kar rahe hain.",
+      "outlook": "Large deals ramp-up aur currency benefits operational efficiencies ko improve karenge."
     },
     {
       "symbol": "POLYCAB",
@@ -1108,68 +967,48 @@
       "macro_driver": "Refined Copper & Aluminium",
       "bps_impact": 50,
       "pricing_power": "HIGH",
-      "rationale": "Monthly price revisions ke chalte Polycab raw material inflation ko jaldi pass-on kar leta hai.",
-      "outlook": "Strong retail brand recall aur pricing power se OPM stable rehne aur expand hone ki ummeed hai."
+      "rationale": "Monthly price revisions aur 86 din ki inventory cycle ki wajah se Polycab raw material cost spikes ko turant end-consumers par pass-on kar deta hai.",
+      "outlook": "Agle quarters mein strong retail demand aur agile pricing ki wajah se margins mein mild expansion dekhne ko milegi."
     },
     {
-      "symbol": "GNFC",
-      "company_name": "Gujarat Narmada Valley Fertilizers",
-      "sector": "Fertilizers, Urea & Crop Protection",
-      "macro_driver": "Natural Gas (Ammonia Feedstock)",
+      "symbol": "PAGEIND",
+      "company_name": "Page Industries (Jockey)",
+      "sector": "Textile Spinning, Denim & Branded Garments",
+      "macro_driver": "Raw Cotton & Combed Yarn",
       "bps_impact": 50,
-      "pricing_power": "MODERATE",
-      "rationale": "Industrial chemicals aur urea mix ke sath, falling gas prices raw material cost pressure ko significantly ease karengีย.",
-      "outlook": "Chemical segment cyclicality ke bawajود, lower feedstock expenses operational profitability ko support karenge."
+      "pricing_power": "HIGH",
+      "rationale": "Branded innerwear segment mein inelastic demand aur strong pricing power hone ke karan yeh cost increase easily absorb ho jati hai.",
+      "outlook": "Premium positioning aur sticky retail pricing ki wajah se margins stable to positive rahenge."
     },
     {
-      "symbol": "COFORGE",
-      "company_name": "Coforge Limited",
-      "sector": "IT Services & Digital Engineering",
-      "macro_driver": "USD-INR Currency Pair",
-      "bps_impact": 50,
-      "pricing_power": "MODERATE",
-      "rationale": "Travel aur insurance verticals mein high-value dollar realizations 78 days CCC ke sath efficiently translate ho rahe hain.",
-      "outlook": "Strong execution and sequential revenue growth ke sath currency tailwinds margins ko further bolster karengi."
-    },
-    {
-      "symbol": "INFY",
-      "company_name": "Infosys Limited",
-      "sector": "IT Services & Digital Engineering",
-      "macro_driver": "USD-INR Currency Pair",
+      "symbol": "SCHNEIDER",
+      "company_name": "Schneider Electric Infrastructure",
+      "sector": "Heavy Electricals & Power Transformers",
+      "macro_driver": "Copper Winding & CRGO Steel",
       "bps_impact": 45,
       "pricing_power": "HIGH",
-      "rationale": "US BFSI discretionary tech spend mein stabilization aur rupee depreciation ka dual benefit margins ko expand karega.",
-      "outlook": "Large deal ramp-ups aur currency tailwinds ke chalte operating margins guided range ke upper end par rahenge."
-    },
-    {
-      "symbol": "TCS",
-      "company_name": "Tata Consultancy Services",
-      "sector": "IT Services & Digital Engineering",
-      "macro_driver": "USD-INR Currency Pair",
-      "bps_impact": 40,
-      "pricing_power": "HIGH",
-      "rationale": "Low subcontractor dependence aur 84 days CCC ke sath, high dollar revenue realization margins ko direct push deta hai.",
-      "outlook": "Tier-1 scale aur favorable currency dynamics ki wajah se operating margins upper band mein sustain karenge."
+      "rationale": "Power distribution aur switchgear portfolio mein robust grid capex demand milne se company easily cost passthrough kar leti hai.",
+      "outlook": "Power infrastructure upgrade cycles aur smart grid adoption se operating leverage improve hoga."
     },
     {
       "symbol": "FINCABLES",
       "company_name": "Finolex Cables Limited",
       "sector": "Power Transmission Cables & Building Wires",
       "macro_driver": "Refined Copper & Aluminium",
-      "bps_impact": 30,
+      "bps_impact": 40,
       "pricing_power": "MODERATE",
-      "rationale": "Balanced 61-day inventory cycle aur diversified product mix se input cost ka asar asani se offset ho jata hai.",
-      "outlook": "Steady cash flows aur disciplined working capital management se margins resilient rahenge."
+      "rationale": "61 days ki balanced inventory aur 57 days ke CCC ke sath, company input cost inflation ko bina demand destruction ke absorb kar rahi hai.",
+      "outlook": "Auto wire aur electrical cable segments mein steady volume growth margins ko positive trajectory par rakhegi."
     },
     {
-      "symbol": "BAJFINANCE",
-      "company_name": "Bajaj Finance Limited",
-      "sector": "Banking, Credit Intermediation & Housing Finance",
-      "macro_driver": "10Y Bond Yields & Systemic Cost of Funds",
-      "bps_impact": 25,
-      "pricing_power": "HIGH",
-      "rationale": "Wholesale bond market mein yields soft hone se borrowing costs ghatengi, jisse high-yielding retail book par spreads widen honge.",
-      "outlook": "Agile loan pricing transmission aur robust consumer demand ki wajah se profitability margins strong expand karenge."
+      "symbol": "RRKABEL",
+      "company_name": "R R Kabel Limited",
+      "sector": "Power Transmission Cables & Building Wires",
+      "macro_driver": "Refined Copper & Aluminium",
+      "bps_impact": 30,
+      "pricing_power": "MODERATE",
+      "rationale": "Faster inventory churn (59 days) aur healthy CFO/OP conversion (121%) copper price pass-through ko smoothly execute karne mein madad karte hain.",
+      "outlook": "Operational efficiencies aur controlled inventory ke chalte margins gradual recovery mode mein rahenge."
     },
     {
       "symbol": "ICICIBANK",
@@ -1178,8 +1017,8 @@
       "macro_driver": "10Y Bond Yields & Systemic Cost of Funds",
       "bps_impact": 20,
       "pricing_power": "HIGH",
-      "rationale": "High floating-rate EBLR loan mix ke chalte, lower cost of funds ka benefit margins mein tezi se reflect hoga.",
-      "outlook": "Strong asset quality aur superior loan pricing power ki wajah se margins industry peers ke comparison mein resilient rahenge."
+      "rationale": "High floating-rate EBLR loan mix aur strong CASA franchise ki wajah se yield expansion ka benefit turant milta hai.",
+      "outlook": "Behtar loan book pricing aur asset quality ki taakat se core operating profitability strong bani rahegi."
     },
     {
       "symbol": "HDFCBANK",
@@ -1188,8 +1027,18 @@
       "macro_driver": "10Y Bond Yields & Systemic Cost of Funds",
       "bps_impact": 15,
       "pricing_power": "HIGH",
-      "rationale": "Post-merger liability mix ko stable karne ke baad, cost of funds normalize hone se NIM mein mild expansion dekhne ko milega.",
-      "outlook": "Deposit mobilization aur credit-deposit ratio improve hone se core operating profitability mein gradual sudhaar aayega."
+      "rationale": "Post-merger liability mix stabilize ho rahi hai aur funding cost easing se NIM trough se recover hone laga hai.",
+      "outlook": "Agle quarters mein deposit re-pricing lag khatam hone par net interest margins mein gradual sudhaar dekhne ko milega."
+    },
+    {
+      "symbol": "FEDERALBNK",
+      "company_name": "Federal Bank Limited",
+      "sector": "Banking, Credit Intermediation & Housing Finance",
+      "macro_driver": "10Y Bond Yields & Systemic Cost of Funds",
+      "bps_impact": 10,
+      "pricing_power": "MODERATE",
+      "rationale": "Low-cost NRI foreign remittances aur granular retail credit momentum se cost of funds control mein hain.",
+      "outlook": "Stable deposit franchise aur retail credit growth ki wajah se NIMs resilient rahenge."
     }
   ],
   "margin_contracting_headwinds": [
@@ -1200,8 +1049,8 @@
       "macro_driver": "Brent Crude / ATF",
       "bps_impact": -400,
       "pricing_power": "WEAK",
-      "rationale": "Weak balance sheet aur high fuel sensitivity ki wajah se har ek crude uptick direct bottom-line erosion karta hai.",
-      "outlook": "Severe cost pressure aur cash flow constraints ke chalte operational turnaround filhal kafi challenging rahega."
+      "rationale": "Dollar lease rentals aur high ATF prices ka double whammy weak pricing power wale carrier ke margins ko crush kar dega.",
+      "outlook": "Severe liquidity constraints aur soaring fuel expenses ke chalte bottom line par heavy contraction expected hai."
     },
     {
       "symbol": "ASIANPAINT",
@@ -1210,8 +1059,8 @@
       "macro_driver": "Brent Crude Oil",
       "bps_impact": -250,
       "pricing_power": "MODERATE",
-      "rationale": "142 din ka inventory buffer aur delayed price pass-through ki wajah se crude inflation aane wale quarters mein margins ko hit karega.",
-      "outlook": "High cost inventory consumption se EBITDA per cent mein sharp compression expected hai."
+      "rationale": "142 days ka massive inventory buffer crude inflation ko instantly reflect nahi hone deta, lekin delayed price hikes aur rising input costs margins ko erode karenge.",
+      "outlook": "Delayed price pass-through aur high inventory days ke karan upcoming quarters mein OPM contract hone ka poora risk hai."
     },
     {
       "symbol": "INDIGO",
@@ -1220,8 +1069,8 @@
       "macro_driver": "Brent Crude / ATF",
       "bps_impact": -250,
       "pricing_power": "MODERATE",
-      "rationale": "Fortnightly fuel burn cost spike ko instant passthrough karna fare caps aur high competition ki wajah se mushkil hota hai.",
-      "outlook": "Badhte ATF prices aur dollar lease rentals ke combination se upcoming quarter ke operational margins dabenge."
+      "rationale": "Fortnightly fuel burn me high ATF prices ka immediate impact padta hai, jise fares me turant pass-on karna mushkil hota hai.",
+      "outlook": "High fuel intensity ki wajah se upcoming quarterly results me airline margins par severe cost pressure dikhega."
     },
     {
       "symbol": "BERGEPAINT",
@@ -1230,8 +1079,8 @@
       "macro_driver": "Brent Crude Oil",
       "bps_impact": -220,
       "pricing_power": "MODERATE",
-      "rationale": "143 din ke inventory cycle ke chalte aggressive dealer networks par margin pressure persist karega.",
-      "outlook": "Volume growth solid rahegi lekin input cost lag ki wajah se margins dabey rahenge."
+      "rationale": "143 days inventory days aur aggressive dealer push ke beech raw material inflation margin ko squeeze kar raha hai.",
+      "outlook": "Volume growth sustain karne ke chakkar mein aggressive pricing nahi kar paane se EBITDA margins par daban rahega."
     },
     {
       "symbol": "PRINCEPIPE",
@@ -1240,8 +1089,8 @@
       "macro_driver": "Crude PVC & CPVC Resins",
       "bps_impact": -210,
       "pricing_power": "WEAK",
-      "rationale": "Regional competition aur limited pricing flexibility ki wajah se volatile resin inventory spreads ko fully pass-on nahi kar paate.",
-      "outlook": "Input cost inflation aur aggressive pricing environment ki wajah se Q3/Q4 margins under pressure rahenge."
+      "rationale": "Regional pricing pressures aur volatile inventory spreads ki wajah se raw material price hikes ko fully absorb karna mushkil hai.",
+      "outlook": "Inventory lag aur fierce market competition ke chalte near-term earnings aur margins par significant dabav banega."
     },
     {
       "symbol": "MRF",
@@ -1250,8 +1099,8 @@
       "macro_driver": "Brent Crude Oil & Synthetic Rubber",
       "bps_impact": -200,
       "pricing_power": "MODERATE",
-      "rationale": "115 din ki inventory days aur 60% CFO/OP ke sath replacement market mein price hikes implement karne mein delay ho raha hai.",
-      "outlook": "High cost rubber inventory ki wajah se upcoming quarters mein OPM dabav mein rahega."
+      "rationale": "115 days inventory cycle aur 60% CFO/OP conversion ke sath, raw material spike ka full impact upcoming financial results mein dikhega.",
+      "outlook": "Replacement demand solid hai, par unhedged raw material cost spike OPM ko temporary hit karega."
     },
     {
       "symbol": "KANSAINER",
@@ -1260,8 +1109,8 @@
       "macro_driver": "Brent Crude Oil",
       "bps_impact": -180,
       "pricing_power": "WEAK",
-      "rationale": "Indexed OEM contracts hone ki wajah se crude-linked raw material price hikes ko pass karne mein time lagta hai.",
-      "outlook": "Auto sector demand strong hai par raw material pressure se OPM par negative impact padega."
+      "rationale": "Indexed auto OEM contracts ke chalte cost escalation ko turant pass on karna mushkil hota hai, jisse 133 days inventory cycle par pressure padta hai.",
+      "outlook": "Auto sector ke tied-up contracts aur raw material lag ke kaaran near-term profitability dabee rahegi."
     },
     {
       "symbol": "DEEPAKNTR",
@@ -1270,8 +1119,18 @@
       "macro_driver": "Crude Naphtha & Benzene",
       "bps_impact": -180,
       "pricing_power": "MODERATE",
-      "rationale": "59 days inventory days ke sath yeh high-cost benzene raw materials ko turant finished goods prices mein pass-on nahi kar pa rahe.",
-      "outlook": "Phenol-acetone spread compression ki wajah se upcoming quarter mein OPM pressure mein rahega."
+      "rationale": "59 days inventory cycle ke sath, phenol-acetone spreads par cost pressure turant impact karega.",
+      "outlook": "Rising input costs aur laggy pricing pass-through ki wajah se upcoming quarters mein OPM compress hone ki ummeed hai."
+    },
+    {
+      "symbol": "ASTRAL",
+      "company_name": "Astral Limited",
+      "sector": "Plastic Pipes & Building Polymers",
+      "macro_driver": "Crude PVC & CPVC Resins",
+      "bps_impact": -160,
+      "pricing_power": "MODERATE",
+      "rationale": "Brand loyalty strong hai par sudden resin cost spikes ko channel mein turant pass karna competitive pressure mein tough hota hai.",
+      "outlook": "High-cost inventory liquidation aur demand pushback ki wajah se upcoming quarters mein margin volatility dekhne ko milegi."
     },
     {
       "symbol": "CEATLTD",
@@ -1279,29 +1138,19 @@
       "sector": "Automotive Tyres & Synthetic Elastomers",
       "macro_driver": "Brent Crude Oil & Synthetic Rubber",
       "bps_impact": -150,
-      "pricing_power": "MODERATE",
-      "rationale": "63 din ka low inventory buffer hone ke karan spot raw material spikes seedhe current quarter ke COGS mein hit karte hain.",
-      "outlook": "Negative working capital cycle hone ke bawajud raw material inflation margins ko erode karegi."
+      "pricing_power": "WEAK",
+      "rationale": "63 days ka low inventory cycle matlab yeh raw material spot spikes ke liye direct exposure rakhte hain bina kisi bade cushion ke.",
+      "outlook": "Spot prices badhne se quarter-on-quarter margins par downward pressure bana rahega."
     },
     {
       "symbol": "ATUL",
       "company_name": "Atul Limited",
       "sector": "Specialty Chemicals, Phenol & Aromatics",
       "macro_driver": "Crude Naphtha & Benzene",
-      "bps_impact": -150,
+      "bps_impact": -140,
       "pricing_power": "MODERATE",
-      "rationale": "Broad-based chemical portfolio hone ki wajah se cyclical input price hikes ko absorb karne mein samay lagta hai.",
-      "outlook": "Basic chemical pricing volatility aur lag mein cost transmission ki wajah se near-term margins soft rahenge."
-    },
-    {
-      "symbol": "VOLTAMP",
-      "company_name": "Voltamp Transformers Limited",
-      "sector": "Heavy Electricals & Power Transformers",
-      "macro_driver": "Copper Winding & CRGO Steel",
-      "bps_impact": -150,
-      "pricing_power": "MODERATE",
-      "rationale": "Fixed-price order book hone ki wajah se current raw material price spikes ko turant customer par nahi daal sakte.",
-      "outlook": "Old lower-margin orders execute hone tak upcoming quarters mein OPM compression dekhne ko milegi."
+      "rationale": "Basic chemical cycles aur unhedged inventory ke chalte raw material inflation ko turant absorb karna mushkil hoga.",
+      "outlook": "Cyclical headwinds aur delayed transmission ke kaaran near-term margins dabav mein rehne ki ummeed hai."
     },
     {
       "symbol": "SUPREMEIND",
@@ -1310,58 +1159,38 @@
       "macro_driver": "Crude PVC & CPVC Resins",
       "bps_impact": -130,
       "pricing_power": "MODERATE",
-      "rationale": "Large volume operations aur inventory destocking ke dauran high-cost resin purchases margins ko temporary hit dete hain.",
-      "outlook": "Volume growth ke bawajud high inventory holding ki wajah se short-term EBITDA margins dabav mein rahenge."
+      "rationale": "Molded packaging aur piping segments mein inventory destocking cycle aur raw material inflation ka double whammy chal raha hai.",
+      "outlook": "Inventory holding losses aur input cost pressure ki short-term impact se EBITDA margins slight contraction dikha sakte hain."
+    },
+    {
+      "symbol": "KPRMILL",
+      "company_name": "K.P.R. Mill Limited",
+      "sector": "Textile Spinning, Denim & Branded Garments",
+      "macro_driver": "Raw Cotton & Combed Yarn",
+      "bps_impact": -120,
+      "pricing_power": "MODERATE",
+      "rationale": "175 days ke high inventory cycle aur 5.13% monthly cotton spike ki wajah se low-cost inventory khatam hote hi margins par temporary squeeze ayega.",
+      "outlook": "Captive green energy ke bawajूद high cotton cost inventory transmission lag ki wajah se short-term EBITDA mein slight contraction dekhne ko milegi."
     },
     {
       "symbol": "DALBHARAT",
       "company_name": "Dalmia Bharat Limited",
       "sector": "Cement & Building Concrete",
       "macro_driver": "Imported Petcoke & Thermal Coal",
-      "bps_impact": -130,
-      "pricing_power": "WEAK",
-      "rationale": "High blending ratios aur regional demand headwinds ke karan petcoke price hike ka pura pass-through mushkil hai.",
-      "outlook": "Eastern/Southern markets me pricing pressure aur input inflation se margins par thodi saggi rhegi."
+      "bps_impact": -110,
+      "pricing_power": "MODERATE",
+      "rationale": "Eastern aur southern markets mein regional pricing headwinds ke sath high petcoke prices margins par severe drag dalenge.",
+      "outlook": "Blending ratios high rakhne ke bawajud energy cost inflation EBITDA per ton ko compress karegi."
     },
     {
-      "symbol": "ONGC",
-      "company_name": "Oil and Natural Gas Corp",
+      "symbol": "OIL",
+      "company_name": "Oil India Limited",
       "sector": "City Gas Distribution & Gas Upstream",
       "macro_driver": "Natural Gas (Spot LNG / APM)",
-      "bps_impact": -120,
+      "bps_impact": -100,
       "pricing_power": "WEAK",
-      "rationale": "Global natural gas benchmark prices mein 32% ki 1Y drop se domestic gas realization pressure mein aa jayegi.",
-      "outlook": "Upstream realizations soften hone se upcoming top-line aur EBITDA margins par downward pressure rahega."
-    },
-    {
-      "symbol": "RRKABEL",
-      "company_name": "R R Kabel Limited",
-      "sector": "Power Transmission Cables & Building Wires",
-      "macro_driver": "Refined Copper & Aluminium",
-      "bps_impact": -120,
-      "pricing_power": "WEAK",
-      "rationale": "Pehle se hi low 6.0% OPM aur export competition ki wajah se copper price hike ko absorb karna mushkil ho raha hai.",
-      "outlook": "Lower base margins aur aggressive pricing environment ke chalte EBITDA per ton mein contraction dikhegi."
-    },
-    {
-      "symbol": "ULTRACEMCO",
-      "company_name": "UltraTech Cement Limited",
-      "sector": "Cement & Building Concrete",
-      "macro_driver": "Imported Petcoke & Thermal Coal",
-      "bps_impact": -110,
-      "pricing_power": "MODERATE",
-      "rationale": "Captive WHRS energy efficiency fuel inflation ke impact ko cushion karti hai par petcoke jump se margins thode compress honge.",
-      "outlook": "Scale benefits ke bavajud high energy costs near-term EBITDA per tonne par thoda pressure dalenge."
-    },
-    {
-      "symbol": "VTL",
-      "company_name": "Vardhman Textiles Limited",
-      "sector": "Textile Spinning, Denim & Branded Garments",
-      "macro_driver": "Raw Cotton & Combed Yarn",
-      "bps_impact": -110,
-      "pricing_power": "MODERATE",
-      "rationale": "Pure yarn spinner hone ke nate, domestic cotton MSP aur global cotton spread badhne par cost turant bottom line par hit karti hai.",
-      "outlook": "Rising raw cotton costs aur lagging yarn realisations ki wajah se near-term quarters mein margin pressure bana rahega."
+      "rationale": "High inventory days (264 days) aur lamba working capital cycle (190 days) cost transmission me delay paida karte hain.",
+      "outlook": "Stretched working capital aur soft gas price environment ki wajah se operating margins me temporary dip aa sakta hai."
     },
     {
       "symbol": "AMBUJACEM",
@@ -1370,108 +1199,108 @@
       "macro_driver": "Imported Petcoke & Thermal Coal",
       "bps_impact": -95,
       "pricing_power": "MODERATE",
-      "rationale": "Supply chain optimization aur green power transition cost headwinds ko partially absorb kar rahe hain.",
-      "outlook": "Input cost inflation ke chalte operating margins me slight near-term contraction dekhne ko milegi."
+      "rationale": "Green power integration aur supply chain optimization ke ongoing efforts ke baad bhi high fuel costs margins ko test karenge.",
+      "outlook": "Near-term quarters mein fuel inflation ka lag dikhega jab tak cost synergies poori tarah scale na ho jayein."
     },
     {
-      "symbol": "OIL",
-      "company_name": "Oil India Limited",
-      "sector": "City Gas Distribution & Gas Upstream",
-      "macro_driver": "Natural Gas (Spot LNG / APM)",
-      "bps_impact": -90,
-      "pricing_power": "WEAK",
-      "rationale": "High inventory days (264 days) aur regulated gas pricing mechanism ki wajah se lower global benchmarks ka impact delayed lekin severe hoga.",
-      "outlook": "High cycle times aur subdued realisations ki vajah se 35% base OPM par margin compression dekhne ko milegi."
-    },
-    {
-      "symbol": "TRIDENT",
-      "company_name": "Trident Limited",
+      "symbol": "VTL",
+      "company_name": "Vardhman Textiles Limited",
       "sector": "Textile Spinning, Denim & Branded Garments",
       "macro_driver": "Raw Cotton & Combed Yarn",
       "bps_impact": -90,
       "pricing_power": "MODERATE",
-      "rationale": "Home textiles aur export freight volatility ke exposure ki wajah se cost pass-through mein delay hota hai.",
-      "outlook": "Export market headwinds aur volatile cotton prices ke chalte upcoming results mein margins par thoda dabav rahega."
+      "rationale": "Pure yarn spinners ke liye domestic cotton MSP aur global spread ke beech gap badhne se realisations turant match nahi ho pati.",
+      "outlook": "Upcoming quarters mein high cost raw material consumption ki wajah se operating margins dabav mein rahenge."
+    },
+    {
+      "symbol": "ONGC",
+      "company_name": "Oil and Natural Gas Corp",
+      "sector": "City Gas Distribution & Gas Upstream",
+      "macro_driver": "Natural Gas (Spot LNG / APM)",
+      "bps_impact": -80,
+      "pricing_power": "WEAK",
+      "rationale": "Global benchmark prices me correction aur regulated domestic realizations ki wajah se top-line growth par pressure rahega.",
+      "outlook": "Gas price realisations soft rehne ke karan upcoming quarters me upstream realisations par margin contraction ka risk hai."
+    },
+    {
+      "symbol": "VOLTAMP",
+      "company_name": "Voltamp Transformers Limited",
+      "sector": "Heavy Electricals & Power Transformers",
+      "macro_driver": "Copper Winding & CRGO Steel",
+      "bps_impact": -80,
+      "pricing_power": "MODERATE",
+      "rationale": "Fixed-price transformer orders mein raw material inflation absorb hone ki wajah se near-term margins par direct negative impact aata hai.",
+      "outlook": "Legacy orders execution ke dauran input cost pressure se margins temporarily compress honge."
+    },
+    {
+      "symbol": "ULTRACEMCO",
+      "company_name": "UltraTech Cement Limited",
+      "sector": "Cement & Building Concrete",
+      "macro_driver": "Imported Petcoke & Thermal Coal",
+      "bps_impact": -80,
+      "pricing_power": "HIGH",
+      "rationale": "Captive WHRS aur scale efficiency ke bawajud, petcoke ki sharp monthly rally short-term cost pressure banayegi.",
+      "outlook": "Realizations mein moderate improvement ke karan cost inflation ka thoda impact absorb ho jayega par OPM par dabav rahega."
     },
     {
       "symbol": "SHREECEM",
       "company_name": "Shree Cement Limited",
       "sector": "Cement & Building Concrete",
       "macro_driver": "Imported Petcoke & Thermal Coal",
-      "bps_impact": -85,
+      "bps_impact": -70,
       "pricing_power": "HIGH",
-      "rationale": "Agile fuel procurement flexibility aur lowest-cost operational model industry peers ke mukable headwind ko behtar manage karega.",
-      "outlook": "Operational efficiencies fuel cost spike ke impact ko limit karengi, jisse margin hit minimal rahega."
+      "rationale": "Industry-leading fuel flexibility aur low-cost operations hone ke karan yeh peers ke mukable cost spike ko behtar manage karega.",
+      "outlook": "Agile fuel procurement ki wajah se contraction minimal rahegi, fir bhi quarterly margins par slight negative impact ayega."
+    },
+    {
+      "symbol": "TRIDENT",
+      "company_name": "Trident Limited",
+      "sector": "Textile Spinning, Denim & Branded Garments",
+      "macro_driver": "Raw Cotton & Combed Yarn",
+      "bps_impact": -70,
+      "pricing_power": "WEAK",
+      "rationale": "Home textiles export market mein fierce competition aur high cotton input costs margins ko severely restrict karte hain.",
+      "outlook": "Export freight volatility aur raw material cost inflation ke chalte EBITDA growth muted rehne ki ummeed hai."
+    },
+    {
+      "symbol": "BRITANNIA",
+      "company_name": "Britannia Industries",
+      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
+      "macro_driver": "Ethanol Pricing Linked to Energy",
+      "bps_impact": -60,
+      "pricing_power": "HIGH",
+      "rationale": "Packaged food giant hone ke naate, industrial sugar aur edible oils ke inflationary trends direct input cost pressure create karte hain.",
+      "outlook": "Volume growth ke bawajूद input basket inflation ki wajah se margins par slight headwind dekhne ko mil sakta hai."
+    },
+    {
+      "symbol": "GNFC",
+      "company_name": "Gujarat Narmada Valley Fertilizers",
+      "sector": "Fertilizers, Urea & Crop Protection",
+      "macro_driver": "Natural Gas (Ammonia Feedstock)",
+      "bps_impact": -50,
+      "pricing_power": "WEAK",
+      "rationale": "Industrial chemicals segment mein weak pricing pressure aur global oversupply ki wajah se input cost savings neutralize ho rahi hain.",
+      "outlook": "Chemical demand softness ki chalte near-term realizations dabav mein rahengi."
     },
     {
       "symbol": "KEI",
       "company_name": "KEI Industries Limited",
       "sector": "Power Transmission Cables & Building Wires",
       "macro_driver": "Refined Copper & Aluminium",
-      "bps_impact": -80,
-      "pricing_power": "MODERATE",
-      "rationale": "87 din ke inventory days aur 115 din ke high CCC ke kaaran cost transmission mein bada lag aata hai.",
-      "outlook": "Delayed price variation clauses aur working capital block hone se near-term margins pe pressure rahega."
-    },
-    {
-      "symbol": "BRITANNIA",
-      "company_name": "Britannia Industries",
-      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
-      "macro_driver": "Crude Oil & Energy (Ethanol Link)",
-      "bps_impact": -80,
-      "pricing_power": "HIGH",
-      "rationale": "Industrial sugar aur palm oil ke heavy consumption ke karan raw material basket inflation ka direct lagged impact padta hai.",
-      "outlook": "Input cost pressures ko offset karne ke liye price hikes lene padenge, jisse upcoming quarters mein margin par nominal dabav rahega."
-    },
-    {
-      "symbol": "SHREERAMA",
-      "company_name": "Shree Renuka Sugars",
-      "sector": "Sugar Mills, Bio-Ethanol & Sweeteners",
-      "macro_driver": "Crude Oil & Energy (Ethanol Link)",
-      "bps_impact": -70,
-      "pricing_power": "WEAK",
-      "rationale": "Port-based raw sugar refining margins global white sugar trade flows aur imported raw material cost volatility par depend karte hain.",
-      "outlook": "Global trade spreads mein tightness aur high input costs ke karan near-term margin recovery mein thodi der lagegi."
-    },
-    {
-      "symbol": "BHARATFORG",
-      "company_name": "Bharat Forge Limited",
-      "sector": "Primary Aluminium & Auto Castings",
-      "macro_driver": "Primary Aluminium Ingot",
-      "bps_impact": -60,
-      "pricing_power": "MODERATE",
-      "rationale": "Lamba inventory cycle (198.0d) aur heavy metal forging costs raw material price volatility ko turant absorb nahi hone dete.",
-      "outlook": "Global industrial demand slowdown aur higher metal input costs ki vajah se margin recovery mein thoda samay lagega."
-    },
-    {
-      "symbol": "JSWSTEEL",
-      "company_name": "JSW Steel Limited",
-      "sector": "Primary Steel, Structural Tubes & Rebars",
-      "macro_driver": "Iron Ore & Coking Coal",
-      "bps_impact": -50,
-      "pricing_power": "MODERATE",
-      "rationale": "Purchased iron ore aur imported coking coal par dependent hone ke kaaran cost lag inventory mein reflect hoti hai.",
-      "outlook": "Finished steel price realisations mein girawat aane se near-term margins par dabav bana rahega."
-    },
-    {
-      "symbol": "ENDURANCE",
-      "company_name": "Endurance Technologies",
-      "sector": "Primary Aluminium & Auto Castings",
-      "macro_driver": "Primary Aluminium Ingot",
       "bps_impact": -40,
-      "pricing_power": "WEAK",
-      "rationale": "Negative working capital (-2.0d) aur 52-day inventory cycle ki wajah se high aluminium costs ka lagged impact margins par padta hai.",
-      "outlook": "OEM price-negotiation lags ki vajah se near-term margins par thoda compression dekhne ko mil sakta hai."
+      "pricing_power": "MODERATE",
+      "rationale": "87 din ki inventory aur 115 din ki lamba working capital cycle (CCC) hone ki wajah se cost transmission mein delay hota hai.",
+      "outlook": "High working capital intensity aur lagged pass-through ki wajah se near-term EBITDA margins par dabav bana rahega."
     },
     {
-      "symbol": "FEDERALBNK",
-      "company_name": "Federal Bank Limited",
+      "symbol": "BAJFINANCE",
+      "company_name": "Bajaj Finance Limited",
       "sector": "Banking, Credit Intermediation & Housing Finance",
       "macro_driver": "10Y Bond Yields & Systemic Cost of Funds",
-      "bps_impact": -10,
+      "bps_impact": -25,
       "pricing_power": "MODERATE",
-      "rationale": "Sticky high-cost deposits aur retail credit competition ki vajah se near-term cost of funds par thoda dabav bana rahega.",
-      "outlook": "CFO/OP ratio ke moderation ke beech, NIM compression aane wale quarters mein margins ko thoda restrict kar sakta hai."
+      "rationale": "Wholesale bond market par zyada nirbharta hone ke karan 1Y high interest rate environment ka lagged impact borrowing cost par padta hai.",
+      "outlook": "High cost of borrowings ke chalte upcoming quarters mein margins par thoda dabav banta rahega."
     }
   ]
 }
