@@ -775,14 +775,16 @@
       "scheduled_ist": "2026-11-02 14:00",
       "title": "IndiGo shares in focus as Centre notifies Rule 192 under Bharatiya Vayuyan Niyam",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>IndiGo shares in focus as Centre notifies Rule 192 under Bharatiya Vayuyan Niyam, 2026</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Central government has notified new airfare pricing rules under Rule 192 of the Bharatiya Vayuyan Niyam, 2026. Airlines are now empowered to set their own tariffs factoring in operating costs, but must submit them to the Directorate General of Civil Aviation. The rules mandate strict disclosure of base fares, taxes, cancellation charges, and refund conditions, while keeping pricing flexibility intact with no blanket fare caps defined.\n\n🧭 <b>MARKET CONTEXT</b>\nAirline tariffs directly impact passenger yields and capacity utilisation. While pricing flexibility allows carriers to adjust fares dynamically, enhanced disclosure norms and open-ended provisions regarding \"extraordinary\" circumstances leave room for regulatory oversight in public interest.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nClearer tariff disclosures and lack of blanket caps are generally constructive for dominant carriers like InterGlobe Aviation, preserving operational agility. However, because the rules do not explicitly clarify whether temporary or route-specific fare caps can be imposed, regulatory ambiguity remains a variable during peak travel demand seasons.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor future DGCA circulars regarding route-specific interpretations, upcoming quarterly yield trends, and passenger revenue per available seat kilometre metrics.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do regulatory disclosures on cancellation and refund rules structurally affect an airline's ancillary revenue streams?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/interglobe-aviation-indigo-share-price-new-airfare-pricing-rules-airline-tariffs-dgca-20024472.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:d56fb4e54808",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/market/interglobe-aviation-indigo-share-price-new-airfare-pricing-rules-airline-tariffs-dgca-20024472.htm",
       "source_headline": "InterGlobe Aviation shares gain after Centre notifies new airfare pricing rules — Check details",
       "story_key": "d56fb4e54808e67e3cbc5d166c8d8a97a61e864ea06a3c128c599abc1988ee42",
-      "generated_at": "2026-11-02 15:15:42 IST"
+      "generated_at": "2026-11-02 15:15:42 IST",
+      "posted_at": "2026-11-10 09:45:49 IST",
+      "telegraph_url": "https://telegra.ph/IndiGo-shares-in-focus-as-Centre-notifies-Rule-192-under-Bharatiya-Vayuyan-Niyam--November-2026-11-10"
     },
     {
       "id": "ai0030",
@@ -1185,6 +1187,22 @@
       "generated_at": "2026-11-10 02:25:48 IST"
     },
     {
+      "id": "newsoevksogczq",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-10 08:00",
+      "scheduled_ist": "2026-11-10 08:00",
+      "title": "RBI queries bank valuations on bond forward trades",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI queries bank valuations on bond forward trades</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nReserve Bank of India has asked select lenders to alter their accounting methodology for bond forwards contracts during recent regular audits. Regulators noted that banks should apply Level 3 inputs for valuing these trades, which account for billions of dollars in notional value across the industry.\n\n🧭 <b>MARKET CONTEXT</b>\nLevel 3 valuation refers to assets whose prices cannot be verified against observable market data, forcing institutions to rely entirely on internal assumptions. Under central bank guidelines, adopting this classification for trades can restrict dividend distributions and tighten available regulatory capital buffers.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf lenders are mandated to reclassify these contracts, it could increase balance sheet conservatism across financial institutions that service corporate and institutional clients hedging interest rate risks. Should capital requirements tighten, affected lenders might recalibrate their derivative exposure, potentially impacting pricing and liquidity in fixed-income hedging markets.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor formal announcements from FIMMDA or the Clearing Corporation of India regarding pricing transparency platforms, alongside any official regulatory circulars clarifying derivative accounting norms.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might tighter accounting norms for over-the-counter derivatives change the hedging costs for institutional market participants?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/rbi-said-to-query-bank-valuations-of-some-bond-derivative-trades/articleshow/135696624.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:979db40c4836",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/rbi-said-to-query-bank-valuations-of-some-bond-derivative-trades/articleshow/135696624.cms",
+      "source_headline": "RBI said to query bank valuations of some bond derivative trades",
+      "story_key": "979db40c4836a6b257d59fdcc86b6ed799453ca9371e9cd2626e6dc95a937727",
+      "generated_at": "2026-11-10 09:44:38 IST"
+    },
+    {
       "id": "ai0038",
       "slot": "B",
       "scheduled_ist": "2026-11-10 10:00",
@@ -1195,6 +1213,6 @@
       "generated_at": "2026-11-09 15:59:09 IST"
     }
   ],
-  "total": 83,
+  "total": 84,
   "last_scheduled": "2026-11-10 10:00"
 }

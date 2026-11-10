@@ -1,6 +1,96 @@
 {
   "stories": [
     {
+      "id": "newsbuyqzvlkqw",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Stock Market holiday: NSE, BSE to remain closed for Diwali-Balipratipada",
+      "url": "https://www.cnbctv18.com/market/stock-market-holiday-nse-bse-to-remain-closed-for-diwali-balipratipada-20030778.htm",
+      "published_at": "2026-11-10T08:08:23+05:30",
+      "published_ist": "2026-11-10 08:08 IST",
+      "summary": "Indian stock markets will remain closed on November 10 for Diwali-Balipratipada, with trading resuming on November 11. Meanwhile, Sensex and Nifty ended higher on Monday.",
+      "first_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "first_seen_ist": "2026-11-10 09:44:38 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsdhzsondazn",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "RBI said to query bank valuations of some bond derivative trades",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/rbi-said-to-query-bank-valuations-of-some-bond-derivative-trades/articleshow/135696624.cms",
+      "published_at": "2026-11-10T07:32:12+05:30",
+      "published_ist": "2026-11-10 07:32 IST",
+      "summary": "India's central bank has informed some lenders about the need to adjust bond forward accounting practices. This change could impact billions of dollars in assets across the banking sector. The Reserve Bank of India suggested using Level 3 inputs for valuing bond-forward trades during recent audits. Banks have been in discussions with industry associations and clearinghouses for potential solutions and better pricing information.",
+      "first_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "first_seen_ist": "2026-11-10 09:44:38 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
+      "status": "queued",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-10 09:44:38 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Central bank regulatory audits questioning valuation methodologies can compel commercial lenders to shift from observable market benchmarks to internal assumptions, which would potentially tighten regulatory capital buffers and restrict dividend payouts. If lenders are forced to classify sizeable portfolios under unobservable inputs due to thin transparency, reported capital adequacy ratios could experience sudden pressure. However, ongoing industry discussions and trial electronic platforms suggest that market participants would likely attempt to improve trade repository pricing data rather than simply absorb higher capital charges.",
+        "what_to_watch": [
+          "Official clarifications or circulars from the Reserve Bank of India regarding bond-forward accounting standards",
+          "Updates from industry associations like FIMMDA and the Clearing Corporation of India on electronic trading platform trials",
+          "Changes in quarterly capital adequacy disclosures and dividend payout announcements by affected commercial banks"
+        ],
+        "evergreen_lesson": "Regulatory shifts in asset valuation directly alter bank capital calculations long before underlying cash flows change, making market transparency and benchmark availability vital defensive buffers for financial institutions."
+      },
+      "processed_ist": "2026-11-10 09:44:38 IST",
+      "post_id": "newsoevksogczq"
+    },
+    {
+      "id": "newsxguxzudqic",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Gold dips ahead of US inflation data",
+      "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-dips-ahead-of-us-inflation-data/articleshow/135696094.cms",
+      "published_at": "2026-11-10T06:26:50+05:30",
+      "published_ist": "2026-11-10 06:26 IST",
+      "summary": "Gold prices edged lower in early Asian trade on Tuesday as investors awaited US inflation data later in the day for clues on the Federal Reserve's next policy move.",
+      "first_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "first_seen_ist": "2026-11-10 09:44:38 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-10 09:44:38 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Global bullion prices often react inversely to macroeconomic data releases that shape major central bank rate expectations, as higher yields increase the opportunity cost of holding non-yielding assets. While short-term geopolitical headlines or regional energy price drops can trigger sudden tactical trading in commodities, the broader market direction remains heavily anchored to incoming inflation prints. If upcoming domestic consumer price releases indicate persistent inflation, expectations of tighter monetary policy would likely keep upward pressure on yields and weigh on precious metals.",
+        "what_to_watch": [
+          "Official US Consumer Price Index and Producer Price Index data releases",
+          "CME FedWatch tool probabilities for upcoming central bank rate decisions",
+          "Official updates regarding geopolitical tensions and regional military actions affecting energy supply routes"
+        ],
+        "evergreen_lesson": "Short-term commodity price dips driven by temporary headline news can reverse rapidly if macro data contradicts market assumptions about central bank policy paths."
+      }
+    },
+    {
+      "id": "newswbjlsjjsao",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Dollar sellers hit pause for US inflation data",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/dollar-sellers-hit-pause-for-us-inflation-data/articleshow/135696077.cms",
+      "published_at": "2026-11-10T06:21:32+05:30",
+      "published_ist": "2026-11-10 06:21 IST",
+      "summary": "The trade and sentiment-sensitive Australian dollar rose by nearly 1% through Monday to sit at $0.6921 early on Tuesday and the New Zealand dollar rose even further to trade at $0.5624, with both steady in morning Asia trade.",
+      "first_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
+      "first_seen_ist": "2026-11-10 09:44:38 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
+      "status": "new",
+      "topic": "economy"
+    },
+    {
       "id": "newsjptjylzrlm",
       "source": "Economic Times",
       "source_priority": 3,
@@ -10,9 +100,9 @@
       "published_ist": "2026-11-09 22:28 IST",
       "summary": "The decision by the Trump administration to launch perpetual futures has sparked significant worry among market stakeholders. Leaders from established exchanges contend that these offerings might disrupt existing market dynamics and risk assessment practices. They claim that perpetual futures ought to be categorized as swaps due to their unique trading characteristics. Moreover, ongoing trading raises alarm about liquidity and counterparty risk, especially in turbulent market conditions.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -38,9 +128,9 @@
       "published_ist": "2026-11-09 22:18 IST",
       "summary": "Federal Reserve Bank of Chicago President Austan Goolsbee said the US central bank must address broadening inflation pressures and the risk of demand overheating from the artificial intelligence data centre build-out.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -66,9 +156,9 @@
       "published_ist": "2026-11-09 22:03 IST",
       "summary": "An internal admission of an extramarital affair by Jensen Huang has forced the world's leading artificial intelligence chipmaker into an unprecedented national security review. While rivals logged unexpected market gains, the inquiry poses fundamental questions for global silicon supply chains.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -82,9 +172,9 @@
       "published_ist": "2026-11-09 20:35 IST",
       "summary": "Wall Street's indexes climbed as investors honed in on Nvidia CEO Jensen Huang's investigation and awaited crucial inflation data. Nvidia's shares faced declines due to worries over foreign intelligence, yet analysts proposed that the sell-off in AI stocks was potentially overblown. Tech giants like Microsoft and Alphabet, along with chip manufacturers such as Marvell and Broadcom, enjoyed substantial gains.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -110,9 +200,9 @@
       "published_ist": "2026-11-09 18:50 IST",
       "summary": "The Reserve Bank of India, in exercise of its powers under Section 36AAA read with Section 56 of the Banking Regulation Act, 1949, had superseded the Board of Directors of Abhyudaya Co-operative Bank Ltd., Mumbai (the bank) for one year on November 24, 2023 , due to material concerns arising from poor governance standards observed within the bank . The period of supersession was extended for a period of one-year, effective November 24, 2024 and further extended for a period of one year, effective November 24, 2025 . 2. Upon a review, the Reserve Bank of India is satisfied that, in the public interest, it is necessary to further extend the period of supersession beyond the close of business of the bank as on November 23, 2026. 3. Accordingly, the Reserve Bank of India (RBI), in exercise of its powers under sub-Section (1) of Section 36AAA read with Section 56 of the Banking Regulation Act",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -140,9 +230,9 @@
       "published_ist": "2026-11-09 17:41 IST",
       "summary": "Indian government bond yields extended their rally on Monday, with the benchmark 10-year yield falling nearly 4 basis points as easing crude oil prices and hopes of a US-Iran peace deal improved sentiment. Investors are now watching US and Indian inflation data for cues on the outlook for interest rates.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -168,9 +258,9 @@
       "published_ist": "2026-11-09 16:46 IST",
       "summary": "The US stock market is currently experiencing a significant pullback in technology and AI-related stocks. Investors are concerned that Democratic victories in the midterm elections may result in reduced data center spending. Despite recent declines, the technology sector remains dominant within the S&P 500 index. Upcoming technology earnings reports and the potential IPO of AI lab Anthropic are closely watched by investors.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -196,9 +286,9 @@
       "published_ist": "2026-11-09 16:10 IST",
       "summary": "In exercise of the powers conferred under Section 45-IA (6) of the Reserve Bank of India Act, 1934, the Reserve Bank has cancelled the Certificate of Registration (CoR) issued to the following Non-Banking Financial Company (NBFC): Name of the NBFC Registered Office Address CoR No. Date of Cancellation Gandhinagar Leasing and Finance Ltd. 420, Times Square Arcade, Opposite Rambaug, Thaltej-Shilaj Road, Ahmedabad, Gujarat – 380059 01.00279 dated December 08, 1998 October 29, 2026 As such, the above company shall not, hereinafter, transact the business of a Non-Banking Financial Institution (NBFI), as defined in clause (a) of Section 45-I of the RBI Act, 1934. (Brij Raj) Chief General Manager Press Release: 2026-2027/1471",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -224,9 +314,9 @@
       "published_ist": "2026-11-09 16:07 IST",
       "summary": "LIC MD & CEO R Doraiswamy says the insurer’s stock valuation does not reflect its size and stature, citing the PSU discount, limited public float and uncertainty over government stake sales. He also discusses slower AUM growth, investment strategy and opportunities in equities and bonds amid market volatility.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -240,11 +330,22 @@
       "published_ist": "2026-11-09 15:54 IST",
       "summary": "The Indian rupee snapped its six-session winning streak on Monday, November 9, as dollar purchases by state-run banks outweighed positive momentum. The currency touched a six-month high of 93.69 per dollar before closing slightly lower at 93.9275. Lower crude oil prices and foreign equity inflows provided some support.",
       "first_seen_at": "2026-11-10T02:25:48.713840+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-10 02:25:48 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
-      "topic": "economy"
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-10 09:44:38 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "State-run banks stepping in with dollar bids to halt a six-session rupee winning streak indicates active intervention in the forex market to manage sharp appreciation. While a six-month high was touched due to soft crude prices and foreign equity inflows, structural factors like the central bank's heavy net short forward position suggest that authorities may prioritize building reserves over allowing currency strength. If global factors like stronger US non-farm payrolls continue to support the dollar, domestic currency upside will likely remain capped.",
+        "what_to_watch": [
+          "Subsequent RBI disclosures on forward book positions and overall forex reserves data",
+          "Official US retail inflation data releases and commentary on future Federal Reserve rate actions"
+        ],
+        "evergreen_lesson": "A currency's appreciation streak driven by short-term capital inflows does not establish a permanent trend if central bank balance sheet constraints and structural import demand motivate active market management."
+      }
     },
     {
       "id": "newsbltapxxxlm",
@@ -256,9 +357,9 @@
       "published_ist": "2026-11-09 14:45 IST",
       "summary": "The most important macro data point this week is the October inflation figures. The Consumer Price Inflation (CPI) figure will be reported on Tuesday, while the Producer Price Inflation (PPI) figures will be reported on Friday.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -284,9 +385,9 @@
       "published_ist": "2026-11-09 13:26 IST",
       "summary": "As many as 23.7 lakh small retail shareholders, or those with authorized share capital of up to ₹2 lakh, had a 20.39% stake in IREDA as of September 30.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -312,9 +413,9 @@
       "published_ist": "2026-11-09 13:03 IST",
       "summary": "Indian government bonds exhibited limited movement today as oil prices showed signs of stabilization. Investors are remaining cautious, especially with inflation data from both the United States and India on the horizon. Scheduled for later today is a bond auction totaling 290.5 billion rupees. Analysts predict yields on the 10-year bond could oscillate between 7.30% and 7.10%, with particular attention on India's October inflation report due for release this Thursday.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -342,9 +443,9 @@
       "published_ist": "2026-11-09 12:46 IST",
       "summary": "Taiwanese shares rallied, ending a seven-session decline as authorities curbed short selling and pledged stabilization measures to restore investor confidence.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -370,9 +471,9 @@
       "published_ist": "2026-11-09 12:30 IST",
       "summary": "CLSA's Laurence Balanco expects the Nifty to climb towards 26,300 and says a close above 25,500 could trigger a rare long-term buy signal. He also shares his outlook on banks, IT, Reliance, crude oil, gold and global markets. What could drive the next market rally?",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -386,9 +487,9 @@
       "published_ist": "2026-11-09 12:13 IST",
       "summary": "Nvidia CEO Jensen Huang faces scrutiny after the company launched an independent probe into allegations that he was targeted by a foreign intelligence operation. The controversy has raised concerns over leadership, corporate governance, China-related business and investor confidence.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -402,9 +503,9 @@
       "published_ist": "2026-11-09 11:43 IST",
       "summary": "Vikash Singh, VP at ICICI Securities sees improving prospects for steel companies, upgrading SAIL and Jindal Steel, while higher alumina costs could keep Vedanta range-bound.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -429,9 +530,9 @@
       "published_ist": "2026-11-09 11:25 IST",
       "summary": "Cryptocurrency cold wallets offer offline security, but recovery phrases and proper management are critical to prevent permanent loss of digital assets.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -456,9 +557,9 @@
       "published_ist": "2026-11-09 10:41 IST",
       "summary": "The banking sector is expected to be the primary engine for this rally, according to Balanco, who noted that the Nifty Bank recently broke out of a trading range that had been developing since February, opening up an upside potential of another 20% from current levels towards the 70,000 mark, he added.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -472,9 +573,9 @@
       "published_ist": "2026-11-09 10:15 IST",
       "summary": "Citi Research projects that India's benchmark Nifty 50 index could hit 28,000 points by the end of 2027. This forecast is based on strong earnings prospects and falling oil prices. Recent foreign portfolio investor activity has contributed significantly to the positive sentiment in the equity market. Additionally, lower oil prices could improve macroeconomic conditions and reduce inflation rates in India.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -499,11 +600,22 @@
       "published_ist": "2026-11-09 09:51 IST",
       "summary": "Citi has added Bajaj Finance to its list of top picks, citing growth visibility and a diversified product bouquet and healthy provisioning buffer which will support earnings resilience and superior return ratios.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
-      "topic": "capital_market"
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-10 09:44:38 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A brokerage raising its Nifty 50 target alongside peer upgrades reflects shifting sentiment based on anticipated corporate earnings compounding and relief from easing oil prices. While lower commodity costs and low foreign portfolio weightages in emerging markets can theoretically trigger index target upgrades, an equity broker's target does not establish actual execution or guaranteed corporate earnings delivery. If global risks such as volatile West Asian crude prices materialize, projected earnings upgrades may face headwinds.",
+        "what_to_watch": [
+          "Actual corporate earnings delivery matching the projected 15% to 16% CAGR through financial years 2026-2028",
+          "Actual Foreign Portfolio Investor (FPI) inflow numbers tracking MSCI EM benchmark adjustments"
+        ],
+        "evergreen_lesson": "Brokerage index targets and foreign inflow estimates represent forward-looking assumptions rather than executed market liquidity, and they remain vulnerable to sudden shifts in macro commodity prices."
+      }
     },
     {
       "id": "newsjeqwjzibky",
@@ -515,9 +627,9 @@
       "published_ist": "2026-11-09 09:22 IST",
       "summary": "The Indian rupee opened stronger against the US dollar at 93.81, supported by foreign investment inflows and lower crude oil prices.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -543,9 +655,9 @@
       "published_ist": "2026-11-09 09:22 IST",
       "summary": "Three Nifty50 stocks that gained over 3% on November 8 featured in StockEdge’s White Marubozu bullish scanner. The candlestick pattern indicates strong buying momentum, with prices closing near the session high.",
       "first_seen_at": "2026-11-04T15:07:47.457021+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-04 15:07:47 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -559,9 +671,9 @@
       "published_ist": "2026-11-09 09:13 IST",
       "summary": "Five Nifty200 stocks featured in StockEdge’s RSI Trending Up scan on November 8, with their Relative Strength Index (RSI) crossing above 50 from below, signalling strengthening price momentum.",
       "first_seen_at": "2026-11-05T12:39:26.056205+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-05 12:39:26 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -575,9 +687,9 @@
       "published_ist": "2026-11-09 08:46 IST",
       "summary": "Review mutual fund portfolios for Samvat 2083 by assessing asset allocation, earnings growth, fund performance, and tax implications before switching.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -603,9 +715,9 @@
       "published_ist": "2026-11-09 07:57 IST",
       "summary": "Shares of Jio Financial, M&M, Bajaj Finance, ICICI Bank, and L&T, saw their leveraged positions decline between ₹120 crore to as much as ₹170 crore during this seven-day stretch. All of these stocks gained between 6% to 15% in the week gone by.",
       "first_seen_at": "2026-11-09T15:32:32.496191+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 15:32:32 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -631,9 +743,9 @@
       "published_ist": "2026-11-09 07:09 IST",
       "summary": "Japan's Nikkei 225 gains 2% and Taiwan's TAIEX advances nearly 3%, tracking a rebound in US technology shares. However, South Korea's Kospi slips as an investigation into Nvidia CEO Jensen Huang adds to concerns over already fragile sentiment towards AI stocks.",
       "first_seen_at": "2026-11-09T07:19:34.798917+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 07:19:34 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -730,9 +842,9 @@
       "published_ist": "2026-11-09 06:23 IST",
       "summary": "The giant Wall Street investment bank says there are plenty of quality buying opportunities even as market uncertainty remains.",
       "first_seen_at": "2026-11-09T07:19:34.798917+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-09 07:19:34 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -746,9 +858,9 @@
       "published_ist": "2026-11-08 19:43 IST",
       "summary": "Sriram Krishnan, Chief Business Development Officer (CBDO) at the NSE, said the exchange is encouraging investors to shift from physical gold to regulated digital gold. So far, EGRs have been created entirely using domestic recycled gold. The larger goal is to reduce India's gold imports and eventually help the country emerge as a global price setter in the bullion market.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -762,9 +874,9 @@
       "published_ist": "2026-11-08 17:08 IST",
       "summary": "The transition gives the Mumbai-based company a wider capital-market platform as it looks to expand its outdoor advertising network, increase its digital billboard portfolio",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -789,9 +901,9 @@
       "published_ist": "2026-11-08 16:35 IST",
       "summary": "Saxo Bank's Ole Hansen sees Brent crude settling at $70-$90 even if West Asia tensions ease, while expecting gold to recover and copper to retain its long-term appeal.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -818,9 +930,9 @@
       "published_ist": "2026-11-08 16:02 IST",
       "summary": "Can India’s stock market sustain its growth momentum? BSE MD & CEO Sundararaman Ramamurthy is optimistic, citing strong GDP growth, regulatory support and a favourable policy environment as key drivers of investor confidence and market participation.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -845,9 +957,9 @@
       "published_ist": "2026-11-08 15:58 IST",
       "summary": "Indian Oil Corporation is trading below its book value and stands to benefit as nearly 15 million tons of capacity and a huge petrochemical complex come on stream, according to Dipan Mehta of Paisasmart.",
       "first_seen_at": "2026-11-08T22:14:58.823033+05:30",
-      "last_seen_at": "2026-11-10T02:25:48.713840+05:30",
+      "last_seen_at": "2026-11-10T09:44:38.959431+05:30",
       "first_seen_ist": "2026-11-08 22:14:58 IST",
-      "last_seen_ist": "2026-11-10 02:25:48 IST",
+      "last_seen_ist": "2026-11-10 09:44:38 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -9808,35 +9920,35 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-10T02:25:48.713840+05:30",
-  "last_scraped_ist": "2026-11-10 02:25:48 IST",
+  "last_scraped_at": "2026-11-10T09:44:38.959431+05:30",
+  "last_scraped_ist": "2026-11-10 09:44:38 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
-      "fresh_items": 70,
+      "fresh_items": 72,
       "accepted_items": 21,
-      "filtered_items": 49,
+      "filtered_items": 51,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 10,
-      "filtered_items": 40,
+      "accepted_items": 13,
+      "filtered_items": 37,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
-      "fresh_items": 13,
+      "fresh_items": 14,
       "accepted_items": 1,
-      "filtered_items": 12,
+      "filtered_items": 13,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
       "fresh_items": 9,
       "accepted_items": 2,
@@ -9844,7 +9956,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9852,7 +9964,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-10 02:25:48 IST",
+      "checked_ist": "2026-11-10 09:44:38 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -9884,16 +9996,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-10 02:25:48 IST"
+    "last_curated_ist": "2026-11-10 09:44:38 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-10 02:25:48 IST",
-    "fetched_items": 142,
-    "accepted_feed_items": 34,
+    "updated_ist": "2026-11-10 09:44:38 IST",
+    "fetched_items": 145,
+    "accepted_feed_items": 37,
     "filtered_feed_items": 108,
-    "new_unique_stories": 10,
+    "new_unique_stories": 4,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 406
+    "stories_total": 410
   }
 }
