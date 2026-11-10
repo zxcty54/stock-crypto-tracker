@@ -833,14 +833,16 @@
       "scheduled_ist": "2026-11-03 08:00",
       "title": "RBI's forward dollar position hits record $239.2 billion as rupee defence costs ",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI's forward dollar position hits record $239.2 billion as rupee defence costs climb</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndia's currency defence has become increasingly expensive for the Reserve Bank of India. As of September end, the central bank's net short dollar position in the forward market reached a record $239.2 billion, more than doubling since June. At the same time, forex reserves fell to $719.75 billion by October 23, marking the seventh consecutive weekly decline.\n\n🧭 <b>MARKET CONTEXT</b>\nA net short forward position means the central bank has committed to deliver US dollars in the future at pre-agreed rates. Much of this buildup stems from a special dollar-rupee swap window launched in June, which mobilized nearly $144 billion—largely through foreign currency non-resident deposits—while creating heavy future delivery obligations.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhile swap windows and spot purchases help absorb capital inflows and manage volatility, they also lock the central bank into massive future dollar liabilities. If global dollar demand remains elevated or domestic capital outflows accelerate, managing these forward delivery commitments could constrain the RBI's liquidity management and increase hedging costs for domestic importers.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming weekly movements in India's headline forex reserves, changes in the forward book size in subsequent RBI data releases, and shifts in global crude oil and US treasury yields.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do heavy central bank interventions in the forward market impact domestic banking liquidity and credit availability for corporations?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/economy/rbi-forward-short-dollar-position-hits-record-239-billion-alpha-article-20024726.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:7196410bf648",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/economy/rbi-forward-short-dollar-position-hits-record-239-billion-alpha-article-20024726.htm",
       "source_headline": "RBI's forward dollar position hits record $239.2 billion as rupee stays under pressure",
       "story_key": "7196410bf648550ef9275afcd9430a876aa987fbf67b05249636e9c354c5ee5d",
-      "generated_at": "2026-11-03 01:57:42 IST"
+      "generated_at": "2026-11-03 01:57:42 IST",
+      "posted_at": "2026-11-10 18:23:12 IST",
+      "telegraph_url": "https://telegra.ph/RBIs-forward-dollar-position-hits-record-2392-billion-as-rupee-defence-costs--November-2026-11-10"
     },
     {
       "id": "newssbzxmrdzli",
@@ -1211,8 +1213,24 @@
       "used": false,
       "topic_key": "moving_average_ka_sahi_use",
       "generated_at": "2026-11-09 15:59:09 IST"
+    },
+    {
+      "id": "newsjlwumrlzjf",
+      "slot": "F",
+      "hourly_slot_ist": "2026-11-10 18:00",
+      "scheduled_ist": "2026-11-10 18:00",
+      "title": "IIFL Finance lines up ₹6,414 cr fundraise with Blackstone stake buy",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>IIFL Finance lines up ₹6,414 cr fundraise with Blackstone stake buy</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIIFL Finance's board approved a preferential issue worth ₹6,414.2 crore via compulsorily convertible preference shares and warrants priced at ₹602 apiece. A Blackstone affiliate, Ingot SG Pte Ltd, will invest around ₹5,000 crore to acquire a 15.57% fully diluted stake. Anchorage Capital funds will add ₹150 crore, while promoters led by Nirmal Bhanwarlal Jain and Venkataraman Rajamani are participating through warrants worth ₹1,264.2 crore. An extraordinary general meeting is set for December 4, 2026.\n\n🧭 <b>MARKET CONTEXT</b>\nA preferential issue at a fixed conversion price expands equity capital without an immediate open-market public offering. CCPS and warrants give institutional investors fixed income qualities upfront alongside future equity conversion rights, altering long-term capital structures.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nLarge private equity injections into non-banking financial companies typically signal strong institutional backing for balance sheet expansion, provided credit growth matches funding costs. If shareholder approval passes, special governance rights—such as board nominations for investments crossing specific thresholds—may alter operational oversight in subsidiaries like IIFL Home Finance and IIFL Samasta Finance.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch out for the EGM voting outcome on December 4, 2026, subsequent capital infusion timelines, and execution metrics in lending books.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya promoters aur large institutional investors ka ye joint capital commitment aapke liye NBFC sector mein long-term confidence ka sign hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/iifl-finance-rs-6414-crore-fundraise-ccps-warrants-blackstone-affiliate-15-57-pc-stake-20030948.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:1b25d9933364",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/iifl-finance-rs-6414-crore-fundraise-ccps-warrants-blackstone-affiliate-15-57-pc-stake-20030948.htm",
+      "source_headline": "IIFL Finance approves ₹6,414 crore fundraise; Blackstone affiliate to acquire 15.57% stake",
+      "story_key": "1b25d99333643e0595c1e333a0c645e13b4767aff8c688253e4afb37752efb30",
+      "generated_at": "2026-11-10 18:21:55 IST"
     }
   ],
-  "total": 84,
-  "last_scheduled": "2026-11-10 10:00"
+  "total": 85,
+  "last_scheduled": "2026-11-10 18:00"
 }
