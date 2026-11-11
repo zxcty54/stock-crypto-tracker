@@ -1229,8 +1229,24 @@
       "source_headline": "IIFL Finance approves ₹6,414 crore fundraise; Blackstone affiliate to acquire 15.57% stake",
       "story_key": "1b25d99333643e0595c1e333a0c645e13b4767aff8c688253e4afb37752efb30",
       "generated_at": "2026-11-10 18:21:55 IST"
+    },
+    {
+      "id": "newstbflwrhner",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-11 08:00",
+      "scheduled_ist": "2026-11-11 08:00",
+      "title": "US Fed Rate Hike Bets Jump on Sticky October Inflation",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>US Fed Rate Hike Bets Jump on Sticky October Inflation</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nUS Consumer Price Index data showed headline inflation rising 0.4% in October, while core inflation increased 0.3% for the third consecutive month. Following the data and hawkish remarks from Fed officials including Governor Christopher Waller and Dallas Fed President Lorie Logan, markets adjusted rate expectations, pricing in higher probabilities of a December rate increase and potential half-percentage-point moves.\n\n🧭 <b>MARKET CONTEXT</b>\nTwo-year US Treasury yields, which act as a sensitive proxy for near-term Federal Reserve policy expectations, surged significantly following the inflation report, reflecting sudden shifts in trader positioning.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA shift toward tighter US monetary policy typically strengthens the US dollar and elevates global bond yields, which can influence foreign institutional capital flows toward emerging markets like India. If global borrowing costs remain higher for longer, domestic liquidity conditions and foreign portfolio allocations to local risk assets could face pressure conditionally.\n\n🔎 <b>KEY WATCHPOINTS</b>\nUpcoming US macroeconomic releases, statements from Federal Reserve rate-setting members ahead of the December meeting, and trajectory metrics of US Treasury yields and the dollar index.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya global interest rate expectations ka yeh badlaav Indian markets ke capital flows aur currency stability ko near term mein prabhavit karega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/economy/us-federal-reserve-officials-open-door-to-a-quicker-round-of-rate-hikes-as-inflation-worsens-20031086.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:af46426a338f",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/economy/us-federal-reserve-officials-open-door-to-a-quicker-round-of-rate-hikes-as-inflation-worsens-20031086.htm",
+      "source_headline": "US Federal Reserve officials open door to a quicker round of rate hikes as inflation worsens",
+      "story_key": "af46426a338fa765b2f8b7e86b6da0a0f2d1ecd7479b0dd0027f95544c45ce29",
+      "generated_at": "2026-11-11 07:33:48 IST"
     }
   ],
-  "total": 85,
-  "last_scheduled": "2026-11-10 18:00"
+  "total": 86,
+  "last_scheduled": "2026-11-11 08:00"
 }
