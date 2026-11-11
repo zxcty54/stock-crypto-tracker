@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-11-11 21:08:07 IST",
+  "generated_at": "2026-11-12 03:48:55 IST",
   "worthy_count": 28,
   "skipped_count": 21,
   "content_feed": [
+    {
+      "hash": "c4b305f541d0",
+      "symbol": "MRF",
+      "company_name": "MRF Limited",
+      "category": "RESULT",
+      "event_type": "DIVIDEND",
+      "broadcast_date": "10-Nov-2026 12:24:20",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf",
+      "headline": "MRF Declares Interim Dividend of Rs. 3 Per Share",
+      "content_worthy": true,
+      "worthiness_reason": "Board declared an interim dividend with a specified record date.",
+      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>MRF Limited (NSE: MRF)</b>\n\n<b>MRF Declares Interim Dividend of Rs. 3 Per Share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend per Share:</b> Rs. 3 (30% on face value of Rs. 10)\n- <b>Dividend Type:</b> Interim Dividend\n- <b>Record Date:</b> Tuesday, November 17, 2026\n- <b>Payment Date:</b> On or after December 1, 2026\n\n📌 <b>What happened:</b>\n↳ The Board of Directors declared an interim dividend for the financial year ending March 31, 2027, during their meeting held on November 10, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-12 03:48:55 IST"
+    },
+    {
+      "hash": "947b9a01feb3",
+      "symbol": "VHL",
+      "company_name": "Vardhman Holdings Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "10-Nov-2026 13:02:37",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf",
+      "headline": "Vardhman Holdings Reports September Quarter Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results containing explicit quarterly Revenue and PAT figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Vardhman Holdings Limited (NSE: VHL)</b>\n\n<b>Vardhman Holdings Reports September Quarter Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue from Operations (Q2 FY27):</b> Rs. 64.43 Crores\n- <b>Net Profit After Tax (Q2 FY27):</b> Rs. 49.99 Crores\n- <b>Total Income (Q2 FY27):</b> Rs. 64.97 Crores\n- <b>Profit Before Tax (Q2 FY27):</b> Rs. 62.33 Crores\n\n📌 <b>What happened:</b>\n↳ The company's Board of Directors approved the un-audited financial results for the quarter ended September 30, 2026, during their meeting held on November 10, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-12 03:48:55 IST"
+    },
     {
       "hash": "6a978e75f292",
       "symbol": "RMDRIP",
@@ -366,34 +394,6 @@
       "worthiness_reason": "Material expansion into international market via new joint venture incorporation.",
       "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Alkem Laboratories (NSE: ALKEM)</b>\n\n<b>Alkem Laboratories incorporates JV in Saudi Arabia</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>JV Name:</b> Alkem Pharma Company\n- <b>Stake:</b> 51% equity holding\n- <b>Investment:</b> 3,825,000 SAR\n- <b>Industry:</b> Pharmaceuticals and Nutraceuticals\n\n📌 <b>What happened:</b>\n↳ Alkem Laboratories has successfully incorporated a new subsidiary in the Kingdom of Saudi Arabia as a joint venture to expand its business and market reach in the region.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ALKEM_08112026184401_Draft_Reg_30_Incorporation_of_JV_signed.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-11 06:11:42 IST"
-    },
-    {
-      "hash": "c4b305f541d0",
-      "symbol": "MRF",
-      "company_name": "MRF Limited",
-      "category": "RESULT",
-      "event_type": "DIVIDEND",
-      "broadcast_date": "10-Nov-2026 12:24:20",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf",
-      "headline": "MRF Limited declares interim dividend of Rs. 3 per share",
-      "content_worthy": true,
-      "worthiness_reason": "MRF Limited declared an interim dividend along with financial results update.",
-      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>MRF Limited (NSE: MRF)</b>\n\n<b>MRF Limited declares interim dividend of Rs. 3 per share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend per Share:</b> Rs. 3.00 (30% on face value of Rs. 10)\n- <b>Record Date:</b> November 17, 2026\n- <b>Payment Date:</b> On or after December 1, 2026\n- <b>Financial Year:</b> Ending March 31, 2027\n\n📌 <b>What happened:</b>\n↳ The Board of Directors of MRF Limited has declared an interim dividend of Rs. 3 per equity share for the financial year ending March 31, 2027, setting November 17, 2026, as the record date.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-11 01:18:32 IST"
-    },
-    {
-      "hash": "947b9a01feb3",
-      "symbol": "VHL",
-      "company_name": "Vardhman Holdings Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "10-Nov-2026 13:02:37",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf",
-      "headline": "Vardhman Holdings reports Q2 FY27 standalone financial results",
-      "content_worthy": true,
-      "worthiness_reason": "Company submitted financial results for the period ended September 30, 2026, containing revenue and PAT figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Vardhman Holdings Limited (NSE: VHL)</b>\n\n<b>Vardhman Holdings reports Q2 FY27 standalone financial results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue from Operations (Q2 FY27):</b> Rs. 64.43 Crores\n- <b>Total Income (Q2 FY27):</b> Rs. 64.97 Crores\n- <b>Profit After Tax / Net Profit (Q2 FY27):</b> Rs. 49.99 Crores\n- <b>Total Revenue from Operations (H1 FY27):</b> Rs. 75.26 Crores\n\n📌 <b>What happened:</b>\n↳ Vardhman Holdings Limited has announced its financial results for the quarter and half year ended September 30, 2026, registering a net profit of Rs. 49.99 Crores for the quarter.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-11 01:18:32 IST"
     }
   ],
   "skipped_archive": [
