@@ -366,9 +366,16 @@
       "at": "2026-11-10 18:23:12 IST",
       "title": "RBI's forward dollar position hits record $239.2 billion as rupee defence costs ",
       "content_hash": "4a144cc4d38a99da7fc78cc49a59e67c6cbce5a6ed26ca381a7434d2d1334234"
+    },
+    "newssbzxmrdzli": {
+      "url": "https://telegra.ph/Banks-raise-deposit-rates-as-systemic-liquidity-drops-and-credit-demand-picks-up--November-2026-11-11",
+      "kind": "evergreen",
+      "at": "2026-11-11 15:14:04 IST",
+      "title": "Banks raise deposit rates as systemic liquidity drops and credit demand picks up",
+      "content_hash": "caf9df046a58c9c1636d370a965aea1258b1a6faed35cdc78abbc10fa9466e48"
     }
   },
   "access_token": "eb4cfde6abe4d353c136ee336440b0e531c1708b992d0270d31676011e14",
   "account_created": "2026-10-07 14:30:15 IST",
-  "last_run": "2026-11-10 18:23:12 IST"
+  "last_run": "2026-11-11 15:14:04 IST"
 }

@@ -851,14 +851,16 @@
       "scheduled_ist": "2026-11-03 08:00",
       "title": "Banks raise deposit rates as systemic liquidity drops and credit demand picks up",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Banks raise deposit rates as systemic liquidity drops and credit demand picks up</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nDomestic banks are raising deposit rates as liquidity tightens and credit demand surges. Bank of India increased deposit rates by 10 to 35 basis points for maturities between one and below three years, offering 6.60% to 6.85% on select tenures, following Indian Bank's recent rate hikes on special term deposits.\n\n🧭 <b>MARKET CONTEXT</b>\nBanking system liquidity has dropped sharply from over ₹11 lakh crore in early September to about ₹1.96 lakh crore, driven by bond sales and variable reverse repo auctions, while certificate of deposit rates crossed 8% for the first time since early 2023.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhen liquidity dries up and credit offtake rises during the busy season, banks compete harder for retail funds to protect their liability profiles. If deposit growth lags credit growth, lenders face higher funding costs, which can eventually pressure net interest margins unless lending rates are adjusted upward.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming credit-to-deposit ratios, fortnightly RBI liquidity data, and certificate of deposit issuance yields to gauge further funding stress.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in systemic liquidity directly impact your assessment of bank margins in the coming quarters?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/a-month-after-rbis-rate-hike-banks-start-raising-deposit-rates-as-liquidity-shrinks-bank-of-india-the-latest-to-move/articleshow/135478028.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:f94e3a459c05",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/a-month-after-rbis-rate-hike-banks-start-raising-deposit-rates-as-liquidity-shrinks-bank-of-india-the-latest-to-move/articleshow/135478028.cms",
       "source_headline": "A month after RBI’s rate hike, banks start raising deposit rates as liquidity shrinks, Bank of India the latest to move",
       "story_key": "f94e3a459c0500aed492b6a249d74ad281520d3a3754f12faabfb58e096cdd5c",
-      "generated_at": "2026-11-03 08:03:30 IST"
+      "generated_at": "2026-11-03 08:03:30 IST",
+      "posted_at": "2026-11-11 15:14:04 IST",
+      "telegraph_url": "https://telegra.ph/Banks-raise-deposit-rates-as-systemic-liquidity-drops-and-credit-demand-picks-up--November-2026-11-11"
     },
     {
       "id": "ai0034",
@@ -1245,8 +1247,24 @@
       "source_headline": "US Federal Reserve officials open door to a quicker round of rate hikes as inflation worsens",
       "story_key": "af46426a338fa765b2f8b7e86b6da0a0f2d1ecd7479b0dd0027f95544c45ce29",
       "generated_at": "2026-11-11 07:33:48 IST"
+    },
+    {
+      "id": "newswwantiyprs",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-11 14:00",
+      "scheduled_ist": "2026-11-11 14:00",
+      "title": "Patna Municipal Corp lists ₹200-crore bond on NSE: Why urban local body debt mat",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Patna Municipal Corp lists ₹200-crore bond on NSE: Why urban local body debt matters</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nBihar has entered the municipal bond market for the first time, with the Patna Municipal Corporation successfully raising ₹200 crore through bonds listed on the National Stock Exchange. The state government has emphasized deploying these proceeds into revenue-generating urban infrastructure projects to manage debt repayment and expand local resource pools.\n\n🧭 <b>MARKET CONTEXT</b>\nMunicipal bonds let urban local bodies directly access public debt markets instead of relying solely on state-level fiscal transfers or bank loans. Structured issuances typically require stringent credit ratings and transparent financial disclosures from city corporations.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf successful, regular municipal bond issuances could deepen India's domestic debt market by adding sub-sovereign paper. For infrastructure, engineering, and construction sectors, alternative civic funding mechanisms could unlock predictable project pipelines if urban bodies successfully establish credible revenue streams. However, repayment viability entirely depends on project execution and cash-flow generation.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack whether other municipal bodies in Bihar follow suit, the actual deployment of the ₹200 crore into revenue-generating assets, and upcoming greenfield or brownfield Public-Private Partnership models announced for the state.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya local body bonds ban sakte hain aage chal kar retail fixed-income portfolios ka ek naya asset class, ya yeh abhi sirf bade institutional investors tak hi seemit rahenge?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/india/bihar-first-municipal-bond-listed-on-nse-patna-civic-body-raises-rs-200-crore-20031199.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:09263cc035ff",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/india/bihar-first-municipal-bond-listed-on-nse-patna-civic-body-raises-rs-200-crore-20031199.htm",
+      "source_headline": "Bihar's first municipal bond listed on NSE; Patna civic body raises ₹200 crore",
+      "story_key": "09263cc035ff1aae34eb7558aba1d381660a01f408df799d326a811c2ff3a48b",
+      "generated_at": "2026-11-11 15:12:25 IST"
     }
   ],
-  "total": 86,
-  "last_scheduled": "2026-11-11 08:00"
+  "total": 87,
+  "last_scheduled": "2026-11-11 14:00"
 }
