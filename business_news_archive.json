@@ -1,6 +1,259 @@
 {
   "stories": [
     {
+      "id": "newsjhstqsdrfu",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "SEBI asks financial firms to update KYC systems under new tax reporting rules",
+      "url": "https://www.cnbctv18.com/market/sebi-fatca-crs-reporting-rules-kyc-system-changes-20031944.htm",
+      "published_at": "2026-11-11T22:59:52+05:30",
+      "published_ist": "2026-11-11 22:59 IST",
+      "summary": "Market intermediaries will have to strengthen customer due diligence, revise account classification systems and upgrade their reporting software to meet the updated requirements. SEBI has also made intermediaries solely responsible for obtaining and reporting client certifications and ensuring compliance with the revised framework.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsapgcecapsc",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "India to switch bonds worth 250 billion rupees next week",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/india-to-switch-bonds-worth-250-billion-rupees-next-week/articleshow/135740426.cms",
+      "published_at": "2026-11-11T19:43:38+05:30",
+      "published_ist": "2026-11-11 19:43 IST",
+      "summary": "On November 16, the Reserve Bank of India will initiate a significant switch auction worth 250 billion rupees. This maneuver involves replacing six bonds that are set to mature between 2027 and 2029 with longer-term securities extending to maturity in 2062. By doing so, the government seeks to optimize its debt repayment schedule. This follows a similar strategy of bond buyback and issuance enacted in October.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newservcfrddep",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Dollar firms as hot inflation, hawkish Fed talk lift rate-hike bets",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/dollar-firms-as-hot-inflation-hawkish-fed-talk-lift-rate-hike-bets/articleshow/135739033.cms",
+      "published_at": "2026-11-11T18:47:36+05:30",
+      "published_ist": "2026-11-11 18:47 IST",
+      "summary": "The US dollar has gained against multiple currencies due to expectations of Federal Reserve interest rate hikes. Inflation data revealed an increase in consumer prices, prompting trader speculation about further monetary tightening. The Japanese yen has weakened to its lowest level in over two months, approaching significant mark. Many developed-market currencies are performing poorly against the dollar this year, attributed to widening interest-rate gaps.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The US dollar has strengthened against multiple developed-market currencies due to higher-than-expected consumer inflation data and hawkish Federal Reserve commentary, which have boosted trader bets on monetary tightening. This dynamic implies that widening interest-rate differentials between the US and other economies continue to drive capital towards dollar-denominated assets. However, market pricing of future rate hikes based on incoming data is speculative and subject to shifting macroeconomic prints rather than guaranteed central bank actions. If upcoming economic data softens, these aggressive rate-hike expectations could unwind rapidly, altering currency valuations.",
+        "what_to_watch": [
+          "CME FedWatch Tool probability updates for upcoming policy meetings",
+          "Subsequent US macroeconomic indicators, including upcoming inflation and employment releases"
+        ],
+        "evergreen_lesson": "Currency strength driven by rate-hike expectations remains highly reactive to incoming inflation prints and central bank signalling, making trend reversals swift when data surprises."
+      }
+    },
+    {
+      "id": "newsjkmatekdli",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Sandur Manganese gets environmental clearance to raise iron ore production capacity to 9.42 MTPA",
+      "url": "https://www.cnbctv18.com/market/stocks/sandur-manganese-share-price-gets-environmental-clearance-to-raise-iron-ore-production-capacity-to-9-42-mtpa-20031792.htm",
+      "published_at": "2026-11-11T18:44:59+05:30",
+      "published_ist": "2026-11-11 18:44 IST",
+      "summary": "Sandur Manganese & Iron Ores has received environmental clearance to increase its iron ore production capacity from 7.85 MTPA to 9.42 MTPA and reduce manganese ore capacity from 1.34 MTPA to 0.733 MTPA. The approval also permits the reconfiguration of its beneficiation plant into two units of 3.5 MTPA each, while the existing 1.2-km downhill conveyor system remains unchanged.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsiktvpkqwqi",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "Conversion/Switch of Government of India Securities",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63958",
+      "published_at": "2026-11-11T18:10:00+05:30",
+      "published_ist": "2026-11-11 18:10 IST",
+      "summary": "Government of India announces the conversion/switch of its securities through auction for an aggregate amount of ₹25,000 crore (face value). The security-wise details of the conversion/switch are given as under: Date of Auction Source Securities Amount (FV) of Source Securities (in ₹ crore) Destination Securities November 16, 2026 (Monday) 7.38% GS 2027 (Maturing on Jun 20, 2027) 5,000 7.18% GS 2037 (Maturing on Jul 24, 2037) 8.26% GS 2027 (Maturing on Aug 02, 2027) 2,000 7.40% GS 2062 (Maturing on Sep 19, 2062) 7.37% GS 2028 (Maturing on Oct 23, 2028) 4,000 6.83% GS 2039 (Maturing on Jan 19, 2039) 7.26% GS 2029 (Maturing on Jan 14, 2029) 4,000 7.73% GS 2034 (Maturing on Dec 19, 2034) 7.10% GS 2029 (Maturing on Apr 18, 2029) 5,000 6.64% GS 2035 (Maturing on Jun 16, 2035) 7.04% GS 2029 (Maturing on Jun 03, 2029) 5,000 7.41% GS 2036 (Maturing on Dec 19, 2036) Total 25,000 The market partic",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The Reserve Bank of India has detailed a conversion auction allowing market participants to swap specific short-to-medium term government securities for longer-dated paper via the e-Kuber platform. This mechanism enables institutional holders to restructure their gilt portfolios while allowing the issuer to defer principal repayment obligations. Yet, the issuance of destination securities up to 2062 implies that banks and insurers must be willing to absorb long-duration interest rate risk. If market participants demand higher yield compensation for holding ultra-long bonds, the cost-benefit of the switch for the sovereign could be constrained.",
+        "what_to_watch": [
+          "Subscription details and bid-to-cover ratios published in the RBI auction outcome report",
+          "Execution prices and yield spread between the source securities and destination securities on the settlement date"
+        ],
+        "evergreen_lesson": "Government bond conversion auctions facilitate passive debt refinancing, but their ultimate efficiency depends on how primary dealers and institutional investors price long-term duration risk."
+      }
+    },
+    {
+      "id": "newsapkewqofxz",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "US Treasury rout hands India's 10-year bond its worst day in a month",
+      "url": "https://economictimes.indiatimes.com/markets/bonds/us-treasury-rout-hands-indias-10-year-bond-its-worst-day-in-a-month/articleshow/135736836.cms",
+      "published_at": "2026-11-11T17:36:33+05:30",
+      "published_ist": "2026-11-11 17:36 IST",
+      "summary": "On Wednesday, the Indian rupee gained strength against the dollar, reaching its highest point since April. This improvement was influenced by foreign investments in local stocks and upbeat sentiment in the non-deliverable forward market. Although inflation concerns in the US led to a stronger dollar, traders remained focused on foreign portfolio investments in Indian equities.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "The Indian rupee strengthened against the dollar despite broader US currency gains, driven primarily by strong foreign portfolio inflows into local equities. This divergence implies that heavy foreign institutional investments can temporarily insulate domestic currency valuations from adverse global macroeconomic headwinds like rising US yields. However, reliance on portfolio flows means that the currency remains vulnerable to sudden shifts in foreign investor sentiment or global risk appetite. If equity inflows moderate, domestic currency strength could face renewed depreciation pressures.",
+        "what_to_watch": [
+          "Net Foreign Portfolio Investor (FPI) equity flow data reported by depositories",
+          "Upcoming official domestic consumer inflation data releases for October"
+        ],
+        "evergreen_lesson": "A local currency can decouple from global dollar strength during periods of heavy foreign equity inflows, but this resilience is contingent on sustained capital participation rather than structural trade dynamics."
+      }
+    },
+    {
+      "id": "newsvvyuykdmst",
+      "source": "RBI Notifications",
+      "source_priority": 3,
+      "headline": "Reserve Bank of India (Domestic Money Transfer) Directions, 2026",
+      "url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13752&Mode=0",
+      "published_at": "2026-11-11T17:00:00+05:30",
+      "published_ist": "2026-11-11 17:00 IST",
+      "summary": "RBI/DPSS/2026-27/476 CO.DPSS.POLC.No.S843/02-27-019/2026-2027 November 11, 2026 All Scheduled Commercial Banks, including Regional Rural Banks / Urban Co-operative Banks / State Co-operative Banks / District Central Co-operative Banks / Authorised Payment System Operators and Participants (Banks and Non-banks) Madam / Dear Sir, Reserve Bank of India (Domestic Money Transfer) Directions, 2026 With a view to harmonising and consolidating the extant instructions relating to Domestic Money Transfer (DMT), it has been decided to issue the Reserve Bank of India (Domestic Money Transfer) Directions, 2026 . 2. These Directions are issued under Section 18 read with Section 10(2) of the Payment and Settlement Systems Act, 2007. Yours faithfully, (Sara Rajendra Kumar Neti) Chief General Manager-in-Charge Encl.: As above Reserve Bank of India (Domestic Money Transfer) Directions, 2026 Table of Conte",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regulatory issuances like the Reserve Bank of India (Domestic Money Transfer) Directions, 2026 aim to consolidate compliance frameworks across scheduled commercial banks and payment operators. Such directives establish uniform operational boundaries, including transaction limits and record-keeping rules for cash pay-outs. If compliance overheads rise, smaller non-bank operators might face margin pressures or necessitate network adjustments.",
+        "what_to_watch": [
+          "Official circular updates or clarifications issued by the RBI regarding agent network compliance.",
+          "Quarterly disclosures from banks and payment operators regarding the cost impact of implementing revised DMT guidelines."
+        ],
+        "evergreen_lesson": "Regulatory consolidation typically raises baseline compliance costs across payment systems, testing the unit economics of smaller non-bank operators."
+      }
+    },
+    {
+      "id": "newsbmmaldikvs",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Indices hold gains at noon; M&M, IndiGo top Nifty charts as IT stocks drag",
+      "url": "https://www.thehindubusinessline.com/markets/indices-hold-gains-at-noon-mm-indigo-top-nifty-charts-as-it-stocks-drag/article71688800.ece",
+      "published_at": "2026-11-11T16:33:26+05:30",
+      "published_ist": "2026-11-11 16:33 IST",
+      "summary": "Sensex was trading at 81,961.89, up 855.24 points or 1.05%, and the Nifty 50 was at 25,270.25, up 225.60 points or 0.90%, as of 1.11 PM",
+      "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Intra-day rallies driven by broad market participation and selective sectoral strength highlight shifting liquidity dynamics across domestic asset classes. While auto and financial counters register gains, external pressures like elevated US inflation data can weigh on export-oriented sectors such as IT. If global macro volatility persists, sectoral rotation could accelerate faster than broader index movements suggest.",
+        "what_to_watch": [
+          "Official US inflation and Federal Reserve rate trajectory announcements.",
+          "Domestic advance-decline ratios and institutional flow data in subsequent trading sessions."
+        ],
+        "evergreen_lesson": "Broad market advances can mask sharp divergence between rate-sensitive domestic sectors and global macro-driven tech counters."
+      }
+    },
+    {
+      "id": "newstvhdesgklx",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "These 12 midcap stocks rally up to 30% in just one month",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/these-12-midcap-stocks-rally-up-to-30-in-just-one-month/slideshow/135734690.cms",
+      "published_at": "2026-11-11T16:10:03+05:30",
+      "published_ist": "2026-11-11 16:10 IST",
+      "summary": "While the Nifty 50 has rallied nearly 11% in a month, several midcap stocks have outperformed the broader index. Here are 12 midcap stocks that have surged between 15% and 30% during this period, according to ACE Equity data.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newscbaludmuyt",
+      "source": "Economic Times",
+      "source_priority": 3,
+      "headline": "Rupee touches strongest since April as foreign inflows offset firm dollar",
+      "url": "https://economictimes.indiatimes.com/markets/forex/forex-news/rupee-touches-strongest-since-april-as-foreign-inflows-offset-firm-dollar/articleshow/135734005.cms",
+      "published_at": "2026-11-11T16:07:51+05:30",
+      "published_ist": "2026-11-11 16:07 IST",
+      "summary": "On Wednesday, the Indian rupee surged to its healthiest value since April, closing at 93.69 against the dollar. This upswing was driven by a remarkable influx of foreign investments in local stocks, totaling nearly $6 billion in November. Even in light of a stronger dollar amid US inflation signals, the rupee stood firm. There's a notable optimistic shift in market sentiment, now eager for India's inflation data anticipated for October.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A strengthening currency in the face of a firm dollar demonstrates that capital account flows can occasionally override traditional trade-weighted currency pressures. Foreign portfolio inflows into local equities provide immediate demand for the local unit, buffering it against external hawkish monetary signals. If portfolio flows reverse abruptly, the currency could retrace its gains rapidly.",
+        "what_to_watch": [
+          "Net monthly Foreign Portfolio Investor (FPI) equity flow data.",
+          "Upcoming domestic consumer inflation prints and their subsequent impact on domestic bond yields."
+        ],
+        "evergreen_lesson": "Short-term currency resilience driven by foreign equity inflows can decouple temporarily from broader global dollar strength."
+      }
+    },
+    {
+      "id": "newsnhhudgprja",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Sensex soars to 9-month high, Nifty crosses 25,200: 5 factors fueling Dalal Street rally",
+      "url": "https://www.cnbctv18.com/market/sensex-soars-to-9-month-high-nifty-crosses-25200-5-factors-fueling-dalal-street-rally-20031573.htm",
+      "published_at": "2026-11-11T15:54:35+05:30",
+      "published_ist": "2026-11-11 15:54 IST",
+      "summary": "The Sensex gained 773 points to 81,879 and the Nifty rose 210 points to 25,255 on Wednesday, closing at fresh nine-month highs. Financial stocks, broad-based buying and gains in capital market and select corporate stocks supported the rally.",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market rallies underpinned by strong advance-decline ratios and sectoral leadership indicate healthy participation rather than narrow index-heavy concentration. Corporate earnings announcements and specific policy approvals often trigger localized re-ratings in individual stocks. If subsequent quarterly execution misses expectations, these stock-specific surges could experience sharp mean reversion.",
+        "what_to_watch": [
+          "Upcoming monthly business numbers and operational disclosures from insurance and aviation segments.",
+          "Subsequent institutional shareholding pattern updates."
+        ],
+        "evergreen_lesson": "Widespread market breadth validates index rallies, but individual stock sustainability depends on verifiable execution rather than announcement-led optimism."
+      }
+    },
+    {
       "id": "newsdkyceqddmu",
       "source": "The Hindu BusinessLine",
       "source_priority": 2,
@@ -10,9 +263,9 @@
       "published_ist": "2026-11-11 14:19 IST",
       "summary": "The partnership positions TCS as a technology enabler for Latin America’s largest street running event, which recently earned its first World Athletics Elite Label",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -55,33 +308,6 @@
       }
     },
     {
-      "id": "newsbmmaldikvs",
-      "source": "The Hindu BusinessLine",
-      "source_priority": 2,
-      "headline": "Indices hold gains at noon; M&M, IndiGo top Nifty charts as IT stocks drag",
-      "url": "https://www.thehindubusinessline.com/markets/indices-hold-gains-at-noon-mm-indigo-top-nifty-charts-as-it-stocks-drag/article71688800.ece",
-      "published_at": "2026-11-11T13:37:24+05:30",
-      "published_ist": "2026-11-11 13:37 IST",
-      "summary": "Sensex was trading at 81,961.89, up 855.24 points or 1.05%, and the Nifty 50 was at 25,270.25, up 225.60 points or 0.90%, as of 1.11 PM",
-      "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
-      "status": "new",
-      "topic": "capital_market",
-      "ai_insight": {
-        "version": 1,
-        "generated_at_ist": "2026-11-11 15:12:25 IST",
-        "context_source": "publisher article page",
-        "why_it_matters": "Market indices holding gains alongside high advance-decline ratios suggest healthy domestic retail and institutional participation across diverse capital segments. Lower crude oil prices could ease input cost pressures for manufacturing and consumer-facing sectors, potentially supporting margin profiles. Yet, short-term index rallies influenced by overbought technical indicators and fluctuating commodity benchmarks do not insulate domestic equities from global monetary policy shifts.",
-        "what_to_watch": [
-          "Official monthly macroeconomic data releases covering trade deficit and import bill figures",
-          "Changes in daily traded volumes and delivery percentages across top-performing sectoral indices"
-        ],
-        "evergreen_lesson": "Macro tailwinds like softer commodity prices provide interim relief to market sentiment, but sustained equity performance relies on fundamental earnings delivery rather than temporary cost dips."
-      }
-    },
-    {
       "id": "newsuilgaymitc",
       "source": "The Hindu BusinessLine",
       "source_priority": 2,
@@ -91,9 +317,9 @@
       "published_ist": "2026-11-11 12:55 IST",
       "summary": "Shareholders approve Anup Bagchi as MD and CEO; stock gains amid institutional optimism and Bank Nifty strength",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -118,9 +344,9 @@
       "published_ist": "2026-11-11 12:33 IST",
       "summary": "Shares of IRFC, the Railway PSU, had made a record high of ₹229 back in 2024, from which it has corrected 61%.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -146,9 +372,9 @@
       "published_ist": "2026-11-11 12:14 IST",
       "summary": "In case ICICI Life Insurance is excluded from the MSCI Global Standard Index, it could result in outflows worth $143 million, while PI Industries' exclusion could result in outflows of $118 million, as per Nuvama Alternative's note.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -174,9 +400,9 @@
       "published_ist": "2026-11-11 11:36 IST",
       "summary": "ICICI Bank shares are at record highs, are a consensus buy among all 52 analysts who track the stock, still have an 11% upside potential from current levels.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -202,9 +428,9 @@
       "published_ist": "2026-11-11 10:16 IST",
       "summary": "DAM Capital has maintained its \"buy\" rating on IIFL Finance, and has raised its price target to ₹880, stating that the much awaited capital infusion is now done.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -230,13 +456,25 @@
       "published_ist": "2026-11-11 09:58 IST",
       "summary": "The Patna Municipal Corporation issued a ₹200-crore municipal bond, marking Bihar's first listing on the National Stock Exchange to fund urban infrastructure projects.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "queued",
       "topic": "capital_market",
       "processed_ist": "2026-11-11 15:12:25 IST",
-      "post_id": "newswwantiyprs"
+      "post_id": "newswwantiyprs",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Municipal bonds allow urban local bodies to tap capital markets for infrastructure, shifting reliance away from state grants. However, the success of this mechanism depends on the project's ability to generate independent revenue streams to cover debt service, rather than relying on municipal tax transfers. If projects fail to be self-sustaining, the debt burden could eventually strain the state's fiscal health.",
+        "what_to_watch": [
+          "Actual revenue collection from the funded infrastructure projects.",
+          "Credit rating updates for the Patna Municipal Corporation.",
+          "The timeline and execution of the proposed 126-km Marine Drive PPP project."
+        ],
+        "evergreen_lesson": "Infrastructure financing via bonds is only as sustainable as the underlying asset's ability to generate direct cash flow."
+      }
     },
     {
       "id": "newsbiglgakhly",
@@ -248,11 +486,23 @@
       "published_ist": "2026-11-11 09:52 IST",
       "summary": "HEG Advanced Materials said it received the incentive for TACC's Synthetic Graphite Anode Material project at Sirsoda Industrial Area, Dewas, Madhya Pradesh.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
-      "topic": "stock_market"
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Government incentives like ECMS are designed to bridge the 'viability gap' for capital-intensive manufacturing, effectively lowering the cost of entry into global supply chains. While this approval signals regulatory support, the actual business impact depends on the company's ability to scale production and meet the technical specifications of global cell manufacturers. Without consistent order books, these incentives alone cannot guarantee long-term profitability.",
+        "what_to_watch": [
+          "Actual commissioning of the 20,000 MTPA capacity by June 2027.",
+          "Quarterly EBITDA margins to see if they align with the projected 8-10% range.",
+          "Updates on the signing of battery and pumped storage MOUs."
+        ],
+        "evergreen_lesson": "Incentives reduce capital risk, but operational success in manufacturing is determined by capacity utilization and customer adoption."
+      }
     },
     {
       "id": "newsadqodqzpta",
@@ -264,9 +514,9 @@
       "published_ist": "2026-11-11 09:41 IST",
       "summary": "Of the 41 analysts who have coverage on the Britannia Industries stock, 32 have \"buy\" recommendations, seven have \"hold\" ratings and two have \"sell\" ratings.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -280,9 +530,9 @@
       "published_ist": "2026-11-11 09:36 IST",
       "summary": "Cameron Brandt, Director of Research, EPFR Global expects India's share of investor attention to improve as flows into emerging markets turn more positive and competition from other markets remains limited. Brandt says a major US IPO or a possible rate hike could cause short-term volatility but is unlikely to derail appetite for Indian and other emerging market equities.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -296,9 +546,9 @@
       "published_ist": "2026-11-11 09:33 IST",
       "summary": "The Indian rupee opened 21 paise higher at 93.72 per US dollar on Wednesday, supported by declining crude oil prices, though rising US Treasury yields could limit further gains.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -312,9 +562,9 @@
       "published_ist": "2026-11-11 09:23 IST",
       "summary": "Seven Nifty500 stocks featured in StockEdge’s White Marubozu bullish scanner on November 9, indicating strong upward price momentum during the session. Banking stocks dominated the list, with gains ranging from 4% to 5.6%.",
       "first_seen_at": "2026-11-04T15:07:47.457021+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-04 15:07:47 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -328,9 +578,9 @@
       "published_ist": "2026-11-11 09:13 IST",
       "summary": "Five Nifty500 stocks closed more than 2% above their respective volume-weighted average prices on November 9, according to StockEdge’s technical scan, indicating positive price action during the session.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -344,9 +594,9 @@
       "published_ist": "2026-11-11 09:01 IST",
       "summary": "Five Nifty500 stocks that gained over 3% on November 9 featured in StockEdge’s RSI Trending Up scan, with their Relative Strength Index (RSI) crossing above 50 from below, signalling strengthening price momentum.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -360,9 +610,9 @@
       "published_ist": "2026-11-11 08:50 IST",
       "summary": "Dhoot Transmission's IPO comprised a fresh issue of equity shares worth ₹1,400 crore and an offer for sale (OFS) of around 1.9 crore shares by existing shareholders, including Bain Capital.",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -387,9 +637,9 @@
       "published_ist": "2026-11-11 08:44 IST",
       "summary": "US October inflation data exceeding expectations and comments from Federal Reserve officials have raised the possibility of a half-percentage-point rate hike in December.",
       "first_seen_at": "2026-11-11T07:33:48.979377+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 07:33:48 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "queued",
       "topic": "economy",
       "processed_ist": "2026-11-11 07:33:48 IST",
@@ -416,9 +666,9 @@
       "published_ist": "2026-11-11 08:24 IST",
       "summary": "",
       "first_seen_at": "2026-11-11T15:12:25.334777+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 15:12:25 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -470,9 +720,9 @@
       "published_ist": "2026-11-11 07:26 IST",
       "summary": "Gold and silver prices rose on Wednesday as investors assessed US interest rate outlooks following stronger-than-expected inflation data.",
       "first_seen_at": "2026-11-11T07:33:48.979377+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 07:33:48 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "economy",
       "ai_insight": {
@@ -554,9 +804,9 @@
       "published_ist": "2026-11-11 06:40 IST",
       "summary": "Among the four stocks whose shareholder lock-in ends today, only LEAP India's shares are trading below their IPO price. The other three names have nearly or more than doubled from their issue price.",
       "first_seen_at": "2026-11-11T07:33:48.979377+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 07:33:48 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -627,6 +877,81 @@
       }
     },
     {
+      "id": "newsrwwjcyfcft",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Cancellation of Recovery Certificate No. 9290 of 2026 issued against Harsha Ishvarbhai Solanki (PAN: DCXPS3726R), Khushbu Arjunbhai Padhiyar (PAN: EBFPP6804K), Nitaben Babulal Khalas (PAN: BZVPK9515P), Nimeshkumar Baldevbhai Parmar (PAN: CDUPP7466C), Taraben Kirankumar Padhiyar (PAN: CXSPP4797A), Ravi Dipakbhai Barupal (PAN: AOBPB8419F), Rakeshbhai Kishanbhai Pandya (PAN: CUMPP3101K), Jayesh Ganpatlal Pansal (PAN: AWUPP5121F), Rajaniben Jayeshbhai Pansal (PAN: FPTPP7859P), Bhavika Prakash Rathod (PAN: BPDPR8645R), Rita Arvindbhai Rangi (PAN: DYHPR5253J), Badamilal Banshilal Garg (PAN: AWVPG2759F), Lataben Narotambhai Rangi (PAN: AYRPR7467F), Navin Shankarlal Tank (PAN: AFJPT4067J), Vishnu Shantibhai Parmar (PAN: CDHPP8536J), Komal Vaghaji Chauhan (PAN: BHYPC1780R), Dayaben Marvadi (PAN: DCEPM0246P), B B Commercial Ltd (PAN: AABCB4535B), Bhargaviben Shamalbhai Raval (PAN: ATEPR0799N), Prakash Chunilal Mudethiya (PAN: AUOPM4259K) and Ramnath Sharma (PAN: IBYPS8699E) jointly and severally in the matter of trading activity in the scrip of ANI Integrated Services Limited",
+      "url": "https://www.sebi.gov.in/enforcement/recovery-proceedings/nov-2026/cancellation-of-recovery-certificate-no-9290-of-2026-issued-against-harsha-ishvarbhai-solanki-pan-dcxps3726r-khushbu-arjunbhai-padhiyar-pan-ebfpp6804k-nitaben-babulal-khalas-pan-bzvpk9515p-_105712.html",
+      "published_at": "2026-11-11T00:00:00+05:30",
+      "published_ist": "2026-11-11 00:00 IST",
+      "summary": "Cancellation of Recovery Certificate No. 9290 of 2026 issued against Harsha Ishvarbhai Solanki (PAN: DCXPS3726R), Khushbu Arjunbhai Padhiyar (PAN: EBFPP6804K), Nitaben Babulal Khalas (PAN: BZVPK9515P), Nimeshkumar Baldevbhai Parmar (PAN: CDUPP7466C), Taraben Kirankumar Padhiyar (PAN: CXSPP4797A), Ravi Dipakbhai Barupal (PAN: AOBPB8419F), Rakeshbhai Kishanbhai Pandya (PAN: CUMPP3101K), Jayesh Ganpatlal Pansal (PAN: AWUPP5121F), Rajaniben Jayeshbhai Pansal (PAN: FPTPP7859P), Bhavika Prakash Rathod (PAN: BPDPR8645R), Rita Arvindbhai Rangi (PAN: DYHPR5253J), Badamilal Banshilal Garg (PAN: AWVPG2759F), Lataben Narotambhai Rangi (PAN: AYRPR7467F), Navin Shankarlal Tank (PAN: AFJPT4067J), Vishnu Shantibhai Parmar (PAN: CDHPP8536J), Komal Vaghaji Chauhan (PAN: BHYPC1780R), Dayaben Marvadi (PAN: DCEPM0246P), B B Commercial Ltd (PAN: AABCB4535B), Bhargaviben Shamalbhai Raval (PAN: ATEPR0799N), Pra",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-11 23:28:20 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Regulatory bodies issue recovery certificates to enforce financial penalties or dues arising from market violations, and their cancellation indicates that the specific monetary demand tied to that order is no longer active for the named parties. However, this administrative relief does not automatically establish whether underlying findings of irregular trading activity in the scrip are overturned or if other legal proceedings remain pending. Markets should note that procedural closures on recovery actions are distinct from clean chits on substantive compliance or corporate governance matters.",
+        "what_to_watch": [
+          "Subsequent formal orders or notices from the regulator clarifying the status of the main proceedings",
+          "Disclosures regarding any settlement, payment, or appeal outcomes linked to the scrip of ANI Integrated Services Limited"
+        ],
+        "evergreen_lesson": "Administrative cancellations of recovery certificates reflect the resolution of specific enforcement dues rather than a blanket reversal of underlying regulatory investigations or market integrity findings."
+      }
+    },
+    {
+      "id": "newsukfxdgznem",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Cancellation of Recovery Certificate No. 9228 of 2026 issued against Fulabhai Bhitor (PAN: DYLPB2813Q) in the matter of trading activity in the scrip of ANI Integrated Services Limited",
+      "url": "https://www.sebi.gov.in/enforcement/recovery-proceedings/nov-2026/cancellation-of-recovery-certificate-no-9228-of-2026-issued-against-fulabhai-bhitor-pan-dylpb2813q-in-the-matter-of-trading-activity-in-the-scrip-of-ani-integrated-services-limited_105708.html",
+      "published_at": "2026-11-11T00:00:00+05:30",
+      "published_ist": "2026-11-11 00:00 IST",
+      "summary": "Cancellation of Recovery Certificate No. 9228 of 2026 issued against Fulabhai Bhitor (PAN: DYLPB2813Q) in the matter of trading activity in the scrip of ANI Integrated Services Limited",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newshxabmhugoc",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Reporting requirement under Foreign Account Tax Compliance Act (FATCA) and Common Reporting Standard (CRS) revised through Income-Tax Act, 2025 read with Income-Tax Rules, 2026",
+      "url": "https://www.sebi.gov.in/legal/circulars/nov-2026/reporting-requirement-under-foreign-account-tax-compliance-act-fatca-and-common-reporting-standard-crs-revised-through-income-tax-act-2025-read-with-income-tax-rules-2026_105705.html",
+      "published_at": "2026-11-11T00:00:00+05:30",
+      "published_ist": "2026-11-11 00:00 IST",
+      "summary": "Reporting requirement under Foreign Account Tax Compliance Act (FATCA) and Common Reporting Standard (CRS) revised through Income-Tax Act, 2025 read with Income-Tax Rules, 2026",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsbvbnvkcjhq",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Summary Settlement Order in the matte of Eight Innovate Fund II, scheme of Eight Innovate Investment Trust I",
+      "url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/summary-settlement-order-in-the-matte-of-eight-innovate-fund-ii-scheme-of-eight-innovate-investment-trust-i_103642.html",
+      "published_at": "2026-11-11T00:00:00+05:30",
+      "published_ist": "2026-11-11 00:00 IST",
+      "summary": "Summary Settlement Order in the matte of Eight Innovate Fund II, scheme of Eight Innovate Investment Trust I",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
       "id": "newsawhizyzajt",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -636,9 +961,9 @@
       "published_ist": "2026-11-10 20:59 IST",
       "summary": "Wall Street traded lower on Tuesday, with the S&P 500 down 0.7%, the Dow Jones Industrial Average declining 249 points and the Nasdaq Composite slipping 0.9%. Hotter-than-expected October inflation and comments from Fed Governor Christopher Waller on a possible 50-basis-point rate hike in December weighed on investor sentiment, while technology stocks led the declines.",
       "first_seen_at": "2026-11-11T02:26:47.279917+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 02:26:47 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -706,9 +1031,9 @@
       "published_ist": "2026-11-10 16:41 IST",
       "summary": "CNBC-TV18 Newsbreak Confirmed: IIFL Finance's board has approved a ₹6,414 crore preferential issue, with a Blackstone affiliate investing ₹5,000 crore and promoters subscribing to warrants worth ₹1,264 crore.",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "queued",
       "topic": "stock_market",
       "ai_insight": {
@@ -762,9 +1087,9 @@
       "published_ist": "2026-11-10 15:17 IST",
       "summary": "Domestic investors strengthened their presence in Indian equities during the quarter, even as foreign institutional investors continued trimming their exposure",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -789,9 +1114,9 @@
       "published_ist": "2026-11-10 12:00 IST",
       "summary": "Gokaldas Exports, in an exchange filing, said The Children's Place, Inc, one of the customers of Atraco Industrial Enterprise FZE, a step-down subsidiary of Gokaldas Exports, has filed for protection under Chapter 11 of the US Bankruptcy Code in the United States.",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -805,9 +1130,9 @@
       "published_ist": "2026-11-10 11:00 IST",
       "summary": "Copper has moved in tandem with AI stocks in recent months. Last week, it had declined 2.7% to a three-month low as concerns arose after the Democrats' sweeping victory in the US midterm elections, which could mean greater regulation of AI.",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -832,9 +1157,9 @@
       "published_ist": "2026-11-10 10:54 IST",
       "summary": "Japan's benchmark Nikkei 225 rose 2.6 per cent to 60,279.37.",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -859,9 +1184,9 @@
       "published_ist": "2026-11-10 09:52 IST",
       "summary": "The deployment is aimed at supporting high-density GPU-based computing through a scalable cooling architecture.",
       "first_seen_at": "2026-11-10T18:21:55.916696+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 18:21:55 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -886,9 +1211,9 @@
       "published_ist": "2026-11-10 08:08 IST",
       "summary": "Indian stock markets will remain closed on November 10 for Diwali-Balipratipada, with trading resuming on November 11. Meanwhile, Sensex and Nifty ended higher on Monday.",
       "first_seen_at": "2026-11-10T09:44:38.959431+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-10 09:44:38 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market",
       "ai_insight": {
@@ -998,9 +1323,25 @@
       "published_ist": "2026-11-10 00:00 IST",
       "summary": "Notice of attachment dated November 10, 2026 issued against First Futures and Stocks Private Limited under RC No.7469 of 2023 in the matter of First Futures and Stocks Private Limited",
       "first_seen_at": "2026-11-11T02:26:47.279917+05:30",
-      "last_seen_at": "2026-11-11T15:12:25.334777+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
       "first_seen_ist": "2026-11-11 02:26:47 IST",
-      "last_seen_ist": "2026-11-11 15:12:25 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newsamzegfpwrb",
+      "source": "SEBI RSS",
+      "source_priority": 3,
+      "headline": "Notice of attachment dated November 10, 2026 issued against R Ravichandran under RC No.6735 of 2023 in the matter of Teledata Technology Solutions Limited",
+      "url": "https://www.sebi.gov.in/enforcement/recovery-proceedings/nov-2026/notice-of-attachment-dated-november-10-2026-issued-against-r-ravichandran-under-rc-no-6735-of-2023-in-the-matter-of-teledata-technology-solutions-limited_105700.html",
+      "published_at": "2026-11-10T00:00:00+05:30",
+      "published_ist": "2026-11-10 00:00 IST",
+      "summary": "Notice of attachment dated November 10, 2026 issued against R Ravichandran under RC No.6735 of 2023 in the matter of Teledata Technology Solutions Limited",
+      "first_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "last_seen_at": "2026-11-11T23:28:20.738712+05:30",
+      "first_seen_ist": "2026-11-11 23:28:20 IST",
+      "last_seen_ist": "2026-11-11 23:28:20 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -5384,7 +5725,7 @@
       "last_seen_at": "2026-11-03T08:03:30.392017+05:30",
       "first_seen_ist": "2026-11-03 08:03:30 IST",
       "last_seen_ist": "2026-11-03 08:03:30 IST",
-      "status": "queued",
+      "status": "posted",
       "topic": "economy",
       "ai_insight": {
         "version": 1,
@@ -5398,7 +5739,8 @@
         "evergreen_lesson": "Jab bhi banking system mein liquidity tight hoti hai, deposit rates mein hike credit cost aur margin pressure ka early indicator banta hai."
       },
       "processed_ist": "2026-11-03 08:03:30 IST",
-      "post_id": "newssbzxmrdzli"
+      "post_id": "newssbzxmrdzli",
+      "posted_at": "2026-11-11 15:14:04 IST"
     },
     {
       "id": "newsfymeijoias",
@@ -10820,55 +11162,55 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-11T15:12:25.334777+05:30",
-  "last_scraped_ist": "2026-11-11 15:12:25 IST",
+  "last_scraped_at": "2026-11-11T23:28:20.738712+05:30",
+  "last_scraped_ist": "2026-11-11 23:28:20 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
-      "fresh_items": 88,
+      "fresh_items": 104,
       "accepted_items": 21,
-      "filtered_items": 67,
+      "filtered_items": 83,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
       "fresh_items": 50,
-      "accepted_items": 4,
-      "filtered_items": 46,
+      "accepted_items": 8,
+      "filtered_items": 42,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
-      "fresh_items": 28,
-      "accepted_items": 8,
+      "fresh_items": 27,
+      "accepted_items": 7,
       "filtered_items": 20,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
-      "fresh_items": 8,
-      "accepted_items": 2,
-      "filtered_items": 6,
+      "fresh_items": 6,
+      "accepted_items": 1,
+      "filtered_items": 5,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
-      "fresh_items": 0,
-      "accepted_items": 0,
+      "fresh_items": 1,
+      "accepted_items": 1,
       "filtered_items": 0,
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-11 15:12:25 IST",
+      "checked_ist": "2026-11-11 23:28:20 IST",
       "http_status": 200,
-      "fresh_items": 6,
-      "accepted_items": 3,
-      "filtered_items": 3,
+      "fresh_items": 13,
+      "accepted_items": 8,
+      "filtered_items": 5,
       "error": null
     }
   },
@@ -10896,16 +11238,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-11 15:12:25 IST"
+    "last_curated_ist": "2026-11-11 23:28:20 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-11 15:12:25 IST",
-    "fetched_items": 180,
-    "accepted_feed_items": 38,
-    "filtered_feed_items": 142,
-    "new_unique_stories": 19,
-    "duplicate_items_collapsed": 3,
+    "updated_ist": "2026-11-11 23:28:20 IST",
+    "fetched_items": 201,
+    "accepted_feed_items": 46,
+    "filtered_feed_items": 155,
+    "new_unique_stories": 15,
+    "duplicate_items_collapsed": 2,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 446
+    "stories_total": 461
   }
 }
