@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11 08:28 PM IST",
+  "updated_at": "2026-11-12 12:56 AM IST",
   "source": "IBJA Official & Market Benchmark",
   "rates_per_10g": {
     "24k": 76150.0,
@@ -11,6 +11,6 @@
     "rate_1y_ago_24k": 68212.07,
     "rate_6m_ago_24k": 68535.0,
     "cpi_inflation_1y": 5.4,
-    "nifty_1y_return": -1.71
+    "nifty_1y_return": -2.53
   }
 }
