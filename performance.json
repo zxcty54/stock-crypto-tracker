@@ -1,24 +1,24 @@
 {
- "generated_at": "2026-11-11 02:52 IST",
+ "generated_at": "2026-11-12 03:35 IST",
  "sample_size": 100,
  "identified": 62,
  "inferred": 38,
  "cards_skipped": 0,
- "channel_avg_views": 21.8,
+ "channel_avg_views": 21.3,
  "growth": {
-  "today": 467,
-  "snapshots": 34,
-  "delta_7d": -3,
-  "per_day": 13.26,
-  "days_to_target": 40,
+  "today": 466,
+  "snapshots": 35,
+  "delta_7d": -2,
+  "per_day": 12.86,
+  "days_to_target": 41,
   "target": 1000,
-  "days_span": 35
+  "days_span": 36
  },
  "status": "ok",
  "pillars": {
   "lifestyle": {
-   "posts": 2,
-   "avg_views": 41.5,
+   "posts": 1,
+   "avg_views": 43.0,
    "weight": 1.0,
    "low_sample": true
   },
@@ -31,7 +31,7 @@
   "technical": {
    "posts": 5,
    "avg_views": 28.4,
-   "weight": 1.3,
+   "weight": 1.33,
    "low_sample": false
   },
   "process": {
@@ -40,28 +40,22 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "business_model": {
-   "posts": 14,
+  "risk": {
+   "posts": 3,
    "avg_views": 23.0,
-   "weight": 1.06,
+   "weight": 1.08,
    "low_sample": false
   },
-  "market_mechanics": {
-   "posts": 4,
-   "avg_views": 22.0,
+  "business_model": {
+   "posts": 13,
+   "avg_views": 21.5,
    "weight": 1.01,
    "low_sample": false
   },
   "corporate": {
-   "posts": 50,
-   "avg_views": 21.4,
-   "weight": 0.98,
-   "low_sample": false
-  },
-  "risk": {
-   "posts": 3,
+   "posts": 51,
    "avg_views": 21.3,
-   "weight": 0.98,
+   "weight": 1.0,
    "low_sample": false
   },
   "psychology": {
@@ -72,23 +66,24 @@
   },
   "awareness": {
    "posts": 6,
-   "avg_views": 18.2,
-   "weight": 0.83,
+   "avg_views": 18.7,
+   "weight": 0.88,
+   "low_sample": false
+  },
+  "market_mechanics": {
+   "posts": 5,
+   "avg_views": 18.6,
+   "weight": 0.87,
    "low_sample": false
   },
   "other": {
    "posts": 12,
-   "avg_views": 17.0,
-   "weight": 0.78,
+   "avg_views": 17.2,
+   "weight": 0.81,
    "low_sample": false
   }
  },
  "top_posts": [
-  {
-   "title": "The Federal Bank Limited (NSE: FEDERALBNK)",
-   "views": 45,
-   "pillar": "business_model"
-  },
   {
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
    "views": 43,
@@ -105,26 +100,31 @@
    "pillar": "corporate"
   },
   {
-   "title": "EMERGENCY FUND VS CAPITAL: Paisa Kahan Rakhna Chahiye",
-   "views": 40,
-   "pillar": "lifestyle"
+   "title": "NBFC VS BANK: Risk Ko Pehle Samjho",
+   "views": 39,
+   "pillar": "business_model"
+  },
+  {
+   "title": "Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL",
+   "views": 38,
+   "pillar": "corporate"
   }
  ],
  "weak_posts": [
   {
-   "title": "Insecticides (India) Limited (NSE: INSECTICID)",
+   "title": "Jtekt India Limited (NSE: JTEKTINDIA)",
+   "views": 10,
+   "pillar": "corporate"
+  },
+  {
+   "title": "Orient Green Power Company Limited (NSE: GREENPOWER)",
    "views": 9,
    "pillar": "corporate"
   },
   {
-   "title": "Samvardhana Motherson International Limited (NSE: MOTHERSON)",
-   "views": 9,
-   "pillar": "corporate"
-  },
-  {
-   "title": "RBI's forward dollar position hits record $239.2 billion as rupee defe",
-   "views": 6,
-   "pillar": "risk"
+   "title": "Banks raise deposit rates as systemic liquidity drops and credit deman",
+   "views": 5,
+   "pillar": "market_mechanics"
   }
  ]
 }

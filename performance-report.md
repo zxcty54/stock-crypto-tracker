@@ -1,6 +1,6 @@
 # 📊 Performance Report
 
-**11-Nov-2026 02:52 IST** | 100 posts tracked | channel avg **22 views**
+**12-Nov-2026 03:35 IST** | 100 posts tracked | channel avg **21 views**
 
 *62 posts pehchaane gaye, 38 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
@@ -8,48 +8,48 @@
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| lifestyle | 2 | 42 | 1.0 |
+| lifestyle | 1 | 43 | 1.0 |
 | tools | 1 | 29 | 1.0 |
-| technical | 5 | 28 | 1.3 |
+| technical | 5 | 28 | 1.33 |
 | process | 2 | 25 | 1.0 |
-| business_model | 14 | 23 | 1.06 |
-| market_mechanics | 4 | 22 | 1.01 |
-| corporate | 50 | 21 | 0.98 |
-| risk | 3 | 21 | 0.98 |
+| risk | 3 | 23 | 1.08 |
+| business_model | 13 | 22 | 1.01 |
+| corporate | 51 | 21 | 1.0 |
 | psychology | 1 | 19 | 1.0 |
-| awareness | 6 | 18 | 0.83 |
-| other | 12 | 17 | 0.78 |
+| awareness | 6 | 19 | 0.88 |
+| market_mechanics | 5 | 19 | 0.87 |
+| other | 12 | 17 | 0.81 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 467** (target 1000)
+**Subscribers: 466** (target 1000)
 
-- Pichhle 7 din me: **-3**
-- Average: **13.26/din**
-- Isi raftaar se 1000 subs: **~40 din**
+- Pichhle 7 din me: **-2**
+- Average: **12.86/din**
+- Isi raftaar se 1000 subs: **~41 din**
 
 
 ## 🏆 Top posts
 
-- **45 views** — The Federal Bank Limited (NSE: FEDERALBNK)  
-  `business_model`
 - **43 views** — 1% RULE: Capital Bachao Ge Tabhi Kheloge  
   `lifestyle`
 - **42 views** — Pace Digitek Limited (NSE: PACEDIGITK)  
   `corporate`
 - **42 views** — Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens  
   `corporate`
-- **40 views** — EMERGENCY FUND VS CAPITAL: Paisa Kahan Rakhna Chahiye  
-  `lifestyle`
+- **39 views** — NBFC VS BANK: Risk Ko Pehle Samjho  
+  `business_model`
+- **38 views** — Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL  
+  `corporate`
 
 ## ⚠️ Kam chale posts
 
-- 9 views — Insecticides (India) Limited (NSE: INSECTICID)  
+- 10 views — Jtekt India Limited (NSE: JTEKTINDIA)  
   `corporate`
-- 9 views — Samvardhana Motherson International Limited (NSE: MOTHERSON)  
+- 9 views — Orient Green Power Company Limited (NSE: GREENPOWER)  
   `corporate`
-- 6 views — RBI's forward dollar position hits record $239.2 billion as rupee defe  
-  `risk`
+- 5 views — Banks raise deposit rates as systemic liquidity drops and credit deman  
+  `market_mechanics`
 
 ---
 
