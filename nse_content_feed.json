@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-11-11 06:12:06 IST",
-  "worthy_count": 11,
-  "skipped_count": 8,
+  "generated_at": "2026-11-11 12:45:19 IST",
+  "worthy_count": 14,
+  "skipped_count": 10,
   "content_feed": [
+    {
+      "hash": "32a261363858",
+      "symbol": "AUROPHARMA",
+      "company_name": "Aurobindo Pharma Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "USFDA_OBSERVATION",
+      "broadcast_date": "11-Nov-2026 11:29:06",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/AUROPHARMA_11112026112206_LtrToSEsApitoriaUnit2USFDA11112026.pdf",
+      "headline": "Aurobindo Pharma Subsidiary Receives USFDA EIR with VAI Classification",
+      "content_worthy": true,
+      "worthiness_reason": "USFDA regulatory inspection update for a subsidiary's manufacturing facility.",
+      "telegram_post": "⚠️ <b>#USFDA_OBSERVATION</b> | <b>Aurobindo Pharma Limited (NSE: AUROPHARMA)</b>\n\n<b>Aurobindo Pharma Subsidiary Receives USFDA EIR with VAI Classification</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility:</b> Apitoria Unit 2 (Apitoria Pharma Private Limited)\n- <b>Facility Type:</b> API Manufacturing Facility\n- <b>USFDA Classification:</b> Voluntary Action Indicated (VAI)\n- <b>Inspection Status:</b> Closed\n\n📌 <b>What happened:</b>\n↳ Apitoria Unit 2, an API manufacturing facility of subsidiary Apitoria Pharma Private Limited, received the Establishment Inspection Report from the USFDA with the inspection classified as Voluntary Action Indicated.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/AUROPHARMA_11112026112206_LtrToSEsApitoriaUnit2USFDA11112026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-11 12:44:59 IST"
+    },
+    {
+      "hash": "d1c4892e3621",
+      "symbol": "BANARISUG",
+      "company_name": "Bannari Amman Sugars Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "11-Nov-2026 11:40:36",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BANARISUG_11112026113844_ResultSept2026.pdf",
+      "headline": "Bannari Amman Sugars Reports Q2 FY27 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with explicit revenue and net profit numbers.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Bannari Amman Sugars Limited (NSE: BANARISUG)</b>\n\n<b>Bannari Amman Sugars Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations (Q2 FY27):</b> Rs 34,021.65 Lakhs\n- <b>Net Profit (Q2 FY27):</b> Rs 3,095.17 Lakhs\n- <b>Revenue from Operations (H1 FY27):</b> Rs 51,256.64 Lakhs\n- <b>Net Profit (H1 FY27):</b> Rs 2,003.63 Lakhs\n\n📌 <b>What happened:</b>\n↳ Bannari Amman Sugars Limited has announced its unaudited financial results for the quarter and half year ended September 30, 2026, reporting a quarterly net profit of Rs 3,095.17 Lakhs on operations.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BANARISUG_11112026113844_ResultSept2026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-11 12:44:59 IST"
+    },
+    {
+      "hash": "3d65a9dda808",
+      "symbol": "GREENPOWER",
+      "company_name": "Orient Green Power Company Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "11-Nov-2026 12:37:13",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/GREENPOWER_11112026123315_SEIntimationResults.pdf",
+      "headline": "Orient Green Power Reports Q2 FY27 Financial Results and Revised Wind Project Timelines",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results for the quarter and half year ended September 30, 2026, with explicit revenue and EBITDA figures, along with project timeline revisions.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Orient Green Power Company Limited (NSE: GREENPOWER)</b>\n\n<b>Orient Green Power Reports Q2 FY27 Financial Results and Revised Wind Project Timelines</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 FY27 Total Income:</b> ₹146.57 Cr (up 8% YoY)\n- <b>Q2 FY27 EBITDA:</b> ₹116.55 Cr (up 12% YoY)\n- <b>H1 FY27 Total Income:</b> ₹232.81 Cr (up 2% YoY)\n- <b>H1 FY27 EBITDA:</b> ₹176.56 Cr (up 4% YoY)\n\n📌 <b>What happened:</b>\n↳ The company approved financial results for the quarter and half year ended September 30, 2026, and revised commercial production timelines for subsidiary wind projects.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GREENPOWER_11112026123315_SEIntimationResults.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-11 12:44:36 IST"
+    },
     {
       "hash": "38384c21a8ad",
       "symbol": "SEAMECLTD",
@@ -159,6 +201,34 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "9fb8c0930c62",
+      "symbol": "JTEKTINDIA",
+      "company_name": "Jtekt India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "11-Nov-2026 10:56:02",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/JTEKTINDIA_11112026105550_Presentation.pdf",
+      "headline": "Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Investor presentation filing without the explicit core numeric revenue and PAT figures in the summary text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-11 12:45:19 IST"
+    },
+    {
+      "hash": "d7bf4b393b30",
+      "symbol": "GREENPOWER",
+      "company_name": "Orient Green Power Company Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "11-Nov-2026 12:29:13",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/GREENPOWER_11112026122609_SEIntimationResults.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Duplicate filing identical to input_id 1.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-11 12:44:36 IST"
+    },
     {
       "hash": "6a978e75f292",
       "symbol": "RMDRIP",
