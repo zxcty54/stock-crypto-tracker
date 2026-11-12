@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-11-12 03:48:55 IST",
-  "worthy_count": 28,
+  "worthy_count": 25,
   "skipped_count": 21,
   "content_feed": [
     {
@@ -352,48 +352,6 @@
       "worthiness_reason": "Financial results for the quarter and half year ended September 30, 2026, with explicit revenue and EBITDA figures, along with project timeline revisions.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Orient Green Power Company Limited (NSE: GREENPOWER)</b>\n\n<b>Orient Green Power Reports Q2 FY27 Financial Results and Revised Wind Project Timelines</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2 FY27 Total Income:</b> ₹146.57 Cr (up 8% YoY)\n- <b>Q2 FY27 EBITDA:</b> ₹116.55 Cr (up 12% YoY)\n- <b>H1 FY27 Total Income:</b> ₹232.81 Cr (up 2% YoY)\n- <b>H1 FY27 EBITDA:</b> ₹176.56 Cr (up 4% YoY)\n\n📌 <b>What happened:</b>\n↳ The company approved financial results for the quarter and half year ended September 30, 2026, and revised commercial production timelines for subsidiary wind projects.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/GREENPOWER_11112026123315_SEIntimationResults.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-11 12:44:36 IST"
-    },
-    {
-      "hash": "38384c21a8ad",
-      "symbol": "SEAMECLTD",
-      "company_name": "Seamec Limited",
-      "category": "ORDER",
-      "event_type": "CONTRACT",
-      "broadcast_date": "08-Nov-2026 13:44:02",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SEAMECLTD_08112026134330_BSENSECommencementPRPXSEAMECPRINCESS08112026.pdf",
-      "headline": "Seamec Limited: Vessel 'SEAMEC PRINCESS' commences ONGC's PRP-X project",
-      "content_worthy": true,
-      "worthiness_reason": "Material update regarding the commencement of a project for a major client (ONGC/L&T).",
-      "telegram_post": "📜 <b>#CONTRACT</b> | <b>Seamec Limited (NSE: SEAMECLTD)</b>\n\n<b>Seamec Limited: Vessel 'SEAMEC PRINCESS' commences ONGC's PRP-X project</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Vessel:</b> SEAMEC PRINCESS\n- <b>Project:</b> PRP-X Project of ONGC\n- <b>Client/Contractor:</b> Larsen & Toubro Limited (L&T Energy Hydrocarbon Div)\n- <b>Consortium Partner:</b> Posh India Offshore Private Limited\n- <b>Status:</b> Deployment commenced on November 8, 2026\n\n📌 <b>What happened:</b>\n↳ The company announced that the vessel 'SEAMEC PRINCESS' departed Mumbai Port on November 8, 2026, to begin work on the PRP-X project awarded to the consortium of Seamec and Posh India by L&T.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SEAMECLTD_08112026134330_BSENSECommencementPRPXSEAMECPRINCESS08112026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-11 06:12:06 IST"
-    },
-    {
-      "hash": "ba53f67d2da4",
-      "symbol": "ADANIENT",
-      "company_name": "Adani Enterprises Limited",
-      "category": "JV",
-      "event_type": "ACQUISITION",
-      "broadcast_date": "08-Nov-2026 17:32:09",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_08112026173159_AELIntimationofacquisitioncompletion08112026.pdf",
-      "headline": "Adani Enterprises completes acquisition of Vizag Mega Data Center Park",
-      "content_worthy": true,
-      "worthiness_reason": "Completion of material acquisition of data center entity.",
-      "telegram_post": "🤝 <b>#ACQUISITION</b> | <b>Adani Enterprises (NSE: ADANIENT)</b>\n\n<b>Adani Enterprises completes acquisition of Vizag Mega Data Center Park</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Target Entity:</b> Vizag Mega Data Center Park Limited (VMDCPL)\n- <b>Acquirer:</b> AdaniConneX Private Limited (JV of Adani Enterprises)\n- <b>Stake Acquired:</b> 100%\n- <b>Status:</b> Acquisition completed\n\n📌 <b>What happened:</b>\n↳ AdaniConneX Private Limited has finalized the acquisition of 100% stake in Vizag Mega Data Center Park Limited, making it a joint venture of Adani Enterprises.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/nishant_joshi_adani_com_08112026173159_AELIntimationofacquisitioncompletion08112026.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-11 06:11:42 IST"
-    },
-    {
-      "hash": "6f38528d5c20",
-      "symbol": "ALKEM",
-      "company_name": "Alkem Laboratories Limited",
-      "category": "JV",
-      "event_type": "JOINT_VENTURE",
-      "broadcast_date": "08-Nov-2026 18:44:19",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/ALKEM_08112026184401_Draft_Reg_30_Incorporation_of_JV_signed.pdf",
-      "headline": "Alkem Laboratories incorporates JV in Saudi Arabia",
-      "content_worthy": true,
-      "worthiness_reason": "Material expansion into international market via new joint venture incorporation.",
-      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Alkem Laboratories (NSE: ALKEM)</b>\n\n<b>Alkem Laboratories incorporates JV in Saudi Arabia</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>JV Name:</b> Alkem Pharma Company\n- <b>Stake:</b> 51% equity holding\n- <b>Investment:</b> 3,825,000 SAR\n- <b>Industry:</b> Pharmaceuticals and Nutraceuticals\n\n📌 <b>What happened:</b>\n↳ Alkem Laboratories has successfully incorporated a new subsidiary in the Kingdom of Saudi Arabia as a joint venture to expand its business and market reach in the region.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/ALKEM_08112026184401_Draft_Reg_30_Incorporation_of_JV_signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-11 06:11:42 IST"
     }
   ],
   "skipped_archive": [
