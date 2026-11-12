@@ -1313,8 +1313,24 @@
       "source_headline": "India bonds track Treasury weakness ahead of debt supply",
       "story_key": "00ea8c5008711acf0e7ce0d9b4566a012b3762e42af61fc7e6f003cdc410b922",
       "generated_at": "2026-11-12 23:59:39 IST"
+    },
+    {
+      "id": "newsgzverjhlba",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-13 08:00",
+      "scheduled_ist": "2026-11-13 08:00",
+      "title": "October retail inflation rises to 6.09%, raising rate hike risks",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>October retail inflation rises to 6.09%, raising rate hike risks</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndia's retail inflation accelerated to 6.09 per cent in October, driven by sharp spikes in food prices including onions at 116.22 per cent, garlic at 60.74 per cent, and dependent categories like restaurants exceeding 10 per cent.\n\n🧭 <b>MARKET CONTEXT</b>\nConsumer Price Index (CPI) measures retail price changes across a basket of goods and services. Industry bodies like Knight Frank and PHDCCI note that erratic climatic conditions pushed up food components, heavily influencing the headline figure.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nSustained consumer price pressures could erode household purchasing power, directly constraining discretionary expenditures such as affordable housing and hospitality. If the RBI views this acceleration as persistent, it may introduce monetary tightening or repo rate hikes at upcoming MPC meetings, potentially increasing borrowing costs for businesses and retail consumers.\n\n🔎 <b>KEY WATCHPOINTS</b>\nSubsequent food supply trends, upcoming central bank policy announcements, and borrowing cost adjustments across retail lending segments.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do you think prolonged high food inflation impacts rural versus urban consumption patterns in the domestic market?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/digital-real-estate/realty-news/october-retail-inflation-surge-may-weigh-on-housing-demand-raise-rate-hike-concerns-knight-frank-phdcci/articleshow/135776096.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:06e27843547f",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/digital-real-estate/realty-news/october-retail-inflation-surge-may-weigh-on-housing-demand-raise-rate-hike-concerns-knight-frank-phdcci/articleshow/135776096.cms",
+      "source_headline": "October retail inflation surge may weigh on housing demand, raise rate hike concerns: Knight Frank, PHDCCI",
+      "story_key": "06e27843547fe93ec31278ebde88b4d9aad5114762eb7849aa9146bebc6fc6bb",
+      "generated_at": "2026-11-13 05:19:10 IST"
     }
   ],
-  "total": 90,
+  "total": 91,
   "last_scheduled": "2026-11-13 08:00"
 }
