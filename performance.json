@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-12 03:35 IST",
+ "generated_at": "2026-11-13 03:22 IST",
  "sample_size": 100,
  "identified": 62,
  "inferred": 38,
  "cards_skipped": 0,
- "channel_avg_views": 21.3,
+ "channel_avg_views": 21.1,
  "growth": {
-  "today": 466,
-  "snapshots": 35,
+  "today": 465,
+  "snapshots": 36,
   "delta_7d": -2,
-  "per_day": 12.86,
-  "days_to_target": 41,
+  "per_day": 12.49,
+  "days_to_target": 42,
   "target": 1000,
-  "days_span": 36
+  "days_span": 37
  },
  "status": "ok",
  "pillars": {
@@ -31,7 +31,7 @@
   "technical": {
    "posts": 5,
    "avg_views": 28.4,
-   "weight": 1.33,
+   "weight": 1.35,
    "low_sample": false
   },
   "process": {
@@ -42,20 +42,32 @@
   },
   "risk": {
    "posts": 3,
-   "avg_views": 23.0,
-   "weight": 1.08,
+   "avg_views": 24.0,
+   "weight": 1.14,
    "low_sample": false
   },
   "business_model": {
    "posts": 13,
-   "avg_views": 21.5,
-   "weight": 1.01,
+   "avg_views": 21.8,
+   "weight": 1.03,
    "low_sample": false
   },
   "corporate": {
-   "posts": 51,
-   "avg_views": 21.3,
-   "weight": 1.0,
+   "posts": 50,
+   "avg_views": 20.7,
+   "weight": 0.98,
+   "low_sample": false
+  },
+  "market_mechanics": {
+   "posts": 5,
+   "avg_views": 20.0,
+   "weight": 0.95,
+   "low_sample": false
+  },
+  "awareness": {
+   "posts": 6,
+   "avg_views": 19.2,
+   "weight": 0.91,
    "low_sample": false
   },
   "psychology": {
@@ -64,22 +76,10 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "awareness": {
-   "posts": 6,
-   "avg_views": 18.7,
-   "weight": 0.88,
-   "low_sample": false
-  },
-  "market_mechanics": {
-   "posts": 5,
-   "avg_views": 18.6,
-   "weight": 0.87,
-   "low_sample": false
-  },
   "other": {
-   "posts": 12,
-   "avg_views": 17.2,
-   "weight": 0.81,
+   "posts": 13,
+   "avg_views": 16.9,
+   "weight": 0.8,
    "low_sample": false
   }
  },
@@ -88,11 +88,6 @@
    "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
    "views": 43,
    "pillar": "lifestyle"
-  },
-  {
-   "title": "Pace Digitek Limited (NSE: PACEDIGITK)",
-   "views": 42,
-   "pillar": "corporate"
   },
   {
    "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
@@ -108,6 +103,11 @@
    "title": "Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL",
    "views": 38,
    "pillar": "corporate"
+  },
+  {
+   "title": "Sterling and Wilson Renewable Energy Limited (NSE: SWSOLAR)",
+   "views": 36,
+   "pillar": "corporate"
   }
  ],
  "weak_posts": [
@@ -117,14 +117,14 @@
    "pillar": "corporate"
   },
   {
-   "title": "Orient Green Power Company Limited (NSE: GREENPOWER)",
+   "title": "RBI updates FEMA export-import rules, eases service reporting threshol",
    "views": 9,
-   "pillar": "corporate"
+   "pillar": "other"
   },
   {
-   "title": "Banks raise deposit rates as systemic liquidity drops and credit deman",
-   "views": 5,
-   "pillar": "market_mechanics"
+   "title": "TD Power Systems Limited (NSE: TDPOWERSYS)",
+   "views": 7,
+   "pillar": "corporate"
   }
  ]
 }
