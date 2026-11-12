@@ -879,14 +879,16 @@
       "scheduled_ist": "2026-11-03 16:00",
       "title": "RBI updates FEMA export-import rules, eases service reporting thresholds to ₹10 ",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI updates FEMA export-import rules, eases service reporting thresholds to ₹10 Lakh</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nRBI ne Foreign Exchange Management (Export and Import of Goods and Services) (Second Amendment) Regulations, 2026 notify kiye hain, jo October 1, 2026 se effective hain. Resident individuals aur non-individuals ke liye service exports aur imports ki reporting requirements mein badlav kiya gaya hai.\n\n🧭 <b>MARKET CONTEXT</b>\n'Export Declaration Form' (EDF) aur 'Import Data Processing and Monitoring System' (IDPMS) woh systems hain jinke zariye RBI cross-border trade transactions ko track karta hai. Naye rules ke mutabik, non-resident individual exporters ya any entity other than resident individuals ke liye ₹10 lakh tak ke inward remittances par EDF submission deem ho jayegi, aur ₹10 lakh se zyada ke import of services ke details IDPMS mein enter karne honge.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nYeh amendment small service exporters aur importers ke liye compliance burden ko streamline kar sakta hai, kyunki chote value ke transactions par reporting process automate ya simplify ho jata hai. Agar cross-border settlements fast hote hain, toh IT, consulting, aur digital service export sectors ki working capital efficiency improve ho sakti hai, though yeh sabhi entities ke transaction sizes par depend karega.\n\n🔎 <b>KEY WATCHPOINTS</b>\nAuthorised Dealer (AD) banks ke circulars, compliance turnaround times, aur kya chote service exporters ko actual practice mein documentation ease milti hai, yeh metrics track karne honge.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki yeh compliance threshold relaxation service-focused micro and small enterprises (MSMEs) ke liye cash flow management aasan karegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13750&amp;Mode=0\">RBI Notifications</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:0e70b6bbe9f1",
       "kind": "business_news_insight",
       "source_name": "RBI Notifications",
       "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13750&Mode=0",
       "source_headline": "Foreign Exchange Management (Export and Import of Goods and Services) (Second Amendment) Regulations, 2026",
       "story_key": "0e70b6bbe9f1202646c44fa28ac5d9b790eee7e172645ddcc6de32f4929767ac",
-      "generated_at": "2026-11-03 17:40:53 IST"
+      "generated_at": "2026-11-03 17:40:53 IST",
+      "posted_at": "2026-11-12 15:34:10 IST",
+      "telegraph_url": "https://telegra.ph/RBI-updates-FEMA-export-import-rules-eases-service-reporting-thresholds-to-10--November-2026-11-12"
     },
     {
       "id": "newscclbszzhpl",
@@ -1279,8 +1281,24 @@
       "source_headline": "India to switch bonds worth 250 billion rupees next week",
       "story_key": "86ca00f47cd2b666165a0f9c7951477ccfc3e615c079dde3f4155cc4b0eae8c1",
       "generated_at": "2026-11-12 06:25:25 IST"
+    },
+    {
+      "id": "newsbaqfwkowcl",
+      "slot": "D",
+      "hourly_slot_ist": "2026-11-12 14:00",
+      "scheduled_ist": "2026-11-12 14:00",
+      "title": "Gulf oil imports surpass Russia as Hormuz flows recover",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Gulf oil imports surpass Russia as Hormuz flows recover</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndia's crude oil imports from the Persian Gulf have exceeded Russian shipments for the first time since the start of the Iran conflict. Shipments through the Strait of Hormuz reached 2.1 million barrels per day this month, surpassing Russia's 1.8 million barrels per day, supported by tanker shuttle runs and normalization by producers like Saudi Arabia, UAE, Iraq, and Kuwait.\n\n🧭 <b>MARKET CONTEXT</b>\nThe Strait of Hormuz is a vital energy chokepoint. Earlier in the year, traffic plunged sharply due to geopolitical tensions, forcing Indian refiners to rely heavily on discounted Russian crude despite longer voyage times and elevated freight costs.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA shift back to Persian Gulf suppliers could alter input cost dynamics for Indian oil refiners and public finances if Middle Eastern pricing and shorter transit routes remain economically competitive against rising freight costs and infrastructure pressures on Russian exports. However, these trade flows remain sensitive to ongoing geopolitical developments in the Middle East.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming data on tanker traffic through the Strait of Hormuz, comparative landed costs of Middle Eastern versus Urals crude grades, and margin trends for domestic refining companies.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might a sustained return to traditional Gulf crude sources impact the gross refining margins of Indian downstream oil companies?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/india/indias-gulf-oil-imports-surpass-russia-for-first-time-since-start-of-iran-war-20032376.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:e460eee70588",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/india/indias-gulf-oil-imports-surpass-russia-for-first-time-since-start-of-iran-war-20032376.htm",
+      "source_headline": "India's Gulf oil imports surpass Russia for first time since start of Iran war",
+      "story_key": "e460eee70588691bf79b3bce9f9a3e18c8733249c5c094c3ef20852a8300433e",
+      "generated_at": "2026-11-12 15:32:19 IST"
     }
   ],
-  "total": 88,
-  "last_scheduled": "2026-11-12 08:00"
+  "total": 89,
+  "last_scheduled": "2026-11-12 14:00"
 }

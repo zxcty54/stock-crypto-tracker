@@ -49,7 +49,8 @@
     "2026-11-10 18",
     "2026-11-11 07",
     "2026-11-11 15",
-    "2026-11-12 06"
+    "2026-11-12 06",
+    "2026-11-12 15"
   ],
   "seen_story_keys": [
     "f2900070e222748d538b0db894a28be2e405175a1cbaf53cf272cb5faeb64ab5",
@@ -101,7 +102,8 @@
     "1b25d99333643e0595c1e333a0c645e13b4767aff8c688253e4afb37752efb30",
     "af46426a338fa765b2f8b7e86b6da0a0f2d1ecd7479b0dd0027f95544c45ce29",
     "09263cc035ff1aae34eb7558aba1d381660a01f408df799d326a811c2ff3a48b",
-    "86ca00f47cd2b666165a0f9c7951477ccfc3e615c079dde3f4155cc4b0eae8c1"
+    "86ca00f47cd2b666165a0f9c7951477ccfc3e615c079dde3f4155cc4b0eae8c1",
+    "e460eee70588691bf79b3bce9f9a3e18c8733249c5c094c3ef20852a8300433e"
   ],
   "seen_story_titles": [
     "Sebi to revamp short-selling, securities lending rules",
@@ -153,9 +155,10 @@
     "IIFL Finance approves ₹6,414 crore fundraise; Blackstone affiliate to acquire 15.57% stake",
     "US Federal Reserve officials open door to a quicker round of rate hikes as inflation worsens",
     "Bihar's first municipal bond listed on NSE; Patna civic body raises ₹200 crore",
-    "India to switch bonds worth 250 billion rupees next week"
+    "India to switch bonds worth 250 billion rupees next week",
+    "India's Gulf oil imports surpass Russia for first time since start of Iran war"
   ],
-  "last_story_title": "India to switch bonds worth 250 billion rupees next week",
-  "last_story_url": "https://economictimes.indiatimes.com/markets/bonds/india-to-switch-bonds-worth-250-billion-rupees-next-week/articleshow/135740426.cms",
-  "last_generated_at": "2026-11-12 06:25:25 IST"
+  "last_story_title": "India's Gulf oil imports surpass Russia for first time since start of Iran war",
+  "last_story_url": "https://www.cnbctv18.com/india/indias-gulf-oil-imports-surpass-russia-for-first-time-since-start-of-iran-war-20032376.htm",
+  "last_generated_at": "2026-11-12 15:32:19 IST"
 }
