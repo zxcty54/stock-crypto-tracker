@@ -1297,8 +1297,24 @@
       "source_headline": "India's Gulf oil imports surpass Russia for first time since start of Iran war",
       "story_key": "e460eee70588691bf79b3bce9f9a3e18c8733249c5c094c3ef20852a8300433e",
       "generated_at": "2026-11-12 15:32:19 IST"
+    },
+    {
+      "id": "newsaptheirkzr",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-13 08:00",
+      "scheduled_ist": "2026-11-13 08:00",
+      "title": "India bonds slide as US Treasury yields test 5% and traders brace for debt suppl",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds slide as US Treasury yields test 5% and traders brace for debt supply</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds extended losses for a second consecutive session, driven by a sharp selloff in US Treasuries and cautious positioning ahead of a domestic debt auction. The 10-year US Treasury yield touched 5% in Asian trade, while New Delhi prepared to auction 340 billion rupees worth of the benchmark 10-year note. Consequently, the benchmark 6.94% 2036 bond yield settled 3.5 basis points higher at 7.2467%, compounding losses from the previous day.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields and prices move inversely. When global benchmark yields like the US Treasury rise, foreign capital tends to exit emerging debt markets to chase higher risk-free dollar returns, pulling local bond prices down and pushing up domestic borrowing costs.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf global yields remain elevated alongside domestic inflation printing at 6.09% in October, primary dealers and banks absorbing large sovereign debt supply could face mark-to-market portfolio losses. This dynamic typically transmits higher borrowing costs to corporate bond issuers and retail loan segments, though transmission speed varies conditional on systemic liquidity.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor the cut-off yields at upcoming debt auctions, incoming crude oil price volatility, and overnight index swap (OIS) rate movements to gauge institutional rate expectations ahead of the next central bank policy meeting.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki domestic bond yields mein yeh tezi corporate borrowings par bhi dabav daalegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-track-treasury-weakness-ahead-of-debt-supply/articleshow/135769595.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:00ea8c500871",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-track-treasury-weakness-ahead-of-debt-supply/articleshow/135769595.cms",
+      "source_headline": "India bonds track Treasury weakness ahead of debt supply",
+      "story_key": "00ea8c5008711acf0e7ce0d9b4566a012b3762e42af61fc7e6f003cdc410b922",
+      "generated_at": "2026-11-12 23:59:39 IST"
     }
   ],
-  "total": 89,
-  "last_scheduled": "2026-11-12 14:00"
+  "total": 90,
+  "last_scheduled": "2026-11-13 08:00"
 }
