@@ -380,9 +380,16 @@
       "at": "2026-11-12 15:34:10 IST",
       "title": "RBI updates FEMA export-import rules, eases service reporting thresholds to ₹10 ",
       "content_hash": "9b54f398c6cf96c4af56136706e6a10ad01d53f5cd0f659c14eba8dc4a22e03b"
+    },
+    "newscclbszzhpl": {
+      "url": "https://telegra.ph/Sebi-fines-brokers-in-Axis-MF-front-running-case--November-2026-11-13",
+      "kind": "evergreen",
+      "at": "2026-11-13 12:33:26 IST",
+      "title": "Sebi fines brokers in Axis MF front-running case",
+      "content_hash": "d0254de72930da8fbaf08598787c2b12e5bcea3aaa03247b48dfa876bb8cf507"
     }
   },
   "access_token": "eb4cfde6abe4d353c136ee336440b0e531c1708b992d0270d31676011e14",
   "account_created": "2026-10-07 14:30:15 IST",
-  "last_run": "2026-11-12 15:34:10 IST"
+  "last_run": "2026-11-13 12:33:26 IST"
 }

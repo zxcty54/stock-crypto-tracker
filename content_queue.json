@@ -897,14 +897,16 @@
       "scheduled_ist": "2026-11-04 08:00",
       "title": "Sebi fines brokers in Axis MF front-running case",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi fines brokers in Axis MF front-running case</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nCapital markets regulator Sebi has imposed penalties totalling Rs 40 lakh on four entities, including Woodstock Broking and Marfatia Stock Broking along with their directors, for allegedly facilitating front-running trades for Axis Mutual Fund during an investigation period spanning April 1, 2021, to March 31, 2022.\n\n🧭 <b>MARKET CONTEXT</b>\nFront-running involves executing personal or third-party trades ahead of a large institutional client's anticipated order to capture price advantages. Sebi's surveillance systems detect such anomalies by tracking order timestamps, IP addresses, and MAC IDs linked to unauthorized remote-access software.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nRegulatory orders penalizing brokerages highlight compliance vulnerabilities in IT infrastructure and remote terminal access. If systemic gaps permit unauthorized external access, institutional clients may increase due diligence on broker execution controls, potentially raising compliance overheads for intermediaries.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor follow-up enforcement actions on connected entities, compliance audits of trading terminals by exchanges, and tightened remote-access guidelines for brokerages.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do retail brokerages balance remote operational flexibility with foolproof surveillance over trading terminals?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/stocks/news/sebi-levies-rs-40-lakh-penalty-on-four-entities-in-axis-mf-front-running-case/articleshow/135506148.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:c4b40784df2d",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-levies-rs-40-lakh-penalty-on-four-entities-in-axis-mf-front-running-case/articleshow/135506148.cms",
       "source_headline": "Sebi levies Rs 40 lakh penalty on four entities in Axis MF front-running case",
       "story_key": "c4b40784df2d3c9f46bc8aeece63bbfc22f93934e6bf6f470efaf7753e52c151",
-      "generated_at": "2026-11-04 01:12:37 IST"
+      "generated_at": "2026-11-04 01:12:37 IST",
+      "posted_at": "2026-11-13 12:33:26 IST",
+      "telegraph_url": "https://telegra.ph/Sebi-fines-brokers-in-Axis-MF-front-running-case--November-2026-11-13"
     },
     {
       "id": "newslhmtlswqxj",
@@ -1329,8 +1331,24 @@
       "source_headline": "October retail inflation surge may weigh on housing demand, raise rate hike concerns: Knight Frank, PHDCCI",
       "story_key": "06e27843547fe93ec31278ebde88b4d9aad5114762eb7849aa9146bebc6fc6bb",
       "generated_at": "2026-11-13 05:19:10 IST"
+    },
+    {
+      "id": "newsohwmddpcpz",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-13 12:00",
+      "scheduled_ist": "2026-11-13 12:00",
+      "title": "Bond yields surge as hot inflation and debt supply pressure RBI rate outlook",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Bond yields surge as hot inflation and debt supply pressure RBI rate outlook</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds faced heavy selling pressure in early trades, pushing the benchmark 6.94% 2036 bond yield to 7.3113% from 7.2467% a day prior. The spike coincides with New Delhi's plan to auction 340 billion rupees of the benchmark paper, taking its outstanding issuance to a record 2.72 trillion rupees. Meanwhile, annual retail inflation accelerated to 6.09% in October, exceeding the Reserve Bank of India's 4% medium-term target.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields move inversely to prices. When supply floods the market or inflation prints run high, investors demand higher yields to preserve purchasing power, eroding the mark-to-market value of existing fixed-income portfolios held by banks and mutual funds.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nPersistent high inflation and rising sovereign yields could prompt the Reserve Bank of India to follow up its October rate hike with further tightening in December. Higher benchmark yields typically transmit to wider corporate borrowing costs across the economy, potentially squeezing debt-reliant sectors if financing conditions tighten.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor upcoming debt auction cut-off yields, the upcoming RBI policy rate decision in early December, and domestic wholesale and retail inflation trajectory.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapke fixed-income ya debt mutual fund portfolios par in badhte yields ka asar pad raha hai?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-under-pressure-before-debt-supply-hot-inflation-prints-pinch-further/articleshow/135789760.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:102ac2913dfa",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-under-pressure-before-debt-supply-hot-inflation-prints-pinch-further/articleshow/135789760.cms",
+      "source_headline": "India bonds under pressure before debt supply; hot inflation prints pinch further",
+      "story_key": "102ac2913dfae3d95189f393ad2554db927ca01257404ccc5a01181577880199",
+      "generated_at": "2026-11-13 12:31:54 IST"
     }
   ],
-  "total": 91,
-  "last_scheduled": "2026-11-13 08:00"
+  "total": 92,
+  "last_scheduled": "2026-11-13 12:00"
 }
