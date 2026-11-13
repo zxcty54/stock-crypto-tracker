@@ -1,8 +1,8 @@
 # 📊 Performance Report
 
-**13-Nov-2026 03:22 IST** | 100 posts tracked | channel avg **21 views**
+**14-Nov-2026 02:58 IST** | 100 posts tracked | channel avg **21 views**
 
-*62 posts pehchaane gaye, 38 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
+*61 posts pehchaane gaye, 39 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
 ## Pillar performance
 
@@ -10,23 +10,23 @@
 |---|---|---|---|
 | lifestyle | 1 | 43 | 1.0 |
 | tools | 1 | 29 | 1.0 |
-| technical | 5 | 28 | 1.35 |
+| technical | 3 | 28 | 1.34 |
 | process | 2 | 25 | 1.0 |
 | risk | 3 | 24 | 1.14 |
-| business_model | 13 | 22 | 1.03 |
-| corporate | 50 | 21 | 0.98 |
-| market_mechanics | 5 | 20 | 0.95 |
-| awareness | 6 | 19 | 0.91 |
+| business_model | 13 | 22 | 1.06 |
+| corporate | 51 | 21 | 0.99 |
+| market_mechanics | 5 | 20 | 0.96 |
 | psychology | 1 | 19 | 1.0 |
-| other | 13 | 17 | 0.8 |
+| awareness | 7 | 18 | 0.87 |
+| other | 13 | 18 | 0.84 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 465** (target 1000)
+**Subscribers: 464** (target 1000)
 
-- Pichhle 7 din me: **-2**
-- Average: **12.49/din**
-- Isi raftaar se 1000 subs: **~42 din**
+- Pichhle 7 din me: **-3**
+- Average: **12.13/din**
+- Isi raftaar se 1000 subs: **~44 din**
 
 
 ## 🏆 Top posts
@@ -46,9 +46,9 @@
 
 - 10 views — Jtekt India Limited (NSE: JTEKTINDIA)  
   `corporate`
-- 9 views — RBI updates FEMA export-import rules, eases service reporting threshol  
-  `other`
-- 7 views — TD Power Systems Limited (NSE: TDPOWERSYS)  
+- 10 views — Ice Make Refrigeration Limited (NSE: ICEMAKE)  
+  `corporate`
+- 8 views — Zee Entertainment Enterprises Limited (NSE: ZEEL)  
   `corporate`
 
 ---
