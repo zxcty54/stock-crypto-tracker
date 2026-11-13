@@ -1,8 +1,22 @@
 {
-  "generated_at": "2026-11-13 01:37:16 IST",
-  "worthy_count": 28,
-  "skipped_count": 43,
+  "generated_at": "2026-11-13 06:39:14 IST",
+  "worthy_count": 27,
+  "skipped_count": 45,
   "content_feed": [
+    {
+      "hash": "947b9a01feb3",
+      "symbol": "VHL",
+      "company_name": "Vardhman Holdings Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "10-Nov-2026 13:02:37",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf",
+      "headline": "Vardhman Holdings Limited Reports Q2 FY27 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Company reported financial results for the quarter ended September 30, 2026, with explicit revenue and net profit numbers.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Vardhman Holdings Limited (NSE: VHL)</b>\n\n<b>Vardhman Holdings Limited Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue from Operations:</b> Rs. 64.43 Crores\n- <b>Total Income:</b> Rs. 64.97 Crores\n- <b>Profit After Tax (PAT):</b> Rs. 49.99 Crores\n- <b>Total Expenses:</b> Rs. 2.64 Crores\n\n📌 <b>What happened:</b>\n↳ Vardhman Holdings Limited announced its standalone unaudited financial results for the quarter ended September 30, 2026, posting a net profit of Rs. 49.99 Crores on a total income of Rs. 64.97 Crores.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-13 06:38:53 IST"
+    },
     {
       "hash": "ac1196313e99",
       "symbol": "JYOTHYLAB",
@@ -366,37 +380,37 @@
       "worthiness_reason": "Company reported quarterly financial results and declared an interim dividend.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>TD Power Systems Limited (NSE: TDPOWERSYS)</b>\n\n<b>TD Power Systems Reports Q2 FY27 Results and Declares Interim Dividend</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Net Sales (Q2):</b> ₹ 82,313.10 Lakhs\n- <b>PAT (Q2):</b> ₹ 12,131.15 Lakhs\n- <b>Interim Dividend:</b> ₹ 0.65 per share (65%)\n- <b>Face Value:</b> ₹ 1/- per share\n\n📌 <b>What happened:</b>\n↳ The company reported a standalone net profit of ₹ 12,131.15 Lakhs for the quarter ended September 30, 2026. Additionally, the Board declared an interim dividend of ₹ 0.65 per equity share for the financial year ending March 31, 2027.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/TDPOWERSYS_12112026170734_1Results_-_for_DSC.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-12 17:26:43 IST"
-    },
+    }
+  ],
+  "skipped_archive": [
     {
       "hash": "c4b305f541d0",
       "symbol": "MRF",
       "company_name": "MRF Limited",
       "category": "RESULT",
-      "event_type": "DIVIDEND",
+      "event_type": "RESULT",
       "broadcast_date": "10-Nov-2026 12:24:20",
       "pdf_link": "https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf",
-      "headline": "MRF Declares Interim Dividend of Rs. 3 Per Share",
-      "content_worthy": true,
-      "worthiness_reason": "Board declared an interim dividend with a specified record date.",
-      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>MRF Limited (NSE: MRF)</b>\n\n<b>MRF Declares Interim Dividend of Rs. 3 Per Share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend per Share:</b> Rs. 3 (30% on face value of Rs. 10)\n- <b>Dividend Type:</b> Interim Dividend\n- <b>Record Date:</b> Tuesday, November 17, 2026\n- <b>Payment Date:</b> On or after December 1, 2026\n\n📌 <b>What happened:</b>\n↳ The Board of Directors declared an interim dividend for the financial year ending March 31, 2027, during their meeting held on November 10, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/MRF_10112026122136_BRESULTFINAL.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-12 03:48:55 IST"
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing does not contain the actual numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-13 06:39:14 IST"
     },
     {
-      "hash": "947b9a01feb3",
-      "symbol": "VHL",
-      "company_name": "Vardhman Holdings Limited",
+      "hash": "03e1067932de",
+      "symbol": "DAVANGERE",
+      "company_name": "Davangere Sugar Company Limited",
       "category": "RESULT",
       "event_type": "RESULT",
-      "broadcast_date": "10-Nov-2026 13:02:37",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf",
-      "headline": "Vardhman Holdings Reports September Quarter Financial Results",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results containing explicit quarterly Revenue and PAT figures.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Vardhman Holdings Limited (NSE: VHL)</b>\n\n<b>Vardhman Holdings Reports September Quarter Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue from Operations (Q2 FY27):</b> Rs. 64.43 Crores\n- <b>Net Profit After Tax (Q2 FY27):</b> Rs. 49.99 Crores\n- <b>Total Income (Q2 FY27):</b> Rs. 64.97 Crores\n- <b>Profit Before Tax (Q2 FY27):</b> Rs. 62.33 Crores\n\n📌 <b>What happened:</b>\n↳ The company's Board of Directors approved the un-audited financial results for the quarter ended September 30, 2026, during their meeting held on November 10, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VHL_10112026130027_VHL_QR_30092026_sd.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-12 03:48:55 IST"
-    }
-  ],
-  "skipped_archive": [
+      "broadcast_date": "13-Nov-2026 01:41:30",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/DAVANGERESUGAR_13112026013539_DSCL_-Outcome_of_Board_Meeting_30_Sept_2026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results summary lacks explicit numeric Revenue and PAT figures in the provided text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-13 06:38:53 IST"
+    },
     {
       "hash": "21d0a866af70",
       "symbol": "MUFTI",
