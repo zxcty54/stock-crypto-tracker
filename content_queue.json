@@ -1347,8 +1347,24 @@
       "source_headline": "India bonds under pressure before debt supply; hot inflation prints pinch further",
       "story_key": "102ac2913dfae3d95189f393ad2554db927ca01257404ccc5a01181577880199",
       "generated_at": "2026-11-13 12:31:54 IST"
+    },
+    {
+      "id": "newsdtdiozirzh",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-14 08:00",
+      "scheduled_ist": "2026-11-14 08:00",
+      "title": "BSE expands domestic benchmarking suite with 14 new sectoral indices",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>BSE expands domestic benchmarking suite with 14 new sectoral indices</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nBSE Index Services launched 14 new sectoral indices derived from the BSE 500 universe, expanding its total sectoral index count to 20. Six legacy sectoral indices were also renamed with a 'BSE 500' prefix to establish a uniform framework.\n\n🧭 <b>MARKET CONTEXT</b>\nSectoral indices track specific industry groups, helping market participants measure relative performance. Transitioning to a broader base like the BSE 500 captures a larger share of listed companies compared to narrower indices.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nA wider array of standardized benchmarks gives asset managers more precise tools to launch specialized exchange-traded funds, index funds, and portfolio management strategies. If institutional funds adopt these newer gauges, capital allocation across broader mid- and small-cap segments could improve incrementally.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack the actual rollout and asset accumulation in new index funds or ETFs referencing these benchmarks, alongside broader industry adoption by domestic fund managers.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki naye aur broad-based sector indices aane se passive funds ka allocation mid aur small-caps mein aur zyada shift hoga?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/bse-index-services-launches-14-new-sectoral-indices-20033701.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:029392ebd986",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/bse-index-services-launches-14-new-sectoral-indices-20033701.htm",
+      "source_headline": "BSE Index Services launches 14 new sectoral indices",
+      "story_key": "029392ebd986edddd796d3595b56f8edcb77f30ce9f8ffeaa74460ace39cd64a",
+      "generated_at": "2026-11-14 05:16:33 IST"
     }
   ],
-  "total": 92,
-  "last_scheduled": "2026-11-13 12:00"
+  "total": 93,
+  "last_scheduled": "2026-11-14 08:00"
 }
