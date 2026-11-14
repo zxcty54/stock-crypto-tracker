@@ -1,27 +1,21 @@
 {
- "generated_at": "2026-11-14 02:58 IST",
+ "generated_at": "2026-11-15 01:29 IST",
  "sample_size": 100,
- "identified": 61,
- "inferred": 39,
+ "identified": 59,
+ "inferred": 41,
  "cards_skipped": 0,
- "channel_avg_views": 21.0,
+ "channel_avg_views": 20.0,
  "growth": {
-  "today": 464,
-  "snapshots": 37,
-  "delta_7d": -3,
-  "per_day": 12.13,
-  "days_to_target": 44,
+  "today": 463,
+  "snapshots": 38,
+  "delta_7d": -4,
+  "per_day": 11.79,
+  "days_to_target": 45,
   "target": 1000,
-  "days_span": 38
+  "days_span": 39
  },
  "status": "ok",
  "pillars": {
-  "lifestyle": {
-   "posts": 1,
-   "avg_views": 43.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
   "tools": {
    "posts": 1,
    "avg_views": 29.0,
@@ -31,7 +25,7 @@
   "technical": {
    "posts": 3,
    "avg_views": 28.0,
-   "weight": 1.34,
+   "weight": 1.4,
    "low_sample": false
   },
   "process": {
@@ -42,26 +36,26 @@
   },
   "risk": {
    "posts": 3,
-   "avg_views": 24.0,
-   "weight": 1.14,
+   "avg_views": 24.7,
+   "weight": 1.24,
    "low_sample": false
   },
   "business_model": {
-   "posts": 13,
-   "avg_views": 22.2,
-   "weight": 1.06,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 51,
-   "avg_views": 20.7,
-   "weight": 0.99,
+   "posts": 12,
+   "avg_views": 20.9,
+   "weight": 1.05,
    "low_sample": false
   },
   "market_mechanics": {
    "posts": 5,
-   "avg_views": 20.2,
-   "weight": 0.96,
+   "avg_views": 20.4,
+   "weight": 1.02,
+   "low_sample": false
+  },
+  "corporate": {
+   "posts": 52,
+   "avg_views": 20.0,
+   "weight": 1.0,
    "low_sample": false
   },
   "psychology": {
@@ -70,35 +64,20 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "awareness": {
-   "posts": 7,
-   "avg_views": 18.1,
-   "weight": 0.87,
+  "other": {
+   "posts": 14,
+   "avg_views": 17.2,
+   "weight": 0.86,
    "low_sample": false
   },
-  "other": {
-   "posts": 13,
-   "avg_views": 17.6,
-   "weight": 0.84,
+  "awareness": {
+   "posts": 7,
+   "avg_views": 15.4,
+   "weight": 0.77,
    "low_sample": false
   }
  },
  "top_posts": [
-  {
-   "title": "1% RULE: Capital Bachao Ge Tabhi Kheloge",
-   "views": 43,
-   "pillar": "lifestyle"
-  },
-  {
-   "title": "Subex Secures USD 0.7M Deal with African Mobile Operator for HyperSens",
-   "views": 42,
-   "pillar": "corporate"
-  },
-  {
-   "title": "NBFC VS BANK: Risk Ko Pehle Samjho",
-   "views": 39,
-   "pillar": "business_model"
-  },
   {
    "title": "Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL",
    "views": 38,
@@ -108,23 +87,38 @@
    "title": "Sterling and Wilson Renewable Energy Limited (NSE: SWSOLAR)",
    "views": 36,
    "pillar": "corporate"
+  },
+  {
+   "title": "MAX DAILY LOSS: Galat Process Aur Corrective Steps",
+   "views": 34,
+   "pillar": "process"
+  },
+  {
+   "title": "Vascon Engineers Secures Rs. 198 Cr Order from State Bank of India for",
+   "views": 34,
+   "pillar": "corporate"
+  },
+  {
+   "title": "TREND VS RANGE: Myth vs Reality",
+   "views": 32,
+   "pillar": "technical"
   }
  ],
  "weak_posts": [
   {
-   "title": "Jtekt India Limited (NSE: JTEKTINDIA)",
-   "views": 10,
+   "title": "Dolat Algotech Limited (NSE: DOLATALGO)",
+   "views": 7,
    "pillar": "corporate"
   },
   {
-   "title": "Ice Make Refrigeration Limited (NSE: ICEMAKE)",
-   "views": 10,
+   "title": "Superhouse Limited (NSE: SUPERHOUSE)",
+   "views": 7,
    "pillar": "corporate"
   },
   {
-   "title": "Zee Entertainment Enterprises Limited (NSE: ZEEL)",
-   "views": 8,
-   "pillar": "corporate"
+   "title": "SEBI forms 18-member panel to revamp Innovators Growth Platform for st",
+   "views": 4,
+   "pillar": "awareness"
   }
  ]
 }
