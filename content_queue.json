@@ -915,14 +915,16 @@
       "scheduled_ist": "2026-11-04 14:00",
       "title": "Meta taps debt market with $15B bond sale to fund aggressive AI infrastructure b",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Meta taps debt market with $15B bond sale to fund aggressive AI infrastructure buildout</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nMeta Platforms is raising $15 billion via a five-part US dollar bond offering, featuring tranches like notes maturing in 2031 at a 5.85% coupon rate and notes due in 2033 at 6.25%. This move follows recent equity-raise plans and highlights how tech giants are intensifying external borrowing to finance massive outlays for data centres, custom chips, and cloud infrastructure.\n\n🧭 <b>MARKET CONTEXT</b>\nWhen cash-rich balance sheets are stretched by multi-billion dollar capital expenditure cycles, firms turn to corporate bond markets. Coupon rates reflect prevailing risk premiums and duration demands in global debt markets.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nAs major technology platforms aggressively leverage debt to fund capital-intensive AI infrastructure, overall corporate debt supply increases. If infrastructure spending fails to generate projected cash flows, high debt-servicing burdens could weigh on tech sector valuations and risk sentiment across global capital markets.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming technology sector corporate debt issuances, global yield movements, and updates on data-centre deployment scale versus revenue realization.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do heavy debt-funded capital expenditure cycles alter the risk profile of traditionally cash-rich technology giants?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/meta-raises-15-billion-through-bond-sale-to-fund-ai-infrastructure-expansion/articleshow/135530378.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:22c77f3d846a",
       "kind": "business_news_insight",
       "source_name": "Economic Times",
       "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/meta-raises-15-billion-through-bond-sale-to-fund-ai-infrastructure-expansion/articleshow/135530378.cms",
       "source_headline": "Meta raises $15 billion through bond sale to fund AI infrastructure expansion",
       "story_key": "22c77f3d846a199954d0ee3d3dcb8104512f2c99c5fdb79926474583d810aee0",
-      "generated_at": "2026-11-04 15:07:47 IST"
+      "generated_at": "2026-11-04 15:07:47 IST",
+      "posted_at": "2026-11-14 12:23:00 IST",
+      "telegraph_url": "https://telegra.ph/Meta-taps-debt-market-with-15B-bond-sale-to-fund-aggressive-AI-infrastructure-b--November-2026-11-14"
     },
     {
       "id": "newsgpxmknpslv",
@@ -1363,8 +1365,24 @@
       "source_headline": "BSE Index Services launches 14 new sectoral indices",
       "story_key": "029392ebd986edddd796d3595b56f8edcb77f30ce9f8ffeaa74460ace39cd64a",
       "generated_at": "2026-11-14 05:16:33 IST"
+    },
+    {
+      "id": "newspbgngucapi",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-14 12:00",
+      "scheduled_ist": "2026-11-14 12:00",
+      "title": "US Fed Vice Chair Jefferson Focuses On Inflation As Economic Activity Stays Soli",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>US Fed Vice Chair Jefferson Focuses On Inflation As Economic Activity Stays Solid</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nUS Federal Reserve Vice Chair Philip Jefferson stated that he is taking his monetary policy cues primarily from inflation trends, noting that the economy is growing and the labor market has stabilized. While joining the majority who waited at the October meeting, Jefferson highlighted persistent price pressures and mentioned that future policy adjustments will depend on incoming data, the evolving outlook, and risk balances. He also noted that artificial intelligence could boost productivity gradually while potentially increasing overall borrowing costs if companies continuously ramp up investments.\n\n🧭 <b>MARKET CONTEXT</b>\nCentral bank policy cues are heavily anchored to incoming inflation and employment data prints rather than arbitrary timelines. When policymakers flag persistent price pressures alongside a stable labor market, it signals that easing cycles may pause or remain restricted.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nFor global capital markets and emerging economies like India, persistent US inflation and potential higher-for-longer interest rates can influence foreign portfolio flows and domestic borrowing dynamics. If global borrowing costs rise due to structural shifts like sustained AI-related infrastructure investments, capital availability for emerging market assets could face tighter conditions, though this depends on broader domestic growth fundamentals.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack upcoming US Consumer Price Index prints, employment reports, and subsequent Federal Reserve commentary for shifts in rate expectations.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya global central bank tone changes aur domestic liquidity par inke asar ko aap apne risk management me track karte hain?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/news/feds-jefferson-says-he-is-taking-his-policy-cues-from-inflation/articleshow/135821792.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:2e1b1047721e",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/news/feds-jefferson-says-he-is-taking-his-policy-cues-from-inflation/articleshow/135821792.cms",
+      "source_headline": "Fed's Jefferson says he is taking his policy cues from inflation",
+      "story_key": "2e1b1047721e38eaa5068ed48588e8c4f1f7e9424668136069fde660885491ee",
+      "generated_at": "2026-11-14 12:21:22 IST"
     }
   ],
-  "total": 93,
-  "last_scheduled": "2026-11-14 08:00"
+  "total": 94,
+  "last_scheduled": "2026-11-14 12:00"
 }
