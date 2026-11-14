@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-14 15:12:16 IST",
+  "generated_at": "2026-11-14 21:44:27 IST",
   "worthy_count": 49,
-  "skipped_count": 83,
+  "skipped_count": 85,
   "content_feed": [
     {
       "hash": "5e1245e57750",
@@ -691,6 +691,34 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "48d895345711",
+      "symbol": "WCIL",
+      "company_name": "Western Carriers (India) Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Nov-2026 14:54:35",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/WCIL_14112026145400_WCIL_OUTCOME_SEPT_2026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The filing only provides the outcome of the board meeting and limited review report cover page without explicitly stating the numeric revenue and PAT figures in the text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-14 21:44:27 IST"
+    },
+    {
+      "hash": "fcf4c7dd1372",
+      "symbol": "MADHUCON",
+      "company_name": "Madhucon Projects Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Nov-2026 14:55:01",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MADHUCON_14112026145443_NewspaperPubUFR30092026MR.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "The filing only provides a notice of newspaper publication for financial results without disclosing the actual numeric figures in the text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-14 21:44:27 IST"
+    },
     {
       "hash": "aa6c0ea3e7a0",
       "symbol": "MVGJL",
