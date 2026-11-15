@@ -1,6 +1,34 @@
 {
   "stories": [
     {
+      "id": "newsgwbbxsssdc",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Record Dates This Week: Cochin Shipyard, Page Industries, Oil India among 12 stocks seeing corporate actions",
+      "url": "https://www.cnbctv18.com/market/corporate-actions-this-week-cochin-shipyard-page-industries-shipping-corp-dr-agarwal-medi-assist-share-price-dividend-buyback-record-date-20034489.htm",
+      "published_at": "2026-11-16T04:30:38+05:30",
+      "published_ist": "2026-11-16 04:30 IST",
+      "summary": "Friday is the record date for the share buyback of Medi Assist. The company has announced a ₹50 crore share buyback, at a price of ₹425 per share.",
+      "first_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "first_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "status": "rejected",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 04:32:51 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Corporate actions jaise dividend payouts, share buybacks aur amalgamations companies ki capital allocation strategy ko reflect karte hain. Yeh announcements sirf ek administrative deadline hain aur yeh establish nahi karte ki stock ki future operational earnings ya long-term cash flow growth strong rahegi. Agar buyback ya dividend payout ke baad bhi core business cash generation kam hoti hai, toh yeh capital returns unsustainable ho sakte hain.",
+        "what_to_watch": [
+          "Company ke subsequent quarterly financial results aur cash flow statements check karna ki payout ke baad liquidity par kya asar pada.",
+          "Official exchange filings mein share buyback ki actual execution aur completion data ko track karna."
+        ],
+        "evergreen_lesson": "Record dates aur corporate actions capital return mechanism hain, lekin yeh business ki future fundamental profitability ya operational strength ki guarantee nahi dete."
+      },
+      "processed_ist": "2026-11-16 04:32:51 IST"
+    },
+    {
       "id": "newsbfokfxlizv",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -10,9 +38,9 @@
       "published_ist": "2026-11-15 21:57 IST",
       "summary": "Sebi chairman Tuhin Kanta Pandey said the regulator will soon issue detailed guidelines for AI use in capital markets. The proposed framework will focus on investor protection, accountability and human oversight.",
       "first_seen_at": "2026-11-15T22:49:59.594869+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-15 22:49:59 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -40,9 +68,9 @@
       "published_ist": "2026-11-15 14:53 IST",
       "summary": "Goldman Sachs has upgraded India to overweight and expects the MSCI Asia ex-Japan Index to return 19% in 2027, driven primarily by earnings growth, Bloomberg reported.",
       "first_seen_at": "2026-11-15T15:14:01.452860+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-15 15:14:01 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "rejected",
       "topic": "stock_market",
       "processed_ist": "2026-11-15 15:14:01 IST",
@@ -69,9 +97,9 @@
       "published_ist": "2026-11-14 16:39 IST",
       "summary": "Despite ongoing tanker attacks near the Strait of Hormuz, surging output from Saudi Arabia and record US production have pushed futures down nearly 25% this month. With the IEA flagging early signs of rebalancing, major Gulf producers are now slashing official selling prices to win back buyers.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -85,9 +113,9 @@
       "published_ist": "2026-11-14 16:27 IST",
       "summary": "Speaking at the HT Leadership Summit 2026, Noel said a public listing could change the way the Tata Group operates. He added that Tata Trusts would work constructively with regulators and other stakeholders to find a solution that preserves the group's founding ethos.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -101,9 +129,9 @@
       "published_ist": "2026-11-14 14:45 IST",
       "summary": "Of these, we shortlisted 8 stocks that consistently gained throughout the period, delivering cumulative returns ranging from 7% to 11%.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -117,9 +145,9 @@
       "published_ist": "2026-11-14 11:31 IST",
       "summary": "Here are the 10 largecap stocks that recorded the biggest jump in November so far, including six who have delivered multibagger returns in the longer run.",
       "first_seen_at": "2026-11-14T12:21:22.551368+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 12:21:22 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "rejected",
       "topic": "stock_market",
       "ai_insight": {
@@ -145,9 +173,9 @@
       "published_ist": "2026-11-14 09:20 IST",
       "summary": "Federal Reserve Vice Chair Philip Jefferson emphasized inflation as the main factor in determining monetary policy. He highlighted that economic growth and a stable labor market have been observed. Jefferson indicated that upcoming adjustments to policy should rely on data trends and the evolving economic outlook. Concerns about artificial intelligence displacing workers were also mentioned in his remarks.",
       "first_seen_at": "2026-11-14T12:21:22.551368+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 12:21:22 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "queued",
       "topic": "economy",
       "ai_insight": {
@@ -174,9 +202,9 @@
       "published_ist": "2026-11-14 08:15 IST",
       "summary": "In the latest transaction, SVF II Meerkat (DE) LLC, an affiliate of SoftBank, offloaded 7.64 crore shares in Bengaluru-based Meesho, according to the block deal data on the National Stock Exchange (NSE).",
       "first_seen_at": "2026-11-14T12:21:22.551368+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 12:21:22 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -201,9 +229,9 @@
       "published_ist": "2026-11-14 05:47 IST",
       "summary": "Technology shares came under renewed pressure as investors weighed concerns over artificial intelligence valuations and persistent inflation across the economy",
       "first_seen_at": "2026-11-14T12:21:22.551368+05:30",
-      "last_seen_at": "2026-11-15T22:49:59.594869+05:30",
+      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
       "first_seen_ist": "2026-11-14 12:21:22 IST",
-      "last_seen_ist": "2026-11-15 22:49:59 IST",
+      "last_seen_ist": "2026-11-16 04:32:51 IST",
       "status": "new",
       "topic": "stock_market",
       "ai_insight": {
@@ -12905,19 +12933,19 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-15T22:49:59.594869+05:30",
-  "last_scraped_ist": "2026-11-15 22:49:59 IST",
+  "last_scraped_at": "2026-11-16T04:32:51.516573+05:30",
+  "last_scraped_ist": "2026-11-16 04:32:51 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
-      "fresh_items": 30,
-      "accepted_items": 6,
-      "filtered_items": 24,
+      "fresh_items": 22,
+      "accepted_items": 5,
+      "filtered_items": 17,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
       "fresh_items": 20,
       "accepted_items": 4,
@@ -12925,7 +12953,7 @@
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
       "fresh_items": 6,
       "accepted_items": 1,
@@ -12933,7 +12961,7 @@
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -12941,7 +12969,7 @@
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -12949,7 +12977,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-15 22:49:59 IST",
+      "checked_ist": "2026-11-16 04:32:51 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -12981,16 +13009,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-15 22:49:59 IST"
+    "last_curated_ist": "2026-11-16 04:32:51 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-15 22:49:59 IST",
-    "fetched_items": 56,
-    "accepted_feed_items": 11,
-    "filtered_feed_items": 45,
+    "updated_ist": "2026-11-16 04:32:51 IST",
+    "fetched_items": 48,
+    "accepted_feed_items": 10,
+    "filtered_feed_items": 38,
     "new_unique_stories": 1,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 532
+    "stories_total": 533
   }
 }
