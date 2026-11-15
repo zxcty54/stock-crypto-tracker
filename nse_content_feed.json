@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-11-15 20:32:29 IST",
-  "worthy_count": 27,
-  "skipped_count": 73,
+  "generated_at": "2026-11-16 01:56:05 IST",
+  "worthy_count": 30,
+  "skipped_count": 74,
   "content_feed": [
+    {
+      "hash": "4f74483f490a",
+      "symbol": "BBOX",
+      "company_name": "Black Box Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "13-Nov-2026 12:21:07",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/BBOX_13112026122059_SE_PR_Q2FY27_Signed.pdf",
+      "headline": "Black Box Reports Q2 FY27 Financial Results and Order Backlog",
+      "content_worthy": true,
+      "worthiness_reason": "Financial results with numeric revenue, EBITDA, PAT, and order backlog figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Black Box Limited (NSE: BBOX)</b>\n\n<b>Black Box Reports Q2 FY27 Financial Results and Order Backlog</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue (Q2 FY27):</b> ₹1,936 crore (Up 22% YoY)\n- <b>EBITDA:</b> ₹175 crore (Up 23% YoY)\n- <b>Profit After Tax (PAT):</b> ₹73 crore (Up 31% YoY)\n- <b>Order Backlog:</b> US$1,044 million (Up 88% YoY)\n\n📌 <b>What happened:</b>\n↳ Black Box Limited announced its unaudited financial results for the quarter ended September 30, 2026, delivering record quarterly revenue and growth across enterprise and data center solutions.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/BBOX_13112026122059_SE_PR_Q2FY27_Signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-16 01:56:05 IST"
+    },
+    {
+      "hash": "877ca2e7199a",
+      "symbol": "VENKEYS",
+      "company_name": "Venky's (India) Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "13-Nov-2026 12:28:33",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/VENKEYS_13112026122620_VIL_FR_Sept2026.pdf",
+      "headline": "Venky's (India) Reports Q2 FY27 Financial Results",
+      "content_worthy": true,
+      "worthiness_reason": "Quarterly financial results containing explicit revenue and PAT figures.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Venky's (India) Limited (NSE: VENKEYS)</b>\n\n<b>Venky's (India) Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income (Q2 FY27):</b> ₹1,01,769 Lakhs\n- <b>Revenue from Operations:</b> ₹1,06,601 Lakhs\n- <b>Profit After Tax (PAT):</b> ₹1,461 Lakhs\n- <b>Basic EPS:</b> ₹10.37\n\n📌 <b>What happened:</b>\n↳ Venky's (India) Limited has announced its audited financial results for the quarter ended September 30, 2026, reporting a net profit of ₹1,461 Lakhs.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/VENKEYS_13112026122620_VIL_FR_Sept2026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-16 01:56:05 IST"
+    },
+    {
+      "hash": "8c384de656b8",
+      "symbol": "JAMNAAUTO",
+      "company_name": "Jamna Auto Industries Limited",
+      "category": "RESULT",
+      "event_type": "DIVIDEND",
+      "broadcast_date": "14-Nov-2026 13:58:54",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/JAMNAAUTO_14112026135815_Outcome.pdf",
+      "headline": "Jamna Auto Industries Limited declares Interim Dividend of Rs. 1.00 per share",
+      "content_worthy": true,
+      "worthiness_reason": "Company declared an interim dividend along with record date and approved financial results.",
+      "telegram_post": "💵 <b>#DIVIDEND</b> | <b>Jamna Auto Industries Limited (NSE: JAMNAAUTO)</b>\n\n<b>Jamna Auto Industries declares Interim Dividend of Rs. 1.00 per share</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Dividend Amount:</b> Rs. 1.00 per equity share\n- <b>Face Value:</b> Rs. 1.00 each\n- <b>Financial Year:</b> 2026-27\n- <b>Record Date:</b> November 20, 2026\n\n📌 <b>What happened:</b>\n↳ The Board of Directors approved the un-audited standalone and consolidated financial results for the quarter and half year ended September 30, 2026, and declared an interim dividend.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/JAMNAAUTO_14112026135815_Outcome.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-16 01:55:43 IST"
+    },
     {
       "hash": "5e1245e57750",
       "symbol": "BFINVEST",
@@ -383,6 +425,48 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "f07dd3e0d803",
+      "symbol": "NITINFIRE",
+      "company_name": "Nitin Fire Protection Industries Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "14-Nov-2026 14:00:27",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/NITINFIRE_14112026135619_Outcome-of-Board-Meeting-result-Sept_26.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing does not explicitly contain the numeric Revenue and PAT figures in the provided text snippet.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-16 01:55:43 IST"
+    },
+    {
+      "hash": "48d895345711",
+      "symbol": "WCIL",
+      "company_name": "Western Carriers (India) Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "14-Nov-2026 14:54:35",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/WCIL_14112026145400_WCIL_OUTCOME_SEPT_2026.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "The filing is an outcome of board meeting regarding financial results, but the actual numeric financial tables containing revenue and PAT are missing from the provided text excerpt.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-16 01:55:22 IST"
+    },
+    {
+      "hash": "fcf4c7dd1372",
+      "symbol": "MADHUCON",
+      "company_name": "Madhucon Projects Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "14-Nov-2026 14:55:01",
+      "pdf_link": "https://nsearchives.nseindia.com/corporate/MADHUCON_14112026145443_NewspaperPubUFR30092026MR.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "The filing is a routine newspaper publication submission regarding financial results, but lacks the actual numeric revenue and PAT details within the provided summary and details text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-16 01:55:22 IST"
+    },
     {
       "hash": "aa6c0ea3e7a0",
       "symbol": "MVGJL",
@@ -1376,34 +1460,6 @@
       "worthiness_reason": "Financial results announcement lacks explicit numeric Revenue and PAT figures in the provided text.",
       "telegram_post": "",
       "analyzed_at": "2026-11-15 02:16:18 IST"
-    },
-    {
-      "hash": "48d895345711",
-      "symbol": "WCIL",
-      "company_name": "Western Carriers (India) Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "14-Nov-2026 14:54:35",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/WCIL_14112026145400_WCIL_OUTCOME_SEPT_2026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "The filing only provides the outcome of the board meeting and limited review report cover page without explicitly stating the numeric revenue and PAT figures in the text.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-14 21:44:27 IST"
-    },
-    {
-      "hash": "fcf4c7dd1372",
-      "symbol": "MADHUCON",
-      "company_name": "Madhucon Projects Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "14-Nov-2026 14:55:01",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/MADHUCON_14112026145443_NewspaperPubUFR30092026MR.pdf",
-      "headline": "Press Release",
-      "content_worthy": false,
-      "worthiness_reason": "The filing only provides a notice of newspaper publication for financial results without disclosing the actual numeric figures in the text.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-14 21:44:27 IST"
     }
   ]
 }
