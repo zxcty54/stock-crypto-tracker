@@ -1385,8 +1385,24 @@
       "source_headline": "Fed's Jefferson says he is taking his policy cues from inflation",
       "story_key": "2e1b1047721e38eaa5068ed48588e8c4f1f7e9424668136069fde660885491ee",
       "generated_at": "2026-11-14 12:21:22 IST"
+    },
+    {
+      "id": "newsamgssaovgw",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-16 08:00",
+      "scheduled_ist": "2026-11-16 08:00",
+      "title": "Sebi to introduce responsible AI guidelines for capital markets",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Sebi to introduce responsible AI guidelines for capital markets</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nMarkets regulator SEBI chairman Tuhin Kanta Pandey announced that detailed guidelines for the responsible use of Artificial Intelligence in capital markets will be issued soon, focusing on guardrails, disclosures, and entity accountability.\n\n🧭 <b>MARKET CONTEXT</b>\nThe framework emphasizes a 'human-in-the-loop' approach, ensuring that critical decisions retain human oversight alongside automated systems, building upon a consultation paper floated in June 2025.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf compliance mandates strict internal controls and mandatory disclosures for AI and algorithmic tools, technology adoption costs for intermediaries could rise conditionally, altering how brokerages and automated platforms deploy client-facing models.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack the final notification text for specific compliance timelines, audit requirements for algorithmic models, and any distinct directives issued for automated advisory services.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki stringent AI guardrails se retail trading platforms par automated advisory ki speed ya cost par asar padega?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-ai-guidelines-responsible-use-artificial-intelligence-capital-markets-20034485.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:ab13f36b400d",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/sebi-ai-guidelines-responsible-use-artificial-intelligence-capital-markets-20034485.htm",
+      "source_headline": "Sebi to issue guidelines for responsible use of AI in capital markets, says chairman Tuhin Kanta Pandey",
+      "story_key": "ab13f36b400d19f730bbef6e8bfa1fdbccd763147634b27ea11b12a9145198d5",
+      "generated_at": "2026-11-15 22:49:59 IST"
     }
   ],
-  "total": 94,
-  "last_scheduled": "2026-11-14 12:00"
+  "total": 95,
+  "last_scheduled": "2026-11-16 08:00"
 }
