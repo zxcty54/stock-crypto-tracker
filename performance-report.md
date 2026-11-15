@@ -1,6 +1,6 @@
 # 📊 Performance Report
 
-**15-Nov-2026 01:29 IST** | 100 posts tracked | channel avg **20 views**
+**16-Nov-2026 01:57 IST** | 100 posts tracked | channel avg **20 views**
 
 *59 posts pehchaane gaye, 41 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
@@ -9,23 +9,23 @@
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
 | tools | 1 | 29 | 1.0 |
-| technical | 3 | 28 | 1.4 |
-| process | 2 | 25 | 1.0 |
-| risk | 3 | 25 | 1.24 |
-| business_model | 12 | 21 | 1.05 |
-| market_mechanics | 5 | 20 | 1.02 |
-| corporate | 52 | 20 | 1.0 |
+| technical | 3 | 28 | 1.38 |
+| process | 2 | 26 | 1.0 |
+| risk | 2 | 22 | 1.0 |
+| market_mechanics | 5 | 21 | 1.05 |
+| business_model | 12 | 21 | 1.04 |
+| corporate | 52 | 21 | 1.02 |
 | psychology | 1 | 19 | 1.0 |
-| other | 14 | 17 | 0.86 |
-| awareness | 7 | 15 | 0.77 |
+| other | 15 | 17 | 0.83 |
+| awareness | 7 | 17 | 0.82 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 463** (target 1000)
+**Subscribers: 462** (target 1000)
 
-- Pichhle 7 din me: **-4**
-- Average: **11.79/din**
-- Isi raftaar se 1000 subs: **~45 din**
+- Pichhle 7 din me: **-5**
+- Average: **11.47/din**
+- Isi raftaar se 1000 subs: **~46 din**
 
 
 ## 🏆 Top posts
@@ -43,12 +43,12 @@
 
 ## ⚠️ Kam chale posts
 
-- 7 views — Dolat Algotech Limited (NSE: DOLATALGO)  
+- 10 views — Ice Make Refrigeration Limited (NSE: ICEMAKE)  
   `corporate`
-- 7 views — Superhouse Limited (NSE: SUPERHOUSE)  
+- 10 views — Insecticides (India) Limited (NSE: INSECTICID)  
   `corporate`
-- 4 views — SEBI forms 18-member panel to revamp Innovators Growth Platform for st  
-  `awareness`
+- 3 views — Germany ke housing market mein political shift; Vonovia ki expropriati  
+  `other`
 
 ---
 

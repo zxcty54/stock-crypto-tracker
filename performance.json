@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-15 01:29 IST",
+ "generated_at": "2026-11-16 01:57 IST",
  "sample_size": 100,
  "identified": 59,
  "inferred": 41,
  "cards_skipped": 0,
- "channel_avg_views": 20.0,
+ "channel_avg_views": 20.3,
  "growth": {
-  "today": 463,
-  "snapshots": 38,
-  "delta_7d": -4,
-  "per_day": 11.79,
-  "days_to_target": 45,
+  "today": 462,
+  "snapshots": 39,
+  "delta_7d": -5,
+  "per_day": 11.47,
+  "days_to_target": 46,
   "target": 1000,
-  "days_span": 39
+  "days_span": 40
  },
  "status": "ok",
  "pillars": {
@@ -25,37 +25,37 @@
   "technical": {
    "posts": 3,
    "avg_views": 28.0,
-   "weight": 1.4,
+   "weight": 1.38,
    "low_sample": false
   },
   "process": {
    "posts": 2,
-   "avg_views": 25.0,
+   "avg_views": 25.5,
    "weight": 1.0,
    "low_sample": true
   },
   "risk": {
-   "posts": 3,
-   "avg_views": 24.7,
-   "weight": 1.24,
+   "posts": 2,
+   "avg_views": 22.0,
+   "weight": 1.0,
+   "low_sample": true
+  },
+  "market_mechanics": {
+   "posts": 5,
+   "avg_views": 21.2,
+   "weight": 1.05,
    "low_sample": false
   },
   "business_model": {
    "posts": 12,
-   "avg_views": 20.9,
-   "weight": 1.05,
-   "low_sample": false
-  },
-  "market_mechanics": {
-   "posts": 5,
-   "avg_views": 20.4,
-   "weight": 1.02,
+   "avg_views": 21.2,
+   "weight": 1.04,
    "low_sample": false
   },
   "corporate": {
    "posts": 52,
-   "avg_views": 20.0,
-   "weight": 1.0,
+   "avg_views": 20.6,
+   "weight": 1.02,
    "low_sample": false
   },
   "psychology": {
@@ -65,15 +65,15 @@
    "low_sample": true
   },
   "other": {
-   "posts": 14,
-   "avg_views": 17.2,
-   "weight": 0.86,
+   "posts": 15,
+   "avg_views": 16.9,
+   "weight": 0.83,
    "low_sample": false
   },
   "awareness": {
    "posts": 7,
-   "avg_views": 15.4,
-   "weight": 0.77,
+   "avg_views": 16.7,
+   "weight": 0.82,
    "low_sample": false
   }
  },
@@ -106,19 +106,19 @@
  ],
  "weak_posts": [
   {
-   "title": "Dolat Algotech Limited (NSE: DOLATALGO)",
-   "views": 7,
+   "title": "Ice Make Refrigeration Limited (NSE: ICEMAKE)",
+   "views": 10,
    "pillar": "corporate"
   },
   {
-   "title": "Superhouse Limited (NSE: SUPERHOUSE)",
-   "views": 7,
+   "title": "Insecticides (India) Limited (NSE: INSECTICID)",
+   "views": 10,
    "pillar": "corporate"
   },
   {
-   "title": "SEBI forms 18-member panel to revamp Innovators Growth Platform for st",
-   "views": 4,
-   "pillar": "awareness"
+   "title": "Germany ke housing market mein political shift; Vonovia ki expropriati",
+   "views": 3,
+   "pillar": "other"
   }
  ]
 }
