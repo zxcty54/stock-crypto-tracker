@@ -1,6 +1,6 @@
 # 📊 Performance Report
 
-**16-Nov-2026 01:57 IST** | 100 posts tracked | channel avg **20 views**
+**17-Nov-2026 05:16 IST** | 100 posts tracked | channel avg **20 views**
 
 *59 posts pehchaane gaye, 41 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
@@ -12,20 +12,20 @@
 | technical | 3 | 28 | 1.38 |
 | process | 2 | 26 | 1.0 |
 | risk | 2 | 22 | 1.0 |
-| market_mechanics | 5 | 21 | 1.05 |
-| business_model | 12 | 21 | 1.04 |
-| corporate | 52 | 21 | 1.02 |
-| psychology | 1 | 19 | 1.0 |
-| other | 15 | 17 | 0.83 |
-| awareness | 7 | 17 | 0.82 |
+| market_mechanics | 5 | 21 | 1.06 |
+| business_model | 12 | 21 | 1.05 |
+| corporate | 51 | 20 | 1.01 |
+| psychology | 1 | 20 | 1.0 |
+| awareness | 7 | 17 | 0.85 |
+| other | 16 | 17 | 0.83 |
 
 ## 📈 Channel Growth
 
-**Subscribers: 462** (target 1000)
+**Subscribers: 460** (target 1000)
 
-- Pichhle 7 din me: **-5**
-- Average: **11.47/din**
-- Isi raftaar se 1000 subs: **~46 din**
+- Pichhle 7 din me: **-7**
+- Average: **11.15/din**
+- Isi raftaar se 1000 subs: **~48 din**
 
 
 ## 🏆 Top posts
@@ -43,11 +43,11 @@
 
 ## ⚠️ Kam chale posts
 
-- 10 views — Ice Make Refrigeration Limited (NSE: ICEMAKE)  
-  `corporate`
 - 10 views — Insecticides (India) Limited (NSE: INSECTICID)  
   `corporate`
-- 3 views — Germany ke housing market mein political shift; Vonovia ki expropriati  
+- 8 views — Germany ke housing market mein political shift; Vonovia ki expropriati  
+  `other`
+- 8 views — Rupee hits 15-day high against dollar on oil drop and FPI flows  
   `other`
 
 ---
