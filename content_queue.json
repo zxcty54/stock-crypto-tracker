@@ -1461,6 +1461,22 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     },
     {
+      "id": "newsqytebyzfrs",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-17 08:00",
+      "scheduled_ist": "2026-11-17 08:00",
+      "title": "India bonds dip as elevated inflation fuels rate hike expectation",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>India bonds dip as elevated inflation fuels rate hike expectation</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndian government bonds closed lower in a choppy session as selling pressure outweighed value buying. The benchmark 6.94% 2036 bond yield settled at 7.3169% compared to 7.3079% previously. The move follows October retail inflation crossing the central bank's 6% tolerance band, prompting primary dealers and economists to revise headline inflation projections to average 6.3% between October and March.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields move inversely to prices. When inflation prints higher than mandated thresholds, fixed-income investors demand higher yields to preserve purchasing power, triggering sell-offs that depress bond valuations.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nPersistent inflation above target limits increases the probability of monetary policy tightening by the central bank. If policy rates are raised, borrowing costs for corporations and retail borrowers across loans and debt instruments tend to drift upward, which can compress margins for capital-intensive sectors and weigh on broader market valuations if sustained.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor forthcoming central bank policy meeting decisions, upcoming domestic inflation prints, and Federal Reserve rate trajectories that influence global capital flows.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do shifts in domestic sovereign bond yields typically impact your sectoral allocation strategy in equity markets?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/bonds/india-bonds-dip-as-elevated-inflation-fuels-rate-hike-expectations/articleshow/135888382.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:ad4b2329e66d",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/bonds/india-bonds-dip-as-elevated-inflation-fuels-rate-hike-expectations/articleshow/135888382.cms",
+      "source_headline": "India bonds dip as elevated inflation fuels rate hike expectations",
+      "story_key": "ad4b2329e66d213f7f590347e6a793a69ba478589930ea053ee8dde54203b08b",
+      "generated_at": "2026-11-17 00:15:36 IST"
+    },
+    {
       "id": "ai0043",
       "slot": "B",
       "scheduled_ist": "2026-11-17 10:00",
@@ -1591,6 +1607,6 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     }
   ],
-  "total": 113,
+  "total": 114,
   "last_scheduled": "2026-11-18 20:00"
 }
