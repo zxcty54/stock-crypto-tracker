@@ -969,14 +969,16 @@
       "scheduled_ist": "2026-11-05 12:00",
       "title": "Rupee hits 15-day high against dollar on oil drop and FPI flows",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>Rupee hits 15-day high against dollar on oil drop and FPI flows</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nThe Indian rupee appreciated against the US dollar, opening at 94.35 and touching a 15-day high of 94.33 per dollar compared to its previous close of 94.64. This movement was supported by falling crude oil prices and foreign portfolio investor (FPI) inflows.\n\n🧭 <b>MARKET CONTEXT</b>\nBrent crude dropped roughly 8.5% in Asian trade to $94.20 per barrel following political shifts in the US after midterm elections, which led markets to re-evaluate geopolitical risk premiums and potential supply negotiations regarding Iran.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIndia imports a large portion of its crude oil, which requires substantial dollar outlays. When crude prices decline, the overall import bill and domestic demand for US dollars ease, reducing downward pressure on the rupee. However, this currency recovery remains conditional and heavily tethered to sustained trends in international crude pricing rather than domestic factors alone.\n\n🔎 <b>KEY WATCHPOINTS</b>\nTrack ongoing movements in international crude benchmarks like Brent, foreign capital flow trends, and domestic macroeconomic indicators like trade deficit data.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki crude oil ki ye tezi se giravat aane wale dino mein Indian inflation aur current account deficit ko sambhalne mein madad karegi?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/currency/rupee-strengthens-15-day-high-against-dollar-factors-explained-20027611.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:57db4f978466",
       "kind": "business_news_insight",
       "source_name": "CNBC-TV18",
       "source_url": "https://www.cnbctv18.com/market/currency/rupee-strengthens-15-day-high-against-dollar-factors-explained-20027611.htm",
       "source_headline": "Rupee strengthens to 15-day high of 94.33 against dollar: Key factors explained",
       "story_key": "57db4f978466886c87fa20bbfdb790529ec52cac19576ec234ff691c55b38b99",
-      "generated_at": "2026-11-05 12:39:26 IST"
+      "generated_at": "2026-11-05 12:39:26 IST",
+      "posted_at": "2026-11-16 12:32:15 IST",
+      "telegraph_url": "https://telegra.ph/Rupee-hits-15-day-high-against-dollar-on-oil-drop-and-FPI-flows--November-2026-11-16"
     },
     {
       "id": "newsqtzccbbcpq",
@@ -1401,8 +1403,24 @@
       "source_headline": "Sebi to issue guidelines for responsible use of AI in capital markets, says chairman Tuhin Kanta Pandey",
       "story_key": "ab13f36b400d19f730bbef6e8bfa1fdbccd763147634b27ea11b12a9145198d5",
       "generated_at": "2026-11-15 22:49:59 IST"
+    },
+    {
+      "id": "newsftzojijhtq",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-16 12:00",
+      "scheduled_ist": "2026-11-16 12:00",
+      "title": "G-Sec yields harden as inflation worries push 10-year benchmark to 7.32%",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>G-Sec yields harden as inflation worries push 10-year benchmark to 7.32%</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nIndia's benchmark 10-year government bond yield climbed to 7.32% in early trades, resuming its hardening trajectory. The upward move follows a brief rally to 7.13% driven by US midterm election outcomes and global sentiment, which lost momentum after domestic retail inflation breached the Reserve Bank of India's upper tolerance limit of 6% in October 2026.\n\n🧭 <b>MARKET CONTEXT</b>\nBond yields move inversely to bond prices. A hardening yield means borrowing costs for the government are rising, which generally sets a higher pricing benchmark for corporate debt, bank loans, and overall financial system liquidity.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nWhen sovereign yields harden due to stubborn inflation, debt-heavy sectors and interest-sensitive segments like banking, auto, and real estate may face higher cost of capital. If macroeconomic pressures persist and domestic monetary policy turns cautious, corporate margin expansions could face headwinds, though conditional on upcoming rate decisions.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor forthcoming domestic inflation prints, central bank policy announcements in early December, movement in US 10-year Treasury yields currently at 5.15%, and Brent crude trends hovering near $95.20 a barrel.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki badhte hue bond yields aane wale December policy mein RBI ke stance ko prabhavit karenge?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.thehindubusinessline.com/markets/g-sec-yields-harden-again-as-inflation-worries-eclipse-global-tailwinds/article71706937.ece\">The Hindu BusinessLine</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:61769724f2a0",
+      "kind": "business_news_insight",
+      "source_name": "The Hindu BusinessLine",
+      "source_url": "https://www.thehindubusinessline.com/markets/g-sec-yields-harden-again-as-inflation-worries-eclipse-global-tailwinds/article71706937.ece",
+      "source_headline": "G-Sec yields harden again as inflation worries eclipse global tailwinds",
+      "story_key": "61769724f2a0e0fa053e0ba2469b8acfbf68a79a30acee05513692376b6f991b",
+      "generated_at": "2026-11-16 12:30:50 IST"
     }
   ],
-  "total": 95,
-  "last_scheduled": "2026-11-16 08:00"
+  "total": 96,
+  "last_scheduled": "2026-11-16 12:00"
 }

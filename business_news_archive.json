@@ -1,6 +1,321 @@
 {
   "stories": [
     {
+      "id": "newszcgnzlizfl",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Sensex today | Stock Market Live: Sensex, Nifty pare early gains as investors assess sustainability of market rally",
+      "url": "https://www.thehindubusinessline.com/markets/sensex-nifty50-today-stock-market-live-updates-16th-november-2026/article71705118.ece",
+      "published_at": "2026-11-16T12:21:59+05:30",
+      "published_ist": "2026-11-16 12:21 IST",
+      "summary": "Sensex, Nifty, Share Prices Live: Indian equities pared a sharp early rally to trade with modest gains on Monday, as investors assessed whether the recent upmove can sustain. Buying in banking stocks and continued foreign inflows offered support, while global weakness kept sentiment cautious.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "capital_market"
+    },
+    {
+      "id": "newspesqvwvemp",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Mahindra Logistics shares fall up to 15% after Hemant Sikka quits as MD & CEO",
+      "url": "https://www.cnbctv18.com/market/mahindra-logistics-share-price-md-ceo-hemant-sikka-quits-mohammed-turra-successor-q2-results-2026-returns-20034774.htm",
+      "published_at": "2026-11-16T11:48:37+05:30",
+      "published_ist": "2026-11-16 11:48 IST",
+      "summary": "Mohammed Turra has been the MD & CEO of Mahindra First Choice Wheels since October 2024, where he has led the growth of the group's multi-brand used-vehicle platform.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Market sentiment often reacts sharply when a key managing director and CEO resigns, especially if the outgoing leader is credited with turning around profitability. In this case, shares fell up to 15% following the announcement that Hemant Sikka is stepping down and Mohammed Turra is slated to take over. Investors might fear that leadership transitions could disrupt ongoing operational momentum or client relationships. However, an executive change alone does not establish a permanent shift in business fundamentals unless subsequent financial disclosures show a reversal in efficiency and margins.",
+        "what_to_watch": [
+          "Shareholder approval outcomes and formal assumption dates for the incoming leadership",
+          "Upcoming quarterly financial reports to track whether operating margins and EBITDA growth sustain their trajectory"
+        ],
+        "evergreen_lesson": "A sharp stock price correction following an executive departure reflects sentiment-driven uncertainty rather than immediate operational deterioration, which can only be confirmed through execution data over subsequent quarters."
+      }
+    },
+    {
+      "id": "newspjlubowyhm",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Vodafone Idea share price: Citi cites key monitorable for ₹16 target",
+      "url": "https://www.cnbctv18.com/market/vodafone-idea-share-price-citi-rating-cites-key-monitorable-for-16-target-20034788.htm",
+      "published_at": "2026-11-16T11:48:32+05:30",
+      "published_ist": "2026-11-16 11:48 IST",
+      "summary": "A major portion of the remaining funding is expected to come from public sector banks, with the management indicating that discussions are nearing completion. Citi identified the finalisation of this funding as an important monitorable.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsmraivqtquh",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "G-Sec yields harden again as inflation worries eclipse global tailwinds",
+      "url": "https://www.thehindubusinessline.com/markets/g-sec-yields-harden-again-as-inflation-worries-eclipse-global-tailwinds/article71706937.ece",
+      "published_at": "2026-11-16T11:36:51+05:30",
+      "published_ist": "2026-11-16 11:36 IST",
+      "summary": "Benchmark 10-year yield may test 7.35-7.40% this week as US Treasury yields, crude oil and domestic inflation remain elevated",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "queued",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Sovereign bond yields are sensitive to shifting macroeconomic fundamentals, moving inversely to global sentiment and domestic inflation prints. Although initial US political outcomes triggered a temporary rally in bond prices and lower yields, the breakout of domestic retail inflation above the RBI's tolerance threshold quickly reversed those gains. This dynamic shows that transient global tailwinds cannot permanently override domestic inflationary pressures. Consequently, borrowing costs across the economy could remain elevated if domestic price pressures persist.",
+        "what_to_watch": [
+          "Upcoming domestic retail inflation prints and RBI monetary policy committee announcements",
+          "Movements in benchmark US Treasury yields and Brent crude oil prices influencing imported inflation"
+        ],
+        "evergreen_lesson": "Temporary rallies driven by global sentiment are fragile when domestic macroeconomic fundamentals, such as retail inflation, deteriorate."
+      },
+      "processed_ist": "2026-11-16 12:30:50 IST",
+      "post_id": "newsftzojijhtq"
+    },
+    {
+      "id": "newsxcofetchud",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "RBI cancels Certificate of Registration of 49 NBFCs",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63979",
+      "published_at": "2026-11-16T11:05:00+05:30",
+      "published_ist": "2026-11-16 11:05 IST",
+      "summary": "The Reserve Bank of India, in exercise of powers conferred on it under Section 45-IA (6) of the Reserve Bank of India Act, 1934, has cancelled the Certificate of Registration of the following companies. Sr. No. Name of the Company Registered Office Address CoR No. CoR Issued on Cancellation Order Date 1 J S Enclaves Pvt Ltd 10, Canning Street, 3rd Floor, Kolkata, West Bengal, India, 700001 B.05.01335 March 30, 1998 October 01, 2026 2 Kavery Commodities Pvt Ltd 33, Chittaranjan Avenue, 5th Floor, Kolkata, Kolkata, Kolkata, West Bengal, India, 700012 B.05.04983 May 20, 2003 October 01, 2026 3 B S Advances Private Limited Flat No. 6E, 74/1 Narkeldanga Main Road, Lake District, Windsor C, Kolkata, West Bengal, India, 700054 B.05.06905 May 25, 2011 October 01, 2026 4 Falcon Complex Private Limited 78/41A, Syed Kadar Street, Arisipalayam, Salem, Tamil Nadu, India, 636009 B.05.05898 December 15",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "RSS excerpt (publisher page unavailable or too short)",
+        "why_it_matters": "The Reserve Bank of India's cancellation of registration certificates under the RBI Act removes legal authorization for specific non-banking financial companies to carry out lending and financial activities. Such regulatory actions typically target inactive, non-compliant, or structurally weak entities to clean up the financial sector architecture. While this administrative cleanup improves overall system hygiene, a cancellation notice does not automatically reveal the scale of public deposits or outstanding credit affected in each individual firm.",
+        "what_to_watch": [
+          "Official RBI notifications for subsequent enforcement actions or additional license cancellations",
+          "Subsequent disclosures or liquidator updates regarding asset resolution and compliance status of impacted entities"
+        ],
+        "evergreen_lesson": "Regulatory license cancellations reflect tighter systemic oversight and compliance enforcement, signaling a structural weeding out of dormant or non-compliant market participants."
+      }
+    },
+    {
+      "id": "newswbhvgsklgt",
+      "source": "RBI Press Releases",
+      "source_priority": 3,
+      "headline": "13 NBFCs and 1 HFC surrender their Certificates of Registration to the RBI",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63978",
+      "published_at": "2026-11-16T11:00:00+05:30",
+      "published_ist": "2026-11-16 11:00 IST",
+      "summary": "The following thirteen Non-Banking Financial Companies (NBFCs) and one Housing Finance Company (HFC) have surrendered their Certificates of Registration (CoRs) granted to them by the Reserve Bank of India (RBI). The RBI, in exercise of powers conferred on it under Section 45-IA (6) of the Reserve Bank of India Act, 1934 (‘the RBI Act)/ Section 29A of National Housing Bank Act, 1987, has therefore cancelled these CoRs. i) Due to exit from Non-Banking Financial Institution (NBFI) business Sr. No. Name of the Company Registered Office Address CoR No. CoR Issued on Date of Cancellation of CoR 1 Manish Synthetics Private Limited (as per MCA - MANISH SYNTHETICS PVT LTD) No 27, Raghunayakulu Street, Parktown, Chennai – 600 003 B-07.00811 October 26, 2015 October 01, 2026 2 Amar Plaza & Holdings Pvt. Ltd. 3, Harish Mukherjee Road, Merlin Legend 4th Floor, Suite No. 402, Kolkata, West Bengal, Ind",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "economy",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "NBFCs and HFCs surrendering their Certificates of Registration typically indicate business restructuring, mergers, or voluntary exits due to strict regulatory compliance or changing business models. If companies are consolidating or shifting below registration thresholds, it could reflect tightening operational overheads or strategic pivots within the shadow banking sector. However, a surrender or cancellation does not automatically indicate financial distress, as many entities simply move out of the regulated perimeter through legal dissolutions or amalgamations.",
+        "what_to_watch": [
+          "Subsequent corporate announcements regarding formal liquidations, mergers, or changes in operating lines for the listed entities.",
+          "RBI data updates on overall registered NBFC and HFC counts to track industry consolidation trends."
+        ],
+        "evergreen_lesson": "Regulatory license surrenders in financial services must be parsed carefully between voluntary strategic exits, corporate restructuring, and forced regulatory crackdowns."
+      }
+    },
+    {
+      "id": "newsmmhchjadub",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Biocon shares gain after US FDA approves cancer drug biosimilar",
+      "url": "https://www.cnbctv18.com/market/biocon-share-price-usfda-approval-pebrilzo-fifth-oncology-biosimilar-her2-positive-breast-cancer-drug-20034624.htm",
+      "published_at": "2026-11-16T10:53:12+05:30",
+      "published_ist": "2026-11-16 10:53 IST",
+      "summary": "The biosimilar to Perjeta has been approved for patients with metastatic and early-stage HER2-positive breast cancer. Biocon expects to launch the drug in the US in Q3 2028 under its licensing agreement with Genentech.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "A regulatory approval for a complex biosimilar allows a pharmaceutical company to target high-value regulated markets, potentially opening up substantial revenue streams upon commercialization. However, an approval or a future launch date years away does not establish immediate financial returns or guaranteed market share against entrenched incumbents. If pricing pressures or legal challenges arise, projected cash flows from the licensing agreement could face material delays.",
+        "what_to_watch": [
+          "Updates on commercial launch execution and actual market uptake in the target geography by the specified quarter.",
+          "Regulatory filings regarding partner milestones, litigation status, or manufacturing plant inspection clearances."
+        ],
+        "evergreen_lesson": "In specialized pharmaceuticals, regulatory approval is a necessary milestone for future market access, but long-term value creation depends entirely on execution timing and competitive intensity at launch."
+      }
+    },
+    {
+      "id": "newsntazxmfzrk",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Govt bonds consolidate after last week’s selloff",
+      "url": "https://www.thehindubusinessline.com/markets/stock-markets/govt-bonds-consolidate-after-last-weeks-selloff/article71706801.ece",
+      "published_at": "2026-11-16T10:34:06+05:30",
+      "published_ist": "2026-11-16 10:34 IST",
+      "summary": "The benchmark 6.94% 2036 bond yield was at 7.3117% as of 10:00 a.m. IST on Monday",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "capital_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Domestic bond yields often react to global monetary spillovers, where rising US Treasury yields and shifting Federal Reserve rate expectations put upward pressure on emerging market borrowing costs. If foreign capital outflows persist alongside domestic inflation moving above tolerance levels, local central banks may face pressure to tighten monetary policy. However, short-term market consolidation or a pause in immediate selling does not guarantee a permanent stabilization of yield curves.",
+        "what_to_watch": [
+          "Upcoming domestic retail inflation prints and central bank policy rate announcements.",
+          "FII debt outflow or inflow data and benchmark 10-year US Treasury yield movements."
+        ],
+        "evergreen_lesson": "Domestic sovereign bond yields are heavily influenced by global macroeconomic spillovers and cross-border capital flows, making local rate trajectories vulnerable to external monetary policy shifts."
+      }
+    },
+    {
+      "id": "newsajygswfsru",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Airbus, Boeing supply-chain shift boosts India’s aerospace stocks",
+      "url": "https://www.thehindubusinessline.com/markets/stock-markets/airbus-boeing-supply-chain-shift-boosts-indias-aerospace-stocks/article71706736.ece",
+      "published_at": "2026-11-16T09:59:01+05:30",
+      "published_ist": "2026-11-16 09:59 IST",
+      "summary": "Ten large suppliers, including Sansera Engineering Ltd. and Aequs Ltd., have soared by an average 123% this year so far, compared with a 3% decline in the benchmark Nifty 50",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Global planemakers diversifying their procurement bases toward developing economies can structurally integrate local engineering vendors into international aviation supply chains. If lower costs and policy support drive sustained contract wins, suppliers can gain long-term earnings visibility and multi-year order backlogs. However, a sharp rally in supplier stock prices driven by thematic optimism does not confirm immediate margin expansion or smooth execution of complex aerospace manufacturing.",
+        "what_to_watch": [
+          "Actual annual procurement volume growth reported by major planemakers from the region.",
+          "Quarterly financial disclosures from listed vendors tracking export revenue growth and order book execution."
+        ],
+        "evergreen_lesson": "Macro policy tailwinds and global supply chain diversification can re-rate niche manufacturing sectors, but sustainable shareholder value depends on steady execution and conversion of long-term order books into realized cash flows."
+      }
+    },
+    {
+      "id": "newsihmbpeuljl",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "VA Tech Wabag shares fall 10% after Saudi Arabia Water Authority cancels ₹2,332 crore desalination plant project",
+      "url": "https://www.cnbctv18.com/market/va-tech-wabag-share-price-300-mld-yanbu-desalination-plant-project-cancelled-second-time-saudi-arabia-water-authority-20034619.htm",
+      "published_at": "2026-11-16T09:34:16+05:30",
+      "published_ist": "2026-11-16 09:34 IST",
+      "summary": "The 300 MLD Yanbu desalination project has been cancelled for the second time. It was initially awarded in September 2024. It was later cancelled due to recalibration and resizing of scope of work. The project was re-awarded to VA Tech Wabag in July 2025 following a reduction in project scope and value.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsmlqgtodnal",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Nvidia shares may bounce back as investors gauge Jensen Huang's comeback reports",
+      "url": "https://www.cnbctv18.com/market/nvidia-shares-may-bounce-back-as-investors-gauge-jensen-huangs-comeback-reports-20034576.htm",
+      "published_at": "2026-11-16T07:50:39+05:30",
+      "published_ist": "2026-11-16 07:50 IST",
+      "summary": "Nvidia Corp. shares may rebound as Jensen Huang discusses a potential return following a scandal and his departure. Supporters, including Elon Musk, urge the board to reinstate him.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market",
+      "ai_insight": {
+        "version": 1,
+        "generated_at_ist": "2026-11-16 12:30:50 IST",
+        "context_source": "publisher article page",
+        "why_it_matters": "Jab key leadership scandal ki wajah se exit karti hai aur market value drop hoti hai, toh yeh investor sentiment aur management stability ko direct impact karta hai. Agar board leadership change ya reinstatement par decision leti hai, toh yeh company ki governance aur future strategic direction ko clarify kar sakta hai. Market mein yeh event yeh bhi highlight karta hai ki kaise high-profile founders ki personal events short-term volatility aur regulatory scrutiny ko trigger kar sakte hain.",
+        "what_to_watch": [
+          "Company ke quarterly earnings report aur management ki commentary demand outlook par.",
+          "Board ya leadership changes aur US Treasury/regulatory disclosures regarding export controls compliance.",
+          "Stock price movement aur trading volume subsequent disclosures ke baad."
+        ],
+        "evergreen_lesson": "Key personnel risk aur regulatory pressure kisi bhi high-growth tech stock ke valuation multiples ko rapidly compress kar sakte hain, independent of immediate underlying product demand."
+      }
+    },
+    {
+      "id": "newsyprzyzeokn",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "Intel sued by shareholders following 29% stock plunge",
+      "url": "https://www.cnbctv18.com/market/intel-sued-by-shareholders-following-29-pc-stock-plunge-20033591.htm",
+      "published_at": "2026-11-16T07:49:57+05:30",
+      "published_ist": "2026-11-16 07:49 IST",
+      "summary": "Shareholders said Intel had the motive and opportunity to defraud by raising capital in mid-August, halfway through its \"disastrous\" third quarter, when it sold $23 billion of stock at $95 per share.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newslnjdoespmf",
+      "source": "The Hindu BusinessLine",
+      "source_priority": 2,
+      "headline": "Buzzing stocks on November 16: Pricol, ONGC, BEL, Dr Reddy’s, VA Tech Wabag and more",
+      "url": "https://www.thehindubusinessline.com/markets/buzzing-stocks-on-november-16-pricol-ongc-bel-dr-reddys-va-tech-wabag-and-more/article71705452.ece",
+      "published_at": "2026-11-16T07:10:27+05:30",
+      "published_ist": "2026-11-16 07:10 IST",
+      "summary": "From a major stake sale in Pricol Autotech and ONGC taking over the disputed Cambay offshore block to BEL’s fresh order wins, USFDA updates, a German acquisition by Fusion CX and new strategic partnerships, several companies announced significant developments",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
+      "id": "newsnfieyyhxju",
+      "source": "CNBC-TV18",
+      "source_priority": 3,
+      "headline": "PhysicsWallah shares worth over ₹19,000 crore free up today as major shareholder lock-in ends",
+      "url": "https://www.cnbctv18.com/market/physicswallah-share-price-shareholder-lock-in-ending-today-over-19000-crore-q2-results-shareholding-retail-mfs-20034522.htm",
+      "published_at": "2026-11-16T06:22:56+05:30",
+      "published_ist": "2026-11-16 06:22 IST",
+      "summary": "Based on Friday's closing price, the total value of PhysicsWallah shares that free up for trade on the lock-in ending today is worth ₹19,505 crore.",
+      "first_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
+      "first_seen_ist": "2026-11-16 12:30:50 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
+      "status": "new",
+      "topic": "stock_market"
+    },
+    {
       "id": "newsgwbbxsssdc",
       "source": "CNBC-TV18",
       "source_priority": 3,
@@ -10,9 +325,9 @@
       "published_ist": "2026-11-16 04:30 IST",
       "summary": "Friday is the record date for the share buyback of Medi Assist. The company has announced a ₹50 crore share buyback, at a price of ₹425 per share.",
       "first_seen_at": "2026-11-16T04:32:51.516573+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-16 04:32:51 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "rejected",
       "topic": "stock_market",
       "ai_insight": {
@@ -38,9 +353,9 @@
       "published_ist": "2026-11-15 21:57 IST",
       "summary": "Sebi chairman Tuhin Kanta Pandey said the regulator will soon issue detailed guidelines for AI use in capital markets. The proposed framework will focus on investor protection, accountability and human oversight.",
       "first_seen_at": "2026-11-15T22:49:59.594869+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-15 22:49:59 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "queued",
       "topic": "capital_market",
       "ai_insight": {
@@ -68,9 +383,9 @@
       "published_ist": "2026-11-15 14:53 IST",
       "summary": "Goldman Sachs has upgraded India to overweight and expects the MSCI Asia ex-Japan Index to return 19% in 2027, driven primarily by earnings growth, Bloomberg reported.",
       "first_seen_at": "2026-11-15T15:14:01.452860+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-15 15:14:01 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "rejected",
       "topic": "stock_market",
       "processed_ist": "2026-11-15 15:14:01 IST",
@@ -97,9 +412,9 @@
       "published_ist": "2026-11-14 16:39 IST",
       "summary": "Despite ongoing tanker attacks near the Strait of Hormuz, surging output from Saudi Arabia and record US production have pushed futures down nearly 25% this month. With the IEA flagging early signs of rebalancing, major Gulf producers are now slashing official selling prices to win back buyers.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "new",
       "topic": "economy"
     },
@@ -113,9 +428,9 @@
       "published_ist": "2026-11-14 16:27 IST",
       "summary": "Speaking at the HT Leadership Summit 2026, Noel said a public listing could change the way the Tata Group operates. He added that Tata Trusts would work constructively with regulators and other stakeholders to find a solution that preserves the group's founding ethos.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "new",
       "topic": "capital_market"
     },
@@ -129,9 +444,9 @@
       "published_ist": "2026-11-14 14:45 IST",
       "summary": "Of these, we shortlisted 8 stocks that consistently gained throughout the period, delivering cumulative returns ranging from 7% to 11%.",
       "first_seen_at": "2026-11-14T20:45:11.898277+05:30",
-      "last_seen_at": "2026-11-16T04:32:51.516573+05:30",
+      "last_seen_at": "2026-11-16T12:30:50.333044+05:30",
       "first_seen_ist": "2026-11-14 20:45:11 IST",
-      "last_seen_ist": "2026-11-16 04:32:51 IST",
+      "last_seen_ist": "2026-11-16 12:30:50 IST",
       "status": "new",
       "topic": "stock_market"
     },
@@ -12933,43 +13248,43 @@
       }
     }
   ],
-  "last_scraped_at": "2026-11-16T04:32:51.516573+05:30",
-  "last_scraped_ist": "2026-11-16 04:32:51 IST",
+  "last_scraped_at": "2026-11-16T12:30:50.333044+05:30",
+  "last_scraped_ist": "2026-11-16 12:30:50 IST",
   "feed_status": {
     "CNBC-TV18": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
-      "fresh_items": 22,
-      "accepted_items": 5,
-      "filtered_items": 17,
+      "fresh_items": 49,
+      "accepted_items": 12,
+      "filtered_items": 37,
       "error": null
     },
     "Economic Times": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
-      "fresh_items": 20,
-      "accepted_items": 4,
-      "filtered_items": 16,
+      "fresh_items": 16,
+      "accepted_items": 1,
+      "filtered_items": 15,
       "error": null
     },
     "The Hindu BusinessLine": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
-      "fresh_items": 6,
-      "accepted_items": 1,
-      "filtered_items": 5,
+      "fresh_items": 15,
+      "accepted_items": 5,
+      "filtered_items": 10,
       "error": null
     },
     "RBI Press Releases": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
-      "fresh_items": 0,
-      "accepted_items": 0,
-      "filtered_items": 0,
+      "fresh_items": 5,
+      "accepted_items": 2,
+      "filtered_items": 3,
       "error": null
     },
     "RBI Notifications": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -12977,7 +13292,7 @@
       "error": null
     },
     "SEBI RSS": {
-      "checked_ist": "2026-11-16 04:32:51 IST",
+      "checked_ist": "2026-11-16 12:30:50 IST",
       "http_status": 200,
       "fresh_items": 0,
       "accepted_items": 0,
@@ -13009,16 +13324,16 @@
     ],
     "newsworthiness_rule": "Exclude stock portfolio/wealth-loss listicles, generic Movers & Shakers roundups, routine dividend/stock-split/other corporate-action ex-date calendars, issuer corporate announcements, commercial order/contract wins, all IPO/FPO coverage, and FII/FPI/DII-related stories; retain regulator/court directives and price-action stories with material catalysts or exceptional broad-market context.",
     "near_duplicate_window_hours": 72,
-    "last_curated_ist": "2026-11-16 04:32:51 IST"
+    "last_curated_ist": "2026-11-16 12:30:50 IST"
   },
   "last_run_stats": {
-    "updated_ist": "2026-11-16 04:32:51 IST",
-    "fetched_items": 48,
-    "accepted_feed_items": 10,
-    "filtered_feed_items": 38,
-    "new_unique_stories": 1,
+    "updated_ist": "2026-11-16 12:30:50 IST",
+    "fetched_items": 85,
+    "accepted_feed_items": 20,
+    "filtered_feed_items": 65,
+    "new_unique_stories": 14,
     "duplicate_items_collapsed": 0,
     "archive_items_removed_by_curation": 0,
-    "stories_total": 533
+    "stories_total": 547
   }
 }
