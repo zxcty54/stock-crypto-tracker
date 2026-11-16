@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-16 00:50:03 IST",
+  "timestamp": "2026-11-17 04:17:04 IST",
   "reports": {
     "ipa_ports_traffic": {
       "title": "Major Ports Traffic from October 2026",
@@ -13,7 +13,7 @@
     },
     "dpiit_wpi": {
       "title": "WPI & PPI(Goods) Press Release",
-      "pdf_url": "https://eaindustry.nic.in/press_release/press_release_202609.pdf",
+      "pdf_url": "https://eaindustry.nic.in/press_release/press_release_202610.pdf",
       "local_path": "downloaded_macro_pdfs/DPIIT_WPI_Latest.pdf"
     },
     "ppac_petroleum_icr": {
