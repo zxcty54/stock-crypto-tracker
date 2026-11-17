@@ -1567,6 +1567,22 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     },
     {
+      "id": "newspzixgallcv",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-18 08:00",
+      "scheduled_ist": "2026-11-18 08:00",
+      "title": "SEBI revises minimum margin norms and MPOR for commodity derivatives starting De",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI revises minimum margin norms and MPOR for commodity derivatives starting Dec 1</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI has revised the minimum initial margin (MIM) and minimum Margin Period of Risk (MPOR) requirements for the commodity derivatives segment, taking effect from December 1. Under the new framework, minimum initial margins are fixed at 6% for low-volatility, 8% for medium-volatility, and 10% for high-volatility commodities, applying uniformly across agricultural and non-agricultural goods. Additionally, the minimum MPOR is set at two days for low- and medium-volatility contracts and three days for high-volatility contracts, following recommendations from working groups and review committees.\n\n🧭 <b>MARKET CONTEXT</b>\nMinimum initial margin represents the mandatory upfront cash deposit required to enter a derivatives trade, while Margin Period of Risk dictates the time horizon used to calculate potential portfolio losses during market stress.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nAdjusting margin structures can alter capital efficiency for commodity market participants. Lowering or standardizing margin floors changes the leverage available to traders, which may influence overall liquidity and participation across different commodity contracts conditional on underlying price volatility.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor exchange-level circulars for exact contract-wise categorization, shifts in open interest, and trading volumes following the implementation of the new norms on December 1.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do changes in mandatory upfront margin requirements typically influence retail participation and risk management in the derivatives segment?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/sebi-revises-minimum-margin-norms-for-commodity-derivatives-20036215.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:8f7d9682c836",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/sebi-revises-minimum-margin-norms-for-commodity-derivatives-20036215.htm",
+      "source_headline": "SEBI revises minimum margin norms for commodity derivatives",
+      "story_key": "8f7d9682c8366cae99440553a25910ccf7abd2420240a7ce2eb6f3a44efc34e7",
+      "generated_at": "2026-11-18 04:02:08 IST"
+    },
+    {
       "id": "ai0050",
       "slot": "B",
       "scheduled_ist": "2026-11-18 10:00",
@@ -1627,6 +1643,6 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     }
   ],
-  "total": 115,
+  "total": 116,
   "last_scheduled": "2026-11-18 20:00"
 }
