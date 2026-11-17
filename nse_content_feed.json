@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-11-17 06:37:13 IST",
-  "worthy_count": 10,
-  "skipped_count": 19,
+  "worthy_count": 7,
+  "skipped_count": 18,
   "content_feed": [
     {
       "hash": "68c25a04a2f3",
@@ -100,48 +100,6 @@
       "worthiness_reason": "Contains complete standalone financial results including quarterly revenue and profit figures.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Superhouse Limited (NSE: SUPERHOUSE)</b>\n\n<b>Superhouse Limited Reports Q2 FY27 Financial Results</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Revenue from Operations:</b> ₹15,817.39 Lakhs\n- <b>Profit Before Tax (PBT):</b> ₹793.92 Lakhs\n- <b>Quarter Ended:</b> September 30, 2026\n- <b>Previous Quarter Revenue:</b> ₹12,752.92 Lakhs\n\n📌 <b>What happened:</b>\n↳ The company's board approved the standalone and consolidated unaudited financial results for the quarter and half year ended September 30, 2026, during the meeting held on November 14, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SUPERHOUSE_14112026145347_FinancialResultSeptember2026.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-16 23:00:09 IST"
-    },
-    {
-      "hash": "f6e3b4f6d4f3",
-      "symbol": "INA",
-      "company_name": "Insolation Energy Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "13-Nov-2026 20:50:51",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/INA_13112026204927_BSE_NSE_Press_Release_13_11_2026_sd.pdf",
-      "headline": "Insolation Energy Reports Q2FY27 Revenue of ₹836.69 Cr, Up 96.45% YoY",
-      "content_worthy": true,
-      "worthiness_reason": "Company announced comprehensive financial results for Q2FY27 and H1FY27 containing explicit numeric Revenue, EBITDA, and PAT figures along with order book updates.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Insolation Energy Limited (NSE: INA)</b>\n\n<b>Insolation Energy Reports Q2FY27 Revenue of ₹836.69 Cr, Up 96.45% YoY</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Q2FY27 Revenue:</b> ₹836.69 Cr (up 96.45% YoY)\n- <b>Q2FY27 Net Profit:</b> ₹25.06 Cr (down 32.18% YoY)\n- <b>H1FY27 Revenue:</b> ₹1,582.09 Cr (up 100.56% YoY)\n- <b>H1FY27 Net Profit:</b> ₹63.08 Cr (down 21.22% YoY)\n- <b>Order Book:</b> ~2.2 GW (~1.3 GW scheduled by March 2027)\n\n📌 <b>What happened:</b>\n↳ Insolation Energy Limited announced its unaudited standalone and consolidated financial results for the quarter and half year ended September 30, 2026, alongside key business updates including upcoming TOPCon cell line commissioning and secured incentives.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/INA_13112026204927_BSE_NSE_Press_Release_13_11_2026_sd.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-16 12:52:14 IST"
-    },
-    {
-      "hash": "8123dc8e0c45",
-      "symbol": "SRIT",
-      "company_name": "SRIT India Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "14-Nov-2026 00:54:45",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/SRIT_14112026005404_Intimation_of_Management_Commentary_Signed.pdf",
-      "headline": "SRIT India reports Q2 FY27 consolidated revenue of Rs 1,047.0 million and PAT of Rs 137.4 million",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with numeric Revenue and PAT provided.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>SRIT India Limited (NSE: SRIT)</b>\n\n<b>SRIT India reports Q2 FY27 consolidated revenue of Rs 1,047.0 million and PAT of Rs 137.4 million</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> Rs 1,047.0 million (up 29.0% YoY)\n- <b>Profit After Tax (PAT):</b> Rs 137.4 million (vs Rs 99.4 million YoY)\n- <b>Profit Before Tax (PBT):</b> Rs 188.9 million\n- <b>H1 FY27 PAT:</b> Rs 205.5 million\n\n📌 <b>What happened:</b>\n↳ SRIT India Limited has released its management commentary and financial results for the quarter and half year ended September 30, 2026, posting a consolidated quarterly revenue of Rs 1,047.0 million and net profit of Rs 137.4 million.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/SRIT_14112026005404_Intimation_of_Management_Commentary_Signed.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-16 12:51:53 IST"
-    },
-    {
-      "hash": "3fc66820441e",
-      "symbol": "TNTELE",
-      "company_name": "Tamilnadu Telecommunication Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "14-Nov-2026 07:16:33",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/TNTELE_14112026071621_Press_Relase_final.pdf",
-      "headline": "Tamilnadu Telecommunication reports Q2 FY27 income of Rs 25,000 and net loss of Rs 44.92 crore",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results with numeric Revenue and PAT provided.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Tamilnadu Telecommunication Limited (NSE: TNTELE)</b>\n\n<b>Tamilnadu Telecommunication reports Q2 FY27 income of Rs 25,000 and net loss of Rs 44.92 crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Total Income:</b> Rs 0.25 Lakhs (250 hundreds)\n- <b>Net Loss (PAT):</b> Rs (4,49,230) hundreds / Rs (44.92) crore\n- <b>EPS (Basic):</b> Rs (0.98)\n- <b>EPS (Diluted):</b> Rs (0.98)\n\n📌 <b>What happened:</b>\n↳ Tamilnadu Telecommunication Limited has announced its unaudited financial results for the quarter ended September 30, 2026, reporting a total income from operations of Rs 250 (in hundreds) and a net loss after tax of Rs 4,49,230 (in hundreds).\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.com/corporate/TNTELE_14112026071621_Press_Relase_final.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-16 12:51:53 IST"
     }
   ],
   "skipped_archive": [
@@ -396,20 +354,6 @@
       "worthiness_reason": "Financial results payload lacks explicit net profit numbers in the provided snippet.",
       "telegram_post": "",
       "analyzed_at": "2026-11-16 23:00:09 IST"
-    },
-    {
-      "hash": "dcbab68f023a",
-      "symbol": "SENCO",
-      "company_name": "Senco Gold Limited",
-      "category": "RESULT",
-      "event_type": "RESULT",
-      "broadcast_date": "13-Nov-2026 20:52:15",
-      "pdf_link": "https://nsearchives.nseindia.com/corporate/Sencogold_13112026204945_SE_Intimation_Outcome_of_BM_dated_13th_November_2026.pdf",
-      "headline": "Outcome of Board Meeting",
-      "content_worthy": false,
-      "worthiness_reason": "Financial results filing details are incomplete in the provided text as actual numerical figures for Revenue and PAT were cut off from the extract.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-16 12:52:14 IST"
     }
   ]
 }
