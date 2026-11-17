@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-17 05:16 IST",
+ "generated_at": "2026-11-18 04:32 IST",
  "sample_size": 100,
  "identified": 59,
  "inferred": 41,
  "cards_skipped": 0,
- "channel_avg_views": 20.3,
+ "channel_avg_views": 20.2,
  "growth": {
-  "today": 460,
-  "snapshots": 40,
-  "delta_7d": -7,
-  "per_day": 11.15,
-  "days_to_target": 48,
+  "today": 458,
+  "snapshots": 41,
+  "delta_7d": -9,
+  "per_day": 10.83,
+  "days_to_target": 50,
   "target": 1000,
-  "days_span": 41
+  "days_span": 42
  },
  "status": "ok",
  "pillars": {
@@ -23,10 +23,10 @@
    "low_sample": true
   },
   "technical": {
-   "posts": 3,
-   "avg_views": 28.0,
-   "weight": 1.38,
-   "low_sample": false
+   "posts": 2,
+   "avg_views": 26.0,
+   "weight": 1.0,
+   "low_sample": true
   },
   "process": {
    "posts": 2,
@@ -36,56 +36,51 @@
   },
   "risk": {
    "posts": 2,
-   "avg_views": 22.0,
+   "avg_views": 22.5,
    "weight": 1.0,
    "low_sample": true
   },
-  "market_mechanics": {
-   "posts": 5,
-   "avg_views": 21.4,
-   "weight": 1.06,
-   "low_sample": false
-  },
   "business_model": {
    "posts": 12,
-   "avg_views": 21.2,
-   "weight": 1.05,
-   "low_sample": false
-  },
-  "corporate": {
-   "posts": 51,
-   "avg_views": 20.5,
-   "weight": 1.01,
+   "avg_views": 21.8,
+   "weight": 1.08,
    "low_sample": false
   },
   "psychology": {
    "posts": 1,
-   "avg_views": 20.0,
+   "avg_views": 21.0,
    "weight": 1.0,
    "low_sample": true
   },
+  "corporate": {
+   "posts": 50,
+   "avg_views": 20.6,
+   "weight": 1.02,
+   "low_sample": false
+  },
+  "market_mechanics": {
+   "posts": 6,
+   "avg_views": 20.3,
+   "weight": 1.01,
+   "low_sample": false
+  },
   "awareness": {
    "posts": 7,
-   "avg_views": 17.1,
-   "weight": 0.85,
+   "avg_views": 17.3,
+   "weight": 0.86,
    "low_sample": false
   },
   "other": {
-   "posts": 16,
-   "avg_views": 16.9,
+   "posts": 17,
+   "avg_views": 16.8,
    "weight": 0.83,
    "low_sample": false
   }
  },
  "top_posts": [
   {
-   "title": "Viviana Power Tech wins Rs 466.74 crore turnkey contract from MGVCL",
-   "views": 38,
-   "pillar": "corporate"
-  },
-  {
    "title": "Sterling and Wilson Renewable Energy Limited (NSE: SWSOLAR)",
-   "views": 36,
+   "views": 37,
    "pillar": "corporate"
   },
   {
@@ -99,9 +94,14 @@
    "pillar": "corporate"
   },
   {
-   "title": "TREND VS RANGE: Myth vs Reality",
-   "views": 32,
-   "pillar": "technical"
+   "title": "Zydus Lifesciences to set up pharma plant in Sri Lanka",
+   "views": 33,
+   "pillar": "corporate"
+  },
+  {
+   "title": "MODISON LIMITED (NSE: MODISONLTD)",
+   "views": 33,
+   "pillar": "corporate"
   }
  ],
  "weak_posts": [
@@ -112,12 +112,12 @@
   },
   {
    "title": "Germany ke housing market mein political shift; Vonovia ki expropriati",
-   "views": 8,
+   "views": 9,
    "pillar": "other"
   },
   {
-   "title": "Rupee hits 15-day high against dollar on oil drop and FPI flows",
-   "views": 8,
+   "title": "Rupee touches six-month high of 94.08 against US dollar amid mixed glo",
+   "views": 5,
    "pillar": "other"
   }
  ]
