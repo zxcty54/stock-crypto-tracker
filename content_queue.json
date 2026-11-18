@@ -1023,14 +1023,16 @@
       "scheduled_ist": "2026-11-06 20:00",
       "title": "RBI data shows NBFC credit grew 15.4% YoY in September 2026",
       "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>RBI data shows NBFC credit grew 15.4% YoY in September 2026</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nRBI released sectoral deployment data for non-banking financial companies for September 2026, showing overall credit growth rising to 15.4 percent year-on-year compared to 13.3 percent a year ago, backed by accelerated retail and agricultural lending.\n\n🧭 <b>MARKET CONTEXT</b>\nSectoral deployment figures track how institutional credit flows across different economic segments like retail, industry, and services, offering a window into credit demand trends in the non-banking financial sector.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nAccelerated growth in retail loans reaching 21.9 percent and robust traction in housing, gold, and vehicle loans suggest sustained domestic consumption appetite. However, a slowdown in industry credit growth down to 7.4 percent points to subdued corporate capital expenditure demand, implying uneven credit off-take across the broader economy.\n\n🔎 <b>KEY WATCHPOINTS</b>\nMonitor subsequent monthly asset quality metrics, credit-deposit ratios, and borrowing cost trends across mid and upper-layer NBFCs to check for stress accumulation in high-growth retail segments.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How might divergence between surging retail lending and slowing industrial credit deployment impact the earnings trajectory of mid-tier NBFCs?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940\">RBI Press Releases</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
-      "used": false,
+      "used": true,
       "topic_key": "business_news_insight:b00e4440f144",
       "kind": "business_news_insight",
       "source_name": "RBI Press Releases",
       "source_url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63940",
       "source_headline": "Sectoral Deployment of Credit by NBFC – September 2026",
       "story_key": "b00e4440f14408dfc39314440680e697dccdb8f0d8386d1703f08cc75d17e489",
-      "generated_at": "2026-11-06 21:36:05 IST"
+      "generated_at": "2026-11-06 21:36:05 IST",
+      "posted_at": "2026-11-18 13:20:53 IST",
+      "telegraph_url": "https://telegra.ph/RBI-data-shows-NBFC-credit-grew-154-YoY-in-September-2026--November-2026-11-18"
     },
     {
       "id": "newsdxllrcvvis",
@@ -1603,6 +1605,22 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     },
     {
+      "id": "newsvykbtiakgg",
+      "slot": "C",
+      "hourly_slot_ist": "2026-11-18 12:00",
+      "scheduled_ist": "2026-11-18 12:00",
+      "title": "SEBI explores linking Margin Trading Facility limits to free float",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>SEBI explores linking Margin Trading Facility limits to free float</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nSEBI Chairman Tuhin Kanta Pandey announced that the regulator is considering a proposal to link Margin Trading Facility limits to a stock's free float. While discussions are underway, no final decision has been finalized. Reports indicate a potential 5% to 10% free-float cap on individual stock MTF exposure, causing intraday stock pullbacks in affected names like BSE and Angel One.\n\n🧭 <b>MARKET CONTEXT</b>\nIndia's overall MTF book has doubled over the last two years to roughly ₹1.5 lakh crore, though it accounts for just 0.7% of the overall free-float market capitalization. Free float refers to the proportion of shares readily available for public trading, excluding promoter and locked-in holdings.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIntroducing a free-float cap on leverage could restrict speculative borrowing in counters with limited public float. If implemented, brokerage firms and exchanges heavily reliant on retail margin trading volumes might face structural moderation in derivative or leveraged turnover. However, impact severity would depend on final threshold levels, given that current broker books largely comply with broad limits.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch out for official consultation papers from SEBI detailing the proposed thresholds, timelines for implementation, and aggregate data on how many mid- and small-cap counters exceed the contemplated free-float caps.\n\n💬 <b>DISCUSSION POINT</b>\n<b>Kya aapko lagta hai ki leverage limits tight hone se retail speculation mein risk-management behtar hoga?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://www.cnbctv18.com/market/bse-angel-one-nse-share-price-fall-sebi-chairman-remarks-mtf-proposal-cap-fleet-float-limits-impact-20036652.htm\">CNBC-TV18</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:da26b6ab6bb6",
+      "kind": "business_news_insight",
+      "source_name": "CNBC-TV18",
+      "source_url": "https://www.cnbctv18.com/market/bse-angel-one-nse-share-price-fall-sebi-chairman-remarks-mtf-proposal-cap-fleet-float-limits-impact-20036652.htm",
+      "source_headline": "BSE, Angel One shares fall up to 6% from the day's high after SEBI Chairman remarks; Details here",
+      "story_key": "da26b6ab6bb60555d6a48a17fbfa6a7a1d125f7056ac0f88523a13012207f99c",
+      "generated_at": "2026-11-18 13:19:00 IST"
+    },
+    {
       "id": "ai0052",
       "slot": "D",
       "scheduled_ist": "2026-11-18 14:00",
@@ -1643,6 +1661,6 @@
       "generated_at": "2026-11-16 15:44:47 IST"
     }
   ],
-  "total": 116,
+  "total": 117,
   "last_scheduled": "2026-11-18 20:00"
 }
