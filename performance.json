@@ -1,27 +1,21 @@
 {
- "generated_at": "2026-11-18 04:32 IST",
+ "generated_at": "2026-11-19 04:09 IST",
  "sample_size": 100,
  "identified": 59,
  "inferred": 41,
  "cards_skipped": 0,
- "channel_avg_views": 20.2,
+ "channel_avg_views": 20.3,
  "growth": {
   "today": 458,
-  "snapshots": 41,
-  "delta_7d": -9,
-  "per_day": 10.83,
-  "days_to_target": 50,
+  "snapshots": 42,
+  "delta_7d": -8,
+  "per_day": 10.58,
+  "days_to_target": 51,
   "target": 1000,
-  "days_span": 42
+  "days_span": 43
  },
  "status": "ok",
  "pillars": {
-  "tools": {
-   "posts": 1,
-   "avg_views": 29.0,
-   "weight": 1.0,
-   "low_sample": true
-  },
   "technical": {
    "posts": 2,
    "avg_views": 26.0,
@@ -36,15 +30,9 @@
   },
   "risk": {
    "posts": 2,
-   "avg_views": 22.5,
+   "avg_views": 23.0,
    "weight": 1.0,
    "low_sample": true
-  },
-  "business_model": {
-   "posts": 12,
-   "avg_views": 21.8,
-   "weight": 1.08,
-   "low_sample": false
   },
   "psychology": {
    "posts": 1,
@@ -52,28 +40,34 @@
    "weight": 1.0,
    "low_sample": true
   },
-  "corporate": {
-   "posts": 50,
-   "avg_views": 20.6,
+  "market_mechanics": {
+   "posts": 6,
+   "avg_views": 20.8,
+   "weight": 1.03,
+   "low_sample": false
+  },
+  "business_model": {
+   "posts": 13,
+   "avg_views": 20.8,
    "weight": 1.02,
    "low_sample": false
   },
-  "market_mechanics": {
-   "posts": 6,
-   "avg_views": 20.3,
-   "weight": 1.01,
+  "corporate": {
+   "posts": 50,
+   "avg_views": 20.8,
+   "weight": 1.02,
    "low_sample": false
   },
   "awareness": {
    "posts": 7,
-   "avg_views": 17.3,
-   "weight": 0.86,
+   "avg_views": 17.7,
+   "weight": 0.87,
    "low_sample": false
   },
   "other": {
    "posts": 17,
-   "avg_views": 16.8,
-   "weight": 0.83,
+   "avg_views": 17.7,
+   "weight": 0.87,
    "low_sample": false
   }
  },
@@ -106,19 +100,19 @@
  ],
  "weak_posts": [
   {
+   "title": "Ice Make Refrigeration Limited (NSE: ICEMAKE)",
+   "views": 10,
+   "pillar": "corporate"
+  },
+  {
    "title": "Insecticides (India) Limited (NSE: INSECTICID)",
    "views": 10,
    "pillar": "corporate"
   },
   {
-   "title": "Germany ke housing market mein political shift; Vonovia ki expropriati",
-   "views": 9,
-   "pillar": "other"
-  },
-  {
-   "title": "Rupee touches six-month high of 94.08 against US dollar amid mixed glo",
-   "views": 5,
-   "pillar": "other"
+   "title": "RBI data shows NBFC credit grew 15.4% YoY in September 2026",
+   "views": 8,
+   "pillar": "business_model"
   }
  ]
 }

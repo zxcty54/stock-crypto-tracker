@@ -1,6 +1,6 @@
 # 📊 Performance Report
 
-**18-Nov-2026 04:32 IST** | 100 posts tracked | channel avg **20 views**
+**19-Nov-2026 04:09 IST** | 100 posts tracked | channel avg **20 views**
 
 *59 posts pehchaane gaye, 41 ka pillar text se nikala gaya. 0 repackaged cards skip kiye.*
 
@@ -8,24 +8,23 @@
 
 | Pillar | Posts | Avg views | Weight |
 |---|---|---|---|
-| tools | 1 | 29 | 1.0 |
 | technical | 2 | 26 | 1.0 |
 | process | 2 | 26 | 1.0 |
-| risk | 2 | 22 | 1.0 |
-| business_model | 12 | 22 | 1.08 |
+| risk | 2 | 23 | 1.0 |
 | psychology | 1 | 21 | 1.0 |
+| market_mechanics | 6 | 21 | 1.03 |
+| business_model | 13 | 21 | 1.02 |
 | corporate | 50 | 21 | 1.02 |
-| market_mechanics | 6 | 20 | 1.01 |
-| awareness | 7 | 17 | 0.86 |
-| other | 17 | 17 | 0.83 |
+| awareness | 7 | 18 | 0.87 |
+| other | 17 | 18 | 0.87 |
 
 ## 📈 Channel Growth
 
 **Subscribers: 458** (target 1000)
 
-- Pichhle 7 din me: **-9**
-- Average: **10.83/din**
-- Isi raftaar se 1000 subs: **~50 din**
+- Pichhle 7 din me: **-8**
+- Average: **10.58/din**
+- Isi raftaar se 1000 subs: **~51 din**
 
 
 ## 🏆 Top posts
@@ -43,12 +42,12 @@
 
 ## ⚠️ Kam chale posts
 
+- 10 views — Ice Make Refrigeration Limited (NSE: ICEMAKE)  
+  `corporate`
 - 10 views — Insecticides (India) Limited (NSE: INSECTICID)  
   `corporate`
-- 9 views — Germany ke housing market mein political shift; Vonovia ki expropriati  
-  `other`
-- 5 views — Rupee touches six-month high of 94.08 against US dollar amid mixed glo  
-  `other`
+- 8 views — RBI data shows NBFC credit grew 15.4% YoY in September 2026  
+  `business_model`
 
 ---
 
