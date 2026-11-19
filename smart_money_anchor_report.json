@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-19 11:42:58 IST",
-  "total_anchors_discovered": 10,
+  "last_updated": "2026-11-19 21:04:49 IST",
+  "total_anchors_discovered": 11,
   "prime_discount_opportunities": 4,
   "buffer_safe_entries": 2,
   "prime_setups": [
@@ -10,7 +10,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 1166.0,
       "capital_raised_cr": 300.0,
-      "market_cap_cr": 184.85,
+      "market_cap_cr": 190.11,
       "allottees": [
         {
           "name": "SBI Mutual Fund",
@@ -21,11 +21,11 @@
       "filing_context": "Preferential allotment of 2,572,898 equity shares at Rs 1,166 per share to SBI-managed mutual funds raising Rs 300 crore.",
       "cmp": 49.75,
       "delta_to_floor_pct": -95.73,
-      "deal_size_pct_mcap": 162.29,
+      "deal_size_pct_mcap": 157.8,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
       "zone_label": "95.73% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.73% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.75 (-95.73% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~162.29% Dilution (MCap: ₹185 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.73% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.75 (-95.73% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~157.8% Dilution (MCap: ₹190 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
     },
     {
       "symbol": "IMAGICAA",
@@ -34,7 +34,7 @@
       "cmp": 40.01,
       "institutional_floor_price": 73.5,
       "capital_raised_cr": 0.0,
-      "market_cap_cr": 2356.2,
+      "market_cap_cr": 2355.02,
       "deal_size_pct_mcap": 0.0,
       "delta_to_floor_pct": -45.56,
       "zone": "PRIME_DISCOUNT",
@@ -43,7 +43,7 @@
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
       "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 45.56% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹40.01 (-45.56% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,356 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 45.56% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹40.01 (-45.56% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,355 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
     },
     {
       "symbol": "GUJTHEM",
@@ -151,7 +151,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 1166.0,
       "capital_raised_cr": 300.0,
-      "market_cap_cr": 184.85,
+      "market_cap_cr": 190.11,
       "allottees": [
         {
           "name": "SBI Mutual Fund",
@@ -162,11 +162,11 @@
       "filing_context": "Preferential allotment of 2,572,898 equity shares at Rs 1,166 per share to SBI-managed mutual funds raising Rs 300 crore.",
       "cmp": 49.75,
       "delta_to_floor_pct": -95.73,
-      "deal_size_pct_mcap": 162.29,
+      "deal_size_pct_mcap": 157.8,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
       "zone_label": "95.73% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.73% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.75 (-95.73% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~162.29% Dilution (MCap: ₹185 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.73% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.75 (-95.73% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~157.8% Dilution (MCap: ₹190 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
     },
     {
       "symbol": "IMAGICAA",
@@ -175,7 +175,7 @@
       "cmp": 40.01,
       "institutional_floor_price": 73.5,
       "capital_raised_cr": 0.0,
-      "market_cap_cr": 2356.2,
+      "market_cap_cr": 2355.02,
       "deal_size_pct_mcap": 0.0,
       "delta_to_floor_pct": -45.56,
       "zone": "PRIME_DISCOUNT",
@@ -184,7 +184,7 @@
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
       "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 45.56% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹40.01 (-45.56% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,356 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 45.56% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹40.01 (-45.56% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,355 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
     },
     {
       "symbol": "GUJTHEM",
@@ -299,6 +299,24 @@
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf",
       "filing_context": "General Updates Bajaj Finance Limited has informed the Exchange about the outcome of QIP 2026 - Special Committee Meeting",
       "alert_card": "🚨 FRESH CAPITAL RADAR | +6.62% EXTENDED\n\n📌 Bajaj Finance Limited (NSE: BAJFINANCE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,025.00\n📊 Current CMP:          ₹1,092.85 (+6.62% vs Anchor)\n📦 Capital Infused:      ₹11,700.00 Cr\n🏢 Dilution / MCap:      ~17.23% Dilution (MCap: ₹67,897 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf"
+    },
+    {
+      "symbol": "URBANCO",
+      "company_name": "Urban Company Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 175.5,
+      "institutional_floor_price": 161.03,
+      "capital_raised_cr": 2580.61,
+      "market_cap_cr": 26023.0,
+      "deal_size_pct_mcap": 9.92,
+      "delta_to_floor_pct": 8.99,
+      "zone": "EXTENDED",
+      "zone_label": "+8.99% Extended",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/URBANCO_19112026192229_QIP_Issue_Close_19112026.pdf",
+      "filing_context": "Committee Meeting Updates Urban Company Limited has informed the Exchange regarding Outcome of Fund Raise Committee Meeting held on November 19, 2026 - Closure ",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +8.99% EXTENDED\n\n📌 Urban Company Limited (NSE: URBANCO)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹161.03\n📊 Current CMP:          ₹175.50 (+8.99% vs Anchor)\n📦 Capital Infused:      ₹2,580.61 Cr\n🏢 Dilution / MCap:      ~9.92% Dilution (MCap: ₹26,023 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/URBANCO_19112026192229_QIP_Issue_Close_19112026.pdf"
     },
     {
       "symbol": "PTCIL",
