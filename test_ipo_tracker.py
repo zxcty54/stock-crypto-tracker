@@ -407,9 +407,9 @@ class TestIpoFormatters(unittest.TestCase):
         self.assertIn("Vishal Mega Mart Limited", msg)
         self.assertIn("+₹18.00 (+23.08%)", msg)
         self.assertIn("Kostak: ₹400", msg)
-        self.assertIn("Listing:</b> <b>2026-12-18</b>", msg)
-        self.assertIn("Demat Credit:</b> 2026-12-17", msg)
-        self.assertIn("Reg:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies Limited</a>", msg)
+        self.assertIn("IPO Listing Date:</b> <b>18 Dec 2026</b>", msg)
+        self.assertIn("Demat Credit:</b> 17 Dec 2026", msg)
+        self.assertIn("Registrar:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies</a>", msg)
         self.assertIn("Issue Size:</b> ₹8,000 Cr", msg)
         self.assertLess(len(msg), 4000)
 
@@ -432,7 +432,7 @@ class TestIpoFormatters(unittest.TestCase):
     def test_get_registrar_link_html(self):
         link_intime = get_registrar_link_html("Link Intime India Private Ltd")
         self.assertIn("linkintime.co.in", link_intime)
-        self.assertIn("Link Intime India Private Ltd", link_intime)
+        self.assertIn("Link Intime", link_intime)
 
         kfin = get_registrar_link_html({"name": "KFin Technologies", "url": "https://kosmic.kfintech.com/ipostatus/"})
         self.assertIn("kosmic.kfintech.com", kfin)
@@ -443,23 +443,23 @@ class TestIpoFormatters(unittest.TestCase):
     def test_curated_post_critical_fields(self):
         # Verify Opens Today alert has listing date, registrar link, demat credit date, ipo size
         opens_msg = format_opens_today_alert(self.sample_ipo)
-        self.assertIn("IPO Listing Date:</b> <b>2026-12-18</b>", opens_msg)
-        self.assertIn("Demat Credit Date:</b> <b>2026-12-17</b>", opens_msg)
-        self.assertIn("Registrar Portal:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies Limited</a>", opens_msg)
+        self.assertIn("IPO Listing Date:</b> <b>18 Dec 2026</b>", opens_msg)
+        self.assertIn("Demat Credit Date:</b> <b>17 Dec 2026</b>", opens_msg)
+        self.assertIn("Registrar Portal:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies</a>", opens_msg)
         self.assertIn("IPO Issue Size:</b> <b>₹8,000 Cr</b>", opens_msg)
 
         # Verify Closing Today alert has listing date, registrar link, demat credit date, ipo size
         closing_msg = format_closing_today_alert(self.sample_ipo)
-        self.assertIn("IPO Listing Date:</b> <b>2026-12-18</b>", closing_msg)
-        self.assertIn("Demat Credit Date:</b> <b>2026-12-17</b>", closing_msg)
-        self.assertIn("Registrar Portal:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies Limited</a>", closing_msg)
+        self.assertIn("IPO Listing Date:</b> <b>18 Dec 2026</b>", closing_msg)
+        self.assertIn("Demat Credit Date:</b> <b>17 Dec 2026</b>", closing_msg)
+        self.assertIn("Registrar Portal:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies</a>", closing_msg)
         self.assertIn("IPO Issue Size:</b> <b>₹8,000 Cr</b>", closing_msg)
 
         # Verify Live GMP Movement alert has listing date, registrar link, demat credit date, ipo size
         gmp_msg = format_gmp_update_alert(self.sample_ipo, old_gmp="+₹10.00", surge_text="Surge")
-        self.assertIn("Listing Date:</b> <b>2026-12-18</b>", gmp_msg)
-        self.assertIn("Demat Credit:</b> 2026-12-17", gmp_msg)
-        self.assertIn("Registrar:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies Limited</a>", gmp_msg)
+        self.assertIn("IPO Listing Date:</b> <b>18 Dec 2026</b>", gmp_msg)
+        self.assertIn("Demat Credit:</b> 17 Dec 2026", gmp_msg)
+        self.assertIn("Registrar:</b> <a href=\"https://kosmic.kfintech.com/ipostatus/\">KFin Technologies</a>", gmp_msg)
         self.assertIn("IPO Issue Size:</b> ₹8,000 Cr", gmp_msg)
 
 

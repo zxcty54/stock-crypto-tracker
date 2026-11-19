@@ -99,22 +99,112 @@ def derive_demat_date(allotment_d: str | None, listing_d: str | None, close_d: s
     return "Prior to Listing"
 
 
+def clean_registrar_name(name: str) -> str:
+    """Shorten registrar name for crisp mobile display."""
+    if not name:
+        return ""
+    clean = re.sub(r"(?i)\s*(?:india\s*)?(?:private|pvt\.?|limited|ltd\.?)\b", "", str(name)).strip()
+    clean = re.sub(r"\s+", " ", clean).strip()
+    return clean or str(name)
+
+
+def format_short_date(val: str | None, include_year: bool = True) -> str:
+    """Format YYYY-MM-DD into clean '19 Nov 2026' or '19 Nov'."""
+    if not val or val in ("TBA", "Tentative", "Announcing Soon", "Prior to Listing"):
+        return safe_text(val, default="TBA")
+    s = str(val).strip()
+    match = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", s)
+    if match:
+        try:
+            dt = datetime.strptime(s, "%Y-%m-%d")
+            return dt.strftime("%d %b %Y") if include_year else dt.strftime("%d %b")
+        except ValueError:
+            pass
+    return s
+
+
+def format_date_range_display(open_d: str | None, close_d: str | None) -> str:
+    """Format open and close dates into clean '19 – 23 Nov 2026'."""
+    if not open_d or open_d in ("TBA", "Announcing Soon"):
+        return format_short_date(close_d)
+    if not close_d or close_d in ("TBA", "Announcing Soon"):
+        return format_short_date(open_d)
+    m1 = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", str(open_d).strip())
+    m2 = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", str(close_d).strip())
+    if m1 and m2:
+        try:
+            dt1 = datetime.strptime(str(open_d).strip(), "%Y-%m-%d")
+            dt2 = datetime.strptime(str(close_d).strip(), "%Y-%m-%d")
+            if dt1.year == dt2.year and dt1.month == dt2.month:
+                d1 = dt1.strftime("%d")
+                d2 = dt2.strftime("%d %b %Y")
+                return f"{d1} – {d2}"
+            elif dt1.year == dt2.year:
+                d1 = dt1.strftime("%d %b")
+                d2 = dt2.strftime("%d %b %Y")
+                return f"{d1} – {d2}"
+            d1 = dt1.strftime("%d %b %Y")
+            d2 = dt2.strftime("%d %b %Y")
+            return f"{d1} – {d2}"
+        except ValueError:
+            pass
+    return f"{open_d} to {close_d}"
+
+
+def format_gmp_percent(val: int | float | str | None) -> str:
+    """Format GMP percentage with sign and percent symbol, e.g. '+2.21%'."""
+    if val is None or val == "" or val == "TBA":
+        return ""
+    s = str(val).strip()
+    if s.endswith("%"):
+        return s if s.startswith(("+", "-")) else f"+{s}"
+    try:
+        num = float(s)
+        return f"+{num:.2f}%" if num > 0 else f"{num:.2f}%"
+    except (ValueError, TypeError):
+        return f"+{s}%"
+
+
+def format_subscription_summary(sub: dict | None) -> str:
+    """Format subscription into crisp single-line mobile string."""
+    if not isinstance(sub, dict) or not sub:
+        return ""
+    total = str(sub.get("total") or "").strip()
+    if not total or total in ("Upcoming", "--", "N/A"):
+        return ""
+    if re.search(r"\d+\.?\d*", total) and ("x" in total.lower() or "times" in total.lower()):
+        parts = [f"<b>Total: {total}</b>"]
+        retail = str(sub.get("retail") or "").strip()
+        if retail and re.search(r"\d", retail) and retail != "Upcoming":
+            parts.append(f"Retail: {retail}")
+        qib = str(sub.get("qib") or "").strip()
+        if qib and re.search(r"\d", qib) and qib != "Upcoming":
+            parts.append(f"QIB: {qib}")
+        return " | ".join(parts)
+    r_val = sub.get("retail", "")
+    q_val = sub.get("qib", "")
+    full_text = f"{total} {r_val} {q_val}"
+    day_match = re.search(r"Day\s*\d+", full_text, re.IGNORECASE)
+    day_info = f" ({day_match.group(0)})" if day_match else ""
+    return f"Bidding Live{day_info}"
+
+
 def get_registrar_link_html(reg: dict | str | None, default_url: str = "") -> str:
     """Generate clean HTML anchor for registrar allotment portal."""
     if not reg:
         return ""
     if isinstance(reg, dict):
-        name = safe_text(reg.get("name"), default="")
+        raw_name = safe_text(reg.get("name"), default="")
         url = reg.get("url") or default_url
     else:
-        name = safe_text(str(reg), default="")
+        raw_name = safe_text(str(reg), default="")
         url = default_url
 
-    if not name or name == "TBA":
+    if not raw_name or raw_name == "TBA":
         return ""
 
     if not url:
-        lower_name = name.lower()
+        lower_name = raw_name.lower()
         for key, p_url in REGISTRAR_PORTALS.items():
             if key in lower_name:
                 url = p_url
@@ -122,7 +212,8 @@ def get_registrar_link_html(reg: dict | str | None, default_url: str = "") -> st
         if not url:
             url = REGISTRAR_PORTALS["bse"]
 
-    return f'<a href="{html.escape(url, quote=True)}">{name}</a>'
+    display_name = clean_registrar_name(raw_name)
+    return f'<a href="{html.escape(url, quote=True)}">{display_name}</a>'
 
 
 def format_test_verification_post() -> str:
@@ -173,17 +264,16 @@ def format_new_ipo_alert(ipo: dict) -> str:
 
     sector = safe_text(ipo.get("sector"), default="Mainboard Equity")
 
-    open_d = safe_text(ipo.get("open_date"), default="Announcing Soon")
-    close_d = safe_text(ipo.get("close_date"), default="Announcing Soon")
-    allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
+    open_d = format_short_date(ipo.get("open_date"))
+    close_d = format_short_date(ipo.get("close_date"))
+    allot_d = format_short_date(ipo.get("allotment_date"))
     refund_d = safe_text(ipo.get("refund_date"), default="Next Business Day")
-    demat_d = safe_text(
+    demat_d = format_short_date(
         ipo.get("demat_credit_date")
         or ipo.get("demat_date")
-        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-        default="Prior to Listing",
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
     )
-    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+    list_d = format_short_date(ipo.get("listing_date"))
 
     price_band = safe_text(ipo.get("price_band"))
     if not price_band.startswith("₹") and price_band != "TBA":
@@ -237,9 +327,9 @@ def format_new_ipo_alert(ipo: dict) -> str:
 
     # Verified GMP & Kostak / Sub2Sauda
     gmp = ipo.get("gmp")
-    gmp_pct = ipo.get("gmp_percent", "")
+    gmp_pct_str = format_gmp_percent(ipo.get("gmp_percent"))
     if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
+        gmp_text = f"<b>{safe_text(gmp)}</b> ({gmp_pct_str})" if gmp_pct_str else f"<b>{safe_text(gmp)}</b>"
     else:
         gmp_text = "Trading yet to start"
 
@@ -370,21 +460,21 @@ def format_new_ipo_alert(ipo: dict) -> str:
 
 
 def format_opens_today_alert(ipo: dict) -> str:
-    """Curated template for Opening Day bidding alert."""
+    """Curated mobile-optimized template for Opening Day bidding alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
 
-    open_d = safe_text(ipo.get("open_date"))
-    close_d = safe_text(ipo.get("close_date"))
-    allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
-    demat_d = safe_text(
+    open_d = ipo.get("open_date")
+    close_d = ipo.get("close_date")
+    bidding_d = format_date_range_display(open_d, close_d)
+    allot_d = format_short_date(ipo.get("allotment_date"))
+    demat_d = format_short_date(
         ipo.get("demat_credit_date")
         or ipo.get("demat_date")
-        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-        default="Prior to Listing",
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
     )
-    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+    list_d = format_short_date(ipo.get("listing_date"))
 
     price_band = safe_text(ipo.get("price_band"))
     if not price_band.startswith("₹") and price_band != "TBA":
@@ -396,10 +486,10 @@ def format_opens_today_alert(ipo: dict) -> str:
 
     issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
-    gmp = ipo.get("gmp")
-    gmp_pct = ipo.get("gmp_percent", "")
-    if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
+    gmp = safe_text(ipo.get("gmp"))
+    gmp_pct_str = format_gmp_percent(ipo.get("gmp_percent"))
+    if gmp and str(gmp).strip() not in ("--", "0", "TBA", ""):
+        gmp_text = f"<b>{gmp}</b> ({gmp_pct_str})" if gmp_pct_str else f"<b>{gmp}</b>"
     else:
         gmp_text = "Trading yet to start"
 
@@ -412,7 +502,6 @@ def format_opens_today_alert(ipo: dict) -> str:
     retail_q = safe_text(res.get("retail_pct"), default="35%")
 
     reg_html = get_registrar_link_html(ipo.get("registrar"))
-    reg_line = f"\n🏛️ <b>Registrar Portal:</b> {reg_html}" if reg_html else ""
 
     return (
         f"🟢 <b>IPO OPENS TODAY: BIDDING IS LIVE</b>\n"
@@ -422,17 +511,17 @@ def format_opens_today_alert(ipo: dict) -> str:
         f"💰 <b>ISSUE &amp; TICKET DETAILS</b>\n"
         f"• <b>IPO Issue Size:</b> <b>{issue_size}</b>\n"
         f"• <b>Price Band:</b> {price_band}\n"
-        f"• <b>Market Lot:</b> {lot_size} Shares (Min. Investment: {min_inv_str})\n"
+        f"• <b>Market Lot:</b> {lot_size} Shares (Min: {min_inv_str})\n"
         f"• <b>Retail Quota:</b> {retail_q}\n\n"
         f"🔥 <b>LATEST GREY MARKET PREMIUM (GMP)</b>\n"
         f"• <b>Current GMP:</b> {gmp_text}\n"
         f"• <b>Expected Listing:</b> {est_list}{rate_line}\n\n"
         f"📅 <b>CONFIRMED TIMELINE</b>\n"
-        f"• <b>Bidding Window:</b> {open_d} to {close_d} (Daily 10 AM - 5 PM)\n"
+        f"• <b>Bidding Window:</b> {bidding_d} (Daily 10 AM - 5 PM)\n"
         f"• <b>Basis of Allotment:</b> {allot_d}\n"
         f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
-        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)"
-        f"{reg_line}\n\n"
+        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n"
+        f"• <b>Registrar Portal:</b> {reg_html}\n\n"
         f"💡 <i>Tip: Retail investors applying at Cut-off price have maximum allocation probability in oversubscribed issues.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Updates:</b> {CHANNEL_HANDLE}\n"
@@ -441,7 +530,7 @@ def format_opens_today_alert(ipo: dict) -> str:
 
 
 def format_closing_today_alert(ipo: dict) -> str:
-    """Curated template for Final Day / Closing Day bidding alert with subscription."""
+    """Curated mobile-optimized template for Final Day bidding alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
@@ -456,30 +545,39 @@ def format_closing_today_alert(ipo: dict) -> str:
     issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     sub = ipo.get("subscription", {})
-    qib = safe_text(sub.get("qib"), default="Updating...")
-    nii = safe_text(sub.get("nii"), default="Updating...")
-    retail = safe_text(sub.get("retail"), default="Updating...")
-    total = safe_text(sub.get("total"), default="Updating...")
+    sub_summary = format_subscription_summary(sub)
+    if not sub_summary or sub_summary.startswith("Bidding"):
+        qib = safe_text(sub.get("qib"), default="Updating...")
+        nii = safe_text(sub.get("nii"), default="Updating...")
+        retail = safe_text(sub.get("retail"), default="Updating...")
+        total = safe_text(sub.get("total"), default="Updating...")
+        sub_section = (
+            f"📊 <b>LIVE NSE SUBSCRIPTION DEMAND</b>\n"
+            f"• <b>QIB:</b> {qib}\n"
+            f"• <b>NII / HNI:</b> {nii}\n"
+            f"• <b>Retail (RII):</b> {retail}\n"
+            f"• <b>TOTAL SUBSCRIPTION:</b> <b>{total}</b>\n\n"
+        )
+    else:
+        sub_section = f"📊 <b>NSE Demand:</b> {sub_summary}\n\n"
 
-    gmp = ipo.get("gmp")
-    gmp_pct = ipo.get("gmp_percent", "")
-    if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
+    gmp = safe_text(ipo.get("gmp"))
+    gmp_pct_str = format_gmp_percent(ipo.get("gmp_percent"))
+    if gmp and str(gmp).strip() not in ("--", "0", "TBA", ""):
+        gmp_text = f"<b>{gmp}</b> ({gmp_pct_str})" if gmp_pct_str else f"<b>{gmp}</b>"
     else:
         gmp_text = "N/A"
 
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
-    allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
-    demat_d = safe_text(
+    allot_d = format_short_date(ipo.get("allotment_date"))
+    demat_d = format_short_date(
         ipo.get("demat_credit_date")
         or ipo.get("demat_date")
-        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-        default="Prior to Listing",
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
     )
-    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+    list_d = format_short_date(ipo.get("listing_date"))
 
     reg_html = get_registrar_link_html(ipo.get("registrar"))
-    reg_line = f"\n🏛️ <b>Registrar Portal:</b> {reg_html}" if reg_html else ""
 
     return (
         f"🔴 <b>IPO CLOSING TODAY: LAST CHANCE TO APPLY</b>\n"
@@ -489,26 +587,22 @@ def format_closing_today_alert(ipo: dict) -> str:
         f"⏳ <b>Deadline:</b> Today by 5:00 PM IST (UPI Mandate: 5:00 PM)\n"
         f"💰 <b>IPO Issue Size:</b> <b>{issue_size}</b> | <b>Cut-off:</b> {cut_off_str}\n"
         f"📦 <b>Market Lot:</b> {lot_size} Shares (Min: {min_inv_str})\n\n"
-        f"📊 <b>LIVE NSE SUBSCRIPTION DEMAND</b>\n"
-        f"• <b>QIB:</b> {qib}\n"
-        f"• <b>NII / HNI:</b> {nii}\n"
-        f"• <b>Retail (RII):</b> {retail}\n"
-        f"• <b>TOTAL SUBSCRIPTION:</b> <b>{total}</b>\n\n"
+        f"{sub_section}"
         f"🔥 <b>LATEST GREY MARKET PREMIUM (GMP)</b>\n"
         f"• <b>Current GMP:</b> {gmp_text}\n"
         f"• <b>Expected Listing:</b> {est_list}\n\n"
         f"📅 <b>NEXT STEPS &amp; TIMELINE</b>\n"
         f"• <b>Basis of Allotment:</b> {allot_d}\n"
         f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
-        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)"
-        f"{reg_line}\n"
+        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n"
+        f"• <b>Registrar Portal:</b> {reg_html}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Instant Allotment Alerts:</b> {CHANNEL_HANDLE}"
     )
 
 
 def format_allotment_out_alert(ipo: dict) -> str:
-    """Curated template for Allotment Out alert with direct 1-click links."""
+    """Curated mobile-optimized template for Allotment Out alert with direct 1-click links."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
@@ -518,21 +612,20 @@ def format_allotment_out_alert(ipo: dict) -> str:
     if not issue_price.startswith("₹") and issue_price != "TBA":
         issue_price = f"₹{issue_price}"
 
-    gmp = ipo.get("gmp")
-    gmp_pct = ipo.get("gmp_percent", "")
-    gmp_text = f"{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp and str(gmp).strip() not in ("--", "0", "") else "TBA"
+    gmp = safe_text(ipo.get("gmp"))
+    gmp_pct_str = format_gmp_percent(ipo.get("gmp_percent"))
+    gmp_text = f"{gmp} ({gmp_pct_str})" if gmp and str(gmp).strip() not in ("--", "0", "TBA", "") else "TBA"
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
 
-    demat_d = safe_text(
+    demat_d = format_short_date(
         ipo.get("demat_credit_date")
         or ipo.get("demat_date")
-        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-        default="Prior to Listing",
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
     )
-    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+    list_d = format_short_date(ipo.get("listing_date"))
 
     reg = ipo.get("registrar", {})
-    reg_name = safe_text(reg.get("name") if isinstance(reg, dict) else reg, default="Registrar Portal")
+    reg_name = clean_registrar_name(reg.get("name") if isinstance(reg, dict) else reg) or "Registrar Portal"
     reg_html = get_registrar_link_html(reg)
 
     return (
@@ -562,65 +655,58 @@ def format_allotment_out_alert(ipo: dict) -> str:
 
 
 def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") -> str:
-    """Curated template for significant GMP movement alert."""
+    """Curated mobile-optimized template for significant GMP movement alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
 
     price_band = safe_text(ipo.get("price_band") or ipo.get("cut_off_price"), default="TBA")
-    open_d = safe_text(ipo.get("open_date"), default="TBA")
-    close_d = safe_text(ipo.get("close_date"), default="TBA")
-    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
-    demat_d = safe_text(
+    open_d = ipo.get("open_date")
+    close_d = ipo.get("close_date")
+    bidding_d = format_date_range_display(open_d, close_d)
+    list_d = format_short_date(ipo.get("listing_date"))
+    demat_d = format_short_date(
         ipo.get("demat_credit_date")
         or ipo.get("demat_date")
-        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-        default="Prior to Listing",
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
     )
     issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
     gmp = safe_text(ipo.get("gmp"), default="N/A")
-    gmp_pct = safe_text(ipo.get("gmp_percent"), default="")
+    gmp_pct_str = format_gmp_percent(ipo.get("gmp_percent"))
 
     surge_disp = f" <b>{surge_text}</b>" if surge_text else ""
-    gmp_str = f"<b>{gmp}</b> ({gmp_pct}){surge_disp}" if gmp_pct else f"<b>{gmp}</b>{surge_disp}"
+    gmp_str = f"<b>{gmp}</b> ({gmp_pct_str}){surge_disp}" if gmp_pct_str else f"<b>{gmp}</b>{surge_disp}"
 
     old_str = f"• <b>Previous GMP:</b> {old_gmp}\n" if old_gmp else ""
     kostak = safe_text(ipo.get("kostak"), default="")
     kostak_str = f"• <b>Kostak Rate:</b> {kostak}\n" if kostak and kostak != "TBA" else ""
 
     reg_html = get_registrar_link_html(ipo.get("registrar"))
-    reg_part = f" | <b>Registrar:</b> {reg_html}" if reg_html else ""
 
     # Live NSE Demand / Bids if available
     sub = ipo.get("subscription", {})
-    sub_line = ""
-    if isinstance(sub, dict) and sub.get("total") and sub.get("total") not in ("Upcoming", ""):
-        sub_parts = []
-        if sub.get("qib") and sub.get("qib") != "Upcoming":
-            sub_parts.append(f"QIB: {sub['qib']}")
-        if sub.get("nii") and sub.get("nii") != "Upcoming":
-            sub_parts.append(f"NII: {sub['nii']}")
-        if sub.get("retail") and sub.get("retail") != "Upcoming":
-            sub_parts.append(f"Retail: {sub['retail']}")
-        sub_parts.append(f"<b>Total: {sub['total']}</b>")
-        sub_line = f"• <b>NSE Demand:</b> {' | '.join(sub_parts)}\n"
+    sub_summary = format_subscription_summary(sub)
+    demand_line = f"• <b>NSE Demand:</b> {sub_summary}\n" if sub_summary else ""
 
     return (
         f"⚡ <b>LIVE GMP MOVEMENT ALERT</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🏢 <b>{comp_name}</b>{sym_tag}\n"
         f"🏷️ <i>Mainboard IPO · Grey Market Revision</i>\n\n"
-        f"💰 <b>IPO Issue Size:</b> {issue_size} | <b>Price Band:</b> {price_band}\n"
-        f"📅 <b>Bidding:</b> {open_d} to {close_d} | <b>Listing Date:</b> <b>{list_d}</b>\n"
-        f"📌 <b>Demat Credit:</b> {demat_d}{reg_part}\n\n"
+        f"💰 <b>IPO Issue Size:</b> {issue_size}\n"
+        f"🏷️ <b>Price Band:</b> {price_band}\n"
+        f"📅 <b>Bidding:</b> {bidding_d}\n"
+        f"🚀 <b>IPO Listing Date:</b> <b>{list_d}</b>\n"
+        f"📌 <b>Demat Credit:</b> {demat_d}\n"
+        f"🏛️ <b>Registrar:</b> {reg_html}\n\n"
         f"🔥 <b>UPDATED GREY MARKET PREMIUM:</b>\n"
         f"{old_str}"
         f"• <b>Current GMP:</b> {gmp_str}\n"
         f"• <b>Expected Listing Price:</b> {est_list}\n"
         f"{kostak_str}"
-        f"{sub_line}\n"
+        f"{demand_line}\n"
         f"<i>*GMP is based on unofficial market trades &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}"
@@ -628,7 +714,7 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
 
 
 def format_listing_today_alert(ipo: dict) -> str:
-    """Curated template for Listing Day debut alert."""
+    """Curated mobile-optimized template for Listing Day debut alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
@@ -673,8 +759,8 @@ def format_listing_today_alert(ipo: dict) -> str:
 
 
 def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str:
-    """Curated template for Daily/Weekly Mainboard IPO GMP Dashboard."""
-    date_str = as_of_date or datetime.now(IST).strftime("%d-%b-%Y")
+    """Curated mobile-optimized template for Daily/Weekly Mainboard IPO GMP Dashboard."""
+    date_str = as_of_date or datetime.now(IST).strftime("%d %b %Y")
     today_str = datetime.now(IST).strftime("%Y-%m-%d")
 
     lines = []
@@ -687,25 +773,24 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
             continue
 
         name = safe_text(ipo.get("company_name"))
-        gmp = ipo.get("gmp")
+        gmp = safe_text(ipo.get("gmp"))
         gmp_pct = ipo.get("gmp_percent", "")
+        gmp_pct_str = format_gmp_percent(gmp_pct)
         price = safe_text(ipo.get("price_band") or ipo.get("cut_off_price"), default="TBA")
 
-        if gmp and str(gmp).strip() not in ("--", "0", ""):
-            gmp_display = f"{safe_text(gmp)}"
-            if gmp_pct:
-                gmp_display += f" ({safe_text(gmp_pct)})"
+        if gmp and str(gmp).strip() not in ("--", "0", "TBA", ""):
+            gmp_display = f"{gmp} ({gmp_pct_str})" if gmp_pct_str else f"{gmp}"
         else:
             gmp_display = "Trading yet to start"
 
-        open_d = safe_text(ipo.get("open_date"), default="TBA")
-        close_d_str = safe_text(close_d, default="TBA")
-        list_d = safe_text(ipo.get("listing_date"), default="Tentative")
-        demat_d = safe_text(
+        open_d = ipo.get("open_date")
+        close_d_val = ipo.get("close_date")
+        bidding_d = format_date_range_display(open_d, close_d_val)
+        list_d = format_short_date(ipo.get("listing_date"))
+        demat_d = format_short_date(
             ipo.get("demat_credit_date")
             or ipo.get("demat_date")
-            or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
-            default="Tentative",
+            or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date"))
         )
         issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
@@ -713,29 +798,22 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
         rate_info = f" | Kostak: {kostak}" if kostak and kostak != "TBA" else ""
 
         reg_html = get_registrar_link_html(ipo.get("registrar"))
-        reg_part = f" | <b>Reg:</b> {reg_html}" if reg_html else ""
 
         # Live NSE Demand / Bids if available
         sub = ipo.get("subscription", {})
-        sub_line = ""
-        if isinstance(sub, dict) and sub.get("total") and sub.get("total") not in ("Upcoming", ""):
-            sub_parts = []
-            if sub.get("qib") and sub.get("qib") != "Upcoming":
-                sub_parts.append(f"QIB: {sub['qib']}")
-            if sub.get("nii") and sub.get("nii") != "Upcoming":
-                sub_parts.append(f"NII: {sub['nii']}")
-            if sub.get("retail") and sub.get("retail") != "Upcoming":
-                sub_parts.append(f"Retail: {sub['retail']}")
-            sub_parts.append(f"<b>Total: {sub['total']}</b>")
-            sub_line = f"\n   • <b>NSE Demand:</b> {' | '.join(sub_parts)}"
+        sub_summary = format_subscription_summary(sub)
+        demand_line = f"\n• <b>NSE Demand:</b> {sub_summary}" if sub_summary else ""
 
         lines.append(
             f"🔹 <b>{name}</b>\n"
-            f"   • <b>Issue Size:</b> {issue_size} | <b>Price:</b> {price}\n"
-            f"   • <b>Bidding:</b> {open_d} to {close_d_str} | <b>Listing:</b> <b>{list_d}</b>\n"
-            f"   • <b>Demat Credit:</b> {demat_d}{reg_part}\n"
-            f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}"
-            f"{sub_line}\n"
+            f"• <b>Issue Size:</b> {issue_size}\n"
+            f"• <b>Price Band:</b> {price}\n"
+            f"• <b>Bidding Window:</b> {bidding_d}\n"
+            f"• <b>IPO Listing Date:</b> <b>{list_d}</b>\n"
+            f"• <b>Demat Credit:</b> {demat_d}\n"
+            f"• <b>Registrar:</b> {reg_html}\n"
+            f"• <b>Live GMP:</b> <b>{gmp_display}</b>{rate_info}"
+            f"{demand_line}\n"
         )
 
     content = "\n".join(lines) if lines else "<i>Currently, no Mainboard IPO is actively open for bidding on NSE/BSE. Tracking upcoming SEBI DRHP issue filings &amp; announcements...</i>"
@@ -744,7 +822,7 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
         f"📊 <b>MAINBOARD IPO: LIVE GMP DASHBOARD</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📅 <i>As of {date_str}</i>\n\n"
-        f"{content}\n\n"
+        f"{content}\n"
         f"<i>*GMP is unofficial market sentiment &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📢 <b>Join {CHANNEL_HANDLE} for Fastest Mainboard IPO Alerts</b>"
