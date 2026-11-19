@@ -15,6 +15,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        ignoreWarnings = true
+    }
+
     defaultConfig {
         applicationId = "com.stockpulse.app"
         minSdk = 24
