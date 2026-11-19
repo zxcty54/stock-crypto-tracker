@@ -54,8 +54,11 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
   bool _isLoading = true;
   Timer? _refreshTimer;
 
-  // Default / Fallback Benchmark Rates (Incase network latency ho)
-  final double _usdInrRate = 83.54;
+  // Dynamic USD/INR exchange rate (Baseline 93.50 for 2026, updated dynamically via open.er-api)
+  double _usdInrRate = 93.50;
+  double _domesticGold24k = 126500.0;
+  double _domesticSilverKg = 132000.0;
+  static const double _landedFactor = 1.10; // 6% Customs Duty + AIDC + 3% GST + clearing premium
 
   late CommodityItem _gold;
   late CommodityItem _silver;
@@ -72,20 +75,35 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
   }
 
   void _initDefaults() {
-    _gold = CommodityItem(symbol: 'XAU', name: 'GOLD 24K', priceUsd: 2650.40, unitUsd: '/ oz');
-    _silver = CommodityItem(symbol: 'XAG', name: 'SILVER', priceUsd: 31.85, unitUsd: '/ oz');
-    _copper = CommodityItem(symbol: 'HG', name: 'COPPER', priceUsd: 4.45, unitUsd: '/ lb');
-    _platinum = CommodityItem(symbol: 'XPT', name: 'PLATINUM', priceUsd: 985.00, unitUsd: '/ oz');
+    _usdInrRate = 93.50;
+    _domesticGold24k = 126500.0;
+    _domesticSilverKg = 132000.0;
+
+    _gold = CommodityItem(symbol: 'XAU', name: 'GOLD 24K', priceUsd: 3750.00, unitUsd: '/ oz');
+    _silver = CommodityItem(symbol: 'XAG', name: 'SILVER', priceUsd: 42.50, unitUsd: '/ oz');
+    _copper = CommodityItem(symbol: 'HG', name: 'COPPER', priceUsd: 4.85, unitUsd: '/ lb');
+    _platinum = CommodityItem(symbol: 'XPT', name: 'PLATINUM', priceUsd: 1080.00, unitUsd: '/ oz');
+
+    _updateForexList(null);
+  }
+
+  void _updateForexList(Map<String, dynamic>? rates) {
+    double getCross(String code, double defaultCross) {
+      if (rates != null && rates[code] is num && (rates[code] as num) > 0) {
+        return _usdInrRate / (rates[code] as num).toDouble();
+      }
+      return _usdInrRate * defaultCross;
+    }
 
     _forexList = [
       ForexRate(code: 'USD', name: 'US Dollar', flag: '🇺🇸', inrRate: _usdInrRate),
-      ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: _usdInrRate * 1.085),
-      ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: _usdInrRate * 1.282),
-      ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: _usdInrRate / 3.6725),
-      ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (_usdInrRate / 155.2) * 100),
-      ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: _usdInrRate * 0.732),
-      ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: _usdInrRate * 0.665),
-      ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: _usdInrRate * 0.745),
+      ForexRate(code: 'EUR', name: 'Euro', flag: '🇪🇺', inrRate: getCross('EUR', 1.055)),
+      ForexRate(code: 'GBP', name: 'British Pound', flag: '🇬🇧', inrRate: getCross('GBP', 1.265)),
+      ForexRate(code: 'AED', name: 'UAE Dirham', flag: '🇦🇪', inrRate: _usdInrRate / ((rates != null && rates['AED'] is num) ? (rates!['AED'] as num).toDouble() : 3.6725)),
+      ForexRate(code: 'JPY', name: 'Japanese Yen (100)', flag: '🇯🇵', inrRate: (_usdInrRate / ((rates != null && rates['JPY'] is num) ? (rates!['JPY'] as num).toDouble() : 155.0)) * 100),
+      ForexRate(code: 'CAD', name: 'Canadian Dollar', flag: '🇨🇦', inrRate: getCross('CAD', 0.715)),
+      ForexRate(code: 'AUD', name: 'Australian Dollar', flag: '🇦🇺', inrRate: getCross('AUD', 0.650)),
+      ForexRate(code: 'SGD', name: 'Singapore Dollar', flag: '🇸🇬', inrRate: getCross('SGD', 0.740)),
     ];
   }
 
@@ -104,7 +122,7 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
           'Accept': 'application/json',
           'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
         },
-      ).timeout(const Duration(seconds: 12));
+      ).timeout(const Duration(seconds: 8));
 
       if (res.statusCode == 200) {
         return jsonDecode(res.body);
@@ -115,19 +133,73 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
 
   Future<void> _fetchMarketData() async {
     try {
+      // 1. Live Forex Rates (Dynamic USD/INR & major currency crosses)
+      final fxData = await _safeGet('https://open.er-api.com/v6/latest/USD') ??
+          await _safeGet('https://api.exchangerate-api.com/v4/latest/USD');
+
+      if (fxData != null && fxData['rates'] != null) {
+        final rates = fxData['rates'] as Map<String, dynamic>;
+        final dynamic inr = rates['INR'];
+        if (inr != null) {
+          final double parsedInr = (inr as num).toDouble();
+          if (parsedInr > 70.0) {
+            _usdInrRate = parsedInr;
+          }
+        }
+        _updateForexList(rates);
+      }
+
+      // 2. Fetch live international Metals spot
       final goldData = await _safeGet('https://api.gold-api.com/price/XAU');
       final silverData = await _safeGet('https://api.gold-api.com/price/XAG');
       final copperData = await _safeGet('https://api.gold-api.com/price/HG');
       final platData = await _safeGet('https://api.gold-api.com/price/XPT');
 
+      // 3. Fetch domestic IBJA rates (CDN + Offline fallback)
+      Map<String, dynamic>? ibjaData = await _safeGet('https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/ibja_rates.json') ??
+          await _safeGet('https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/ibja_rates.json');
+
+      if (ibjaData == null) {
+        try {
+          final localStr = await rootBundle.loadString('assets/data/ibja_rates.json');
+          ibjaData = jsonDecode(localStr);
+        } catch (_) {}
+      }
+
+      if (ibjaData != null) {
+        final r = ibjaData['rates_per_10g'] as Map<String, dynamic>?;
+        if (r != null) {
+          final g24k = (r['24k'] as num?)?.toDouble();
+          if (g24k != null && g24k > 100000) {
+            _domesticGold24k = g24k;
+          }
+          final sKg = (r['silver_per_kg'] as num?)?.toDouble();
+          if (sKg != null && sKg > 80000) {
+            _domesticSilverKg = sKg;
+          }
+        }
+        final fx = (ibjaData['usd_inr_rate'] as num?)?.toDouble();
+        if (fx != null && fx > 70.0 && _usdInrRate <= 84.0) {
+          _usdInrRate = fx;
+        }
+      }
+
       if (mounted) {
         setState(() {
-          if (goldData != null && goldData['price'] != null) {
+          if (goldData != null && goldData['price'] != null && (goldData['price'] as num) > 1000) {
             _gold = CommodityItem.fromJson(goldData, 'GOLD 24K', '/ oz');
+          } else if (_domesticGold24k > 0) {
+            final derivedOz = ((_domesticGold24k / _landedFactor) / _usdInrRate / 10) * 31.1035;
+            _gold = CommodityItem(symbol: 'XAU', name: 'GOLD 24K', priceUsd: derivedOz, unitUsd: '/ oz');
           }
-          if (silverData != null && silverData['price'] != null) {
+
+          if (silverData != null && silverData['price'] != null && (silverData['price'] as num) > 10) {
             _silver = CommodityItem.fromJson(silverData, 'SILVER', '/ oz');
+          } else if (_domesticSilverKg > 0) {
+            final derivedOz = ((_domesticSilverKg / _landedFactor) / _usdInrRate / 1000) * 31.1035;
+            _silver = CommodityItem(symbol: 'XAG', name: 'SILVER', priceUsd: derivedOz, unitUsd: '/ oz');
           }
+
           if (copperData != null && copperData['price'] != null) {
             _copper = CommodityItem.fromJson(copperData, 'COPPER', '/ lb');
           }
@@ -144,11 +216,19 @@ class _MetalsTickerCardState extends State<MetalsTickerCard> {
     }
   }
 
-  // Conversions for Indian Domestic Reference
-  double _calcGoldPer10g(double usdOz) => ((usdOz / 31.1035) * 10) * _usdInrRate;
-  double _calcSilverPerKg(double usdOz) => ((usdOz / 31.1035) * 1000) * _usdInrRate;
-  double _calcCopperPerKg(double usdLb) => (usdLb * 2.20462) * _usdInrRate;
-  double _calcPlatPer10g(double usdOz) => ((usdOz / 31.1035) * 10) * _usdInrRate;
+  // Conversions for Indian Domestic Reference (Including 6% Customs Duty + AIDC + 3% GST + clearing ~1.10 landed multiplier)
+  double _calcGoldPer10g(double usdOz) {
+    if (_domesticGold24k > 0) return _domesticGold24k;
+    return ((usdOz / 31.1035) * 10) * _usdInrRate * _landedFactor;
+  }
+
+  double _calcSilverPerKg(double usdOz) {
+    if (_domesticSilverKg > 0) return _domesticSilverKg;
+    return ((usdOz / 31.1035) * 1000) * _usdInrRate * _landedFactor;
+  }
+
+  double _calcCopperPerKg(double usdLb) => (usdLb * 2.20462) * _usdInrRate * _landedFactor;
+  double _calcPlatPer10g(double usdOz) => ((usdOz / 31.1035) * 10) * _usdInrRate * _landedFactor;
 
   String _formatIndianCurrency(double val) {
     return val.toStringAsFixed(0).replaceAllMapped(

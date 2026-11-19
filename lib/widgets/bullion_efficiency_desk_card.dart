@@ -28,12 +28,12 @@ class BullionDeskData {
     final trend = json['trend_1y'] as Map<String, dynamic>? ?? {};
 
     return BullionDeskData(
-      current24k: (rates['24k'] as num?)?.toDouble() ?? 76150.0,
-      current22k: (rates['22k'] as num?)?.toDouble() ?? 69804.17,
-      silverPerKg: (rates['silver_per_kg'] as num?)?.toDouble() ?? 92400.0,
-      ago1y24k: (trend['rate_1y_ago_24k'] as num?)?.toDouble() ?? 60029.42,
+      current24k: (rates['24k'] as num?)?.toDouble() ?? 126500.0,
+      current22k: (rates['22k'] as num?)?.toDouble() ?? 115958.33,
+      silverPerKg: (rates['silver_per_kg'] as num?)?.toDouble() ?? 132000.0,
+      ago1y24k: (trend['rate_1y_ago_24k'] as num?)?.toDouble() ?? 98500.0,
       cpiInflation: (trend['cpi_inflation_1y'] as num?)?.toDouble() ?? 5.4,
-      niftyReturn: (trend['nifty_1y_return'] as num?)?.toDouble() ?? -8.09,
+      niftyReturn: (trend['nifty_1y_return'] as num?)?.toDouble() ?? 14.85,
       updatedAt: json['updated_at']?.toString() ?? 'Live Benchmark',
     );
   }
@@ -52,12 +52,12 @@ class _BullionEfficiencyDeskCardState extends State<BullionEfficiencyDeskCard> {
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/ibja_rates.json';
 
   BullionDeskData _data = const BullionDeskData(
-    current24k: 76150.0,
-    current22k: 69804.17,
-    silverPerKg: 92400.0,
-    ago1y24k: 60029.42,
+    current24k: 126500.0,
+    current22k: 115958.33,
+    silverPerKg: 132000.0,
+    ago1y24k: 98500.0,
     cpiInflation: 5.4,
-    niftyReturn: -8.09,
+    niftyReturn: 14.85,
     updatedAt: 'Live',
   );
 
@@ -82,26 +82,46 @@ class _BullionEfficiencyDeskCardState extends State<BullionEfficiencyDeskCard> {
   }
 
   Future<void> _fetchDeskData() async {
-    try {
-      final res = await http.get(
-        Uri.parse('$_dataUrl?ts=${DateTime.now().millisecondsSinceEpoch}'),
-        headers: {'Cache-Control': 'no-cache'},
-      ).timeout(const Duration(seconds: 8));
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final urls = [
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/ibja_rates.json?ts=$timestamp',
+      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/ibja_rates.json?ts=$timestamp',
+    ];
 
-      if (res.statusCode == 200) {
-        final parsed = jsonDecode(res.body);
-        if (mounted) {
-          setState(() {
-            _data = BullionDeskData.fromJson(parsed);
-            _isLoading = false;
-          });
+    for (final url in urls) {
+      try {
+        final res = await http.get(
+          Uri.parse(url),
+          headers: {'Cache-Control': 'no-cache'},
+        ).timeout(const Duration(seconds: 8));
+
+        if (res.statusCode == 200 && res.body.isNotEmpty) {
+          final parsed = jsonDecode(res.body);
+          if (mounted) {
+            setState(() {
+              _data = BullionDeskData.fromJson(parsed);
+              _isLoading = false;
+            });
+          }
+          return;
         }
-      } else {
-        if (mounted) setState(() => _isLoading = false);
-      }
-    } catch (_) {
-      if (mounted) setState(() => _isLoading = false);
+      } catch (_) {}
     }
+
+    // Offline local asset fallback
+    try {
+      final localData = await rootBundle.loadString('assets/data/ibja_rates.json');
+      final parsed = jsonDecode(localData);
+      if (mounted) {
+        setState(() {
+          _data = BullionDeskData.fromJson(parsed);
+          _isLoading = false;
+        });
+      }
+      return;
+    } catch (_) {}
+
+    if (mounted) setState(() => _isLoading = false);
   }
 
   String _formatInr(num val) {
