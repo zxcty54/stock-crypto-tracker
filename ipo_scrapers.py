@@ -61,6 +61,17 @@ NSE_HEADERS = {
     "Referer": "https://www.nseindia.com/market-data/all-upcoming-issues-ipo",
 }
 
+BSE_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.bseindia.com/markets/publicissues/ipoissues?id=1&Type=P",
+}
+
 
 def fetch_html(url: str, headers: dict | None = None, timeout: int = 15) -> requests.Response | None:
     """Make HTTP GET request with curl_cffi Chrome impersonation to bypass Cloudflare."""
@@ -919,55 +930,210 @@ class DrhpDetailParser:
 
 class NseIpoScraper:
     """
-    Fetches official NSE public IPO API endpoints:
-    Filters strictly for series='EQ' (Mainboard equities).
+    Fetches official NSE public IPO issues from:
+    Webpage: https://www.nseindia.com/market-data/all-upcoming-issues-ipo
+    APIs:
+      - https://www.nseindia.com/api/ipo-current-issue
+      - https://www.nseindia.com/api/all-upcoming-issues?category=ipo
+      - https://www.nseindia.com/api/all-ipo-issues
+    Filters strictly for series='EQ' (Mainboard equities), excluding SME/Emerge.
     """
 
     BASE_URL = "https://www.nseindia.com"
-    ALL_IPO_URL = "https://www.nseindia.com/api/all-ipo-issues"
+    UPCOMING_PAGE_URL = "https://www.nseindia.com/market-data/all-upcoming-issues-ipo"
+    ENDPOINTS = [
+        "https://www.nseindia.com/api/ipo-current-issue",
+        "https://www.nseindia.com/api/all-upcoming-issues?category=ipo",
+        "https://www.nseindia.com/api/all-ipo-issues",
+    ]
 
     def __init__(self, session: requests.Session | None = None):
         self.session = session or requests.Session()
 
     def fetch_nse_ipos(self) -> list[dict]:
         results = []
+        seen = set()
         try:
-            self.session.get(self.BASE_URL, headers=NSE_HEADERS, timeout=10)
-            resp = self.session.get(self.ALL_IPO_URL, headers=NSE_HEADERS, timeout=12)
-            if resp.status_code == 200:
-                data = resp.json()
-                items = data.get("data", []) if isinstance(data, dict) else (data if isinstance(data, list) else [])
-                for entry in items:
-                    if not isinstance(entry, dict):
+            # Warm up session cookies via official upcoming issues page
+            self.session.get(self.UPCOMING_PAGE_URL, headers=NSE_HEADERS, timeout=12)
+
+            for endpoint in self.ENDPOINTS:
+                try:
+                    resp = self.session.get(endpoint, headers=NSE_HEADERS, timeout=12)
+                    if resp.status_code != 200:
                         continue
+                    data = resp.json()
+                    items = []
+                    if isinstance(data, list):
+                        items = data
+                    elif isinstance(data, dict):
+                        items = data.get("data") or data.get("items") or []
 
-                    series = entry.get("series", "").strip().upper()
-                    if series and series not in ("EQ", "MAINBOARD", ""):
-                        continue
+                    for entry in items:
+                        if not isinstance(entry, dict):
+                            continue
 
-                    sym = entry.get("symbol", "").strip()
-                    comp_name = clean_company_name(entry.get("companyName") or entry.get("issueName") or sym)
-                    if not comp_name or is_sme_ipo(comp_name):
-                        continue
+                        series = str(entry.get("series") or entry.get("issueType") or "").strip().upper()
+                        if series and any(sme in series for sme in ("SM", "SME", "EMERGE")):
+                            continue
 
-                    open_d = parse_indian_date(entry.get("issueStartDate") or entry.get("openDate"))
-                    close_d = parse_indian_date(entry.get("issueEndDate") or entry.get("closeDate"))
-                    price_b = entry.get("priceBand") or entry.get("issuePrice") or ""
-                    size_cr = entry.get("issueSize") or ""
+                        sym = entry.get("symbol", "").strip()
+                        comp_name = clean_company_name(entry.get("companyName") or entry.get("issueName") or sym)
+                        if not comp_name or is_sme_ipo(comp_name):
+                            continue
 
-                    results.append({
-                        "source": "nse",
-                        "symbol": sym,
-                        "company_name": comp_name,
-                        "open_date": open_d,
-                        "close_date": close_d,
-                        "price_band": str(price_b),
-                        "issue_size_cr": str(size_cr),
-                        "is_mainboard": True,
-                    })
+                        slug = sanitize_slug(comp_name)
+                        if slug in seen:
+                            continue
+                        seen.add(slug)
+
+                        open_d = parse_indian_date(entry.get("issueStartDate") or entry.get("openDate") or entry.get("startDate"))
+                        close_d = parse_indian_date(entry.get("issueEndDate") or entry.get("closeDate") or entry.get("endDate"))
+                        price_b = entry.get("priceBand") or entry.get("issuePrice") or entry.get("price") or ""
+                        size_cr = entry.get("issueSize") or ""
+
+                        results.append({
+                            "source": "nse_official",
+                            "symbol": sym,
+                            "company_name": comp_name,
+                            "open_date": open_d,
+                            "close_date": close_d,
+                            "price_band": str(price_b),
+                            "issue_size_cr": str(size_cr),
+                            "is_mainboard": True,
+                        })
+                except Exception as ep_err:
+                    logger.debug(f"NSE endpoint {endpoint} note: {ep_err}")
 
         except Exception as e:
             logger.debug(f"NSE IPO API fetch note: {e}")
+
+        return results
+
+
+class BseIpoScraper:
+    """
+    Fetches official BSE public issues from:
+    Webpage: https://www.bseindia.com/markets/publicissues/ipoissues?id=1&Type=P
+    API: https://api.bseindia.com/BseIndiaAPI/api/PublicIssue/w?Type=P
+    Filters strictly for Mainboard Equities (excluding SME and Debt).
+    """
+
+    PAGE_URL = "https://www.bseindia.com/markets/publicissues/ipoissues?id=1&Type=P"
+    API_URL = "https://api.bseindia.com/BseIndiaAPI/api/PublicIssue/w?Type=P"
+
+    def __init__(self, session: requests.Session | None = None):
+        self.session = session or requests.Session()
+
+    def fetch_bse_ipos(self) -> list[dict]:
+        results = []
+        seen = set()
+
+        # 1. Try BSE Official JSON API
+        try:
+            resp = self.session.get(self.API_URL, headers=BSE_HEADERS, timeout=12)
+            if resp and resp.status_code == 200:
+                data = resp.json()
+                items = data if isinstance(data, list) else data.get("Table", [])
+                for entry in items:
+                    if not isinstance(entry, dict):
+                        continue
+                    sec_type = str(entry.get("Security_Type") or entry.get("security_type") or "").strip().lower()
+                    if "sme" in sec_type or "debt" in sec_type:
+                        continue
+
+                    comp_name = clean_company_name(entry.get("Issue_Name") or entry.get("company_name") or "")
+                    if not comp_name or is_sme_ipo(comp_name):
+                        continue
+
+                    slug = sanitize_slug(comp_name)
+                    if slug in seen:
+                        continue
+                    seen.add(slug)
+
+                    open_d = parse_indian_date(entry.get("Issue_Start_Date") or entry.get("start_date"))
+                    close_d = parse_indian_date(entry.get("Issue_End_Date") or entry.get("end_date"))
+                    price_b = str(entry.get("Offer_Price") or entry.get("offer_price") or "").strip()
+                    face_val = str(entry.get("Face_Value") or entry.get("face_value") or "").strip()
+
+                    results.append({
+                        "source": "bse_official",
+                        "company_name": comp_name,
+                        "open_date": open_d,
+                        "close_date": close_d,
+                        "price_band": price_b,
+                        "face_value": face_val,
+                        "is_mainboard": True,
+                    })
+        except Exception as e:
+            logger.debug(f"BSE API note: {e}")
+
+        # 2. Scrape official BSE HTML page if API didn't return
+        if not results:
+            try:
+                resp = fetch_html(self.PAGE_URL, headers=BSE_HEADERS, timeout=15)
+                if resp and resp.status_code == 200:
+                    soup = BeautifulSoup(resp.text, "html.parser")
+                    tables = soup.find_all("table")
+                    for table in tables:
+                        rows = table.find_all("tr")
+                        if len(rows) < 2:
+                            continue
+                        headers = [c.get_text(strip=True).lower() for c in rows[0].find_all(["th", "td"])]
+                        if not any("issue" in h for h in headers):
+                            continue
+
+                        def find_idx(keywords):
+                            for idx, h in enumerate(headers):
+                                if any(k in h for k in keywords):
+                                    return idx
+                            return -1
+
+                        idx_name = find_idx(["issue name", "company", "security name", "name"])
+                        idx_type = find_idx(["security type", "type"])
+                        idx_start = find_idx(["issue start", "start date", "open date", "from"])
+                        idx_end = find_idx(["issue end", "end date", "close date", "to"])
+                        idx_price = find_idx(["offer price", "price band", "issue price", "price"])
+                        idx_face = find_idx(["face value", "fv"])
+
+                        if idx_name == -1:
+                            continue
+
+                        for tr in rows[1:]:
+                            tds = tr.find_all("td")
+                            if len(tds) <= idx_name:
+                                continue
+
+                            sec_type = tds[idx_type].get_text(strip=True).lower() if idx_type >= 0 and idx_type < len(tds) else ""
+                            if "sme" in sec_type or "debt" in sec_type:
+                                continue
+
+                            raw_name = tds[idx_name].get_text(strip=True)
+                            if not raw_name or is_sme_ipo(raw_name):
+                                continue
+
+                            comp_name = clean_company_name(raw_name)
+                            slug = sanitize_slug(comp_name)
+                            if slug in seen:
+                                continue
+                            seen.add(slug)
+
+                            open_d = parse_indian_date(tds[idx_start].get_text(strip=True)) if idx_start >= 0 and idx_start < len(tds) else None
+                            close_d = parse_indian_date(tds[idx_end].get_text(strip=True)) if idx_end >= 0 and idx_end < len(tds) else None
+                            price_b = tds[idx_price].get_text(strip=True) if idx_price >= 0 and idx_price < len(tds) else ""
+                            face_val = tds[idx_face].get_text(strip=True) if idx_face >= 0 and idx_face < len(tds) else ""
+
+                            results.append({
+                                "source": "bse_official",
+                                "company_name": comp_name,
+                                "open_date": open_d,
+                                "close_date": close_d,
+                                "price_band": price_b,
+                                "face_value": face_val,
+                                "is_mainboard": True,
+                            })
+            except Exception as e:
+                logger.debug(f"BSE HTML scraping note: {e}")
 
         return results
 
@@ -990,6 +1156,7 @@ class IpoAggregator:
         self.ipowatch = IpoWatchGmpScraper(self.session)
         self.chittorgarh_issues = ChittorgarhScraper(self.session)
         self.nse = NseIpoScraper(self.session)
+        self.bse = BseIpoScraper(self.session)
         self.drhp_parser = DrhpDetailParser(self.session)
 
     def collect_all_mainboard_ipos(self) -> list[dict]:
@@ -1152,20 +1319,81 @@ class IpoAggregator:
                 if "ipowatch" not in target.get("sources", []):
                     target.setdefault("sources", []).append("ipowatch")
 
-        # 5. Enrich with NSE Equity data
+        # 5. Enrich with Official NSE & BSE Equity Data
         nse_items = self.nse.fetch_nse_ipos()
+        logger.info(f"Collected {len(nse_items)} entries from official NSE India")
         for ne in nse_items:
             slug = sanitize_slug(ne.get("company_name", ""))
-            if slug in merged_map:
-                target = merged_map[slug]
+            if not slug:
+                continue
+            target = merged_map.get(slug)
+            if not target:
+                target = {
+                    "id": slug,
+                    "company_name": ne.get("company_name"),
+                    "symbol": ne.get("symbol", ""),
+                    "issue_type": "Mainboard",
+                    "exchange": "NSE & BSE",
+                    "open_date": ne.get("open_date"),
+                    "close_date": ne.get("close_date"),
+                    "allotment_date": None,
+                    "listing_date": None,
+                    "price_band": ne.get("price_band") or "",
+                    "issue_size_cr": ne.get("issue_size_cr") or "",
+                    "sources": ["nse_official"],
+                    "is_already_listed": False,
+                    "status": "UPCOMING",
+                }
+                merged_map[slug] = target
+            else:
                 if ne.get("symbol"):
                     target["symbol"] = ne["symbol"]
                 if not target.get("open_date") and ne.get("open_date"):
                     target["open_date"] = ne["open_date"]
                 if not target.get("close_date") and ne.get("close_date"):
                     target["close_date"] = ne["close_date"]
+                if not target.get("price_band") and ne.get("price_band"):
+                    target["price_band"] = ne["price_band"]
+                if not target.get("issue_size_cr") and ne.get("issue_size_cr"):
+                    target["issue_size_cr"] = ne["issue_size_cr"]
+                if "nse_official" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("nse_official")
 
-        # 5. Enrich active/upcoming issues with DRHP objects & financials
+        bse_items = self.bse.fetch_bse_ipos()
+        logger.info(f"Collected {len(bse_items)} entries from official BSE India")
+        for be in bse_items:
+            slug = sanitize_slug(be.get("company_name", ""))
+            if not slug:
+                continue
+            target = merged_map.get(slug)
+            if not target:
+                target = {
+                    "id": slug,
+                    "company_name": be.get("company_name"),
+                    "symbol": "",
+                    "issue_type": "Mainboard",
+                    "exchange": "NSE & BSE",
+                    "open_date": be.get("open_date"),
+                    "close_date": be.get("close_date"),
+                    "allotment_date": None,
+                    "listing_date": None,
+                    "price_band": be.get("price_band") or "",
+                    "sources": ["bse_official"],
+                    "is_already_listed": False,
+                    "status": "UPCOMING",
+                }
+                merged_map[slug] = target
+            else:
+                if not target.get("open_date") and be.get("open_date"):
+                    target["open_date"] = be["open_date"]
+                if not target.get("close_date") and be.get("close_date"):
+                    target["close_date"] = be["close_date"]
+                if not target.get("price_band") and be.get("price_band"):
+                    target["price_band"] = be["price_band"]
+                if "bse_official" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("bse_official")
+
+        # 6. Enrich active/upcoming issues with DRHP objects & financials
         for slug, ipo in merged_map.items():
             if ipo.get("is_already_listed"):
                 continue

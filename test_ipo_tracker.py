@@ -22,6 +22,8 @@ from ipo_scrapers import (
     IpoCentralGmpScraper,
     ChittorgarhGmpScraper,
     IpoWatchGmpScraper,
+    NseIpoScraper,
+    BseIpoScraper,
     DrhpDetailParser,
     IpoAggregator,
 )
@@ -168,6 +170,85 @@ class TestDrhpParser(unittest.TestCase):
         self.assertEqual(res["promoter_holding"]["pre_issue"], "96.46%")
         self.assertEqual(len(res["lead_managers"]), 2)
         self.assertIn("rhp_filing.pdf", res["drhp_url"])
+
+
+class TestOfficialExchangeScrapers(unittest.TestCase):
+    def test_bse_scraper_filters_sme_and_debt(self):
+        scraper = BseIpoScraper()
+        mock_session = MagicMock()
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = [
+            {
+                "Issue_Name": "Crystal Crop Protection Limited",
+                "Security_Type": "Equity",
+                "Issue_Start_Date": "18-Nov-2026",
+                "Issue_End_Date": "20-Nov-2026",
+                "Offer_Price": "259.00 - 272.00",
+                "Face_Value": "10.00",
+            },
+            {
+                "Issue_Name": "Some SME Company Limited",
+                "Security_Type": "Equity (SME)",
+                "Issue_Start_Date": "18-Nov-2026",
+                "Issue_End_Date": "20-Nov-2026",
+                "Offer_Price": "50.00",
+                "Face_Value": "10.00",
+            },
+            {
+                "Issue_Name": "Corporate Bond Series I",
+                "Security_Type": "Debt",
+                "Issue_Start_Date": "18-Nov-2026",
+                "Issue_End_Date": "20-Nov-2026",
+                "Offer_Price": "1000.00",
+                "Face_Value": "1000.00",
+            },
+        ]
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        items = scraper.fetch_bse_ipos()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["company_name"], "Crystal Crop Protection Limited")
+        self.assertEqual(items[0]["open_date"], "2026-11-18")
+        self.assertEqual(items[0]["close_date"], "2026-11-20")
+
+    def test_nse_scraper_filters_emerge(self):
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "data": [
+                {
+                    "symbol": "MCL",
+                    "companyName": "Mahanadi Coalfields Limited",
+                    "series": "EQ",
+                    "issueStartDate": "19-Nov-2026",
+                    "issueEndDate": "23-Nov-2026",
+                    "priceBand": "129-136",
+                    "issueSize": "4200",
+                },
+                {
+                    "symbol": "WATRANA",
+                    "companyName": "Watrana Rentals Limited",
+                    "series": "SM",
+                    "issueStartDate": "19-Nov-2026",
+                    "issueEndDate": "23-Nov-2026",
+                    "priceBand": "232-245",
+                    "issueSize": "45",
+                },
+            ]
+        }
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        items = scraper.fetch_nse_ipos()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["symbol"], "MCL")
+        self.assertEqual(items[0]["company_name"], "Mahanadi Coalfields Limited")
+        self.assertEqual(items[0]["open_date"], "2026-11-19")
+        self.assertEqual(items[0]["close_date"], "2026-11-23")
 
 
 class TestIpoFormatters(unittest.TestCase):
