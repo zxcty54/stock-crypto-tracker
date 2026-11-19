@@ -282,4 +282,7 @@ def dispatch_feed(now=None):
 
 
 if __name__ == "__main__":
-    dispatch_feed()
+    import sys
+    print("ℹ️ Telegram corporate announcements posting has been permanently disabled per configuration.")
+    sys.exit(0)
+

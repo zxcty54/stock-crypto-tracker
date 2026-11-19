@@ -448,4 +448,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    print("ℹ️ Telegram news and content queue posting has been permanently disabled per configuration.")
+    sys.exit(0)
+
