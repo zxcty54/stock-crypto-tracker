@@ -13,8 +13,11 @@ class EconomyDemandRadarScreen extends StatefulWidget {
 
 class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     with SingleTickerProviderStateMixin {
-  static const String dataUrl =
-      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/economy_demand_radar.json';
+  static const List<String> dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/economy_demand_radar.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
+    'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
+  ];
 
   bool _isLoading = true;
   String? _errorMessage;
@@ -47,32 +50,38 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     if (isRefresh) HapticFeedback.lightImpact();
     setState(() => _isLoading = true);
 
-    try {
-      final uri = Uri.parse('$dataUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
-      final response = await http.get(
-        uri,
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-        },
-      ).timeout(const Duration(seconds: 6));
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
 
-      if (response.statusCode == 200) {
-        final decoded = jsonDecode(utf8.decode(response.bodyBytes));
-        if (mounted) {
-          setState(() {
-            _payload = decoded;
-            _isLoading = false;
-            _errorMessage = null;
-          });
-          return;
+    // 1. Try Live Network CDNs first (Zero APK rebuild required)
+    for (final baseUrl in dataUrls) {
+      try {
+        final uri = Uri.parse('$baseUrl?ts=$timestamp');
+        final response = await http.get(
+          uri,
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+          },
+        ).timeout(const Duration(seconds: 5));
+
+        if (response.statusCode == 200 && response.body.isNotEmpty) {
+          final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+          if (mounted) {
+            setState(() {
+              _payload = decoded;
+              _isLoading = false;
+              _errorMessage = null;
+            });
+            return;
+          }
         }
+      } catch (_) {
+        // Try next CDN
+        continue;
       }
-    } catch (_) {
-      // Fallback to local asset if network is unavailable or raw file not yet on main
     }
 
-    // Try bundled local asset fallback
+    // 2. Offline / Emergency Fallback (if airplane mode or all CDNs unreachable)
     try {
       final localJson = await rootBundle.loadString('assets/data/economy_demand_radar.json');
       final decoded = jsonDecode(localJson);
