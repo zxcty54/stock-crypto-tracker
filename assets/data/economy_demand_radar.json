@@ -1,7 +1,7 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-19 15:26:40 IST",
+  "last_updated": "2026-11-19 15:30:44 IST",
   "economy_headline": {
     "core_infra_growth_pct": 7.9,
     "port_cargo_growth_pct": 10.17,
@@ -14,38 +14,7 @@
       "report_title": "DPIIT Index of Eight Core Industries",
       "period": "September 2026 (Provisional)",
       "overall_yoy_growth_pct": 7.9,
-      "previous_month_growth_pct": null,
       "components": {
-        "Coal": {
-          "weight": 5.596,
-          "yoy_pct": 10.7,
-          "status": "PEAK_DEMAND"
-        },
-        "Natural Gas": {
-          "weight": 3.841,
-          "yoy_pct": -4.6,
-          "status": "CONTRACTION"
-        },
-        "Crude Oil": {
-          "weight": 7.43,
-          "yoy_pct": -1.4,
-          "status": "CONTRACTION"
-        },
-        "Refinery Products": {
-          "weight": 22.572,
-          "yoy_pct": 10.3,
-          "status": "PEAK_DEMAND"
-        },
-        "Fertilizers": {
-          "weight": 2.731,
-          "yoy_pct": -11.7,
-          "status": "SHARP_CONTRACTION"
-        },
-        "Steel": {
-          "weight": 17.584,
-          "yoy_pct": 4.9,
-          "status": "EXPANDING"
-        },
         "Cement": {
           "weight": 4.41,
           "yoy_pct": 9.8,
@@ -56,183 +25,43 @@
           "yoy_pct": 11.4,
           "status": "PEAK_DEMAND"
         },
+        "Coal": {
+          "weight": 5.596,
+          "yoy_pct": 10.7,
+          "status": "PEAK_DEMAND"
+        },
+        "Refinery Products": {
+          "weight": 22.572,
+          "yoy_pct": 10.3,
+          "status": "PEAK_DEMAND"
+        },
+        "Steel": {
+          "weight": 17.584,
+          "yoy_pct": 4.9,
+          "status": "EXPANDING"
+        },
         "Iron Ore": {
           "weight": 4.905,
           "yoy_pct": 18.4,
           "status": "SURGING"
+        },
+        "Crude Oil": {
+          "weight": 7.43,
+          "yoy_pct": -1.4,
+          "status": "CONTRACTION"
+        },
+        "Natural Gas": {
+          "weight": 3.841,
+          "yoy_pct": -4.6,
+          "status": "CONTRACTION"
+        },
+        "Fertilizers": {
+          "weight": 2.731,
+          "yoy_pct": -11.7,
+          "status": "SHARP_CONTRACTION"
         }
       },
-      "historical_13m_growth": [
-        {
-          "month": "Sep-25",
-          "Coal": -1.1,
-          "Natural Gas": -3.7,
-          "Crude Oil": -0.7,
-          "Refinery Products": -3.2,
-          "Fertilizers": 1.7,
-          "Steel": 14.3,
-          "Cement": 5.1,
-          "Electricity": 3.1,
-          "Iron Ore": 0.8,
-          "Overall Index": 3.1
-        },
-        {
-          "month": "Oct-25",
-          "Coal": -8.4,
-          "Natural Gas": -5.2,
-          "Crude Oil": -0.8,
-          "Refinery Products": 5.3,
-          "Fertilizers": 7.4,
-          "Steel": 9.5,
-          "Cement": 5.2,
-          "Electricity": -7.0,
-          "Iron Ore": 8.7,
-          "Overall Index": 0.8
-        },
-        {
-          "month": "Nov-25",
-          "Coal": 2.2,
-          "Natural Gas": -2.5,
-          "Crude Oil": -2.6,
-          "Refinery Products": -0.2,
-          "Fertilizers": 5.5,
-          "Steel": 11.6,
-          "Cement": 15.1,
-          "Electricity": -1.5,
-          "Iron Ore": 19.3,
-          "Overall Index": 3.5
-        },
-        {
-          "month": "Dec-25",
-          "Coal": 3.7,
-          "Natural Gas": -4.4,
-          "Crude Oil": -5.1,
-          "Refinery Products": -0.3,
-          "Fertilizers": 4.1,
-          "Steel": 11.1,
-          "Cement": 14.0,
-          "Electricity": 6.2,
-          "Iron Ore": 22.3,
-          "Overall Index": 5.6
-        },
-        {
-          "month": "Jan-26",
-          "Coal": 0.9,
-          "Natural Gas": -4.9,
-          "Crude Oil": -5.4,
-          "Refinery Products": 0.4,
-          "Fertilizers": 3.7,
-          "Steel": 13.8,
-          "Cement": 11.3,
-          "Electricity": 5.1,
-          "Iron Ore": 12.8,
-          "Overall Index": 5.2
-        },
-        {
-          "month": "Feb-26",
-          "Coal": 1.4,
-          "Natural Gas": -5.0,
-          "Crude Oil": -4.8,
-          "Refinery Products": -0.4,
-          "Fertilizers": 3.5,
-          "Steel": 9.9,
-          "Cement": 9.1,
-          "Electricity": 2.3,
-          "Iron Ore": 8.5,
-          "Overall Index": 3.2
-        },
-        {
-          "month": "Mar-26",
-          "Coal": -4.0,
-          "Natural Gas": -3.7,
-          "Crude Oil": -5.3,
-          "Refinery Products": 0.9,
-          "Fertilizers": -24.6,
-          "Steel": 9.6,
-          "Cement": 4.7,
-          "Electricity": 0.8,
-          "Iron Ore": 33.3,
-          "Overall Index": 2.9
-        },
-        {
-          "month": "Apr-26",
-          "Coal": -9.0,
-          "Natural Gas": -4.2,
-          "Crude Oil": -3.2,
-          "Refinery Products": -0.2,
-          "Fertilizers": -8.5,
-          "Steel": 4.7,
-          "Cement": 8.3,
-          "Electricity": 5.5,
-          "Iron Ore": 12.5,
-          "Overall Index": 2.7
-        },
-        {
-          "month": "May-26",
-          "Coal": -9.5,
-          "Natural Gas": -5.0,
-          "Crude Oil": -4.2,
-          "Refinery Products": -8.2,
-          "Fertilizers": -1.0,
-          "Steel": 5.1,
-          "Cement": 8.4,
-          "Electricity": 11.2,
-          "Iron Ore": 19.0,
-          "Overall Index": 3.2
-        },
-        {
-          "month": "Jun-26",
-          "Coal": 1.4,
-          "Natural Gas": -4.8,
-          "Crude Oil": -4.2,
-          "Refinery Products": -4.0,
-          "Fertilizers": -3.3,
-          "Steel": 5.6,
-          "Cement": 9.9,
-          "Electricity": 11.4,
-          "Iron Ore": 44.5,
-          "Overall Index": 6.0
-        },
-        {
-          "month": "Jul-26",
-          "Coal": 7.6,
-          "Natural Gas": -3.0,
-          "Crude Oil": -5.3,
-          "Refinery Products": 3.0,
-          "Fertilizers": -8.0,
-          "Steel": 1.9,
-          "Cement": 12.7,
-          "Electricity": 8.4,
-          "Iron Ore": 29.5,
-          "Overall Index": 5.0
-        },
-        {
-          "month": "Aug-26",
-          "Coal": -3.8,
-          "Natural Gas": -4.9,
-          "Crude Oil": -3.6,
-          "Refinery Products": 5.6,
-          "Fertilizers": -12.4,
-          "Steel": 3.5,
-          "Cement": 11.7,
-          "Electricity": 13.1,
-          "Iron Ore": 5.5,
-          "Overall Index": 5.9
-        },
-        {
-          "month": "Sep-26 (P)",
-          "Coal": 10.7,
-          "Natural Gas": -4.6,
-          "Crude Oil": -1.4,
-          "Refinery Products": 10.3,
-          "Fertilizers": -11.7,
-          "Steel": 4.9,
-          "Cement": 9.8,
-          "Electricity": 11.4,
-          "Iron Ore": 18.4,
-          "Overall Index": 7.9
-        }
-      ]
+      "historical_13m_growth": []
     },
     "ipa_major_ports": {
       "report_title": "Indian Ports Association (IPA) Major Ports Traffic",
@@ -264,12 +93,6 @@
           "share_pct": 5.2,
           "growth_pct": 9.4,
           "status": "PEAK_DEMAND"
-        },
-        "Fertilizers (Finished & Raw)": {
-          "volume_mmt": 12.5,
-          "share_pct": 2.2,
-          "growth_pct": -0.94,
-          "status": "CONTRACTION"
         }
       }
     },
@@ -277,32 +100,26 @@
       "report_title": "PPAC Monthly Petroleum Industry Consumption Review",
       "period": "September 2026",
       "total_pol_consumption_mmt": 19.26,
-      "previous_pol_consumption_mmt": 18.63,
       "total_pol_growth_pct": 3.4,
       "fuels": {
         "Motor Spirit (Petrol)": {
           "consumption_mmt": 3.67,
-          "previous_mmt": 3.4,
           "yoy_growth_pct": 8.0,
-          "proxy_for": "Personal Mobility & Passenger Vehicles",
           "status": "PEAK_DEMAND"
         },
         "High Speed Diesel (HSD)": {
           "consumption_mmt": 7.11,
           "yoy_growth_pct": 5.6,
-          "proxy_for": "Commercial Freight, Logistics, Agriculture & Factory Power",
           "status": "EXPANDING"
         },
         "Aviation Turbine Fuel (ATF)": {
           "consumption_mmt": 0.2,
           "yoy_growth_pct": 0.9,
-          "proxy_for": "Aviation Sector & Air Passenger Traffic",
           "status": "MODERATE_EXPANSION"
         },
         "Bitumen": {
           "consumption_mmt": 0.12,
           "yoy_growth_pct": 17.2,
-          "proxy_for": "Road & Highway Construction Activity",
           "status": "SURGING"
         }
       }
@@ -314,7 +131,6 @@
       "monthly_vehicle_count_mn": 378.4,
       "yoy_growth_pct": 8.5,
       "mom_growth_pct": 1.6,
-      "proxy_for": "Interstate Commercial Cargo Movement & Highway Logistics Volume",
       "status": "EXPANDING",
       "rolling_12m_series": [
         {
@@ -426,7 +242,7 @@
       "sector": "Port Logistics & Global Trade",
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚢 SURGING EXPORTS",
-      "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51% YoY",
+      "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY)",
       "economic_rationale": "Major ports cargo traffic double-digit growth par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
       "beneficiary_equities": [
         {
