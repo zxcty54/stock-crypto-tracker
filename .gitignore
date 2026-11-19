@@ -23,3 +23,12 @@ key.properties
 
 # Supabase CLI local state
 **/supabase/.temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.telegraph_token
+
+
