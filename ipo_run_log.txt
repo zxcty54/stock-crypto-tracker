@@ -1,25 +1,25 @@
-2026-11-19 06:12:59 [INFO] ipo_tracker: Testing Telegram connection with target channel: @ipocentral
-2026-11-19 06:12:59 [INFO] ipo_tracker: ✅ Bot is valid: @Fundamentaltraderbot (Fundamental Trader bot)
-2026-11-19 06:13:00 [INFO] ipo_tracker: ✅ Channel verified: IPO Central (ipocentral)
-2026-11-19 06:13:00 [INFO] ipo_tracker: 📨 Broadcasting live verification test post to @ipocentral...
-2026-11-19 06:13:01 [INFO] ipo_tracker: 🎉 Live verification test post successfully delivered to @ipocentral!
-2026-11-19 06:13:01 [INFO] ipo_tracker: ======================================================================
-2026-11-19 06:13:01 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
-2026-11-19 06:13:01 [INFO] ipo_tracker: 📅 Timestamp: 19-Nov-2026 11:43:01 IST (Today: 2026-11-19)
-2026-11-19 06:13:01 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
-2026-11-19 06:13:01 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
-2026-11-19 06:13:01 [INFO] ipo_tracker: ======================================================================
-2026-11-19 06:13:01 [INFO] ipo_tracker: Loaded 8 tracked IPOs and 35 historical posted events.
-2026-11-19 06:13:01 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
-2026-11-19 06:13:02 [INFO] ipo_tracker.scrapers: Collected 0 entries from Chittorgarh Report 82
-2026-11-19 06:13:04 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
-2026-11-19 06:13:04 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from Chittorgarh Report 82
-2026-11-19 06:13:05 [INFO] ipo_tracker.scrapers: Collected 2 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields']
-2026-11-19 06:13:07 [INFO] ipo_tracker.scrapers: Collected 2 entries from official NSE India: ['Crystal Crop Protection Limited', 'Mahanadi Coalfields Limited']
-2026-11-19 06:13:09 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
-2026-11-19 06:13:09 [INFO] ipo_tracker: Aggregated 2 Mainboard IPO records from web.
-2026-11-19 06:13:09 [INFO] ipo_tracker: Master state updated: 0 new, 2 refreshed.
-2026-11-19 06:13:09 [INFO] ipo_tracker: Saved 8 IPO records to ipo_master.json
-2026-11-19 06:13:09 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
-2026-11-19 06:13:09 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 2 active IPOs...
-2026-11-19 06:13:09 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
+2026-11-19 06:18:49 [INFO] ipo_tracker: Testing Telegram connection with target channel: @ipocentral
+2026-11-19 06:18:49 [INFO] ipo_tracker: ✅ Bot is valid: @Fundamentaltraderbot (Fundamental Trader bot)
+2026-11-19 06:18:50 [INFO] ipo_tracker: ✅ Channel verified: IPO Central (ipocentral)
+2026-11-19 06:18:50 [INFO] ipo_tracker: 📨 Broadcasting live verification test post to @ipocentral...
+2026-11-19 06:18:50 [INFO] ipo_tracker: 🎉 Live verification test post successfully delivered to @ipocentral!
+2026-11-19 06:18:51 [INFO] ipo_tracker: ======================================================================
+2026-11-19 06:18:51 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
+2026-11-19 06:18:51 [INFO] ipo_tracker: 📅 Timestamp: 19-Nov-2026 11:48:51 IST (Today: 2026-11-19)
+2026-11-19 06:18:51 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
+2026-11-19 06:18:51 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
+2026-11-19 06:18:51 [INFO] ipo_tracker: ======================================================================
+2026-11-19 06:18:51 [INFO] ipo_tracker: Loaded 8 tracked IPOs and 35 historical posted events.
+2026-11-19 06:18:51 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
+2026-11-19 06:18:52 [INFO] ipo_tracker.scrapers: Collected 0 entries from Chittorgarh Report 82
+2026-11-19 06:18:53 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
+2026-11-19 06:18:54 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from Chittorgarh Report 82
+2026-11-19 06:18:55 [INFO] ipo_tracker.scrapers: Collected 2 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields']
+2026-11-19 06:18:57 [INFO] ipo_tracker.scrapers: Collected 2 entries from official NSE India: ['Crystal Crop Protection Limited', 'Mahanadi Coalfields Limited']
+2026-11-19 06:19:04 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
+2026-11-19 06:19:04 [INFO] ipo_tracker: Aggregated 2 Mainboard IPO records from web.
+2026-11-19 06:19:04 [INFO] ipo_tracker: Master state updated: 0 new, 2 refreshed.
+2026-11-19 06:19:04 [INFO] ipo_tracker: Saved 8 IPO records to ipo_master.json
+2026-11-19 06:19:04 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
+2026-11-19 06:19:04 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 2 active IPOs...
+2026-11-19 06:19:05 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
