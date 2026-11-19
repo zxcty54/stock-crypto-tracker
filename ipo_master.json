@@ -1,0 +1,174 @@
+[
+  {
+    "id": "vishal-mega-mart",
+    "company_name": "Vishal Mega Mart Limited",
+    "symbol": "VISHAL",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-12-11",
+    "close_date": "2024-12-13",
+    "allotment_date": "2024-12-16",
+    "listing_date": "2024-12-18",
+    "price_band": "₹74 to ₹78",
+    "cut_off_price": 78,
+    "lot_size": 190,
+    "min_investment": 14820,
+    "issue_size_cr": "8,000",
+    "fresh_issue_cr": "0",
+    "ofs_cr": "8,000",
+    "gmp": "18",
+    "gmp_percent": "+23.08%",
+    "est_listing_price": "₹96.00",
+    "subscription": {
+      "qib": "Updating...",
+      "nii": "Updating...",
+      "retail": "Updating...",
+      "total": "Upcoming"
+    },
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "about": "One of India's leading hypermarket and value-retail operators serving Tier-1 to Tier-4 cities with an extensive range of apparel, general merchandise, and FMCG products.",
+    "sources": [
+      "chittorgarh",
+      "investorgain"
+    ],
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
+  },
+  {
+    "id": "ntpc-green-energy",
+    "company_name": "NTPC Green Energy Limited",
+    "symbol": "NTPCGREEN",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-11-19",
+    "close_date": "2024-11-22",
+    "allotment_date": "2024-11-25",
+    "listing_date": "2024-11-27",
+    "price_band": "₹102 to ₹108",
+    "cut_off_price": 108,
+    "lot_size": 138,
+    "min_investment": 14904,
+    "issue_size_cr": "10,000",
+    "fresh_issue_cr": "10,000",
+    "ofs_cr": "0",
+    "gmp": "8",
+    "gmp_percent": "+7.41%",
+    "est_listing_price": "₹116.00",
+    "subscription": {
+      "qib": "3.28x",
+      "nii": "1.82x",
+      "retail": "1.44x",
+      "total": "2.42x",
+      "as_of": "Day 3 (Final)"
+    },
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "about": "A wholly-owned subsidiary of NTPC Limited and India's premier public-sector renewable energy giant with a massive operational and pipeline capacity in solar, wind, and green energy solutions.",
+    "sources": [
+      "chittorgarh",
+      "investorgain",
+      "nse"
+    ],
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
+  },
+  {
+    "id": "swiggy",
+    "company_name": "Swiggy Limited",
+    "symbol": "SWIGGY",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-11-06",
+    "close_date": "2024-11-08",
+    "allotment_date": "2024-11-11",
+    "listing_date": "2024-11-13",
+    "price_band": "₹371 to ₹390",
+    "cut_off_price": 390,
+    "lot_size": 38,
+    "min_investment": 14820,
+    "issue_size_cr": "11,327",
+    "fresh_issue_cr": "4,499",
+    "ofs_cr": "6,828",
+    "gmp": "12",
+    "gmp_percent": "+3.08%",
+    "est_listing_price": "₹402.00",
+    "listing_price": "₹412.00",
+    "listing_gain": "+5.64%",
+    "subscription": {
+      "qib": "6.02x",
+      "nii": "0.41x",
+      "retail": "1.14x",
+      "total": "3.59x",
+      "as_of": "Final"
+    },
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "about": "Pioneering Indian consumer technology company operating an end-to-end convenience platform spanning online food delivery, quick commerce (Instamart), and dining out services.",
+    "sources": [
+      "chittorgarh",
+      "nse"
+    ],
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
+    ]
+  },
+  {
+    "id": "acme-solar-holdings",
+    "company_name": "ACME Solar Holdings Limited",
+    "symbol": "ACMESOLAR",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-11-06",
+    "close_date": "2024-11-08",
+    "allotment_date": "2024-11-11",
+    "listing_date": "2024-11-13",
+    "price_band": "₹275 to ₹289",
+    "cut_off_price": 289,
+    "lot_size": 51,
+    "min_investment": 14739,
+    "issue_size_cr": "2,900",
+    "fresh_issue_cr": "2,395",
+    "ofs_cr": "505",
+    "gmp": "0",
+    "gmp_percent": "0.00%",
+    "est_listing_price": "₹289.00",
+    "listing_price": "₹251.00",
+    "listing_gain": "-13.15%",
+    "subscription": {
+      "qib": "3.10x",
+      "nii": "0.97x",
+      "retail": "3.25x",
+      "total": "2.89x",
+      "as_of": "Final"
+    },
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "about": "One of the largest renewable energy independent power producers (IPP) in India with comprehensive utility-scale solar and hybrid project portfolios.",
+    "sources": [
+      "chittorgarh",
+      "investorgain"
+    ],
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
+    ]
+  }
+]

@@ -1,0 +1,89 @@
+name: 📢 Mainboard IPO Tracker & Telegram Broadcaster
+
+on:
+  # 1. Scheduled Runs (IST: 08:30, 11:30, 14:30, 16:30, 19:30, 21:00)
+  # Times in UTC (IST - 5h 30m)
+  schedule:
+    - cron: '0 3,6,9,11,14,15 * * *'
+
+  # 2. Manual Trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Task to execute"
+        required: true
+        type: choice
+        options:
+          - auto
+          - summary
+          - dry_run
+          - status
+        default: auto
+
+# Prevent overlapping concurrent dispatches
+concurrency:
+  group: ipo-tracker-telegram-dispatch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  track-and-broadcast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: 🚀 Run Mainboard IPO Tracker
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHAT_ID || '@ipocentral' }}
+          IPO_TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHAT_ID || '@ipocentral' }}
+        run: |
+          TASK="${{ github.event.inputs.task || 'auto' }}"
+          echo "Executing task: $TASK"
+
+          if [ "$TASK" = "summary" ]; then
+            python ipo_tracker.py --summary
+          elif [ "$TASK" = "dry_run" ]; then
+            python ipo_tracker.py --dry-run
+          elif [ "$TASK" = "status" ]; then
+            python ipo_tracker.py --status
+          else
+            python ipo_tracker.py
+          fi
+
+      - name: 💾 Commit and Sync IPO Master & Delivery Log
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          for file in ipo_master.json ipo_posted_log.json; do
+            if [ -f "$file" ]; then
+              git add "$file"
+            fi
+          done
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ No IPO state changes to commit."
+          else
+            git commit -m "⚡ Sync Mainboard IPO Tracker & Delivery Log [$(date +'%d-%b-%Y %H:%M IST')] [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF}"
+            echo "✅ Successfully synced IPO database and posted logs."
+          fi
