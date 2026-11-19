@@ -264,25 +264,26 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
     if listing_date and listing_date < today_str:
         return []
 
-    # 1. NEW_IPO_ANNOUNCED
-    # Trigger ONLY if upcoming or currently open (never for past/expired dates or missing dates)
+    # 1. NEW_IPO_ANNOUNCED vs IPO_OPENS_TODAY
+    # If opening today, trigger IPO_OPENS_TODAY as the urgent alert (suppressing duplicate NEW_IPO_ANNOUNCED)
     new_event_id = f"ipo:{ipo_id}:announced"
-    if new_event_id not in posted_events_set:
+    opens_event_id = f"ipo:{ipo_id}:opens_today"
+
+    if open_date and open_date == today_str:
+        if opens_event_id not in posted_events_set:
+            events.append(("IPO_OPENS_TODAY", opens_event_id))
+            posted_events_set.add(new_event_id)
+    elif new_event_id not in posted_events_set:
         is_relevant = False
-        if open_date and open_date >= today_str:
+        if open_date and open_date > today_str:
             is_relevant = True
-        elif open_date and close_date and open_date <= today_str <= close_date:
+        elif open_date and close_date and open_date < today_str <= close_date:
             is_relevant = True
 
         if is_relevant:
             events.append(("NEW_IPO_ANNOUNCED", new_event_id))
 
-    # 2. IPO_OPENS_TODAY
-    opens_event_id = f"ipo:{ipo_id}:opens_today"
-    if open_date and open_date == today_str and opens_event_id not in posted_events_set:
-        events.append(("IPO_OPENS_TODAY", opens_event_id))
-
-    # 3. IPO_CLOSING_TODAY
+    # 2. IPO_CLOSING_TODAY
     closing_event_id = f"ipo:{ipo_id}:closing_today"
     if close_date and close_date == today_str and closing_event_id not in posted_events_set:
         events.append(("IPO_CLOSING_TODAY", closing_event_id))
@@ -469,12 +470,13 @@ def run_tracker(now: datetime | None = None) -> int:
 
         success, msg = send_telegram_message(message_html)
         if success:
-            posted_log.append(event_id)
-            posted_set.add(event_id)
-            if "posted_events" not in ipo:
-                ipo["posted_events"] = []
-            if event_type not in ipo["posted_events"]:
-                ipo["posted_events"].append(event_type)
+            if not DRY_RUN:
+                posted_log.append(event_id)
+                posted_set.add(event_id)
+                if "posted_events" not in ipo:
+                    ipo["posted_events"] = []
+                if event_type not in ipo["posted_events"]:
+                    ipo["posted_events"].append(event_type)
 
             dispatched_count += 1
             logger.info(f"   ✅ Successfully broadcasted [{event_type}] for {comp_name}")
@@ -483,8 +485,9 @@ def run_tracker(now: datetime | None = None) -> int:
             logger.error(f"   ❌ Telegram delivery failed for {comp_name}: {msg}")
 
     # 7. Persist updated posted log and master
-    save_posted_log(posted_log)
-    save_master(master)
+    if not DRY_RUN:
+        save_posted_log(posted_log)
+        save_master(master)
 
     logger.info("=" * 70)
     logger.info(f"🎉 RUN COMPLETE: {dispatched_count} alerts broadcasted to {CHAT_ID}")

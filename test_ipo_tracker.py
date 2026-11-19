@@ -14,12 +14,14 @@ from ipo_scrapers import (
     sanitize_slug,
     sanitize_gmp,
     parse_indian_date,
+    parse_date_range,
     is_sme_ipo,
     is_already_listed,
     get_registrar_url,
     ChittorgarhScraper,
     IpoCentralGmpScraper,
     ChittorgarhGmpScraper,
+    IpoWatchGmpScraper,
     DrhpDetailParser,
     IpoAggregator,
 )
@@ -294,6 +296,44 @@ class TestLifecycleEngine(unittest.TestCase):
             "is_already_listed": False,
         }
         events = evaluate_ipo_events(upcoming_ipo, today_str="2026-11-19", posted_events_set=set())
+        event_types = [e[0] for e in events]
+        self.assertIn("NEW_IPO_ANNOUNCED", event_types)
+
+    def test_date_range_parsing(self):
+        d1, d2 = parse_date_range("18 Nov - 20 Nov")
+        self.assertEqual(d1, "2026-11-18")
+        self.assertEqual(d2, "2026-11-20")
+
+        d1, d2 = parse_date_range("19 Nov - 23 Nov")
+        self.assertEqual(d1, "2026-11-19")
+        self.assertEqual(d2, "2026-11-23")
+
+    def test_live_ipo_event_scheduling(self):
+        # Mahanadi Coalfields opens today (19-Nov-2026)
+        mcl = {
+            "id": "mahanadi-coalfields",
+            "company_name": "Mahanadi Coalfields Limited",
+            "open_date": "2026-11-19",
+            "close_date": "2026-11-23",
+            "price_band": "₹129 to ₹136",
+            "is_already_listed": False,
+        }
+        events = evaluate_ipo_events(mcl, today_str="2026-11-19", posted_events_set=set())
+        event_types = [e[0] for e in events]
+        self.assertIn("IPO_OPENS_TODAY", event_types)
+        # Verify no duplicate NEW_IPO_ANNOUNCED on opening day
+        self.assertNotIn("NEW_IPO_ANNOUNCED", event_types)
+
+        # Crystal Crop Protection is currently active (Day 2: 18-Nov to 20-Nov)
+        crystal = {
+            "id": "crystal-crop-protection",
+            "company_name": "Crystal Crop Protection Limited",
+            "open_date": "2026-11-18",
+            "close_date": "2026-11-20",
+            "price_band": "₹259 to ₹272",
+            "is_already_listed": False,
+        }
+        events = evaluate_ipo_events(crystal, today_str="2026-11-19", posted_events_set=set())
         event_types = [e[0] for e in events]
         self.assertIn("NEW_IPO_ANNOUNCED", event_types)
 

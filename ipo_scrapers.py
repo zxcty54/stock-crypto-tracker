@@ -268,6 +268,30 @@ def parse_indian_date(date_str: str) -> str | None:
     return None
 
 
+def parse_date_range(range_str: str) -> tuple[str | None, str | None]:
+    """
+    Parse date ranges like '18 Nov - 20 Nov', '19 Nov - 23 Nov 2026', '18 to 20 Nov'.
+    Returns (open_date_str, close_date_str) in 'YYYY-MM-DD' format.
+    """
+    if not range_str or not isinstance(range_str, str):
+        return None, None
+
+    cleaned = re.sub(r"\s+", " ", range_str).strip()
+    parts = re.split(r"\s*(?:-|to|–)\s*", cleaned, maxsplit=1)
+    if len(parts) == 2:
+        part1, part2 = parts[0].strip(), parts[1].strip()
+        if not re.search(r"[a-zA-Z]", part1):
+            month_year = re.search(r"([a-zA-Z]+(?:\s+\d{4})?)", part2)
+            if month_year:
+                part1 = f"{part1} {month_year.group(1)}"
+        return parse_indian_date(part1), parse_indian_date(part2)
+    elif len(parts) == 1:
+        d = parse_indian_date(parts[0])
+        return d, d
+
+    return None, None
+
+
 def get_registrar_url(registrar_name: str) -> str:
     """Match registrar name to its direct allotment lookup page."""
     if not registrar_name:
@@ -473,7 +497,124 @@ class ChittorgarhGmpScraper:
 
 
 # ============================================================
-# 3. CHITTORGARH MAINBOARD ISSUES & DASHBOARD SCRAPER
+# 3. IPO WATCH LIVE GMP & ISSUE TRACKER
+# ============================================================
+
+class IpoWatchGmpScraper:
+    """
+    Scrapes IPO Watch live Grey Market Premium and active issues table:
+    URL: https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/
+    Captures IPO Name, GMP, Trend, Price Band, Est Listing, Bidding Dates, Issue Type, Status.
+    Strictly filters for Mainboard and filters out SME/NSE Emerge.
+    """
+
+    URL = "https://ipowatch.in/ipo-grey-market-premium-latest-ipo-gmp/"
+
+    def __init__(self, session: requests.Session | None = None):
+        self.session = session or requests.Session()
+
+    def fetch_live_table(self) -> list[dict]:
+        results = []
+        try:
+            resp = None
+            if hasattr(self, "session") and self.session:
+                try:
+                    resp = self.session.get(self.URL, headers=BROWSER_HEADERS, timeout=15)
+                except Exception:
+                    pass
+            if not resp or getattr(resp, "status_code", 0) != 200:
+                resp = fetch_html(self.URL, timeout=15)
+            if not resp or resp.status_code != 200:
+                logger.debug("IpoWatch fetch failed or blocked")
+                return results
+
+            soup = BeautifulSoup(resp.text, "html.parser")
+            tables = soup.find_all("table")
+
+            for table in tables:
+                rows = table.find_all("tr")
+                if len(rows) < 2:
+                    continue
+
+                headers = [c.get_text(strip=True).lower() for c in rows[0].find_all(["th", "td"])]
+                if not any("gmp" in h for h in headers) or not any("name" in h or "ipo" in h for h in headers):
+                    continue
+
+                def find_idx(keywords):
+                    for idx, h in enumerate(headers):
+                        if any(k in h for k in keywords):
+                            return idx
+                    return -1
+
+                idx_name = find_idx(["ipo name", "ipo", "company", "name"])
+                idx_gmp = find_idx(["ipo gmp", "gmp"])
+                idx_price = find_idx(["price band", "price"])
+                idx_est = find_idx(["est. listing", "est listing", "gain"])
+                idx_date = find_idx(["date", "bidding date", "dates"])
+                idx_type = find_idx(["type", "category"])
+                idx_status = find_idx(["status"])
+
+                for tr in rows[1:]:
+                    tds = tr.find_all("td")
+                    if len(tds) <= max(idx_name, idx_gmp):
+                        continue
+
+                    # Check type first: Mainboard vs SME
+                    type_str = tds[idx_type].get_text(strip=True).lower() if idx_type >= 0 and idx_type < len(tds) else ""
+                    if type_str and any(sme_term in type_str for sme_term in ["sme", "emerge"]):
+                        continue  # Exclude SME
+
+                    raw_name = tds[idx_name].get_text(strip=True)
+                    if not raw_name or is_sme_ipo(raw_name):
+                        continue
+
+                    link_tag = tds[idx_name].find("a")
+                    detail_url = link_tag.get("href", "").strip() if link_tag else ""
+
+                    clean_name = clean_company_name(raw_name)
+                    raw_gmp = tds[idx_gmp].get_text(strip=True) if idx_gmp >= 0 and idx_gmp < len(tds) else ""
+                    gmp_amt, gmp_pct = sanitize_gmp(raw_gmp)
+
+                    price_raw = tds[idx_price].get_text(strip=True) if idx_price >= 0 and idx_price < len(tds) else ""
+                    est_raw = tds[idx_est].get_text(strip=True) if idx_est >= 0 and idx_est < len(tds) else ""
+                    date_raw = tds[idx_date].get_text(strip=True) if idx_date >= 0 and idx_date < len(tds) else ""
+                    status_raw = tds[idx_status].get_text(strip=True).upper() if idx_status >= 0 and idx_status < len(tds) else "UPCOMING"
+
+                    # Parse date range e.g. "18 Nov - 20 Nov"
+                    open_d, close_d = parse_date_range(date_raw)
+
+                    # Extract estimated listing percent if gmp_pct is missing
+                    if not gmp_pct and "%" in est_raw:
+                        pct_m = re.search(r"\(\+?([-\d\.]+)%\)", est_raw)
+                        if pct_m:
+                            try:
+                                gmp_pct = float(pct_m.group(1))
+                            except ValueError:
+                                pass
+
+                    results.append({
+                        "company_name": clean_name,
+                        "raw_name": raw_name,
+                        "gmp": gmp_amt,
+                        "gmp_percent": gmp_pct,
+                        "price_band": price_raw,
+                        "est_listing_price": est_raw,
+                        "open_date": open_d,
+                        "close_date": close_d,
+                        "detail_url": detail_url,
+                        "status": status_raw,
+                        "issue_type": "Mainboard",
+                        "source": "ipowatch",
+                    })
+
+        except Exception as e:
+            logger.debug(f"IpoWatch fetch note: {e}")
+
+        return results
+
+
+# ============================================================
+# 4. CHITTORGARH MAINBOARD ISSUES & DASHBOARD SCRAPER
 # ============================================================
 
 class ChittorgarhScraper:
@@ -846,6 +987,7 @@ class IpoAggregator:
         self.session = session or requests.Session()
         self.ipocentral_gmp = IpoCentralGmpScraper(self.session)
         self.chittorgarh_gmp = ChittorgarhGmpScraper(self.session)
+        self.ipowatch = IpoWatchGmpScraper(self.session)
         self.chittorgarh_issues = ChittorgarhScraper(self.session)
         self.nse = NseIpoScraper(self.session)
         self.drhp_parser = DrhpDetailParser(self.session)
@@ -960,7 +1102,57 @@ class IpoAggregator:
                 if not target.get("detail_url") and cg.get("detail_url"):
                     target["detail_url"] = cg["detail_url"]
 
-        # 4. Enrich with NSE Equity data
+        # 4. Enrich with IPO Watch Live GMP & Issues
+        ipowatch_items = self.ipowatch.fetch_live_table()
+        logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch")
+        for iw in ipowatch_items:
+            slug = sanitize_slug(iw.get("company_name", ""))
+            if not slug:
+                continue
+            target = merged_map.get(slug)
+            if not target:
+                target = {
+                    "id": slug,
+                    "company_name": iw.get("company_name"),
+                    "symbol": "",
+                    "issue_type": "Mainboard",
+                    "exchange": "NSE & BSE",
+                    "open_date": iw.get("open_date"),
+                    "close_date": iw.get("close_date"),
+                    "allotment_date": None,
+                    "listing_date": None,
+                    "price_band": iw.get("price_band") or "",
+                    "issue_size_cr": "",
+                    "gmp": iw.get("gmp") or "",
+                    "gmp_percent": iw.get("gmp_percent") or "",
+                    "est_listing_price": iw.get("est_listing_price") or "",
+                    "kostak": "",
+                    "sub2sauda": "",
+                    "detail_url": iw.get("detail_url") or "",
+                    "sources": ["ipowatch"],
+                    "is_already_listed": False,
+                    "status": iw.get("status", "UPCOMING"),
+                }
+                merged_map[slug] = target
+            else:
+                if iw.get("gmp") and not target.get("gmp"):
+                    target["gmp"] = iw["gmp"]
+                if iw.get("gmp_percent") and not target.get("gmp_percent"):
+                    target["gmp_percent"] = iw["gmp_percent"]
+                if iw.get("price_band") and not target.get("price_band"):
+                    target["price_band"] = iw["price_band"]
+                if iw.get("open_date") and not target.get("open_date"):
+                    target["open_date"] = iw["open_date"]
+                if iw.get("close_date") and not target.get("close_date"):
+                    target["close_date"] = iw["close_date"]
+                if iw.get("est_listing_price") and not target.get("est_listing_price"):
+                    target["est_listing_price"] = iw["est_listing_price"]
+                if iw.get("detail_url") and not target.get("detail_url"):
+                    target["detail_url"] = iw["detail_url"]
+                if "ipowatch" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("ipowatch")
+
+        # 5. Enrich with NSE Equity data
         nse_items = self.nse.fetch_nse_ipos()
         for ne in nse_items:
             slug = sanitize_slug(ne.get("company_name", ""))

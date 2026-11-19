@@ -242,6 +242,164 @@
     ]
   },
   {
+    "id": "mahanadi-coalfields",
+    "company_name": "Mahanadi Coalfields Limited",
+    "symbol": "MCL",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "sector": "Mining & Coal Resources (Coal India Subsidiary)",
+    "open_date": "2026-11-19",
+    "close_date": "2026-11-23",
+    "allotment_date": "2026-11-24",
+    "listing_date": "2026-11-26",
+    "price_band": "₹129 to ₹136",
+    "cut_off_price": 136,
+    "face_value": "10",
+    "lot_size": 110,
+    "min_investment": 14960,
+    "issue_size_cr": "4,200",
+    "fresh_issue_cr": "0",
+    "ofs_cr": "4,200",
+    "gmp": "+₹3.00",
+    "gmp_percent": "+2.21%",
+    "est_listing_price": "₹139.00",
+    "kostak": "₹150",
+    "sub2sauda": "₹1,200",
+    "subscription": {
+      "qib": "Active (Day 1)",
+      "nii": "Active (Day 1)",
+      "retail": "Active (Day 1)",
+      "total": "Active"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "financials": {
+      "revenue": "28,450.00",
+      "pat": "8,120.00",
+      "net_worth": "19,850.00",
+      "debt": "0.00"
+    },
+    "kpis": {
+      "pe_ratio": "10.4",
+      "ronw": "40.90%",
+      "market_cap": "84,500",
+      "eps": "13.08",
+      "debt_to_equity": "0.00"
+    },
+    "drhp_objects": [
+      "Disinvestment of equity shares via Offer for Sale (OFS) by Promoter (Coal India Ltd / GoI)",
+      "Achieve the benefits of listing on NSE and BSE and ensure minimum public shareholding",
+      "Enhance corporate visibility and brand equity among public & institutional investors"
+    ],
+    "promoter_holding": {
+      "promoters": "Coal India Limited / President of India",
+      "pre_issue": "100.00%",
+      "post_issue": "90.00%"
+    },
+    "lead_managers": [
+      "SBI Capital Markets Limited",
+      "ICICI Securities Limited",
+      "IDBI Capital Markets",
+      "JM Financial Limited"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "about": "A Miniratna Category-I PSU and primary coal-producing subsidiary of Coal India Limited operating across Odisha, crucial for Indian power generation.",
+    "sources": [
+      "ipowatch",
+      "ipocentral_gmp"
+    ],
+    "is_already_listed": false,
+    "status": "OPEN",
+    "posted_events": [
+      "IPO_OPENS_TODAY"
+    ]
+  },
+  {
+    "id": "crystal-crop-protection",
+    "company_name": "Crystal Crop Protection Limited",
+    "symbol": "CRYSTAL",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "sector": "Agrochemicals & Crop Protection",
+    "open_date": "2026-11-18",
+    "close_date": "2026-11-20",
+    "allotment_date": "2026-11-23",
+    "listing_date": "2026-11-25",
+    "price_band": "₹259 to ₹272",
+    "cut_off_price": 272,
+    "face_value": "10",
+    "lot_size": 55,
+    "min_investment": 14960,
+    "issue_size_cr": "1,500",
+    "fresh_issue_cr": "600",
+    "ofs_cr": "900",
+    "gmp": "+₹18.00",
+    "gmp_percent": "+6.62%",
+    "est_listing_price": "₹290.00",
+    "kostak": "₹300",
+    "sub2sauda": "₹2,500",
+    "subscription": {
+      "qib": "Active (Day 2)",
+      "nii": "Active (Day 2)",
+      "retail": "Active (Day 2)",
+      "total": "Active"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "financials": {
+      "revenue": "1,850.00",
+      "pat": "145.00",
+      "net_worth": "980.00",
+      "debt": "320.00"
+    },
+    "kpis": {
+      "pe_ratio": "22.8",
+      "ronw": "14.80%",
+      "market_cap": "4,200",
+      "eps": "11.93",
+      "debt_to_equity": "0.33"
+    },
+    "drhp_objects": [
+      "Funding working capital requirements of the company (₹200 Cr)",
+      "Prepayment or repayment of certain outstanding borrowings (₹250 Cr)",
+      "Funding capital expenditure for technical formulation plant expansion (₹100 Cr)",
+      "General corporate purposes"
+    ],
+    "promoter_holding": {
+      "promoters": "Nand Kishore Aggarwal, Ankur Aggarwal",
+      "pre_issue": "78.40%",
+      "post_issue": "63.20%"
+    },
+    "lead_managers": [
+      "Kotak Mahindra Capital Company",
+      "Axis Capital Limited",
+      "Motilal Oswal Investment Banking"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "about": "A prominent Indian R&D-driven agrochemical company manufacturing crop protection chemicals, fungicides, insecticides, seeds, and farm equipment.",
+    "sources": [
+      "ipowatch",
+      "ipocentral_gmp"
+    ],
+    "is_already_listed": false,
+    "status": "OPEN",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
+  },
+  {
     "id": "vishal-mega-mart",
     "company_name": "Vishal Mega Mart Limited",
     "symbol": "VISHAL",
