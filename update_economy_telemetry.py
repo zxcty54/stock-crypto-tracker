@@ -32,6 +32,97 @@ PPAC_PDF = os.path.join(PDF_DIR, "PPAC_Petroleum_Consumption_Latest.pdf")
 IPA_EXCEL = os.path.join(PDF_DIR, "IPA_Traffic_Latest.xlsx")
 
 
+def try_playwright_download():
+    """If Playwright is installed and configured (like in GitHub Actions), use headless Chromium."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        return False
+
+    try:
+        print("🌐 Launching Playwright Chromium for dynamic JavaScript-rendered government portals...")
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+            )
+
+            # 1. IPA Ports
+            try:
+                page.goto("https://ipa.org.in/reports-statistics", timeout=30000)
+                page.wait_for_timeout(2000)
+                detail_link = None
+                for a in page.query_selector_all("a"):
+                    aria = (a.get_attribute("aria-label") or "").lower()
+                    href = a.get_attribute("href") or ""
+                    text = a.inner_text().lower()
+                    if "traffic" in aria or "traffic" in text or "traffic-month" in href:
+                        detail_link = href if href.startswith("http") else f"https://ipa.org.in{href}"
+                        break
+                if detail_link:
+                    page.goto(detail_link, timeout=30000)
+                    page.wait_for_timeout(2000)
+                    for a in page.query_selector_all("a"):
+                        href = a.get_attribute("href") or ""
+                        if ".xlsx" in href.lower() or ".xls" in href.lower() or "/upload/media/" in href.lower():
+                            file_url = href if href.startswith("http") else f"https://ipa.org.in{href}"
+                            resp = page.request.get(file_url, timeout=30000)
+                            if resp.status == 200:
+                                b = resp.body()
+                                if b.startswith(b'PK') or b.startswith(b'\xd0\xcf\x11\xe0'):
+                                    with open(IPA_EXCEL, "wb") as f:
+                                        f.write(b)
+                                    print(f"   💾 [Playwright] Saved latest IPA Traffic Excel ({len(b)//1024} KB)")
+                                    break
+            except Exception as e:
+                print(f"   ⚠️ Playwright IPA note: {e}")
+
+            # 2. DPIIT Eight Core
+            try:
+                page.goto("https://eaindustry.nic.in/", timeout=30000)
+                page.wait_for_timeout(2000)
+                pdf_url = None
+                for a in page.query_selector_all("a"):
+                    href = a.get_attribute("href") or ""
+                    if "press_release_ici_" in href.lower() and href.lower().endswith(".pdf"):
+                        pdf_url = href if href.startswith("http") else f"https://eaindustry.nic.in/{href.lstrip('/')}"
+                        break
+                if pdf_url:
+                    resp = page.request.get(pdf_url, timeout=30000)
+                    if resp.status == 200 and resp.body().startswith(b'%PDF-'):
+                        with open(CORE_PDF, "wb") as f:
+                            f.write(resp.body())
+                        print(f"   💾 [Playwright] Saved latest DPIIT Eight Core PDF ({len(resp.body())//1024} KB)")
+            except Exception as e:
+                print(f"   ⚠️ Playwright DPIIT note: {e}")
+
+            # 3. PPAC Fuel ICR
+            try:
+                page.goto("https://ppac.gov.in/consumption/reports", timeout=30000)
+                page.wait_for_timeout(3000)
+                pdf_url = None
+                for a in page.query_selector_all("a"):
+                    href = a.get_attribute("href") or ""
+                    text = a.inner_text().strip().lower()
+                    if ("industry consumption report" in text or "_icr_" in href.lower()) and "download.php" in href.lower():
+                        pdf_url = href if href.startswith("http") else f"https://ppac.gov.in/{href.lstrip('/')}"
+                        break
+                if pdf_url:
+                    resp = page.request.get(pdf_url, timeout=30000)
+                    if resp.status == 200 and resp.body().startswith(b'%PDF-'):
+                        with open(PPAC_PDF, "wb") as f:
+                            f.write(resp.body())
+                        print(f"   💾 [Playwright] Saved latest PPAC Petroleum ICR PDF ({len(resp.body())//1024} KB)")
+            except Exception as e:
+                print(f"   ⚠️ Playwright PPAC note: {e}")
+
+            browser.close()
+            return True
+    except Exception as e:
+        print(f"ℹ️ Playwright browser run note: {e}")
+        return False
+
+
 def try_download_latest_reports():
     """Attempts to auto-download fresh monthly statutory reports if online (e.g., in GitHub Actions)."""
     import urllib.request
@@ -544,8 +635,10 @@ def main():
     print("🇮🇳 EXECUTING INDIAN ECONOMY PHYSICAL TELEMETRY DYNAMIC ENGINE")
     print("=" * 70)
 
-    # 1. Try to download latest monthly reports if online (e.g. in GitHub Actions)
-    try_download_latest_reports()
+    # 1. Try headless Playwright browser first if in GitHub Actions, else urllib/requests
+    success = try_playwright_download()
+    if not success:
+        try_download_latest_reports()
 
     # 2. Dynamically parse all statutory documents
     core_data = parse_dpiit_eight_core()
