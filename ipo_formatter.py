@@ -440,6 +440,42 @@ def format_allotment_out_alert(ipo: dict) -> str:
     )
 
 
+def format_gmp_update_alert(ipo: dict, old_gmp: str = "") -> str:
+    """Template for significant GMP movement alert."""
+    comp_name = safe_text(ipo.get("company_name"))
+    sym = safe_text(ipo.get("symbol"), default="")
+    sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
+
+    price_band = safe_text(ipo.get("price_band") or ipo.get("cut_off_price"), default="TBA")
+    open_d = safe_text(ipo.get("open_date"), default="TBA")
+    close_d = safe_text(ipo.get("close_date"), default="TBA")
+    est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
+    gmp = safe_text(ipo.get("gmp"), default="N/A")
+    gmp_pct = safe_text(ipo.get("gmp_percent"), default="")
+    gmp_str = f"<b>{gmp}</b> ({gmp_pct})" if gmp_pct else f"<b>{gmp}</b>"
+
+    old_str = f"• <b>Previous GMP:</b> {old_gmp}\n" if old_gmp else ""
+    kostak = safe_text(ipo.get("kostak"), default="")
+    kostak_str = f"• <b>Kostak Rate:</b> {kostak}\n" if kostak and kostak != "TBA" else ""
+
+    return (
+        f"⚡ <b>LIVE GMP MOVEMENT ALERT</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🏢 <b>{comp_name}</b>{sym_tag}\n"
+        f"🏷️ <i>Mainboard IPO · Grey Market Revision</i>\n\n"
+        f"💰 <b>Price Band:</b> {price_band}\n"
+        f"📅 <b>Bidding Window:</b> {open_d} to {close_d}\n\n"
+        f"🔥 <b>UPDATED GREY MARKET PREMIUM:</b>\n"
+        f"{old_str}"
+        f"• <b>Current GMP:</b> {gmp_str}\n"
+        f"• <b>Expected Listing Price:</b> {est_list}\n"
+        f"{kostak_str}\n"
+        f"<i>*GMP is based on unofficial market trades &amp; subject to rapid fluctuations.</i>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}"
+    )
+
+
 def format_listing_today_alert(ipo: dict) -> str:
     """Template for Listing Day debut alert."""
     comp_name = safe_text(ipo.get("company_name"))
@@ -562,6 +598,7 @@ def format_ipo_post(event_type: str, ipo: dict) -> str | None:
         "IPO_CLOSING_TODAY": format_closing_today_alert,
         "ALLOTMENT_OUT": format_allotment_out_alert,
         "LISTING_TODAY": format_listing_today_alert,
+        "GMP_UPDATE": format_gmp_update_alert,
     }
     formatter = formatters.get(event_type)
     if not formatter:
