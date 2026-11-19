@@ -1,5 +1,7 @@
 {
-  "last_updated": "2026-11-19 12:20:07 IST",
+  "title": "Indian Economy Physical Demand Radar",
+  "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
+  "last_updated": "2026-11-19 14:44:08 IST",
   "economy_headline": {
     "core_infra_growth_pct": 7.9,
     "port_cargo_growth_pct": 10.17,
@@ -12,363 +14,448 @@
       "report_title": "DPIIT Index of Eight Core Industries",
       "period": "September 2026 (Provisional)",
       "overall_yoy_growth_pct": 7.9,
-      "previous_month_growth_pct": 5.9,
+      "previous_month_growth_pct": null,
       "components": {
-        "Iron Ore": {
-          "weight": 4.91,
-          "yoy_pct": 18.4,
-          "status": "SURGING"
-        },
-        "Electricity": {
-          "weight": 30.93,
-          "yoy_pct": 11.4,
+        "Coal": {
+          "weight": 5.596,
+          "yoy_pct": 10.7,
           "status": "PEAK_DEMAND"
         },
-        "Coal": {
-          "weight": 5.6,
-          "yoy_pct": 10.7,
-          "status": "STRONG_EXPANSION"
-        },
-        "Refinery Products": {
-          "weight": 22.57,
-          "yoy_pct": 10.3,
-          "status": "EXPANDING"
-        },
-        "Cement": {
-          "weight": 4.41,
-          "yoy_pct": 9.8,
-          "status": "EXPANDING"
-        },
-        "Steel": {
-          "weight": 17.58,
-          "yoy_pct": 4.9,
-          "status": "MODERATE_EXPANSION"
+        "Natural Gas": {
+          "weight": 3.841,
+          "yoy_pct": -4.6,
+          "status": "CONTRACTION"
         },
         "Crude Oil": {
           "weight": 7.43,
           "yoy_pct": -1.4,
           "status": "CONTRACTION"
         },
-        "Natural Gas": {
-          "weight": 3.84,
-          "yoy_pct": -4.6,
-          "status": "CONTRACTION"
+        "Refinery Products": {
+          "weight": 22.572,
+          "yoy_pct": 10.3,
+          "status": "PEAK_DEMAND"
         },
         "Fertilizers": {
-          "weight": 2.73,
+          "weight": 2.731,
           "yoy_pct": -11.7,
           "status": "SHARP_CONTRACTION"
+        },
+        "Steel": {
+          "weight": 17.584,
+          "yoy_pct": 4.9,
+          "status": "EXPANDING"
+        },
+        "Cement": {
+          "weight": 4.41,
+          "yoy_pct": 9.8,
+          "status": "PEAK_DEMAND"
+        },
+        "Electricity": {
+          "weight": 30.932,
+          "yoy_pct": 11.4,
+          "status": "PEAK_DEMAND"
+        },
+        "Iron Ore": {
+          "weight": 4.905,
+          "yoy_pct": 18.4,
+          "status": "SURGING"
         }
       },
       "historical_13m_growth": [
         {
           "month": "Sep-25",
-          "overall_yoy": 3.1,
-          "cement_yoy": 5.1,
-          "power_yoy": 3.1,
-          "steel_yoy": 14.3
+          "Coal": -1.1,
+          "Natural Gas": -3.7,
+          "Crude Oil": -0.7,
+          "Refinery Products": -3.2,
+          "Fertilizers": 1.7,
+          "Steel": 14.3,
+          "Cement": 5.1,
+          "Electricity": 3.1,
+          "Iron Ore": 0.8,
+          "Overall Index": 3.1
         },
         {
           "month": "Oct-25",
-          "overall_yoy": 0.8,
-          "cement_yoy": 5.2,
-          "power_yoy": -7.0,
-          "steel_yoy": 9.5
+          "Coal": -8.4,
+          "Natural Gas": -5.2,
+          "Crude Oil": -0.8,
+          "Refinery Products": 5.3,
+          "Fertilizers": 7.4,
+          "Steel": 9.5,
+          "Cement": 5.2,
+          "Electricity": -7.0,
+          "Iron Ore": 8.7,
+          "Overall Index": 0.8
         },
         {
           "month": "Nov-25",
-          "overall_yoy": 3.5,
-          "cement_yoy": 15.1,
-          "power_yoy": -1.5,
-          "steel_yoy": 11.6
+          "Coal": 2.2,
+          "Natural Gas": -2.5,
+          "Crude Oil": -2.6,
+          "Refinery Products": -0.2,
+          "Fertilizers": 5.5,
+          "Steel": 11.6,
+          "Cement": 15.1,
+          "Electricity": -1.5,
+          "Iron Ore": 19.3,
+          "Overall Index": 3.5
         },
         {
           "month": "Dec-25",
-          "overall_yoy": 5.6,
-          "cement_yoy": 14.0,
-          "power_yoy": 6.2,
-          "steel_yoy": 11.1
+          "Coal": 3.7,
+          "Natural Gas": -4.4,
+          "Crude Oil": -5.1,
+          "Refinery Products": -0.3,
+          "Fertilizers": 4.1,
+          "Steel": 11.1,
+          "Cement": 14.0,
+          "Electricity": 6.2,
+          "Iron Ore": 22.3,
+          "Overall Index": 5.6
         },
         {
           "month": "Jan-26",
-          "overall_yoy": 5.2,
-          "cement_yoy": 11.3,
-          "power_yoy": 5.1,
-          "steel_yoy": 13.8
+          "Coal": 0.9,
+          "Natural Gas": -4.9,
+          "Crude Oil": -5.4,
+          "Refinery Products": 0.4,
+          "Fertilizers": 3.7,
+          "Steel": 13.8,
+          "Cement": 11.3,
+          "Electricity": 5.1,
+          "Iron Ore": 12.8,
+          "Overall Index": 5.2
         },
         {
           "month": "Feb-26",
-          "overall_yoy": 3.2,
-          "cement_yoy": 9.1,
-          "power_yoy": 2.3,
-          "steel_yoy": 9.9
+          "Coal": 1.4,
+          "Natural Gas": -5.0,
+          "Crude Oil": -4.8,
+          "Refinery Products": -0.4,
+          "Fertilizers": 3.5,
+          "Steel": 9.9,
+          "Cement": 9.1,
+          "Electricity": 2.3,
+          "Iron Ore": 8.5,
+          "Overall Index": 3.2
         },
         {
           "month": "Mar-26",
-          "overall_yoy": 2.9,
-          "cement_yoy": 4.7,
-          "power_yoy": 0.8,
-          "steel_yoy": 9.6
+          "Coal": -4.0,
+          "Natural Gas": -3.7,
+          "Crude Oil": -5.3,
+          "Refinery Products": 0.9,
+          "Fertilizers": -24.6,
+          "Steel": 9.6,
+          "Cement": 4.7,
+          "Electricity": 0.8,
+          "Iron Ore": 33.3,
+          "Overall Index": 2.9
         },
         {
           "month": "Apr-26",
-          "overall_yoy": 2.7,
-          "cement_yoy": 8.3,
-          "power_yoy": 5.5,
-          "steel_yoy": 4.7
+          "Coal": -9.0,
+          "Natural Gas": -4.2,
+          "Crude Oil": -3.2,
+          "Refinery Products": -0.2,
+          "Fertilizers": -8.5,
+          "Steel": 4.7,
+          "Cement": 8.3,
+          "Electricity": 5.5,
+          "Iron Ore": 12.5,
+          "Overall Index": 2.7
         },
         {
           "month": "May-26",
-          "overall_yoy": 3.2,
-          "cement_yoy": 8.4,
-          "power_yoy": 11.2,
-          "steel_yoy": 5.1
+          "Coal": -9.5,
+          "Natural Gas": -5.0,
+          "Crude Oil": -4.2,
+          "Refinery Products": -8.2,
+          "Fertilizers": -1.0,
+          "Steel": 5.1,
+          "Cement": 8.4,
+          "Electricity": 11.2,
+          "Iron Ore": 19.0,
+          "Overall Index": 3.2
         },
         {
           "month": "Jun-26",
-          "overall_yoy": 6.0,
-          "cement_yoy": 9.9,
-          "power_yoy": 11.4,
-          "steel_yoy": 5.6
+          "Coal": 1.4,
+          "Natural Gas": -4.8,
+          "Crude Oil": -4.2,
+          "Refinery Products": -4.0,
+          "Fertilizers": -3.3,
+          "Steel": 5.6,
+          "Cement": 9.9,
+          "Electricity": 11.4,
+          "Iron Ore": 44.5,
+          "Overall Index": 6.0
         },
         {
           "month": "Jul-26",
-          "overall_yoy": 5.0,
-          "cement_yoy": 12.7,
-          "power_yoy": 8.4,
-          "steel_yoy": 1.9
+          "Coal": 7.6,
+          "Natural Gas": -3.0,
+          "Crude Oil": -5.3,
+          "Refinery Products": 3.0,
+          "Fertilizers": -8.0,
+          "Steel": 1.9,
+          "Cement": 12.7,
+          "Electricity": 8.4,
+          "Iron Ore": 29.5,
+          "Overall Index": 5.0
         },
         {
           "month": "Aug-26",
-          "overall_yoy": 5.9,
-          "cement_yoy": 11.7,
-          "power_yoy": 13.1,
-          "steel_yoy": 3.5
+          "Coal": -3.8,
+          "Natural Gas": -4.9,
+          "Crude Oil": -3.6,
+          "Refinery Products": 5.6,
+          "Fertilizers": -12.4,
+          "Steel": 3.5,
+          "Cement": 11.7,
+          "Electricity": 13.1,
+          "Iron Ore": 5.5,
+          "Overall Index": 5.9
         },
         {
-          "month": "Sep-26",
-          "overall_yoy": 7.9,
-          "cement_yoy": 9.8,
-          "power_yoy": 11.4,
-          "steel_yoy": 4.9
+          "month": "Sep-26 (P)",
+          "Coal": 10.7,
+          "Natural Gas": -4.6,
+          "Crude Oil": -1.4,
+          "Refinery Products": 10.3,
+          "Fertilizers": -11.7,
+          "Steel": 4.9,
+          "Cement": 9.8,
+          "Electricity": 11.4,
+          "Iron Ore": 18.4,
+          "Overall Index": 7.9
         }
       ]
     },
     "ipa_major_ports": {
       "report_title": "Indian Ports Association (IPA) Major Ports Traffic",
-      "period": "April-October 2026 vs April-October 2025",
+      "period": "April to October 2026 vs April to October 2025",
       "total_cargo_current_mmt": 566.4,
       "total_cargo_previous_mmt": 514.1,
       "cargo_yoy_growth_pct": 10.17,
       "major_commodities": {
         "POL (Crude & Products)": {
-          "volume_mmt": 162.8,
-          "share_pct": 28.7,
-          "status": "EXPANDING"
+          "volume_mmt": 174.6,
+          "share_pct": 30.8,
+          "growth_pct": 12.07,
+          "status": "PEAK_DEMAND"
         },
         "Container Cargo": {
-          "volume_mmt": 124.5,
-          "share_pct": 22.0,
-          "status": "STRONG_EXPANSION"
+          "volume_mmt": 132.5,
+          "share_pct": 23.4,
+          "growth_pct": 8.51,
+          "status": "PEAK_DEMAND"
         },
         "Coal (Thermal & Coking)": {
-          "volume_mmt": 118.2,
-          "share_pct": 20.9,
+          "volume_mmt": 120.5,
+          "share_pct": 21.3,
+          "growth_pct": 6.51,
           "status": "EXPANDING"
         },
-        "Iron Ore (Incl. Pellets)": {
-          "volume_mmt": 48.6,
-          "share_pct": 8.6,
-          "status": "MODERATE_EXPANSION"
+        "Iron Ore & Pellets": {
+          "volume_mmt": 29.5,
+          "share_pct": 5.2,
+          "growth_pct": 9.4,
+          "status": "PEAK_DEMAND"
         },
-        "Fertilizer & Raw Materials": {
-          "volume_mmt": 14.8,
-          "share_pct": 2.6,
-          "status": "STEADY"
+        "Fertilizers (Finished & Raw)": {
+          "volume_mmt": 12.5,
+          "share_pct": 2.2,
+          "growth_pct": -0.94,
+          "status": "CONTRACTION"
         }
       }
     },
     "ppac_fuel_freight": {
-      "report_title": "PPAC Industry Consumption Report (POL & NG)",
+      "report_title": "PPAC Monthly Petroleum Industry Consumption Review",
       "period": "September 2026",
-      "total_consumption_mmt": 19.26,
-      "total_consumption_yoy_pct": 3.4,
+      "total_pol_consumption_mmt": 19.26,
+      "previous_pol_consumption_mmt": 18.63,
+      "total_pol_growth_pct": 3.4,
       "fuels": {
+        "Motor Spirit (Petrol)": {
+          "consumption_mmt": 3.67,
+          "previous_mmt": 3.4,
+          "yoy_growth_pct": 8.0,
+          "proxy_for": "Personal Mobility & Passenger Vehicles",
+          "status": "PEAK_DEMAND"
+        },
         "High Speed Diesel (HSD)": {
-          "metric_label": "Commercial Freight & Trucking Pulse",
+          "consumption_mmt": 7.11,
           "yoy_growth_pct": 5.6,
-          "monthly_consumption_mmt": 7.42,
+          "proxy_for": "Commercial Freight, Logistics, Agriculture & Factory Power",
           "status": "EXPANDING"
         },
-        "Motor Spirit (Petrol MS)": {
-          "metric_label": "Personal Mobility & 2W/4W Offtake",
-          "yoy_growth_pct": 8.0,
-          "monthly_consumption_mmt": 3.25,
-          "status": "HIGH_GROWTH"
-        },
         "Aviation Turbine Fuel (ATF)": {
-          "metric_label": "Air Travel & Passenger Km",
-          "yoy_growth_pct": 11.2,
-          "monthly_consumption_mmt": 0.76,
-          "status": "STRONG_EXPANSION"
+          "consumption_mmt": 0.2,
+          "yoy_growth_pct": 0.9,
+          "proxy_for": "Aviation Sector & Air Passenger Traffic",
+          "status": "MODERATE_EXPANSION"
         },
         "Bitumen": {
-          "metric_label": "Highway Road Construction Activity",
-          "yoy_growth_pct": 6.4,
-          "monthly_consumption_mmt": 0.68,
-          "status": "ACCELERATING"
-        },
-        "LPG": {
-          "metric_label": "Domestic & Commercial Cooking Gas",
-          "yoy_growth_pct": -9.0,
-          "monthly_consumption_mmt": 2.54,
-          "status": "SOFTENING"
+          "consumption_mmt": 0.12,
+          "yoy_growth_pct": 17.2,
+          "proxy_for": "Road & Highway Construction Activity",
+          "status": "SURGING"
         }
       }
     },
     "netc_fastag_toll": {
-      "report_title": "NETC FASTag National Highway Toll Collection",
-      "latest_month": "October 2026",
-      "latest_toll_cr": 6380.0,
-      "latest_volume_mn": 378.0,
-      "average_ticket_size_inr": 168.8,
+      "report_title": "NETC FASTag National Highway Toll Telemetry",
+      "period": "September 2026",
+      "monthly_collection_inr_cr": 6380.5,
+      "monthly_vehicle_count_mn": 378.4,
       "yoy_growth_pct": 8.5,
-      "status": "STRONG_MOMENTUM",
-      "rolling_12m_history": [
+      "mom_growth_pct": 1.6,
+      "proxy_for": "Interstate Commercial Cargo Movement & Highway Logistics Volume",
+      "status": "EXPANDING",
+      "rolling_12m_series": [
+        {
+          "month": "Oct-25",
+          "toll_cr": 5880.2,
+          "vehicles_mn": 347.1,
+          "yoy_growth": 9.2
+        },
         {
           "month": "Nov-25",
-          "toll_cr": 5350.0,
-          "volume_mn": 338.0,
-          "yoy_pct": 12.1
+          "toll_cr": 5940.5,
+          "vehicles_mn": 352.0,
+          "yoy_growth": 8.7
         },
         {
           "month": "Dec-25",
-          "toll_cr": 5860.0,
-          "volume_mn": 361.0,
-          "yoy_pct": 14.5
+          "toll_cr": 6120.0,
+          "vehicles_mn": 365.4,
+          "yoy_growth": 9.8
         },
         {
           "month": "Jan-26",
-          "toll_cr": 5780.0,
-          "volume_mn": 354.0,
-          "yoy_pct": 11.2
+          "toll_cr": 6050.4,
+          "vehicles_mn": 359.8,
+          "yoy_growth": 8.1
         },
         {
           "month": "Feb-26",
-          "toll_cr": 5420.0,
-          "volume_mn": 332.0,
-          "yoy_pct": 9.4
+          "toll_cr": 5790.0,
+          "vehicles_mn": 344.2,
+          "yoy_growth": 7.9
         },
         {
           "month": "Mar-26",
-          "toll_cr": 5910.0,
-          "volume_mn": 359.0,
-          "yoy_pct": 10.3
+          "toll_cr": 6210.8,
+          "vehicles_mn": 369.0,
+          "yoy_growth": 8.4
         },
         {
           "month": "Apr-26",
-          "toll_cr": 5960.0,
-          "volume_mn": 362.0,
-          "yoy_pct": 8.7
+          "toll_cr": 6180.5,
+          "vehicles_mn": 366.5,
+          "yoy_growth": 8.0
         },
         {
           "month": "May-26",
-          "toll_cr": 6050.0,
-          "volume_mn": 366.0,
-          "yoy_pct": 8.9
+          "toll_cr": 6310.2,
+          "vehicles_mn": 374.1,
+          "yoy_growth": 8.9
         },
         {
           "month": "Jun-26",
-          "toll_cr": 6120.0,
-          "volume_mn": 368.0,
-          "yoy_pct": 7.8
+          "toll_cr": 6240.0,
+          "vehicles_mn": 370.2,
+          "yoy_growth": 8.3
         },
         {
           "month": "Jul-26",
-          "toll_cr": 6020.0,
-          "volume_mn": 362.0,
-          "yoy_pct": 7.2
+          "toll_cr": 6195.4,
+          "vehicles_mn": 367.8,
+          "yoy_growth": 7.8
         },
         {
           "month": "Aug-26",
-          "toll_cr": 6090.0,
-          "volume_mn": 365.0,
-          "yoy_pct": 7.5
+          "toll_cr": 6280.1,
+          "vehicles_mn": 372.4,
+          "yoy_growth": 8.2
         },
         {
           "month": "Sep-26",
-          "toll_cr": 6150.0,
-          "volume_mn": 368.0,
-          "yoy_pct": 7.9
-        },
-        {
-          "month": "Oct-26",
-          "toll_cr": 6380.0,
-          "volume_mn": 378.0,
-          "yoy_pct": 8.5
+          "toll_cr": 6380.5,
+          "vehicles_mn": 378.4,
+          "yoy_growth": 8.5
         }
       ]
     }
   },
   "sector_demand_matrix": [
     {
-      "sector": "Logistics & Commercial Vehicles",
-      "demand_signal": "STRONG_EXPANSION",
-      "momentum_badge": "🟢 BOOMING",
-      "primary_indicators": "FASTag Toll: +8.5% YoY (₹6,380 Cr) • Diesel: +5.6% YoY",
-      "economic_rationale": "Highways par freight fleet utilization aur commercial inter-state goods movement continuous surge par hain, jo CV replacement demand aur fleet expansion ko fuel kar raha hai.",
+      "sector": "Commercial Vehicles & Road Freight",
+      "demand_signal": "EXPANDING",
+      "momentum_badge": "🚀 RAPID EXPANSION",
+      "primary_indicators": "PPAC Diesel (HSD): +5.6% YoY • FASTag Toll Collection: +8.5% YoY",
+      "economic_rationale": "High-Speed Diesel consumption aur Highway FASTag toll collections mein robust growth national freight volume expansion ko reflect karta hai.",
       "beneficiary_equities": [
         {
           "symbol": "TATAMOTORS",
           "name": "Tata Motors Ltd",
-          "thesis": "CV segment market leader benefiting from freight fleet demand"
+          "thesis": "Commercial vehicle MHCV freight replacement cycle"
         },
         {
           "symbol": "ASHOKLEY",
           "name": "Ashok Leyland Ltd",
-          "thesis": "MHCV truck volume expansion with pricing power"
+          "thesis": "Direct play on domestic truck tonnage expansion"
         },
         {
-          "symbol": "TCIEXP",
-          "name": "TCI Express Ltd",
-          "thesis": "Express logistics and B2B road freight pricing defense"
+          "symbol": "VBL",
+          "name": "Varun Beverages Ltd",
+          "thesis": "Cold-chain logistics and heavy transport fleet utilization"
         },
         {
-          "symbol": "VRLLOG",
-          "name": "VRL Logistics Ltd",
-          "thesis": "High route density and diesel inflation pass-through"
+          "symbol": "MAHLOG",
+          "name": "Mahindra Logistics Ltd",
+          "thesis": "Third-party express cargo supply chain beneficiary"
         }
       ]
     },
     {
-      "sector": "Ports, Terminals & EXIM Trade",
-      "demand_signal": "STRONG_EXPANSION",
-      "momentum_badge": "🟢 EXPANDING",
-      "primary_indicators": "Major Ports Cargo: +10.17% YoY (566.4 MMT) • Container Cargo: +22.0% Share",
-      "economic_rationale": "Indian major ports ne 566 MMT cargo record cross kiya hai. Coastal shipping aur export-import container volumes double-digit growth (+10.2%) par hain.",
+      "sector": "Port Logistics & Global Trade",
+      "demand_signal": "EXPANDING",
+      "momentum_badge": "🚢 SURGING EXPORTS",
+      "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51% YoY",
+      "economic_rationale": "Major ports cargo traffic double-digit growth par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
       "beneficiary_equities": [
         {
           "symbol": "ADANIPORTS",
-          "name": "Adani Ports and SEZ",
-          "thesis": "Pan-India cargo market share gain and container logistics growth"
-        },
-        {
-          "symbol": "JSWINFRA",
-          "name": "JSW Infrastructure Ltd",
-          "thesis": "Third-party commercial cargo and port capacity expansion"
+          "name": "Adani Ports and SEZ Ltd",
+          "thesis": "Handles >27% of India's maritime cargo with volume growth"
         },
         {
           "symbol": "CONCOR",
           "name": "Container Corporation of India",
-          "thesis": "Dedicated Freight Corridor (DFC) rail-to-port volume shift"
+          "thesis": "Inland container depot rail freight throughput expansion"
+        },
+        {
+          "symbol": "JPA",
+          "name": "JSW Infrastructure Ltd",
+          "thesis": "Non-major port dry bulk cargo expansion"
+        },
+        {
+          "symbol": "ALLCARGO",
+          "name": "Allcargo Logistics Ltd",
+          "thesis": "LCL ocean consolidation and multimodal logistics"
         }
       ]
     },
     {
-      "sector": "Infrastructure, Cement & Road Construction",
-      "demand_signal": "ACCELERATING",
-      "momentum_badge": "🟢 ACCELERATING",
-      "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen: +6.4% YoY",
+      "sector": "Infrastructure & Cement Construction",
+      "demand_signal": "STRONG_DEMAND",
+      "momentum_badge": "📈 STRONG DEMAND",
+      "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen Road Capex",
       "economic_rationale": "Post-monsoon highway construction, central capex execution, aur residential housing absorption se cement volume dispatch multi-month highs par hai.",
       "beneficiary_equities": [
         {
@@ -379,7 +466,7 @@
         {
           "symbol": "AMBUJACEM",
           "name": "Ambuja Cements Ltd",
-          "thesis": "Adani group capacity additions and logistics synergy"
+          "thesis": "Capacity additions and logistics synergy"
         },
         {
           "symbol": "LT",
@@ -389,7 +476,7 @@
         {
           "symbol": "GRINFRA",
           "name": "G R Infraprojects Ltd",
-          "thesis": "Highway EPC contractor benefiting from bitumen & road capex"
+          "thesis": "Highway EPC contractor benefiting from road capex"
         }
       ]
     },
@@ -398,7 +485,7 @@
       "demand_signal": "PEAK_DEMAND",
       "momentum_badge": "🔥 PEAK DEMAND",
       "primary_indicators": "8-Core Electricity: +11.4% YoY • Coal Dispatch: +10.7% YoY",
-      "economic_rationale": "Industrial power consumption aur commercial base-load growth double-digits (+11.4%) par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
+      "economic_rationale": "Industrial power consumption aur commercial base-load growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
       "beneficiary_equities": [
         {
           "symbol": "NTPC",
@@ -423,45 +510,55 @@
       ]
     },
     {
-      "sector": "Primary Metals (Steel & Mining)",
+      "sector": "Steel & Metals Fabrication",
       "demand_signal": "STEADY_GROWTH",
-      "momentum_badge": "⚡ STEADY",
-      "primary_indicators": "Iron Ore Output: +18.4% YoY • Steel Production: +4.9% YoY",
-      "economic_rationale": "Domestic infrastructure consumption steel demand ko support kar raha hai, jabki raw material iron ore output (+18.4%) record mining growth dikha raha hai.",
+      "momentum_badge": "⚙️ STEADY CAPEX",
+      "primary_indicators": "8-Core Steel: +4.9% YoY • Iron Ore: +18.4% YoY",
+      "economic_rationale": "Domestic infrastructure capex, automotive demand, aur pre-engineered buildings domestic steel production ko support kar rahe hain.",
       "beneficiary_equities": [
         {
           "symbol": "TATASTEEL",
           "name": "Tata Steel Ltd",
-          "thesis": "Domestic market automotive and construction steel dominance"
+          "thesis": "Domestic flat products pricing power and Kalinganagar expansion"
         },
         {
           "symbol": "JSWSTEEL",
           "name": "JSW Steel Ltd",
-          "thesis": "Capacity ramp-up and flat products demand absorption"
+          "thesis": "Volume leadership and domestic market share gains"
         },
         {
-          "symbol": "NMDC",
-          "name": "NMDC Ltd",
-          "thesis": "Record iron ore evacuation volumes driven by domestic steel mills"
+          "symbol": "JINDALSTEL",
+          "name": "Jindal Steel & Power Ltd",
+          "thesis": "Angul pellet plant and structural steel order book"
+        },
+        {
+          "symbol": "SAIL",
+          "name": "Steel Authority of India Ltd",
+          "thesis": "Long product railways and infrastructure execution"
         }
       ]
     },
     {
-      "sector": "Agro-Chemicals & Fertilizers",
-      "demand_signal": "SOFTENING",
-      "momentum_badge": "⚠️ SOFTENING",
-      "primary_indicators": "8-Core Fertilizer Output: -11.7% YoY",
-      "economic_rationale": "Post-Kharif seasonal inventory destocking aur international raw material import parity ke chalte fertilizer plant operating rates mein contraction aya hai.",
+      "sector": "Aviation & Airport Ecosystem",
+      "demand_signal": "EXPANDING",
+      "momentum_badge": "✈️ AVIATION DEMAND",
+      "primary_indicators": "PPAC ATF Consumption: +0.9% YoY • Domestic Passenger Traffic",
+      "economic_rationale": "Corporate business travel aur leisure passenger traffic capacity load factors ko high maintain kar rahe hain.",
       "beneficiary_equities": [
         {
-          "symbol": "COROMANDEL",
-          "name": "Coromandel International Ltd",
-          "thesis": "Defensive NPK complex fertilizer mix with rural brand moat"
+          "symbol": "INDIGO",
+          "name": "InterGlobe Aviation Ltd",
+          "thesis": "Domestic fleet dominance and expanding international routes"
         },
         {
-          "symbol": "CHAMBLFERT",
-          "name": "Chambal Fertilisers Ltd",
-          "thesis": "Energy-efficient urea producer managing subsidy cycles"
+          "symbol": "SPICEJET",
+          "name": "SpiceJet Ltd",
+          "thesis": "Fleet ungrounding and regional route connectivity"
+        },
+        {
+          "symbol": "GMRINFRA",
+          "name": "GMR Airports Infrastructure Ltd",
+          "thesis": "Passenger footfall and non-aero tariff revenue expansion"
         }
       ]
     }
