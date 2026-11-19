@@ -1,6 +1,10 @@
 name: Update Physical Economy Telemetry Radar
 
 on:
+  push:
+    branches:
+      - 'arena/**'
+      - 'main'
   schedule:
     # Run twice a week (Tuesday & Friday) at 7:00 PM IST (13:30 UTC)
     - cron: '30 13 * * 2,5'
@@ -26,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests openpyxl pdfplumber playwright
+          pip install requests openpyxl pdfplumber playwright pandas
           playwright install --with-deps chromium
 
       - name: Run Economy Telemetry Engine
@@ -38,12 +42,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add economy_demand_radar.json assets/data/economy_demand_radar.json downloaded_macro_pdfs/
+          git add -A economy_demand_radar.json assets/data/economy_demand_radar.json downloaded_macro_pdfs/
           if git diff --staged --quiet; then
             echo "ℹ️ No changes in economy radar data."
           else
             git commit -m "🏭 Auto-Update: Physical Economy Demand Radar [$(date +'%d-%b-%Y')]"
-            git pull --rebase origin main
-            git push origin main
-            echo "✅ Telemetry radar pushed directly to main branch!"
+            git push origin HEAD:${{ github.ref }}
+            echo "✅ Telemetry radar and downloaded reports pushed to ${{ github.ref }}!"
           fi
