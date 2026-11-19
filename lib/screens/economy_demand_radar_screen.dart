@@ -217,6 +217,8 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
               const SizedBox(height: 10),
               ...sectors.map((s) => _buildSectorDemandCard(s)),
+              const SizedBox(height: 10),
+              _buildSebiDisclaimerCard(),
             ],
           ),
         ),
@@ -236,6 +238,8 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               _buildFuelModule(modules['ppac_fuel_freight']),
               const SizedBox(height: 14),
               _buildFastagModule(modules['netc_fastag_toll']),
+              const SizedBox(height: 10),
+              _buildSebiDisclaimerCard(),
             ],
           ),
         ),
@@ -323,10 +327,10 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
         children: [
           Row(
             children: [
-              const Icon(Icons.psychology_rounded, size: 16, color: Color(0xFF38BDF8)),
+              const Icon(Icons.school_rounded, size: 16, color: Color(0xFF38BDF8)),
               const SizedBox(width: 6),
               Text(
-                "INSTITUTIONAL EDGE: LEADING PHYSICAL TELEMETRY",
+                "EDUCATIONAL MACRO INSIGHT: PHYSICAL INDICATORS",
                 style: GoogleFonts.plusJakartaSans(
                   color: const Color(0xFF38BDF8),
                   fontSize: 10.5,
@@ -338,7 +342,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           ),
           const SizedBox(height: 6),
           const Text(
-            "Companies financial results 45 din baad report karti hain, jabki DPIIT, Fuel aur Ports data MONTHLY real-time milta hai. Jab physical volume +10% surge karta hai, toh plant operating leverage se quarterly profit multiple times expand hota hai. Is matrix se aap results aane se pehle winners pehchan sakte hain.",
+            "Companies ke quarterly financial results 45 din baad report hote hain, jabki Government ka physical telemetry data (DPIIT 8-Core, Fuel, Ports, FASTag) MONTHLY real-time publish hota hai. Jab physical volume dispatch expand hota hai, toh plant operating leverage se quarterly production metrics par asar padta hai. Yeh analysis purely educational macroeconomic study ke liye hai — yeh kisi bhi prakar ki stock recommendation ya investment advice nahi hai.",
             style: TextStyle(
               color: Colors.white70,
               fontSize: 11,
@@ -350,10 +354,57 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     );
   }
 
+  Widget _buildSebiDisclaimerCard() {
+    return Container(
+      margin: const EdgeInsets.only(top: 14, bottom: 20),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D131F),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFB300).withOpacity(0.35)),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Color(0xFFFFB300), size: 15),
+              SizedBox(width: 8),
+              Text(
+                "SEBI COMPLIANCE & STATUTORY DISCLAIMER",
+                style: TextStyle(
+                  color: Color(0xFFFFB300),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.8,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Text(
+            "1. NOT SEBI REGISTERED: StockPulse and its developers are NOT registered with the Securities and Exchange Board of India (SEBI) as Research Analysts (RA) or Investment Advisers (IA).\n\n"
+            "2. NO BUY / SELL CALLS OR TIPS: Nothing on this app constitutes investment advice, portfolio management, stock tips, buy/sell recommendations, price targets, or financial guarantees.\n\n"
+            "3. STATUTORY DATA AGGREGATION: All physical volume metrics are aggregated from official Government of India releases (DPIIT, PPAC, IPA, NPCI) solely for academic and educational macro-tracking purposes.\n\n"
+            "4. INDEPENDENT ADVICE: Equity investments are subject to market risks. Users must consult a SEBI registered investment advisor before making any financial commitment.",
+            style: TextStyle(
+              color: Color(0xFF94A3B8),
+              fontSize: 10,
+              height: 1.45,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildSectorDemandCard(Map<String, dynamic> s) {
     final stocks = (s['beneficiary_equities'] as List?) ?? [];
     final badge = s['momentum_badge'] ?? '🟢 EXPANDING';
     final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION');
+    final trendOutlook = s['macro_trend_outlook'] ?? s['earnings_outlook'];
+    final correlationNote = s['macro_correlation_note'] ?? s['earnings_prediction_thesis'];
+    final keyMetric = s['fundamental_metric_to_track'] ?? s['key_metric_to_watch'];
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -408,7 +459,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
             s['economic_rationale'] ?? '',
             style: const TextStyle(color: Colors.white70, fontSize: 11.5, height: 1.35),
           ),
-          if (s['earnings_outlook'] != null) ...[
+          if (trendOutlook != null) ...[
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(10),
@@ -438,7 +489,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          "RESULTS OUTLOOK: ${s['earnings_outlook']}",
+                          "MACRO ACTIVITY TREND: $trendOutlook",
                           style: TextStyle(
                             color: isSoft ? accentRed : accentGreen,
                             fontSize: 10.5,
@@ -449,10 +500,10 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                       ),
                     ],
                   ),
-                  if (s['earnings_prediction_thesis'] != null) ...[
+                  if (correlationNote != null) ...[
                     const SizedBox(height: 5),
                     Text(
-                      s['earnings_prediction_thesis'],
+                      correlationNote,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 11,
@@ -460,13 +511,13 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                       ),
                     ),
                   ],
-                  if (s['key_metric_to_watch'] != null) ...[
+                  if (keyMetric != null) ...[
                     const SizedBox(height: 6),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "🎯 Result Metric: ",
+                          "🎯 Fundamental Driver: ",
                           style: TextStyle(
                             color: accentAmber,
                             fontSize: 10,
@@ -475,7 +526,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                         ),
                         Expanded(
                           child: Text(
-                            s['key_metric_to_watch'],
+                            keyMetric,
                             style: const TextStyle(
                               color: Color(0xFFE2E8F0),
                               fontSize: 10,
@@ -493,13 +544,22 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           const SizedBox(height: 10),
           const Divider(color: Color(0xFF1B2433), height: 1),
           const SizedBox(height: 8),
-          Text(
-            "EQUITY BENEFICIARIES TO WATCH:",
-            style: GoogleFonts.plusJakartaSans(
-              color: textMuted,
-              fontSize: 9.5,
-              fontWeight: FontWeight.w800,
-            ),
+          Row(
+            children: [
+              Text(
+                "SECTOR REPRESENTATIVE PEERS (EDUCATIONAL STUDY):",
+                style: GoogleFonts.plusJakartaSans(
+                  color: textMuted,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 2),
+          const Text(
+            "Tickers listed below are representative industry case studies for macro sensitivity tracking, NOT buy/sell recommendations.",
+            style: TextStyle(color: Colors.white38, fontSize: 9, fontStyle: FontStyle.italic),
           ),
           const SizedBox(height: 6),
           Wrap(
