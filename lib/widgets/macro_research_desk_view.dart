@@ -35,9 +35,11 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   }
 
   Future<void> _loadReportJson() async {
-    // 🎯 ISP Bypass Endpoints (Never blocked by Jio/Airtel)
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    // 🎯 Primary Direct GitHub + ISP Bypass CDN Endpoints
     final List<String> endpoints = [
-      'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/macro_research_report.json',
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/macro_research_report.json?ts=$timestamp',
+      'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/macro_research_report.json?ts=$timestamp',
       'https://cdn.staticaly.com/gh/zxcty54/stock-crypto-tracker/main/macro_research_report.json',
     ];
 
