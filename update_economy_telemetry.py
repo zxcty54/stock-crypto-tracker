@@ -86,33 +86,53 @@ async def download_all_macro_reports():
             page = await download_context.new_page()
 
             # 1. IPA Major Ports Excel
-            print("\n⚓ [1/3] Crawling IPA Major Ports Report...")
+            print("\n⚓ [1/5] Crawling IPA Major Ports Report...")
             try:
-                await page.goto("https://ipa.org.in/reports-statistics", wait_until="domcontentloaded", timeout=45000)
-                await page.wait_for_timeout(2000)
-                detail_link = None
-                for a in await page.query_selector_all("a"):
-                    aria = (await a.get_attribute("aria-label") or "").lower()
-                    href = (await a.get_attribute("href") or "")
-                    text = (await a.inner_text()).lower()
-                    if "traffic" in aria or "traffic" in text or "traffic-month" in href:
-                        detail_link = urljoin("https://ipa.org.in/reports-statistics", href)
-                        break
-
-                if detail_link:
-                    await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
+                for target_url in ["https://ipa.org.in/reports-statistics", "https://ipa.org.in/traffic-month"]:
+                    await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
                     await page.wait_for_timeout(2000)
+
+                    # Check direct file links
+                    found = False
                     for a in await page.query_selector_all("a"):
                         href = await a.get_attribute("href") or ""
-                        if ".xlsx" in href.lower() or ".xls" in href.lower() or "/upload/media/" in href.lower():
-                            file_url = urljoin(detail_link, href)
+                        if (".xlsx" in href.lower() or ".xls" in href.lower() or "/upload/media/" in href.lower()) and "media-" in href.lower():
+                            file_url = urljoin(target_url, href)
+                            print(f"   ⚓ Found direct IPA Excel link: {file_url}")
                             await download_binary_file(page, file_url, "IPA_Traffic_Latest.xlsx")
+                            found = True
                             break
+                    if found:
+                        break
+
+                    # Detail link search (avoiding dummy anchors)
+                    for a in await page.query_selector_all("a"):
+                        href = await a.get_attribute("href") or ""
+                        text = (await a.inner_text()).strip().lower()
+                        if href.startswith("#") or href.startswith("javascript:") or len(href) < 3:
+                            continue
+                        if "traffic-month" in href.lower() or "ports traffic" in text or ("traffic" in text and "2026" in text):
+                            detail_link = urljoin(target_url, href)
+                            print(f"   ⚓ Navigating to IPA detail link: {detail_link}")
+                            await page.goto(detail_link, wait_until="domcontentloaded", timeout=45000)
+                            await page.wait_for_timeout(2000)
+                            for sub_a in await page.query_selector_all("a"):
+                                sub_href = await sub_a.get_attribute("href") or ""
+                                if ".xlsx" in sub_href.lower() or ".xls" in sub_href.lower() or "/upload/media/" in sub_href.lower():
+                                    file_url = urljoin(detail_link, sub_href)
+                                    print(f"   ⚓ Found IPA file in detail page: {file_url}")
+                                    await download_binary_file(page, file_url, "IPA_Traffic_Latest.xlsx")
+                                    found = True
+                                    break
+                            if found:
+                                break
+                    if found:
+                        break
             except Exception as e:
                 print(f"   ⚠️ IPA Ports Download Error: {e}")
 
             # 2. DPIIT 8-Core Industries PDF
-            print("\n🏭 [2/3] Crawling DPIIT 8-Core Industries PDF...")
+            print("\n🏭 [2/5] Crawling DPIIT 8-Core Industries PDF...")
             try:
                 await page.goto("https://eaindustry.nic.in/", wait_until="domcontentloaded", timeout=45000)
                 await page.wait_for_timeout(2000)
@@ -136,7 +156,61 @@ async def download_all_macro_reports():
             except Exception as e:
                 print(f"   ⚠️ DPIIT 8-Core Download Error: {e}")
 
-            # 3. PPAC Petroleum Consumption PDF (ICR)
+            # 3. DPIIT WPI Inflation PDF
+            print("\n📈 [3/5] Crawling DPIIT WPI Press Release PDF...")
+            try:
+                for a in await page.query_selector_all("a"):
+                    href = await a.get_attribute("href") or ""
+                    if "press_release_" in href.lower() and "ici" not in href.lower() and href.lower().endswith(".pdf"):
+                        full_url = urljoin("https://eaindustry.nic.in/", href)
+                        await download_binary_file(page, full_url, "DPIIT_WPI_Latest.pdf")
+                        break
+            except Exception as e:
+                print(f"   ⚠️ DPIIT WPI Download Error: {e}")
+
+            # 4. PPAC Petroleum Consumption PDF (ICR)
+            print("\n🛢️ [4/5] Crawling PPAC Petroleum Consumption PDF...")
+            try:
+                await page.goto("https://ppac.gov.in/consumption/reports", wait_until="domcontentloaded", timeout=45000)
+                await page.wait_for_timeout(3000)
+                pdf_url = None
+                for a in await page.query_selector_all("a"):
+                    href = await a.get_attribute("href") or ""
+                    title = (await a.get_attribute("title") or "").lower()
+                    text = (await a.inner_text()).strip().lower()
+                    if ("industry consumption report" in title or "industry consumption report" in text or "_icr_" in href.lower()) and "download.php" in href.lower():
+                        pdf_url = urljoin("https://ppac.gov.in/consumption/reports", href)
+                        break
+
+                if not pdf_url:
+                    await page.goto("https://ppac.gov.in/", wait_until="domcontentloaded", timeout=45000)
+                    await page.wait_for_timeout(2000)
+                    for a in await page.query_selector_all("a"):
+                        href = await a.get_attribute("href") or ""
+                        text = (await a.inner_text()).strip().lower()
+                        if "industry consumption report" in text and "download.php" in href:
+                            pdf_url = urljoin("https://ppac.gov.in/", href)
+                            break
+
+                if pdf_url:
+                    await download_binary_file(page, pdf_url, "PPAC_Petroleum_Consumption_Latest.pdf")
+            except Exception as e:
+                print(f"   ⚠️ PPAC ICR Download Error: {e}")
+
+            # 5. MoSPI IIP Industrial Production PDF
+            print("\n🏭 [5/5] Crawling MoSPI IIP PDF...")
+            try:
+                await page.goto("https://www.mospi.gov.in/", wait_until="domcontentloaded", timeout=45000)
+                await page.wait_for_timeout(2000)
+                for a in await page.query_selector_all("a"):
+                    href = await a.get_attribute("href") or ""
+                    text = (await a.inner_text()).strip().lower()
+                    if ("iip" in text or "index of industrial production" in text or "quick_estimate" in href.lower()) and href.lower().endswith(".pdf"):
+                        full_url = urljoin("https://www.mospi.gov.in/", href)
+                        await download_binary_file(page, full_url, "MoSPI_IIP_Latest.pdf")
+                        break
+            except Exception as e:
+                print(f"   ⚠️ MoSPI IIP Download Error: {e}")
             print("\n🛢️ [3/3] Crawling PPAC Petroleum Consumption PDF...")
             try:
                 await page.goto("https://ppac.gov.in/consumption/reports", wait_until="domcontentloaded", timeout=45000)
