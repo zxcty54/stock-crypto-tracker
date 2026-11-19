@@ -57,7 +57,7 @@ jobs:
       - name: 📦 Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          pip install curl_cffi requests beautifulsoup4
 
       - name: 🚀 Run Mainboard IPO Tracker
         env:

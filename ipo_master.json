@@ -1,16 +1,102 @@
 [
   {
-    "id": "carraro-india",
-    "company_name": "Carraro India Limited",
-    "symbol": "CARRARO",
+    "id": "hdb-financial-services",
+    "company_name": "HDB Financial Services Limited",
+    "symbol": "HDBFIN",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "sector": "Retail NBFC & Lending",
     "open_date": null,
     "close_date": null,
     "allotment_date": null,
     "listing_date": null,
     "price_band": "TBA",
     "cut_off_price": null,
+    "face_value": "10",
+    "lot_size": null,
+    "min_investment": null,
+    "issue_size_cr": "12,500",
+    "fresh_issue_cr": "2,500",
+    "ofs_cr": "10,000",
+    "gmp": "+₹85.00",
+    "gmp_percent": "+18.20%",
+    "est_listing_price": "TBA",
+    "kostak": "₹800",
+    "sub2sauda": "₹5,000",
+    "subscription": {
+      "qib": "Upcoming",
+      "nii": "Upcoming",
+      "retail": "Upcoming",
+      "total": "Upcoming"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "financials": {
+      "revenue": "14,171.00",
+      "pat": "2,461.00",
+      "net_worth": "13,425.00",
+      "debt": "72,500.00"
+    },
+    "kpis": {
+      "pe_ratio": "24.5",
+      "ronw": "18.33%",
+      "market_cap": "75,000",
+      "eps": "31.20",
+      "debt_to_equity": "5.40"
+    },
+    "drhp_objects": [
+      "Augment Tier-I capital base to meet future capital requirements arising out of ongoing lending growth (₹2,500 Cr)",
+      "Offer for Sale (OFS) of equity shares by promoter HDFC Bank Limited (₹10,000 Cr)",
+      "General corporate purposes"
+    ],
+    "promoter_holding": {
+      "promoters": "HDFC Bank Limited",
+      "pre_issue": "94.64%",
+      "post_issue": "74.80%"
+    },
+    "lead_managers": [
+      "JM Financial",
+      "BofA Securities India",
+      "Goldman Sachs (India)",
+      "HSBC Securities",
+      "IIFL Securities",
+      "Jefferies India",
+      "Morgan Stanley India",
+      "Nomura Financial Advisory"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "about": "One of India's largest retail-focused non-banking financial companies (NBFC) and a flagship subsidiary of HDFC Bank, operating 1,600+ branches across lending, business loans, and BPO services.",
+    "sources": [
+      "chittorgarh",
+      "ipocentral_gmp",
+      "sebi"
+    ],
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
+  },
+  {
+    "id": "carraro-india",
+    "company_name": "Carraro India Limited",
+    "symbol": "CARRARO",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "sector": "Auto Ancillary & Farm Equipment",
+    "open_date": null,
+    "close_date": null,
+    "allotment_date": null,
+    "listing_date": null,
+    "price_band": "TBA",
+    "cut_off_price": null,
+    "face_value": "10",
     "lot_size": null,
     "min_investment": null,
     "issue_size_cr": "1,812",
@@ -19,6 +105,14 @@
     "gmp": "",
     "gmp_percent": "",
     "est_listing_price": "",
+    "kostak": "",
+    "sub2sauda": "",
+    "subscription": {
+      "qib": "Upcoming",
+      "nii": "Upcoming",
+      "retail": "Upcoming",
+      "total": "Upcoming"
+    },
     "reservation": {
       "qib_pct": "50%",
       "nii_pct": "15%",
@@ -27,12 +121,25 @@
     "financials": {
       "revenue": "1,770.40",
       "pat": "60.62",
-      "net_worth": "428.15"
+      "net_worth": "428.15",
+      "debt": "312.40"
+    },
+    "kpis": {
+      "pe_ratio": "32.1",
+      "ronw": "14.15%",
+      "market_cap": "4,500",
+      "eps": "8.40",
+      "debt_to_equity": "0.73"
     },
     "drhp_objects": [
-      "Offer for Sale by Carraro International S.E.",
-      "Enhance brand visibility and provide liquidity to shareholders"
+      "Carry out the Offer for Sale (OFS) of equity shares by Carraro International S.E. (Italian Engineering Group)",
+      "Achieve the benefits of listing equity shares on NSE & BSE and enhance corporate brand equity"
     ],
+    "promoter_holding": {
+      "promoters": "Carraro International S.E.",
+      "pre_issue": "100%",
+      "post_issue": "74.00%"
+    },
     "lead_managers": [
       "Axis Capital",
       "BNP Paribas",
@@ -42,9 +149,90 @@
       "name": "Link Intime India Private Ltd",
       "url": "https://linkintime.co.in/initial_offer/public-issues.html"
     },
-    "about": "Leading manufacturer of transmission systems, axles, and drive systems for agricultural tractors and construction equipment in India.",
+    "about": "Tier-1 engineering manufacturer of transmission systems, heavy-duty axles, and driveline assemblies for agricultural tractors, backhoe loaders, and off-highway construction machinery.",
     "sources": [
       "chittorgarh",
+      "sebi"
+    ],
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
+  },
+  {
+    "id": "avanse-financial-services",
+    "company_name": "Avanse Financial Services Limited",
+    "symbol": "AVANSE",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "sector": "Education Financing & NBFC",
+    "open_date": null,
+    "close_date": null,
+    "allotment_date": null,
+    "listing_date": null,
+    "price_band": "TBA",
+    "cut_off_price": null,
+    "face_value": "5",
+    "lot_size": null,
+    "min_investment": null,
+    "issue_size_cr": "3,500",
+    "fresh_issue_cr": "1,000",
+    "ofs_cr": "2,500",
+    "gmp": "+₹25.00",
+    "gmp_percent": "+12.50%",
+    "est_listing_price": "TBA",
+    "kostak": "₹350",
+    "sub2sauda": "₹2,000",
+    "subscription": {
+      "qib": "Upcoming",
+      "nii": "Upcoming",
+      "retail": "Upcoming",
+      "total": "Upcoming"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "financials": {
+      "revenue": "1,726.96",
+      "pat": "342.40",
+      "net_worth": "2,845.00",
+      "debt": "10,210.00"
+    },
+    "kpis": {
+      "pe_ratio": "28.4",
+      "ronw": "14.50%",
+      "market_cap": "12,000",
+      "eps": "12.80",
+      "debt_to_equity": "3.58"
+    },
+    "drhp_objects": [
+      "Augment company's Tier-1 capital base to meet future capital requirements arising out of business and asset growth (₹1,000 Cr)",
+      "Offer for Sale (OFS) of shares by Olive Vine Investment Ltd (Warburg Pincus affiliate) and Kedaara Capital (₹2,500 Cr)",
+      "General corporate purposes"
+    ],
+    "promoter_holding": {
+      "promoters": "Olive Vine Investment Ltd, Kedaara Capital",
+      "pre_issue": "83.20%",
+      "post_issue": "64.50%"
+    },
+    "lead_managers": [
+      "Kotak Mahindra Capital",
+      "J.P. Morgan India",
+      "Nomura Financial Advisory",
+      "Nuvama Wealth Management",
+      "SBI Capital Markets"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "about": "India's leading education-focused non-banking financial company (NBFC) providing comprehensive funding solutions for students pursuing higher education in India and premier international universities.",
+    "sources": [
+      "chittorgarh",
+      "ipocentral_gmp",
       "sebi"
     ],
     "is_already_listed": false,
@@ -64,66 +252,17 @@
     "allotment_date": "2024-12-16",
     "listing_date": "2024-12-18",
     "price_band": "₹74 to ₹78",
-    "cut_off_price": 78,
-    "lot_size": 190,
-    "min_investment": 14820,
+    "listing_price": "₹110.00",
+    "listing_gain": "+41.02%",
     "issue_size_cr": "8,000",
-    "fresh_issue_cr": "0",
-    "ofs_cr": "8,000",
-    "gmp": "+₹18.00",
-    "gmp_percent": "+23.08%",
-    "est_listing_price": "₹96.00",
-    "kostak": "₹400",
-    "sub2sauda": "₹2,500",
-    "subscription": {
-      "qib": "Upcoming",
-      "nii": "Upcoming",
-      "retail": "Upcoming",
-      "total": "Upcoming"
-    },
-    "reservation": {
-      "qib_pct": "50%",
-      "nii_pct": "15%",
-      "retail_pct": "35%"
-    },
-    "financials": {
-      "revenue": "8,911.90",
-      "pat": "461.94",
-      "net_worth": "2,410.50"
-    },
-    "kpis": {
-      "pe_ratio": "38.5",
-      "ronw": "19.16%",
-      "market_cap": "35,000"
-    },
-    "drhp_objects": [
-      "Achieve the benefits of listing the equity shares on the stock exchanges",
-      "Carry out the Offer for Sale (OFS) of equity shares by Samayat Services LLP"
-    ],
-    "promoter_holding": {
-      "pre_issue": "96.46%",
-      "post_issue": "74.50%"
-    },
-    "lead_managers": [
-      "Kotak Mahindra Capital",
-      "ICICI Securities",
-      "Jefferies India",
-      "J.P. Morgan India",
-      "Morgan Stanley India"
-    ],
-    "registrar": {
-      "name": "KFin Technologies Limited",
-      "url": "https://kosmic.kfintech.com/ipostatus/"
-    },
-    "about": "One of India’s foremost hypermarket retail chains providing value-for-money fashion, FMCG, and general merchandise to middle-income families across 600+ stores.",
-    "sources": [
-      "chittorgarh",
-      "ipocentral_gmp"
-    ],
-    "is_already_listed": false,
-    "status": "UPCOMING",
+    "is_already_listed": true,
+    "status": "LISTED",
     "posted_events": [
-      "NEW_IPO_ANNOUNCED"
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
     ]
   },
   {
@@ -137,67 +276,17 @@
     "allotment_date": "2024-11-25",
     "listing_date": "2024-11-27",
     "price_band": "₹102 to ₹108",
-    "cut_off_price": 108,
-    "lot_size": 138,
-    "min_investment": 14904,
+    "listing_price": "₹111.50",
+    "listing_gain": "+3.24%",
     "issue_size_cr": "10,000",
-    "fresh_issue_cr": "10,000",
-    "ofs_cr": "0",
-    "gmp": "+₹8.00",
-    "gmp_percent": "+7.41%",
-    "est_listing_price": "₹116.00",
-    "kostak": "₹250",
-    "sub2sauda": "₹1,200",
-    "subscription": {
-      "qib": "3.28x",
-      "nii": "1.82x",
-      "retail": "1.44x",
-      "total": "2.42x",
-      "as_of": "Day 3 (Final)"
-    },
-    "reservation": {
-      "qib_pct": "75%",
-      "nii_pct": "15%",
-      "retail_pct": "10%"
-    },
-    "financials": {
-      "revenue": "2,037.66",
-      "pat": "344.72",
-      "net_worth": "7,185.00"
-    },
-    "kpis": {
-      "pe_ratio": "53.2",
-      "ronw": "5.21%",
-      "market_cap": "91,000"
-    },
-    "drhp_objects": [
-      "Investment in wholly-owned subsidiary, NTPC Renewable Energy Ltd (NREL) for repayment/prepayment of borrowings (₹7,500 Cr)",
-      "General corporate purposes"
-    ],
-    "promoter_holding": {
-      "pre_issue": "100%",
-      "post_issue": "89.01%"
-    },
-    "lead_managers": [
-      "IDBI Capital Markets",
-      "HDFC Bank Limited",
-      "IIFL Securities",
-      "Nuvama Wealth Management"
-    ],
-    "registrar": {
-      "name": "KFin Technologies Limited",
-      "url": "https://kosmic.kfintech.com/ipostatus/"
-    },
-    "about": "India’s largest renewable energy public sector enterprise (excluding hydro) in terms of operating capacity, focused on utility-scale solar and wind projects.",
-    "sources": [
-      "chittorgarh",
-      "ipocentral_gmp",
-      "nse"
-    ],
-    "is_already_listed": false,
-    "status": "OPEN",
+    "is_already_listed": true,
+    "status": "LISTED",
     "posted_events": [
-      "NEW_IPO_ANNOUNCED"
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
     ]
   },
   {
@@ -211,33 +300,81 @@
     "allotment_date": "2024-11-11",
     "listing_date": "2024-11-13",
     "price_band": "₹371 to ₹390",
-    "cut_off_price": 390,
-    "lot_size": 38,
-    "min_investment": 14820,
-    "issue_size_cr": "11,327",
-    "fresh_issue_cr": "4,499",
-    "ofs_cr": "6,828",
-    "gmp": "+₹12.00",
-    "gmp_percent": "+3.08%",
-    "est_listing_price": "₹402.00",
     "listing_price": "₹412.00",
     "listing_gain": "+5.64%",
-    "subscription": {
-      "qib": "6.02x",
-      "nii": "0.41x",
-      "retail": "1.14x",
-      "total": "3.59x",
-      "as_of": "Final"
-    },
-    "registrar": {
-      "name": "Link Intime India Private Ltd",
-      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
-    },
-    "about": "Pioneering Indian consumer technology company operating online food delivery, quick commerce (Instamart), and dining out services.",
-    "sources": [
-      "chittorgarh",
-      "nse"
-    ],
+    "issue_size_cr": "11,327",
+    "is_already_listed": true,
+    "status": "LISTED",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
+    ]
+  },
+  {
+    "id": "acme-solar-holdings",
+    "company_name": "ACME Solar Holdings Limited",
+    "symbol": "ACMESOLAR",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-11-06",
+    "close_date": "2024-11-08",
+    "allotment_date": "2024-11-11",
+    "listing_date": "2024-11-13",
+    "price_band": "₹275 to ₹289",
+    "listing_price": "₹251.00",
+    "listing_gain": "-13.15%",
+    "issue_size_cr": "2,900",
+    "is_already_listed": true,
+    "status": "LISTED",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
+    ]
+  },
+  {
+    "id": "afcons-infrastructure",
+    "company_name": "Afcons Infrastructure Limited",
+    "symbol": "AFCONS",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-10-25",
+    "close_date": "2024-10-29",
+    "allotment_date": "2024-10-30",
+    "listing_date": "2024-11-04",
+    "price_band": "₹440 to ₹463",
+    "listing_price": "₹430.00",
+    "listing_gain": "-7.13%",
+    "issue_size_cr": "5,430",
+    "is_already_listed": true,
+    "status": "LISTED",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED",
+      "IPO_OPENS_TODAY",
+      "IPO_CLOSING_TODAY",
+      "ALLOTMENT_OUT",
+      "LISTING_TODAY"
+    ]
+  },
+  {
+    "id": "hyundai-motor-india",
+    "company_name": "Hyundai Motor India Limited",
+    "symbol": "HYUNDAI",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2024-10-15",
+    "close_date": "2024-10-17",
+    "allotment_date": "2024-10-18",
+    "listing_date": "2024-10-22",
+    "price_band": "₹1865 to ₹1960",
+    "listing_price": "₹1934.00",
+    "listing_gain": "-1.33%",
+    "issue_size_cr": "27,870",
     "is_already_listed": true,
     "status": "LISTED",
     "posted_events": [

@@ -28,6 +28,13 @@ import xml.etree.ElementTree as ET
 import requests
 from bs4 import BeautifulSoup
 
+try:
+    from curl_cffi import requests as cffi_requests
+    HAS_CURL_CFFI = True
+except ImportError:
+    import requests as cffi_requests
+    HAS_CURL_CFFI = False
+
 logger = logging.getLogger("ipo_tracker.scrapers")
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -53,6 +60,18 @@ NSE_HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
     "Referer": "https://www.nseindia.com/market-data/all-upcoming-issues-ipo",
 }
+
+
+def fetch_html(url: str, headers: dict | None = None, timeout: int = 15) -> requests.Response | None:
+    """Make HTTP GET request with curl_cffi Chrome impersonation to bypass Cloudflare."""
+    h = headers or BROWSER_HEADERS
+    try:
+        if HAS_CURL_CFFI:
+            return cffi_requests.get(url, headers=h, timeout=timeout, impersonate="chrome124")
+        return requests.get(url, headers=h, timeout=timeout)
+    except Exception as e:
+        logger.debug(f"Fetch error for {url}: {e}")
+        return None
 
 REGISTRAR_LINKS = {
     "link intime": "https://linkintime.co.in/initial_offer/public-issues.html",
@@ -279,9 +298,16 @@ class IpoCentralGmpScraper:
     def fetch_live_gmp(self) -> list[dict]:
         results = []
         try:
-            resp = self.session.get(self.GMP_URL, headers=BROWSER_HEADERS, timeout=15)
-            if resp.status_code != 200:
-                logger.debug(f"IPOCentral GMP returned status {resp.status_code}")
+            resp = None
+            if hasattr(self, "session") and self.session:
+                try:
+                    resp = self.session.get(self.GMP_URL, headers=BROWSER_HEADERS, timeout=15)
+                except Exception:
+                    pass
+            if not resp or getattr(resp, "status_code", 0) != 200:
+                resp = fetch_html(self.GMP_URL, timeout=15)
+            if not resp or resp.status_code != 200:
+                logger.debug("IPOCentral GMP fetch failed or blocked")
                 return results
 
             soup = BeautifulSoup(resp.text, "html.parser")
@@ -370,8 +396,15 @@ class ChittorgarhGmpScraper:
     def fetch_mainboard_gmp(self) -> list[dict]:
         results = []
         try:
-            resp = self.session.get(self.REPORT_82_GMP_URL, headers=BROWSER_HEADERS, timeout=15)
-            if resp.status_code != 200:
+            resp = None
+            if hasattr(self, "session") and self.session:
+                try:
+                    resp = self.session.get(self.REPORT_82_GMP_URL, headers=BROWSER_HEADERS, timeout=15)
+                except Exception:
+                    pass
+            if not resp or getattr(resp, "status_code", 0) != 200:
+                resp = fetch_html(self.REPORT_82_GMP_URL, timeout=15)
+            if not resp or resp.status_code != 200:
                 return results
 
             soup = BeautifulSoup(resp.text, "html.parser")
@@ -462,9 +495,16 @@ class ChittorgarhScraper:
         today_str = today_str or datetime.now(IST).strftime("%Y-%m-%d")
         results = []
         try:
-            resp = self.session.get(self.REPORT_URL, headers=BROWSER_HEADERS, timeout=15)
-            if resp.status_code != 200:
-                logger.warning(f"Chittorgarh Report 82 returned status {resp.status_code}")
+            resp = None
+            if hasattr(self, "session") and self.session:
+                try:
+                    resp = self.session.get(self.REPORT_URL, headers=BROWSER_HEADERS, timeout=15)
+                except Exception:
+                    pass
+            if not resp or getattr(resp, "status_code", 0) != 200:
+                resp = fetch_html(self.REPORT_URL, timeout=15)
+            if not resp or resp.status_code != 200:
+                logger.warning("Chittorgarh Report 82 fetch failed")
                 return results
 
             soup = BeautifulSoup(resp.text, "html.parser")
@@ -593,8 +633,15 @@ class DrhpDetailParser:
             return details
 
         try:
-            resp = self.session.get(detail_url, headers=BROWSER_HEADERS, timeout=12)
-            if resp.status_code != 200:
+            resp = None
+            if hasattr(self, "session") and self.session:
+                try:
+                    resp = self.session.get(detail_url, headers=BROWSER_HEADERS, timeout=12)
+                except Exception:
+                    pass
+            if not resp or getattr(resp, "status_code", 0) != 200:
+                resp = fetch_html(detail_url, timeout=12)
+            if not resp or resp.status_code != 200:
                 return details
 
             soup = BeautifulSoup(resp.text, "html.parser")
