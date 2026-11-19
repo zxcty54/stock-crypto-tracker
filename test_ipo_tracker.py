@@ -5,6 +5,7 @@ UNIT TESTS FOR MAINBOARD IPO TRACKER (ENHANCED)
 Tests scrapers, parsers, SME filters, DRHP detail extractor, formatters, and lifecycle engine.
 """
 
+import json
 import unittest
 from unittest.mock import MagicMock
 from datetime import datetime
@@ -573,6 +574,86 @@ class TestLifecycleEngine(unittest.TestCase):
         self.assertIn("+₹28.00", msg)
         self.assertIn("Surge", msg)
         self.assertIn("NSE Demand", msg)
+
+    def test_telegraph_node_structure_and_cta(self):
+        from telegraph_publisher import TelegraphPublisher
+        publisher = TelegraphPublisher(token_file="/tmp/.test_telegraph_token")
+        sample_ipo = {
+            "company_name": "Mahanadi Coalfields Limited",
+            "symbol": "MAHACOAL",
+            "price_band": "₹129 - ₹136",
+            "open_date": "2026-11-19",
+            "close_date": "2026-11-23",
+            "allotment_date": "2026-11-24",
+            "listing_date": "2026-11-26",
+            "issue_size_cr": "4,200",
+            "gmp": "+₹3.00",
+            "gmp_percent": 2.21,
+            "est_listing_price": "₹139 (+2.21%)",
+            "about": "Coal India subsidiary.",
+            "financials": {"revenue": "28,450.00", "pat": "8,120.00"},
+            "kpis": {"pe_ratio": "10.4", "ronw": "40.90%"},
+            "registrar": {"name": "KFin Technologies Limited", "url": "https://kosmic.kfintech.com/ipostatus/"},
+        }
+        nodes = publisher.build_ipo_article_nodes(sample_ipo)
+        self.assertGreater(len(nodes), 10)
+
+        # Check for presence of H3 headings
+        h3_tags = [n.get("children", [""])[0] for n in nodes if n.get("tag") == "h3"]
+        self.assertTrue(any("Issue Details & Complete Timetable" in h for h in h3_tags))
+        self.assertTrue(any("Live Grey Market Premium" in h for h in h3_tags))
+        self.assertTrue(any("Financial Highlights" in h for h in h3_tags))
+
+        # Check for Telegram CTA link
+        raw_json = json.dumps(nodes)
+        self.assertIn("https://t.me/ipocentral", raw_json)
+        self.assertIn("Join @ipocentral on Telegram", raw_json)
+
+    def test_telegraph_publish_mock(self):
+        from telegraph_publisher import TelegraphPublisher
+        publisher = TelegraphPublisher(token_file="/tmp/.test_telegraph_token")
+        publisher.access_token = "mock_token_abc"
+
+        with unittest.mock.patch("requests.post") as mock_post:
+            mock_post.return_value.status_code = 200
+            mock_post.return_value.json.return_value = {
+                "ok": True,
+                "result": {"url": "https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19"},
+            }
+            url = publisher.publish_ipo_review({"company_name": "Mahanadi Coalfields Limited"})
+            self.assertEqual(url, "https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19")
+
+    def test_instant_view_links_in_telegram_alerts(self):
+        ipo_with_tg = {
+            "company_name": "Mahanadi Coalfields Limited",
+            "symbol": "MAHACOAL",
+            "price_band": "₹129 - ₹136",
+            "open_date": "2026-11-19",
+            "close_date": "2026-11-23",
+            "allotment_date": "2026-11-24",
+            "listing_date": "2026-11-26",
+            "issue_size_cr": "4,200",
+            "gmp": "+₹3.00",
+            "gmp_percent": "+2.21%",
+            "est_listing_price": "₹139 (+2.21%)",
+            "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19",
+            "registrar": {"name": "KFin Technologies", "url": "https://kosmic.kfintech.com/ipostatus/"},
+        }
+
+        # 1. Opening Today Alert
+        opens_msg = format_opens_today_alert(ipo_with_tg)
+        self.assertIn("https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19", opens_msg)
+        self.assertIn("Instant View", opens_msg)
+
+        # 2. New IPO Alert
+        new_msg = format_new_ipo_alert(ipo_with_tg)
+        self.assertIn("https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19", new_msg)
+        self.assertIn("Instant View", new_msg)
+
+        # 3. GMP Dashboard
+        dash_msg = format_gmp_dashboard([ipo_with_tg], as_of_date="19-Nov-2026")
+        self.assertIn("https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19", dash_msg)
+        self.assertIn("Instant View", dash_msg)
 
 
 if __name__ == "__main__":

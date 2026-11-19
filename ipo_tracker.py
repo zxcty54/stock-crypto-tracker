@@ -40,6 +40,7 @@ from ipo_formatter import (
     format_issue_size,
     CHANNEL_HANDLE,
 )
+from telegraph_publisher import TelegraphPublisher
 
 # ============================================================
 # LOGGING CONFIGURATION
@@ -454,7 +455,7 @@ def run_tracker(now: datetime | None = None) -> int:
             existing = master[ipo_id]
             for key in ("open_date", "close_date", "allotment_date", "listing_date", "demat_credit_date",
                         "price_band", "lot_size", "issue_size_cr", "gmp", "gmp_percent",
-                        "est_listing_price", "listing_price", "listing_gain", "symbol"):
+                        "est_listing_price", "listing_price", "listing_gain", "symbol", "telegraph_url"):
                 val = item.get(key)
                 if val:
                     # Protect issue_size_cr from raw share counts (> 1,000,000 without Cr)
@@ -474,6 +475,23 @@ def run_tracker(now: datetime | None = None) -> int:
             updated_ipos_count += 1
 
     logger.info(f"Master state updated: {new_ipos_count} new, {updated_ipos_count} refreshed.")
+
+    # 4b. Ensure Telegraph DRHP analysis is published for active mainboard IPOs
+    telegraph = TelegraphPublisher()
+    telegraph_published = 0
+    for ipo_id, item in master.items():
+        if not item.get("telegraph_url") and is_active_mainboard_issue(item, today_str):
+            try:
+                tg_url = telegraph.publish_ipo_review(item)
+                if tg_url:
+                    item["telegraph_url"] = tg_url
+                    telegraph_published += 1
+                    logger.info(f"📝 Published Telegraph DRHP review for {item.get('company_name')}: {tg_url}")
+            except Exception as e:
+                logger.warning(f"⚠️ Telegraph publish failed for {item.get('company_name')}: {e}")
+
+    if telegraph_published > 0:
+        logger.info(f"Published {telegraph_published} new Telegraph DRHP articles.")
 
     # Save merged state
     save_master(master)

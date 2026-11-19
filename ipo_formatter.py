@@ -416,12 +416,16 @@ def format_new_ipo_alert(ipo: dict) -> str:
     drhp_link = ipo.get("drhp_url")
     drhp_line = f'\n\n📄 <b>Official Prospectus:</b> <a href="{html.escape(drhp_link, quote=True)}">Download Official SEBI DRHP / RHP PDF</a>' if drhp_link else ""
 
+    telegraph_url = ipo.get("telegraph_url")
+    telegraph_banner = f"📖 <b>Full DRHP Review:</b> <a href=\"{html.escape(telegraph_url, quote=True)}\">Read on Telegraph (⚡ Instant View)</a>\n\n" if telegraph_url else ""
+
     return (
         f"📢 <b>NEW MAINBOARD IPO ALERT (DRHP DETAILS)</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🏢 <b>{comp_name}</b>{sym_tag}\n"
         f"🏷️ <i>Mainboard IPO · NSE &amp; BSE Listing</i>\n"
         f"🏭 <b>Sector:</b> {sector}\n\n"
+        f"{telegraph_banner}"
         f"📅 <b>ISSUE TIMETABLE</b>\n"
         f"• <b>Bidding Opens:</b> {open_d} (10:00 AM IST)\n"
         f"• <b>Bidding Closes:</b> {close_d} (5:00 PM IST)\n"
@@ -503,6 +507,9 @@ def format_opens_today_alert(ipo: dict) -> str:
 
     reg_html = get_registrar_link_html(ipo.get("registrar"))
 
+    telegraph_url = ipo.get("telegraph_url")
+    telegraph_line = f"• <b>Full Review:</b> <a href=\"{html.escape(telegraph_url, quote=True)}\">Telegraph (⚡ Instant View)</a>\n" if telegraph_url else ""
+
     return (
         f"🟢 <b>IPO OPENS TODAY: BIDDING IS LIVE</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -521,7 +528,8 @@ def format_opens_today_alert(ipo: dict) -> str:
         f"• <b>Basis of Allotment:</b> {allot_d}\n"
         f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
         f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n"
-        f"• <b>Registrar Portal:</b> {reg_html}\n\n"
+        f"• <b>Registrar Portal:</b> {reg_html}\n"
+        f"{telegraph_line}\n"
         f"💡 <i>Tip: Retail investors applying at Cut-off price have maximum allocation probability in oversubscribed issues.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Updates:</b> {CHANNEL_HANDLE}\n"
@@ -693,6 +701,9 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
     sub_summary = format_subscription_summary(sub)
     demand_line = f"• <b>NSE Demand:</b> {sub_summary}\n" if sub_summary else ""
 
+    telegraph_url = ipo.get("telegraph_url")
+    telegraph_line = f"• <b>Full Review:</b> <a href=\"{html.escape(telegraph_url, quote=True)}\">Telegraph (⚡ Instant View)</a>\n" if telegraph_url else ""
+
     return (
         f"⚡ <b>LIVE GMP MOVEMENT ALERT</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -709,7 +720,8 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
         f"• <b>Current GMP:</b> {gmp_str}\n"
         f"• <b>Expected Listing Price:</b> {est_list}\n"
         f"{kostak_str}"
-        f"{demand_line}\n"
+        f"{demand_line}"
+        f"{telegraph_line}\n"
         f"<i>*GMP is based on unofficial market trades &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}\n"
@@ -809,6 +821,9 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
         sub_summary = format_subscription_summary(sub)
         demand_line = f"\n• <b>NSE Demand:</b> {sub_summary}" if sub_summary else ""
 
+        tg_url = ipo.get("telegraph_url")
+        tg_line = f"\n• <b>Full Review:</b> <a href=\"{html.escape(tg_url, quote=True)}\">Telegraph (⚡ Instant View)</a>" if tg_url else ""
+
         lines.append(
             f"🔹 <b>{name}</b>\n"
             f"• <b>Issue Size:</b> {issue_size}\n"
@@ -818,7 +833,8 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
             f"• <b>Demat Credit:</b> {demat_d}\n"
             f"• <b>Registrar:</b> {reg_html}\n"
             f"• <b>Live GMP:</b> <b>{gmp_display}</b>{rate_info}"
-            f"{demand_line}\n"
+            f"{demand_line}"
+            f"{tg_line}\n"
         )
 
     content = "\n".join(lines) if lines else "<i>Currently, no Mainboard IPO is actively open for bidding on NSE/BSE. Tracking upcoming SEBI DRHP issue filings &amp; announcements...</i>"
