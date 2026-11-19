@@ -75,9 +75,15 @@ def sanitize_slug(name: str) -> str:
 
 
 def clean_company_name(raw: str) -> str:
-    """Standardize company name, removing clutter like '(Mainboard)', 'IPO', etc."""
+    """Standardize company name, removing clutter like '(Mainboard)', 'IPO', Cloudflare artifacts, badges, etc."""
     text = re.sub(r"\s+", " ", raw or "").strip()
-    text = re.sub(r"\bIPO\b", "", text, flags=re.IGNORECASE)
+    # Remove Cloudflare email protected artifacts
+    text = re.sub(r"\[email\s*protected\]", "", text, flags=re.IGNORECASE)
+    # Remove listing gain percentage badges e.g. (10.98%) or (-5.56%)
+    text = re.sub(r"\([+-]?\d+(?:\.\d+)?%\)", "", text)
+    # Remove trailing status tags like IPO U, IPO O, IPO C, or bare IPO (even without space e.g. ZetwerkIPO)
+    text = re.sub(r"(?i)\s*ipo\s*[uoc]?$", "", text)
+    text = re.sub(r"\bIPO\s*[UOC]?\b", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\(Mainboard\)", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\(BSE/NSE\)", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip(" -–:,")
@@ -235,7 +241,7 @@ class ChittorgarhScraper:
                     continue
 
                 a_tag = tds[idx_name].find("a")
-                raw_name = tds[idx_name].get_text(strip=True)
+                raw_name = a_tag.get_text(strip=True) if a_tag else tds[idx_name].get_text(strip=True)
                 if not raw_name:
                     continue
 
