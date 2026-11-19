@@ -525,6 +525,7 @@ def format_opens_today_alert(ipo: dict) -> str:
         f"💡 <i>Tip: Retail investors applying at Cut-off price have maximum allocation probability in oversubscribed issues.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Updates:</b> {CHANNEL_HANDLE}\n"
+        f"🏷️ <i>#IPO #MainboardIPO #IPOGMP #IPOOpening #IPOCentral</i>\n"
         f"{DISCLAIMER}"
     )
 
@@ -597,7 +598,8 @@ def format_closing_today_alert(ipo: dict) -> str:
         f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n"
         f"• <b>Registrar Portal:</b> {reg_html}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>Instant Allotment Alerts:</b> {CHANNEL_HANDLE}"
+        f"📊 <b>Instant Allotment Alerts:</b> {CHANNEL_HANDLE}\n"
+        f"🏷️ <i>#IPOClosing #MainboardIPO #IPOGMP #IPOAllotment #StockMarket</i>"
     )
 
 
@@ -650,7 +652,8 @@ def format_allotment_out_alert(ipo: dict) -> str:
         f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n\n"
         f"<i>Note: If shares are allotted, debit notification or SMS from bank/CDSL will follow. Unallotted funds will be unblocked automatically.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>Stay Tuned for Listing Day Updates:</b> {CHANNEL_HANDLE}"
+        f"📊 <b>Stay Tuned for Listing Day Updates:</b> {CHANNEL_HANDLE}\n"
+        f"🏷️ <i>#IPOAllotment #AllotmentOut #MainboardIPO #IPOCentral</i>"
     )
 
 
@@ -709,7 +712,8 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
         f"{demand_line}\n"
         f"<i>*GMP is based on unofficial market trades &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}"
+        f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}\n"
+        f"🏷️ <i>#GMPAlert #LiveGMP #MainboardIPO #GreyMarketPremium</i>"
     )
 
 
@@ -754,6 +758,7 @@ def format_listing_today_alert(ipo: dict) -> str:
         f"💡 <i>Post-listing strategy: Long-term allottees can review quarterly earnings; listing gain seekers can maintain trailing stop-loss.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Performance:</b> {CHANNEL_HANDLE}\n"
+        f"🏷️ <i>#IPOListing #StockMarket #ListingGains #MainboardIPO</i>\n"
         f"{DISCLAIMER}"
     )
 
@@ -825,7 +830,8 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
         f"{content}\n"
         f"<i>*GMP is unofficial market sentiment &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📢 <b>Join {CHANNEL_HANDLE} for Fastest Mainboard IPO Alerts</b>"
+        f"📢 <b>Join {CHANNEL_HANDLE} for Fastest Mainboard IPO Alerts</b>\n"
+        f"🏷️ <i>#MainboardIPO #IPOGMP #IPOAllotment #IPOCentral #StockMarketIndia</i>"
     )
 
 
