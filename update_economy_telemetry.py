@@ -33,69 +33,108 @@ IPA_EXCEL = os.path.join(PDF_DIR, "IPA_Traffic_Latest.xlsx")
 
 
 def try_download_latest_reports():
-    """Attempts to auto-download fresh monthly reports if online (e.g., in GitHub Actions)."""
+    """Attempts to auto-download fresh monthly statutory reports if online (e.g., in GitHub Actions)."""
     import urllib.request
     from urllib.parse import urljoin
+    import ssl
 
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    }
     os.makedirs(PDF_DIR, exist_ok=True)
 
-    # 1. Check DPIIT 8 Core
-    try:
-        req = urllib.request.Request("https://eaindustry.nic.in/", headers=headers)
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            html = resp.read().decode("utf-8", errors="ignore")
-            matches = re.findall(r'href=[\'"]([^\'"]*(?:Eight|Core)[^\'"]*\.pdf)[\'"]', html, re.I)
-            if matches:
-                full_url = urljoin("https://eaindustry.nic.in/", matches[0])
-                print(f"📥 Found online DPIIT Core PDF: {full_url}")
-                dl_req = urllib.request.Request(full_url, headers=headers)
-                with urllib.request.urlopen(dl_req, timeout=15) as dl_resp:
-                    content = dl_resp.read()
-                    if len(content) > 10000:
-                        with open(CORE_PDF, "wb") as f:
-                            f.write(content)
-                        print(f"   💾 Updated local DPIIT Core PDF ({len(content)//1024} KB)")
-    except Exception as e:
-        print(f"ℹ️ DPIIT online check: using local downloaded file ({e})")
+    # Disable SSL certificate verification for legacy Indian government portals
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
 
-    # 2. Check IPA Ports Traffic
+    # 1. Check DPIIT 8 Core Industries
     try:
-        req = urllib.request.Request("https://ipa.org.in/reports-statistics", headers=headers)
-        with urllib.request.urlopen(req, timeout=8) as resp:
+        urls_to_try = [
+            "https://eaindustry.nic.in/",
+            "https://eaindustry.nic.in/ici_download_data.asp"
+        ]
+        found_dpiit = False
+        for site_url in urls_to_try:
+            if found_dpiit:
+                break
+            try:
+                req = urllib.request.Request(site_url, headers=headers)
+                with urllib.request.urlopen(req, timeout=10, context=ctx) as resp:
+                    html = resp.read().decode("utf-8", errors="ignore")
+                    matches = re.findall(r'href=[\'"]([^\'"]*(?:Eight|Core|ici|press_note)[^\'"]*\.pdf)[\'"]', html, re.I)
+                    if matches:
+                        full_url = urljoin(site_url, matches[0])
+                        print(f"📥 Discovered online DPIIT Core PDF: {full_url}")
+                        dl_req = urllib.request.Request(full_url, headers=headers)
+                        with urllib.request.urlopen(dl_req, timeout=20, context=ctx) as dl_resp:
+                            content = dl_resp.read()
+                            # Ensure it's a valid PDF and not an HTML error page
+                            if content.startswith(b'%PDF-') and len(content) > 10000:
+                                with open(CORE_PDF, "wb") as f:
+                                    f.write(content)
+                                print(f"   💾 Updated local DPIIT Core PDF ({len(content)//1024} KB)")
+                                found_dpiit = True
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"ℹ️ DPIIT online check note: {e}")
+
+    # 2. Check IPA Major Ports Traffic
+    try:
+        ipa_url = "https://ipa.org.in/reports-statistics"
+        req = urllib.request.Request(ipa_url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10, context=ctx) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
             matches = re.findall(r'href=[\'"]([^\'"]*traffic[^\'"]*\.xlsx?)[\'"]', html, re.I)
             if matches:
-                full_url = urljoin("https://ipa.org.in/", matches[0])
-                print(f"📥 Found online IPA Ports Traffic: {full_url}")
+                full_url = urljoin(ipa_url, matches[0])
+                print(f"📥 Discovered online IPA Ports Traffic: {full_url}")
                 dl_req = urllib.request.Request(full_url, headers=headers)
-                with urllib.request.urlopen(dl_req, timeout=15) as dl_resp:
+                with urllib.request.urlopen(dl_req, timeout=20, context=ctx) as dl_resp:
                     content = dl_resp.read()
-                    if len(content) > 5000:
+                    # Check for valid zip/excel magic header
+                    if (content.startswith(b'PK') or content.startswith(b'\xd0\xcf\x11\xe0')) and len(content) > 5000:
                         with open(IPA_EXCEL, "wb") as f:
                             f.write(content)
                         print(f"   💾 Updated local IPA Traffic Excel ({len(content)//1024} KB)")
     except Exception as e:
-        print(f"ℹ️ IPA online check: using local downloaded file ({e})")
+        print(f"ℹ️ IPA online check note: {e}")
 
     # 3. Check PPAC Petroleum ICR
     try:
-        req = urllib.request.Request("https://ppac.gov.in/consumption/reports", headers=headers)
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            html = resp.read().decode("utf-8", errors="ignore")
-            matches = re.findall(r'href=[\'"]([^\'"]*consumption[^\'"]*\.pdf)[\'"]', html, re.I)
-            if matches:
-                full_url = urljoin("https://ppac.gov.in/", matches[0])
-                print(f"📥 Found online PPAC ICR: {full_url}")
-                dl_req = urllib.request.Request(full_url, headers=headers)
-                with urllib.request.urlopen(dl_req, timeout=15) as dl_resp:
-                    content = dl_resp.read()
-                    if len(content) > 50000:
-                        with open(PPAC_PDF, "wb") as f:
-                            f.write(content)
-                        print(f"   💾 Updated local PPAC ICR PDF ({len(content)//1024} KB)")
+        ppac_urls = [
+            "https://ppac.gov.in/consumption/reports",
+            "https://ppac.gov.in/"
+        ]
+        found_ppac = False
+        for site_url in ppac_urls:
+            if found_ppac:
+                break
+            try:
+                req = urllib.request.Request(site_url, headers=headers)
+                with urllib.request.urlopen(req, timeout=10, context=ctx) as resp:
+                    html = resp.read().decode("utf-8", errors="ignore")
+                    # Match both direct .pdf and download.php?id=... links
+                    matches = re.findall(r'href=[\'"]([^\'"]*(?:consumption|report|download\.php)[^\'"]*)[\'"]', html, re.I)
+                    for m in matches:
+                        if "consumption" in m.lower() or "download.php" in m.lower():
+                            full_url = urljoin(site_url, m)
+                            print(f"📥 Discovered candidate PPAC report: {full_url}")
+                            dl_req = urllib.request.Request(full_url, headers=headers)
+                            with urllib.request.urlopen(dl_req, timeout=25, context=ctx) as dl_resp:
+                                content = dl_resp.read()
+                                if content.startswith(b'%PDF-') and len(content) > 50000:
+                                    with open(PPAC_PDF, "wb") as f:
+                                        f.write(content)
+                                    print(f"   💾 Updated local PPAC ICR PDF ({len(content)//1024} KB)")
+                                    found_ppac = True
+                                    break
+            except Exception:
+                continue
     except Exception as e:
-        print(f"ℹ️ PPAC online check: using local downloaded file ({e})")
+        print(f"ℹ️ PPAC online check note: {e}")
 
 
 def get_growth_status(growth_pct):
