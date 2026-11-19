@@ -1,12 +1,22 @@
 name: 📢 Mainboard IPO Tracker & Telegram Broadcaster
 
 on:
-  # 1. Scheduled Runs (IST: 08:30, 11:30, 14:30, 16:30, 19:30, 21:00)
+  # 1. Trigger on push to branch for immediate verification
+  push:
+    branches:
+      - 'main'
+      - 'arena/**'
+    paths:
+      - 'ipo_*.py'
+      - 'ipo_*.json'
+      - '.github/workflows/ipo_tracker.yml'
+
+  # 2. Scheduled Runs (IST: 08:30, 11:30, 14:30, 16:30, 19:30, 21:00)
   # Times in UTC (IST - 5h 30m)
   schedule:
     - cron: '0 3,6,9,11,14,15 * * *'
 
-  # 2. Manual Trigger from GitHub UI
+  # 3. Manual Trigger from GitHub UI
   workflow_dispatch:
     inputs:
       task:
@@ -52,20 +62,19 @@ jobs:
       - name: 🚀 Run Mainboard IPO Tracker
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHAT_ID || '@ipocentral' }}
-          IPO_TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || secrets.TELEGRAM_CHAT_ID || '@ipocentral' }}
+          IPO_TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || '@ipocentral' }}
         run: |
           TASK="${{ github.event.inputs.task || 'auto' }}"
           echo "Executing task: $TASK"
 
           if [ "$TASK" = "summary" ]; then
-            python ipo_tracker.py --summary
+            python ipo_tracker.py --summary --ignore-quiet-hours
           elif [ "$TASK" = "dry_run" ]; then
             python ipo_tracker.py --dry-run
           elif [ "$TASK" = "status" ]; then
             python ipo_tracker.py --status
           else
-            python ipo_tracker.py
+            python ipo_tracker.py --ignore-quiet-hours
           fi
 
       - name: 💾 Commit and Sync IPO Master & Delivery Log

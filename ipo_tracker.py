@@ -419,8 +419,22 @@ def run_tracker(now: datetime | None = None) -> int:
     logger.info(f"🎯 Total pending lifecycle alerts to dispatch: {len(pending_dispatches)}")
 
     if not pending_dispatches:
-        logger.info("✅ No pending IPO events to broadcast. Channel is completely up to date!")
-        return 0
+        logger.info("ℹ️ No pending lifecycle events. Broadcasting live Mainboard IPO GMP Dashboard to channel...")
+        active_ipos = [
+            ipo for ipo in master.values()
+            if not ipo.get("listing_date") or ipo.get("listing_date") >= today_str
+        ]
+        if not active_ipos:
+            active_ipos = list(master.values())[:6]
+
+        dashboard_text = format_gmp_dashboard(active_ipos, as_of_date=now.strftime("%d-%b-%Y"))
+        success, msg = send_telegram_message(dashboard_text)
+        if success:
+            logger.info(f"✅ Mainboard IPO GMP Dashboard broadcasted to {CHAT_ID}!")
+            return 0
+        else:
+            logger.error(f"❌ Failed to broadcast dashboard: {msg}")
+            return 1
 
     # 6. Dispatch Alerts
     dispatched_count = 0
