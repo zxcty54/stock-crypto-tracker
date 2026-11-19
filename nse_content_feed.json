@@ -1,7 +1,121 @@
 {
-  "generated_at": "2026-11-17 06:37:13 IST",
-  "worthy_count": 0,
-  "skipped_count": 0,
-  "content_feed": [],
-  "skipped_archive": []
+  "generated_at": "2026-11-19 14:49:20 IST",
+  "worthy_count": 4,
+  "skipped_count": 4,
+  "content_feed": [
+    {
+      "hash": "239550f4f2ff",
+      "symbol": "VIVIANA",
+      "company_name": "Viviana Power Tech Limited",
+      "category": "ORDER",
+      "event_type": "ORDER_WIN",
+      "broadcast_date": "19-Nov-2026 10:58:29",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/VIVIANA_19112026105817_VIVIANA__Intimation_of_Receiving_Order_DHBVN_19112026.pdf",
+      "headline": "Viviana Power Tech bags turnkey contract worth Rs 124 crore from DHBVNL",
+      "content_worthy": true,
+      "worthiness_reason": "Material turnkey order win worth Rs 124 crore.",
+      "telegram_post": "📜 <b>#ORDER_WIN</b> | <b>Viviana Power Tech Limited (NSE: VIVIANA)</b>\n\n<b>Viviana Power Tech bags turnkey contract worth Rs 124 crore from DHBVNL</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Client:</b> Dakshin Haryana Bijli Vitran Nigam Limited (DHBVNL)\n- <b>Order Value:</b> Rs 1,24,00,00,000 (inclusive of taxes)\n- <b>Scope:</b> Development of distribution infrastructure of 11 KV feeders of Badshahpur subdivision of Gurugram Circle-2 under RDSS scheme\n- <b>Execution Period:</b> 15 Months from the Dates of LOA\n- <b>Geography:</b> Domestic\n\n📌 <b>What happened:</b>\n↳ Viviana Power Tech Limited has been awarded a domestic turnkey contract from Dakshin Haryana Bijli Vitran Nigam Limited for power distribution infrastructure development.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/VIVIANA_19112026105817_VIVIANA__Intimation_of_Receiving_Order_DHBVN_19112026.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-19 14:49:20 IST"
+    },
+    {
+      "hash": "2a024c288d3a",
+      "symbol": "BETA",
+      "company_name": "Beta Drugs Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "19-Nov-2026 11:27:16",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/BETA_19112026112645_press_release_final.pdf",
+      "headline": "Beta Drugs Forms Oncology Joint Venture in Algeria with IMGSA Groupe SPA",
+      "content_worthy": true,
+      "worthiness_reason": "Formation of an international joint venture with significant capital investment and asset acquisition.",
+      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Beta Drugs Limited (NSE: BETA)</b>\n\n<b>Beta Drugs Forms Oncology Joint Venture in Algeria with IMGSA Groupe SPA</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Partner:</b> IMGSA Groupe SPA (Algeria)\n- <b>Beta Stake:</b> 49% (Remaining 51% held by IMGSA)\n- <b>Plant Acquisition Cost:</b> US$ 8.7 million\n- <b>Beta Capital Infusion:</b> US$ 3 million over 3 years\n\n📌 <b>What happened:</b>\n↳ Beta Drugs has entered into a joint venture in Algeria with IMGSA Groupe SPA to acquire an oncology formulation plant and expand its manufacturing and distribution footprint in North African markets.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/BETA_19112026112645_press_release_final.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-19 14:48:59 IST"
+    },
+    {
+      "hash": "0bcc1f5ed4fd",
+      "symbol": "SANDUMA",
+      "company_name": "Sandur Manganese & Iron Ores Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "CAPEX",
+      "broadcast_date": "19-Nov-2026 11:51:59",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/SANDUR_19112026114303_Ltr2SEsPressRelease.pdf",
+      "headline": "Sandur Manganese Plans Rs 280 Crore Beneficiation Capex for Deogiri Plant",
+      "content_worthy": true,
+      "worthiness_reason": "Sandur Manganese announced a significant Rs 280 crore capex for a beneficiation plant with capacity and timeline details.",
+      "telegram_post": "🏭 <b>#CAPEX</b> | <b>Sandur Manganese & Iron Ores Limited (NSE: SANDUMA)</b>\n\n<b>Sandur Manganese Plans Rs 280 Crore Beneficiation Capex for Deogiri Plant</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Investment:</b> Approximately Rs 280 crore\n- <b>Location:</b> Deogiri Village, Sandur Taluk, Ballari District, Karnataka\n- <b>Target Capacity:</b> Up to 1.7 MTPA of upgraded ore output\n- <b>Commissioning Timeline:</b> August 2027 (First 3.5 MTPA unit)\n- <b>Funding:</b> Combination of debt and internal accruals\n\n📌 <b>What happened:</b>\n↳ The company announced plans to invest Rs 280 crore in its first in-mine iron ore beneficiation plant at Deogiri, designed to upgrade lower-grade iron ore from ~50% Fe to over 60% Fe content.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/SANDUR_19112026114303_Ltr2SEsPressRelease.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-19 14:48:37 IST"
+    },
+    {
+      "hash": "18d098d2e976",
+      "symbol": "ALKEM",
+      "company_name": "Alkem Laboratories Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "USFDA_OBSERVATION",
+      "broadcast_date": "19-Nov-2026 13:32:21",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/ALKEM_19112026132550_Intimation-Warning_letter_USFDA_inspection_Daman.pdf",
+      "headline": "Alkem Laboratories Receives USFDA Warning Letter for Daman Facility",
+      "content_worthy": true,
+      "worthiness_reason": "Receipt of USFDA warning letter for a manufacturing facility is a material regulatory update.",
+      "telegram_post": "⚠️ <b>#USFDA_OBSERVATION</b> | <b>Alkem Laboratories Limited (NSE: ALKEM)</b>\n\n<b>Alkem Laboratories Receives USFDA Warning Letter for Daman Facility</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Facility Location:</b> Amaliya, Daman\n- <b>Authority:</b> U.S. Food and Drug Administration (USFDA)\n- <b>Date of Receipt:</b> November 18, 2026\n- <b>Inspection Period:</b> April 20, 2026 to May 1, 2026\n- <b>Previous Classification:</b> Official Action Indicated (OAI)\n\n📌 <b>What happened:</b>\n↳ The USFDA has issued a warning letter following an inspection of the company's manufacturing facility in Amaliya, Daman. The company stated that it will respond within the stipulated timeline and that operations and supplies to the U.S. market continue from the said facility with no material financial impact currently quantified.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/ALKEM_19112026132550_Intimation-Warning_letter_USFDA_inspection_Daman.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-19 14:48:16 IST"
+    }
+  ],
+  "skipped_archive": [
+    {
+      "hash": "2c5dcebc27bc",
+      "symbol": "SKFINDIA",
+      "company_name": "SKF India Limited",
+      "category": "CAPACITY_EXPANSION",
+      "event_type": "RESULT",
+      "broadcast_date": "19-Nov-2026 10:55:09",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/SKFINDIA25_19112026105437_NSE.pdf",
+      "headline": "Updates",
+      "content_worthy": false,
+      "worthiness_reason": "The financial results filing lacks explicit numeric values for Revenue and PAT in the summary text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-19 14:49:20 IST"
+    },
+    {
+      "hash": "f06923302385",
+      "symbol": "BETA",
+      "company_name": "Beta Drugs Limited",
+      "category": "JV",
+      "event_type": "OTHER",
+      "broadcast_date": "19-Nov-2026 11:24:12",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/BETA_19112026112403_press_release_final.pdf",
+      "headline": "Press Release",
+      "content_worthy": false,
+      "worthiness_reason": "Duplicate filing of the exact same corporate announcement and press release.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-19 14:48:59 IST"
+    },
+    {
+      "hash": "46d1b96e50f4",
+      "symbol": "BALAJITELE",
+      "company_name": "Balaji Telefilms Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "19-Nov-2026 12:33:18",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/BALAJITELE_19112026123008_BTLUFRSEPT302026.pdf",
+      "headline": "Updates",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results disclosure is cut off and incomplete in the provided source text.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-19 14:48:37 IST"
+    },
+    {
+      "hash": "603733d143bb",
+      "symbol": "GENSOL",
+      "company_name": "Gensol Engineering Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "19-Nov-2026 13:08:00",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/GENSOLRP_19112026130749_NSE_Reply_for_12112026_Regulation_33.pdf",
+      "headline": "Reasons for Delayed/Non-submission of Financial Results",
+      "content_worthy": false,
+      "worthiness_reason": "Routine regulatory explanation regarding delayed financial results due to an ongoing Corporate Insolvency Resolution Process (CIRP).",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-19 14:48:16 IST"
+    }
+  ]
 }
