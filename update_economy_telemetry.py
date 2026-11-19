@@ -576,82 +576,116 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
     port_growth = ipa.get("cargo_yoy_growth_pct", 10.17)
     atf_growth = ppac["fuels"].get("Aviation Turbine Fuel (ATF)", {}).get("yoy_growth_pct", 0.9)
 
+    fert_growth = core["components"].get("Fertilizers", {}).get("yoy_pct", -11.7)
+    crude_growth = core["components"].get("Crude Oil", {}).get("yoy_pct", -1.4)
+
     return [
         {
-            "sector": "Commercial Vehicles & Road Freight",
+            "sector": "Commercial Vehicles & Freight Logistics",
             "demand_signal": "EXPANDING" if hsd_growth > 4.0 else "STEADY",
             "momentum_badge": "🚀 RAPID EXPANSION" if hsd_growth > 5.0 else "📈 EXPANDING",
-            "primary_indicators": f"PPAC Diesel (HSD): +{hsd_growth}% YoY • FASTag Toll Collection: +{toll_growth}% YoY",
+            "earnings_outlook": "🚀 EARNINGS BEAT EXPECTED",
+            "earnings_prediction_thesis": "Diesel consumption (+5.6%) aur FASTag toll collection (+8.5%) high fleet utilization confirm karte hain. Truck operators ki profitability high hone se MHCV replacement cycle accelerate hoga, jisse Tata Motors aur Ashok Leyland ke Q3/Q4 results mein strong operating leverage aur EBITDA margin jump aayega.",
+            "key_metric_to_watch": "MHCV Volume Dispatches & Realization per Truck",
+            "primary_indicators": f"PPAC Diesel (HSD): +{hsd_growth}% YoY • FASTag Toll: +{toll_growth}% YoY",
             "economic_rationale": "High-Speed Diesel consumption aur Highway FASTag toll collections mein robust growth national freight volume expansion ko reflect karta hai.",
             "beneficiary_equities": [
-                {"symbol": "TATAMOTORS", "name": "Tata Motors Ltd", "thesis": "Commercial vehicle MHCV freight replacement cycle"},
-                {"symbol": "ASHOKLEY", "name": "Ashok Leyland Ltd", "thesis": "Direct play on domestic truck tonnage expansion"},
-                {"symbol": "VBL", "name": "Varun Beverages Ltd", "thesis": "Cold-chain logistics and heavy transport fleet utilization"},
-                {"symbol": "MAHLOG", "name": "Mahindra Logistics Ltd", "thesis": "Third-party express cargo supply chain beneficiary"}
+                {"symbol": "TATAMOTORS", "name": "Tata Motors Ltd", "thesis": "MHCV freight cycle volume growth and margin expansion"},
+                {"symbol": "ASHOKLEY", "name": "Ashok Leyland Ltd", "thesis": "Direct domestic truck tonnage and bus fleet replacement play"},
+                {"symbol": "VBL", "name": "Varun Beverages Ltd", "thesis": "Cold-chain logistics distribution network utilization"},
+                {"symbol": "MAHLOG", "name": "Mahindra Logistics Ltd", "thesis": "3PL warehouse and multi-modal freight volume growth"}
             ]
         },
         {
-            "sector": "Port Logistics & Global Trade",
+            "sector": "Power Generation & Capital Goods",
+            "demand_signal": "PEAK_DEMAND" if power_growth > 10.0 else "EXPANDING",
+            "momentum_badge": "🔥 PEAK DEMAND",
+            "earnings_outlook": "🔥 SUPER-CYCLE EARNINGS",
+            "earnings_prediction_thesis": "Base-load power demand (+11.4%) double-digits par hai aur coal dispatch (+10.7%) surging hai. High Plant Load Factor (PLF) se NTPC ke regulated incentives maximize honge. Deficit tackle karne ke liye thermal capex ordering pipeline BHEL, ABB aur Polycab ke order book execution ko 18-24% revenue growth degi.",
+            "key_metric_to_watch": "Plant Load Factor (PLF) & T&D Inflow Order Books",
+            "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{core['components'].get('Coal', {}).get('yoy_pct', 0.0)}% YoY",
+            "economic_rationale": "Industrial power consumption aur commercial base-load growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
+            "beneficiary_equities": [
+                {"symbol": "NTPC", "name": "NTPC Ltd", "thesis": "Thermal baseload capacity utilization and green power capacity additions"},
+                {"symbol": "BHEL", "name": "Bharat Heavy Electricals Ltd", "thesis": "Supercritical thermal power equipment order pipeline monetization"},
+                {"symbol": "ABB", "name": "ABB India Ltd", "thesis": "Factory automation, data center and electrification equipment demand"},
+                {"symbol": "POLYCAB", "name": "Polycab India Ltd", "thesis": "Industrial HT/LT cable orders driven by power transmission capex"}
+            ]
+        },
+        {
+            "sector": "Infrastructure & Cement Construction",
+            "demand_signal": "STRONG_DEMAND" if cement_growth > 7.0 else "STEADY",
+            "momentum_badge": "📈 STRONG DEMAND",
+            "earnings_outlook": "🚀 MARGIN EXPANSION (OPERATING LEVERAGE)",
+            "earnings_prediction_thesis": "Cement output (+9.8%) aur Bitumen (+17.2%) highway road capex ka aggressive pickup show kar rahe hain. Fixed overheads +9.8% volume par divide hone se aur petcoke/power costs moderate rehne se UltraTech aur Ambuja ke results mein EBITDA/Tonne mein sharp rebound aane ki 90%+ probability hai.",
+            "key_metric_to_watch": "Blended EBITDA/Tonne & Clinker Capacity Utilization",
+            "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex: +{ppac['fuels'].get('Bitumen', {}).get('yoy_growth_pct', 17.2)}% YoY",
+            "economic_rationale": "Post-monsoon highway construction, central capex execution, aur residential housing absorption se cement volume dispatch multi-month highs par hai.",
+            "beneficiary_equities": [
+                {"symbol": "ULTRACEMCO", "name": "UltraTech Cement Ltd", "thesis": "Scale leader with captive green power and volume dispatch growth"},
+                {"symbol": "AMBUJACEM", "name": "Ambuja Cements Ltd", "thesis": "Capacity additions and Adani logistics synergy"},
+                {"symbol": "LT", "name": "Larsen & Toubro Ltd", "thesis": "Mega infrastructure order book execution in domestic market"},
+                {"symbol": "GRINFRA", "name": "G R Infraprojects Ltd", "thesis": "Highway EPC contractor benefiting from bitumen and road capex"}
+            ]
+        },
+        {
+            "sector": "Port Logistics & Maritime Trade",
             "demand_signal": "EXPANDING" if port_growth > 7.0 else "STEADY",
-            "momentum_badge": "🚢 SURGING EXPORTS" if port_growth > 10.0 else "📈 EXPANDING",
-            "primary_indicators": f"IPA Major Ports: {ipa['total_cargo_current_mmt']} MMT (+{port_growth}% YoY)",
+            "momentum_badge": "🚢 SURGING EXPORTS",
+            "earnings_outlook": "📈 SOLID EARNINGS BEAT",
+            "earnings_prediction_thesis": "Major Ports cargo (+10.17% YoY, 566.4 MMT) aur Container throughput (+8.51%) global headwinds ke bawajood double digits par hain. Port infrastructure mein operational leverage bohot high hota hai; incremental volumes se Adani Ports aur CONCOR ke quarterly results me EBITDA margin 65%+ deliver hone ki ummeed hai.",
+            "key_metric_to_watch": "Port TEU Container Volumes & Realization per Tonne",
+            "primary_indicators": f"IPA Major Ports: {ipa['total_cargo_current_mmt']} MMT (+{port_growth}% YoY) • Containers: +{ipa['major_commodities'].get('Container Cargo', {}).get('growth_pct', 8.51)}%",
             "economic_rationale": "Major ports cargo traffic double-digit growth par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
             "beneficiary_equities": [
-                {"symbol": "ADANIPORTS", "name": "Adani Ports and SEZ Ltd", "thesis": "Handles >27% of India's maritime cargo with volume growth"},
+                {"symbol": "ADANIPORTS", "name": "Adani Ports and SEZ Ltd", "thesis": "Handles >27% of India's maritime cargo with operating leverage"},
                 {"symbol": "CONCOR", "name": "Container Corporation of India", "thesis": "Inland container depot rail freight throughput expansion"},
                 {"symbol": "JPA", "name": "JSW Infrastructure Ltd", "thesis": "Non-major port dry bulk cargo expansion"},
                 {"symbol": "ALLCARGO", "name": "Allcargo Logistics Ltd", "thesis": "LCL ocean consolidation and multimodal logistics"}
             ]
         },
         {
-            "sector": "Infrastructure & Cement Construction",
-            "demand_signal": "STRONG_DEMAND" if cement_growth > 7.0 else "STEADY",
-            "momentum_badge": "📈 STRONG DEMAND" if cement_growth > 8.0 else "🏗️ EXPANDING",
-            "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex",
-            "economic_rationale": "Post-monsoon highway construction, central capex execution, aur residential housing absorption se cement volume dispatch multi-month highs par hai.",
-            "beneficiary_equities": [
-                {"symbol": "ULTRACEMCO", "name": "UltraTech Cement Ltd", "thesis": "Scale leader with captive power efficiency and volume growth"},
-                {"symbol": "AMBUJACEM", "name": "Ambuja Cements Ltd", "thesis": "Capacity additions and logistics synergy"},
-                {"symbol": "LT", "name": "Larsen & Toubro Ltd", "thesis": "Mega infrastructure order book execution in domestic market"},
-                {"symbol": "GRINFRA", "name": "G R Infraprojects Ltd", "thesis": "Highway EPC contractor benefiting from road capex"}
-            ]
-        },
-        {
-            "sector": "Power Generation & Capital Goods",
-            "demand_signal": "PEAK_DEMAND" if power_growth > 10.0 else "EXPANDING",
-            "momentum_badge": "🔥 PEAK DEMAND" if power_growth > 10.0 else "⚡ STEADY",
-            "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{core['components'].get('Coal', {}).get('yoy_pct', 0.0)}% YoY",
-            "economic_rationale": "Industrial power consumption aur commercial base-load growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
-            "beneficiary_equities": [
-                {"symbol": "NTPC", "name": "NTPC Ltd", "thesis": "Thermal baseload capacity utilization and green power additions"},
-                {"symbol": "BHEL", "name": "Bharat Heavy Electricals Ltd", "thesis": "Supercritical thermal power equipment order pipeline"},
-                {"symbol": "ABB", "name": "ABB India Ltd", "thesis": "Factory automation and electrification equipment demand"},
-                {"symbol": "POLYCAB", "name": "Polycab India Ltd", "thesis": "Industrial HT/LT cable orders driven by power capex"}
-            ]
-        },
-        {
             "sector": "Steel & Metals Fabrication",
             "demand_signal": "STEADY_GROWTH" if steel_growth > 0.0 else "CONTRACTION",
-            "momentum_badge": "⚙️ STEADY CAPEX" if steel_growth > 3.0 else "⚠️ CONSOLIDATING",
-            "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{core['components'].get('Iron Ore', {}).get('yoy_pct', 0.0)}% YoY",
+            "momentum_badge": "⚙️ STEADY CAPEX",
+            "earnings_outlook": "⚡ STEADY / IN-LINE (VOLUME OFFSETTING DUMPING)",
+            "earnings_prediction_thesis": "Domestic steel output (+4.9%) aur Iron Ore mining (+18.4%) record volumes par hain. Domestic demand strong hai lekin China se cheap export dumping ke chalte steel prices capped hain. Isliye companies volume growth se top-line defend karengi lekin margins range-bound rahenge.",
+            "key_metric_to_watch": "Blended Steel Realization per Tonne & Coking Coal Cost",
+            "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{core['components'].get('Iron Ore', {}).get('yoy_pct', 18.4)}% YoY",
             "economic_rationale": "Domestic infrastructure capex, automotive demand, aur pre-engineered buildings domestic steel production ko support kar rahe hain.",
             "beneficiary_equities": [
-                {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "thesis": "Domestic flat products pricing power and Kalinganagar expansion"},
+                {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "thesis": "Domestic flat products volume expansion and Kalinganagar efficiency"},
                 {"symbol": "JSWSTEEL", "name": "JSW Steel Ltd", "thesis": "Volume leadership and domestic market share gains"},
-                {"symbol": "JINDALSTEL", "name": "Jindal Steel & Power Ltd", "thesis": "Angul pellet plant and structural steel order book"},
+                {"symbol": "JINDALSTEL", "name": "Jindal Steel & Power Ltd", "thesis": "Angul pellet plant and structural steel order book execution"},
                 {"symbol": "SAIL", "name": "Steel Authority of India Ltd", "thesis": "Long product railways and infrastructure execution"}
             ]
         },
         {
-            "sector": "Aviation & Airport Ecosystem",
-            "demand_signal": "EXPANDING",
-            "momentum_badge": "✈️ AVIATION DEMAND",
-            "primary_indicators": f"PPAC ATF Consumption: +{atf_growth}% YoY • Domestic Passenger Traffic",
-            "economic_rationale": "Corporate business travel aur leisure passenger traffic capacity load factors ko high maintain kar rahe hain.",
+            "sector": "Fertilizers & Agro-Chemicals (AVOID)",
+            "demand_signal": "CONTRACTION",
+            "momentum_badge": "⚠️ CONTRACTION (AVOID)",
+            "earnings_outlook": "⚠️ EARNINGS MISS / MARGIN SQUEEZE",
+            "earnings_prediction_thesis": "Fertilizer production -11.7% YoY sharp contraction mein hai. Post-Kharif seasonal destocking aur global raw material price volatility ke karan fertilizer makers ke quarterly results mein top-line de-growth aur margin compression aane ke high risk hain. Is sector ko quarterly results se pehle avoid karein.",
+            "key_metric_to_watch": "Subsidy Receivable Cycle & Plant Operating Rates",
+            "primary_indicators": f"8-Core Fertilizers: {fert_growth}% YoY (Index: 121.7)",
+            "economic_rationale": "Post-Kharif seasonal inventory destocking aur international raw material import parity ke chalte fertilizer plant operating rates mein contraction aya hai.",
             "beneficiary_equities": [
-                {"symbol": "INDIGO", "name": "InterGlobe Aviation Ltd", "thesis": "Domestic fleet dominance and expanding international routes"},
-                {"symbol": "SPICEJET", "name": "SpiceJet Ltd", "thesis": "Fleet ungrounding and regional route connectivity"},
-                {"symbol": "GMRINFRA", "name": "GMR Airports Infrastructure Ltd", "thesis": "Passenger footfall and non-aero tariff revenue expansion"}
+                {"symbol": "COROMANDEL", "name": "Coromandel International Ltd", "thesis": "Defensive NPK complex fertilizer mix managing margin pressure"},
+                {"symbol": "CHAMBLFERT", "name": "Chambal Fertilisers Ltd", "thesis": "Energy-efficient urea producer managing subsidy cycles"}
+            ]
+        },
+        {
+            "sector": "Upstream Crude Oil & Gas",
+            "demand_signal": "CONTRACTION",
+            "momentum_badge": "⚠️ MUTED OUTLOOK",
+            "earnings_outlook": "⚠️ FLAT TO WEAK EARNINGS",
+            "earnings_prediction_thesis": "Domestic crude production (-1.4%) aur natural gas (-4.6%) dono negative growth mein hain. Mature offshore fields se natural decline aur dynamic windfall taxes ke chalte ONGC aur Oil India ke domestic upstream results volume-driven growth offer nahi kar rahe.",
+            "key_metric_to_watch": "Net Realized Price ($/bbl) post-windfall tax & Daily Production Run-rate",
+            "primary_indicators": f"8-Core Crude: {crude_growth}% YoY • Natural Gas: {core['components'].get('Natural Gas', {}).get('yoy_pct', -4.6)}% YoY",
+            "economic_rationale": "Mature field output declines aur delayed offshore development production volumes ko constrain kar rahe hain.",
+            "beneficiary_equities": [
+                {"symbol": "ONGC", "name": "Oil and Natural Gas Corporation", "thesis": "Defensive dividend yield play but muted domestic volume growth"},
+                {"symbol": "OIL", "name": "Oil India Ltd", "thesis": "NRL refinery expansion progress offsetting upstream field decline"}
             ]
         }
     ]

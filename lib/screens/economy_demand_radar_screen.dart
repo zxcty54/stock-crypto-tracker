@@ -203,6 +203,8 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
             padding: const EdgeInsets.all(14),
             children: [
               _buildHeadlineBanner(headline),
+              const SizedBox(height: 12),
+              _buildEarningsAlphaExplainer(),
               const SizedBox(height: 16),
               Text(
                 "ACTIONABLE SECTOR DEMAND SIGNALS (${sectors.length})",
@@ -308,6 +310,46 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     );
   }
 
+  Widget _buildEarningsAlphaExplainer() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.25)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.psychology_rounded, size: 16, color: Color(0xFF38BDF8)),
+              const SizedBox(width: 6),
+              Text(
+                "INSTITUTIONAL EDGE: LEADING PHYSICAL TELEMETRY",
+                style: GoogleFonts.plusJakartaSans(
+                  color: const Color(0xFF38BDF8),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.6,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            "Companies financial results 45 din baad report karti hain, jabki DPIIT, Fuel aur Ports data MONTHLY real-time milta hai. Jab physical volume +10% surge karta hai, toh plant operating leverage se quarterly profit multiple times expand hota hai. Is matrix se aap results aane se pehle winners pehchan sakte hain.",
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 11,
+              height: 1.35,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildSectorDemandCard(Map<String, dynamic> s) {
     final stocks = (s['beneficiary_equities'] as List?) ?? [];
     final badge = s['momentum_badge'] ?? '🟢 EXPANDING';
@@ -366,6 +408,88 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
             s['economic_rationale'] ?? '',
             style: const TextStyle(color: Colors.white70, fontSize: 11.5, height: 1.35),
           ),
+          if (s['earnings_outlook'] != null) ...[
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: isSoft
+                    ? accentRed.withOpacity(0.08)
+                    : const Color(0xFF0A1F1C),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isSoft
+                      ? accentRed.withOpacity(0.3)
+                      : accentGreen.withOpacity(0.3),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        isSoft
+                            ? Icons.warning_amber_rounded
+                            : Icons.insights_rounded,
+                        size: 14,
+                        color: isSoft ? accentRed : accentGreen,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          "RESULTS OUTLOOK: ${s['earnings_outlook']}",
+                          style: TextStyle(
+                            color: isSoft ? accentRed : accentGreen,
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (s['earnings_prediction_thesis'] != null) ...[
+                    const SizedBox(height: 5),
+                    Text(
+                      s['earnings_prediction_thesis'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                  if (s['key_metric_to_watch'] != null) ...[
+                    const SizedBox(height: 6),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "🎯 Result Metric: ",
+                          style: TextStyle(
+                            color: accentAmber,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            s['key_metric_to_watch'],
+                            style: const TextStyle(
+                              color: Color(0xFFE2E8F0),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 10),
           const Divider(color: Color(0xFF1B2433), height: 1),
           const SizedBox(height: 8),
