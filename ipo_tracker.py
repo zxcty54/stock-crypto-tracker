@@ -22,6 +22,7 @@ Features:
 from __future__ import annotations
 
 import os
+import re
 import sys
 import json
 import time
@@ -240,6 +241,39 @@ def is_posting_window(now: datetime) -> bool:
     return POSTING_START_HOUR_IST <= now.hour < POSTING_END_HOUR_IST
 
 
+def is_active_mainboard_issue(ipo: dict, today_str: str) -> bool:
+    """
+    Check if an IPO is currently active or has a confirmed upcoming bidding schedule.
+    Strictly excludes:
+    - Already listed IPOs
+    - Expired/closed IPOs (close_date < today_str)
+    - Stale/draft filings with no confirmed bidding dates (open_date is None or 'TBA')
+    """
+    if is_already_listed(ipo, today_str):
+        return False
+
+    open_date = ipo.get("open_date")
+    close_date = ipo.get("close_date")
+
+    if not open_date or open_date == "TBA" or not isinstance(open_date, str):
+        return False
+
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", open_date):
+        return False
+
+    if close_date and close_date < today_str:
+        return False
+
+    if open_date > today_str:
+        return True
+    if close_date and open_date <= today_str <= close_date:
+        return True
+    if open_date == today_str:
+        return True
+
+    return False
+
+
 def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) -> list[tuple[str, str]]:
     """
     Evaluate an IPO against today's date to determine which lifecycle alerts are pending.
@@ -389,10 +423,11 @@ def run_tracker(now: datetime | None = None) -> int:
         logger.info("Generating Mainboard IPO GMP Dashboard summary...")
         active_ipos = [
             ipo for ipo in master.values()
-            if not ipo.get("is_already_listed")
+            if is_active_mainboard_issue(ipo, today_str)
         ]
         if not active_ipos:
-            active_ipos = list(master.values())[:6]
+            logger.info("ℹ️ No active Mainboard IPOs currently open or upcoming.")
+            return 0
 
         dashboard_text = format_gmp_dashboard(active_ipos, as_of_date=now.strftime("%d-%b-%Y"))
         success, msg = send_telegram_message(dashboard_text)
@@ -436,14 +471,15 @@ def run_tracker(now: datetime | None = None) -> int:
     logger.info(f"🎯 Total pending lifecycle alerts to dispatch: {len(pending_dispatches)}")
 
     if not pending_dispatches:
-        logger.info("ℹ️ No pending lifecycle events. Broadcasting live Mainboard IPO GMP Dashboard to channel...")
         active_ipos = [
             ipo for ipo in master.values()
-            if not ipo.get("is_already_listed")
+            if is_active_mainboard_issue(ipo, today_str)
         ]
         if not active_ipos:
-            active_ipos = list(master.values())[:6]
+            logger.info("ℹ️ No active Mainboard IPOs currently open or upcoming. Skipping GMP dashboard broadcast.")
+            return 0
 
+        logger.info(f"ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for {len(active_ipos)} active IPOs...")
         dashboard_text = format_gmp_dashboard(active_ipos, as_of_date=now.strftime("%d-%b-%Y"))
         success, msg = send_telegram_message(dashboard_text)
         if success:

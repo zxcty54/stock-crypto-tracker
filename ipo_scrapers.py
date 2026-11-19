@@ -1221,37 +1221,16 @@ class IpoAggregator:
 
             target = merged_map.get(slug)
             if not target:
-                # Add if upcoming or active
-                target = {
-                    "id": slug,
-                    "company_name": gmp_item.get("company_name"),
-                    "symbol": "",
-                    "issue_type": "Mainboard",
-                    "exchange": "NSE & BSE",
-                    "open_date": None,
-                    "close_date": None,
-                    "allotment_date": None,
-                    "listing_date": None,
-                    "price_band": gmp_item.get("price_band") or "",
-                    "issue_size_cr": "",
-                    "gmp": gmp_item.get("gmp") or "",
-                    "gmp_percent": gmp_item.get("gmp_percent") or "",
-                    "kostak": gmp_item.get("kostak") or "",
-                    "sub2sauda": gmp_item.get("sub2sauda") or "",
-                    "sources": ["ipocentral_gmp"],
-                    "is_already_listed": False,
-                    "status": "UPCOMING",
-                }
-                merged_map[slug] = target
-            else:
-                if gmp_item.get("gmp"):
-                    target["gmp"] = gmp_item["gmp"]
-                if gmp_item.get("gmp_percent"):
-                    target["gmp_percent"] = gmp_item["gmp_percent"]
-                if gmp_item.get("kostak"):
-                    target["kostak"] = gmp_item["kostak"]
-                if gmp_item.get("sub2sauda"):
-                    target["sub2sauda"] = gmp_item["sub2sauda"]
+                continue
+
+            if gmp_item.get("gmp"):
+                target["gmp"] = gmp_item["gmp"]
+            if gmp_item.get("gmp_percent"):
+                target["gmp_percent"] = gmp_item["gmp_percent"]
+            if gmp_item.get("kostak"):
+                target["kostak"] = gmp_item["kostak"]
+            if gmp_item.get("sub2sauda"):
+                target["sub2sauda"] = gmp_item["sub2sauda"]
 
         # 3. Enrich with Secondary Live GMP from Chittorgarh Report 82
         c_gmp_items = self.chittorgarh_gmp.fetch_mainboard_gmp()
@@ -1432,4 +1411,14 @@ class IpoAggregator:
                 except Exception:
                     pass
 
-        return list(merged_map.values())
+        # Return only items with confirmed bidding dates or historical listed records
+        clean_results = []
+        for ipo in merged_map.values():
+            if ipo.get("is_already_listed"):
+                clean_results.append(ipo)
+            elif ipo.get("open_date") and ipo.get("open_date") != "TBA":
+                clean_results.append(ipo)
+            else:
+                logger.debug(f"Filtered out undated draft issue: {ipo.get('company_name')}")
+
+        return clean_results
