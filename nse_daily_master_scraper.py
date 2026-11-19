@@ -238,13 +238,30 @@ def extract_pdf_data(session, pdf_url, is_result=False):
     
     pdf_headers = {
         "User-Agent": HEADERS["User-Agent"],
-        "Accept": "*/*",
-        "Host": "nsearchives.nseindia.com",
+        "Accept": "application/pdf,application/octet-stream,*/*",
         "Referer": "https://www.nseindia.com/"
     }
 
     try:
-        resp = session.get(pdf_url, headers=pdf_headers, timeout=25)
+        resp = session.get(pdf_url, headers=pdf_headers, timeout=20)
+        # If not successful, try alternate NSE archive host if available
+        if (resp.status_code != 200 or not resp.content.startswith(b'%PDF')) and "nsearchives.nseindia.com" in pdf_url:
+            alt_url = pdf_url.replace("nsearchives.nseindia.com", "archives.nseindia.com")
+            try:
+                alt_resp = session.get(alt_url, headers=pdf_headers, timeout=20)
+                if alt_resp.status_code == 200 and alt_resp.content.startswith(b'%PDF'):
+                    resp = alt_resp
+            except Exception:
+                pass
+        elif (resp.status_code != 200 or not resp.content.startswith(b'%PDF')) and "archives.nseindia.com" in pdf_url:
+            alt_url = pdf_url.replace("archives.nseindia.com", "nsearchives.nseindia.com")
+            try:
+                alt_resp = session.get(alt_url, headers=pdf_headers, timeout=20)
+                if alt_resp.status_code == 200 and alt_resp.content.startswith(b'%PDF'):
+                    resp = alt_resp
+            except Exception:
+                pass
+
         if resp.status_code != 200 or not resp.content.startswith(b'%PDF'):
             return "", {}
 
@@ -260,9 +277,12 @@ def extract_pdf_data(session, pdf_url, is_result=False):
                 pass
 
         if not extracted_text:
-            reader = PdfReader(io.BytesIO(pdf_bytes))
-            pages = [p.extract_text() for p in reader.pages[:3] if p.extract_text()]
-            extracted_text = " ".join(" ".join(pages).split())[:3500]
+            try:
+                reader = PdfReader(io.BytesIO(pdf_bytes))
+                pages = [p.extract_text() for p in reader.pages[:3] if p.extract_text()]
+                extracted_text = " ".join(" ".join(pages).split())[:3500]
+            except Exception:
+                pass
 
         forensics = {}
         if is_result and pdf_bytes:
@@ -398,11 +418,12 @@ def run_nse_hourly_master():
             if pdf_downloads < MAX_PDF_DOWNLOADS:
                 print(f"   📄 [{pdf_downloads + 1}/{MAX_PDF_DOWNLOADS}] Extracting PDF: {symbol} | {category}...")
                 pdf_text, _ = extract_pdf_data(session, pdf_url, is_result=(category == "RESULT"))
-                if pdf_text:
-                    pdf_downloads += 1
+                pdf_downloads += 1
                 time.sleep(1.8)
 
-        if not pdf_text:
+        # Resilient fallback: If PDF extraction is empty or blocked, retain filing with subject & summary
+        content_text = pdf_text.strip() if pdf_text else f"{subject}. {summary}".strip()
+        if not content_text:
             continue
 
         new_announcements.append({
@@ -414,7 +435,7 @@ def run_nse_hourly_master():
             "broadcast_date": broadcast_dt,
             "summary": summary[:400],
             "pdf_link": pdf_url,
-            "pdf_extracted_text": pdf_text
+            "pdf_extracted_text": content_text
         })
         seen_announcement_hashes.add(item_hash)
 
