@@ -421,9 +421,8 @@ def run_nse_hourly_master():
                 pdf_downloads += 1
                 time.sleep(1.8)
 
-        # Resilient fallback: If PDF extraction is empty or blocked, retain filing with subject & summary
-        content_text = pdf_text.strip() if pdf_text else f"{subject}. {summary}".strip()
-        if not content_text:
+        # Strict PDF Check: Without extracted PDF text, drop the announcement
+        if not pdf_text or not pdf_text.strip():
             continue
 
         new_announcements.append({
@@ -435,7 +434,7 @@ def run_nse_hourly_master():
             "broadcast_date": broadcast_dt,
             "summary": summary[:400],
             "pdf_link": pdf_url,
-            "pdf_extracted_text": content_text
+            "pdf_extracted_text": pdf_text.strip()
         })
         seen_announcement_hashes.add(item_hash)
 

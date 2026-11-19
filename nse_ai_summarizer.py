@@ -34,8 +34,8 @@ BATCH_PAUSE_SECONDS = 20
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-# 72 Hours retention (3 Days) so app feed is never wiped blank over weekends or holidays
-CUTOFF_24H_ANALYZED = NOW - timedelta(days=3)
+# 24 Hours retention calculated strictly from the time of insertion (Strict 24h Freshness)
+CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
 
 MODEL_REGISTRY = [
     {"name": "openai/gpt-oss-20b", "provider": "groq"},
@@ -395,10 +395,9 @@ def process_corporate_actions_feed():
 
     candidates = []
 
-    # 1. Actionable Announcements from Master Archive
+    # 1. Actionable Announcements from Master Archive (Strict PDF only)
     for a in master_data.get("corporate_announcements", []):
-        if a.get("hash") not in processed_hashes and (a.get("pdf_extracted_text") or a.get("summary") or a.get("subject")):
-            content_body = (a.get("pdf_extracted_text") or f"{a.get('subject')}. {a.get('summary')}")[:12000]
+        if a.get("hash") not in processed_hashes and a.get("pdf_extracted_text"):
             candidates.append({
                 "type": "ANNOUNCEMENT",
                 "hash": a.get("hash"),
@@ -407,7 +406,7 @@ def process_corporate_actions_feed():
                 "category": a.get("category"),
                 "subject": a.get("subject"),
                 "summary": a.get("summary"),
-                "payload_text": content_body,
+                "payload_text": a.get("pdf_extracted_text")[:12000],
                 "broadcast_date": a.get("broadcast_date"),
                 "pdf_link": a.get("pdf_link")
             })
@@ -539,10 +538,8 @@ def process_corporate_actions_feed():
                 print(f"  ⏭️ [SKIPPED]  {itm['symbol']}: {res.get('worthiness_reason', '')[:50]}")
                 feed_archive["skipped_archive"].insert(0, record)
 
-        if len(feed_archive["content_feed"]) > 20:
-            feed_archive["content_feed"] = [item for item in feed_archive["content_feed"] if is_within_24h_of_analysis(item)]
-        if len(feed_archive["skipped_archive"]) > 50:
-            feed_archive["skipped_archive"] = [item for item in feed_archive["skipped_archive"] if is_within_24h_of_analysis(item)]
+        feed_archive["content_feed"] = [item for item in feed_archive["content_feed"] if is_within_24h_of_analysis(item)]
+        feed_archive["skipped_archive"] = [item for item in feed_archive["skipped_archive"] if is_within_24h_of_analysis(item)]
 
         feed_archive["generated_at"] = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
         feed_archive["worthy_count"] = len(feed_archive["content_feed"])
