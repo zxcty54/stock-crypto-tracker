@@ -1659,8 +1659,24 @@
       "used": false,
       "topic_key": "breakout_vs_fakeout",
       "generated_at": "2026-11-16 15:44:47 IST"
+    },
+    {
+      "id": "newsafpjwzhmvi",
+      "slot": "A",
+      "hourly_slot_ist": "2026-11-19 08:00",
+      "scheduled_ist": "2026-11-19 08:00",
+      "title": "US Fed minutes show inflation concerns, rate hike debate heats up",
+      "text": "📊 <b>BUSINESS &amp; MARKET BRIEF</b>\n\n📌 <b>US Fed minutes show inflation concerns, rate hike debate heats up</b>\n━━━━━━━━━━━━━━━━━━\n\n📍 <b>KEY DEVELOPMENT</b>\nUS Federal Reserve meeting minutes from October 27-28 revealed that policymakers are growing increasingly concerned about persistent inflation. While rates were kept steady in the 3.75%-4.00% range, almost all officials agreed that further rate hikes may be necessary if economic conditions evolve as expected. A few members even discussed the possibility of a half-percentage-point increase if incoming price data remains unfavorable.\n\n🧭 <b>MARKET CONTEXT</b>\nThe Fed target range of 3.75%-4.00% reflects an ongoing effort to cool an economy where prices continue to rise at an annual rate above 3%. Persistent inflation has forced central bankers to weigh whether a neutral policy stance is restrictive enough to hit their targeted 2% goal.\n\n🏦 <b>BUSINESS IMPLICATIONS</b>\nIf the US central bank shifts toward a more aggressive policy stance or delivers higher interest rates, global liquidity conditions could tighten. For Indian markets, tighter US monetary policy typically influences foreign capital flows and impacts currency valuations, though the exact transmission depends on domestic economic fundamentals.\n\n🔎 <b>KEY WATCHPOINTS</b>\nWatch out for upcoming US inflation prints, commentary ahead of the December 8-9 Fed meeting, and subsequent foreign portfolio flow trends in emerging markets.\n\n💬 <b>DISCUSSION POINT</b>\n<b>How do global interest rate trajectories usually influence your assessment of risk in domestic equity sectors?</b>\n\n━━━━━━━━━━━━━━━━━━\n🔗 <b>SOURCES</b> · <a href=\"https://economictimes.indiatimes.com/markets/us-stocks/news/fed-policymakers-focused-on-inflation-risks-in-october-with-some-seeing-need-for-bigger-rate-hike/articleshow/135970652.cms\">Economic Times</a>\n🤖 <i>AI-assisted analysis of public business news.</i>\n\n⚠️ <i>Educational only. Not investment advice. Not SEBI registered.</i>",
+      "used": false,
+      "topic_key": "business_news_insight:0b94e6677620",
+      "kind": "business_news_insight",
+      "source_name": "Economic Times",
+      "source_url": "https://economictimes.indiatimes.com/markets/us-stocks/news/fed-policymakers-focused-on-inflation-risks-in-october-with-some-seeing-need-for-bigger-rate-hike/articleshow/135970652.cms",
+      "source_headline": "Fed policymakers focused on inflation risks in October, with some seeing need for bigger rate hike",
+      "story_key": "0b94e667762061cc64a3a42ea43e68f8d4d5e08f80d6e8e0849b1151d9d38547",
+      "generated_at": "2026-11-19 06:08:42 IST"
     }
   ],
-  "total": 117,
-  "last_scheduled": "2026-11-18 20:00"
+  "total": 118,
+  "last_scheduled": "2026-11-19 08:00"
 }
