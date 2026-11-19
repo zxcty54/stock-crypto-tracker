@@ -5,15 +5,16 @@ IPO TELEGRAM POST FORMATTER (INSTITUTIONAL DRHP EDITION)
 Generates comprehensive, institutional-grade HTML messages for Telegram (@ipocentral).
 
 Includes every critical detail required by retail, HNI & institutional investors:
-1. NEW_IPO_ANNOUNCED - Full DRHP Analysis: Timetable, Ticket Sizes (Retail, sNII, bNII),
+1. TEST_VERIFICATION - System test and verification broadcast
+2. NEW_IPO_ANNOUNCED - Full DRHP Analysis: Timetable, Ticket Sizes (Retail, sNII, bNII),
                        Fresh vs OFS, Live GMP + Kostak + Sub2Sauda, Quota Allocation,
                        Multi-year Restated Financials, Valuation KPIs (P/E, RoNW, RoCE, MCap),
                        Objects of the Issue, Promoters Pre/Post holding, Lead Managers & Registrar.
-2. IPO_OPENS_TODAY   - Opening Day bidding alert with GMP, Kostak, lot details & cutoff times.
-3. IPO_CLOSING_TODAY - Final Day bidding reminder with live subscription numbers & GMP.
-4. ALLOTMENT_OUT     - Basis of Allotment finalized with 1-click direct registrar & exchange links.
-5. LISTING_TODAY     - Market debut alert with issue vs listing price and listing gains.
-6. GMP_DASHBOARD     - Daily snapshot of active Mainboard IPOs with GMP, Gain % & Kostak rates.
+3. IPO_OPENS_TODAY   - Opening Day bidding alert with GMP, Kostak, lot details & cutoff times.
+4. IPO_CLOSING_TODAY - Final Day bidding reminder with live subscription numbers & GMP.
+5. ALLOTMENT_OUT     - Basis of Allotment finalized with 1-click direct registrar & exchange links.
+6. LISTING_TODAY     - Market debut alert with issue vs listing price and listing gains.
+7. GMP_DASHBOARD     - Daily snapshot of active Mainboard IPOs with GMP, Gain % & Kostak rates.
 """
 
 from __future__ import annotations
@@ -43,6 +44,42 @@ def format_currency(val: int | float | str | None) -> str:
         return f"{num:,.0f}" if num.is_integer() else f"{num:,.2f}"
     except (ValueError, TypeError):
         return str(val)
+
+
+def format_test_verification_post() -> str:
+    """Template for live bot test and system verification."""
+    now_str = datetime.now(IST).strftime("%d-%b-%Y %H:%M IST")
+    return (
+        f"🧪 <b>MAINBOARD IPO TRACKER — SYSTEM TEST &amp; VERIFICATION</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🏢 <b>BOT STATUS: CONNECTED &amp; OPERATIONAL</b>\n"
+        f"🏷️ <i>Target Channel: {CHANNEL_HANDLE}</i>\n"
+        f"📅 <i>Timestamp: {now_str}</i>\n\n"
+        f"📡 <b>LIVE DATA SOURCES CONFIGURED:</b>\n"
+        f"• <b>NSE Live Issue API:</b> Current &amp; upcoming Mainboard equities\n"
+        f"• <b>BSE Live Master API:</b> Official BSE equity IPO master\n"
+        f"• <b>IPO Central Live GMP:</b> Live GMP, Kostak &amp; Sub2Sauda rates\n"
+        f"• <b>Chittorgarh Dashboard:</b> Active bidding &amp; upcoming issues\n\n"
+        f"🛡️ <b>STRICT INTEGRITY FILTERS ENFORCED:</b>\n"
+        f"• ✅ <b>Mainboard Only:</b> Only NSE &amp; BSE mainboard tracked\n"
+        f"• 🚫 <b>SME Blocked:</b> BSE SME &amp; NSE Emerge automatically filtered\n"
+        f"• 🚫 <b>Historical Purged:</b> Zero already-listed IPOs posted\n\n"
+        f"📊 <b>COMPLETE DRHP DETAILS INCLUDED IN EVERY ALERT:</b>\n"
+        f"• Full 6-step timetable (Open, Close, Allotment, Refund, Demat, Listing)\n"
+        f"• Ticket sizes: Retail (1 Lot), Retail Max, sNII (14 Lots), bNII (68 Lots)\n"
+        f"• Fresh Issue vs Offer for Sale (OFS) capital breakdown\n"
+        f"• Verified Live GMP, Expected Listing Price, Kostak &amp; Sub2Sauda\n"
+        f"• SEBI DRHP Quota (QIB 50-75%, NII 15%, Retail 35%)\n"
+        f"• Restated Financials (Revenue, PAT, Net Worth, Borrowings)\n"
+        f"• Valuation KPIs (P/E Ratio, RoNW / ROE %, Post-Issue Market Cap, EPS)\n"
+        f"• Objects of the Issue (DRHP Use of Net Proceeds)\n"
+        f"• Promoters &amp; Pre/Post Shareholding percentages\n"
+        f"• Registrar Allotment Portal link &amp; Lead Managers (BRLMs)\n"
+        f"• Official SEBI DRHP / RHP PDF download link\n\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📢 <b>Channel:</b> {CHANNEL_HANDLE}\n"
+        f"🤖 <i>Automated IPO dispatch pipeline is ready and monitoring 24x7!</i>"
+    )
 
 
 # ============================================================
@@ -75,7 +112,6 @@ def format_new_ipo_alert(ipo: dict) -> str:
     min_inv = ipo.get("min_investment")
     min_inv_str = f"₹{format_currency(min_inv)}" if min_inv else "TBA"
 
-    # sNII (14 lots) and bNII (68 lots)
     lot_int = None
     try:
         lot_int = int(str(ipo.get("lot_size", "")).strip())
@@ -505,6 +541,7 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
 def format_ipo_post(event_type: str, ipo: dict) -> str | None:
     """Format an IPO alert message based on its lifecycle event type."""
     formatters = {
+        "TEST_VERIFICATION": lambda x: format_test_verification_post(),
         "NEW_IPO_ANNOUNCED": format_new_ipo_alert,
         "IPO_OPENS_TODAY": format_opens_today_alert,
         "IPO_CLOSING_TODAY": format_closing_today_alert,

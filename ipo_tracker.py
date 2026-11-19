@@ -34,6 +34,7 @@ from ipo_scrapers import IpoAggregator, sanitize_slug, is_already_listed
 from ipo_formatter import (
     format_ipo_post,
     format_gmp_dashboard,
+    format_test_verification_post,
     CHANNEL_HANDLE,
 )
 
@@ -74,9 +75,10 @@ POSTING_END_HOUR_IST = 22
 DRY_RUN = "--dry-run" in sys.argv
 STATUS_ONLY = "--status" in sys.argv
 TEST_MODE = "--test" in sys.argv
+TEST_POST_MODE = "--test-post" in sys.argv
 SUMMARY_ONLY = "--summary" in sys.argv
 FORCE_EVENT_ARG = "--force-event" in sys.argv
-IGNORE_QUIET = "--ignore-quiet-hours" in sys.argv or DRY_RUN or TEST_MODE or FORCE_EVENT_ARG
+IGNORE_QUIET = "--ignore-quiet-hours" in sys.argv or DRY_RUN or TEST_MODE or TEST_POST_MODE or FORCE_EVENT_ARG
 
 
 # ============================================================
@@ -175,8 +177,8 @@ def send_telegram_message(
         return False, f"Request exception: {e}"
 
 
-def test_telegram_connection() -> bool:
-    """Test Telegram Bot credentials and channel admin rights."""
+def test_telegram_connection(send_sample: bool = False) -> bool:
+    """Test Telegram Bot credentials, channel permissions, and optionally dispatch a live verification post."""
     if not BOT_TOKEN:
         logger.error("❌ TELEGRAM_BOT_TOKEN or TELEGRAM_TOKEN is not set.")
         return False
@@ -211,6 +213,18 @@ def test_telegram_connection() -> bool:
     except Exception as e:
         logger.error(f"❌ Failed to verify chat {CHAT_ID}: {e}")
         return False
+
+    # 3. Dispatch Live Test Post if requested
+    if send_sample:
+        logger.info(f"📨 Broadcasting live verification test post to {CHAT_ID}...")
+        test_html = format_test_verification_post()
+        success, msg = send_telegram_message(test_html)
+        if success:
+            logger.info(f"🎉 Live verification test post successfully delivered to {CHAT_ID}!")
+            return True
+        else:
+            logger.error(f"❌ Failed to deliver live verification test post: {msg}")
+            return False
 
     return True
 
@@ -484,8 +498,12 @@ def run_tracker(now: datetime | None = None) -> int:
 # ============================================================
 
 if __name__ == "__main__":
+    if TEST_POST_MODE:
+        ok = test_telegram_connection(send_sample=True)
+        sys.exit(0 if ok else 1)
+
     if TEST_MODE:
-        ok = test_telegram_connection()
+        ok = test_telegram_connection(send_sample=False)
         sys.exit(0 if ok else 1)
 
     exit_code = run_tracker()

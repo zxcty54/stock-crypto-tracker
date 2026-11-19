@@ -24,11 +24,12 @@ on:
         required: true
         type: choice
         options:
+          - test_post
           - auto
           - summary
           - dry_run
           - status
-        default: auto
+        default: test_post
 
 # Prevent overlapping concurrent dispatches
 concurrency:
@@ -64,17 +65,28 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
           IPO_TELEGRAM_CHAT_ID: ${{ secrets.IPO_TELEGRAM_CHAT_ID || '@ipocentral' }}
         run: |
-          TASK="${{ github.event.inputs.task || 'auto' }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            TASK="auto"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TASK="${{ github.event.inputs.task || 'test_post' }}"
+          else
+            TASK="test_post"
+          fi
           echo "Executing task: $TASK"
 
-          if [ "$TASK" = "summary" ]; then
-            python ipo_tracker.py --summary --ignore-quiet-hours
+          if [ "$TASK" = "test_post" ]; then
+            echo "🧪 Dispatching Live Test Post to Telegram..."
+            python ipo_tracker.py --test-post --ignore-quiet-hours 2>&1 | tee ipo_run_log.txt
+            echo "📊 Executing Tracker Run..."
+            python ipo_tracker.py --ignore-quiet-hours 2>&1 | tee -a ipo_run_log.txt
+          elif [ "$TASK" = "summary" ]; then
+            python ipo_tracker.py --summary --ignore-quiet-hours 2>&1 | tee ipo_run_log.txt
           elif [ "$TASK" = "dry_run" ]; then
-            python ipo_tracker.py --dry-run
+            python ipo_tracker.py --dry-run 2>&1 | tee ipo_run_log.txt
           elif [ "$TASK" = "status" ]; then
-            python ipo_tracker.py --status
+            python ipo_tracker.py --status 2>&1 | tee ipo_run_log.txt
           else
-            python ipo_tracker.py --ignore-quiet-hours
+            python ipo_tracker.py --ignore-quiet-hours 2>&1 | tee ipo_run_log.txt
           fi
 
       - name: 💾 Commit and Sync IPO Master & Delivery Log
@@ -82,7 +94,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          for file in ipo_master.json ipo_posted_log.json; do
+          for file in ipo_master.json ipo_posted_log.json ipo_run_log.txt; do
             if [ -f "$file" ]; then
               git add "$file"
             fi
