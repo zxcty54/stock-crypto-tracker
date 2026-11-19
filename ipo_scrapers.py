@@ -1010,6 +1010,95 @@ class NseIpoScraper:
 
         return results
 
+    def fetch_nse_issue_details(self, symbol: str) -> dict:
+        """
+        Fetch detailed issue info and live cumulative bid/demand data from official NSE endpoints:
+          - https://www.nseindia.com/api/ipo-detail?symbol={symbol}
+          - https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}
+        Captures:
+          - lot_size, face_value, tick_size, registrar, lead_managers
+          - subscription / demand: QIB, NII, Retail, Total times subscribed
+        """
+        details: dict = {
+            "symbol": symbol,
+            "lot_size": None,
+            "face_value": None,
+            "tick_size": None,
+            "registrar": None,
+            "lead_managers": [],
+            "subscription": {},
+        }
+        if not symbol:
+            return details
+
+        # 1. Fetch IPO Detail & Issue Info
+        try:
+            url_detail = f"https://www.nseindia.com/api/ipo-detail?symbol={symbol}"
+            resp = self.session.get(url_detail, headers=NSE_HEADERS, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                if isinstance(data, dict):
+                    info = data.get("issueInfo") or data.get("data") or data
+                    if isinstance(info, dict):
+                        if info.get("minBidQuantity"):
+                            try:
+                                details["lot_size"] = int(info["minBidQuantity"])
+                            except (ValueError, TypeError):
+                                pass
+                        if info.get("faceValue"):
+                            details["face_value"] = str(info["faceValue"])
+                        if info.get("tickSize"):
+                            details["tick_size"] = str(info["tickSize"])
+                        if info.get("registrar"):
+                            details["registrar"] = str(info["registrar"]).strip()
+                        if info.get("leadManager"):
+                            lm_str = str(info["leadManager"])
+                            details["lead_managers"] = [m.strip() for m in re.split(r"[,;]", lm_str) if m.strip()]
+        except Exception as e:
+            logger.debug(f"NSE detail API note for {symbol}: {e}")
+
+        # 2. Fetch Live Bid / Cumulative Demand Data
+        try:
+            url_bids = f"https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}"
+            resp = self.session.get(url_bids, headers=NSE_HEADERS, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                if isinstance(data, dict):
+                    sub = {}
+                    if data.get("noOfTimes"):
+                        times_val = str(data["noOfTimes"]).strip()
+                        sub["total"] = times_val if times_val.endswith("x") else f"{times_val}x"
+                    if data.get("totalBids"):
+                        sub["total_bids"] = str(data["totalBids"])
+                    if data.get("sharesOffered"):
+                        sub["shares_offered"] = str(data["sharesOffered"])
+
+                    cats = data.get("categories") or data.get("categoryWise") or data.get("data") or []
+                    if isinstance(cats, list):
+                        for cat in cats:
+                            if not isinstance(cat, dict):
+                                continue
+                            c_name = str(cat.get("category") or cat.get("name") or "").upper()
+                            c_times = str(cat.get("noOfTimes") or cat.get("subscription") or "").strip()
+                            if c_times and not c_times.endswith("x"):
+                                c_times += "x"
+
+                            if "QIB" in c_name:
+                                sub["qib"] = c_times
+                            elif "NII" in c_name or "HNI" in c_name:
+                                sub["nii"] = c_times
+                            elif "RETAIL" in c_name or "RII" in c_name:
+                                sub["retail"] = c_times
+                            elif "EMPLOYEE" in c_name:
+                                sub["employee"] = c_times
+
+                    if sub:
+                        details["subscription"] = sub
+        except Exception as e:
+            logger.debug(f"NSE bid details API note for {symbol}: {e}")
+
+        return details
+
 
 class BseIpoScraper:
     """
@@ -1310,12 +1399,13 @@ class IpoAggregator:
             slug = sanitize_slug(ne.get("company_name", ""))
             if not slug:
                 continue
+            sym = ne.get("symbol", "")
             target = merged_map.get(slug)
             if not target:
                 target = {
                     "id": slug,
                     "company_name": ne.get("company_name"),
-                    "symbol": ne.get("symbol", ""),
+                    "symbol": sym,
                     "issue_type": "Mainboard",
                     "exchange": "NSE & BSE",
                     "open_date": ne.get("open_date"),
@@ -1330,8 +1420,8 @@ class IpoAggregator:
                 }
                 merged_map[slug] = target
             else:
-                if ne.get("symbol"):
-                    target["symbol"] = ne["symbol"]
+                if sym:
+                    target["symbol"] = sym
                 if not target.get("open_date") and ne.get("open_date"):
                     target["open_date"] = ne["open_date"]
                 if not target.get("close_date") and ne.get("close_date"):
@@ -1342,6 +1432,30 @@ class IpoAggregator:
                     target["issue_size_cr"] = ne["issue_size_cr"]
                 if "nse_official" not in target.get("sources", []):
                     target.setdefault("sources", []).append("nse_official")
+
+            # Fetch deep NSE issue information and live cumulative bids/demand
+            if sym:
+                try:
+                    nse_deep = self.nse.fetch_nse_issue_details(sym)
+                    if nse_deep.get("lot_size") and not target.get("lot_size"):
+                        target["lot_size"] = nse_deep["lot_size"]
+                    if nse_deep.get("face_value") and not target.get("face_value"):
+                        target["face_value"] = nse_deep["face_value"]
+                    if nse_deep.get("tick_size") and not target.get("tick_size"):
+                        target["tick_size"] = nse_deep["tick_size"]
+                    if nse_deep.get("lead_managers") and not target.get("lead_managers"):
+                        target["lead_managers"] = nse_deep["lead_managers"]
+                    if nse_deep.get("registrar") and not target.get("registrar", {}).get("name"):
+                        reg_name = nse_deep["registrar"]
+                        target["registrar"] = {
+                            "name": reg_name,
+                            "url": get_registrar_url(reg_name),
+                        }
+                    if nse_deep.get("subscription"):
+                        target["subscription"] = nse_deep["subscription"]
+                        logger.info(f"   📊 NSE Live Demand/Bids for {target['company_name']}: {nse_deep['subscription']}")
+                except Exception as deep_err:
+                    logger.debug(f"NSE deep detail fetch note for {sym}: {deep_err}")
 
         bse_items = self.bse.fetch_bse_ipos()
         bse_names = [be.get("company_name") for be in bse_items]

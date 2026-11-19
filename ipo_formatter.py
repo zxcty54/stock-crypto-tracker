@@ -515,10 +515,25 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
         kostak = safe_text(ipo.get("kostak"), default="")
         rate_info = f" | Kostak: {kostak}" if kostak and kostak != "TBA" else ""
 
+        # Live NSE Demand / Bids if available
+        sub = ipo.get("subscription", {})
+        sub_line = ""
+        if isinstance(sub, dict) and sub.get("total") and sub.get("total") not in ("Upcoming", ""):
+            sub_parts = []
+            if sub.get("qib") and sub.get("qib") != "Upcoming":
+                sub_parts.append(f"QIB: {sub['qib']}")
+            if sub.get("nii") and sub.get("nii") != "Upcoming":
+                sub_parts.append(f"NII: {sub['nii']}")
+            if sub.get("retail") and sub.get("retail") != "Upcoming":
+                sub_parts.append(f"Retail: {sub['retail']}")
+            sub_parts.append(f"<b>Total: {sub['total']}</b>")
+            sub_line = f"\n   • <b>NSE Demand:</b> {' | '.join(sub_parts)}"
+
         lines.append(
             f"🔹 <b>{name}</b>\n"
             f"   • Price: {price} | Dates: {open_d} to {close_d_str}\n"
-            f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}\n"
+            f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}"
+            f"{sub_line}\n"
         )
 
     content = "\n".join(lines) if lines else "<i>Currently, no Mainboard IPO is actively open for bidding on NSE/BSE. Tracking upcoming SEBI DRHP issue filings &amp; announcements...</i>"

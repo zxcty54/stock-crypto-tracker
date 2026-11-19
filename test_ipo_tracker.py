@@ -250,6 +250,62 @@ class TestOfficialExchangeScrapers(unittest.TestCase):
         self.assertEqual(items[0]["open_date"], "2026-11-19")
         self.assertEqual(items[0]["close_date"], "2026-11-23")
 
+    def test_nse_deep_issue_and_bid_details(self):
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+
+        # Mock detail response
+        mock_resp_detail = MagicMock()
+        mock_resp_detail.status_code = 200
+        mock_resp_detail.json.return_value = {
+            "issueInfo": {
+                "symbol": "MCL",
+                "minBidQuantity": 110,
+                "faceValue": "10",
+                "tickSize": "1",
+                "registrar": "KFin Technologies Limited",
+                "leadManager": "SBI Capital Markets, ICICI Securities",
+            }
+        }
+
+        # Mock bids response
+        mock_resp_bids = MagicMock()
+        mock_resp_bids.status_code = 200
+        mock_resp_bids.json.return_value = {
+            "noOfTimes": "2.45",
+            "totalBids": "59780000",
+            "sharesOffered": "24400000",
+            "categories": [
+                {"category": "QIB", "noOfTimes": "1.25x"},
+                {"category": "NII", "noOfTimes": "3.10x"},
+                {"category": "Retail", "noOfTimes": "4.80x"},
+            ],
+        }
+
+        def mock_get(url, **kwargs):
+            if "ipo-detail" in url:
+                return mock_resp_detail
+            elif "ipo-bid-details" in url:
+                return mock_resp_bids
+            resp = MagicMock()
+            resp.status_code = 200
+            resp.json.return_value = {}
+            return resp
+
+        mock_session.get.side_effect = mock_get
+        scraper.session = mock_session
+
+        deep = scraper.fetch_nse_issue_details("MCL")
+        self.assertEqual(deep["lot_size"], 110)
+        self.assertEqual(deep["face_value"], "10")
+        self.assertEqual(deep["tick_size"], "1")
+        self.assertEqual(deep["registrar"], "KFin Technologies Limited")
+        self.assertEqual(len(deep["lead_managers"]), 2)
+        self.assertEqual(deep["subscription"]["total"], "2.45x")
+        self.assertEqual(deep["subscription"]["qib"], "1.25x")
+        self.assertEqual(deep["subscription"]["nii"], "3.10x")
+        self.assertEqual(deep["subscription"]["retail"], "4.80x")
+
 
 class TestIpoFormatters(unittest.TestCase):
     def setUp(self):
