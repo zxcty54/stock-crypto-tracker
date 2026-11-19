@@ -147,7 +147,9 @@ class _CorporateAnnouncementsScreenState
   String _selectedCategory = 'ALL';
 
   final String _endpointUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/nse_content_feed.json';
+      'https://stock-models-api.nitesh-skyhigh.workers.dev/?type=filings';
+  final String _fallbackUrl =
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/nse_content_feed.json';
 
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
@@ -166,15 +168,28 @@ class _CorporateAnnouncementsScreenState
     setState(() => _isLoading = true);
     try {
       final uri = Uri.parse(
-          '$_endpointUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
-      final response = await http.get(
+          '$_endpointUrl&ts=${DateTime.now().millisecondsSinceEpoch}');
+      http.Response response = await http.get(
         uri,
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
           'Expires': '0',
         },
-      );
+      ).timeout(const Duration(seconds: 8));
+
+      // Fallback to direct raw GitHub if Cloudflare worker route returns non-200
+      if (response.statusCode != 200) {
+        final fallbackUri = Uri.parse(
+            '$_fallbackUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
+        response = await http.get(
+          fallbackUri,
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+          },
+        ).timeout(const Duration(seconds: 8));
+      }
 
       if (response.statusCode == 200) {
         final parsed = jsonDecode(response.body);
@@ -190,6 +205,22 @@ class _CorporateAnnouncementsScreenState
         });
       }
     } catch (e) {
+      try {
+        final fallbackUri = Uri.parse(
+            '$_fallbackUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
+        final fbResponse =
+            await http.get(fallbackUri).timeout(const Duration(seconds: 8));
+        if (fbResponse.statusCode == 200) {
+          final parsed = jsonDecode(fbResponse.body);
+          setState(() {
+            _payload = CorporateFeedPayload.fromJson(parsed);
+            _isLoading = false;
+            _errorMessage = null;
+          });
+          return;
+        }
+      } catch (_) {}
+
       setState(() {
         _errorMessage = 'Network connection issue: $e';
         _isLoading = false;
