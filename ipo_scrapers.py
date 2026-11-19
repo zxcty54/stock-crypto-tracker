@@ -1250,10 +1250,14 @@ class IpoAggregator:
 
         # 4. Enrich with IPO Watch Live GMP & Issues
         ipowatch_items = self.ipowatch.fetch_live_table()
-        logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch")
+        iw_names = [iw.get("company_name") for iw in ipowatch_items]
+        logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch: {iw_names}")
         for iw in ipowatch_items:
             slug = sanitize_slug(iw.get("company_name", ""))
             if not slug:
+                continue
+            # Only add if it has confirmed bidding dates
+            if not iw.get("open_date"):
                 continue
             target = merged_map.get(slug)
             if not target:
@@ -1300,7 +1304,8 @@ class IpoAggregator:
 
         # 5. Enrich with Official NSE & BSE Equity Data
         nse_items = self.nse.fetch_nse_ipos()
-        logger.info(f"Collected {len(nse_items)} entries from official NSE India")
+        nse_names = [ne.get("company_name") for ne in nse_items]
+        logger.info(f"Collected {len(nse_items)} entries from official NSE India: {nse_names}")
         for ne in nse_items:
             slug = sanitize_slug(ne.get("company_name", ""))
             if not slug:
@@ -1339,7 +1344,8 @@ class IpoAggregator:
                     target.setdefault("sources", []).append("nse_official")
 
         bse_items = self.bse.fetch_bse_ipos()
-        logger.info(f"Collected {len(bse_items)} entries from official BSE India")
+        bse_names = [be.get("company_name") for be in bse_items]
+        logger.info(f"Collected {len(bse_items)} entries from official BSE India: {bse_names}")
         for be in bse_items:
             slug = sanitize_slug(be.get("company_name", ""))
             if not slug:
