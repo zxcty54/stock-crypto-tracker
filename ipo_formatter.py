@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-IPO TELEGRAM POST FORMATTER
-===========================
+IPO TELEGRAM POST FORMATTER (ENHANCED WITH DRHP DETAILS)
+========================================================
 Generates rich, clean, professional HTML messages for Telegram (@ipocentral).
-Handles:
-1. NEW_IPO_ANNOUNCED - Comprehensive overview of newly filed/announced Mainboard IPO
-2. IPO_OPENS_TODAY   - Opening Day bidding alert with GMP and lot details
-3. IPO_CLOSING_TODAY - Final Day bidding reminder with live subscription numbers and GMP
-4. ALLOTMENT_OUT     - Basis of Allotment finalized with 1-click registrar & BSE/NSE links
-5. LISTING_TODAY     - Market debut alert with issue vs listing price and listing gains
-6. GMP_DASHBOARD     - Daily snapshot of all active Mainboard IPOs with GMP & Expected Gain %
+
+Includes:
+1. NEW_IPO_ANNOUNCED - Comprehensive overview with DRHP Objects, Quota Reservations,
+                       Financial highlights, KPIs, Promoters, Lead Managers & verified GMP.
+2. IPO_OPENS_TODAY   - Opening Day bidding alert with GMP, Kostak, lot details & cutoff times.
+3. IPO_CLOSING_TODAY - Final Day bidding reminder with live subscription numbers & GMP.
+4. ALLOTMENT_OUT     - Basis of Allotment finalized with 1-click direct registrar & exchange links.
+5. LISTING_TODAY     - Market debut alert with issue vs listing price and listing gains.
+6. GMP_DASHBOARD     - Daily snapshot of active Mainboard IPOs with GMP, Gain % & Kostak rates.
 """
 
 from __future__ import annotations
@@ -42,14 +44,14 @@ def format_currency(val: int | float | str | None) -> str:
 
 
 # ============================================================
-# EVENT FORMATTERS
+# EVENT FORMATTERS (ENHANCED)
 # ============================================================
 
 def format_new_ipo_alert(ipo: dict) -> str:
-    """Template for newly announced / filed Mainboard IPO."""
+    """Template for newly announced / filed Mainboard IPO enriched with DRHP details."""
     comp_name = safe_text(ipo.get("company_name"))
-    open_d = safe_text(ipo.get("open_date"))
-    close_d = safe_text(ipo.get("close_date"))
+    open_d = safe_text(ipo.get("open_date"), default="Announcing Soon")
+    close_d = safe_text(ipo.get("close_date"), default="Announcing Soon")
     allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
     list_d = safe_text(ipo.get("listing_date"), default="Tentative")
 
@@ -74,21 +76,82 @@ def format_new_ipo_alert(ipo: dict) -> str:
     if fresh_issue or ofs:
         size_breakdown = f"\n  ├ <b>Fresh Issue:</b> {fresh_issue or 'TBA'}\n  └ <b>Offer for Sale (OFS):</b> {ofs or 'TBA'}"
 
+    # Verified GMP & Kostak
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
     if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"₹{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp_pct else f"₹{safe_text(gmp)}"
+        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
     else:
         gmp_text = "Trading yet to start"
 
     est_list = safe_text(ipo.get("est_listing_price"), default="")
     est_list_line = f"\n• <b>Est. Listing Price:</b> {est_list}" if est_list and est_list != "TBA" else ""
 
+    kostak = safe_text(ipo.get("kostak"), default="")
+    sub2 = safe_text(ipo.get("sub2sauda"), default="")
+    rate_line = ""
+    if kostak != "TBA" or sub2 != "TBA":
+        rate_line = f"\n• <b>Kostak:</b> {kostak} | <b>Sub2Sauda:</b> {sub2}"
+
+    # DRHP Quota Allocation
+    res = ipo.get("reservation", {})
+    quota_lines = []
+    if res.get("qib_pct"):
+        quota_lines.append(f"• <b>QIB Quota:</b> {safe_text(res['qib_pct'])}")
+    if res.get("nii_pct"):
+        quota_lines.append(f"• <b>NII / HNI Quota:</b> {safe_text(res['nii_pct'])}")
+    if res.get("retail_pct"):
+        quota_lines.append(f"• <b>Retail (RII) Quota:</b> {safe_text(res['retail_pct'])}")
+
+    quota_section = ""
+    if quota_lines:
+        quota_section = "\n\n📊 <b>SEBI DRHP ISSUE ALLOCATION</b>\n" + "\n".join(quota_lines)
+
+    # DRHP Financial Highlights
+    fin = ipo.get("financials", {})
+    kpis = ipo.get("kpis", {})
+    fin_lines = []
+    if fin.get("revenue"):
+        fin_lines.append(f"• <b>Revenue (Latest):</b> ₹{safe_text(fin['revenue'])} Cr")
+    if fin.get("pat"):
+        fin_lines.append(f"• <b>Profit After Tax (PAT):</b> ₹{safe_text(fin['pat'])} Cr")
+    if kpis.get("pe_ratio"):
+        fin_lines.append(f"• <b>P/E Ratio:</b> {safe_text(kpis['pe_ratio'])}x")
+    if kpis.get("ronw"):
+        fin_lines.append(f"• <b>RoNW / ROE:</b> {safe_text(kpis['ronw'])}")
+    if kpis.get("market_cap"):
+        fin_lines.append(f"• <b>Post-Issue Market Cap:</b> ₹{safe_text(kpis['market_cap'])} Cr")
+
+    fin_section = ""
+    if fin_lines:
+        fin_section = "\n\n📈 <b>FINANCIAL HIGHLIGHTS (RESTATED CONSOLIDATED)</b>\n" + "\n".join(fin_lines)
+
+    # DRHP Objects of the Issue
+    objects = ipo.get("drhp_objects", [])
+    obj_section = ""
+    if objects:
+        bullets = [f"• {safe_text(o)}" for o in objects[:4]]
+        obj_section = "\n\n🎯 <b>OBJECTS OF THE ISSUE (USE OF PROCEEDS)</b>\n" + "\n".join(bullets)
+
+    # Promoters & Lead Managers
+    promo = ipo.get("promoter_holding", {})
+    promo_line = ""
+    if promo.get("pre_issue") or promo.get("post_issue"):
+        promo_line = f"\n👥 <b>Promoter Holding:</b> Pre: {safe_text(promo.get('pre_issue'))} ➔ Post: {safe_text(promo.get('post_issue'))}"
+
+    lms = ipo.get("lead_managers", [])
+    lm_line = ""
+    if lms:
+        lm_line = f"\n👔 <b>Lead Managers:</b> {safe_text(', '.join(lms[:3]))}"
+
     reg = ipo.get("registrar", {})
     reg_name = safe_text(reg.get("name") if isinstance(reg, dict) else reg, default="To be announced")
 
     about = safe_text(ipo.get("about"), default="")
     about_section = f"\n\nℹ️ <b>About the Company:</b>\n{about}" if about and about != "TBA" else ""
+
+    drhp_link = ipo.get("drhp_url")
+    drhp_line = f'\n\n📄 <b>Official Document:</b> <a href="{html.escape(drhp_link, quote=True)}">Download SEBI DRHP / RHP PDF</a>' if drhp_link else ""
 
     return (
         f"📢 <b>NEW MAINBOARD IPO ANNOUNCED</b>\n"
@@ -106,9 +169,15 @@ def format_new_ipo_alert(ipo: dict) -> str:
         f"• <b>Min. Investment (Retail):</b> {min_inv_str}\n"
         f"• <b>Total Issue Size:</b> {issue_size}{size_breakdown}\n\n"
         f"🔥 <b>GREY MARKET PREMIUM (GMP)</b>\n"
-        f"• <b>Current GMP:</b> {gmp_text}{est_list_line}\n\n"
+        f"• <b>Current GMP:</b> {gmp_text}{est_list_line}{rate_line}"
+        f"{quota_section}"
+        f"{fin_section}"
+        f"{obj_section}"
+        f"{promo_line}\n"
         f"🏛️ <b>Registrar:</b> {reg_name}"
-        f"{about_section}\n"
+        f"{lm_line}"
+        f"{about_section}"
+        f"{drhp_line}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Channel:</b> {CHANNEL_HANDLE}\n"
         f"{DISCLAIMER}"
@@ -138,11 +207,17 @@ def format_opens_today_alert(ipo: dict) -> str:
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
     if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"₹{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp_pct else f"₹{safe_text(gmp)}"
+        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
     else:
         gmp_text = "N/A"
 
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
+    kostak = safe_text(ipo.get("kostak"), default="")
+    sub2 = safe_text(ipo.get("sub2sauda"), default="")
+    rate_line = f"\n• <b>Kostak:</b> {kostak} | <b>Sub2Sauda:</b> {sub2}" if kostak != "TBA" or sub2 != "TBA" else ""
+
+    res = ipo.get("reservation", {})
+    retail_q = safe_text(res.get("retail_pct"), default="35%")
 
     return (
         f"🟢 <b>IPO OPENS TODAY: BIDDING IS LIVE</b>\n"
@@ -152,10 +227,10 @@ def format_opens_today_alert(ipo: dict) -> str:
         f"⏰ <b>Bidding Window:</b> {open_d} to {close_d} (Daily 10:00 AM - 5:00 PM IST)\n"
         f"💰 <b>Price Band:</b> {price_band}\n"
         f"📦 <b>Lot Size:</b> {lot_size} Shares (Min: {min_inv_str})\n"
-        f"📊 <b>Total Issue Size:</b> {issue_size}\n\n"
+        f"📊 <b>Total Issue Size:</b> {issue_size} (Retail Quota: {retail_q})\n\n"
         f"🔥 <b>LATEST GMP UPDATE</b>\n"
         f"• <b>Grey Market Premium:</b> {gmp_text}\n"
-        f"• <b>Expected Listing:</b> {est_list}\n\n"
+        f"• <b>Expected Listing:</b> {est_list}{rate_line}\n\n"
         f"📌 <b>KEY TIMELINES</b>\n"
         f"• <b>Closing Date:</b> {close_d} (5:00 PM Cutoff)\n"
         f"• <b>Allotment Finalization:</b> {allot_d}\n"
@@ -186,7 +261,7 @@ def format_closing_today_alert(ipo: dict) -> str:
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
     if gmp and str(gmp).strip() not in ("--", "0", ""):
-        gmp_text = f"₹{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp_pct else f"₹{safe_text(gmp)}"
+        gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
     else:
         gmp_text = "N/A"
 
@@ -202,7 +277,7 @@ def format_closing_today_alert(ipo: dict) -> str:
         f"⏳ <b>Deadline:</b> Today by 5:00 PM IST (UPI Mandate: 5:00 PM)\n"
         f"💰 <b>Cut-off Price:</b> {cut_off_str}\n"
         f"📦 <b>Min Investment:</b> {min_inv_str} ({lot_size} Shares)\n\n"
-        f"📊 <b>SUBSCRIPTION STATUS</b>\n"
+        f"📊 <b>LATEST SUBSCRIPTION STATUS</b>\n"
         f"• <b>QIB:</b> {qib}\n"
         f"• <b>NII / HNI:</b> {nii}\n"
         f"• <b>Retail (RII):</b> {retail}\n"
@@ -309,31 +384,38 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
 
     lines = []
     for ipo in ipos:
+        # Exclude already listed past IPOs from active GMP dashboard
+        if ipo.get("is_already_listed"):
+            continue
+
         name = safe_text(ipo.get("company_name"))
         gmp = ipo.get("gmp")
         gmp_pct = ipo.get("gmp_percent", "")
         price = safe_text(ipo.get("price_band") or ipo.get("cut_off_price"), default="TBA")
 
         if gmp and str(gmp).strip() not in ("--", "0", ""):
-            gmp_display = f"₹{safe_text(gmp)}"
+            gmp_display = f"{safe_text(gmp)}"
             if gmp_pct:
                 gmp_display += f" ({safe_text(gmp_pct)})"
         else:
-            gmp_display = "No GMP yet"
+            gmp_display = "Trading yet to start"
 
         open_d = safe_text(ipo.get("open_date"), default="TBA")
         close_d = safe_text(ipo.get("close_date"), default="TBA")
 
+        kostak = safe_text(ipo.get("kostak"), default="")
+        rate_info = f" | Kostak: {kostak}" if kostak and kostak != "TBA" else ""
+
         lines.append(
             f"🔹 <b>{name}</b>\n"
             f"   • Price: {price} | Dates: {open_d} to {close_d}\n"
-            f"   • <b>GMP:</b> <b>{gmp_display}</b>\n"
+            f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}\n"
         )
 
     content = "\n".join(lines) if lines else "<i>No active Mainboard IPOs currently in bidding.</i>"
 
     return (
-        f"📊 <b>MAINBOARD IPO: LATEST GMP &amp; STATUS</b>\n"
+        f"📊 <b>MAINBOARD IPO: LIVE GMP DASHBOARD</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📅 <i>As of {date_str}</i>\n\n"
         f"{content}\n"

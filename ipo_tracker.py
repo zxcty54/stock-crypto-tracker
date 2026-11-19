@@ -30,7 +30,7 @@ from datetime import datetime, timezone, timedelta
 
 import requests
 
-from ipo_scrapers import IpoAggregator, sanitize_slug
+from ipo_scrapers import IpoAggregator, sanitize_slug, is_already_listed
 from ipo_formatter import (
     format_ipo_post,
     format_gmp_dashboard,
@@ -229,6 +229,7 @@ def is_posting_window(now: datetime) -> bool:
 def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) -> list[tuple[str, str]]:
     """
     Evaluate an IPO against today's date to determine which lifecycle alerts are pending.
+    Strictly excludes already-listed historical IPOs.
     Returns a list of (event_type, event_id).
     """
     events = []
@@ -239,13 +240,23 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
     listing_date = ipo.get("listing_date")
     allotment_out = ipo.get("allotment_out", False)
 
+    # 0. Reject already listed issues from lifecycle triggers
+    if is_already_listed(ipo, today_str):
+        return []
+
     # 1. NEW_IPO_ANNOUNCED
-    # Trigger if not yet posted and open_date is upcoming or open today (or within last 3 days)
+    # Trigger ONLY if upcoming or currently open (never for past/expired dates)
     new_event_id = f"ipo:{ipo_id}:announced"
     if new_event_id not in posted_events_set:
-        is_relevant = True
-        if close_date and close_date < today_str:
-            is_relevant = False  # Don't announce already closed ancient IPOs
+        is_relevant = False
+        if open_date and open_date >= today_str:
+            is_relevant = True
+        elif open_date and close_date and open_date <= today_str <= close_date:
+            is_relevant = True
+        elif not open_date and not close_date and (ipo.get("price_band") or ipo.get("issue_size_cr")):
+            # Known upcoming DRHP filing with preliminary terms
+            is_relevant = True
+
         if is_relevant:
             events.append(("NEW_IPO_ANNOUNCED", new_event_id))
 
@@ -265,7 +276,6 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
     # Trigger when allotment is finalized
     allot_event_id = f"ipo:{ipo_id}:allotment_out"
     if allot_event_id not in posted_events_set:
-        # Trigger if explicitly marked or if today is allotment_date
         should_trigger_allot = False
         if allotment_out:
             should_trigger_allot = True
@@ -371,10 +381,9 @@ def run_tracker(now: datetime | None = None) -> int:
         logger.info("Generating Mainboard IPO GMP Dashboard summary...")
         active_ipos = [
             ipo for ipo in master.values()
-            if not ipo.get("listing_date") or ipo.get("listing_date") >= today_str
+            if not ipo.get("is_already_listed")
         ]
         if not active_ipos:
-            # Fallback to the latest tracked IPOs
             active_ipos = list(master.values())[:6]
 
         dashboard_text = format_gmp_dashboard(active_ipos, as_of_date=now.strftime("%d-%b-%Y"))
@@ -422,7 +431,7 @@ def run_tracker(now: datetime | None = None) -> int:
         logger.info("ℹ️ No pending lifecycle events. Broadcasting live Mainboard IPO GMP Dashboard to channel...")
         active_ipos = [
             ipo for ipo in master.values()
-            if not ipo.get("listing_date") or ipo.get("listing_date") >= today_str
+            if not ipo.get("is_already_listed")
         ]
         if not active_ipos:
             active_ipos = list(master.values())[:6]

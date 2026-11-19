@@ -1,936 +1,54 @@
 [
   {
-    "id": "zetwerkipo-email-protected-5-46",
-    "company_name": "Zetwerk",
-    "symbol": "",
+    "id": "carraro-india",
+    "company_name": "Carraro India Limited",
+    "symbol": "CARRARO",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
     "open_date": null,
     "close_date": null,
     "allotment_date": null,
     "listing_date": null,
-    "price_band": "151",
-    "lot_size": 99,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹1.2(0.79%)1 ↓ / 30 ↑",
-    "gmp_percent": "0.79%",
+    "price_band": "TBA",
+    "cut_off_price": null,
+    "lot_size": null,
+    "min_investment": null,
+    "issue_size_cr": "1,812",
+    "fresh_issue_cr": "0",
+    "ofs_cr": "1,812",
+    "gmp": "",
+    "gmp_percent": "",
     "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
     },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 151,
-    "min_investment": 14949,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "zetwerk",
-    "company_name": "Zetwerk",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "151",
-    "lot_size": 99,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹1.2(0.79%)1 ↓ / 30 ↑",
-    "gmp_percent": "0.79%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
+    "financials": {
+      "revenue": "1,770.40",
+      "pat": "60.62",
+      "net_worth": "428.15"
     },
-    "about": "",
-    "sources": [
-      "investorgain"
+    "drhp_objects": [
+      "Offer for Sale by Carraro International S.E.",
+      "Enhance brand visibility and provide liquidity to shareholders"
     ],
-    "cut_off_price": 151,
-    "min_investment": 14949,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "tonbo-imaging-indiaipo-email-protected-65-71",
-    "company_name": "Tonbo Imaging India",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "700",
-    "lot_size": 21,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹452(64.57%)270 ↓ / 516 ↑",
-    "gmp_percent": "64.57%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
+    "lead_managers": [
+      "Axis Capital",
+      "BNP Paribas",
+      "Nuvama Wealth Management"
+    ],
     "registrar": {
-      "name": "",
-      "url": ""
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
     },
-    "about": "",
+    "about": "Leading manufacturer of transmission systems, axles, and drive systems for agricultural tractors and construction equipment in India.",
     "sources": [
-      "investorgain"
+      "chittorgarh",
+      "sebi"
     ],
-    "cut_off_price": 700,
-    "min_investment": 14700,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "tonbo-imaging",
-    "company_name": "Tonbo Imaging India",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "700",
-    "lot_size": 21,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹452(64.57%)270 ↓ / 516 ↑",
-    "gmp_percent": "64.57%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 700,
-    "min_investment": 14700,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "sahajanand-medical-technologiesipo-email-protected-7-89",
-    "company_name": "Sahajanand Medical Technologies",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "344",
-    "lot_size": 43,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹17(4.94%)15 ↓ / 43 ↑",
-    "gmp_percent": "4.94%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 344,
-    "min_investment": 14792,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "sahajanand-medical-technologies",
-    "company_name": "Sahajanand Medical Technologies",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "344",
-    "lot_size": 43,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹17(4.94%)15 ↓ / 43 ↑",
-    "gmp_percent": "4.94%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 344,
-    "min_investment": 14792,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "sfc-environmental-technologiesipo-email-protected-7-61",
-    "company_name": "SFC Environmental Technologies",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "330",
-    "lot_size": 45,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹15.5(4.70%)10 ↓ / 32 ↑",
-    "gmp_percent": "4.70%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 330,
-    "min_investment": 14850,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "sfc-environmental-technologies",
-    "company_name": "SFC Environmental Technologies",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "330",
-    "lot_size": 45,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹15.5(4.70%)10 ↓ / 32 ↑",
-    "gmp_percent": "4.70%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 330,
-    "min_investment": 14850,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "paras-healthcareipo-email-protected-3-9",
-    "company_name": "Paras Healthcare",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "693",
-    "lot_size": 21,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹13(1.88%)9 ↓ / 96 ↑",
-    "gmp_percent": "1.88%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 693,
-    "min_investment": 14553,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "paras-healthcare",
-    "company_name": "Paras Healthcare",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "693",
-    "lot_size": 21,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹13(1.88%)9 ↓ / 96 ↑",
-    "gmp_percent": "1.88%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 693,
-    "min_investment": 14553,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "mahanadi-coalfieldsipou",
-    "company_name": "Mahanadi Coalfields",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "136",
-    "lot_size": 110,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹3.1(2.28%)3.10 ↓ / 9.25 ↑",
-    "gmp_percent": "2.28%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 136,
-    "min_investment": 14960,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "mahanadi-coalfields",
-    "company_name": "Mahanadi Coalfields",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "136",
-    "lot_size": 110,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹3.1(2.28%)3.10 ↓ / 9.25 ↑",
-    "gmp_percent": "2.28%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 136,
-    "min_investment": 14960,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "m-k-sons-fine-jewelsipo-email-protected-5-56",
-    "company_name": "M.K.Sons Fine Jewels",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "162",
-    "lot_size": 91,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹11(6.79%)5.50 ↓ / 15 ↑",
-    "gmp_percent": "6.79%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 162,
-    "min_investment": 14742,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "m-k-sons-fine-jewels",
-    "company_name": "M.K.Sons Fine Jewels",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "162",
-    "lot_size": 91,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹11(6.79%)5.50 ↓ / 15 ↑",
-    "gmp_percent": "6.79%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 162,
-    "min_investment": 14742,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "jio-platformsipo-email-protected-21-36",
-    "company_name": "Jio Platforms",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "1,119",
-    "lot_size": 12,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹250(22.34%)148 ↓ / 273 ↑",
-    "gmp_percent": "22.34%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 1119,
-    "min_investment": 13428,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "jio-platforms",
-    "company_name": "Jio Platforms",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "1,119",
-    "lot_size": 12,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹250(22.34%)148 ↓ / 273 ↑",
-    "gmp_percent": "22.34%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 1119,
-    "min_investment": 13428,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "eaaa-alternativesipo-email-protected-0-63",
-    "company_name": "EAAA India Alternatives",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "1,665",
-    "lot_size": 9,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹54(3.24%)11 ↓ / 121 ↑",
-    "gmp_percent": "3.24%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 1665,
-    "min_investment": 14985,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "eaaa-alternatives",
-    "company_name": "EAAA India Alternatives",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "1,665",
-    "lot_size": 9,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹54(3.24%)11 ↓ / 121 ↑",
-    "gmp_percent": "3.24%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 1665,
-    "min_investment": 14985,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "crystal-crop-protectionipoo",
-    "company_name": "Crystal Crop Protection",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "272",
-    "lot_size": 55,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹18(6.62%)13 ↓ / 40 ↑",
-    "gmp_percent": "6.62%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 272,
-    "min_investment": 14960,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "crystal-crop-protection",
-    "company_name": "Crystal Crop Protection",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "272",
-    "lot_size": 55,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹18(6.62%)13 ↓ / 40 ↑",
-    "gmp_percent": "6.62%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 272,
-    "min_investment": 14960,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bonfiglioli-transmissionsipo-email-protected-0",
-    "company_name": "Bonfiglioli Transmissions",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "586",
-    "lot_size": 25,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹66(11.26%)66 ↓ / 178 ↑",
-    "gmp_percent": "11.26%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 586,
-    "min_investment": 14650,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bonfiglioli-transmissions",
-    "company_name": "Bonfiglioli Transmissions",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "586",
-    "lot_size": 25,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹66(11.26%)66 ↓ / 178 ↑",
-    "gmp_percent": "11.26%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 586,
-    "min_investment": 14650,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bombay-coated-and-special-steelsipo-email-protected-10-98",
-    "company_name": "Bombay Coated and Special Steels",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "82",
-    "lot_size": 182,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹8(9.76%)7 ↓ / 9 ↑",
-    "gmp_percent": "9.76%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 82,
-    "min_investment": 14924,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bombay-coated-and-special-steels",
-    "company_name": "Bombay Coated and Special Steels",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "82",
-    "lot_size": 182,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹8(9.76%)7 ↓ / 9 ↑",
-    "gmp_percent": "9.76%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 82,
-    "min_investment": 14924,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bls-polymersipo-email-protected-65-33",
-    "company_name": "BLS Polymers",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "150",
-    "lot_size": 100,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹69(46.00%)18 ↓ / 70 ↑",
-    "gmp_percent": "46.00%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 150,
-    "min_investment": 15000,
-    "created_at": "2026-11-19T10:03:02.491515+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ]
-  },
-  {
-    "id": "bls-polymers",
-    "company_name": "BLS Polymers",
-    "symbol": "",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": null,
-    "close_date": null,
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "150",
-    "lot_size": 100,
-    "issue_size_cr": "",
-    "fresh_issue_cr": "",
-    "ofs_cr": "",
-    "gmp": "₹69(46.00%)18 ↓ / 70 ↑",
-    "gmp_percent": "46.00%",
-    "est_listing_price": "",
-    "listing_price": "",
-    "listing_gain": "",
-    "subscription": {},
-    "registrar": {
-      "name": "",
-      "url": ""
-    },
-    "about": "",
-    "sources": [
-      "investorgain"
-    ],
-    "cut_off_price": 150,
-    "min_investment": 15000,
-    "created_at": "2026-11-19T10:05:30.881820+05:30",
+    "is_already_listed": false,
+    "status": "UPCOMING",
     "posted_events": [
       "NEW_IPO_ANNOUNCED"
     ]
@@ -952,25 +70,61 @@
     "issue_size_cr": "8,000",
     "fresh_issue_cr": "0",
     "ofs_cr": "8,000",
-    "gmp": "18",
+    "gmp": "+₹18.00",
     "gmp_percent": "+23.08%",
     "est_listing_price": "₹96.00",
+    "kostak": "₹400",
+    "sub2sauda": "₹2,500",
     "subscription": {
-      "qib": "Updating...",
-      "nii": "Updating...",
-      "retail": "Updating...",
+      "qib": "Upcoming",
+      "nii": "Upcoming",
+      "retail": "Upcoming",
       "total": "Upcoming"
     },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "financials": {
+      "revenue": "8,911.90",
+      "pat": "461.94",
+      "net_worth": "2,410.50"
+    },
+    "kpis": {
+      "pe_ratio": "38.5",
+      "ronw": "19.16%",
+      "market_cap": "35,000"
+    },
+    "drhp_objects": [
+      "Achieve the benefits of listing the equity shares on the stock exchanges",
+      "Carry out the Offer for Sale (OFS) of equity shares by Samayat Services LLP"
+    ],
+    "promoter_holding": {
+      "pre_issue": "96.46%",
+      "post_issue": "74.50%"
+    },
+    "lead_managers": [
+      "Kotak Mahindra Capital",
+      "ICICI Securities",
+      "Jefferies India",
+      "J.P. Morgan India",
+      "Morgan Stanley India"
+    ],
     "registrar": {
       "name": "KFin Technologies Limited",
       "url": "https://kosmic.kfintech.com/ipostatus/"
     },
-    "about": "One of India's leading hypermarket and value-retail operators serving Tier-1 to Tier-4 cities with an extensive range of apparel, general merchandise, and FMCG products.",
+    "about": "One of India’s foremost hypermarket retail chains providing value-for-money fashion, FMCG, and general merchandise to middle-income families across 600+ stores.",
     "sources": [
       "chittorgarh",
-      "investorgain"
+      "ipocentral_gmp"
     ],
-    "posted_events": []
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ]
   },
   {
     "id": "ntpc-green-energy",
@@ -989,9 +143,11 @@
     "issue_size_cr": "10,000",
     "fresh_issue_cr": "10,000",
     "ofs_cr": "0",
-    "gmp": "8",
+    "gmp": "+₹8.00",
     "gmp_percent": "+7.41%",
     "est_listing_price": "₹116.00",
+    "kostak": "₹250",
+    "sub2sauda": "₹1,200",
     "subscription": {
       "qib": "3.28x",
       "nii": "1.82x",
@@ -999,16 +155,47 @@
       "total": "2.42x",
       "as_of": "Day 3 (Final)"
     },
+    "reservation": {
+      "qib_pct": "75%",
+      "nii_pct": "15%",
+      "retail_pct": "10%"
+    },
+    "financials": {
+      "revenue": "2,037.66",
+      "pat": "344.72",
+      "net_worth": "7,185.00"
+    },
+    "kpis": {
+      "pe_ratio": "53.2",
+      "ronw": "5.21%",
+      "market_cap": "91,000"
+    },
+    "drhp_objects": [
+      "Investment in wholly-owned subsidiary, NTPC Renewable Energy Ltd (NREL) for repayment/prepayment of borrowings (₹7,500 Cr)",
+      "General corporate purposes"
+    ],
+    "promoter_holding": {
+      "pre_issue": "100%",
+      "post_issue": "89.01%"
+    },
+    "lead_managers": [
+      "IDBI Capital Markets",
+      "HDFC Bank Limited",
+      "IIFL Securities",
+      "Nuvama Wealth Management"
+    ],
     "registrar": {
       "name": "KFin Technologies Limited",
       "url": "https://kosmic.kfintech.com/ipostatus/"
     },
-    "about": "A wholly-owned subsidiary of NTPC Limited and India's premier public-sector renewable energy giant with a massive operational and pipeline capacity in solar, wind, and green energy solutions.",
+    "about": "India’s largest renewable energy public sector enterprise (excluding hydro) in terms of operating capacity, focused on utility-scale solar and wind projects.",
     "sources": [
       "chittorgarh",
-      "investorgain",
+      "ipocentral_gmp",
       "nse"
     ],
+    "is_already_listed": false,
+    "status": "OPEN",
     "posted_events": [
       "NEW_IPO_ANNOUNCED"
     ]
@@ -1030,7 +217,7 @@
     "issue_size_cr": "11,327",
     "fresh_issue_cr": "4,499",
     "ofs_cr": "6,828",
-    "gmp": "12",
+    "gmp": "+₹12.00",
     "gmp_percent": "+3.08%",
     "est_listing_price": "₹402.00",
     "listing_price": "₹412.00",
@@ -1046,57 +233,13 @@
       "name": "Link Intime India Private Ltd",
       "url": "https://linkintime.co.in/initial_offer/public-issues.html"
     },
-    "about": "Pioneering Indian consumer technology company operating an end-to-end convenience platform spanning online food delivery, quick commerce (Instamart), and dining out services.",
+    "about": "Pioneering Indian consumer technology company operating online food delivery, quick commerce (Instamart), and dining out services.",
     "sources": [
       "chittorgarh",
       "nse"
     ],
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
-  },
-  {
-    "id": "acme-solar-holdings",
-    "company_name": "ACME Solar Holdings Limited",
-    "symbol": "ACMESOLAR",
-    "issue_type": "Mainboard",
-    "exchange": "NSE & BSE",
-    "open_date": "2024-11-06",
-    "close_date": "2024-11-08",
-    "allotment_date": "2024-11-11",
-    "listing_date": "2024-11-13",
-    "price_band": "₹275 to ₹289",
-    "cut_off_price": 289,
-    "lot_size": 51,
-    "min_investment": 14739,
-    "issue_size_cr": "2,900",
-    "fresh_issue_cr": "2,395",
-    "ofs_cr": "505",
-    "gmp": "0",
-    "gmp_percent": "0.00%",
-    "est_listing_price": "₹289.00",
-    "listing_price": "₹251.00",
-    "listing_gain": "-13.15%",
-    "subscription": {
-      "qib": "3.10x",
-      "nii": "0.97x",
-      "retail": "3.25x",
-      "total": "2.89x",
-      "as_of": "Final"
-    },
-    "registrar": {
-      "name": "KFin Technologies Limited",
-      "url": "https://kosmic.kfintech.com/ipostatus/"
-    },
-    "about": "One of the largest renewable energy independent power producers (IPP) in India with comprehensive utility-scale solar and hybrid project portfolios.",
-    "sources": [
-      "chittorgarh",
-      "investorgain"
-    ],
+    "is_already_listed": true,
+    "status": "LISTED",
     "posted_events": [
       "NEW_IPO_ANNOUNCED",
       "IPO_OPENS_TODAY",
