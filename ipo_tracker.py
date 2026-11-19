@@ -274,6 +274,52 @@ def is_active_mainboard_issue(ipo: dict, today_str: str) -> bool:
     return False
 
 
+def check_significant_gmp_movement(old_gmp: str | None, new_gmp: str | None) -> tuple[bool, str]:
+    """
+    Check if GMP movement is significant enough to warrant a dedicated breaking post.
+    Thresholds:
+      - Absolute change >= ₹8/share
+      - OR Relative change >= 25% with at least ₹3 change
+    """
+    if not new_gmp or new_gmp in ("--", "0", ""):
+        return False, ""
+    if not old_gmp or old_gmp in ("--", "0", ""):
+        return False, ""
+
+    def parse_amt(val_str: str) -> float | None:
+        m = re.search(r"[-+]?\d+(?:\.\d+)?", val_str.replace(",", ""))
+        return float(m.group(0)) if m else None
+
+    old_val = parse_amt(old_gmp)
+    new_val = parse_amt(new_gmp)
+    if old_val is None or new_val is None:
+        return False, ""
+
+    diff = new_val - old_val
+    abs_diff = abs(diff)
+    if abs_diff < 3.0:
+        return False, ""
+
+    is_significant = False
+    if abs_diff >= 8.0:
+        is_significant = True
+    elif old_val > 0 and (abs_diff / old_val) >= 0.25:
+        is_significant = True
+
+    if not is_significant:
+        return False, ""
+
+    if old_val > 0:
+        pct = (diff / old_val) * 100
+        direction = "Surge 📈" if pct > 0 else "Drop 📉"
+        pct_sign = "+" if pct > 0 else ""
+        surge_text = f"({pct_sign}{pct:.1f}% {direction})"
+    else:
+        surge_text = "📈"
+
+    return True, surge_text
+
+
 def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) -> list[tuple[str, str]]:
     """
     Evaluate an IPO against today's date to determine which lifecycle alerts are pending.
@@ -332,6 +378,20 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
     list_event_id = f"ipo:{ipo_id}:listing_today"
     if listing_date and listing_date == today_str and list_event_id not in posted_events_set:
         events.append(("LISTING_TODAY", list_event_id))
+
+    # 6. GMP_UPDATE (Significant GMP Movement Alert - Option 3)
+    last_posted_gmp = ipo.get("last_posted_gmp")
+    current_gmp = ipo.get("gmp")
+    if current_gmp and is_active_mainboard_issue(ipo, today_str):
+        if not last_posted_gmp:
+            ipo["last_posted_gmp"] = current_gmp
+        else:
+            is_sig, surge_text = check_significant_gmp_movement(last_posted_gmp, current_gmp)
+            if is_sig:
+                gmp_event_id = f"ipo:{ipo_id}:gmp_update:{current_gmp}"
+                if gmp_event_id not in posted_events_set:
+                    ipo["surge_text"] = surge_text
+                    events.append(("GMP_UPDATE", gmp_event_id))
 
     return events
 
@@ -513,6 +573,11 @@ def run_tracker(now: datetime | None = None) -> int:
                     ipo["posted_events"] = []
                 if event_type not in ipo["posted_events"]:
                     ipo["posted_events"].append(event_type)
+                if event_type == "GMP_UPDATE":
+                    ipo["last_posted_gmp"] = ipo.get("gmp")
+                    ipo.pop("surge_text", None)
+                elif not ipo.get("last_posted_gmp"):
+                    ipo["last_posted_gmp"] = ipo.get("gmp")
 
             dispatched_count += 1
             logger.info(f"   ✅ Successfully broadcasted [{event_type}] for {comp_name}")

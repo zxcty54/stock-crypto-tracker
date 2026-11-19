@@ -440,7 +440,7 @@ def format_allotment_out_alert(ipo: dict) -> str:
     )
 
 
-def format_gmp_update_alert(ipo: dict, old_gmp: str = "") -> str:
+def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") -> str:
     """Template for significant GMP movement alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
@@ -452,11 +452,27 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "") -> str:
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
     gmp = safe_text(ipo.get("gmp"), default="N/A")
     gmp_pct = safe_text(ipo.get("gmp_percent"), default="")
-    gmp_str = f"<b>{gmp}</b> ({gmp_pct})" if gmp_pct else f"<b>{gmp}</b>"
+
+    surge_disp = f" <b>{surge_text}</b>" if surge_text else ""
+    gmp_str = f"<b>{gmp}</b> ({gmp_pct}){surge_disp}" if gmp_pct else f"<b>{gmp}</b>{surge_disp}"
 
     old_str = f"• <b>Previous GMP:</b> {old_gmp}\n" if old_gmp else ""
     kostak = safe_text(ipo.get("kostak"), default="")
     kostak_str = f"• <b>Kostak Rate:</b> {kostak}\n" if kostak and kostak != "TBA" else ""
+
+    # Live NSE Demand / Bids if available
+    sub = ipo.get("subscription", {})
+    sub_line = ""
+    if isinstance(sub, dict) and sub.get("total") and sub.get("total") not in ("Upcoming", ""):
+        sub_parts = []
+        if sub.get("qib") and sub.get("qib") != "Upcoming":
+            sub_parts.append(f"QIB: {sub['qib']}")
+        if sub.get("nii") and sub.get("nii") != "Upcoming":
+            sub_parts.append(f"NII: {sub['nii']}")
+        if sub.get("retail") and sub.get("retail") != "Upcoming":
+            sub_parts.append(f"Retail: {sub['retail']}")
+        sub_parts.append(f"<b>Total: {sub['total']}</b>")
+        sub_line = f"• <b>NSE Demand:</b> {' | '.join(sub_parts)}\n"
 
     return (
         f"⚡ <b>LIVE GMP MOVEMENT ALERT</b>\n"
@@ -469,7 +485,8 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "") -> str:
         f"{old_str}"
         f"• <b>Current GMP:</b> {gmp_str}\n"
         f"• <b>Expected Listing Price:</b> {est_list}\n"
-        f"{kostak_str}\n"
+        f"{kostak_str}"
+        f"{sub_line}\n"
         f"<i>*GMP is based on unofficial market trades &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Tracking:</b> {CHANNEL_HANDLE}"
@@ -598,7 +615,11 @@ def format_ipo_post(event_type: str, ipo: dict) -> str | None:
         "IPO_CLOSING_TODAY": format_closing_today_alert,
         "ALLOTMENT_OUT": format_allotment_out_alert,
         "LISTING_TODAY": format_listing_today_alert,
-        "GMP_UPDATE": format_gmp_update_alert,
+        "GMP_UPDATE": lambda x: format_gmp_update_alert(
+            x,
+            old_gmp=x.get("last_posted_gmp", ""),
+            surge_text=x.get("surge_text", ""),
+        ),
     }
     formatter = formatters.get(event_type)
     if not formatter:

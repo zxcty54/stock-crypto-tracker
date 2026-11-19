@@ -33,10 +33,11 @@ from ipo_formatter import (
     format_closing_today_alert,
     format_allotment_out_alert,
     format_listing_today_alert,
+    format_gmp_update_alert,
     format_gmp_dashboard,
     format_ipo_post,
 )
-from ipo_tracker import evaluate_ipo_events
+from ipo_tracker import evaluate_ipo_events, check_significant_gmp_movement
 
 
 class TestIpoScraperHelpers(unittest.TestCase):
@@ -473,6 +474,49 @@ class TestLifecycleEngine(unittest.TestCase):
         events = evaluate_ipo_events(crystal, today_str="2026-11-19", posted_events_set=set())
         event_types = [e[0] for e in events]
         self.assertIn("NEW_IPO_ANNOUNCED", event_types)
+
+    def test_significant_gmp_movement_thresholds(self):
+        # Routine ₹1 fluctuation -> should NOT trigger
+        is_sig, _ = check_significant_gmp_movement("+₹18.00", "+₹19.00")
+        self.assertFalse(is_sig)
+
+        # Large surge (+₹18 to +₹28) -> SHOULD trigger (+55.6% Surge)
+        is_sig, text = check_significant_gmp_movement("+₹18.00", "+₹28.00")
+        self.assertTrue(is_sig)
+        self.assertIn("Surge", text)
+
+        # Large drop (+₹18 to +₹10) -> SHOULD trigger (-44.4% Drop)
+        is_sig, text = check_significant_gmp_movement("+₹18.00", "+₹10.00")
+        self.assertTrue(is_sig)
+        self.assertIn("Drop", text)
+
+        # Doubling (+₹3 to +₹6) -> SHOULD trigger (+100% Surge)
+        is_sig, text = check_significant_gmp_movement("+₹3.00", "+₹6.00")
+        self.assertTrue(is_sig)
+
+    def test_gmp_update_alert_format(self):
+        ipo = {
+            "company_name": "Crystal Crop Protection Limited",
+            "symbol": "CRYSTAL",
+            "price_band": "₹259 to ₹272",
+            "open_date": "2026-11-18",
+            "close_date": "2026-11-20",
+            "gmp": "+₹28.00",
+            "gmp_percent": "+10.29%",
+            "est_listing_price": "₹300.00",
+            "kostak": "₹350",
+            "subscription": {
+                "qib": "1.80x",
+                "retail": "4.50x",
+                "total": "3.20x",
+            },
+        }
+        msg = format_gmp_update_alert(ipo, old_gmp="+₹18.00", surge_text="(+55.6% Surge 📈)")
+        self.assertIn("LIVE GMP MOVEMENT ALERT", msg)
+        self.assertIn("Previous GMP:</b> +₹18.00", msg)
+        self.assertIn("+₹28.00", msg)
+        self.assertIn("Surge", msg)
+        self.assertIn("NSE Demand", msg)
 
 
 if __name__ == "__main__":
