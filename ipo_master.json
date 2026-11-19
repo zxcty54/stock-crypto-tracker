@@ -252,7 +252,7 @@
     "close_date": "2026-11-23",
     "allotment_date": "2026-11-24",
     "listing_date": "2026-11-26",
-    "price_band": "₹129 to ₹136",
+    "price_band": "₹129 - ₹136",
     "cut_off_price": 136,
     "face_value": "10",
     "lot_size": 110,
@@ -261,8 +261,8 @@
     "fresh_issue_cr": "0",
     "ofs_cr": "4,200",
     "gmp": "+₹3.00",
-    "gmp_percent": "+2.21%",
-    "est_listing_price": "₹139.00",
+    "gmp_percent": 2.21,
+    "est_listing_price": "₹139(+2.21%)",
     "kostak": "₹150",
     "sub2sauda": "₹1,200",
     "subscription": {
@@ -318,7 +318,8 @@
     "status": "OPEN",
     "posted_events": [
       "IPO_OPENS_TODAY"
-    ]
+    ],
+    "last_updated": "2026-11-19T11:22:51.859143+05:30"
   },
   {
     "id": "crystal-crop-protection",
@@ -331,7 +332,7 @@
     "close_date": "2026-11-20",
     "allotment_date": "2026-11-23",
     "listing_date": "2026-11-25",
-    "price_band": "₹259 to ₹272",
+    "price_band": "₹259 - ₹272",
     "cut_off_price": 272,
     "face_value": "10",
     "lot_size": 55,
@@ -340,8 +341,8 @@
     "fresh_issue_cr": "600",
     "ofs_cr": "900",
     "gmp": "+₹18.00",
-    "gmp_percent": "+6.62%",
-    "est_listing_price": "₹290.00",
+    "gmp_percent": 6.62,
+    "est_listing_price": "₹290(+6.62%)",
     "kostak": "₹300",
     "sub2sauda": "₹2,500",
     "subscription": {
@@ -397,7 +398,8 @@
     "status": "OPEN",
     "posted_events": [
       "NEW_IPO_ANNOUNCED"
-    ]
+    ],
+    "last_updated": "2026-11-19T11:22:51.859143+05:30"
   },
   {
     "id": "vishal-mega-mart",
