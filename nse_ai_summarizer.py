@@ -34,8 +34,8 @@ BATCH_PAUSE_SECONDS = 20
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 
-# 24 Hours retention calculated strictly from the time of insertion
-CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
+# 72 Hours retention (3 Days) so app feed is never wiped blank over weekends or holidays
+CUTOFF_24H_ANALYZED = NOW - timedelta(days=3)
 
 MODEL_REGISTRY = [
     {"name": "openai/gpt-oss-20b", "provider": "groq"},
@@ -397,7 +397,8 @@ def process_corporate_actions_feed():
 
     # 1. Actionable Announcements from Master Archive
     for a in master_data.get("corporate_announcements", []):
-        if a.get("hash") not in processed_hashes and a.get("pdf_extracted_text"):
+        if a.get("hash") not in processed_hashes and (a.get("pdf_extracted_text") or a.get("summary") or a.get("subject")):
+            content_body = (a.get("pdf_extracted_text") or f"{a.get('subject')}. {a.get('summary')}")[:12000]
             candidates.append({
                 "type": "ANNOUNCEMENT",
                 "hash": a.get("hash"),
@@ -406,7 +407,7 @@ def process_corporate_actions_feed():
                 "category": a.get("category"),
                 "subject": a.get("subject"),
                 "summary": a.get("summary"),
-                "payload_text": a.get("pdf_extracted_text")[:12000],
+                "payload_text": content_body,
                 "broadcast_date": a.get("broadcast_date"),
                 "pdf_link": a.get("pdf_link")
             })
@@ -469,10 +470,33 @@ def process_corporate_actions_feed():
         batch_result = call_hybrid_ai(prompt_str)
 
         if not batch_result:
-            print(f"⚠️ Batch {batch_counter} failed across all providers. Skipping batch.")
-            i += BATCH_SIZE
-            batch_counter += 1
-            continue
+            print(f"⚠️ Batch {batch_counter} AI unavailable. Using structured fallback...")
+            batch_result = []
+            for b_idx, itm in enumerate(batch, 1):
+                clean_dt = str(itm.get("broadcast_date") or "").replace(" IST", "").strip()
+                cat = itm.get("category", "GENERAL")
+                sym = itm.get("symbol", "")
+                comp = itm.get("company_name") or sym
+                subj = itm.get("subject", "")
+                summ = itm.get("summary", "")
+                link = itm.get("pdf_link") or "https://www.nseindia.com"
+
+                formatted_post = (
+                    f"🏢 <b>{comp} ({sym})</b>\n"
+                    f"🏷️ <i>Corporate Filing · {cat}</i>\n"
+                    f"📅 <i>{clean_dt}</i>\n\n"
+                    f"📄 <b>Subject:</b> {subj}\n"
+                    f"📝 <b>Summary:</b> {summ or 'Filing submitted to stock exchange.'}\n\n"
+                    f"📌 <b>Source:</b> <a href=\"{link}\">Official NSE Corporate Filing</a>"
+                )
+                batch_result.append({
+                    "input_id": b_idx,
+                    "content_worthy": True,
+                    "worthiness_reason": f"Qualified NSE {cat} announcement",
+                    "event_type": cat,
+                    "headline": subj[:120],
+                    "telegram_post": formatted_post,
+                })
 
         result_map = {res.get("input_id"): res for res in batch_result if isinstance(res, dict)}
 
@@ -515,8 +539,10 @@ def process_corporate_actions_feed():
                 print(f"  ⏭️ [SKIPPED]  {itm['symbol']}: {res.get('worthiness_reason', '')[:50]}")
                 feed_archive["skipped_archive"].insert(0, record)
 
-        feed_archive["content_feed"] = [item for item in feed_archive["content_feed"] if is_within_24h_of_analysis(item)]
-        feed_archive["skipped_archive"] = [item for item in feed_archive["skipped_archive"] if is_within_24h_of_analysis(item)]
+        if len(feed_archive["content_feed"]) > 20:
+            feed_archive["content_feed"] = [item for item in feed_archive["content_feed"] if is_within_24h_of_analysis(item)]
+        if len(feed_archive["skipped_archive"]) > 50:
+            feed_archive["skipped_archive"] = [item for item in feed_archive["skipped_archive"] if is_within_24h_of_analysis(item)]
 
         feed_archive["generated_at"] = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
         feed_archive["worthy_count"] = len(feed_archive["content_feed"])
