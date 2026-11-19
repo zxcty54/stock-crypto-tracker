@@ -12,6 +12,9 @@ import '../widgets/macro_research_desk_view.dart';
 // 🏢 Company Business Intelligence Screen Import
 import 'company_intelligence_screen.dart';
 
+// 🏭 Physical Economy Demand Radar Import
+import 'economy_demand_radar_screen.dart';
+
 // 📢 Corporate Announcements Screen Import
 import 'corporate_announcements_screen.dart';
 
@@ -439,7 +442,97 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🏢 7. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
+              // 🏭 7. PHYSICAL ECONOMY DEMAND RADAR ENTRY BANNER
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EconomyDemandRadarScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFFFF9100).withAlpha(80),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFF9100).withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.factory_rounded,
+                                color: Color(0xFFFF9100),
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "PHYSICAL ECONOMY RADAR",
+                                        style: TextStyle(
+                                          color: Color(0xFFFF9100),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.1,
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        "8-CORE · PORTS · FUEL",
+                                        style: TextStyle(
+                                          color: Color(0xFF38BDF8),
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 3),
+                                  Text(
+                                    "Physical Ground Telemetry & Sector Demand Signals",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Color(0xFF8896AB),
+                              size: 14,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // 🏢 8. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
