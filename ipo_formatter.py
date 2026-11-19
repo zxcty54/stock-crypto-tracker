@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-IPO TELEGRAM POST FORMATTER (ENHANCED WITH DRHP DETAILS)
-========================================================
-Generates rich, clean, professional HTML messages for Telegram (@ipocentral).
+IPO TELEGRAM POST FORMATTER (INSTITUTIONAL DRHP EDITION)
+=========================================================
+Generates comprehensive, institutional-grade HTML messages for Telegram (@ipocentral).
 
-Includes:
-1. NEW_IPO_ANNOUNCED - Comprehensive overview with DRHP Objects, Quota Reservations,
-                       Financial highlights, KPIs, Promoters, Lead Managers & verified GMP.
+Includes every critical detail required by retail, HNI & institutional investors:
+1. NEW_IPO_ANNOUNCED - Full DRHP Analysis: Timetable, Ticket Sizes (Retail, sNII, bNII),
+                       Fresh vs OFS, Live GMP + Kostak + Sub2Sauda, Quota Allocation,
+                       Multi-year Restated Financials, Valuation KPIs (P/E, RoNW, RoCE, MCap),
+                       Objects of the Issue, Promoters Pre/Post holding, Lead Managers & Registrar.
 2. IPO_OPENS_TODAY   - Opening Day bidding alert with GMP, Kostak, lot details & cutoff times.
 3. IPO_CLOSING_TODAY - Final Day bidding reminder with live subscription numbers & GMP.
 4. ALLOTMENT_OUT     - Basis of Allotment finalized with 1-click direct registrar & exchange links.
@@ -44,25 +46,64 @@ def format_currency(val: int | float | str | None) -> str:
 
 
 # ============================================================
-# EVENT FORMATTERS (ENHANCED)
+# EVENT FORMATTERS (INSTITUTIONAL GRADE)
 # ============================================================
 
 def format_new_ipo_alert(ipo: dict) -> str:
-    """Template for newly announced / filed Mainboard IPO enriched with DRHP details."""
+    """Comprehensive DRHP overview card containing all essential investor metrics."""
     comp_name = safe_text(ipo.get("company_name"))
+    sym = safe_text(ipo.get("symbol"), default="")
+    sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
+
+    sector = safe_text(ipo.get("sector"), default="Mainboard Equity")
+
     open_d = safe_text(ipo.get("open_date"), default="Announcing Soon")
     close_d = safe_text(ipo.get("close_date"), default="Announcing Soon")
     allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
+    refund_d = safe_text(ipo.get("refund_date"), default="Next Business Day")
+    demat_d = safe_text(ipo.get("demat_date"), default="Prior to Listing")
     list_d = safe_text(ipo.get("listing_date"), default="Tentative")
 
     price_band = safe_text(ipo.get("price_band"))
     if not price_band.startswith("₹") and price_band != "TBA":
         price_band = f"₹{price_band}"
 
+    face_val = safe_text(ipo.get("face_value"), default="10")
     lot_size = safe_text(ipo.get("lot_size"))
+
+    # Lot & Investment Calculations
     min_inv = ipo.get("min_investment")
     min_inv_str = f"₹{format_currency(min_inv)}" if min_inv else "TBA"
 
+    # sNII (14 lots) and bNII (68 lots)
+    lot_int = None
+    try:
+        lot_int = int(str(ipo.get("lot_size", "")).strip())
+    except (ValueError, TypeError):
+        pass
+
+    cut_off_num = None
+    try:
+        cut_off_num = float(str(ipo.get("cut_off_price", "")).replace("₹", "").replace(",", "").strip())
+    except (ValueError, TypeError):
+        pass
+
+    snii_str = "TBA (> ₹2 Lakhs)"
+    bnii_str = "TBA (> ₹10 Lakhs)"
+    retail_max_str = "TBA (Max ₹2 Lakhs)"
+
+    if lot_int and cut_off_num:
+        snii_lots = 14
+        bnii_lots = 68
+        ret_max_lots = 13
+        snii_amt = int(round(snii_lots * lot_int * cut_off_num))
+        bnii_amt = int(round(bnii_lots * lot_int * cut_off_num))
+        ret_max_amt = int(round(ret_max_lots * lot_int * cut_off_num))
+        snii_str = f"₹{snii_amt:,.0f} ({snii_lots * lot_int} Shares)"
+        bnii_str = f"₹{bnii_amt:,.0f} ({bnii_lots * lot_int} Shares)"
+        retail_max_str = f"₹{ret_max_amt:,.0f} ({ret_max_lots * lot_int} Shares)"
+
+    # Issue Size Breakdown
     issue_size = safe_text(ipo.get("issue_size_cr"))
     if issue_size != "TBA" and not issue_size.endswith("Cr"):
         issue_size = f"₹{issue_size} Cr"
@@ -74,9 +115,11 @@ def format_new_ipo_alert(ipo: dict) -> str:
 
     size_breakdown = ""
     if fresh_issue or ofs:
-        size_breakdown = f"\n  ├ <b>Fresh Issue:</b> {fresh_issue or 'TBA'}\n  └ <b>Offer for Sale (OFS):</b> {ofs or 'TBA'}"
+        fresh_txt = f"₹{fresh_issue} Cr" if fresh_issue and not fresh_issue.startswith("₹") else (fresh_issue or "TBA")
+        ofs_txt = f"₹{ofs} Cr" if ofs and not ofs.startswith("₹") else (ofs or "TBA")
+        size_breakdown = f"\n  ├ <b>Fresh Issue:</b> {fresh_txt} (New capital to balance sheet)\n  └ <b>Offer for Sale (OFS):</b> {ofs_txt} (Promoter / PE Exit)"
 
-    # Verified GMP & Kostak
+    # Verified GMP & Kostak / Sub2Sauda
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
     if gmp and str(gmp).strip() not in ("--", "0", ""):
@@ -90,91 +133,117 @@ def format_new_ipo_alert(ipo: dict) -> str:
     kostak = safe_text(ipo.get("kostak"), default="")
     sub2 = safe_text(ipo.get("sub2sauda"), default="")
     rate_line = ""
-    if kostak != "TBA" or sub2 != "TBA":
-        rate_line = f"\n• <b>Kostak:</b> {kostak} | <b>Sub2Sauda:</b> {sub2}"
+    if (kostak and kostak != "TBA") or (sub2 and sub2 != "TBA"):
+        rate_line = f"\n• <b>Kostak:</b> {kostak or 'TBA'} | <b>Sub2Sauda:</b> {sub2 or 'TBA'}"
 
     # DRHP Quota Allocation
     res = ipo.get("reservation", {})
-    quota_lines = []
-    if res.get("qib_pct"):
-        quota_lines.append(f"• <b>QIB Quota:</b> {safe_text(res['qib_pct'])}")
-    if res.get("nii_pct"):
-        quota_lines.append(f"• <b>NII / HNI Quota:</b> {safe_text(res['nii_pct'])}")
-    if res.get("retail_pct"):
-        quota_lines.append(f"• <b>Retail (RII) Quota:</b> {safe_text(res['retail_pct'])}")
+    qib_q = safe_text(res.get("qib_pct"), default="50%")
+    nii_q = safe_text(res.get("nii_pct"), default="15%")
+    ret_q = safe_text(res.get("retail_pct"), default="35%")
 
-    quota_section = ""
-    if quota_lines:
-        quota_section = "\n\n📊 <b>SEBI DRHP ISSUE ALLOCATION</b>\n" + "\n".join(quota_lines)
-
-    # DRHP Financial Highlights
+    # Restated Consolidated Financials
     fin = ipo.get("financials", {})
     kpis = ipo.get("kpis", {})
     fin_lines = []
     if fin.get("revenue"):
-        fin_lines.append(f"• <b>Revenue (Latest):</b> ₹{safe_text(fin['revenue'])} Cr")
+        fin_lines.append(f"• <b>Revenue from Operations:</b> ₹{safe_text(fin['revenue'])} Cr")
     if fin.get("pat"):
         fin_lines.append(f"• <b>Profit After Tax (PAT):</b> ₹{safe_text(fin['pat'])} Cr")
-    if kpis.get("pe_ratio"):
-        fin_lines.append(f"• <b>P/E Ratio:</b> {safe_text(kpis['pe_ratio'])}x")
-    if kpis.get("ronw"):
-        fin_lines.append(f"• <b>RoNW / ROE:</b> {safe_text(kpis['ronw'])}")
-    if kpis.get("market_cap"):
-        fin_lines.append(f"• <b>Post-Issue Market Cap:</b> ₹{safe_text(kpis['market_cap'])} Cr")
+    if fin.get("net_worth"):
+        fin_lines.append(f"• <b>Total Net Worth:</b> ₹{safe_text(fin['net_worth'])} Cr")
+    if fin.get("debt"):
+        fin_lines.append(f"• <b>Total Borrowings / Debt:</b> ₹{safe_text(fin['debt'])} Cr")
 
     fin_section = ""
     if fin_lines:
-        fin_section = "\n\n📈 <b>FINANCIAL HIGHLIGHTS (RESTATED CONSOLIDATED)</b>\n" + "\n".join(fin_lines)
+        fin_section = "\n\n📈 <b>RESTATED CONSOLIDATED FINANCIALS (DRHP)</b>\n" + "\n".join(fin_lines)
 
-    # DRHP Objects of the Issue
+    # Valuation & Key Performance Indicators (KPIs)
+    kpi_lines = []
+    if kpis.get("pe_ratio"):
+        kpi_lines.append(f"• <b>P/E Ratio (Upper Band):</b> {safe_text(kpis['pe_ratio'])}x")
+    if kpis.get("ronw"):
+        kpi_lines.append(f"• <b>RoNW / ROE:</b> {safe_text(kpis['ronw'])}")
+    if kpis.get("market_cap"):
+        mcap_val = safe_text(kpis['market_cap'])
+        kpi_lines.append(f"• <b>Post-Issue Market Cap:</b> ₹{mcap_val} Cr")
+    if kpis.get("eps"):
+        kpi_lines.append(f"• <b>EPS (Pre-Issue):</b> ₹{safe_text(kpis['eps'])}")
+    if kpis.get("debt_to_equity"):
+        kpi_lines.append(f"• <b>Debt-to-Equity:</b> {safe_text(kpis['debt_to_equity'])}")
+
+    kpi_section = ""
+    if kpi_lines:
+        kpi_section = "\n\n⚙️ <b>VALUATION &amp; KEY PERFORMANCE INDICATORS</b>\n" + "\n".join(kpi_lines)
+
+    # Objects of the Issue (Use of Proceeds)
     objects = ipo.get("drhp_objects", [])
     obj_section = ""
     if objects:
         bullets = [f"• {safe_text(o)}" for o in objects[:4]]
         obj_section = "\n\n🎯 <b>OBJECTS OF THE ISSUE (USE OF PROCEEDS)</b>\n" + "\n".join(bullets)
 
-    # Promoters & Lead Managers
+    # Promoters & Shareholding
     promo = ipo.get("promoter_holding", {})
-    promo_line = ""
+    promo_lines = []
+    if promo.get("promoters"):
+        promo_lines.append(f"• <b>Promoters:</b> {safe_text(promo.get('promoters'))}")
     if promo.get("pre_issue") or promo.get("post_issue"):
-        promo_line = f"\n👥 <b>Promoter Holding:</b> Pre: {safe_text(promo.get('pre_issue'))} ➔ Post: {safe_text(promo.get('post_issue'))}"
+        promo_lines.append(f"• <b>Promoter Holding:</b> Pre: {safe_text(promo.get('pre_issue'))} ➔ Post: {safe_text(promo.get('post_issue'))}")
 
+    promo_section = ""
+    if promo_lines:
+        promo_section = "\n\n👥 <b>PROMOTERS &amp; SHAREHOLDING</b>\n" + "\n".join(promo_lines)
+
+    # Lead Managers & Registrar
     lms = ipo.get("lead_managers", [])
-    lm_line = ""
-    if lms:
-        lm_line = f"\n👔 <b>Lead Managers:</b> {safe_text(', '.join(lms[:3]))}"
+    lm_line = f"\n• <b>Lead Managers:</b> {safe_text(', '.join(lms[:4]))}" if lms else ""
 
     reg = ipo.get("registrar", {})
     reg_name = safe_text(reg.get("name") if isinstance(reg, dict) else reg, default="To be announced")
+    reg_url = (reg.get("url") if isinstance(reg, dict) else "") or "https://www.bseindia.com/investors/appli_check.aspx"
 
     about = safe_text(ipo.get("about"), default="")
-    about_section = f"\n\nℹ️ <b>About the Company:</b>\n{about}" if about and about != "TBA" else ""
+    about_section = f"\n\nℹ️ <b>Business Overview:</b>\n{about}" if about and about != "TBA" else ""
 
     drhp_link = ipo.get("drhp_url")
-    drhp_line = f'\n\n📄 <b>Official Document:</b> <a href="{html.escape(drhp_link, quote=True)}">Download SEBI DRHP / RHP PDF</a>' if drhp_link else ""
+    drhp_line = f'\n\n📄 <b>Official Prospectus:</b> <a href="{html.escape(drhp_link, quote=True)}">Download Official SEBI DRHP / RHP PDF</a>' if drhp_link else ""
 
     return (
-        f"📢 <b>NEW MAINBOARD IPO ANNOUNCED</b>\n"
+        f"📢 <b>NEW MAINBOARD IPO ALERT (DRHP DETAILS)</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"🏢 <b>{comp_name}</b>\n"
-        f"🏷️ <i>Mainboard Issue · NSE &amp; BSE Listing</i>\n\n"
-        f"📅 <b>TENTATIVE TIMETABLE</b>\n"
-        f"• <b>IPO Opens:</b> {open_d}\n"
-        f"• <b>IPO Closes:</b> {close_d}\n"
+        f"🏢 <b>{comp_name}</b>{sym_tag}\n"
+        f"🏷️ <i>Mainboard IPO · NSE &amp; BSE Listing</i>\n"
+        f"🏭 <b>Sector:</b> {sector}\n\n"
+        f"📅 <b>ISSUE TIMETABLE</b>\n"
+        f"• <b>Bidding Opens:</b> {open_d} (10:00 AM IST)\n"
+        f"• <b>Bidding Closes:</b> {close_d} (5:00 PM IST)\n"
         f"• <b>Basis of Allotment:</b> {allot_d}\n"
-        f"• <b>Listing Date:</b> {list_d}\n\n"
-        f"💰 <b>PRICE &amp; ISSUE DETAILS</b>\n"
-        f"• <b>Price Band:</b> {price_band} per share\n"
-        f"• <b>Market Lot:</b> {lot_size} Shares\n"
-        f"• <b>Min. Investment (Retail):</b> {min_inv_str}\n"
+        f"• <b>Initiation of Refunds:</b> {refund_d}\n"
+        f"• <b>Credit to Demat Accounts:</b> {demat_d}\n"
+        f"• <b>Exchange Listing Date:</b> {list_d}\n\n"
+        f"💰 <b>PRICE BAND &amp; TICKET SIZES</b>\n"
+        f"• <b>Price Band:</b> {price_band} (Face Value: ₹{face_val})\n"
+        f"• <b>Market Lot Size:</b> {lot_size} Shares\n"
+        f"• <b>Retail Min. (1 Lot):</b> {min_inv_str} ({lot_size} Shares)\n"
+        f"• <b>Retail Max. (13 Lots):</b> {retail_max_str}\n"
+        f"• <b>sNII Min. (14 Lots):</b> {snii_str}\n"
+        f"• <b>bNII Min. (68 Lots):</b> {bnii_str}\n\n"
+        f"📊 <b>ISSUE SIZE BREAKDOWN</b>\n"
         f"• <b>Total Issue Size:</b> {issue_size}{size_breakdown}\n\n"
         f"🔥 <b>GREY MARKET PREMIUM (GMP)</b>\n"
-        f"• <b>Current GMP:</b> {gmp_text}{est_list_line}{rate_line}"
-        f"{quota_section}"
+        f"• <b>Current GMP:</b> {gmp_text}{est_list_line}{rate_line}\n\n"
+        f"📊 <b>SEBI DRHP ISSUE ALLOCATION</b>\n"
+        f"• <b>QIB Quota:</b> {qib_q} (Anchor: up to 60% of QIB)\n"
+        f"• <b>NII / HNI Quota:</b> {nii_q} (bNII: 10% | sNII: 5%)\n"
+        f"• <b>Retail (RII) Quota:</b> {ret_q}"
         f"{fin_section}"
+        f"{kpi_section}"
         f"{obj_section}"
-        f"{promo_line}\n"
-        f"🏛️ <b>Registrar:</b> {reg_name}"
+        f"{promo_section}\n\n"
+        f"🏛️ <b>INTERMEDIARIES &amp; REGISTRAR</b>\n"
+        f"• <b>Registrar:</b> {reg_name} (<a href=\"{html.escape(reg_url, quote=True)}\">Allotment Portal</a>)"
         f"{lm_line}"
         f"{about_section}"
         f"{drhp_line}\n"
@@ -214,7 +283,7 @@ def format_opens_today_alert(ipo: dict) -> str:
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
     kostak = safe_text(ipo.get("kostak"), default="")
     sub2 = safe_text(ipo.get("sub2sauda"), default="")
-    rate_line = f"\n• <b>Kostak:</b> {kostak} | <b>Sub2Sauda:</b> {sub2}" if kostak != "TBA" or sub2 != "TBA" else ""
+    rate_line = f"\n• <b>Kostak:</b> {kostak} | <b>Sub2Sauda:</b> {sub2}" if (kostak and kostak != "TBA") or (sub2 and sub2 != "TBA") else ""
 
     res = ipo.get("reservation", {})
     retail_q = safe_text(res.get("retail_pct"), default="35%")
@@ -381,11 +450,15 @@ def format_listing_today_alert(ipo: dict) -> str:
 def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str:
     """Template for Daily/Weekly Mainboard IPO GMP Dashboard."""
     date_str = as_of_date or datetime.now(IST).strftime("%d-%b-%Y")
+    today_str = datetime.now(IST).strftime("%Y-%m-%d")
 
     lines = []
     for ipo in ipos:
-        # Exclude already listed past IPOs from active GMP dashboard
+        # Strictly exclude already listed or expired past issues
         if ipo.get("is_already_listed"):
+            continue
+        close_d = ipo.get("close_date")
+        if close_d and close_d < today_str:
             continue
 
         name = safe_text(ipo.get("company_name"))
@@ -401,24 +474,24 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
             gmp_display = "Trading yet to start"
 
         open_d = safe_text(ipo.get("open_date"), default="TBA")
-        close_d = safe_text(ipo.get("close_date"), default="TBA")
+        close_d_str = safe_text(close_d, default="TBA")
 
         kostak = safe_text(ipo.get("kostak"), default="")
         rate_info = f" | Kostak: {kostak}" if kostak and kostak != "TBA" else ""
 
         lines.append(
             f"🔹 <b>{name}</b>\n"
-            f"   • Price: {price} | Dates: {open_d} to {close_d}\n"
+            f"   • Price: {price} | Dates: {open_d} to {close_d_str}\n"
             f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}\n"
         )
 
-    content = "\n".join(lines) if lines else "<i>No active Mainboard IPOs currently in bidding.</i>"
+    content = "\n".join(lines) if lines else "<i>Currently, no Mainboard IPO is actively open for bidding on NSE/BSE. Tracking upcoming SEBI DRHP issue filings &amp; announcements...</i>"
 
     return (
         f"📊 <b>MAINBOARD IPO: LIVE GMP DASHBOARD</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📅 <i>As of {date_str}</i>\n\n"
-        f"{content}\n"
+        f"{content}\n\n"
         f"<i>*GMP is unofficial market sentiment &amp; subject to rapid fluctuations.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📢 <b>Join {CHANNEL_HANDLE} for Fastest Mainboard IPO Alerts</b>"

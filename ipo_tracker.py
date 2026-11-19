@@ -240,12 +240,18 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
     listing_date = ipo.get("listing_date")
     allotment_out = ipo.get("allotment_out", False)
 
-    # 0. Reject already listed issues from lifecycle triggers
+    # 0. Reject already listed or expired past issues
     if is_already_listed(ipo, today_str):
         return []
 
+    if close_date and close_date < today_str:
+        return []
+
+    if listing_date and listing_date < today_str:
+        return []
+
     # 1. NEW_IPO_ANNOUNCED
-    # Trigger ONLY if upcoming or currently open (never for past/expired dates)
+    # Trigger ONLY if upcoming or currently open (never for past/expired dates or missing dates)
     new_event_id = f"ipo:{ipo_id}:announced"
     if new_event_id not in posted_events_set:
         is_relevant = False
@@ -253,42 +259,29 @@ def evaluate_ipo_events(ipo: dict, today_str: str, posted_events_set: set[str]) 
             is_relevant = True
         elif open_date and close_date and open_date <= today_str <= close_date:
             is_relevant = True
-        elif not open_date and not close_date and (ipo.get("price_band") or ipo.get("issue_size_cr")):
-            # Known upcoming DRHP filing with preliminary terms
-            is_relevant = True
 
         if is_relevant:
             events.append(("NEW_IPO_ANNOUNCED", new_event_id))
 
     # 2. IPO_OPENS_TODAY
-    # Trigger on the day the IPO opens for bidding
     opens_event_id = f"ipo:{ipo_id}:opens_today"
-    if open_date == today_str and opens_event_id not in posted_events_set:
+    if open_date and open_date == today_str and opens_event_id not in posted_events_set:
         events.append(("IPO_OPENS_TODAY", opens_event_id))
 
     # 3. IPO_CLOSING_TODAY
-    # Trigger on the day the IPO closes
     closing_event_id = f"ipo:{ipo_id}:closing_today"
-    if close_date == today_str and closing_event_id not in posted_events_set:
+    if close_date and close_date == today_str and closing_event_id not in posted_events_set:
         events.append(("IPO_CLOSING_TODAY", closing_event_id))
 
     # 4. ALLOTMENT_OUT
-    # Trigger when allotment is finalized
     allot_event_id = f"ipo:{ipo_id}:allotment_out"
     if allot_event_id not in posted_events_set:
-        should_trigger_allot = False
-        if allotment_out:
-            should_trigger_allot = True
-        elif allotment_date and allotment_date == today_str:
-            should_trigger_allot = True
-
-        if should_trigger_allot:
+        if allotment_out or (allotment_date and allotment_date == today_str):
             events.append(("ALLOTMENT_OUT", allot_event_id))
 
     # 5. LISTING_TODAY
-    # Trigger on listing date
     list_event_id = f"ipo:{ipo_id}:listing_today"
-    if listing_date == today_str and list_event_id not in posted_events_set:
+    if listing_date and listing_date == today_str and list_event_id not in posted_events_set:
         events.append(("LISTING_TODAY", list_event_id))
 
     return events

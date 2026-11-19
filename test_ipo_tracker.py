@@ -174,10 +174,10 @@ class TestIpoFormatters(unittest.TestCase):
             "id": "vishal-mega-mart",
             "company_name": "Vishal Mega Mart Limited",
             "symbol": "VISHAL",
-            "open_date": "2024-12-11",
-            "close_date": "2024-12-13",
-            "allotment_date": "2024-12-16",
-            "listing_date": "2024-12-18",
+            "open_date": "2026-12-11",
+            "close_date": "2026-12-13",
+            "allotment_date": "2026-12-16",
+            "listing_date": "2026-12-18",
             "price_band": "₹74 to ₹78",
             "cut_off_price": 78,
             "lot_size": 190,
@@ -222,12 +222,12 @@ class TestIpoFormatters(unittest.TestCase):
 
     def test_new_ipo_alert(self):
         msg = format_new_ipo_alert(self.sample_ipo)
-        self.assertIn("NEW MAINBOARD IPO ANNOUNCED", msg)
+        self.assertIn("NEW MAINBOARD IPO ALERT", msg)
         self.assertIn("Vishal Mega Mart Limited", msg)
         self.assertIn("@ipocentral", msg)
         self.assertIn("SEBI DRHP ISSUE ALLOCATION", msg)
         self.assertIn("QIB Quota:</b> 50%", msg)
-        self.assertIn("FINANCIAL HIGHLIGHTS", msg)
+        self.assertIn("RESTATED CONSOLIDATED FINANCIALS", msg)
         self.assertIn("OBJECTS OF THE ISSUE", msg)
         self.assertIn("Kostak:</b> ₹400", msg)
         self.assertIn("KFin Technologies Limited", msg)
