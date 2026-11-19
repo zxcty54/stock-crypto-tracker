@@ -13,6 +13,8 @@ class SmartMoneyAnchorScreen extends StatefulWidget {
 class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
   static const String apiUrl =
       'https://stock-models-api.nitesh-skyhigh.workers.dev/?type=anchor';
+  static const String fallbackUrl =
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/smart_money_anchor_report.json';
 
   bool _isLoading = true;
   String? _errorMessage;
@@ -32,22 +34,64 @@ class _SmartMoneyAnchorScreenState extends State<SmartMoneyAnchorScreen> {
     });
 
     try {
-      final uri = Uri.parse(forceRefresh ? '$apiUrl&nocache=true' : apiUrl);
-      final response = await http.get(uri).timeout(const Duration(seconds: 15));
+      final uri = Uri.parse(forceRefresh
+          ? '$apiUrl&nocache=true&ts=${DateTime.now().millisecondsSinceEpoch}'
+          : '$apiUrl&ts=${DateTime.now().millisecondsSinceEpoch}');
+      http.Response response =
+          await http.get(uri).timeout(const Duration(seconds: 10));
 
+      Map<String, dynamic>? decoded;
       if (response.statusCode == 200) {
-        final decoded = json.decode(utf8.decode(response.bodyBytes));
+        final data = json.decode(utf8.decode(response.bodyBytes));
+        if (data is Map<String, dynamic> &&
+            (data['all_setups'] as List? ?? []).isNotEmpty) {
+          decoded = data;
+        }
+      }
+
+      // If worker returns error or empty setups, fallback to raw GitHub
+      if (decoded == null) {
+        final fbUri = Uri.parse(
+            '$fallbackUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
+        final fbResponse =
+            await http.get(fbUri).timeout(const Duration(seconds: 10));
+        if (fbResponse.statusCode == 200) {
+          final fbData = json.decode(utf8.decode(fbResponse.bodyBytes));
+          if (fbData is Map<String, dynamic>) {
+            decoded = fbData;
+          }
+        }
+      }
+
+      if (decoded != null) {
         setState(() {
           _reportData = decoded;
           _isLoading = false;
         });
       } else {
         setState(() {
-          _errorMessage = 'Server error: HTTP ${response.statusCode}';
+          _errorMessage = 'Unable to load anchor setups. Please try again.';
           _isLoading = false;
         });
       }
     } catch (e) {
+      try {
+        final fbUri = Uri.parse(
+            '$fallbackUrl?ts=${DateTime.now().millisecondsSinceEpoch}');
+        final fbResponse =
+            await http.get(fbUri).timeout(const Duration(seconds: 10));
+        if (fbResponse.statusCode == 200) {
+          final fbData = json.decode(utf8.decode(fbResponse.bodyBytes));
+          if (fbData is Map<String, dynamic>) {
+            setState(() {
+              _reportData = fbData;
+              _isLoading = false;
+            });
+            return;
+          }
+        }
+      } catch (_) {}
+
       setState(() {
         _errorMessage = 'Data load error: $e';
         _isLoading = false;
