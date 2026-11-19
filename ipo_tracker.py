@@ -36,6 +36,8 @@ from ipo_formatter import (
     format_ipo_post,
     format_gmp_dashboard,
     format_test_verification_post,
+    derive_demat_date,
+    format_issue_size,
     CHANNEL_HANDLE,
 )
 
@@ -450,12 +452,23 @@ def run_tracker(now: datetime | None = None) -> int:
         else:
             # Update existing with latest GMP, dates, and prices
             existing = master[ipo_id]
-            for key in ("open_date", "close_date", "allotment_date", "listing_date",
+            for key in ("open_date", "close_date", "allotment_date", "listing_date", "demat_credit_date",
                         "price_band", "lot_size", "issue_size_cr", "gmp", "gmp_percent",
                         "est_listing_price", "listing_price", "listing_gain", "symbol"):
                 val = item.get(key)
                 if val:
+                    # Protect issue_size_cr from raw share counts (> 1,000,000 without Cr)
+                    if key == "issue_size_cr" and existing.get("issue_size_cr"):
+                        s_val = str(val).strip().replace(",", "")
+                        if s_val.isdigit() and len(s_val) >= 7:
+                            continue
                     existing[key] = val
+
+            # Always populate demat_credit_date if not set
+            if not existing.get("demat_credit_date"):
+                derived = derive_demat_date(existing.get("allotment_date"), existing.get("listing_date"), existing.get("close_date"))
+                if derived and derived != "Prior to Listing":
+                    existing["demat_credit_date"] = derived
 
             existing["last_updated"] = now.isoformat()
             updated_ipos_count += 1

@@ -990,7 +990,12 @@ class NseIpoScraper:
                         open_d = parse_indian_date(entry.get("issueStartDate") or entry.get("openDate") or entry.get("startDate"))
                         close_d = parse_indian_date(entry.get("issueEndDate") or entry.get("closeDate") or entry.get("endDate"))
                         price_b = entry.get("priceBand") or entry.get("issuePrice") or entry.get("price") or ""
-                        size_cr = entry.get("issueSize") or ""
+                        raw_size = entry.get("issueSize") or ""
+                        size_cr = ""
+                        if entry.get("issueSizeInRs"):
+                            size_cr = str(entry.get("issueSizeInRs"))
+                        elif entry.get("issueAmount"):
+                            size_cr = str(entry.get("issueAmount"))
 
                         results.append({
                             "source": "nse_official",
@@ -999,7 +1004,8 @@ class NseIpoScraper:
                             "open_date": open_d,
                             "close_date": close_d,
                             "price_band": str(price_b),
-                            "issue_size_cr": str(size_cr),
+                            "issue_size_cr": size_cr,
+                            "issue_shares": str(raw_size),
                             "is_mainboard": True,
                         })
                 except Exception as ep_err:

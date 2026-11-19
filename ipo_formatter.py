@@ -20,12 +20,27 @@ Includes every critical detail required by retail, HNI & institutional investors
 from __future__ import annotations
 
 import html
+import re
 from datetime import datetime, timezone, timedelta
 
 IST = timezone(timedelta(hours=5, minutes=30))
 CHANNEL_HANDLE = "@ipocentral"
 CHANNEL_URL = "https://t.me/ipocentral"
 DISCLAIMER = "⚠️ <i>Educational update only. Not financial advice. Not SEBI registered. Always read the Red Herring Prospectus (RHP) before applying.</i>"
+
+REGISTRAR_PORTALS: dict[str, str] = {
+    "link intime": "https://linkintime.co.in/initial_offer/public-issues.html",
+    "kfin": "https://kosmic.kfintech.com/ipostatus/",
+    "kfintech": "https://kosmic.kfintech.com/ipostatus/",
+    "bigshare": "https://www.bigshareonline.com/ipo_Allotment.html",
+    "cameo": "https://ipo.cameoindia.com/",
+    "skyline": "https://www.skylinerta.com/ipo.php",
+    "integrated": "https://www.integratedindia.in/",
+    "purva": "https://www.purvashare.com/queries/",
+    "mas services": "https://www.masserv.com/opt.asp",
+    "bse": "https://www.bseindia.com/investors/appli_check.aspx",
+    "nse": "https://www.nseindia.com/products/dynaContent/equities/ipos/ipo_login.jsp",
+}
 
 
 def safe_text(val: str | None, default: str = "TBA") -> str:
@@ -44,6 +59,70 @@ def format_currency(val: int | float | str | None) -> str:
         return f"{num:,.0f}" if num.is_integer() else f"{num:,.2f}"
     except (ValueError, TypeError):
         return str(val)
+
+
+def format_issue_size(val: str | int | float | None) -> str:
+    """Format issue size into clean '₹X,XXX Cr' string."""
+    if not val or val == "TBA":
+        return "TBA"
+    s = str(val).strip()
+    if s.endswith("Cr"):
+        return s if s.startswith("₹") else f"₹{s}"
+    if "crore" in s.lower() or "cr" in s.lower():
+        nums = re.findall(r"\d+(?:,\d+)*(?:\.\d+)?", s)
+        if nums:
+            return f"₹{nums[0]} Cr"
+    nums = re.findall(r"\d+(?:\.\d+)?", s.replace(",", ""))
+    if nums:
+        num = float(nums[0])
+        # If in raw rupees (> 100 Crore in rupees = 1,000,000,000)
+        if num > 1000000000:
+            num = num / 10000000
+        return f"₹{num:,.0f} Cr" if num.is_integer() else f"₹{num:,.2f} Cr"
+    return f"₹{s} Cr"
+
+
+def derive_demat_date(allotment_d: str | None, listing_d: str | None, close_d: str | None) -> str:
+    """Derive Demat credit date via SEBI T+3 market rules."""
+    for d_str, offset in [(listing_d, -1), (allotment_d, 1), (close_d, 2)]:
+        if d_str and d_str != "TBA" and re.match(r"^\d{4}-\d{2}-\d{2}$", d_str):
+            try:
+                dt = datetime.strptime(d_str, "%Y-%m-%d")
+                target = dt + timedelta(days=offset)
+                if target.weekday() == 6:  # Sunday
+                    target += timedelta(days=1 if offset > 0 else -1)
+                elif target.weekday() == 5:  # Saturday
+                    target += timedelta(days=2 if offset > 0 else -1)
+                return target.strftime("%Y-%m-%d")
+            except ValueError:
+                pass
+    return "Prior to Listing"
+
+
+def get_registrar_link_html(reg: dict | str | None, default_url: str = "") -> str:
+    """Generate clean HTML anchor for registrar allotment portal."""
+    if not reg:
+        return ""
+    if isinstance(reg, dict):
+        name = safe_text(reg.get("name"), default="")
+        url = reg.get("url") or default_url
+    else:
+        name = safe_text(str(reg), default="")
+        url = default_url
+
+    if not name or name == "TBA":
+        return ""
+
+    if not url:
+        lower_name = name.lower()
+        for key, p_url in REGISTRAR_PORTALS.items():
+            if key in lower_name:
+                url = p_url
+                break
+        if not url:
+            url = REGISTRAR_PORTALS["bse"]
+
+    return f'<a href="{html.escape(url, quote=True)}">{name}</a>'
 
 
 def format_test_verification_post() -> str:
@@ -98,7 +177,12 @@ def format_new_ipo_alert(ipo: dict) -> str:
     close_d = safe_text(ipo.get("close_date"), default="Announcing Soon")
     allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
     refund_d = safe_text(ipo.get("refund_date"), default="Next Business Day")
-    demat_d = safe_text(ipo.get("demat_date"), default="Prior to Listing")
+    demat_d = safe_text(
+        ipo.get("demat_credit_date")
+        or ipo.get("demat_date")
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+        default="Prior to Listing",
+    )
     list_d = safe_text(ipo.get("listing_date"), default="Tentative")
 
     price_band = safe_text(ipo.get("price_band"))
@@ -140,11 +224,7 @@ def format_new_ipo_alert(ipo: dict) -> str:
         retail_max_str = f"₹{ret_max_amt:,.0f} ({ret_max_lots * lot_int} Shares)"
 
     # Issue Size Breakdown
-    issue_size = safe_text(ipo.get("issue_size_cr"))
-    if issue_size != "TBA" and not issue_size.endswith("Cr"):
-        issue_size = f"₹{issue_size} Cr"
-    elif issue_size != "TBA" and not issue_size.startswith("₹"):
-        issue_size = f"₹{issue_size}"
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     fresh_issue = safe_text(ipo.get("fresh_issue_cr"), default="")
     ofs = safe_text(ipo.get("ofs_cr"), default="")
@@ -290,12 +370,21 @@ def format_new_ipo_alert(ipo: dict) -> str:
 
 
 def format_opens_today_alert(ipo: dict) -> str:
-    """Template for Opening Day bidding alert."""
+    """Curated template for Opening Day bidding alert."""
     comp_name = safe_text(ipo.get("company_name"))
+    sym = safe_text(ipo.get("symbol"), default="")
+    sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
+
     open_d = safe_text(ipo.get("open_date"))
     close_d = safe_text(ipo.get("close_date"))
-    allot_d = safe_text(ipo.get("allotment_date"), default="TBA")
-    list_d = safe_text(ipo.get("listing_date"), default="TBA")
+    allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
+    demat_d = safe_text(
+        ipo.get("demat_credit_date")
+        or ipo.get("demat_date")
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+        default="Prior to Listing",
+    )
+    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
 
     price_band = safe_text(ipo.get("price_band"))
     if not price_band.startswith("₹") and price_band != "TBA":
@@ -305,16 +394,14 @@ def format_opens_today_alert(ipo: dict) -> str:
     min_inv = ipo.get("min_investment")
     min_inv_str = f"₹{format_currency(min_inv)}" if min_inv else "TBA"
 
-    issue_size = safe_text(ipo.get("issue_size_cr"))
-    if issue_size != "TBA" and not issue_size.startswith("₹"):
-        issue_size = f"₹{issue_size} Cr"
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
     if gmp and str(gmp).strip() not in ("--", "0", ""):
         gmp_text = f"<b>{safe_text(gmp)}</b> ({safe_text(gmp_pct)})" if gmp_pct else f"<b>{safe_text(gmp)}</b>"
     else:
-        gmp_text = "N/A"
+        gmp_text = "Trading yet to start"
 
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
     kostak = safe_text(ipo.get("kostak"), default="")
@@ -324,38 +411,49 @@ def format_opens_today_alert(ipo: dict) -> str:
     res = ipo.get("reservation", {})
     retail_q = safe_text(res.get("retail_pct"), default="35%")
 
+    reg_html = get_registrar_link_html(ipo.get("registrar"))
+    reg_line = f"\n🏛️ <b>Registrar Portal:</b> {reg_html}" if reg_html else ""
+
     return (
         f"🟢 <b>IPO OPENS TODAY: BIDDING IS LIVE</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"🏢 <b>{comp_name}</b>\n"
-        f"🏷️ <i>Mainboard IPO · NSE &amp; BSE</i>\n\n"
-        f"⏰ <b>Bidding Window:</b> {open_d} to {close_d} (Daily 10:00 AM - 5:00 PM IST)\n"
-        f"💰 <b>Price Band:</b> {price_band}\n"
-        f"📦 <b>Lot Size:</b> {lot_size} Shares (Min: {min_inv_str})\n"
-        f"📊 <b>Total Issue Size:</b> {issue_size} (Retail Quota: {retail_q})\n\n"
-        f"🔥 <b>LATEST GMP UPDATE</b>\n"
-        f"• <b>Grey Market Premium:</b> {gmp_text}\n"
+        f"🏢 <b>{comp_name}</b>{sym_tag}\n"
+        f"🏷️ <i>Mainboard IPO · NSE &amp; BSE Listing</i>\n\n"
+        f"💰 <b>ISSUE &amp; TICKET DETAILS</b>\n"
+        f"• <b>IPO Issue Size:</b> <b>{issue_size}</b>\n"
+        f"• <b>Price Band:</b> {price_band}\n"
+        f"• <b>Market Lot:</b> {lot_size} Shares (Min. Investment: {min_inv_str})\n"
+        f"• <b>Retail Quota:</b> {retail_q}\n\n"
+        f"🔥 <b>LATEST GREY MARKET PREMIUM (GMP)</b>\n"
+        f"• <b>Current GMP:</b> {gmp_text}\n"
         f"• <b>Expected Listing:</b> {est_list}{rate_line}\n\n"
-        f"📌 <b>KEY TIMELINES</b>\n"
-        f"• <b>Closing Date:</b> {close_d} (5:00 PM Cutoff)\n"
-        f"• <b>Allotment Finalization:</b> {allot_d}\n"
-        f"• <b>Listing Date:</b> {list_d}\n\n"
+        f"📅 <b>CONFIRMED TIMELINE</b>\n"
+        f"• <b>Bidding Window:</b> {open_d} to {close_d} (Daily 10 AM - 5 PM)\n"
+        f"• <b>Basis of Allotment:</b> {allot_d}\n"
+        f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
+        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)"
+        f"{reg_line}\n\n"
         f"💡 <i>Tip: Retail investors applying at Cut-off price have maximum allocation probability in oversubscribed issues.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>Live Updates:</b> {CHANNEL_HANDLE}\n"
+        f"📊 <b>Real-time IPO Updates:</b> {CHANNEL_HANDLE}\n"
         f"{DISCLAIMER}"
     )
 
 
 def format_closing_today_alert(ipo: dict) -> str:
-    """Template for Final Day / Closing Day bidding alert with subscription."""
+    """Curated template for Final Day / Closing Day bidding alert with subscription."""
     comp_name = safe_text(ipo.get("company_name"))
+    sym = safe_text(ipo.get("symbol"), default="")
+    sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
+
     cut_off = ipo.get("cut_off_price") or ipo.get("price_band")
     cut_off_str = f"₹{cut_off}" if cut_off and not str(cut_off).startswith("₹") else safe_text(cut_off)
 
     lot_size = safe_text(ipo.get("lot_size"))
     min_inv = ipo.get("min_investment")
     min_inv_str = f"₹{format_currency(min_inv)}" if min_inv else "TBA"
+
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     sub = ipo.get("subscription", {})
     qib = safe_text(sub.get("qib"), default="Updating...")
@@ -371,69 +469,92 @@ def format_closing_today_alert(ipo: dict) -> str:
         gmp_text = "N/A"
 
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
-    allot_d = safe_text(ipo.get("allotment_date"), default="TBA")
-    list_d = safe_text(ipo.get("listing_date"), default="TBA")
+    allot_d = safe_text(ipo.get("allotment_date"), default="Tentative")
+    demat_d = safe_text(
+        ipo.get("demat_credit_date")
+        or ipo.get("demat_date")
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+        default="Prior to Listing",
+    )
+    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+
+    reg_html = get_registrar_link_html(ipo.get("registrar"))
+    reg_line = f"\n🏛️ <b>Registrar Portal:</b> {reg_html}" if reg_html else ""
 
     return (
         f"🔴 <b>IPO CLOSING TODAY: LAST CHANCE TO APPLY</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"🏢 <b>{comp_name}</b>\n"
+        f"🏢 <b>{comp_name}</b>{sym_tag}\n"
         f"🏷️ <i>Mainboard IPO · Final Bidding Day!</i>\n\n"
         f"⏳ <b>Deadline:</b> Today by 5:00 PM IST (UPI Mandate: 5:00 PM)\n"
-        f"💰 <b>Cut-off Price:</b> {cut_off_str}\n"
-        f"📦 <b>Min Investment:</b> {min_inv_str} ({lot_size} Shares)\n\n"
-        f"📊 <b>LATEST SUBSCRIPTION STATUS</b>\n"
+        f"💰 <b>IPO Issue Size:</b> <b>{issue_size}</b> | <b>Cut-off:</b> {cut_off_str}\n"
+        f"📦 <b>Market Lot:</b> {lot_size} Shares (Min: {min_inv_str})\n\n"
+        f"📊 <b>LIVE NSE SUBSCRIPTION DEMAND</b>\n"
         f"• <b>QIB:</b> {qib}\n"
         f"• <b>NII / HNI:</b> {nii}\n"
         f"• <b>Retail (RII):</b> {retail}\n"
         f"• <b>TOTAL SUBSCRIPTION:</b> <b>{total}</b>\n\n"
-        f"🔥 <b>LATEST GMP EXPECTATION</b>\n"
-        f"• <b>GMP:</b> {gmp_text}\n"
-        f"• <b>Est. Listing Price:</b> {est_list}\n\n"
-        f"📅 <b>NEXT STEPS</b>\n"
-        f"• <b>Allotment Finalization:</b> {allot_d}\n"
-        f"• <b>Refund Initiation:</b> Next Business Day\n"
-        f"• <b>Listing on Exchanges:</b> {list_d}\n"
+        f"🔥 <b>LATEST GREY MARKET PREMIUM (GMP)</b>\n"
+        f"• <b>Current GMP:</b> {gmp_text}\n"
+        f"• <b>Expected Listing:</b> {est_list}\n\n"
+        f"📅 <b>NEXT STEPS &amp; TIMELINE</b>\n"
+        f"• <b>Basis of Allotment:</b> {allot_d}\n"
+        f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
+        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)"
+        f"{reg_line}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Instant Allotment Alerts:</b> {CHANNEL_HANDLE}"
     )
 
 
 def format_allotment_out_alert(ipo: dict) -> str:
-    """Template for Allotment Out alert with direct 1-click links."""
+    """Curated template for Allotment Out alert with direct 1-click links."""
     comp_name = safe_text(ipo.get("company_name"))
-    reg = ipo.get("registrar", {})
-    reg_name = safe_text(reg.get("name") if isinstance(reg, dict) else reg, default="Registrar Portal")
-    reg_url = (reg.get("url") if isinstance(reg, dict) else "") or "https://www.bseindia.com/investors/appli_check.aspx"
+    sym = safe_text(ipo.get("symbol"), default="")
+    sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
 
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
     issue_price = safe_text(ipo.get("cut_off_price") or ipo.get("price_band"))
     if not issue_price.startswith("₹") and issue_price != "TBA":
         issue_price = f"₹{issue_price}"
 
     gmp = ipo.get("gmp")
     gmp_pct = ipo.get("gmp_percent", "")
-    gmp_text = f"₹{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp and gmp != "--" else "TBA"
+    gmp_text = f"{safe_text(gmp)} ({safe_text(gmp_pct)})" if gmp and str(gmp).strip() not in ("--", "0", "") else "TBA"
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
-    list_d = safe_text(ipo.get("listing_date"), default="TBA")
+
+    demat_d = safe_text(
+        ipo.get("demat_credit_date")
+        or ipo.get("demat_date")
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+        default="Prior to Listing",
+    )
+    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+
+    reg = ipo.get("registrar", {})
+    reg_name = safe_text(reg.get("name") if isinstance(reg, dict) else reg, default="Registrar Portal")
+    reg_html = get_registrar_link_html(reg)
 
     return (
         f"🎯 <b>IPO ALLOTMENT OUT: CHECK STATUS NOW</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"🏢 <b>{comp_name}</b>\n"
+        f"🏢 <b>{comp_name}</b>{sym_tag}\n"
         f"🏷️ <i>Mainboard IPO Allotment Finalized</i>\n\n"
-        f"Basis of allotment has been processed. Investors can verify status using PAN, Application Number, or DP Client ID.\n\n"
+        f"Basis of allotment has been finalized. Investors can verify status using PAN, Application Number, or DP Client ID.\n\n"
         f"🔗 <b>DIRECT ALLOTMENT CHECK LINKS:</b>\n"
         f"• <b>Official Registrar ({reg_name}):</b>\n"
-        f"  👉 <a href=\"{html.escape(reg_url, quote=True)}\">Check on Registrar Website</a>\n\n"
+        f"  👉 {reg_html}\n\n"
         f"• <b>BSE Allotment Portal:</b>\n"
         f"  👉 <a href=\"https://www.bseindia.com/investors/appli_check.aspx\">Check on BSE India</a>\n\n"
         f"• <b>NSE Allotment Verification:</b>\n"
         f"  👉 <a href=\"https://www.nseindia.com/products/dynaContent/equities/ipos/ipo_login.jsp\">Check on NSE India</a>\n\n"
         f"💰 <b>PRE-LISTING METRICS</b>\n"
-        f"• <b>Issue Price:</b> {issue_price}\n"
-        f"• <b>Current GMP:</b> {gmp_text}\n"
-        f"• <b>Estimated Listing Price:</b> {est_list}\n"
-        f"🚀 <b>Listing Date:</b> {list_d}\n\n"
+        f"• <b>IPO Issue Size:</b> {issue_size} | <b>Issue Price:</b> {issue_price}\n"
+        f"• <b>Current GMP:</b> <b>{gmp_text}</b>\n"
+        f"• <b>Estimated Listing Price:</b> {est_list}\n\n"
+        f"📅 <b>UPCOMING DATES</b>\n"
+        f"• <b>Demat Credit Date:</b> <b>{demat_d}</b>\n"
+        f"• <b>IPO Listing Date:</b> <b>{list_d}</b> (NSE &amp; BSE)\n\n"
         f"<i>Note: If shares are allotted, debit notification or SMS from bank/CDSL will follow. Unallotted funds will be unblocked automatically.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Stay Tuned for Listing Day Updates:</b> {CHANNEL_HANDLE}"
@@ -441,7 +562,7 @@ def format_allotment_out_alert(ipo: dict) -> str:
 
 
 def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") -> str:
-    """Template for significant GMP movement alert."""
+    """Curated template for significant GMP movement alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
@@ -449,6 +570,15 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
     price_band = safe_text(ipo.get("price_band") or ipo.get("cut_off_price"), default="TBA")
     open_d = safe_text(ipo.get("open_date"), default="TBA")
     close_d = safe_text(ipo.get("close_date"), default="TBA")
+    list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+    demat_d = safe_text(
+        ipo.get("demat_credit_date")
+        or ipo.get("demat_date")
+        or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+        default="Prior to Listing",
+    )
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
+
     est_list = safe_text(ipo.get("est_listing_price"), default="TBA")
     gmp = safe_text(ipo.get("gmp"), default="N/A")
     gmp_pct = safe_text(ipo.get("gmp_percent"), default="")
@@ -459,6 +589,9 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
     old_str = f"• <b>Previous GMP:</b> {old_gmp}\n" if old_gmp else ""
     kostak = safe_text(ipo.get("kostak"), default="")
     kostak_str = f"• <b>Kostak Rate:</b> {kostak}\n" if kostak and kostak != "TBA" else ""
+
+    reg_html = get_registrar_link_html(ipo.get("registrar"))
+    reg_part = f" | <b>Registrar:</b> {reg_html}" if reg_html else ""
 
     # Live NSE Demand / Bids if available
     sub = ipo.get("subscription", {})
@@ -479,8 +612,9 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🏢 <b>{comp_name}</b>{sym_tag}\n"
         f"🏷️ <i>Mainboard IPO · Grey Market Revision</i>\n\n"
-        f"💰 <b>Price Band:</b> {price_band}\n"
-        f"📅 <b>Bidding Window:</b> {open_d} to {close_d}\n\n"
+        f"💰 <b>IPO Issue Size:</b> {issue_size} | <b>Price Band:</b> {price_band}\n"
+        f"📅 <b>Bidding:</b> {open_d} to {close_d} | <b>Listing Date:</b> <b>{list_d}</b>\n"
+        f"📌 <b>Demat Credit:</b> {demat_d}{reg_part}\n\n"
         f"🔥 <b>UPDATED GREY MARKET PREMIUM:</b>\n"
         f"{old_str}"
         f"• <b>Current GMP:</b> {gmp_str}\n"
@@ -494,7 +628,7 @@ def format_gmp_update_alert(ipo: dict, old_gmp: str = "", surge_text: str = "") 
 
 
 def format_listing_today_alert(ipo: dict) -> str:
-    """Template for Listing Day debut alert."""
+    """Curated template for Listing Day debut alert."""
     comp_name = safe_text(ipo.get("company_name"))
     sym = safe_text(ipo.get("symbol"), default="")
     sym_tag = f" ({sym})" if sym and sym != "TBA" else ""
@@ -510,12 +644,13 @@ def format_listing_today_alert(ipo: dict) -> str:
     gain = safe_text(ipo.get("listing_gain"), default="")
     gain_str = f" ({gain})" if gain else ""
 
-    issue_size = safe_text(ipo.get("issue_size_cr"))
-    if issue_size != "TBA" and not issue_size.startswith("₹"):
-        issue_size = f"₹{issue_size} Cr"
+    issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
     sub = ipo.get("subscription", {})
     total_sub = safe_text(sub.get("total"), default="Over-subscribed")
+
+    reg_html = get_registrar_link_html(ipo.get("registrar"))
+    reg_line = f"• <b>Registrar:</b> {reg_html}\n" if reg_html else ""
 
     return (
         f"🚀 <b>IPO LISTING TODAY: MARKET DEBUT</b>\n"
@@ -527,8 +662,9 @@ def format_listing_today_alert(ipo: dict) -> str:
         f"• <b>Listing Price:</b> <b>{list_p}</b>{gain_str}\n"
         f"• <b>Exchanges:</b> NSE &amp; BSE\n\n"
         f"📊 <b>ISSUE RECAP</b>\n"
-        f"• <b>Total Issue Size:</b> {issue_size}\n"
-        f"• <b>Overall Subscription:</b> {total_sub}\n\n"
+        f"• <b>IPO Issue Size:</b> {issue_size}\n"
+        f"• <b>Overall Subscription:</b> {total_sub}\n"
+        f"{reg_line}\n"
         f"💡 <i>Post-listing strategy: Long-term allottees can review quarterly earnings; listing gain seekers can maintain trailing stop-loss.</i>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📊 <b>Real-time IPO Performance:</b> {CHANNEL_HANDLE}\n"
@@ -537,7 +673,7 @@ def format_listing_today_alert(ipo: dict) -> str:
 
 
 def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str:
-    """Template for Daily/Weekly Mainboard IPO GMP Dashboard."""
+    """Curated template for Daily/Weekly Mainboard IPO GMP Dashboard."""
     date_str = as_of_date or datetime.now(IST).strftime("%d-%b-%Y")
     today_str = datetime.now(IST).strftime("%Y-%m-%d")
 
@@ -564,9 +700,20 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
 
         open_d = safe_text(ipo.get("open_date"), default="TBA")
         close_d_str = safe_text(close_d, default="TBA")
+        list_d = safe_text(ipo.get("listing_date"), default="Tentative")
+        demat_d = safe_text(
+            ipo.get("demat_credit_date")
+            or ipo.get("demat_date")
+            or derive_demat_date(ipo.get("allotment_date"), ipo.get("listing_date"), ipo.get("close_date")),
+            default="Tentative",
+        )
+        issue_size = format_issue_size(ipo.get("issue_size_cr"))
 
         kostak = safe_text(ipo.get("kostak"), default="")
         rate_info = f" | Kostak: {kostak}" if kostak and kostak != "TBA" else ""
+
+        reg_html = get_registrar_link_html(ipo.get("registrar"))
+        reg_part = f" | <b>Reg:</b> {reg_html}" if reg_html else ""
 
         # Live NSE Demand / Bids if available
         sub = ipo.get("subscription", {})
@@ -584,7 +731,9 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
 
         lines.append(
             f"🔹 <b>{name}</b>\n"
-            f"   • Price: {price} | Dates: {open_d} to {close_d_str}\n"
+            f"   • <b>Issue Size:</b> {issue_size} | <b>Price:</b> {price}\n"
+            f"   • <b>Bidding:</b> {open_d} to {close_d_str} | <b>Listing:</b> <b>{list_d}</b>\n"
+            f"   • <b>Demat Credit:</b> {demat_d}{reg_part}\n"
             f"   • <b>GMP:</b> <b>{gmp_display}</b>{rate_info}"
             f"{sub_line}\n"
         )

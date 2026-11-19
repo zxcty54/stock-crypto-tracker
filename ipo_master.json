@@ -15,7 +15,7 @@
     "face_value": "10",
     "lot_size": 110,
     "min_investment": 14960,
-    "issue_size_cr": "493068045",
+    "issue_size_cr": "4,200",
     "fresh_issue_cr": "0",
     "ofs_cr": "4,200",
     "gmp": "+₹3.00",
@@ -77,7 +77,8 @@
     "posted_events": [
       "IPO_OPENS_TODAY"
     ],
-    "last_updated": "2026-11-19T12:01:07.970603+05:30"
+    "last_updated": "2026-11-19T12:01:07.970603+05:30",
+    "demat_credit_date": "2026-11-25"
   },
   {
     "id": "crystal-crop-protection",
@@ -95,7 +96,7 @@
     "face_value": "10",
     "lot_size": 55,
     "min_investment": 14960,
-    "issue_size_cr": "12170076",
+    "issue_size_cr": "1,500",
     "fresh_issue_cr": "600",
     "ofs_cr": "900",
     "gmp": "+₹18.00",
@@ -157,7 +158,8 @@
     "posted_events": [
       "NEW_IPO_ANNOUNCED"
     ],
-    "last_updated": "2026-11-19T12:01:07.970603+05:30"
+    "last_updated": "2026-11-19T12:01:07.970603+05:30",
+    "demat_credit_date": "2026-11-24"
   },
   {
     "id": "vishal-mega-mart",
