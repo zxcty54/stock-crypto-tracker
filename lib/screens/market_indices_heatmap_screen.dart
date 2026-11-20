@@ -32,13 +32,15 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
 
   final TextEditingController _searchCtrl = TextEditingController();
 
-  // Cloudflare Worker Proxy Endpoints
+  // Cloudflare Worker Proxy Endpoints & Google Apps Script Direct Feed
   final String _sheetApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
   final String _stockApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet1";
   final String _constituentsApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet3";
+  final String _directGasConstituentsUrl =
+      "https://script.google.com/macros/s/AKfycbwzNPJpNK84hWl2-aziiLOoC55D6ua7NeWcFcGRZvPP-oYX9uLU1YmSZTcVPv_ZBnG3/exec";
 
   final NumberFormat _currencyFormat = NumberFormat('#,##,##0.00', 'en_IN');
   Map<String, Map<String, dynamic>> _liveStockQuotes = {};
@@ -148,7 +150,8 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
       // Silent fallback
     }
 
-    // 3. Optional: Fetch dynamic constituents from Sheet 3 if deployed on Cloudflare
+    // 3. Fetch dynamic constituents from Cloudflare Worker or direct Google Apps Script
+    bool constituentsSynced = false;
     try {
       final constRes = await http
           .get(Uri.parse(_constituentsApiUrl))
@@ -156,12 +159,27 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
 
       if (constRes.statusCode == 200) {
         final decoded = jsonDecode(constRes.body);
-        if (decoded is List) {
+        if (decoded is List && decoded.isNotEmpty) {
           _mergeRemoteConstituents(decoded);
+          constituentsSynced = true;
         }
       }
-    } catch (_) {
-      // Silent fallback
+    } catch (_) {}
+
+    // Direct Google Apps Script fallback if Cloudflare Worker is pending deploy
+    if (!constituentsSynced) {
+      try {
+        final gasRes = await http
+            .get(Uri.parse(_directGasConstituentsUrl))
+            .timeout(const Duration(seconds: 10));
+
+        if (gasRes.statusCode == 200) {
+          final decoded = jsonDecode(gasRes.body);
+          if (decoded is List && decoded.isNotEmpty) {
+            _mergeRemoteConstituents(decoded);
+          }
+        }
+      } catch (_) {}
     }
   }
 
