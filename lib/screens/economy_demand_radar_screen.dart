@@ -25,6 +25,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
   String? _errorMessage;
   Map<String, dynamic>? _payload;
   late TabController _tabController;
+  int _selectedSectorFilter = 0; // 0 = All, 1 = High Demand / Expanding, 2 = Softening
 
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
@@ -205,6 +206,15 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     final sectors = (_payload!['sector_demand_matrix'] as List?) ?? [];
     final modules = _payload!['telemetry_modules'] ?? {};
 
+    final filteredSectors = sectors.where((s) {
+      if (_selectedSectorFilter == 0) return true;
+      final badge = (s['momentum_badge'] ?? '').toString();
+      final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION');
+      if (_selectedSectorFilter == 1) return !isSoft;
+      if (_selectedSectorFilter == 2) return isSoft;
+      return true;
+    }).toList();
+
     return TabBarView(
       controller: _tabController,
       children: [
@@ -219,18 +229,10 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               _buildHeadlineBanner(headline),
               const SizedBox(height: 12),
               _buildEarningsAlphaExplainer(),
-              const SizedBox(height: 16),
-              Text(
-                "ACTIONABLE SECTOR DEMAND SIGNALS (${sectors.length})",
-                style: GoogleFonts.plusJakartaSans(
-                  color: accentCyan,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.0,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ...sectors.map((s) => _buildSectorDemandCard(s)),
+              const SizedBox(height: 14),
+              _buildSectorBreadthAndFilter(sectors),
+              const SizedBox(height: 12),
+              ...filteredSectors.map((s) => _buildSectorDemandCard(s)),
               const SizedBox(height: 10),
               _buildSebiDisclaimerCard(),
             ],
@@ -551,6 +553,140 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     );
   }
 
+  Widget _buildSectorBreadthAndFilter(List<dynamic> allSectors) {
+    int expandingCount = 0;
+    int softeningCount = 0;
+    for (final s in allSectors) {
+      final badge = (s['momentum_badge'] ?? '').toString();
+      if (badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION')) {
+        softeningCount++;
+      } else {
+        expandingCount++;
+      }
+    }
+    final int total = allSectors.length;
+    final double expandingPct = total > 0 ? (expandingCount / total) : 0.71;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: surfaceCard,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: borderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "SECTOR DEMAND BREADTH",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white70,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.8,
+                ),
+              ),
+              Text(
+                "$expandingCount/$total ACTIVE EXPANSIONS",
+                style: const TextStyle(
+                  color: accentCyan,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Visual Breadth Ratio Bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: SizedBox(
+              height: 6,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: expandingCount > 0 ? expandingCount : 1,
+                    child: Container(color: accentGreen),
+                  ),
+                  const SizedBox(width: 2),
+                  Expanded(
+                    flex: softeningCount > 0 ? softeningCount : 1,
+                    child: Container(color: accentRed),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "🟢 ${(expandingPct * 100).toInt()}% Expanding ($expandingCount)",
+                style: const TextStyle(color: accentGreen, fontSize: 9.5, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "🔴 ${((1 - expandingPct) * 100).toInt()}% Softening ($softeningCount)",
+                style: const TextStyle(color: accentRed, fontSize: 9.5, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // 3 Interactive Filter Chips
+          Row(
+            children: [
+              _buildFilterChip(0, "All ($total)"),
+              const SizedBox(width: 6),
+              _buildFilterChip(1, "🔥 High Demand ($expandingCount)"),
+              const SizedBox(width: 6),
+              _buildFilterChip(2, "⚠️ Softening ($softeningCount)"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterChip(int index, String label) {
+    final bool isSelected = _selectedSectorFilter == index;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() => _selectedSectorFilter = index);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? accentCyan.withOpacity(0.18) : const Color(0xFF0A101D),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: isSelected ? accentCyan : Colors.white12,
+              width: isSelected ? 1.2 : 0.8,
+            ),
+          ),
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: isSelected ? accentCyan : textMuted,
+              fontSize: 9.5,
+              fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildSebiDisclaimerCard() {
     return Container(
       margin: const EdgeInsets.only(top: 14, bottom: 20),
@@ -598,18 +734,44 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
   Widget _buildSectorDemandCard(Map<String, dynamic> s) {
     final stocks = (s['beneficiary_equities'] as List?) ?? [];
     final badge = s['momentum_badge'] ?? '🟢 EXPANDING';
-    final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION');
-    final trendOutlook = s['macro_trend_outlook'] ?? s['earnings_outlook'];
-    final catalystNote = s['macro_correlation_note'] ?? s['economic_rationale'] ?? '';
+    final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION');
     final keyMetric = s['fundamental_metric_to_track'] ?? s['key_metric_to_watch'];
-    final primaryInd = s['primary_indicators'] ?? '';
+
+    // Extract metrics list (from structured 'metrics' or split 'primary_indicators')
+    List<Map<String, dynamic>> metricItems = [];
+    if (s['metrics'] is List && (s['metrics'] as List).isNotEmpty) {
+      metricItems = (s['metrics'] as List).map((m) => Map<String, dynamic>.from(m)).toList();
+    } else {
+      final primaryInd = (s['primary_indicators'] ?? '').toString();
+      final parts = primaryInd.split('•');
+      for (final p in parts) {
+        final trimmed = p.trim();
+        if (trimmed.isEmpty) continue;
+        if (trimmed.contains(':')) {
+          final spl = trimmed.split(':');
+          final lbl = spl[0].trim();
+          final val = spl.sublist(1).join(':').trim();
+          metricItems.add({
+            'label': lbl,
+            'value': val,
+            'positive': !val.contains('-'),
+          });
+        } else {
+          metricItems.add({
+            'label': 'Metric',
+            'value': trimmed,
+            'positive': !trimmed.contains('-'),
+          });
+        }
+      }
+    }
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: surfaceCard,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isSoft ? accentRed.withOpacity(0.3) : borderSubtle,
         ),
@@ -617,6 +779,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Row 1: Sector Title + Momentum Badge
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -626,12 +789,12 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                   style: GoogleFonts.plusJakartaSans(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
-                    fontSize: 13.5,
+                    fontSize: 13,
                   ),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
                   color: isSoft ? accentRed.withOpacity(0.15) : accentGreen.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(6),
@@ -641,20 +804,20 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                   style: TextStyle(
                     color: isSoft ? accentRed : accentGreen,
                     fontWeight: FontWeight.bold,
-                    fontSize: 10,
+                    fontSize: 9.5,
                   ),
                 ),
               ),
             ],
           ),
 
-          // 📊 Demand Temperature Meter (Visual Bar)
+          // Row 2: 5-Segment Demand Intensity Meter
           const SizedBox(height: 6),
           Row(
             children: [
               const Text(
-                "DEMAND INTENSITY: ",
-                style: TextStyle(color: textMuted, fontSize: 9, fontWeight: FontWeight.bold),
+                "INTENSITY: ",
+                style: TextStyle(color: textMuted, fontSize: 8.5, fontWeight: FontWeight.bold),
               ),
               Expanded(
                 child: Row(
@@ -663,7 +826,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                     final bool isActive = index < activeSegments;
                     return Expanded(
                       child: Container(
-                        height: 5,
+                        height: 4.5,
                         margin: const EdgeInsets.symmetric(horizontal: 1.5),
                         decoration: BoxDecoration(
                           color: isActive
@@ -678,7 +841,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
               const SizedBox(width: 6),
               Text(
-                isSoft ? "SOFTENING" : (badge.contains('RAPID') ? "PEAK (5/5)" : "HIGH (4/5)"),
+                isSoft ? "SOFT (2/5)" : (badge.contains('RAPID') ? "PEAK (5/5)" : "HIGH (4/5)"),
                 style: TextStyle(
                   color: isSoft ? accentRed : accentGreen,
                   fontSize: 8.5,
@@ -688,130 +851,119 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
             ],
           ),
 
-          // Primary Indicator Chips / Strip
-          if (primaryInd.isNotEmpty) ...[
+          // Row 3: Dual Telemetry Metric Badges (Visual Data Tiles!)
+          if (metricItems.isNotEmpty) ...[
             const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: const Color(0xFF090E17),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: accentCyan.withOpacity(0.2)),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.analytics_outlined, color: accentCyan, size: 13),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      primaryInd,
-                      style: GoogleFonts.robotoMono(
-                        color: accentCyan,
-                        fontSize: 10.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-
-          // Single Crisp Data-First Driver (No duplicate essay)
-          if (catalystNote.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              catalystNote,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 11,
-                height: 1.35,
-              ),
-            ),
-          ],
-
-          // Trend & Fundamental Driver Strip
-          if (keyMetric != null || trendOutlook != null) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(
-                color: isSoft ? accentRed.withOpacity(0.06) : const Color(0xFF0A1F1C),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                  color: isSoft ? accentRed.withOpacity(0.25) : accentGreen.withOpacity(0.25),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    isSoft ? Icons.trending_down_rounded : Icons.trending_up_rounded,
-                    size: 14,
-                    color: isSoft ? accentRed : accentGreen,
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      keyMetric != null ? "Driver: $keyMetric" : "Trend: $trendOutlook",
-                      style: TextStyle(
-                        color: isSoft ? accentRed : accentGreen,
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-
-          // Clean Peer Stocks (No 7x repeated disclaimer)
-          if (stocks.isNotEmpty) ...[
-            const SizedBox(height: 10),
             Row(
-              children: const [
-                Text(
-                  "REPRESENTATIVE PEERS",
-                  style: TextStyle(
-                    color: textMuted,
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.4,
+              children: metricItems.map((m) {
+                final bool isPos = m['positive'] == true;
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 2.5),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF090F1B),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                        color: isPos ? accentCyan.withOpacity(0.2) : accentRed.withOpacity(0.25),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          m['label']?.toString() ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: textMuted,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Icon(
+                              isPos ? Icons.trending_up_rounded : Icons.trending_down_rounded,
+                              size: 13,
+                              color: isPos ? accentGreen : accentRed,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                m['value']?.toString() ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.robotoMono(
+                                  color: isPos ? Colors.white : accentRed,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                );
+              }).toList(),
             ),
-            const SizedBox(height: 5),
+          ],
+
+          // Row 4: Key Fundamental Driver Pill (1-line)
+          if (keyMetric != null && keyMetric.toString().isNotEmpty) ...[
+            const SizedBox(height: 7),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0D1424),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.white10),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.track_changes_rounded, size: 12, color: accentAmber),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: Text(
+                      "Driver: $keyMetric",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
+          // Row 5: Actionable Stock Tickers
+          if (stocks.isNotEmpty) ...[
+            const SizedBox(height: 7),
             Wrap(
               spacing: 6,
               runSpacing: 5,
               children: stocks.map((st) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3.5),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0C1320),
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: const Color(0xFF1E2D44)),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        st['symbol'] ?? '',
-                        style: GoogleFonts.robotoMono(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 10,
-                        ),
-                      ),
-                      if (st['name'] != null && st['name'].toString().isNotEmpty) ...[
-                        const SizedBox(width: 4),
-                        Text(
-                          "• ${st['name']}",
-                          style: const TextStyle(color: textMuted, fontSize: 9),
-                        ),
-                      ],
-                    ],
+                  child: Text(
+                    st['symbol'] ?? '',
+                    style: GoogleFonts.robotoMono(
+                      color: accentCyan,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 10,
+                    ),
                   ),
                 );
               }).toList(),

@@ -1,24 +1,69 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-20 16:30:49 IST",
+  "last_updated": "2026-11-20 16:39:35 IST",
   "economy_headline": {
-    "core_infra_growth_pct": 10.9,
+    "core_infra_growth_pct": 7.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
     "verdict": "BROAD-BASED PHYSICAL EXPANSION",
-    "momentum_score": 88,
+    "momentum_score": 84,
     "momentum_label": "HIGH INDUSTRIAL PULSE",
-    "headline_summary": "India Core Infrastructure & Ground Logistics Expand at Robust +10.9% YoY Momentum"
+    "headline_summary": "India's Ground Economy Expanding at +8.0% YoY Volume Pace — Zero Industrial Slowdown"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
       "report_title": "DPIIT Index of Eight Core Industries",
-      "period": "October 2026 (Provisional)",
-      "overall_yoy_growth_pct": 10.9,
-      "previous_month_growth_pct": null,
-      "components": {},
+      "period": "September 2026 (Provisional)",
+      "overall_yoy_growth_pct": 7.9,
+      "components": {
+        "Cement": {
+          "weight": 4.41,
+          "yoy_pct": 9.8,
+          "status": "PEAK_DEMAND"
+        },
+        "Electricity": {
+          "weight": 30.932,
+          "yoy_pct": 11.4,
+          "status": "PEAK_DEMAND"
+        },
+        "Coal": {
+          "weight": 5.596,
+          "yoy_pct": 10.7,
+          "status": "PEAK_DEMAND"
+        },
+        "Refinery Products": {
+          "weight": 22.572,
+          "yoy_pct": 10.3,
+          "status": "PEAK_DEMAND"
+        },
+        "Steel": {
+          "weight": 17.584,
+          "yoy_pct": 4.9,
+          "status": "EXPANDING"
+        },
+        "Iron Ore": {
+          "weight": 4.905,
+          "yoy_pct": 18.4,
+          "status": "SURGING"
+        },
+        "Crude Oil": {
+          "weight": 7.43,
+          "yoy_pct": -1.4,
+          "status": "CONTRACTION"
+        },
+        "Natural Gas": {
+          "weight": 3.841,
+          "yoy_pct": -4.6,
+          "status": "CONTRACTION"
+        },
+        "Fertilizers": {
+          "weight": 2.731,
+          "yoy_pct": -11.7,
+          "status": "SHARP_CONTRACTION"
+        }
+      },
       "historical_13m_growth": []
     },
     "ipa_major_ports": {
@@ -58,19 +103,16 @@
       "report_title": "PPAC Monthly Petroleum Industry Consumption Review",
       "period": "September 2026",
       "total_pol_consumption_mmt": 19.26,
-      "previous_pol_consumption_mmt": 18.63,
       "total_pol_growth_pct": 3.4,
       "fuels": {
         "Motor Spirit (Petrol)": {
           "consumption_mmt": 3.67,
           "yoy_growth_pct": 8.0,
-          "proxy_for": "Personal Mobility & Passenger Vehicles",
           "status": "PEAK_DEMAND"
         },
         "High Speed Diesel (HSD)": {
           "consumption_mmt": 7.11,
           "yoy_growth_pct": 5.6,
-          "proxy_for": "Commercial Freight, Logistics & Agriculture",
           "status": "EXPANDING"
         },
         "Aviation Turbine Fuel (ATF)": {
@@ -175,9 +217,20 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚀 RAPID EXPANSION",
       "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-      "macro_correlation_note": "Diesel/HSD consumption rose +5.6% YoY while NETC FASTag toll collections expanded +8.5% YoY to ₹5,840 Cr.",
       "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
       "primary_indicators": "PPAC Diesel (HSD): +5.6% YoY • FASTag Toll: +8.5% YoY",
+      "metrics": [
+        {
+          "label": "PPAC Diesel (HSD)",
+          "value": "+5.6% YoY",
+          "positive": true
+        },
+        {
+          "label": "FASTag Toll Flow",
+          "value": "+8.5% YoY",
+          "positive": true
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "TATAMOTORS",
@@ -206,9 +259,20 @@
       "demand_signal": "PEAK_DEMAND",
       "momentum_badge": "🔥 PEAK DEMAND",
       "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-      "macro_correlation_note": "Electricity generation surged +11.4% YoY alongside a +10.7% YoY increase in domestic coal dispatch.",
       "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
       "primary_indicators": "8-Core Electricity: +11.4% YoY • Coal Dispatch: +10.7% YoY",
+      "metrics": [
+        {
+          "label": "8-Core Electricity",
+          "value": "+11.4% YoY",
+          "positive": true
+        },
+        {
+          "label": "Coal Dispatch",
+          "value": "+10.7% YoY",
+          "positive": true
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "NTPC",
@@ -237,9 +301,20 @@
       "demand_signal": "STRONG_DEMAND",
       "momentum_badge": "📈 STRONG DEMAND",
       "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-      "macro_correlation_note": "Cement production grew +9.8% YoY driven by a stellar +17.2% YoY spike in bitumen road capex.",
       "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
       "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen Road Capex: +17.2% YoY",
+      "metrics": [
+        {
+          "label": "8-Core Cement",
+          "value": "+9.8% YoY",
+          "positive": true
+        },
+        {
+          "label": "Bitumen Road Capex",
+          "value": "+17.2% YoY",
+          "positive": true
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "ULTRACEMCO",
@@ -268,9 +343,20 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚢 SURGING EXPORTS",
       "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-      "macro_correlation_note": "Major ports cargo handling surged +10.17% YoY to 566.4 MMT, underpinned by a +8.51% YoY rise in container volumes.",
       "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
       "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51%",
+      "metrics": [
+        {
+          "label": "Major Ports Cargo",
+          "value": "+10.17% YoY",
+          "positive": true
+        },
+        {
+          "label": "Container Volume",
+          "value": "+8.51%",
+          "positive": true
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "ADANIPORTS",
@@ -299,9 +385,20 @@
       "demand_signal": "STEADY_GROWTH",
       "momentum_badge": "⚙️ STEADY CAPEX",
       "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-      "macro_correlation_note": "Steel production sustained steady expansion with a +4.9% YoY increase, feeding heavy industrial fabrication.",
       "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
       "primary_indicators": "8-Core Steel: +4.9% YoY • Iron Ore: +18.4% YoY",
+      "metrics": [
+        {
+          "label": "8-Core Steel",
+          "value": "+4.9% YoY",
+          "positive": true
+        },
+        {
+          "label": "Iron Ore Output",
+          "value": "+18.4% YoY",
+          "positive": true
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "TATASTEEL",
@@ -330,9 +427,15 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ VOLUME CONTRACTION",
       "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING",
-      "macro_correlation_note": "Rabi nutrient replenishment steady; domestic urea offtake tracking seasonal 3-year historical averages.",
       "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
       "primary_indicators": "8-Core Fertilizers: -11.7% YoY",
+      "metrics": [
+        {
+          "label": "8-Core Fertilizers",
+          "value": "-11.7% YoY",
+          "positive": false
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "COROMANDEL",
@@ -351,9 +454,20 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION",
       "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-      "macro_correlation_note": "Domestic refinery runs tracking higher with robust product cracks; mature offshore yields remain stable.",
       "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
       "primary_indicators": "8-Core Crude: -1.4% YoY • Natural Gas: -4.6% YoY",
+      "metrics": [
+        {
+          "label": "8-Core Crude",
+          "value": "-1.4% YoY",
+          "positive": false
+        },
+        {
+          "label": "Natural Gas",
+          "value": "-4.6% YoY",
+          "positive": false
+        }
+      ],
       "beneficiary_equities": [
         {
           "symbol": "ONGC",

@@ -593,9 +593,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "EXPANDING" if hsd_growth > 4.0 else "STEADY",
             "momentum_badge": "🚀 RAPID EXPANSION" if hsd_growth > 5.0 else "📈 EXPANDING",
             "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-            "macro_correlation_note": f"Diesel +{hsd_growth}% YoY & FASTag toll +{toll_growth}% YoY confirm high inter-state commercial freight velocity and fleet utilization above 85%.",
             "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
             "primary_indicators": f"PPAC Diesel (HSD): +{hsd_growth}% YoY • FASTag Toll: +{toll_growth}% YoY",
+            "metrics": [
+                {"label": "PPAC Diesel (HSD)", "value": f"+{hsd_growth}% YoY", "positive": hsd_growth >= 0},
+                {"label": "FASTag Toll Flow", "value": f"+{toll_growth}% YoY", "positive": toll_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "TATAMOTORS", "name": "Tata Motors Ltd", "thesis": "Commercial Vehicle (MHCV) division cargo freight market share"},
                 {"symbol": "ASHOKLEY", "name": "Ashok Leyland Ltd", "thesis": "Domestic truck tonnage and medium/heavy commercial vehicle volume tracker"},
@@ -608,9 +611,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "PEAK_DEMAND" if power_growth > 10.0 else "EXPANDING",
             "momentum_badge": "🔥 PEAK DEMAND" if power_growth > 10.0 else "⚡ STRONG GENERATION",
             "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-            "macro_correlation_note": f"Electricity +{power_growth}% YoY and coal dispatch +{coal_growth}% YoY confirm robust industrial baseload absorption and rising thermal plant load factor (PLF).",
             "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
             "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{coal_growth}% YoY",
+            "metrics": [
+                {"label": "8-Core Electricity", "value": f"+{power_growth}% YoY", "positive": power_growth >= 0},
+                {"label": "Coal Dispatch", "value": f"+{coal_growth}% YoY", "positive": coal_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "NTPC", "name": "NTPC Ltd", "thesis": "Thermal baseload generation and regulated capacity addition peer"},
                 {"symbol": "BHEL", "name": "Bharat Heavy Electricals Ltd", "thesis": "Thermal power equipment and supercritical boiler engineering peer"},
@@ -623,9 +629,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "STRONG_DEMAND" if cement_growth > 7.0 else "STEADY",
             "momentum_badge": "📈 STRONG DEMAND" if cement_growth > 7.0 else "🏗️ STEADY CONSTRUCTION",
             "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-            "macro_correlation_note": f"Cement output +{cement_growth}% YoY and bitumen +{bitumen_growth}% YoY reflect active post-monsoon highway capex and central infrastructure project execution.",
             "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
             "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex: +{bitumen_growth}% YoY",
+            "metrics": [
+                {"label": "8-Core Cement", "value": f"+{cement_growth}% YoY", "positive": cement_growth >= 0},
+                {"label": "Bitumen Road Capex", "value": f"+{bitumen_growth}% YoY", "positive": bitumen_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "ULTRACEMCO", "name": "UltraTech Cement Ltd", "thesis": "Domestic scale leader in clinker and cement volume dispatches"},
                 {"symbol": "AMBUJACEM", "name": "Ambuja Cements Ltd", "thesis": "Pan-India cement manufacturing capacity and logistics peer"},
@@ -638,9 +647,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "EXPANDING" if port_growth > 7.0 else "STEADY",
             "momentum_badge": "🚢 SURGING EXPORTS" if port_growth > 8.0 else "📈 STEADY CARGO",
             "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-            "macro_correlation_note": f"Major ports cargo +{port_growth}% YoY ({ipa.get('total_cargo_current_mmt', 566.4)} MMT) and container volume +{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}% signal steady maritime export-import throughput.",
             "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
             "primary_indicators": f"IPA Major Ports: {ipa.get('total_cargo_current_mmt', 566.4)} MMT (+{port_growth}% YoY) • Containers: +{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%",
+            "metrics": [
+                {"label": "Major Ports Cargo", "value": f"+{port_growth}% YoY", "positive": port_growth >= 0},
+                {"label": "Container Volume", "value": f"+{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%", "positive": True}
+            ],
             "beneficiary_equities": [
                 {"symbol": "ADANIPORTS", "name": "Adani Ports and SEZ Ltd", "thesis": "Largest commercial port operator tracking India EXIM volume"},
                 {"symbol": "CONCOR", "name": "Container Corporation of India", "thesis": "Inland container depot rail freight throughput operator peer"},
@@ -653,9 +665,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "STEADY_GROWTH" if steel_growth > 0.0 else "CONTRACTION",
             "momentum_badge": "⚙️ STEADY CAPEX" if steel_growth > 3.0 else "⚡ RANGEBOUND DISPATCH",
             "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-            "macro_correlation_note": f"Finished steel output +{steel_growth}% YoY and iron ore +{iron_ore_growth}% YoY underpin steady domestic structural fabrication and automotive demand.",
             "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
             "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{iron_ore_growth}% YoY",
+            "metrics": [
+                {"label": "8-Core Steel", "value": f"+{steel_growth}% YoY", "positive": steel_growth >= 0},
+                {"label": "Iron Ore Output", "value": f"+{iron_ore_growth}% YoY", "positive": iron_ore_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "thesis": "Domestic flat products and automotive steel manufacturing peer"},
                 {"symbol": "JSWSTEEL", "name": "JSW Steel Ltd", "thesis": "Scale manufacturing and domestic infrastructure steel peer"},
@@ -668,9 +683,11 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "CONTRACTION" if fert_growth < 0 else "EXPANDING",
             "momentum_badge": "⚠️ VOLUME CONTRACTION" if fert_growth < 0 else "🌱 AGRI EXPANSION",
             "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING" if fert_growth < 0 else "🌾 SOWING PICKUP",
-            "macro_correlation_note": f"Fertilizer production at {fert_growth}% YoY reflects seasonal inventory destocking ahead of the upcoming Rabi sowing acreage cycle.",
             "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
             "primary_indicators": f"8-Core Fertilizers: {fert_growth}% YoY",
+            "metrics": [
+                {"label": "8-Core Fertilizers", "value": f"{fert_growth}% YoY", "positive": fert_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "COROMANDEL", "name": "Coromandel International Ltd", "thesis": "Complex NPK fertilizer manufacturing and agri-input peer"},
                 {"symbol": "CHAMBLFERT", "name": "Chambal Fertilisers Ltd", "thesis": "Urea production and domestic crop protection peer"}
@@ -681,9 +698,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "CONTRACTION" if crude_growth < 0 else "STEADY",
             "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION" if crude_growth < 0 else "🛢️ UPSTREAM STABLE",
             "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-            "macro_correlation_note": f"Domestic crude ({crude_growth}% YoY) and natural gas ({gas_growth}% YoY) track mature field maintenance cycles and offshore replacement schedules.",
             "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
             "primary_indicators": f"8-Core Crude: {crude_growth}% YoY • Natural Gas: {gas_growth}% YoY",
+            "metrics": [
+                {"label": "8-Core Crude", "value": f"{crude_growth}% YoY", "positive": crude_growth >= 0},
+                {"label": "Natural Gas", "value": f"{gas_growth}% YoY", "positive": gas_growth >= 0}
+            ],
             "beneficiary_equities": [
                 {"symbol": "ONGC", "name": "Oil and Natural Gas Corporation", "thesis": "Domestic upstream crude oil and natural gas exploration peer"},
                 {"symbol": "OIL", "name": "Oil India Ltd", "thesis": "North-east domestic oil exploration and refining subsidiary peer"}
