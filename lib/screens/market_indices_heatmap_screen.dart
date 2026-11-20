@@ -37,6 +37,8 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
   final String _stockApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet1";
+  final String _constituentsApiUrl =
+      "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet3";
 
   final NumberFormat _currencyFormat = NumberFormat('#,##,##0.00', 'en_IN');
   Map<String, Map<String, dynamic>> _liveStockQuotes = {};
@@ -144,6 +146,58 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
       }
     } catch (_) {
       // Silent fallback
+    }
+
+    // 3. Optional: Fetch dynamic constituents from Sheet 3 if deployed on Cloudflare
+    try {
+      final constRes = await http
+          .get(Uri.parse(_constituentsApiUrl))
+          .timeout(const Duration(seconds: 8));
+
+      if (constRes.statusCode == 200) {
+        final decoded = jsonDecode(constRes.body);
+        if (decoded is List) {
+          _mergeRemoteConstituents(decoded);
+        }
+      }
+    } catch (_) {
+      // Silent fallback
+    }
+  }
+
+  void _mergeRemoteConstituents(List<dynamic> rows) {
+    Map<String, List<Map<String, dynamic>>> sectorMap = {};
+    for (var r in rows) {
+      if (r is Map) {
+        final sec = (r['SECTOR'] ?? r['sector'] ?? '').toString().toUpperCase().trim();
+        final sym = (r['SYMBOL'] ?? r['symbol'] ?? '').toString().toUpperCase().trim();
+        final name = (r['COMPANY_NAME'] ?? r['name'] ?? sym).toString();
+        final weight = (r['WEIGHT'] ?? r['weight'] ?? '').toString();
+        final price = _extractNum(r['CMP'] ?? r['price']);
+        final change = _extractNum(r['CHANGE'] ?? r['change']);
+
+        if (sec.isNotEmpty && sym.isNotEmpty) {
+          sectorMap.putIfAbsent(sec, () => []);
+          sectorMap[sec]!.add({
+            'symbol': sym,
+            'name': name,
+            'weight': weight,
+            'price': price,
+            'change_pct': change,
+          });
+        }
+      }
+    }
+
+    if (sectorMap.isNotEmpty && mounted) {
+      setState(() {
+        for (var item in [..._sectoralList, ..._broadMarketList]) {
+          final sName = (item['name'] ?? '').toString().toUpperCase().trim();
+          if (sectorMap.containsKey(sName)) {
+            item['constituents'] = sectorMap[sName];
+          }
+        }
+      });
     }
   }
 
