@@ -447,6 +447,286 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   // =============================================================
+  // 📊 EXECUTIVE CONCLUSION HUD & NET FLOW COLUMN BAR CHART
+  // =============================================================
+  Widget _buildExecutiveBarChart() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF142038), Color(0xFF0C1424)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.4), width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF00E5FF).withOpacity(0.08),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header Badge
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00E5FF).withOpacity(0.18),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.bar_chart_rounded,
+                        color: Color(0xFF00E5FF), size: 18),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    "CORE CONCLUSION (AT A GLANCE)",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: const Color(0xFF00E5FF),
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00FF88).withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Text(
+                  "🔥 LIVE REGIME",
+                  style: TextStyle(
+                    color: Color(0xFF00FF88),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Big Bold Verdict
+          Text(
+            "Institutions are pouring +₹12,800 Cr into Large Caps while DUMPING Small Caps (-₹4,600 Cr)",
+            style: GoogleFonts.plusJakartaSans(
+              color: Colors.white,
+              fontSize: 14.5,
+              fontWeight: FontWeight.w900,
+              height: 1.3,
+            ),
+          ),
+          const SizedBox(height: 14),
+
+          // 📊 Vertical Net Capital Flow Column Bar Chart
+          Container(
+            padding: const EdgeInsets.fromLTRB(10, 14, 10, 10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF080D17),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: const Color(0xFF1B283E)),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("NET 30-DAY INSTITUTIONAL CAPITAL FLOW (₹ CRORE)",
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                    Text("Zero Baseline: ₹0 Cr",
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // The 4 Columns
+                SizedBox(
+                  height: 110,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      _buildFlowColumn(
+                        label: "LARGE CAP",
+                        amountStr: "+₹12.8k Cr",
+                        heightRatio: 1.0,
+                        isPositive: true,
+                        color: const Color(0xFF00FF88),
+                        icon: Icons.arrow_upward_rounded,
+                      ),
+                      _buildFlowColumn(
+                        label: "CASH / REPO",
+                        amountStr: "+₹2.1k Cr",
+                        heightRatio: 0.32,
+                        isPositive: true,
+                        color: const Color(0xFF00E5FF),
+                        icon: Icons.arrow_upward_rounded,
+                      ),
+                      _buildFlowColumn(
+                        label: "MID CAP",
+                        amountStr: "-₹1.2k Cr",
+                        heightRatio: 0.24,
+                        isPositive: false,
+                        color: const Color(0xFFFF9100),
+                        icon: Icons.arrow_downward_rounded,
+                      ),
+                      _buildFlowColumn(
+                        label: "SMALL CAP",
+                        amountStr: "-₹4.6k Cr",
+                        heightRatio: 0.58,
+                        isPositive: false,
+                        color: const Color(0xFFFF2A6D),
+                        icon: Icons.arrow_downward_rounded,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 6),
+                // Zero baseline indicator
+                Container(
+                  height: 1.5,
+                  color: Colors.white24,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+
+          // 3 Bullet Conclusions (Crystal clear)
+          _buildTakeawayItem(
+            Icons.check_circle_rounded,
+            const Color(0xFF00FF88),
+            "73% Fresh SIP Allocation into Large Caps",
+            "Institutions are parking the bulk of domestic SIP inflows into resilient Private Banks and Utilities for capital safety.",
+          ),
+          const SizedBox(height: 6),
+          _buildTakeawayItem(
+            Icons.cancel_rounded,
+            const Color(0xFFFF2A6D),
+            "Small-Cap De-risking & Distribution",
+            "Small-cap median P/E reached an unsustainable >45x. Marquee funds are cutting positions to secure 2-year multibagger gains.",
+          ),
+          const SizedBox(height: 6),
+          _buildTakeawayItem(
+            Icons.savings_rounded,
+            const Color(0xFFFFB703),
+            "₹55,100+ Cr Cash Dry Powder Waiting",
+            "High 7.76% liquidity buffer held by funds like PPFAS & Quant, waiting to buy steep market crash dips.",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFlowColumn({
+    required String label,
+    required String amountStr,
+    required double heightRatio,
+    required bool isPositive,
+    required Color color,
+    required IconData icon,
+  }) {
+    final double barHeight = (heightRatio * 65.0).clamp(16.0, 65.0);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: color, size: 9),
+            const SizedBox(width: 2),
+            Text(
+              amountStr,
+              style: GoogleFonts.robotoMono(
+                color: color,
+                fontSize: 9.5,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+
+        // Vertical Column Bar
+        Container(
+          width: 42,
+          height: barHeight,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.95), color.withOpacity(0.45)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: color, width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: color.withOpacity(0.25),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 6),
+
+        Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            color: Colors.white70,
+            fontSize: 8.5,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTakeawayItem(
+      IconData icon, Color color, String title, String desc) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: color, size: 14),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.plusJakartaSans(
+                  color: color,
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 1),
+              Text(
+                desc,
+                style: const TextStyle(
+                    color: Colors.white70, fontSize: 10, height: 1.3),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // =============================================================
   // TAB 1: 🌊 MONEY FLOW & MARKET CAP ROTATION
   // =============================================================
   Widget _buildMoneyFlowTab() {
@@ -458,6 +738,10 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     return ListView(
       padding: const EdgeInsets.all(14),
       children: [
+        // 🌟 0. EXECUTIVE CONCLUSION HUD & COLUMN BAR CHART (Ek Baar Me Saaf)
+        _buildExecutiveBarChart(),
+        const SizedBox(height: 16),
+
         // 1. Regime Banner
         Container(
           padding: const EdgeInsets.all(14),
@@ -832,7 +1116,32 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ),
             ],
           ),
-          const SizedBox(height: 5),
+          // 📊 Horizontal Comparative Bar Chart
+          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Container(
+              height: 7,
+              color: const Color(0xFF090D16),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: FractionallySizedBox(
+                  widthFactor: (flow.abs() / 4850.0).clamp(0.06, 1.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: isInflow
+                            ? [const Color(0xFF00E5FF), const Color(0xFF00FF88)]
+                            : [const Color(0xFFFF5252), const Color(0xFFFF1744)],
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
           Text(
             thesis,
             style: const TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
@@ -1217,28 +1526,106 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           ),
           const SizedBox(height: 8),
 
-          // Retail Trap Warning Box
+          // 📊 Retail Divergence Visualizer Dual-Bar Graph
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF28111A),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.3)),
+              color: const Color(0xFF1B0C14),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.35)),
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.warning_amber_rounded,
-                    color: Color(0xFFFF2A6D), size: 14),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    "Retail Divergence: $retail",
-                    style: const TextStyle(
-                      color: Color(0xFFFF80AB),
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.w800,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "DII INSTITUTIONAL SLASHDOWN",
+                      style: TextStyle(
+                        color: Color(0xFFFF5252),
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    Text(
+                      "${drop.toStringAsFixed(1)}% Dumped",
+                      style: GoogleFonts.robotoMono(
+                        color: const Color(0xFFFF5252),
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: Container(
+                    height: 6,
+                    color: const Color(0xFF0D060A),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: (drop.abs() / 60.0).clamp(0.1, 1.0),
+                        child: Container(color: const Color(0xFFFF2A6D)),
+                      ),
                     ),
                   ),
+                ),
+                const SizedBox(height: 8),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "RETAIL INFLOW ABSORPTION (TRAP)",
+                      style: TextStyle(
+                        color: Color(0xFFFFB703),
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    Text(
+                      retail,
+                      style: GoogleFonts.robotoMono(
+                        color: const Color(0xFFFFB703),
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: Container(
+                    height: 6,
+                    color: const Color(0xFF0D060A),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: 0.65,
+                        child: Container(color: const Color(0xFFFFB703)),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: const [
+                    Icon(Icons.warning_amber_rounded,
+                        color: Color(0xFFFF2A6D), size: 12),
+                    SizedBox(width: 4),
+                    Text(
+                      "ALERT: Smart money selling into retail euphoria!",
+                      style: TextStyle(
+                        color: Color(0xFFFF80AB),
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -1955,6 +2342,37 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                   fontWeight: FontWeight.w900,
                   letterSpacing: 0.8,
                 ),
+              ),
+              const SizedBox(height: 8),
+              // 🔋 Segmented visual liquid tank gauge
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Container(
+                  height: 12,
+                  color: const Color(0xFF090D16),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: FractionallySizedBox(
+                      widthFactor: (avgCash / 15.0).clamp(0.08, 1.0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF00E5FF), Color(0xFF00FF88)],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("0% (Overheated)", style: TextStyle(color: Colors.white38, fontSize: 8)),
+                  Text("7.5% (Discipline Target)", style: TextStyle(color: Color(0xFF00E5FF), fontSize: 8, fontWeight: FontWeight.bold)),
+                  Text("15% (Extreme Liquid)", style: TextStyle(color: Colors.white38, fontSize: 8)),
+                ],
               ),
               const SizedBox(height: 8),
               Container(
