@@ -344,8 +344,8 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                       // 1. DYNAMIC ACCOUNTABILITY STRIP (Only visible when verified yesterday data exists)
                       if (_hasYesterdayData && _yesterdayResultText != null)
                         Container(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
                             color: const Color(0xFF090E1A),
                             borderRadius: BorderRadius.circular(8),
@@ -360,7 +360,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                               Icon(
                                 _isCrowdWinner ? Icons.verified_rounded : Icons.warning_amber_rounded,
                                 color: _isCrowdWinner ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
-                                size: 14,
+                                size: 13,
                               ),
                               const SizedBox(width: 6),
                               Expanded(
@@ -369,7 +369,7 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.plusJakartaSans(
-                                    fontSize: 10,
+                                    fontSize: 9.5,
                                     color: _isCrowdWinner ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -389,12 +389,12 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                 animation: _pulseController,
                                 builder: (context, child) {
                                   return Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                                     decoration: BoxDecoration(
                                       color: isDailyLocked
                                           ? Colors.orange.withOpacity(0.12)
                                           : const Color(0xFF00FF88).withOpacity(0.12 + (_pulseController.value * 0.1)),
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(16),
                                       border: Border.all(
                                         color: isDailyLocked
                                             ? Colors.orange.withOpacity(0.5)
@@ -404,19 +404,19 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                     child: Row(
                                       children: [
                                         Container(
-                                          width: 6,
-                                          height: 6,
+                                          width: 5,
+                                          height: 5,
                                           decoration: BoxDecoration(
                                             color: isDailyLocked ? Colors.orange : const Color(0xFF00FF88),
                                             shape: BoxShape.circle,
                                           ),
                                         ),
-                                        const SizedBox(width: 5),
+                                        const SizedBox(width: 4),
                                         Text(
                                           isDailyLocked ? "MARKET LIVE" : "LIVE POLL",
                                           style: GoogleFonts.plusJakartaSans(
                                             color: isDailyLocked ? Colors.orange : const Color(0xFF00FF88),
-                                            fontSize: 9.5,
+                                            fontSize: 9,
                                             fontWeight: FontWeight.w900,
                                             letterSpacing: 0.5,
                                           ),
@@ -429,15 +429,15 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                               const SizedBox(width: 8),
                               Text(
                                 "$totalVotes voted",
-                                style: const TextStyle(color: Colors.white54, fontSize: 11, fontWeight: FontWeight.w600),
+                                style: const TextStyle(color: Colors.white54, fontSize: 10.5, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
                           Container(
-                            padding: const EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
                               color: const Color(0xFF090D16),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(8),
                               border: Border.all(color: const Color(0xFF26354D)),
                             ),
                             child: Row(
@@ -449,154 +449,111 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ],
                       ),
-                      const SizedBox(height: 14),
-
-                      // 3. CLEAN QUESTION
-                      Text(
-                        _activeTab == 0
-                            ? "Kal Nifty Bullish rahega ya Bearish?"
-                            : "$_currentMonthName me Nifty ka Major Trend?",
-                        style: GoogleFonts.plusJakartaSans(
-                          color: Colors.white,
-                          fontSize: 14.5,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-
-                      // 4. FLOATING DOMINANCE BADGE (Separate Row)
-                      Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: dominantColor.withOpacity(0.12),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: dominantColor.withOpacity(0.35), width: 1),
-                          ),
-                          child: Text(
-                            dominantText,
-                            style: TextStyle(
-                              color: dominantColor,
-                              fontSize: 10.5,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0.4,
-                            ),
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 10),
 
-                      // 5. UNCLUTTERED SPLIT SCOREBOARD
+                      // 3. QUESTION & DOMINANCE (Unified Single Row)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                totalVotes == 0 ? "50%" : "${bullPct.toStringAsFixed(0)}%",
-                                style: GoogleFonts.plusJakartaSans(
-                                  color: const Color(0xFF00FF88),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w900,
-                                  height: 1.1,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                "BULLISH",
-                                style: TextStyle(color: Color(0xFF00FF88), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
-                              ),
-                            ],
-                          ),
-                          if (_activeTab == 1)
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  totalVotes == 0 ? "0%" : "${sidePct.toStringAsFixed(0)}%",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    color: const Color(0xFFFFB300),
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w900,
-                                    height: 1.1,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                const Text(
-                                  "RANGE",
-                                  style: TextStyle(color: Color(0xFFFFB300), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
-                                ),
-                              ],
+                          Text(
+                            _activeTab == 0
+                                ? "Nifty Market Sentiment"
+                                : "$_currentMonthName Nifty Outlook",
+                            style: GoogleFonts.plusJakartaSans(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
                             ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                totalVotes == 0 ? "50%" : "${bearPct.toStringAsFixed(0)}%",
-                                style: GoogleFonts.plusJakartaSans(
-                                  color: const Color(0xFFFF2A6D),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w900,
-                                  height: 1.1,
-                                ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: dominantColor.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: dominantColor.withOpacity(0.35), width: 0.8),
+                            ),
+                            child: Text(
+                              dominantText,
+                              style: TextStyle(
+                                color: dominantColor,
+                                fontSize: 9.5,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0.3,
                               ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                "BEARISH",
-                                style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
 
-                      // 6. 3D RATIO BAR
-                      Container(
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF0A0F1A),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.white.withOpacity(0.08)),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: totalVotes == 0 ? 50 : bullPct.round().clamp(2, 98),
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [Color(0xFF00C853), Color(0xFF00FF88)],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              if (_activeTab == 1 && sidePct > 0) ...[
-                                const SizedBox(width: 2),
-                                Expanded(
-                                  flex: sidePct.round().clamp(1, 98),
-                                  child: Container(color: const Color(0xFFFFB300)),
-                                ),
-                              ],
-                              const SizedBox(width: 2),
-                              Expanded(
-                                flex: totalVotes == 0 ? 50 : bearPct.round().clamp(2, 98),
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [Color(0xFFFF2A6D), Color(0xFFD50000)],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                      // 4. COMPACT RATIO BAR WITH EMBEDDED SCOREBOARD
+                      Row(
+                        children: [
+                          Text(
+                            totalVotes == 0 ? "50% Bull" : "${bullPct.toStringAsFixed(0)}% Bull",
+                            style: GoogleFonts.plusJakartaSans(
+                              color: const Color(0xFF00FF88),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
-                        ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Container(
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0A0F1A),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: totalVotes == 0 ? 50 : bullPct.round().clamp(2, 98),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [Color(0xFF00C853), Color(0xFF00FF88)],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    if (_activeTab == 1 && sidePct > 0) ...[
+                                      const SizedBox(width: 1),
+                                      Expanded(
+                                        flex: sidePct.round().clamp(1, 98),
+                                        child: Container(color: const Color(0xFFFFB300)),
+                                      ),
+                                    ],
+                                    const SizedBox(width: 1),
+                                    Expanded(
+                                      flex: totalVotes == 0 ? 50 : bearPct.round().clamp(2, 98),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [Color(0xFFFF2A6D), Color(0xFFD50000)],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            totalVotes == 0 ? "50% Bear" : "${bearPct.toStringAsFixed(0)}% Bear",
+                            style: GoogleFonts.plusJakartaSans(
+                              color: const Color(0xFFFF2A6D),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 18),
+                      const SizedBox(height: 12),
 
                       // 7. ACTION BUTTONS & CHIPS
                       if (_activeTab == 0) ...[
@@ -635,22 +592,17 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                           ),
                         ],
                       ] else ...[
-                        // Spacious Monthly Container
+                        // Compact Monthly Container
                         Container(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                           decoration: BoxDecoration(
                             color: const Color(0xFF090E1A).withOpacity(0.6),
-                            borderRadius: BorderRadius.circular(14),
+                            borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: const Color(0xFF1E2B3E)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "1. SELECT PRIMARY BIAS",
-                                style: TextStyle(color: Colors.white54, fontSize: 9.5, fontWeight: FontWeight.w900, letterSpacing: 0.5),
-                              ),
-                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
@@ -684,26 +636,26 @@ class _CommunitySentimentCardState extends State<CommunitySentimentCard>
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 8),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "2. TARGET RANGE",
-                                    style: TextStyle(color: Colors.white54, fontSize: 9.5, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                                    "TARGET RANGE",
+                                    style: TextStyle(color: Colors.white54, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 0.5),
                                   ),
                                   Text(
-                                    "Nifty: ${widget.niftyLivePrice.toStringAsFixed(1)}",
-                                    style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 10, fontWeight: FontWeight.bold),
+                                    "CMP: ${widget.niftyLivePrice > 0 ? widget.niftyLivePrice.toStringAsFixed(1) : '22,459'}",
+                                    style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 9.5, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Row(
                                 children: _dynamicRanges.map((range) {
                                   return Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 3),
+                                      padding: const EdgeInsets.symmetric(horizontal: 2.5),
                                       child: _buildRangeChip(range),
                                     ),
                                   );
