@@ -61,3 +61,4 @@ flutter:
     - assets/data/ibja_rates.json
     - assets/data/market_movers.json
     - assets/data/indices_heatmap.json
+    - assets/data/mf_smart_money_radar.json
