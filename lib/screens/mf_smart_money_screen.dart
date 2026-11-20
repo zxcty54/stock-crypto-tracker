@@ -1390,50 +1390,23 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 "When Do Institutions Dump & Exit Stocks?",
                 style: GoogleFonts.plusJakartaSans(
                   color: Colors.white,
-                  fontSize: 13.5,
+                  fontSize: 13,
                   fontWeight: FontWeight.w900,
                 ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                "Real-time alerts tracking where marquee DIIs are cutting stakes, liquidating positions, and offloading shares into retail liquidity during euphoria.",
-                style: TextStyle(
-                    color: Colors.white70, fontSize: 11, height: 1.35),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 14),
 
-        // 2. 4-Rule Exit Checklist Header
+        // Active Institutional Exits & Dumping Radar
         Row(
-          children: const [
-            Icon(Icons.checklist_rtl_rounded,
-                color: Color(0xFF00E5FF), size: 16),
-            SizedBox(width: 6),
+          children: [
+            const Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 16),
+            const SizedBox(width: 6),
             Text(
-              "4 GOLDEN RULES: HOW TO SPOT INSTITUTIONAL EXITS",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0.4,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        ..._exitChecklist.map((c) => _buildChecklistCard(c)),
-        const SizedBox(height: 16),
-
-        // 3. Active Institutional Exits & Dumping Radar
-        Row(
-          children: const [
-            Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 16),
-            SizedBox(width: 6),
-            Text(
-              "ACTIVE INSTITUTIONAL DUMPING & TRAP RADAR",
-              style: TextStyle(
+              "TRACKED INSTITUTIONAL EXITS (${_institutionalExits.length})",
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11.5,
                 fontWeight: FontWeight.w900,
@@ -1445,64 +1418,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         const SizedBox(height: 8),
         ..._institutionalExits.map((e) => _buildExitCard(e)),
       ],
-    );
-  }
-
-  Widget _buildChecklistCard(Map<String, dynamic> c) {
-    final numStr = c['rule_number'] ?? '';
-    final title = c['title'] ?? '';
-    final exp = c['explanation'] ?? '';
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFF1E2B3E)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFF00E5FF).withOpacity(0.12),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Text(
-              numStr,
-              style: GoogleFonts.robotoMono(
-                color: const Color(0xFF00E5FF),
-                fontSize: 11,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  exp,
-                  style: const TextStyle(
-                      color: Colors.white60, fontSize: 10.5, height: 1.3),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -1711,14 +1626,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            catalyst,
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 10.5, height: 1.3),
-          ),
           if (funds.isNotEmpty) ...[
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Text(
               "Exiting Funds: ${funds.join(' • ')}",
               style: GoogleFonts.plusJakartaSans(
@@ -1898,13 +1807,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 fontSize: 9.5,
                 fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 6),
-          Text(
-            _metadata['stance_summary'] ??
-                "Marquee DII managers maintain selective accumulation in electronics, defence, and capital markets.",
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 11, height: 1.35),
-          ),
         ],
       ),
     );
@@ -2078,12 +1980,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            thesis,
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 11, height: 1.3),
           ),
           const SizedBox(height: 8),
           Wrap(

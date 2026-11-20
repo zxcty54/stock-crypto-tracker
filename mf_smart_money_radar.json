@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
     "last_updated": "November 2026 Portfolio Disclosure",
-    "generated_timestamp": "2026-11-20T16:20:49.913024",
+    "generated_timestamp": "2026-11-20T17:20:06.482003",
     "total_funds_analyzed": 20,
     "total_aum_tracked_cr": 710600.0,
     "average_cash_level_pct": 7.76,
@@ -2255,14 +2255,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "DIXON",
-          "weight_in_a": 3.6,
-          "weight_in_b": 5.8
-        },
-        {
           "symbol": "KAYNES",
           "weight_in_a": 3.9,
           "weight_in_b": 5.2
+        },
+        {
+          "symbol": "DIXON",
+          "weight_in_a": 3.6,
+          "weight_in_b": 5.8
         }
       ]
     },
@@ -2300,14 +2300,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "PREMIERENE",
-          "weight_in_a": 2.8,
-          "weight_in_b": 4.8
-        },
-        {
           "symbol": "COFORGE",
           "weight_in_a": 3.0,
           "weight_in_b": 6.5
+        },
+        {
+          "symbol": "PREMIERENE",
+          "weight_in_a": 2.8,
+          "weight_in_b": 4.8
         }
       ]
     },
@@ -2385,14 +2385,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "SBIN",
-          "weight_in_a": 5.4,
-          "weight_in_b": 4.5
-        },
-        {
           "symbol": "HDFCBANK",
           "weight_in_a": 3.2,
           "weight_in_b": 8.8
+        },
+        {
+          "symbol": "SBIN",
+          "weight_in_a": 5.4,
+          "weight_in_b": 4.5
         }
       ]
     },
@@ -2403,29 +2403,14 @@
       "common_count": 7,
       "common_stocks": [
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 9.2
-        },
-        {
-          "symbol": "INFY",
-          "weight_in_a": 3.2,
-          "weight_in_b": 7.1
-        },
-        {
           "symbol": "RELIANCE",
           "weight_in_a": 5.1,
           "weight_in_b": 8.4
         },
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 5.9
-        },
-        {
-          "symbol": "LT",
-          "weight_in_a": 4.1,
-          "weight_in_b": 6.8
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 9.2
         },
         {
           "symbol": "AXISBANK",
@@ -2436,6 +2421,21 @@
           "symbol": "HDFCBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 5.4
+        },
+        {
+          "symbol": "LT",
+          "weight_in_a": 4.1,
+          "weight_in_b": 6.8
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 5.9
+        },
+        {
+          "symbol": "INFY",
+          "weight_in_a": 3.2,
+          "weight_in_b": 7.1
         }
       ]
     },
@@ -2445,6 +2445,11 @@
       "overlap_pct": 39.4,
       "common_count": 4,
       "common_stocks": [
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.8
+        },
         {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.2,
@@ -2459,11 +2464,6 @@
           "symbol": "INFY",
           "weight_in_a": 3.2,
           "weight_in_b": 5.8
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.8
         }
       ]
     },
@@ -2487,6 +2487,11 @@
       "common_count": 4,
       "common_stocks": [
         {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 5.4,
+          "weight_in_b": 8.8
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 9.2,
           "weight_in_b": 9.5
@@ -2500,11 +2505,6 @@
           "symbol": "INFY",
           "weight_in_a": 7.1,
           "weight_in_b": 5.8
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 5.4,
-          "weight_in_b": 8.8
         }
       ]
     },
@@ -2712,11 +2712,6 @@
       "common_count": 3,
       "common_stocks": [
         {
-          "symbol": "CCL",
-          "weight_in_a": 2.9,
-          "weight_in_b": 4.2
-        },
-        {
           "symbol": "BRIGADE",
           "weight_in_a": 4.9,
           "weight_in_b": 4.8
@@ -2725,6 +2720,11 @@
           "symbol": "ASTRAL",
           "weight_in_a": 2.2,
           "weight_in_b": 2.8
+        },
+        {
+          "symbol": "CCL",
+          "weight_in_a": 2.9,
+          "weight_in_b": 4.2
         }
       ]
     },
@@ -2754,9 +2754,9 @@
           "weight_in_b": 7.9
         },
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 6.2
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 8.4
         },
         {
           "symbol": "BHARTIARTL",
@@ -2764,14 +2764,14 @@
           "weight_in_b": 3.8
         },
         {
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 6.2
+        },
+        {
           "symbol": "TRENT",
           "weight_in_a": 4.5,
           "weight_in_b": 3.5
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 8.4
         }
       ]
     },
@@ -2787,14 +2787,9 @@
           "weight_in_b": 8.1
         },
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 5.9
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 4.8
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 11.8
         },
         {
           "symbol": "LT",
@@ -2802,9 +2797,14 @@
           "weight_in_b": 3.9
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 11.8
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 4.8
+        },
+        {
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 5.9
         }
       ]
     },
@@ -2829,6 +2829,11 @@
       "common_count": 4,
       "common_stocks": [
         {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.4,
+          "weight_in_b": 11.8
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 7.9,
           "weight_in_b": 8.1
@@ -2842,11 +2847,6 @@
           "symbol": "INFY",
           "weight_in_a": 6.2,
           "weight_in_b": 5.9
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.4,
-          "weight_in_b": 11.8
         }
       ]
     }
