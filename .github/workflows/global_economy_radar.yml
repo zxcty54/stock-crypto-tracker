@@ -29,6 +29,9 @@ jobs:
           pip install requests
 
       - name: Run Global Economy Telemetry Hunter
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python global_economy_radar_hunter.py
 

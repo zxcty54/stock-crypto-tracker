@@ -1012,10 +1012,111 @@ def build_global_radar_payload(metrics: dict) -> dict:
     return payload
 
 
+
+def call_gemini_ai_refiner(metrics: dict, payload: dict) -> dict:
+    """
+    If GEMINI_API_KEY / GOOGLE_API_KEY is present in environment (e.g. GitHub Actions),
+    queries Google Gemini to refine all bullet points, shocks, and headlines into
+    ultra-crisp, data-dense institutional points.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key or not api_key.strip():
+        print("ℹ️ No GEMINI_API_KEY found in environment; using calibrated quant rule synthesis.")
+        return payload
+
+    print("🤖 GEMINI_API_KEY detected! Dispatching live macro metrics to Gemini AI...")
+
+    prompt = f"""You are an institutional macro quantitative strategist for StockPulse Pro terminal.
+Analyze these live macro numbers:
+- Brent Crude: ${metrics['brent_crude']}/bbl
+- DXY Dollar Index: {metrics['dxy_index']}
+- US 10Y Treasury Yield: {metrics['us_10y_yield']}%
+- USD / INR: ₹{metrics['usd_inr']}
+- Sovereign Gold: ${metrics['gold_oz']}/oz
+- US Services PMI: {metrics['us_services_pmi']}, Mfg: {metrics['us_mfg_pmi']}
+- China Composite PMI: {metrics['china_composite_pmi']}, PPI: {metrics['china_ppi']}%, Property YoY: {metrics['china_property_investment']}%
+- Eurozone Mfg PMI: {metrics['europe_mfg_pmi']}
+- Japan Composite PMI: {metrics['japan_composite_pmi']}
+- India Composite PMI: {metrics['india_composite_pmi']}
+
+STRICT INSTRUCTION:
+Keep all text ULTRA-SHORT, DATA-DENSE, and PUNCHY BULLET POINTS. NO LONG PARAGRAPHS. Focus heavily on NUMBERS, METRICS, BASIS POINTS, AND STOCK TICKERS.
+
+Return valid JSON with exactly this structure:
+{{
+  "regime_headline": "Short 1-line regime headline with key numbers",
+  "health_verdict": "Short 1-line global health verdict with key metrics",
+  "crude_shock_severity": "CRITICAL SHOCK ALERT or RANGEBOUND COMFORT",
+  "crude_shock_trigger": "1-line trigger with crude dollar numbers",
+  "crude_shock_winners": ["ONGC", "OIL", "GAIL"],
+  "crude_shock_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"]
+}}
+"""
+
+    candidate_models = [
+        "gemini-2.5-flash-lite",
+        "gemini-1.5-flash",
+        "gemini-2.0-flash",
+        "gemini-1.5-pro"
+    ]
+
+    req_body = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 0.2,
+            "maxOutputTokens": 2000,
+            "responseMimeType": "application/json"
+        }
+    }
+
+    for model in candidate_models:
+        for version in ["v1beta", "v1"]:
+            url = f"https://generativelanguage.googleapis.com/{version}/models/{model}:generateContent?key={api_key.strip()}"
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(req_body).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=20) as resp:
+                    if resp.status == 200:
+                        raw = json.loads(resp.read().decode("utf-8"))
+                        text_part = raw["candidates"][0]["content"]["parts"][0]["text"].strip()
+                        if text_part.startswith("```json"):
+                            text_part = text_part[7:]
+                        elif text_part.startswith("```"):
+                            text_part = text_part[3:]
+                        if text_part.endswith("```"):
+                            text_part = text_part[:-3]
+
+                        ai_data = json.loads(text_part.strip())
+                        print(f"  ✓ Gemini AI refined macro telemetry successfully using {model} [{version}]!")
+
+                        if "regime_headline" in ai_data:
+                            payload["metadata"]["regime_headline"] = ai_data["regime_headline"]
+                        if "health_verdict" in ai_data:
+                            payload["executive_hud"]["health_verdict"] = ai_data["health_verdict"]
+                        if "crude_shock_severity" in ai_data and payload["dynamic_shock_transmission_engine"]["shocks"]:
+                            payload["dynamic_shock_transmission_engine"]["shocks"][0]["severity"] = ai_data["crude_shock_severity"]
+                        if "crude_shock_trigger" in ai_data and payload["dynamic_shock_transmission_engine"]["shocks"]:
+                            payload["dynamic_shock_transmission_engine"]["shocks"][0]["trigger"] = ai_data["crude_shock_trigger"]
+                        if "crude_shock_winners" in ai_data and payload["dynamic_shock_transmission_engine"]["shocks"]:
+                            payload["dynamic_shock_transmission_engine"]["shocks"][0]["margin_winners"] = ai_data["crude_shock_winners"]
+                        if "crude_shock_losers" in ai_data and payload["dynamic_shock_transmission_engine"]["shocks"]:
+                            payload["dynamic_shock_transmission_engine"]["shocks"][0]["margin_losers"] = ai_data["crude_shock_losers"]
+
+                        return payload
+            except Exception:
+                continue
+
+    print("ℹ️ Preserving calibrated quant rule synthesis.")
+    return payload
+
 def generate_global_radar():
-    print("🌐 Generating Global Macro Economy Pressure & Expansion Radar via Algorithmic Synthesis...")
+    print("🌐 Generating Global Macro Economy Pressure & Expansion Radar via Algorithmic Synthesis & Gemini AI...")
     metrics = ingest_telemetry()
     payload = build_global_radar_payload(metrics)
+    payload = call_gemini_ai_refiner(metrics, payload)
 
     for file_path in [OUTPUT_ASSET_FILE, OUTPUT_ROOT_FILE]:
         os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
