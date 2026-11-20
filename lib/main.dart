@@ -326,9 +326,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               },
             ),
             _drawerTile(
-              icon: Icons.pie_chart_rounded,
-              title: 'Delivery & OHLC History',
-              subtitle: '20-Day Qty, Del %, High/Low filters',
+              icon: Icons.leaderboard_rounded,
+              title: 'Weekly & Monthly Movers',
+              subtitle: 'Top Gainers, Losers & 20D OHLC Delivery',
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(

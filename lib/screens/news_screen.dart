@@ -28,6 +28,9 @@ import '../widgets/hidden_gems_radar.dart';
 // ⚓ Smart Money Anchor Screen Import
 import '../widgets/smart_money_anchor_screen.dart';
 
+// 🏆 Weekly & Monthly Gainers & Delivery History Import
+import 'stock_delivery_history_screen.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -331,6 +334,96 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                                   SizedBox(height: 3),
                                   Text(
                                     "Disclosures, Order Wins, Board Meets & Buybacks",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Color(0xFF8896AB),
+                              size: 14,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // 🏆 5B. WEEKLY & MONTHLY MARKET GAINERS BANNER
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StockDeliveryHistoryScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFF00F5A0).withAlpha(80),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00F5A0).withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.leaderboard_rounded,
+                                color: Color(0xFF00F5A0),
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "WEEKLY & MONTHLY GAINERS",
+                                        style: TextStyle(
+                                          color: Color(0xFF00F5A0),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.1,
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        "1W · 1M MOVERS",
+                                        style: TextStyle(
+                                          color: Color(0xFF00F0FF),
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 3),
+                                  Text(
+                                    "Top Momentum Outperformers & Delivery Surges",
                                     style: TextStyle(
                                       color: Colors.white70,
                                       fontSize: 12,

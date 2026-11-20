@@ -59,3 +59,4 @@ flutter:
     - assets/data/macro_research_report.json
     - assets/data/order_radar_report.json
     - assets/data/ibja_rates.json
+    - assets/data/market_movers.json

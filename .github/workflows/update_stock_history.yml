@@ -33,11 +33,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add stock_history_20d.json
+          git add stock_history_20d.json market_movers.json assets/data/market_movers.json
           if git diff --staged --quiet; then
             echo "ℹ️ No changes detected. Data already up-to-date."
           else
-            git commit -m "📊 Daily Stock History: Updated 10D Cache [$(date +'%d-%b-%Y')]"
+            git commit -m "📊 Daily Stock History & Market Movers [$(date +'%d-%b-%Y')]"
             git push origin main
-            echo "✅ Successfully updated stock_history_20d.json"
+            echo "✅ Successfully updated stock_history_20d.json and market_movers.json"
           fi
