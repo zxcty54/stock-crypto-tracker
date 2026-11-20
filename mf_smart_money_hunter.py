@@ -34,7 +34,9 @@ REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(REPO_ROOT, "assets", "data", "mf_smart_money_radar.json")
 ROOT_OUTPUT_FILE = os.path.join(REPO_ROOT, "mf_smart_money_radar.json")
 DISCLOSURE_DIR = os.path.join(REPO_ROOT, "mf_portfolio_disclosures")
+SNAPSHOT_DIR = os.path.join(DISCLOSURE_DIR, "snapshots")
 SNAPSHOT_FILE = os.path.join(DISCLOSURE_DIR, "previous_portfolio_snapshot.json")
+LEDGER_FILE = os.path.join(DISCLOSURE_DIR, "infiltrations_ledger.json")
 
 # Official AMFI Scheme Codes (Direct-Growth) for India's Top 20 Alpha Funds
 SCHEME_CODES = {
@@ -1387,20 +1389,69 @@ def ingest_all_disclosures(funds):
 
     return funds
 
+def get_cycle_keys(dt=None):
+    """Returns current and previous reporting cycle strings, e.g. ('2026_11', '2026_10')."""
+    if dt is None:
+        dt = datetime.now()
+    curr_key = dt.strftime("%Y_%m")
+    if dt.month == 1:
+        prev_key = f"{dt.year - 1}_12"
+    else:
+        prev_key = f"{dt.year}_{dt.month - 1:02d}"
+    return curr_key, prev_key
+
 def load_previous_snapshot():
-    """Loads previous month's snapshot from disk if present."""
+    """
+    Loads previous reporting cycle's snapshot.
+    Prioritizes month-versioned snapshot (e.g. snapshots/snapshot_2026_10.json).
+    Falls back to latest historical snapshot older than current cycle,
+    or legacy previous_portfolio_snapshot.json.
+    """
+    curr_cycle, prev_cycle = get_cycle_keys()
+
+    # 1. Check exact previous month snapshot file
+    prev_file = os.path.join(SNAPSHOT_DIR, f"snapshot_{prev_cycle}.json")
+    if os.path.exists(prev_file):
+        try:
+            with open(prev_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+
+    # 2. Check any older snapshots in SNAPSHOT_DIR sorted descending
+    if os.path.exists(SNAPSHOT_DIR):
+        files = sorted(
+            [f for f in os.listdir(SNAPSHOT_DIR) if f.startswith("snapshot_") and f.endswith(".json")],
+            reverse=True
+        )
+        for f in files:
+            if curr_cycle not in f:
+                try:
+                    with open(os.path.join(SNAPSHOT_DIR, f), "r", encoding="utf-8") as fp:
+                        return json.load(fp)
+                except Exception:
+                    pass
+
+    # 3. Fallback to legacy SNAPSHOT_FILE
     if os.path.exists(SNAPSHOT_FILE):
         try:
             with open(SNAPSHOT_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             pass
+
     return None
 
 def save_current_snapshot(funds):
-    """Saves current holdings snapshot to enable delta calculations next month."""
+    """
+    Saves current holdings snapshot versioned by reporting month (e.g. snapshots/snapshot_2026_11.json)
+    and also updates previous_portfolio_snapshot.json.
+    """
     try:
-        os.makedirs(DISCLOSURE_DIR, exist_ok=True)
+        os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+        curr_cycle, _ = get_cycle_keys()
+        versioned_file = os.path.join(SNAPSHOT_DIR, f"snapshot_{curr_cycle}.json")
+
         snapshot = [
             {
                 "id": f["id"],
@@ -1411,10 +1462,92 @@ def save_current_snapshot(funds):
             }
             for f in funds
         ]
+
+        with open(versioned_file, "w", encoding="utf-8") as f:
+            json.dump(snapshot, f, indent=2)
+
         with open(SNAPSHOT_FILE, "w", encoding="utf-8") as f:
             json.dump(snapshot, f, indent=2)
+
+        print(f"💾 Preserved versioned monthly snapshot: snapshot_{curr_cycle}.json")
     except Exception as e:
         print(f"⚠️ Error saving snapshot: {e}")
+
+def update_infiltrations_ledger(detected_infiltrations, current_funds):
+    """
+    Maintains a multi-month persistent infiltration ledger so newly added stocks
+    remain tracked across successive months with cycle age and trajectory.
+    """
+    curr_cycle, _ = get_cycle_keys()
+    ledger = {}
+    if os.path.exists(LEDGER_FILE):
+        try:
+            with open(LEDGER_FILE, "r", encoding="utf-8") as f:
+                ledger = json.load(f)
+        except Exception:
+            ledger = {}
+
+    for inf in detected_infiltrations:
+        sym = inf["symbol"]
+        curr_funds_holding = [f.get("short_name", f["name"]) for f in current_funds if any(h["symbol"] == sym for h in f.get("top_10_holdings", []))]
+        funds_display = curr_funds_holding if curr_funds_holding else inf.get("participating_funds", [])
+
+        if sym not in ledger:
+            ledger[sym] = {
+                "symbol": sym,
+                "company_name": inf.get("company_name", sym),
+                "sector": inf.get("sector", "Diversified"),
+                "first_detected_cycle": curr_cycle,
+                "first_detected_date": datetime.now().strftime("%B %Y"),
+                "cycles_held": 1,
+                "participating_funds": funds_display,
+                "action_type": inf.get("action_type", "FRESH_ENTRY"),
+                "estimated_buying_cr": inf.get("estimated_buying_cr", 0.0),
+                "avg_holding_increase_pct": inf.get("avg_holding_increase_pct", 100.0),
+                "catalyst_thesis": inf.get("catalyst_thesis", ""),
+                "institutional_conviction": inf.get("institutional_conviction", "HIGH_CONVICTION"),
+                "history": [
+                    {
+                        "cycle": curr_cycle,
+                        "action": inf.get("action_type", "FRESH_ENTRY"),
+                        "est_buying_cr": inf.get("estimated_buying_cr", 0.0)
+                    }
+                ]
+            }
+        else:
+            entry = ledger[sym]
+            existing_cycles = [h["cycle"] for h in entry.get("history", [])]
+            if curr_cycle not in existing_cycles:
+                entry["cycles_held"] = entry.get("cycles_held", 1) + 1
+                entry["action_type"] = inf.get("action_type", entry.get("action_type"))
+                entry["participating_funds"] = funds_display
+                entry["history"].append({
+                    "cycle": curr_cycle,
+                    "action": inf.get("action_type", "HOLDING"),
+                    "est_buying_cr": inf.get("estimated_buying_cr", 0.0)
+                })
+
+    try:
+        with open(LEDGER_FILE, "w", encoding="utf-8") as f:
+            json.dump(ledger, f, indent=2)
+    except Exception:
+        pass
+
+    enriched = []
+    for inf in detected_infiltrations:
+        sym = inf["symbol"]
+        rec = ledger.get(sym, {})
+        cycles_held = rec.get("cycles_held", 1)
+        first_cycle_str = rec.get("first_detected_date", datetime.now().strftime("%B %Y"))
+
+        enriched_item = dict(inf)
+        enriched_item["cycles_held"] = cycles_held
+        enriched_item["first_detected_cycle"] = first_cycle_str
+        if cycles_held > 1 and inf.get("action_type") == "FRESH_ENTRY":
+            enriched_item["catalyst_thesis"] = f"Infiltrated {cycles_held} cycles ago ({first_cycle_str}); DIIs maintaining active conviction."
+        enriched.append(enriched_item)
+
+    return enriched
 
 def compute_portfolio_deltas(previous_snapshot, current_funds):
     """
@@ -1649,6 +1782,7 @@ def build_full_report():
     # 4. Compare with previous snapshot to compute fresh entries & exits dynamically
     prev_snapshot = load_previous_snapshot()
     infiltrations, exits = compute_portfolio_deltas(prev_snapshot, funds)
+    infiltrations = update_infiltrations_ledger(infiltrations, funds)
 
     # 5. Save current snapshot for next month's delta calculation
     save_current_snapshot(funds)

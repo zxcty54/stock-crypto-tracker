@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
     "last_updated": "November 2026 Portfolio Disclosure",
-    "generated_timestamp": "2026-11-20T14:39:59.167934",
+    "generated_timestamp": "2026-11-20T14:43:22.591830",
     "total_funds_analyzed": 20,
     "total_aum_tracked_cr": 710600.0,
     "average_cash_level_pct": 7.76,
@@ -1987,7 +1987,9 @@
       "estimated_buying_cr": 485.0,
       "avg_holding_increase_pct": 100.0,
       "catalyst_thesis": "Marquee electronic manufacturing services (EMS) order wins and semiconductor assembly OSAT government approval.",
-      "institutional_conviction": "VERY_HIGH"
+      "institutional_conviction": "VERY_HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "PREMIERENE",
@@ -2001,7 +2003,9 @@
       "estimated_buying_cr": 420.0,
       "avg_holding_increase_pct": 100.0,
       "catalyst_thesis": "Solar cell and module manufacturing capacity ramp-up with high domestic ALMM order visibility.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "CDSL",
@@ -2015,7 +2019,9 @@
       "estimated_buying_cr": 510.0,
       "avg_holding_increase_pct": 100.0,
       "catalyst_thesis": "Surge in new demat account additions and steady recurring annuity revenue with high operating leverage.",
-      "institutional_conviction": "VERY_HIGH"
+      "institutional_conviction": "VERY_HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "ZENTEC",
@@ -2029,7 +2035,9 @@
       "estimated_buying_cr": 175.0,
       "avg_holding_increase_pct": 100.0,
       "catalyst_thesis": "Massive military export order book and indigenous anti-drone system deployment across armed forces.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "KIRLOSENG",
@@ -2044,7 +2052,9 @@
       "estimated_buying_cr": 210.0,
       "avg_holding_increase_pct": 100.0,
       "catalyst_thesis": "CPCB IV+ compliant emission transition leadership and strong industrial power backup capex demand.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "TRENT",
@@ -2059,7 +2069,9 @@
       "estimated_buying_cr": 680.0,
       "avg_holding_increase_pct": 36.0,
       "catalyst_thesis": "Explosive same-store sales growth in Zudio brand and Star Bazaar grocery retail turnaround.",
-      "institutional_conviction": "VERY_HIGH"
+      "institutional_conviction": "VERY_HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "MCX",
@@ -2073,7 +2085,9 @@
       "estimated_buying_cr": 320.0,
       "avg_holding_increase_pct": 36.0,
       "catalyst_thesis": "Record commodity options trading turnover and migration to self-owned software reducing software vendor payouts.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "PERSISTENT",
@@ -2088,7 +2102,9 @@
       "estimated_buying_cr": 540.0,
       "avg_holding_increase_pct": 24.8,
       "catalyst_thesis": "Superior BFSI & Healthcare digital engineering deal wins outperforming tier-1 IT pack.",
-      "institutional_conviction": "VERY_HIGH"
+      "institutional_conviction": "VERY_HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "APARINDS",
@@ -2102,7 +2118,9 @@
       "estimated_buying_cr": 240.0,
       "avg_holding_increase_pct": 48.0,
       "catalyst_thesis": "Global grid transmission capex boom and premium high-margin specialty conductor export shipments.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "DIXON",
@@ -2117,7 +2135,9 @@
       "estimated_buying_cr": 390.0,
       "avg_holding_increase_pct": 23.7,
       "catalyst_thesis": "Mobile manufacturing joint ventures with global brands under IT hardware PLI scheme.",
-      "institutional_conviction": "HIGH"
+      "institutional_conviction": "HIGH",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "PAYTM",
@@ -2131,7 +2151,9 @@
       "estimated_buying_cr": -310.0,
       "avg_holding_increase_pct": -100.0,
       "catalyst_thesis": "Regulatory actions on payments bank operations leading to institutional reallocation toward compliant lenders.",
-      "institutional_conviction": "NEGATIVE_EXIT"
+      "institutional_conviction": "NEGATIVE_EXIT",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "ZEEL",
@@ -2145,7 +2167,9 @@
       "estimated_buying_cr": -240.0,
       "avg_holding_increase_pct": -45.0,
       "catalyst_thesis": "Termination of Sony mega-merger leading to legal friction and advertising market share dilution.",
-      "institutional_conviction": "NEGATIVE_EXIT"
+      "institutional_conviction": "NEGATIVE_EXIT",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "INDUSINDBK",
@@ -2158,7 +2182,9 @@
       "estimated_buying_cr": -290.0,
       "avg_holding_increase_pct": -38.0,
       "catalyst_thesis": "Microfinance book asset quality stress and net interest margin compression in rising deposit rate cycle.",
-      "institutional_conviction": "NEGATIVE_EXIT"
+      "institutional_conviction": "NEGATIVE_EXIT",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     },
     {
       "symbol": "UPL",
@@ -2171,7 +2197,9 @@
       "estimated_buying_cr": -180.0,
       "avg_holding_increase_pct": -42.0,
       "catalyst_thesis": "Global crop protection channel destocking and prolonged pricing pressure from generic Chinese active ingredients.",
-      "institutional_conviction": "NEGATIVE_EXIT"
+      "institutional_conviction": "NEGATIVE_EXIT",
+      "cycles_held": 1,
+      "first_detected_cycle": "November 2026"
     }
   ],
   "precomputed_overlaps": [
@@ -2223,14 +2251,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "KAYNES",
-          "weight_in_a": 3.9,
-          "weight_in_b": 5.2
-        },
-        {
           "symbol": "DIXON",
           "weight_in_a": 3.6,
           "weight_in_b": 5.8
+        },
+        {
+          "symbol": "KAYNES",
+          "weight_in_a": 3.9,
+          "weight_in_b": 5.2
         }
       ]
     },
@@ -2353,14 +2381,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "SBIN",
-          "weight_in_a": 5.4,
-          "weight_in_b": 4.5
-        },
-        {
           "symbol": "HDFCBANK",
           "weight_in_a": 3.2,
           "weight_in_b": 8.8
+        },
+        {
+          "symbol": "SBIN",
+          "weight_in_a": 5.4,
+          "weight_in_b": 4.5
         }
       ]
     },
@@ -2371,24 +2399,9 @@
       "common_count": 7,
       "common_stocks": [
         {
-          "symbol": "LT",
-          "weight_in_a": 4.1,
-          "weight_in_b": 6.8
-        },
-        {
-          "symbol": "INFY",
-          "weight_in_a": 3.2,
-          "weight_in_b": 7.1
-        },
-        {
-          "symbol": "AXISBANK",
-          "weight_in_a": 4.5,
-          "weight_in_b": 4.1
-        },
-        {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 9.2
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 5.9
         },
         {
           "symbol": "RELIANCE",
@@ -2396,14 +2409,29 @@
           "weight_in_b": 8.4
         },
         {
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 9.2
+        },
+        {
+          "symbol": "LT",
+          "weight_in_a": 4.1,
+          "weight_in_b": 6.8
+        },
+        {
+          "symbol": "AXISBANK",
+          "weight_in_a": 4.5,
+          "weight_in_b": 4.1
+        },
+        {
+          "symbol": "INFY",
+          "weight_in_a": 3.2,
+          "weight_in_b": 7.1
+        },
+        {
           "symbol": "HDFCBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 5.4
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 5.9
         }
       ]
     },
@@ -2414,6 +2442,16 @@
       "common_count": 4,
       "common_stocks": [
         {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 4.2
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.8
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 9.5
@@ -2422,16 +2460,6 @@
           "symbol": "INFY",
           "weight_in_a": 3.2,
           "weight_in_b": 5.8
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.8
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 4.2
         }
       ]
     },
@@ -2455,6 +2483,16 @@
       "common_count": 4,
       "common_stocks": [
         {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 5.9,
+          "weight_in_b": 4.2
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 5.4,
+          "weight_in_b": 8.8
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 9.2,
           "weight_in_b": 9.5
@@ -2463,16 +2501,6 @@
           "symbol": "INFY",
           "weight_in_a": 7.1,
           "weight_in_b": 5.8
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 5.4,
-          "weight_in_b": 8.8
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 5.9,
-          "weight_in_b": 4.2
         }
       ]
     },
@@ -2717,9 +2745,9 @@
       "common_count": 5,
       "common_stocks": [
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 6.2
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 3.8
         },
         {
           "symbol": "ICICIBANK",
@@ -2727,9 +2755,9 @@
           "weight_in_b": 7.9
         },
         {
-          "symbol": "TRENT",
-          "weight_in_a": 4.5,
-          "weight_in_b": 3.5
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 6.2
         },
         {
           "symbol": "HDFCBANK",
@@ -2737,9 +2765,9 @@
           "weight_in_b": 8.4
         },
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 3.8
+          "symbol": "TRENT",
+          "weight_in_a": 4.5,
+          "weight_in_b": 3.5
         }
       ]
     },
@@ -2749,6 +2777,16 @@
       "overlap_pct": 46.6,
       "common_count": 5,
       "common_stocks": [
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 4.8
+        },
+        {
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.1
+        },
         {
           "symbol": "LT",
           "weight_in_a": 4.8,
@@ -2760,19 +2798,9 @@
           "weight_in_b": 5.9
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.1
-        },
-        {
           "symbol": "HDFCBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 11.8
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 4.8
         }
       ]
     },
@@ -2797,6 +2825,16 @@
       "common_count": 4,
       "common_stocks": [
         {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.8,
+          "weight_in_b": 4.8
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.4,
+          "weight_in_b": 11.8
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 7.9,
           "weight_in_b": 8.1
@@ -2805,16 +2843,6 @@
           "symbol": "INFY",
           "weight_in_a": 6.2,
           "weight_in_b": 5.9
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.4,
-          "weight_in_b": 11.8
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.8,
-          "weight_in_b": 4.8
         }
       ]
     }

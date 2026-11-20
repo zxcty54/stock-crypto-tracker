@@ -1937,6 +1937,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final double changePct =
         (item['avg_holding_increase_pct'] as num?)?.toDouble() ?? 0.0;
     final thesis = item['catalyst_thesis'] ?? '';
+    final String firstCycle = item['first_detected_cycle']?.toString() ?? '';
+    final int cyclesHeld = (item['cycles_held'] as num?)?.toInt() ?? 1;
 
     Color tagColor = const Color(0xFF00FF88);
     String tagLabel = "FRESH ENTRY";
@@ -2019,9 +2021,28 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
             ],
           ),
           const SizedBox(height: 2),
-          Text(
-            name,
-            style: const TextStyle(color: Colors.white54, fontSize: 10.5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  name,
+                  style: const TextStyle(color: Colors.white54, fontSize: 10.5),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (firstCycle.isNotEmpty)
+                Text(
+                  cyclesHeld > 1
+                      ? "$firstCycle • $cyclesHeld cycles"
+                      : "Added: $firstCycle",
+                  style: const TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+            ],
           ),
           const SizedBox(height: 10),
 
