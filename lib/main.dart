@@ -12,6 +12,7 @@ import 'screens/community_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
 import 'screens/portfolio_tracker_screen.dart'; // 📈 Virtual Portfolio Tracker
 import 'screens/market_indices_heatmap_screen.dart'; // 🗺️ Sector & Indices Heatmap
+import 'screens/mf_smart_money_screen.dart'; // 🕵️ MF Smart Money Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -336,6 +337,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const MarketIndicesHeatmapScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.radar_rounded,
+              title: 'MF Smart Money Radar',
+              subtitle: 'Top 20 DII Infiltrations & Overlap Audit',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MfSmartMoneyScreen(),
                   ),
                 );
               },

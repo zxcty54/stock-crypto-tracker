@@ -39,6 +39,9 @@ import '../widgets/indices_heatmap_preview_card.dart';
 // ⚡ Community Market Sentiment Radar
 import '../widgets/community_sentiment_card.dart';
 
+// 🕵️ Mutual Fund Smart Money Preview Card
+import '../widgets/mf_smart_money_preview_card.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -174,6 +177,11 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                     isVotingAllowed: _isVotingAllowed,
                   ),
                 ),
+              ),
+
+              // 🕵️ 2C. MUTUAL FUND SMART MONEY RADAR (Top 20 DII Infiltrations & Overlap Audit)
+              const SliverToBoxAdapter(
+                child: MfSmartMoneyPreviewCard(),
               ),
 
               // 💎 3. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
