@@ -11,6 +11,7 @@ Compiles institutional portfolio disclosures for India's Top 20 Marquee Mutual F
 - Automated Live AMFI / MFAPI Daily NAV & Returns Calculation
 """
 
+import csv
 import json
 import os
 import sys
@@ -23,8 +24,17 @@ try:
 except ImportError:
     HAS_URLLIB = False
 
-OUTPUT_FILE = "assets/data/mf_smart_money_radar.json"
-ROOT_OUTPUT_FILE = "mf_smart_money_radar.json"
+try:
+    import openpyxl
+    HAS_OPENPYXL = True
+except ImportError:
+    HAS_OPENPYXL = False
+
+REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FILE = os.path.join(REPO_ROOT, "assets", "data", "mf_smart_money_radar.json")
+ROOT_OUTPUT_FILE = os.path.join(REPO_ROOT, "mf_smart_money_radar.json")
+DISCLOSURE_DIR = os.path.join(REPO_ROOT, "mf_portfolio_disclosures")
+SNAPSHOT_FILE = os.path.join(DISCLOSURE_DIR, "previous_portfolio_snapshot.json")
 
 # Official AMFI Scheme Codes (Direct-Growth) for India's Top 20 Alpha Funds
 SCHEME_CODES = {
@@ -1098,6 +1108,379 @@ EXIT_TIMING_CHECKLIST = [
     }
 ]
 
+COMPANY_NAME_TO_SYMBOL = {
+    "itc": "ITC",
+    "hdfc bank": "HDFCBANK",
+    "icici bank": "ICICIBANK",
+    "reliance": "RELIANCE",
+    "infosys": "INFY",
+    "tcs": "TCS",
+    "tata consultancy": "TCS",
+    "bharti airtel": "BHARTIARTL",
+    "state bank of india": "SBIN",
+    "sbi": "SBIN",
+    "larsen & toubro": "LT",
+    "l&t": "LT",
+    "bajaj finance": "BAJFINANCE",
+    "bajaj holdings": "BAJAJHLDNG",
+    "kotak mahindra": "KOTAKBANK",
+    "hindustan unilever": "HINDUNILVR",
+    "tata motors": "TATAMOTORS",
+    "maruti suzuki": "MARUTI",
+    "ntpc": "NTPC",
+    "power grid": "POWERGRID",
+    "coal india": "COALINDIA",
+    "hcl tech": "HCLTECH",
+    "alphabet": "GOOGL",
+    "google": "GOOGL",
+    "meta platforms": "META",
+    "facebook": "META",
+    "kaynes": "KAYNES",
+    "dixon": "DIXON",
+    "pg electroplast": "PGEL",
+    "premier energies": "PREMIERENE",
+    "trent": "TRENT",
+    "delhivery": "DELHIVERY",
+    "ireda": "IREDA",
+    "pb fintech": "POLICYBZR",
+    "policybazaar": "POLICYBZR",
+    "zee entertainment": "ZEEL",
+    "indusind": "INDUSINDBK",
+    "upl": "UPL",
+    "bhel": "BHEL",
+    "abb india": "ABB",
+    "siemens": "SIEMENS",
+    "polycab": "POLYCAB",
+    "ultratech": "ULTRACEMCO",
+    "ambuja": "AMBUJACEM",
+    "adani ports": "ADANIPORTS",
+    "concor": "CONCOR",
+    "tata steel": "TATASTEEL",
+    "jsw steel": "JSWSTEEL",
+    "jindal steel": "JINDALSTEL",
+    "sail": "SAIL",
+    "ongc": "ONGC",
+    "oil india": "OIL",
+    "varun beverages": "VBL",
+    "zomato": "ZOMATO",
+    "swiggy": "SWIGGY",
+    "suzlon": "SUZLON",
+    "tata power": "TATAPOWER"
+}
+
+def normalize_company_symbol(name_str):
+    name_clean = re.sub(r'[^a-zA-Z0-9\s]', ' ', str(name_str).lower()).strip()
+    for key, sym in COMPANY_NAME_TO_SYMBOL.items():
+        if key in name_clean:
+            return sym
+    words = name_clean.split()
+    if words:
+        cand = re.sub(r'[^A-Z]', '', words[0].upper())
+        if 2 <= len(cand) <= 12:
+            return cand
+    return str(name_str)[:10].upper().strip()
+
+# Target URLs for public monthly disclosure sheets
+AMC_DISCLOSURE_SOURCES = [
+    {
+        "fund_id": "ppfas_flexi",
+        "url": "https://amc.ppfas.com/downloads/portfolio-disclosure/monthly-portfolio.csv",
+        "filename": "ppfas_flexi_monthly.csv"
+    },
+    {
+        "fund_id": "quant_small",
+        "url": "https://quantmutual.com/statutory-disclosures/quant-small-cap-fund.xlsx",
+        "filename": "quant_small_monthly.xlsx"
+    }
+]
+
+def download_public_amc_disclosures():
+    """
+    Attempts to download monthly AMC disclosure files if public internet is available (e.g. CI runner).
+    Files are saved in mf_portfolio_disclosures directory.
+    """
+    if not HAS_URLLIB:
+        return
+    os.makedirs(DISCLOSURE_DIR, exist_ok=True)
+    print("📡 Checking public AMC statutory disclosure feeds...")
+    for src in AMC_DISCLOSURE_SOURCES:
+        dest = os.path.join(DISCLOSURE_DIR, src["filename"])
+        try:
+            req = urllib.request.Request(
+                src["url"],
+                headers={"User-Agent": "Mozilla/5.0 (StockPulse/1.0)"}
+            )
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                if resp.status == 200:
+                    content = resp.read()
+                    if len(content) > 1000:
+                        with open(dest, "wb") as f:
+                            f.write(content)
+                        print(f"  ✓ Downloaded statutory disclosure for {src['fund_id']} -> {src['filename']}")
+        except Exception:
+            # Fallback gracefully if direct link changed or behind captcha
+            pass
+
+def parse_csv_disclosure(filepath):
+    """
+    Universal CSV parser for SEBI statutory portfolio disclosures.
+    Extracts Cash/TREPS % and Top Holdings with weights.
+    """
+    holdings = []
+    cash_pct = 0.0
+
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            reader = csv.reader(f)
+            rows = list(reader)
+
+        header_idx = -1
+        name_col = -1
+        weight_col = -1
+
+        for idx, row in enumerate(rows[:25]):
+            row_lower = [c.lower().strip() for c in row]
+            for c_idx, cell in enumerate(row_lower):
+                if any(w in cell for w in ["name of the instrument", "issuer", "company name", "security description"]):
+                    name_col = c_idx
+                if any(w in cell for w in ["% to net assets", "% of nav", "% of total", "weight"]):
+                    weight_col = c_idx
+            if name_col != -1 and weight_col != -1:
+                header_idx = idx
+                break
+
+        if header_idx != -1:
+            for row in rows[header_idx + 1:]:
+                if len(row) <= max(name_col, weight_col):
+                    continue
+                name_val = row[name_col].strip()
+                weight_str = re.sub(r'[^0-9.]', '', row[weight_col].strip())
+                if not name_val or not weight_str:
+                    continue
+                try:
+                    wt = float(weight_str)
+                except ValueError:
+                    continue
+
+                name_l = name_val.lower()
+                if any(k in name_l for k in ["treps", "reverse repo", "cash margin", "net current assets"]):
+                    cash_pct += wt
+                elif wt > 0.1 and not any(k in name_l for k in ["total", "sub-total", "grand total", "net assets"]):
+                    sym = normalize_company_symbol(name_val)
+                    holdings.append({
+                        "symbol": sym,
+                        "name": name_val[:30],
+                        "weight": round(wt, 2),
+                        "shares_change_pct": 0.0
+                    })
+
+        holdings.sort(key=lambda x: x["weight"], reverse=True)
+    except Exception as e:
+        print(f"⚠️ Error parsing CSV {filepath}: {e}")
+
+    return {
+        "top_10": holdings[:10],
+        "cash_pct": round(cash_pct, 2) if cash_pct > 0 else None
+    }
+
+def parse_excel_disclosure(filepath):
+    """
+    Universal Openpyxl parser for SEBI statutory portfolio Excel files (.xlsx).
+    """
+    if not HAS_OPENPYXL:
+        return None
+
+    holdings = []
+    cash_pct = 0.0
+
+    try:
+        wb = openpyxl.load_workbook(filepath, data_only=True)
+        sheet = wb.active
+        rows = list(sheet.iter_rows(values_only=True))
+
+        header_idx = -1
+        name_col = -1
+        weight_col = -1
+
+        for idx, row in enumerate(rows[:30]):
+            row_str = [str(c or "").lower().strip() for c in row]
+            for c_idx, cell in enumerate(row_str):
+                if any(w in cell for w in ["name of the instrument", "issuer", "company name"]):
+                    name_col = c_idx
+                if any(w in cell for w in ["% to net assets", "% of nav", "weight"]):
+                    weight_col = c_idx
+            if name_col != -1 and weight_col != -1:
+                header_idx = idx
+                break
+
+        if header_idx != -1:
+            for row in rows[header_idx + 1:]:
+                if len(row) <= max(name_col, weight_col):
+                    continue
+                name_val = str(row[name_col] or "").strip()
+                weight_raw = str(row[weight_col] or "").strip()
+                weight_clean = re.sub(r'[^0-9.]', '', weight_raw)
+                if not name_val or not weight_clean:
+                    continue
+                try:
+                    wt = float(weight_clean)
+                except ValueError:
+                    continue
+
+                name_l = name_val.lower()
+                if any(k in name_l for k in ["treps", "reverse repo", "cash margin", "net current assets"]):
+                    cash_pct += wt
+                elif wt > 0.1 and not any(k in name_l for k in ["total", "sub-total", "grand total"]):
+                    sym = normalize_company_symbol(name_val)
+                    holdings.append({
+                        "symbol": sym,
+                        "name": name_val[:30],
+                        "weight": round(wt, 2),
+                        "shares_change_pct": 0.0
+                    })
+
+        holdings.sort(key=lambda x: x["weight"], reverse=True)
+    except Exception as e:
+        print(f"⚠️ Error parsing Excel {filepath}: {e}")
+
+    return {
+        "top_10": holdings[:10],
+        "cash_pct": round(cash_pct, 2) if cash_pct > 0 else None
+    }
+
+def ingest_all_disclosures(funds):
+    """
+    Scans mf_portfolio_disclosures directory. If fresh files exist for any fund,
+    updates its top 10 holdings and cash percentage automatically.
+    """
+    if not os.path.exists(DISCLOSURE_DIR):
+        return funds
+
+    files = [f for f in os.listdir(DISCLOSURE_DIR) if not f.startswith(".")]
+    if not files:
+        return funds
+
+    print(f"📂 Found {len(files)} disclosure files in '{DISCLOSURE_DIR}' — ingesting...")
+
+    for f_name in files:
+        f_path = os.path.join(DISCLOSURE_DIR, f_name)
+        matched_fund = None
+        for fund in funds:
+            if fund["id"] in f_name.lower():
+                matched_fund = fund
+                break
+
+        if matched_fund is None:
+            continue
+
+        parsed = None
+        if f_name.endswith(".csv"):
+            parsed = parse_csv_disclosure(f_path)
+        elif f_name.endswith(".xlsx") and HAS_OPENPYXL:
+            parsed = parse_excel_disclosure(f_path)
+
+        if parsed and parsed.get("top_10"):
+            matched_fund["top_10_holdings"] = parsed["top_10"]
+            if parsed.get("cash_pct"):
+                matched_fund["cash_holding_pct"] = parsed["cash_pct"]
+            print(f"  ✓ Ingested fresh statutory holdings for {matched_fund['name']} ({len(parsed['top_10'])} stocks)")
+
+    return funds
+
+def load_previous_snapshot():
+    """Loads previous month's snapshot from disk if present."""
+    if os.path.exists(SNAPSHOT_FILE):
+        try:
+            with open(SNAPSHOT_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return None
+
+def save_current_snapshot(funds):
+    """Saves current holdings snapshot to enable delta calculations next month."""
+    try:
+        os.makedirs(DISCLOSURE_DIR, exist_ok=True)
+        snapshot = [
+            {
+                "id": f["id"],
+                "name": f["name"],
+                "aum_cr": f.get("aum_cr", 0.0),
+                "cash_holding_pct": f.get("cash_holding_pct", 0.0),
+                "top_10_holdings": f.get("top_10_holdings", [])
+            }
+            for f in funds
+        ]
+        with open(SNAPSHOT_FILE, "w", encoding="utf-8") as f:
+            json.dump(snapshot, f, indent=2)
+    except Exception as e:
+        print(f"⚠️ Error saving snapshot: {e}")
+
+def compute_portfolio_deltas(previous_snapshot, current_funds):
+    """
+    Compares previous month's holdings snapshot with current holdings.
+    Automatically detects Fresh Buys, Aggressive Accumulations, and Exits.
+    """
+    if not previous_snapshot:
+        return SMART_MONEY_INFILTRATIONS, INSTITUTIONAL_EXITS_AND_TRAPS
+
+    prev_map = {f["id"]: {h["symbol"]: h.get("weight", 0.0) for h in f.get("top_10_holdings", [])} for f in previous_snapshot}
+    new_infiltrations = []
+    new_exits = []
+
+    for curr_fund in current_funds:
+        f_id = curr_fund["id"]
+        f_name = curr_fund.get("short_name", curr_fund["name"])
+        curr_holdings = {h["symbol"]: h for h in curr_fund.get("top_10_holdings", [])}
+        prev_fund_holdings = prev_map.get(f_id, {})
+
+        # 1. Fresh Entries & Accumulations
+        for sym, h in curr_holdings.items():
+            prev_wt = prev_fund_holdings.get(sym, 0.0)
+            curr_wt = h.get("weight", 0.0)
+            if prev_wt == 0.0 and curr_wt >= 1.5:
+                new_infiltrations.append({
+                    "symbol": sym,
+                    "company_name": h.get("name", sym),
+                    "action_type": "FRESH_ENTRY",
+                    "participating_funds": [f_name],
+                    "estimated_buying_cr": round(curr_wt * 180.0, 1),
+                    "avg_holding_increase_pct": 100.0,
+                    "catalyst_thesis": f"Fresh monthly portfolio infiltration by {f_name} at {curr_wt}% holding weight.",
+                    "institutional_conviction": "HIGH_CONVICTION"
+                })
+            elif prev_wt > 0 and curr_wt >= prev_wt * 1.25:
+                boost = round(((curr_wt - prev_wt) / prev_wt) * 100.0, 1)
+                new_infiltrations.append({
+                    "symbol": sym,
+                    "company_name": h.get("name", sym),
+                    "action_type": "AGGRESSIVE_ACCUMULATION",
+                    "participating_funds": [f_name],
+                    "estimated_buying_cr": round((curr_wt - prev_wt) * 150.0, 1),
+                    "avg_holding_increase_pct": boost,
+                    "catalyst_thesis": f"Stake boost of +{boost}% MoM reflecting institutional volume buildup.",
+                    "institutional_conviction": "HIGH_CONVICTION"
+                })
+
+        # 2. Exits & Slashing
+        for sym, prev_wt in prev_fund_holdings.items():
+            if sym not in curr_holdings and prev_wt >= 2.0:
+                new_exits.append({
+                    "symbol": sym,
+                    "company_name": sym,
+                    "sector": "Diversified",
+                    "action_type": "SILENT_DUMPING",
+                    "participating_funds": [f_name],
+                    "estimated_buying_cr": -round(prev_wt * 160.0, 1),
+                    "avg_holding_increase_pct": -100.0,
+                    "catalyst_thesis": f"Complete monthly portfolio exit by {f_name} (was {prev_wt}%).",
+                    "institutional_conviction": "NEGATIVE_EXIT"
+                })
+
+    final_infiltrations = new_infiltrations if new_infiltrations else SMART_MONEY_INFILTRATIONS
+    final_exits = new_exits if new_exits else INSTITUTIONAL_EXITS_AND_TRAPS
+    return final_infiltrations, final_exits
+
 def fetch_live_amfi_nav(scheme_code):
     """Fetches real-time daily NAV directly from AMFI Open API (api.mfapi.in)."""
     if not HAS_URLLIB:
@@ -1242,9 +1625,15 @@ Return ONLY the raw JSON string with no markdown formatting or code blocks."""
 
 def build_full_report():
     print("🚀 Initializing Dynamic MF Smart Money Engine...")
-    
-    # Try live AMFI enrichment if connected
-    for f in TOP_20_FUNDS:
+
+    # 1. Download fresh statutory disclosures if open feeds exist
+    download_public_amc_disclosures()
+
+    # 2. Ingest any fresh monthly disclosure files from mf_portfolio_disclosures directory
+    funds = ingest_all_disclosures(TOP_20_FUNDS)
+
+    # 3. Live AMFI daily NAV enrichment directly from AMFI Open API
+    for f in funds:
         sc = f.get("scheme_code")
         if sc:
             live = fetch_live_amfi_nav(sc)
@@ -1253,9 +1642,16 @@ def build_full_report():
                 f["nav_change_pct"] = live["nav_change_pct"]
                 f["last_nav_date"] = live["date"]
 
-    total_aum = sum(f["aum_cr"] for f in TOP_20_FUNDS)
-    weighted_cash = sum((f["cash_holding_pct"] * f["aum_cr"]) for f in TOP_20_FUNDS) / total_aum
+    total_aum = sum(f["aum_cr"] for f in funds)
+    weighted_cash = sum((f["cash_holding_pct"] * f["aum_cr"]) for f in funds) / total_aum
     cash_cr = (weighted_cash / 100.0) * total_aum
+
+    # 4. Compare with previous snapshot to compute fresh entries & exits dynamically
+    prev_snapshot = load_previous_snapshot()
+    infiltrations, exits = compute_portfolio_deltas(prev_snapshot, funds)
+
+    # 5. Save current snapshot for next month's delta calculation
+    save_current_snapshot(funds)
 
     # Dynamically calibrate rotation tiers and takeaways
     tiers = MARKET_CAP_ROTATION.get("tiers", [])
@@ -1310,9 +1706,9 @@ def build_full_report():
 
     # Precompute pairwise overlaps for top pairings
     precomputed_overlaps = []
-    for i in range(len(TOP_20_FUNDS)):
-        for j in range(i + 1, min(i + 4, len(TOP_20_FUNDS))):
-            res = calculate_overlap(TOP_20_FUNDS[i], TOP_20_FUNDS[j])
+    for i in range(len(funds)):
+        for j in range(i + 1, min(i + 4, len(funds))):
+            res = calculate_overlap(funds[i], funds[j])
             precomputed_overlaps.append(res)
 
     report = {
@@ -1320,7 +1716,7 @@ def build_full_report():
             "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
             "last_updated": datetime.now().strftime("%B %Y Portfolio Disclosure"),
             "generated_timestamp": datetime.now().isoformat(),
-            "total_funds_analyzed": len(TOP_20_FUNDS),
+            "total_funds_analyzed": len(funds),
             "total_aum_tracked_cr": round(total_aum, 1),
             "average_cash_level_pct": round(weighted_cash, 2),
             "market_stance": "SELECTIVE_ACCUMULATION",
@@ -1329,10 +1725,10 @@ def build_full_report():
         "market_cap_rotation": MARKET_CAP_ROTATION,
         "sector_money_flows": SECTOR_MONEY_FLOWS,
         "smart_money_tactics": SMART_MONEY_TACTICS,
-        "institutional_exits_and_traps": INSTITUTIONAL_EXITS_AND_TRAPS,
+        "institutional_exits_and_traps": exits,
         "exit_timing_checklist": EXIT_TIMING_CHECKLIST,
-        "top_20_funds": TOP_20_FUNDS,
-        "smart_money_infiltrations": SMART_MONEY_INFILTRATIONS,
+        "top_20_funds": funds,
+        "smart_money_infiltrations": infiltrations,
         "precomputed_overlaps": precomputed_overlaps
     }
 
@@ -1345,8 +1741,8 @@ def build_full_report():
             json.dump(report, f, indent=2)
     
     print(f"✅ Generated {OUTPUT_FILE} and {ROOT_OUTPUT_FILE}")
-    print(f"📊 Total Funds: {len(TOP_20_FUNDS)} | Total AUM: ₹{total_aum:,.0f} Cr | Weighted Cash: {weighted_cash:.2f}%")
-    print(f"🕵️ Infiltration Signals: {len(SMART_MONEY_INFILTRATIONS)}")
+    print(f"📊 Total Funds: {len(funds)} | Total AUM: ₹{total_aum:,.0f} Cr | Weighted Cash: {weighted_cash:.2f}%")
+    print(f"🕵️ Infiltration Signals: {len(infiltrations)}")
 
 if __name__ == "__main__":
     build_full_report()
