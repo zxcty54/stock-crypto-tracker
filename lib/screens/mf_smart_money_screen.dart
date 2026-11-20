@@ -494,7 +494,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
       for (var item in rawTakeaways) {
         if (item is Map) {
           final title = item['title']?.toString() ?? '';
-          final desc = item['desc']?.toString() ?? '';
           final type = item['type']?.toString() ?? 'positive';
           final IconData icon = type == 'warning'
               ? Icons.cancel_rounded
@@ -502,8 +501,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           final Color col = type == 'warning'
               ? const Color(0xFFFF2A6D)
               : (type == 'neutral' ? const Color(0xFFFFB703) : const Color(0xFF00FF88));
-          takeawayWidgets.add(_buildTakeawayItem(icon, col, title, desc));
-          takeawayWidgets.add(const SizedBox(height: 6));
+          takeawayWidgets.add(_buildTakeawayItem(icon, col, title));
+          takeawayWidgets.add(const SizedBox(height: 5));
         }
       }
       if (takeawayWidgets.isNotEmpty) {
@@ -514,22 +513,19 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         _buildTakeawayItem(
           Icons.check_circle_rounded,
           const Color(0xFF00FF88),
-          "73% Fresh SIP Allocation into Large Caps",
-          "Institutions are parking the bulk of domestic SIP inflows into resilient Private Banks and Utilities for capital safety.",
+          "73% Fresh SIP Capital concentrated into Large Caps",
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 5),
         _buildTakeawayItem(
           Icons.cancel_rounded,
           const Color(0xFFFF2A6D),
-          "Small-Cap De-risking & Distribution",
-          "Small-cap median P/E reached an unsustainable >45x. Marquee funds are cutting positions to secure 2-year multibagger gains.",
+          "Small-Cap De-risking (-₹4,600 Cr) as median P/E crossed 45x",
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 5),
         _buildTakeawayItem(
           Icons.savings_rounded,
           const Color(0xFFFFB703),
-          "₹55,100+ Cr Cash Dry Powder Waiting",
-          "High 7.76% liquidity buffer held by funds like PPFAS & Quant, waiting to buy steep market crash dips.",
+          "₹55,100+ Cr (7.76%) Cash Dry Powder waiting on sidelines",
         ),
       ];
     }
@@ -759,35 +755,30 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     );
   }
 
-  Widget _buildTakeawayItem(
-      IconData icon, Color color, String title, String desc) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, color: color, size: 14),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: GoogleFonts.plusJakartaSans(
-                  color: color,
-                  fontSize: 10.5,
-                  fontWeight: FontWeight.w900,
-                ),
+  Widget _buildTakeawayItem(IconData icon, Color color, String title) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF080D17),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 13),
+          const SizedBox(width: 7),
+          Expanded(
+            child: Text(
+              title,
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
               ),
-              const SizedBox(height: 1),
-              Text(
-                desc,
-                style: const TextStyle(
-                    color: Colors.white70, fontSize: 10, height: 1.3),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
