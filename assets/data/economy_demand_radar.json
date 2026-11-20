@@ -1,24 +1,69 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-20 16:41:08 IST",
+  "last_updated": "2026-11-20 16:54:15 IST",
   "economy_headline": {
-    "core_infra_growth_pct": 10.9,
+    "core_infra_growth_pct": 7.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
-    "verdict": "ROBUST INDUSTRIAL MOMENTUM",
-    "momentum_score": 88,
+    "verdict": "BROAD-BASED PHYSICAL EXPANSION",
+    "momentum_score": 84,
     "momentum_label": "HIGH INDUSTRIAL PULSE",
-    "headline_summary": "India Core Infrastructure & Logistics Surge +10.1% YoY Driven by Capex and Freight"
+    "headline_summary": "India's Ground Economy Expanding at +8.0% YoY Volume Pace — Zero Industrial Slowdown"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
       "report_title": "DPIIT Index of Eight Core Industries",
-      "period": "October 2026 (Provisional)",
-      "overall_yoy_growth_pct": 10.9,
-      "previous_month_growth_pct": null,
-      "components": {},
+      "period": "September 2026 (Provisional)",
+      "overall_yoy_growth_pct": 7.9,
+      "components": {
+        "Cement": {
+          "weight": 4.41,
+          "yoy_pct": 9.8,
+          "status": "PEAK_DEMAND"
+        },
+        "Electricity": {
+          "weight": 30.932,
+          "yoy_pct": 11.4,
+          "status": "PEAK_DEMAND"
+        },
+        "Coal": {
+          "weight": 5.596,
+          "yoy_pct": 10.7,
+          "status": "PEAK_DEMAND"
+        },
+        "Refinery Products": {
+          "weight": 22.572,
+          "yoy_pct": 10.3,
+          "status": "PEAK_DEMAND"
+        },
+        "Steel": {
+          "weight": 17.584,
+          "yoy_pct": 4.9,
+          "status": "EXPANDING"
+        },
+        "Iron Ore": {
+          "weight": 4.905,
+          "yoy_pct": 18.4,
+          "status": "SURGING"
+        },
+        "Crude Oil": {
+          "weight": 7.43,
+          "yoy_pct": -1.4,
+          "status": "CONTRACTION"
+        },
+        "Natural Gas": {
+          "weight": 3.841,
+          "yoy_pct": -4.6,
+          "status": "CONTRACTION"
+        },
+        "Fertilizers": {
+          "weight": 2.731,
+          "yoy_pct": -11.7,
+          "status": "SHARP_CONTRACTION"
+        }
+      },
       "historical_13m_growth": []
     },
     "ipa_major_ports": {
@@ -58,19 +103,16 @@
       "report_title": "PPAC Monthly Petroleum Industry Consumption Review",
       "period": "September 2026",
       "total_pol_consumption_mmt": 19.26,
-      "previous_pol_consumption_mmt": 18.63,
       "total_pol_growth_pct": 3.4,
       "fuels": {
         "Motor Spirit (Petrol)": {
           "consumption_mmt": 3.67,
           "yoy_growth_pct": 8.0,
-          "proxy_for": "Personal Mobility & Passenger Vehicles",
           "status": "PEAK_DEMAND"
         },
         "High Speed Diesel (HSD)": {
           "consumption_mmt": 7.11,
           "yoy_growth_pct": 5.6,
-          "proxy_for": "Commercial Freight, Logistics & Agriculture",
           "status": "EXPANDING"
         },
         "Aviation Turbine Fuel (ATF)": {
@@ -175,7 +217,7 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚀 RAPID EXPANSION",
       "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-      "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
+      "fundamental_metric_to_track": "MHCV Fleet Tonnage & Production Runs",
       "primary_indicators": "PPAC Diesel (HSD): +5.6% YoY • FASTag Toll: +8.5% YoY",
       "metrics": [
         {
@@ -210,15 +252,14 @@
           "name": "Mahindra Logistics Ltd",
           "thesis": "3PL supply chain logistics and integrated cargo movement peer"
         }
-      ],
-      "macro_correlation_note": "Diesel consumption +5.6% and FASTag revenue +8.5% signal sustained heavy-duty freight throughput."
+      ]
     },
     {
       "sector": "Power Generation & Capital Goods",
       "demand_signal": "PEAK_DEMAND",
       "momentum_badge": "🔥 PEAK DEMAND",
       "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-      "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
+      "fundamental_metric_to_track": "Baseload PLF & Transmission Order Inflows",
       "primary_indicators": "8-Core Electricity: +11.4% YoY • Coal Dispatch: +10.7% YoY",
       "metrics": [
         {
@@ -253,15 +294,14 @@
           "name": "Polycab India Ltd",
           "thesis": "Industrial HT/LT power cables and transmission equipment peer"
         }
-      ],
-      "macro_correlation_note": "Electricity +11.4% and Coal +10.7% indicate high industrial capacity utilization and grid demand."
+      ]
     },
     {
       "sector": "Infrastructure & Cement Construction",
       "demand_signal": "STRONG_DEMAND",
       "momentum_badge": "📈 STRONG DEMAND",
       "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-      "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
+      "fundamental_metric_to_track": "Cement Dispatches & Highway Capex Absorption",
       "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen Road Capex: +17.2% YoY",
       "metrics": [
         {
@@ -296,15 +336,14 @@
           "name": "G R Infraprojects Ltd",
           "thesis": "National highway EPC and road construction contractor peer"
         }
-      ],
-      "macro_correlation_note": "Cement +9.8% and Bitumen +17.2% confirm aggressive government-led road and urban infrastructure spending."
+      ]
     },
     {
       "sector": "Port Logistics & Maritime Trade",
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚢 SURGING EXPORTS",
       "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-      "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
+      "fundamental_metric_to_track": "Container TEU Throughput & Dry Bulk Tonnage",
       "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51%",
       "metrics": [
         {
@@ -339,15 +378,14 @@
           "name": "Allcargo Logistics Ltd",
           "thesis": "Global LCL container consolidation and multi-modal logistics peer"
         }
-      ],
-      "macro_correlation_note": "Major port cargo +10.17% and container traffic +8.51% reflect strong external trade and domestic supply chain velocity."
+      ]
     },
     {
       "sector": "Steel & Metals Fabrication",
       "demand_signal": "STEADY_GROWTH",
       "momentum_badge": "⚙️ STEADY CAPEX",
       "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-      "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
+      "fundamental_metric_to_track": "Finished Structural Steel & Capex Dispatches",
       "primary_indicators": "8-Core Steel: +4.9% YoY • Iron Ore: +18.4% YoY",
       "metrics": [
         {
@@ -382,15 +420,14 @@
           "name": "Steel Authority of India Ltd",
           "thesis": "Public sector long products and railway track infrastructure peer"
         }
-      ],
-      "macro_correlation_note": "Steel output +4.9% YoY indicates steady demand from construction and automotive manufacturing sectors."
+      ]
     },
     {
       "sector": "Fertilizers & Agro-Chemicals",
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ VOLUME CONTRACTION",
       "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING",
-      "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
+      "fundamental_metric_to_track": "Rabi Sowing Cycle & Plant Operating Run-Rates",
       "primary_indicators": "8-Core Fertilizers: -11.7% YoY",
       "metrics": [
         {
@@ -410,15 +447,14 @@
           "name": "Chambal Fertilisers Ltd",
           "thesis": "Urea production and domestic crop protection peer"
         }
-      ],
-      "macro_correlation_note": "Stable inventory levels maintained; seasonal demand tracking aligned with pre-monsoon distribution cycles."
+      ]
     },
     {
       "sector": "Upstream Crude Oil & Gas",
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION",
       "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-      "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
+      "fundamental_metric_to_track": "Offshore Extraction Volumes & Realized BOE Pricing",
       "primary_indicators": "8-Core Crude: -1.4% YoY • Natural Gas: -4.6% YoY",
       "metrics": [
         {
@@ -443,8 +479,7 @@
           "name": "Oil India Ltd",
           "thesis": "North-east domestic oil exploration and refining subsidiary peer"
         }
-      ],
-      "macro_correlation_note": "Refining throughput remains elevated to meet +5.6% diesel demand; offshore output steady."
+      ]
     }
   ]
 }

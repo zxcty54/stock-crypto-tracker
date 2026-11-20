@@ -672,14 +672,18 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               width: isSelected ? 1.2 : 0.8,
             ),
           ),
-          child: Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: isSelected ? accentCyan : textMuted,
-              fontSize: 9.5,
-              fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? accentCyan : textMuted,
+                  fontSize: 9.5,
+                  fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ),
@@ -871,14 +875,16 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          m['label']?.toString() ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: textMuted,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            m['label']?.toString() ?? '',
+                            style: const TextStyle(
+                              color: textMuted,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -891,14 +897,16 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                             ),
                             const SizedBox(width: 4),
                             Expanded(
-                              child: Text(
-                                m['value']?.toString() ?? '',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.robotoMono(
-                                  color: isPos ? Colors.white : accentRed,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w800,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  m['value']?.toString() ?? '',
+                                  style: GoogleFonts.robotoMono(
+                                    color: isPos ? Colors.white : accentRed,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
                               ),
                             ),
@@ -912,29 +920,46 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
             ),
           ],
 
-          // Row 4: Key Fundamental Driver Pill (1-line)
+          // Row 4: Key Fundamental Driver (Full text visible, zero truncation)
           if (keyMetric != null && keyMetric.toString().isNotEmpty) ...[
             const SizedBox(height: 7),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               decoration: BoxDecoration(
                 color: const Color(0xFF0D1424),
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(color: Colors.white10),
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.track_changes_rounded, size: 12, color: accentAmber),
-                  const SizedBox(width: 5),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 1.5),
+                    child: Icon(Icons.track_changes_rounded, size: 12.5, color: accentAmber),
+                  ),
+                  const SizedBox(width: 6),
                   Expanded(
-                    child: Text(
-                      "Driver: $keyMetric",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w600,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: "Driver: ",
+                            style: TextStyle(
+                              color: accentAmber,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 10,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "$keyMetric",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
+                              height: 1.25,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

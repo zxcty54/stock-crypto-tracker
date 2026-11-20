@@ -593,7 +593,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "EXPANDING" if hsd_growth > 4.0 else "STEADY",
             "momentum_badge": "🚀 RAPID EXPANSION" if hsd_growth > 5.0 else "📈 EXPANDING",
             "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-            "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
+            "fundamental_metric_to_track": "MHCV Fleet Tonnage & Production Runs",
             "primary_indicators": f"PPAC Diesel (HSD): +{hsd_growth}% YoY • FASTag Toll: +{toll_growth}% YoY",
             "metrics": [
                 {"label": "PPAC Diesel (HSD)", "value": f"+{hsd_growth}% YoY", "positive": hsd_growth >= 0},
@@ -611,7 +611,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "PEAK_DEMAND" if power_growth > 10.0 else "EXPANDING",
             "momentum_badge": "🔥 PEAK DEMAND" if power_growth > 10.0 else "⚡ STRONG GENERATION",
             "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-            "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
+            "fundamental_metric_to_track": "Baseload PLF & Transmission Order Inflows",
             "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{coal_growth}% YoY",
             "metrics": [
                 {"label": "8-Core Electricity", "value": f"+{power_growth}% YoY", "positive": power_growth >= 0},
@@ -629,7 +629,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "STRONG_DEMAND" if cement_growth > 7.0 else "STEADY",
             "momentum_badge": "📈 STRONG DEMAND" if cement_growth > 7.0 else "🏗️ STEADY CONSTRUCTION",
             "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-            "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
+            "fundamental_metric_to_track": "Cement Dispatches & Highway Capex Absorption",
             "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex: +{bitumen_growth}% YoY",
             "metrics": [
                 {"label": "8-Core Cement", "value": f"+{cement_growth}% YoY", "positive": cement_growth >= 0},
@@ -647,7 +647,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "EXPANDING" if port_growth > 7.0 else "STEADY",
             "momentum_badge": "🚢 SURGING EXPORTS" if port_growth > 8.0 else "📈 STEADY CARGO",
             "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-            "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
+            "fundamental_metric_to_track": "Container TEU Throughput & Dry Bulk Tonnage",
             "primary_indicators": f"IPA Major Ports: {ipa.get('total_cargo_current_mmt', 566.4)} MMT (+{port_growth}% YoY) • Containers: +{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%",
             "metrics": [
                 {"label": "Major Ports Cargo", "value": f"+{port_growth}% YoY", "positive": port_growth >= 0},
@@ -665,7 +665,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "STEADY_GROWTH" if steel_growth > 0.0 else "CONTRACTION",
             "momentum_badge": "⚙️ STEADY CAPEX" if steel_growth > 3.0 else "⚡ RANGEBOUND DISPATCH",
             "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-            "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
+            "fundamental_metric_to_track": "Finished Structural Steel & Capex Dispatches",
             "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{iron_ore_growth}% YoY",
             "metrics": [
                 {"label": "8-Core Steel", "value": f"+{steel_growth}% YoY", "positive": steel_growth >= 0},
@@ -683,7 +683,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "CONTRACTION" if fert_growth < 0 else "EXPANDING",
             "momentum_badge": "⚠️ VOLUME CONTRACTION" if fert_growth < 0 else "🌱 AGRI EXPANSION",
             "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING" if fert_growth < 0 else "🌾 SOWING PICKUP",
-            "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
+            "fundamental_metric_to_track": "Rabi Sowing Cycle & Plant Operating Run-Rates",
             "primary_indicators": f"8-Core Fertilizers: {fert_growth}% YoY",
             "metrics": [
                 {"label": "8-Core Fertilizers", "value": f"{fert_growth}% YoY", "positive": fert_growth >= 0}
@@ -698,7 +698,7 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "CONTRACTION" if crude_growth < 0 else "STEADY",
             "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION" if crude_growth < 0 else "🛢️ UPSTREAM STABLE",
             "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-            "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
+            "fundamental_metric_to_track": "Offshore Extraction Volumes & Realized BOE Pricing",
             "primary_indicators": f"8-Core Crude: {crude_growth}% YoY • Natural Gas: {gas_growth}% YoY",
             "metrics": [
                 {"label": "8-Core Crude", "value": f"{crude_growth}% YoY", "positive": crude_growth >= 0},
