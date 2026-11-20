@@ -31,6 +31,9 @@ import '../widgets/smart_money_anchor_screen.dart';
 // 🏆 Weekly & Monthly Gainers & Delivery History Import
 import 'stock_delivery_history_screen.dart';
 
+// 🗺️ NSE Indices & Sector Heatmap Preview Card
+import '../widgets/indices_heatmap_preview_card.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -77,7 +80,12 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 💎 2. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
+              // 🗺️ 2. NSE INDICES & SECTOR HEATMAP (Broad 21 & Sectoral 23 Matrix)
+              const SliverToBoxAdapter(
+                child: IndicesHeatmapPreviewCard(),
+              ),
+
+              // 💎 3. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),

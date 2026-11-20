@@ -10,6 +10,7 @@ import '../widgets/create_chart_post_sheet.dart';
 import '../widgets/create_confession_sheet.dart';
 import '../widgets/community_sentiment_card.dart';
 import '../services/auth_service.dart';
+import 'market_indices_heatmap_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -479,7 +480,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
       child: Row(
         children: [
           InkWell(
-            onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+            onTap: () {
+              HapticFeedback.selectionClick();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const MarketIndicesHeatmapScreen(),
+                ),
+              );
+            },
             child: Container(
               margin: const EdgeInsets.only(left: 14, right: 6),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),

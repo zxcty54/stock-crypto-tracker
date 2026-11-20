@@ -11,6 +11,7 @@ import 'screens/strategy_builder_screen.dart';
 import 'screens/community_screen.dart';
 import 'screens/stock_delivery_history_screen.dart';
 import 'screens/portfolio_tracker_screen.dart'; // 📈 Virtual Portfolio Tracker
+import 'screens/market_indices_heatmap_screen.dart'; // 🗺️ Sector & Indices Heatmap
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -323,6 +324,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               onTap: () {
                 Navigator.pop(context);
                 setState(() => _currentIndex = 1);
+              },
+            ),
+            _drawerTile(
+              icon: Icons.grid_view_rounded,
+              title: 'Sectoral & Market Heatmap',
+              subtitle: '23 Sectoral + 21 Broad Indices Matrix',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MarketIndicesHeatmapScreen(),
+                  ),
+                );
               },
             ),
             _drawerTile(
