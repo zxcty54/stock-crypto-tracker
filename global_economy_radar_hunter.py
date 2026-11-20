@@ -1222,6 +1222,70 @@ Return valid JSON with exactly this structure:
       "impact_on_india": "POSITIVE ARBITRAGE",
       "india_takeaway": "1-sentence takeaway on Indian energy and solar adoption"
     }}
+  ],
+  "superpower_refinements": [
+    {{
+      "id": "us",
+      "status_label": "Short status e.g. TECH & FISCAL RESILIENCE",
+      "top_pressure_title": "Short title with metric e.g. US 10Y Yield Spike (~4.4%) & PE Multiple Squeeze",
+      "top_pressure_desc": "1-sentence concise description",
+      "top_expansion_title": "Short title e.g. $250B+ Generative AI Compute Supercycle",
+      "top_expansion_desc": "1-sentence concise description"
+    }},
+    {{
+      "id": "china",
+      "status_label": "Short status e.g. STIMULUS BAZOOKA DEFENSE",
+      "top_pressure_title": "Short title with metric e.g. Factory Deflation (-2.9% PPI) & Property Slump",
+      "top_pressure_desc": "1-sentence concise description",
+      "top_expansion_title": "Short title e.g. Clean-Tech & LFP Battery Global Dominance",
+      "top_expansion_desc": "1-sentence concise description"
+    }},
+    {{
+      "id": "europe",
+      "status_label": "Short status e.g. INDUSTRIAL STAGNATION",
+      "top_pressure_title": "Short title e.g. German Automotive & Chemical De-industrialization",
+      "top_pressure_desc": "1-sentence concise description",
+      "top_expansion_title": "Short title e.g. European Defense Procurement & ECB Easing",
+      "top_expansion_desc": "1-sentence concise description"
+    }},
+    {{
+      "id": "japan",
+      "status_label": "Short status e.g. YEN NORMALIZATION & CHIP REVIVAL",
+      "top_pressure_title": "Short title e.g. BOJ Rate Uncertainty & Carry Trade Unwind Risk",
+      "top_pressure_desc": "1-sentence concise description",
+      "top_expansion_title": "Short title e.g. Corporate Governance Reforms & Rapidus Fab Subsidies",
+      "top_expansion_desc": "1-sentence concise description"
+    }},
+    {{
+      "id": "em_india",
+      "status_label": "Short status e.g. GLOBAL GROWTH ENGINE",
+      "top_pressure_title": "Short title e.g. Strong DXY Dollar Squeeze & Tactical FII Outflows",
+      "top_pressure_desc": "1-sentence concise description",
+      "top_expansion_title": "Short title e.g. China+1 High-Tech Relocation & Infra Supercycle",
+      "top_expansion_desc": "1-sentence concise description"
+    }}
+  ],
+  "supply_demand_levers_update": [
+    {{
+      "id": "energy_valve",
+      "how_they_control": "1-2 sentence concise oil control state with current Brent",
+      "india_transmission": "1-2 sentence concise transmission to Indian trade deficit & paints/OMCs"
+    }},
+    {{
+      "id": "dollar_liquidity_tap",
+      "how_they_control": "1-2 sentence state of US rates and dollar liquidity suction",
+      "india_transmission": "1-2 sentence transmission to INR stability & FII flows"
+    }},
+    {{
+      "id": "china_overcapacity_tap",
+      "how_they_control": "1-2 sentence state of Chinese factory surplus dumping with current PPI",
+      "india_transmission": "1-2 sentence transmission to Indian steel/chem vs solar/electronics"
+    }},
+    {{
+      "id": "chokepoint_shipping_valve",
+      "how_they_control": "1-2 sentence state of Red Sea/chokepoints and container freight rates",
+      "india_transmission": "1-2 sentence transmission to Indian export freight invoices & transit"
+    }}
   ]
 }}
 """
@@ -1296,6 +1360,34 @@ Return valid JSON with exactly this structure:
                                         match["india_takeaway"] = new_bf["india_takeaway"]
                                     if new_bf.get("title"):
                                         match["title"] = new_bf["title"]
+
+                        if "superpower_refinements" in ai_data and isinstance(ai_data["superpower_refinements"], list):
+                            existing_sps = payload.get("global_superpowers", [])
+                            for ref in ai_data["superpower_refinements"]:
+                                sp_id = ref.get("id")
+                                match = next((s for s in existing_sps if s.get("id") == sp_id), None)
+                                if match:
+                                    if ref.get("status_label"):
+                                        match["status_label"] = ref["status_label"]
+                                    if ref.get("top_pressure_title") and match.get("pressure_points"):
+                                        match["pressure_points"][0]["title"] = ref["top_pressure_title"]
+                                        if ref.get("top_pressure_desc"):
+                                            match["pressure_points"][0]["description"] = ref["top_pressure_desc"]
+                                    if ref.get("top_expansion_title") and match.get("expansion_engines"):
+                                        match["expansion_engines"][0]["title"] = ref["top_expansion_title"]
+                                        if ref.get("top_expansion_desc"):
+                                            match["expansion_engines"][0]["description"] = ref["top_expansion_desc"]
+
+                        if "supply_demand_levers_update" in ai_data and isinstance(ai_data["supply_demand_levers_update"], list):
+                            existing_levers = payload.get("supply_demand_control_levers", {}).get("levers", [])
+                            for lev_up in ai_data["supply_demand_levers_update"]:
+                                lev_id = lev_up.get("id")
+                                match = next((l for l in existing_levers if l.get("id") == lev_id), None)
+                                if match:
+                                    if lev_up.get("how_they_control"):
+                                        match["how_they_control"] = lev_up["how_they_control"]
+                                    if lev_up.get("india_transmission"):
+                                        match["india_transmission"] = lev_up["india_transmission"]
 
                         return payload
             except Exception:
