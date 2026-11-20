@@ -22,6 +22,10 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
 
   Map<String, dynamic> _metadata = {};
   Map<String, dynamic> _executiveHud = {};
+  Map<String, dynamic> _supplyDemandLevers = {};
+  Map<String, dynamic> _sectorMarginMatrix = {};
+  Map<String, dynamic> _currencyTradeTelemetry = {};
+  Map<String, dynamic> _shockTransmissionEngine = {};
   List<Map<String, dynamic>> _superpowers = [];
   Map<String, dynamic> _usaChinaClash = {};
   List<Map<String, dynamic>> _stressGauges = [];
@@ -50,7 +54,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
     _loadDataset();
   }
 
@@ -63,9 +67,18 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   void _populateData(Map<String, dynamic> data) {
     _metadata = Map<String, dynamic>.from(data['metadata'] ?? {});
     _executiveHud = Map<String, dynamic>.from(data['executive_hud'] ?? {});
+    _supplyDemandLevers =
+        Map<String, dynamic>.from(data['supply_demand_control_levers'] ?? {});
+    _sectorMarginMatrix =
+        Map<String, dynamic>.from(data['sector_margin_demand_matrix'] ?? {});
+    _currencyTradeTelemetry =
+        Map<String, dynamic>.from(data['currency_and_trade_telemetry'] ?? {});
+    _shockTransmissionEngine =
+        Map<String, dynamic>.from(data['dynamic_shock_transmission_engine'] ?? {});
     _superpowers = List<Map<String, dynamic>>.from(
         data['global_superpowers'] ?? []);
-    _usaChinaClash = Map<String, dynamic>.from(data['usa_china_macro_clash'] ?? {});
+    _usaChinaClash = Map<String, dynamic>.from(
+        data['usa_china_macro_clash'] ?? {});
     _stressGauges = List<Map<String, dynamic>>.from(
         data['global_stress_gauges'] ?? []);
     _headwindsTailwinds =
@@ -80,31 +93,25 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
       setState(() => _isSyncing = true);
     }
 
-    // 1. Offline bundled asset fallback first
-    if (_superpowers.isEmpty) {
-      try {
-        final jsonStr = await rootBundle
-            .loadString('assets/data/global_economy_radar.json');
-        final data = jsonDecode(jsonStr);
-
-        if (mounted && _superpowers.isEmpty) {
+    try {
+      final localJson = await rootBundle
+          .loadString('assets/data/global_economy_radar.json');
+      final dynamic parsed = jsonDecode(localJson);
+      if (parsed is Map<String, dynamic> &&
+          parsed['global_superpowers'] != null) {
+        if (mounted) {
           setState(() {
-            _populateData(data);
+            _populateData(parsed);
             _isLoading = false;
           });
         }
-      } catch (e) {
-        debugPrint("Error loading bundled global economy dataset: $e");
       }
-    }
+    } catch (_) {}
 
-    // 2. Fetch live dynamic radar from CDNs
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
     bool fetchedLive = false;
-
-    for (final baseUrl in dataUrls) {
+    for (final url in dataUrls) {
       try {
-        final uri = Uri.parse('$baseUrl?ts=$timestamp');
+        final uri = Uri.parse("$url?t=${DateTime.now().millisecondsSinceEpoch}");
         final response = await http.get(
           uri,
           headers: {
@@ -141,7 +148,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             break;
           }
         }
-      } catch (e) {
+      } catch (_) {
         continue;
       }
     }
@@ -154,8 +161,11 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
       if (isRefresh) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Baseline cached global radar active."),
-            backgroundColor: Color(0xFF00838F),
+            content: Text(
+              "ℹ️ Operating on Local Macro Baseline (Offline Fallback)",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            backgroundColor: Color(0xFF37474F),
             duration: Duration(seconds: 2),
           ),
         );
@@ -167,10 +177,10 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: kCardDark,
+        backgroundColor: const Color(0xFF0C121E),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: kBorderSubtle),
+          side: const BorderSide(color: Color(0xFF1E2B3E)),
         ),
         title: Row(
           children: [
@@ -208,20 +218,20 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               ),
               const SizedBox(height: 10),
               _buildInfoStep(
-                "2. Pressure vs Expansion Matrix",
-                "Detects where economic pain (de-industrialization, property debt, yield gravity) vs growth engines (AI capex, China+1, rate cuts) are active.",
+                "2. Supply-Demand Control Levers",
+                "Tracks how OPEC+ energy valves, US Fed dollar taps, and Chinese factory overcapacity dictate global margins and trade.",
                 kAccentGreen,
               ),
               const SizedBox(height: 10),
               _buildInfoStep(
-                "3. Global Stress Barometers",
-                "Real-time monitoring of US Dollar Index (DXY), US 10Y yields, Brent Crude, and sovereign central bank Gold accumulation.",
+                "3. US vs China Macro Clash",
+                "Analyzes tit-for-tat friction across tariffs, semiconductor embargoes, critical minerals, and emerging market relocation.",
                 kAccentAmber,
               ),
               const SizedBox(height: 10),
               _buildInfoStep(
-                "4. Equity Translation Impact",
-                "Maps international geopolitical and macroeconomic shifts into affected sectors and listed equities.",
+                "4. Currency & Trade Deficit Transmission",
+                "Monitors USD/INR exchange rate sensitivity, crude oil multiplier rules, and direct impact on domestic company margins.",
                 kAccentRed,
               ),
             ],
@@ -351,6 +361,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               fontSize: 11, fontWeight: FontWeight.w600),
           tabs: const [
             Tab(text: "🗺️ SUPERPOWERS (KAHA DABAO)"),
+            Tab(text: "⚡ SUPPLY-DEMAND & MARGINS"),
             Tab(text: "⚔️ US vs CHINA CLASH"),
             Tab(text: "📊 GLOBAL STRESS GAUGES"),
             Tab(text: "⚖️ HEADWINDS vs TAILWINDS"),
@@ -370,6 +381,12 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                   backgroundColor: kCardDark,
                   onRefresh: () => _loadDataset(isRefresh: true),
                   child: _buildSuperpowersTab(),
+                ),
+                RefreshIndicator(
+                  color: kAccentCyan,
+                  backgroundColor: kCardDark,
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildSupplyDemandAndMarginsTab(),
                 ),
                 RefreshIndicator(
                   color: kAccentCyan,
@@ -401,262 +418,341 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 1: 🗺️ GLOBAL SUPERPOWERS & PRESSURE vs EXPANSION
+  // TAB 1: 🗺️ SUPERPOWERS & EXECUTIVE HUD
   // =============================================================
   Widget _buildSuperpowersTab() {
+    final healthScore = _executiveHud['global_health_score'] ?? 54.0;
+    final healthLabel = _executiveHud['global_health_label'] ?? 'EXPANDING';
+    final verdict = _executiveHud['health_verdict'] ?? '';
+    final headline = _metadata['regime_headline'] ?? '';
+    final conclusion = _metadata['global_conclusion'] ?? '';
+    final pillars = (_executiveHud['core_pillars'] as List<dynamic>? ?? []);
+
     return ListView(
       padding: const EdgeInsets.all(14),
       children: [
-        // 1. Executive Global Conclusion HUD & Regional Bar Chart
-        _buildExecutiveGlobalHUD(),
-        const SizedBox(height: 16),
+        // Executive HUD Card
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF131B2A), Color(0xFF0F1726)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+            boxShadow: [
+              BoxShadow(
+                color: kAccentCyan.withOpacity(0.06),
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: kAccentCyan.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.analytics_rounded,
+                            color: kAccentCyan, size: 16),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        "GLOBAL MACRO BAROMETER",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                    decoration: BoxDecoration(
+                      color: _isLiveSynced
+                          ? kAccentGreen.withOpacity(0.15)
+                          : const Color(0xFF37474F),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          _isLiveSynced ? Icons.wifi_rounded : Icons.offline_bolt_rounded,
+                          color: _isLiveSynced ? kAccentGreen : Colors.white70,
+                          size: 11,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          _isLiveSynced ? "LIVE CDN SYNC" : "BASELINE",
+                          style: TextStyle(
+                            color: _isLiveSynced ? kAccentGreen : Colors.white70,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Score Meter Row
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "$healthScore",
+                    style: GoogleFonts.robotoMono(
+                      color: kAccentCyan,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -1,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 6, left: 4),
+                    child: Text(
+                      "/ 100",
+                      style: TextStyle(color: kTextMuted, fontSize: 13),
+                    ),
+                  ),
+                  const Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: kAccentCyan.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          healthLabel,
+                          style: const TextStyle(
+                            color: kAccentCyan,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _metadata['last_updated'] ?? 'Latest Baseline',
+                        style: const TextStyle(
+                            color: kTextMuted, fontSize: 9.5),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Visual Progress Bar
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: LinearProgressIndicator(
+                  value: (healthScore as num).toDouble() / 100.0,
+                  backgroundColor: const Color(0xFF1E2B3E),
+                  valueColor: const AlwaysStoppedAnimation<Color>(kAccentCyan),
+                  minHeight: 6,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Verdict & Headline
+              if (headline.isNotEmpty)
+                Text(
+                  headline,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              const SizedBox(height: 4),
+              Text(
+                verdict.isNotEmpty ? verdict : conclusion,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 10.5,
+                  height: 1.35,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+
+        // Visual Benchmark Column Chart
+        _buildPmiColumnChart(pillars),
+        const SizedBox(height: 14),
 
         // Section Title
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: const [
-                Icon(Icons.account_balance_rounded,
-                    color: kAccentCyan, size: 16),
-                SizedBox(width: 6),
-                Text(
-                  "SUPERPOWER BLOCS (PRESSURE vs EXPANSION)",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11.5,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.4,
-                  ),
-                ),
-              ],
+          children: const [
+            Icon(Icons.public_rounded, color: kAccentCyan, size: 16),
+            SizedBox(width: 6),
+            Text(
+              "ECONOMIC SUPERPOWERS TELEMETRY",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5,
+              ),
             ),
           ],
         ),
         const SizedBox(height: 8),
 
-        // Superpower Detailed Cards
+        // Superpower Cards List
         ..._superpowers.map((p) => _buildSuperpowerCard(p)),
       ],
     );
   }
 
-  Widget _buildExecutiveGlobalHUD() {
-    final pillars = (_executiveHud['core_pillars'] as List<dynamic>? ?? []);
-    final score = _executiveHud['global_health_score'] ?? 68;
-    final label = _executiveHud['global_health_label'] ??
-        'MODERATE ASYMMETRIC EXPANSION';
-    final conclusion = _metadata['global_conclusion'] ?? '';
-
+  Widget _buildPmiColumnChart(List<dynamic> pillars) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF142038), Color(0xFF0C1424)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: kAccentCyan.withOpacity(0.4), width: 1.2),
-        boxShadow: [
-          BoxShadow(
-            color: kAccentCyan.withOpacity(0.08),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: kBorderSubtle),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Badge
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text(
+                "REGIONAL COMPOSITE PMI BENCHMARK",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                ),
+              ),
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(6),
+                    width: 8,
+                    height: 8,
                     decoration: BoxDecoration(
-                      color: kAccentCyan.withOpacity(0.18),
-                      borderRadius: BorderRadius.circular(8),
+                      color: kAccentAmber,
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                    child: const Icon(Icons.public_rounded,
-                        color: kAccentCyan, size: 18),
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "GLOBAL CONCLUSION (AT A GLANCE)",
-                    style: GoogleFonts.plusJakartaSans(
-                      color: kAccentCyan,
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.6,
-                    ),
+                  const SizedBox(width: 4),
+                  const Text(
+                    "50 = Expansion Threshold",
+                    style: TextStyle(color: kTextMuted, fontSize: 9),
                   ),
                 ],
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: kAccentGreen.withOpacity(0.18),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  "$score/100 EXPANSION",
-                  style: const TextStyle(
-                    color: kAccentGreen,
-                    fontSize: 9,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 16),
 
-          // Core Headline
-          Text(
-            "Global Asymmetric Fracturing: US Tech & India/Asia Booming vs European Contraction & China Deflation",
-            style: GoogleFonts.plusJakartaSans(
-              color: Colors.white,
-              fontSize: 14.5,
-              fontWeight: FontWeight.w900,
-              height: 1.3,
-            ),
-          ),
-          const SizedBox(height: 14),
+          // Columns Layout
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: pillars.map((item) {
+              final String region = item['region'] ?? '';
+              final String flag = item['flag'] ?? '';
+              final double pmi = (item['growth_pmi'] as num?)?.toDouble() ?? 50.0;
+              final isAbove50 = pmi >= 50.0;
+              final Color barColor = isAbove50
+                  ? (pmi > 55.0 ? kAccentGreen : kAccentCyan)
+                  : kAccentRed;
 
-          // 📊 Regional Output Column Bar Chart (PMI Comparison)
-          Container(
-            padding: const EdgeInsets.fromLTRB(10, 14, 10, 10),
-            decoration: BoxDecoration(
-              color: const Color(0xFF080D17),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF1B283E)),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("REGIONAL ECONOMIC ACTIVITY & PMI BENCHMARK (50.0 = NEUTRAL)",
-                        style: TextStyle(
-                            color: Colors.white38,
-                            fontSize: 8.5,
-                            fontWeight: FontWeight.bold)),
-                    Text("Threshold: 50.0",
-                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
-                  ],
-                ),
-                const SizedBox(height: 12),
+              final double heightFactor = ((pmi - 35.0) / 30.0).clamp(0.15, 1.0);
+              final double barHeight = heightFactor * 100.0;
 
-                // 5 Pillars
-                SizedBox(
-                  height: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: pillars.map((p) {
-                      final double pmi =
-                          (p['growth_pmi'] as num?)?.toDouble() ?? 50.0;
-                      final String flag = p['flag'] ?? '';
-                      final String rName =
-                          (p['region'] ?? '').toString().split(' ').first;
-                      final bool isExpanding = pmi >= 50.0;
-                      final Color col = isExpanding
-                          ? (pmi > 55.0 ? kAccentGreen : kAccentCyan)
-                          : kAccentRed;
-
-                      return _buildRegionBar(
-                        flag: flag,
-                        name: rName,
-                        pmiStr: pmi.toStringAsFixed(1),
-                        heightRatio: (pmi / 60.0).clamp(0.2, 1.0),
-                        color: col,
-                        isExpanding: isExpanding,
-                      );
-                    }).toList(),
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    pmi.toStringAsFixed(1),
+                    style: GoogleFonts.robotoMono(
+                      color: barColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Container(height: 1.5, color: Colors.white24),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-
-          // Core Summary
-          Text(
-            conclusion,
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 11, height: 1.35),
+                  const SizedBox(height: 4),
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        width: 28,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 50.0,
+                        child: Container(
+                          width: 32,
+                          height: 1.5,
+                          color: kAccentAmber.withOpacity(0.4),
+                        ),
+                      ),
+                      Container(
+                        width: 28,
+                        height: barHeight,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              barColor.withOpacity(0.7),
+                              barColor,
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(flag, style: const TextStyle(fontSize: 16)),
+                  const SizedBox(height: 2),
+                  Text(
+                    region.contains(' ') ? region.split(' ').first : region,
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white70,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildRegionBar({
-    required String flag,
-    required String name,
-    required String pmiStr,
-    required double heightRatio,
-    required Color color,
-    required bool isExpanding,
-  }) {
-    final double barHeight = (heightRatio * 58.0).clamp(16.0, 58.0);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(flag, style: const TextStyle(fontSize: 10)),
-            const SizedBox(width: 2),
-            Text(
-              pmiStr,
-              style: GoogleFonts.robotoMono(
-                color: color,
-                fontSize: 9.5,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        Container(
-          width: 38,
-          height: barHeight,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [color.withOpacity(0.95), color.withOpacity(0.45)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: color, width: 1),
-            boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(0.25),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          name,
-          style: GoogleFonts.plusJakartaSans(
-            color: Colors.white70,
-            fontSize: 8.5,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-      ],
     );
   }
 
@@ -727,7 +823,8 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Text(
-            "Central Bank: $rate • Inflation: $inflation\n$pmi",
+            "Central Bank: $rate • Inflation: $inflation
+$pmi",
             style: const TextStyle(color: kTextMuted, fontSize: 10, height: 1.3),
           ),
         ),
@@ -753,7 +850,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                       style: const TextStyle(fontSize: 8.5),
                       children: [
                         TextSpan(
-                          text: ": ",
+                          text: "$k: ",
                           style: const TextStyle(
                             color: Colors.white54,
                             fontWeight: FontWeight.bold,
@@ -797,9 +894,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               margin: const EdgeInsets.only(bottom: 6),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF1B0C14),
+                color: const Color(0xFF090D16),
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: kAccentRed.withOpacity(0.3)),
+                border: Border.all(color: kAccentRed.withOpacity(0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -869,9 +966,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               margin: const EdgeInsets.only(bottom: 6),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF0C1B14),
+                color: const Color(0xFF090D16),
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: kAccentGreen.withOpacity(0.3)),
+                border: Border.all(color: kAccentGreen.withOpacity(0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -897,7 +994,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                           borderRadius: BorderRadius.circular(3),
                         ),
                         child: Text(
-                          en['impact'] ?? 'GROWTH',
+                          en['impact'] ?? 'EXPANSION',
                           style: const TextStyle(
                             color: kAccentGreen,
                             fontSize: 7.5,
@@ -923,7 +1020,858 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 2: ⚔️ USA vs CHINA MACRO CLASH DESK
+  // TAB 2: ⚡ SUPPLY-DEMAND, MARGINS & CURRENCY RADAR
+  // =============================================================
+  Widget _buildSupplyDemandAndMarginsTab() {
+    final leversHeadline = _supplyDemandLevers['headline'] ??
+        'HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND';
+    final leversDesc = _supplyDemandLevers['description'] ?? '';
+    final levers = (_supplyDemandLevers['levers'] as List<dynamic>? ?? []);
+
+    final marginDesc = _sectorMarginMatrix['description'] ?? '';
+    final expansionSectors =
+        (_sectorMarginMatrix['margin_expansion_sectors'] as List<dynamic>? ?? []);
+    final pressureSectors =
+        (_sectorMarginMatrix['margin_pressure_sectors'] as List<dynamic>? ?? []);
+
+    final usdInr = _currencyTradeTelemetry['usd_inr_current'] ?? 84.42;
+    final inrStress = _currencyTradeTelemetry['stress_level'] ?? 'MANAGED FLOAT';
+    final rbiForex = _currencyTradeTelemetry['rbi_forex_warchest'] ?? '$675 Billion';
+    final crudeRule =
+        (_currencyTradeTelemetry['crude_sensitivity_rule'] as Map<String, dynamic>? ?? {});
+    final eximDynamics =
+        (_currencyTradeTelemetry['import_export_dynamics'] as List<dynamic>? ?? []);
+
+    final shocks =
+        (_shockTransmissionEngine['shocks'] as List<dynamic>? ?? []);
+
+    return ListView(
+      padding: const EdgeInsets.all(14),
+      children: [
+        // Intro Card
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF131B2A), Color(0xFF1A1A2E)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.bolt_rounded, color: kAccentCyan, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      leversHeadline,
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                leversDesc,
+                style: const TextStyle(
+                    color: Colors.white70, fontSize: 10.5, height: 1.35),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+
+        // Live Geopolitical Shock Alert
+        if (shocks.isNotEmpty) ...[
+          _buildActiveShockBanner(shocks.first),
+          const SizedBox(height: 14),
+        ],
+
+        // 📊 GRAPHICAL CHART 1: Sector Margin Delta (Expansion vs Pressure)
+        _buildSectorMarginChart(expansionSectors, pressureSectors, marginDesc),
+        const SizedBox(height: 14),
+
+        // 📊 GRAPHICAL CHART 2: USD/INR Currency & Trade Deficit Gauge
+        _buildCurrencyAndTradeGauge(usdInr, inrStress, rbiForex, crudeRule, eximDynamics),
+        const SizedBox(height: 14),
+
+        // 4 Global Supply-Demand Levers
+        Row(
+          children: const [
+            Icon(Icons.tune_rounded, color: kAccentAmber, size: 16),
+            SizedBox(width: 6),
+            Text(
+              "4 GLOBAL LEVERS CONTROLLING WORLD SUPPLY & DEMAND",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ...levers.map((lev) => _buildLeverCard(lev)),
+      ],
+    );
+  }
+
+  Widget _buildActiveShockBanner(Map<String, dynamic> shock) {
+    final name = shock['shock_name'] ?? '';
+    final trigger = shock['trigger'] ?? '';
+    final supplyChoke = shock['supply_demand_choke'] ?? '';
+    final eximShift = shock['import_export_shift'] ?? '';
+    final inrImpact = shock['currency_impact'] ?? '';
+    final winners = (shock['margin_winners'] as List<dynamic>? ?? []);
+    final losers = (shock['margin_losers'] as List<dynamic>? ?? []);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: kAccentAmber.withOpacity(0.5)),
+      ),
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        tilePadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+        childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+        iconColor: kAccentAmber,
+        collapsedIconColor: Colors.white54,
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: kAccentAmber.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Icon(Icons.warning_amber_rounded,
+                  color: kAccentAmber, size: 16),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "LIVE SHOCK SURVEILLANCE",
+                        style: TextStyle(
+                          color: kAccentAmber,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 1),
+                        decoration: BoxDecoration(
+                          color: kAccentRed.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: const Text(
+                          "ACTIVE TRIGGER",
+                          style: TextStyle(
+                            color: kAccentRed,
+                            fontSize: 7.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    name,
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        children: [
+          const Divider(color: kBorderSubtle),
+          const SizedBox(height: 4),
+
+          // Transmission Flow Diagram (Steps)
+          _buildShockFlowStep("1. GLOBAL TRIGGER", trigger, kAccentAmber),
+          _buildShockFlowStep("2. SUPPLY-DEMAND CHOKE", supplyChoke, kAccentCyan),
+          _buildShockFlowStep("3. EXPORT-IMPORT SHIFT", eximShift, Colors.white70),
+          _buildShockFlowStep("4. CURRENCY (INR) IMPACT", inrImpact, kAccentRed),
+
+          const SizedBox(height: 6),
+          // Winners & Losers Row
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: kAccentGreen.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: kAccentGreen.withOpacity(0.25)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "🟢 MARGIN EXPANSION",
+                        style: TextStyle(
+                          color: kAccentGreen,
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        winners.join(" • "),
+                        style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: kAccentRed.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: kAccentRed.withOpacity(0.25)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "🔴 MARGIN PRESSURE",
+                        style: TextStyle(
+                          color: kAccentRed,
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        losers.join(" • "),
+                        style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildShockFlowStep(String tag, String text, Color col) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+            decoration: BoxDecoration(
+              color: col.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              tag,
+              style: TextStyle(
+                color: col,
+                fontSize: 8,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 10,
+                height: 1.25,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectorMarginChart(
+      List<dynamic> expansion, List<dynamic> pressure, String desc) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "SECTOR MARGIN DELTA CHART (BPS)",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const Text(
+                "+ / - Basis Points",
+                style: TextStyle(color: kTextMuted, fontSize: 9.5),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            desc,
+            style: const TextStyle(color: Colors.white60, fontSize: 10),
+          ),
+          const SizedBox(height: 12),
+
+          // 🟢 EXPANSION SECTION
+          Row(
+            children: const [
+              Icon(Icons.trending_up_rounded, color: kAccentGreen, size: 14),
+              SizedBox(width: 4),
+              Text(
+                "MARGIN EXPANSION (GLOBAL TAILWINDS)",
+                style: TextStyle(
+                  color: kAccentGreen,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.4,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ...expansion.map((sec) => _buildMarginBarRow(sec, isExpansion: true)),
+
+          const SizedBox(height: 14),
+
+          // 🔴 PRESSURE SECTION
+          Row(
+            children: const [
+              Icon(Icons.trending_down_rounded, color: kAccentRed, size: 14),
+              SizedBox(width: 4),
+              Text(
+                "MARGIN PRESSURE (GLOBAL INPUT & DUMPING DABAO)",
+                style: TextStyle(
+                  color: kAccentRed,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.4,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ...pressure.map((sec) => _buildMarginBarRow(sec, isExpansion: false)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMarginBarRow(Map<String, dynamic> sec,
+      {required bool isExpansion}) {
+    final sector = sec['sector'] ?? '';
+    final int delta = (sec['margin_delta_bps'] as num?)?.toInt() ?? 0;
+    final int demand = (sec['demand_score'] as num?)?.toInt() ?? 50;
+    final driver = sec['driver'] ?? '';
+    final stocks = (sec['key_stocks'] as List<dynamic>? ?? []);
+    final Color barColor = isExpansion ? kAccentGreen : kAccentRed;
+
+    final double widthFactor = (delta.abs() / 300.0).clamp(0.15, 1.0);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: barColor.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                sector,
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: barColor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      "${delta > 0 ? '+' : ''}$delta bps",
+                      style: GoogleFonts.robotoMono(
+                        color: barColor,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    "Demand: $demand",
+                    style: TextStyle(
+                      color: demand > 75 ? kAccentGreen : Colors.white54,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // Visual Bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: (widthFactor * 100).toInt(),
+                  child: Container(
+                    height: 5,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          barColor.withOpacity(0.5),
+                          barColor,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: ((1.0 - widthFactor) * 100).toInt(),
+                  child: Container(
+                    height: 5,
+                    color: const Color(0xFF1E2B3E),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+
+          Text(
+            driver,
+            style: const TextStyle(
+                color: Colors.white60, fontSize: 9.5, height: 1.25),
+          ),
+          if (stocks.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                const Text(
+                  "Plays: ",
+                  style: TextStyle(color: kTextMuted, fontSize: 8.5),
+                ),
+                Text(
+                  stocks.join(", "),
+                  style: GoogleFonts.robotoMono(
+                    color: Colors.white,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCurrencyAndTradeGauge(
+      dynamic usdInr,
+      String inrStress,
+      String rbiForex,
+      Map<String, dynamic> crudeRule,
+      List<dynamic> eximDynamics) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.currency_exchange_rounded,
+                      color: kAccentCyan, size: 16),
+                  const SizedBox(width: 6),
+                  Text(
+                    "USD / INR & TRADE DEFICIT RADAR",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: kAccentAmber.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  inrStress,
+                  style: const TextStyle(
+                    color: kAccentAmber,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Rate & Warchest Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("CURRENT SPOT RATE",
+                      style: TextStyle(color: kTextMuted, fontSize: 9)),
+                  Text(
+                    "₹$usdInr",
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text("RBI FOREX WARCHEST",
+                      style: TextStyle(color: kTextMuted, fontSize: 9)),
+                  Text(
+                    rbiForex,
+                    style: GoogleFonts.robotoMono(
+                      color: kAccentGreen,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // 3-Zone Visual Color Gauge Bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 33,
+                  child: Container(
+                    height: 8,
+                    color: kAccentGreen.withOpacity(0.7),
+                  ),
+                ),
+                Expanded(
+                  flex: 33,
+                  child: Container(
+                    height: 8,
+                    color: kAccentAmber.withOpacity(0.7),
+                  ),
+                ),
+                Expanded(
+                  flex: 34,
+                  child: Container(
+                    height: 8,
+                    color: kAccentRed.withOpacity(0.85),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("₹82.50 (Inflow)",
+                  style: TextStyle(color: Colors.white54, fontSize: 8)),
+              Text("₹83.80 (Float)",
+                  style: TextStyle(color: Colors.white54, fontSize: 8)),
+              Text("₹84.42 (DXY Dabao)",
+                  style: TextStyle(
+                      color: kAccentRed,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          // The $10 Crude Oil Rule Box
+          if (crudeRule.isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF090D16),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFF1E2B3E)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    crudeRule['rule_title'] ?? 'The $10 Crude Rule',
+                    style: const TextStyle(
+                      color: kAccentCyan,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  _buildRulePoint(
+                      Icons.arrow_forward_rounded,
+                      crudeRule['stat_trade_deficit'] ?? '',
+                      kAccentAmber),
+                  _buildRulePoint(
+                      Icons.arrow_forward_rounded,
+                      crudeRule['stat_currency_impact'] ?? '',
+                      kAccentRed),
+                  _buildRulePoint(
+                      Icons.arrow_forward_rounded,
+                      crudeRule['stat_inflation_impact'] ?? '',
+                      Colors.white70),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+
+          // Exim Flows Row
+          ...eximDynamics.map((dyn) {
+            final flow = dyn['flow'] ?? '';
+            final status = dyn['status'] ?? '';
+            final details = dyn['details'] ?? '';
+            final bool isImport = flow == 'IMPORTS';
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isImport
+                      ? kAccentRed.withOpacity(0.06)
+                      : kAccentGreen.withOpacity(0.06),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: isImport
+                        ? kAccentRed.withOpacity(0.2)
+                        : kAccentGreen.withOpacity(0.2),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          flow,
+                          style: TextStyle(
+                            color: isImport ? kAccentRed : kAccentGreen,
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        Text(
+                          status,
+                          style: TextStyle(
+                            color: isImport ? kAccentRed : kAccentGreen,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      details,
+                      style: const TextStyle(
+                          color: Colors.white70, fontSize: 9.5, height: 1.25),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRulePoint(IconData icon, String text, Color col) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 3),
+      child: Row(
+        children: [
+          Icon(icon, color: col, size: 11),
+          const SizedBox(width: 5),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: col,
+                fontSize: 9.5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLeverCard(Map<String, dynamic> lev) {
+    final name = lev['name'] ?? '';
+    final controller = lev['controller'] ?? '';
+    final how = lev['how_they_control'] ?? '';
+    final shock = lev['shock_scenario'] ?? '';
+    final transmission = lev['india_transmission'] ?? '';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: GoogleFonts.plusJakartaSans(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            "Controller: $controller",
+            style: const TextStyle(color: kAccentCyan, fontSize: 9.5),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            how,
+            style: const TextStyle(
+                color: Colors.white70, fontSize: 10, height: 1.3),
+          ),
+          const SizedBox(height: 6),
+
+          // Shock & India Note
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: kAccentAmber.withOpacity(0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "🇮🇳 INDIA TRANSMISSION & SHOCK IMPACT",
+                  style: TextStyle(
+                    color: kAccentAmber,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  transmission,
+                  style: const TextStyle(
+                      color: Colors.white70, fontSize: 9.5, height: 1.3),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // =============================================================
+  // TAB 3: ⚔️ USA vs CHINA MACRO CLASH DESK
   // =============================================================
   Widget _buildUsChinaClashTab() {
     final headline = _usaChinaClash['headline'] ?? 'USA vs CHINA MACRO CLASH';
@@ -1213,7 +2161,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 3: 📊 GLOBAL STRESS GAUGES
+  // TAB 4: 📊 GLOBAL STRESS GAUGES
   // =============================================================
   Widget _buildStressGaugesTab() {
     return ListView(
@@ -1233,16 +2181,16 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               Text(
                 "GLOBAL CROSS-BORDER STRESS GAUGES",
                 style: TextStyle(
-                  color: kAccentCyan,
-                  fontSize: 11,
+                  color: Colors.white,
+                  fontSize: 12,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 0.5,
                 ),
               ),
-              SizedBox(height: 3),
+              SizedBox(height: 4),
               Text(
-                "Tracking the 6 macroeconomic barometers that govern foreign institutional (FII) flows, currency valuations, and raw material inflation.",
-                style: TextStyle(color: Colors.white70, fontSize: 11, height: 1.3),
+                "Real-time visual meters monitoring sovereign liquidity stress, raw commodity flows, and currency pressures.",
+                style: TextStyle(color: Colors.white70, fontSize: 10.5),
               ),
             ],
           ),
@@ -1321,43 +2269,33 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                 ),
               ),
               Text(
-                "Historical Range: $range",
-                style: const TextStyle(color: kTextMuted, fontSize: 9.5),
+                "Range: $range",
+                style: const TextStyle(color: kTextMuted, fontSize: 10),
               ),
             ],
           ),
           const SizedBox(height: 8),
 
-          // 📊 Horizontal Gauge Meter
+          // Horizontal Gauge Bar
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: Container(
-              height: 8,
-              color: const Color(0xFF090D16),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FractionallySizedBox(
-                  widthFactor: barRatio.clamp(0.08, 1.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: isPressure
-                            ? [kAccentAmber, kAccentRed]
-                            : [kAccentCyan, kAccentGreen],
-                      ),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                ),
-              ),
+            child: LinearProgressIndicator(
+              value: barRatio.clamp(0.05, 1.0),
+              backgroundColor: const Color(0xFF131B2A),
+              valueColor: AlwaysStoppedAnimation<Color>(barColor),
+              minHeight: 6,
             ),
           ),
           const SizedBox(height: 8),
 
+          // Market Impact Note
           Text(
             impact,
             style: const TextStyle(
-                color: Colors.white70, fontSize: 10.5, height: 1.3),
+              color: Colors.white70,
+              fontSize: 10.5,
+              height: 1.3,
+            ),
           ),
         ],
       ),
@@ -1365,7 +2303,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 3: ⚖️ HEADWINDS vs TAILWINDS
+  // TAB 5: ⚖️ HEADWINDS vs TAILWINDS
   // =============================================================
   Widget _buildHeadwindsTailwindsTab() {
     final headwinds =
@@ -1503,7 +2441,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 4: 🎯 EQUITY IMPACT MATRIX
+  // TAB 6: 🎯 EQUITY IMPACT MATRIX
   // =============================================================
   Widget _buildEquityImpactTab() {
     return ListView(
@@ -1521,18 +2459,18 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                "CROSS-BORDER EQUITY IMPACT RADAR",
+                "CROSS-BORDER EQUITY TRANSLATION MATRIX",
                 style: TextStyle(
-                  color: kAccentCyan,
-                  fontSize: 11,
+                  color: Colors.white,
+                  fontSize: 12,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 0.5,
                 ),
               ),
-              SizedBox(height: 3),
+              SizedBox(height: 4),
               Text(
-                "Direct correlation tracking between global macro shifts (China dumping, US tech capex, EU auto slowdown) and listed equities.",
-                style: TextStyle(color: Colors.white70, fontSize: 11, height: 1.3),
+                "Direct translation of global geopolitical, tariff, and monetary catalysts into listed domestic equities.",
+                style: TextStyle(color: Colors.white70, fontSize: 10.5),
               ),
             ],
           ),
@@ -1630,12 +2568,12 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                       padding: const EdgeInsets.only(left: 12),
                       child: Text(
                         st['catalyst'] ?? '',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 9.5,
-                          height: 1.25,
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: col,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
                         ),
-                        textAlign: TextAlign.right,
                       ),
                     ),
                   ),

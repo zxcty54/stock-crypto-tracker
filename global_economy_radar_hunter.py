@@ -4,7 +4,8 @@ Global Macro Economy Radar Hunter Engine
 ========================================
 Compiles cross-border macroeconomic indicators, superpower telemetry
 (US, China, Europe, Japan, India & EM Asia), global stress barometers,
-and the US vs China Macro Clash Matrix.
+the US vs China Macro Clash Matrix, and the dynamic Supply-Demand
+Control & Currency / Import-Export Transmission Engine.
 
 Outputs:
  - assets/data/global_economy_radar.json (App bundled baseline)
@@ -13,6 +14,7 @@ Outputs:
 
 import os
 import json
+import urllib.request
 from datetime import datetime, timezone
 
 OUTPUT_ASSET_FILE = "assets/data/global_economy_radar.json"
@@ -102,6 +104,197 @@ GLOBAL_RADAR_PAYLOAD = {
                 "flow_color": "green",
                 "net_momentum_pct": 7.2,
                 "key_driver": "China+1 Supply Chain Shift & Domestic Capex Execution"
+            }
+        ]
+    },
+    "supply_demand_control_levers": {
+        "headline": "HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND",
+        "description": "Global superpowers do not let free markets dictate outcomes; they actively manipulate energy valves, monetary liquidity taps, industrial subsidies, and chokepoints to enforce dominance.",
+        "levers": [
+            {
+                "id": "energy_valve",
+                "name": "1. The Hydrocarbon Energy Valve (OPEC+ & US Shale)",
+                "icon": "🛢️",
+                "controller": "Saudi Arabia (OPEC+ Quotas) & US (Permian Shale 13.5M bpd)",
+                "how_they_control": "OPEC+ restricts supply by 2.2M bpd to keep crude above $70, while the US deploys Permian shale drillers and Strategic Petroleum Reserve (SPR) releases to cap oil price spikes.",
+                "shock_scenario": "Middle East / Iran escalation or Strait of Hormuz tanker blockage shuts off 20% of maritime crude transit, causing an immediate +$15-20/bbl risk premium spike.",
+                "india_transmission": "India imports >85% of crude. Every $10/bbl oil increase expands India's annual trade deficit by $13B, depreciates INR by 25-35 paise, drives inflation +45 bps, and crushes margins for Paints, Tyres, and OMCs."
+            },
+            {
+                "id": "dollar_liquidity_tap",
+                "name": "2. The Dollar Liquidity & Yield Tap (US Fed & Treasury)",
+                "icon": "💵",
+                "controller": "US Federal Reserve & US Treasury Auction Desk",
+                "how_they_control": "By maintaining higher policy rates and issuing $2T+ in annual Treasuries, US 10Y yields (~4.42%) stay elevated, sucking capital out of emerging market equities into US dollar assets (DXY >106).",
+                "shock_scenario": "Sticky US services inflation delays Fed cuts, keeping King Dollar elevated and creating a persistent foreign exchange squeeze on emerging currencies.",
+                "india_transmission": "FII outflows from domestic equities, forcing RBI to actively sell forex reserves ($675B buffer) to prevent disorderly Rupee depreciation past 84.50."
+            },
+            {
+                "id": "china_overcapacity_tap",
+                "name": "3. The Factory Overcapacity Tap (China State Mandates)",
+                "icon": "🏭",
+                "controller": "Beijing State-Owned Banks & Municipal Planners",
+                "how_they_control": "Facing domestic property collapse, China directs state subsidies into manufacturing 2x-3x domestic demand in steel, solar modules, lithium batteries, and agrochemicals, dumping surplus globally.",
+                "shock_scenario": "25-month producer price deflation (-2.9% PPI) prompts aggressive predatory dumping across Asian and Latin American markets to keep Chinese factory workers employed.",
+                "india_transmission": "Bifurcated Impact: Crushes profit margins for domestic primary commodity producers (Tata Steel, JSW, UPL), but provides massive input cost deflation to downstream solar developers, real estate, and consumer tech assemblers."
+            },
+            {
+                "id": "chokepoint_shipping_valve",
+                "name": "4. Geopolitical Chokepoints & Freight Valve (Red Sea & Straits)",
+                "icon": "🚢",
+                "controller": "Regional Militias (Houthis) & Maritime Naval Coalitions",
+                "how_they_control": "Attacks on Bab-el-Mandeb / Red Sea compel cargo container ships to reroute 10,000 miles around Africa's Cape of Good Hope, tripling container spot freight rates and adding 14 days transit time.",
+                "shock_scenario": "Coordinated chokepoint blockades in Red Sea or Malacca Strait freeze container slot availability, causing global supply chain delays.",
+                "india_transmission": "Exporters of textiles, auto parts, and basmati rice face inflated freight invoices and delayed receivables, while European export demand contracts."
+            }
+        ]
+    },
+    "sector_margin_demand_matrix": {
+        "headline": "SECTOR MARGIN PRESSURE vs EXPANSION RADAR",
+        "description": "Quantifies which domestic and global sectors gain operating leverage versus which face margin compression under current global macro flows.",
+        "margin_expansion_sectors": [
+            {
+                "sector": "Power Grid & Transformers",
+                "margin_delta_bps": 250,
+                "demand_score": 96,
+                "trend": "RAPID MARGIN EXPANSION",
+                "driver": "Global AI data center electricity crunch and high-voltage transmission transformer shortages.",
+                "key_stocks": ["VOLTAMP", "ABB", "SIEMENS"]
+            },
+            {
+                "sector": "Solar EPC Developers & Clean Tech",
+                "margin_delta_bps": 220,
+                "demand_score": 88,
+                "trend": "INPUT COST WINDFALL",
+                "driver": "Plummeting Chinese solar wafer and cell prices reduce project construction capex by 25-30%.",
+                "key_stocks": ["TATAPOWER", "PREMIERENE", "NTPC"]
+            },
+            {
+                "sector": "Electronics EMS / China+1 Assembly",
+                "margin_delta_bps": 180,
+                "demand_score": 92,
+                "trend": "STRUCTURAL OUTPERFORMANCE",
+                "driver": "Multinationals mandating non-China sourcing quotas plus Indian PLI scale advantages.",
+                "key_stocks": ["DIXON", "KAYNES", "PGEL"]
+            },
+            {
+                "sector": "Defense & Strategic Aerospace",
+                "margin_delta_bps": 160,
+                "demand_score": 95,
+                "trend": "MULTI-YEAR ORDER BOOK",
+                "driver": "Global NATO and Indo-Pacific defense procurement supercycle and indigenous defense offsets.",
+                "key_stocks": ["HAL", "BEL", "SOLARINDS"]
+            },
+            {
+                "sector": "Paints & Specialty Adhesives",
+                "margin_delta_bps": 140,
+                "demand_score": 74,
+                "trend": "RAW MATERIAL RELIEF",
+                "driver": "Rangebound Brent crude ($70-$74) keeps titanium dioxide and solvent raw material costs low.",
+                "key_stocks": ["ASIANPAINT", "BERGEPAINT", "PIDILITIND"]
+            }
+        ],
+        "margin_pressure_sectors": [
+            {
+                "sector": "Primary Steel & Base Metals",
+                "margin_delta_bps": -240,
+                "demand_score": 48,
+                "trend": "SEVERE PRICE DABAO",
+                "driver": "Chinese hot-rolled coil dumping at below-cash-cost suppresses domestic Indian steel realisations.",
+                "key_stocks": ["TATASTEEL", "JSWSTEEL", "SAIL"]
+            },
+            {
+                "sector": "Agrochemicals & Crop Protection",
+                "margin_delta_bps": -190,
+                "demand_score": 52,
+                "trend": "PRICE WAR COMPRESSION",
+                "driver": "Predatory Chinese generic active ingredient dumping and global distributor channel destocking.",
+                "key_stocks": ["UPL", "SRF", "PIIND"]
+            },
+            {
+                "sector": "European Auto Component Exporters",
+                "margin_delta_bps": -150,
+                "demand_score": 42,
+                "trend": "EXPORT ORDER DELAYS",
+                "driver": "Volkswagen factory closures and deep German automotive production cuts depress export volumes.",
+                "key_stocks": ["BHARATFORG", "MOTHERSON", "BALKRISIND"]
+            },
+            {
+                "sector": "IT Discretionary Software Services",
+                "margin_delta_bps": -110,
+                "demand_score": 58,
+                "trend": "DEAL CONVERSION SLUMP",
+                "driver": "US enterprise BFSI clients reprioritizing discretionary software budgets strictly to AI GPU capex.",
+                "key_stocks": ["TCS", "WIPRO", "INFY", "TECHM"]
+            }
+        ]
+    },
+    "currency_and_trade_telemetry": {
+        "usd_inr_current": 84.42,
+        "stress_level": "ELEVATED (MANAGED FLOAT)",
+        "rbi_forex_warchest": "$675 Billion (Massive Shield)",
+        "net_trade_impact_score": "-1.8% Drag",
+        "crude_sensitivity_rule": {
+            "rule_title": "The $10 Crude Oil Multiplier Rule",
+            "stat_trade_deficit": "+$13.2 Billion Annual Trade Deficit",
+            "stat_currency_impact": "-25 to -35 Paise Rupee Depreciation",
+            "stat_inflation_impact": "+45 bps Domestic Retail CPI Spike",
+            "stat_gdp_impact": "-30 bps Net GDP Drag"
+        },
+        "import_export_dynamics": [
+            {
+                "flow": "IMPORTS",
+                "status": "DEFICIT PRESSURE",
+                "details": "High electronics parts and crude imports create foreign currency demand; offset by falling coal and steel input prices.",
+                "vulnerable_segments": ["Crude Oil (85% Imported)", "Electronics Chips", "Coking Coal"]
+            },
+            {
+                "flow": "EXPORTS",
+                "status": "SELECTIVE GROWTH",
+                "details": "Engineering and chemical goods to Europe slow down; high-value smartphone and aerospace exports to US surge +23.4% YoY.",
+                "resilient_segments": ["Mobile Phones / EMS", "Pharma Formulations", "Refined Petroleum"]
+            }
+        ]
+    },
+    "dynamic_shock_transmission_engine": {
+        "headline": "LIVE GEOPOLITICAL & SUPPLY SHOCK DETECTOR",
+        "status_summary": "Active surveillance of Middle East crude routes, DXY dollar spikes, and Chinese tariff retaliations.",
+        "shocks": [
+            {
+                "id": "crude_shortage_shock",
+                "shock_name": "Middle East Conflict & Hormuz Crude Supply Choke",
+                "is_active": True,
+                "severity": "ELEVATED MONITORING",
+                "trigger": "US-Iran military friction and potential maritime missile strikes along the Strait of Hormuz tanker routes.",
+                "supply_demand_choke": "Threat of 2.5M bpd oil supply disruption; tanker war risk insurance premiums jump 300%.",
+                "import_export_shift": "India's monthly oil import bill swells; emergency crude sourcing shifted to Russian and West African grades.",
+                "currency_impact": "USD/INR pushes against 84.40 - 84.50 band; RBI intervenes via spot dollar sales to defend currency.",
+                "margin_winners": ["ONGC", "OIL", "GAIL"],
+                "margin_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"]
+            },
+            {
+                "id": "king_dollar_shock",
+                "shock_name": "King Dollar & US 10Y Yield Gravity Spike",
+                "is_active": True,
+                "severity": "HIGH PRESSURE",
+                "trigger": "US 10Y yields breaking 4.40% and DXY surging to 106.25 due to strong US economic data and slower Fed rate cuts.",
+                "supply_demand_choke": "Dollar liquidity contraction across emerging market banks; foreign institutional capital sucked back into US T-Bills.",
+                "import_export_shift": "Imported goods become costlier in Rupee terms; export realisations in dollars yield higher Rupee revenue.",
+                "currency_impact": "Emerging Asian currencies face synchronized depreciation; Rupee supported by RBI's $675B forex warchest.",
+                "margin_winners": ["SUNPHARMA", "DRREDDY", "DIVISLAB"],
+                "margin_losers": ["TATASTEEL", "ADANIENT", "JSWSTEEL"]
+            },
+            {
+                "id": "china_dumping_shock",
+                "shock_name": "China Shock 2.0 Industrial Overcapacity Dumping",
+                "is_active": True,
+                "severity": "ONGOING DABAO",
+                "trigger": "China real estate contraction (-10.3%) and 25-month factory-gate deflation (-2.9% PPI) forcing factories to dump surplus.",
+                "supply_demand_choke": "Global steel, solar, and chemical markets flooded with inventory priced below Western cash cost of production.",
+                "import_export_shift": "Cheap Chinese hot-rolled coil steel and agrochem intermediates surge into Indian ports, triggering anti-dumping petitions.",
+                "currency_impact": "Disinflationary import price effect helps keep wholesale inflation low without direct FX volatility.",
+                "margin_winners": ["TATAPOWER", "PREMIERENE", "DIXON"],
+                "margin_losers": ["TATASTEEL", "JSWSTEEL", "UPL", "SRF"]
             }
         ]
     },
@@ -646,13 +839,13 @@ GLOBAL_RADAR_PAYLOAD = {
 }
 
 def generate_global_radar():
-    print("🌐 Generating Global Macro Economy Pressure & Expansion Radar...")
+    print("🌐 Generating Global Macro Economy Pressure & Expansion Radar with Supply-Demand Engine...")
     for file_path in [OUTPUT_ASSET_FILE, OUTPUT_ROOT_FILE]:
         os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(GLOBAL_RADAR_PAYLOAD, f, indent=2)
     print(f"✅ Created {OUTPUT_ASSET_FILE} and {OUTPUT_ROOT_FILE}")
-    print(f"📊 Superpowers: {len(GLOBAL_RADAR_PAYLOAD['global_superpowers'])} | US vs China Battlefields: {len(GLOBAL_RADAR_PAYLOAD['usa_china_macro_clash']['battlefields'])}")
+    print(f"📊 Levers: {len(GLOBAL_RADAR_PAYLOAD['supply_demand_control_levers']['levers'])} | Shocks: {len(GLOBAL_RADAR_PAYLOAD['dynamic_shock_transmission_engine']['shocks'])}")
 
 if __name__ == "__main__":
     generate_global_radar()
