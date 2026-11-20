@@ -23,6 +23,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   Map<String, dynamic> _metadata = {};
   Map<String, dynamic> _executiveHud = {};
   List<Map<String, dynamic>> _superpowers = [];
+  Map<String, dynamic> _usaChinaClash = {};
   List<Map<String, dynamic>> _stressGauges = [];
   Map<String, dynamic> _headwindsTailwinds = {};
   List<Map<String, dynamic>> _equityImpacts = [];
@@ -49,7 +50,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _loadDataset();
   }
 
@@ -64,6 +65,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     _executiveHud = Map<String, dynamic>.from(data['executive_hud'] ?? {});
     _superpowers = List<Map<String, dynamic>>.from(
         data['global_superpowers'] ?? []);
+    _usaChinaClash = Map<String, dynamic>.from(data['usa_china_macro_clash'] ?? {});
     _stressGauges = List<Map<String, dynamic>>.from(
         data['global_stress_gauges'] ?? []);
     _headwindsTailwinds =
@@ -349,6 +351,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               fontSize: 11, fontWeight: FontWeight.w600),
           tabs: const [
             Tab(text: "🗺️ SUPERPOWERS (KAHA DABAO)"),
+            Tab(text: "⚔️ US vs CHINA CLASH"),
             Tab(text: "📊 GLOBAL STRESS GAUGES"),
             Tab(text: "⚖️ HEADWINDS vs TAILWINDS"),
             Tab(text: "🎯 EQUITY IMPACT MATRIX"),
@@ -367,6 +370,12 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                   backgroundColor: kCardDark,
                   onRefresh: () => _loadDataset(isRefresh: true),
                   child: _buildSuperpowersTab(),
+                ),
+                RefreshIndicator(
+                  color: kAccentCyan,
+                  backgroundColor: kCardDark,
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildUsChinaClashTab(),
                 ),
                 RefreshIndicator(
                   color: kAccentCyan,
@@ -658,6 +667,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final rate = p['central_bank_rate'] ?? '';
     final inflation = p['inflation_rate'] ?? '';
     final pmi = p['pmi_summary'] ?? '';
+    final vitalStats = (p['vital_stats'] as Map<String, dynamic>? ?? {});
     final pressurePoints = (p['pressure_points'] as List<dynamic>? ?? []);
     final expansionEngines = (p['expansion_engines'] as List<dynamic>? ?? []);
 
@@ -723,6 +733,47 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         ),
         children: [
           const Divider(color: kBorderSubtle),
+
+          if (vitalStats.isNotEmpty) ...[
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: vitalStats.entries.map((entry) {
+                final k = entry.key.replaceAll('_', ' ').toUpperCase();
+                final v = entry.value.toString();
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: const Color(0xFF1E2B3E)),
+                  ),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(fontSize: 8.5),
+                      children: [
+                        TextSpan(
+                          text: ": ",
+                          style: const TextStyle(
+                            color: Colors.white54,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: v,
+                          style: GoogleFonts.robotoMono(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 10),
+          ],
 
           // 🔴 Pressure Points Section (Kaha Dabao Hai)
           Row(
@@ -872,7 +923,297 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 2: 📊 GLOBAL STRESS GAUGES
+  // TAB 2: ⚔️ USA vs CHINA MACRO CLASH DESK
+  // =============================================================
+  Widget _buildUsChinaClashTab() {
+    final headline = _usaChinaClash['headline'] ?? 'USA vs CHINA MACRO CLASH';
+    final overview = _usaChinaClash['overview'] ?? '';
+    final battlefields =
+        (_usaChinaClash['battlefields'] as List<dynamic>? ?? []);
+
+    return ListView(
+      padding: const EdgeInsets.all(14),
+      children: [
+        // Top Banner Card
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1A1A2E), Color(0xFF16213E)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: kAccentCyan.withOpacity(0.4)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Text("🇺🇸", style: TextStyle(fontSize: 22)),
+                  const SizedBox(width: 6),
+                  const Text("⚔️", style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 6),
+                  const Text("🇨🇳", style: TextStyle(fontSize: 22)),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      headline,
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                overview,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 11,
+                  height: 1.35,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+
+        // Battlefields List
+        ...battlefields.map((bf) => _buildBattlefieldCard(bf)),
+      ],
+    );
+  }
+
+  Widget _buildBattlefieldCard(Map<String, dynamic> bf) {
+    final title = bf['title'] ?? '';
+    final usOffensive = bf['us_offensive'] ?? '';
+    final chinaRetaliation = bf['china_retaliation'] ?? '';
+    final macroImpact = bf['macro_impact'] ?? '';
+    final impactOnIndia = bf['impact_on_india'] ?? '';
+    final indiaTakeaway = bf['india_takeaway'] ?? '';
+
+    final isIndiaPositive = impactOnIndia.contains('POSITIVE') ||
+        impactOnIndia.contains('BENEFICIARY');
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Title
+          Text(
+            title,
+            style: GoogleFonts.plusJakartaSans(
+              color: Colors.white,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // US Offensive Box
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0D1829),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: kAccentCyan.withOpacity(0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: const [
+                    Text("🇺🇸", style: TextStyle(fontSize: 14)),
+                    SizedBox(width: 6),
+                    Text(
+                      "US OFFENSIVE & LEVERAGE",
+                      style: TextStyle(
+                        color: kAccentCyan,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  usOffensive,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 10.5,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // China Counter Box
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF24121A),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: kAccentRed.withOpacity(0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: const [
+                    Text("🇨🇳", style: TextStyle(fontSize: 14)),
+                    SizedBox(width: 6),
+                    Text(
+                      "CHINA COUNTER & RETALIATION",
+                      style: TextStyle(
+                        color: kAccentRed,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  chinaRetaliation,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 10.5,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // Global Macro Impact Note
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFF1E2B3E)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.public_rounded, color: kAccentAmber, size: 14),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(fontSize: 10, height: 1.3),
+                      children: [
+                        const TextSpan(
+                          text: "Global Impact: ",
+                          style: TextStyle(
+                            color: kAccentAmber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: macroImpact,
+                          style: const TextStyle(color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // India Impact Box
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: isIndiaPositive
+                  ? kAccentGreen.withOpacity(0.08)
+                  : kAccentAmber.withOpacity(0.08),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                color: isIndiaPositive
+                    ? kAccentGreen.withOpacity(0.3)
+                    : kAccentAmber.withOpacity(0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: const [
+                        Text("🇮🇳", style: TextStyle(fontSize: 14)),
+                        SizedBox(width: 6),
+                        Text(
+                          "INDIA TAKEAWAY & ARBITRAGE",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 1.5),
+                      decoration: BoxDecoration(
+                        color: isIndiaPositive
+                            ? kAccentGreen.withOpacity(0.2)
+                            : kAccentAmber.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        impactOnIndia,
+                        style: TextStyle(
+                          color: isIndiaPositive ? kAccentGreen : kAccentAmber,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  indiaTakeaway,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 10,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // =============================================================
+  // TAB 3: 📊 GLOBAL STRESS GAUGES
   // =============================================================
   Widget _buildStressGaugesTab() {
     return ListView(
