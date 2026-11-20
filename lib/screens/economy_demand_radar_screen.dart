@@ -15,6 +15,7 @@ class EconomyDemandRadarScreen extends StatefulWidget {
 class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     with SingleTickerProviderStateMixin {
   static const List<String> dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/0e3fda87-stock-crypto-tracker/economy_demand_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/economy_demand_radar.json',
     'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
     'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
@@ -119,16 +120,16 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "INDIAN ECONOMY DEMAND RADAR",
+              "INDIA DEMAND RADAR",
               style: GoogleFonts.plusJakartaSans(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
-                fontSize: 14,
-                letterSpacing: 0.8,
+                fontSize: 14.5,
+                letterSpacing: 0.5,
               ),
             ),
             const Text(
-              "FASTag Toll • Port Cargo • Diesel • 8-Core Physical Pulse",
+              "FASTag • Ports • Diesel • 8-Core",
               style: TextStyle(color: textMuted, fontSize: 10),
             ),
           ],
@@ -159,8 +160,8 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           unselectedLabelColor: textMuted,
           labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
           tabs: const [
-            Tab(text: "🎯 SECTOR DEMAND & STOCKS"),
-            Tab(text: "📊 PHYSICAL TELEMETRY GAUGES"),
+            Tab(text: "🎯 SECTORS & DEMAND"),
+            Tab(text: "📊 PHYSICAL GAUGES"),
           ],
         ),
       ),
