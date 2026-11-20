@@ -8,7 +8,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../widgets/trader_feed_card.dart';
 import '../widgets/create_chart_post_sheet.dart';
 import '../widgets/create_confession_sheet.dart';
-import '../widgets/community_sentiment_card.dart';
 import '../services/auth_service.dart';
 import 'market_indices_heatmap_screen.dart';
 
@@ -320,28 +319,16 @@ class _CommunityScreenState extends State<CommunityScreen> {
           },
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 6, bottom: 120),
-            // 3 static headers: Indices(0), Sentiment(1), Filter & Confession Shortcut(2)
-            itemCount: 3 + (posts.isEmpty ? 1 : posts.length),
+            // 2 static headers: Indices Ticker(0), Filter & Confession Shortcut(1)
+            itemCount: 2 + (posts.isEmpty ? 1 : posts.length),
             itemBuilder: (context, index) {
               // 1. TOP INDICES TICKER
               if (index == 0) {
                 return _buildTopIndicesTickerStrip();
               }
 
-              // 2. HERO SENTIMENT CARD
+              // 2. 🎯 STREAMLINED FILTER ROW & CONFESSION SHORTCUT
               if (index == 1) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-                  child: CommunitySentimentCard(
-                    niftyLivePrice: _niftyPrice,
-                    marketStatus: _marketStatus,
-                    isVotingAllowed: _isVotingAllowed,
-                  ),
-                );
-              }
-
-              // 3. 🎯 STREAMLINED FILTER ROW & CONFESSION SHORTCUT
-              if (index == 2) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                   child: Row(
@@ -418,8 +405,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // Feed Cards (Offset index - 3)
-              final post = posts[index - 3];
+              // Feed Cards (Offset index - 2)
+              final post = posts[index - 2];
               return TraderFeedCard(
                 key: ValueKey(post['id']),
                 post: post,

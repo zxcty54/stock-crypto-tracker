@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // 🪙 Spot Ticker Import
 import '../widgets/metals_ticker_card.dart';
@@ -34,6 +36,9 @@ import 'stock_delivery_history_screen.dart';
 // 🗺️ NSE Indices & Sector Heatmap Preview Card
 import '../widgets/indices_heatmap_preview_card.dart';
 
+// ⚡ Community Market Sentiment Radar
+import '../widgets/community_sentiment_card.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -44,6 +49,78 @@ class NewsScreen extends StatefulWidget {
 class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  final String _sheetApiUrl =
+      "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
+
+  double _niftyPrice = 25548.20;
+  String _niftyChangeStr = "+0.13%";
+  String _marketStatus = "POST_MARKET";
+  bool _isVotingAllowed = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchLiveIndices();
+  }
+
+  Future<void> _fetchLiveIndices() async {
+    try {
+      final response = await http
+          .get(Uri.parse(_sheetApiUrl))
+          .timeout(const Duration(seconds: 8));
+
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+
+        Map<String, dynamic> parsedData = {};
+        String status = "POST_MARKET";
+        bool allowed = true;
+
+        if (decoded is Map<String, dynamic>) {
+          status = decoded['market_status']?.toString() ?? "POST_MARKET";
+          allowed = decoded['voting_allowed'] == true;
+
+          if (decoded.containsKey('data') && decoded['data'] is Map<String, dynamic>) {
+            parsedData = Map<String, dynamic>.from(decoded['data']);
+          } else {
+            parsedData = decoded;
+          }
+        }
+
+        double extractedNifty = _niftyPrice;
+        String extractedChange = _niftyChangeStr;
+        parsedData.forEach((key, val) {
+          final cleanKey = key.toString().toLowerCase().replaceAll(" ", "").replaceAll("_", "");
+          if (cleanKey.contains("nifty50") || cleanKey == "nifty") {
+            if (val is Map) {
+              if (val.containsKey('price')) {
+                extractedNifty = (val['price'] as num).toDouble();
+              }
+              if (val.containsKey('change')) {
+                final c = val['change'];
+                final d = (c is num)
+                    ? c.toDouble()
+                    : double.tryParse(c.toString().replaceAll('%', '').trim()) ?? 0.0;
+                extractedChange = "${d >= 0 ? '+' : ''}${d.toStringAsFixed(2)}%";
+              }
+            } else if (val is num) {
+              extractedNifty = val.toDouble();
+            }
+          }
+        });
+
+        if (mounted) {
+          setState(() {
+            _niftyPrice = extractedNifty;
+            _niftyChangeStr = extractedChange;
+            _marketStatus = status;
+            _isVotingAllowed = allowed;
+          });
+        }
+      }
+    } catch (_) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +134,9 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
           color: const Color(0xFF00E5FF),
           backgroundColor: const Color(0xFF0F1726),
           onRefresh: () async {
+            await _fetchLiveIndices();
             setState(() {});
-            await Future.delayed(const Duration(milliseconds: 600));
+            await Future.delayed(const Duration(milliseconds: 400));
           },
           child: CustomScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -83,6 +161,19 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               // 🗺️ 2. NSE INDICES & SECTOR HEATMAP (Broad 21 & Sectoral 23 Matrix)
               const SliverToBoxAdapter(
                 child: IndicesHeatmapPreviewCard(),
+              ),
+
+              // ⚡ 2B. MARKET SENTIMENT & TRADER CONSENSUS RADAR (Daily Mood & Target Strikes)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 4.0),
+                  child: CommunitySentimentCard(
+                    niftyLivePrice: _niftyPrice,
+                    niftyChangeStr: _niftyChangeStr,
+                    marketStatus: _marketStatus,
+                    isVotingAllowed: _isVotingAllowed,
+                  ),
+                ),
               ),
 
               // 💎 3. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
