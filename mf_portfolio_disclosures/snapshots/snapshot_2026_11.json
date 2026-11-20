@@ -1,0 +1,1362 @@
+[
+  {
+    "id": "ppfas_flexi",
+    "name": "Parag Parikh Flexi Cap Fund",
+    "aum_cr": 78450.0,
+    "cash_holding_pct": 14.2,
+    "top_10_holdings": [
+      {
+        "symbol": "ITC",
+        "name": "ITC Limited",
+        "weight": 7.9,
+        "shares_change_pct": 1.8
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 7.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BAJAJHLDNG",
+        "name": "Bajaj Holdings",
+        "weight": 6.9,
+        "shares_change_pct": 4.2
+      },
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 5.8,
+        "shares_change_pct": 0.8
+      },
+      {
+        "symbol": "POWERGRID",
+        "name": "Power Grid Corp",
+        "weight": 5.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "COALINDIA",
+        "name": "Coal India",
+        "weight": 4.9,
+        "shares_change_pct": -1.2
+      },
+      {
+        "symbol": "HCLTECH",
+        "name": "HCL Technologies",
+        "weight": 4.6,
+        "shares_change_pct": 3.1
+      },
+      {
+        "symbol": "MARUTI",
+        "name": "Maruti Suzuki",
+        "weight": 4.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet Inc",
+        "weight": 3.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "META",
+        "name": "Meta Platforms",
+        "weight": 3.3,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "quant_small",
+    "name": "Quant Small Cap Fund",
+    "aum_cr": 26800.0,
+    "cash_holding_pct": 8.4,
+    "top_10_holdings": [
+      {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries",
+        "weight": 8.5,
+        "shares_change_pct": 4.8
+      },
+      {
+        "symbol": "JIOFIN",
+        "name": "Jio Financial Services",
+        "weight": 6.8,
+        "shares_change_pct": 8.2
+      },
+      {
+        "symbol": "ADANIPOWER",
+        "name": "Adani Power",
+        "weight": 5.4,
+        "shares_change_pct": 12.5
+      },
+      {
+        "symbol": "BIKAJI",
+        "name": "Bikaji Foods",
+        "weight": 4.9,
+        "shares_change_pct": 28.4
+      },
+      {
+        "symbol": "ARVIND",
+        "name": "Arvind Limited",
+        "weight": 4.5,
+        "shares_change_pct": 16.2
+      },
+      {
+        "symbol": "AEGISLOG",
+        "name": "Aegis Logistics",
+        "weight": 4.1,
+        "shares_change_pct": -2.1
+      },
+      {
+        "symbol": "KAYNES",
+        "name": "Kaynes Technology",
+        "weight": 3.9,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "DIXON",
+        "name": "Dixon Technologies",
+        "weight": 3.6,
+        "shares_change_pct": 33.0
+      },
+      {
+        "symbol": "HINDCOPPER",
+        "name": "Hindustan Copper",
+        "weight": 3.2,
+        "shares_change_pct": 18.5
+      },
+      {
+        "symbol": "HFCL",
+        "name": "HFCL Limited",
+        "weight": 2.9,
+        "shares_change_pct": -5.4
+      }
+    ]
+  },
+  {
+    "id": "nippon_small",
+    "name": "Nippon India Small Cap Fund",
+    "aum_cr": 64200.0,
+    "cash_holding_pct": 4.6,
+    "top_10_holdings": [
+      {
+        "symbol": "TIINDIA",
+        "name": "Tube Investments",
+        "weight": 4.2,
+        "shares_change_pct": 2.1
+      },
+      {
+        "symbol": "APARINDS",
+        "name": "Apar Industries",
+        "weight": 3.8,
+        "shares_change_pct": 5.4
+      },
+      {
+        "symbol": "KPITTECH",
+        "name": "KPIT Technologies",
+        "weight": 3.4,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "MCX",
+        "name": "Multi Commodity Exchange",
+        "weight": 3.1,
+        "shares_change_pct": 36.0
+      },
+      {
+        "symbol": "TEJASNET",
+        "name": "Tejas Networks",
+        "weight": 2.9,
+        "shares_change_pct": 4.8
+      },
+      {
+        "symbol": "VOLTAMP",
+        "name": "Voltamp Transformers",
+        "weight": 2.7,
+        "shares_change_pct": 6.2
+      },
+      {
+        "symbol": "ELGIEQUIP",
+        "name": "Elgi Equipments",
+        "weight": 2.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KAYNES",
+        "name": "Kaynes Technology",
+        "weight": 2.4,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "CARBORUNIV",
+        "name": "Carborundum Universal",
+        "weight": 2.2,
+        "shares_change_pct": 3.1
+      },
+      {
+        "symbol": "CREDITACC",
+        "name": "CreditAccess Grameen",
+        "weight": 2.0,
+        "shares_change_pct": -4.2
+      }
+    ]
+  },
+  {
+    "id": "hdfc_midcap",
+    "name": "HDFC Mid-Cap Opportunities Fund",
+    "aum_cr": 74800.0,
+    "cash_holding_pct": 6.8,
+    "top_10_holdings": [
+      {
+        "symbol": "INDHOTEL",
+        "name": "Indian Hotels Company",
+        "weight": 4.8,
+        "shares_change_pct": 1.4
+      },
+      {
+        "symbol": "TATACOMM",
+        "name": "Tata Communications",
+        "weight": 4.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "name": "Federal Bank",
+        "weight": 3.9,
+        "shares_change_pct": 3.8
+      },
+      {
+        "symbol": "BEL",
+        "name": "Bharat Electronics",
+        "weight": 3.7,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "MFSL",
+        "name": "Max Financial Services",
+        "weight": 3.5,
+        "shares_change_pct": 4.2
+      },
+      {
+        "symbol": "APOLLOTYRE",
+        "name": "Apollo Tyres",
+        "weight": 3.2,
+        "shares_change_pct": -1.8
+      },
+      {
+        "symbol": "COFORGE",
+        "name": "Coforge Limited",
+        "weight": 3.0,
+        "shares_change_pct": 6.4
+      },
+      {
+        "symbol": "PREMIERENE",
+        "name": "Premier Energies",
+        "weight": 2.8,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "SUNDRMFAST",
+        "name": "Sundram Fasteners",
+        "weight": 2.6,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BALKRISIND",
+        "name": "Balkrishna Industries",
+        "weight": 2.4,
+        "shares_change_pct": -2.0
+      }
+    ]
+  },
+  {
+    "id": "motilal_midcap",
+    "name": "Motilal Oswal Midcap Fund",
+    "aum_cr": 23400.0,
+    "cash_holding_pct": 9.8,
+    "top_10_holdings": [
+      {
+        "symbol": "PERSISTENT",
+        "name": "Persistent Systems",
+        "weight": 8.4,
+        "shares_change_pct": 6.2
+      },
+      {
+        "symbol": "TRENT",
+        "name": "Trent Limited",
+        "weight": 7.8,
+        "shares_change_pct": 42.0
+      },
+      {
+        "symbol": "COFORGE",
+        "name": "Coforge Limited",
+        "weight": 6.5,
+        "shares_change_pct": 8.1
+      },
+      {
+        "symbol": "POLYCAB",
+        "name": "Polycab India",
+        "weight": 6.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "DIXON",
+        "name": "Dixon Technologies",
+        "weight": 5.8,
+        "shares_change_pct": 14.2
+      },
+      {
+        "symbol": "KAYNES",
+        "name": "Kaynes Technology",
+        "weight": 5.2,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "PREMIERENE",
+        "name": "Premier Energies",
+        "weight": 4.8,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "ZENTEC",
+        "name": "Zen Technologies",
+        "weight": 4.2,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "KIMS",
+        "name": "Krishna Institute of Med",
+        "weight": 3.9,
+        "shares_change_pct": 5.0
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "name": "Max Healthcare",
+        "weight": 3.6,
+        "shares_change_pct": -3.4
+      }
+    ]
+  },
+  {
+    "id": "sbi_contra",
+    "name": "SBI Contra Fund",
+    "aum_cr": 39500.0,
+    "cash_holding_pct": 11.5,
+    "top_10_holdings": [
+      {
+        "symbol": "GAIL",
+        "name": "GAIL (India)",
+        "weight": 5.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "SBIN",
+        "name": "State Bank of India",
+        "weight": 5.4,
+        "shares_change_pct": 3.2
+      },
+      {
+        "symbol": "ONGC",
+        "name": "Oil & Natural Gas Corp",
+        "weight": 4.9,
+        "shares_change_pct": -0.8
+      },
+      {
+        "symbol": "TECHM",
+        "name": "Tech Mahindra",
+        "weight": 4.5,
+        "shares_change_pct": 4.6
+      },
+      {
+        "symbol": "CDSL",
+        "name": "Central Depository Services",
+        "weight": 4.1,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "SUZLON",
+        "name": "Suzlon Energy",
+        "weight": 3.8,
+        "shares_change_pct": 29.0
+      },
+      {
+        "symbol": "NTPC",
+        "name": "NTPC Limited",
+        "weight": 3.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 3.2,
+        "shares_change_pct": 2.1
+      },
+      {
+        "symbol": "BPCL",
+        "name": "Bharat Petroleum",
+        "weight": 2.9,
+        "shares_change_pct": -3.5
+      },
+      {
+        "symbol": "ITC",
+        "name": "ITC Limited",
+        "weight": 2.7,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "mirae_large_mid",
+    "name": "Mirae Asset Large & Midcap Fund",
+    "aum_cr": 41200.0,
+    "cash_holding_pct": 4.8,
+    "top_10_holdings": [
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 6.8,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 6.2,
+        "shares_change_pct": 0.8
+      },
+      {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries",
+        "weight": 5.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "AXISBANK",
+        "name": "Axis Bank",
+        "weight": 4.5,
+        "shares_change_pct": 3.4
+      },
+      {
+        "symbol": "LT",
+        "name": "Larsen & Toubro",
+        "weight": 4.1,
+        "shares_change_pct": 2.0
+      },
+      {
+        "symbol": "TCS",
+        "name": "Tata Consultancy Services",
+        "weight": 3.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 3.5,
+        "shares_change_pct": 1.5
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 3.2,
+        "shares_change_pct": -1.0
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "name": "Federal Bank",
+        "weight": 2.9,
+        "shares_change_pct": 4.8
+      },
+      {
+        "symbol": "INDUSINDBK",
+        "name": "IndusInd Bank",
+        "weight": 2.2,
+        "shares_change_pct": -38.0
+      }
+    ]
+  },
+  {
+    "id": "icici_bluechip",
+    "name": "ICICI Prudential Bluechip Fund",
+    "aum_cr": 59800.0,
+    "cash_holding_pct": 7.2,
+    "top_10_holdings": [
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 9.2,
+        "shares_change_pct": 1.4
+      },
+      {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries",
+        "weight": 8.4,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 7.1,
+        "shares_change_pct": 2.1
+      },
+      {
+        "symbol": "LT",
+        "name": "Larsen & Toubro",
+        "weight": 6.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 5.9,
+        "shares_change_pct": 2.8
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 5.4,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "MARUTI",
+        "name": "Maruti Suzuki",
+        "weight": 4.6,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "AXISBANK",
+        "name": "Axis Bank",
+        "weight": 4.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ULTRACEMCO",
+        "name": "UltraTech Cement",
+        "weight": 3.8,
+        "shares_change_pct": 3.4
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "name": "Sun Pharma",
+        "weight": 3.2,
+        "shares_change_pct": -0.8
+      }
+    ]
+  },
+  {
+    "id": "hdfc_flexi",
+    "name": "HDFC Flexi Cap Fund",
+    "aum_cr": 66200.0,
+    "cash_holding_pct": 5.4,
+    "top_10_holdings": [
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 9.5,
+        "shares_change_pct": 1.1
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 8.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 5.8,
+        "shares_change_pct": 3.2
+      },
+      {
+        "symbol": "CIPLA",
+        "name": "Cipla Limited",
+        "weight": 4.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "SBIN",
+        "name": "State Bank of India",
+        "weight": 4.5,
+        "shares_change_pct": 2.4
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 4.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "HCLTECH",
+        "name": "HCL Technologies",
+        "weight": 3.9,
+        "shares_change_pct": 4.1
+      },
+      {
+        "symbol": "COALINDIA",
+        "name": "Coal India",
+        "weight": 3.5,
+        "shares_change_pct": -2.0
+      },
+      {
+        "symbol": "LODHA",
+        "name": "Macrotech Developers",
+        "weight": 3.2,
+        "shares_change_pct": 6.8
+      },
+      {
+        "symbol": "TITAN",
+        "name": "Titan Company",
+        "weight": 2.8,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "kotak_emerging",
+    "name": "Kotak Emerging Equity Fund",
+    "aum_cr": 52600.0,
+    "cash_holding_pct": 6.5,
+    "top_10_holdings": [
+      {
+        "symbol": "SUPREMEIND",
+        "name": "Supreme Industries",
+        "weight": 4.6,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "PERSISTENT",
+        "name": "Persistent Systems",
+        "weight": 4.2,
+        "shares_change_pct": 31.0
+      },
+      {
+        "symbol": "SCHAEFFLER",
+        "name": "Schaeffler India",
+        "weight": 3.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "CUMMINSIND",
+        "name": "Cummins India",
+        "weight": 3.6,
+        "shares_change_pct": 4.5
+      },
+      {
+        "symbol": "THERMAX",
+        "name": "Thermax Limited",
+        "weight": 3.4,
+        "shares_change_pct": 2.8
+      },
+      {
+        "symbol": "SOLARINDS",
+        "name": "Solar Industries",
+        "weight": 3.1,
+        "shares_change_pct": 5.4
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "name": "Federal Bank",
+        "weight": 2.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ASTRAL",
+        "name": "Astral Limited",
+        "weight": 2.7,
+        "shares_change_pct": -1.4
+      },
+      {
+        "symbol": "OBEROIRLTY",
+        "name": "Oberoi Realty",
+        "weight": 2.5,
+        "shares_change_pct": 6.2
+      },
+      {
+        "symbol": "BALKRISIND",
+        "name": "Balkrishna Industries",
+        "weight": 2.3,
+        "shares_change_pct": -2.8
+      }
+    ]
+  },
+  {
+    "id": "sbi_small",
+    "name": "SBI Small Cap Fund",
+    "aum_cr": 32400.0,
+    "cash_holding_pct": 8.9,
+    "top_10_holdings": [
+      {
+        "symbol": "BLUESTARCO",
+        "name": "Blue Star Limited",
+        "weight": 4.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KALPATPOWR",
+        "name": "Kalpataru Projects",
+        "weight": 4.4,
+        "shares_change_pct": 3.8
+      },
+      {
+        "symbol": "CARBORUNIV",
+        "name": "Carborundum Universal",
+        "weight": 3.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "LEMON TREE",
+        "name": "Lemon Tree Hotels",
+        "weight": 3.5,
+        "shares_change_pct": 4.2
+      },
+      {
+        "symbol": "HAWKINS",
+        "name": "Hawkins Cookers",
+        "weight": 3.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "FINCABLES",
+        "name": "Finolex Cables",
+        "weight": 2.9,
+        "shares_change_pct": -2.1
+      },
+      {
+        "symbol": "SHILPAMED",
+        "name": "Shilpa Medicare",
+        "weight": 2.7,
+        "shares_change_pct": 85.0
+      },
+      {
+        "symbol": "CHALET",
+        "name": "Chalet Hotels",
+        "weight": 2.5,
+        "shares_change_pct": 5.4
+      },
+      {
+        "symbol": "KIRLOSENG",
+        "name": "Kirloskar Oil Engines",
+        "weight": 2.3,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "VGUARD",
+        "name": "V-Guard Industries",
+        "weight": 2.1,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "quant_active",
+    "name": "Quant Active Fund",
+    "aum_cr": 12800.0,
+    "cash_holding_pct": 7.9,
+    "top_10_holdings": [
+      {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries",
+        "weight": 9.1,
+        "shares_change_pct": 3.2
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 7.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "TATAPOWER",
+        "name": "Tata Power",
+        "weight": 5.9,
+        "shares_change_pct": 14.5
+      },
+      {
+        "symbol": "SAIL",
+        "name": "Steel Authority of India",
+        "weight": 5.2,
+        "shares_change_pct": 22.0
+      },
+      {
+        "symbol": "JIOFIN",
+        "name": "Jio Financial Services",
+        "weight": 4.8,
+        "shares_change_pct": 6.8
+      },
+      {
+        "symbol": "ZENTEC",
+        "name": "Zen Technologies",
+        "weight": 4.2,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "LODHA",
+        "name": "Macrotech Developers",
+        "weight": 3.9,
+        "shares_change_pct": 8.4
+      },
+      {
+        "symbol": "BIKAJI",
+        "name": "Bikaji Foods",
+        "weight": 3.6,
+        "shares_change_pct": 18.2
+      },
+      {
+        "symbol": "ADANIPOWER",
+        "name": "Adani Power",
+        "weight": 3.3,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "DIXON",
+        "name": "Dixon Technologies",
+        "weight": 2.9,
+        "shares_change_pct": 24.0
+      }
+    ]
+  },
+  {
+    "id": "bandhan_small",
+    "name": "Bandhan Small Cap Fund",
+    "aum_cr": 6950.0,
+    "cash_holding_pct": 9.4,
+    "top_10_holdings": [
+      {
+        "symbol": "ARVIND",
+        "name": "Arvind Limited",
+        "weight": 4.8,
+        "shares_change_pct": 24.5
+      },
+      {
+        "symbol": "APARINDS",
+        "name": "Apar Industries",
+        "weight": 4.5,
+        "shares_change_pct": 48.0
+      },
+      {
+        "symbol": "REC",
+        "name": "REC Limited",
+        "weight": 4.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "PCBL",
+        "name": "PCBL Limited",
+        "weight": 3.8,
+        "shares_change_pct": 16.8
+      },
+      {
+        "symbol": "PFC",
+        "name": "Power Finance Corporation",
+        "weight": 3.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "SHILPAMED",
+        "name": "Shilpa Medicare",
+        "weight": 3.2,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "KAYNES",
+        "name": "Kaynes Technology",
+        "weight": 2.9,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "RADICO",
+        "name": "Radico Khaitan",
+        "weight": 2.7,
+        "shares_change_pct": 5.2
+      },
+      {
+        "symbol": "MOTILALOFS",
+        "name": "Motilal Oswal Financial",
+        "weight": 2.5,
+        "shares_change_pct": 12.0
+      },
+      {
+        "symbol": "ANANTRAJ",
+        "name": "Anant Raj Limited",
+        "weight": 2.2,
+        "shares_change_pct": 8.0
+      }
+    ]
+  },
+  {
+    "id": "tata_digital",
+    "name": "Tata Digital India Fund",
+    "aum_cr": 11800.0,
+    "cash_holding_pct": 5.8,
+    "top_10_holdings": [
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 19.8,
+        "shares_change_pct": 2.1
+      },
+      {
+        "symbol": "TCS",
+        "name": "Tata Consultancy Services",
+        "weight": 16.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "HCLTECH",
+        "name": "HCL Technologies",
+        "weight": 11.2,
+        "shares_change_pct": 4.8
+      },
+      {
+        "symbol": "TECHM",
+        "name": "Tech Mahindra",
+        "weight": 8.4,
+        "shares_change_pct": 5.2
+      },
+      {
+        "symbol": "PERSISTENT",
+        "name": "Persistent Systems",
+        "weight": 6.8,
+        "shares_change_pct": 12.5
+      },
+      {
+        "symbol": "COFORGE",
+        "name": "Coforge Limited",
+        "weight": 5.9,
+        "shares_change_pct": 14.8
+      },
+      {
+        "symbol": "WIPRO",
+        "name": "Wipro Limited",
+        "weight": 5.2,
+        "shares_change_pct": -3.0
+      },
+      {
+        "symbol": "LTIM",
+        "name": "LTIMindtree",
+        "weight": 4.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "MPHASIS",
+        "name": "Mphasis Limited",
+        "weight": 3.9,
+        "shares_change_pct": 6.4
+      },
+      {
+        "symbol": "CYIENT",
+        "name": "Cyient Limited",
+        "weight": 3.2,
+        "shares_change_pct": 8.1
+      }
+    ]
+  },
+  {
+    "id": "dsp_small",
+    "name": "DSP Small Cap Fund",
+    "aum_cr": 17200.0,
+    "cash_holding_pct": 6.2,
+    "top_10_holdings": [
+      {
+        "symbol": "RATNAMANI",
+        "name": "Ratnamani Metals",
+        "weight": 5.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "SUPRAJIT",
+        "name": "Suprajit Engineering",
+        "weight": 4.8,
+        "shares_change_pct": 2.4
+      },
+      {
+        "symbol": "IPCALAB",
+        "name": "Ipca Laboratories",
+        "weight": 4.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KIRLOSENG",
+        "name": "Kirloskar Oil Engines",
+        "weight": 4.1,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "ATUL",
+        "name": "Atul Limited",
+        "weight": 3.8,
+        "shares_change_pct": 5.2
+      },
+      {
+        "symbol": "KIRLFER",
+        "name": "Kirloskar Ferrous Industries",
+        "weight": 3.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ECLERX",
+        "name": "eClerx Services",
+        "weight": 3.2,
+        "shares_change_pct": 6.8
+      },
+      {
+        "symbol": "MANINFRA",
+        "name": "Man Infraconstruction",
+        "weight": 2.9,
+        "shares_change_pct": 14.5
+      },
+      {
+        "symbol": "SWARAJENG",
+        "name": "Swaraj Engines",
+        "weight": 2.6,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "DCMSHRIRAM",
+        "name": "DCM Shriram",
+        "weight": 2.4,
+        "shares_change_pct": -4.2
+      }
+    ]
+  },
+  {
+    "id": "franklin_smaller",
+    "name": "Franklin India Smaller Companies Fund",
+    "aum_cr": 15400.0,
+    "cash_holding_pct": 7.5,
+    "top_10_holdings": [
+      {
+        "symbol": "BRIGADE",
+        "name": "Brigade Enterprises",
+        "weight": 4.9,
+        "shares_change_pct": 3.8
+      },
+      {
+        "symbol": "EQUITASBNK",
+        "name": "Equitas Small Finance Bank",
+        "weight": 4.4,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "DEEPAKNTR",
+        "name": "Deepak Nitrite",
+        "weight": 4.1,
+        "shares_change_pct": 5.2
+      },
+      {
+        "symbol": "KIRLOSENG",
+        "name": "Kirloskar Oil Engines",
+        "weight": 3.8,
+        "shares_change_pct": 100.0
+      },
+      {
+        "symbol": "JBCHEPHARM",
+        "name": "JB Chemicals",
+        "weight": 3.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KALYANKJIL",
+        "name": "Kalyan Jewellers",
+        "weight": 3.2,
+        "shares_change_pct": 18.2
+      },
+      {
+        "symbol": "CCL",
+        "name": "CCL Products",
+        "weight": 2.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "FIVESTAR",
+        "name": "Five-Star Business Finance",
+        "weight": 2.7,
+        "shares_change_pct": 8.4
+      },
+      {
+        "symbol": "GMM",
+        "name": "GMM Pfaudler",
+        "weight": 2.4,
+        "shares_change_pct": -6.0
+      },
+      {
+        "symbol": "ASTRAL",
+        "name": "Astral Limited",
+        "weight": 2.2,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "canara_emerging",
+    "name": "Canara Robeco Emerging Equities Fund",
+    "aum_cr": 25800.0,
+    "cash_holding_pct": 5.8,
+    "top_10_holdings": [
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 6.8,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 6.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "LT",
+        "name": "Larsen & Toubro",
+        "weight": 4.8,
+        "shares_change_pct": 2.4
+      },
+      {
+        "symbol": "TRENT",
+        "name": "Trent Limited",
+        "weight": 4.5,
+        "shares_change_pct": 28.0
+      },
+      {
+        "symbol": "BEL",
+        "name": "Bharat Electronics",
+        "weight": 4.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 3.8,
+        "shares_change_pct": 1.8
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "name": "Max Healthcare",
+        "weight": 3.5,
+        "shares_change_pct": 5.2
+      },
+      {
+        "symbol": "INDHOTEL",
+        "name": "Indian Hotels Company",
+        "weight": 3.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "name": "Federal Bank",
+        "weight": 2.9,
+        "shares_change_pct": 4.5
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 2.6,
+        "shares_change_pct": 0.0
+      }
+    ]
+  },
+  {
+    "id": "axis_small",
+    "name": "Axis Small Cap Fund",
+    "aum_cr": 24100.0,
+    "cash_holding_pct": 12.8,
+    "top_10_holdings": [
+      {
+        "symbol": "NH",
+        "name": "Narayana Hrudayalaya",
+        "weight": 5.4,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BRIGADE",
+        "name": "Brigade Enterprises",
+        "weight": 4.8,
+        "shares_change_pct": 2.1
+      },
+      {
+        "symbol": "CCL",
+        "name": "CCL Products",
+        "weight": 4.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KIMS",
+        "name": "Krishna Institute of Med",
+        "weight": 3.9,
+        "shares_change_pct": 4.8
+      },
+      {
+        "symbol": "BSOFT",
+        "name": "Birlasoft Limited",
+        "weight": 3.6,
+        "shares_change_pct": 6.2
+      },
+      {
+        "symbol": "CHOLAMAND",
+        "name": "Cholamandalam Financial",
+        "weight": 3.3,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "FINEORG",
+        "name": "Fine Organic Industries",
+        "weight": 3.0,
+        "shares_change_pct": -1.8
+      },
+      {
+        "symbol": "ASTRAL",
+        "name": "Astral Limited",
+        "weight": 2.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "TATAELXSI",
+        "name": "Tata Elxsi",
+        "weight": 2.5,
+        "shares_change_pct": 3.8
+      },
+      {
+        "symbol": "PNCINFRA",
+        "name": "PNC Infratech",
+        "weight": 2.3,
+        "shares_change_pct": -4.0
+      }
+    ]
+  },
+  {
+    "id": "invesco_contra",
+    "name": "Invesco India Contra Fund",
+    "aum_cr": 16800.0,
+    "cash_holding_pct": 8.2,
+    "top_10_holdings": [
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 8.4,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 7.9,
+        "shares_change_pct": 1.2
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 6.2,
+        "shares_change_pct": 2.8
+      },
+      {
+        "symbol": "NTPC",
+        "name": "NTPC Limited",
+        "weight": 4.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "name": "Sun Pharma",
+        "weight": 4.4,
+        "shares_change_pct": 3.1
+      },
+      {
+        "symbol": "M&M",
+        "name": "Mahindra & Mahindra",
+        "weight": 4.1,
+        "shares_change_pct": 4.5
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 3.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "TRENT",
+        "name": "Trent Limited",
+        "weight": 3.5,
+        "shares_change_pct": 18.0
+      },
+      {
+        "symbol": "COALINDIA",
+        "name": "Coal India",
+        "weight": 3.1,
+        "shares_change_pct": -2.4
+      },
+      {
+        "symbol": "UPL",
+        "name": "UPL Limited",
+        "weight": 1.8,
+        "shares_change_pct": -42.0
+      }
+    ]
+  },
+  {
+    "id": "uti_nifty50",
+    "name": "UTI Nifty 50 Index Fund",
+    "aum_cr": 20400.0,
+    "cash_holding_pct": 0.8,
+    "top_10_holdings": [
+      {
+        "symbol": "HDFCBANK",
+        "name": "HDFC Bank",
+        "weight": 11.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "RELIANCE",
+        "name": "Reliance Industries",
+        "weight": 9.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "weight": 8.1,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys Limited",
+        "weight": 5.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "weight": 4.8,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "ITC",
+        "name": "ITC Limited",
+        "weight": 4.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "LT",
+        "name": "Larsen & Toubro",
+        "weight": 3.9,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "TCS",
+        "name": "Tata Consultancy Services",
+        "weight": 3.5,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "AXISBANK",
+        "name": "Axis Bank",
+        "weight": 3.2,
+        "shares_change_pct": 0.0
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "name": "Kotak Mahindra Bank",
+        "weight": 2.8,
+        "shares_change_pct": 0.0
+      }
+    ]
+  }
+]

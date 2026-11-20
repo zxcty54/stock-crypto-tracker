@@ -42,6 +42,10 @@ import '../widgets/community_sentiment_card.dart';
 // 🕵️ Mutual Fund Smart Money Preview Card
 import '../widgets/mf_smart_money_preview_card.dart';
 
+// 🌍 Global Economy Radar Preview Card
+import '../widgets/global_economy_preview_card.dart';
+import 'global_economy_radar_screen.dart';
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
 
@@ -730,6 +734,11 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                     ),
                   ),
                 ),
+              ),
+
+              // 🌍 7B. GLOBAL ECONOMY RADAR ENTRY BANNER (Pressure vs Expansion across Superpowers)
+              const SliverToBoxAdapter(
+                child: GlobalEconomyPreviewCard(),
               ),
 
               // 🏢 8. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
