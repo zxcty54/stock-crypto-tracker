@@ -67,6 +67,27 @@ def fetch_live_market_ticker(symbol: str) -> float:
         pass
     return None
 
+def fetch_live_forex_usd_inr() -> float:
+    """Attempts to fetch live USD/INR from open.er-api or yahoo finance."""
+    # 1. Try open.er-api (most reliable for real-time currency rates)
+    try:
+        url = "https://open.er-api.com/v6/latest/USD"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=4) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            inr = data.get("rates", {}).get("INR")
+            if inr and isinstance(inr, (int, float)) and inr > 50:
+                return float(inr)
+    except Exception:
+        pass
+
+    # 2. Try Yahoo Finance USDINR=X / INR=X
+    for sym in ["USDINR=X", "INR=X"]:
+        val = fetch_live_market_ticker(sym)
+        if val is not None and val > 50:
+            return val
+    return None
+
 def ingest_telemetry() -> dict:
     metrics = dict(BASELINE_METRICS)
 
@@ -75,7 +96,6 @@ def ingest_telemetry() -> dict:
         "brent_crude": "CL=F",
         "dxy_index": "DX-Y.NYB",
         "us_10y_yield": "^TNX",
-        "usd_inr": "INR=X",
         "gold_oz": "GC=F",
     }
 
@@ -87,6 +107,13 @@ def ingest_telemetry() -> dict:
             print(f"  ✓ Live update for {key}: {metrics[key]}")
         else:
             print(f"  • Using calibrated baseline for {key}: {metrics[key]}")
+
+    live_fx = fetch_live_forex_usd_inr()
+    if live_fx is not None:
+        metrics["usd_inr"] = round(live_fx, 2)
+        print(f"  ✓ Live update for usd_inr: {metrics['usd_inr']}")
+    else:
+        print(f"  • Using calibrated baseline for usd_inr: {metrics['usd_inr']}")
 
     return metrics
 

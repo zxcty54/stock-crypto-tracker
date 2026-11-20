@@ -51,11 +51,30 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/global_economy_radar.json',
   ];
 
+  double? _liveUsdInr;
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 5, vsync: this);
     _loadDataset();
+    _fetchLiveForexRate();
+  }
+
+  Future<void> _fetchLiveForexRate() async {
+    try {
+      final uri = Uri.parse("https://open.er-api.com/v6/latest/USD");
+      final response = await http.get(uri).timeout(const Duration(seconds: 4));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final inr = (data['rates']?['INR'] as num?)?.toDouble();
+        if (inr != null && inr > 60.0 && mounted) {
+          setState(() {
+            _liveUsdInr = double.parse(inr.toStringAsFixed(2));
+          });
+        }
+      }
+    } catch (_) {}
   }
 
   @override
@@ -378,20 +397,49 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               ),
               const SizedBox(height: 10),
 
-              // Live Ticker Horizontal Scroll Row
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildQuickMetricChip("BRENT", r"$73.4", kAccentGreen),
-                    _buildQuickMetricChip("USD/INR", "₹84.42", kAccentRed),
-                    _buildQuickMetricChip("DXY", "106.25", kAccentRed),
-                    _buildQuickMetricChip("US 10Y", "4.42%", kAccentAmber),
-                    _buildQuickMetricChip("GOLD", r"$2,655", kAccentGreen),
-                    _buildQuickMetricChip("IN PMI", "58.6", kAccentGreen),
-                  ],
-                ),
-              ),
+              // Live Ticker Horizontal Scroll Row (Dynamically populated from live telemetry)
+              Builder(builder: (context) {
+                final double liveUsdInr = _liveUsdInr ??
+                    (_currencyTradeTelemetry['usd_inr_current'] as num?)?.toDouble() ??
+                    84.42;
+                final String usdInrStr = liveUsdInr.toStringAsFixed(2);
+
+                String brentStr = r"$73.40";
+                String dxyStr = "106.25";
+                String us10yStr = "4.42%";
+                String goldStr = r"$2,655";
+                String inPmiStr = "58.6";
+
+                for (var g in _stressGauges) {
+                  final id = g['id'];
+                  final val = g['current_value'];
+                  if (id == 'brent_crude' && val != null) brentStr = "\$$val";
+                  if (id == 'dxy_dollar' && val != null) dxyStr = "$val";
+                  if (id == 'us_10y_yield' && val != null) us10yStr = "$val%";
+                  if (id == 'gold_spot' && val != null) goldStr = "\$$val";
+                }
+
+                for (var sp in _superpowers) {
+                  if (sp['name'] == 'India') {
+                    final pmi = sp['vital_stats']?['composite_pmi'];
+                    if (pmi != null) inPmiStr = "$pmi";
+                  }
+                }
+
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _buildQuickMetricChip("BRENT", brentStr, kAccentGreen),
+                      _buildQuickMetricChip("USD/INR", "₹$usdInrStr", kAccentRed),
+                      _buildQuickMetricChip("DXY", dxyStr, kAccentRed),
+                      _buildQuickMetricChip("US 10Y", us10yStr, kAccentAmber),
+                      _buildQuickMetricChip("GOLD", goldStr, kAccentGreen),
+                      _buildQuickMetricChip("IN PMI", inPmiStr, kAccentGreen),
+                    ],
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -736,7 +784,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final pressureSectors =
         (_sectorMarginMatrix['margin_pressure_sectors'] as List<dynamic>? ?? []);
 
-    final usdInr = _currencyTradeTelemetry['usd_inr_current'] ?? 84.42;
+    final double usdInr = _liveUsdInr ??
+        (_currencyTradeTelemetry['usd_inr_current'] as num?)?.toDouble() ??
+        84.42;
     final inrStress = _currencyTradeTelemetry['stress_level'] ?? 'MANAGED FLOAT';
     final rbiForex = _currencyTradeTelemetry['rbi_forex_warchest'] ?? r'$675 Billion';
     final crudeRule =
@@ -1126,13 +1176,13 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           const SizedBox(height: 3),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("₹82.50 (Inflow)",
+            children: [
+              const Text("₹82.50 (Inflow)",
                   style: TextStyle(color: Colors.white54, fontSize: 7.5)),
-              Text("₹83.80 (Float)",
+              const Text("₹83.80 (Float)",
                   style: TextStyle(color: Colors.white54, fontSize: 7.5)),
-              Text("₹84.42 (DXY Dabao)",
-                  style: TextStyle(
+              Text("₹${usdInr.toStringAsFixed(2)} (Current Float)",
+                  style: const TextStyle(
                       color: kAccentRed,
                       fontSize: 8,
                       fontWeight: FontWeight.bold)),
