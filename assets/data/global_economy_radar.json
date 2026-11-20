@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-20T13:42:44.755143+00:00",
+    "generated_timestamp": "2026-11-20T14:23:40.266300+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -855,24 +855,24 @@
   },
   "equity_impact_matrix": [
     {
-      "theme": "China+1 Global Supply Relocation",
+      "theme": "China+1 & AI Electronics Hardware Supercycle",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
       "stocks": [
         {
           "symbol": "KAYNES",
           "name": "Kaynes Technology",
-          "catalyst": "Aerospace & defense EMS assembly orders & OSAT packaging"
+          "catalyst": "Aerospace & defense EMS assembly orders and OSAT packaging (Fab utilization 94.5%)"
         },
         {
           "symbol": "DIXON",
           "name": "Dixon Technologies",
-          "catalyst": "Mobile phone & laptop domestic manufacturing expansion"
+          "catalyst": "Mobile phone & laptop domestic manufacturing expansion under PLI scheme"
         },
         {
           "symbol": "PGEL",
           "name": "PG Electroplast",
-          "catalyst": "Consumer electronics ODM contract manufacturing"
+          "catalyst": "Consumer electronics contract ODM capacity expansion"
         }
       ]
     },
@@ -889,29 +889,51 @@
         {
           "symbol": "SIEMENS",
           "name": "Siemens India",
-          "catalyst": "High-voltage grid transmission equipment demand"
+          "catalyst": "High-voltage grid transmission and industrial automation equipment demand"
         },
         {
           "symbol": "VOLTAMP",
           "name": "Voltamp Transformers",
-          "catalyst": "Multi-year domestic & industrial transformer order backlog"
+          "catalyst": "Multi-year industrial transformer order backlog and utility capex"
         }
       ]
     },
     {
-      "theme": "Western Discretionary Tech Freeze",
+      "theme": "Soft Crude & Chemical Raw Material Margin Relief",
+      "impact_direction": "BENEFICIARY",
+      "status": "EXPANDING",
+      "stocks": [
+        {
+          "symbol": "ASIANPAINT",
+          "name": "Asian Paints Ltd",
+          "catalyst": "Rangebound Brent ($73.4/bbl) protects paint gross margins and titanium dioxide input costs"
+        },
+        {
+          "symbol": "INDIGO",
+          "name": "InterGlobe Aviation",
+          "catalyst": "Aviation turbine fuel stability protects quarterly operating margins"
+        },
+        {
+          "symbol": "PIDILITIND",
+          "name": "Pidilite Industries",
+          "catalyst": "Vinyl acetate monomer (VAM) softness supports adhesive profitability"
+        }
+      ]
+    },
+    {
+      "theme": "Western Discretionary Tech Budget Freeze",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
       "stocks": [
         {
           "symbol": "TCS",
           "name": "Tata Consultancy Services",
-          "catalyst": "US BFSI discretionary deal closure sluggishness"
+          "catalyst": "Elevated US 10Y yield (4.42%) delays enterprise discretionary tech transformation deals"
         },
         {
           "symbol": "WIPRO",
           "name": "Wipro Ltd",
-          "catalyst": "Prolonged consulting restructuring and muted revenue guidance"
+          "catalyst": "Sluggish US BFSI discretionary consulting spending and muted revenue guidance"
         }
       ]
     },
@@ -923,12 +945,12 @@
         {
           "symbol": "TATASTEEL",
           "name": "Tata Steel Ltd",
-          "catalyst": "Cheap Chinese hot-rolled coil imports compressing domestic steel spreads"
+          "catalyst": "Distressed Chinese factory exports (-2.9% PPI) undercut domestic steel spreads"
         },
         {
           "symbol": "UPL",
           "name": "UPL Limited",
-          "catalyst": "Chinese generic agrochemical active ingredients price war"
+          "catalyst": "Chinese generic agrochemical active ingredients price competition in export markets"
         }
       ]
     }

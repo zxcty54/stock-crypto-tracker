@@ -349,6 +349,111 @@ class MacroCommentarySynthesizer:
 # ==============================================================================
 # 3. MASTER PAYLOAD GENERATOR
 # ==============================================================================
+def synthesize_equity_impact_matrix(metrics: dict) -> list:
+    """
+    Dynamically generates the Equity Impact Matrix based on live macro telemetry:
+    - Crude Oil pricing dynamics (<$78 vs >=$78)
+    - US 10Y Yield & Enterprise Tech discretionary cycle (>=4.25% vs <4.25%)
+    - China PPI deflationary dumping vs domestic recovery
+    - Semiconductor fab utilization & Global AI CapEx supercycle
+    """
+    themes = []
+
+    # 1. AI Hardware, Semiconductor & China+1 Relocation (Core Global Beneficiary)
+    if metrics["semicon_utilization"] >= 90.0 or metrics["india_composite_pmi"] >= 55.0:
+        themes.append({
+            "theme": "China+1 & AI Electronics Hardware Supercycle",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": f"Aerospace & defense EMS assembly orders and OSAT packaging (Fab utilization {metrics['semicon_utilization']}%)"},
+                {"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "Mobile phone & laptop domestic manufacturing expansion under PLI scheme"},
+                {"symbol": "PGEL", "name": "PG Electroplast", "catalyst": "Consumer electronics contract ODM capacity expansion"}
+            ]
+        })
+
+    # 2. Power Grid, High-Voltage Transmission & Transformers
+    themes.append({
+        "theme": "Global AI Infrastructure & Electrical Power Equipment",
+        "impact_direction": "BENEFICIARY",
+        "status": "EXPANDING",
+        "stocks": [
+            {"symbol": "ABB", "name": "ABB India", "catalyst": "Global data center electrification & switchgear exports"},
+            {"symbol": "SIEMENS", "name": "Siemens India", "catalyst": "High-voltage grid transmission and industrial automation equipment demand"},
+            {"symbol": "VOLTAMP", "name": "Voltamp Transformers", "catalyst": "Multi-year industrial transformer order backlog and utility capex"}
+        ]
+    })
+
+    # 3. Crude Oil Sensitivity Rotation: Soft Crude (Paints/Airlines) vs High Crude (Upstream E&P)
+    if metrics["brent_crude"] < 78.0:
+        themes.append({
+            "theme": "Soft Crude & Chemical Raw Material Margin Relief",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "ASIANPAINT", "name": "Asian Paints Ltd", "catalyst": f"Rangebound Brent (${metrics['brent_crude']}/bbl) protects paint gross margins and titanium dioxide input costs"},
+                {"symbol": "INDIGO", "name": "InterGlobe Aviation", "catalyst": "Aviation turbine fuel stability protects quarterly operating margins"},
+                {"symbol": "PIDILITIND", "name": "Pidilite Industries", "catalyst": "Vinyl acetate monomer (VAM) softness supports adhesive profitability"}
+            ]
+        })
+    else:
+        themes.append({
+            "theme": "Upstream Crude Oil & Exploration Cash Realization",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "ONGC", "name": "Oil & Natural Gas Corp", "catalyst": f"Crude at ${metrics['brent_crude']}/bbl boosts net upstream oil realization and exploration cash flow"},
+                {"symbol": "OIL", "name": "Oil India Ltd", "catalyst": "North-east crude production expansion and high pipeline transport realizations"}
+            ]
+        })
+
+    # 4. US 10Y Yield & Tech Discretionary Spending
+    if metrics["us_10y_yield"] >= 4.25:
+        themes.append({
+            "theme": "Western Discretionary Tech Budget Freeze",
+            "impact_direction": "PRESSURE_FACING",
+            "status": "HEADWIND",
+            "stocks": [
+                {"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": f"Elevated US 10Y yield ({metrics['us_10y_yield']}%) delays enterprise discretionary tech transformation deals"},
+                {"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "Sluggish US BFSI discretionary consulting spending and muted revenue guidance"}
+            ]
+        })
+    else:
+        themes.append({
+            "theme": "US Rate Easing & Cloud Transformation Deal Revival",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "INFY", "name": "Infosys Ltd", "catalyst": f"Lower US borrowing costs ({metrics['us_10y_yield']}%) unfreeze enterprise cloud and generative AI contracts"},
+                {"symbol": "PERSISTENT", "name": "Persistent Systems", "catalyst": "Digital engineering deal pipeline expansion and enterprise AI deployments"}
+            ]
+        })
+
+    # 5. Chinese Industrial Overcapacity / Deflationary Dumping
+    if metrics["china_ppi"] < -1.5 or metrics["china_property_investment"] < -5.0:
+        themes.append({
+            "theme": "Chinese Industrial Overcapacity & Steel Dumping",
+            "impact_direction": "PRESSURE_FACING",
+            "status": "HEADWIND",
+            "stocks": [
+                {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "catalyst": f"Distressed Chinese factory exports ({metrics['china_ppi']}% PPI) undercut domestic steel spreads"},
+                {"symbol": "UPL", "name": "UPL Limited", "catalyst": "Chinese generic agrochemical active ingredients price competition in export markets"}
+            ]
+        })
+    else:
+        themes.append({
+            "theme": "Global Commodity Demand Recovery",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "HINDALCO", "name": "Hindalco Industries", "catalyst": "Global base metal demand and aluminium pricing tailwinds"},
+                {"symbol": "JINDALSTEL", "name": "Jindal Steel & Power", "catalyst": "Infrastructure steel structural dispatches and pellet export strength"}
+            ]
+        })
+
+    return themes
+
+
 def build_global_radar_payload(metrics: dict) -> dict:
     synthesizer = MacroCommentarySynthesizer(metrics)
     health_score, health_label, verdict, headline, conclusion = synthesizer.synthesize_executive_hud()
@@ -994,46 +1099,7 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 }
             ]
         },
-        "equity_impact_matrix": [
-            {
-                "theme": "China+1 Global Supply Relocation",
-                "impact_direction": "BENEFICIARY",
-                "status": "EXPANDING",
-                "stocks": [
-                    {"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": "Aerospace & defense EMS assembly orders & OSAT packaging"},
-                    {"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "Mobile phone & laptop domestic manufacturing expansion"},
-                    {"symbol": "PGEL", "name": "PG Electroplast", "catalyst": "Consumer electronics ODM contract manufacturing"}
-                ]
-            },
-            {
-                "theme": "Global AI Infrastructure & Electrical Power Equipment",
-                "impact_direction": "BENEFICIARY",
-                "status": "EXPANDING",
-                "stocks": [
-                    {"symbol": "ABB", "name": "ABB India", "catalyst": "Global data center electrification & switchgear exports"},
-                    {"symbol": "SIEMENS", "name": "Siemens India", "catalyst": "High-voltage grid transmission equipment demand"},
-                    {"symbol": "VOLTAMP", "name": "Voltamp Transformers", "catalyst": "Multi-year domestic & industrial transformer order backlog"}
-                ]
-            },
-            {
-                "theme": "Western Discretionary Tech Freeze",
-                "impact_direction": "PRESSURE_FACING",
-                "status": "HEADWIND",
-                "stocks": [
-                    {"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": "US BFSI discretionary deal closure sluggishness"},
-                    {"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "Prolonged consulting restructuring and muted revenue guidance"}
-                ]
-            },
-            {
-                "theme": "Chinese Industrial Overcapacity & Steel Dumping",
-                "impact_direction": "PRESSURE_FACING",
-                "status": "HEADWIND",
-                "stocks": [
-                    {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "catalyst": "Cheap Chinese hot-rolled coil imports compressing domestic steel spreads"},
-                    {"symbol": "UPL", "name": "UPL Limited", "catalyst": "Chinese generic agrochemical active ingredients price war"}
-                ]
-            }
-        ]
+        "equity_impact_matrix": synthesize_equity_impact_matrix(metrics)
     }
 
     return payload
@@ -1076,7 +1142,45 @@ Return valid JSON with exactly this structure:
   "crude_shock_severity": "CRITICAL SHOCK ALERT or RANGEBOUND COMFORT",
   "crude_shock_trigger": "1-line trigger with crude dollar numbers",
   "crude_shock_winners": ["ONGC", "OIL", "GAIL"],
-  "crude_shock_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"]
+  "crude_shock_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"],
+  "equity_impact_matrix": [
+    {{
+      "theme": "China+1 & AI Hardware Supercycle",
+      "impact_direction": "BENEFICIARY",
+      "status": "EXPANDING",
+      "stocks": [
+        {{"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": "1-line data-backed reason"}},
+        {{"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "1-line data-backed reason"}}
+      ]
+    }},
+    {{
+      "theme": "Crude Sensitivity Theme (e.g. Soft Crude Relief or High Oil E&P)",
+      "impact_direction": "BENEFICIARY",
+      "status": "EXPANDING",
+      "stocks": [
+        {{"symbol": "ASIANPAINT", "name": "Asian Paints Ltd", "catalyst": "1-line data-backed reason"}},
+        {{"symbol": "INDIGO", "name": "InterGlobe Aviation", "catalyst": "1-line data-backed reason"}}
+      ]
+    }},
+    {{
+      "theme": "US 10Y Yield Enterprise Tech Theme",
+      "impact_direction": "PRESSURE_FACING",
+      "status": "HEADWIND",
+      "stocks": [
+        {{"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": "1-line data-backed reason"}},
+        {{"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "1-line data-backed reason"}}
+      ]
+    }},
+    {{
+      "theme": "Chinese Dumping or Commodity Theme",
+      "impact_direction": "PRESSURE_FACING",
+      "status": "HEADWIND",
+      "stocks": [
+        {{"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "catalyst": "1-line data-backed reason"}},
+        {{"symbol": "UPL", "name": "UPL Limited", "catalyst": "1-line data-backed reason"}}
+      ]
+    }}
+  ]
 }}
 """
 
@@ -1131,6 +1235,8 @@ Return valid JSON with exactly this structure:
                             payload["dynamic_shock_transmission_engine"]["shocks"][0]["margin_winners"] = ai_data["crude_shock_winners"]
                         if "crude_shock_losers" in ai_data and payload["dynamic_shock_transmission_engine"]["shocks"]:
                             payload["dynamic_shock_transmission_engine"]["shocks"][0]["margin_losers"] = ai_data["crude_shock_losers"]
+                        if "equity_impact_matrix" in ai_data and isinstance(ai_data["equity_impact_matrix"], list) and len(ai_data["equity_impact_matrix"]) >= 2:
+                            payload["equity_impact_matrix"] = ai_data["equity_impact_matrix"]
 
                         return payload
             except Exception:
