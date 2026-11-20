@@ -669,8 +669,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             ),
           const SizedBox(height: 8),
 
-          // Compact Pressure & Expansion Badges
+          // Compact Pressure & Expansion Badges (Full text, no truncation)
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
@@ -681,14 +682,15 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                             color: kAccentRed,
                             fontSize: 8,
                             fontWeight: FontWeight.w900)),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 3),
                     ...pressurePoints.take(2).map((pt) {
-                      return Text(
-                        "• ${pt['title']}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 8.5),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Text(
+                          "• ${pt['title']}",
+                          style: const TextStyle(
+                              color: Colors.white70, fontSize: 8.5, height: 1.25),
+                        ),
                       );
                     }),
                   ],
@@ -704,14 +706,15 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                             color: kAccentGreen,
                             fontSize: 8,
                             fontWeight: FontWeight.w900)),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 3),
                     ...expansionEngines.take(2).map((en) {
-                      return Text(
-                        "• ${en['title']}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 8.5),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Text(
+                          "• ${en['title']}",
+                          style: const TextStyle(
+                              color: Colors.white70, fontSize: 8.5, height: 1.25),
+                        ),
                       );
                     }),
                   ],
@@ -836,37 +839,48 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           ),
           const SizedBox(height: 6),
 
-          // Winners & Losers Stocks Strip
-          Row(
-            children: [
-              Text("🟢 WINNERS: ",
-                  style: const TextStyle(
-                      color: kAccentGreen, fontSize: 8.5, fontWeight: FontWeight.bold)),
-              Expanded(
-                child: Text(
-                  winners.join(" • "),
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white,
-                    fontSize: 9.5,
-                    fontWeight: FontWeight.w900,
+          // Winners & Losers Stocks Strip (Full readability)
+          if (winners.isNotEmpty) ...[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("🟢 WINNERS: ",
+                    style: TextStyle(
+                        color: kAccentGreen, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    winners.join(" • "),
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
-              ),
-              Text("🔴 LOSERS: ",
-                  style: const TextStyle(
-                      color: kAccentRed, fontSize: 8.5, fontWeight: FontWeight.bold)),
-              Expanded(
-                child: Text(
-                  losers.join(" • "),
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white,
-                    fontSize: 9.5,
-                    fontWeight: FontWeight.w900,
+              ],
+            ),
+            const SizedBox(height: 3),
+          ],
+          if (losers.isNotEmpty) ...[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("🔴 LOSERS: ",
+                    style: TextStyle(
+                        color: kAccentRed, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    losers.join(" • "),
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -923,7 +937,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final double widthFactor = (delta.abs() / 280.0).clamp(0.12, 1.0);
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -933,15 +947,14 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               Expanded(
                 child: Text(
                   sector,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 10,
+                    fontSize: 10.5,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+              const SizedBox(width: 6),
               Row(
                 children: [
                   Container(
@@ -972,58 +985,48 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               ),
             ],
           ),
-          const SizedBox(height: 3),
+          const SizedBox(height: 4),
 
-          // Visual Bar + Stock Tickers Row
-          Row(
-            children: [
-              Expanded(
-                flex: 6,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(2),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: (widthFactor * 100).toInt(),
-                        child: Container(
-                          height: 4.5,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                barColor.withOpacity(0.5),
-                                barColor,
-                              ],
-                            ),
-                          ),
-                        ),
+          // Visual Bar (Full width)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: (widthFactor * 100).toInt(),
+                  child: Container(
+                    height: 5,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          barColor.withOpacity(0.5),
+                          barColor,
+                        ],
                       ),
-                      Expanded(
-                        flex: ((1.0 - widthFactor) * 100).toInt(),
-                        child: Container(
-                          height: 4.5,
-                          color: const Color(0xFF1E2B3E),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  stocks.join(", "),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.white70,
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  flex: ((1.0 - widthFactor) * 100).toInt(),
+                  child: Container(
+                    height: 5,
+                    color: const Color(0xFF1E2B3E),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          if (stocks.isNotEmpty) ...[
+            const SizedBox(height: 3),
+            Text(
+              "🎯 Stocks: ${stocks.join(', ')}",
+              style: GoogleFonts.robotoMono(
+                color: Colors.white70,
+                fontSize: 8.5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -1582,44 +1585,52 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           ),
           const SizedBox(height: 8),
 
-          // Listed Equities Ticker Table
+          // Listed Equities Ticker Table (Full catalyst text visible, zero ellipsis)
           ...stocks.map((st) {
+            final String symbol = st['symbol'] ?? '';
+            final String name = st['name'] ?? '';
+            final String catalyst = st['catalyst'] ?? '';
             return Container(
-              margin: const EdgeInsets.only(bottom: 4),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              margin: const EdgeInsets.only(bottom: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
               decoration: BoxDecoration(
                 color: const Color(0xFF090D16),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(6),
                 border: Border.all(color: const Color(0xFF1E2B3E)),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    st['symbol'] ?? '',
-                    style: GoogleFonts.robotoMono(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w900,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        symbol,
+                        style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      if (name.isNotEmpty)
+                        Text(
+                          name,
+                          style: const TextStyle(color: kTextMuted, fontSize: 9.5),
+                        ),
+                    ],
                   ),
-                  Text(
-                    st['name'] ?? '',
-                    style: const TextStyle(color: kTextMuted, fontSize: 9),
-                  ),
-                  Expanded(
-                    child: Text(
-                      st['catalyst'] ?? '',
-                      textAlign: TextAlign.end,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                  if (catalyst.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      catalyst,
                       style: TextStyle(
                         color: col,
-                        fontSize: 9,
+                        fontSize: 9.5,
                         fontWeight: FontWeight.w600,
+                        height: 1.3,
                       ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             );
