@@ -14,7 +14,8 @@ class MfSmartMoneyPreviewCard extends StatefulWidget {
 class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
   String _freshBuyText = "KAYNES / CDSL";
   String _accText = "TRENT (+36%)";
-  String _dryPowderText = "7.8% Cash";
+  String _rotationText = "Large Cap (+1.8%)";
+  String _regimeBadge = "QUALITY ROTATION";
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
       final jsonStr =
           await rootBundle.loadString('assets/data/mf_smart_money_radar.json');
       final data = jsonDecode(jsonStr);
-      final meta = data['metadata'] as Map<String, dynamic>?;
+      final rotation = data['market_cap_rotation'] as Map<String, dynamic>?;
       final infiltrations =
           data['smart_money_infiltrations'] as List<dynamic>?;
 
@@ -56,10 +57,16 @@ class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
             }
           }
 
-          if (meta != null && meta['average_cash_level_pct'] != null) {
-            final cash =
-                (meta['average_cash_level_pct'] as num).toDouble();
-            _dryPowderText = "${cash.toStringAsFixed(1)}% Cash";
+          if (rotation != null) {
+            final tiers = rotation['tiers'] as List<dynamic>?;
+            if (tiers != null && tiers.isNotEmpty) {
+              final large = tiers.first;
+              final mom = (large['mom_change_pct'] as num?)?.toDouble() ?? 0.0;
+              _rotationText = "Large Cap (${mom >= 0 ? '+' : ''}${mom.toStringAsFixed(1)}%)";
+            }
+            if (rotation['regime'] == 'FLIGHT_TO_QUALITY') {
+              _regimeBadge = "QUALITY ROTATION";
+            }
           }
         });
       }
@@ -157,10 +164,28 @@ class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(width: 4),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 1.5),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF00E5FF)
+                                        .withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Text(
+                                    _regimeBadge,
+                                    style: const TextStyle(
+                                      color: Color(0xFF00E5FF),
+                                      fontSize: 8,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             const Text(
-                              "Portfolio Infiltration, Overlap Audit & Cash Barometer",
+                              "Money Flow, Infiltrations, Exits & Overlap Audit",
                               style: TextStyle(
                                   color: Colors.white54, fontSize: 9.5),
                             ),
@@ -198,8 +223,8 @@ class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
                     const SizedBox(width: 6),
                     Expanded(
                       child: _buildMiniStatChip(
-                        "DRY POWDER",
-                        _dryPowderText,
+                        "ROTATION",
+                        _rotationText,
                         const Color(0xFFFFB703),
                       ),
                     ),

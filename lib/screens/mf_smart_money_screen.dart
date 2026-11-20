@@ -20,6 +20,11 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   bool _isLiveSynced = false;
 
   Map<String, dynamic> _metadata = {};
+  Map<String, dynamic> _marketCapRotation = {};
+  List<Map<String, dynamic>> _sectorMoneyFlows = [];
+  List<Map<String, dynamic>> _smartMoneyTactics = [];
+  List<Map<String, dynamic>> _institutionalExits = [];
+  List<Map<String, dynamic>> _exitChecklist = [];
   List<Map<String, dynamic>> _topFunds = [];
   List<Map<String, dynamic>> _infiltrations = [];
 
@@ -45,7 +50,7 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _loadDataset();
   }
 
@@ -53,6 +58,24 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  void _populateData(Map<String, dynamic> data) {
+    _metadata = Map<String, dynamic>.from(data['metadata'] ?? {});
+    _marketCapRotation =
+        Map<String, dynamic>.from(data['market_cap_rotation'] ?? {});
+    _sectorMoneyFlows =
+        List<Map<String, dynamic>>.from(data['sector_money_flows'] ?? []);
+    _smartMoneyTactics =
+        List<Map<String, dynamic>>.from(data['smart_money_tactics'] ?? []);
+    _institutionalExits = List<Map<String, dynamic>>.from(
+        data['institutional_exits_and_traps'] ?? []);
+    _exitChecklist =
+        List<Map<String, dynamic>>.from(data['exit_timing_checklist'] ?? []);
+    _topFunds =
+        List<Map<String, dynamic>>.from(data['top_20_funds'] ?? []);
+    _infiltrations = List<Map<String, dynamic>>.from(
+        data['smart_money_infiltrations'] ?? []);
   }
 
   Future<void> _loadDataset({bool isRefresh = false}) async {
@@ -70,11 +93,7 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
 
         if (mounted && _topFunds.isEmpty) {
           setState(() {
-            _metadata = Map<String, dynamic>.from(data['metadata'] ?? {});
-            _topFunds =
-                List<Map<String, dynamic>>.from(data['top_20_funds'] ?? []);
-            _infiltrations = List<Map<String, dynamic>>.from(
-                data['smart_money_infiltrations'] ?? []);
+            _populateData(data);
             _isLoading = false;
           });
         }
@@ -103,11 +122,7 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           if (parsed is Map<String, dynamic> && parsed['top_20_funds'] != null) {
             if (mounted) {
               setState(() {
-                _metadata = Map<String, dynamic>.from(parsed['metadata'] ?? {});
-                _topFunds = List<Map<String, dynamic>>.from(
-                    parsed['top_20_funds'] ?? []);
-                _infiltrations = List<Map<String, dynamic>>.from(
-                    parsed['smart_money_infiltrations'] ?? []);
+                _populateData(parsed);
                 _isLiveSynced = true;
                 _isSyncing = false;
                 _isLoading = false;
@@ -130,7 +145,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           }
         }
       } catch (e) {
-        // Try next fallback CDN
         continue;
       }
     }
@@ -298,7 +312,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
       }
     });
 
-    // Normalized overlap score based on top holdings
     final double overlapScore = (overlapWeight * 2.0).clamp(0.0, 100.0);
 
     return {
@@ -383,10 +396,11 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           unselectedLabelStyle: GoogleFonts.plusJakartaSans(
               fontSize: 11, fontWeight: FontWeight.w600),
           tabs: const [
+            Tab(text: "🌊 MONEY FLOW"),
+            Tab(text: "🚨 EXITS & TRAPS"),
             Tab(text: "🕵️ INFILTRATIONS"),
             Tab(text: "⚖️ OVERLAP SCANNER"),
-            Tab(text: "🏛️ TOP 20 FUNDS"),
-            Tab(text: "⏱️ CASH BAROMETER"),
+            Tab(text: "🏛️ TOP 20 & CASH"),
           ],
         ),
       ),
@@ -397,6 +411,18 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           : TabBarView(
               controller: _tabController,
               children: [
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildMoneyFlowTab(),
+                ),
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildExitsAndTrapsTab(),
+                ),
                 RefreshIndicator(
                   color: const Color(0xFF00E5FF),
                   backgroundColor: const Color(0xFF0F1726),
@@ -413,13 +439,7 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                   color: const Color(0xFF00E5FF),
                   backgroundColor: const Color(0xFF0F1726),
                   onRefresh: () => _loadDataset(isRefresh: true),
-                  child: _buildTopFundsTab(),
-                ),
-                RefreshIndicator(
-                  color: const Color(0xFF00E5FF),
-                  backgroundColor: const Color(0xFF0F1726),
-                  onRefresh: () => _loadDataset(isRefresh: true),
-                  child: _buildCashBarometerTab(),
+                  child: _buildCashAndDirectoryTab(),
                 ),
               ],
             ),
@@ -427,7 +447,852 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   // =============================================================
-  // TAB 1: SMART MONEY STOCK INFILTRATIONS
+  // TAB 1: 🌊 MONEY FLOW & MARKET CAP ROTATION
+  // =============================================================
+  Widget _buildMoneyFlowTab() {
+    final tiers = (_marketCapRotation['tiers'] as List<dynamic>? ?? []);
+    final regimeTitle = _marketCapRotation['regime_title'] ?? 'Flight to Quality';
+    final regimeSummary = _marketCapRotation['regime_summary'] ??
+        'Marquee DII managers are rotating capital into defensive Large-Caps while trimming frothy Small-Caps.';
+
+    return ListView(
+      padding: const EdgeInsets.all(14),
+      children: [
+        // 1. Regime Banner
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF131F37), Color(0xFF0D1424)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.35)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.waves_rounded,
+                          color: Color(0xFF00E5FF), size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        "CAPITAL FLOW REGIME",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: const Color(0xFF00E5FF),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00FF88).withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Text(
+                      "🛡️ FLIGHT TO QUALITY",
+                      style: TextStyle(
+                        color: Color(0xFF00FF88),
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                regimeTitle,
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                regimeSummary,
+                style: const TextStyle(
+                    color: Colors.white70, fontSize: 11, height: 1.35),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // 2. Market Cap Shift Barometer Header
+        Row(
+          children: const [
+            Icon(Icons.pie_chart_rounded,
+                color: Color(0xFF00E5FF), size: 16),
+            SizedBox(width: 6),
+            Text(
+              "MARKET CAP ROTATION (LARGE vs MID vs SMALL)",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.4,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+
+        // Visual Stacked Bar
+        ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: SizedBox(
+            height: 12,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 58,
+                  child: Container(color: const Color(0xFF00E5FF)),
+                ),
+                const SizedBox(width: 1),
+                Expanded(
+                  flex: 24,
+                  child: Container(color: const Color(0xFF2979FF)),
+                ),
+                const SizedBox(width: 1),
+                Expanded(
+                  flex: 10,
+                  child: Container(color: const Color(0xFFFF9100)),
+                ),
+                const SizedBox(width: 1),
+                Expanded(
+                  flex: 8,
+                  child: Container(color: const Color(0xFF00FF88)),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 6),
+        // Legend
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text("■ Large (58.4%)",
+                style: TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold)),
+            Text("■ Mid (24.2%)",
+                style: TextStyle(
+                    color: Color(0xFF2979FF),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold)),
+            Text("■ Small (9.6%)",
+                style: TextStyle(
+                    color: Color(0xFFFF9100),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold)),
+            Text("■ Cash (7.8%)",
+                style: TextStyle(
+                    color: Color(0xFF00FF88),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        const SizedBox(height: 10),
+
+        // Tier Breakdown Cards
+        ...tiers.map((t) => _buildMarketCapTierCard(t)),
+        const SizedBox(height: 16),
+
+        // 3. Sector Rotation Heatmap Header
+        Row(
+          children: const [
+            Icon(Icons.sync_alt_rounded, color: Color(0xFF00E5FF), size: 16),
+            SizedBox(width: 6),
+            Text(
+              "SECTOR ROTATION RADAR (INFLOWS vs OUTFLOWS)",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.4,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ..._sectorMoneyFlows.map((s) => _buildSectorFlowCard(s)),
+        const SizedBox(height: 16),
+
+        // 4. Modus Operandi Guide ("Kaise Kar Rahe Hain")
+        Row(
+          children: const [
+            Icon(Icons.psychology_rounded,
+                color: Color(0xFF00E5FF), size: 16),
+            SizedBox(width: 6),
+            Text(
+              "INSTITUTIONAL EXECUTION TACTICS (HOW THEY BUY)",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.4,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ..._smartMoneyTactics.map((t) => _buildTacticCard(t)),
+      ],
+    );
+  }
+
+  Widget _buildMarketCapTierCard(dynamic tier) {
+    if (tier is! Map) return const SizedBox.shrink();
+    final name = tier['name'] ?? '';
+    final double pct = (tier['allocation_pct'] as num?)?.toDouble() ?? 0.0;
+    final double mom = (tier['mom_change_pct'] as num?)?.toDouble() ?? 0.0;
+    final double flow = (tier['net_flow_cr'] as num?)?.toDouble() ?? 0.0;
+    final status = tier['status'] ?? '';
+    final reason = tier['reason'] ?? '';
+    final sectors = (tier['preferred_sectors'] as List<dynamic>? ?? []);
+
+    final bool isPositive = mom >= 0;
+    final Color badgeColor = isPositive ? const Color(0xFF00FF88) : const Color(0xFFFF5252);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1726),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    name,
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: badgeColor.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      "${isPositive ? '▲ +' : '▼ '}${mom.toStringAsFixed(1)}% MoM",
+                      style: TextStyle(
+                        color: badgeColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                "${pct.toStringAsFixed(1)}%",
+                style: GoogleFonts.robotoMono(
+                  color: const Color(0xFF00E5FF),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Net 30D Flow: ${flow >= 0 ? '+' : ''}₹${_currencyFormat.format(flow)} Cr",
+                style: GoogleFonts.robotoMono(
+                  color: isPositive ? const Color(0xFF00FF88) : const Color(0xFFFF5252),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1E2B3E),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  status,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            reason,
+            style: const TextStyle(color: Colors.white60, fontSize: 10.5, height: 1.3),
+          ),
+          if (sectors.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 5,
+              runSpacing: 4,
+              children: sectors.map((sec) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: const Color(0xFF1E2B3E)),
+                  ),
+                  child: Text(
+                    sec.toString(),
+                    style: const TextStyle(color: Colors.white54, fontSize: 9),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectorFlowCard(Map<String, dynamic> s) {
+    final sector = s['sector'] ?? '';
+    final double flow = (s['net_flow_cr'] as num?)?.toDouble() ?? 0.0;
+    final double mom = (s['mom_change_pct'] as num?)?.toDouble() ?? 0.0;
+    final thesis = s['thesis'] ?? '';
+    final bought = (s['top_bought'] as List<dynamic>? ?? []);
+    final trimmed = (s['top_trimmed'] as List<dynamic>? ?? []);
+
+    final bool isInflow = flow >= 0;
+    final Color color = isInflow ? const Color(0xFF00FF88) : const Color(0xFFFF5252);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1726),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  sector,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "${isInflow ? '+' : ''}₹${_currencyFormat.format(flow)} Cr (${mom >= 0 ? '+' : ''}${mom.toStringAsFixed(1)}%)",
+                  style: GoogleFonts.robotoMono(
+                    color: color,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Text(
+            thesis,
+            style: const TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              if (bought.isNotEmpty) ...[
+                const Text("BOUGHT: ",
+                    style: TextStyle(
+                        color: Color(0xFF00FF88),
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900)),
+                Expanded(
+                  child: Text(
+                    bought.join(', '),
+                    style: GoogleFonts.robotoMono(
+                        color: Colors.white,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+              if (trimmed.isNotEmpty) ...[
+                const SizedBox(width: 8),
+                const Text("TRIMMED: ",
+                    style: TextStyle(
+                        color: Color(0xFFFF5252),
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900)),
+                Expanded(
+                  child: Text(
+                    trimmed.join(', '),
+                    style: GoogleFonts.robotoMono(
+                        color: Colors.white,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTacticCard(Map<String, dynamic> t) {
+    final title = t['title'] ?? '';
+    final tag = t['tag'] ?? '';
+    final desc = t['description'] ?? '';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D1424),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFF1B283E)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00E5FF).withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  tag,
+                  style: const TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 8,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            desc,
+            style: const TextStyle(color: Colors.white60, fontSize: 10.5, height: 1.35),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // =============================================================
+  // TAB 2: 🚨 EXITS & RETAIL TRAPS ("Kab Nikal Rahe Hain")
+  // =============================================================
+  Widget _buildExitsAndTrapsTab() {
+    return ListView(
+      padding: const EdgeInsets.all(14),
+      children: [
+        // 1. Alert Banner
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF28111A), Color(0xFF140B10)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.4)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.warning_amber_rounded,
+                          color: Color(0xFFFF2A6D), size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        "INSTITUTIONAL EXIT FORENSICS",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: const Color(0xFFFF2A6D),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF2A6D).withOpacity(0.18),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Text(
+                      "🚨 RETAIL TRAP DETECTOR",
+                      style: TextStyle(
+                        color: Color(0xFFFF2A6D),
+                        fontSize: 9,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                "When Do Institutions Dump & Exit Stocks?",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 13.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                "Real-time alerts tracking where marquee DIIs are cutting stakes, liquidating positions, and offloading shares into retail liquidity during euphoria.",
+                style: TextStyle(
+                    color: Colors.white70, fontSize: 11, height: 1.35),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // 2. 4-Rule Exit Checklist Header
+        Row(
+          children: const [
+            Icon(Icons.checklist_rtl_rounded,
+                color: Color(0xFF00E5FF), size: 16),
+            SizedBox(width: 6),
+            Text(
+              "4 GOLDEN RULES: HOW TO SPOT INSTITUTIONAL EXITS",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.4,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ..._exitChecklist.map((c) => _buildChecklistCard(c)),
+        const SizedBox(height: 16),
+
+        // 3. Active Institutional Exits & Dumping Radar
+        Row(
+          children: const [
+            Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 16),
+            SizedBox(width: 6),
+            Text(
+              "ACTIVE INSTITUTIONAL DUMPING & TRAP RADAR",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.4,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ..._institutionalExits.map((e) => _buildExitCard(e)),
+      ],
+    );
+  }
+
+  Widget _buildChecklistCard(Map<String, dynamic> c) {
+    final numStr = c['rule_number'] ?? '';
+    final title = c['title'] ?? '';
+    final exp = c['explanation'] ?? '';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1726),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFF00E5FF).withOpacity(0.12),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(
+              numStr,
+              style: GoogleFonts.robotoMono(
+                color: const Color(0xFF00E5FF),
+                fontSize: 11,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  exp,
+                  style: const TextStyle(
+                      color: Colors.white60, fontSize: 10.5, height: 1.3),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExitCard(Map<String, dynamic> e) {
+    final sym = e['symbol'] ?? '';
+    final name = e['company_name'] ?? '';
+    final tier = e['market_cap_tier'] ?? '';
+    final action = e['action'] ?? '';
+    final double drop = (e['dii_stake_drop_pct'] as num?)?.toDouble() ?? 0.0;
+    final double sellingCr =
+        (e['estimated_selling_cr'] as num?)?.toDouble() ?? 0.0;
+    final retail = e['retail_holding_change'] ?? '';
+    final catalyst = e['catalyst_reason'] ?? '';
+    final funds = (e['exiting_funds'] as List<dynamic>? ?? []);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1726),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    sym,
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1E2B3E),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      tier,
+                      style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFF2A6D).withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  action.replaceAll('_', ' '),
+                  style: const TextStyle(
+                    color: Color(0xFFFF2A6D),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 2),
+          Text(
+            name,
+            style: const TextStyle(color: Colors.white54, fontSize: 10),
+          ),
+          const SizedBox(height: 10),
+
+          // Key metrics row
+          Row(
+            children: [
+              Expanded(
+                child: _buildExitMetricBox(
+                  "DII STAKE DROP",
+                  "${drop.toStringAsFixed(1)}%",
+                  const Color(0xFFFF5252),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildExitMetricBox(
+                  "EST. SELLING",
+                  "₹${_currencyFormat.format(sellingCr.abs())} Cr",
+                  const Color(0xFFFF9100),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Retail Trap Warning Box
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: const Color(0xFF28111A),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.3)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.warning_amber_rounded,
+                    color: Color(0xFFFF2A6D), size: 14),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    "Retail Divergence: $retail",
+                    style: const TextStyle(
+                      color: Color(0xFFFF80AB),
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            catalyst,
+            style: const TextStyle(
+                color: Colors.white70, fontSize: 10.5, height: 1.3),
+          ),
+          if (funds.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              "Exiting Funds: ${funds.join(' • ')}",
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white38,
+                fontSize: 9,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExitMetricBox(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label,
+              style: const TextStyle(color: Colors.white38, fontSize: 8)),
+          const SizedBox(height: 2),
+          Text(
+            value,
+            style: GoogleFonts.robotoMono(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // =============================================================
+  // TAB 3: SMART MONEY STOCK INFILTRATIONS
   // =============================================================
   Widget _buildInfiltrationsTab() {
     List<Map<String, dynamic>> filtered = _infiltrations;
@@ -449,7 +1314,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              _buildFilterChip("ALL", "ALL (${_infiltrations.length})", _infiltrationFilter == "ALL", () {
+              _buildFilterChip("ALL", "ALL (${_infiltrations.length})",
+                  _infiltrationFilter == "ALL", () {
                 setState(() => _infiltrationFilter = "ALL");
               }),
               const SizedBox(width: 6),
@@ -464,7 +1330,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 "AGGRESSIVE_ACCUMULATION",
                 "🚀 ACCUMULATIONS (+25%)",
                 _infiltrationFilter == "AGGRESSIVE_ACCUMULATION",
-                () => setState(() => _infiltrationFilter = "AGGRESSIVE_ACCUMULATION"),
+                () => setState(
+                    () => _infiltrationFilter = "AGGRESSIVE_ACCUMULATION"),
               ),
               const SizedBox(width: 6),
               _buildFilterChip(
@@ -581,8 +1448,10 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final sector = item['sector'] ?? '';
     final action = item['action_type'] ?? '';
     final funds = (item['participating_funds'] as List<dynamic>? ?? []);
-    final double volumeCr = (item['estimated_buying_cr'] as num?)?.toDouble() ?? 0.0;
-    final double changePct = (item['avg_holding_increase_pct'] as num?)?.toDouble() ?? 0.0;
+    final double volumeCr =
+        (item['estimated_buying_cr'] as num?)?.toDouble() ?? 0.0;
+    final double changePct =
+        (item['avg_holding_increase_pct'] as num?)?.toDouble() ?? 0.0;
     final thesis = item['catalyst_thesis'] ?? '';
 
     Color tagColor = const Color(0xFF00FF88);
@@ -595,15 +1464,13 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
       tagIcon = Icons.trending_up_rounded;
     } else if (action == "SILENT_DUMPING") {
       tagColor = const Color(0xFFFF2A6D);
-      tagLabel = "SILENT EXIT / DUMPING";
-      tagIcon = Icons.warning_amber_rounded;
+      tagLabel = "SILENT DUMPING (${changePct.toInt()}%)";
+      tagIcon = Icons.warning_rounded;
     }
 
-    final bool isBuy = volumeCr >= 0;
-
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: const Color(0xFF0F1726),
         borderRadius: BorderRadius.circular(12),
@@ -612,50 +1479,53 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header: Symbol & Tag
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF00E5FF).withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.3)),
-                    ),
-                    child: Text(
-                      sym,
-                      style: GoogleFonts.robotoMono(
-                        color: const Color(0xFF00E5FF),
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w900,
-                      ),
+                  Text(
+                    sym,
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    sector,
-                    style: const TextStyle(color: Colors.white54, fontSize: 10),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1E2B3E),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      sector,
+                      style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
                 decoration: BoxDecoration(
                   color: tagColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Row(
                   children: [
-                    Icon(tagIcon, color: tagColor, size: 12),
+                    Icon(tagIcon, color: tagColor, size: 10),
                     const SizedBox(width: 4),
                     Text(
                       tagLabel,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: TextStyle(
                         color: tagColor,
-                        fontSize: 9.5,
+                        fontSize: 8.5,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
@@ -664,64 +1534,14 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ),
             ],
           ),
-          const SizedBox(height: 6),
-
-          // Company Name & Est Volume
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  name,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-              Text(
-                "${isBuy ? '+' : ''}₹${volumeCr.abs().toStringAsFixed(0)} Cr",
-                style: GoogleFonts.robotoMono(
-                  color: isBuy ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ],
+          const SizedBox(height: 2),
+          Text(
+            name,
+            style: const TextStyle(color: Colors.white54, fontSize: 10.5),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
-          // Participating Funds Pills
-          Wrap(
-            spacing: 5,
-            runSpacing: 4,
-            children: funds.map((f) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF151F32),
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xFF22324B)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.account_balance_rounded,
-                        color: Colors.white38, size: 10),
-                    const SizedBox(width: 4),
-                    Text(
-                      f.toString(),
-                      style: const TextStyle(color: Colors.white70, fontSize: 9.5),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 8),
-
-          // Thesis Box
+          // Flow Box
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -729,54 +1549,72 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.insights_rounded,
-                    color: Color(0xFF00E5FF), size: 13),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    thesis,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 10.5,
-                      height: 1.3,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("ESTIMATED CAPITAL DELTA",
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
+                    const SizedBox(height: 2),
+                    Text(
+                      volumeCr >= 0
+                          ? "+₹${_currencyFormat.format(volumeCr)} Cr"
+                          : "-₹${_currencyFormat.format(volumeCr.abs())} Cr",
+                      style: GoogleFonts.robotoMono(
+                        color: volumeCr >= 0
+                            ? const Color(0xFF00FF88)
+                            : const Color(0xFFFF2A6D),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
-                  ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text("ACTIVE BUYERS / HOLDERS",
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
+                    const SizedBox(height: 2),
+                    Text(
+                      "${funds.length} Top Funds",
+                      style: GoogleFonts.robotoMono(
+                        color: const Color(0xFF00E5FF),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 10),
+          Text(
+            thesis,
+            style: const TextStyle(
+                color: Colors.white70, fontSize: 11, height: 1.3),
+          ),
           const SizedBox(height: 8),
-
-          // Copy Action
-          Align(
-            alignment: Alignment.centerRight,
-            child: InkWell(
-              onTap: () {
-                Clipboard.setData(ClipboardData(text: "$sym: $name"));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("$sym copied to clipboard"),
-                    backgroundColor: const Color(0xFF00E5FF),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              borderRadius: BorderRadius.circular(6),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.copy_rounded, color: Colors.white38, size: 12),
-                    SizedBox(width: 4),
-                    Text("Copy Symbol",
-                        style: TextStyle(color: Colors.white54, fontSize: 10)),
-                  ],
+          Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: funds.map((f) {
+              return Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF141C2B),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: const Color(0xFF22324B)),
                 ),
-              ),
-            ),
+                child: Text(
+                  f.toString(),
+                  style: const TextStyle(color: Colors.white60, fontSize: 9),
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
@@ -784,25 +1622,27 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   // =============================================================
-  // TAB 2: PORTFOLIO OVERLAP & FEE LEAKAGE SCANNER
+  // TAB 4: OVERLAP SCANNER
   // =============================================================
   Widget _buildOverlapScannerTab() {
     if (_topFunds.length < 2) {
-      return const Center(child: Text("Need at least 2 funds for comparison"));
+      return const Center(child: CircularProgressIndicator(color: Color(0xFF00E5FF)));
     }
 
-    final fundA = _topFunds[_selectedFundAIdx];
-    final fundB = _topFunds[_selectedFundBIdx];
-    final overlapData = _computeOverlap(fundA, fundB);
-    final double overlapPct = overlapData['overlap_pct'] as double;
-    final commonStocks = (overlapData['common_stocks'] as List<dynamic>? ?? []);
+    final fundA = _topFunds[_selectedFundAIdx.clamp(0, _topFunds.length - 1)];
+    final fundB = _topFunds[_selectedFundBIdx.clamp(0, _topFunds.length - 1)];
+
+    final overlapResult = _computeOverlap(fundA, fundB);
+    final double overlapPct = overlapResult['overlap_pct'] as double;
+    final List<Map<String, dynamic>> commonStocks =
+        List<Map<String, dynamic>>.from(overlapResult['common_stocks'] ?? []);
 
     Color scoreColor = const Color(0xFF00FF88);
-    String verdict = "EXCELLENT DIVERSIFICATION";
-    if (overlapPct >= 50) {
+    String verdict = "DIVERSIFIED (LOW OVERLAP)";
+    if (overlapPct > 45) {
       scoreColor = const Color(0xFFFF2A6D);
-      verdict = "SEVERE OVERLAP (FEE LEAKAGE DETECTED)";
-    } else if (overlapPct >= 30) {
+      verdict = "CLONED PORTFOLIO (FEE LEAKAGE)";
+    } else if (overlapPct > 25) {
       scoreColor = const Color(0xFFFFB703);
       verdict = "MODERATE OVERLAP";
     }
@@ -810,7 +1650,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     return ListView(
       padding: const EdgeInsets.all(14),
       children: [
-        // Headline
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -902,21 +1741,23 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
                 child: Text(
                   verdict,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: TextStyle(
                     color: scoreColor,
-                    fontSize: 10,
+                    fontSize: 9.5,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
-              // Sub statistics
+              const SizedBox(height: 14),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildOverlapMiniStat("Common Stocks", "${commonStocks.length}"),
-                  _buildOverlapMiniStat("Fund A Unique", "${overlapData['fund_a_unique']}"),
-                  _buildOverlapMiniStat("Fund B Unique", "${overlapData['fund_b_unique']}"),
+                  _buildOverlapMiniStat(
+                      "Unique to A", "${overlapResult['fund_a_unique']}"),
+                  _buildOverlapMiniStat(
+                      "Unique to B", "${overlapResult['fund_b_unique']}"),
                 ],
               ),
             ],
@@ -924,13 +1765,13 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         ),
         const SizedBox(height: 16),
 
-        // Common Holdings List
+        // Overlapping Stocks List
         Row(
           children: const [
             Icon(Icons.layers_rounded, color: Color(0xFF00E5FF), size: 16),
             SizedBox(width: 6),
             Text(
-              "COMMON UNDERLYING STOCKS",
+              "COMMON UNDERLYING HOLDINGS",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 11.5,
@@ -951,17 +1792,16 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
             ),
             child: const Center(
               child: Text(
-                "Zero common holdings in top allocations! Both funds have distinct alpha portfolios.",
+                "Zero common holdings in Top 10 — Excellent diversification!",
                 style: TextStyle(color: Color(0xFF00FF88), fontSize: 11),
-                textAlign: TextAlign.center,
               ),
             ),
           )
         else
-          ...commonStocks.map((c) {
-            final sym = c['symbol'] ?? '';
-            final wtA = (c['weight_a'] as num?)?.toDouble() ?? 0.0;
-            final wtB = (c['weight_b'] as num?)?.toDouble() ?? 0.0;
+          ...commonStocks.map((s) {
+            final sym = s['symbol'] ?? '';
+            final double wtA = (s['weight_a'] as num?)?.toDouble() ?? 0.0;
+            final double wtB = (s['weight_b'] as num?)?.toDouble() ?? 0.0;
 
             return Container(
               margin: const EdgeInsets.only(bottom: 6),
@@ -985,13 +1825,19 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                   Row(
                     children: [
                       Text(
-                        "Fund A: ${wtA.toStringAsFixed(1)}%",
-                        style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 10),
+                        "Fund A: $wtA%",
+                        style: const TextStyle(
+                            color: Color(0xFF00E5FF),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        "Fund B: ${wtB.toStringAsFixed(1)}%",
-                        style: const TextStyle(color: Color(0xFFFFB703), fontSize: 10),
+                        "Fund B: $wtB%",
+                        style: const TextStyle(
+                            color: Color(0xFFFFB703),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -1004,25 +1850,24 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   Widget _buildFundSelectorBox(
-      String label, String fundName, Function(int) onSelect, int currentIdx) {
+      String label, String currentName, Function(int) onSelect, int currentIdx) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: const Color(0xFF1E2B3E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label,
-              style: const TextStyle(color: Colors.white38, fontSize: 9, fontWeight: FontWeight.bold)),
+          Text(label, style: const TextStyle(color: Colors.white38, fontSize: 8.5)),
           const SizedBox(height: 4),
           DropdownButtonHideUnderline(
             child: DropdownButton<int>(
-              value: currentIdx,
+              value: currentIdx.clamp(0, _topFunds.length - 1),
               isExpanded: true,
-              dropdownColor: const Color(0xFF101726),
+              dropdownColor: const Color(0xFF141C2B),
               icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF00E5FF)),
               style: GoogleFonts.plusJakartaSans(
                 color: Colors.white,
@@ -1063,19 +1908,105 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   // =============================================================
-  // TAB 3: TOP 20 MARQUEE FUNDS
+  // TAB 5: 🏛️ TOP 20 & INSTITUTIONAL CASH BAROMETER
   // =============================================================
-  Widget _buildTopFundsTab() {
+  Widget _buildCashAndDirectoryTab() {
+    final double avgCash =
+        (_metadata['average_cash_level_pct'] as num?)?.toDouble() ?? 7.8;
+    final double totalAum =
+        (_metadata['total_aum_tracked_cr'] as num?)?.toDouble() ?? 710600.0;
+    final double dryPowderCr = (totalAum * (avgCash / 100.0));
+
+    // Category filter for funds
     List<Map<String, dynamic>> filtered = _topFunds;
     if (_fundCategoryFilter != "ALL") {
       filtered = filtered
-          .where((f) => (f['category'] ?? '').toString().contains(_fundCategoryFilter))
+          .where((f) =>
+              (f['category'] ?? '').toString().contains(_fundCategoryFilter))
           .toList();
     }
 
     return ListView(
       padding: const EdgeInsets.all(14),
       children: [
+        // Cash Macro Gauge
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFF101726),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFF1E2B3E)),
+          ),
+          child: Column(
+            children: [
+              Text(
+                "${avgCash.toStringAsFixed(2)}%",
+                style: GoogleFonts.robotoMono(
+                  color: const Color(0xFF00FF88),
+                  fontSize: 34,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                "WEIGHTED INSTITUTIONAL CASH LEVEL",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white54,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.8,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00E5FF).withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  "≈ ₹${_currencyFormat.format(dryPowderCr)} Cr DRY POWDER READY TO BUY DIPS",
+                  style: GoogleFonts.robotoMono(
+                    color: const Color(0xFF00E5FF),
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "When average cash is above 7.5%, marquee managers are exercising defensive discipline, awaiting valuation pullbacks before deploying fresh inflows.",
+                style: TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Section Title: Top 20 Funds Directory
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(Icons.account_balance_rounded,
+                    color: Color(0xFF00E5FF), size: 16),
+                SizedBox(width: 6),
+                Text(
+                  "TOP 20 ALPHA FUNDS DIRECTORY",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+
         // Category Filter
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -1085,19 +2016,23 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 setState(() => _fundCategoryFilter = "ALL");
               }),
               const SizedBox(width: 6),
-              _buildFilterChip("Flexi Cap", "FLEXI CAP", _fundCategoryFilter == "Flexi Cap", () {
+              _buildFilterChip(
+                  "Flexi Cap", "FLEXI CAP", _fundCategoryFilter == "Flexi Cap", () {
                 setState(() => _fundCategoryFilter = "Flexi Cap");
               }),
               const SizedBox(width: 6),
-              _buildFilterChip("Small Cap", "SMALL CAP", _fundCategoryFilter == "Small Cap", () {
+              _buildFilterChip(
+                  "Small Cap", "SMALL CAP", _fundCategoryFilter == "Small Cap", () {
                 setState(() => _fundCategoryFilter = "Small Cap");
               }),
               const SizedBox(width: 6),
-              _buildFilterChip("Mid Cap", "MID CAP", _fundCategoryFilter == "Mid Cap", () {
+              _buildFilterChip(
+                  "Mid Cap", "MID CAP", _fundCategoryFilter == "Mid Cap", () {
                 setState(() => _fundCategoryFilter = "Mid Cap");
               }),
               const SizedBox(width: 6),
-              _buildFilterChip("Large", "LARGE / MULTI", _fundCategoryFilter == "Large", () {
+              _buildFilterChip(
+                  "Large", "LARGE / MULTI", _fundCategoryFilter == "Large", () {
                 setState(() => _fundCategoryFilter = "Large");
               }),
             ],
@@ -1121,7 +2056,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final double cagr3y = (fund['cagr_3y'] as num?)?.toDouble() ?? 0.0;
     final double cagr5y = (fund['cagr_5y'] as num?)?.toDouble() ?? 0.0;
     final double cashPct = (fund['cash_holding_pct'] as num?)?.toDouble() ?? 0.0;
-    final double downside = (fund['downside_capture_ratio'] as num?)?.toDouble() ?? 100.0;
+    final double downside =
+        (fund['downside_capture_ratio'] as num?)?.toDouble() ?? 100.0;
     final holdings = (fund['top_10_holdings'] as List<dynamic>? ?? []);
 
     return Container(
@@ -1184,7 +2120,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildFundMiniPerf("NAV", "₹${nav.toStringAsFixed(2)}", navChg >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D)),
+              _buildFundMiniPerf("NAV", "₹${nav.toStringAsFixed(2)}",
+                  navChg >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D)),
               _buildFundMiniPerf("1Y CAGR", "+$cagr1y%", const Color(0xFF00FF88)),
               _buildFundMiniPerf("3Y CAGR", "+$cagr3y%", const Color(0xFF00E5FF)),
               _buildFundMiniPerf("5Y CAGR", "+$cagr5y%", const Color(0xFFFFB703)),
@@ -1212,7 +2149,9 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                       Text(
                         "${cashPct.toStringAsFixed(1)}% (${cashPct > 10 ? 'High Reserve' : 'Deployed'})",
                         style: GoogleFonts.robotoMono(
-                          color: cashPct > 10 ? const Color(0xFF00FF88) : Colors.white70,
+                          color: cashPct > 10
+                              ? const Color(0xFF00FF88)
+                              : Colors.white70,
                           fontSize: 10.5,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1238,7 +2177,9 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                       Text(
                         "${downside.toStringAsFixed(1)}% (Capital Shield)",
                         style: GoogleFonts.robotoMono(
-                          color: downside < 70 ? const Color(0xFF00E5FF) : Colors.white70,
+                          color: downside < 70
+                              ? const Color(0xFF00E5FF)
+                              : Colors.white70,
                           fontSize: 10.5,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1281,7 +2222,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
                 child: Text(
                   "$s $wt%",
-                  style: GoogleFonts.robotoMono(color: Colors.white70, fontSize: 9.5),
+                  style: GoogleFonts.robotoMono(
+                      color: Colors.white70, fontSize: 9.5),
                 ),
               );
             }).toList(),
@@ -1346,160 +2288,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         Text(value,
             style: GoogleFonts.robotoMono(
                 color: color, fontSize: 10.5, fontWeight: FontWeight.bold)),
-      ],
-    );
-  }
-
-  // =============================================================
-  // TAB 4: INSTITUTIONAL CASH BAROMETER
-  // =============================================================
-  Widget _buildCashBarometerTab() {
-    final double avgCash =
-        (_metadata['average_cash_level_pct'] as num?)?.toDouble() ?? 7.8;
-    final double totalAum =
-        (_metadata['total_aum_tracked_cr'] as num?)?.toDouble() ?? 710600.0;
-    final double dryPowderCr = (totalAum * (avgCash / 100.0));
-
-    // Sort funds by cash % descending
-    List<Map<String, dynamic>> cashRanked = List.from(_topFunds);
-    cashRanked.sort((a, b) {
-      final ca = (a['cash_holding_pct'] as num?)?.toDouble() ?? 0.0;
-      final cb = (b['cash_holding_pct'] as num?)?.toDouble() ?? 0.0;
-      return cb.compareTo(ca);
-    });
-
-    return ListView(
-      padding: const EdgeInsets.all(14),
-      children: [
-        // Cash Macro Gauge
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: const Color(0xFF101726),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF1E2B3E)),
-          ),
-          child: Column(
-            children: [
-              Text(
-                "${avgCash.toStringAsFixed(2)}%",
-                style: GoogleFonts.robotoMono(
-                  color: const Color(0xFF00FF88),
-                  fontSize: 34,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              Text(
-                "WEIGHTED INSTITUTIONAL CASH LEVEL",
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white54,
-                  fontSize: 9.5,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.8,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF00E5FF).withOpacity(0.12),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  "≈ ₹${_currencyFormat.format(dryPowderCr)} Cr DRY POWDER READY TO BUY DIPS",
-                  style: GoogleFonts.robotoMono(
-                    color: const Color(0xFF00E5FF),
-                    fontSize: 10.5,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                "When average cash is above 7.5%, marquee managers are exercising defensive discipline, awaiting valuation pullbacks before deploying fresh inflows.",
-                style: TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Cash Ranking Leaderboard
-        Row(
-          children: const [
-            Icon(Icons.savings_rounded, color: Color(0xFF00E5FF), size: 16),
-            SizedBox(width: 6),
-            Text(
-              "DRY POWDER CASH RANKINGS (TOP 20)",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-
-        ...cashRanked.map((f) {
-          final sName = f['short_name'] ?? f['name'];
-          final double cPct = (f['cash_holding_pct'] as num?)?.toDouble() ?? 0.0;
-          final double fAum = (f['aum_cr'] as num?)?.toDouble() ?? 0.0;
-          final double cashCr = fAum * (cPct / 100.0);
-
-          return Container(
-            margin: const EdgeInsets.only(bottom: 6),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              color: const Color(0xFF0F1726),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF1E2B3E)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    sName,
-                    style: GoogleFonts.plusJakartaSans(
-                      color: Colors.white,
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "₹${cashCr.toStringAsFixed(0)} Cr",
-                      style: const TextStyle(color: Colors.white38, fontSize: 10),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: cPct > 10
-                            ? const Color(0xFF00FF88).withOpacity(0.15)
-                            : const Color(0xFF1E2B3E),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        "${cPct.toStringAsFixed(1)}%",
-                        style: GoogleFonts.robotoMono(
-                          color: cPct > 10 ? const Color(0xFF00FF88) : Colors.white70,
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        }),
       ],
     );
   }

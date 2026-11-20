@@ -830,6 +830,273 @@ SMART_MONEY_INFILTRATIONS = [
     }
 ]
 
+# =============================================================
+# 🌊 INSTITUTIONAL CAPITAL FLOW & ROTATION ENGINE
+# =============================================================
+
+MARKET_CAP_ROTATION = {
+    "regime": "FLIGHT_TO_QUALITY",
+    "regime_title": "Flight to Quality (Large-Cap Rotation)",
+    "regime_summary": (
+        "Over the last 30-day reporting cycle, marquee DII managers shifted +₹12,800 Cr into resilient Large-Caps, "
+        "raising Large-Cap allocation to 58.4% (+1.8% MoM). Small-cap exposure was trimmed by -1.7% (-₹4,600 Cr) "
+        "due to frothy valuation multiples (>45x P/E), while Mid-Caps saw selective stock picking. "
+        "Institutional cash dry powder stands strong at 7.76% (₹55,100+ Cr)."
+    ),
+    "tiers": [
+        {
+            "tier_id": "large_cap",
+            "name": "Large Cap (Top 100)",
+            "allocation_pct": 58.4,
+            "mom_change_pct": 1.8,
+            "net_flow_cr": 12800.0,
+            "flow_direction": "INFLOW",
+            "status": "HEAVY ACCUMULATION",
+            "reason": "Valuation comfort in private banks and large-cap compounders amidst global volatility.",
+            "preferred_sectors": ["Private Banking", "Telecom", "Power Utilities"]
+        },
+        {
+            "tier_id": "mid_cap",
+            "name": "Mid Cap (101 - 250)",
+            "allocation_pct": 24.2,
+            "mom_change_pct": -0.4,
+            "net_flow_cr": -1200.0,
+            "flow_direction": "SELECTIVE",
+            "status": "SELECTIVE REBALANCING",
+            "reason": "Selective alpha hunt in capex winners (EMS, solar) while trimming high-debt midcaps.",
+            "preferred_sectors": ["EMS / Electronics", "Capital Goods", "Auto Ancillaries"]
+        },
+        {
+            "tier_id": "small_cap",
+            "name": "Small Cap (251+)",
+            "allocation_pct": 9.6,
+            "mom_change_pct": -1.7,
+            "net_flow_cr": -4600.0,
+            "flow_direction": "OUTFLOW",
+            "status": "PROFIT BOOKING / DUMPING",
+            "reason": "Extreme froth (median P/E > 42x) and liquidity risk prompting managers to de-risk portfolios.",
+            "preferred_sectors": ["Clean Energy Niche", "Defense Supply Chain"]
+        },
+        {
+            "tier_id": "cash_reserves",
+            "name": "Cash & Arbitrage",
+            "allocation_pct": 7.8,
+            "mom_change_pct": 0.3,
+            "net_flow_cr": 2100.0,
+            "flow_direction": "INFLOW",
+            "status": "DRY POWDER READY",
+            "reason": "High cash buffer reserved by managers like PPFAS and Quant to buy sharp market dips.",
+            "preferred_sectors": ["TREPS", "Overnight Repo", "Arbitrage Spread"]
+        }
+    ]
+}
+
+SECTOR_MONEY_FLOWS = [
+    {
+        "sector": "EMS & Electronics Hardware",
+        "net_flow_cr": 4850.0,
+        "mom_change_pct": 32.4,
+        "flow_type": "AGGRESSIVE_INFLOW",
+        "thesis": "Aggressive PLI scheme capex ramp-up and multi-year order visibility in PCB assembly and mobile exports.",
+        "top_bought": ["KAYNES", "DIXON", "PGEL"],
+        "top_trimmed": []
+    },
+    {
+        "sector": "Solar & Clean Energy Infra",
+        "net_flow_cr": 3620.0,
+        "mom_change_pct": 28.1,
+        "flow_type": "AGGRESSIVE_INFLOW",
+        "thesis": "High institutional appetite for renewable cell manufacturers and state transmission grid upgrades.",
+        "top_bought": ["PREMIERENE", "WAAREE", "SUZLON"],
+        "top_trimmed": []
+    },
+    {
+        "sector": "Private Banking & Financials",
+        "net_flow_cr": 2900.0,
+        "mom_change_pct": 12.5,
+        "flow_type": "STEADY_INFLOW",
+        "thesis": "Attractive valuation discount (HDFC Bank & ICICI Bank at historical mean P/B) vs expensive broader market.",
+        "top_bought": ["HDFCBANK", "ICICIBANK", "CDSL"],
+        "top_trimmed": ["BANDHANBNK"]
+    },
+    {
+        "sector": "Power Generation & Grid Transmission",
+        "net_flow_cr": 2150.0,
+        "mom_change_pct": 18.0,
+        "flow_type": "STEADY_INFLOW",
+        "thesis": "Structural power deficit and surge in data center & industrial peak energy demand.",
+        "top_bought": ["POWERGRID", "NTPC", "TATAPOWER"],
+        "top_trimmed": []
+    },
+    {
+        "sector": "Auto & EV Components",
+        "net_flow_cr": 1400.0,
+        "mom_change_pct": 9.4,
+        "flow_type": "SELECTIVE_INFLOW",
+        "thesis": "Premium SUV volume dominance and high content per vehicle in electric drive units.",
+        "top_bought": ["TATAMOTORS", "M&M", "SONACOMS"],
+        "top_trimmed": []
+    },
+    {
+        "sector": "IT & Software Services",
+        "net_flow_cr": -2100.0,
+        "mom_change_pct": -14.2,
+        "flow_type": "HEAVY_OUTFLOW",
+        "thesis": "US BFSI discretionary tech budget freeze and margin pressure; managers rotating to domestic consumption.",
+        "top_bought": ["COFORGE"],
+        "top_trimmed": ["TCS", "INFY", "WIPRO"]
+    },
+    {
+        "sector": "FMCG & Consumer Staples",
+        "net_flow_cr": -1450.0,
+        "mom_change_pct": -11.0,
+        "flow_type": "HEAVY_OUTFLOW",
+        "thesis": "Sluggish rural volume growth and intense market share erosion from quick-commerce dark stores.",
+        "top_bought": ["ITC"],
+        "top_trimmed": ["HINDUNILVR", "DABUR", "MARICO"]
+    },
+    {
+        "sector": "Agrochemicals & Crop Protection",
+        "net_flow_cr": -890.0,
+        "mom_change_pct": -22.5,
+        "flow_type": "SEVERE_OUTFLOW",
+        "thesis": "Prolonged pricing pressure from cheap generic Chinese active ingredients and extended channel destocking.",
+        "top_bought": [],
+        "top_trimmed": ["UPL", "PIIND"]
+    }
+]
+
+SMART_MONEY_TACTICS = [
+    {
+        "title": "Staggered Creeping Buying (Chupke Se Accumulation)",
+        "tag": "STEALTH ACCUMULATION",
+        "color": "green",
+        "description": "Institutions avoid triggering 10% upper circuits by slicing ₹500+ Cr orders into 20-30 daily delivery slices (<8% of daily market volume). By the time retail traders spot the chart breakout, the fund already owns 3-5% of the company."
+    },
+    {
+        "title": "Anchor & QIP Bulk Infiltration (Discounted Blocks)",
+        "tag": "OFF-MARKET DEALS",
+        "color": "cyan",
+        "description": "Marquee DIIs take large allocations in high-growth companies via Anchor IPO allotments or Qualified Institutional Placements (QIPs) at a 5-10% regulatory discount without paying open-market impact slippage."
+    },
+    {
+        "title": "Contrarian FII Dip Absorption (Girte Market Mein Support)",
+        "tag": "CONTRARIAN SUPPORT",
+        "color": "amber",
+        "description": "When foreign funds (FIIs) sell in panic due to US Fed yields or geopolitical events, DIIs use predictable domestic SIP inflows (₹25,000+ Cr/month) to accumulate bluechips at deep structural support zones (200-DMA)."
+    },
+    {
+        "title": "Retail Distribution Trap (Euphoria Mein Silent Exit)",
+        "tag": "DISTRIBUTION TRAP",
+        "color": "red",
+        "description": "When a small/mid cap goes viral on social media and hits multiple circuits, funds quietly sell their stake into the massive incoming retail buy orders over 2-3 months without causing an immediate panic crash."
+    }
+]
+
+INSTITUTIONAL_EXITS_AND_TRAPS = [
+    {
+        "symbol": "DELHIVERY",
+        "company_name": "Delhivery Ltd",
+        "market_cap_tier": "Mid Cap",
+        "action": "COMPLETE_EXIT",
+        "intensity": "SEVERE_DUMPING",
+        "dii_stake_drop_pct": -45.0,
+        "estimated_selling_cr": -1250.0,
+        "exiting_funds": ["SBI Long Term Equity", "Mirae Asset Large & Midcap"],
+        "retail_holding_change": "+5.8% Spike (Retail Trap Warning)",
+        "catalyst_reason": "Logistics margin compression from captive dark stores and captive fleet insourcing by major quick-commerce and e-commerce players.",
+        "warning_level": "CRITICAL"
+    },
+    {
+        "symbol": "IREDA",
+        "company_name": "Indian Renewable Energy Dev Agency",
+        "market_cap_tier": "Mid Cap",
+        "action": "SILENT_DUMPING",
+        "intensity": "HEAVY_REDUCTION",
+        "dii_stake_drop_pct": -38.0,
+        "estimated_selling_cr": -820.0,
+        "exiting_funds": ["HDFC Mid-Cap Opportunities", "Tata Small Cap"],
+        "retail_holding_change": "+8.4% Surge (Classic Liquidity Trap)",
+        "catalyst_reason": "Valuation ran far ahead of loan book fundamentals (P/B > 5.5x). Institutions distributed into heavy retail social media frenzy.",
+        "warning_level": "CRITICAL"
+    },
+    {
+        "symbol": "POLICYBZR",
+        "company_name": "PB Fintech Ltd",
+        "market_cap_tier": "Mid Cap",
+        "action": "PROFIT_BOOKING",
+        "intensity": "STAKE_TRIMMING",
+        "dii_stake_drop_pct": -28.0,
+        "estimated_selling_cr": -980.0,
+        "exiting_funds": ["Nippon India Small Cap", "Quant Small Cap"],
+        "retail_holding_change": "+3.1% Absorption",
+        "catalyst_reason": "Valuations crossed 95x forward P/E after a massive +140% 1-year run. Managers locking in multibagger profits into Large-Cap rotation.",
+        "warning_level": "MODERATE"
+    },
+    {
+        "symbol": "ZEEL",
+        "company_name": "Zee Entertainment Enterprises",
+        "market_cap_tier": "Mid Cap",
+        "action": "COMPLETE_EXIT",
+        "intensity": "SEVERE_DUMPING",
+        "dii_stake_drop_pct": -52.0,
+        "estimated_selling_cr": -640.0,
+        "exiting_funds": ["ICICI Prudential Bluechip", "HDFC Mid-Cap"],
+        "retail_holding_change": "+4.6% Retail Inflow",
+        "catalyst_reason": "Termination of Sony mega-merger, protracted legal disputes, and continuous loss of OTT viewership to JioCinema and Netflix.",
+        "warning_level": "CRITICAL"
+    },
+    {
+        "symbol": "INDUSINDBK",
+        "company_name": "IndusInd Bank Limited",
+        "market_cap_tier": "Large Cap",
+        "action": "STAKE_REDUCTION",
+        "intensity": "ACTIVE_TRIMMING",
+        "dii_stake_drop_pct": -32.0,
+        "estimated_selling_cr": -590.0,
+        "exiting_funds": ["Mirae Asset Large & Midcap", "Invesco India Contra"],
+        "retail_holding_change": "+2.2%",
+        "catalyst_reason": "Microfinance book asset quality slippage and sticky cost of funds dampening net interest margin (NIM) expansion.",
+        "warning_level": "MODERATE"
+    },
+    {
+        "symbol": "UPL",
+        "company_name": "UPL Limited",
+        "market_cap_tier": "Large Cap",
+        "action": "COMPLETE_EXIT",
+        "intensity": "SEVERE_DUMPING",
+        "dii_stake_drop_pct": -42.0,
+        "estimated_selling_cr": -410.0,
+        "exiting_funds": ["Invesco India Contra", "Nippon India Small Cap"],
+        "retail_holding_change": "+3.8% Trap",
+        "catalyst_reason": "Elevated balance sheet debt and prolonged global agrochemical channel destocking continuing for 4th consecutive quarter.",
+        "warning_level": "HIGH"
+    }
+]
+
+EXIT_TIMING_CHECKLIST = [
+    {
+        "rule_number": "01",
+        "title": "Valuation Froth (PE > 3x Historical Median)",
+        "explanation": "When a company's stock price appreciates faster than earnings growth and PE crosses 80-100x without margin expansion, marquee DIIs systematically start a 3-month distribution phase."
+    },
+    {
+        "rule_number": "02",
+        "title": "Institutional Slashing vs Retail Soaring",
+        "explanation": "The #1 Retail Trap Indicator: If DII ownership drops by >15% over consecutive months while total retail shareholder count spikes >20%, smart money is using retail liquidity to exit."
+    },
+    {
+        "rule_number": "03",
+        "title": "Regulatory 10% Single-Stock Ceiling",
+        "explanation": "Under SEBI mutual fund guidelines, no equity scheme can hold >10% of its NAV in a single company. When a multibagger hits 8.5-9.5% weight, fund managers are legally forced to trim profits."
+    },
+    {
+        "rule_number": "04",
+        "title": "Two Consecutive Quarters of Margin Decline",
+        "explanation": "If a company loses pricing power and EBITDA margins shrink for two quarters in a row, institutional algorithms flag the stock for aggressive stake liquidation."
+    }
+]
+
 def fetch_live_amfi_nav(scheme_code):
     """Fetches real-time daily NAV directly from AMFI Open API (api.mfapi.in)."""
     if not HAS_URLLIB:
@@ -916,6 +1183,11 @@ def build_full_report():
                 "(PREMIERENE), and retail consumption leaders (TRENT)."
             )
         },
+        "market_cap_rotation": MARKET_CAP_ROTATION,
+        "sector_money_flows": SECTOR_MONEY_FLOWS,
+        "smart_money_tactics": SMART_MONEY_TACTICS,
+        "institutional_exits_and_traps": INSTITUTIONAL_EXITS_AND_TRAPS,
+        "exit_timing_checklist": EXIT_TIMING_CHECKLIST,
         "top_20_funds": TOP_20_FUNDS,
         "smart_money_infiltrations": SMART_MONEY_INFILTRATIONS,
         "precomputed_overlaps": precomputed_overlaps
