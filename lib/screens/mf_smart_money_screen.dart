@@ -864,15 +864,9 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 regimeTitle,
                 style: GoogleFonts.plusJakartaSans(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w900,
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                regimeSummary,
-                style: const TextStyle(
-                    color: Colors.white70, fontSize: 11, height: 1.35),
               ),
             ],
           ),
@@ -1130,13 +1124,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            reason,
-            style: const TextStyle(color: Colors.white60, fontSize: 10.5, height: 1.3),
-          ),
           if (sectors.isNotEmpty) ...[
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 5,
               runSpacing: 4,
@@ -1237,11 +1226,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            thesis,
-            style: const TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
           ),
           const SizedBox(height: 8),
           Row(
