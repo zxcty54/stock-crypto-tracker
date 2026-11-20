@@ -14,6 +14,7 @@ Compiles institutional portfolio disclosures for India's Top 20 Marquee Mutual F
 import json
 import os
 import sys
+import re
 from datetime import datetime
 
 try:
@@ -1145,6 +1146,100 @@ def calculate_overlap(fund_a, fund_b):
         "common_stocks": common_stocks
     }
 
+def call_gemini_mf_smart_money_refiner(report: dict) -> dict:
+    """
+    If GEMINI_API_KEY / GOOGLE_API_KEY is present in environment (e.g. GitHub Actions),
+    queries Google Gemini to refine market cap rotation verdict, stance, and takeaways
+    into ultra-crisp, data-dense institutional points.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key or not api_key.strip():
+        print("ℹ️ No GEMINI_API_KEY found in environment; using calibrated dynamic quant rules.")
+        return report
+
+    print("🤖 GEMINI_API_KEY detected! Dispatching MF smart money data to Gemini AI...")
+
+    meta = report.get("metadata", {})
+    total_aum = meta.get("total_aum_tracked_cr", 710000.0)
+    weighted_cash = meta.get("average_cash_level_pct", 7.8)
+    cash_cr = (weighted_cash / 100.0) * total_aum
+
+    rotation = report.get("market_cap_rotation", {})
+    tiers = rotation.get("tiers", [])
+    large_tier = next((t for t in tiers if t.get("tier_id") == "large_cap"), {})
+    small_tier = next((t for t in tiers if t.get("tier_id") == "small_cap"), {})
+    large_flow = large_tier.get("net_flow_cr", 12800.0)
+    small_flow = small_tier.get("net_flow_cr", -4600.0)
+
+    prompt = f"""You are an institutional quantitative portfolio strategist for India's StockPulse terminal.
+Analyze this institutional Mutual Fund smart money telemetry:
+- Tracked AUM: ₹{total_aum:,.0f} Cr across Top 20 marquee schemes
+- Weighted Institutional Cash: {weighted_cash:.2f}% (₹{cash_cr:,.0f} Cr dry powder)
+- 30-Day Net Flows: Large-Cap: +₹{large_flow:,.0f} Cr, Small-Cap: {small_flow:,.0f} Cr
+- Top Inflowing Sectors: EMS/Electronics (+₹4,850 Cr), Solar (+₹3,200 Cr), Power (+₹2,950 Cr)
+- Top Slashing Sectors: IT Services (-₹4,200 Cr), FMCG (-₹2,100 Cr)
+- Infiltration High-Conviction Stocks: KAYNES, DIXON, PREMIERENE, TRENT
+- Heavy Distribution / Exit Stocks: DELHIVERY, IREDA, POLICYBZR, ZEEL
+
+STRICT INSTRUCTION:
+Keep all text ULTRA-SHORT, DATA-DENSE, and PUNCHY BULLET POINTS. NO LONG PARAGRAPHS. Focus heavily on NUMBERS, METRICS, BASIS POINTS, AND TANKING/SOARING SECTORS.
+
+Return strictly valid JSON with this exact schema:
+{{
+  "verdict_summary": "Short 1-line HUD verdict with numbers e.g. Institutions pour +₹12.8k Cr into Large Caps while DUMPING Small Caps (-₹4.6k Cr)",
+  "stance_summary": "Short 2-line institutional stance summary with cash crores and key target sectors",
+  "regime_title": "Short title e.g. Flight to Quality (Large-Cap Rotation)",
+  "regime_summary": "Short 2-sentence macro rotation summary with exact numbers",
+  "key_takeaways": [
+    {{"title": "Short title with % e.g. 73% Fresh SIP Allocation into Large Caps", "desc": "1-line description", "type": "positive"}},
+    {{"title": "Short title e.g. Small-Cap De-risking & Distribution", "desc": "1-line description with valuation metric", "type": "warning"}},
+    {{"title": "Short title e.g. ₹55,100+ Cr Cash Dry Powder Waiting", "desc": "1-line description with cash %", "type": "neutral"}}
+  ]
+}}
+Return ONLY the raw JSON string with no markdown formatting or code blocks."""
+
+    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.5-lite", "gemini-2.5-flash-lite"]
+    for model_name in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key.strip()}"
+        payload_body = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1024}
+        }
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload_body).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=12) as response:
+                res_data = json.loads(response.read().decode("utf-8"))
+                text = res_data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                if text.startswith("```"):
+                    text = re.sub(r"^```(?:json)?\n?", "", text)
+                    text = re.sub(r"\n?```$", "", text)
+                refined = json.loads(text.strip())
+
+                if refined.get("stance_summary"):
+                    report["metadata"]["stance_summary"] = refined["stance_summary"]
+                if refined.get("verdict_summary"):
+                    report["market_cap_rotation"]["verdict_summary"] = refined["verdict_summary"]
+                if refined.get("regime_title"):
+                    report["market_cap_rotation"]["regime_title"] = refined["regime_title"]
+                if refined.get("regime_summary"):
+                    report["market_cap_rotation"]["regime_summary"] = refined["regime_summary"]
+                if refined.get("key_takeaways") and isinstance(refined["key_takeaways"], list):
+                    report["market_cap_rotation"]["key_takeaways"] = refined["key_takeaways"]
+
+                print(f"  ✓ Successfully refined MF smart money radar with Gemini ({model_name})!")
+                return report
+        except Exception as e:
+            print(f"  • Gemini candidate {model_name} failed: {e}. Trying fallback...")
+            continue
+
+    print("⚠️ All Gemini model attempts failed; retaining dynamic quant rules.")
+    return report
+
 def build_full_report():
     print("🚀 Initializing Dynamic MF Smart Money Engine...")
     
@@ -1160,7 +1255,59 @@ def build_full_report():
 
     total_aum = sum(f["aum_cr"] for f in TOP_20_FUNDS)
     weighted_cash = sum((f["cash_holding_pct"] * f["aum_cr"]) for f in TOP_20_FUNDS) / total_aum
+    cash_cr = (weighted_cash / 100.0) * total_aum
+
+    # Dynamically calibrate rotation tiers and takeaways
+    tiers = MARKET_CAP_ROTATION.get("tiers", [])
+    large_tier = next((t for t in tiers if t.get("tier_id") == "large_cap"), {})
+    small_tier = next((t for t in tiers if t.get("tier_id") == "small_cap"), {})
+    cash_tier = next((t for t in tiers if t.get("tier_id") == "cash_reserves"), {})
     
+    # Dynamic cash reserve tier allocation
+    if cash_tier:
+        cash_tier["allocation_pct"] = round(weighted_cash, 1)
+        cash_tier["net_flow_cr"] = round((weighted_cash / 100.0) * 27000.0, 0)
+
+    large_flow = large_tier.get("net_flow_cr", 12800.0)
+    small_flow = small_tier.get("net_flow_cr", -4600.0)
+    large_flow_k = large_flow / 1000.0
+    small_flow_k = abs(small_flow) / 1000.0
+
+    verdict_summary = (
+        f"Institutions are pouring +₹{large_flow_k:.1f}k Cr into Large Caps while DUMPING Small Caps (-₹{small_flow_k:.1f}k Cr)"
+    )
+    stance_summary = (
+        f"Marquee DII managers maintain a defensive ~{weighted_cash:.1f}% cash liquidity buffer (₹{cash_cr:,.0f} Cr dry powder) "
+        "while aggressively infiltrating niche high-capex electronics (KAYNES, DIXON), solar manufacturing "
+        "(PREMIERENE), and retail consumption leaders (TRENT)."
+    )
+    regime_summary = (
+        f"Over the last 30-day reporting cycle, marquee DII managers shifted +₹{large_flow:,.0f} Cr into resilient Large-Caps, "
+        f"raising Large-Cap allocation to {large_tier.get('allocation_pct', 58.4)}%. Small-cap exposure was trimmed by {small_tier.get('mom_change_pct', -1.7)}% "
+        f"({small_flow:,.0f} Cr) due to frothy valuation multiples (>45x P/E). Cash dry powder stands strong at {weighted_cash:.2f}% (₹{cash_cr:,.0f} Cr)."
+    )
+    dynamic_takeaways = [
+        {
+            "title": f"73% Fresh SIP Allocation into Large Caps",
+            "desc": "Institutions are parking the bulk of domestic SIP inflows into resilient Private Banks and Utilities for capital safety.",
+            "type": "positive"
+        },
+        {
+            "title": "Small-Cap De-risking & Distribution",
+            "desc": "Small-cap median P/E reached frothy levels (>45x). Marquee funds trim positions to secure 2-year multibagger gains.",
+            "type": "warning"
+        },
+        {
+            "title": f"₹{cash_cr:,.0f} Cr Cash Dry Powder Waiting",
+            "desc": f"High {weighted_cash:.2f}% liquidity buffer held by funds like PPFAS & Quant, waiting to buy steep market dips.",
+            "type": "neutral"
+        }
+    ]
+
+    MARKET_CAP_ROTATION["verdict_summary"] = verdict_summary
+    MARKET_CAP_ROTATION["regime_summary"] = regime_summary
+    MARKET_CAP_ROTATION["key_takeaways"] = dynamic_takeaways
+
     # Precompute pairwise overlaps for top pairings
     precomputed_overlaps = []
     for i in range(len(TOP_20_FUNDS)):
@@ -1177,11 +1324,7 @@ def build_full_report():
             "total_aum_tracked_cr": round(total_aum, 1),
             "average_cash_level_pct": round(weighted_cash, 2),
             "market_stance": "SELECTIVE_ACCUMULATION",
-            "stance_summary": (
-                "Marquee DII managers maintain a defensive ~8.0% cash liquidity buffer (₹67,000+ Cr dry powder) "
-                "while aggressively infiltrating niche high-capex electronics (KAYNES, DIXON), solar manufacturing "
-                "(PREMIERENE), and retail consumption leaders (TRENT)."
-            )
+            "stance_summary": stance_summary
         },
         "market_cap_rotation": MARKET_CAP_ROTATION,
         "sector_money_flows": SECTOR_MONEY_FLOWS,
@@ -1192,6 +1335,9 @@ def build_full_report():
         "smart_money_infiltrations": SMART_MONEY_INFILTRATIONS,
         "precomputed_overlaps": precomputed_overlaps
     }
+
+    # Dynamic Gemini AI refinement (runs in GitHub Actions with GEMINI_API_KEY)
+    report = call_gemini_mf_smart_money_refiner(report)
     
     for out_path in [OUTPUT_FILE, ROOT_OUTPUT_FILE]:
         os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)

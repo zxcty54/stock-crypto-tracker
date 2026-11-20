@@ -14,9 +14,13 @@ import os
 import re
 import json
 import asyncio
+import urllib.request
 from datetime import datetime
 from urllib.parse import urljoin
-import openpyxl
+try:
+    import openpyxl
+except ImportError:
+    openpyxl = None
 
 try:
     import pdfplumber
@@ -351,8 +355,8 @@ def parse_dpiit_eight_core():
 # 2. DYNAMIC IPA MAJOR PORTS PARSER
 # ======================================================================
 def parse_ipa_ports():
-    if not os.path.exists(IPA_EXCEL):
-        print(f"⚠️ IPA Excel not found at {IPA_EXCEL}, using standard baseline")
+    if not os.path.exists(IPA_EXCEL) or openpyxl is None:
+        print(f"⚠️ IPA Excel not found or openpyxl not installed, using standard baseline")
         return {
             "report_title": "Indian Ports Association (IPA) Major Ports Traffic",
             "period": "April to October 2026 vs April to October 2025",
@@ -573,11 +577,15 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
     cement_growth = core["components"].get("Cement", {}).get("yoy_pct", 9.8)
     power_growth = core["components"].get("Electricity", {}).get("yoy_pct", 11.4)
     steel_growth = core["components"].get("Steel", {}).get("yoy_pct", 4.9)
+    coal_growth = core["components"].get("Coal", {}).get("yoy_pct", 10.7)
     port_growth = ipa.get("cargo_yoy_growth_pct", 10.17)
     atf_growth = ppac["fuels"].get("Aviation Turbine Fuel (ATF)", {}).get("yoy_growth_pct", 0.9)
+    bitumen_growth = ppac["fuels"].get("Bitumen", {}).get("yoy_growth_pct", 17.2)
 
     fert_growth = core["components"].get("Fertilizers", {}).get("yoy_pct", -11.7)
     crude_growth = core["components"].get("Crude Oil", {}).get("yoy_pct", -1.4)
+    gas_growth = core["components"].get("Natural Gas", {}).get("yoy_pct", -4.6)
+    iron_ore_growth = core["components"].get("Iron Ore", {}).get("yoy_pct", 18.4)
 
     return [
         {
@@ -585,10 +593,10 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
             "demand_signal": "EXPANDING" if hsd_growth > 4.0 else "STEADY",
             "momentum_badge": "🚀 RAPID EXPANSION" if hsd_growth > 5.0 else "📈 EXPANDING",
             "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-            "macro_correlation_note": "Diesel consumption (+5.6%) aur Highway FASTag toll collections (+8.5%) commercial freight activity mein continuous expansion ko darshate hain. Historically, jab fleet utilization 85%+ cross karta hai, commercial vehicle manufacturers ke dispatches aur tonnage volumes mein positive trend dekha jata hai.",
+            "macro_correlation_note": f"Diesel consumption (+{hsd_growth}%) aur Highway FASTag toll collections (+{toll_growth}%) commercial freight activity mein continuous expansion ko darshate hain. Historically, jab fleet utilization 85%+ cross karta hai, commercial vehicle manufacturers ke dispatches aur tonnage volumes mein positive trend dekha jata hai.",
             "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
             "primary_indicators": f"PPAC Diesel (HSD): +{hsd_growth}% YoY • FASTag Toll: +{toll_growth}% YoY",
-            "economic_rationale": "High-Speed Diesel consumption aur Highway FASTag toll collections mein robust growth national freight volume expansion ko reflect karta hai.",
+            "economic_rationale": f"High-Speed Diesel consumption (+{hsd_growth}%) aur Highway FASTag toll collections (+{toll_growth}%) mein robust growth national freight volume expansion ko reflect karta hai.",
             "beneficiary_equities": [
                 {"symbol": "TATAMOTORS", "name": "Tata Motors Ltd", "thesis": "Commercial Vehicle (MHCV) division cargo freight market share"},
                 {"symbol": "ASHOKLEY", "name": "Ashok Leyland Ltd", "thesis": "Domestic truck tonnage and medium/heavy commercial vehicle volume tracker"},
@@ -599,12 +607,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         {
             "sector": "Power Generation & Capital Goods",
             "demand_signal": "PEAK_DEMAND" if power_growth > 10.0 else "EXPANDING",
-            "momentum_badge": "🔥 PEAK DEMAND",
+            "momentum_badge": "🔥 PEAK DEMAND" if power_growth > 10.0 else "⚡ STRONG GENERATION",
             "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-            "macro_correlation_note": "National electricity generation (+11.4%) double-digits par hai aur coal dispatch (+10.7%) multi-month high par hai. Industrial shift operations badhne se baseload thermal utilities ka Plant Load Factor (PLF) increase hota hai aur heavy equipment transmission order execution accelerate hota hai.",
+            "macro_correlation_note": f"National electricity generation (+{power_growth}%) double-digits par hai aur coal dispatch (+{coal_growth}%) multi-month high par hai. Industrial shift operations badhne se baseload thermal utilities ka Plant Load Factor (PLF) increase hota hai aur heavy equipment transmission order execution accelerate hota hai.",
             "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
-            "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{core['components'].get('Coal', {}).get('yoy_pct', 0.0)}% YoY",
-            "economic_rationale": "Industrial power consumption aur commercial base-load growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
+            "primary_indicators": f"8-Core Electricity: +{power_growth}% YoY • Coal Dispatch: +{coal_growth}% YoY",
+            "economic_rationale": f"Industrial power consumption (+{power_growth}%) aur coal dispatch growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
             "beneficiary_equities": [
                 {"symbol": "NTPC", "name": "NTPC Ltd", "thesis": "Thermal baseload generation and regulated capacity addition peer"},
                 {"symbol": "BHEL", "name": "Bharat Heavy Electricals Ltd", "thesis": "Thermal power equipment and supercritical boiler engineering peer"},
@@ -615,12 +623,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         {
             "sector": "Infrastructure & Cement Construction",
             "demand_signal": "STRONG_DEMAND" if cement_growth > 7.0 else "STEADY",
-            "momentum_badge": "📈 STRONG DEMAND",
+            "momentum_badge": "📈 STRONG DEMAND" if cement_growth > 7.0 else "🏗️ STEADY CONSTRUCTION",
             "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-            "macro_correlation_note": "Cement output (+9.8%) aur Bitumen consumption (+17.2%) highway capex aur post-monsoon construction activity ka sharp pickup reflect karte hain. Fixed plant capacity utilization badhne par cement manufacturing companies ke operating metrics me volume leverage positively reflect karta hai.",
+            "macro_correlation_note": f"Cement output (+{cement_growth}%) aur Bitumen consumption (+{bitumen_growth}%) highway capex aur post-monsoon construction activity ka sharp pickup reflect karte hain. Fixed plant capacity utilization badhne par cement manufacturing companies ke operating metrics me volume leverage positively reflect karta hai.",
             "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
-            "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex: +{ppac['fuels'].get('Bitumen', {}).get('yoy_growth_pct', 17.2)}% YoY",
-            "economic_rationale": "Post-monsoon highway construction, central capex execution, aur residential housing absorption se cement volume dispatch multi-month highs par hai.",
+            "primary_indicators": f"8-Core Cement: +{cement_growth}% YoY • Bitumen Road Capex: +{bitumen_growth}% YoY",
+            "economic_rationale": f"Post-monsoon highway construction, central capex execution, aur cement volume dispatch (+{cement_growth}%) multi-month highs par hai.",
             "beneficiary_equities": [
                 {"symbol": "ULTRACEMCO", "name": "UltraTech Cement Ltd", "thesis": "Domestic scale leader in clinker and cement volume dispatches"},
                 {"symbol": "AMBUJACEM", "name": "Ambuja Cements Ltd", "thesis": "Pan-India cement manufacturing capacity and logistics peer"},
@@ -631,12 +639,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         {
             "sector": "Port Logistics & Maritime Trade",
             "demand_signal": "EXPANDING" if port_growth > 7.0 else "STEADY",
-            "momentum_badge": "🚢 SURGING EXPORTS",
+            "momentum_badge": "🚢 SURGING EXPORTS" if port_growth > 8.0 else "📈 STEADY CARGO",
             "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-            "macro_correlation_note": "IPA Major Ports total cargo (+10.17% YoY, 566.4 MMT) aur Container throughput (+8.51%) domestic trade volume expansion ko validate karte hain. Ports ke capital-intensive nature ke chalte incremental container handling efficiency operating margins ko positively influence karti hai.",
+            "macro_correlation_note": f"IPA Major Ports total cargo (+{port_growth}% YoY, {ipa.get('total_cargo_current_mmt', 566.4)} MMT) aur Container throughput (+{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%) domestic trade volume expansion ko validate karte hain. Ports ke capital-intensive nature ke chalte incremental container handling efficiency operating margins ko positively influence karti hai.",
             "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
-            "primary_indicators": f"IPA Major Ports: {ipa['total_cargo_current_mmt']} MMT (+{port_growth}% YoY) • Containers: +{ipa['major_commodities'].get('Container Cargo', {}).get('growth_pct', 8.51)}%",
-            "economic_rationale": "Major ports cargo traffic double-digit growth par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
+            "primary_indicators": f"IPA Major Ports: {ipa.get('total_cargo_current_mmt', 566.4)} MMT (+{port_growth}% YoY) • Containers: +{ipa.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%",
+            "economic_rationale": f"Major ports cargo traffic (+{port_growth}%) double-digit pace par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
             "beneficiary_equities": [
                 {"symbol": "ADANIPORTS", "name": "Adani Ports and SEZ Ltd", "thesis": "Largest commercial port operator tracking India EXIM volume"},
                 {"symbol": "CONCOR", "name": "Container Corporation of India", "thesis": "Inland container depot rail freight throughput operator peer"},
@@ -647,12 +655,12 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         {
             "sector": "Steel & Metals Fabrication",
             "demand_signal": "STEADY_GROWTH" if steel_growth > 0.0 else "CONTRACTION",
-            "momentum_badge": "⚙️ STEADY CAPEX",
+            "momentum_badge": "⚙️ STEADY CAPEX" if steel_growth > 3.0 else "⚡ RANGEBOUND DISPATCH",
             "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-            "macro_correlation_note": "Domestic steel production (+4.9%) aur Iron Ore output (+18.4%) infrastructure capex aur auto manufacturing demand ko support karte hain. Global export market pricing pressure ke bawajood domestic volume consumption steady rehta hai.",
+            "macro_correlation_note": f"Domestic steel production (+{steel_growth}%) aur Iron Ore output (+{iron_ore_growth}%) infrastructure capex aur auto manufacturing demand ko support karte hain. Global export market pricing pressure ke bawajood domestic volume consumption steady rehta hai.",
             "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
-            "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{core['components'].get('Iron Ore', {}).get('yoy_pct', 18.4)}% YoY",
-            "economic_rationale": "Domestic infrastructure capex, automotive demand, aur pre-engineered buildings domestic steel production ko support kar rahe hain.",
+            "primary_indicators": f"8-Core Steel: +{steel_growth}% YoY • Iron Ore: +{iron_ore_growth}% YoY",
+            "economic_rationale": f"Domestic infrastructure capex, automotive demand, aur pre-engineered buildings domestic steel production (+{steel_growth}%) ko support kar rahe hain.",
             "beneficiary_equities": [
                 {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "thesis": "Domestic flat products and automotive steel manufacturing peer"},
                 {"symbol": "JSWSTEEL", "name": "JSW Steel Ltd", "thesis": "Scale manufacturing and domestic infrastructure steel peer"},
@@ -662,13 +670,13 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         },
         {
             "sector": "Fertilizers & Agro-Chemicals",
-            "demand_signal": "CONTRACTION",
-            "momentum_badge": "⚠️ VOLUME CONTRACTION",
-            "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING",
-            "macro_correlation_note": "Fertilizer production output mein -11.7% YoY ki seasonal girawat aayi hai. Post-Kharif seasonal destocking aur international raw material import parity ke chalte fertilizer manufacturing plants ke operating capacity utilization mein temporary reduction notice hota hai.",
+            "demand_signal": "CONTRACTION" if fert_growth < 0 else "EXPANDING",
+            "momentum_badge": "⚠️ VOLUME CONTRACTION" if fert_growth < 0 else "🌱 AGRI EXPANSION",
+            "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING" if fert_growth < 0 else "🌾 SOWING PICKUP",
+            "macro_correlation_note": f"Fertilizer production output ({fert_growth}% YoY) seasonal demand pattern aur raw material import parity reflect karta hai. Post-Kharif seasonal destocking ke chalte plant capacity utilization mein temporary adjustment dekha jata hai.",
             "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
-            "primary_indicators": f"8-Core Fertilizers: {fert_growth}% YoY (Index: 121.7)",
-            "economic_rationale": "Post-Kharif seasonal inventory destocking aur international raw material import parity ke chalte fertilizer plant operating rates mein contraction aya hai.",
+            "primary_indicators": f"8-Core Fertilizers: {fert_growth}% YoY",
+            "economic_rationale": f"Seasonal inventory destocking aur international raw material import parity ke chalte fertilizer plant operating rates {fert_growth}% par settle hue hain.",
             "beneficiary_equities": [
                 {"symbol": "COROMANDEL", "name": "Coromandel International Ltd", "thesis": "Complex NPK fertilizer manufacturing and agri-input peer"},
                 {"symbol": "CHAMBLFERT", "name": "Chambal Fertilisers Ltd", "thesis": "Urea production and domestic crop protection peer"}
@@ -676,19 +684,114 @@ def synthesize_sector_demand_matrix(core, ipa, ppac, fastag):
         },
         {
             "sector": "Upstream Crude Oil & Gas",
-            "demand_signal": "CONTRACTION",
-            "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION",
+            "demand_signal": "CONTRACTION" if crude_growth < 0 else "STEADY",
+            "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION" if crude_growth < 0 else "🛢️ UPSTREAM STABLE",
             "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-            "macro_correlation_note": "Domestic crude oil (-1.4%) aur natural gas (-4.6%) production mein slight de-growth dekhi gayi hai, jo mature offshore fields ke natural depletion aur operational maintenance cycles ko reflect karta hai.",
+            "macro_correlation_note": f"Domestic crude oil ({crude_growth}%) aur natural gas ({gas_growth}%) production mature offshore fields ke natural depletion aur operational maintenance cycles ko reflect karta hai.",
             "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
-            "primary_indicators": f"8-Core Crude: {crude_growth}% YoY • Natural Gas: {core['components'].get('Natural Gas', {}).get('yoy_pct', -4.6)}% YoY",
-            "economic_rationale": "Mature field output declines aur delayed offshore development production volumes ko constrain kar rahe hain.",
+            "primary_indicators": f"8-Core Crude: {crude_growth}% YoY • Natural Gas: {gas_growth}% YoY",
+            "economic_rationale": "Mature field output declines aur delayed offshore development production volumes ko balance kar rahe hain.",
             "beneficiary_equities": [
                 {"symbol": "ONGC", "name": "Oil and Natural Gas Corporation", "thesis": "Domestic upstream crude oil and natural gas exploration peer"},
                 {"symbol": "OIL", "name": "Oil India Ltd", "thesis": "North-east domestic oil exploration and refining subsidiary peer"}
             ]
         }
     ]
+
+
+def call_gemini_economy_refiner(core_data: dict, ipa_data: dict, ppac_data: dict, fastag_data: dict, payload: dict) -> dict:
+    """
+    If GEMINI_API_KEY / GOOGLE_API_KEY is present in environment (e.g. GitHub Actions),
+    queries Google Gemini to refine all bullet points, verdict, and sector summaries
+    into ultra-crisp, data-dense macroeconomic points.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key or not api_key.strip():
+        print("ℹ️ No GEMINI_API_KEY found in environment; using calibrated dynamic quant rules.")
+        return payload
+
+    print("🤖 GEMINI_API_KEY detected! Dispatching physical telemetry metrics to Gemini AI...")
+
+    core_growth = core_data.get("overall_yoy_growth_pct", 7.9)
+    port_growth = ipa_data.get("cargo_yoy_growth_pct", 10.17)
+    hsd_growth = ppac_data.get("fuels", {}).get("High Speed Diesel (HSD)", {}).get("yoy_growth_pct", 5.6)
+    toll_growth = fastag_data.get("yoy_growth_pct", 8.5)
+
+    prompt = f"""You are an institutional macro strategist for India's StockPulse terminal.
+Analyze this official Government of India physical ground-economy telemetry:
+- DPIIT 8-Core Infrastructure Growth: +{core_growth}% YoY (Electricity: +{core_data.get('components', {}).get('Electricity', {}).get('yoy_pct', 11.4)}%, Cement: +{core_data.get('components', {}).get('Cement', {}).get('yoy_pct', 9.8)}%, Steel: +{core_data.get('components', {}).get('Steel', {}).get('yoy_pct', 4.9)}%, Coal: +{core_data.get('components', {}).get('Coal', {}).get('yoy_pct', 10.7)}%)
+- IPA Major Ports Total Cargo: {ipa_data.get('total_cargo_current_mmt', 566.4)} MMT (+{port_growth}% YoY), Containers: +{ipa_data.get('major_commodities', {}).get('Container Cargo', {}).get('growth_pct', 8.51)}%
+- PPAC Petroleum Consumption: Diesel/HSD: +{hsd_growth}% YoY, Bitumen Road Capex: +{ppac_data.get('fuels', {}).get('Bitumen', {}).get('yoy_growth_pct', 17.2)}%
+- NETC FASTag Highway Toll: +{toll_growth}% YoY (₹{fastag_data.get('monthly_toll_collection_cr', 5840)} Cr)
+
+STRICT INSTRUCTION:
+Keep all text ULTRA-SHORT, DATA-DENSE, and PUNCHY. NO LONG PARAGRAPHS. Focus on EXACT NUMBERS, BASIS POINTS, AND MACRO IMPACT. Keep text minimal and data prominent.
+
+Return strictly valid JSON with this exact schema:
+{{
+  "headline_summary": "Short 1-line conclusion with key numbers e.g. India Ground Freight & Core Infra Expand at +8.0% YoY Pace",
+  "verdict": "Short 3-4 word badge e.g. BROAD-BASED PHYSICAL EXPANSION",
+  "momentum_score": 84,
+  "momentum_label": "HIGH INDUSTRIAL PULSE",
+  "sector_notes": {{
+    "Commercial Vehicles & Freight Logistics": "Max 2 lines incorporating Diesel and FASTag YoY growth",
+    "Power Generation & Capital Goods": "Max 2 lines incorporating Electricity and Coal dispatch YoY",
+    "Infrastructure & Cement Construction": "Max 2 lines incorporating Cement and Bitumen YoY",
+    "Port Logistics & Maritime Trade": "Max 2 lines incorporating Port Cargo and Container YoY",
+    "Steel & Metals Fabrication": "Max 2 lines incorporating Steel and Iron Ore YoY",
+    "Fertilizers & Agro-Chemicals": "Max 2 lines on seasonal inventory cycle",
+    "Upstream Crude Oil & Gas": "Max 2 lines on mature offshore field status"
+  }}
+}}
+Return ONLY the raw JSON string with no markdown formatting or code blocks."""
+
+    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.5-lite", "gemini-2.5-flash-lite"]
+    for model_name in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key.strip()}"
+        payload_body = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1024}
+        }
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload_body).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=12) as response:
+                res_data = json.loads(response.read().decode("utf-8"))
+                text = res_data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                if text.startswith("```"):
+                    text = re.sub(r"^```(?:json)?\n?", "", text)
+                    text = re.sub(r"\n?```$", "", text)
+                refined = json.loads(text.strip())
+
+                # Update headline fields
+                if refined.get("headline_summary"):
+                    payload["economy_headline"]["headline_summary"] = refined["headline_summary"]
+                if refined.get("verdict"):
+                    payload["economy_headline"]["verdict"] = refined["verdict"]
+                if refined.get("momentum_score"):
+                    payload["economy_headline"]["momentum_score"] = int(refined["momentum_score"])
+                if refined.get("momentum_label"):
+                    payload["economy_headline"]["momentum_label"] = refined["momentum_label"]
+
+                # Update sector notes
+                sector_notes = refined.get("sector_notes", {})
+                for sec in payload.get("sector_demand_matrix", []):
+                    sec_name = sec.get("sector")
+                    if sec_name in sector_notes and sector_notes[sec_name]:
+                        sec["macro_correlation_note"] = sector_notes[sec_name]
+
+                print(f"  ✓ Successfully refined economy telemetry with Gemini ({model_name})!")
+                return payload
+        except Exception as e:
+            print(f"  • Gemini candidate {model_name} failed: {e}. Trying fallback...")
+            continue
+
+    print("⚠️ All Gemini model attempts failed; retaining dynamic quant rules.")
+    return payload
 
 
 def main():
@@ -711,16 +814,30 @@ def main():
 
     demand_matrix = synthesize_sector_demand_matrix(core_data, ipa_data, ppac_data, fastag_data)
 
+    core_growth = core_data.get("overall_yoy_growth_pct", 7.9)
+    port_growth = ipa_data.get("cargo_yoy_growth_pct", 10.17)
+    hsd_growth = ppac_data.get("fuels", {}).get("High Speed Diesel (HSD)", {}).get("yoy_growth_pct", 5.6)
+    toll_growth = fastag_data.get("yoy_growth_pct", 8.5)
+
+    weighted_pulse = (core_growth * 0.35 + port_growth * 0.25 + hsd_growth * 0.25 + toll_growth * 0.15)
+    momentum_score = int(round(max(10, min(99, 42.0 + weighted_pulse * 5.2))))
+    momentum_label = "HIGH INDUSTRIAL PULSE" if momentum_score >= 75 else ("STEADY PULSE" if momentum_score >= 55 else "CONSOLIDATING")
+    verdict = "BROAD-BASED PHYSICAL EXPANSION" if weighted_pulse > 6.0 else "STEADY VOLUME EXPANSION"
+    headline_summary = f"India's Ground Economy Expanding at +{weighted_pulse:.1f}% YoY Volume Pace — Zero Industrial Slowdown"
+
     payload = {
         "title": "Indian Economy Physical Demand Radar",
         "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
         "economy_headline": {
-            "core_infra_growth_pct": core_data["overall_yoy_growth_pct"],
-            "port_cargo_growth_pct": ipa_data["cargo_yoy_growth_pct"],
-            "diesel_freight_growth_pct": ppac_data["fuels"]["High Speed Diesel (HSD)"]["yoy_growth_pct"],
-            "fastag_toll_growth_pct": fastag_data["yoy_growth_pct"],
-            "verdict": "BROAD-BASED PHYSICAL EXPANSION"
+            "core_infra_growth_pct": core_growth,
+            "port_cargo_growth_pct": port_growth,
+            "diesel_freight_growth_pct": hsd_growth,
+            "fastag_toll_growth_pct": toll_growth,
+            "verdict": verdict,
+            "momentum_score": momentum_score,
+            "momentum_label": momentum_label,
+            "headline_summary": headline_summary
         },
         "telemetry_modules": {
             "dpiit_eight_core": core_data,
@@ -730,6 +847,9 @@ def main():
         },
         "sector_demand_matrix": demand_matrix
     }
+
+    # 3. Dynamic Gemini AI refinement (runs in GitHub Actions with GEMINI_API_KEY)
+    payload = call_gemini_economy_refiner(core_data, ipa_data, ppac_data, fastag_data, payload)
 
     # Save to root JSON
     out_path = os.path.join(REPO_ROOT, OUTPUT_FILE)

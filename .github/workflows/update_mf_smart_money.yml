@@ -32,6 +32,9 @@ jobs:
           pip install requests pandas
 
       - name: 🚀 Execute MF Smart Money Infiltration Engine
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python mf_smart_money_hunter.py
 

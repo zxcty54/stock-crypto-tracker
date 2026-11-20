@@ -2,17 +2,17 @@
   "metadata": {
     "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
     "last_updated": "November 2026 Portfolio Disclosure",
-    "generated_timestamp": "2026-11-20T08:05:13.019149",
+    "generated_timestamp": "2026-11-20T13:17:39.016593",
     "total_funds_analyzed": 20,
     "total_aum_tracked_cr": 710600.0,
     "average_cash_level_pct": 7.76,
     "market_stance": "SELECTIVE_ACCUMULATION",
-    "stance_summary": "Marquee DII managers maintain a defensive ~8.0% cash liquidity buffer (\u20b967,000+ Cr dry powder) while aggressively infiltrating niche high-capex electronics (KAYNES, DIXON), solar manufacturing (PREMIERENE), and retail consumption leaders (TRENT)."
+    "stance_summary": "Marquee DII managers maintain a defensive ~7.8% cash liquidity buffer (\u20b955,119 Cr dry powder) while aggressively infiltrating niche high-capex electronics (KAYNES, DIXON), solar manufacturing (PREMIERENE), and retail consumption leaders (TRENT)."
   },
   "market_cap_rotation": {
     "regime": "FLIGHT_TO_QUALITY",
     "regime_title": "Flight to Quality (Large-Cap Rotation)",
-    "regime_summary": "Over the last 30-day reporting cycle, marquee DII managers shifted +\u20b912,800 Cr into resilient Large-Caps, raising Large-Cap allocation to 58.4% (+1.8% MoM). Small-cap exposure was trimmed by -1.7% (-\u20b94,600 Cr) due to frothy valuation multiples (>45x P/E), while Mid-Caps saw selective stock picking. Institutional cash dry powder stands strong at 7.76% (\u20b955,100+ Cr).",
+    "regime_summary": "Over the last 30-day reporting cycle, marquee DII managers shifted +\u20b912,800 Cr into resilient Large-Caps, raising Large-Cap allocation to 58.4%. Small-cap exposure was trimmed by -1.7% (-4,600 Cr) due to frothy valuation multiples (>45x P/E). Cash dry powder stands strong at 7.76% (\u20b955,119 Cr).",
     "tiers": [
       {
         "tier_id": "large_cap",
@@ -63,7 +63,7 @@
         "name": "Cash & Arbitrage",
         "allocation_pct": 7.8,
         "mom_change_pct": 0.3,
-        "net_flow_cr": 2100.0,
+        "net_flow_cr": 2094.0,
         "flow_direction": "INFLOW",
         "status": "DRY POWDER READY",
         "reason": "High cash buffer reserved by managers like PPFAS and Quant to buy sharp market dips.",
@@ -72,6 +72,24 @@
           "Overnight Repo",
           "Arbitrage Spread"
         ]
+      }
+    ],
+    "verdict_summary": "Institutions are pouring +\u20b912.8k Cr into Large Caps while DUMPING Small Caps (-\u20b94.6k Cr)",
+    "key_takeaways": [
+      {
+        "title": "73% Fresh SIP Allocation into Large Caps",
+        "desc": "Institutions are parking the bulk of domestic SIP inflows into resilient Private Banks and Utilities for capital safety.",
+        "type": "positive"
+      },
+      {
+        "title": "Small-Cap De-risking & Distribution",
+        "desc": "Small-cap median P/E reached frothy levels (>45x). Marquee funds trim positions to secure 2-year multibagger gains.",
+        "type": "warning"
+      },
+      {
+        "title": "\u20b955,119 Cr Cash Dry Powder Waiting",
+        "desc": "High 7.76% liquidity buffer held by funds like PPFAS & Quant, waiting to buy steep market dips.",
+        "type": "neutral"
       }
     ]
   },
@@ -2250,14 +2268,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "PREMIERENE",
-          "weight_in_a": 2.8,
-          "weight_in_b": 4.8
-        },
-        {
           "symbol": "COFORGE",
           "weight_in_a": 3.0,
           "weight_in_b": 6.5
+        },
+        {
+          "symbol": "PREMIERENE",
+          "weight_in_a": 2.8,
+          "weight_in_b": 4.8
         }
       ]
     },
@@ -2335,14 +2353,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "SBIN",
-          "weight_in_a": 5.4,
-          "weight_in_b": 4.5
-        },
-        {
           "symbol": "HDFCBANK",
           "weight_in_a": 3.2,
           "weight_in_b": 8.8
+        },
+        {
+          "symbol": "SBIN",
+          "weight_in_a": 5.4,
+          "weight_in_b": 4.5
         }
       ]
     },
@@ -2358,24 +2376,14 @@
           "weight_in_b": 7.1
         },
         {
-          "symbol": "AXISBANK",
-          "weight_in_a": 4.5,
-          "weight_in_b": 4.1
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 5.4
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 9.2
         },
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 5.9
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 5.4
         },
         {
           "symbol": "RELIANCE",
@@ -2386,6 +2394,16 @@
           "symbol": "LT",
           "weight_in_a": 4.1,
           "weight_in_b": 6.8
+        },
+        {
+          "symbol": "AXISBANK",
+          "weight_in_a": 4.5,
+          "weight_in_b": 4.1
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 5.9
         }
       ]
     },
@@ -2401,9 +2419,9 @@
           "weight_in_b": 5.8
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.8
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 9.5
         },
         {
           "symbol": "BHARTIARTL",
@@ -2411,9 +2429,9 @@
           "weight_in_b": 4.2
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 9.5
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2442,9 +2460,9 @@
           "weight_in_b": 5.8
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 5.4,
-          "weight_in_b": 8.8
+          "symbol": "ICICIBANK",
+          "weight_in_a": 9.2,
+          "weight_in_b": 9.5
         },
         {
           "symbol": "BHARTIARTL",
@@ -2452,9 +2470,9 @@
           "weight_in_b": 4.2
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 9.2,
-          "weight_in_b": 9.5
+          "symbol": "HDFCBANK",
+          "weight_in_a": 5.4,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2493,14 +2511,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.8,
-          "weight_in_b": 7.8
-        },
-        {
           "symbol": "LODHA",
           "weight_in_a": 3.2,
           "weight_in_b": 3.9
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.8,
+          "weight_in_b": 7.8
         }
       ]
     },
@@ -2704,11 +2722,6 @@
           "weight_in_b": 6.2
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 8.4
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 7.9
@@ -2717,6 +2730,11 @@
           "symbol": "TRENT",
           "weight_in_a": 4.5,
           "weight_in_b": 3.5
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 8.4
         },
         {
           "symbol": "BHARTIARTL",
@@ -2737,24 +2755,24 @@
           "weight_in_b": 5.9
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 11.8
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 8.1
         },
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 4.8
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 11.8
         },
         {
           "symbol": "LT",
           "weight_in_a": 4.8,
           "weight_in_b": 3.9
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 4.8
         }
       ]
     },
@@ -2784,9 +2802,9 @@
           "weight_in_b": 5.9
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.4,
-          "weight_in_b": 11.8
+          "symbol": "ICICIBANK",
+          "weight_in_a": 7.9,
+          "weight_in_b": 8.1
         },
         {
           "symbol": "BHARTIARTL",
@@ -2794,9 +2812,9 @@
           "weight_in_b": 4.8
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 7.9,
-          "weight_in_b": 8.1
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.4,
+          "weight_in_b": 11.8
         }
       ]
     }

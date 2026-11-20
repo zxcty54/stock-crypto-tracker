@@ -348,7 +348,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
 
           // Big Bold Conclusion
           Text(
-            "India's Ground Economy is Expanding at +8.0% YoY Volume Growth — Zero Industrial Slowdown",
+            h['headline_summary'] ?? "India's Ground Economy Expanding at +8.0% YoY Volume Pace — Zero Industrial Slowdown",
             style: GoogleFonts.plusJakartaSans(
               color: Colors.white,
               fontSize: 14.5,
@@ -420,36 +420,44 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           const SizedBox(height: 12),
 
           // Physical Economy Temperature Bar
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("PHYSICAL MOMENTUM THERMOMETER",
-                  style: TextStyle(color: Colors.white54, fontSize: 8.5, fontWeight: FontWeight.bold)),
-              Text("84/100 (HIGH INDUSTRIAL PULSE)",
-                  style: TextStyle(color: accentGreen, fontSize: 8.5, fontWeight: FontWeight.w900)),
-            ],
-          ),
-          const SizedBox(height: 4),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Container(
-              height: 7,
-              color: const Color(0xFF090D16),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FractionallySizedBox(
-                  widthFactor: 0.84,
+          Builder(builder: (context) {
+            final int momentumScore = (h['momentum_score'] as num?)?.toInt() ?? 84;
+            final String momentumLabel = h['momentum_label'] ?? 'HIGH INDUSTRIAL PULSE';
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("PHYSICAL MOMENTUM THERMOMETER",
+                        style: TextStyle(color: Colors.white54, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                    Text("$momentumScore/100 ($momentumLabel)",
+                        style: const TextStyle(color: accentGreen, fontSize: 8.5, fontWeight: FontWeight.w900)),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
                   child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [accentAmber, accentCyan, accentGreen],
+                    height: 7,
+                    color: const Color(0xFF090D16),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: (momentumScore / 100.0).clamp(0.05, 1.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [accentAmber, accentCyan, accentGreen],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
+              ],
+            );
+          }),
         ],
       ),
     );
@@ -516,7 +524,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
 
   Widget _buildEarningsAlphaExplainer() {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF0F172A),
         borderRadius: BorderRadius.circular(12),
@@ -527,27 +535,64 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
         children: [
           Row(
             children: [
-              const Icon(Icons.school_rounded, size: 16, color: Color(0xFF38BDF8)),
+              const Icon(Icons.school_rounded, size: 14, color: Color(0xFF38BDF8)),
               const SizedBox(width: 6),
               Text(
-                "EDUCATIONAL MACRO INSIGHT: PHYSICAL INDICATORS",
+                "WHY PHYSICAL TELEMETRY LEADS EARNINGS (45-DAY EDGE)",
                 style: GoogleFonts.plusJakartaSans(
                   color: const Color(0xFF38BDF8),
-                  fontSize: 10.5,
+                  fontSize: 10,
                   fontWeight: FontWeight.w900,
-                  letterSpacing: 0.6,
+                  letterSpacing: 0.5,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          const Text(
-            "Companies ke quarterly financial results 45 din baad report hote hain, jabki Government ka physical telemetry data (DPIIT 8-Core, Fuel, Ports, FASTag) MONTHLY real-time publish hota hai. Jab physical volume dispatch expand hota hai, toh plant operating leverage se quarterly production metrics par asar padta hai. Yeh analysis purely educational macroeconomic study ke liye hai — yeh kisi bhi prakar ki stock recommendation ya investment advice nahi hai.",
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 11,
-              height: 1.35,
-            ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text("⏱️ 45-Day Advance Lead",
+                          style: TextStyle(color: accentCyan, fontSize: 9.5, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 2),
+                      Text("Govt telemetry reports monthly, far ahead of delayed quarterly results.",
+                          style: TextStyle(color: Colors.white70, fontSize: 8.5, height: 1.25)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text("⚡ Operating Leverage",
+                          style: TextStyle(color: accentGreen, fontSize: 9.5, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 2),
+                      Text("High plant capacity utilization directly expands dispatches & margins.",
+                          style: TextStyle(color: Colors.white70, fontSize: 8.5, height: 1.25)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
