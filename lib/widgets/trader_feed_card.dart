@@ -391,23 +391,25 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
     if (_bias == 'BEARISH') biasColor = const Color(0xFFFF2A6D);
 
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 4.5),
       decoration: BoxDecoration(
-        color: hasRegret ? regretColor.withOpacity(0.02) : Colors.transparent,
-        border: Border(
-          bottom: const BorderSide(color: Color(0xFF1A2333), width: 0.8),
-          left: hasRegret ? BorderSide(color: regretColor, width: 3.0) : BorderSide.none,
+        color: hasRegret ? regretColor.withOpacity(0.04) : const Color(0xFF101726),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: hasRegret ? regretColor.withOpacity(0.35) : const Color(0xFF1B263B),
+          width: hasRegret ? 1.0 : 0.8,
         ),
       ),
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-            radius: 18,
+            radius: 17,
             backgroundColor: const Color(0xFF1E2B3E),
             child: Text(
               authorName.isNotEmpty ? authorName[0].toUpperCase() : 'T',
-              style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 13, fontWeight: FontWeight.w900),
+              style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 12.5, fontWeight: FontWeight.w900),
             ),
           ),
           const SizedBox(width: 10),
@@ -586,19 +588,19 @@ class _TraderFeedCardState extends State<TraderFeedCard> {
 
                 if (widget.post['chart_url'] != null)
                   Padding(
-                    padding: const EdgeInsets.only(top: 4, bottom: 10),
+                    padding: const EdgeInsets.only(top: 4, bottom: 8),
                     child: GestureDetector(
                       onTap: () => _openFullScreenChart(widget.post['chart_url']),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         child: Container(
                           width: double.infinity,
                           constraints: const BoxConstraints(
-                            maxHeight: 380,
+                            maxHeight: 260,
                           ),
                           decoration: BoxDecoration(
                             border: Border.all(color: const Color(0xFF1E2B3E)),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(10),
                             color: const Color(0xFF070B12),
                           ),
                           child: CachedNetworkImage(

@@ -1,0 +1,107 @@
+name: ⚙️ Growth Engine
+
+# ─────────────────────────────────────────────────────────────────────────
+#  PERF LOOP — roz 21:00 IST apne aap
+#
+#  Kaam: channel ke views padho → pillar weights banao
+#        → content_generator.py un weights se topics chunta hai
+#
+#  Manually: Actions → Run workflow → mode chuno (sirf TEST ke liye)
+#  (infographic + blogger alag files me hain — filhal dormant)
+# ─────────────────────────────────────────────────────────────────────────
+
+on:
+  schedule:
+    - cron: '30 15 * * *'        # 21:00 IST — perf (roz)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Kya chalao? (status = haal dekho)'
+        required: true
+        default: 'status'
+        type: choice
+        options: [status, perf]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: growth-engine
+  cancel-in-progress: false
+
+jobs:
+  growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install deps
+        run: pip install --quiet requests
+
+      # ── konsa mode chalana hai (schedule se decide) ──
+      - name: 🎯 Decide mode
+        id: pick
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then       # schedule se aaya (koi input nahi)
+            MODE="perf"
+          fi
+          echo "mode=$MODE" >> $GITHUB_OUTPUT
+          echo "▶️ chalega: $MODE"
+
+      - name: ⚙️ Run growth engine
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHANNEL:   ${{ secrets.TELEGRAM_CHANNEL || secrets.CHAT_ID }}
+          CHANNEL_LINK:       ${{ secrets.CHANNEL_LINK }}
+        run: |
+          MODE="${{ steps.pick.outputs.mode }}"
+          echo "▶️ python growth_engine.py $MODE"
+          python growth_engine.py "$MODE"
+
+      - name: 💾 State save
+        if: always()
+        run: |
+          git config user.name  "growth-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+          for f in performance.json performance-report.md; do
+            [ -f "$f" ] && git add "$f"
+          done
+          git add -A -- ':!card_*.png' ':!.card_render.html' ':!.github' 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "ℹ️ Koi change nahi"
+            exit 0
+          fi
+          git commit -m "⚙️ growth [$(date -u +'%d-%b-%Y %H:%M UTC')]" || exit 0
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME:-main}" >/dev/null 2>&1 || true
+            git push && { echo "✅ Saved"; exit 0; }
+            sleep 5
+          done
+
+      - name: 📊 Summary
+        if: always()
+        run: |
+          {
+            echo "## ⚙️ Growth Engine"
+            echo ""
+            echo "- **Mode**: ${{ steps.pick.outputs.mode }}"
+            echo ""
+            if [ -f performance-report.md ]; then
+              echo "### 📊 Performance"
+              head -25 performance-report.md
+            fi
+          } >> $GITHUB_STEP_SUMMARY
+          cat $GITHUB_STEP_SUMMARY

@@ -8,8 +8,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../widgets/trader_feed_card.dart';
 import '../widgets/create_chart_post_sheet.dart';
 import '../widgets/create_confession_sheet.dart';
-import '../widgets/community_sentiment_card.dart';
 import '../services/auth_service.dart';
+import 'market_indices_heatmap_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -319,95 +319,68 @@ class _CommunityScreenState extends State<CommunityScreen> {
           },
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 6, bottom: 120),
-            // 4 static headers: Indices(0), Sentiment(1), ConfessionBar(2), FilterRibbon(3)
-            itemCount: 4 + (posts.isEmpty ? 1 : posts.length),
+            // 2 static headers: Indices Ticker(0), Filter & Confession Shortcut(1)
+            itemCount: 2 + (posts.isEmpty ? 1 : posts.length),
             itemBuilder: (context, index) {
               // 1. TOP INDICES TICKER
               if (index == 0) {
                 return _buildTopIndicesTickerStrip();
               }
 
-              // 2. HERO SENTIMENT CARD
+              // 2. 🎯 STREAMLINED FILTER ROW & CONFESSION SHORTCUT
               if (index == 1) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  child: CommunitySentimentCard(
-                    niftyLivePrice: _niftyPrice,
-                    marketStatus: _marketStatus,
-                    isVotingAllowed: _isVotingAllowed,
-                  ),
-                );
-              }
-
-              // 3. TRADER CONFESSION ENTRY STRIP
-              if (index == 2) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: _openConfessionFlow,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF131B2A),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: const Color(0xFFFF2A6D).withOpacity(0.4),
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFF2A6D).withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Icon(Icons.shield_rounded, color: Color(0xFFFF2A6D), size: 16),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "TRADER CONFESSION DESK",
-                                  style: GoogleFonts.robotoMono(
-                                    color: const Color(0xFFFF2A6D),
-                                    fontSize: 9.5,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 0.6,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                const Text(
-                                  "FOMO ya Revenge trade? Confess anonymously (Max 700 words)...",
-                                  style: TextStyle(color: Colors.white70, fontSize: 11),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.edit_note_rounded, color: Color(0xFFFF2A6D), size: 20),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }
-
-              // 4. 🎯 FEED FILTER TABS (ALL / CHARTS / CONFESSIONS)
-              if (index == 3) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   child: Row(
                     children: [
-                      _buildFilterChip('ALL', 'ALL WIRE (${_communityPosts.length})'),
-                      const SizedBox(width: 6),
-                      _buildFilterChip('CHARTS', 'CHARTS'),
-                      const SizedBox(width: 6),
-                      _buildFilterChip('CONFESSIONS', 'CONFESSIONS'),
+                      Expanded(
+                        child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF101726),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: const Color(0xFF1E2B3E)),
+                          ),
+                          child: Row(
+                            children: [
+                              _buildSegmentedFilter('ALL', 'ALL (${_communityPosts.length})'),
+                              _buildSegmentedFilter('CHARTS', 'CHARTS'),
+                              _buildSegmentedFilter('CONFESSIONS', 'CONFESS'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      InkWell(
+                        onTap: _openConfessionFlow,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: 36,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFF2A6D).withOpacity(0.12),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.4)),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.shield_rounded, color: Color(0xFFFF2A6D), size: 14),
+                              const SizedBox(width: 4),
+                              Text(
+                                "+ CONFESS",
+                                style: GoogleFonts.robotoMono(
+                                  color: const Color(0xFFFF2A6D),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 0.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -432,8 +405,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // Feed Cards (Offset index - 4)
-              final post = posts[index - 4];
+              // Feed Cards (Offset index - 2)
+              final post = posts[index - 2];
               return TraderFeedCard(
                 key: ValueKey(post['id']),
                 post: post,
@@ -446,36 +419,32 @@ class _CommunityScreenState extends State<CommunityScreen> {
     );
   }
 
-  Widget _buildFilterChip(String value, String label) {
+  Widget _buildSegmentedFilter(String value, String label) {
     final isSelected = _selectedFilter == value;
     final isConfession = value == 'CONFESSIONS';
     final activeColor = isConfession ? const Color(0xFFFF2A6D) : const Color(0xFF00E5FF);
 
     return Expanded(
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           HapticFeedback.selectionClick();
           setState(() => _selectedFilter = value);
         },
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 7),
-          decoration: BoxDecoration(
-            color: isSelected ? activeColor.withOpacity(0.16) : const Color(0xFF131B2A),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: isSelected ? activeColor : const Color(0xFF1E2B3E),
-              width: isSelected ? 1.2 : 0.8,
-            ),
-          ),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 160),
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? activeColor.withOpacity(0.18) : Colors.transparent,
+            borderRadius: BorderRadius.circular(7),
+            border: isSelected ? Border.all(color: activeColor.withOpacity(0.5), width: 1) : null,
+          ),
           child: Text(
             label,
             style: GoogleFonts.robotoMono(
               color: isSelected ? activeColor : Colors.white60,
-              fontSize: 10,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0.3,
+              fontSize: 9.5,
+              fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
+              letterSpacing: 0.2,
             ),
           ),
         ),
@@ -498,7 +467,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
       child: Row(
         children: [
           InkWell(
-            onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+            onTap: () {
+              HapticFeedback.selectionClick();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const MarketIndicesHeatmapScreen(),
+                ),
+              );
+            },
             child: Container(
               margin: const EdgeInsets.only(left: 14, right: 6),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),

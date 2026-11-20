@@ -55,3 +55,9 @@ flutter:
     - assets/data/bactest.json
     - assets/data/stockpulse.jpeg
     - assets/data/economy_demand_radar.json
+    - assets/data/company_business_models.json
+    - assets/data/macro_research_report.json
+    - assets/data/order_radar_report.json
+    - assets/data/ibja_rates.json
+    - assets/data/market_movers.json
+    - assets/data/indices_heatmap.json

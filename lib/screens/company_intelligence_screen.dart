@@ -465,7 +465,7 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               _buildCatalystsAndMetricsCard(catalysts, metrics),
               const SizedBox(height: 16),
 
-              _buildSectionHeader("THESIS INVALIDATION TRIGGER", "CLEAR CONDITIONS TO EXIT / AVOID THIS STOCK", Icons.dangerous_rounded, titleColor: const Color(0xFFFF2A6D)),
+              _buildSectionHeader("FUNDAMENTAL DOWNSIDE RISKS", "KEY STRUCTURAL DOWNSIDE TRIGGERS (EDUCATIONAL)", Icons.warning_amber_rounded, titleColor: const Color(0xFFFF9100)),
               const SizedBox(height: 10),
               _buildThesisInvalidationDossier(invalidation, risks),
               const SizedBox(height: 16),
@@ -473,6 +473,8 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
               _buildSectionHeader("AUDITED FINANCIAL BASELINE", "STATUTORY STATEMENTS & EFFICIENCY RATIOS", Icons.table_chart_rounded),
               const SizedBox(height: 10),
               _buildFinancialStatementsAccordion(pnl, bs, cf, eff, statement),
+              const SizedBox(height: 16),
+              _buildSebiDisclaimerCard(),
             ],
           ),
         ),
@@ -798,11 +800,11 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
         children: [
           Row(
             children: const [
-              Icon(Icons.dangerous_rounded, color: Color(0xFFFF2A6D), size: 18),
+              Icon(Icons.warning_amber_rounded, color: Color(0xFFFF9100), size: 18),
               SizedBox(width: 6),
               Text(
-                "THESIS INVALIDATION (WHEN TO EXIT)",
-                style: TextStyle(color: Color(0xFFFF2A6D), fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.8),
+                "STRUCTURAL DOWNSIDE RISK TRIGGERS",
+                style: TextStyle(color: Color(0xFFFF9100), fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.8),
               ),
             ],
           ),
@@ -1036,5 +1038,49 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       return "${(parsedVal / 100000).toStringAsFixed(2)}L Cr";
     }
     return "${parsedVal.toStringAsFixed(0)} Cr";
+  }
+
+  Widget _buildSebiDisclaimerCard() {
+    return Container(
+      margin: const EdgeInsets.only(top: 8, bottom: 20),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D131F),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFB300).withOpacity(0.35)),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Color(0xFFFFB300), size: 15),
+              SizedBox(width: 8),
+              Text(
+                "SEBI COMPLIANCE & STATUTORY DISCLAIMER",
+                style: TextStyle(
+                  color: Color(0xFFFFB300),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.8,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Text(
+            "1. NOT SEBI REGISTERED: StockPulse and its developers are NOT registered with the Securities and Exchange Board of India (SEBI) as Research Analysts (RA) or Investment Advisers (IA).\n\n"
+            "2. NO BUY / SELL CALLS OR TIPS: All company business models, operating metrics, and risk triggers are for educational analysis and research purposes only. Nothing on this platform constitutes financial or investment advice.\n\n"
+            "3. STATUTORY DATA SOURCE: Audited financial statement metrics are sourced from official corporate filings (BSE/NSE) and statutory annual reports.\n\n"
+            "4. INDEPENDENT ADVICE: Equity investments involve market risks. Please consult a SEBI registered investment advisor before making any financial investment decisions.",
+            style: TextStyle(
+              color: Color(0xFF94A3B8),
+              fontSize: 10,
+              height: 1.45,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

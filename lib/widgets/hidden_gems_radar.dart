@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,24 +36,72 @@ class _OrderRadarDashboardWidgetState extends State<OrderRadarDashboardWidget>
       _errorMessage = null;
     });
 
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+
+    // 🎯 Tier 1: Cloudflare Worker API
     try {
-      final endpoint = "${widget.workerBaseUrl}/?type=radar";
+      final endpoint = "${widget.workerBaseUrl}/?type=radar&ts=$timestamp";
       final response = await http
           .get(Uri.parse(endpoint))
-          .timeout(const Duration(seconds: 12));
+          .timeout(const Duration(seconds: 8));
 
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         final decoded = json.decode(utf8.decode(response.bodyBytes));
+        if (mounted) {
+          setState(() {
+            _reportData = decoded;
+            _isLoading = false;
+          });
+        }
+        return;
+      }
+    } catch (e) {
+      debugPrint("Worker radar fetch failed: $e. Trying GitHub / CDN fallbacks...");
+    }
+
+    // 🎯 Tier 2: Direct GitHub Raw + ISP Bypass CDNs
+    final List<String> endpoints = [
+      'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/order_radar_report.json?ts=$timestamp',
+      'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/order_radar_report.json?ts=$timestamp',
+      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/order_radar_report.json?ts=$timestamp',
+    ];
+
+    for (final url in endpoints) {
+      try {
+        final res = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 8));
+        if (res.statusCode == 200 && res.body.isNotEmpty) {
+          final decoded = json.decode(utf8.decode(res.bodyBytes));
+          if (mounted) {
+            setState(() {
+              _reportData = decoded;
+              _isLoading = false;
+            });
+          }
+          return;
+        }
+      } catch (e) {
+        debugPrint("CDN radar fetch failed ($url): $e");
+      }
+    }
+
+    // 🎯 Tier 3: Local Bundled Asset Fallback
+    try {
+      final localJson = await rootBundle.loadString('assets/data/order_radar_report.json');
+      final decoded = json.decode(localJson);
+      if (mounted) {
         setState(() {
           _reportData = decoded;
           _isLoading = false;
         });
-      } else {
-        throw Exception("Server returned HTTP ${response.statusCode}");
       }
-    } catch (e) {
+      return;
+    } catch (localErr) {
+      debugPrint("Local asset fallback failed: $localErr");
+    }
+
+    if (mounted) {
       setState(() {
-        _errorMessage = "Failed to load live radar data: $e";
+        _errorMessage = "Network issue: Unable to load order radar data from server or local assets.";
         _isLoading = false;
       });
     }

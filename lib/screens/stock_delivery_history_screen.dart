@@ -42,6 +42,26 @@ class StockDayRecord {
   bool get isBull => close >= open;
 }
 
+class MarketMoverItem {
+  final String symbol;
+  final double cmp;
+  final double refPrice;
+  final double changePct;
+  final int volume;
+  final double deliveryPct;
+  final String period;
+
+  MarketMoverItem({
+    required this.symbol,
+    required this.cmp,
+    required this.refPrice,
+    required this.changePct,
+    required this.volume,
+    required this.deliveryPct,
+    required this.period,
+  });
+}
+
 enum DeliveryFilterMode {
   latestDate,
   highestDelivery,
@@ -64,21 +84,88 @@ class StockDeliveryHistoryScreen extends StatefulWidget {
 }
 
 class _StockDeliveryHistoryScreenState
-    extends State<StockDeliveryHistoryScreen> {
+    extends State<StockDeliveryHistoryScreen>
+    with SingleTickerProviderStateMixin {
   final String _dataUrl =
       'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/stock_history_20d.json';
 
+  late TabController _mainTabController;
   Map<String, List<StockDayRecord>> _stockDatabase = {};
   late String _selectedSymbol;
   bool _isLoading = true;
   String? _errorMessage;
   DeliveryFilterMode _currentFilter = DeliveryFilterMode.latestDate;
 
+  // Market Movers Collections
+  int _selectedMoverSubTab = 0; // 0: 🟢 1-Week, 1: 🚀 1-Month, 2: 🔴 Top Losers, 3: 📦 High Deliv
+  List<MarketMoverItem> _weeklyGainers = [];
+  List<MarketMoverItem> _monthlyGainers = [];
+  List<MarketMoverItem> _weeklyLosers = [];
+  List<MarketMoverItem> _highDeliveryGainers = [];
+
   @override
   void initState() {
     super.initState();
+    _mainTabController = TabController(length: 2, vsync: this);
     _selectedSymbol = widget.initialSymbol;
     _fetchHistoryData();
+  }
+
+  @override
+  void dispose() {
+    _mainTabController.dispose();
+    super.dispose();
+  }
+
+  void _computeMarketMovers() {
+    final List<MarketMoverItem> weekly = [];
+    final List<MarketMoverItem> monthly = [];
+
+    _stockDatabase.forEach((sym, records) {
+      if (records.length < 2) return;
+      final latest = records.last;
+      final cmp = latest.close;
+
+      // 1-Week (5 trading sessions ago)
+      if (records.length >= 5) {
+        final p5 = records[records.length - 5].close;
+        if (p5 > 0) {
+          final chg = ((cmp - p5) / p5) * 100;
+          weekly.add(MarketMoverItem(
+            symbol: sym,
+            cmp: cmp,
+            refPrice: p5,
+            changePct: double.parse(chg.toStringAsFixed(2)),
+            volume: latest.tradedQty,
+            deliveryPct: latest.deliveryPercent,
+            period: '5-Day (1W)',
+          ));
+        }
+      }
+
+      // 1-Month / Multi-session (earliest recorded session in window)
+      final pMonth = records.first.close;
+      if (pMonth > 0) {
+        final chg = ((cmp - pMonth) / pMonth) * 100;
+        monthly.add(MarketMoverItem(
+          symbol: sym,
+          cmp: cmp,
+          refPrice: pMonth,
+          changePct: double.parse(chg.toStringAsFixed(2)),
+          volume: latest.tradedQty,
+          deliveryPct: latest.deliveryPercent,
+          period: '${records.length}-Session Window',
+        ));
+      }
+    });
+
+    weekly.sort((a, b) => b.changePct.compareTo(a.changePct));
+    monthly.sort((a, b) => b.changePct.compareTo(a.changePct));
+
+    _weeklyGainers = weekly.where((x) => x.changePct > 0).take(35).toList();
+    _weeklyLosers = weekly.where((x) => x.changePct < 0).toList().reversed.take(35).toList();
+    _monthlyGainers = monthly.where((x) => x.changePct > 0).take(35).toList();
+    _highDeliveryGainers = weekly.where((x) => x.deliveryPct >= 50.0 && x.changePct > 2.0).take(30).toList();
   }
 
   Future<void> _fetchHistoryData() async {
@@ -99,6 +186,7 @@ class _StockDeliveryHistoryScreenState
 
         setState(() {
           _stockDatabase = parsed;
+          _computeMarketMovers();
           if (!_stockDatabase.containsKey(_selectedSymbol) &&
               _stockDatabase.isNotEmpty) {
             _selectedSymbol = _stockDatabase.keys.first;
@@ -386,6 +474,18 @@ class _StockDeliveryHistoryScreenState
             letterSpacing: 0.8,
           ),
         ),
+        bottom: TabBar(
+          controller: _mainTabController,
+          indicatorColor: const Color(0xFF00F0FF),
+          indicatorWeight: 3,
+          labelColor: const Color(0xFF00F0FF),
+          unselectedLabelColor: const Color(0xFF8896AB),
+          labelStyle: GoogleFonts.plusJakartaSans(fontSize: 11.5, fontWeight: FontWeight.bold),
+          tabs: const [
+            Tab(icon: Icon(Icons.leaderboard_rounded, size: 16), text: "🏆 Weekly & Monthly Movers"),
+            Tab(icon: Icon(Icons.candlestick_chart_rounded, size: 16), text: "📊 Stock OHLC & Delivery"),
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search_rounded, color: Color(0xFF00F0FF)),
@@ -429,13 +529,304 @@ class _StockDeliveryHistoryScreenState
                     ],
                   ),
                 )
-              : Column(
+              : TabBarView(
+                  controller: _mainTabController,
                   children: [
-                    _buildSelectorAndFilterBar(),
-                    _buildSummaryBar(),
-                    Expanded(child: _buildHistoryListView()),
+                    _buildMarketMoversTab(),
+                    Column(
+                      children: [
+                        _buildSelectorAndFilterBar(),
+                        _buildSummaryBar(),
+                        Expanded(child: _buildHistoryListView()),
+                      ],
+                    ),
                   ],
                 ),
+    );
+  }
+
+  Widget _buildMarketMoversTab() {
+    List<MarketMoverItem> activeList;
+    switch (_selectedMoverSubTab) {
+      case 0:
+        activeList = _weeklyGainers;
+        break;
+      case 1:
+        activeList = _monthlyGainers;
+        break;
+      case 2:
+        activeList = _weeklyLosers;
+        break;
+      case 3:
+      default:
+        activeList = _highDeliveryGainers;
+        break;
+    }
+
+    return Column(
+      children: [
+        // Sub-selector Bar
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          color: const Color(0xFF0F1726),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildMoverSubTabChip(0, "🟢 1-Week Gainers (${_weeklyGainers.length})"),
+                const SizedBox(width: 8),
+                _buildMoverSubTabChip(1, "🚀 1-Month Gainers (${_monthlyGainers.length})"),
+                const SizedBox(width: 8),
+                _buildMoverSubTabChip(2, "🔴 Top Losers (${_weeklyLosers.length})"),
+                const SizedBox(width: 8),
+                _buildMoverSubTabChip(3, "📦 High Deliv Acc (${_highDeliveryGainers.length})"),
+              ],
+            ),
+          ),
+        ),
+
+        // Hint bar
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          color: const Color(0xFF0A101D),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'RANKED BY LIQUID EXCHANGE VOLUME & % RETURN',
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w800,
+                  color: const Color(0xFF00F0FF),
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const Text(
+                'Tap to inspect OHLC',
+                style: TextStyle(color: Colors.white38, fontSize: 9.5),
+              ),
+            ],
+          ),
+        ),
+
+        // Active List
+        Expanded(
+          child: activeList.isEmpty
+              ? const Center(
+                  child: Text("No records available in this timeframe", style: TextStyle(color: Colors.white54)),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.all(12),
+                  itemCount: activeList.length + 1,
+                  itemBuilder: (context, idx) {
+                    if (idx == activeList.length) {
+                      return _buildSebiDisclaimer();
+                    }
+                    final item = activeList[idx];
+                    return _buildMoverStockCard(item, idx + 1);
+                  },
+                ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMoverSubTabChip(int index, String label) {
+    final isSelected = _selectedMoverSubTab == index;
+    return InkWell(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        setState(() => _selectedMoverSubTab = index);
+      },
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF00F0FF).withOpacity(0.18) : const Color(0xFF162032),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF00F0FF) : const Color(0xFF25334A),
+          ),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? const Color(0xFF00F0FF) : Colors.white70,
+            fontSize: 11,
+            fontWeight: isSelected ? FontWeight.w900 : FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMoverStockCard(MarketMoverItem item, int rank) {
+    final isGain = item.changePct >= 0;
+    final color = isGain ? const Color(0xFF00F5A0) : const Color(0xFFFF5252);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            HapticFeedback.selectionClick();
+            setState(() {
+              _selectedSymbol = item.symbol;
+            });
+            _mainTabController.animateTo(1);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            child: Row(
+              children: [
+                // Rank Circle
+                Container(
+                  width: 26,
+                  height: 26,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C2638),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: Text(
+                    '$rank',
+                    style: const TextStyle(
+                      color: Colors.white54,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+
+                // Symbol & Base Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            item.symbol,
+                            style: GoogleFonts.plusJakartaSans(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: item.deliveryPct >= 50
+                                  ? const Color(0xFF00F5A0).withOpacity(0.15)
+                                  : Colors.white10,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              '${item.deliveryPct.toStringAsFixed(1)}% Del',
+                              style: TextStyle(
+                                color: item.deliveryPct >= 50
+                                    ? const Color(0xFF00F5A0)
+                                    : const Color(0xFF94A3B8),
+                                fontSize: 9.5,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Base: ₹${item.refPrice.toStringAsFixed(1)} • Vol: ${_formatCompact(item.volume)}',
+                        style: const TextStyle(color: Color(0xFF6B7A99), fontSize: 11),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // CMP & Return Badge
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '₹${item.cmp.toStringAsFixed(1)}',
+                      style: GoogleFonts.robotoMono(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                      decoration: BoxDecoration(
+                        color: color.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        '${isGain ? '+' : ''}${item.changePct.toStringAsFixed(2)}%',
+                        style: GoogleFonts.robotoMono(
+                          color: color,
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(width: 6),
+                const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: Colors.white24),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSebiDisclaimer() {
+    return Container(
+      margin: const EdgeInsets.only(top: 8, bottom: 20),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A101D),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFFFFB300).withOpacity(0.3)),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Color(0xFFFFB300), size: 14),
+              SizedBox(width: 6),
+              Text(
+                "SEBI COMPLIANCE & RESEARCH DISCLAIMER",
+                style: TextStyle(
+                  color: Color(0xFFFFB300),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 6),
+          Text(
+            "This leaderboard ranks securities purely based on historical price and volume percentages extracted from official NSE Bhavcopy files. "
+            "It does NOT constitute investment advice, buy/sell calls, or price targets. StockPulse is not SEBI registered. Please consult a SEBI registered investment advisor before trading.",
+            style: TextStyle(color: Color(0xFF8896AB), fontSize: 9.5, height: 1.4),
+          ),
+        ],
+      ),
     );
   }
 

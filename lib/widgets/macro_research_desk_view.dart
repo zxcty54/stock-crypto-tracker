@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class MacroResearchDeskView extends StatefulWidget {
@@ -65,6 +66,23 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       } catch (e) {
         debugPrint("Endpoint failed ($urlString): $e");
       }
+    }
+
+    // 🎯 Tier 4: Offline Local Assets Fallback
+    try {
+      final localJson = await rootBundle.loadString('assets/data/macro_research_report.json');
+      final decoded = json.decode(localJson);
+      if (mounted) {
+        setState(() {
+          _reportData = decoded;
+          _sectors = decoded['sectors'] ?? [];
+          _isLoading = false;
+          _errorMessage = null;
+        });
+        return;
+      }
+    } catch (e) {
+      debugPrint("Local asset fallback failed: $e");
     }
 
     if (mounted) {
@@ -195,8 +213,11 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  itemCount: _sectors.length,
+                  itemCount: _sectors.length + 1,
                   itemBuilder: (context, index) {
+                    if (index == _sectors.length) {
+                      return _buildSebiDisclaimerCard();
+                    }
                     final sector = _sectors[index];
                     return _buildSectorCard(sector);
                   },
@@ -566,6 +587,49 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSebiDisclaimerCard() {
+    return Container(
+      margin: const EdgeInsets.only(top: 8, bottom: 24),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D131F),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFB300).withOpacity(0.35)),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.gavel_rounded, color: Color(0xFFFFB300), size: 15),
+              SizedBox(width: 8),
+              Text(
+                "SEBI COMPLIANCE & STATUTORY DISCLAIMER",
+                style: TextStyle(
+                  color: Color(0xFFFFB300),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.8,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Text(
+            "1. NOT SEBI REGISTERED: StockPulse and its developers are NOT registered with the Securities and Exchange Board of India (SEBI) as Research Analysts (RA) or Investment Advisers (IA).\n\n"
+            "2. NO BUY / SELL CALLS OR TIPS: Margin projections (OPM bps, pricing power, commodity delta) are theoretical financial models solely for educational study. Nothing constitutes stock recommendations or financial advice.\n\n"
+            "3. MARKET RISK: Corporate margins depend on several dynamic operational factors. Consult a SEBI registered investment advisor before taking any financial decision.",
+            style: TextStyle(
+              color: Color(0xFF94A3B8),
+              fontSize: 10,
+              height: 1.45,
+            ),
           ),
         ],
       ),
