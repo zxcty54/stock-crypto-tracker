@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 class MfSmartMoneyScreen extends StatefulWidget {
   const MfSmartMoneyScreen({super.key});
@@ -15,6 +16,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isLoading = true;
+  bool _isSyncing = false;
+  bool _isLiveSynced = false;
 
   Map<String, dynamic> _metadata = {};
   List<Map<String, dynamic>> _topFunds = [];
@@ -30,6 +33,15 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
 
   final NumberFormat _currencyFormat = NumberFormat('#,##,##0.00', 'en_IN');
 
+  // Dynamic remote data CDNs (Auto-updated every month via GitHub Actions)
+  static const List<String> dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/assets/data/mf_smart_money_radar.json',
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/mf_smart_money_radar.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/mf_smart_money_radar.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/mf_smart_money_radar.json',
+    'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/mf_smart_money_radar.json',
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -43,25 +55,207 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     super.dispose();
   }
 
-  Future<void> _loadDataset() async {
-    try {
-      final jsonStr =
-          await rootBundle.loadString('assets/data/mf_smart_money_radar.json');
-      final data = jsonDecode(jsonStr);
-
-      if (mounted) {
-        setState(() {
-          _metadata = Map<String, dynamic>.from(data['metadata'] ?? {});
-          _topFunds = List<Map<String, dynamic>>.from(data['top_20_funds'] ?? []);
-          _infiltrations = List<Map<String, dynamic>>.from(
-              data['smart_money_infiltrations'] ?? []);
-          _isLoading = false;
-        });
-      }
-    } catch (e) {
-      debugPrint("Error loading MF dataset: $e");
-      if (mounted) setState(() => _isLoading = false);
+  Future<void> _loadDataset({bool isRefresh = false}) async {
+    if (isRefresh) {
+      HapticFeedback.lightImpact();
+      setState(() => _isSyncing = true);
     }
+
+    // 1. First, load bundled asset baseline if not yet populated
+    if (_topFunds.isEmpty) {
+      try {
+        final jsonStr =
+            await rootBundle.loadString('assets/data/mf_smart_money_radar.json');
+        final data = jsonDecode(jsonStr);
+
+        if (mounted && _topFunds.isEmpty) {
+          setState(() {
+            _metadata = Map<String, dynamic>.from(data['metadata'] ?? {});
+            _topFunds =
+                List<Map<String, dynamic>>.from(data['top_20_funds'] ?? []);
+            _infiltrations = List<Map<String, dynamic>>.from(
+                data['smart_money_infiltrations'] ?? []);
+            _isLoading = false;
+          });
+        }
+      } catch (e) {
+        debugPrint("Error loading local bundled MF dataset: $e");
+      }
+    }
+
+    // 2. Fetch live dynamic radar from CDNs (auto-updated every month)
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    bool fetchedLive = false;
+
+    for (final baseUrl in dataUrls) {
+      try {
+        final uri = Uri.parse('$baseUrl?ts=$timestamp');
+        final response = await http.get(
+          uri,
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+          },
+        ).timeout(const Duration(seconds: 6));
+
+        if (response.statusCode == 200 && response.body.isNotEmpty) {
+          final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));
+          if (parsed is Map<String, dynamic> && parsed['top_20_funds'] != null) {
+            if (mounted) {
+              setState(() {
+                _metadata = Map<String, dynamic>.from(parsed['metadata'] ?? {});
+                _topFunds = List<Map<String, dynamic>>.from(
+                    parsed['top_20_funds'] ?? []);
+                _infiltrations = List<Map<String, dynamic>>.from(
+                    parsed['smart_money_infiltrations'] ?? []);
+                _isLiveSynced = true;
+                _isSyncing = false;
+                _isLoading = false;
+              });
+            }
+            fetchedLive = true;
+            if (isRefresh && mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    "✅ Live Institutional Radar Synced (${_metadata['last_updated'] ?? 'Latest'})",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  backgroundColor: const Color(0xFF00C853),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            }
+            break;
+          }
+        }
+      } catch (e) {
+        // Try next fallback CDN
+        continue;
+      }
+    }
+
+    if (!fetchedLive && mounted) {
+      setState(() {
+        _isSyncing = false;
+        _isLoading = false;
+      });
+      if (isRefresh) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Baseline cached radar active."),
+            backgroundColor: Color(0xFF00838F),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+
+  void _showPipelineInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF0F1726),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Color(0xFF1E2B3E)),
+        ),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF00E5FF).withOpacity(0.15),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.auto_mode_rounded,
+                  color: Color(0xFF00E5FF), size: 18),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                "Dynamic Monthly Engine",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildInfoStep(
+                "1. SEBI 10th Mandate",
+                "By Indian securities law (SEBI), every Mutual Fund AMC must disclose its complete portfolio by the 10th of every month.",
+                const Color(0xFF00E5FF),
+              ),
+              const SizedBox(height: 10),
+              _buildInfoStep(
+                "2. Automated Monthly Job",
+                "GitHub Actions runs on the 11th of every month (cron: 0 14 11 * *) to automatically fetch portfolio filings, compute month-over-month holding changes, and identify institutional moves.",
+                const Color(0xFF00FF88),
+              ),
+              const SizedBox(height: 10),
+              _buildInfoStep(
+                "3. Live AMFI Scheme API",
+                "Integrated with the official AMFI Open API (api.mfapi.in) using scheme codes (e.g. 122639) for daily real-time NAVs and returns.",
+                const Color(0xFFFFB703),
+              ),
+              const SizedBox(height: 10),
+              _buildInfoStep(
+                "4. Zero-Update Cloud Sync",
+                "New monthly data streams instantly via raw GitHub / CDN to your app without needing any Play Store update or APK rebuild.",
+                const Color(0xFFE040FB),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("CLOSE",
+                style: TextStyle(
+                    color: Color(0xFF00E5FF), fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoStep(String title, String desc, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            desc,
+            style: const TextStyle(
+                color: Colors.white70, fontSize: 10.5, height: 1.3),
+          ),
+        ],
+      ),
+    );
   }
 
   // -------------------------------------------------------------
@@ -117,6 +311,12 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
 
   @override
   Widget build(BuildContext context) {
+    final double totalAum =
+        (_metadata['total_aum_tracked_cr'] as num?)?.toDouble() ?? 710600.0;
+    final String aumStr = totalAum >= 100000
+        ? "₹${(totalAum / 100000).toStringAsFixed(1)}L Cr"
+        : "₹${_currencyFormat.format(totalAum)} Cr";
+
     return Scaffold(
       backgroundColor: const Color(0xFF090D16),
       appBar: AppBar(
@@ -127,7 +327,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           children: [
             Row(
               children: [
-                const Icon(Icons.radar_rounded, color: Color(0xFF00E5FF), size: 18),
+                const Icon(Icons.radar_rounded,
+                    color: Color(0xFF00E5FF), size: 18),
                 const SizedBox(width: 6),
                 Text(
                   "MF SMART MONEY RADAR",
@@ -140,12 +341,36 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
               ],
             ),
-            const Text(
-              "Top 20 Marquee Funds Portfolio Forensics • ₹7.1L Cr Tracked",
-              style: TextStyle(color: Colors.white54, fontSize: 9.5),
+            Text(
+              "Top ${_topFunds.isNotEmpty ? _topFunds.length : 20} Marquee Funds • $aumStr Tracked",
+              style: const TextStyle(color: Colors.white54, fontSize: 9.5),
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: _isSyncing
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Color(0xFF00E5FF),
+                    ),
+                  )
+                : const Icon(Icons.sync_rounded,
+                    color: Color(0xFF00E5FF), size: 20),
+            tooltip: "Refresh Live Institutional Data",
+            onPressed: _isSyncing ? null : () => _loadDataset(isRefresh: true),
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline_rounded,
+                color: Colors.white70, size: 20),
+            tooltip: "Automated Monthly Pipeline",
+            onPressed: () => _showPipelineInfoDialog(context),
+          ),
+          const SizedBox(width: 4),
+        ],
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
@@ -153,8 +378,10 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           indicatorWeight: 2.5,
           labelColor: const Color(0xFF00E5FF),
           unselectedLabelColor: Colors.white54,
-          labelStyle: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w800),
-          unselectedLabelStyle: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w600),
+          labelStyle: GoogleFonts.plusJakartaSans(
+              fontSize: 11, fontWeight: FontWeight.w800),
+          unselectedLabelStyle: GoogleFonts.plusJakartaSans(
+              fontSize: 11, fontWeight: FontWeight.w600),
           tabs: const [
             Tab(text: "🕵️ INFILTRATIONS"),
             Tab(text: "⚖️ OVERLAP SCANNER"),
@@ -170,10 +397,30 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           : TabBarView(
               controller: _tabController,
               children: [
-                _buildInfiltrationsTab(),
-                _buildOverlapScannerTab(),
-                _buildTopFundsTab(),
-                _buildCashBarometerTab(),
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildInfiltrationsTab(),
+                ),
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildOverlapScannerTab(),
+                ),
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildTopFundsTab(),
+                ),
+                RefreshIndicator(
+                  color: const Color(0xFF00E5FF),
+                  backgroundColor: const Color(0xFF0F1726),
+                  onRefresh: () => _loadDataset(isRefresh: true),
+                  child: _buildCashBarometerTab(),
+                ),
               ],
             ),
     );
@@ -247,6 +494,16 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   }
 
   Widget _buildInfiltrationSummaryBanner() {
+    final String lastUpdated =
+        _metadata['last_updated'] ?? 'Latest SEBI Disclosures';
+    final double totalAum =
+        (_metadata['total_aum_tracked_cr'] as num?)?.toDouble() ?? 710600.0;
+    final double avgCash =
+        (_metadata['average_cash_level_pct'] as num?)?.toDouble() ?? 7.76;
+    final String aumStr = totalAum >= 100000
+        ? "₹${(totalAum / 100000).toStringAsFixed(1)}L Cr"
+        : "₹${_currencyFormat.format(totalAum)} Cr";
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -262,7 +519,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
             children: [
               Row(
                 children: [
-                  const Icon(Icons.bolt_rounded, color: Color(0xFF00E5FF), size: 16),
+                  const Icon(Icons.bolt_rounded,
+                      color: Color(0xFF00E5FF), size: 16),
                   const SizedBox(width: 6),
                   Text(
                     "INSTITUTIONAL DELTA SIGNAL",
@@ -276,27 +534,41 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF00FF88).withOpacity(0.12),
+                  color: _isLiveSynced
+                      ? const Color(0xFF00FF88).withOpacity(0.15)
+                      : const Color(0xFF00E5FF).withOpacity(0.12),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: const Text(
-                  "ACTIVE SECTOR SHIFT",
+                child: Text(
+                  _isLiveSynced ? "🟢 LIVE CLOUD SYNCED" : "⚡ AUTOMATED DII RADAR",
                   style: TextStyle(
-                    color: Color(0xFF00FF88),
-                    fontSize: 9,
+                    color: _isLiveSynced
+                        ? const Color(0xFF00FF88)
+                        : const Color(0xFF00E5FF),
+                    fontSize: 8.5,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 4),
+          Text(
+            "Cycle: $lastUpdated • $aumStr Assets • ${avgCash.toStringAsFixed(1)}% Dry Powder",
+            style: const TextStyle(
+                color: Color(0xFF8896AB),
+                fontSize: 9.5,
+                fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 6),
           Text(
             _metadata['stance_summary'] ??
                 "Marquee DII managers maintain selective accumulation in electronics, defence, and capital markets.",
-            style: const TextStyle(color: Colors.white70, fontSize: 11, height: 1.35),
+            style: const TextStyle(
+                color: Colors.white70, fontSize: 11, height: 1.35),
           ),
         ],
       ),
@@ -1013,6 +1285,52 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 ),
               );
             }).toList(),
+          ),
+          const SizedBox(height: 10),
+
+          // AMFI Live API Badge
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFF1E2B3E)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.api_rounded,
+                        color: Color(0xFF00E5FF), size: 14),
+                    const SizedBox(width: 6),
+                    Text(
+                      "AMFI Scheme: ${fund['scheme_code'] ?? 'Official Registry'}",
+                      style: GoogleFonts.robotoMono(
+                        color: Colors.white70,
+                        fontSize: 9.5,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF00FF88).withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
+                    "OPEN AMFI API",
+                    style: TextStyle(
+                      color: Color(0xFF00FF88),
+                      fontSize: 8,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

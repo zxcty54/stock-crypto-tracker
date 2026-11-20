@@ -8,17 +8,51 @@ Compiles institutional portfolio disclosures for India's Top 20 Marquee Mutual F
 - Institutional Cash Barometer (Market Timing Signal)
 - Pairwise Portfolio Overlap & Fee Leakage Scanner
 - Downside Protection & Rolling Alpha Matrix
+- Automated Live AMFI / MFAPI Daily NAV & Returns Calculation
 """
 
 import json
 import os
+import sys
 from datetime import datetime
 
+try:
+    import urllib.request
+    HAS_URLLIB = True
+except ImportError:
+    HAS_URLLIB = False
+
 OUTPUT_FILE = "assets/data/mf_smart_money_radar.json"
+ROOT_OUTPUT_FILE = "mf_smart_money_radar.json"
+
+# Official AMFI Scheme Codes (Direct-Growth) for India's Top 20 Alpha Funds
+SCHEME_CODES = {
+    "ppfas_flexi": 122639,
+    "quant_small": 120828,
+    "nippon_small": 118778,
+    "hdfc_midcap": 118989,
+    "motilal_midcap": 127042,
+    "sbi_contra": 119598,
+    "mirae_large_mid": 118834,
+    "icici_bluechip": 120586,
+    "hdfc_flexi": 118968,
+    "kotak_emerging": 120166,
+    "sbi_small": 125497,
+    "quant_active": 120823,
+    "bandhan_small": 147944,
+    "tata_digital": 135783,
+    "dsp_small": 119062,
+    "franklin_smaller": 118667,
+    "canara_emerging": 118557,
+    "axis_small": 125354,
+    "invesco_contra": 120387,
+    "uti_nifty50": 120716
+}
 
 TOP_20_FUNDS = [
     {
         "id": "ppfas_flexi",
+        "scheme_code": 122639,
         "name": "Parag Parikh Flexi Cap Fund",
         "short_name": "PPFAS Flexi Cap",
         "fund_house": "PPFAS Mutual Fund",
@@ -49,6 +83,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "quant_small",
+        "scheme_code": 120828,
         "name": "Quant Small Cap Fund",
         "short_name": "Quant Small Cap",
         "fund_house": "Quant Mutual Fund",
@@ -79,6 +114,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "nippon_small",
+        "scheme_code": 118778,
         "name": "Nippon India Small Cap Fund",
         "short_name": "Nippon Small Cap",
         "fund_house": "Nippon India MF",
@@ -109,6 +145,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "hdfc_midcap",
+        "scheme_code": 118989,
         "name": "HDFC Mid-Cap Opportunities Fund",
         "short_name": "HDFC Mid-Cap",
         "fund_house": "HDFC Mutual Fund",
@@ -139,6 +176,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "motilal_midcap",
+        "scheme_code": 127042,
         "name": "Motilal Oswal Midcap Fund",
         "short_name": "Motilal Midcap",
         "fund_house": "Motilal Oswal MF",
@@ -169,6 +207,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "sbi_contra",
+        "scheme_code": 119598,
         "name": "SBI Contra Fund",
         "short_name": "SBI Contra",
         "fund_house": "SBI Mutual Fund",
@@ -199,6 +238,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "mirae_large_mid",
+        "scheme_code": 118834,
         "name": "Mirae Asset Large & Midcap Fund",
         "short_name": "Mirae Large & Midcap",
         "fund_house": "Mirae Asset MF",
@@ -229,6 +269,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "icici_bluechip",
+        "scheme_code": 120586,
         "name": "ICICI Prudential Bluechip Fund",
         "short_name": "ICICI Bluechip",
         "fund_house": "ICICI Prudential MF",
@@ -259,6 +300,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "hdfc_flexi",
+        "scheme_code": 118968,
         "name": "HDFC Flexi Cap Fund",
         "short_name": "HDFC Flexi Cap",
         "fund_house": "HDFC Mutual Fund",
@@ -289,6 +331,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "kotak_emerging",
+        "scheme_code": 120166,
         "name": "Kotak Emerging Equity Fund",
         "short_name": "Kotak Emerging",
         "fund_house": "Kotak Mahindra MF",
@@ -319,6 +362,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "sbi_small",
+        "scheme_code": 125497,
         "name": "SBI Small Cap Fund",
         "short_name": "SBI Small Cap",
         "fund_house": "SBI Mutual Fund",
@@ -349,6 +393,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "quant_active",
+        "scheme_code": 120823,
         "name": "Quant Active Fund",
         "short_name": "Quant Active",
         "fund_house": "Quant Mutual Fund",
@@ -379,6 +424,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "bandhan_small",
+        "scheme_code": 147944,
         "name": "Bandhan Small Cap Fund",
         "short_name": "Bandhan Small Cap",
         "fund_house": "Bandhan Mutual Fund",
@@ -409,6 +455,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "tata_digital",
+        "scheme_code": 135783,
         "name": "Tata Digital India Fund",
         "short_name": "Tata Digital Tech",
         "fund_house": "Tata Mutual Fund",
@@ -439,6 +486,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "dsp_small",
+        "scheme_code": 119062,
         "name": "DSP Small Cap Fund",
         "short_name": "DSP Small Cap",
         "fund_house": "DSP Mutual Fund",
@@ -469,6 +517,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "franklin_smaller",
+        "scheme_code": 118667,
         "name": "Franklin India Smaller Companies Fund",
         "short_name": "Franklin Smaller Co",
         "fund_house": "Franklin Templeton MF",
@@ -499,6 +548,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "canara_emerging",
+        "scheme_code": 118557,
         "name": "Canara Robeco Emerging Equities Fund",
         "short_name": "Canara Emerging Eq",
         "fund_house": "Canara Robeco MF",
@@ -529,6 +579,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "axis_small",
+        "scheme_code": 125354,
         "name": "Axis Small Cap Fund",
         "short_name": "Axis Small Cap",
         "fund_house": "Axis Mutual Fund",
@@ -559,6 +610,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "invesco_contra",
+        "scheme_code": 120387,
         "name": "Invesco India Contra Fund",
         "short_name": "Invesco Contra",
         "fund_house": "Invesco Mutual Fund",
@@ -589,6 +641,7 @@ TOP_20_FUNDS = [
     },
     {
         "id": "uti_nifty50",
+        "scheme_code": 120716,
         "name": "UTI Nifty 50 Index Fund",
         "short_name": "UTI Nifty 50",
         "fund_house": "UTI Mutual Fund",
@@ -777,16 +830,37 @@ SMART_MONEY_INFILTRATIONS = [
     }
 ]
 
+def fetch_live_amfi_nav(scheme_code):
+    """Fetches real-time daily NAV directly from AMFI Open API (api.mfapi.in)."""
+    if not HAS_URLLIB:
+        return None
+    try:
+        url = f"https://api.mfapi.in/mf/{scheme_code}"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=5) as res:
+            if res.status == 200:
+                data = json.loads(res.read().decode())
+                nav_data = data.get("data", [])
+                if nav_data and len(nav_data) >= 2:
+                    current_nav = float(nav_data[0]["nav"])
+                    prev_nav = float(nav_data[1]["nav"])
+                    nav_change_pct = ((current_nav - prev_nav) / prev_nav) * 100.0
+                    return {
+                        "nav": round(current_nav, 2),
+                        "nav_change_pct": round(nav_change_pct, 2),
+                        "date": nav_data[0]["date"]
+                    }
+    except Exception:
+        pass
+    return None
+
 def calculate_overlap(fund_a, fund_b):
     symbols_a = {h["symbol"]: h["weight"] for h in fund_a.get("top_10_holdings", [])}
     symbols_b = {h["symbol"]: h["weight"] for h in fund_b.get("top_10_holdings", [])}
     
     common_symbols = set(symbols_a.keys()).intersection(set(symbols_b.keys()))
-    
-    # Overlap formula: sum of min(weight_a, weight_b) for common stocks
     overlap_pct = sum(min(symbols_a[sym], symbols_b[sym]) for sym in common_symbols)
-    # Scale to percentage representing portfolio overlap
-    total_min = overlap_pct * 2.0  # Normalized for top holdings comparison
+    total_min = overlap_pct * 2.0
     
     common_stocks = []
     for s in common_symbols:
@@ -805,6 +879,18 @@ def calculate_overlap(fund_a, fund_b):
     }
 
 def build_full_report():
+    print("🚀 Initializing Dynamic MF Smart Money Engine...")
+    
+    # Try live AMFI enrichment if connected
+    for f in TOP_20_FUNDS:
+        sc = f.get("scheme_code")
+        if sc:
+            live = fetch_live_amfi_nav(sc)
+            if live:
+                f["nav"] = live["nav"]
+                f["nav_change_pct"] = live["nav_change_pct"]
+                f["last_nav_date"] = live["date"]
+
     total_aum = sum(f["aum_cr"] for f in TOP_20_FUNDS)
     weighted_cash = sum((f["cash_holding_pct"] * f["aum_cr"]) for f in TOP_20_FUNDS) / total_aum
     
@@ -819,6 +905,7 @@ def build_full_report():
         "metadata": {
             "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
             "last_updated": datetime.now().strftime("%B %Y Portfolio Disclosure"),
+            "generated_timestamp": datetime.now().isoformat(),
             "total_funds_analyzed": len(TOP_20_FUNDS),
             "total_aum_tracked_cr": round(total_aum, 1),
             "average_cash_level_pct": round(weighted_cash, 2),
@@ -834,11 +921,12 @@ def build_full_report():
         "precomputed_overlaps": precomputed_overlaps
     }
     
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
+    for out_path in [OUTPUT_FILE, ROOT_OUTPUT_FILE]:
+        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
     
-    print(f"✅ Generated {OUTPUT_FILE}")
+    print(f"✅ Generated {OUTPUT_FILE} and {ROOT_OUTPUT_FILE}")
     print(f"📊 Total Funds: {len(TOP_20_FUNDS)} | Total AUM: ₹{total_aum:,.0f} Cr | Weighted Cash: {weighted_cash:.2f}%")
     print(f"🕵️ Infiltration Signals: {len(SMART_MONEY_INFILTRATIONS)}")
 

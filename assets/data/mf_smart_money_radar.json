@@ -2,6 +2,7 @@
   "metadata": {
     "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
     "last_updated": "November 2026 Portfolio Disclosure",
+    "generated_timestamp": "2026-11-20T07:27:29.716103",
     "total_funds_analyzed": 20,
     "total_aum_tracked_cr": 710600.0,
     "average_cash_level_pct": 7.76,
@@ -11,6 +12,7 @@
   "top_20_funds": [
     {
       "id": "ppfas_flexi",
+      "scheme_code": 122639,
       "name": "Parag Parikh Flexi Cap Fund",
       "short_name": "PPFAS Flexi Cap",
       "fund_house": "PPFAS Mutual Fund",
@@ -91,6 +93,7 @@
     },
     {
       "id": "quant_small",
+      "scheme_code": 120828,
       "name": "Quant Small Cap Fund",
       "short_name": "Quant Small Cap",
       "fund_house": "Quant Mutual Fund",
@@ -171,6 +174,7 @@
     },
     {
       "id": "nippon_small",
+      "scheme_code": 118778,
       "name": "Nippon India Small Cap Fund",
       "short_name": "Nippon Small Cap",
       "fund_house": "Nippon India MF",
@@ -251,6 +255,7 @@
     },
     {
       "id": "hdfc_midcap",
+      "scheme_code": 118989,
       "name": "HDFC Mid-Cap Opportunities Fund",
       "short_name": "HDFC Mid-Cap",
       "fund_house": "HDFC Mutual Fund",
@@ -331,6 +336,7 @@
     },
     {
       "id": "motilal_midcap",
+      "scheme_code": 127042,
       "name": "Motilal Oswal Midcap Fund",
       "short_name": "Motilal Midcap",
       "fund_house": "Motilal Oswal MF",
@@ -411,6 +417,7 @@
     },
     {
       "id": "sbi_contra",
+      "scheme_code": 119598,
       "name": "SBI Contra Fund",
       "short_name": "SBI Contra",
       "fund_house": "SBI Mutual Fund",
@@ -491,6 +498,7 @@
     },
     {
       "id": "mirae_large_mid",
+      "scheme_code": 118834,
       "name": "Mirae Asset Large & Midcap Fund",
       "short_name": "Mirae Large & Midcap",
       "fund_house": "Mirae Asset MF",
@@ -571,6 +579,7 @@
     },
     {
       "id": "icici_bluechip",
+      "scheme_code": 120586,
       "name": "ICICI Prudential Bluechip Fund",
       "short_name": "ICICI Bluechip",
       "fund_house": "ICICI Prudential MF",
@@ -651,6 +660,7 @@
     },
     {
       "id": "hdfc_flexi",
+      "scheme_code": 118968,
       "name": "HDFC Flexi Cap Fund",
       "short_name": "HDFC Flexi Cap",
       "fund_house": "HDFC Mutual Fund",
@@ -731,6 +741,7 @@
     },
     {
       "id": "kotak_emerging",
+      "scheme_code": 120166,
       "name": "Kotak Emerging Equity Fund",
       "short_name": "Kotak Emerging",
       "fund_house": "Kotak Mahindra MF",
@@ -811,6 +822,7 @@
     },
     {
       "id": "sbi_small",
+      "scheme_code": 125497,
       "name": "SBI Small Cap Fund",
       "short_name": "SBI Small Cap",
       "fund_house": "SBI Mutual Fund",
@@ -891,6 +903,7 @@
     },
     {
       "id": "quant_active",
+      "scheme_code": 120823,
       "name": "Quant Active Fund",
       "short_name": "Quant Active",
       "fund_house": "Quant Mutual Fund",
@@ -971,6 +984,7 @@
     },
     {
       "id": "bandhan_small",
+      "scheme_code": 147944,
       "name": "Bandhan Small Cap Fund",
       "short_name": "Bandhan Small Cap",
       "fund_house": "Bandhan Mutual Fund",
@@ -1051,6 +1065,7 @@
     },
     {
       "id": "tata_digital",
+      "scheme_code": 135783,
       "name": "Tata Digital India Fund",
       "short_name": "Tata Digital Tech",
       "fund_house": "Tata Mutual Fund",
@@ -1131,6 +1146,7 @@
     },
     {
       "id": "dsp_small",
+      "scheme_code": 119062,
       "name": "DSP Small Cap Fund",
       "short_name": "DSP Small Cap",
       "fund_house": "DSP Mutual Fund",
@@ -1211,6 +1227,7 @@
     },
     {
       "id": "franklin_smaller",
+      "scheme_code": 118667,
       "name": "Franklin India Smaller Companies Fund",
       "short_name": "Franklin Smaller Co",
       "fund_house": "Franklin Templeton MF",
@@ -1291,6 +1308,7 @@
     },
     {
       "id": "canara_emerging",
+      "scheme_code": 118557,
       "name": "Canara Robeco Emerging Equities Fund",
       "short_name": "Canara Emerging Eq",
       "fund_house": "Canara Robeco MF",
@@ -1371,6 +1389,7 @@
     },
     {
       "id": "axis_small",
+      "scheme_code": 125354,
       "name": "Axis Small Cap Fund",
       "short_name": "Axis Small Cap",
       "fund_house": "Axis Mutual Fund",
@@ -1451,6 +1470,7 @@
     },
     {
       "id": "invesco_contra",
+      "scheme_code": 120387,
       "name": "Invesco India Contra Fund",
       "short_name": "Invesco Contra",
       "fund_house": "Invesco Mutual Fund",
@@ -1531,6 +1551,7 @@
     },
     {
       "id": "uti_nifty50",
+      "scheme_code": 120716,
       "name": "UTI Nifty 50 Index Fund",
       "short_name": "UTI Nifty 50",
       "fund_house": "UTI Mutual Fund",
@@ -1991,14 +2012,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 3.2,
-          "weight_in_b": 8.8
-        },
-        {
           "symbol": "SBIN",
           "weight_in_a": 5.4,
           "weight_in_b": 4.5
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 3.2,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2009,19 +2030,9 @@
       "common_count": 7,
       "common_stocks": [
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 5.9
-        },
-        {
-          "symbol": "INFY",
-          "weight_in_a": 3.2,
-          "weight_in_b": 7.1
-        },
-        {
-          "symbol": "RELIANCE",
-          "weight_in_a": 5.1,
-          "weight_in_b": 8.4
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 9.2
         },
         {
           "symbol": "LT",
@@ -2029,9 +2040,9 @@
           "weight_in_b": 6.8
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 9.2
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 5.9
         },
         {
           "symbol": "AXISBANK",
@@ -2042,6 +2053,16 @@
           "symbol": "HDFCBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 5.4
+        },
+        {
+          "symbol": "RELIANCE",
+          "weight_in_a": 5.1,
+          "weight_in_b": 8.4
+        },
+        {
+          "symbol": "INFY",
+          "weight_in_a": 3.2,
+          "weight_in_b": 7.1
         }
       ]
     },
@@ -2052,24 +2073,24 @@
       "common_count": 4,
       "common_stocks": [
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.5,
-          "weight_in_b": 4.2
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 9.5
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.8
-        },
-        {
           "symbol": "INFY",
           "weight_in_a": 3.2,
           "weight_in_b": 5.8
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.5,
+          "weight_in_b": 4.2
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2093,24 +2114,24 @@
       "common_count": 4,
       "common_stocks": [
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 5.9,
-          "weight_in_b": 4.2
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 9.2,
           "weight_in_b": 9.5
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 5.4,
-          "weight_in_b": 8.8
-        },
-        {
           "symbol": "INFY",
           "weight_in_a": 7.1,
           "weight_in_b": 5.8
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 5.9,
+          "weight_in_b": 4.2
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 5.4,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2318,6 +2339,11 @@
       "common_count": 3,
       "common_stocks": [
         {
+          "symbol": "BRIGADE",
+          "weight_in_a": 4.9,
+          "weight_in_b": 4.8
+        },
+        {
           "symbol": "CCL",
           "weight_in_a": 2.9,
           "weight_in_b": 4.2
@@ -2326,11 +2352,6 @@
           "symbol": "ASTRAL",
           "weight_in_a": 2.2,
           "weight_in_b": 2.8
-        },
-        {
-          "symbol": "BRIGADE",
-          "weight_in_a": 4.9,
-          "weight_in_b": 4.8
         }
       ]
     },
@@ -2355,19 +2376,19 @@
       "common_count": 5,
       "common_stocks": [
         {
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 7.9
+        },
+        {
           "symbol": "BHARTIARTL",
           "weight_in_a": 2.6,
           "weight_in_b": 3.8
         },
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 6.2
-        },
-        {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 7.9
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 8.4
         },
         {
           "symbol": "TRENT",
@@ -2375,9 +2396,9 @@
           "weight_in_b": 3.5
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 8.4
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 6.2
         }
       ]
     },
@@ -2388,14 +2409,9 @@
       "common_count": 5,
       "common_stocks": [
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 4.8
-        },
-        {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 5.9
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.1
         },
         {
           "symbol": "LT",
@@ -2403,14 +2419,19 @@
           "weight_in_b": 3.9
         },
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.1
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 4.8
         },
         {
           "symbol": "HDFCBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 11.8
+        },
+        {
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 5.9
         }
       ]
     },
@@ -2435,24 +2456,24 @@
       "common_count": 4,
       "common_stocks": [
         {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 3.8,
-          "weight_in_b": 4.8
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 7.9,
           "weight_in_b": 8.1
         },
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.4,
-          "weight_in_b": 11.8
-        },
-        {
           "symbol": "INFY",
           "weight_in_a": 6.2,
           "weight_in_b": 5.9
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 3.8,
+          "weight_in_b": 4.8
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.4,
+          "weight_in_b": 11.8
         }
       ]
     }

@@ -1,9 +1,70 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../screens/mf_smart_money_screen.dart';
 
-class MfSmartMoneyPreviewCard extends StatelessWidget {
+class MfSmartMoneyPreviewCard extends StatefulWidget {
   const MfSmartMoneyPreviewCard({super.key});
+
+  @override
+  State<MfSmartMoneyPreviewCard> createState() => _MfSmartMoneyPreviewCardState();
+}
+
+class _MfSmartMoneyPreviewCardState extends State<MfSmartMoneyPreviewCard> {
+  String _freshBuyText = "KAYNES / CDSL";
+  String _accText = "TRENT (+36%)";
+  String _dryPowderText = "7.8% Cash";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreviewStats();
+  }
+
+  Future<void> _loadPreviewStats() async {
+    try {
+      final jsonStr =
+          await rootBundle.loadString('assets/data/mf_smart_money_radar.json');
+      final data = jsonDecode(jsonStr);
+      final meta = data['metadata'] as Map<String, dynamic>?;
+      final infiltrations =
+          data['smart_money_infiltrations'] as List<dynamic>?;
+
+      if (mounted) {
+        setState(() {
+          if (infiltrations != null && infiltrations.isNotEmpty) {
+            final freshBuys = infiltrations
+                .where((i) => i['action_type'] == 'FRESH_ENTRY')
+                .toList();
+            if (freshBuys.isNotEmpty) {
+              final symbols = freshBuys
+                  .take(2)
+                  .map((i) => i['symbol'].toString())
+                  .join(' / ');
+              _freshBuyText = symbols;
+            }
+
+            final accum = infiltrations
+                .where((i) => i['action_type'] == 'AGGRESSIVE_ACCUMULATION')
+                .toList();
+            if (accum.isNotEmpty) {
+              final topAcc = accum.first;
+              final pct =
+                  (topAcc['avg_holding_increase_pct'] as num?)?.toInt() ?? 0;
+              _accText = "${topAcc['symbol']} (+$pct%)";
+            }
+          }
+
+          if (meta != null && meta['average_cash_level_pct'] != null) {
+            final cash =
+                (meta['average_cash_level_pct'] as num).toDouble();
+            _dryPowderText = "${cash.toStringAsFixed(1)}% Cash";
+          }
+        });
+      }
+    } catch (_) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +144,8 @@ class MfSmartMoneyPreviewCard extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 5, vertical: 1.5),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF00FF88).withOpacity(0.15),
+                                    color: const Color(0xFF00FF88)
+                                        .withOpacity(0.15),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: const Text(
@@ -99,7 +161,8 @@ class MfSmartMoneyPreviewCard extends StatelessWidget {
                             ),
                             const Text(
                               "Portfolio Infiltration, Overlap Audit & Cash Barometer",
-                              style: TextStyle(color: Colors.white54, fontSize: 9.5),
+                              style: TextStyle(
+                                  color: Colors.white54, fontSize: 9.5),
                             ),
                           ],
                         ),
@@ -114,13 +177,13 @@ class MfSmartMoneyPreviewCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
 
-                // 3 Highlights Chips Row
+                // 3 Highlights Chips Row (Dynamic)
                 Row(
                   children: [
                     Expanded(
                       child: _buildMiniStatChip(
                         "FRESH BUY",
-                        "KAYNES / CDSL",
+                        _freshBuyText,
                         const Color(0xFF00FF88),
                       ),
                     ),
@@ -128,7 +191,7 @@ class MfSmartMoneyPreviewCard extends StatelessWidget {
                     Expanded(
                       child: _buildMiniStatChip(
                         "ACCUMULATION",
-                        "TRENT (+36%)",
+                        _accText,
                         const Color(0xFF00E5FF),
                       ),
                     ),
@@ -136,7 +199,7 @@ class MfSmartMoneyPreviewCard extends StatelessWidget {
                     Expanded(
                       child: _buildMiniStatChip(
                         "DRY POWDER",
-                        "7.76% Cash",
+                        _dryPowderText,
                         const Color(0xFFFFB703),
                       ),
                     ),
