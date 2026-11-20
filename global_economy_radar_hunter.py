@@ -1180,112 +1180,6 @@ Return valid JSON with exactly this structure:
         {{"symbol": "UPL", "name": "UPL Limited", "catalyst": "1-line data-backed reason"}}
       ]
     }}
-  ],
-  "usa_china_battlefields": [
-    {{
-      "id": "trade_tariffs",
-      "title": "1. Trade War 2.0 & Tariff Escalation",
-      "us_offensive": "1-2 sentence latest US tariff stance and global import duties",
-      "china_retaliation": "1-2 sentence latest China export restrictions on critical minerals, ag, currency",
-      "impact_on_india": "POSITIVE (NET BENEFICIARY)",
-      "india_takeaway": "1-sentence actionable takeaway for Indian markets/supply chains"
-    }},
-    {{
-      "id": "tech_chips",
-      "title": "2. Semiconductor Blockade & AI Cold War",
-      "us_offensive": "1-2 sentence latest US AI chip export controls & EDA lithography bans",
-      "china_retaliation": "1-2 sentence latest China domestic chip substitution & state semiconductor funds",
-      "impact_on_india": "POSITIVE FOR INDIA EMS & DESIGN",
-      "india_takeaway": "1-sentence actionable takeaway for Indian electronics/semis"
-    }},
-    {{
-      "id": "currency_debt",
-      "title": "3. King Dollar Dominance vs Sovereign Gold Accumulation",
-      "us_offensive": "1-2 sentence US dollar and Treasury liquidity positioning with current DXY",
-      "china_retaliation": "1-2 sentence China gold reserve accumulation & local currency settlement moves",
-      "impact_on_india": "NEUTRAL TO POSITIVE",
-      "india_takeaway": "1-sentence takeaway for RBI reserves and INR trade"
-    }},
-    {{
-      "id": "industrial_dumping",
-      "title": "4. Industrial Overcapacity vs Western Reshoring (China Shock 2.0)",
-      "us_offensive": "1-2 sentence Western anti-subsidy tariffs and clean tech protectionism",
-      "china_retaliation": "1-2 sentence China factory overcapacity dumping with current China PPI",
-      "impact_on_india": "MIXED (COMMODITIES PRESSURE, EPC GAIN)",
-      "india_takeaway": "1-sentence takeaway on hurt vs benefit sectors in India"
-    }},
-    {{
-      "id": "energy_monopoly",
-      "title": "5. Energy Sovereignty: US Shale vs Chinese Clean-Tech Monopoly",
-      "us_offensive": "1-2 sentence US crude/LNG energy export dominance with current Brent price",
-      "china_retaliation": "1-2 sentence Chinese clean tech and battery hardware dominance",
-      "impact_on_india": "POSITIVE ARBITRAGE",
-      "india_takeaway": "1-sentence takeaway on Indian energy and solar adoption"
-    }}
-  ],
-  "superpower_refinements": [
-    {{
-      "id": "us",
-      "status_label": "Short status e.g. TECH & FISCAL RESILIENCE",
-      "top_pressure_title": "Short title with metric e.g. US 10Y Yield Spike (~4.4%) & PE Multiple Squeeze",
-      "top_pressure_desc": "1-sentence concise description",
-      "top_expansion_title": "Short title e.g. $250B+ Generative AI Compute Supercycle",
-      "top_expansion_desc": "1-sentence concise description"
-    }},
-    {{
-      "id": "china",
-      "status_label": "Short status e.g. STIMULUS BAZOOKA DEFENSE",
-      "top_pressure_title": "Short title with metric e.g. Factory Deflation (-2.9% PPI) & Property Slump",
-      "top_pressure_desc": "1-sentence concise description",
-      "top_expansion_title": "Short title e.g. Clean-Tech & LFP Battery Global Dominance",
-      "top_expansion_desc": "1-sentence concise description"
-    }},
-    {{
-      "id": "europe",
-      "status_label": "Short status e.g. INDUSTRIAL STAGNATION",
-      "top_pressure_title": "Short title e.g. German Automotive & Chemical De-industrialization",
-      "top_pressure_desc": "1-sentence concise description",
-      "top_expansion_title": "Short title e.g. European Defense Procurement & ECB Easing",
-      "top_expansion_desc": "1-sentence concise description"
-    }},
-    {{
-      "id": "japan",
-      "status_label": "Short status e.g. YEN NORMALIZATION & CHIP REVIVAL",
-      "top_pressure_title": "Short title e.g. BOJ Rate Uncertainty & Carry Trade Unwind Risk",
-      "top_pressure_desc": "1-sentence concise description",
-      "top_expansion_title": "Short title e.g. Corporate Governance Reforms & Rapidus Fab Subsidies",
-      "top_expansion_desc": "1-sentence concise description"
-    }},
-    {{
-      "id": "em_india",
-      "status_label": "Short status e.g. GLOBAL GROWTH ENGINE",
-      "top_pressure_title": "Short title e.g. Strong DXY Dollar Squeeze & Tactical FII Outflows",
-      "top_pressure_desc": "1-sentence concise description",
-      "top_expansion_title": "Short title e.g. China+1 High-Tech Relocation & Infra Supercycle",
-      "top_expansion_desc": "1-sentence concise description"
-    }}
-  ],
-  "supply_demand_levers_update": [
-    {{
-      "id": "energy_valve",
-      "how_they_control": "1-2 sentence concise oil control state with current Brent",
-      "india_transmission": "1-2 sentence concise transmission to Indian trade deficit & paints/OMCs"
-    }},
-    {{
-      "id": "dollar_liquidity_tap",
-      "how_they_control": "1-2 sentence state of US rates and dollar liquidity suction",
-      "india_transmission": "1-2 sentence transmission to INR stability & FII flows"
-    }},
-    {{
-      "id": "china_overcapacity_tap",
-      "how_they_control": "1-2 sentence state of Chinese factory surplus dumping with current PPI",
-      "india_transmission": "1-2 sentence transmission to Indian steel/chem vs solar/electronics"
-    }},
-    {{
-      "id": "chokepoint_shipping_valve",
-      "how_they_control": "1-2 sentence state of Red Sea/chokepoints and container freight rates",
-      "india_transmission": "1-2 sentence transmission to Indian export freight invoices & transit"
-    }}
   ]
 }}
 """
@@ -1301,7 +1195,7 @@ Return valid JSON with exactly this structure:
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "temperature": 0.2,
-            "maxOutputTokens": 3000,
+            "maxOutputTokens": 2000,
             "responseMimeType": "application/json"
         }
     }
@@ -1343,51 +1237,6 @@ Return valid JSON with exactly this structure:
                             payload["dynamic_shock_transmission_engine"]["shocks"][0]["margin_losers"] = ai_data["crude_shock_losers"]
                         if "equity_impact_matrix" in ai_data and isinstance(ai_data["equity_impact_matrix"], list) and len(ai_data["equity_impact_matrix"]) >= 2:
                             payload["equity_impact_matrix"] = ai_data["equity_impact_matrix"]
-
-                        if "usa_china_battlefields" in ai_data and isinstance(ai_data["usa_china_battlefields"], list) and len(ai_data["usa_china_battlefields"]) >= 3:
-                            existing_bfs = payload.get("usa_china_macro_clash", {}).get("battlefields", [])
-                            for new_bf in ai_data["usa_china_battlefields"]:
-                                target_id = new_bf.get("id")
-                                match = next((b for b in existing_bfs if b.get("id") == target_id), None)
-                                if match:
-                                    if new_bf.get("us_offensive"):
-                                        match["us_offensive"] = new_bf["us_offensive"]
-                                    if new_bf.get("china_retaliation"):
-                                        match["china_retaliation"] = new_bf["china_retaliation"]
-                                    if new_bf.get("impact_on_india"):
-                                        match["impact_on_india"] = new_bf["impact_on_india"]
-                                    if new_bf.get("india_takeaway"):
-                                        match["india_takeaway"] = new_bf["india_takeaway"]
-                                    if new_bf.get("title"):
-                                        match["title"] = new_bf["title"]
-
-                        if "superpower_refinements" in ai_data and isinstance(ai_data["superpower_refinements"], list):
-                            existing_sps = payload.get("global_superpowers", [])
-                            for ref in ai_data["superpower_refinements"]:
-                                sp_id = ref.get("id")
-                                match = next((s for s in existing_sps if s.get("id") == sp_id), None)
-                                if match:
-                                    if ref.get("status_label"):
-                                        match["status_label"] = ref["status_label"]
-                                    if ref.get("top_pressure_title") and match.get("pressure_points"):
-                                        match["pressure_points"][0]["title"] = ref["top_pressure_title"]
-                                        if ref.get("top_pressure_desc"):
-                                            match["pressure_points"][0]["description"] = ref["top_pressure_desc"]
-                                    if ref.get("top_expansion_title") and match.get("expansion_engines"):
-                                        match["expansion_engines"][0]["title"] = ref["top_expansion_title"]
-                                        if ref.get("top_expansion_desc"):
-                                            match["expansion_engines"][0]["description"] = ref["top_expansion_desc"]
-
-                        if "supply_demand_levers_update" in ai_data and isinstance(ai_data["supply_demand_levers_update"], list):
-                            existing_levers = payload.get("supply_demand_control_levers", {}).get("levers", [])
-                            for lev_up in ai_data["supply_demand_levers_update"]:
-                                lev_id = lev_up.get("id")
-                                match = next((l for l in existing_levers if l.get("id") == lev_id), None)
-                                if match:
-                                    if lev_up.get("how_they_control"):
-                                        match["how_they_control"] = lev_up["how_they_control"]
-                                    if lev_up.get("india_transmission"):
-                                        match["india_transmission"] = lev_up["india_transmission"]
 
                         return payload
             except Exception:
