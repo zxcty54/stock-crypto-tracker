@@ -1,24 +1,69 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-20 16:07:46 IST",
+  "last_updated": "2026-11-20 16:17:10 IST",
   "economy_headline": {
-    "core_infra_growth_pct": 10.9,
+    "core_infra_growth_pct": 7.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
     "verdict": "BROAD-BASED PHYSICAL EXPANSION",
-    "momentum_score": 89,
+    "momentum_score": 84,
     "momentum_label": "HIGH INDUSTRIAL PULSE",
-    "headline_summary": "India's Ground Economy Expanding at +9.0% YoY Volume Pace — Zero Industrial Slowdown"
+    "headline_summary": "India's Ground Economy Expanding at +8.0% YoY Volume Pace — Zero Industrial Slowdown"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
       "report_title": "DPIIT Index of Eight Core Industries",
-      "period": "October 2026 (Provisional)",
-      "overall_yoy_growth_pct": 10.9,
-      "previous_month_growth_pct": null,
-      "components": {},
+      "period": "September 2026 (Provisional)",
+      "overall_yoy_growth_pct": 7.9,
+      "components": {
+        "Cement": {
+          "weight": 4.41,
+          "yoy_pct": 9.8,
+          "status": "PEAK_DEMAND"
+        },
+        "Electricity": {
+          "weight": 30.932,
+          "yoy_pct": 11.4,
+          "status": "PEAK_DEMAND"
+        },
+        "Coal": {
+          "weight": 5.596,
+          "yoy_pct": 10.7,
+          "status": "PEAK_DEMAND"
+        },
+        "Refinery Products": {
+          "weight": 22.572,
+          "yoy_pct": 10.3,
+          "status": "PEAK_DEMAND"
+        },
+        "Steel": {
+          "weight": 17.584,
+          "yoy_pct": 4.9,
+          "status": "EXPANDING"
+        },
+        "Iron Ore": {
+          "weight": 4.905,
+          "yoy_pct": 18.4,
+          "status": "SURGING"
+        },
+        "Crude Oil": {
+          "weight": 7.43,
+          "yoy_pct": -1.4,
+          "status": "CONTRACTION"
+        },
+        "Natural Gas": {
+          "weight": 3.841,
+          "yoy_pct": -4.6,
+          "status": "CONTRACTION"
+        },
+        "Fertilizers": {
+          "weight": 2.731,
+          "yoy_pct": -11.7,
+          "status": "SHARP_CONTRACTION"
+        }
+      },
       "historical_13m_growth": []
     },
     "ipa_major_ports": {
@@ -58,19 +103,16 @@
       "report_title": "PPAC Monthly Petroleum Industry Consumption Review",
       "period": "September 2026",
       "total_pol_consumption_mmt": 19.26,
-      "previous_pol_consumption_mmt": 18.63,
       "total_pol_growth_pct": 3.4,
       "fuels": {
         "Motor Spirit (Petrol)": {
           "consumption_mmt": 3.67,
           "yoy_growth_pct": 8.0,
-          "proxy_for": "Personal Mobility & Passenger Vehicles",
           "status": "PEAK_DEMAND"
         },
         "High Speed Diesel (HSD)": {
           "consumption_mmt": 7.11,
           "yoy_growth_pct": 5.6,
-          "proxy_for": "Commercial Freight, Logistics & Agriculture",
           "status": "EXPANDING"
         },
         "Aviation Turbine Fuel (ATF)": {
@@ -175,10 +217,9 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚀 RAPID EXPANSION",
       "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-      "macro_correlation_note": "Diesel consumption (+5.6%) aur Highway FASTag toll collections (+8.5%) commercial freight activity mein continuous expansion ko darshate hain. Historically, jab fleet utilization 85%+ cross karta hai, commercial vehicle manufacturers ke dispatches aur tonnage volumes mein positive trend dekha jata hai.",
+      "macro_correlation_note": "Diesel +5.6% YoY & FASTag toll +8.5% YoY confirm high inter-state commercial freight velocity and fleet utilization above 85%.",
       "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
       "primary_indicators": "PPAC Diesel (HSD): +5.6% YoY • FASTag Toll: +8.5% YoY",
-      "economic_rationale": "High-Speed Diesel consumption (+5.6%) aur Highway FASTag toll collections (+8.5%) mein robust growth national freight volume expansion ko reflect karta hai.",
       "beneficiary_equities": [
         {
           "symbol": "TATAMOTORS",
@@ -207,10 +248,9 @@
       "demand_signal": "PEAK_DEMAND",
       "momentum_badge": "🔥 PEAK DEMAND",
       "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-      "macro_correlation_note": "National electricity generation (+11.4%) double-digits par hai aur coal dispatch (+10.7%) multi-month high par hai. Industrial shift operations badhne se baseload thermal utilities ka Plant Load Factor (PLF) increase hota hai aur heavy equipment transmission order execution accelerate hota hai.",
+      "macro_correlation_note": "Electricity +11.4% YoY and coal dispatch +10.7% YoY confirm robust industrial baseload absorption and rising thermal plant load factor (PLF).",
       "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
       "primary_indicators": "8-Core Electricity: +11.4% YoY • Coal Dispatch: +10.7% YoY",
-      "economic_rationale": "Industrial power consumption (+11.4%) aur coal dispatch growth double-digits par chal raha hai. Grid transmission aur heavy equipment makers ke order books full hain.",
       "beneficiary_equities": [
         {
           "symbol": "NTPC",
@@ -239,10 +279,9 @@
       "demand_signal": "STRONG_DEMAND",
       "momentum_badge": "📈 STRONG DEMAND",
       "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-      "macro_correlation_note": "Cement output (+9.8%) aur Bitumen consumption (+17.2%) highway capex aur post-monsoon construction activity ka sharp pickup reflect karte hain. Fixed plant capacity utilization badhne par cement manufacturing companies ke operating metrics me volume leverage positively reflect karta hai.",
+      "macro_correlation_note": "Cement output +9.8% YoY and bitumen +17.2% YoY reflect active post-monsoon highway capex and central infrastructure project execution.",
       "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
       "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen Road Capex: +17.2% YoY",
-      "economic_rationale": "Post-monsoon highway construction, central capex execution, aur cement volume dispatch (+9.8%) multi-month highs par hai.",
       "beneficiary_equities": [
         {
           "symbol": "ULTRACEMCO",
@@ -271,10 +310,9 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚢 SURGING EXPORTS",
       "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-      "macro_correlation_note": "IPA Major Ports total cargo (+10.17% YoY, 566.4 MMT) aur Container throughput (+8.51%) domestic trade volume expansion ko validate karte hain. Ports ke capital-intensive nature ke chalte incremental container handling efficiency operating margins ko positively influence karti hai.",
+      "macro_correlation_note": "Major ports cargo +10.17% YoY (566.4 MMT) and container volume +8.51% signal steady maritime export-import throughput.",
       "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
       "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51%",
-      "economic_rationale": "Major ports cargo traffic (+10.17%) double-digit pace par hai, POL aur containerized volumes dono mein sharp acceleration dikh raha hai.",
       "beneficiary_equities": [
         {
           "symbol": "ADANIPORTS",
@@ -303,10 +341,9 @@
       "demand_signal": "STEADY_GROWTH",
       "momentum_badge": "⚙️ STEADY CAPEX",
       "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-      "macro_correlation_note": "Domestic steel production (+4.9%) aur Iron Ore output (+18.4%) infrastructure capex aur auto manufacturing demand ko support karte hain. Global export market pricing pressure ke bawajood domestic volume consumption steady rehta hai.",
+      "macro_correlation_note": "Finished steel output +4.9% YoY and iron ore +18.4% YoY underpin steady domestic structural fabrication and automotive demand.",
       "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
       "primary_indicators": "8-Core Steel: +4.9% YoY • Iron Ore: +18.4% YoY",
-      "economic_rationale": "Domestic infrastructure capex, automotive demand, aur pre-engineered buildings domestic steel production (+4.9%) ko support kar rahe hain.",
       "beneficiary_equities": [
         {
           "symbol": "TATASTEEL",
@@ -335,10 +372,9 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ VOLUME CONTRACTION",
       "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING",
-      "macro_correlation_note": "Fertilizer production output (-11.7% YoY) seasonal demand pattern aur raw material import parity reflect karta hai. Post-Kharif seasonal destocking ke chalte plant capacity utilization mein temporary adjustment dekha jata hai.",
+      "macro_correlation_note": "Fertilizer production at -11.7% YoY reflects seasonal inventory destocking ahead of the upcoming Rabi sowing acreage cycle.",
       "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
       "primary_indicators": "8-Core Fertilizers: -11.7% YoY",
-      "economic_rationale": "Seasonal inventory destocking aur international raw material import parity ke chalte fertilizer plant operating rates -11.7% par settle hue hain.",
       "beneficiary_equities": [
         {
           "symbol": "COROMANDEL",
@@ -357,10 +393,9 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION",
       "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-      "macro_correlation_note": "Domestic crude oil (-1.4%) aur natural gas (-4.6%) production mature offshore fields ke natural depletion aur operational maintenance cycles ko reflect karta hai.",
+      "macro_correlation_note": "Domestic crude (-1.4% YoY) and natural gas (-4.6% YoY) track mature field maintenance cycles and offshore replacement schedules.",
       "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
       "primary_indicators": "8-Core Crude: -1.4% YoY • Natural Gas: -4.6% YoY",
-      "economic_rationale": "Mature field output declines aur delayed offshore development production volumes ko balance kar rahe hain.",
       "beneficiary_equities": [
         {
           "symbol": "ONGC",

@@ -524,75 +524,26 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
 
   Widget _buildEarningsAlphaExplainer() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F172A),
-        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFF0C1424),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.25)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.school_rounded, size: 14, color: Color(0xFF38BDF8)),
-              const SizedBox(width: 6),
-              Text(
-                "WHY PHYSICAL TELEMETRY LEADS EARNINGS (45-DAY EDGE)",
-                style: GoogleFonts.plusJakartaSans(
-                  color: const Color(0xFF38BDF8),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.5,
-                ),
+      child: Row(
+        children: const [
+          Icon(Icons.bolt_rounded, size: 14, color: Color(0xFF38BDF8)),
+          SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              "45-DAY LEAD EDGE: Physical volume dispatches report monthly, leading delayed quarterly corporate earnings results.",
+              style: TextStyle(
+                color: Color(0xFF94A3B8),
+                fontSize: 9.5,
+                fontWeight: FontWeight.w600,
+                height: 1.25,
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF090D16),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.white10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("⏱️ 45-Day Advance Lead",
-                          style: TextStyle(color: accentCyan, fontSize: 9.5, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 2),
-                      Text("Govt telemetry reports monthly, far ahead of delayed quarterly results.",
-                          style: TextStyle(color: Colors.white70, fontSize: 8.5, height: 1.25)),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF090D16),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.white10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("⚡ Operating Leverage",
-                          style: TextStyle(color: accentGreen, fontSize: 9.5, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 2),
-                      Text("High plant capacity utilization directly expands dispatches & margins.",
-                          style: TextStyle(color: Colors.white70, fontSize: 8.5, height: 1.25)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
@@ -648,8 +599,9 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     final badge = s['momentum_badge'] ?? '🟢 EXPANDING';
     final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION');
     final trendOutlook = s['macro_trend_outlook'] ?? s['earnings_outlook'];
-    final correlationNote = s['macro_correlation_note'] ?? s['earnings_prediction_thesis'];
+    final catalystNote = s['macro_correlation_note'] ?? s['economic_rationale'] ?? '';
     final keyMetric = s['fundamental_metric_to_track'] ?? s['key_metric_to_watch'];
+    final primaryInd = s['primary_indicators'] ?? '';
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -694,6 +646,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
             ],
           ),
+
           // 📊 Demand Temperature Meter (Visual Bar)
           const SizedBox(height: 6),
           Row(
@@ -733,151 +686,136 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            s['primary_indicators'] ?? '',
-            style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            s['economic_rationale'] ?? '',
-            style: const TextStyle(color: Colors.white70, fontSize: 11.5, height: 1.35),
-          ),
-          if (trendOutlook != null) ...[
-            const SizedBox(height: 10),
+
+          // Primary Indicator Chips / Strip
+          if (primaryInd.isNotEmpty) ...[
+            const SizedBox(height: 8),
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: isSoft
-                    ? accentRed.withOpacity(0.08)
-                    : const Color(0xFF0A1F1C),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: isSoft
-                      ? accentRed.withOpacity(0.3)
-                      : accentGreen.withOpacity(0.3),
-                ),
+                color: const Color(0xFF090E17),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: accentCyan.withOpacity(0.2)),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        isSoft
-                            ? Icons.warning_amber_rounded
-                            : Icons.insights_rounded,
-                        size: 14,
-                        color: isSoft ? accentRed : accentGreen,
+                  const Icon(Icons.analytics_outlined, color: accentCyan, size: 13),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      primaryInd,
+                      style: GoogleFonts.robotoMono(
+                        color: accentCyan,
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w700,
                       ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          "MACRO ACTIVITY TREND: $trendOutlook",
-                          style: TextStyle(
-                            color: isSoft ? accentRed : accentGreen,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  if (correlationNote != null) ...[
-                    const SizedBox(height: 5),
-                    Text(
-                      correlationNote,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        height: 1.35,
-                      ),
-                    ),
-                  ],
-                  if (keyMetric != null) ...[
-                    const SizedBox(height: 6),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "🎯 Fundamental Driver: ",
-                          style: TextStyle(
-                            color: accentAmber,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            keyMetric,
-                            style: const TextStyle(
-                              color: Color(0xFFE2E8F0),
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
                 ],
               ),
             ),
           ],
-          const SizedBox(height: 10),
-          const Divider(color: Color(0xFF1B2433), height: 1),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Text(
-                "SECTOR REPRESENTATIVE PEERS (EDUCATIONAL STUDY):",
-                style: GoogleFonts.plusJakartaSans(
-                  color: textMuted,
-                  fontSize: 9.5,
-                  fontWeight: FontWeight.w800,
+
+          // Single Crisp Data-First Driver (No duplicate essay)
+          if (catalystNote.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              catalystNote,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 11,
+                height: 1.35,
+              ),
+            ),
+          ],
+
+          // Trend & Fundamental Driver Strip
+          if (keyMetric != null || trendOutlook != null) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: isSoft ? accentRed.withOpacity(0.06) : const Color(0xFF0A1F1C),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(
+                  color: isSoft ? accentRed.withOpacity(0.25) : accentGreen.withOpacity(0.25),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 2),
-          const Text(
-            "Tickers listed below are representative industry case studies for macro sensitivity tracking, NOT buy/sell recommendations.",
-            style: TextStyle(color: Colors.white38, fontSize: 9, fontStyle: FontStyle.italic),
-          ),
-          const SizedBox(height: 6),
-          Wrap(
-            spacing: 8,
-            runSpacing: 6,
-            children: stocks.map((st) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0C1320),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: const Color(0xFF1E2D44)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      st['symbol'] ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
+              child: Row(
+                children: [
+                  Icon(
+                    isSoft ? Icons.trending_down_rounded : Icons.trending_up_rounded,
+                    size: 14,
+                    color: isSoft ? accentRed : accentGreen,
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      keyMetric != null ? "Driver: $keyMetric" : "Trend: $trendOutlook",
+                      style: TextStyle(
+                        color: isSoft ? accentRed : accentGreen,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      "• ${st['name'] ?? ''}",
-                      style: const TextStyle(color: textMuted, fontSize: 10),
-                    ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+
+          // Clean Peer Stocks (No 7x repeated disclaimer)
+          if (stocks.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: const [
+                Text(
+                  "REPRESENTATIVE PEERS",
+                  style: TextStyle(
+                    color: textMuted,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.4,
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Wrap(
+              spacing: 6,
+              runSpacing: 5,
+              children: stocks.map((st) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0C1320),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: const Color(0xFF1E2D44)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        st['symbol'] ?? '',
+                        style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 10,
+                        ),
+                      ),
+                      if (st['name'] != null && st['name'].toString().isNotEmpty) ...[
+                        const SizedBox(width: 4),
+                        Text(
+                          "• ${st['name']}",
+                          style: const TextStyle(color: textMuted, fontSize: 9),
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );
