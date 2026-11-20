@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'global_economy_radar_screen.dart';
 
 class EconomyDemandRadarScreen extends StatefulWidget {
   const EconomyDemandRadarScreen({super.key});
@@ -133,6 +134,18 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.public_rounded, color: Color(0xFF00E5FF), size: 21),
+            tooltip: "Switch to Global Economy Radar",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const GlobalEconomyRadarScreen(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: accentCyan, size: 20),
             tooltip: "Live Refresh",

@@ -1,0 +1,503 @@
+#!/usr/bin/env python3
+"""
+🌐 Global Macro Economy Pressure & Expansion Engine
+Compiles multi-region telemetry and stress indicators across:
+- Superpower Blocs: United States, China, Eurozone/UK, Japan, Emerging Markets (India & ASEAN)
+- Global Stress Gauges: DXY Dollar Index, US 10Y Yield, Brent Crude, Sovereign Gold, Global Semiconductor Lead Time, Baltic Dry
+- Macro Pressure vs Expansion Factors (Dabao vs Growth Engines)
+- Cross-Border Trade, Tariff & Equity Impact Analysis
+"""
+
+import json
+import os
+from datetime import datetime
+
+OUTPUT_ASSET_FILE = "assets/data/global_economy_radar.json"
+OUTPUT_ROOT_FILE = "global_economy_radar.json"
+
+GLOBAL_RADAR_PAYLOAD = {
+    "metadata": {
+        "title": "Global Macro Economy Pressure & Expansion Radar",
+        "last_updated": "November 2026 Global Telemetry",
+        "generated_timestamp": datetime.now().isoformat(),
+        "global_regime": "ASYMMETRIC_EXPANSION_WITH_DEBT_STRESS",
+        "regime_headline": "Global Asymmetric Divergence: US AI Capex vs European Industrial Slump & China Stimulus",
+        "global_conclusion": (
+            "Global economic momentum is sharply fractured. The United States maintains resilient services "
+            "and an unprecedented $250B+ AI infrastructure capex wave. Europe remains gripped by severe industrial "
+            "de-leveraging (German auto & chemical crisis). China is deploying massive ¥10 Trillion fiscal bond stimulus "
+            "to combat housing deflation, while India and Southeast Asia expand as the primary China+1 supply chain beneficiaries."
+        )
+    },
+    "executive_hud": {
+        "global_health_score": 68,
+        "global_health_label": "MODERATE ASYMMETRIC EXPANSION",
+        "health_verdict": "Real global physical output is sustained by Emerging Asian manufacturing and US tech spending, offset by European contraction.",
+        "regions_expansion_count": 3,
+        "regions_pressure_count": 2,
+        "core_pillars": [
+            {
+                "region_id": "us",
+                "region": "UNITED STATES",
+                "flag": "🇺🇸",
+                "gdp_trillion_usd": 28.7,
+                "growth_pmi": 54.9,
+                "growth_pmi_label": "Services PMI",
+                "status": "MODERATE EXPANSION",
+                "status_type": "EXPANSION",
+                "flow_color": "cyan",
+                "net_momentum_pct": 2.8,
+                "key_driver": "AI Infrastructure & Tech Capex"
+            },
+            {
+                "region_id": "china",
+                "region": "CHINA",
+                "flag": "🇨🇳",
+                "gdp_trillion_usd": 18.5,
+                "growth_pmi": 50.3,
+                "growth_pmi_label": "Caixin Mfg PMI",
+                "status": "STIMULUS BAZOOKA",
+                "status_type": "NEUTRAL",
+                "flow_color": "amber",
+                "net_momentum_pct": 0.5,
+                "key_driver": "¥10T Fiscal Package & Clean-tech Export Dump"
+            },
+            {
+                "region_id": "europe",
+                "region": "EUROZONE & UK",
+                "flag": "🇪🇺",
+                "gdp_trillion_usd": 19.4,
+                "growth_pmi": 46.0,
+                "growth_pmi_label": "Manufacturing PMI",
+                "status": "SEVERE CONTRACTION",
+                "status_type": "PRESSURE",
+                "flow_color": "red",
+                "net_momentum_pct": -2.4,
+                "key_driver": "German Auto Crisis & High Energy Cost"
+            },
+            {
+                "region_id": "japan",
+                "region": "JAPAN",
+                "flag": "🇯🇵",
+                "gdp_trillion_usd": 4.2,
+                "growth_pmi": 51.2,
+                "growth_pmi_label": "Composite PMI",
+                "status": "MONETARY INFLECTION",
+                "status_type": "EXPANSION",
+                "flow_color": "cyan",
+                "net_momentum_pct": 1.4,
+                "key_driver": "30-Yr High Wage Hikes & Semiconductor Capex"
+            },
+            {
+                "region_id": "em_india",
+                "region": "INDIA & EM ASIA",
+                "flag": "🇮🇳",
+                "gdp_trillion_usd": 7.6,
+                "growth_pmi": 58.6,
+                "growth_pmi_label": "Composite PMI",
+                "status": "RAPID EXPANSION",
+                "status_type": "EXPANSION",
+                "flow_color": "green",
+                "net_momentum_pct": 7.2,
+                "key_driver": "China+1 Manufacturing & Domestic Consumption"
+            }
+        ]
+    },
+    "global_superpowers": [
+        {
+            "id": "us",
+            "name": "United States of America",
+            "flag": "🇺🇸",
+            "economic_status": "MODERATE_EXPANSION",
+            "status_label": "TECH-DRIVEN RESILIENCE",
+            "central_bank_rate": "4.50% - 4.75% (Fed Cutting)",
+            "inflation_rate": "3.3% Core CPI",
+            "pmi_summary": "Services 54.9 (Booming) • Mfg 48.5 (Soft)",
+            "pressure_points": [
+                {
+                    "title": "US 10-Year Yield Spike (~4.4%)",
+                    "description": "High long-term Treasury yields increase global borrowing costs and put persistent valuation pressure on high-PE equities worldwide.",
+                    "severity": "HIGH"
+                },
+                {
+                    "title": "$35.8 Trillion Sovereign Debt Burden",
+                    "description": "Annual federal interest servicing has crossed $1.1 Trillion, restricting long-term fiscal headroom and driving credit rating downgrade risks.",
+                    "severity": "HIGH"
+                },
+                {
+                    "title": "Commercial Real Estate (CRE) Distress",
+                    "description": "Work-from-home vacancies in metropolitan office towers continue to weigh on regional US banks.",
+                    "severity": "MODERATE"
+                }
+            ],
+            "expansion_engines": [
+                {
+                    "title": "$250B+ AI Data Center & Compute Supercycle",
+                    "description": "Hyperscalers (Microsoft, Meta, Google, Amazon, Oracle) are executing the largest technological capex ramp-up in modern history.",
+                    "impact": "GLOBAL TECH PUMP"
+                },
+                {
+                    "title": "Federal Reserve Rate Cut Cycle",
+                    "description": "Easing policy rate injects liquidity into capital markets, lowering refinancing friction for midcap corporates.",
+                    "impact": "LIQUIDITY EXPANSION"
+                },
+                {
+                    "title": "Resilient Consumer Balance Sheets",
+                    "description": "Real wage growth has turned positive as headline inflation cools down, sustaining retail consumption.",
+                    "impact": "EARNINGS SUPPORT"
+                }
+            ]
+        },
+        {
+            "id": "china",
+            "name": "China (People's Republic of China)",
+            "flag": "🇨🇳",
+            "economic_status": "DEFLATIONARY_PRESSURE",
+            "status_label": "STIMULUS BAZOOKA DEFENSE",
+            "central_bank_rate": "3.10% (PBOC Easing)",
+            "inflation_rate": "0.3% CPI • -2.9% PPI (Deflation)",
+            "pmi_summary": "Caixin Mfg 50.3 (Borderline) • Services 52.0",
+            "pressure_points": [
+                {
+                    "title": "Real Estate Liquidation & Wealth Erosion",
+                    "description": "Over 70% of Chinese household wealth was tied to property. Persistent price declines have triggered severe consumer sentiment depression.",
+                    "severity": "CRITICAL"
+                },
+                {
+                    "title": "Producer Price Deflation (-2.9% PPI)",
+                    "description": "Industrial overcapacity has ignited vicious domestic price wars in electric vehicles, solar panels, and lithium batteries.",
+                    "severity": "HIGH"
+                },
+                {
+                    "title": "Western Tariff Barriers & Trade Friction",
+                    "description": "US and EU imposing 50-100% tariffs on Chinese EVs and solar cells to protect domestic industrial bases.",
+                    "severity": "HIGH"
+                }
+            ],
+            "expansion_engines": [
+                {
+                    "title": "¥10 Trillion Local Debt Swap & Fiscal Stimulus",
+                    "description": "Beijing announced a historic debt-relief swap program to unfreeze municipal budgets and stimulate infrastructure dispatches.",
+                    "impact": "LIQUIDITY FLOOR"
+                },
+                {
+                    "title": "Global Clean-Tech Export Dominance",
+                    "description": "Controlling >80% of global solar ingot, wafer, and LFP battery supply chains, flooding Global South markets.",
+                    "impact": "INDUSTRIAL MONOPOLY"
+                },
+                {
+                    "title": "Semiconductor Self-Sufficiency Ramp-up",
+                    "description": "Domestic fab capacity expanding at 25% YoY to bypass US export restrictions (SMIC, Huawei ecosystem).",
+                    "impact": "LOCALIZED RESILIENCE"
+                }
+            ]
+        },
+        {
+            "id": "europe",
+            "name": "Eurozone & United Kingdom",
+            "flag": "🇪🇺",
+            "economic_status": "SEVERE_CONTRACTION",
+            "status_label": "DE-INDUSTRIALIZATION SHOCK",
+            "central_bank_rate": "3.25% (ECB Aggressive Cuts)",
+            "inflation_rate": "2.0% HICP (Target Hit)",
+            "pmi_summary": "Manufacturing 46.0 (Deep Slump) • Services 51.6",
+            "pressure_points": [
+                {
+                    "title": "German Industrial De-Industrialization",
+                    "description": "Volkswagen planning historic domestic factory closures, BASF scaling back chemical production due to 3x higher natural gas costs vs US.",
+                    "severity": "CRITICAL"
+                },
+                {
+                    "title": "French & British Fiscal Austerity",
+                    "description": "Deficit overruns forcing tax hikes and public spending cuts, directly depressing consumer discretionary demand.",
+                    "severity": "HIGH"
+                },
+                {
+                    "title": "High Energy Transition Penalties",
+                    "description": "Heavy carbon border tariffs and expensive renewable grid integration making heavy manufacturing uncompetitive.",
+                    "severity": "HIGH"
+                }
+            ],
+            "expansion_engines": [
+                {
+                    "title": "Rapid ECB Rate Cuts Ahead of US Fed",
+                    "description": "Lagarde accelerating rate reductions (expecting <2.25% by mid-2025) to provide urgent monetary CPR to the mortgage and auto sectors.",
+                    "impact": "CREDIT RELIEF"
+                },
+                {
+                    "title": "European Defense Capex Supercycle",
+                    "description": "NATO members increasing defense budgets to >2.5% of GDP, driving record backlogs for Rheinmetall, BAE Systems, and Airbus.",
+                    "impact": "DEFENSE BOOM"
+                },
+                {
+                    "title": "Southern Europe Tourism & Services",
+                    "description": "Spain, Portugal, and Greece maintaining 2.0%+ GDP growth on record international tourism and service exports.",
+                    "impact": "PERIPHERY STRENGTH"
+                }
+            ]
+        },
+        {
+            "id": "japan",
+            "name": "Japan",
+            "flag": "🇯🇵",
+            "economic_status": "MONETARY_INFLECTION",
+            "status_label": "WAGE-PRICE SPIRAL EXIT",
+            "central_bank_rate": "0.25% (BoJ Hiking Path)",
+            "inflation_rate": "2.5% Core CPI (Sustained)",
+            "pmi_summary": "Services 53.1 • Manufacturing 49.2",
+            "pressure_points": [
+                {
+                    "title": "Yen Carry Trade Unwinding Flashpoints",
+                    "description": "When the Bank of Japan hikes rates while the Fed cuts, the Yen strengthens rapidly, triggering algorithmic margin calls across global asset markets.",
+                    "severity": "HIGH"
+                },
+                {
+                    "title": "Import Fuel & Food Inflation",
+                    "description": "Weak historical Yen has driven up import costs for Japanese households and small-medium manufacturing enterprises.",
+                    "severity": "MODERATE"
+                }
+            ],
+            "expansion_engines": [
+                {
+                    "title": "Historic 30-Year Wage Growth (Shunto +5.2%)",
+                    "description": "Japanese conglomerates agreed to the largest wage increases since 1991, successfully ending three decades of deflationary stagnation.",
+                    "impact": "DOMESTIC DEMAND"
+                },
+                {
+                    "title": "Tokyo Stock Exchange (TSE) Corporate Reform",
+                    "description": "Mandatory push for companies trading below 1x P/B to initiate buybacks, boost dividends, and eliminate cross-shareholdings.",
+                    "impact": "EQUITY BOOM"
+                },
+                {
+                    "title": "Semiconductor Mega-Fabs (Kumamoto & Rapidus)",
+                    "description": "TSMC's multi-billion dollar fab deployments establishing Japan as a leading advanced packaging hub.",
+                    "impact": "CAPEX SURGE"
+                }
+            ]
+        },
+        {
+            "id": "em_india",
+            "name": "India & Emerging Asia (China+1 Hub)",
+            "flag": "🇮🇳",
+            "economic_status": "RAPID_EXPANSION",
+            "status_label": "GLOBAL GROWTH SWEET SPOT",
+            "central_bank_rate": "6.50% (RBI Neutral Stance)",
+            "inflation_rate": "4.8% Core CPI • High Food Spikes",
+            "pmi_summary": "Composite 58.6 (Highest Globally) • Mfg 57.5",
+            "pressure_points": [
+                {
+                    "title": "Strong US Dollar Currency Depletion",
+                    "description": "A rising DXY (>106) puts pressure on Emerging Market currencies, forcing central banks to use forex reserves to cushion currency volatility.",
+                    "severity": "MODERATE"
+                },
+                {
+                    "title": "Middle East Energy Geopolitics",
+                    "description": "Over 85% of crude oil is imported; any escalation near the Strait of Hormuz directly threatens domestic trade deficits.",
+                    "severity": "HIGH"
+                }
+            ],
+            "expansion_engines": [
+                {
+                    "title": "China+1 High-Tech Manufacturing Relocation",
+                    "description": "Apple now produces 1 in 7 iPhones in India. Foxconn, Pegatron, and Dixon ramping up domestic electronics assembly at scale.",
+                    "impact": "EXPORT SURGE"
+                },
+                {
+                    "title": "Domestic Physical Infrastructure Capex",
+                    "description": "Central government deploying ₹11.11 Lakh Crore in physical capex (highways, dedicated freight corridors, renewables).",
+                    "impact": "VOLUMETRIC EXPANSION"
+                },
+                {
+                    "title": "Systematic Retail Inflow Financialization",
+                    "description": "Domestic monthly SIPs of ₹25,000+ Cr insulate Indian capital markets from foreign institutional panic exits.",
+                    "impact": "LIQUIDITY SHIELD"
+                }
+            ]
+        }
+    ],
+    "global_stress_gauges": [
+        {
+            "id": "dxy",
+            "name": "US Dollar Index (DXY)",
+            "current_value": 106.25,
+            "unit": "Index Pts",
+            "status": "ELEVATED_PRESSURE",
+            "status_label": "STRONG DOLLAR SQUEEZE",
+            "bar_ratio": 0.82,
+            "flow_direction": "PRESSURE",
+            "historical_range": "99.5 - 107.0",
+            "market_impact": (
+                "When DXY crosses 105, foreign institutional investors (FIIs) pull liquidity out of Emerging Markets. "
+                "Strong dollar raises the cost of dollar-denominated debt for Asian and Latin American corporates."
+            )
+        },
+        {
+            "id": "us10y",
+            "name": "US 10-Year Treasury Yield",
+            "current_value": 4.42,
+            "unit": "% Annual",
+            "status": "RESTRICTIVE",
+            "status_label": "YIELD GRAVITY ON TECH",
+            "bar_ratio": 0.78,
+            "flow_direction": "PRESSURE",
+            "historical_range": "3.80% - 4.70%",
+            "market_impact": (
+                "The global risk-free discount rate. Yields above 4.3% suck capital back into US money market funds "
+                "and trigger valuation compression for expensive growth stocks globally."
+            )
+        },
+        {
+            "id": "brent",
+            "name": "Brent Crude Oil",
+            "current_value": 73.40,
+            "unit": "$ / Barrel",
+            "status": "MUTED_RELIEF",
+            "status_label": "IMPORTED INFLATION RELIEF",
+            "bar_ratio": 0.45,
+            "flow_direction": "EXPANSION",
+            "historical_range": "$68 - $92",
+            "market_impact": (
+                "Crude below $75 is a massive macro boon for oil importers like India, Japan, and the EU. "
+                "It cools down current account deficits and input costs for paints, adhesives, and airlines."
+            )
+        },
+        {
+            "id": "gold",
+            "name": "Sovereign Gold Bullion",
+            "current_value": 2655.0,
+            "unit": "$ / Troy Oz",
+            "status": "ALL_TIME_HIGH",
+            "status_label": "DE-DOLLARIZATION RUSH",
+            "bar_ratio": 0.95,
+            "flow_direction": "EXPANSION",
+            "historical_range": "$1,980 - $2,790",
+            "market_impact": (
+                "Central banks (People's Bank of China, Reserve Bank of India, Turkey) are purchasing physical gold "
+                "at the fastest pace in modern history to hedge against Western weaponization of US Treasury reserves."
+            )
+        },
+        {
+            "id": "semi_lead",
+            "name": "Global Semiconductor Fab Utilization",
+            "current_value": 94.5,
+            "unit": "% Capacity",
+            "status": "SURGING_DEMAND",
+            "status_label": "AI CHIP BOTTLENECK",
+            "bar_ratio": 0.92,
+            "flow_direction": "EXPANSION",
+            "historical_range": "70% - 98%",
+            "market_impact": (
+                "TSMC 3nm/5nm and CoWoS advanced packaging lines are booked solid through 2026. "
+                "AI hardware demand is creating unprecedented capital expenditures for ASML, Lam Research, and Nvidia."
+            )
+        },
+        {
+            "id": "baltic_dry",
+            "name": "Baltic Dry Shipping Index",
+            "current_value": 1680.0,
+            "unit": "Freight Pts",
+            "status": "MODERATE_FLOW",
+            "status_label": "BALANCED BULK EXIM",
+            "bar_ratio": 0.58,
+            "flow_direction": "EXPANSION",
+            "historical_range": "1,100 - 2,250",
+            "market_impact": (
+                "Measures ocean transport rates for iron ore, coal, and grains. Current levels confirm stable "
+                "raw material movements without the shipping cost spikes seen during pandemic bottlenecks."
+            )
+        }
+    ],
+    "global_headwinds_and_tailwinds": {
+        "pressure_headwinds": [
+            {
+                "title": "US Corporate IT Discretionary Budget Freezes",
+                "impact_level": "SEVERE DABAO",
+                "affected_sectors": ["Indian IT Services", "US SaaS Software", "Tech Consulting"],
+                "reason": "US BFSI and retail executives are reprioritizing discretionary software budgets strictly towards generative AI proof-of-concepts, delaying large multi-year digital transformation deals."
+            },
+            {
+                "title": "Universal US Import Tariff Threat (10% - 60%)",
+                "impact_level": "MACRO RISK",
+                "affected_sectors": ["Chinese Exporters", "Global Autos", "Steel & Aluminium"],
+                "reason": "Proposed tariff escalations threaten to disrupt integrated global supply chains and reignite US imported consumer inflation."
+            },
+            {
+                "title": "European Industrial Demand Stagnation",
+                "impact_level": "EXPORT DABAO",
+                "affected_sectors": ["Specialty Chemicals", "Engineering Exports", "Textiles"],
+                "reason": "With German factory orders and automotive dispatches declining, Indian and Asian exporters of intermediates face delayed purchase orders."
+            }
+        ],
+        "expansion_tailwinds": [
+            {
+                "title": "China+1 Manufacturing Relocation to India & ASEAN",
+                "impact_level": "MASSIVE TAILWIND",
+                "affected_sectors": ["Electronics (EMS)", "Solar Modules", "Precision Engineering"],
+                "reason": "Global multinational brands are mandating that at least 25-30% of their global component sourcing originate outside mainland China."
+            },
+            {
+                "title": "Muted Crude Oil & Commodity Softness",
+                "impact_level": "PROFIT EXPANSION",
+                "affected_sectors": ["Paints", "Airlines", "FMCG Packaging", "Tyres"],
+                "reason": "Crude oil remaining rangebound ($70-$75) prevents gross margin contraction and keeps national current account deficits in comfortable zones."
+            },
+            {
+                "title": "Global Central Bank Rate-Easing Liquidity Wave",
+                "impact_level": "LIQUIDITY EXPANSION",
+                "affected_sectors": ["Private Banking", "Real Estate", "Renewable Energy"],
+                "reason": "Synchronized rate cuts from the ECB, Bank of England, and US Fed lower global borrowing spreads and reduce corporate interest burdens."
+            }
+        ]
+    },
+    "equity_impact_matrix": [
+        {
+            "theme": "China+1 Global Supply Relocation",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": "Aerospace & defense EMS assembly orders"},
+                {"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "Mobile phone & laptop domestic manufacturing expansion"},
+                {"symbol": "PGEL", "name": "PG Electroplast", "catalyst": "Consumer electronics ODM contract manufacturing"}
+            ]
+        },
+        {
+            "theme": "Global Energy Transition & Solar Tenders",
+            "impact_direction": "BENEFICIARY",
+            "status": "EXPANDING",
+            "stocks": [
+                {"symbol": "PREMIERENE", "name": "Premier Energies", "catalyst": "Solar cell & module domestic integration boom"},
+                {"symbol": "POWERGRID", "name": "Power Grid Corp", "catalyst": "Massive grid transmission capex to connect green energy"}
+            ]
+        },
+        {
+            "theme": "Western Discretionary Tech Freeze",
+            "impact_direction": "PRESSURE_FACING",
+            "status": "HEADWIND",
+            "stocks": [
+                {"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": "US BFSI discretionary deal closure sluggishness"},
+                {"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "Prolonged consulting restructuring and muted revenue guidance"}
+            ]
+        },
+        {
+            "theme": "Chinese Agrochemical & Chemical Price Dumping",
+            "impact_direction": "PRESSURE_FACING",
+            "status": "HEADWIND",
+            "stocks": [
+                {"symbol": "UPL", "name": "UPL Limited", "catalyst": "Cheap Chinese generic active ingredients suppressing realizations"},
+                {"symbol": "SRF", "name": "SRF Limited", "catalyst": "Fluorochemicals global refrigerant destocking pressure"}
+            ]
+        }
+    ]
+}
+
+def generate_global_radar():
+    print("🌐 Generating Global Macro Economy Pressure & Expansion Radar...")
+    for file_path in [OUTPUT_ASSET_FILE, OUTPUT_ROOT_FILE]:
+        os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(GLOBAL_RADAR_PAYLOAD, f, indent=2)
+    print(f"✅ Created {OUTPUT_ASSET_FILE} and {OUTPUT_ROOT_FILE}")
+    print(f"📊 Superpowers: {len(GLOBAL_RADAR_PAYLOAD['global_superpowers'])} | Stress Gauges: {len(GLOBAL_RADAR_PAYLOAD['global_stress_gauges'])}")
+
+if __name__ == "__main__":
+    generate_global_radar()
