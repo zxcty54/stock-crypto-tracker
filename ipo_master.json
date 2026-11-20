@@ -1,5 +1,36 @@
 [
   {
+    "id": "foodlink-f-b-holdings",
+    "company_name": "Foodlink F&B Holdings",
+    "symbol": "",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2026-11-26",
+    "close_date": "2026-11-30",
+    "allotment_date": null,
+    "listing_date": null,
+    "price_band": "₹0",
+    "issue_size_cr": "",
+    "gmp": "",
+    "gmp_percent": "",
+    "est_listing_price": "—",
+    "kostak": "",
+    "sub2sauda": "",
+    "detail_url": "/foodlink-fb-holdings-ipo-details/",
+    "sources": [
+      "ipowatch"
+    ],
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "cut_off_price": 0,
+    "created_at": "2026-11-20T12:26:46.690525+05:30",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ],
+    "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
+    "last_posted_gmp": ""
+  },
+  {
     "id": "mahanadi-coalfields",
     "company_name": "Mahanadi Coalfields Limited",
     "symbol": "MAHACOAL",
@@ -19,8 +50,8 @@
     "fresh_issue_cr": "0",
     "ofs_cr": "4,200",
     "gmp": "+₹3.00",
-    "gmp_percent": 2.21,
-    "est_listing_price": "₹139(+2.21%)",
+    "gmp_percent": 1.47,
+    "est_listing_price": "₹138(+1.47%)",
     "kostak": "₹150",
     "sub2sauda": "₹1,200",
     "subscription": {
@@ -75,11 +106,13 @@
     "is_already_listed": false,
     "status": "OPEN",
     "posted_events": [
-      "IPO_OPENS_TODAY"
+      "IPO_OPENS_TODAY",
+      "NEW_IPO_ANNOUNCED"
     ],
-    "last_updated": "2026-11-19T14:05:07.138736+05:30",
+    "last_updated": "2026-11-20T12:26:46.690525+05:30",
     "demat_credit_date": "2026-11-25",
-    "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19"
+    "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
+    "last_posted_gmp": "+₹3.00"
   },
   {
     "id": "crystal-crop-protection",
@@ -101,8 +134,8 @@
     "fresh_issue_cr": "600",
     "ofs_cr": "900",
     "gmp": "+₹18.00",
-    "gmp_percent": 6.62,
-    "est_listing_price": "₹290(+6.62%)",
+    "gmp_percent": 6.25,
+    "est_listing_price": "₹289(+6.25%)",
     "kostak": "₹300",
     "sub2sauda": "₹2,500",
     "subscription": {
@@ -157,11 +190,13 @@
     "is_already_listed": false,
     "status": "OPEN",
     "posted_events": [
-      "NEW_IPO_ANNOUNCED"
+      "NEW_IPO_ANNOUNCED",
+      "IPO_CLOSING_TODAY"
     ],
-    "last_updated": "2026-11-19T14:05:07.138736+05:30",
+    "last_updated": "2026-11-20T12:26:46.690525+05:30",
     "demat_credit_date": "2026-11-24",
-    "telegraph_url": "https://telegra.ph/Crystal-Crop-Protection-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19"
+    "telegraph_url": "https://telegra.ph/Crystal-Crop-Protection-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
+    "last_posted_gmp": "+₹18.00"
   },
   {
     "id": "vishal-mega-mart",
