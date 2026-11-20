@@ -258,7 +258,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             Tab(text: "🗺️ SUPERPOWERS HUD"),
             Tab(text: "⚡ MARGINS & S-D RADAR"),
             Tab(text: "📊 STRESS BAROMETERS"),
-            Tab(text: "🎯 EQUITY TRANSLATION"),
+            Tab(text: "🎯 SECTOR SENSITIVITY"),
           ],
         ),
       ),
@@ -1659,32 +1659,63 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 4: 🎯 EQUITY TRANSLATION MATRIX (DATA & TICKERS)
-
+  // TAB 4: 🎯 SECTOR & INDUSTRY MACRO SENSITIVITY MATRIX
   // =============================================================
   Widget _buildEquityImpactTab() {
     return ListView(
       padding: const EdgeInsets.all(12),
       children: [
-        ..._equityImpacts.map((e) => _buildEquityThemeCard(e)),
+        // SEBI Statutory Notice Banner
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          margin: const EdgeInsets.only(bottom: 12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF0D1524),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF1E2B3E)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.shield_outlined, color: kAccentCyan, size: 16),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  "SEBI Statutory Notice: Sectoral macroeconomic research & input-cost sensitivity analysis. Not an investment recommendation, advisory, or buy/sell tip.",
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white70,
+                    fontSize: 9.5,
+                    height: 1.35,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        ..._equityImpacts.map((e) => _buildIndustrySensitivityCard(e)),
       ],
     );
   }
 
-  Widget _buildEquityThemeCard(Map<String, dynamic> theme) {
+  Widget _buildIndustrySensitivityCard(Map<String, dynamic> theme) {
     final tName = theme['theme'] ?? '';
     final direction = theme['impact_direction'] ?? '';
+    final status = theme['status'] ?? (direction == 'BENEFICIARY' ? 'EXPANDING' : 'HEADWIND');
+    final index = theme['benchmark_index'] ?? 'Sector Basket';
+    final sensitivity = theme['cost_sensitivity'] ?? '';
+    final channel = theme['transmission_channel'] ?? '';
+    final segments = (theme['exposed_segments'] as List<dynamic>? ?? []);
+
     final bool isBeneficiary = direction == 'BENEFICIARY';
     final Color col = isBeneficiary ? kAccentGreen : kAccentRed;
-    final stocks = (theme['stocks'] as List<dynamic>? ?? []);
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: kCardDark,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: col.withOpacity(0.3)),
+        border: Border.all(color: col.withOpacity(0.35)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1692,83 +1723,156 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                tName,
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w900,
+              Expanded(
+                child: Text(
+                  tName,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
+              const SizedBox(width: 6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: col.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  isBeneficiary ? "🟢 EXPANDING" : "🔴 PRESSURE",
+                  status,
                   style: TextStyle(
                     color: col,
-                    fontSize: 8,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
-
-          // Listed Equities Ticker Table (Full catalyst text visible, zero ellipsis)
-          ...stocks.map((st) {
-            final String symbol = st['symbol'] ?? '';
-            final String name = st['name'] ?? '';
-            final String catalyst = st['catalyst'] ?? '';
-            return Container(
-              margin: const EdgeInsets.only(bottom: 6),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-              decoration: BoxDecoration(
-                color: const Color(0xFF090D16),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFF1E2B3E)),
+          const SizedBox(height: 5),
+          Row(
+            children: [
+              const Icon(Icons.bar_chart_rounded, color: kAccentCyan, size: 12),
+              const SizedBox(width: 4),
+              Text(
+                "Benchmark Index: $index",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentCyan,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Macro Input-Cost & Transmission Data Box
+          Container(
+            padding: const EdgeInsets.all(9),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFF1E2B3E)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (sensitivity.isNotEmpty) ...[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: const [
+                      Icon(Icons.tune_rounded, color: Colors.white38, size: 11),
+                      SizedBox(width: 4),
                       Text(
-                        symbol,
-                        style: GoogleFonts.robotoMono(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w900,
+                        "INPUT-COST / COGS SENSITIVITY",
+                        style: TextStyle(
+                          color: Colors.white38,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.3,
                         ),
                       ),
-                      if (name.isNotEmpty)
-                        Text(
-                          name,
-                          style: const TextStyle(color: kTextMuted, fontSize: 9.5),
-                        ),
                     ],
                   ),
-                  if (catalyst.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      catalyst,
-                      style: TextStyle(
-                        color: col,
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w600,
-                        height: 1.3,
-                      ),
+                  const SizedBox(height: 3),
+                  Text(
+                    sensitivity,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 9.5,
+                      height: 1.3,
                     ),
-                  ],
+                  ),
+                  const SizedBox(height: 8),
                 ],
-              ),
-            );
-          }),
+                if (channel.isNotEmpty) ...[
+                  Row(
+                    children: [
+                      Icon(Icons.sync_alt_rounded, color: col, size: 11),
+                      const SizedBox(width: 4),
+                      Text(
+                        "MACRO TRANSMISSION CHANNEL",
+                        style: TextStyle(
+                          color: col,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    channel,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.85),
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w500,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+
+          if (segments.isNotEmpty) ...[
+            const SizedBox(height: 9),
+            Row(
+              children: const [
+                Icon(Icons.category_rounded, color: Colors.white38, size: 10),
+                SizedBox(width: 4),
+                Text(
+                  "AFFECTED INDUSTRY SUB-SEGMENTS",
+                  style: TextStyle(
+                    color: Colors.white38,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Wrap(
+              spacing: 5,
+              runSpacing: 4,
+              children: segments.map((seg) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF10192A),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: const Color(0xFF22344D)),
+                  ),
+                  child: Text(
+                    seg.toString(),
+                    style: const TextStyle(color: Colors.white70, fontSize: 8.5),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );

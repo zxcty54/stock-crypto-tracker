@@ -351,7 +351,9 @@ class MacroCommentarySynthesizer:
 # ==============================================================================
 def synthesize_equity_impact_matrix(metrics: dict) -> list:
     """
-    Dynamically generates the Equity Impact Matrix based on live macro telemetry:
+    Dynamically generates the Sector & Industry Macro Sensitivity Matrix:
+    - Focuses on Industry Baskets, Cost of Goods Sold (COGS) sensitivities, and Benchmark Indices
+    - Fully compliant with SEBI research regulations: Zero individual stock recommendations or buy/sell tips
     - Crude Oil pricing dynamics (<$78 vs >=$78)
     - US 10Y Yield & Enterprise Tech discretionary cycle (>=4.25% vs <4.25%)
     - China PPI deflationary dumping vs domestic recovery
@@ -362,93 +364,98 @@ def synthesize_equity_impact_matrix(metrics: dict) -> list:
     # 1. AI Hardware, Semiconductor & China+1 Relocation (Core Global Beneficiary)
     if metrics["semicon_utilization"] >= 90.0 or metrics["india_composite_pmi"] >= 55.0:
         themes.append({
-            "theme": "China+1 & AI Electronics Hardware Supercycle",
+            "theme": "Electronics Manufacturing (EMS) & Defence Assemblies",
+            "benchmark_index": "Nifty India Manufacturing",
             "impact_direction": "BENEFICIARY",
             "status": "EXPANDING",
-            "stocks": [
-                {"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": f"Aerospace & defense EMS assembly orders and OSAT packaging (Fab utilization {metrics['semicon_utilization']}%)"},
-                {"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "Mobile phone & laptop domestic manufacturing expansion under PLI scheme"},
-                {"symbol": "PGEL", "name": "PG Electroplast", "catalyst": "Consumer electronics contract ODM capacity expansion"}
-            ]
+            "cost_sensitivity": "15-20% component import reliance cushioned by domestic PLI schemes and value-add localization",
+            "transmission_channel": f"Global China+1 relocation & high global fab utilization ({metrics['semicon_utilization']}%) driving multi-year export order backlogs",
+            "exposed_segments": ["Mobile & PCB Contract Assembly", "Defence Avionics & OSAT Packaging", "Consumer Electronics ODM"],
+            "stocks": []
         })
 
     # 2. Power Grid, High-Voltage Transmission & Transformers
     themes.append({
-        "theme": "Global AI Infrastructure & Electrical Power Equipment",
+        "theme": "Power Transmission & Heavy Electrical Equipment",
+        "benchmark_index": "Nifty Energy & Infrastructure",
         "impact_direction": "BENEFICIARY",
         "status": "EXPANDING",
-        "stocks": [
-            {"symbol": "ABB", "name": "ABB India", "catalyst": "Global data center electrification & switchgear exports"},
-            {"symbol": "SIEMENS", "name": "Siemens India", "catalyst": "High-voltage grid transmission and industrial automation equipment demand"},
-            {"symbol": "VOLTAMP", "name": "Voltamp Transformers", "catalyst": "Multi-year industrial transformer order backlog and utility capex"}
-        ]
+        "cost_sensitivity": "Copper & CRGO electrical steel input costs offset by robust multi-year fixed escalation contracts",
+        "transmission_channel": "Global data center AI compute loads & grid modernisation creating unprecedented transformer equipment shortages",
+        "exposed_segments": ["High-Voltage Power Transformers", "Gas-Insulated Switchgear", "Grid Substation EPC"],
+        "stocks": []
     })
 
     # 3. Crude Oil Sensitivity Rotation: Soft Crude (Paints/Airlines) vs High Crude (Upstream E&P)
     if metrics["brent_crude"] < 78.0:
         themes.append({
-            "theme": "Soft Crude & Chemical Raw Material Margin Relief",
+            "theme": "Paints, Specialty Adhesives & Aviation Logistics",
+            "benchmark_index": "Nifty Consumption / FMCG",
             "impact_direction": "BENEFICIARY",
-            "status": "EXPANDING",
-            "stocks": [
-                {"symbol": "ASIANPAINT", "name": "Asian Paints Ltd", "catalyst": f"Rangebound Brent (${metrics['brent_crude']}/bbl) protects paint gross margins and titanium dioxide input costs"},
-                {"symbol": "INDIGO", "name": "InterGlobe Aviation", "catalyst": "Aviation turbine fuel stability protects quarterly operating margins"},
-                {"symbol": "PIDILITIND", "name": "Pidilite Industries", "catalyst": "Vinyl acetate monomer (VAM) softness supports adhesive profitability"}
-            ]
+            "status": "MARGIN EXPANSION",
+            "cost_sensitivity": "35-42% of Cost of Goods Sold (COGS) directly tied to Crude & Petrochemical derivatives (Monomers, ATF, Solvents)",
+            "transmission_channel": f"Soft Brent crude (${metrics['brent_crude']}/bbl) prevents input cost inflation, directly expanding gross EBITDA margins",
+            "exposed_segments": ["Decorative Architectural Paints", "Commercial Airline ATF Fuel", "Synthetic Resins & Adhesives"],
+            "stocks": []
         })
     else:
         themes.append({
-            "theme": "Upstream Crude Oil & Exploration Cash Realization",
+            "theme": "Upstream Oil & Gas Exploration (E&P)",
+            "benchmark_index": "Nifty Oil & Gas",
             "impact_direction": "BENEFICIARY",
-            "status": "EXPANDING",
-            "stocks": [
-                {"symbol": "ONGC", "name": "Oil & Natural Gas Corp", "catalyst": f"Crude at ${metrics['brent_crude']}/bbl boosts net upstream oil realization and exploration cash flow"},
-                {"symbol": "OIL", "name": "Oil India Ltd", "catalyst": "North-east crude production expansion and high pipeline transport realizations"}
-            ]
+            "status": "CASH FLOW EXPANSION",
+            "cost_sensitivity": "Exploration lifting costs fixed; revenue directly proportional to international dollar oil realizations",
+            "transmission_channel": f"Elevated crude (${metrics['brent_crude']}/bbl) boosts gross dollar realizations and upstream drilling operating cash flows",
+            "exposed_segments": ["Offshore Crude Drilling", "Domestic Natural Gas Extraction", "Cross-Country Pipeline Transmission"],
+            "stocks": []
         })
 
     # 4. US 10Y Yield & Tech Discretionary Spending
     if metrics["us_10y_yield"] >= 4.25:
         themes.append({
-            "theme": "Western Discretionary Tech Budget Freeze",
+            "theme": "Tier-1 IT & Enterprise Software Services",
+            "benchmark_index": "Nifty IT",
             "impact_direction": "PRESSURE_FACING",
             "status": "HEADWIND",
-            "stocks": [
-                {"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": f"Elevated US 10Y yield ({metrics['us_10y_yield']}%) delays enterprise discretionary tech transformation deals"},
-                {"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "Sluggish US BFSI discretionary consulting spending and muted revenue guidance"}
-            ]
+            "cost_sensitivity": "High revenue dependence on US & European BFSI tech budgets (50-60% of top-line revenue)",
+            "transmission_channel": f"High US 10Y Treasury yield ({metrics['us_10y_yield']}%) prompts US enterprise CFOs to freeze non-critical discretionary consulting projects",
+            "exposed_segments": ["BFSI Discretionary Consulting", "Legacy Enterprise IT Maintenance", "ERP Implementation Deals"],
+            "stocks": []
         })
     else:
         themes.append({
-            "theme": "US Rate Easing & Cloud Transformation Deal Revival",
+            "theme": "Tier-1 IT & Enterprise Cloud Transformation",
+            "benchmark_index": "Nifty IT",
             "impact_direction": "BENEFICIARY",
             "status": "EXPANDING",
-            "stocks": [
-                {"symbol": "INFY", "name": "Infosys Ltd", "catalyst": f"Lower US borrowing costs ({metrics['us_10y_yield']}%) unfreeze enterprise cloud and generative AI contracts"},
-                {"symbol": "PERSISTENT", "name": "Persistent Systems", "catalyst": "Digital engineering deal pipeline expansion and enterprise AI deployments"}
-            ]
+            "cost_sensitivity": "Global corporate tech budgets expand with lower western capital borrowing costs",
+            "transmission_channel": f"Lower US borrowing yields ({metrics['us_10y_yield']}%) unfreeze corporate enterprise cloud migration & generative AI contracts",
+            "exposed_segments": ["Enterprise Cloud Migration", "Generative AI Engineering", "Digital Healthcare Solutions"],
+            "stocks": []
         })
 
     # 5. Chinese Industrial Overcapacity / Deflationary Dumping
     if metrics["china_ppi"] < -1.5 or metrics["china_property_investment"] < -5.0:
         themes.append({
-            "theme": "Chinese Industrial Overcapacity & Steel Dumping",
+            "theme": "Primary Steel & Crop Protection Agrochemicals",
+            "benchmark_index": "Nifty Metal / Commodities",
             "impact_direction": "PRESSURE_FACING",
-            "status": "HEADWIND",
-            "stocks": [
-                {"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "catalyst": f"Distressed Chinese factory exports ({metrics['china_ppi']}% PPI) undercut domestic steel spreads"},
-                {"symbol": "UPL", "name": "UPL Limited", "catalyst": "Chinese generic agrochemical active ingredients price competition in export markets"}
-            ]
+            "status": "MARGIN COMPRESSION",
+            "cost_sensitivity": "High vulnerability to distressed Chinese dumping and generic active ingredient imports",
+            "transmission_channel": f"Distressed Chinese factory exports ({metrics['china_ppi']}% PPI) undercut domestic steel realization spreads and chemical export pricing",
+            "exposed_segments": ["Hot-Rolled Steel Coils", "Generic Agrochemical Off-Patents", "Commodity Base Chemicals"],
+            "stocks": []
         })
     else:
         themes.append({
-            "theme": "Global Commodity Demand Recovery",
+            "theme": "Primary Base Metals & Global Commodity Materials",
+            "benchmark_index": "Nifty Metal",
             "impact_direction": "BENEFICIARY",
             "status": "EXPANDING",
-            "stocks": [
-                {"symbol": "HINDALCO", "name": "Hindalco Industries", "catalyst": "Global base metal demand and aluminium pricing tailwinds"},
-                {"symbol": "JINDALSTEL", "name": "Jindal Steel & Power", "catalyst": "Infrastructure steel structural dispatches and pellet export strength"}
-            ]
+            "cost_sensitivity": "High operating leverage to global London Metal Exchange (LME) spot prices",
+            "transmission_channel": "Global manufacturing PMI recovery drives restocking of industrial metals and structural steel dispatches",
+            "exposed_segments": ["Aluminium Smelting & Extrusions", "Finished Structural Steel", "Pellet & Sponge Iron Exports"],
+            "stocks": []
         })
 
     return themes
@@ -1133,7 +1140,8 @@ Analyze these live macro numbers:
 - India Composite PMI: {metrics['india_composite_pmi']}
 
 STRICT INSTRUCTION:
-Keep all text ULTRA-SHORT, DATA-DENSE, and PUNCHY BULLET POINTS. NO LONG PARAGRAPHS. Focus heavily on NUMBERS, METRICS, BASIS POINTS, AND STOCK TICKERS.
+Keep all text ULTRA-SHORT, DATA-DENSE, and PUNCHY BULLET POINTS. NO LONG PARAGRAPHS. Focus heavily on NUMBERS, METRICS, BASIS POINTS, AND SECTOR BASKETS.
+COMPLIANCE MANDATE: Do NOT recommend or mention single stock buy/sell tips. Focus 100% on Industry Baskets, Cost Sensitivities, and Benchmark Indices.
 
 Return valid JSON with exactly this structure:
 {{
@@ -1141,44 +1149,48 @@ Return valid JSON with exactly this structure:
   "health_verdict": "Short 1-line global health verdict with key metrics",
   "crude_shock_severity": "CRITICAL SHOCK ALERT or RANGEBOUND COMFORT",
   "crude_shock_trigger": "1-line trigger with crude dollar numbers",
-  "crude_shock_winners": ["ONGC", "OIL", "GAIL"],
-  "crude_shock_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"],
+  "crude_shock_winners": ["Upstream Oil & Gas (E&P)", "Pipeline Transmission", "Renewables EPC"],
+  "crude_shock_losers": ["Paints & Coatings", "Commercial Airlines (ATF)", "Downstream Marketing OMCs"],
   "equity_impact_matrix": [
     {{
-      "theme": "China+1 & AI Hardware Supercycle",
+      "theme": "Short industry basket name e.g. Electronics Manufacturing (EMS) & Defence",
+      "benchmark_index": "Nifty India Manufacturing",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "stocks": [
-        {{"symbol": "KAYNES", "name": "Kaynes Technology", "catalyst": "1-line data-backed reason"}},
-        {{"symbol": "DIXON", "name": "Dixon Technologies", "catalyst": "1-line data-backed reason"}}
-      ]
+      "cost_sensitivity": "1-line COGS / raw material input sensitivity metric",
+      "transmission_channel": "1-line macro transmission mechanism with numbers",
+      "exposed_segments": ["Segment 1", "Segment 2", "Segment 3"],
+      "stocks": []
     }},
     {{
-      "theme": "Crude Sensitivity Theme (e.g. Soft Crude Relief or High Oil E&P)",
+      "theme": "Short crude sensitivity sector e.g. Paints, Adhesives & Aviation Logistics",
+      "benchmark_index": "Nifty Consumption / FMCG",
       "impact_direction": "BENEFICIARY",
-      "status": "EXPANDING",
-      "stocks": [
-        {{"symbol": "ASIANPAINT", "name": "Asian Paints Ltd", "catalyst": "1-line data-backed reason"}},
-        {{"symbol": "INDIGO", "name": "InterGlobe Aviation", "catalyst": "1-line data-backed reason"}}
-      ]
+      "status": "MARGIN EXPANSION",
+      "cost_sensitivity": "1-line COGS / raw material input sensitivity metric",
+      "transmission_channel": "1-line macro transmission mechanism with numbers",
+      "exposed_segments": ["Segment 1", "Segment 2", "Segment 3"],
+      "stocks": []
     }},
     {{
-      "theme": "US 10Y Yield Enterprise Tech Theme",
+      "theme": "Short tech sensitivity sector e.g. Tier-1 IT & Enterprise Software Services",
+      "benchmark_index": "Nifty IT",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
-      "stocks": [
-        {{"symbol": "TCS", "name": "Tata Consultancy Services", "catalyst": "1-line data-backed reason"}},
-        {{"symbol": "WIPRO", "name": "Wipro Ltd", "catalyst": "1-line data-backed reason"}}
-      ]
+      "cost_sensitivity": "1-line COGS / revenue sensitivity metric",
+      "transmission_channel": "1-line macro transmission mechanism with numbers",
+      "exposed_segments": ["Segment 1", "Segment 2", "Segment 3"],
+      "stocks": []
     }},
     {{
-      "theme": "Chinese Dumping or Commodity Theme",
+      "theme": "Short commodity sector e.g. Primary Steel & Crop Protection Agrochemicals",
+      "benchmark_index": "Nifty Metal / Commodities",
       "impact_direction": "PRESSURE_FACING",
-      "status": "HEADWIND",
-      "stocks": [
-        {{"symbol": "TATASTEEL", "name": "Tata Steel Ltd", "catalyst": "1-line data-backed reason"}},
-        {{"symbol": "UPL", "name": "UPL Limited", "catalyst": "1-line data-backed reason"}}
-      ]
+      "status": "MARGIN COMPRESSION",
+      "cost_sensitivity": "1-line COGS / dumping sensitivity metric",
+      "transmission_channel": "1-line macro transmission mechanism with numbers",
+      "exposed_segments": ["Segment 1", "Segment 2", "Segment 3"],
+      "stocks": []
     }}
   ]
 }}

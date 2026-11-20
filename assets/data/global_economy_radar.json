@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-20T16:16:27.108351+00:00",
+    "generated_timestamp": "2026-11-20T18:00:31.751136+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -855,104 +855,74 @@
   },
   "equity_impact_matrix": [
     {
-      "theme": "China+1 & AI Electronics Hardware Supercycle",
+      "theme": "Electronics Manufacturing (EMS) & Defence Assemblies",
+      "benchmark_index": "Nifty India Manufacturing",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "stocks": [
-        {
-          "symbol": "KAYNES",
-          "name": "Kaynes Technology",
-          "catalyst": "Aerospace & defense EMS assembly orders and OSAT packaging (Fab utilization 94.5%)"
-        },
-        {
-          "symbol": "DIXON",
-          "name": "Dixon Technologies",
-          "catalyst": "Mobile phone & laptop domestic manufacturing expansion under PLI scheme"
-        },
-        {
-          "symbol": "PGEL",
-          "name": "PG Electroplast",
-          "catalyst": "Consumer electronics contract ODM capacity expansion"
-        }
-      ]
+      "cost_sensitivity": "15-20% component import reliance cushioned by domestic PLI schemes and value-add localization",
+      "transmission_channel": "Global China+1 relocation & high global fab utilization (94.5%) driving multi-year export order backlogs",
+      "exposed_segments": [
+        "Mobile & PCB Contract Assembly",
+        "Defence Avionics & OSAT Packaging",
+        "Consumer Electronics ODM"
+      ],
+      "stocks": []
     },
     {
-      "theme": "Global AI Infrastructure & Electrical Power Equipment",
+      "theme": "Power Transmission & Heavy Electrical Equipment",
+      "benchmark_index": "Nifty Energy & Infrastructure",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "stocks": [
-        {
-          "symbol": "ABB",
-          "name": "ABB India",
-          "catalyst": "Global data center electrification & switchgear exports"
-        },
-        {
-          "symbol": "SIEMENS",
-          "name": "Siemens India",
-          "catalyst": "High-voltage grid transmission and industrial automation equipment demand"
-        },
-        {
-          "symbol": "VOLTAMP",
-          "name": "Voltamp Transformers",
-          "catalyst": "Multi-year industrial transformer order backlog and utility capex"
-        }
-      ]
+      "cost_sensitivity": "Copper & CRGO electrical steel input costs offset by robust multi-year fixed escalation contracts",
+      "transmission_channel": "Global data center AI compute loads & grid modernisation creating unprecedented transformer equipment shortages",
+      "exposed_segments": [
+        "High-Voltage Power Transformers",
+        "Gas-Insulated Switchgear",
+        "Grid Substation EPC"
+      ],
+      "stocks": []
     },
     {
-      "theme": "Soft Crude & Chemical Raw Material Margin Relief",
+      "theme": "Paints, Specialty Adhesives & Aviation Logistics",
+      "benchmark_index": "Nifty Consumption / FMCG",
       "impact_direction": "BENEFICIARY",
-      "status": "EXPANDING",
-      "stocks": [
-        {
-          "symbol": "ASIANPAINT",
-          "name": "Asian Paints Ltd",
-          "catalyst": "Rangebound Brent ($73.4/bbl) protects paint gross margins and titanium dioxide input costs"
-        },
-        {
-          "symbol": "INDIGO",
-          "name": "InterGlobe Aviation",
-          "catalyst": "Aviation turbine fuel stability protects quarterly operating margins"
-        },
-        {
-          "symbol": "PIDILITIND",
-          "name": "Pidilite Industries",
-          "catalyst": "Vinyl acetate monomer (VAM) softness supports adhesive profitability"
-        }
-      ]
+      "status": "MARGIN EXPANSION",
+      "cost_sensitivity": "35-42% of Cost of Goods Sold (COGS) directly tied to Crude & Petrochemical derivatives (Monomers, ATF, Solvents)",
+      "transmission_channel": "Soft Brent crude ($73.4/bbl) prevents input cost inflation, directly expanding gross EBITDA margins",
+      "exposed_segments": [
+        "Decorative Architectural Paints",
+        "Commercial Airline ATF Fuel",
+        "Synthetic Resins & Adhesives"
+      ],
+      "stocks": []
     },
     {
-      "theme": "Western Discretionary Tech Budget Freeze",
+      "theme": "Tier-1 IT & Enterprise Software Services",
+      "benchmark_index": "Nifty IT",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
-      "stocks": [
-        {
-          "symbol": "TCS",
-          "name": "Tata Consultancy Services",
-          "catalyst": "Elevated US 10Y yield (4.42%) delays enterprise discretionary tech transformation deals"
-        },
-        {
-          "symbol": "WIPRO",
-          "name": "Wipro Ltd",
-          "catalyst": "Sluggish US BFSI discretionary consulting spending and muted revenue guidance"
-        }
-      ]
+      "cost_sensitivity": "High revenue dependence on US & European BFSI tech budgets (50-60% of top-line revenue)",
+      "transmission_channel": "High US 10Y Treasury yield (4.42%) prompts US enterprise CFOs to freeze non-critical discretionary consulting projects",
+      "exposed_segments": [
+        "BFSI Discretionary Consulting",
+        "Legacy Enterprise IT Maintenance",
+        "ERP Implementation Deals"
+      ],
+      "stocks": []
     },
     {
-      "theme": "Chinese Industrial Overcapacity & Steel Dumping",
+      "theme": "Primary Steel & Crop Protection Agrochemicals",
+      "benchmark_index": "Nifty Metal / Commodities",
       "impact_direction": "PRESSURE_FACING",
-      "status": "HEADWIND",
-      "stocks": [
-        {
-          "symbol": "TATASTEEL",
-          "name": "Tata Steel Ltd",
-          "catalyst": "Distressed Chinese factory exports (-2.9% PPI) undercut domestic steel spreads"
-        },
-        {
-          "symbol": "UPL",
-          "name": "UPL Limited",
-          "catalyst": "Chinese generic agrochemical active ingredients price competition in export markets"
-        }
-      ]
+      "status": "MARGIN COMPRESSION",
+      "cost_sensitivity": "High vulnerability to distressed Chinese dumping and generic active ingredient imports",
+      "transmission_channel": "Distressed Chinese factory exports (-2.9% PPI) undercut domestic steel realization spreads and chemical export pricing",
+      "exposed_segments": [
+        "Hot-Rolled Steel Coils",
+        "Generic Agrochemical Off-Patents",
+        "Commodity Base Chemicals"
+      ],
+      "stocks": []
     }
   ]
 }
