@@ -56,7 +56,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     _loadDataset();
     _fetchLiveForexRate();
   }
@@ -257,8 +257,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           tabs: const [
             Tab(text: "🗺️ SUPERPOWERS HUD"),
             Tab(text: "⚡ MARGINS & S-D RADAR"),
-            Tab(text: "⚔️ US vs CHINA CLASH"),
-            Tab(text: "📊 STRESS GAUGES"),
+            Tab(text: "📊 STRESS BAROMETERS"),
             Tab(text: "🎯 EQUITY TRANSLATION"),
           ],
         ),
@@ -281,12 +280,6 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                   backgroundColor: kCardDark,
                   onRefresh: () => _loadDataset(isRefresh: true),
                   child: _buildSupplyDemandAndMarginsTab(),
-                ),
-                RefreshIndicator(
-                  color: kAccentCyan,
-                  backgroundColor: kCardDark,
-                  onRefresh: () => _loadDataset(isRefresh: true),
-                  child: _buildUsChinaClashTab(),
                 ),
                 RefreshIndicator(
                   color: kAccentCyan,
@@ -1283,63 +1276,30 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   }
 
   // =============================================================
-  // TAB 3: ⚔️ US vs CHINA CLASH (DATA-CENTRIC BATTLEFIELDS)
+  // TAB 3: 📊 STRESS BAROMETERS (DATA & GAUGE METERS)
   // =============================================================
-  Widget _buildUsChinaClashTab() {
-    final battlefields =
-        (_usaChinaClash['battlefields'] as List<dynamic>? ?? []);
-
+  Widget _buildStressGaugesTab() {
     return ListView(
       padding: const EdgeInsets.all(12),
       children: [
-        // Title Strip
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          decoration: BoxDecoration(
-            color: kCardDark,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: kAccentCyan.withOpacity(0.3)),
-          ),
-          child: Row(
-            children: const [
-              Text("🇺🇸 ⚔️ 🇨🇳", style: TextStyle(fontSize: 16)),
-              SizedBox(width: 8),
-              Text(
-                "USA vs CHINA: 5-BATTLEFIELD TIT-FOR-TAT MATRIX",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10.5,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.4,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-
-        ...battlefields.map((bf) => _buildBattlefieldDataCard(bf)),
+        _buildStressBarometerOverview(),
+        ..._stressGauges.map((g) => _buildStressGaugeCard(g)),
       ],
     );
   }
 
-  Widget _buildBattlefieldDataCard(Map<String, dynamic> bf) {
-    final title = bf['title'] ?? '';
-    final usOffensive = bf['us_offensive'] ?? '';
-    final chinaRetaliation = bf['china_retaliation'] ?? '';
-    final impactOnIndia = bf['impact_on_india'] ?? '';
-    final indiaTakeaway = bf['india_takeaway'] ?? '';
-
-    final isIndiaPositive = impactOnIndia.contains('POSITIVE') ||
-        impactOnIndia.contains('BENEFICIARY');
-
+  Widget _buildStressBarometerOverview() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: kCardDark,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: kBorderSubtle),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF131D2E), Color(0xFF0C1322)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kAccentCyan.withOpacity(0.35)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1347,134 +1307,107 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white,
-                  fontSize: 11.5,
-                  fontWeight: FontWeight.w900,
-                ),
+              Row(
+                children: [
+                  const Icon(Icons.speed_rounded, color: kAccentCyan, size: 16),
+                  const SizedBox(width: 6),
+                  Text(
+                    "GLOBAL MACRO STRESS BAROMETER",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: isIndiaPositive
-                      ? kAccentGreen.withOpacity(0.2)
-                      : kAccentAmber.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(3),
+                  color: kAccentAmber.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(4),
                 ),
-                child: Text(
-                  impactOnIndia,
+                child: const Text(
+                  "6 GAUGES ACTIVE",
                   style: TextStyle(
-                    color: isIndiaPositive ? kAccentGreen : kAccentAmber,
-                    fontSize: 7.5,
+                    color: kAccentAmber,
+                    fontSize: 8.5,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
-          // Two-Column Data Layout
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0D1829),
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: kAccentCyan.withOpacity(0.2)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          // Comparative Horizontal Bar Chart for all 6 items
+          ..._stressGauges.map((g) {
+            final name = g['name']?.toString().split('(').first.trim() ?? '';
+            final val = g['current_value'];
+            final unit = g['unit'] ?? '';
+            final double ratio = (g['bar_ratio'] as num?)?.toDouble() ?? 0.5;
+            final isPressure = g['flow_direction'] == 'PRESSURE';
+            final Color color = isPressure ? kAccentRed : (ratio > 0.7 ? kAccentAmber : kAccentGreen);
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("🇺🇸 US OFFENSIVE",
-                          style: TextStyle(
-                              color: kAccentCyan,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w900)),
-                      const SizedBox(height: 3),
+                      Expanded(
+                        child: Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                       Text(
-                        usOffensive,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 8.5, height: 1.25),
+                        "  (" + (ratio * 100).toInt().toString() + "%)",
+                        style: GoogleFonts.robotoMono(
+                          color: color,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF24121A),
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: kAccentRed.withOpacity(0.2)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("🇨🇳 CHINA COUNTER",
-                          style: TextStyle(
-                              color: kAccentRed,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w900)),
-                      const SizedBox(height: 3),
-                      Text(
-                        chinaRetaliation,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 8.5, height: 1.25),
+                  const SizedBox(height: 3),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(3),
+                    child: SizedBox(
+                      height: 5.5,
+                      child: Stack(
+                        children: [
+                          Container(color: const Color(0xFF090D16)),
+                          FractionallySizedBox(
+                            widthFactor: ratio.clamp(0.05, 1.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [color.withOpacity(0.6), color],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 6),
-
-          // India Takeaway Strip
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: const Color(0xFF090D16),
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: const Color(0xFF1E2B3E)),
-            ),
-            child: Row(
-              children: [
-                const Text("🇮🇳 ARBITRAGE: ",
-                    style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 8,
-                        fontWeight: FontWeight.bold)),
-                Expanded(
-                  child: Text(
-                    indiaTakeaway,
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 8.5, fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
-            ),
-          ),
+            );
+          }),
         ],
       ),
-    );
-  }
-
-  // =============================================================
-  // TAB 4: 📊 STRESS BAROMETERS (DATA & GAUGE METERS)
-  // =============================================================
-  Widget _buildStressGaugesTab() {
-    return ListView(
-      padding: const EdgeInsets.all(12),
-      children: [
-        ..._stressGauges.map((g) => _buildStressGaugeCard(g)),
-      ],
     );
   }
 
@@ -1487,15 +1420,16 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final isPressure = g['flow_direction'] == 'PRESSURE';
     final Color barColor = isPressure ? kAccentRed : kAccentGreen;
     final range = g['historical_range'] ?? '';
-    final impact = g['market_impact'] ?? '';
+    final String indiaImpact = _getGaugeIndiaSummary(g['id'], g['market_impact'] ?? '');
+    final List<String> assets = _getGaugeAssets(g['id']);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: kCardDark,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: barColor.withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: barColor.withOpacity(0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1503,80 +1437,230 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                name,
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w900,
+              Expanded(
+                child: Text(
+                  name,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: barColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   statusLabel,
                   style: TextStyle(
                     color: barColor,
-                    fontSize: 8,
+                    fontSize: 8.5,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
 
-          // Value Row
+          // Big Metric Value & Range
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                "$val $unit",
-                style: GoogleFonts.robotoMono(
-                  color: barColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    "",
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    unit,
+                    style: TextStyle(
+                      color: barColor,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
               Text(
-                "Range: $range",
+                "Range: ",
                 style: const TextStyle(color: kTextMuted, fontSize: 9.5),
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8),
 
-          // Horizontal Gauge Bar
-          ClipRRect(
-            borderRadius: BorderRadius.circular(3),
-            child: LinearProgressIndicator(
-              value: barRatio.clamp(0.05, 1.0),
-              backgroundColor: const Color(0xFF131B2A),
-              valueColor: AlwaysStoppedAnimation<Color>(barColor),
-              minHeight: 5,
-            ),
+          // Multi-Zone Visual Range Barometer
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final double pointerPos = (constraints.maxWidth * barRatio.clamp(0.04, 0.96)) - 4;
+                  return Padding(
+                    padding: EdgeInsets.only(left: pointerPos.clamp(0.0, constraints.maxWidth - 8)),
+                    child: const Icon(Icons.arrow_drop_down, color: Colors.white, size: 12),
+                  );
+                },
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(3),
+                child: SizedBox(
+                  height: 6,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 35,
+                        child: Container(color: kAccentGreen.withOpacity(0.7)),
+                      ),
+                      const SizedBox(width: 1.5),
+                      Expanded(
+                        flex: 35,
+                        child: Container(color: kAccentAmber.withOpacity(0.7)),
+                      ),
+                      const SizedBox(width: 1.5),
+                      Expanded(
+                        flex: 30,
+                        child: Container(color: kAccentRed.withOpacity(0.7)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("🟢 LOW / BENIGN", style: TextStyle(color: kTextMuted, fontSize: 8)),
+                  Text("🟡 ELEVATED", style: TextStyle(color: kTextMuted, fontSize: 8)),
+                  Text("🔴 SEVERE STRESS", style: TextStyle(color: kTextMuted, fontSize: 8)),
+                ],
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
 
-          Text(
-            impact,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 9.5,
-              height: 1.25,
+          // 🇮🇳 India Transmission Strip (Crisp, wrapped, no truncation)
+          if (indiaImpact.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF090D16),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.white10),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 1.5),
+                    child: Text("🇮🇳", style: TextStyle(fontSize: 11)),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      indiaImpact,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
+
+          // Impacted Asset Chips
+          if (assets.isNotEmpty) ...[
+            const SizedBox(height: 7),
+            Wrap(
+              spacing: 5,
+              runSpacing: 4,
+              children: assets.map((a) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0C1320),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: const Color(0xFF1E2D44)),
+                  ),
+                  child: Text(
+                    a,
+                    style: GoogleFonts.robotoMono(
+                      color: kAccentCyan,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 8.5,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );
   }
 
+  String _getGaugeIndiaSummary(String? id, String defaultText) {
+    switch (id) {
+      case 'dxy':
+      case 'dxy_dollar':
+        return "Drains emerging market liquidity • Pressures Rupee toward 84.42 • FII outflow bias";
+      case 'us10y':
+      case 'us_10y_yield':
+        return "Compresses equity PE multiples • Raises refinancing cost on dollar corporate debt";
+      case 'brent_crude':
+        return "Oil sweet spot keeps CAD manageable • Boosts operating margins for Paints, Chemicals & OMCs";
+      case 'gold_spot':
+        return "Confirms central bank reserve diversification (PBOC, RBI) into neutral physical assets";
+      case 'semicon_utilization':
+        return "Massive AI capex utilization spills over into Indian EMS & electronics packaging orderbooks";
+      case 'baltic_dry':
+        return "Steady raw material bulk shipments without pandemic maritime freight cost disruptions";
+      default:
+        return defaultText.split('.').first;
+    }
+  }
+
+  List<String> _getGaugeAssets(String? id) {
+    switch (id) {
+      case 'dxy':
+      case 'dxy_dollar':
+        return ['USD/INR', 'FII FLOWS', 'BANKING NIFTY'];
+      case 'us10y':
+      case 'us_10y_yield':
+        return ['GROWTH STOCKS', 'IT SERVICES', 'EM DEBT'];
+      case 'brent_crude':
+        return ['PAINTS (ASIANPAINT)', 'CHEMICALS', 'OMCs (BPCL/IOC)'];
+      case 'gold_spot':
+        return ['GOLD ETFS', 'TITAN', 'MUTHOOTFIN'];
+      case 'semicon_utilization':
+        return ['KAYNES', 'DIXON', 'TATA TECH'];
+      case 'baltic_dry':
+        return ['ADANIPORTS', 'TATASTEEL', 'SHIPPING CORP'];
+      default:
+        return [];
+    }
+  }
+
   // =============================================================
-  // TAB 5: 🎯 EQUITY TRANSLATION MATRIX (DATA & TICKERS)
+  // TAB 4: 🎯 EQUITY TRANSLATION MATRIX (DATA & TICKERS)
+
   // =============================================================
   Widget _buildEquityImpactTab() {
     return ListView(
