@@ -32,11 +32,14 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
 
   final TextEditingController _searchCtrl = TextEditingController();
 
-  // Cloudflare Worker Proxy Endpoint
+  // Cloudflare Worker Proxy Endpoints
   final String _sheetApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
+  final String _stockApiUrl =
+      "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet1";
 
   final NumberFormat _currencyFormat = NumberFormat('#,##,##0.00', 'en_IN');
+  Map<String, Map<String, dynamic>> _liveStockQuotes = {};
 
   @override
   void initState() {
@@ -87,6 +90,7 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
   }
 
   Future<void> _fetchLiveRemoteData() async {
+    // 1. Fetch Sector & Broad Indices updates
     try {
       final response = await http
           .get(Uri.parse(_sheetApiUrl))
@@ -111,6 +115,44 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
     } catch (_) {
       // Gracefully silent fallback to bundled high-fidelity snapshot
     }
+
+    // 2. Fetch live stock quotes from Sheet 1 to enrich constituent stocks
+    try {
+      final stockRes = await http
+          .get(Uri.parse(_stockApiUrl))
+          .timeout(const Duration(seconds: 8));
+
+      if (stockRes.statusCode == 200) {
+        final List<dynamic> stockRows = jsonDecode(stockRes.body);
+        Map<String, Map<String, dynamic>> quotes = {};
+        for (var row in stockRows) {
+          if (row is Map) {
+            final sym = (row['Symbol'] ?? '').toString().toUpperCase().trim();
+            if (sym.isNotEmpty && sym != 'SYMBOL') {
+              quotes[sym] = {
+                'price': _extractNum(row['CMP']),
+                'change': _extractNum(row['Change']),
+              };
+            }
+          }
+        }
+        if (mounted && quotes.isNotEmpty) {
+          setState(() {
+            _liveStockQuotes = quotes;
+          });
+        }
+      }
+    } catch (_) {
+      // Silent fallback
+    }
+  }
+
+  double _extractNum(dynamic val) {
+    if (val == null) return 0.0;
+    if (val is num) return val.toDouble();
+    return double.tryParse(
+            val.toString().replaceAll(',', '').replaceAll('%', '').trim()) ??
+        0.0;
   }
 
   void _mergeLiveUpdates(Map<String, dynamic> liveData) {
@@ -750,7 +792,7 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
   }
 
   // -------------------------------------------------------------
-  // Modal Sheet: Index Deep Dive
+  // Modal Sheet: Index Deep Dive & Trending Constituent Stocks
   // -------------------------------------------------------------
   void _showIndexDetailModal(Map<String, dynamic> item) {
     HapticFeedback.mediumImpact();
@@ -765,143 +807,490 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
     final double? high = (item['high'] as num?)?.toDouble();
     final double? low = (item['low'] as num?)?.toDouble();
 
+    // Extract constituents
+    final rawConstituents = (item['constituents'] as List<dynamic>?) ?? [];
+    List<Map<String, dynamic>> constituents = rawConstituents
+        .map((c) => Map<String, dynamic>.from(c as Map))
+        .toList();
+
+    // Enrich constituents with real-time sheet1 quotes if available
+    for (var c in constituents) {
+      final sym = (c['symbol'] ?? '').toString().toUpperCase();
+      if (_liveStockQuotes.containsKey(sym)) {
+        final live = _liveStockQuotes[sym]!;
+        if (live['price'] != null && live['price'] > 0) {
+          c['price'] = live['price'];
+        }
+        if (live['change'] != null) {
+          c['change_pct'] = live['change'];
+        }
+      }
+    }
+
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xFF0F1726),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Top Handle
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Colors.white24,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14),
+        String filterMode = "ALL"; // "ALL", "GAINERS", "LOSERS"
 
-                // Name & Performance
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
+        return StatefulBuilder(
+          builder: (modalCtx, setModalState) {
+            List<Map<String, dynamic>> displayedConstituents = List.from(constituents);
+
+            // Filter
+            if (filterMode == "GAINERS") {
+              displayedConstituents = displayedConstituents
+                  .where((s) => ((s['change_pct'] as num?)?.toDouble() ?? 0.0) >= 0)
+                  .toList();
+            } else if (filterMode == "LOSERS") {
+              displayedConstituents = displayedConstituents
+                  .where((s) => ((s['change_pct'] as num?)?.toDouble() ?? 0.0) < 0)
+                  .toList();
+            }
+
+            // Always sort by performance (descending: highest gainers first)
+            displayedConstituents.sort((a, b) {
+              final ca = (a['change_pct'] as num?)?.toDouble() ?? 0.0;
+              final cb = (b['change_pct'] as num?)?.toDouble() ?? 0.0;
+              return cb.compareTo(ca);
+            });
+
+            return Container(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.85,
+              ),
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Top Handle
+                      Center(
+                        child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(2),
                           ),
                         ),
-                        Text(
-                          category,
-                          style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 11, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Name & Performance Badge
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.plusJakartaSans(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  category,
+                                  style: const TextStyle(
+                                    color: Color(0xFF00E5FF),
+                                    fontSize: 10.5,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: heatColor.withOpacity(0.18),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: heatColor.withOpacity(0.4)),
+                            ),
+                            child: Text(
+                              "${isUp ? '+' : ''}${changePct.toStringAsFixed(2)}%",
+                              style: GoogleFonts.robotoMono(
+                                color: heatColor,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Level Highlight
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF090D16),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: const Color(0xFF1E2B3E)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "INDEX LEVEL (CMP)",
+                              style: TextStyle(
+                                color: Colors.white54,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              _currencyFormat.format(price),
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      if (open != null || high != null || low != null) ...[
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            if (open != null)
+                              Expanded(child: _buildMetricMiniBox("OPEN", _currencyFormat.format(open))),
+                            if (high != null) ...[
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _buildMetricMiniBox(
+                                  "DAY HIGH",
+                                  _currencyFormat.format(high),
+                                  const Color(0xFF00FF88),
+                                ),
+                              ),
+                            ],
+                            if (low != null) ...[
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _buildMetricMiniBox(
+                                  "DAY LOW",
+                                  _currencyFormat.format(low),
+                                  const Color(0xFFFF2A6D),
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                       ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: heatColor.withOpacity(0.18),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: heatColor.withOpacity(0.4)),
+
+                      const SizedBox(height: 14),
+
+                      // Constituent Trending Stocks Header & Filters
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.trending_up_rounded, color: Color(0xFF00E5FF), size: 16),
+                              const SizedBox(width: 6),
+                              Text(
+                                "CONSTITUENT STOCKS",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                          // Filter toggle pills
+                          Row(
+                            children: [
+                              _buildModalFilterChip("ALL", filterMode == "ALL", () {
+                                setModalState(() => filterMode = "ALL");
+                              }),
+                              const SizedBox(width: 4),
+                              _buildModalFilterChip("GAINERS", filterMode == "GAINERS", () {
+                                setModalState(() => filterMode = "GAINERS");
+                              }),
+                              const SizedBox(width: 4),
+                              _buildModalFilterChip("LOSERS", filterMode == "LOSERS", () {
+                                setModalState(() => filterMode = "LOSERS");
+                              }),
+                            ],
+                          ),
+                        ],
                       ),
-                      child: Text(
-                        "${isUp ? '+' : ''}${changePct.toStringAsFixed(2)}%",
-                        style: GoogleFonts.robotoMono(
-                          color: heatColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w900,
+                      const SizedBox(height: 8),
+
+                      // Stocks List
+                      Expanded(
+                        child: displayedConstituents.isEmpty
+                            ? Center(
+                                child: Text(
+                                  "No stocks match '$filterMode' filter",
+                                  style: const TextStyle(color: Colors.white38, fontSize: 11),
+                                ),
+                              )
+                            : ListView.separated(
+                                itemCount: displayedConstituents.length,
+                                separatorBuilder: (_, __) => const SizedBox(height: 6),
+                                itemBuilder: (context, idx) {
+                                  final stock = displayedConstituents[idx];
+                                  return _buildConstituentStockTile(stock, context);
+                                },
+                              ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      // Bottom Copy button
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF00E5FF),
+                            foregroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 11),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                          icon: const Icon(Icons.copy_rounded, size: 15),
+                          label: const Text(
+                            "COPY INDEX VALUE",
+                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
+                          ),
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(
+                                text: "$name: ${_currencyFormat.format(price)} ($changePct%)"));
+                            Navigator.pop(ctx);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("$name copied to clipboard"),
+                                backgroundColor: const Color(0xFF00F5A0),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 16),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
-                // Level Highlight
+  Widget _buildModalFilterChip(String label, bool isSelected, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(4),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF00E5FF).withOpacity(0.2) : const Color(0xFF141C2B),
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF00E5FF) : const Color(0xFF1E2B3E),
+            width: 0.8,
+          ),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            color: isSelected ? const Color(0xFF00E5FF) : Colors.white54,
+            fontSize: 9,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConstituentStockTile(Map<String, dynamic> stock, BuildContext context) {
+    final sym = (stock['symbol'] ?? '').toString().toUpperCase();
+    final name = (stock['name'] ?? sym).toString();
+    final weight = (stock['weight'] ?? '').toString();
+
+    final double price = (stock['price'] as num?)?.toDouble() ?? 0.0;
+    final double changePct = (stock['change_pct'] as num?)?.toDouble() ?? 0.0;
+
+    final bool isUp = changePct >= 0;
+    final Color trendColor = isUp ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D);
+
+    return InkWell(
+      onTap: () {
+        _showStockActionSheet(context, sym, name, price, changePct);
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        decoration: BoxDecoration(
+          color: const Color(0xFF090D16),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: const Color(0xFF1E2B3E)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              decoration: BoxDecoration(
+                color: const Color(0xFF00E5FF).withOpacity(0.12),
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: const Color(0xFF00E5FF).withOpacity(0.3)),
+              ),
+              child: Text(
+                sym,
+                style: GoogleFonts.robotoMono(
+                  color: const Color(0xFF00E5FF),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  if (weight.isNotEmpty)
+                    Text(
+                      "Weight: $weight",
+                      style: const TextStyle(color: Colors.white38, fontSize: 9.5),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "₹${_currencyFormat.format(price)}",
+                  style: GoogleFonts.robotoMono(
+                    color: Colors.white,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 2),
                 Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF090D16),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF1E2B3E)),
+                    color: trendColor.withOpacity(0.14),
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        "INDEX LEVEL (CMP)",
-                        style: TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w900),
+                      Icon(
+                        isUp ? Icons.arrow_drop_up_rounded : Icons.arrow_drop_down_rounded,
+                        color: trendColor,
+                        size: 14,
                       ),
                       Text(
-                        _currencyFormat.format(price),
+                        "${isUp ? '+' : ''}${changePct.toStringAsFixed(2)}%",
                         style: GoogleFonts.robotoMono(
-                          color: Colors.white,
-                          fontSize: 16,
+                          color: trendColor,
+                          fontSize: 9.5,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                     ],
                   ),
                 ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-                if (open != null || high != null || low != null) ...[
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      if (open != null)
-                        Expanded(child: _buildMetricMiniBox("OPEN", _currencyFormat.format(open))),
-                      if (high != null) ...[
-                        const SizedBox(width: 8),
-                        Expanded(child: _buildMetricMiniBox("DAY HIGH", _currencyFormat.format(high), const Color(0xFF00FF88))),
-                      ],
-                      if (low != null) ...[
-                        const SizedBox(width: 8),
-                        Expanded(child: _buildMetricMiniBox("DAY LOW", _currencyFormat.format(low), const Color(0xFFFF2A6D))),
-                      ],
-                    ],
+  void _showStockActionSheet(BuildContext ctx, String sym, String name, double price, double change) {
+    showModalBottomSheet(
+      context: ctx,
+      backgroundColor: const Color(0xFF141C2B),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (actionCtx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "$sym · $name",
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
                   ),
-                ],
-
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00E5FF),
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
-                    icon: const Icon(Icons.copy_rounded, size: 16),
-                    label: const Text("COPY INDEX VALUE", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11)),
-                    onPressed: () {
-                      Clipboard.setData(ClipboardData(text: "$name: ${_currencyFormat.format(price)} ($changePct%)"));
-                      Navigator.pop(ctx);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("$name copied to clipboard"),
-                          backgroundColor: const Color(0xFF00F5A0),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "₹${_currencyFormat.format(price)} (${change >= 0 ? '+' : ''}${change.toStringAsFixed(2)}%)",
+                  style: GoogleFonts.robotoMono(
+                    color: change >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
+                const SizedBox(height: 12),
+                ListTile(
+                  leading: const Icon(Icons.bookmark_add_rounded, color: Color(0xFF00E5FF)),
+                  title: const Text("Add to Watchlist", style: TextStyle(color: Colors.white, fontSize: 13)),
+                  onTap: () {
+                    Navigator.pop(actionCtx);
+                    ScaffoldMessenger.of(ctx).showSnackBar(
+                      SnackBar(
+                        content: Text("$sym added to Watchlist"),
+                        backgroundColor: const Color(0xFF00E5FF),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.copy_rounded, color: Colors.white70),
+                  title: const Text("Copy Stock Symbol & Quote", style: TextStyle(color: Colors.white, fontSize: 13)),
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: "$sym: ₹$price (${change >= 0 ? '+' : ''}$change%)"));
+                    Navigator.pop(actionCtx);
+                    ScaffoldMessenger.of(ctx).showSnackBar(
+                      SnackBar(
+                        content: Text("Copied $sym quote to clipboard"),
+                        backgroundColor: const Color(0xFF00F5A0),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
