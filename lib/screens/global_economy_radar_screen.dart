@@ -823,8 +823,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Text(
-            "Central Bank: $rate • Inflation: $inflation
-$pmi",
+            "Central Bank: $rate • Inflation: $inflation • $pmi",
             style: const TextStyle(color: kTextMuted, fontSize: 10, height: 1.3),
           ),
         ),
@@ -1036,7 +1035,7 @@ $pmi",
 
     final usdInr = _currencyTradeTelemetry['usd_inr_current'] ?? 84.42;
     final inrStress = _currencyTradeTelemetry['stress_level'] ?? 'MANAGED FLOAT';
-    final rbiForex = _currencyTradeTelemetry['rbi_forex_warchest'] ?? '$675 Billion';
+    final rbiForex = _currencyTradeTelemetry['rbi_forex_warchest'] ?? r'$675 Billion';
     final crudeRule =
         (_currencyTradeTelemetry['crude_sensitivity_rule'] as Map<String, dynamic>? ?? {});
     final eximDynamics =
@@ -1688,7 +1687,7 @@ $pmi",
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    crudeRule['rule_title'] ?? 'The $10 Crude Rule',
+                    crudeRule['rule_title'] ?? r'The $10 Crude Rule',
                     style: const TextStyle(
                       color: kAccentCyan,
                       fontSize: 10.5,
