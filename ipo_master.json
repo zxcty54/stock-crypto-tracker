@@ -28,7 +28,9 @@
       "NEW_IPO_ANNOUNCED"
     ],
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
-    "last_posted_gmp": ""
+    "last_posted_gmp": "",
+    "demat_credit_date": "2026-12-02",
+    "last_updated": "2026-11-20T16:44:55.925132+05:30"
   },
   {
     "id": "mahanadi-coalfields",
@@ -50,8 +52,8 @@
     "fresh_issue_cr": "0",
     "ofs_cr": "4,200",
     "gmp": "+₹3.00",
-    "gmp_percent": 1.47,
-    "est_listing_price": "₹138(+1.47%)",
+    "gmp_percent": 0.74,
+    "est_listing_price": "₹137(+0.74%)",
     "kostak": "₹150",
     "sub2sauda": "₹1,200",
     "subscription": {
@@ -109,7 +111,7 @@
       "IPO_OPENS_TODAY",
       "NEW_IPO_ANNOUNCED"
     ],
-    "last_updated": "2026-11-20T12:26:46.690525+05:30",
+    "last_updated": "2026-11-20T16:44:55.925132+05:30",
     "demat_credit_date": "2026-11-25",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
     "last_posted_gmp": "+₹3.00"
@@ -134,8 +136,8 @@
     "fresh_issue_cr": "600",
     "ofs_cr": "900",
     "gmp": "+₹18.00",
-    "gmp_percent": 6.25,
-    "est_listing_price": "₹289(+6.25%)",
+    "gmp_percent": 5.51,
+    "est_listing_price": "₹287(+5.51%)",
     "kostak": "₹300",
     "sub2sauda": "₹2,500",
     "subscription": {
@@ -193,7 +195,7 @@
       "NEW_IPO_ANNOUNCED",
       "IPO_CLOSING_TODAY"
     ],
-    "last_updated": "2026-11-20T12:26:46.690525+05:30",
+    "last_updated": "2026-11-20T16:44:55.925132+05:30",
     "demat_credit_date": "2026-11-24",
     "telegraph_url": "https://telegra.ph/Crystal-Crop-Protection-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
     "last_posted_gmp": "+₹18.00"
