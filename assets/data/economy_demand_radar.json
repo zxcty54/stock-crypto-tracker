@@ -1,16 +1,16 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-20 16:18:43 IST",
+  "last_updated": "2026-11-20 16:23:22 IST",
   "economy_headline": {
     "core_infra_growth_pct": 10.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
-    "verdict": "STRONG PHYSICAL EXPANSION",
+    "verdict": "ROBUST INDUSTRIAL MOMENTUM",
     "momentum_score": 88,
-    "momentum_label": "PEAK INDUSTRIAL MOMENTUM",
-    "headline_summary": "India Core Infrastructure & Ground Logistics Expand at +9.7% YoY Multi-Sector Pulse"
+    "momentum_label": "HIGH INDUSTRIAL PULSE",
+    "headline_summary": "India Core Infrastructure & Logistics Surge +10.1% YoY Driven by Capex and Freight"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
@@ -175,7 +175,7 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚀 RAPID EXPANSION",
       "macro_trend_outlook": "📈 HIGH FLEET UTILIZATION & VOLUME EXPANSION",
-      "macro_correlation_note": "Diesel consumption +5.6% YoY alongside FASTag toll collections at ₹5,840 Cr (+8.5% YoY), signaling robust long-haul freight movement.",
+      "macro_correlation_note": "Diesel consumption +5.6% and FASTag revenue +8.5% signal strong heavy-vehicle throughput.",
       "fundamental_metric_to_track": "MHCV Production/Dispatch Volumes & Fleet Tonnage Realization",
       "primary_indicators": "PPAC Diesel (HSD): +5.6% YoY • FASTag Toll: +8.5% YoY",
       "beneficiary_equities": [
@@ -206,7 +206,7 @@
       "demand_signal": "PEAK_DEMAND",
       "momentum_badge": "🔥 PEAK DEMAND",
       "macro_trend_outlook": "🔥 BASELOAD GENERATION & CAPEX ACCELERATION",
-      "macro_correlation_note": "Electricity surges +11.4% YoY backed by high coal dispatch at +10.7% YoY, sustaining industrial load factors.",
+      "macro_correlation_note": "Electricity +11.4% and Coal +10.7% confirm sustained industrial energy demand.",
       "fundamental_metric_to_track": "Plant Load Factor (PLF) & Transmission/Distribution Inflow Orders",
       "primary_indicators": "8-Core Electricity: +11.4% YoY • Coal Dispatch: +10.7% YoY",
       "beneficiary_equities": [
@@ -237,7 +237,7 @@
       "demand_signal": "STRONG_DEMAND",
       "momentum_badge": "📈 STRONG DEMAND",
       "macro_trend_outlook": "🏗️ INFRASTRUCTURE VOLUME REBOUND",
-      "macro_correlation_note": "Cement output expands +9.8% YoY driven by aggressive bitumen road capex surging +17.2% YoY.",
+      "macro_correlation_note": "Cement +9.8% and Bitumen +17.2% reflect aggressive road and urban infrastructure spending.",
       "fundamental_metric_to_track": "Quarterly Cement Dispatches (MMT) & Blended Operating Costs",
       "primary_indicators": "8-Core Cement: +9.8% YoY • Bitumen Road Capex: +17.2% YoY",
       "beneficiary_equities": [
@@ -268,7 +268,7 @@
       "demand_signal": "EXPANDING",
       "momentum_badge": "🚢 SURGING EXPORTS",
       "macro_trend_outlook": "📈 CARGO THROUGHPUT EXPANSION",
-      "macro_correlation_note": "Major ports cargo hits 566.4 MMT (+10.17% YoY) with container throughput up +8.51% YoY, indicating strong export-import flows.",
+      "macro_correlation_note": "Major port cargo +10.17% and container traffic +8.51% indicate resilient export-import trade.",
       "fundamental_metric_to_track": "Container TEU Throughput & Non-Major Port Dry Bulk Volume",
       "primary_indicators": "IPA Major Ports: 566.4 MMT (+10.17% YoY) • Containers: +8.51%",
       "beneficiary_equities": [
@@ -299,7 +299,7 @@
       "demand_signal": "STEADY_GROWTH",
       "momentum_badge": "⚙️ STEADY CAPEX",
       "macro_trend_outlook": "⚡ STEADY DOMESTIC DISPATCHES",
-      "macro_correlation_note": "Steel production records +4.9% YoY growth, matching downstream manufacturing and structural fabrication demand.",
+      "macro_correlation_note": "Steel output +4.9% YoY shows steady demand for ongoing construction and manufacturing projects.",
       "fundamental_metric_to_track": "Crude Steel Finished Production Volumes & Raw Material Input Costs",
       "primary_indicators": "8-Core Steel: +4.9% YoY • Iron Ore: +18.4% YoY",
       "beneficiary_equities": [
@@ -330,7 +330,7 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ VOLUME CONTRACTION",
       "macro_trend_outlook": "⚠️ SEASONAL INVENTORY DESTOCKING",
-      "macro_correlation_note": "Seasonal inventory stocking remains stable ahead of rabi crop cycle with steady rail-road rake movements.",
+      "macro_correlation_note": "Stable inventory levels maintained; seasonal demand tracking historical averages.",
       "fundamental_metric_to_track": "Quarterly Production Run-rates & Subsidy Working Capital Cycle",
       "primary_indicators": "8-Core Fertilizers: -11.7% YoY",
       "beneficiary_equities": [
@@ -351,7 +351,7 @@
       "demand_signal": "CONTRACTION",
       "momentum_badge": "⚠️ PRODUCTION CONSOLIDATION",
       "macro_trend_outlook": "⚠️ MATURE FIELD CONSOLIDATION",
-      "macro_correlation_note": "Refinery throughput tracking stable domestic demand alongside localized upstream field output.",
+      "macro_correlation_note": "Refining throughput remains elevated to meet +5.6% HSD demand growth.",
       "fundamental_metric_to_track": "Daily Oil Equivalent (BOE) Production Volumes & Realized Prices",
       "primary_indicators": "8-Core Crude: -1.4% YoY • Natural Gas: -4.6% YoY",
       "beneficiary_equities": [
