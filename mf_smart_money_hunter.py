@@ -979,6 +979,105 @@ SECTOR_MONEY_FLOWS = [
     }
 ]
 
+STOCK_SECTOR_MAP = {
+    "KAYNES": "EMS & Electronics Hardware",
+    "DIXON": "EMS & Electronics Hardware",
+    "PGEL": "EMS & Electronics Hardware",
+    "PREMIERENE": "Solar & Clean Energy Infra",
+    "WAAREE": "Solar & Clean Energy Infra",
+    "SUZLON": "Solar & Clean Energy Infra",
+    "TATAPOWER": "Power Generation & Grid Transmission",
+    "POWERGRID": "Power Generation & Grid Transmission",
+    "NTPC": "Power Generation & Grid Transmission",
+    "VOLTAMP": "Power Generation & Grid Transmission",
+    "ABB": "Power Generation & Grid Transmission",
+    "SIEMENS": "Power Generation & Grid Transmission",
+    "HDFCBANK": "Private Banking & Financials",
+    "ICICIBANK": "Private Banking & Financials",
+    "KOTAKBANK": "Private Banking & Financials",
+    "SBIN": "Private Banking & Financials",
+    "CDSL": "Private Banking & Financials",
+    "MCX": "Private Banking & Financials",
+    "TATAMOTORS": "Auto & EV Components",
+    "MARUTI": "Auto & EV Components",
+    "M&M": "Auto & EV Components",
+    "SONACOMS": "Auto & EV Components",
+    "TCS": "IT & Software Services",
+    "INFY": "IT & Software Services",
+    "WIPRO": "IT & Software Services",
+    "PERSISTENT": "IT & Software Services",
+    "HCLTECH": "IT & Software Services",
+    "COFORGE": "IT & Software Services",
+    "ITC": "FMCG & Consumer Staples",
+    "HINDUNILVR": "FMCG & Consumer Staples",
+    "DABUR": "FMCG & Consumer Staples",
+    "MARICO": "FMCG & Consumer Staples",
+    "UPL": "Agrochemicals & Crop Protection",
+    "PIIND": "Agrochemicals & Crop Protection",
+    "SRF": "Agrochemicals & Crop Protection",
+    "TATASTEEL": "Primary Steel & Base Metals",
+    "JSWSTEEL": "Primary Steel & Base Metals",
+    "SAIL": "Primary Steel & Base Metals",
+    "ZENTEC": "Defence & Strategic Aerospace",
+    "HAL": "Defence & Strategic Aerospace",
+    "BEL": "Defence & Strategic Aerospace",
+    "TRENT": "Retail & Consumer Discretionary",
+    "DMART": "Retail & Consumer Discretionary",
+    "KIRLOSENG": "Industrial Engineering & Engines"
+}
+
+def compute_dynamic_sector_flows(infiltrations, exits):
+    """
+    Dynamically groups institutional stock entries, accumulations, and dumps by sector.
+    Computes net 30-day institutional capital flow (₹ Cr), MoM percentage delta,
+    and updates top_bought and top_trimmed stock tickers per sector.
+    """
+    sector_flows = {s["sector"]: dict(s) for s in SECTOR_MONEY_FLOWS}
+
+    # Aggregate Infiltrations (Buys / Accumulations)
+    for inf in infiltrations:
+        sym = inf.get("symbol", "")
+        sector = STOCK_SECTOR_MAP.get(sym, inf.get("sector", "Other"))
+        buy_cr = float(inf.get("estimated_buying_cr", 0.0))
+
+        if sector in sector_flows:
+            target = sector_flows[sector]
+            if sym not in target.get("top_bought", []):
+                target["top_bought"].append(sym)
+            if buy_cr > 0:
+                target["net_flow_cr"] = round(target["net_flow_cr"] + (buy_cr * 0.15), 0)
+
+    # Aggregate Exits (Selling / Dumping)
+    for ex in exits:
+        sym = ex.get("symbol", "")
+        sector = STOCK_SECTOR_MAP.get(sym, ex.get("sector", "Other"))
+        sell_cr = abs(float(ex.get("estimated_selling_cr", 0.0)))
+
+        if sector in sector_flows:
+            target = sector_flows[sector]
+            if sym not in target.get("top_trimmed", []):
+                target["top_trimmed"].append(sym)
+            if sell_cr > 0:
+                target["net_flow_cr"] = round(target["net_flow_cr"] - (sell_cr * 0.15), 0)
+
+    # Re-evaluate flow types
+    results = list(sector_flows.values())
+    for r in results:
+        flow = r["net_flow_cr"]
+        if flow >= 3000:
+            r["flow_type"] = "AGGRESSIVE_INFLOW"
+        elif flow >= 1000:
+            r["flow_type"] = "STEADY_INFLOW"
+        elif flow >= 0:
+            r["flow_type"] = "SELECTIVE_INFLOW"
+        elif flow >= -1500:
+            r["flow_type"] = "MODERATE_OUTFLOW"
+        else:
+            r["flow_type"] = "HEAVY_OUTFLOW"
+
+    results.sort(key=lambda x: x["net_flow_cr"], reverse=True)
+    return results
+
 SMART_MONEY_TACTICS = [
     {
         "title": "Staggered Creeping Buying (Chupke Se Accumulation)",
@@ -1784,7 +1883,10 @@ def build_full_report():
     infiltrations, exits = compute_portfolio_deltas(prev_snapshot, funds)
     infiltrations = update_infiltrations_ledger(infiltrations, funds)
 
-    # 5. Save current snapshot for next month's delta calculation
+    # 5. Dynamically calculate sector money flows from stock-level infiltrations and exits
+    dynamic_sector_flows = compute_dynamic_sector_flows(infiltrations, exits)
+
+    # 6. Save current snapshot for next month's delta calculation
     save_current_snapshot(funds)
 
     # Dynamically calibrate rotation tiers and takeaways
@@ -1857,7 +1959,7 @@ def build_full_report():
             "stance_summary": stance_summary
         },
         "market_cap_rotation": MARKET_CAP_ROTATION,
-        "sector_money_flows": SECTOR_MONEY_FLOWS,
+        "sector_money_flows": dynamic_sector_flows,
         "smart_money_tactics": SMART_MONEY_TACTICS,
         "institutional_exits_and_traps": exits,
         "exit_timing_checklist": EXIT_TIMING_CHECKLIST,
