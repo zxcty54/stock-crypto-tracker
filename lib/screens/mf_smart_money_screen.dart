@@ -1149,6 +1149,20 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final bought = (s['top_bought'] as List<dynamic>? ?? []);
     final trimmed = (s['top_trimmed'] as List<dynamic>? ?? []);
 
+    final buyingFunds = (s['top_buying_funds'] as List<dynamic>? ?? []).map((e) => e.toString()).toList();
+    if (buyingFunds.isEmpty) {
+      final Set<String> matchedFunds = {};
+      for (var sym in bought) {
+        for (var inf in _infiltrations) {
+          if (inf['symbol'] == sym) {
+            final fList = (inf['participating_funds'] as List<dynamic>? ?? []);
+            matchedFunds.addAll(fList.map((e) => e.toString()));
+          }
+        }
+      }
+      buyingFunds.addAll(matchedFunds);
+    }
+
     final bool isInflow = flow >= 0;
     final Color color = isInflow ? const Color(0xFF00FF88) : const Color(0xFFFF5252);
 
@@ -1256,6 +1270,32 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ],
           ),
+          if (buyingFunds.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "BUYING MFs: ",
+                  style: TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    buyingFunds.take(4).join(' • '),
+                    style: GoogleFonts.plusJakartaSans(
+                      color: const Color(0xFFB0BEC5),
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -1972,26 +2012,77 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 6,
-            runSpacing: 4,
-            children: funds.map((f) {
-              return Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF141C2B),
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xFF22324B)),
+          if (funds.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(
+                  action == 'SILENT_DUMPING'
+                      ? Icons.exit_to_app_rounded
+                      : Icons.shopping_bag_rounded,
+                  color: action == 'SILENT_DUMPING'
+                      ? const Color(0xFFFF2A6D)
+                      : const Color(0xFF00FF88),
+                  size: 13,
                 ),
-                child: Text(
-                  f.toString(),
-                  style: const TextStyle(color: Colors.white60, fontSize: 9),
+                const SizedBox(width: 5),
+                Text(
+                  action == 'SILENT_DUMPING'
+                      ? "DUMPING / TRIMMING MFs (WHO SOLD):"
+                      : "BUYING MUTUAL FUNDS (WHO BOUGHT):",
+                  style: TextStyle(
+                    color: action == 'SILENT_DUMPING'
+                        ? const Color(0xFFFF80AB)
+                        : const Color(0xFF00FF88),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.3,
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: funds.map((f) {
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF101B2E),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: action == 'SILENT_DUMPING'
+                          ? const Color(0xFFFF2A6D).withOpacity(0.35)
+                          : const Color(0xFF00E5FF).withOpacity(0.35),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.account_balance_rounded,
+                        color: action == 'SILENT_DUMPING'
+                            ? const Color(0xFFFF80AB)
+                            : const Color(0xFF00E5FF),
+                        size: 10,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        f.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );

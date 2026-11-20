@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Institutional Mutual Fund Smart Money & Infiltration Radar",
     "last_updated": "November 2026 Portfolio Disclosure",
-    "generated_timestamp": "2026-11-20T17:20:06.482003",
+    "generated_timestamp": "2026-11-20T17:39:12.109762",
     "total_funds_analyzed": 20,
     "total_aum_tracked_cr": 710600.0,
     "average_cash_level_pct": 7.76,
@@ -105,7 +105,15 @@
         "DIXON",
         "PGEL"
       ],
-      "top_trimmed": []
+      "top_trimmed": [],
+      "top_buying_funds": [
+        "Quant Small Cap",
+        "Nippon India Small Cap",
+        "Motilal Oswal Midcap",
+        "Bandhan Small Cap",
+        "Quant Active"
+      ],
+      "top_trimming_funds": []
     },
     {
       "sector": "Solar & Clean Energy Infra",
@@ -118,7 +126,12 @@
         "WAAREE",
         "SUZLON"
       ],
-      "top_trimmed": []
+      "top_trimmed": [],
+      "top_buying_funds": [
+        "HDFC Mid-Cap Opportunities",
+        "Motilal Oswal Midcap"
+      ],
+      "top_trimming_funds": []
     },
     {
       "sector": "Private Banking & Financials",
@@ -134,7 +147,14 @@
       ],
       "top_trimmed": [
         "BANDHANBNK"
-      ]
+      ],
+      "top_buying_funds": [
+        "Parag Parikh Flexi Cap",
+        "SBI Contra Fund",
+        "Nippon India Small Cap",
+        "Bandhan Small Cap"
+      ],
+      "top_trimming_funds": []
     },
     {
       "sector": "Power Generation & Grid Transmission",
@@ -147,7 +167,9 @@
         "NTPC",
         "TATAPOWER"
       ],
-      "top_trimmed": []
+      "top_trimmed": [],
+      "top_buying_funds": [],
+      "top_trimming_funds": []
     },
     {
       "sector": "Auto & EV Components",
@@ -160,7 +182,9 @@
         "M&M",
         "SONACOMS"
       ],
-      "top_trimmed": []
+      "top_trimmed": [],
+      "top_buying_funds": [],
+      "top_trimming_funds": []
     },
     {
       "sector": "Agrochemicals & Crop Protection",
@@ -174,7 +198,11 @@
       "top_trimmed": [
         "UPL",
         "PIIND"
-      ]
+      ],
+      "top_buying_funds": [
+        "Invesco India Contra"
+      ],
+      "top_trimming_funds": []
     },
     {
       "sector": "FMCG & Consumer Staples",
@@ -189,7 +217,9 @@
         "HINDUNILVR",
         "DABUR",
         "MARICO"
-      ]
+      ],
+      "top_buying_funds": [],
+      "top_trimming_funds": []
     },
     {
       "sector": "IT & Software Services",
@@ -205,7 +235,13 @@
         "TCS",
         "INFY",
         "WIPRO"
-      ]
+      ],
+      "top_buying_funds": [
+        "Kotak Emerging Equity",
+        "Tata Digital India",
+        "Motilal Oswal Midcap"
+      ],
+      "top_trimming_funds": []
     }
   ],
   "smart_money_tactics": [
@@ -2385,14 +2421,14 @@
       "common_count": 2,
       "common_stocks": [
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 3.2,
-          "weight_in_b": 8.8
-        },
-        {
           "symbol": "SBIN",
           "weight_in_a": 5.4,
           "weight_in_b": 4.5
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 3.2,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2403,29 +2439,14 @@
       "common_count": 7,
       "common_stocks": [
         {
+          "symbol": "INFY",
+          "weight_in_a": 3.2,
+          "weight_in_b": 7.1
+        },
+        {
           "symbol": "RELIANCE",
           "weight_in_a": 5.1,
           "weight_in_b": 8.4
-        },
-        {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 9.2
-        },
-        {
-          "symbol": "AXISBANK",
-          "weight_in_a": 4.5,
-          "weight_in_b": 4.1
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 5.4
-        },
-        {
-          "symbol": "LT",
-          "weight_in_a": 4.1,
-          "weight_in_b": 6.8
         },
         {
           "symbol": "BHARTIARTL",
@@ -2433,9 +2454,24 @@
           "weight_in_b": 5.9
         },
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.2,
-          "weight_in_b": 7.1
+          "symbol": "LT",
+          "weight_in_a": 4.1,
+          "weight_in_b": 6.8
+        },
+        {
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 9.2
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 5.4
+        },
+        {
+          "symbol": "AXISBANK",
+          "weight_in_a": 4.5,
+          "weight_in_b": 4.1
         }
       ]
     },
@@ -2445,11 +2481,6 @@
       "overlap_pct": 39.4,
       "common_count": 4,
       "common_stocks": [
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 8.8
-        },
         {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.2,
@@ -2464,6 +2495,11 @@
           "symbol": "INFY",
           "weight_in_a": 3.2,
           "weight_in_b": 5.8
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2487,11 +2523,6 @@
       "common_count": 4,
       "common_stocks": [
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 5.4,
-          "weight_in_b": 8.8
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 9.2,
           "weight_in_b": 9.5
@@ -2505,6 +2536,11 @@
           "symbol": "INFY",
           "weight_in_a": 7.1,
           "weight_in_b": 5.8
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 5.4,
+          "weight_in_b": 8.8
         }
       ]
     },
@@ -2712,6 +2748,11 @@
       "common_count": 3,
       "common_stocks": [
         {
+          "symbol": "CCL",
+          "weight_in_a": 2.9,
+          "weight_in_b": 4.2
+        },
+        {
           "symbol": "BRIGADE",
           "weight_in_a": 4.9,
           "weight_in_b": 4.8
@@ -2720,11 +2761,6 @@
           "symbol": "ASTRAL",
           "weight_in_a": 2.2,
           "weight_in_b": 2.8
-        },
-        {
-          "symbol": "CCL",
-          "weight_in_a": 2.9,
-          "weight_in_b": 4.2
         }
       ]
     },
@@ -2749,14 +2785,9 @@
       "common_count": 5,
       "common_stocks": [
         {
-          "symbol": "ICICIBANK",
-          "weight_in_a": 6.8,
-          "weight_in_b": 7.9
-        },
-        {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 6.2,
-          "weight_in_b": 8.4
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 6.2
         },
         {
           "symbol": "BHARTIARTL",
@@ -2764,14 +2795,19 @@
           "weight_in_b": 3.8
         },
         {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 6.2
+          "symbol": "ICICIBANK",
+          "weight_in_a": 6.8,
+          "weight_in_b": 7.9
         },
         {
           "symbol": "TRENT",
           "weight_in_a": 4.5,
           "weight_in_b": 3.5
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 6.2,
+          "weight_in_b": 8.4
         }
       ]
     },
@@ -2782,6 +2818,21 @@
       "common_count": 5,
       "common_stocks": [
         {
+          "symbol": "INFY",
+          "weight_in_a": 3.8,
+          "weight_in_b": 5.9
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "weight_in_a": 2.6,
+          "weight_in_b": 4.8
+        },
+        {
+          "symbol": "LT",
+          "weight_in_a": 4.8,
+          "weight_in_b": 3.9
+        },
+        {
           "symbol": "ICICIBANK",
           "weight_in_a": 6.8,
           "weight_in_b": 8.1
@@ -2790,21 +2841,6 @@
           "symbol": "HDFCBANK",
           "weight_in_a": 6.2,
           "weight_in_b": 11.8
-        },
-        {
-          "symbol": "LT",
-          "weight_in_a": 4.8,
-          "weight_in_b": 3.9
-        },
-        {
-          "symbol": "BHARTIARTL",
-          "weight_in_a": 2.6,
-          "weight_in_b": 4.8
-        },
-        {
-          "symbol": "INFY",
-          "weight_in_a": 3.8,
-          "weight_in_b": 5.9
         }
       ]
     },
@@ -2829,11 +2865,6 @@
       "common_count": 4,
       "common_stocks": [
         {
-          "symbol": "HDFCBANK",
-          "weight_in_a": 8.4,
-          "weight_in_b": 11.8
-        },
-        {
           "symbol": "ICICIBANK",
           "weight_in_a": 7.9,
           "weight_in_b": 8.1
@@ -2847,6 +2878,11 @@
           "symbol": "INFY",
           "weight_in_a": 6.2,
           "weight_in_b": 5.9
+        },
+        {
+          "symbol": "HDFCBANK",
+          "weight_in_a": 8.4,
+          "weight_in_b": 11.8
         }
       ]
     }

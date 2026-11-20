@@ -1030,18 +1030,25 @@ def compute_dynamic_sector_flows(infiltrations, exits):
     """
     Dynamically groups institutional stock entries, accumulations, and dumps by sector.
     Computes net 30-day institutional capital flow (₹ Cr), MoM percentage delta,
-    and updates top_bought and top_trimmed stock tickers per sector.
+    and updates top_bought and top_trimmed stock tickers per sector along with buying/trimming mutual funds.
     """
     sector_flows = {s["sector"]: dict(s) for s in SECTOR_MONEY_FLOWS}
+    for s in sector_flows.values():
+        s["top_buying_funds"] = list(s.get("top_buying_funds", []))
+        s["top_trimming_funds"] = list(s.get("top_trimming_funds", []))
 
     # Aggregate Infiltrations (Buys / Accumulations)
     for inf in infiltrations:
         sym = inf.get("symbol", "")
         sector = STOCK_SECTOR_MAP.get(sym, inf.get("sector", "Other"))
         buy_cr = float(inf.get("estimated_buying_cr", 0.0))
+        funds = inf.get("participating_funds", [])
 
         if sector in sector_flows:
             target = sector_flows[sector]
+            for f in funds:
+                if f not in target["top_buying_funds"]:
+                    target["top_buying_funds"].append(f)
             if sym not in target.get("top_bought", []):
                 target["top_bought"].append(sym)
             if buy_cr > 0:
@@ -1052,9 +1059,13 @@ def compute_dynamic_sector_flows(infiltrations, exits):
         sym = ex.get("symbol", "")
         sector = STOCK_SECTOR_MAP.get(sym, ex.get("sector", "Other"))
         sell_cr = abs(float(ex.get("estimated_selling_cr", 0.0)))
+        funds = ex.get("funds", [])
 
         if sector in sector_flows:
             target = sector_flows[sector]
+            for f in funds:
+                if f not in target["top_trimming_funds"]:
+                    target["top_trimming_funds"].append(f)
             if sym not in target.get("top_trimmed", []):
                 target["top_trimmed"].append(sym)
             if sell_cr > 0:
