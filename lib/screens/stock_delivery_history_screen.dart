@@ -72,10 +72,12 @@ enum DeliveryFilterMode {
 // ---------------- SCREEN WIDGET ----------------
 class StockDeliveryHistoryScreen extends StatefulWidget {
   final String initialSymbol;
+  final int initialTabIndex;
 
   const StockDeliveryHistoryScreen({
     super.key,
     this.initialSymbol = '360ONE',
+    this.initialTabIndex = 0,
   });
 
   @override
@@ -86,8 +88,11 @@ class StockDeliveryHistoryScreen extends StatefulWidget {
 class _StockDeliveryHistoryScreenState
     extends State<StockDeliveryHistoryScreen>
     with SingleTickerProviderStateMixin {
-  final String _dataUrl =
-      'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/stock_history_20d.json';
+  static const List<String> _dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/stock_history_20d.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/stock_history_20d.json',
+    'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/stock_history_20d.json',
+  ];
 
   late TabController _mainTabController;
   Map<String, List<StockDayRecord>> _stockDatabase = {};
@@ -106,7 +111,11 @@ class _StockDeliveryHistoryScreenState
   @override
   void initState() {
     super.initState();
-    _mainTabController = TabController(length: 2, vsync: this);
+    _mainTabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: widget.initialTabIndex.clamp(0, 1),
+    );
     _selectedSymbol = widget.initialSymbol;
     _fetchHistoryData();
   }
@@ -169,39 +178,44 @@ class _StockDeliveryHistoryScreenState
   }
 
   Future<void> _fetchHistoryData() async {
-    try {
-      final res = await http.get(
-        Uri.parse('$_dataUrl?ts=${DateTime.now().millisecondsSinceEpoch}'),
-        headers: {'Cache-Control': 'no-cache'},
-      );
+    for (final url in _dataUrls) {
+      try {
+        final res = await http.get(
+          Uri.parse('$url?ts=${DateTime.now().millisecondsSinceEpoch}'),
+          headers: {'Cache-Control': 'no-cache'},
+        ).timeout(const Duration(seconds: 8));
 
-      if (res.statusCode == 200) {
-        final Map<String, dynamic> rawJson = jsonDecode(res.body);
-        final Map<String, List<StockDayRecord>> parsed = {};
+        if (res.statusCode == 200 && res.body.isNotEmpty) {
+          final Map<String, dynamic> rawJson = jsonDecode(utf8.decode(res.bodyBytes));
+          final Map<String, List<StockDayRecord>> parsed = {};
 
-        rawJson.forEach((sym, records) {
-          final list = records as List;
-          parsed[sym] = list.map((item) => StockDayRecord.fromList(item)).toList();
-        });
+          rawJson.forEach((sym, records) {
+            final list = records as List;
+            parsed[sym] = list.map((item) => StockDayRecord.fromList(item)).toList();
+          });
 
-        setState(() {
-          _stockDatabase = parsed;
-          _computeMarketMovers();
-          if (!_stockDatabase.containsKey(_selectedSymbol) &&
-              _stockDatabase.isNotEmpty) {
-            _selectedSymbol = _stockDatabase.keys.first;
+          if (mounted) {
+            setState(() {
+              _stockDatabase = parsed;
+              _computeMarketMovers();
+              if (!_stockDatabase.containsKey(_selectedSymbol) &&
+                  _stockDatabase.isNotEmpty) {
+                _selectedSymbol = _stockDatabase.keys.first;
+              }
+              _errorMessage = null;
+              _isLoading = false;
+            });
           }
-          _isLoading = false;
-        });
-      } else {
-        setState(() {
-          _errorMessage = 'Failed to load: HTTP ${res.statusCode}';
-          _isLoading = false;
-        });
+          return;
+        }
+      } catch (e) {
+        debugPrint("Endpoint failed ($url): $e");
       }
-    } catch (e) {
+    }
+
+    if (mounted && _stockDatabase.isEmpty) {
       setState(() {
-        _errorMessage = 'Network connection issue: $e';
+        _errorMessage = 'Network connection issue: Unable to load 20D OHLC and delivery data.';
         _isLoading = false;
       });
     }
@@ -482,8 +496,8 @@ class _StockDeliveryHistoryScreenState
           unselectedLabelColor: const Color(0xFF8896AB),
           labelStyle: GoogleFonts.plusJakartaSans(fontSize: 11.5, fontWeight: FontWeight.bold),
           tabs: const [
-            Tab(icon: Icon(Icons.leaderboard_rounded, size: 16), text: "🏆 Weekly & Monthly Movers"),
             Tab(icon: Icon(Icons.candlestick_chart_rounded, size: 16), text: "📊 Stock OHLC & Delivery"),
+            Tab(icon: Icon(Icons.leaderboard_rounded, size: 16), text: "🏆 Weekly & Monthly Movers"),
           ],
         ),
         actions: [
@@ -532,7 +546,6 @@ class _StockDeliveryHistoryScreenState
               : TabBarView(
                   controller: _mainTabController,
                   children: [
-                    _buildMarketMoversTab(),
                     Column(
                       children: [
                         _buildSelectorAndFilterBar(),
@@ -540,6 +553,7 @@ class _StockDeliveryHistoryScreenState
                         Expanded(child: _buildHistoryListView()),
                       ],
                     ),
+                    _buildMarketMoversTab(),
                   ],
                 ),
     );
@@ -680,7 +694,7 @@ class _StockDeliveryHistoryScreenState
             setState(() {
               _selectedSymbol = item.symbol;
             });
-            _mainTabController.animateTo(1);
+            _mainTabController.animateTo(0);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),

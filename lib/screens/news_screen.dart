@@ -466,7 +466,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 ),
               ),
 
-              // 🏆 5B. WEEKLY & MONTHLY MARKET GAINERS BANNER
+              // 📊 5B. STOCK OHLC & DELIVERY DATA RADAR BANNER
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -485,68 +485,103 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                       child: Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF131B2A),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF131B2A), Color(0xFF0F1726)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: const Color(0xFF00F5A0).withAlpha(80),
+                            color: const Color(0xFF00F0FF).withOpacity(0.35),
                           ),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF00F5A0).withAlpha(25),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Icon(
-                                Icons.leaderboard_rounded,
-                                color: Color(0xFF00F5A0),
-                                size: 24,
-                              ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF00F0FF).withOpacity(0.06),
+                              blurRadius: 10,
+                              offset: const Offset(0, 3),
                             ),
-                            const SizedBox(width: 12),
-                            const Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF00F0FF).withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: const Icon(
+                                    Icons.candlestick_chart_rounded,
+                                    color: Color(0xFF00F0FF),
+                                    size: 24,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "WEEKLY & MONTHLY GAINERS",
-                                        style: TextStyle(
-                                          color: Color(0xFF00F5A0),
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1.1,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "STOCK OHLC & DELIVERY RADAR",
+                                            style: GoogleFonts.plusJakartaSans(
+                                              color: const Color(0xFF00F0FF),
+                                              fontSize: 11.5,
+                                              fontWeight: FontWeight.w900,
+                                              letterSpacing: 0.8,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 6),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFF00F5A0).withOpacity(0.15),
+                                              borderRadius: BorderRadius.circular(4),
+                                            ),
+                                            child: const Text(
+                                              "20D NSE DATA",
+                                              style: TextStyle(
+                                                color: Color(0xFF00F5A0),
+                                                fontSize: 8.5,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(width: 6),
-                                      Text(
-                                        "1W · 1M MOVERS",
+                                      const SizedBox(height: 3),
+                                      const Text(
+                                        "20-Day Open, High, Low, Close & Demat Delivery % (1,589 Stocks)",
                                         style: TextStyle(
-                                          color: Color(0xFF00F0FF),
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white70,
+                                          fontSize: 11.5,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 3),
-                                  Text(
-                                    "Top Momentum Outperformers & Delivery Surges",
-                                    style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Color(0xFF00F0FF),
+                                  size: 14,
+                                ),
+                              ],
                             ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Color(0xFF8896AB),
-                              size: 14,
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                _buildDeliveryMiniChip("📊 20D OHLC", const Color(0xFF00F0FF)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("📦 Delivery %", const Color(0xFF00F5A0)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("🔥 Volume Surges", const Color(0xFFFFB703)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("🏆 1W/1M Movers", const Color(0xFFFF2A6D)),
+                              ],
                             ),
                           ],
                         ),
@@ -841,6 +876,28 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                 child: SizedBox(height: 100),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeliveryMiniChip(String label, Color color) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: const Color(0xFF090D16),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: color.withOpacity(0.3)),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: color,
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
