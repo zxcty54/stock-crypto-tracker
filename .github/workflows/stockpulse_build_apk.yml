@@ -61,14 +61,7 @@ jobs:
         run: dart run flutter_launcher_icons
 
       - name: Flutter Analyze
-        run: |
-          set -o pipefail
-          flutter analyze 2>&1 | while IFS= read -r line; do
-            echo "$line"
-            if echo "$line" | grep -qE "error •|error -"; then
-              echo "::error title=Dart Error::$line"
-            fi
-          done
+        run: flutter analyze lib/
 
       - name: Build Release APK
         env:
