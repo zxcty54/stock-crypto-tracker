@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class CompanyIntelligenceScreen extends StatefulWidget {
-  const CompanyIntelligenceScreen({super.key});
+  final String? initialSymbol;
+  const CompanyIntelligenceScreen({super.key, this.initialSymbol});
 
   @override
   State<CompanyIntelligenceScreen> createState() => _CompanyIntelligenceScreenState();
@@ -33,6 +34,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.initialSymbol != null && widget.initialSymbol!.isNotEmpty) {
+      _selectedSymbol = widget.initialSymbol;
+    }
     _fetchCompaniesData();
   }
 
@@ -140,7 +144,9 @@ class _CompanyIntelligenceScreenState extends State<CompanyIntelligenceScreen> {
       setState(() {
         _companiesData = companies;
         if (_companiesData.isNotEmpty) {
-          if (_selectedSymbol == null || !_companiesData.containsKey(_selectedSymbol)) {
+          if (widget.initialSymbol != null && _companiesData.containsKey(widget.initialSymbol)) {
+            _selectedSymbol = widget.initialSymbol;
+          } else if (_selectedSymbol == null || !_companiesData.containsKey(_selectedSymbol)) {
             _selectedSymbol = _companiesData.keys.first;
           }
         }

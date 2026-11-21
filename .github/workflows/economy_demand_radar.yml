@@ -34,6 +34,9 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run Economy Telemetry Engine
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python update_economy_telemetry.py
 

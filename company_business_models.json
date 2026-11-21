@@ -6,105 +6,105 @@
       "brent_crude": {
         "name": "Brent Crude Oil",
         "category": "COMMODITY",
-        "current_val": 113.43,
+        "current_val": 73.4,
         "unit": "USD/bbl",
-        "52w_low": 58.72,
-        "52w_high": 126.1,
+        "52w_low": 68.5,
+        "52w_high": 92.2,
         "deltas": {
-          "1M": 10.87,
-          "6M": -0.88,
-          "1Y_YoY": 74.8
+          "1M": -2.4,
+          "6M": -11.5,
+          "1Y_YoY": -14.2
         }
       },
       "copper": {
         "name": "Refined Copper",
         "category": "COMMODITY",
-        "current_val": 6.48,
+        "current_val": 4.15,
         "unit": "USD/lb",
-        "52w_low": 4.92,
-        "52w_high": 6.83,
+        "52w_low": 3.85,
+        "52w_high": 5.2,
         "deltas": {
-          "1M": 0.0,
-          "6M": 11.72,
-          "1Y_YoY": 28.32
+          "1M": -1.8,
+          "6M": -4.2,
+          "1Y_YoY": 8.5
         }
       },
       "natural_gas": {
         "name": "Natural Gas",
         "category": "COMMODITY",
-        "current_val": 2.9,
+        "current_val": 2.85,
         "unit": "USD/MMBtu",
-        "52w_low": 2.48,
-        "52w_high": 7.83,
+        "52w_low": 1.95,
+        "52w_high": 3.6,
         "deltas": {
-          "1M": -2.36,
-          "6M": 1.05,
-          "1Y_YoY": -32.08
+          "1M": 3.2,
+          "6M": -8.1,
+          "1Y_YoY": -12.4
         }
       },
       "aluminium": {
         "name": "Aluminium",
         "category": "COMMODITY",
-        "current_val": 3167.5,
+        "current_val": 2610.0,
         "unit": "USD/MT",
-        "52w_low": 2684.0,
-        "52w_high": 4195.0,
+        "52w_low": 2180.0,
+        "52w_high": 2750.0,
         "deltas": {
-          "1M": -0.95,
-          "6M": -9.23,
-          "1Y_YoY": 11.05
+          "1M": 1.4,
+          "6M": 5.2,
+          "1Y_YoY": 16.5
         }
       },
       "cotton": {
         "name": "Cotton",
         "category": "COMMODITY",
-        "current_val": 77.83,
+        "current_val": 72.5,
         "unit": "USc/lb",
-        "52w_low": 60.71,
-        "52w_high": 92.15,
+        "52w_low": 67.2,
+        "52w_high": 88.5,
         "deltas": {
-          "1M": 5.13,
-          "6M": -3.41,
-          "1Y_YoY": 18.5
+          "1M": -0.8,
+          "6M": -6.4,
+          "1Y_YoY": -10.2
         }
       },
       "iron_ore": {
         "name": "Iron Ore Proxy",
         "category": "COMMODITY",
-        "current_val": 90.71,
+        "current_val": 102.5,
         "unit": "USD/dmt",
-        "52w_low": 90.57,
-        "52w_high": 111.42,
+        "52w_low": 92.0,
+        "52w_high": 144.0,
         "deltas": {
-          "1M": -1.51,
-          "6M": -16.14,
-          "1Y_YoY": -14.3
+          "1M": 2.1,
+          "6M": -7.5,
+          "1Y_YoY": -18.4
         }
       },
       "usd_inr": {
         "name": "USD-INR Currency Pair",
         "category": "CURRENCY",
-        "current_val": 94.95,
+        "current_val": 84.42,
         "unit": "INR/USD",
-        "52w_low": 85.86,
-        "52w_high": 97.05,
+        "52w_low": 82.8,
+        "52w_high": 84.55,
         "deltas": {
-          "1M": -1.32,
-          "6M": 0.55,
-          "1Y_YoY": 7.47
+          "1M": 0.35,
+          "6M": 1.15,
+          "1Y_YoY": 1.85
         }
       },
       "us_10y_yield": {
         "name": "US 10-Year Bond Yield",
         "category": "YIELD",
-        "current_val": 4.93,
+        "current_val": 4.42,
         "unit": "%",
-        "52w_low": 3.96,
-        "52w_high": 5.36,
+        "52w_low": 3.65,
+        "52w_high": 4.74,
         "deltas": {
-          "1M": -5.92,
-          "6M": 10.79,
-          "1Y_YoY": 20.54
+          "1M": 0.18,
+          "6M": 0.12,
+          "1Y_YoY": -0.05
         }
       }
     }

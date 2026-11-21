@@ -13,6 +13,8 @@ import 'screens/stock_delivery_history_screen.dart';
 import 'screens/portfolio_tracker_screen.dart'; // 📈 Virtual Portfolio Tracker
 import 'screens/market_indices_heatmap_screen.dart'; // 🗺️ Sector & Indices Heatmap
 import 'screens/mf_smart_money_screen.dart'; // 🕵️ MF Smart Money Radar
+import 'screens/economy_demand_radar_screen.dart'; // 🏭 Physical Economy Demand Radar
+import 'screens/global_economy_radar_screen.dart'; // 🌍 Global Economy Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -351,6 +353,35 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const MfSmartMoneyScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.public_rounded,
+              title: 'Global Economy Radar',
+              subtitle: 'US, China, EU, Japan & EM Pressure vs Expansion',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const GlobalEconomyRadarScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.factory_rounded,
+              title: 'Physical Economy Radar',
+              subtitle: '8-Core, Power, Rail, Port & Fuel Ground Reality',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const EconomyDemandRadarScreen(),
                   ),
                 );
               },

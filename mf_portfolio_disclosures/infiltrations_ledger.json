@@ -1,0 +1,340 @@
+{
+  "KAYNES": {
+    "symbol": "KAYNES",
+    "company_name": "Kaynes Technology India Ltd",
+    "sector": "Electronics & Defence EMS",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Quant Small Cap",
+      "Nippon Small Cap",
+      "Motilal Midcap",
+      "Bandhan Small Cap"
+    ],
+    "action_type": "FRESH_ENTRY",
+    "estimated_buying_cr": 485.0,
+    "avg_holding_increase_pct": 100.0,
+    "catalyst_thesis": "Marquee electronic manufacturing services (EMS) order wins and semiconductor assembly OSAT government approval.",
+    "institutional_conviction": "VERY_HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "FRESH_ENTRY",
+        "est_buying_cr": 485.0
+      }
+    ]
+  },
+  "PREMIERENE": {
+    "symbol": "PREMIERENE",
+    "company_name": "Premier Energies Ltd",
+    "sector": "Solar Energy & Modules",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "HDFC Mid-Cap",
+      "Motilal Midcap"
+    ],
+    "action_type": "FRESH_ENTRY",
+    "estimated_buying_cr": 420.0,
+    "avg_holding_increase_pct": 100.0,
+    "catalyst_thesis": "Solar cell and module manufacturing capacity ramp-up with high domestic ALMM order visibility.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "FRESH_ENTRY",
+        "est_buying_cr": 420.0
+      }
+    ]
+  },
+  "CDSL": {
+    "symbol": "CDSL",
+    "company_name": "Central Depository Services Ltd",
+    "sector": "Capital Markets Infrastructure",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "SBI Contra"
+    ],
+    "action_type": "FRESH_ENTRY",
+    "estimated_buying_cr": 510.0,
+    "avg_holding_increase_pct": 100.0,
+    "catalyst_thesis": "Surge in new demat account additions and steady recurring annuity revenue with high operating leverage.",
+    "institutional_conviction": "VERY_HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "FRESH_ENTRY",
+        "est_buying_cr": 510.0
+      }
+    ]
+  },
+  "ZENTEC": {
+    "symbol": "ZENTEC",
+    "company_name": "Zen Technologies Ltd",
+    "sector": "Defence Simulators & Anti-Drone",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Motilal Midcap",
+      "Quant Active"
+    ],
+    "action_type": "FRESH_ENTRY",
+    "estimated_buying_cr": 175.0,
+    "avg_holding_increase_pct": 100.0,
+    "catalyst_thesis": "Massive military export order book and indigenous anti-drone system deployment across armed forces.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "FRESH_ENTRY",
+        "est_buying_cr": 175.0
+      }
+    ]
+  },
+  "KIRLOSENG": {
+    "symbol": "KIRLOSENG",
+    "company_name": "Kirloskar Oil Engines Ltd",
+    "sector": "Industrial Engines & Power Gen",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "SBI Small Cap",
+      "DSP Small Cap",
+      "Franklin Smaller Co"
+    ],
+    "action_type": "FRESH_ENTRY",
+    "estimated_buying_cr": 210.0,
+    "avg_holding_increase_pct": 100.0,
+    "catalyst_thesis": "CPCB IV+ compliant emission transition leadership and strong industrial power backup capex demand.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "FRESH_ENTRY",
+        "est_buying_cr": 210.0
+      }
+    ]
+  },
+  "TRENT": {
+    "symbol": "TRENT",
+    "company_name": "Trent Limited",
+    "sector": "Retail & Fashion (Zudio / Westside)",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Motilal Midcap",
+      "Canara Emerging Eq",
+      "Invesco Contra"
+    ],
+    "action_type": "AGGRESSIVE_ACCUMULATION",
+    "estimated_buying_cr": 680.0,
+    "avg_holding_increase_pct": 36.0,
+    "catalyst_thesis": "Explosive same-store sales growth in Zudio brand and Star Bazaar grocery retail turnaround.",
+    "institutional_conviction": "VERY_HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "AGGRESSIVE_ACCUMULATION",
+        "est_buying_cr": 680.0
+      }
+    ]
+  },
+  "MCX": {
+    "symbol": "MCX",
+    "company_name": "Multi Commodity Exchange of India",
+    "sector": "Financial Exchange",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Nippon Small Cap"
+    ],
+    "action_type": "AGGRESSIVE_ACCUMULATION",
+    "estimated_buying_cr": 320.0,
+    "avg_holding_increase_pct": 36.0,
+    "catalyst_thesis": "Record commodity options trading turnover and migration to self-owned software reducing software vendor payouts.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "AGGRESSIVE_ACCUMULATION",
+        "est_buying_cr": 320.0
+      }
+    ]
+  },
+  "PERSISTENT": {
+    "symbol": "PERSISTENT",
+    "company_name": "Persistent Systems Ltd",
+    "sector": "IT & Digital Engineering",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Motilal Midcap",
+      "Kotak Emerging",
+      "Tata Digital Tech"
+    ],
+    "action_type": "AGGRESSIVE_ACCUMULATION",
+    "estimated_buying_cr": 540.0,
+    "avg_holding_increase_pct": 24.8,
+    "catalyst_thesis": "Superior BFSI & Healthcare digital engineering deal wins outperforming tier-1 IT pack.",
+    "institutional_conviction": "VERY_HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "AGGRESSIVE_ACCUMULATION",
+        "est_buying_cr": 540.0
+      }
+    ]
+  },
+  "APARINDS": {
+    "symbol": "APARINDS",
+    "company_name": "Apar Industries Ltd",
+    "sector": "Power Conductors & Speciality Oils",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Nippon Small Cap",
+      "Bandhan Small Cap"
+    ],
+    "action_type": "AGGRESSIVE_ACCUMULATION",
+    "estimated_buying_cr": 240.0,
+    "avg_holding_increase_pct": 48.0,
+    "catalyst_thesis": "Global grid transmission capex boom and premium high-margin specialty conductor export shipments.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "AGGRESSIVE_ACCUMULATION",
+        "est_buying_cr": 240.0
+      }
+    ]
+  },
+  "DIXON": {
+    "symbol": "DIXON",
+    "company_name": "Dixon Technologies India",
+    "sector": "Consumer Electronics EMS",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Quant Small Cap",
+      "Motilal Midcap",
+      "Quant Active"
+    ],
+    "action_type": "AGGRESSIVE_ACCUMULATION",
+    "estimated_buying_cr": 390.0,
+    "avg_holding_increase_pct": 23.7,
+    "catalyst_thesis": "Mobile manufacturing joint ventures with global brands under IT hardware PLI scheme.",
+    "institutional_conviction": "HIGH",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "AGGRESSIVE_ACCUMULATION",
+        "est_buying_cr": 390.0
+      }
+    ]
+  },
+  "PAYTM": {
+    "symbol": "PAYTM",
+    "company_name": "One97 Communications Ltd",
+    "sector": "Fintech Payments",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Nippon India Small Cap",
+      "Quant Small Cap"
+    ],
+    "action_type": "SILENT_DUMPING",
+    "estimated_buying_cr": -310.0,
+    "avg_holding_increase_pct": -100.0,
+    "catalyst_thesis": "Regulatory actions on payments bank operations leading to institutional reallocation toward compliant lenders.",
+    "institutional_conviction": "NEGATIVE_EXIT",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "SILENT_DUMPING",
+        "est_buying_cr": -310.0
+      }
+    ]
+  },
+  "ZEEL": {
+    "symbol": "ZEEL",
+    "company_name": "Zee Entertainment Enterprises",
+    "sector": "Media & Broadcasting",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "ICICI Prudential Bluechip",
+      "HDFC Mid-Cap"
+    ],
+    "action_type": "SILENT_DUMPING",
+    "estimated_buying_cr": -240.0,
+    "avg_holding_increase_pct": -45.0,
+    "catalyst_thesis": "Termination of Sony mega-merger leading to legal friction and advertising market share dilution.",
+    "institutional_conviction": "NEGATIVE_EXIT",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "SILENT_DUMPING",
+        "est_buying_cr": -240.0
+      }
+    ]
+  },
+  "INDUSINDBK": {
+    "symbol": "INDUSINDBK",
+    "company_name": "IndusInd Bank Limited",
+    "sector": "Private Banking",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Mirae Large & Midcap"
+    ],
+    "action_type": "SILENT_DUMPING",
+    "estimated_buying_cr": -290.0,
+    "avg_holding_increase_pct": -38.0,
+    "catalyst_thesis": "Microfinance book asset quality stress and net interest margin compression in rising deposit rate cycle.",
+    "institutional_conviction": "NEGATIVE_EXIT",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "SILENT_DUMPING",
+        "est_buying_cr": -290.0
+      }
+    ]
+  },
+  "UPL": {
+    "symbol": "UPL",
+    "company_name": "UPL Limited",
+    "sector": "Agrochemicals",
+    "first_detected_cycle": "2026_11",
+    "first_detected_date": "November 2026",
+    "cycles_held": 1,
+    "participating_funds": [
+      "Invesco Contra"
+    ],
+    "action_type": "SILENT_DUMPING",
+    "estimated_buying_cr": -180.0,
+    "avg_holding_increase_pct": -42.0,
+    "catalyst_thesis": "Global crop protection channel destocking and prolonged pricing pressure from generic Chinese active ingredients.",
+    "institutional_conviction": "NEGATIVE_EXIT",
+    "history": [
+      {
+        "cycle": "2026_11",
+        "action": "SILENT_DUMPING",
+        "est_buying_cr": -180.0
+      }
+    ]
+  }
+}

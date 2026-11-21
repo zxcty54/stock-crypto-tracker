@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'global_economy_radar_screen.dart';
 
 class EconomyDemandRadarScreen extends StatefulWidget {
   const EconomyDemandRadarScreen({super.key});
@@ -14,6 +15,7 @@ class EconomyDemandRadarScreen extends StatefulWidget {
 class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     with SingleTickerProviderStateMixin {
   static const List<String> dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/0e3fda87-stock-crypto-tracker/economy_demand_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/economy_demand_radar.json',
     'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
     'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/economy_demand_radar.json',
@@ -23,6 +25,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
   String? _errorMessage;
   Map<String, dynamic>? _payload;
   late TabController _tabController;
+  int _selectedSectorFilter = 0; // 0 = All, 1 = High Demand / Expanding, 2 = Softening
 
   static const Color bgDark = Color(0xFF090D16);
   static const Color surfaceCard = Color(0xFF131B2A);
@@ -118,21 +121,33 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "INDIAN ECONOMY DEMAND RADAR",
+              "INDIA DEMAND RADAR",
               style: GoogleFonts.plusJakartaSans(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
-                fontSize: 14,
-                letterSpacing: 0.8,
+                fontSize: 14.5,
+                letterSpacing: 0.5,
               ),
             ),
             const Text(
-              "FASTag Toll • Port Cargo • Diesel • 8-Core Physical Pulse",
+              "FASTag • Ports • Diesel • 8-Core",
               style: TextStyle(color: textMuted, fontSize: 10),
             ),
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.public_rounded, color: Color(0xFF00E5FF), size: 21),
+            tooltip: "Switch to Global Economy Radar",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const GlobalEconomyRadarScreen(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded, color: accentCyan, size: 20),
             tooltip: "Live Refresh",
@@ -146,8 +161,8 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           unselectedLabelColor: textMuted,
           labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
           tabs: const [
-            Tab(text: "🎯 SECTOR DEMAND & STOCKS"),
-            Tab(text: "📊 PHYSICAL TELEMETRY GAUGES"),
+            Tab(text: "🎯 SECTORS & DEMAND"),
+            Tab(text: "📊 PHYSICAL GAUGES"),
           ],
         ),
       ),
@@ -191,6 +206,15 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
     final sectors = (_payload!['sector_demand_matrix'] as List?) ?? [];
     final modules = _payload!['telemetry_modules'] ?? {};
 
+    final filteredSectors = sectors.where((s) {
+      if (_selectedSectorFilter == 0) return true;
+      final badge = (s['momentum_badge'] ?? '').toString();
+      final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION');
+      if (_selectedSectorFilter == 1) return !isSoft;
+      if (_selectedSectorFilter == 2) return isSoft;
+      return true;
+    }).toList();
+
     return TabBarView(
       controller: _tabController,
       children: [
@@ -205,18 +229,10 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               _buildHeadlineBanner(headline),
               const SizedBox(height: 12),
               _buildEarningsAlphaExplainer(),
-              const SizedBox(height: 16),
-              Text(
-                "ACTIONABLE SECTOR DEMAND SIGNALS (${sectors.length})",
-                style: GoogleFonts.plusJakartaSans(
-                  color: accentCyan,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.0,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ...sectors.map((s) => _buildSectorDemandCard(s)),
+              const SizedBox(height: 14),
+              _buildSectorBreadthAndFilter(sectors),
+              const SizedBox(height: 12),
+              ...filteredSectors.map((s) => _buildSectorDemandCard(s)),
               const SizedBox(height: 10),
               _buildSebiDisclaimerCard(),
             ],
@@ -335,7 +351,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
 
           // Big Bold Conclusion
           Text(
-            "India's Ground Economy is Expanding at +8.0% YoY Volume Growth — Zero Industrial Slowdown",
+            h['headline_summary'] ?? "India's Ground Economy Expanding at +8.0% YoY Volume Pace — Zero Industrial Slowdown",
             style: GoogleFonts.plusJakartaSans(
               color: Colors.white,
               fontSize: 14.5,
@@ -407,36 +423,44 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
           const SizedBox(height: 12),
 
           // Physical Economy Temperature Bar
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("PHYSICAL MOMENTUM THERMOMETER",
-                  style: TextStyle(color: Colors.white54, fontSize: 8.5, fontWeight: FontWeight.bold)),
-              Text("84/100 (HIGH INDUSTRIAL PULSE)",
-                  style: TextStyle(color: accentGreen, fontSize: 8.5, fontWeight: FontWeight.w900)),
-            ],
-          ),
-          const SizedBox(height: 4),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Container(
-              height: 7,
-              color: const Color(0xFF090D16),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FractionallySizedBox(
-                  widthFactor: 0.84,
+          Builder(builder: (context) {
+            final int momentumScore = (h['momentum_score'] as num?)?.toInt() ?? 84;
+            final String momentumLabel = h['momentum_label'] ?? 'HIGH INDUSTRIAL PULSE';
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("PHYSICAL MOMENTUM THERMOMETER",
+                        style: TextStyle(color: Colors.white54, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                    Text("$momentumScore/100 ($momentumLabel)",
+                        style: const TextStyle(color: accentGreen, fontSize: 8.5, fontWeight: FontWeight.w900)),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
                   child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [accentAmber, accentCyan, accentGreen],
+                    height: 7,
+                    color: const Color(0xFF090D16),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: (momentumScore / 100.0).clamp(0.05, 1.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [accentAmber, accentCyan, accentGreen],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
+              ],
+            );
+          }),
         ],
       ),
     );
@@ -503,40 +527,166 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
 
   Widget _buildEarningsAlphaExplainer() {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0C1424),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.25)),
+      ),
+      child: Row(
+        children: const [
+          Icon(Icons.bolt_rounded, size: 14, color: Color(0xFF38BDF8)),
+          SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              "45-DAY LEAD EDGE: Physical volume dispatches report monthly, leading delayed quarterly corporate earnings results.",
+              style: TextStyle(
+                color: Color(0xFF94A3B8),
+                fontSize: 9.5,
+                fontWeight: FontWeight.w600,
+                height: 1.25,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectorBreadthAndFilter(List<dynamic> allSectors) {
+    int expandingCount = 0;
+    int softeningCount = 0;
+    for (final s in allSectors) {
+      final badge = (s['momentum_badge'] ?? '').toString();
+      if (badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION')) {
+        softeningCount++;
+      } else {
+        expandingCount++;
+      }
+    }
+    final int total = allSectors.length;
+    final double expandingPct = total > 0 ? (expandingCount / total) : 0.71;
+
+    return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F172A),
+        color: surfaceCard,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.25)),
+        border: Border.all(color: borderSubtle),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(Icons.school_rounded, size: 16, color: Color(0xFF38BDF8)),
-              const SizedBox(width: 6),
               Text(
-                "EDUCATIONAL MACRO INSIGHT: PHYSICAL INDICATORS",
+                "SECTOR DEMAND BREADTH",
                 style: GoogleFonts.plusJakartaSans(
-                  color: const Color(0xFF38BDF8),
-                  fontSize: 10.5,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.6,
+                  color: Colors.white70,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.8,
+                ),
+              ),
+              Text(
+                "$expandingCount/$total ACTIVE EXPANSIONS",
+                style: const TextStyle(
+                  color: accentCyan,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          const Text(
-            "Companies ke quarterly financial results 45 din baad report hote hain, jabki Government ka physical telemetry data (DPIIT 8-Core, Fuel, Ports, FASTag) MONTHLY real-time publish hota hai. Jab physical volume dispatch expand hota hai, toh plant operating leverage se quarterly production metrics par asar padta hai. Yeh analysis purely educational macroeconomic study ke liye hai — yeh kisi bhi prakar ki stock recommendation ya investment advice nahi hai.",
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 11,
-              height: 1.35,
+          const SizedBox(height: 8),
+
+          // Visual Breadth Ratio Bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: SizedBox(
+              height: 6,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: expandingCount > 0 ? expandingCount : 1,
+                    child: Container(color: accentGreen),
+                  ),
+                  const SizedBox(width: 2),
+                  Expanded(
+                    flex: softeningCount > 0 ? softeningCount : 1,
+                    child: Container(color: accentRed),
+                  ),
+                ],
+              ),
             ),
           ),
+          const SizedBox(height: 6),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "🟢 ${(expandingPct * 100).toInt()}% Expanding ($expandingCount)",
+                style: const TextStyle(color: accentGreen, fontSize: 9.5, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "🔴 ${((1 - expandingPct) * 100).toInt()}% Softening ($softeningCount)",
+                style: const TextStyle(color: accentRed, fontSize: 9.5, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // 3 Interactive Filter Chips
+          Row(
+            children: [
+              _buildFilterChip(0, "All ($total)"),
+              const SizedBox(width: 6),
+              _buildFilterChip(1, "🔥 High Demand ($expandingCount)"),
+              const SizedBox(width: 6),
+              _buildFilterChip(2, "⚠️ Softening ($softeningCount)"),
+            ],
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildFilterChip(int index, String label) {
+    final bool isSelected = _selectedSectorFilter == index;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() => _selectedSectorFilter = index);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? accentCyan.withOpacity(0.18) : const Color(0xFF0A101D),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: isSelected ? accentCyan : Colors.white12,
+              width: isSelected ? 1.2 : 0.8,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? accentCyan : textMuted,
+                  fontSize: 9.5,
+                  fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -588,17 +738,44 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
   Widget _buildSectorDemandCard(Map<String, dynamic> s) {
     final stocks = (s['beneficiary_equities'] as List?) ?? [];
     final badge = s['momentum_badge'] ?? '🟢 EXPANDING';
-    final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION');
-    final trendOutlook = s['macro_trend_outlook'] ?? s['earnings_outlook'];
-    final correlationNote = s['macro_correlation_note'] ?? s['earnings_prediction_thesis'];
+    final isSoft = badge.contains('SOFTENING') || badge.contains('CONTRACTION') || badge.contains('CONSOLIDATION');
     final keyMetric = s['fundamental_metric_to_track'] ?? s['key_metric_to_watch'];
 
+    // Extract metrics list (from structured 'metrics' or split 'primary_indicators')
+    List<Map<String, dynamic>> metricItems = [];
+    if (s['metrics'] is List && (s['metrics'] as List).isNotEmpty) {
+      metricItems = (s['metrics'] as List).map((m) => Map<String, dynamic>.from(m)).toList();
+    } else {
+      final primaryInd = (s['primary_indicators'] ?? '').toString();
+      final parts = primaryInd.split('•');
+      for (final p in parts) {
+        final trimmed = p.trim();
+        if (trimmed.isEmpty) continue;
+        if (trimmed.contains(':')) {
+          final spl = trimmed.split(':');
+          final lbl = spl[0].trim();
+          final val = spl.sublist(1).join(':').trim();
+          metricItems.add({
+            'label': lbl,
+            'value': val,
+            'positive': !val.contains('-'),
+          });
+        } else {
+          metricItems.add({
+            'label': 'Metric',
+            'value': trimmed,
+            'positive': !trimmed.contains('-'),
+          });
+        }
+      }
+    }
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: surfaceCard,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isSoft ? accentRed.withOpacity(0.3) : borderSubtle,
         ),
@@ -606,6 +783,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Row 1: Sector Title + Momentum Badge
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -615,12 +793,12 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                   style: GoogleFonts.plusJakartaSans(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
-                    fontSize: 13.5,
+                    fontSize: 13,
                   ),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
                   color: isSoft ? accentRed.withOpacity(0.15) : accentGreen.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(6),
@@ -630,19 +808,20 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                   style: TextStyle(
                     color: isSoft ? accentRed : accentGreen,
                     fontWeight: FontWeight.bold,
-                    fontSize: 10,
+                    fontSize: 9.5,
                   ),
                 ),
               ),
             ],
           ),
-          // 📊 Demand Temperature Meter (Visual Bar)
+
+          // Row 2: 5-Segment Demand Intensity Meter
           const SizedBox(height: 6),
           Row(
             children: [
               const Text(
-                "DEMAND INTENSITY: ",
-                style: TextStyle(color: textMuted, fontSize: 9, fontWeight: FontWeight.bold),
+                "INTENSITY: ",
+                style: TextStyle(color: textMuted, fontSize: 8.5, fontWeight: FontWeight.bold),
               ),
               Expanded(
                 child: Row(
@@ -651,7 +830,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
                     final bool isActive = index < activeSegments;
                     return Expanded(
                       child: Container(
-                        height: 5,
+                        height: 4.5,
                         margin: const EdgeInsets.symmetric(horizontal: 1.5),
                         decoration: BoxDecoration(
                           color: isActive
@@ -666,7 +845,7 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
               const SizedBox(width: 6),
               Text(
-                isSoft ? "SOFTENING" : (badge.contains('RAPID') ? "PEAK (5/5)" : "HIGH (4/5)"),
+                isSoft ? "SOFT (2/5)" : (badge.contains('RAPID') ? "PEAK (5/5)" : "HIGH (4/5)"),
                 style: TextStyle(
                   color: isSoft ? accentRed : accentGreen,
                   fontSize: 8.5,
@@ -675,151 +854,146 @@ class _EconomyDemandRadarScreenState extends State<EconomyDemandRadarScreen>
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            s['primary_indicators'] ?? '',
-            style: const TextStyle(color: accentCyan, fontSize: 11, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            s['economic_rationale'] ?? '',
-            style: const TextStyle(color: Colors.white70, fontSize: 11.5, height: 1.35),
-          ),
-          if (trendOutlook != null) ...[
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: isSoft
-                    ? accentRed.withOpacity(0.08)
-                    : const Color(0xFF0A1F1C),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: isSoft
-                      ? accentRed.withOpacity(0.3)
-                      : accentGreen.withOpacity(0.3),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        isSoft
-                            ? Icons.warning_amber_rounded
-                            : Icons.insights_rounded,
-                        size: 14,
-                        color: isSoft ? accentRed : accentGreen,
-                      ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          "MACRO ACTIVITY TREND: $trendOutlook",
-                          style: TextStyle(
-                            color: isSoft ? accentRed : accentGreen,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (correlationNote != null) ...[
-                    const SizedBox(height: 5),
-                    Text(
-                      correlationNote,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        height: 1.35,
+
+          // Row 3: Dual Telemetry Metric Badges (Visual Data Tiles!)
+          if (metricItems.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Row(
+              children: metricItems.map((m) {
+                final bool isPos = m['positive'] == true;
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 2.5),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF090F1B),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                        color: isPos ? accentCyan.withOpacity(0.2) : accentRed.withOpacity(0.25),
                       ),
                     ),
-                  ],
-                  if (keyMetric != null) ...[
-                    const SizedBox(height: 6),
-                    Row(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "🎯 Fundamental Driver: ",
-                          style: TextStyle(
-                            color: accentAmber,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Expanded(
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
                           child: Text(
-                            keyMetric,
+                            m['label']?.toString() ?? '',
                             style: const TextStyle(
-                              color: Color(0xFFE2E8F0),
-                              fontSize: 10,
+                              color: textMuted,
+                              fontSize: 9,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Icon(
+                              isPos ? Icons.trending_up_rounded : Icons.trending_down_rounded,
+                              size: 13,
+                              color: isPos ? accentGreen : accentRed,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  m['value']?.toString() ?? '',
+                                  style: GoogleFonts.robotoMono(
+                                    color: isPos ? Colors.white : accentRed,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+
+          // Row 4: Key Fundamental Driver (Full text visible, zero truncation)
+          if (keyMetric != null && keyMetric.toString().isNotEmpty) ...[
+            const SizedBox(height: 7),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0D1424),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.white10),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 1.5),
+                    child: Icon(Icons.track_changes_rounded, size: 12.5, color: accentAmber),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: "Driver: ",
+                            style: TextStyle(
+                              color: accentAmber,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 10,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "$keyMetric",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
+                              height: 1.25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ],
-          const SizedBox(height: 10),
-          const Divider(color: Color(0xFF1B2433), height: 1),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Text(
-                "SECTOR REPRESENTATIVE PEERS (EDUCATIONAL STUDY):",
-                style: GoogleFonts.plusJakartaSans(
-                  color: textMuted,
-                  fontSize: 9.5,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 2),
-          const Text(
-            "Tickers listed below are representative industry case studies for macro sensitivity tracking, NOT buy/sell recommendations.",
-            style: TextStyle(color: Colors.white38, fontSize: 9, fontStyle: FontStyle.italic),
-          ),
-          const SizedBox(height: 6),
-          Wrap(
-            spacing: 8,
-            runSpacing: 6,
-            children: stocks.map((st) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0C1320),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: const Color(0xFF1E2D44)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      st['symbol'] ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
-                      ),
+
+          // Row 5: Actionable Stock Tickers
+          if (stocks.isNotEmpty) ...[
+            const SizedBox(height: 7),
+            Wrap(
+              spacing: 6,
+              runSpacing: 5,
+              children: stocks.map((st) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3.5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0C1320),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: const Color(0xFF1E2D44)),
+                  ),
+                  child: Text(
+                    st['symbol'] ?? '',
+                    style: GoogleFonts.robotoMono(
+                      color: accentCyan,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 10,
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      "• ${st['name'] ?? ''}",
-                      style: const TextStyle(color: textMuted, fontSize: 10),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );

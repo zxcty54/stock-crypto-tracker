@@ -1,0 +1,52 @@
+name: Update Global Economy Radar
+
+on:
+  schedule:
+    # 1. Post-Market Close: Mon-Fri at 13:30 UTC (7:00 PM IST) for fresh FII/DII & NSE F&O participant data
+    - cron: '30 13 * * 1-5'
+    # 2. Pre-Market Monday: 3:30 AM UTC (9:00 AM IST) for weekly global macro alignment
+    - cron: '30 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-global-radar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests curl_cffi
+
+      - name: Run Global Economy Telemetry Hunter
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python global_economy_radar_hunter.py
+
+      - name: Direct Commit & Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A global_economy_radar.json assets/data/global_economy_radar.json
+          if git diff --staged --quiet; then
+            echo "ℹ️ No changes in global economy radar data."
+          else
+            git commit -m "🌍 Auto-Update: Global Economy Pressure & Expansion Radar [$(date +'%d-%b-%Y')]"
+            git push origin HEAD:${{ github.ref }}
+            echo "✅ Global economy radar pushed to ${{ github.ref }}!"
+          fi

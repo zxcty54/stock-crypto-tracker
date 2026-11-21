@@ -450,6 +450,86 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
   // 📊 EXECUTIVE CONCLUSION HUD & NET FLOW COLUMN BAR CHART
   // =============================================================
   Widget _buildExecutiveBarChart() {
+    final tiers = (_marketCapRotation['tiers'] as List<dynamic>? ?? []);
+    Map<String, dynamic> largeTier = {};
+    Map<String, dynamic> midTier = {};
+    Map<String, dynamic> smallTier = {};
+    Map<String, dynamic> cashTier = {};
+
+    for (var t in tiers) {
+      if (t is Map) {
+        final id = t['tier_id'];
+        if (id == 'large_cap') largeTier = Map<String, dynamic>.from(t);
+        if (id == 'mid_cap') midTier = Map<String, dynamic>.from(t);
+        if (id == 'small_cap') smallTier = Map<String, dynamic>.from(t);
+        if (id == 'cash_reserves') cashTier = Map<String, dynamic>.from(t);
+      }
+    }
+
+    final double largeFlow = (largeTier['net_flow_cr'] as num?)?.toDouble() ?? 12800.0;
+    final double midFlow = (midTier['net_flow_cr'] as num?)?.toDouble() ?? -1200.0;
+    final double smallFlow = (smallTier['net_flow_cr'] as num?)?.toDouble() ?? -4600.0;
+    final double cashFlow = (cashTier['net_flow_cr'] as num?)?.toDouble() ?? 2100.0;
+
+    final double maxAbsFlow = [largeFlow.abs(), midFlow.abs(), smallFlow.abs(), cashFlow.abs()]
+        .reduce((curr, next) => curr > next ? curr : next);
+    final double safeMax = maxAbsFlow > 0 ? maxAbsFlow : 1.0;
+
+    String fmtFlow(double val) {
+      final sign = val >= 0 ? '+' : '-';
+      final absVal = val.abs();
+      if (absVal >= 1000) {
+        return '$sign₹${(absVal / 1000).toStringAsFixed(1)}k Cr';
+      }
+      return '$sign₹${absVal.toStringAsFixed(0)} Cr';
+    }
+
+    final String verdictText = _marketCapRotation['verdict_summary'] ??
+        _metadata['stance_summary'] ??
+        "Institutions are pouring +₹12,800 Cr into Large Caps while DUMPING Small Caps (-₹4,600 Cr)";
+
+    final rawTakeaways = _marketCapRotation['key_takeaways'];
+    List<Widget> takeawayWidgets = [];
+    if (rawTakeaways is List && rawTakeaways.isNotEmpty) {
+      for (var item in rawTakeaways) {
+        if (item is Map) {
+          final title = item['title']?.toString() ?? '';
+          final type = item['type']?.toString() ?? 'positive';
+          final IconData icon = type == 'warning'
+              ? Icons.cancel_rounded
+              : (type == 'neutral' ? Icons.savings_rounded : Icons.check_circle_rounded);
+          final Color col = type == 'warning'
+              ? const Color(0xFFFF2A6D)
+              : (type == 'neutral' ? const Color(0xFFFFB703) : const Color(0xFF00FF88));
+          takeawayWidgets.add(_buildTakeawayItem(icon, col, title));
+          takeawayWidgets.add(const SizedBox(height: 5));
+        }
+      }
+      if (takeawayWidgets.isNotEmpty) {
+        takeawayWidgets.removeLast();
+      }
+    } else {
+      takeawayWidgets = [
+        _buildTakeawayItem(
+          Icons.check_circle_rounded,
+          const Color(0xFF00FF88),
+          "73% Fresh SIP Capital concentrated into Large Caps",
+        ),
+        const SizedBox(height: 5),
+        _buildTakeawayItem(
+          Icons.cancel_rounded,
+          const Color(0xFFFF2A6D),
+          "Small-Cap De-risking (-₹4,600 Cr) as median P/E crossed 45x",
+        ),
+        const SizedBox(height: 5),
+        _buildTakeawayItem(
+          Icons.savings_rounded,
+          const Color(0xFFFFB703),
+          "₹55,100+ Cr (7.76%) Cash Dry Powder waiting on sidelines",
+        ),
+      ];
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -519,7 +599,7 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
 
           // Big Bold Verdict
           Text(
-            "Institutions are pouring +₹12,800 Cr into Large Caps while DUMPING Small Caps (-₹4,600 Cr)",
+            verdictText,
             style: GoogleFonts.plusJakartaSans(
               color: Colors.white,
               fontSize: 14.5,
@@ -559,35 +639,35 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                     children: [
                       _buildFlowColumn(
                         label: "LARGE CAP",
-                        amountStr: "+₹12.8k Cr",
-                        heightRatio: 1.0,
-                        isPositive: true,
-                        color: const Color(0xFF00FF88),
-                        icon: Icons.arrow_upward_rounded,
+                        amountStr: fmtFlow(largeFlow),
+                        heightRatio: (largeFlow.abs() / safeMax).clamp(0.2, 1.0),
+                        isPositive: largeFlow >= 0,
+                        color: largeFlow >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                        icon: largeFlow >= 0 ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
                       ),
                       _buildFlowColumn(
                         label: "CASH / REPO",
-                        amountStr: "+₹2.1k Cr",
-                        heightRatio: 0.32,
-                        isPositive: true,
+                        amountStr: fmtFlow(cashFlow),
+                        heightRatio: (cashFlow.abs() / safeMax).clamp(0.2, 1.0),
+                        isPositive: cashFlow >= 0,
                         color: const Color(0xFF00E5FF),
-                        icon: Icons.arrow_upward_rounded,
+                        icon: cashFlow >= 0 ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
                       ),
                       _buildFlowColumn(
                         label: "MID CAP",
-                        amountStr: "-₹1.2k Cr",
-                        heightRatio: 0.24,
-                        isPositive: false,
-                        color: const Color(0xFFFF9100),
-                        icon: Icons.arrow_downward_rounded,
+                        amountStr: fmtFlow(midFlow),
+                        heightRatio: (midFlow.abs() / safeMax).clamp(0.2, 1.0),
+                        isPositive: midFlow >= 0,
+                        color: midFlow >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF9100),
+                        icon: midFlow >= 0 ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
                       ),
                       _buildFlowColumn(
                         label: "SMALL CAP",
-                        amountStr: "-₹4.6k Cr",
-                        heightRatio: 0.58,
-                        isPositive: false,
-                        color: const Color(0xFFFF2A6D),
-                        icon: Icons.arrow_downward_rounded,
+                        amountStr: fmtFlow(smallFlow),
+                        heightRatio: (smallFlow.abs() / safeMax).clamp(0.2, 1.0),
+                        isPositive: smallFlow >= 0,
+                        color: smallFlow >= 0 ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                        icon: smallFlow >= 0 ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
                       ),
                     ],
                   ),
@@ -603,27 +683,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           ),
           const SizedBox(height: 14),
 
-          // 3 Bullet Conclusions (Crystal clear)
-          _buildTakeawayItem(
-            Icons.check_circle_rounded,
-            const Color(0xFF00FF88),
-            "73% Fresh SIP Allocation into Large Caps",
-            "Institutions are parking the bulk of domestic SIP inflows into resilient Private Banks and Utilities for capital safety.",
-          ),
-          const SizedBox(height: 6),
-          _buildTakeawayItem(
-            Icons.cancel_rounded,
-            const Color(0xFFFF2A6D),
-            "Small-Cap De-risking & Distribution",
-            "Small-cap median P/E reached an unsustainable >45x. Marquee funds are cutting positions to secure 2-year multibagger gains.",
-          ),
-          const SizedBox(height: 6),
-          _buildTakeawayItem(
-            Icons.savings_rounded,
-            const Color(0xFFFFB703),
-            "₹55,100+ Cr Cash Dry Powder Waiting",
-            "High 7.76% liquidity buffer held by funds like PPFAS & Quant, waiting to buy steep market crash dips.",
-          ),
+          // 3 Bullet Conclusions (Dynamically rendered)
+          ...takeawayWidgets,
         ],
       ),
     );
@@ -694,35 +755,30 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     );
   }
 
-  Widget _buildTakeawayItem(
-      IconData icon, Color color, String title, String desc) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, color: color, size: 14),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: GoogleFonts.plusJakartaSans(
-                  color: color,
-                  fontSize: 10.5,
-                  fontWeight: FontWeight.w900,
-                ),
+  Widget _buildTakeawayItem(IconData icon, Color color, String title) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF080D17),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 13),
+          const SizedBox(width: 7),
+          Expanded(
+            child: Text(
+              title,
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
               ),
-              const SizedBox(height: 1),
-              Text(
-                desc,
-                style: const TextStyle(
-                    color: Colors.white70, fontSize: 10, height: 1.3),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -799,15 +855,9 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 regimeTitle,
                 style: GoogleFonts.plusJakartaSans(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w900,
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                regimeSummary,
-                style: const TextStyle(
-                    color: Colors.white70, fontSize: 11, height: 1.35),
               ),
             ],
           ),
@@ -833,63 +883,95 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         ),
         const SizedBox(height: 8),
 
-        // Visual Stacked Bar
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: SizedBox(
-            height: 12,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 58,
-                  child: Container(color: const Color(0xFF00E5FF)),
+        // Visual Stacked Bar & Legend (Dynamically bound to monthly tiers)
+        Builder(builder: (context) {
+          int largeFlex = 58;
+          int midFlex = 24;
+          int smallFlex = 10;
+          int cashFlex = 8;
+          String largeStr = "58.4%";
+          String midStr = "24.2%";
+          String smallStr = "9.6%";
+          String cashStr = "7.8%";
+          for (var t in tiers) {
+            if (t is Map) {
+              final id = t['tier_id'];
+              final alloc = (t['allocation_pct'] as num?)?.toDouble() ?? 0.0;
+              if (id == 'large_cap') {
+                largeFlex = alloc.round().clamp(1, 90);
+                largeStr = "${alloc.toStringAsFixed(1)}%";
+              } else if (id == 'mid_cap') {
+                midFlex = alloc.round().clamp(1, 90);
+                midStr = "${alloc.toStringAsFixed(1)}%";
+              } else if (id == 'small_cap') {
+                smallFlex = alloc.round().clamp(1, 90);
+                smallStr = "${alloc.toStringAsFixed(1)}%";
+              } else if (id == 'cash_reserves') {
+                cashFlex = alloc.round().clamp(1, 90);
+                cashStr = "${alloc.toStringAsFixed(1)}%";
+              }
+            }
+          }
+          return Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: SizedBox(
+                  height: 12,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: largeFlex,
+                        child: Container(color: const Color(0xFF00E5FF)),
+                      ),
+                      const SizedBox(width: 1),
+                      Expanded(
+                        flex: midFlex,
+                        child: Container(color: const Color(0xFF2979FF)),
+                      ),
+                      const SizedBox(width: 1),
+                      Expanded(
+                        flex: smallFlex,
+                        child: Container(color: const Color(0xFFFF9100)),
+                      ),
+                      const SizedBox(width: 1),
+                      Expanded(
+                        flex: cashFlex,
+                        child: Container(color: const Color(0xFF00FF88)),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 1),
-                Expanded(
-                  flex: 24,
-                  child: Container(color: const Color(0xFF2979FF)),
-                ),
-                const SizedBox(width: 1),
-                Expanded(
-                  flex: 10,
-                  child: Container(color: const Color(0xFFFF9100)),
-                ),
-                const SizedBox(width: 1),
-                Expanded(
-                  flex: 8,
-                  child: Container(color: const Color(0xFF00FF88)),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 6),
-        // Legend
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text("■ Large (58.4%)",
-                style: TextStyle(
-                    color: Color(0xFF00E5FF),
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.bold)),
-            Text("■ Mid (24.2%)",
-                style: TextStyle(
-                    color: Color(0xFF2979FF),
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.bold)),
-            Text("■ Small (9.6%)",
-                style: TextStyle(
-                    color: Color(0xFFFF9100),
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.bold)),
-            Text("■ Cash (7.8%)",
-                style: TextStyle(
-                    color: Color(0xFF00FF88),
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("■ Large ($largeStr)",
+                      style: const TextStyle(
+                          color: Color(0xFF00E5FF),
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold)),
+                  Text("■ Mid ($midStr)",
+                      style: const TextStyle(
+                          color: Color(0xFF2979FF),
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold)),
+                  Text("■ Small ($smallStr)",
+                      style: const TextStyle(
+                          color: Color(0xFFFF9100),
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold)),
+                  Text("■ Cash ($cashStr)",
+                      style: const TextStyle(
+                          color: Color(0xFF00FF88),
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ],
+          );
+        }),
         const SizedBox(height: 10),
 
         // Tier Breakdown Cards
@@ -1033,13 +1115,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            reason,
-            style: const TextStyle(color: Colors.white60, fontSize: 10.5, height: 1.3),
-          ),
           if (sectors.isNotEmpty) ...[
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 5,
               runSpacing: 4,
@@ -1071,6 +1148,20 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final thesis = s['thesis'] ?? '';
     final bought = (s['top_bought'] as List<dynamic>? ?? []);
     final trimmed = (s['top_trimmed'] as List<dynamic>? ?? []);
+
+    final buyingFunds = (s['top_buying_funds'] as List<dynamic>? ?? []).map((e) => e.toString()).toList();
+    if (buyingFunds.isEmpty) {
+      final Set<String> matchedFunds = {};
+      for (var sym in bought) {
+        for (var inf in _infiltrations) {
+          if (inf['symbol'] == sym) {
+            final fList = (inf['participating_funds'] as List<dynamic>? ?? []);
+            matchedFunds.addAll(fList.map((e) => e.toString()));
+          }
+        }
+      }
+      buyingFunds.addAll(matchedFunds);
+    }
 
     final bool isInflow = flow >= 0;
     final Color color = isInflow ? const Color(0xFF00FF88) : const Color(0xFFFF5252);
@@ -1141,11 +1232,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ),
             ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            thesis,
-            style: const TextStyle(color: Colors.white70, fontSize: 10.5, height: 1.3),
-          ),
           const SizedBox(height: 8),
           Row(
             children: [
@@ -1184,6 +1270,32 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ],
           ),
+          if (buyingFunds.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "BUYING MFs: ",
+                  style: TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    buyingFunds.take(4).join(' • '),
+                    style: GoogleFonts.plusJakartaSans(
+                      color: const Color(0xFFB0BEC5),
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -1309,50 +1421,23 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 "When Do Institutions Dump & Exit Stocks?",
                 style: GoogleFonts.plusJakartaSans(
                   color: Colors.white,
-                  fontSize: 13.5,
+                  fontSize: 13,
                   fontWeight: FontWeight.w900,
                 ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                "Real-time alerts tracking where marquee DIIs are cutting stakes, liquidating positions, and offloading shares into retail liquidity during euphoria.",
-                style: TextStyle(
-                    color: Colors.white70, fontSize: 11, height: 1.35),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 14),
 
-        // 2. 4-Rule Exit Checklist Header
+        // Active Institutional Exits & Dumping Radar
         Row(
-          children: const [
-            Icon(Icons.checklist_rtl_rounded,
-                color: Color(0xFF00E5FF), size: 16),
-            SizedBox(width: 6),
+          children: [
+            const Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 16),
+            const SizedBox(width: 6),
             Text(
-              "4 GOLDEN RULES: HOW TO SPOT INSTITUTIONAL EXITS",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0.4,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        ..._exitChecklist.map((c) => _buildChecklistCard(c)),
-        const SizedBox(height: 16),
-
-        // 3. Active Institutional Exits & Dumping Radar
-        Row(
-          children: const [
-            Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 16),
-            SizedBox(width: 6),
-            Text(
-              "ACTIVE INSTITUTIONAL DUMPING & TRAP RADAR",
-              style: TextStyle(
+              "TRACKED INSTITUTIONAL EXITS (${_institutionalExits.length})",
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 11.5,
                 fontWeight: FontWeight.w900,
@@ -1364,64 +1449,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
         const SizedBox(height: 8),
         ..._institutionalExits.map((e) => _buildExitCard(e)),
       ],
-    );
-  }
-
-  Widget _buildChecklistCard(Map<String, dynamic> c) {
-    final numStr = c['rule_number'] ?? '';
-    final title = c['title'] ?? '';
-    final exp = c['explanation'] ?? '';
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFF1E2B3E)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFF00E5FF).withOpacity(0.12),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Text(
-              numStr,
-              style: GoogleFonts.robotoMono(
-                color: const Color(0xFF00E5FF),
-                fontSize: 11,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  exp,
-                  style: const TextStyle(
-                      color: Colors.white60, fontSize: 10.5, height: 1.3),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -1630,21 +1657,52 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            catalyst,
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 10.5, height: 1.3),
-          ),
           if (funds.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: const [
+                Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 13),
+                SizedBox(width: 5),
+                Text(
+                  "EXITING INSTITUTIONS (WHO SOLD):",
+                  style: TextStyle(
+                    color: Color(0xFFFF5252),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.4,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 6),
-            Text(
-              "Exiting Funds: ${funds.join(' • ')}",
-              style: GoogleFonts.plusJakartaSans(
-                color: Colors.white38,
-                fontSize: 9,
-                fontWeight: FontWeight.w600,
-              ),
+            Wrap(
+              spacing: 6,
+              runSpacing: 5,
+              children: funds.map((f) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F0D15),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.4)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.account_balance_rounded, color: Color(0xFFFF5252), size: 11),
+                      const SizedBox(width: 5),
+                      Text(
+                        f.toString(),
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ],
         ],
@@ -1817,13 +1875,6 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                 fontSize: 9.5,
                 fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 6),
-          Text(
-            _metadata['stance_summary'] ??
-                "Marquee DII managers maintain selective accumulation in electronics, defence, and capital markets.",
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 11, height: 1.35),
-          ),
         ],
       ),
     );
@@ -1840,6 +1891,8 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
     final double changePct =
         (item['avg_holding_increase_pct'] as num?)?.toDouble() ?? 0.0;
     final thesis = item['catalyst_thesis'] ?? '';
+    final String firstCycle = item['first_detected_cycle']?.toString() ?? '';
+    final int cyclesHeld = (item['cycles_held'] as num?)?.toInt() ?? 1;
 
     Color tagColor = const Color(0xFF00FF88);
     String tagLabel = "FRESH ENTRY";
@@ -1922,9 +1975,28 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
             ],
           ),
           const SizedBox(height: 2),
-          Text(
-            name,
-            style: const TextStyle(color: Colors.white54, fontSize: 10.5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  name,
+                  style: const TextStyle(color: Colors.white54, fontSize: 10.5),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (firstCycle.isNotEmpty)
+                Text(
+                  cyclesHeld > 1
+                      ? "$firstCycle • $cyclesHeld cycles"
+                      : "Added: $firstCycle",
+                  style: const TextStyle(
+                    color: Color(0xFF00E5FF),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+            ],
           ),
           const SizedBox(height: 10),
 
@@ -1977,32 +2049,77 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
               ],
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            thesis,
-            style: const TextStyle(
-                color: Colors.white70, fontSize: 11, height: 1.3),
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 6,
-            runSpacing: 4,
-            children: funds.map((f) {
-              return Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF141C2B),
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xFF22324B)),
+          if (funds.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(
+                  action == 'SILENT_DUMPING'
+                      ? Icons.exit_to_app_rounded
+                      : Icons.shopping_bag_rounded,
+                  color: action == 'SILENT_DUMPING'
+                      ? const Color(0xFFFF2A6D)
+                      : const Color(0xFF00FF88),
+                  size: 13,
                 ),
-                child: Text(
-                  f.toString(),
-                  style: const TextStyle(color: Colors.white60, fontSize: 9),
+                const SizedBox(width: 5),
+                Text(
+                  action == 'SILENT_DUMPING'
+                      ? "DUMPING / TRIMMING MFs (WHO SOLD):"
+                      : "BUYING MUTUAL FUNDS (WHO BOUGHT):",
+                  style: TextStyle(
+                    color: action == 'SILENT_DUMPING'
+                        ? const Color(0xFFFF80AB)
+                        : const Color(0xFF00FF88),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.3,
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: funds.map((f) {
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF101B2E),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: action == 'SILENT_DUMPING'
+                          ? const Color(0xFFFF2A6D).withOpacity(0.35)
+                          : const Color(0xFF00E5FF).withOpacity(0.35),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.account_balance_rounded,
+                        color: action == 'SILENT_DUMPING'
+                            ? const Color(0xFFFF80AB)
+                            : const Color(0xFF00E5FF),
+                        size: 10,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        f.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ],
       ),
     );
