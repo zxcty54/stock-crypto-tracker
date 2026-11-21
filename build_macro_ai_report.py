@@ -390,6 +390,13 @@ Ensure all {len(sector_batch)} sectors are returned in the list.
     return call_gemini_with_fallback(prompt, api_key)
 
 def run_pipeline():
+    # Ingest dynamic live commodity & FX benchmarks before executing research analysis
+    try:
+        from generate_macro_margin_report import update_live_macro_benchmarks
+        update_live_macro_benchmarks()
+    except Exception as e:
+        print(f"ℹ️ Live benchmark auto-update notice: {e}")
+
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         print("ℹ️ No GEMINI_API_KEY found in environment; using calibrated quant rule engine.")

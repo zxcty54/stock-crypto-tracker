@@ -974,7 +974,6 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final sector = sec['sector'] ?? '';
     final int delta = (sec['margin_delta_bps'] as num?)?.toInt() ?? 0;
     final int demand = (sec['demand_score'] as num?)?.toInt() ?? 50;
-    final stocks = (sec['key_stocks'] as List<dynamic>? ?? []);
     final Color barColor = isExpansion ? kAccentGreen : kAccentRed;
 
     final double widthFactor = (delta.abs() / 280.0).clamp(0.12, 1.0);
@@ -1059,17 +1058,6 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               ],
             ),
           ),
-          if (stocks.isNotEmpty) ...[
-            const SizedBox(height: 3),
-            Text(
-              "🎯 Stocks: ${stocks.join(', ')}",
-              style: GoogleFonts.robotoMono(
-                color: Colors.white70,
-                fontSize: 8.5,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
         ],
       ),
     );
@@ -1476,7 +1464,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    "",
+                    "$val",
                     style: GoogleFonts.robotoMono(
                       color: Colors.white,
                       fontSize: 18,
@@ -1495,7 +1483,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                 ],
               ),
               Text(
-                "Range: ",
+                "Range: $range",
                 style: const TextStyle(color: kTextMuted, fontSize: 9.5),
               ),
             ],
@@ -1641,18 +1629,18 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     switch (id) {
       case 'dxy':
       case 'dxy_dollar':
-        return ['USD/INR', 'FII FLOWS', 'BANKING NIFTY'];
+        return ['USD/INR PAIR', 'FII FLOW BASKET', 'BANKING SECTOR'];
       case 'us10y':
       case 'us_10y_yield':
-        return ['GROWTH STOCKS', 'IT SERVICES', 'EM DEBT'];
+        return ['TECH EQUITIES', 'IT EXPORTERS', 'EM DEBT BASKET'];
       case 'brent_crude':
-        return ['PAINTS (ASIANPAINT)', 'CHEMICALS', 'OMCs (BPCL/IOC)'];
+        return ['DECORATIVE PAINTS', 'SPECIALTY CHEMICALS', 'OIL REFINING'];
       case 'gold_spot':
-        return ['GOLD ETFS', 'TITAN', 'MUTHOOTFIN'];
+        return ['GOLD SOVEREIGN', 'GEMS & JEWELLERY', 'GOLD NBFC BASKET'];
       case 'semicon_utilization':
-        return ['KAYNES', 'DIXON', 'TATA TECH'];
+        return ['ELECTRONICS EMS', 'AUTO ER&D', 'TECH HARDWARE'];
       case 'baltic_dry':
-        return ['ADANIPORTS', 'TATASTEEL', 'SHIPPING CORP'];
+        return ['PORT INFRA', 'BULK METALS', 'MARITIME FREIGHT'];
       default:
         return [];
     }
