@@ -1,5 +1,6 @@
 import os
 import json
+import urllib.request
 from datetime import datetime
 
 OUTPUT_FILES = [
@@ -17,6 +18,50 @@ MACRO_BENCHMARKS = {
     "usd_inr": {"name": "USD-INR Currency Pair", "val": 84.42, "unit": "INR/USD", "delta_1m": 0.35},
     "us_10y_yield": {"name": "10Y Bond Yields & Systemic Cost of Funds", "val": 4.42, "unit": "%", "delta_1m": 0.18}
 }
+
+COMMODITY_TICKER_MAP = {
+    "brent_crude": ["BZ=F", "CL=F"],
+    "copper": ["HG=F"],
+    "natural_gas": ["NG=F"],
+    "aluminium": ["ALI=F"],
+    "cotton": ["CT=F"],
+    "iron_ore": ["TIO=F"],
+    "usd_inr": ["USDINR=X", "INR=X"],
+    "us_10y_yield": ["^TNX"]
+}
+
+def fetch_live_commodity_price(symbol):
+    try:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=5d"
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            meta = data["chart"]["result"][0]["meta"]
+            price = meta.get("regularMarketPrice")
+            prev_close = meta.get("chartPreviousClose")
+            delta_1m = 0.0
+            if price and prev_close and prev_close > 0:
+                delta_1m = round(((price - prev_close) / prev_close) * 100.0, 2)
+            return price, delta_1m
+    except Exception:
+        return None, None
+
+def update_live_macro_benchmarks():
+    print("📡 Ingesting live commodity tickers (Yahoo Finance / Forex)...")
+    for key, tickers in COMMODITY_TICKER_MAP.items():
+        for t in tickers:
+            price, delta = fetch_live_commodity_price(t)
+            if price is not None and price > 0:
+                MACRO_BENCHMARKS[key]["val"] = round(price, 2)
+                if delta is not None:
+                    MACRO_BENCHMARKS[key]["delta_1m"] = delta
+                print(f"  ✓ Live update for {key}: {price} (delta: {delta}%)")
+                break
+        else:
+            print(f"  • Using calibrated baseline for {key}: {MACRO_BENCHMARKS[key]['val']}")
 
 SECTORS_DATA = [
     {
@@ -788,6 +833,7 @@ SECTORS_DATA = [
 
 def build_full_macro_report():
     print("🚀 Generating Complete 17-Sector Calibrated Macro Margin Report...")
+    update_live_macro_benchmarks()
 
     expanding_stocks_global = []
     contracting_stocks_global = []

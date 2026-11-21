@@ -475,12 +475,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     final isExpanding = stock['margin_trajectory'] == "MARGIN_EXPANSION";
     final int bps = (stock['projected_opm_change_bps'] ?? 0) as int;
     final color = isExpanding ? kGreenAccent : kRedAccent;
+    final rationale = (stock['operational_transmission_rationale'] ?? '').toString();
+    final pricingPower = (stock['pricing_power'] ?? 'MODERATE').toString();
 
     // Normalizing divergence bar (300 bps max ceiling)
     final double normalizedWidth = min(1.0, bps.abs() / 300.0);
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: kBgDark,
@@ -494,34 +496,36 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
                     Text(
                       stock['symbol'] ?? '',
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white),
                     ),
-                    Text(
-                      stock['company_name'] ?? '',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 10, color: kMutedText),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        stock['company_name'] ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 10.5, color: kMutedText),
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.12),
-                  borderRadius: BorderRadius.circular(6),
+                  borderRadius: BorderRadius.circular(5),
                   border: Border.all(color: color.withOpacity(0.4)),
                 ),
                 child: Text(
                   "${bps > 0 ? '+' : ''}$bps bps",
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: FontWeight.w900,
                     color: color,
                   ),
@@ -529,7 +533,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
 
           // Zero-Center Divergence Bar
           Column(
@@ -538,14 +542,14 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("MARGIN CONTRACTION", style: TextStyle(fontSize: 8, color: kRedAccent, fontWeight: FontWeight.bold)),
-                  const Text("BASE (0)", style: TextStyle(fontSize: 8, color: kMutedText)),
-                  const Text("MARGIN EXPANSION", style: TextStyle(fontSize: 8, color: kGreenAccent, fontWeight: FontWeight.bold)),
+                  const Text("CONTRACTION", style: TextStyle(fontSize: 8, color: kRedAccent, fontWeight: FontWeight.w800)),
+                  const Text("BASE 0", style: TextStyle(fontSize: 8, color: kMutedText)),
+                  const Text("EXPANSION", style: TextStyle(fontSize: 8, color: kGreenAccent, fontWeight: FontWeight.w800)),
                 ],
               ),
               const SizedBox(height: 3),
               Container(
-                height: 6,
+                height: 5,
                 decoration: BoxDecoration(
                   color: kSurfaceBg,
                   borderRadius: BorderRadius.circular(3),
@@ -589,50 +593,36 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
               ),
             ],
           ),
-          const SizedBox(height: 10),
-
-          // Operational Transmission Explanation
-          Text(
-            stock['operational_transmission_rationale'] ?? '',
-            style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.35),
-          ),
           const SizedBox(height: 8),
 
-          // Pricing Power & Transmission Details Box
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            decoration: BoxDecoration(
-              color: kSurfaceBg,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: kBorderDark),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF090D16),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    "PRICING POWER: ${stock['pricing_power'] ?? 'MODERATE'}",
-                    style: TextStyle(
-                      fontSize: 8.5,
-                      fontWeight: FontWeight.w900,
-                      color: stock['pricing_power'] == 'HIGH' ? kGreenAccent : Colors.white70,
-                    ),
+          // Ultra-Clean 1-Line Transmission Data Pill
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                decoration: BoxDecoration(
+                  color: pricingPower == 'HIGH' ? kGreenAccent.withOpacity(0.12) : kSurfaceBg,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: pricingPower == 'HIGH' ? kGreenAccent.withOpacity(0.3) : kBorderDark),
+                ),
+                child: Text(
+                  pricingPower,
+                  style: TextStyle(
+                    fontSize: 8,
+                    fontWeight: FontWeight.w900,
+                    color: pricingPower == 'HIGH' ? kGreenAccent : Colors.white70,
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    stock['quarterly_ebitda_outlook'] ?? '',
-                    style: const TextStyle(fontSize: 9.5, color: Colors.white70, height: 1.3),
-                  ),
+              ),
+              const SizedBox(width: 7),
+              Expanded(
+                child: Text(
+                  rationale,
+                  style: const TextStyle(fontSize: 10, color: Color(0xFFC9D1D9), height: 1.3),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
