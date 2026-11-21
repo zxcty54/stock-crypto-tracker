@@ -36,8 +36,22 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
   }
 
   Future<void> _loadReportJson() async {
+    // 🎯 Instant Load: Offline Local Assets First (0ms perceived latency)
+    try {
+      final localJson = await rootBundle.loadString('assets/data/macro_research_report.json');
+      final decoded = json.decode(localJson);
+      if (mounted && decoded is Map<String, dynamic> && decoded['sectors'] != null) {
+        setState(() {
+          _reportData = decoded;
+          _sectors = decoded['sectors'] ?? [];
+          _isLoading = false;
+          _errorMessage = null;
+        });
+      }
+    } catch (_) {}
+
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    // 🎯 Primary Direct GitHub + ISP Bypass CDN Endpoints
+    // 🎯 Live Sync in Background: Primary Direct GitHub + ISP Bypass CDN Endpoints
     final List<String> endpoints = [
       'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/macro_research_report.json?ts=$timestamp',
       'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/macro_research_report.json?ts=$timestamp',
@@ -49,43 +63,26 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
         final response = await http.get(
           Uri.parse(urlString),
           headers: {'Accept': 'application/json'},
-        ).timeout(const Duration(seconds: 12));
+        ).timeout(const Duration(seconds: 6));
 
         if (response.statusCode == 200) {
           final decoded = json.decode(utf8.decode(response.bodyBytes));
-          if (mounted) {
+          if (mounted && decoded is Map<String, dynamic> && decoded['sectors'] != null) {
             setState(() {
               _reportData = decoded;
               _sectors = decoded['sectors'] ?? [];
               _isLoading = false;
               _errorMessage = null;
             });
+            return;
           }
-          return;
         }
       } catch (e) {
         debugPrint("Endpoint failed ($urlString): $e");
       }
     }
 
-    // 🎯 Tier 4: Offline Local Assets Fallback
-    try {
-      final localJson = await rootBundle.loadString('assets/data/macro_research_report.json');
-      final decoded = json.decode(localJson);
-      if (mounted) {
-        setState(() {
-          _reportData = decoded;
-          _sectors = decoded['sectors'] ?? [];
-          _isLoading = false;
-          _errorMessage = null;
-        });
-        return;
-      }
-    } catch (e) {
-      debugPrint("Local asset fallback failed: $e");
-    }
-
-    if (mounted) {
+    if (mounted && _sectors.isEmpty) {
       setState(() {
         _errorMessage = "Network issue: Unable to fetch data from CDN endpoints.";
         _isLoading = false;

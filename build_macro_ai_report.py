@@ -9,11 +9,13 @@ INPUT_MODELS_FILE = "company_business_models.json"
 OUTPUT_REPORT_FILE = "macro_research_report.json"
 
 # ==============================================================================
-# 🎯 AI CANDIDATE MODELS LIST (Gemini 3.7 Priority)
+# 🎯 STANDARD TEXT GEMINI MODELS LIST (Google AI Studio Production Models)
 # ==============================================================================
 CANDIDATE_MODELS = [
-    "gemini-3.5-flash-lite",
-    
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-8b",
+    "gemini-1.5-pro",
 ]
 
 # ==============================================================================
@@ -263,7 +265,7 @@ def load_business_models():
         return None, None
 
 def call_gemini_with_fallback(prompt, api_key):
-    """Executes prompt on candidate Gemini models with fallback."""
+    """Executes prompt on standard text-based Gemini models with fallback via native urllib."""
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
@@ -272,30 +274,36 @@ def call_gemini_with_fallback(prompt, api_key):
             "responseMimeType": "application/json"
         }
     }
+    data_bytes = json.dumps(payload).encode("utf-8")
 
     for model_name in CANDIDATE_MODELS:
         for version in ["v1beta", "v1"]:
             url = f"https://generativelanguage.googleapis.com/{version}/models/{model_name}:generateContent?key={api_key}"
-            headers = {"Content-Type": "application/json"}
+            req = urllib.request.Request(
+                url,
+                data=data_bytes,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
 
             try:
-                res = requests.post(url, json=payload, headers=headers, timeout=50)
-                if res.status_code == 200:
-                    raw_text = res.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                    if raw_text.startswith("```json"):
-                        raw_text = raw_text[7:]
-                    elif raw_text.startswith("```"):
-                        raw_text = raw_text[3:]
-                    if raw_text.endswith("```"):
-                        raw_text = raw_text[:-3]
+                with urllib.request.urlopen(req, timeout=45) as res:
+                    if res.status == 200:
+                        raw = json.loads(res.read().decode("utf-8"))
+                        raw_text = raw["candidates"][0]["content"]["parts"][0]["text"].strip()
+                        if raw_text.startswith("```json"):
+                            raw_text = raw_text[7:]
+                        elif raw_text.startswith("```"):
+                            raw_text = raw_text[3:]
+                        if raw_text.endswith("```"):
+                            raw_text = raw_text[:-3]
 
-                    parsed = json.loads(raw_text.strip())
-                    return parsed, f"{model_name} [{version}]"
-                else:
-                    if res.status_code != 404:
-                        print(f"   ⚠ [{version}] {model_name} -> HTTP {res.status_code}")
-                    time.sleep(0.5)
-
+                        parsed = json.loads(raw_text.strip())
+                        return parsed, f"{model_name} [{version}]"
+            except urllib.error.HTTPError as e:
+                if e.code != 404:
+                    print(f"   ⚠ [{version}] {model_name} -> HTTP {e.code}")
+                time.sleep(0.5)
             except Exception:
                 time.sleep(0.5)
 
@@ -435,6 +443,42 @@ def run_pipeline():
         if batch_idx < total_batches:
             print("   ⏳ Sleeping 10s to maintain safe rate limits...")
             time.sleep(10)
+
+    # 🛡️ Resilient Fail-Safe: If any sector failed under AI rate limits, supplement via quant rule engine
+    if len(all_sector_reports) < len(SECTOR_REGISTRY):
+        print(f"ℹ️ [{len(all_sector_reports)}/{len(SECTOR_REGISTRY)}] sectors evaluated via AI.")
+        from generate_macro_margin_report import build_full_macro_report, SECTOR_CALIBRATION, evaluate_stock_calibrated, load_macro_environment
+        if not all_sector_reports:
+            print("🔄 AI service unavailable or quota exhausted; seamlessly executing calibrated quant engine...")
+            build_full_macro_report()
+            return
+
+        evaluated_ids = {s.get("sector_id") for s in all_sector_reports}
+        macro_env = load_macro_environment()
+        for sec in SECTOR_REGISTRY:
+            s_id = sec["id"]
+            if s_id not in evaluated_ids:
+                print(f"   ⚙️ Supplementing missing sector [{sec['name']}] via quant rules...")
+                sec_cfg = SECTOR_CALIBRATION.get(s_id, {})
+                bench_key = sec_cfg.get("benchmark_key", "brent_crude")
+                bench_item = macro_env.get(bench_key, {})
+                bench_price = f"{bench_item.get('current_val', 'N/A')} {bench_item.get('unit', '')}"
+                bench_delta = bench_item.get("deltas", {}).get("1M", 0.0)
+
+                stocks_out = []
+                for st in sec_cfg.get("stocks", []):
+                    calc = evaluate_stock_calibrated(st["symbol"], st, bench_item, bench_delta)
+                    stocks_out.append(calc)
+
+                all_sector_reports.append({
+                    "sector_id": s_id,
+                    "sector_name": sec["name"],
+                    "benchmark_commodity": sec_cfg.get("benchmark_commodity", sec["benchmark_label"]),
+                    "benchmark_price": bench_price,
+                    "benchmark_1m_delta_pct": bench_delta,
+                    "sector_macro_thesis": sec_cfg.get("sector_macro_thesis", ""),
+                    "evaluated_stocks": stocks_out
+                })
 
     # Aggregation into Outcome-First Matrix
     expanding_stocks_global = []
