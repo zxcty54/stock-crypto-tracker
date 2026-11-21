@@ -15,6 +15,7 @@ import 'screens/market_indices_heatmap_screen.dart'; // 🗺️ Sector & Indices
 import 'screens/mf_smart_money_screen.dart'; // 🕵️ MF Smart Money Radar
 import 'screens/economy_demand_radar_screen.dart'; // 🏭 Physical Economy Demand Radar
 import 'screens/global_economy_radar_screen.dart'; // 🌍 Global Economy Radar
+import 'screens/institutional_internals_radar_screen.dart'; // 🏛️ Institutional & Risk Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -368,6 +369,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const GlobalEconomyRadarScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.account_balance_rounded,
+              title: 'Institutional & Market Risk Radar',
+              subtitle: 'FII/DII Squeeze, India VIX, Pledge & Bulk Deals',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const InstitutionalInternalsRadarScreen(),
                   ),
                 );
               },
