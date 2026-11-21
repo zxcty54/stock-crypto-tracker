@@ -2172,7 +2172,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             children: [
               Row(
                 children: [
-                  const Icon(Icons.event_upcoming_rounded,
+                  const Icon(Icons.upcoming_rounded,
                       color: kAccentAmber, size: 15),
                   const SizedBox(width: 6),
                   Text(
