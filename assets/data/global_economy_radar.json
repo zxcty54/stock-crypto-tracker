@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-21T15:37:38.122639+00:00",
+    "generated_timestamp": "2026-11-21T16:19:43.853348+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -157,6 +157,96 @@
       "days_remaining": 27
     }
   ],
+  "market_internals": {
+    "total_stocks_screened": 1589,
+    "advances_count": 545,
+    "declines_count": 1040,
+    "unchanged_count": 4,
+    "breadth_thrust_pct": 34.4,
+    "market_regime": "INDEX_CAMOUFLAGE",
+    "regime_label": "Index Camouflage Trap (Smart Money Distributing)",
+    "regime_truth": "Heavyweights holding headline index while 65%+ broader stocks are in net decline.",
+    "india_vix": 13.4,
+    "vix_zone": "HEALTHY_STEADY",
+    "vix_label": "Healthy Structural Trend (12.0 - 15.5)",
+    "vix_truth": "Balanced volatility; sustainable trend conditions with low speculative drag.",
+    "top_delivery_accumulations": [
+      {
+        "symbol": "ENKEIWHEL",
+        "change_pct": 1.3,
+        "delivery_pct": 99.59,
+        "volume": 251568
+      },
+      {
+        "symbol": "SRGHFL",
+        "change_pct": 5.0,
+        "delivery_pct": 99.05,
+        "volume": 77388
+      },
+      {
+        "symbol": "NPBET",
+        "change_pct": 5.87,
+        "delivery_pct": 98.29,
+        "volume": 55831
+      },
+      {
+        "symbol": "UNIONGOLD",
+        "change_pct": 0.98,
+        "delivery_pct": 97.54,
+        "volume": 162729
+      },
+      {
+        "symbol": "EBBETF0431",
+        "change_pct": 0.0,
+        "delivery_pct": 96.96,
+        "volume": 91296
+      },
+      {
+        "symbol": "AMNPLST",
+        "change_pct": 0.7,
+        "delivery_pct": 96.58,
+        "volume": 107852
+      }
+    ],
+    "top_churn_distribution_traps": [
+      {
+        "symbol": "V2RETAIL",
+        "change_pct": -0.27,
+        "delivery_pct": 9.55,
+        "volume": 101067743
+      },
+      {
+        "symbol": "ASHOKA",
+        "change_pct": -0.69,
+        "delivery_pct": 3.9,
+        "volume": 37934887
+      },
+      {
+        "symbol": "PNB",
+        "change_pct": -0.43,
+        "delivery_pct": 27.11,
+        "volume": 35794087
+      },
+      {
+        "symbol": "BLSPOLY",
+        "change_pct": -0.83,
+        "delivery_pct": 5.57,
+        "volume": 27865158
+      },
+      {
+        "symbol": "ANGELONE",
+        "change_pct": -4.23,
+        "delivery_pct": 12.11,
+        "volume": 26431363
+      },
+      {
+        "symbol": "FIRSTCRY",
+        "change_pct": -1.29,
+        "delivery_pct": 5.2,
+        "volume": 25603367
+      }
+    ]
+  },
   "supply_demand_control_levers": {
     "headline": "HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND",
     "description": "Global superpowers actively manipulate energy valves, monetary liquidity taps, industrial subsidies, and maritime chokepoints to enforce dominance.",

@@ -37,6 +37,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   Map<String, dynamic> _fiiDiiFlows = {};
   Map<String, dynamic> _fiiDiiDerivatives = {};
   List<Map<String, dynamic>> _upcomingTriggers = [];
+  Map<String, dynamic> _marketInternals = {};
   String _selectedImpactFilter = 'ALL';
 
   // Theme Colors
@@ -115,6 +116,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     _fiiDiiDerivatives = Map<String, dynamic>.from(data['fii_dii_derivatives'] ?? {});
     _upcomingTriggers = List<Map<String, dynamic>>.from(
         data['upcoming_macro_triggers'] ?? []);
+    _marketInternals = Map<String, dynamic>.from(data['market_internals'] ?? {});
   }
 
   Future<void> _loadDataset({bool isRefresh = false}) async {
@@ -468,6 +470,12 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         // Institutional FII vs DII Flow Divergence Bar
         if (_fiiDiiFlows.isNotEmpty) ...[
           _buildFiiDiiDivergenceCard(),
+          const SizedBox(height: 12),
+        ],
+
+        // Institutional Market Internals & Advance-Decline Camouflage Barometer
+        if (_marketInternals.isNotEmpty) ...[
+          _buildMarketInternalsCard(),
           const SizedBox(height: 12),
         ],
 
@@ -896,6 +904,523 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildMarketInternalsCard() {
+    final int tot = (_marketInternals['total_stocks_screened'] as num?)?.toInt() ?? 1589;
+    final int adv = (_marketInternals['advances_count'] as num?)?.toInt() ?? 545;
+    final int dec = (_marketInternals['declines_count'] as num?)?.toInt() ?? 1040;
+    final double breadthPct = (_marketInternals['breadth_thrust_pct'] as num?)?.toDouble() ?? 34.4;
+    final double decPct = (100.0 - breadthPct).clamp(0.0, 100.0);
+
+    final String regime = _marketInternals['market_regime'] ?? 'INDEX_CAMOUFLAGE';
+    final String regimeTruth = _marketInternals['regime_truth'] ??
+        'Heavyweights holding headline index while 65%+ broader stocks are in net decline.';
+
+    final double vix = (_marketInternals['india_vix'] as num?)?.toDouble() ?? 13.4;
+    final String vixLabel = _marketInternals['vix_label'] ?? 'Healthy Structural Trend (12.0 - 15.5)';
+
+    final bool isCamouflage = regime == 'INDEX_CAMOUFLAGE';
+    final bool isAccumulation = regime == 'BROAD_ACCUMULATION';
+    final Color regimeColor = isCamouflage ? kAccentRed : (isAccumulation ? kAccentGreen : kAccentAmber);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.insights_rounded, color: kAccentCyan, size: 15),
+                  const SizedBox(width: 5),
+                  Text(
+                    "MARKET INTERNALS & CAMOUFLAGE RADAR",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                decoration: BoxDecoration(
+                  color: regimeColor.withOpacity(0.18),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: regimeColor.withOpacity(0.4)),
+                ),
+                child: Text(
+                  isCamouflage ? "🚨 INDEX CAMOUFLAGE" : (isAccumulation ? "🟢 BROAD ACCUMULATION" : "BIFURCATED"),
+                  style: TextStyle(
+                    color: regimeColor,
+                    fontSize: 7.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Advance vs Decline Numbers Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "ADVANCES: $adv (${breadthPct.toStringAsFixed(1)}%)",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentGreen,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF090D16),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "$tot NSE STOCKS AUDITED",
+                  style: const TextStyle(color: Colors.white54, fontSize: 8, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text(
+                "DECLINES: $dec (${decPct.toStringAsFixed(1)}%)",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentRed,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // Visual Breadth Bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: (breadthPct * 10).toInt().clamp(5, 950),
+                  child: Container(height: 6, color: kAccentGreen),
+                ),
+                Expanded(
+                  flex: (decPct * 10).toInt().clamp(5, 950),
+                  child: Container(height: 6, color: kAccentRed),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("0% ADVANCES", style: TextStyle(color: Colors.white38, fontSize: 7)),
+              Text("50% BREADTH PIVOT", style: TextStyle(color: Colors.white38, fontSize: 7)),
+              Text("100% ADVANCES", style: TextStyle(color: Colors.white38, fontSize: 7)),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // 1-line Camouflage Truth Box
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: regimeColor.withOpacity(0.3)),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  isCamouflage ? Icons.warning_amber_rounded : Icons.check_circle_outline_rounded,
+                  color: regimeColor,
+                  size: 12,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    regimeTruth,
+                    style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 8.5, height: 1.25),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // Divider
+          Container(height: 1, color: const Color(0xFF1E2B3E)),
+          const SizedBox(height: 8),
+
+          // India VIX Barometer Section
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.speed_rounded, color: kAccentAmber, size: 13),
+                  const SizedBox(width: 4),
+                  Text(
+                    "INDIA VIX: ${vix.toStringAsFixed(2)}",
+                    style: GoogleFonts.robotoMono(
+                      color: Colors.white,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                vixLabel,
+                style: const TextStyle(color: kAccentCyan, fontSize: 8, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+
+          // Multi-zone VIX meter
+          Row(
+            children: [
+              Expanded(child: Container(height: 4, decoration: BoxDecoration(color: kAccentGreen.withOpacity(0.6), borderRadius: const BorderRadius.horizontal(left: Radius.circular(2))))),
+              const SizedBox(width: 2),
+              Expanded(child: Container(height: 4, color: kAccentCyan.withOpacity(0.6))),
+              const SizedBox(width: 2),
+              Expanded(child: Container(height: 4, color: kAccentAmber.withOpacity(0.6))),
+              const SizedBox(width: 2),
+              Expanded(child: Container(height: 4, decoration: BoxDecoration(color: kAccentRed.withOpacity(0.6), borderRadius: const BorderRadius.horizontal(right: Radius.circular(2))))),
+            ],
+          ),
+          const SizedBox(height: 3),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("< 12 COMPLACENCY", style: TextStyle(color: Colors.white38, fontSize: 6.5)),
+              Text("12-15.5 STEADY", style: TextStyle(color: Colors.white38, fontSize: 6.5)),
+              Text("15.5-21 EVENT", style: TextStyle(color: Colors.white38, fontSize: 6.5)),
+              Text("> 21 PANIC BOTTOM", style: TextStyle(color: Colors.white38, fontSize: 6.5)),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Bottom Action: Inspect Delivery vs Churn Traps
+          InkWell(
+            borderRadius: BorderRadius.circular(6),
+            onTap: () => _showDeliveryVsChurnSheet(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: kAccentCyan.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: kAccentCyan.withOpacity(0.3)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Inspect Top 6 Real Delivery Buys vs Operator Churn Traps",
+                    style: TextStyle(
+                      color: kAccentCyan,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: kAccentCyan, size: 13),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeliveryVsChurnSheet(BuildContext context) {
+    final List<dynamic> realBuys = (_marketInternals['top_delivery_accumulations'] as List<dynamic>? ?? []);
+    final List<dynamic> churnTraps = (_marketInternals['top_churn_distribution_traps'] as List<dynamic>? ?? []);
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0F1726),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.72,
+          minChildSize: 0.45,
+          maxChildSize: 0.92,
+          expand: false,
+          builder: (context, scrollController) {
+            return ListView(
+              controller: scrollController,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const Icon(Icons.layers_rounded, color: kAccentCyan, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      "INSTITUTIONAL TRUTH: DELIVERY vs CHURN",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  "Separating genuine demat share lock-in from operator day-trading volume traps.",
+                  style: TextStyle(color: kTextMuted, fontSize: 9),
+                ),
+                const SizedBox(height: 14),
+
+                // SECTION 1: REAL DELIVERY ACCUMULATION
+                Row(
+                  children: const [
+                    Icon(Icons.lock_rounded, color: kAccentGreen, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "🟢 REAL INSTITUTIONAL DEMAT ACCUMULATION (> 95% DELIVERY)",
+                      style: TextStyle(
+                        color: kAccentGreen,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...realBuys.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final double chg = (st['change_pct'] as num?)?.toDouble() ?? 0.0;
+                  final double deliv = (st['delivery_pct'] as num?)?.toDouble() ?? 0.0;
+                  final int vol = (st['volume'] as num?)?.toInt() ?? 0;
+                  final String volStr = vol > 1000000 ? "${(vol / 1000000).toStringAsFixed(1)}M" : "${(vol / 1000).toStringAsFixed(0)}k";
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentGreen.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          sym,
+                          style: GoogleFonts.robotoMono(
+                            color: Colors.white,
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          "${chg >= 0 ? '+' : ''}$chg%",
+                          style: GoogleFonts.robotoMono(
+                            color: chg >= 0 ? kAccentGreen : kAccentRed,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentGreen.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "${deliv.toStringAsFixed(1)}% Delivery ($volStr)",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentGreen,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => StockDeliveryHistoryScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Delivery →",
+                              style: TextStyle(color: kAccentCyan, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                const SizedBox(height: 14),
+
+                // SECTION 2: OPERATOR CHURN TRAPS
+                Row(
+                  children: const [
+                    Icon(Icons.shuffle_rounded, color: kAccentRed, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "🔴 OPERATOR CHURN TRAPS (< 15% DELIVERY, DAY-TRADING CHURN)",
+                      style: TextStyle(
+                        color: kAccentRed,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...churnTraps.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final double chg = (st['change_pct'] as num?)?.toDouble() ?? 0.0;
+                  final double deliv = (st['delivery_pct'] as num?)?.toDouble() ?? 0.0;
+                  final int vol = (st['volume'] as num?)?.toInt() ?? 0;
+                  final String volStr = vol > 10000000 ? "${(vol / 10000000).toStringAsFixed(1)} Cr" : (vol > 100000 ? "${(vol / 100000).toStringAsFixed(1)}L" : "${(vol / 1000).toStringAsFixed(0)}k");
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentRed.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          sym,
+                          style: GoogleFonts.robotoMono(
+                            color: Colors.white,
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          "${chg >= 0 ? '+' : ''}$chg%",
+                          style: GoogleFonts.robotoMono(
+                            color: chg >= 0 ? kAccentGreen : kAccentRed,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentRed.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "${deliv.toStringAsFixed(1)}% Delivery ($volStr Vol)",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentRed,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => StockDeliveryHistoryScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Delivery →",
+                              style: TextStyle(color: kAccentCyan, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+                const SizedBox(height: 14),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.shield_outlined, color: kAccentCyan, size: 12),
+                      SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          "SEBI Statutory Notice: Algorithmic delivery percentage scan from official NSE Bhavcopy. Strictly educational analysis; does not constitute investment advice or stock recommendations.",
+                          style: TextStyle(color: Colors.white54, fontSize: 8, height: 1.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
