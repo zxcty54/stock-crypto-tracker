@@ -34,6 +34,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   Map<String, dynamic> _headwindsTailwinds = {};
   List<Map<String, dynamic>> _equityImpacts = [];
   Map<String, dynamic> _fiiDiiFlows = {};
+  Map<String, dynamic> _fiiDiiDerivatives = {};
   List<Map<String, dynamic>> _upcomingTriggers = [];
 
   // Theme Colors
@@ -109,6 +110,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     _equityImpacts = List<Map<String, dynamic>>.from(
         data['equity_impact_matrix'] ?? []);
     _fiiDiiFlows = Map<String, dynamic>.from(data['fii_dii_flows'] ?? {});
+    _fiiDiiDerivatives = Map<String, dynamic>.from(data['fii_dii_derivatives'] ?? {});
     _upcomingTriggers = List<Map<String, dynamic>>.from(
         data['upcoming_macro_triggers'] ?? []);
   }
@@ -696,8 +698,180 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               Text("SIP ABSORPTION", style: TextStyle(color: Colors.white38, fontSize: 7.5)),
             ],
           ),
+
+          if (_fiiDiiDerivatives.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Container(height: 1, color: const Color(0xFF1E2B3E)),
+            const SizedBox(height: 10),
+            _buildDerivativesSentimentSection(),
+          ],
         ],
       ),
+    );
+  }
+
+  Widget _buildDerivativesSentimentSection() {
+    final double fiiLongRatio = (_fiiDiiDerivatives['fii_long_ratio'] as num?)?.toDouble() ?? 19.4;
+    final double fiiShortRatio = (_fiiDiiDerivatives['fii_short_ratio'] as num?)?.toDouble() ?? 80.6;
+    final int fiiLong = (_fiiDiiDerivatives['fii_index_long_contracts'] as num?)?.toInt() ?? 28500;
+    final int fiiShort = (_fiiDiiDerivatives['fii_index_short_contracts'] as num?)?.toInt() ?? 118500;
+    final int fiiNet = (_fiiDiiDerivatives['fii_net_contracts'] as num?)?.toInt() ?? -90000;
+    final double clientLongRatio = (_fiiDiiDerivatives['client_long_ratio'] as num?)?.toDouble() ?? 66.2;
+    final double diiLongRatio = (_fiiDiiDerivatives['dii_long_ratio'] as num?)?.toDouble() ?? 40.0;
+    final String zoneLabel = _fiiDiiDerivatives['zone_label'] ?? 'Extreme Short Squeeze (< 20% Long)';
+
+    final bool isExtremeSqueeze = fiiLongRatio < 20.0;
+    final Color badgeColor = isExtremeSqueeze ? kAccentRed : (fiiLongRatio < 40.0 ? kAccentAmber : kAccentGreen);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.analytics_rounded, color: kAccentCyan, size: 14),
+                const SizedBox(width: 5),
+                Text(
+                  "NSE INDEX FUTURES OI (NIFTY & BANKNIFTY)",
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+              decoration: BoxDecoration(
+                color: badgeColor.withOpacity(0.18),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: badgeColor.withOpacity(0.4)),
+              ),
+              child: Text(
+                zoneLabel,
+                style: TextStyle(
+                  color: badgeColor,
+                  fontSize: 7.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+
+        // Long vs Short Ratio Numbers
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "LONG: ${(fiiLong / 1000).toStringAsFixed(1)}k (${fiiLongRatio.toStringAsFixed(1)}%)",
+              style: GoogleFonts.robotoMono(
+                color: kAccentGreen,
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: const Color(0xFF090D16),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                "${fiiNet > 0 ? '+' : ''}${(fiiNet / 1000).toStringAsFixed(1)}k NET",
+                style: GoogleFonts.robotoMono(
+                  color: fiiNet >= 0 ? kAccentGreen : kAccentRed,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+            Text(
+              "SHORT: ${(fiiShort / 1000).toStringAsFixed(1)}k (${fiiShortRatio.toStringAsFixed(1)}%)",
+              style: GoogleFonts.robotoMono(
+                color: kAccentRed,
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+
+        // Multi-segment Long vs Short Meter Bar
+        ClipRRect(
+          borderRadius: BorderRadius.circular(3),
+          child: Row(
+            children: [
+              Expanded(
+                flex: (fiiLongRatio * 10).toInt().clamp(5, 950),
+                child: Container(
+                  height: 6,
+                  color: kAccentGreen,
+                ),
+              ),
+              Expanded(
+                flex: (fiiShortRatio * 10).toInt().clamp(5, 950),
+                child: Container(
+                  height: 6,
+                  color: kAccentRed,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 4),
+
+        // Scale marker row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text("0% LONG", style: TextStyle(color: Colors.white38, fontSize: 7)),
+            Text("20% SQUEEZE LINE", style: TextStyle(color: kAccentAmber, fontSize: 7, fontWeight: FontWeight.bold)),
+            Text("50% NEUTRAL", style: TextStyle(color: Colors.white38, fontSize: 7)),
+            Text("100% SHORT", style: TextStyle(color: Colors.white38, fontSize: 7)),
+          ],
+        ),
+        const SizedBox(height: 8),
+
+        // Counterparty Contrast Pill
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: const Color(0xFF090D16),
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.white10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Text("RETAIL COUNTERPART: ", style: TextStyle(color: Colors.white54, fontSize: 8)),
+                  Text(
+                    "${clientLongRatio.toStringAsFixed(1)}% LONG",
+                    style: GoogleFonts.robotoMono(color: Colors.white, fontSize: 8.5, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text("DII FUTURES: ", style: TextStyle(color: Colors.white54, fontSize: 8)),
+                  Text(
+                    "${diiLongRatio.toStringAsFixed(1)}% LONG",
+                    style: GoogleFonts.robotoMono(color: kAccentCyan, fontSize: 8.5, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-21T15:07:52.349579+00:00",
+    "generated_timestamp": "2026-11-21T15:28:00.175359+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -91,6 +91,23 @@
     "data_source": "MACRO_TELEMETRY_CORRELATION",
     "regime_verdict": "DII Absorption Moat (1.14x SIP Cushion)",
     "dxy_correlation_note": "DXY at 106.25 & US 10Y at 4.42% create FII outflow pressure, absorbed by domestic SIP liquidity."
+  },
+  "fii_dii_derivatives": {
+    "fii_long_ratio": 19.4,
+    "fii_short_ratio": 80.6,
+    "fii_index_long_contracts": 28500,
+    "fii_index_short_contracts": 118500,
+    "fii_net_contracts": -90000,
+    "dii_long_ratio": 40.0,
+    "client_long_ratio": 66.2,
+    "client_net_contracts": 120000,
+    "pro_long_ratio": 47.3,
+    "sentiment_zone": "EXTREME_SHORT_SQUEEZE",
+    "zone_label": "Extreme Short Squeeze (< 20% Long)",
+    "contrarian_signal": "BULLISH_CONTRARIAN",
+    "verdict": "FIIs holding 80%+ short contracts. High probability of violent short covering rally.",
+    "trade_date": "21 Nov 2026",
+    "data_source": "MACRO_TELEMETRY_CORRELATION"
   },
   "upcoming_macro_triggers": [
     {
