@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-20 07:58 AM IST",
-  "total_stocks_screened": 1589,
+  "last_updated": "2026-11-21 02:56 AM IST",
+  "total_stocks_screened": 1593,
   "weekly_gainers": [
     {
       "symbol": "CNL",
@@ -30,12 +30,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "BFINVEST",
-      "cmp": 492.15,
-      "ref_price": 383.95,
-      "change_pct": 28.18,
-      "volume": 225995,
-      "delivery_pct": 39.56,
+      "symbol": "TINNARUBR",
+      "cmp": 943.45,
+      "ref_price": 741.85,
+      "change_pct": 27.18,
+      "volume": 677454,
+      "delivery_pct": 9.4,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -66,15 +66,6 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "OMPOWER",
-      "cmp": 152.74,
-      "ref_price": 124.27,
-      "change_pct": 22.91,
-      "volume": 4426088,
-      "delivery_pct": 11.29,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
       "symbol": "KILITCH",
       "cmp": 244.16,
       "ref_price": 200.54,
@@ -84,21 +75,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "STYLEBAAZA",
-      "cmp": 539.45,
-      "ref_price": 443.5,
-      "change_pct": 21.63,
-      "volume": 2939028,
-      "delivery_pct": 58.98,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "HINDOILEXP",
-      "cmp": 227.84,
-      "ref_price": 188.79,
-      "change_pct": 20.68,
-      "volume": 10112861,
-      "delivery_pct": 18.04,
+      "symbol": "KMCSHIL",
+      "cmp": 203.78,
+      "ref_price": 167.89,
+      "change_pct": 21.38,
+      "volume": 1395170,
+      "delivery_pct": 16.61,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -112,20 +94,11 @@
     },
     {
       "symbol": "GREAVESCOT",
-      "cmp": 266.63,
-      "ref_price": 223.18,
-      "change_pct": 19.47,
-      "volume": 36316006,
-      "delivery_pct": 9.29,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "BLSPOLY",
-      "cmp": 279.98,
-      "ref_price": 234.75,
-      "change_pct": 19.27,
-      "volume": 27865158,
-      "delivery_pct": 5.57,
+      "cmp": 268.31,
+      "ref_price": 225.97,
+      "change_pct": 18.74,
+      "volume": 16881233,
+      "delivery_pct": 15.02,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -147,12 +120,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "DEEPAKFERT",
-      "cmp": 1480.5,
-      "ref_price": 1258.0,
-      "change_pct": 17.69,
-      "volume": 1187154,
-      "delivery_pct": 22.92,
+      "symbol": "SGFIN",
+      "cmp": 821.05,
+      "ref_price": 698.3,
+      "change_pct": 17.58,
+      "volume": 525664,
+      "delivery_pct": 30.06,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -165,21 +138,30 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "SGFIN",
-      "cmp": 833.95,
-      "ref_price": 711.8,
-      "change_pct": 17.16,
-      "volume": 1316172,
-      "delivery_pct": 27.28,
+      "symbol": "SGMART",
+      "cmp": 1097.05,
+      "ref_price": 941.45,
+      "change_pct": 16.53,
+      "volume": 1874090,
+      "delivery_pct": 30.42,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "ALICON",
-      "cmp": 997.0,
-      "ref_price": 854.3,
-      "change_pct": 16.7,
-      "volume": 94837,
-      "delivery_pct": 61.38,
+      "symbol": "SHREECEM",
+      "cmp": 25475.0,
+      "ref_price": 21900.0,
+      "change_pct": 16.32,
+      "volume": 87715,
+      "delivery_pct": 74.88,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "SUNSHINE",
+      "cmp": 512.4,
+      "ref_price": 440.6,
+      "change_pct": 16.3,
+      "volume": 298588,
+      "delivery_pct": 53.49,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -192,39 +174,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "SHARDAMOTR",
-      "cmp": 935.05,
-      "ref_price": 808.7,
-      "change_pct": 15.62,
-      "volume": 482872,
-      "delivery_pct": 25.51,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "PSPPROJECT",
-      "cmp": 798.85,
-      "ref_price": 691.55,
-      "change_pct": 15.52,
-      "volume": 184335,
-      "delivery_pct": 50.49,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "IVALUE",
-      "cmp": 233.61,
-      "ref_price": 202.31,
-      "change_pct": 15.47,
-      "volume": 258125,
-      "delivery_pct": 47.52,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "SKYWAYS",
-      "cmp": 128.94,
-      "ref_price": 111.73,
-      "change_pct": 15.4,
-      "volume": 4203012,
-      "delivery_pct": 16.84,
+      "symbol": "DCI",
+      "cmp": 382.45,
+      "ref_price": 329.95,
+      "change_pct": 15.91,
+      "volume": 204754,
+      "delivery_pct": 30.66,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -246,21 +201,39 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "SUBROS",
-      "cmp": 693.25,
-      "ref_price": 604.95,
-      "change_pct": 14.6,
-      "volume": 5971955,
-      "delivery_pct": 5.52,
+      "symbol": "WINDMACHIN",
+      "cmp": 321.2,
+      "ref_price": 280.55,
+      "change_pct": 14.49,
+      "volume": 184570,
+      "delivery_pct": 63.88,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "TIMKEN",
-      "cmp": 3124.6,
-      "ref_price": 2730.1,
-      "change_pct": 14.45,
-      "volume": 58123,
-      "delivery_pct": 67.92,
+      "symbol": "MAXHEALTH",
+      "cmp": 1081.0,
+      "ref_price": 947.1,
+      "change_pct": 14.14,
+      "volume": 9531767,
+      "delivery_pct": 29.78,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "DEEPAKFERT",
+      "cmp": 1437.2,
+      "ref_price": 1261.8,
+      "change_pct": 13.9,
+      "volume": 276080,
+      "delivery_pct": 33.86,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "DOMS",
+      "cmp": 2151.9,
+      "ref_price": 1894.8,
+      "change_pct": 13.57,
+      "volume": 157827,
+      "delivery_pct": 66.27,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -273,12 +246,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "POWERMECH",
-      "cmp": 2395.1,
-      "ref_price": 2124.7,
-      "change_pct": 12.73,
-      "volume": 70306,
-      "delivery_pct": 36.9,
+      "symbol": "BLUESTARCO",
+      "cmp": 1791.0,
+      "ref_price": 1587.2,
+      "change_pct": 12.84,
+      "volume": 1144409,
+      "delivery_pct": 20.98,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "HINDOILEXP",
+      "cmp": 216.82,
+      "ref_price": 192.4,
+      "change_pct": 12.69,
+      "volume": 1046899,
+      "delivery_pct": 24.79,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -291,41 +273,59 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "ROSSTECH",
-      "cmp": 1555.6,
-      "ref_price": 1381.1,
-      "change_pct": 12.63,
-      "volume": 52900,
-      "delivery_pct": 37.78,
+      "symbol": "ARIS",
+      "cmp": 164.97,
+      "ref_price": 146.86,
+      "change_pct": 12.33,
+      "volume": 5192310,
+      "delivery_pct": 33.26,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "SGMART",
-      "cmp": 1025.25,
-      "ref_price": 911.05,
-      "change_pct": 12.53,
-      "volume": 359669,
-      "delivery_pct": 41.33,
+      "symbol": "IVALUE",
+      "cmp": 235.52,
+      "ref_price": 209.73,
+      "change_pct": 12.3,
+      "volume": 85058,
+      "delivery_pct": 46.17,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "SUNSHINE",
-      "cmp": 501.75,
-      "ref_price": 446.5,
-      "change_pct": 12.37,
-      "volume": 1162780,
-      "delivery_pct": 35.05,
+      "symbol": "SIGNATURE",
+      "cmp": 859.4,
+      "ref_price": 766.6,
+      "change_pct": 12.11,
+      "volume": 371635,
+      "delivery_pct": 18.52,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "GOKEX",
+      "cmp": 757.6,
+      "ref_price": 676.3,
+      "change_pct": 12.02,
+      "volume": 777605,
+      "delivery_pct": 40.59,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "AJMERA",
+      "cmp": 149.29,
+      "ref_price": 133.28,
+      "change_pct": 12.01,
+      "volume": 6570674,
+      "delivery_pct": 13.9,
       "period": "1-Week (5 Sessions)"
     }
   ],
   "weekly_losers": [
     {
       "symbol": "DCAL",
-      "cmp": 121.15,
-      "ref_price": 174.1,
-      "change_pct": -30.41,
-      "volume": 1782758,
-      "delivery_pct": 41.56,
+      "cmp": 115.57,
+      "ref_price": 172.92,
+      "change_pct": -33.17,
+      "volume": 802269,
+      "delivery_pct": 53.08,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -338,15 +338,6 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "V2RETAIL",
-      "cmp": 141.61,
-      "ref_price": 186.11,
-      "change_pct": -23.91,
-      "volume": 101067743,
-      "delivery_pct": 9.55,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
       "symbol": "PASHUPATI",
       "cmp": 108.43,
       "ref_price": 141.62,
@@ -356,12 +347,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "OAL",
-      "cmp": 493.75,
-      "ref_price": 628.05,
-      "change_pct": -21.38,
-      "volume": 62698,
-      "delivery_pct": 38.44,
+      "symbol": "SHRINGARMS",
+      "cmp": 236.25,
+      "ref_price": 307.85,
+      "change_pct": -23.26,
+      "volume": 2642076,
+      "delivery_pct": 34.92,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -374,39 +365,48 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "JSLL",
-      "cmp": 296.35,
-      "ref_price": 367.7,
-      "change_pct": -19.4,
-      "volume": 912470,
-      "delivery_pct": 47.95,
+      "symbol": "EBGNG",
+      "cmp": 470.35,
+      "ref_price": 577.2,
+      "change_pct": -18.51,
+      "volume": 1433816,
+      "delivery_pct": 48.15,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "ONIXSOLAR",
-      "cmp": 237.35,
-      "ref_price": 288.65,
-      "change_pct": -17.77,
-      "volume": 336698,
-      "delivery_pct": 62.95,
+      "symbol": "PRAVEG",
+      "cmp": 186.84,
+      "ref_price": 228.03,
+      "change_pct": -18.06,
+      "volume": 52667,
+      "delivery_pct": 74.3,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "STANLEY",
-      "cmp": 119.81,
-      "ref_price": 145.19,
-      "change_pct": -17.48,
-      "volume": 712586,
-      "delivery_pct": 56.34,
+      "symbol": "IZMO",
+      "cmp": 743.85,
+      "ref_price": 901.7,
+      "change_pct": -17.51,
+      "volume": 80358,
+      "delivery_pct": 42.1,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "KAYNES",
-      "cmp": 2882.0,
-      "ref_price": 3484.0,
-      "change_pct": -17.28,
-      "volume": 2317744,
-      "delivery_pct": 15.65,
+      "symbol": "OAL",
+      "cmp": 516.7,
+      "ref_price": 625.7,
+      "change_pct": -17.42,
+      "volume": 5266433,
+      "delivery_pct": 2.73,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "MOSILVER",
+      "cmp": 151.25,
+      "ref_price": 182.66,
+      "change_pct": -17.2,
+      "volume": 154664,
+      "delivery_pct": 48.38,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -419,12 +419,39 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "PRICOLLTD",
-      "cmp": 613.9,
-      "ref_price": 733.75,
-      "change_pct": -16.33,
-      "volume": 1297789,
-      "delivery_pct": 43.83,
+      "symbol": "INNOVACAP",
+      "cmp": 977.8,
+      "ref_price": 1172.4,
+      "change_pct": -16.6,
+      "volume": 61619,
+      "delivery_pct": 46.47,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "SILVERBND",
+      "cmp": 155.56,
+      "ref_price": 186.12,
+      "change_pct": -16.42,
+      "volume": 90641,
+      "delivery_pct": 53.04,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "BETA",
+      "cmp": 1655.4,
+      "ref_price": 1977.9,
+      "change_pct": -16.31,
+      "volume": 126295,
+      "delivery_pct": 49.97,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "MSTCLTD",
+      "cmp": 656.55,
+      "ref_price": 783.35,
+      "change_pct": -16.19,
+      "volume": 254032,
+      "delivery_pct": 55.53,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -437,6 +464,15 @@
       "period": "1-Week (5 Sessions)"
     },
     {
+      "symbol": "MENONBE",
+      "cmp": 307.15,
+      "ref_price": 366.3,
+      "change_pct": -16.15,
+      "volume": 309766,
+      "delivery_pct": 43.16,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
       "symbol": "AAATECH",
       "cmp": 103.57,
       "ref_price": 123.24,
@@ -446,12 +482,12 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "KPEL",
-      "cmp": 172.39,
-      "ref_price": 204.69,
-      "change_pct": -15.78,
-      "volume": 540961,
-      "delivery_pct": 35.16,
+      "symbol": "CHOICEGOLD",
+      "cmp": 122.85,
+      "ref_price": 145.74,
+      "change_pct": -15.71,
+      "volume": 66008,
+      "delivery_pct": 58.2,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -464,12 +500,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
+      "symbol": "JAYKAY",
+      "cmp": 177.6,
+      "ref_price": 209.7,
+      "change_pct": -15.31,
+      "volume": 116366,
+      "delivery_pct": 52.21,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
       "symbol": "AVALON",
-      "cmp": 1786.4,
-      "ref_price": 2108.5,
-      "change_pct": -15.28,
-      "volume": 414286,
-      "delivery_pct": 50.78,
+      "cmp": 1728.3,
+      "ref_price": 2038.3,
+      "change_pct": -15.21,
+      "volume": 289178,
+      "delivery_pct": 42.23,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -482,12 +527,48 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "TMPV",
-      "cmp": 252.55,
-      "ref_price": 297.25,
+      "symbol": "KAYNES",
+      "cmp": 2910.0,
+      "ref_price": 3430.0,
+      "change_pct": -15.16,
+      "volume": 716407,
+      "delivery_pct": 32.35,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "INDIAGLYCO",
+      "cmp": 264.35,
+      "ref_price": 311.3,
+      "change_pct": -15.08,
+      "volume": 245650,
+      "delivery_pct": 45.71,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "CAPLIPOINT",
+      "cmp": 2029.1,
+      "ref_price": 2388.7,
+      "change_pct": -15.05,
+      "volume": 165087,
+      "delivery_pct": 42.7,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "PRICOLLTD",
+      "cmp": 635.35,
+      "ref_price": 747.85,
       "change_pct": -15.04,
-      "volume": 13932893,
-      "delivery_pct": 46.33,
+      "volume": 782989,
+      "delivery_pct": 42.92,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "E2E",
+      "cmp": 476.25,
+      "ref_price": 560.05,
+      "change_pct": -14.96,
+      "volume": 2032425,
+      "delivery_pct": 52.45,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -527,111 +608,30 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "LINCOLN",
-      "cmp": 499.3,
-      "ref_price": 582.05,
-      "change_pct": -14.22,
-      "volume": 71966,
-      "delivery_pct": 35.24,
+      "symbol": "SKYGOLD",
+      "cmp": 874.9,
+      "ref_price": 1022.1,
+      "change_pct": -14.4,
+      "volume": 1953030,
+      "delivery_pct": 46.92,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "CHEMCON",
-      "cmp": 193.24,
-      "ref_price": 224.72,
-      "change_pct": -14.01,
-      "volume": 68023,
-      "delivery_pct": 61.6,
+      "symbol": "SHIPROCKET",
+      "cmp": 109.78,
+      "ref_price": 128.2,
+      "change_pct": -14.37,
+      "volume": 6037034,
+      "delivery_pct": 44.78,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "APEX",
-      "cmp": 295.3,
-      "ref_price": 343.0,
-      "change_pct": -13.91,
-      "volume": 97260,
-      "delivery_pct": 38.35,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "TRANSWORLD",
-      "cmp": 204.58,
-      "ref_price": 237.39,
-      "change_pct": -13.82,
-      "volume": 110087,
-      "delivery_pct": 61.52,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "ACCELYA",
-      "cmp": 943.75,
-      "ref_price": 1092.8,
-      "change_pct": -13.64,
-      "volume": 70911,
-      "delivery_pct": 85.68,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "GALAXYSURF",
-      "cmp": 2163.1,
-      "ref_price": 2504.8,
-      "change_pct": -13.64,
-      "volume": 88623,
-      "delivery_pct": 50.3,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "SHRINGARMS",
-      "cmp": 269.45,
-      "ref_price": 311.8,
-      "change_pct": -13.58,
-      "volume": 446687,
-      "delivery_pct": 49.26,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "KENNAMET",
-      "cmp": 3876.8,
-      "ref_price": 4482.8,
-      "change_pct": -13.52,
-      "volume": 67045,
-      "delivery_pct": 58.83,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "SPMLINFRA",
-      "cmp": 138.83,
-      "ref_price": 160.18,
-      "change_pct": -13.33,
-      "volume": 217384,
-      "delivery_pct": 55.11,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "GUFICBIO",
-      "cmp": 422.25,
-      "ref_price": 487.0,
-      "change_pct": -13.3,
-      "volume": 151573,
-      "delivery_pct": 52.66,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "DPABHUSHAN",
-      "cmp": 1900.5,
-      "ref_price": 2186.0,
-      "change_pct": -13.06,
-      "volume": 57070,
-      "delivery_pct": 40.67,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "GODAVARIB",
-      "cmp": 199.45,
-      "ref_price": 229.27,
-      "change_pct": -13.01,
-      "volume": 84999,
-      "delivery_pct": 62.4,
+      "symbol": "SHILPAMED",
+      "cmp": 849.15,
+      "ref_price": 991.5,
+      "change_pct": -14.36,
+      "volume": 1538885,
+      "delivery_pct": 46.06,
       "period": "1-Week (5 Sessions)"
     }
   ],
@@ -658,33 +658,13 @@
     },
     {
       "symbol": "HINDOILEXP",
-      "cmp": 227.84,
+      "cmp": 216.82,
       "ref_price": 155.64,
-      "change_pct": 46.39,
-      "volume": 10112861,
-      "delivery_pct": 18.04,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "STYLEBAAZA",
-      "cmp": 539.45,
-      "ref_price": 376.25,
-      "change_pct": 43.38,
-      "volume": 2939028,
-      "delivery_pct": 58.98,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "FAZE3Q",
-      "cmp": 612.05,
-      "ref_price": 431.85,
-      "change_pct": 41.73,
-      "volume": 3552713,
-      "delivery_pct": 8.36,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "change_pct": 39.31,
+      "volume": 1046899,
+      "delivery_pct": 24.79,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "ARYAMAN",
@@ -707,6 +687,16 @@
       "period": "5-Session Month"
     },
     {
+      "symbol": "FAZE3Q",
+      "cmp": 587.65,
+      "ref_price": 431.85,
+      "change_pct": 36.08,
+      "volume": 164812,
+      "delivery_pct": 29.0,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
       "symbol": "UDAYJEW",
       "cmp": 228.74,
       "ref_price": 168.73,
@@ -717,14 +707,24 @@
       "period": "5-Session Month"
     },
     {
-      "symbol": "SYMBIOTEC",
-      "cmp": 1621.3,
-      "ref_price": 1233.2,
-      "change_pct": 31.47,
-      "volume": 311557,
-      "delivery_pct": 35.07,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "KMCSHIL",
+      "cmp": 203.78,
+      "ref_price": 150.46,
+      "change_pct": 35.44,
+      "volume": 1395170,
+      "delivery_pct": 16.61,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "STYLEBAAZA",
+      "cmp": 500.15,
+      "ref_price": 376.25,
+      "change_pct": 32.93,
+      "volume": 2222208,
+      "delivery_pct": 56.61,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "ONWARDTEC",
@@ -733,16 +733,6 @@
       "change_pct": 31.28,
       "volume": 280123,
       "delivery_pct": 42.12,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "KMCSHIL",
-      "cmp": 197.42,
-      "ref_price": 150.46,
-      "change_pct": 31.21,
-      "volume": 3284540,
-      "delivery_pct": 10.44,
       "days_tracked": 10,
       "period": "10-Session Month"
     },
@@ -757,24 +747,34 @@
       "period": "10-Session Month"
     },
     {
-      "symbol": "GREAVESCOT",
-      "cmp": 266.63,
-      "ref_price": 205.87,
-      "change_pct": 29.51,
-      "volume": 36316006,
-      "delivery_pct": 9.29,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "SUNSHINE",
+      "cmp": 512.4,
+      "ref_price": 392.4,
+      "change_pct": 30.58,
+      "volume": 298588,
+      "delivery_pct": 53.49,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "DEEPAKFERT",
-      "cmp": 1480.5,
-      "ref_price": 1146.4,
-      "change_pct": 29.14,
-      "volume": 1187154,
-      "delivery_pct": 22.92,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "GREAVESCOT",
+      "cmp": 268.31,
+      "ref_price": 205.87,
+      "change_pct": 30.33,
+      "volume": 16881233,
+      "delivery_pct": 15.02,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "SYMBIOTEC",
+      "cmp": 1598.6,
+      "ref_price": 1233.2,
+      "change_pct": 29.63,
+      "volume": 294589,
+      "delivery_pct": 37.76,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "MIDWESTLTD",
@@ -787,34 +787,24 @@
       "period": "10-Session Month"
     },
     {
-      "symbol": "AMANTA",
-      "cmp": 237.38,
-      "ref_price": 184.91,
-      "change_pct": 28.38,
-      "volume": 266972,
-      "delivery_pct": 25.95,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "SEIL",
+      "cmp": 208.05,
+      "ref_price": 161.48,
+      "change_pct": 28.84,
+      "volume": 1214852,
+      "delivery_pct": 54.7,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "BFINVEST",
-      "cmp": 492.15,
-      "ref_price": 383.95,
-      "change_pct": 28.18,
-      "volume": 225995,
-      "delivery_pct": 39.56,
-      "days_tracked": 5,
-      "period": "5-Session Month"
-    },
-    {
-      "symbol": "SUNSHINE",
-      "cmp": 501.75,
-      "ref_price": 392.4,
-      "change_pct": 27.87,
-      "volume": 1162780,
-      "delivery_pct": 35.05,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "NEOGEN",
+      "cmp": 2920.2,
+      "ref_price": 2273.6,
+      "change_pct": 28.44,
+      "volume": 210689,
+      "delivery_pct": 30.92,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "KABRAEXTRU",
@@ -837,6 +827,16 @@
       "period": "7-Session Month"
     },
     {
+      "symbol": "PNB",
+      "cmp": 155.33,
+      "ref_price": 122.42,
+      "change_pct": 26.88,
+      "volume": 38879715,
+      "delivery_pct": 32.94,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
       "symbol": "BPLPHARMA",
       "cmp": 2440.0,
       "ref_price": 1926.0,
@@ -847,14 +847,24 @@
       "period": "4-Session Month"
     },
     {
-      "symbol": "MMFL",
-      "cmp": 659.05,
-      "ref_price": 522.65,
-      "change_pct": 26.1,
-      "volume": 98107,
-      "delivery_pct": 55.51,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "JLHL",
+      "cmp": 317.4,
+      "ref_price": 252.95,
+      "change_pct": 25.48,
+      "volume": 18711481,
+      "delivery_pct": 3.51,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "DEEPAKFERT",
+      "cmp": 1437.2,
+      "ref_price": 1146.4,
+      "change_pct": 25.37,
+      "volume": 276080,
+      "delivery_pct": 33.86,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "AFFORDABLE",
@@ -867,16 +877,6 @@
       "period": "5-Session Month"
     },
     {
-      "symbol": "KDDL",
-      "cmp": 4876.8,
-      "ref_price": 3913.7,
-      "change_pct": 24.61,
-      "volume": 928825,
-      "delivery_pct": 11.9,
-      "days_tracked": 3,
-      "period": "3-Session Month"
-    },
-    {
       "symbol": "RAMKY",
       "cmp": 395.55,
       "ref_price": 317.8,
@@ -885,6 +885,46 @@
       "delivery_pct": 47.88,
       "days_tracked": 10,
       "period": "10-Session Month"
+    },
+    {
+      "symbol": "IVALUE",
+      "cmp": 235.52,
+      "ref_price": 189.37,
+      "change_pct": 24.37,
+      "volume": 85058,
+      "delivery_pct": 46.17,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "RUNWALENTR",
+      "cmp": 253.59,
+      "ref_price": 204.0,
+      "change_pct": 24.31,
+      "volume": 184678,
+      "delivery_pct": 66.14,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "IREDA",
+      "cmp": 131.7,
+      "ref_price": 106.0,
+      "change_pct": 24.25,
+      "volume": 39090577,
+      "delivery_pct": 17.83,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "MMFL",
+      "cmp": 648.05,
+      "ref_price": 522.65,
+      "change_pct": 23.99,
+      "volume": 149396,
+      "delivery_pct": 56.65,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "BBL",
@@ -897,106 +937,76 @@
       "period": "9-Session Month"
     },
     {
-      "symbol": "IVALUE",
-      "cmp": 233.61,
-      "ref_price": 189.37,
-      "change_pct": 23.36,
-      "volume": 258125,
-      "delivery_pct": 47.52,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "J&KBANK",
+      "cmp": 149.73,
+      "ref_price": 121.23,
+      "change_pct": 23.51,
+      "volume": 3340937,
+      "delivery_pct": 46.31,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "KALYANKJIL",
-      "cmp": 650.0,
-      "ref_price": 529.05,
-      "change_pct": 22.86,
-      "volume": 13020275,
-      "delivery_pct": 24.54,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "ALICON",
+      "cmp": 1075.75,
+      "ref_price": 871.95,
+      "change_pct": 23.37,
+      "volume": 882638,
+      "delivery_pct": 11.45,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "SKYWAYS",
-      "cmp": 128.94,
-      "ref_price": 105.04,
-      "change_pct": 22.75,
-      "volume": 4203012,
-      "delivery_pct": 16.84,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "DCBBANK",
+      "cmp": 233.53,
+      "ref_price": 189.55,
+      "change_pct": 23.2,
+      "volume": 1507176,
+      "delivery_pct": 37.12,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "IXIGO",
-      "cmp": 177.03,
-      "ref_price": 144.65,
-      "change_pct": 22.39,
-      "volume": 1771255,
-      "delivery_pct": 37.65,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "BANKINDIA",
+      "cmp": 164.7,
+      "ref_price": 133.9,
+      "change_pct": 23.0,
+      "volume": 12321840,
+      "delivery_pct": 41.38,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "MACPOWER",
-      "cmp": 2383.7,
-      "ref_price": 1949.3,
-      "change_pct": 22.28,
-      "volume": 53448,
-      "delivery_pct": 47.74,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "NEOGEN",
-      "cmp": 2780.2,
-      "ref_price": 2273.6,
-      "change_pct": 22.28,
-      "volume": 744793,
-      "delivery_pct": 91.64,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "CORONA",
-      "cmp": 2539.4,
-      "ref_price": 2078.4,
-      "change_pct": 22.18,
-      "volume": 166759,
-      "delivery_pct": 22.72,
-      "days_tracked": 7,
-      "period": "7-Session Month"
-    },
-    {
-      "symbol": "PNB",
-      "cmp": 149.57,
-      "ref_price": 122.42,
-      "change_pct": 22.18,
-      "volume": 35794087,
-      "delivery_pct": 27.11,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "JARO",
-      "cmp": 397.8,
-      "ref_price": 326.0,
-      "change_pct": 22.02,
-      "volume": 341836,
-      "delivery_pct": 6.86,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "TTKHLTCARE",
+      "cmp": 1110.15,
+      "ref_price": 905.3,
+      "change_pct": 22.63,
+      "volume": 340677,
+      "delivery_pct": 22.8,
+      "days_tracked": 4,
+      "period": "4-Session Month"
     }
   ],
   "monthly_losers": [
     {
       "symbol": "KMEW",
-      "cmp": 732.7,
+      "cmp": 716.7,
       "ref_price": 3329.9,
-      "change_pct": -78.0,
-      "volume": 592331,
-      "delivery_pct": 42.86,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "change_pct": -78.48,
+      "volume": 448304,
+      "delivery_pct": 41.03,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "EBGNG",
+      "cmp": 470.35,
+      "ref_price": 728.9,
+      "change_pct": -35.47,
+      "volume": 1433816,
+      "delivery_pct": 48.15,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "UNIDT",
@@ -1029,16 +1039,6 @@
       "period": "10-Session Month"
     },
     {
-      "symbol": "EBGNG",
-      "cmp": 517.2,
-      "ref_price": 728.9,
-      "change_pct": -29.04,
-      "volume": 418784,
-      "delivery_pct": 43.33,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
       "symbol": "AMAL",
       "cmp": 655.25,
       "ref_price": 917.9,
@@ -1050,43 +1050,33 @@
     },
     {
       "symbol": "SUPRIYA",
-      "cmp": 614.8,
+      "cmp": 620.15,
       "ref_price": 859.9,
-      "change_pct": -28.5,
-      "volume": 193135,
-      "delivery_pct": 51.18,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "ONIXSOLAR",
-      "cmp": 237.35,
-      "ref_price": 328.0,
-      "change_pct": -27.64,
-      "volume": 336698,
-      "delivery_pct": 62.95,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "RPTECH",
-      "cmp": 626.25,
-      "ref_price": 843.45,
-      "change_pct": -25.75,
-      "volume": 413116,
-      "delivery_pct": 50.93,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "change_pct": -27.88,
+      "volume": 132451,
+      "delivery_pct": 53.68,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "PIIND",
-      "cmp": 1624.0,
+      "cmp": 1597.4,
       "ref_price": 2187.0,
-      "change_pct": -25.74,
-      "volume": 900369,
-      "delivery_pct": 34.34,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "change_pct": -26.96,
+      "volume": 505448,
+      "delivery_pct": 41.0,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "MOSILVER",
+      "cmp": 151.25,
+      "ref_price": 204.43,
+      "change_pct": -26.01,
+      "volume": 154664,
+      "delivery_pct": 48.38,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "YASHO",
@@ -1099,6 +1089,26 @@
       "period": "7-Session Month"
     },
     {
+      "symbol": "WSTCSTPAPR",
+      "cmp": 617.7,
+      "ref_price": 829.7,
+      "change_pct": -25.55,
+      "volume": 338507,
+      "delivery_pct": 43.1,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "DCAL",
+      "cmp": 115.57,
+      "ref_price": 154.81,
+      "change_pct": -25.35,
+      "volume": 802269,
+      "delivery_pct": 53.08,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
       "symbol": "BNAGROCHEM",
       "cmp": 162.66,
       "ref_price": 217.6,
@@ -1109,6 +1119,26 @@
       "period": "7-Session Month"
     },
     {
+      "symbol": "UTLSOLAR",
+      "cmp": 298.6,
+      "ref_price": 393.65,
+      "change_pct": -24.15,
+      "volume": 240247,
+      "delivery_pct": 52.05,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "ONIXSOLAR",
+      "cmp": 250.2,
+      "ref_price": 328.0,
+      "change_pct": -23.72,
+      "volume": 165521,
+      "delivery_pct": 63.95,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
       "symbol": "INDOTECH",
       "cmp": 2573.3,
       "ref_price": 3347.6,
@@ -1117,6 +1147,16 @@
       "delivery_pct": 86.26,
       "days_tracked": 4,
       "period": "4-Session Month"
+    },
+    {
+      "symbol": "RPTECH",
+      "cmp": 650.2,
+      "ref_price": 843.45,
+      "change_pct": -22.91,
+      "volume": 398804,
+      "delivery_pct": 44.56,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "3BBLACKBIO",
@@ -1139,14 +1179,34 @@
       "period": "10-Session Month"
     },
     {
-      "symbol": "DCAL",
-      "cmp": 121.15,
-      "ref_price": 154.81,
-      "change_pct": -21.74,
-      "volume": 1782758,
-      "delivery_pct": 41.56,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "VALIANTORG",
+      "cmp": 323.15,
+      "ref_price": 418.2,
+      "change_pct": -22.73,
+      "volume": 72627,
+      "delivery_pct": 51.64,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "ELLEN",
+      "cmp": 270.75,
+      "ref_price": 347.55,
+      "change_pct": -22.1,
+      "volume": 294210,
+      "delivery_pct": 45.62,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "PRAVEG",
+      "cmp": 186.84,
+      "ref_price": 238.1,
+      "change_pct": -21.53,
+      "volume": 52667,
+      "delivery_pct": 74.3,
+      "days_tracked": 8,
+      "period": "8-Session Month"
     },
     {
       "symbol": "CENTENKA",
@@ -1159,54 +1219,24 @@
       "period": "5-Session Month"
     },
     {
-      "symbol": "OAL",
-      "cmp": 493.75,
-      "ref_price": 624.4,
-      "change_pct": -20.92,
-      "volume": 62698,
-      "delivery_pct": 38.44,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "JNKINDIA",
+      "cmp": 330.6,
+      "ref_price": 413.35,
+      "change_pct": -20.02,
+      "volume": 157995,
+      "delivery_pct": 54.54,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
-      "symbol": "MOSILVER",
-      "cmp": 162.17,
-      "ref_price": 204.43,
-      "change_pct": -20.67,
-      "volume": 58413,
-      "delivery_pct": 38.29,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "UTLSOLAR",
-      "cmp": 312.8,
-      "ref_price": 393.65,
-      "change_pct": -20.54,
-      "volume": 278706,
-      "delivery_pct": 48.88,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "WSTCSTPAPR",
-      "cmp": 663.1,
-      "ref_price": 829.7,
-      "change_pct": -20.08,
-      "volume": 248832,
-      "delivery_pct": 37.31,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "ELLEN",
-      "cmp": 278.6,
-      "ref_price": 347.55,
-      "change_pct": -19.84,
-      "volume": 196868,
-      "delivery_pct": 49.13,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "SHRINGARMS",
+      "cmp": 236.25,
+      "ref_price": 291.3,
+      "change_pct": -18.9,
+      "volume": 2642076,
+      "delivery_pct": 34.92,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "DPWIRES",
@@ -1229,16 +1259,6 @@
       "period": "7-Session Month"
     },
     {
-      "symbol": "THERMAX",
-      "cmp": 2681.7,
-      "ref_price": 3282.3,
-      "change_pct": -18.3,
-      "volume": 240013,
-      "delivery_pct": 55.04,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
       "symbol": "PAUSHAKLTD",
       "cmp": 623.9,
       "ref_price": 763.25,
@@ -1247,6 +1267,36 @@
       "delivery_pct": 29.94,
       "days_tracked": 9,
       "period": "9-Session Month"
+    },
+    {
+      "symbol": "VENKEYS",
+      "cmp": 1395.4,
+      "ref_price": 1702.0,
+      "change_pct": -18.01,
+      "volume": 102067,
+      "delivery_pct": 64.78,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "SBISILVER",
+      "cmp": 149.16,
+      "ref_price": 181.27,
+      "change_pct": -17.71,
+      "volume": 5167374,
+      "delivery_pct": 28.81,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "HDFCSILVER",
+      "cmp": 145.35,
+      "ref_price": 176.46,
+      "change_pct": -17.63,
+      "volume": 18933177,
+      "delivery_pct": 36.12,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "HERANBA",
@@ -1259,14 +1309,24 @@
       "period": "6-Session Month"
     },
     {
-      "symbol": "VALIANTORG",
-      "cmp": 345.7,
-      "ref_price": 418.2,
-      "change_pct": -17.34,
-      "volume": 58804,
-      "delivery_pct": 49.49,
-      "days_tracked": 10,
-      "period": "10-Session Month"
+      "symbol": "PFOCUS",
+      "cmp": 252.7,
+      "ref_price": 305.55,
+      "change_pct": -17.3,
+      "volume": 4938322,
+      "delivery_pct": 22.92,
+      "days_tracked": 11,
+      "period": "11-Session Month"
+    },
+    {
+      "symbol": "OAL",
+      "cmp": 516.7,
+      "ref_price": 624.4,
+      "change_pct": -17.25,
+      "volume": 5266433,
+      "delivery_pct": 2.73,
+      "days_tracked": 11,
+      "period": "11-Session Month"
     },
     {
       "symbol": "DMCC",
@@ -1275,66 +1335,6 @@
       "change_pct": -17.24,
       "volume": 89370,
       "delivery_pct": 45.35,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "KSOLVES",
-      "cmp": 199.69,
-      "ref_price": 241.14,
-      "change_pct": -17.19,
-      "volume": 54346,
-      "delivery_pct": 65.85,
-      "days_tracked": 6,
-      "period": "6-Session Month"
-    },
-    {
-      "symbol": "DPABHUSHAN",
-      "cmp": 1900.5,
-      "ref_price": 2293.5,
-      "change_pct": -17.14,
-      "volume": 57070,
-      "delivery_pct": 40.67,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "BELDING",
-      "cmp": 777.85,
-      "ref_price": 937.65,
-      "change_pct": -17.04,
-      "volume": 68501,
-      "delivery_pct": 98.35,
-      "days_tracked": 3,
-      "period": "3-Session Month"
-    },
-    {
-      "symbol": "INDIANHUME",
-      "cmp": 295.55,
-      "ref_price": 355.45,
-      "change_pct": -16.85,
-      "volume": 65177,
-      "delivery_pct": 65.53,
-      "days_tracked": 10,
-      "period": "10-Session Month"
-    },
-    {
-      "symbol": "RPGLIFE",
-      "cmp": 2575.7,
-      "ref_price": 3089.2,
-      "change_pct": -16.62,
-      "volume": 138783,
-      "delivery_pct": 23.57,
-      "days_tracked": 3,
-      "period": "3-Session Month"
-    },
-    {
-      "symbol": "CEWATER",
-      "cmp": 218.11,
-      "ref_price": 260.95,
-      "change_pct": -16.42,
-      "volume": 92433,
-      "delivery_pct": 58.34,
       "days_tracked": 10,
       "period": "10-Session Month"
     }
@@ -1350,30 +1350,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "STYLEBAAZA",
-      "cmp": 539.45,
-      "ref_price": 443.5,
-      "change_pct": 21.63,
-      "volume": 2939028,
-      "delivery_pct": 58.98,
+      "symbol": "SHREECEM",
+      "cmp": 25475.0,
+      "ref_price": 21900.0,
+      "change_pct": 16.32,
+      "volume": 87715,
+      "delivery_pct": 74.88,
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "ALICON",
-      "cmp": 997.0,
-      "ref_price": 854.3,
-      "change_pct": 16.7,
-      "volume": 94837,
-      "delivery_pct": 61.38,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "PSPPROJECT",
-      "cmp": 798.85,
-      "ref_price": 691.55,
-      "change_pct": 15.52,
-      "volume": 184335,
-      "delivery_pct": 50.49,
+      "symbol": "SUNSHINE",
+      "cmp": 512.4,
+      "ref_price": 440.6,
+      "change_pct": 16.3,
+      "volume": 298588,
+      "delivery_pct": 53.49,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1386,12 +1377,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "TIMKEN",
-      "cmp": 3124.6,
-      "ref_price": 2730.1,
-      "change_pct": 14.45,
-      "volume": 58123,
-      "delivery_pct": 67.92,
+      "symbol": "WINDMACHIN",
+      "cmp": 321.2,
+      "ref_price": 280.55,
+      "change_pct": 14.49,
+      "volume": 184570,
+      "delivery_pct": 63.88,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "DOMS",
+      "cmp": 2151.9,
+      "ref_price": 1894.8,
+      "change_pct": 13.57,
+      "volume": 157827,
+      "delivery_pct": 66.27,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1404,12 +1404,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "GREENLAM",
-      "cmp": 228.03,
-      "ref_price": 204.61,
-      "change_pct": 11.45,
-      "volume": 3719716,
-      "delivery_pct": 64.89,
+      "symbol": "APTUS",
+      "cmp": 195.6,
+      "ref_price": 174.98,
+      "change_pct": 11.78,
+      "volume": 3621526,
+      "delivery_pct": 55.64,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "TIMKEN",
+      "cmp": 3100.8,
+      "ref_price": 2775.5,
+      "change_pct": 11.72,
+      "volume": 89039,
+      "delivery_pct": 81.87,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1440,21 +1449,21 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "NEXT50",
-      "cmp": 753.38,
-      "ref_price": 679.13,
-      "change_pct": 10.93,
-      "volume": 78299,
-      "delivery_pct": 85.4,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
       "symbol": "XPROINDIA",
       "cmp": 1262.0,
       "ref_price": 1142.2,
       "change_pct": 10.49,
       "volume": 100991,
       "delivery_pct": 55.12,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "MMP",
+      "cmp": 460.4,
+      "ref_price": 416.85,
+      "change_pct": 10.45,
+      "volume": 79382,
+      "delivery_pct": 53.58,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1467,6 +1476,24 @@
       "period": "1-Week (5 Sessions)"
     },
     {
+      "symbol": "SEIL",
+      "cmp": 208.05,
+      "ref_price": 189.54,
+      "change_pct": 9.77,
+      "volume": 1214852,
+      "delivery_pct": 54.7,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "BORANA",
+      "cmp": 259.47,
+      "ref_price": 237.27,
+      "change_pct": 9.36,
+      "volume": 93915,
+      "delivery_pct": 53.36,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
       "symbol": "SESHAPAPER",
       "cmp": 221.47,
       "ref_price": 202.73,
@@ -1476,12 +1503,39 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "MARATHON",
-      "cmp": 435.95,
-      "ref_price": 399.9,
-      "change_pct": 9.01,
-      "volume": 84708,
-      "delivery_pct": 70.73,
+      "symbol": "RUNWALENTR",
+      "cmp": 253.59,
+      "ref_price": 232.25,
+      "change_pct": 9.19,
+      "volume": 184678,
+      "delivery_pct": 66.14,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "HCG",
+      "cmp": 624.95,
+      "ref_price": 572.95,
+      "change_pct": 9.08,
+      "volume": 81314,
+      "delivery_pct": 51.91,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "KIMS",
+      "cmp": 795.6,
+      "ref_price": 729.65,
+      "change_pct": 9.04,
+      "volume": 1043606,
+      "delivery_pct": 56.55,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "MARUTI",
+      "cmp": 14011.0,
+      "ref_price": 12854.0,
+      "change_pct": 9.0,
+      "volume": 1648162,
+      "delivery_pct": 52.28,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1512,12 +1566,39 @@
       "period": "1-Week (5 Sessions)"
     },
     {
-      "symbol": "MAXESTATES",
-      "cmp": 574.9,
-      "ref_price": 529.5,
-      "change_pct": 8.57,
-      "volume": 122886,
-      "delivery_pct": 51.49,
+      "symbol": "IGL",
+      "cmp": 154.79,
+      "ref_price": 142.33,
+      "change_pct": 8.75,
+      "volume": 1896988,
+      "delivery_pct": 54.08,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "NEXT50",
+      "cmp": 755.04,
+      "ref_price": 694.87,
+      "change_pct": 8.66,
+      "volume": 59622,
+      "delivery_pct": 70.0,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "AXISBANK",
+      "cmp": 1446.0,
+      "ref_price": 1331.0,
+      "change_pct": 8.64,
+      "volume": 21477017,
+      "delivery_pct": 69.85,
+      "period": "1-Week (5 Sessions)"
+    },
+    {
+      "symbol": "ORCHPHARMA",
+      "cmp": 960.4,
+      "ref_price": 884.4,
+      "change_pct": 8.59,
+      "volume": 66764,
+      "delivery_pct": 50.52,
       "period": "1-Week (5 Sessions)"
     },
     {
@@ -1527,87 +1608,6 @@
       "change_pct": 8.43,
       "volume": 136715,
       "delivery_pct": 88.13,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "AGI",
-      "cmp": 698.25,
-      "ref_price": 645.55,
-      "change_pct": 8.16,
-      "volume": 66743,
-      "delivery_pct": 59.48,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "DOMS",
-      "cmp": 2024.1,
-      "ref_price": 1874.2,
-      "change_pct": 8.0,
-      "volume": 50177,
-      "delivery_pct": 84.62,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "DOLLAR",
-      "cmp": 257.71,
-      "ref_price": 238.9,
-      "change_pct": 7.87,
-      "volume": 64843,
-      "delivery_pct": 65.29,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "BORANA",
-      "cmp": 247.96,
-      "ref_price": 230.37,
-      "change_pct": 7.64,
-      "volume": 50498,
-      "delivery_pct": 65.44,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "VETO",
-      "cmp": 138.14,
-      "ref_price": 128.35,
-      "change_pct": 7.63,
-      "volume": 79860,
-      "delivery_pct": 62.05,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "THOMASCOTT",
-      "cmp": 288.15,
-      "ref_price": 267.85,
-      "change_pct": 7.58,
-      "volume": 59351,
-      "delivery_pct": 53.95,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "PRABHA",
-      "cmp": 199.62,
-      "ref_price": 185.61,
-      "change_pct": 7.55,
-      "volume": 63940,
-      "delivery_pct": 73.85,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "SANATHAN",
-      "cmp": 590.65,
-      "ref_price": 549.45,
-      "change_pct": 7.5,
-      "volume": 80960,
-      "delivery_pct": 50.55,
-      "period": "1-Week (5 Sessions)"
-    },
-    {
-      "symbol": "RUNWALENTR",
-      "cmp": 232.3,
-      "ref_price": 216.42,
-      "change_pct": 7.34,
-      "volume": 94709,
-      "delivery_pct": 54.71,
       "period": "1-Week (5 Sessions)"
     }
   ]
