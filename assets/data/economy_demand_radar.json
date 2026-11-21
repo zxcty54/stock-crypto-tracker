@@ -1,14 +1,14 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-21 17:25:48 IST",
+  "last_updated": "2026-11-21 17:28:48 IST",
   "economy_headline": {
     "core_infra_growth_pct": 10.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
     "verdict": "BROAD-BASED PHYSICAL EXPANSION",
-    "momentum_score": 88,
+    "momentum_score": 89,
     "momentum_label": "HIGH INDUSTRIAL PULSE",
     "headline_summary": "India Ground Freight & Core Infra Expand at +10.9% YoY Pace"
   },
@@ -211,7 +211,7 @@
           "thesis": "3PL supply chain logistics and integrated cargo movement peer"
         }
       ],
-      "macro_correlation_note": "Diesel consumption +5.6% YoY and FASTag toll collections up +8.5% YoY (₹5,840 Cr) signal robust heavy commercial vehicle movement across domestic supply chains."
+      "macro_correlation_note": "Diesel consumption up +5.6% YoY; NETC FASTag toll collections surge +8.5% YoY (₹5,840 Cr) indicating robust highway freight velocity."
     },
     {
       "sector": "Power Generation & Capital Goods",
@@ -254,7 +254,7 @@
           "thesis": "Industrial HT/LT power cables and transmission equipment peer"
         }
       ],
-      "macro_correlation_note": "Electricity surges +11.4% YoY backed by a +10.7% YoY spike in coal dispatch, indicating surging base-load industrial demand and manufacturing activity."
+      "macro_correlation_note": "Electricity surges +11.4% YoY backed by +10.7% coal dispatch growth, driving heavy industrial and manufacturing load demand."
     },
     {
       "sector": "Infrastructure & Cement Construction",
@@ -297,7 +297,7 @@
           "thesis": "National highway EPC and road construction contractor peer"
         }
       ],
-      "macro_correlation_note": "Bitumen road capex jumps +17.2% YoY alongside cement output growth of +9.8% YoY, confirming aggressive federal highway execution and structural construction momentum."
+      "macro_correlation_note": "Cement production rises +9.8% YoY alongside a massive +17.2% jump in bitumen road capex, validating aggressive highway construction run-rates."
     },
     {
       "sector": "Port Logistics & Maritime Trade",
@@ -340,7 +340,7 @@
           "thesis": "Global LCL container consolidation and multi-modal logistics peer"
         }
       ],
-      "macro_correlation_note": "Major ports cargo hits 566.4 MMT (+10.17% YoY) with container volumes expanding +8.51% YoY, pointing to strong external trade and domestic port-led evacuation."
+      "macro_correlation_note": "Major ports cargo climbs +10.17% YoY to 566.4 MMT; container traffic accelerates +8.51% YoY reflecting strong export-import throughput."
     },
     {
       "sector": "Steel & Metals Fabrication",
@@ -383,7 +383,7 @@
           "thesis": "Public sector long products and railway track infrastructure peer"
         }
       ],
-      "macro_correlation_note": "Steel production prints +4.9% YoY, underpinned by strong domestic structural consumption from ongoing urban infrastructure and real estate project pipelines."
+      "macro_correlation_note": "Finished steel output grows +4.9% YoY, underpinned by heavy domestic infrastructure offtake and sustained capital goods fabrication."
     },
     {
       "sector": "Fertilizers & Agro-Chemicals",
@@ -411,7 +411,7 @@
           "thesis": "Urea production and domestic crop protection peer"
         }
       ],
-      "macro_correlation_note": "Rabi season inventory buildup remains steady with robust rake dispatches supporting rural distribution channels and immediate nutrient replenishment cycles."
+      "macro_correlation_note": "Rabi season inventory replenishment steady with stable logistics dispatch matching baseline seasonal agricultural consumption."
     },
     {
       "sector": "Upstream Crude Oil & Gas",
@@ -444,7 +444,7 @@
           "thesis": "North-east domestic oil exploration and refining subsidiary peer"
         }
       ],
-      "macro_correlation_note": "Refinery throughput tracks steady domestic petroleum demand while mature offshore fields sustain optimal capacity utilization rates."
+      "macro_correlation_note": "Refinery throughput tracking domestic petroleum demand (+5.6% HSD); mature offshore fields maintaining steady base-load output."
     }
   ]
 }
