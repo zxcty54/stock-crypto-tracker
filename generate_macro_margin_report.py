@@ -63,6 +63,24 @@ def update_live_macro_benchmarks():
         else:
             print(f"  • Using calibrated baseline for {key}: {MACRO_BENCHMARKS[key]['val']}")
 
+    # Synchronize live commodity benchmarks with company_business_models.json
+    try:
+        cbm_path = "company_business_models.json"
+        if os.path.exists(cbm_path):
+            with open(cbm_path, "r", encoding="utf-8") as f:
+                cbm = json.load(f)
+            meta = cbm.setdefault("metadata", {})
+            snap = meta.setdefault("macro_snapshot", {})
+            for k, info in MACRO_BENCHMARKS.items():
+                if k in snap:
+                    snap[k]["current_val"] = info["val"]
+                    snap[k].setdefault("deltas", {})["1M"] = info.get("delta_1m", 0.0)
+            with open(cbm_path, "w", encoding="utf-8") as f:
+                json.dump(cbm, f, indent=2, ensure_ascii=False)
+            print("  ✓ Synchronized live benchmarks with company_business_models.json")
+    except Exception as e:
+        print(f"  ℹ️ company_business_models sync notice: {e}")
+
 SECTORS_DATA = [
     {
         "sector_id": "auto_tyres_rubber",
@@ -832,6 +850,7 @@ SECTORS_DATA = [
 ]
 
 def build_full_macro_report():
+    import re
     print("🚀 Generating Complete 17-Sector Calibrated Macro Margin Report...")
     update_live_macro_benchmarks()
 
@@ -842,14 +861,21 @@ def build_full_macro_report():
     for sec in SECTORS_DATA:
         bkey = sec["benchmark_key"]
         bench_info = MACRO_BENCHMARKS.get(bkey, {})
+        val = bench_info.get('val', 73.40)
+        unit = bench_info.get('unit', '')
+
+        # Dynamically inject live commodity price into thesis text
+        thesis = sec["sector_macro_thesis"]
+        thesis = re.sub(r"\(\$[\d,.]+(/[a-zA-Z]+)?\)", f"(${val} {unit})", thesis)
+        thesis = re.sub(r"\([\d,.]+\)", f"({val})", thesis)
 
         sec_copy = {
             "sector_id": sec["sector_id"],
             "sector_name": sec["sector_name"],
             "benchmark_commodity": sec["benchmark_commodity"],
-            "benchmark_price": f"{bench_info.get('val', 73.40)} {bench_info.get('unit', 'USD/bbl')}",
+            "benchmark_price": f"{val} {unit}",
             "benchmark_1m_delta_pct": bench_info.get("delta_1m", -2.40),
-            "sector_macro_thesis": sec["sector_macro_thesis"],
+            "sector_macro_thesis": thesis,
             "evaluated_stocks": sec["stocks"]
         }
         all_sectors.append(sec_copy)
@@ -896,6 +922,29 @@ def build_full_macro_report():
 
     print(f"📊 Total Sectors: {len(all_sectors)} | Total Stocks: {len(expanding_stocks_global) + len(contracting_stocks_global)}")
     print(f"🟢 Expanding: {len(expanding_stocks_global)} | 🔴 Contracting: {len(contracting_stocks_global)}")
+
+SECTOR_CALIBRATION = {sec["sector_id"]: sec for sec in SECTORS_DATA}
+
+def load_macro_environment():
+    out = {}
+    for k, v in MACRO_BENCHMARKS.items():
+        out[k] = {
+            "current_val": v["val"],
+            "unit": v["unit"],
+            "deltas": {"1M": v.get("delta_1m", 0.0)}
+        }
+    return out
+
+def evaluate_stock_calibrated(symbol, stock_cfg, bench_item, bench_delta):
+    return {
+        "symbol": symbol,
+        "company_name": stock_cfg.get("company_name", symbol),
+        "margin_trajectory": stock_cfg.get("margin_trajectory", "MARGIN_EXPANSION"),
+        "projected_opm_change_bps": stock_cfg.get("projected_opm_change_bps", 80),
+        "pricing_power": stock_cfg.get("pricing_power", "HIGH"),
+        "operational_transmission_rationale": stock_cfg.get("operational_transmission_rationale", ""),
+        "quarterly_ebitda_outlook": stock_cfg.get("quarterly_ebitda_outlook", "")
+    }
 
 if __name__ == "__main__":
     build_full_macro_report()

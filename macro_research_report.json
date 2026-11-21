@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21 06:04:32 IST",
+  "updated_at": "2026-11-21 15:43:00 IST",
   "macro_pulse_summary": {
     "total_sectors_analyzed": 17,
     "total_stocks_screened": 68,
@@ -13,7 +13,7 @@
       "benchmark_commodity": "Brent Crude Oil & Synthetic Rubber",
       "benchmark_price": "73.4 USD/bbl",
       "benchmark_1m_delta_pct": -2.4,
-      "sector_macro_thesis": "Rangebound Brent crude ($73.4/bbl) provides raw material gross margin cushion for domestic tyre manufacturers (~60% COGS in synthetic rubber, carbon black & natural rubber).",
+      "sector_macro_thesis": "Rangebound Brent crude ($73.4 USD/bbl) provides raw material gross margin cushion for domestic tyre manufacturers (~60% COGS in synthetic rubber, carbon black & natural rubber).",
       "evaluated_stocks": [
         {
           "symbol": "MRF",
@@ -59,7 +59,7 @@
       "benchmark_commodity": "Brent Crude Oil",
       "benchmark_price": "73.4 USD/bbl",
       "benchmark_1m_delta_pct": -2.4,
-      "sector_macro_thesis": "Softness in crude oil ($73.4/bbl) directly cools solvent and monomer pricing (~53% COGS), expanding gross margins across decorative paint producers.",
+      "sector_macro_thesis": "Softness in crude oil ($73.4 USD/bbl) directly cools solvent and monomer pricing (~53% COGS), expanding gross margins across decorative paint producers.",
       "evaluated_stocks": [
         {
           "symbol": "ASIANPAINT",
@@ -105,7 +105,7 @@
       "benchmark_commodity": "Natural Gas (Spot LNG / APM)",
       "benchmark_price": "2.85 USD/MMBtu",
       "benchmark_1m_delta_pct": 3.2,
-      "sector_macro_thesis": "Moderate domestic APM natural gas prices ($2.85/MMBtu) provide stable gas sourcing costs for city gas networks while sustaining upstream exploration cash flows.",
+      "sector_macro_thesis": "Moderate domestic APM natural gas prices ($2.85 USD/MMBtu) provide stable gas sourcing costs for city gas networks while sustaining upstream exploration cash flows.",
       "evaluated_stocks": [
         {
           "symbol": "IGL",
@@ -289,7 +289,7 @@
       "benchmark_commodity": "Refined Copper & Aluminium",
       "benchmark_price": "4.15 USD/lb",
       "benchmark_1m_delta_pct": -1.8,
-      "sector_macro_thesis": "Copper cathodes ($4.15/lb) comprise 68-72% of cable costs; disciplined domestic monthly price revision mechanisms allow swift cost pass-through.",
+      "sector_macro_thesis": "Copper cathodes ($4.15 USD/lb) comprise 68-72% of cable costs; disciplined domestic monthly price revision mechanisms allow swift cost pass-through.",
       "evaluated_stocks": [
         {
           "symbol": "POLYCAB",
@@ -381,7 +381,7 @@
       "benchmark_commodity": "Iron Ore & Coking Coal",
       "benchmark_price": "102.5 USD/dmt",
       "benchmark_1m_delta_pct": 2.1,
-      "sector_macro_thesis": "Domestic steel demand remains supported by national infrastructure execution; iron ore ($102.5/dmt) spreads balance Chinese export dumping dynamics.",
+      "sector_macro_thesis": "Domestic steel demand remains supported by national infrastructure execution; iron ore ($102.5 USD/dmt) spreads balance Chinese export dumping dynamics.",
       "evaluated_stocks": [
         {
           "symbol": "TATASTEEL",
@@ -427,7 +427,7 @@
       "benchmark_commodity": "Primary Aluminium Ingot",
       "benchmark_price": "2610.0 USD/MT",
       "benchmark_1m_delta_pct": 1.4,
-      "sector_macro_thesis": "LME aluminium pricing ($2,610/MT) provides healthy smelting realization while domestic automotive light-weighting drives casting demand.",
+      "sector_macro_thesis": "LME aluminium pricing ($2610.0 USD/MT) provides healthy smelting realization while domestic automotive light-weighting drives casting demand.",
       "evaluated_stocks": [
         {
           "symbol": "HINDALCO",
@@ -473,7 +473,7 @@
       "benchmark_commodity": "Natural Gas Kiln Fuel",
       "benchmark_price": "2.85 USD/MMBtu",
       "benchmark_1m_delta_pct": 3.2,
-      "sector_macro_thesis": "Stable industrial gas sourcing costs ($2.85/MMBtu) keep kiln fuel expenses (25-30% of cost) predictable across ceramic clusters.",
+      "sector_macro_thesis": "Stable industrial gas sourcing costs ($2.85 USD/MMBtu) keep kiln fuel expenses (25-30% of cost) predictable across ceramic clusters.",
       "evaluated_stocks": [
         {
           "symbol": "KAJARIACER",
@@ -565,7 +565,7 @@
       "benchmark_commodity": "Raw Cotton & Combed Yarn",
       "benchmark_price": "72.5 USc/lb",
       "benchmark_1m_delta_pct": -0.8,
-      "sector_macro_thesis": "Raw cotton pricing stability ($72.5/lb) balances domestic Minimum Support Price (MSP) levels against international export yarn demand.",
+      "sector_macro_thesis": "Raw cotton pricing stability ($72.5 USc/lb) balances domestic Minimum Support Price (MSP) levels against international export yarn demand.",
       "evaluated_stocks": [
         {
           "symbol": "PAGEIND",
@@ -657,7 +657,7 @@
       "benchmark_commodity": "Natural Gas (Ammonia Feedstock)",
       "benchmark_price": "2.85 USD/MMBtu",
       "benchmark_1m_delta_pct": 3.2,
-      "sector_macro_thesis": "Natural gas pooling mechanism ($2.85/MMBtu) keeps ammonia synthesis costs controlled under sovereign fertilizer subsidy frameworks.",
+      "sector_macro_thesis": "Natural gas pooling mechanism ($2.85 USD/MMBtu) keeps ammonia synthesis costs controlled under sovereign fertilizer subsidy frameworks.",
       "evaluated_stocks": [
         {
           "symbol": "COROMANDEL",
