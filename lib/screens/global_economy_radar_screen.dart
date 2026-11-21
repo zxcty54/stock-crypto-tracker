@@ -38,6 +38,8 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   Map<String, dynamic> _fiiDiiDerivatives = {};
   List<Map<String, dynamic>> _upcomingTriggers = [];
   Map<String, dynamic> _marketInternals = {};
+  Map<String, dynamic> _promoterRadar = {};
+  Map<String, dynamic> _bulkBlockDeals = {};
   String _selectedImpactFilter = 'ALL';
 
   // Theme Colors
@@ -117,6 +119,8 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     _upcomingTriggers = List<Map<String, dynamic>>.from(
         data['upcoming_macro_triggers'] ?? []);
     _marketInternals = Map<String, dynamic>.from(data['market_internals'] ?? {});
+    _promoterRadar = Map<String, dynamic>.from(data['promoter_insider_radar'] ?? {});
+    _bulkBlockDeals = Map<String, dynamic>.from(data['smart_bulk_block_deals'] ?? {});
   }
 
   Future<void> _loadDataset({bool isRefresh = false}) async {
@@ -476,6 +480,12 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         // Institutional Market Internals & Advance-Decline Camouflage Barometer
         if (_marketInternals.isNotEmpty) ...[
           _buildMarketInternalsCard(),
+          const SizedBox(height: 12),
+        ],
+
+        // Institutional Smart Money: Promoter Pledge & Smart Bulk Deals
+        if (_promoterRadar.isNotEmpty || _bulkBlockDeals.isNotEmpty) ...[
+          _buildPromoterAndBulkDealsCard(),
           const SizedBox(height: 12),
         ],
 
@@ -1410,6 +1420,728 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                       Expanded(
                         child: Text(
                           "SEBI Statutory Notice: Algorithmic delivery percentage scan from official NSE Bhavcopy. Strictly educational analysis; does not constitute investment advice or stock recommendations.",
+                          style: TextStyle(color: Colors.white54, fontSize: 8, height: 1.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildPromoterAndBulkDealsCard() {
+    final highPledgeList = (_promoterRadar['high_pledge_danger_zone'] as List<dynamic>? ?? []);
+    final insiderBuys = (_promoterRadar['insider_promoter_accumulations'] as List<dynamic>? ?? []);
+    final netAbsorptions = (_bulkBlockDeals['net_institutional_absorptions'] as List<dynamic>? ?? []);
+    final churnTraps = (_bulkBlockDeals['filtered_operator_churn_traps'] as List<dynamic>? ?? []);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.verified_user_rounded, color: kAccentCyan, size: 15),
+                  const SizedBox(width: 5),
+                  Text(
+                    "PROMOTER PLEDGE & MARQUEE BULK DEALS",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                decoration: BoxDecoration(
+                  color: kAccentCyan.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: kAccentCyan.withOpacity(0.4)),
+                ),
+                child: const Text(
+                  "INSTITUTIONAL RADAR",
+                  style: TextStyle(
+                    color: kAccentCyan,
+                    fontSize: 7.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // PART 1: Promoter Pledge & Insider SAST Bar
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "PLEDGE RISK (> 25%): ${highPledgeList.length} STOCKS",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentRed,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                "SAST INSIDER BUYS: ${insiderBuys.length}",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentGreen,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+
+          InkWell(
+            borderRadius: BorderRadius.circular(6),
+            onTap: () => _showPledgeAndInsiderSheet(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: kAccentRed.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: kAccentRed.withOpacity(0.3)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "⚡ Inspect Margin Call Danger Zone & Insider SAST Purchases",
+                    style: TextStyle(
+                      color: kAccentRed,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: kAccentRed, size: 13),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // Divider
+          Container(height: 1, color: const Color(0xFF1E2B3E)),
+          const SizedBox(height: 8),
+
+          // PART 2: Smart Bulk & Block Deals (Operator Churn Filtered)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "MARQUEE NET DEMAT (> ₹10 Cr): ${netAbsorptions.length}",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentGreen,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                "OPERATOR CHURN: ${churnTraps.length} TRAPS",
+                style: GoogleFonts.robotoMono(
+                  color: kAccentAmber,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
+
+          InkWell(
+            borderRadius: BorderRadius.circular(6),
+            onTap: () => _showSmartBulkDealsSheet(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: kAccentGreen.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: kAccentGreen.withOpacity(0.3)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "🏛️ Inspect Marquee Net Absorption vs Filtered Churn Traps",
+                    style: TextStyle(
+                      color: kAccentGreen,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: kAccentGreen, size: 13),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showPledgeAndInsiderSheet(BuildContext context) {
+    final highPledge = (_promoterRadar['high_pledge_danger_zone'] as List<dynamic>? ?? []);
+    final insiderBuys = (_promoterRadar['insider_promoter_accumulations'] as List<dynamic>? ?? []);
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0F1726),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.72,
+          minChildSize: 0.45,
+          maxChildSize: 0.92,
+          expand: false,
+          builder: (context, scrollController) {
+            return ListView(
+              controller: scrollController,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const Icon(Icons.shield_rounded, color: kAccentCyan, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      "PROMOTER PLEDGING & INSIDER SAST RADAR",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  "Tracking high lender pledge risk and personal promoter open-market share accumulation.",
+                  style: TextStyle(color: kTextMuted, fontSize: 9),
+                ),
+                const SizedBox(height: 14),
+
+                // SECTION 1: MARGIN CALL DANGER ZONE
+                Row(
+                  children: const [
+                    Icon(Icons.warning_amber_rounded, color: kAccentRed, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "⚠️ MARGIN CALL DANGER ZONE (> 25% PROMOTER PLEDGE)",
+                      style: TextStyle(
+                        color: kAccentRed,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...highPledge.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final comp = st['company'] ?? sym;
+                  final double pledge = (st['pledged_pct'] as num?)?.toDouble() ?? 0.0;
+                  final double promoter = (st['promoter_holding'] as num?)?.toDouble() ?? 0.0;
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentRed.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              sym,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              comp,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: kTextMuted, fontSize: 8),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentRed.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "${pledge.toStringAsFixed(1)}% Pledged (${promoter.toStringAsFixed(1)}% Holding)",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentRed,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => CompanyIntelligenceScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Model →",
+                              style: TextStyle(color: Colors.white70, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                const SizedBox(height: 14),
+
+                // SECTION 2: INSIDER PROMOTER BUYS
+                Row(
+                  children: const [
+                    Icon(Icons.trending_up_rounded, color: kAccentGreen, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "🟢 INSIDER PROMOTER ACCUMULATION (SEBI SAST REG 29 OPEN MARKET)",
+                      style: TextStyle(
+                        color: kAccentGreen,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...insiderBuys.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final comp = st['company'] ?? sym;
+                  final double stakeCr = (st['stake_acquired_cr'] as num?)?.toDouble() ?? 0.0;
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentGreen.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              sym,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              comp,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: kTextMuted, fontSize: 8),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentGreen.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "+₹${stakeCr.toStringAsFixed(1)} Cr Open-Market Buy",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentGreen,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => CompanyIntelligenceScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Model →",
+                              style: TextStyle(color: kAccentGreen, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+                const SizedBox(height: 14),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.shield_outlined, color: kAccentCyan, size: 12),
+                      SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          "SEBI Statutory Notice: Pledged shareholding and SAST insider disclosures from official stock exchange filings. Strictly educational analysis; does not constitute investment advice.",
+                          style: TextStyle(color: Colors.white54, fontSize: 8, height: 1.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showSmartBulkDealsSheet(BuildContext context) {
+    final netAbsorptions = (_bulkBlockDeals['net_institutional_absorptions'] as List<dynamic>? ?? []);
+    final churnTraps = (_bulkBlockDeals['filtered_operator_churn_traps'] as List<dynamic>? ?? []);
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0F1726),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.72,
+          minChildSize: 0.45,
+          maxChildSize: 0.92,
+          expand: false,
+          builder: (context, scrollController) {
+            return ListView(
+              controller: scrollController,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const Icon(Icons.account_balance_rounded, color: kAccentCyan, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      "SMART BULK/BLOCK ABSORPTION vs OPERATOR CHURN",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  "Isolating Marquee Institutional Net Demat Delivery from fake operator intraday churn.",
+                  style: TextStyle(color: kTextMuted, fontSize: 9),
+                ),
+                const SizedBox(height: 14),
+
+                // SECTION 1: MARQUEE NET ABSORPTION
+                Row(
+                  children: const [
+                    Icon(Icons.verified_rounded, color: kAccentGreen, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "🟢 MARQUEE NET INSTITUTIONAL ABSORPTION (> ₹10 Cr NET DEMAT)",
+                      style: TextStyle(
+                        color: kAccentGreen,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...netAbsorptions.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final client = st['client_name'] ?? '';
+                  final double netCr = (st['net_value_cr'] as num?)?.toDouble() ?? 0.0;
+                  final double price = (st['avg_price'] as num?)?.toDouble() ?? 0.0;
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentGreen.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              sym,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              client,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: kTextMuted, fontSize: 8),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentGreen.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "+₹${netCr.toStringAsFixed(1)} Cr @ ₹${price.toStringAsFixed(0)}",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentGreen,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => StockDeliveryHistoryScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Delivery →",
+                              style: TextStyle(color: kAccentCyan, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                const SizedBox(height: 14),
+
+                // SECTION 2: FILTERED OPERATOR CHURN TRAPS
+                Row(
+                  children: const [
+                    Icon(Icons.block_rounded, color: kAccentAmber, size: 12),
+                    SizedBox(width: 5),
+                    Text(
+                      "🔴 FILTERED OPERATOR INTRADAY CHURN (DAY-TRADING VOLUME BAIT)",
+                      style: TextStyle(
+                        color: kAccentAmber,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                ...churnTraps.map((st) {
+                  final sym = st['symbol']?.toString().toUpperCase() ?? '';
+                  final client = st['client_name'] ?? '';
+                  final double grossCr = (st['gross_traded_cr'] as num?)?.toDouble() ?? 0.0;
+                  final double netCr = (st['net_absorbed_cr'] as num?)?.toDouble() ?? 0.0;
+                  final double churn = (st['churn_ratio_pct'] as num?)?.toDouble() ?? 99.0;
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF131B2A),
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: kAccentAmber.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              sym,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              client,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: kTextMuted, fontSize: 8),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: kAccentAmber.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            "${churn.toStringAsFixed(1)}% Churn (₹${grossCr.toStringAsFixed(0)} Cr Traded / Net ₹${netCr.toStringAsFixed(2)} Cr)",
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentAmber,
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => StockDeliveryHistoryScreen(initialSymbol: sym),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1F293D),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              "Delivery →",
+                              style: TextStyle(color: kAccentCyan, fontSize: 8.5, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+                const SizedBox(height: 14),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.shield_outlined, color: kAccentCyan, size: 12),
+                      SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          "SEBI Statutory Notice: Bulk and Block deal data processed via algorithmic netting from official exchange disclosures. Strictly educational analysis; does not constitute investment advice.",
                           style: TextStyle(color: Colors.white54, fontSize: 8, height: 1.3),
                         ),
                       ),
