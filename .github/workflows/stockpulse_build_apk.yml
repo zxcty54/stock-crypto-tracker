@@ -60,6 +60,9 @@ jobs:
       - name: Generate App Launcher Icons
         run: dart run flutter_launcher_icons
 
+      - name: Flutter Analyze
+        run: flutter analyze
+
       - name: Build Release APK
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -68,7 +71,8 @@ jobs:
           flutter build apk --release --no-tree-shake-icons \
             --android-skip-build-dependency-validation \
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
-            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
+            --verbose
 
       - name: Compress APK to ZIP
         run: |
