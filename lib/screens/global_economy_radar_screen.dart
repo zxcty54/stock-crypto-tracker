@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'economy_demand_radar_screen.dart';
+import 'company_intelligence_screen.dart';
+import 'stock_delivery_history_screen.dart';
 
 class GlobalEconomyRadarScreen extends StatefulWidget {
   const GlobalEconomyRadarScreen({super.key});
@@ -31,6 +33,8 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   List<Map<String, dynamic>> _stressGauges = [];
   Map<String, dynamic> _headwindsTailwinds = {};
   List<Map<String, dynamic>> _equityImpacts = [];
+  Map<String, dynamic> _fiiDiiFlows = {};
+  List<Map<String, dynamic>> _upcomingTriggers = [];
 
   // Theme Colors
   static const Color kBgDark = Color(0xFF090D16);
@@ -104,6 +108,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         Map<String, dynamic>.from(data['global_headwinds_and_tailwinds'] ?? {});
     _equityImpacts = List<Map<String, dynamic>>.from(
         data['equity_impact_matrix'] ?? []);
+    _fiiDiiFlows = Map<String, dynamic>.from(data['fii_dii_flows'] ?? {});
+    _upcomingTriggers = List<Map<String, dynamic>>.from(
+        data['upcoming_macro_triggers'] ?? []);
   }
 
   Future<void> _loadDataset({bool isRefresh = false}) async {
@@ -454,6 +461,18 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         ),
         const SizedBox(height: 12),
 
+        // Institutional FII vs DII Flow Divergence Bar
+        if (_fiiDiiFlows.isNotEmpty) ...[
+          _buildFiiDiiDivergenceCard(),
+          const SizedBox(height: 12),
+        ],
+
+        // Upcoming Macro Triggers Countdown
+        if (_upcomingTriggers.isNotEmpty) ...[
+          _buildUpcomingTriggersStrip(),
+          const SizedBox(height: 12),
+        ],
+
         // 2. Visual Regional PMI Column Chart
         _buildPmiColumnChart(pillars),
         const SizedBox(height: 12),
@@ -487,6 +506,313 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
               color: col,
               fontSize: 10,
               fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFiiDiiDivergenceCard() {
+    final double fiiNet = (_fiiDiiFlows['fii_net_crores'] as num?)?.toDouble() ?? -2450.0;
+    final double diiNet = (_fiiDiiFlows['dii_net_crores'] as num?)?.toDouble() ?? 3180.0;
+    final double netPulse = (_fiiDiiFlows['net_pulse_crores'] as num?)?.toDouble() ?? 730.0;
+    final double absorption = (_fiiDiiFlows['absorption_ratio'] as num?)?.toDouble() ?? 1.3;
+    final String verdict = _fiiDiiFlows['regime_verdict'] ?? 'DII Absorption Moat';
+
+    final bool isNetPositive = netPulse >= 0;
+    final Color netColor = isNetPositive ? kAccentGreen : kAccentRed;
+
+    final double fiiFactor = (fiiNet.abs() / 5000.0).clamp(0.12, 1.0);
+    final double diiFactor = (diiNet.abs() / 5000.0).clamp(0.12, 1.0);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.compare_arrows_rounded,
+                      color: kAccentCyan, size: 15),
+                  const SizedBox(width: 6),
+                  Text(
+                    "INSTITUTIONAL CASH TURNOVER (FII vs DII)",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                decoration: BoxDecoration(
+                  color: netColor.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  verdict,
+                  style: TextStyle(
+                    color: netColor,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Numbers Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("FOREIGN (FII)",
+                      style: TextStyle(color: kAccentRed, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                  Text(
+                    "${fiiNet > 0 ? '+' : ''}₹${fiiNet.toStringAsFixed(0)} Cr",
+                    style: GoogleFonts.robotoMono(
+                      color: fiiNet >= 0 ? kAccentGreen : kAccentRed,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF090D16),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: netColor.withOpacity(0.35)),
+                ),
+                child: Column(
+                  children: [
+                    const Text("NET PULSE",
+                        style: TextStyle(color: Colors.white38, fontSize: 7.5, fontWeight: FontWeight.bold)),
+                    Text(
+                      "${netPulse > 0 ? '+' : ''}₹${netPulse.toStringAsFixed(0)} Cr",
+                      style: GoogleFonts.robotoMono(
+                        color: netColor,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text("DOMESTIC (DII)",
+                      style: TextStyle(color: kAccentGreen, fontSize: 8.5, fontWeight: FontWeight.bold)),
+                  Text(
+                    "${diiNet > 0 ? '+' : ''}₹${diiNet.toStringAsFixed(0)} Cr",
+                    style: GoogleFonts.robotoMono(
+                      color: diiNet >= 0 ? kAccentGreen : kAccentRed,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Visual Divergence Gauge Bar
+          Row(
+            children: [
+              // FII Bar (Left, Red)
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      flex: ((1.0 - fiiFactor) * 100).toInt(),
+                      child: Container(height: 5, color: const Color(0xFF131B2A)),
+                    ),
+                    Expanded(
+                      flex: (fiiFactor * 100).toInt(),
+                      child: Container(
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: kAccentRed,
+                          borderRadius: const BorderRadius.horizontal(left: Radius.circular(2)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 2,
+                height: 10,
+                color: Colors.white54,
+              ),
+              // DII Bar (Right, Green)
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: (diiFactor * 100).toInt(),
+                      child: Container(
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: kAccentGreen,
+                          borderRadius: const BorderRadius.horizontal(right: Radius.circular(2)),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: ((1.0 - diiFactor) * 100).toInt(),
+                      child: Container(height: 5, color: const Color(0xFF131B2A)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("OUTFLOW DABAO", style: TextStyle(color: Colors.white38, fontSize: 7.5)),
+              Text("0 BASE", style: TextStyle(color: Colors.white38, fontSize: 7.5)),
+              Text("SIP ABSORPTION", style: TextStyle(color: Colors.white38, fontSize: 7.5)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUpcomingTriggersStrip() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: kBorderSubtle),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.event_upcoming_rounded,
+                      color: kAccentAmber, size: 15),
+                  const SizedBox(width: 6),
+                  Text(
+                    "MACRO TRIGGERS (CALENDAR COUNTDOWN)",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                "${_upcomingTriggers.length} UPCOMING",
+                style: const TextStyle(color: kTextMuted, fontSize: 8.5),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: _upcomingTriggers.map((trig) {
+                final int days = (trig['days_remaining'] as num?)?.toInt() ?? 0;
+                final String name = trig['name'] ?? '';
+                final String date = trig['event_date'] ?? '';
+                final String impact = trig['impact'] ?? 'HIGH';
+
+                final bool isCritical = impact == 'CRITICAL';
+                final Color impactColor = isCritical ? kAccentRed : kAccentAmber;
+
+                return Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  padding: const EdgeInsets.all(8),
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: impactColor.withOpacity(0.35)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                            decoration: BoxDecoration(
+                              color: impactColor.withOpacity(0.18),
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Text(
+                              impact,
+                              style: TextStyle(
+                                color: impactColor,
+                                fontSize: 7,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${days}d LEFT",
+                            style: GoogleFonts.robotoMono(
+                              color: days <= 10 ? kAccentRed : Colors.white70,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w800,
+                          height: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        date,
+                        style: const TextStyle(color: kTextMuted, fontSize: 8),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ],
@@ -1725,170 +2051,466 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: kCardDark,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: col.withOpacity(0.35)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  tName,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: col.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    color: col,
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              const Icon(Icons.bar_chart_rounded, color: kAccentCyan, size: 12),
-              const SizedBox(width: 4),
-              Text(
-                "Benchmark Index: $index",
-                style: GoogleFonts.robotoMono(
-                  color: kAccentCyan,
-                  fontSize: 9.5,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-
-          // Macro Input-Cost & Transmission Data Box
-          Container(
-            padding: const EdgeInsets.all(9),
-            decoration: BoxDecoration(
-              color: const Color(0xFF090D16),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF1E2B3E)),
-            ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () => _showSectorConstituentsSheet(context, theme),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (sensitivity.isNotEmpty) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        tName,
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: col.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        status,
+                        style: TextStyle(
+                          color: col,
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    const Icon(Icons.bar_chart_rounded, color: kAccentCyan, size: 12),
+                    const SizedBox(width: 4),
+                    Text(
+                      "Benchmark Index: $index",
+                      style: GoogleFonts.robotoMono(
+                        color: kAccentCyan,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // Macro Input-Cost & Transmission Data Box
+                Container(
+                  padding: const EdgeInsets.all(9),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: const Color(0xFF1E2B3E)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (sensitivity.isNotEmpty) ...[
+                        Row(
+                          children: const [
+                            Icon(Icons.tune_rounded, color: Colors.white38, size: 11),
+                            SizedBox(width: 4),
+                            Text(
+                              "INPUT-COST / COGS SENSITIVITY",
+                              style: TextStyle(
+                                color: Colors.white38,
+                                fontSize: 8,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 0.3,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          sensitivity,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 9.5,
+                            height: 1.3,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                      if (channel.isNotEmpty) ...[
+                        Row(
+                          children: [
+                            Icon(Icons.sync_alt_rounded, color: col, size: 11),
+                            const SizedBox(width: 4),
+                            Text(
+                              "MACRO TRANSMISSION CHANNEL",
+                              style: TextStyle(
+                                color: col,
+                                fontSize: 8,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 0.3,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          channel,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.85),
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w500,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+
+                if (segments.isNotEmpty) ...[
+                  const SizedBox(height: 9),
                   Row(
                     children: const [
-                      Icon(Icons.tune_rounded, color: Colors.white38, size: 11),
+                      Icon(Icons.category_rounded, color: Colors.white38, size: 10),
                       SizedBox(width: 4),
                       Text(
-                        "INPUT-COST / COGS SENSITIVITY",
+                        "AFFECTED INDUSTRY SUB-SEGMENTS",
                         style: TextStyle(
                           color: Colors.white38,
                           fontSize: 8,
                           fontWeight: FontWeight.w800,
-                          letterSpacing: 0.3,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 3),
-                  Text(
-                    sensitivity,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 9.5,
-                      height: 1.3,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
-                if (channel.isNotEmpty) ...[
-                  Row(
-                    children: [
-                      Icon(Icons.sync_alt_rounded, color: col, size: 11),
-                      const SizedBox(width: 4),
-                      Text(
-                        "MACRO TRANSMISSION CHANNEL",
-                        style: TextStyle(
-                          color: col,
-                          fontSize: 8,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.3,
+                  const SizedBox(height: 5),
+                  Wrap(
+                    spacing: 5,
+                    runSpacing: 4,
+                    children: segments.map((seg) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF10192A),
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFF22344D)),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    channel,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.85),
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.w500,
-                      height: 1.3,
-                    ),
+                        child: Text(
+                          seg.toString(),
+                          style: const TextStyle(color: Colors.white70, fontSize: 8.5),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ],
-              ],
-            ),
-          ),
 
-          if (segments.isNotEmpty) ...[
-            const SizedBox(height: 9),
-            Row(
-              children: const [
-                Icon(Icons.category_rounded, color: Colors.white38, size: 10),
-                SizedBox(width: 4),
-                Text(
-                  "AFFECTED INDUSTRY SUB-SEGMENTS",
-                  style: TextStyle(
-                    color: Colors.white38,
-                    fontSize: 8,
-                    fontWeight: FontWeight.w800,
-                  ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.touch_app_rounded, color: col, size: 12),
+                    const SizedBox(width: 4),
+                    Text(
+                      "Tap to inspect constituent peers & delivery spikes →",
+                      style: TextStyle(
+                        color: col,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 5),
-            Wrap(
-              spacing: 5,
-              runSpacing: 4,
-              children: segments.map((seg) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF10192A),
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: const Color(0xFF22344D)),
-                  ),
-                  child: Text(
-                    seg.toString(),
-                    style: const TextStyle(color: Colors.white70, fontSize: 8.5),
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
-        ],
+          ),
+        ),
       ),
+    );
+  }
+
+  void _showSectorConstituentsSheet(
+      BuildContext context, Map<String, dynamic> theme) {
+    final tName = theme['theme'] ?? '';
+    final direction = theme['impact_direction'] ?? '';
+    final status = theme['status'] ?? (direction == 'BENEFICIARY' ? 'EXPANDING' : 'HEADWIND');
+    final index = theme['benchmark_index'] ?? 'Sector Basket';
+    final tickers = (theme['representative_tickers'] as List<dynamic>? ?? []);
+    final segments = (theme['exposed_segments'] as List<dynamic>? ?? []);
+    final bool isBeneficiary = direction == 'BENEFICIARY';
+    final Color col = isBeneficiary ? kAccentGreen : kAccentRed;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0F1726),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.65,
+          minChildSize: 0.4,
+          maxChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) {
+            return ListView(
+              controller: scrollController,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        tName,
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: col.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: col.withOpacity(0.4)),
+                      ),
+                      child: Text(
+                        status,
+                        style: TextStyle(
+                          color: col,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "Benchmark Index: $index",
+                  style: GoogleFonts.robotoMono(
+                    color: kAccentCyan,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                if (segments.isNotEmpty) ...[
+                  const Text(
+                    "CORE SUB-SEGMENTS",
+                    style: TextStyle(
+                      color: Colors.white38,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 5,
+                    children: segments.map((seg) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF162032),
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: const Color(0xFF23354E)),
+                        ),
+                        child: Text(
+                          seg.toString(),
+                          style: const TextStyle(color: Colors.white70, fontSize: 9),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+
+                const Text(
+                  "PEER GROUP & DIRECT MICRO INTELLIGENCE",
+                  style: TextStyle(
+                    color: Colors.white38,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.4,
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                if (tickers.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      "No specific tickers mapped for this macro basket.",
+                      style: TextStyle(color: kTextMuted, fontSize: 11),
+                    ),
+                  )
+                else
+                  ...tickers.map((t) {
+                    final sym = t.toString().toUpperCase();
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF131B2A),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: const Color(0xFF1E2B3E)),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(color: Colors.white12),
+                            ),
+                            child: Text(
+                              sym,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(ctx);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => StockDeliveryHistoryScreen(
+                                    initialSymbol: sym,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                              decoration: BoxDecoration(
+                                color: kAccentCyan.withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.bar_chart_rounded, color: kAccentCyan, size: 12),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "Delivery Spikes",
+                                    style: TextStyle(
+                                      color: kAccentCyan,
+                                      fontSize: 9.5,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(ctx);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => CompanyIntelligenceScreen(
+                                    initialSymbol: sym,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF21262D),
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: Colors.white12),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.business_rounded, color: Colors.white70, size: 12),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "Business Model",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 9.5,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+
+                const SizedBox(height: 14),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.white10),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.shield_outlined, color: kAccentCyan, size: 12),
+                      SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          "SEBI Notice: Constituent peers are for research and macro transmission reference only. Not an investment recommendation.",
+                          style: TextStyle(color: Colors.white54, fontSize: 8, height: 1.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

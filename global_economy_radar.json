@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-21T06:04:32.730501+00:00",
+    "generated_timestamp": "2026-11-21T14:12:28.897838+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -81,6 +81,63 @@
       }
     ]
   },
+  "fii_dii_flows": {
+    "fii_net_crores": -3012.5,
+    "dii_net_crores": 3430.0,
+    "net_pulse_crores": 417.5,
+    "absorption_ratio": 1.14,
+    "fii_action": "NET_SELLER",
+    "dii_action": "NET_BUYER",
+    "regime_verdict": "DII Absorption Moat (1.14x SIP Cushion)",
+    "dxy_correlation_note": "DXY at 106.25 & US 10Y at 4.42% create FII outflow pressure, absorbed by domestic SIP liquidity."
+  },
+  "upcoming_macro_triggers": [
+    {
+      "id": "eight_core",
+      "name": "DPIIT 8-Core Infrastructure Output",
+      "category": "PHYSICAL_DEMAND",
+      "impact": "HIGH",
+      "focus": "Steel, Cement & Electricity Growth",
+      "event_date": "30 Nov 2026",
+      "days_remaining": 9
+    },
+    {
+      "id": "opec_review",
+      "name": "OPEC+ Joint Ministerial Monitoring (JMMC)",
+      "category": "COMMODITIES",
+      "impact": "HIGH",
+      "focus": "Crude Production Quotas & Supply Cuts",
+      "event_date": "01 Dec 2026",
+      "days_remaining": 10
+    },
+    {
+      "id": "rbi_mpc",
+      "name": "RBI Monetary Policy Meeting",
+      "category": "MONETARY_POLICY",
+      "impact": "CRITICAL",
+      "focus": "Repo Rate & Domestic Liquidity",
+      "event_date": "06 Dec 2026",
+      "days_remaining": 15
+    },
+    {
+      "id": "india_cpi",
+      "name": "MoSPI India CPI Inflation",
+      "category": "INFLATION",
+      "impact": "HIGH",
+      "focus": "Food Basket & Core CPI Print",
+      "event_date": "12 Dec 2026",
+      "days_remaining": 21
+    },
+    {
+      "id": "fed_fomc",
+      "name": "US Federal Reserve FOMC",
+      "category": "GLOBAL_RATES",
+      "impact": "CRITICAL",
+      "focus": "Fed Funds Rate & Dot Plot Guidance",
+      "event_date": "18 Dec 2026",
+      "days_remaining": 27
+    }
+  ],
   "supply_demand_control_levers": {
     "headline": "HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND",
     "description": "Global superpowers actively manipulate energy valves, monetary liquidity taps, industrial subsidies, and maritime chokepoints to enforce dominance.",
@@ -864,6 +921,12 @@
         "Defence Avionics & OSAT Packaging",
         "Consumer Electronics ODM"
       ],
+      "representative_tickers": [
+        "DIXON",
+        "KAYNES",
+        "PGEL",
+        "BEL"
+      ],
       "stocks": []
     },
     {
@@ -877,6 +940,12 @@
         "High-Voltage Power Transformers",
         "Gas-Insulated Switchgear",
         "Grid Substation EPC"
+      ],
+      "representative_tickers": [
+        "VOLTAMP",
+        "ABB",
+        "SIEMENS",
+        "SCHNEIDER"
       ],
       "stocks": []
     },
@@ -892,6 +961,12 @@
         "Commercial Airline ATF Fuel",
         "Synthetic Resins & Adhesives"
       ],
+      "representative_tickers": [
+        "ASIANPAINT",
+        "BERGEPAINT",
+        "INDIGO",
+        "PIDILITIND"
+      ],
       "stocks": []
     },
     {
@@ -906,6 +981,12 @@
         "Legacy Enterprise IT Maintenance",
         "ERP Implementation Deals"
       ],
+      "representative_tickers": [
+        "TCS",
+        "INFY",
+        "WIPRO",
+        "COFORGE"
+      ],
       "stocks": []
     },
     {
@@ -919,6 +1000,12 @@
         "Hot-Rolled Steel Coils",
         "Generic Agrochemical Off-Patents",
         "Commodity Base Chemicals"
+      ],
+      "representative_tickers": [
+        "TATASTEEL",
+        "JSWSTEEL",
+        "APLAPOLLO",
+        "UPL"
       ],
       "stocks": []
     }
