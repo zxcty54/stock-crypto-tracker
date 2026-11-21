@@ -1658,14 +1658,51 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
             ),
           ),
           if (funds.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              "Exiting Funds: ${funds.join(' • ')}",
-              style: GoogleFonts.plusJakartaSans(
-                color: Colors.white38,
-                fontSize: 9,
-                fontWeight: FontWeight.w600,
-              ),
+            const SizedBox(height: 10),
+            Row(
+              children: const [
+                Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 13),
+                SizedBox(width: 5),
+                Text(
+                  "EXITING INSTITUTIONS (WHO SOLD):",
+                  style: TextStyle(
+                    color: Color(0xFFFF5252),
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.4,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 6,
+              runSpacing: 5,
+              children: funds.map((f) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1F0D15),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.4)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.account_balance_rounded, color: Color(0xFFFF5252), size: 11),
+                      const SizedBox(width: 5),
+                      Text(
+                        f.toString(),
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ],
         ],
