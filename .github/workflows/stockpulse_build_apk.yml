@@ -62,12 +62,13 @@ jobs:
 
       - name: Flutter Analyze
         run: |
-          OUTPUT=$(flutter analyze 2>&1 || true)
-          echo "::error title=Flutter Analysis::$OUTPUT"
-          if echo "$OUTPUT" | grep -E "error •|error -"; then
-            echo "$OUTPUT"
-            exit 1
-          fi
+          set -o pipefail
+          flutter analyze 2>&1 | while IFS= read -r line; do
+            echo "$line"
+            if echo "$line" | grep -qE "error •|error -"; then
+              echo "::error title=Dart Error::$line"
+            fi
+          done
 
       - name: Build Release APK
         env:
