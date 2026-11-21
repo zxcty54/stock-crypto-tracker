@@ -45,6 +45,7 @@ import '../widgets/mf_smart_money_preview_card.dart';
 // 🌍 Global Economy Radar Preview Card
 import '../widgets/global_economy_preview_card.dart';
 import 'global_economy_radar_screen.dart';
+import 'institutional_internals_radar_screen.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
@@ -774,6 +775,131 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               // 🌍 7B. GLOBAL ECONOMY RADAR ENTRY BANNER (Pressure vs Expansion across Superpowers)
               const SliverToBoxAdapter(
                 child: GlobalEconomyPreviewCard(),
+              ),
+
+              // 🏛️ 7C. INSTITUTIONAL FLOWS & MARKET RISK RADAR ENTRY BANNER
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const InstitutionalInternalsRadarScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF131B2A), Color(0xFF0F1726)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFF00FF88).withOpacity(0.35),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF00FF88).withOpacity(0.06),
+                              blurRadius: 10,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF00FF88).withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: const Icon(
+                                    Icons.account_balance_rounded,
+                                    color: Color(0xFF00FF88),
+                                    size: 24,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "INSTITUTIONAL & RISK RADAR",
+                                            style: GoogleFonts.plusJakartaSans(
+                                              color: const Color(0xFF00FF88),
+                                              fontSize: 11.5,
+                                              fontWeight: FontWeight.w900,
+                                              letterSpacing: 0.8,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 6),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFF00E5FF).withOpacity(0.15),
+                                              borderRadius: BorderRadius.circular(4),
+                                            ),
+                                            child: const Text(
+                                              "FII / DII / VIX",
+                                              style: TextStyle(
+                                                color: Color(0xFF00E5FF),
+                                                fontSize: 8.5,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 3),
+                                      const Text(
+                                        "Participant Derivatives Squeeze • India VIX • Breadth • Promoter Pledge",
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 11.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Color(0xFF00FF88),
+                                  size: 14,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                _buildDeliveryMiniChip("🏛️ FII/DII Net Flow", const Color(0xFF00FF88)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("🌡️ India VIX Meter", const Color(0xFFFFB703)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("⚡ Pledge Risk > 25%", const Color(0xFFFF2A6D)),
+                                const SizedBox(width: 6),
+                                _buildDeliveryMiniChip("📦 Bulk Deals", const Color(0xFF00E5FF)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               // 🏢 8. COMPANY BUSINESS INTELLIGENCE ENTRY BANNER
