@@ -28,7 +28,9 @@
       "NEW_IPO_ANNOUNCED"
     ],
     "telegraph_url": "https://telegra.ph/Integris-Medtech-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
-    "last_posted_gmp": ""
+    "last_posted_gmp": "",
+    "demat_credit_date": "2026-12-03",
+    "last_updated": "2026-11-21T16:21:57.308557+05:30"
   },
   {
     "id": "foodlink-f-b-holdings",
@@ -61,7 +63,7 @@
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-02",
-    "last_updated": "2026-11-21T03:15:12.700836+05:30"
+    "last_updated": "2026-11-21T16:21:57.308557+05:30"
   },
   {
     "id": "mahanadi-coalfields",
@@ -84,7 +86,7 @@
     "ofs_cr": "4,200",
     "gmp": "+₹3.00",
     "gmp_percent": 0.74,
-    "est_listing_price": "₹137(+0.74%)",
+    "est_listing_price": "₹136",
     "kostak": "₹150",
     "sub2sauda": "₹1,200",
     "subscription": {
@@ -142,7 +144,7 @@
       "IPO_OPENS_TODAY",
       "NEW_IPO_ANNOUNCED"
     ],
-    "last_updated": "2026-11-21T03:15:12.700836+05:30",
+    "last_updated": "2026-11-21T16:21:57.308557+05:30",
     "demat_credit_date": "2026-11-25",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
     "last_posted_gmp": "+₹3.00"
@@ -226,7 +228,7 @@
       "NEW_IPO_ANNOUNCED",
       "IPO_CLOSING_TODAY"
     ],
-    "last_updated": "2026-11-21T03:15:12.700836+05:30",
+    "last_updated": "2026-11-21T16:21:57.308557+05:30",
     "demat_credit_date": "2026-11-24",
     "telegraph_url": "https://telegra.ph/Crystal-Crop-Protection-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
     "last_posted_gmp": "+₹18.00"
