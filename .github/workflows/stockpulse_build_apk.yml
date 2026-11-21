@@ -62,9 +62,11 @@ jobs:
 
       - name: Flutter Analyze
         run: |
-          flutter analyze --no-fatal-infos --no-fatal-warnings lib/ || {
-            echo "::error::Flutter analyze found issues in lib/"
-          }
+          flutter analyze --no-fatal-infos --no-fatal-warnings lib/ > /tmp/analyze.log 2>&1 || true
+          cat /tmp/analyze.log
+          grep -E "(error •|warning •|info •)" /tmp/analyze.log | head -n 20 | while IFS= read -r line; do
+            echo "::error title=Analyze::$line"
+          done
 
       - name: Build Release APK
         env:
