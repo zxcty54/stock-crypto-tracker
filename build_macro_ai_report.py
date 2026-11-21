@@ -9,13 +9,10 @@ INPUT_MODELS_FILE = "company_business_models.json"
 OUTPUT_REPORT_FILE = "macro_research_report.json"
 
 # ==============================================================================
-# 🎯 STANDARD TEXT GEMINI MODELS LIST (Google AI Studio Production Models)
+# 🎯 AI CANDIDATE MODELS LIST (Gemini 3.7 Priority)
 # ==============================================================================
 CANDIDATE_MODELS = [
-    "gemini-2.0-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
-    "gemini-1.5-pro",
+    "gemini-3.5-flash-lite",
 ]
 
 # ==============================================================================
