@@ -1,16 +1,16 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-21 15:29:49 IST",
+  "last_updated": "2026-11-21 15:39:28 IST",
   "economy_headline": {
     "core_infra_growth_pct": 10.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 5.6,
     "fastag_toll_growth_pct": 8.5,
-    "verdict": "STRONG PHYSICAL MOMENTUM",
-    "momentum_score": 88,
-    "momentum_label": "HIGH INDUSTRIAL PULSE",
-    "headline_summary": "India Core Infrastructure & Ground Telemetry Surge +10.1% YoY led by Power (+11.4%) & Bitumen Capex (+17.2%)"
+    "verdict": "AGGRESSIVE PHYSICAL EXPANSION",
+    "momentum_score": 89,
+    "momentum_label": "PEAK INDUSTRIAL VELOCITY",
+    "headline_summary": "India Core Infrastructure & Ground Telemetry Surge +10.2% YoY Led by Power, Ports, and Roads"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
@@ -211,7 +211,7 @@
           "thesis": "3PL supply chain logistics and integrated cargo movement peer"
         }
       ],
-      "macro_correlation_note": "Diesel consumption up +5.6% YoY; NETC FASTag Highway toll collections expand +8.5% YoY to ₹5,840 Cr."
+      "macro_correlation_note": "Diesel consumption +5.6% YoY & FASTag tolls at ₹5,840 Cr (+8.5% YoY) confirm surging cross-state freight movement."
     },
     {
       "sector": "Power Generation & Capital Goods",
@@ -254,7 +254,7 @@
           "thesis": "Industrial HT/LT power cables and transmission equipment peer"
         }
       ],
-      "macro_correlation_note": "Electricity surges +11.4% YoY backed by robust coal dispatch up +10.7% YoY."
+      "macro_correlation_note": "Electricity surges +11.4% YoY backed by robust Coal dispatch growth of +10.7% YoY, signaling heavy industrial demand."
     },
     {
       "sector": "Infrastructure & Cement Construction",
@@ -297,7 +297,7 @@
           "thesis": "National highway EPC and road construction contractor peer"
         }
       ],
-      "macro_correlation_note": "Cement output prints +9.8% YoY alongside a massive +17.2% YoY spike in bitumen road capex."
+      "macro_correlation_note": "Bitumen road capex jumps +17.2% YoY alongside Cement production up +9.8% YoY, driving aggressive execution."
     },
     {
       "sector": "Port Logistics & Maritime Trade",
@@ -340,7 +340,7 @@
           "thesis": "Global LCL container consolidation and multi-modal logistics peer"
         }
       ],
-      "macro_correlation_note": "IPA major ports total cargo touches 566.4 MMT (+10.17% YoY) with container throughput up +8.51% YoY."
+      "macro_correlation_note": "Major Ports total cargo hits 566.4 MMT (+10.17% YoY) with Container throughput expanding +8.51% YoY."
     },
     {
       "sector": "Steel & Metals Fabrication",
@@ -383,7 +383,7 @@
           "thesis": "Public sector long products and railway track infrastructure peer"
         }
       ],
-      "macro_correlation_note": "Finished steel production registers solid +4.9% YoY growth on sustained construction demand."
+      "macro_correlation_note": "Steel production advances +4.9% YoY, underpinning domestic fabrication activity and structural demand."
     },
     {
       "sector": "Fertilizers & Agro-Chemicals",
@@ -411,7 +411,7 @@
           "thesis": "Urea production and domestic crop protection peer"
         }
       ],
-      "macro_correlation_note": "Seasonal inventory stabilization underway ahead of upcoming rabi nutrient demand cycles."
+      "macro_correlation_note": "Rabi nutrient absorption holding steady at baseline seasonal averages with lean inventory carry-forwards."
     },
     {
       "sector": "Upstream Crude Oil & Gas",
@@ -444,7 +444,7 @@
           "thesis": "North-east domestic oil exploration and refining subsidiary peer"
         }
       ],
-      "macro_correlation_note": "Stable refinery throughput absorption supported by resilient domestic HSD demand."
+      "macro_correlation_note": "Domestic refining throughput matches steady transport fuels demand while LNG imports absorb residual deficits."
     }
   ]
 }
