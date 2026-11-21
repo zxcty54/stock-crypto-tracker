@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-20 21:59:39 IST",
-  "worthy_count": 13,
-  "skipped_count": 4,
+  "generated_at": "2026-11-21 18:13:31 IST",
+  "worthy_count": 12,
+  "skipped_count": 5,
   "content_feed": [
     {
       "hash": "239550f4f2ff",
@@ -170,23 +170,23 @@
       "worthiness_reason": "Financial results with explicit standalone revenue and PAT figures for the quarter ended September 30, 2026.",
       "telegram_post": "📊 <b>#RESULT</b> | <b>Valecha Engineering Limited (NSE: VALECHAENG)</b>\n\n<b>Valecha Engineering Reports Q2 FY27 Standalone Financials</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Revenue from Operations:</b> ₹2.87 Crores (vs ₹8.94 Crores in Q2 FY26)\n- <b>Total Income:</b> ₹3.70 Crores (vs ₹15.56 Crores in Q2 FY26)\n- <b>Profit Before Tax (PBT):</b> ₹1.18 Crores (vs ₹10.55 Crores in Q2 FY26)\n\n📌 <b>What happened:</b>\n↳ Valecha Engineering Limited announced its standalone unaudited financial results for the quarter ended September 30, 2026, reporting a revenue from operations of ₹2.87 Crores.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/VALECHAENG_20112026191013_Outcome_of_Board_Meeting.pdf\">NSE Corporate Filing</a>",
       "analyzed_at": "2026-11-20 21:55:35 IST"
-    },
+    }
+  ],
+  "skipped_archive": [
     {
       "hash": "35725817e0ce",
       "symbol": "BESTAGRO",
       "company_name": "Best Agrolife Limited",
       "category": "RESULT",
-      "event_type": "RESULT",
+      "event_type": "OTHER",
       "broadcast_date": "20-Nov-2026 11:58:42",
       "pdf_link": "https://nsearchives.nseindia.in/corporate/BESTAGRO_20112026115830_BESTAGROSEoutcomeBM301026MR.pdf",
-      "headline": "Best Agrolife Limited Approves Q2 FY27 Financial Results and Management Changes",
-      "content_worthy": true,
-      "worthiness_reason": "Financial results approval along with key management changes.",
-      "telegram_post": "📊 <b>#RESULT</b> | <b>Best Agrolife Limited (NSE: BESTAGRO)</b>\n\n<b>Best Agrolife Limited Approves Q2 FY27 Financial Results and Management Changes</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Event:</b> Un-Audited Financial Results (Standalone & Consolidated) for Quarter and Half-Year ended 30th September, 2026\n- <b>CFO Appointment:</b> Mr. Sanjeev Bajaj appointed as Chief Financial Officer\n- <b>Role Transition:</b> Mr. Vikas Jain transitioned from CFO to Vice President - Business Operations\n- <b>ESOP:</b> Grant of employee stock options under Best Agrolife Employee Stock Option Scheme, 2024\n\n📌 <b>What happened:</b>\n↳ The board approved the standalone and consolidated un-audited financial results for the quarter and half-year ended September 30, 2026, alongside key leadership changes and ESOP proposals.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/BESTAGRO_20112026115830_BESTAGROSEoutcomeBM301026MR.pdf\">NSE Corporate Filing</a>",
-      "analyzed_at": "2026-11-20 12:54:17 IST"
-    }
-  ],
-  "skipped_archive": [
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "The filing mentions the approval of financial results but does not disclose the actual numeric Revenue and PAT figures, rendering it ineligible for a results update.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-21 18:13:31 IST"
+    },
     {
       "hash": "2c5dcebc27bc",
       "symbol": "SKFINDIA",
