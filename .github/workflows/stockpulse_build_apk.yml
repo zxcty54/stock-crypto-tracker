@@ -77,7 +77,13 @@ jobs:
             --android-skip-build-dependency-validation \
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
             --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
-            --verbose
+            --verbose > /tmp/build.log 2>&1 || {
+              echo "=== BUILD FAILED ==="
+              tail -n 30 /tmp/build.log | while IFS= read -r line; do
+                echo "::error title=Gradle Error::$line"
+              done
+              exit 1
+            }
 
       - name: Compress APK to ZIP
         run: |
