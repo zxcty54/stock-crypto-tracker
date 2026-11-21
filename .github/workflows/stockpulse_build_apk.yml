@@ -61,7 +61,13 @@ jobs:
         run: dart run flutter_launcher_icons
 
       - name: Flutter Analyze
-        run: flutter analyze
+        run: |
+          OUTPUT=$(flutter analyze 2>&1 || true)
+          echo "::error title=Flutter Analysis::$OUTPUT"
+          if echo "$OUTPUT" | grep -E "error •|error -"; then
+            echo "$OUTPUT"
+            exit 1
+          fi
 
       - name: Build Release APK
         env:
