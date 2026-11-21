@@ -349,26 +349,96 @@ class MacroCommentarySynthesizer:
 # ==============================================================================
 # 3. MASTER PAYLOAD GENERATOR
 # ==============================================================================
+def fetch_live_fii_dii_flows() -> dict:
+    """
+    Attempts to fetch live official daily provisional FII / DII trading turnover.
+    Primary Source: NSE India official endpoint (/api/fiidiiTradeReact).
+    Secondary Source: Public financial data mirrors.
+    Returns dict with fii_net and dii_net in ₹ Crores, or None if outside market hours/offline.
+    """
+    # 1. Attempt NSE India official endpoint via curl_cffi or requests with session
+    try:
+        from curl_cffi import requests
+        session = requests.Session(impersonate="chrome124")
+        session.get("https://www.nseindia.com", headers={"User-Agent": "Mozilla/5.0"}, timeout=6)
+        resp = session.get(
+            "https://www.nseindia.com/api/fiidiiTradeReact",
+            headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"},
+            timeout=6
+        )
+        if resp.status_code == 200:
+            items = resp.json()
+            fii_val = None
+            dii_val = None
+            trade_date = None
+            for itm in items:
+                cat = str(itm.get("category", "")).upper()
+                net_str = str(itm.get("netValue", "")).replace(",", "").strip()
+                trade_date = itm.get("date") or trade_date
+                if "FII" in cat or "FPI" in cat:
+                    fii_val = float(net_str)
+                elif "DII" in cat:
+                    dii_val = float(net_str)
+            if fii_val is not None and dii_val is not None:
+                return {
+                    "fii_net": fii_val,
+                    "dii_net": dii_val,
+                    "trade_date": trade_date,
+                    "source": "NSE_OFFICIAL_PROVISIONAL"
+                }
+    except Exception:
+        pass
+
+    # 2. Attempt Public Financial JSON API
+    try:
+        url = "https://priceapi.moneycontrol.com/pricefeed/techCharts/indianMarket/fiidii"
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        )
+        with urllib.request.urlopen(req, timeout=5) as r:
+            payload = json.loads(r.read().decode("utf-8"))
+            if isinstance(payload, dict) and "fiiNet" in payload and "diiNet" in payload:
+                return {
+                    "fii_net": float(payload["fiiNet"]),
+                    "dii_net": float(payload["diiNet"]),
+                    "trade_date": payload.get("date"),
+                    "source": "FINANCIAL_FEED_MIRROR"
+                }
+    except Exception:
+        pass
+
+    return None
+
+
 def synthesize_fii_dii_flows(metrics: dict) -> dict:
     """
     Computes daily/weekly FII vs DII institutional flows & DXY correlation.
-    When DXY > 105.0 or US 10Y > 4.35%, FIIs face tactical capital drawdowns,
-    while domestic SIP inflows (₹25,000+ Cr/month) provide high DII absorption.
+    Primary: Ingests live provisional data from NSE India / exchange feed.
+    Fallback: When market is closed or on weekends/holidays, computes macro-correlated
+    telemetry where elevated DXY (>105) & US 10Y (>4.35%) trigger FII outflows cushioned
+    by ₹25,000+ Cr/month domestic SIP liquidity.
     Zero AI involved; 100% deterministic mathematical telemetry.
     """
     dxy = metrics.get("dxy_index", 106.25)
     us10y = metrics.get("us_10y_yield", 4.42)
 
-    # Base daily institutional turnover (in ₹ Crores)
-    if dxy >= 106.0 or us10y >= 4.40:
-        fii_net = -2450.0 - round((dxy - 105.0) * 450, 1)
-        dii_net = 3180.0 + round((dxy - 105.0) * 200, 1)
-    elif dxy >= 104.0:
-        fii_net = -1280.0
-        dii_net = 2150.0
+    live = fetch_live_fii_dii_flows()
+    if live:
+        fii_net = round(live["fii_net"], 1)
+        dii_net = round(live["dii_net"], 1)
+        source = live.get("source", "NSE_LIVE")
     else:
-        fii_net = 1450.0
-        dii_net = 1850.0
+        source = "MACRO_TELEMETRY_CORRELATION"
+        if dxy >= 106.0 or us10y >= 4.40:
+            fii_net = -2450.0 - round((dxy - 105.0) * 450, 1)
+            dii_net = 3180.0 + round((dxy - 105.0) * 200, 1)
+        elif dxy >= 104.0:
+            fii_net = -1280.0
+            dii_net = 2150.0
+        else:
+            fii_net = 1450.0
+            dii_net = 1850.0
 
     net_pulse = round(dii_net + fii_net, 1)
     absorption_ratio = round(abs(dii_net) / max(1.0, abs(fii_net)), 2) if fii_net < 0 else round(dii_net / max(1.0, fii_net), 2)
@@ -380,6 +450,7 @@ def synthesize_fii_dii_flows(metrics: dict) -> dict:
         "absorption_ratio": absorption_ratio,
         "fii_action": "NET_SELLER" if fii_net < 0 else "NET_BUYER",
         "dii_action": "NET_BUYER" if dii_net > 0 else "NET_SELLER",
+        "data_source": source,
         "regime_verdict": f"DII Absorption Moat ({absorption_ratio}x SIP Cushion)" if fii_net < 0 else "Synchronized Dual Inflows",
         "dxy_correlation_note": f"DXY at {dxy} & US 10Y at {us10y}% create FII outflow pressure, absorbed by domestic SIP liquidity."
     }

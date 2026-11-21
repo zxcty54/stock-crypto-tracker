@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-21T14:12:28.897838+00:00",
+    "generated_timestamp": "2026-11-21T15:07:52.349579+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -88,6 +88,7 @@
     "absorption_ratio": 1.14,
     "fii_action": "NET_SELLER",
     "dii_action": "NET_BUYER",
+    "data_source": "MACRO_TELEMETRY_CORRELATION",
     "regime_verdict": "DII Absorption Moat (1.14x SIP Cushion)",
     "dxy_correlation_note": "DXY at 106.25 & US 10Y at 4.42% create FII outflow pressure, absorbed by domestic SIP liquidity."
   },
