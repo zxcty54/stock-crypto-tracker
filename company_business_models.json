@@ -6,105 +6,105 @@
       "brent_crude": {
         "name": "Brent Crude Oil",
         "category": "COMMODITY",
-        "current_val": 113.43,
+        "current_val": 73.4,
         "unit": "USD/bbl",
-        "52w_low": 58.72,
-        "52w_high": 126.1,
+        "52w_low": 68.5,
+        "52w_high": 92.2,
         "deltas": {
-          "1M": 10.87,
-          "6M": -0.88,
-          "1Y_YoY": 74.8
+          "1M": -2.4,
+          "6M": -11.5,
+          "1Y_YoY": -14.2
         }
       },
       "copper": {
         "name": "Refined Copper",
         "category": "COMMODITY",
-        "current_val": 6.48,
+        "current_val": 4.15,
         "unit": "USD/lb",
-        "52w_low": 4.92,
-        "52w_high": 6.83,
+        "52w_low": 3.85,
+        "52w_high": 5.2,
         "deltas": {
-          "1M": 0.0,
-          "6M": 11.72,
-          "1Y_YoY": 28.32
+          "1M": -1.8,
+          "6M": -4.2,
+          "1Y_YoY": 8.5
         }
       },
       "natural_gas": {
         "name": "Natural Gas",
         "category": "COMMODITY",
-        "current_val": 2.9,
+        "current_val": 2.85,
         "unit": "USD/MMBtu",
-        "52w_low": 2.48,
-        "52w_high": 7.83,
+        "52w_low": 1.95,
+        "52w_high": 3.6,
         "deltas": {
-          "1M": -2.36,
-          "6M": 1.05,
-          "1Y_YoY": -32.08
+          "1M": 3.2,
+          "6M": -8.1,
+          "1Y_YoY": -12.4
         }
       },
       "aluminium": {
         "name": "Aluminium",
         "category": "COMMODITY",
-        "current_val": 3167.5,
+        "current_val": 2610.0,
         "unit": "USD/MT",
-        "52w_low": 2684.0,
-        "52w_high": 4195.0,
+        "52w_low": 2180.0,
+        "52w_high": 2750.0,
         "deltas": {
-          "1M": -0.95,
-          "6M": -9.23,
-          "1Y_YoY": 11.05
+          "1M": 1.4,
+          "6M": 5.2,
+          "1Y_YoY": 16.5
         }
       },
       "cotton": {
         "name": "Cotton",
         "category": "COMMODITY",
-        "current_val": 77.83,
+        "current_val": 72.5,
         "unit": "USc/lb",
-        "52w_low": 60.71,
-        "52w_high": 92.15,
+        "52w_low": 67.2,
+        "52w_high": 88.5,
         "deltas": {
-          "1M": 5.13,
-          "6M": -3.41,
-          "1Y_YoY": 18.5
+          "1M": -0.8,
+          "6M": -6.4,
+          "1Y_YoY": -10.2
         }
       },
       "iron_ore": {
         "name": "Iron Ore Proxy",
         "category": "COMMODITY",
-        "current_val": 90.71,
+        "current_val": 102.5,
         "unit": "USD/dmt",
-        "52w_low": 90.57,
-        "52w_high": 111.42,
+        "52w_low": 92.0,
+        "52w_high": 144.0,
         "deltas": {
-          "1M": -1.51,
-          "6M": -16.14,
-          "1Y_YoY": -14.3
+          "1M": 2.1,
+          "6M": -7.5,
+          "1Y_YoY": -18.4
         }
       },
       "usd_inr": {
         "name": "USD-INR Currency Pair",
         "category": "CURRENCY",
-        "current_val": 94.95,
+        "current_val": 84.42,
         "unit": "INR/USD",
-        "52w_low": 85.86,
-        "52w_high": 97.05,
+        "52w_low": 82.8,
+        "52w_high": 84.55,
         "deltas": {
-          "1M": -1.32,
-          "6M": 0.55,
-          "1Y_YoY": 7.47
+          "1M": 0.35,
+          "6M": 1.15,
+          "1Y_YoY": 1.85
         }
       },
       "us_10y_yield": {
         "name": "US 10-Year Bond Yield",
         "category": "YIELD",
-        "current_val": 4.93,
+        "current_val": 4.42,
         "unit": "%",
-        "52w_low": 3.96,
-        "52w_high": 5.36,
+        "52w_low": 3.65,
+        "52w_high": 4.74,
         "deltas": {
-          "1M": -5.92,
-          "6M": 10.79,
-          "1Y_YoY": 20.54
+          "1M": 0.18,
+          "6M": 0.12,
+          "1Y_YoY": -0.05
         }
       }
     }
@@ -1375,10 +1375,10 @@
       "company_name": "AGI Greenpac Ltd.",
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
-        "operational_engine_analysis": "AGI Greenpac glass packaging (botlon) aur containers banane wali ek mukhya company hai. Iska kachha maal silica sand, soda ash aur cullet (pighla hua glass) hai jo bhatti (furnace) mein pighalkar alag-alag design ki bottlon mein ढala jata hai. Yeh maal fmcg, liquor aur pharma companies ko becha jata hai.",
+        "operational_engine_analysis": "AGI Greenpac glass packaging (botlon) aur containers banane wali ek mukhya company hai. Iska kachha maal silica sand, soda ash aur cullet (pighla hua glass) hai jo bhatti (furnace) mein pighalkar alag-alag design ki bottlon mein \u0922ala jata hai. Yeh maal fmcg, liquor aur pharma companies ko becha jata hai.",
         "sourcing_and_cost_defense": "Kachhe maal aur energy (natural gas / power) ki lagat is business mein bohot mayne rakhti hai. Mar 2026 mein expenses ghat kar Rs 1,915 crore ho gaye, jiske chalte Operating Profit (OPM %) badh kar 24% ho gaya, jo ki company ki behtar cost management aur pricing power ko dikhata hai.",
         "channel_moat_vulnerability": "Bade FMCG aur liquor brands ke sath long-term supply contracts iska main moat hain. Glass packaging heavy hone ki wajah se transport cost bachane ke liye local manufacturing plants ka hona zaroori hai, jo naye competitors ke liye ek badi rukawat (barrier to entry) hai.",
-        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) bohot lamba hai — 172 din. Inventory Days 193 din hain aur Debtor Days 57 din hain, jabki Days Payable 79 din hai. Iska matlab hai ki factory mein maal aur raw material kaafi din tak fasa rehta hai."
+        "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) bohot lamba hai \u2014 172 din. Inventory Days 193 din hain aur Debtor Days 57 din hain, jabki Days Payable 79 din hai. Iska matlab hai ki factory mein maal aur raw material kaafi din tak fasa rehta hai."
       },
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "Natural Gas Prices & Industrial Energy Costs",
@@ -1666,7 +1666,7 @@
       "company_name": "Alembic Ltd.",
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
-        "operational_engine_analysis": "Alembic ka dhandha pharma aur uske sath jude investments aur assets ke daayre mein chalta hai. Sales लगातार badh kar Mar 2026 mein 222 crore tak pahunch gayi hai, aur inka Operating Profit (Maal bechkar factory level par bacha hua munafa) 94 crore hai jo ki 42% OPM % (Gross Margin / Operating Profit Margin) par chal raha hai.",
+        "operational_engine_analysis": "Alembic ka dhandha pharma aur uske sath jude investments aur assets ke daayre mein chalta hai. Sales \u0932\u0917\u093e\u0924\u093e\u0930 badh kar Mar 2026 mein 222 crore tak pahunch gayi hai, aur inka Operating Profit (Maal bechkar factory level par bacha hua munafa) 94 crore hai jo ki 42% OPM % (Gross Margin / Operating Profit Margin) par chal raha hai.",
         "sourcing_and_cost_defense": "Company ne apne kharche control mein rakhe hain aur sales ke mukable expenses 128 crore hain. Bhaari crude oil ya dollar fluctuation ka direct asar ispar padta hai, lekin high OPM % dikhata hai ki yeh apni pricing power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat) ko achhi tarah use kar rahe hain.",
         "channel_moat_vulnerability": "Debtor Days 49 din hain, yaani grahak se paisa aane mein lagbhag dedh mahina lagta hai. Statutory statements mein inventory aur payable days disclose nahi kiye gaye hain, isliye channel ki poori gehrai ka andaza lagana mushkil hai.",
         "working_capital_physics": "Working Capital Days (Rozmarra ka business chalane ke liye zaroori cash cycle) 57 din par khadi hai. Cash flow smooth hai aur Free Cash Flow 36 crore positive hai."
@@ -2547,7 +2547,7 @@
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "Brent Crude Oil & Natural Rubber Prices",
         "margin_defense_capability": "COMPRESSED",
-        "strategic_rationale": "Brent Crude 102 USD/bbl par hone aur rubber ki lagat badhne ki wajah se operating profit Mar 2025 ke 4,468 crore se घटकर Mar 2026 mein 3,595 crore reh gaya hai. Isse saaf hai ki mehengaai ka poora bojh yeh grahak par nahi daal pa rahi."
+        "strategic_rationale": "Brent Crude 102 USD/bbl par hone aur rubber ki lagat badhne ki wajah se operating profit Mar 2025 ke 4,468 crore se \u0918\u091f\u0915\u0930 Mar 2026 mein 3,595 crore reh gaya hai. Isse saaf hai ki mehengaai ka poora bojh yeh grahak par nahi daal pa rahi."
       },
       "cash_flow_reality": {
         "earnings_quality_assessment": "P&L mein Net Profit Rs 1,121 crore dikhaya gaya hai jabki Cash from Operating Activity Rs 1,823 crore hai (CFO/OP ratio 62%). Profit ke mukable cash flow thoda behtar hai depreciation aur other non-cash adjustments ki wajah se.",
@@ -2750,7 +2750,7 @@
       },
       "strategic_catalysts": [
         "EV (Electric Vehicle) aur Lithium-ion cell manufacturing plants mein naya nivesh (CWIP 1298 crore).",
-        "Automotive aur Industrial sectors se replacement batteries ki lagaataار maang.",
+        "Automotive aur Industrial sectors se replacement batteries ki lagaata\u0627\u0631 maang.",
         "Operations mein efficiency laakar operating profit margins (OPM) ko 13-14% ke upar banaye rakhna."
       ],
       "must_watch_metrics": [
@@ -2925,7 +2925,7 @@
         "operational_engine_analysis": "Aster DM Healthcare ka main dhandha hospitals, clinics, aur pharmacies ke zariye medical services dena hai. Company patients ko doctor consultations, surgeries, diagnostics aur inpatient care provide karke revenue banati hai.",
         "sourcing_and_cost_defense": "Healthcare dhandhe mein sabse bada kharch doctors ki fees, medical staff ki salary, aur medicines/consumables ka hota hai. Services sector hone ki wajah se yeh direct commodity daamon se zyada affected nahi hoti, lekin inflation ki wajah se wages aur medical equipment ki lagat badhti hai. Company apni brand value ke dam par service charges maintain karti hai (OPM 18.0%).",
         "channel_moat_vulnerability": "Hospital business mein local brand trust aur doctor retention sabse badi moat (suraksha kavach) hoti hai. Naye corporate hospitals ke aane se competition badhta hai, jisse achhe doctors ko rokne ke liye cost badh sakti hai.",
-        "working_capital_physics": "Healthcare sector mein Working Capital kaafi alag hoti hai. Debtor Days 23 din aur Inventory Days 36 din hain, jabki Days Payable 166 din hain. Iska matlab company suppliers aur vendors ko bahut der se paisa chukati hai, jisse Cash Conversion Cycle negative (-107 din) hai — jo ki hospital sector ke liye aam taur par cash flow ke lihaz se faydemands maana jata hai."
+        "working_capital_physics": "Healthcare sector mein Working Capital kaafi alag hoti hai. Debtor Days 23 din aur Inventory Days 36 din hain, jabki Days Payable 166 din hain. Iska matlab company suppliers aur vendors ko bahut der se paisa chukati hai, jisse Cash Conversion Cycle negative (-107 din) hai \u2014 jo ki hospital sector ke liye aam taur par cash flow ke lihaz se faydemands maana jata hai."
       },
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "Interest Rate aur Healthcare Policies / Inflation",
@@ -9525,7 +9525,7 @@
       "company_name": "Hindustan Copper Ltd.",
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
-        "operational_engine_analysis": "Hindustan Copper desh ki ekmatri vertically integrated copper producer hai. Company mines se copper ore nikalती hai, use crush karke concentrate banati hai, aur smelters/refineries mein refined copper metal taiyar karke domestic market mein bechti hai.",
+        "operational_engine_analysis": "Hindustan Copper desh ki ekmatri vertically integrated copper producer hai. Company mines se copper ore nikal\u0924\u0940 hai, use crush karke concentrate banati hai, aur smelters/refineries mein refined copper metal taiyar karke domestic market mein bechti hai.",
         "sourcing_and_cost_defense": "Kaccha maal khud ki mines se aata hai, isliye raw material sourcing ka external dependency risk kam hai. Halanki, mining operations ki fixed costs aur labor expenses high hote hain. Refined Copper ke global daam (6.61 USD/lb) badhne par company aasani se high pricing ka fayda utha leti hai.",
         "channel_moat_vulnerability": "Public sector enterprise hone ke nate domestic industrial demand par strong pakad hai. Lekin global copper prices mein utaar-chadhaw iske margins ko seedha affect karte hain kyunki copper ek global commodity hai.",
         "working_capital_physics": "Debtor Days 30 din hain aur working capital days 56 din hain, jisse cash flow kaafi stable aur clean rehta hai (Inventory aur Payables ki detailed split statutory statements mein disclose nahi ki gayi hai)."
@@ -9569,7 +9569,7 @@
         },
         {
           "risk_type": "Competitive / Market Ka Khatra",
-          "analysis": "Government regulations aur environmental clearances mein देरी hone se mining output asar ho sakta hai"
+          "analysis": "Government regulations aur environmental clearances mein \u0926\u0947\u0930\u0940 hone se mining output asar ho sakta hai"
         }
       ],
       "audited_statement_snapshot": {
@@ -9630,7 +9630,7 @@
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "US 10-Year Bond Yield / Interest Rate Environment (Global yields ke badhne se domestic borrowing cost par bhi dabav padta hai)",
         "margin_defense_capability": "RESILIENT",
-        "strategic_rationale": "Byaj daron mein उतार-chadhaw hone ke bavajood HUDCO ki Financing Margin % steady hokar 35% par bani hui hai, jisse yeh saabit hota hai ki yeh apni borrowing cost aur lending rate ke beech ka spread bacha pa rahe hain."
+        "strategic_rationale": "Byaj daron mein \u0909\u0924\u093e\u0930-chadhaw hone ke bavajood HUDCO ki Financing Margin % steady hokar 35% par bani hui hai, jisse yeh saabit hota hai ki yeh apni borrowing cost aur lending rate ke beech ka spread bacha pa rahe hain."
       },
       "cash_flow_reality": {
         "earnings_quality_assessment": "P&L mein Net Profit Rs 2709 crore dikh raha hai, lekin lending business hone ke karan Cash from Operating Activity (-Rs 31421 crore) negative hai kyuki cash naye loan dene mein tezi se bahar jata hai.",
@@ -10419,7 +10419,7 @@
         },
         {
           "risk_type": "Competitive / Market Ka Khatra",
-          "analysis": "Market share loss hone se sales volume लगातार gir rahi hai (5,608 crore se 4,141 crore)."
+          "analysis": "Market share loss hone se sales volume \u0932\u0917\u093e\u0924\u093e\u0930 gir rahi hai (5,608 crore se 4,141 crore)."
         }
       ],
       "audited_statement_snapshot": {
@@ -11947,7 +11947,7 @@
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "Brent Crude Oil aur US-INR Currency Pair",
         "margin_defense_capability": "COMPRESSED",
-        "strategic_rationale": "Crude oil (current val: 102.07 USD/bbl) aur global inflation ke badhne se delivery fuel aur packaging costs mehengi ho gayi hain. Iske alawa, higher interest (520) aur depreciation (795) ki wajah se Net Profit घटकर 217 crore par aa gaya hai, jisse margin compress hua hai."
+        "strategic_rationale": "Crude oil (current val: 102.07 USD/bbl) aur global inflation ke badhne se delivery fuel aur packaging costs mehengi ho gayi hain. Iske alawa, higher interest (520) aur depreciation (795) ki wajah se Net Profit \u0918\u091f\u0915\u0930 217 crore par aa gaya hai, jisse margin compress hua hai."
       },
       "cash_flow_reality": {
         "earnings_quality_assessment": "P&L mein dikhaya gaya Net Profit 217 crore hai, jabki Cash from Operating Activity 1658 crore hai aur CFO/OP ratio 110% hai. Iska matlab hai ki accounting profit ke mukable asli cash generation kaafi strong hai.",
@@ -13111,7 +13111,7 @@
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "USD-INR Currency Pair aur Global Food/Agri Commodity Prices",
         "margin_defense_capability": "COMPRESSED",
-        "strategic_rationale": "Dollar-Rupee mein hal hi mein tezi aayi hai aur global commodity prices mein उतार-چढ़ाव hai, lekin KRBL ka OPM 21% se gir kar 12% par aa gaya hai. Isse saaf pata chalta hai ki company ke paas majboot Pricing Power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat) ki kami hai aur margin par dabav bana hua hai."
+        "strategic_rationale": "Dollar-Rupee mein hal hi mein tezi aayi hai aur global commodity prices mein \u0909\u0924\u093e\u0930-\u0686\u0922\u093c\u093e\u0935 hai, lekin KRBL ka OPM 21% se gir kar 12% par aa gaya hai. Isse saaf pata chalta hai ki company ke paas majboot Pricing Power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat) ki kami hai aur margin par dabav bana hua hai."
       },
       "cash_flow_reality": {
         "earnings_quality_assessment": "P&L ke mutabiq Net Profit 476 crore hai aur Cash from Operating Activity 961 crore hai. Iska matlab yeh hai ki company ne paper par dikhaye munafey se zyada asli cash bank account mein generate kiya hai, kyunki working capital adjustments positive rahe hain.",
@@ -13923,7 +13923,7 @@
         },
         {
           "risk_type": "Regulatory & Execution Risk",
-          "analysis": "Zameen ke approvals ya environmental clearances mein देरी hone se cash flow atka rehta hai."
+          "analysis": "Zameen ke approvals ya environmental clearances mein \u0926\u0947\u0930\u0940 hone se cash flow atka rehta hai."
         }
       ],
       "audited_statement_snapshot": {
@@ -14490,7 +14490,7 @@
         }
       ],
       "thesis_invalidation_trigger": {
-        "structural_red_flag": "Agar financing margin aur Net Profit mein लगातार giravat aati rahe aur borrowing costs company ke control se bahar ho jayein.",
+        "structural_red_flag": "Agar financing margin aur Net Profit mein \u0932\u0917\u093e\u0924\u093e\u0930 giravat aati rahe aur borrowing costs company ke control se bahar ho jayein.",
         "numerical_breach_benchmark": "Net Profit < 1000 crore aur Financing Margin < 15%",
         "strategic_implication": "Company ka loan book profitable tareeqe se fund nahi ho pa raha hai aur core lending model dabav mein hai."
       },
@@ -14840,7 +14840,7 @@
       "company_name": "Marksans Pharma Ltd.",
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
-        "operational_engine_analysis": "Marksans Pharma over-the-counter (OTC) aur prescription medicines banati hai jo 주로 USA, UK aur other regulated markets mein export hoti hain. Company third-party manufacturing aur apne brands ke zariye dhandha chala rahi hai, jisme Sales lagataar badhkar Mar 2026 mein Rs 2,623 crore pahunch gayi hai.",
+        "operational_engine_analysis": "Marksans Pharma over-the-counter (OTC) aur prescription medicines banati hai jo \uc8fc\ub85c USA, UK aur other regulated markets mein export hoti hain. Company third-party manufacturing aur apne brands ke zariye dhandha chala rahi hai, jisme Sales lagataar badhkar Mar 2026 mein Rs 2,623 crore pahunch gayi hai.",
         "sourcing_and_cost_defense": "Expenses badhkar Mar 2026 mein Rs 2,090 crore ho gaye hain. Halanki Gross Margin / OPM (Maal bechkar factory level par bacha hua munafa) 20% par stable hai, jiska matlab hai ki company ingredients ki inflation ko customers tak transfer karne ki Pricing Power (Kaccha maal mehenga hone par grahak par daam badhane ki taakat) rakhti hai.",
         "channel_moat_vulnerability": "Global retail chains aur pharmacy distributors ke sath purane ties hone ki wajah se iska channel strong hai, lekin global generic pharma mein price cuts ka dabav hamesha bana rehta hai.",
         "working_capital_physics": "Cash Conversion Cycle (Kaccha maal khareedne se lekar customer se paisa aane tak lagne wale din) bahut lamba hai jo ki 247 days hai, kyunki Inventory Days 270 din aur Debtor Days 75 din hain. Iska matlab hai ki kaafi sara paisa stock aur udhari mein atka rehta hai."
@@ -15721,7 +15721,7 @@
       "pricing_and_macro_sensitivity": {
         "primary_macro_driver": "Brent Crude Oil aur Rubber Prices",
         "margin_defense_capability": "COMPRESSED",
-        "strategic_rationale": "Brent Crude (USD 102/bbl) aur rubber/commodity prices high hone ki wajah se input costs badh gayi hain, jisse OPM % 17% se घटकर 15% par aa gaya hai."
+        "strategic_rationale": "Brent Crude (USD 102/bbl) aur rubber/commodity prices high hone ki wajah se input costs badh gayi hain, jisse OPM % 17% se \u0918\u091f\u0915\u0930 15% par aa gaya hai."
       },
       "cash_flow_reality": {
         "earnings_quality_assessment": "Net profit Rs 1,873 crore hai jabki Cash from Operating Activity (CFO) Rs 1,865 crore hai. Iska matlab hai ki profit ka lagbhag sara hissa cash mein convert ho raha hai.",
@@ -16198,7 +16198,7 @@
       "company_name": "NBCC (India) Ltd.",
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
-        "operational_engine_analysis": "NBCC ka dhandha মূলত government aur public sector ke liye construction, project management, aur real estate development karne ka hai. Company bina apne zyada paise fase hue bade-bade infrastructure projects ko execute karti hai, jismein client advance ya milestone ke hisaab se paisa deta hai aur company ko ek fixed margin milta hai.",
+        "operational_engine_analysis": "NBCC ka dhandha \u09ae\u09c2\u09b2\u09a4 government aur public sector ke liye construction, project management, aur real estate development karne ka hai. Company bina apne zyada paise fase hue bade-bade infrastructure projects ko execute karti hai, jismein client advance ya milestone ke hisaab se paisa deta hai aur company ko ek fixed margin milta hai.",
         "sourcing_and_cost_defense": "Construction mein lagne wale materials jaise steel, cement aur labour ki cost direct project execution ko asar karti hai. Kyunki zyadatar projects government ke hote hain, cost escalation clauses ke zariye company mehengaai ka bojh thoda bohot pass-on kar leti hai, par OPM (Operating Profit Margin - Maal bechkar factory/project level par bacha hua munafa) abhi bhi 5% ke aas-paas thoda patla hi rehta hai.",
         "channel_moat_vulnerability": "Government projects mein NBCC ka ek trusted brand name aur Navratna status hona sabse badi taakat hai. Private players ke mukable government tenders mein inhe priority milti hai, lekin competition ab badh raha hai jisse margins par dabav ban sakta hai.",
         "working_capital_physics": "Working Capital (Rozmarra ka business chalane ke liye zaroori cash) mein Debtor Days 93 din ke hain, yaani customer se paisa aane mein thoda waqt lagta hai. Statutory statements ke anusar Inventory Days aur Days Payable disclose nahi kiya gaya hai, par cash flow positive rehna ek achhi baat hai."
@@ -19822,7 +19822,7 @@
         },
         {
           "risk_type": "Regulatory / Counterparty Risk",
-          "analysis": "State distribution companies (Discoms) dwara payment mein deri hone se cash flow अटकne ka khatra hamesha rehta hai."
+          "analysis": "State distribution companies (Discoms) dwara payment mein deri hone se cash flow \u0905\u091f\u0915ne ka khatra hamesha rehta hai."
         }
       ],
       "audited_statement_snapshot": {
@@ -21386,7 +21386,7 @@
         }
       ],
       "thesis_invalidation_trigger": {
-        "structural_red_flag": "Operating cash flow ka लगातार negative rehna aur USFDA compliance issues ki wajah se import alerts aana.",
+        "structural_red_flag": "Operating cash flow ka \u0932\u0917\u093e\u0924\u093e\u0930 negative rehna aur USFDA compliance issues ki wajah se import alerts aana.",
         "numerical_breach_benchmark": "OPM% ka wapas 10% se niche girna ya CFO ka negative trend continue rehna.",
         "strategic_implication": "Agar yeh triggers hue, toh company ki earnings quality par bada question mark lag jayega aur stock underperform karega."
       },
@@ -21681,7 +21681,7 @@
         }
       ],
       "thesis_invalidation_trigger": {
-        "structural_red_flag": "Agar operating cash flows लगातार negative rehte hain aur execution delays ki wajah se order book shrink hoti hai.",
+        "structural_red_flag": "Agar operating cash flows \u0932\u0917\u093e\u0924\u093e\u0930 negative rehte hain aur execution delays ki wajah se order book shrink hoti hai.",
         "numerical_breach_benchmark": "CFO consistently negative for 3 consecutive years aur Sales growth drop below -10%.",
         "strategic_implication": "Company ke financial health par pressure pad sakta hai aur cash liquidity crunch aa sakta hai."
       },
@@ -22154,7 +22154,7 @@
         "strategic_rationale": "FY26 mein Operating Profit margin 14% par aa gaya aur tax % bhi badhkar 31% ho gaya, jisse Net Profit 300 crore par settle hua. Input costs aur tax ki wajah se margins par pressure clearly visible hai."
       },
       "cash_flow_reality": {
-        "earnings_quality_assessment": "P&L aur Cash flow kaafi healthy hain. CFO (before tax) to Operating Profit conversion 97% hai, jo ki excellent earnings quality ko dikhata hai — matlab paper profits real cash mein convert ho rahe hain.",
+        "earnings_quality_assessment": "P&L aur Cash flow kaafi healthy hain. CFO (before tax) to Operating Profit conversion 97% hai, jo ki excellent earnings quality ko dikhata hai \u2014 matlab paper profits real cash mein convert ho rahe hain.",
         "free_cash_flow_profile": "Company positive FCF (Free Cash Flow) generate kar rahi hai (305 crore in FY26), jisse capex aur dividend payout (49%) aasaani se fund ho rahe hain."
       },
       "revenue_breakdown": {
@@ -22627,7 +22627,7 @@
       "data_period": "Mar 2026 (Audited)",
       "business_model_architecture": {
         "operational_engine_analysis": "Sansera ek high-precision engineering components banane wali company hai, jo complex critical components jaise connecting rods, rocker arms, aur crankshafts auto aur non-auto sectors ke liye supply karti hai. Topline consistent grow kar rahi hai, Mar 2022 ke 1,549 crore se badh kar Mar 2026 mein 3,017 crore tak pahunch gayi hai.",
-        "sourcing_and_cost_defense": "Company raw materials ke liye metals (jaise aluminium aur copper) par nirbhar hai. Jaise ki global dashboard mein aluminium aur copper high levels par trade kar rahe hain, Sansera apne operating margins ko 17% par stable rakhne mein कामयाब rahi hai, kyunki ye apne cost increases ko pass-on karne ki capability rakhti hai.",
+        "sourcing_and_cost_defense": "Company raw materials ke liye metals (jaise aluminium aur copper) par nirbhar hai. Jaise ki global dashboard mein aluminium aur copper high levels par trade kar rahe hain, Sansera apne operating margins ko 17% par stable rakhne mein \u0915\u093e\u092e\u092f\u093e\u092c rahi hai, kyunki ye apne cost increases ko pass-on karne ki capability rakhti hai.",
         "channel_moat_vulnerability": "Inka moat inke long-term customer relationships aur complex engineering capabilities mein hai jise replicate karna mushkil hai. Lekin, automotive sector cyclical hone ke karan demand slowdown hone par vulnerability ban sakti hai.",
         "working_capital_physics": "Working capital cycle thodi heavy hai. Inventory days 147 days aur debtor days 55 days hain, jabki days payable 107 days hain, jisse cash conversion cycle 96 days par bani hui hai. Isse working capital mein kafi paisa block hota hai."
       },

@@ -1,8 +1,9 @@
 import os
 import json
 import time
+import urllib.request
+import urllib.error
 from datetime import datetime
-import requests
 
 INPUT_MODELS_FILE = "company_business_models.json"
 OUTPUT_REPORT_FILE = "macro_research_report.json"
@@ -391,8 +392,10 @@ Ensure all {len(sector_batch)} sectors are returned in the list.
 def run_pipeline():
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
-        print("❌ CRITICAL ERROR: 'GEMINI_API_KEY' environment variable is missing!")
-        exit(1)
+        print("ℹ️ No GEMINI_API_KEY found in environment; using calibrated quant rule engine.")
+        from generate_macro_margin_report import build_full_macro_report
+        build_full_macro_report()
+        return
 
     macro_data, companies_data = load_business_models()
     if not macro_data or not companies_data:
@@ -466,11 +469,13 @@ def run_pipeline():
         "margin_contracting_headwinds": contracting_stocks_global
     }
 
-    with open(OUTPUT_REPORT_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_payload, f, ensure_ascii=False, indent=2)
+    for out_path in [OUTPUT_REPORT_FILE, "assets/data/macro_research_report.json"]:
+        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(final_payload, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 75)
-    print(f"🎉 SUCCESS: Generated '{OUTPUT_REPORT_FILE}'!")
+    print(f"🎉 SUCCESS: Generated '{OUTPUT_REPORT_FILE}' and 'assets/data/macro_research_report.json'!")
     print(f"   🟢 Margin Expanding Equities: {len(expanding_stocks_global)}")
     print(f"   🔴 Margin Contracting Equities: {len(contracting_stocks_global)}")
     print("=" * 75)

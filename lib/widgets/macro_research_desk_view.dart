@@ -100,32 +100,40 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
       appBar: AppBar(
         backgroundColor: kBgDark,
         elevation: 0,
+        titleSpacing: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              "MACRO MARGIN RADAR",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.1,
-                color: Colors.white,
+            const FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "MACRO MARGIN RADAR",
+                style: TextStyle(
+                  fontSize: 14.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.5,
+                  color: Colors.white,
+                ),
               ),
             ),
+            const SizedBox(height: 1),
             Text(
-              "Audited Balance Sheets vs Live Commodity Transmission",
-              style: TextStyle(fontSize: 10, color: kMutedText),
+              "Cost Transmission & Margin Sensitivity",
+              style: TextStyle(fontSize: 9.5, color: kMutedText.withOpacity(0.85)),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
         actions: [
           Container(
-            margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            margin: const EdgeInsets.only(right: 12, top: 12, bottom: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
               color: kSurfaceBg,
               borderRadius: BorderRadius.circular(20),
@@ -141,13 +149,13 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(width: 6),
-                const Text(
-                  "17 SECTORS",
-                  style: TextStyle(
-                    fontSize: 9,
+                const SizedBox(width: 5),
+                Text(
+                  "${_sectors.length} SECTORS",
+                  style: const TextStyle(
+                    fontSize: 8.5,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 0.8,
+                    letterSpacing: 0.6,
                     color: Colors.white70,
                   ),
                 ),
@@ -206,6 +214,7 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
     return Column(
       children: [
         _buildSearchAndFilters(),
+        _buildTopNotice(),
         Expanded(
           child: _sectors.isEmpty
               ? const Center(
@@ -224,6 +233,31 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
                 ),
         ),
       ],
+    );
+  }
+
+  Widget _buildTopNotice() {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D1524),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Icon(Icons.shield_outlined, color: kGreenAccent, size: 14),
+          SizedBox(width: 7),
+          Expanded(
+            child: Text(
+              "SEBI Statutory Notice: Sectoral macroeconomic research & raw material cost transmission analysis. Strictly educational; does not constitute investment advice or individual stock recommendations.",
+              style: TextStyle(color: Colors.white70, fontSize: 8.5, height: 1.3),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -560,33 +594,45 @@ class _MacroResearchDeskViewState extends State<MacroResearchDeskView> {
           // Operational Transmission Explanation
           Text(
             stock['operational_transmission_rationale'] ?? '',
-            style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.3),
+            style: const TextStyle(fontSize: 11, color: Color(0xFFC9D1D9), height: 1.35),
           ),
           const SizedBox(height: 8),
 
-          // Pricing Power & Outlook Row
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: kSurfaceBg,
-                  borderRadius: BorderRadius.circular(4),
+          // Pricing Power & Transmission Details Box
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
+              color: kSurfaceBg,
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: kBorderDark),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF090D16),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    "PRICING POWER: ${stock['pricing_power'] ?? 'MODERATE'}",
+                    style: TextStyle(
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.w900,
+                      color: stock['pricing_power'] == 'HIGH' ? kGreenAccent : Colors.white70,
+                    ),
+                  ),
                 ),
-                child: Text(
-                  "PRICING POWER: ${stock['pricing_power'] ?? 'MODERATE'}",
-                  style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white70),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    stock['quarterly_ebitda_outlook'] ?? '',
+                    style: const TextStyle(fontSize: 9.5, color: Colors.white70, height: 1.3),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  "Outlook: ${stock['quarterly_ebitda_outlook'] ?? ''}",
-                  style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic, color: color.withOpacity(0.9)),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
