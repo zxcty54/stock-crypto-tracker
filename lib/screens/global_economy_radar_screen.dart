@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'economy_demand_radar_screen.dart';
 import 'company_intelligence_screen.dart';
 import 'stock_delivery_history_screen.dart';
+import '../widgets/macro_research_desk_view.dart';
 
 class GlobalEconomyRadarScreen extends StatefulWidget {
   const GlobalEconomyRadarScreen({super.key});
@@ -36,6 +37,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   Map<String, dynamic> _fiiDiiFlows = {};
   Map<String, dynamic> _fiiDiiDerivatives = {};
   List<Map<String, dynamic>> _upcomingTriggers = [];
+  String _selectedImpactFilter = 'ALL';
 
   // Theme Colors
   static const Color kBgDark = Color(0xFF090D16);
@@ -521,6 +523,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final double netPulse = (_fiiDiiFlows['net_pulse_crores'] as num?)?.toDouble() ?? 730.0;
     final double absorption = (_fiiDiiFlows['absorption_ratio'] as num?)?.toDouble() ?? 1.3;
     final String verdict = _fiiDiiFlows['regime_verdict'] ?? 'DII Absorption Moat';
+    final String tradeDate = _fiiDiiDerivatives['trade_date'] ??
+        _fiiDiiFlows['trade_date'] ??
+        'Market Close';
 
     final bool isNetPositive = netPulse >= 0;
     final Color netColor = isNetPositive ? kAccentGreen : kAccentRed;
@@ -541,21 +546,40 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.compare_arrows_rounded,
-                      color: kAccentCyan, size: 15),
-                  const SizedBox(width: 6),
-                  Text(
-                    "INSTITUTIONAL CASH TURNOVER (FII vs DII)",
-                    style: GoogleFonts.plusJakartaSans(
-                      color: Colors.white,
-                      fontSize: 10.5,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.4,
+              Expanded(
+                child: Row(
+                  children: [
+                    const Icon(Icons.compare_arrows_rounded,
+                        color: kAccentCyan, size: 15),
+                    const SizedBox(width: 5),
+                    Text(
+                      "INSTITUTIONAL CASH (FII vs DII)",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 5),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF090D16),
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(color: Colors.white12),
+                      ),
+                      child: Text(
+                        tradeDate,
+                        style: const TextStyle(
+                          color: kTextMuted,
+                          fontSize: 7,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
@@ -1328,6 +1352,10 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         _buildSectorMarginChart(expansionSectors, pressureSectors),
         const SizedBox(height: 12),
 
+        // Deep 17-Sector Macro Margin Desk Launcher
+        _buildDeepMarginDeskLauncher(),
+        const SizedBox(height: 12),
+
         // 3. 📊 GRAPHICAL GAUGE: USD/INR & Trade Deficit Sensitivity Meter
         _buildCurrencyAndTradeGauge(usdInr, inrStress, rbiForex, crudeRule, eximDynamics),
         const SizedBox(height: 12),
@@ -1585,6 +1613,87 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDeepMarginDeskLauncher() {
+    return Container(
+      decoration: BoxDecoration(
+        color: kCardDark,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const MacroResearchDeskView(),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: kAccentCyan.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.tune_rounded, color: kAccentCyan, size: 16),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "17-SECTOR INPUT-COST MARGIN DESK",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      const Text(
+                        "Inspect raw material COGS benchmarks & commodity divergence sliders",
+                        style: TextStyle(color: kTextMuted, fontSize: 8.5),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: kAccentCyan.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: kAccentCyan.withOpacity(0.4)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        "Open Desk",
+                        style: TextStyle(color: kAccentCyan, fontSize: 9, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(width: 2),
+                      Icon(Icons.chevron_right_rounded, color: kAccentCyan, size: 12),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -2176,6 +2285,19 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
   // TAB 4: 🎯 SECTOR & INDUSTRY MACRO SENSITIVITY MATRIX
   // =============================================================
   Widget _buildEquityImpactTab() {
+    final int beneficiariesCount = _equityImpacts
+        .where((e) => e['impact_direction'] == 'BENEFICIARY')
+        .length;
+    final int headwindsCount = _equityImpacts
+        .where((e) => e['impact_direction'] == 'HEADWIND')
+        .length;
+
+    final List<Map<String, dynamic>> filteredList = _selectedImpactFilter == 'ALL'
+        ? _equityImpacts
+        : _equityImpacts
+            .where((e) => e['impact_direction'] == _selectedImpactFilter)
+            .toList();
+
     return ListView(
       padding: const EdgeInsets.all(12),
       children: [
@@ -2206,8 +2328,55 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             ],
           ),
         ),
-        ..._equityImpacts.map((e) => _buildIndustrySensitivityCard(e)),
+
+        // 1-Tap Filter Chip Row (Beneficiaries vs Headwinds)
+        Row(
+          children: [
+            _buildImpactFilterChip("ALL", "ALL (${_equityImpacts.length})", Colors.white70),
+            const SizedBox(width: 6),
+            _buildImpactFilterChip("BENEFICIARY", "🟢 BENEFICIARIES ($beneficiariesCount)", kAccentGreen),
+            const SizedBox(width: 6),
+            _buildImpactFilterChip("HEADWIND", "🔴 HEADWINDS ($headwindsCount)", kAccentRed),
+          ],
+        ),
+        const SizedBox(height: 12),
+
+        ...filteredList.map((e) => _buildIndustrySensitivityCard(e)),
       ],
+    );
+  }
+
+  Widget _buildImpactFilterChip(String filterKey, String label, Color activeCol) {
+    final bool isSelected = _selectedImpactFilter == filterKey;
+    return Expanded(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(6),
+        onTap: () {
+          HapticFeedback.selectionClick();
+          setState(() => _selectedImpactFilter = filterKey);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6.5),
+          decoration: BoxDecoration(
+            color: isSelected ? activeCol.withOpacity(0.18) : const Color(0xFF0F1726),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: isSelected ? activeCol.withOpacity(0.6) : const Color(0xFF1E2B3E),
+              width: isSelected ? 1.2 : 1,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? activeCol : Colors.white60,
+                fontSize: 8.5,
+                fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 

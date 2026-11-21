@@ -428,8 +428,10 @@ def synthesize_fii_dii_flows(metrics: dict) -> dict:
         fii_net = round(live["fii_net"], 1)
         dii_net = round(live["dii_net"], 1)
         source = live.get("source", "NSE_LIVE")
+        trade_date = live.get("trade_date") or datetime.now(timezone.utc).strftime("%d %b %Y")
     else:
         source = "MACRO_TELEMETRY_CORRELATION"
+        trade_date = datetime.now(timezone.utc).strftime("%d %b %Y")
         if dxy >= 106.0 or us10y >= 4.40:
             fii_net = -2450.0 - round((dxy - 105.0) * 450, 1)
             dii_net = 3180.0 + round((dxy - 105.0) * 200, 1)
@@ -450,6 +452,7 @@ def synthesize_fii_dii_flows(metrics: dict) -> dict:
         "absorption_ratio": absorption_ratio,
         "fii_action": "NET_SELLER" if fii_net < 0 else "NET_BUYER",
         "dii_action": "NET_BUYER" if dii_net > 0 else "NET_SELLER",
+        "trade_date": trade_date,
         "data_source": source,
         "regime_verdict": f"DII Absorption Moat ({absorption_ratio}x SIP Cushion)" if fii_net < 0 else "Synchronized Dual Inflows",
         "dxy_correlation_note": f"DXY at {dxy} & US 10Y at {us10y}% create FII outflow pressure, absorbed by domestic SIP liquidity."

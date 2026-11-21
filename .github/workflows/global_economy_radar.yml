@@ -2,7 +2,9 @@ name: Update Global Economy Radar
 
 on:
   schedule:
-    # Run every Monday at 3:30 AM UTC (9:00 AM IST) before market open
+    # 1. Post-Market Close: Mon-Fri at 13:30 UTC (7:00 PM IST) for fresh FII/DII & NSE F&O participant data
+    - cron: '30 13 * * 1-5'
+    # 2. Pre-Market Monday: 3:30 AM UTC (9:00 AM IST) for weekly global macro alignment
     - cron: '30 3 * * 1'
   workflow_dispatch:
 
@@ -26,7 +28,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install requests curl_cffi
 
       - name: Run Global Economy Telemetry Hunter
         env:
