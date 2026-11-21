@@ -1,7 +1,7 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-20 18:02:23 IST",
+  "last_updated": "2026-11-21 05:28:19 IST",
   "economy_headline": {
     "core_infra_growth_pct": 10.9,
     "port_cargo_growth_pct": 10.17,
@@ -211,7 +211,7 @@
           "thesis": "3PL supply chain logistics and integrated cargo movement peer"
         }
       ],
-      "macro_correlation_note": "Diesel consumption up +5.6% YoY; NETC FASTag toll collections surged to ₹5840 Cr (+8.5% YoY), confirming robust highway freight velocity."
+      "macro_correlation_note": "Diesel consumption up +5.6% YoY alongside FASTag toll collections rising +8.5% YoY to ₹5840 Cr."
     },
     {
       "sector": "Power Generation & Capital Goods",
@@ -254,7 +254,7 @@
           "thesis": "Industrial HT/LT power cables and transmission equipment peer"
         }
       ],
-      "macro_correlation_note": "Electricity output surged +11.4% YoY alongside a +10.7% expansion in coal dispatch, indicating heavy industrial energy absorption."
+      "macro_correlation_note": "Electricity generation surges +11.4% YoY supported by robust +10.7% YoY coal dispatch growth."
     },
     {
       "sector": "Infrastructure & Cement Construction",
@@ -297,7 +297,7 @@
           "thesis": "National highway EPC and road construction contractor peer"
         }
       ],
-      "macro_correlation_note": "Cement production grew +9.8% YoY while bitumen road capex leaped +17.2% YoY, validating aggressive national highway construction velocity."
+      "macro_correlation_note": "Cement production climbs +9.8% YoY while bitumen road capex accelerates by +17.2% YoY."
     },
     {
       "sector": "Port Logistics & Maritime Trade",
@@ -340,7 +340,7 @@
           "thesis": "Global LCL container consolidation and multi-modal logistics peer"
         }
       ],
-      "macro_correlation_note": "Major ports handled 566.4 MMT (+10.17% YoY) with container volumes rising +8.51%, reflecting resilient import-export throughput."
+      "macro_correlation_note": "Major ports cargo hits 566.4 MMT, marking +10.17% YoY expansion with container throughput up +8.51%."
     },
     {
       "sector": "Steel & Metals Fabrication",
@@ -383,7 +383,7 @@
           "thesis": "Public sector long products and railway track infrastructure peer"
         }
       ],
-      "macro_correlation_note": "Steel output posted solid growth at +4.9% YoY, driven by sustained structural demand from urban real estate and heavy engineering."
+      "macro_correlation_note": "Finished steel output records steady +4.9% YoY volume growth matching domestic fabrication demand."
     },
     {
       "sector": "Fertilizers & Agro-Chemicals",
@@ -411,7 +411,7 @@
           "thesis": "Urea production and domestic crop protection peer"
         }
       ],
-      "macro_correlation_note": "Rabi nutrient dispatch normalization observed; inventory positions stable ahead of upcoming pre-monsoon soil preparation cycles."
+      "macro_correlation_note": "Seasonal inventory cycles remain stable with baseline nutrient placement matching multi-year averages."
     },
     {
       "sector": "Upstream Crude Oil & Gas",
@@ -444,7 +444,7 @@
           "thesis": "North-east domestic oil exploration and refining subsidiary peer"
         }
       ],
-      "macro_correlation_note": "Domestic refinery runs tracking higher with robust product cracks; diesel and bitumen demand outstripping baseline seasonal averages."
+      "macro_correlation_note": "Domestic refinery throughput reflects strong transport fuel demand amid steady crude intake."
     }
   ]
 }
