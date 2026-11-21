@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-20T18:00:31.751136+00:00",
+    "generated_timestamp": "2026-11-21T05:57:47.233491+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
@@ -38,7 +38,7 @@
         "status_type": "PRESSURE",
         "flow_color": "red",
         "net_momentum_pct": 4.8,
-        "key_driver": "Property Slump (-10.3%) vs \u00a510T Debt Swap Stimulus"
+        "key_driver": "Property Slump (-10.3%) vs Stimulus Defense"
       },
       {
         "region_id": "europe",
@@ -289,15 +289,14 @@
         "import_export_shift": "India's annual crude import deficit impact: ~+$12.6B; emergency crude diversification to Russian and African grades.",
         "currency_impact": "USD/INR trading at \u20b984.42; RBI defending currency with foreign exchange market interventions.",
         "margin_winners": [
-          "ONGC",
-          "OIL",
-          "GAIL"
+          "Upstream Oil & Gas (E&P)",
+          "Domestic Gas Producers",
+          "Refinery Exporters"
         ],
         "margin_losers": [
-          "HPCL",
-          "BPCL",
-          "ASIANPAINT",
-          "INDIGO"
+          "Aviation Logistics",
+          "Decorative Paints",
+          "Downstream Fuel Retailers"
         ]
       },
       {
@@ -310,14 +309,14 @@
         "import_export_shift": "Imported energy and electronics become costlier in Rupee terms; dollar export billing gains realization cushion.",
         "currency_impact": "Rupee tests \u20b984.42 band; supported by RBI's $675.0B protective warchest.",
         "margin_winners": [
-          "SUNPHARMA",
-          "DRREDDY",
-          "DIVISLAB"
+          "IT Services Exporters",
+          "Generic Pharma Exporters",
+          "Precision Engineering"
         ],
         "margin_losers": [
-          "TATASTEEL",
-          "ADANIENT",
-          "JSWSTEEL"
+          "High Forex Debt Borrowers",
+          "Import-Reliant Metals",
+          "Capital Goods Importers"
         ]
       },
       {
@@ -330,15 +329,14 @@
         "import_export_shift": "Cheap Chinese steel coils and agrochemical intermediates surge into Asian ports, triggering anti-dumping investigations.",
         "currency_impact": "Disinflationary import price effect helps keep wholesale inflation low without direct foreign exchange shock.",
         "margin_winners": [
-          "TATAPOWER",
-          "PREMIERENE",
-          "DIXON"
+          "Solar EPC Developers",
+          "Electronics EMS Assemblers",
+          "Downstream Infrastructure"
         ],
         "margin_losers": [
-          "TATASTEEL",
-          "JSWSTEEL",
-          "UPL",
-          "SRF"
+          "Primary Blast-Furnace Steel",
+          "Basic Industrial Chemicals",
+          "Technical Crop Agrochemicals"
         ]
       }
     ]
@@ -599,7 +597,7 @@
       "name": "India & Emerging Asia",
       "flag": "\ud83c\uddee\ud83c\uddf3",
       "economic_status": "HIGH_GROWTH_LEADER",
-      "status_label": "GLOBAL GROWTH ENGINE",
+      "status_label": "FASTEST GROWING MAJOR ECONOMY",
       "central_bank_rate": "6.50% (RBI Neutral Stance)",
       "inflation_rate": "6.2% Headline (Food Spike) \u2022 Core 3.5%",
       "pmi_summary": "Manufacturing 57.5 \u2022 Services 59.2 (Composite 58.6)",
@@ -710,20 +708,20 @@
       "name": "US 10-Year Treasury Yield",
       "current_value": 4.42,
       "unit": "%",
-      "stress_level": "HIGH RISK GRAVITY",
+      "stress_level": "RESTRICTIVE CAPITAL COST",
       "status_label": "YIELD GRAVITY DABAO",
       "bar_ratio": 0.61,
       "flow_direction": "PRESSURE",
       "historical_range": "3.60% - 5.00%",
-      "market_impact": "High US long-term risk-free rates (4.42%) compress global equity price-to-earnings (PE) multiples and raise refinancing borrowing hurdles for dollar-denominated emerging market corporate debt."
+      "market_impact": "Long-term risk-free rates (4.42%) set global corporate discount rates, equity PE gravity, and dollar debt rollover costs for emerging market borrowers."
     },
     {
       "id": "brent_crude",
       "name": "Brent Crude Oil",
       "current_value": 73.4,
       "unit": "USD/bbl",
-      "stress_level": "MODERATE RELIEF",
-      "status_label": "MACRO SWEET SPOT",
+      "stress_level": "BENIGN RELIEF",
+      "status_label": "INPUT COST WINDFALL",
       "bar_ratio": 0.41,
       "flow_direction": "EXPANSION",
       "historical_range": "$68 - $92",
@@ -734,7 +732,7 @@
       "name": "Sovereign Gold (XAU/USD)",
       "current_value": 2655.0,
       "unit": "USD/oz",
-      "stress_level": "SAFE HAVEN DEMAND",
+      "stress_level": "PEAK RESERVE DIVERSIFICATION",
       "status_label": "DE-DOLLARIZATION HEDGE",
       "bar_ratio": 0.78,
       "flow_direction": "EXPANSION",
@@ -746,19 +744,19 @@
       "name": "Global Semiconductor Fab Utilization",
       "current_value": 94.5,
       "unit": "%",
-      "stress_level": "PEAK EXPANSION",
-      "status_label": "AI HARDWARE SUPERCYCLE",
+      "stress_level": "AI HARDWARE SUPERCYCLE",
+      "status_label": "AI COMPUTE BOOM",
       "bar_ratio": 0.94,
       "flow_direction": "EXPANSION",
       "historical_range": "72% - 96%",
-      "market_impact": "Near-capacity utilization (94.5%) at leading-edge foundries (TSMC 3nm/5nm) verifies the massive structural demand for AI accelerators, spilling over into domestic Indian electronic manufacturing (EMS) and packaging orders."
+      "market_impact": "Near-capacity utilization (94.5%) at leading-edge foundries (TSMC 3nm/5nm) verifies structural demand for AI accelerators, spilling over into domestic Indian electronic manufacturing (EMS) and packaging orders."
     },
     {
       "id": "baltic_dry",
       "name": "Baltic Dry Shipping Index",
       "current_value": 1680.0,
       "unit": "points",
-      "stress_level": "HEALTHY STEADY FLOW",
+      "stress_level": "STEADY BULK TRADE",
       "status_label": "BALANCED BULK EXIM",
       "bar_ratio": 0.44,
       "flow_direction": "EXPANSION",

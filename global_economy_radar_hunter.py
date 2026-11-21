@@ -274,8 +274,8 @@ class MacroCommentarySynthesizer:
             "supply_demand_choke": f"Threat of 2.0-2.5M bpd oil supply disruption; tanker war risk insurance premiums elevated.",
             "import_export_shift": f"India's annual crude import deficit impact: ~+${crude_deficit}B; emergency crude diversification to Russian and African grades.",
             "currency_impact": f"USD/INR trading at ₹{m['usd_inr']}; RBI defending currency with foreign exchange market interventions.",
-            "margin_winners": ["ONGC", "OIL", "GAIL"],
-            "margin_losers": ["HPCL", "BPCL", "ASIANPAINT", "INDIGO"]
+            "margin_winners": ["Upstream Oil & Gas (E&P)", "Domestic Gas Producers", "Refinery Exporters"],
+            "margin_losers": ["Aviation Logistics", "Decorative Paints", "Downstream Fuel Retailers"]
         })
 
         # 2. King Dollar & Yield Gravity Shock
@@ -284,13 +284,13 @@ class MacroCommentarySynthesizer:
             "id": "king_dollar_shock",
             "shock_name": "King Dollar & US 10Y Yield Gravity Spike",
             "is_active": is_dollar_high,
-            "severity": "ELEVATED DOLLAR SQUEEZE" if is_dollar_high else "MODERATE FLOAT",
+            "severity": "ELEVATED DOLLAR SQUEEZE" if is_dollar_high else "MODERATE CURRENCY FLOAT",
             "trigger": f"US 10Y yields at {m['us_10y_yield']}% and DXY at {m['dxy_index']} driven by resilient US growth ({m['us_services_pmi']} PMI).",
             "supply_demand_choke": "Dollar liquidity contraction across emerging market banks; foreign institutional capital re-allocating to US T-Bills.",
             "import_export_shift": "Imported energy and electronics become costlier in Rupee terms; dollar export billing gains realization cushion.",
             "currency_impact": f"Rupee tests ₹{m['usd_inr']} band; supported by RBI's ${m['india_forex_bn']}B protective warchest.",
-            "margin_winners": ["SUNPHARMA", "DRREDDY", "DIVISLAB"],
-            "margin_losers": ["TATASTEEL", "ADANIENT", "JSWSTEEL"]
+            "margin_winners": ["IT Services Exporters", "Generic Pharma Exporters", "Precision Engineering"],
+            "margin_losers": ["High Forex Debt Borrowers", "Import-Reliant Metals", "Capital Goods Importers"]
         })
 
         # 3. China Overcapacity Dumping Shock
@@ -299,13 +299,13 @@ class MacroCommentarySynthesizer:
             "id": "china_dumping_shock",
             "shock_name": "China Shock 2.0 Industrial Overcapacity Dumping",
             "is_active": is_china_dumping,
-            "severity": "ACTIVE FACTORY DUMPING",
+            "severity": "ACTIVE FACTORY DUMPING" if is_china_dumping else "BALANCED OVERSEAS SHIPMENTS",
             "trigger": f"China property contraction ({m['china_property_investment']}%) and factory deflation ({m['china_ppi']}% PPI) forcing overseas inventory clearance.",
             "supply_demand_choke": "Global steel, solar, and chemical markets flooded with Chinese inventory priced below international cash cost.",
             "import_export_shift": "Cheap Chinese steel coils and agrochemical intermediates surge into Asian ports, triggering anti-dumping investigations.",
             "currency_impact": "Disinflationary import price effect helps keep wholesale inflation low without direct foreign exchange shock.",
-            "margin_winners": ["TATAPOWER", "PREMIERENE", "DIXON"],
-            "margin_losers": ["TATASTEEL", "JSWSTEEL", "UPL", "SRF"]
+            "margin_winners": ["Solar EPC Developers", "Electronics EMS Assemblers", "Downstream Infrastructure"],
+            "margin_losers": ["Primary Blast-Furnace Steel", "Basic Industrial Chemicals", "Technical Crop Agrochemicals"]
         })
 
         return shocks
@@ -471,6 +471,186 @@ def build_global_radar_payload(metrics: dict) -> dict:
     now_utc = datetime.now(timezone.utc)
     month_year = now_utc.strftime("%B %Y")
 
+    # Dynamic Superpower Evaluation based on live/monthly metrics
+    us_pmi = metrics["us_services_pmi"]
+    us_10y = metrics["us_10y_yield"]
+    if us_pmi >= 54.0:
+        us_eco_status = "MODERATE_EXPANSION" if us_10y >= 4.40 else "ACCELERATING_EXPANSION"
+        us_status_label = "TECH & FISCAL RESILIENCE" if us_10y >= 4.40 else "BROAD-BASED EXPANSION"
+    elif us_pmi >= 50.0:
+        us_eco_status = "MODERATE_EXPANSION"
+        us_status_label = "SERVICES-LED RESILIENCE"
+    else:
+        us_eco_status = "CONTRACTION"
+        us_status_label = "CYCLICAL SLOWDOWN"
+
+    cn_ppi = metrics["china_ppi"]
+    cn_pmi = metrics["china_composite_pmi"]
+    cn_prop = metrics["china_property_investment"]
+    if cn_ppi < -2.0 and cn_prop < -5.0:
+        cn_eco_status = "DEFLATIONARY_PRESSURE"
+        cn_status_label = "STIMULUS BAZOOKA DEFENSE"
+    elif cn_pmi >= 51.0 and cn_ppi >= 0.0:
+        cn_eco_status = "CYCLICAL_RECOVERY"
+        cn_status_label = "DOMESTIC DEMAND REBOUND"
+    elif cn_pmi >= 50.0:
+        cn_eco_status = "STABILIZATION_PHASE"
+        cn_status_label = "BORDERLINE STABILIZATION"
+    else:
+        cn_eco_status = "SEVERE_CONTRACTION"
+        cn_status_label = "FACTORY OVERCAPACITY DRAG"
+
+    eu_pmi = metrics["europe_mfg_pmi"]
+    if eu_pmi < 47.0:
+        eu_eco_status = "SEVERE_CONTRACTION"
+        eu_status_label = "DE-INDUSTRIALIZATION SHOCK"
+    elif eu_pmi < 50.0:
+        eu_eco_status = "MODERATE_PRESSURE"
+        eu_status_label = "SUBDUED FACTORY ORDERS"
+    elif eu_pmi < 53.0:
+        eu_eco_status = "MODEST_EXPANSION"
+        eu_status_label = "MILD INDUSTRIAL RECOVERY"
+    else:
+        eu_eco_status = "RAPID_EXPANSION"
+        eu_status_label = "BROAD INDUSTRIAL RECOVERY"
+
+    jp_pmi = metrics["japan_composite_pmi"]
+    if jp_pmi >= 51.0:
+        jp_eco_status = "MODEST_EXPANSION"
+        jp_status_label = "EXITING 30-YR DEFLATION"
+    elif jp_pmi >= 49.0:
+        jp_eco_status = "NEUTRAL_FLOAT"
+        jp_status_label = "BALANCED DOMESTIC FLOAT"
+    else:
+        jp_eco_status = "MODERATE_PRESSURE"
+        jp_status_label = "EXPORT SLOWDOWN"
+
+    in_pmi = metrics["india_composite_pmi"]
+    if in_pmi >= 57.0:
+        in_eco_status = "HIGH_GROWTH_LEADER"
+        in_status_label = "FASTEST GROWING MAJOR ECONOMY"
+    elif in_pmi >= 52.0:
+        in_eco_status = "MODERATE_EXPANSION"
+        in_status_label = "SOLID DOMESTIC MOMENTUM"
+    else:
+        in_eco_status = "SLOWDOWN"
+        in_status_label = "GROWTH DECELERATION"
+
+    def evaluate_pillar(region_id: str, pmi: float) -> tuple:
+        if region_id == "us":
+            if pmi >= 52.0:
+                return ("EXPANSION", "EXPANSION", "cyan")
+            elif pmi >= 50.0:
+                return ("MODERATE EXPANSION", "EXPANSION", "cyan")
+            else:
+                return ("CONTRACTION", "PRESSURE", "red")
+        elif region_id == "china":
+            if metrics["china_ppi"] < -1.5:
+                return ("DEFLATIONARY PRESSURE", "PRESSURE", "red")
+            elif pmi >= 51.0:
+                return ("STIMULUS EXPANSION", "EXPANSION", "cyan")
+            elif pmi >= 50.0:
+                return ("BORDERLINE RECOVERY", "EXPANSION", "cyan")
+            else:
+                return ("FACTORY CONTRACTION", "PRESSURE", "red")
+        elif region_id == "europe":
+            if pmi >= 50.0:
+                return ("INDUSTRIAL RECOVERY", "EXPANSION", "green")
+            elif pmi >= 47.0:
+                return ("MILD CONTRACTION", "PRESSURE", "red")
+            else:
+                return ("DEEP CONTRACTION", "PRESSURE", "red")
+        elif region_id == "japan":
+            if pmi >= 50.0:
+                return ("MODEST REBOUND", "EXPANSION", "cyan")
+            else:
+                return ("EXPORT CONTRACTION", "PRESSURE", "red")
+        elif region_id == "em_india":
+            if pmi >= 56.0:
+                return ("RAPID EXPANSION", "EXPANSION", "green")
+            elif pmi >= 50.0:
+                return ("DOMESTIC EXPANSION", "EXPANSION", "green")
+            else:
+                return ("GROWTH DECELERATION", "PRESSURE", "red")
+        return ("EXPANSION" if pmi >= 50.0 else "CONTRACTION", "EXPANSION" if pmi >= 50.0 else "PRESSURE", "cyan" if pmi >= 50.0 else "red")
+
+    us_p_stat, us_p_type, us_p_col = evaluate_pillar("us", metrics["us_services_pmi"])
+    cn_p_stat, cn_p_type, cn_p_col = evaluate_pillar("china", metrics["china_composite_pmi"])
+    eu_p_stat, eu_p_type, eu_p_col = evaluate_pillar("europe", metrics["europe_mfg_pmi"])
+    jp_p_stat, jp_p_type, jp_p_col = evaluate_pillar("japan", metrics["japan_composite_pmi"])
+    in_p_stat, in_p_type, in_p_col = evaluate_pillar("em_india", metrics["india_composite_pmi"])
+
+    core_pillars = [
+        {
+            "region_id": "us",
+            "region": "UNITED STATES",
+            "flag": "🇺🇸",
+            "gdp_trillion_usd": 28.7,
+            "growth_pmi": metrics["us_services_pmi"],
+            "growth_pmi_label": "Services PMI",
+            "status": us_p_stat,
+            "status_type": us_p_type,
+            "flow_color": us_p_col,
+            "net_momentum_pct": 2.8,
+            "key_driver": "$250B+ AI Data Center Capex & Fed Easing Cycle"
+        },
+        {
+            "region_id": "china",
+            "region": "CHINA",
+            "flag": "🇨🇳",
+            "gdp_trillion_usd": 18.5,
+            "growth_pmi": metrics["china_composite_pmi"],
+            "growth_pmi_label": "Caixin Composite",
+            "status": cn_p_stat,
+            "status_type": cn_p_type,
+            "flow_color": cn_p_col,
+            "net_momentum_pct": 4.8,
+            "key_driver": f"Property Slump ({metrics['china_property_investment']}%) vs Stimulus Defense"
+        },
+        {
+            "region_id": "europe",
+            "region": "EUROZONE / UK",
+            "flag": "🇪🇺",
+            "gdp_trillion_usd": 19.4,
+            "growth_pmi": metrics["europe_mfg_pmi"],
+            "growth_pmi_label": "Mfg PMI",
+            "status": eu_p_stat,
+            "status_type": eu_p_type,
+            "flow_color": eu_p_col,
+            "net_momentum_pct": 0.7,
+            "key_driver": "German Auto Slump, Energy Shocks & French Fiscal Deficits"
+        },
+        {
+            "region_id": "japan",
+            "region": "JAPAN",
+            "flag": "🇯🇵",
+            "gdp_trillion_usd": 4.2,
+            "growth_pmi": metrics["japan_composite_pmi"],
+            "growth_pmi_label": "Composite PMI",
+            "status": jp_p_stat,
+            "status_type": jp_p_type,
+            "flow_color": jp_p_col,
+            "net_momentum_pct": 1.2,
+            "key_driver": "30-Year High Wage Hikes (+5.2%) & Semicon Onshoring"
+        },
+        {
+            "region_id": "em_india",
+            "region": "INDIA & EM ASIA",
+            "flag": "🇮🇳",
+            "gdp_trillion_usd": 7.6,
+            "growth_pmi": metrics["india_composite_pmi"],
+            "growth_pmi_label": "Composite PMI",
+            "status": in_p_stat,
+            "status_type": in_p_type,
+            "flow_color": in_p_col,
+            "net_momentum_pct": 7.2,
+            "key_driver": "China+1 Supply Chain Shift & Domestic Capex Execution"
+        }
+    ]
+
+    exp_count = sum(1 for p in core_pillars if p["status_type"] == "EXPANSION")
+    pres_count = sum(1 for p in core_pillars if p["status_type"] == "PRESSURE")
+
     payload = {
         "metadata": {
             "title": "Global Macro Economy Pressure & Expansion Radar",
@@ -484,75 +664,9 @@ def build_global_radar_payload(metrics: dict) -> dict:
             "global_health_score": health_score,
             "global_health_label": health_label,
             "health_verdict": verdict,
-            "regions_expansion_count": 3,
-            "regions_pressure_count": 2,
-            "core_pillars": [
-                {
-                    "region_id": "us",
-                    "region": "UNITED STATES",
-                    "flag": "🇺🇸",
-                    "gdp_trillion_usd": 28.7,
-                    "growth_pmi": metrics["us_services_pmi"],
-                    "growth_pmi_label": "Services PMI",
-                    "status": "EXPANSION",
-                    "status_type": "EXPANSION",
-                    "flow_color": "cyan",
-                    "net_momentum_pct": 2.8,
-                    "key_driver": "$250B+ AI Data Center Capex & Fed Easing Cycle"
-                },
-                {
-                    "region_id": "china",
-                    "region": "CHINA",
-                    "flag": "🇨🇳",
-                    "gdp_trillion_usd": 18.5,
-                    "growth_pmi": metrics["china_composite_pmi"],
-                    "growth_pmi_label": "Caixin Composite",
-                    "status": "DEFLATIONARY PRESSURE",
-                    "status_type": "PRESSURE",
-                    "flow_color": "red",
-                    "net_momentum_pct": 4.8,
-                    "key_driver": f"Property Slump ({metrics['china_property_investment']}%) vs ¥10T Debt Swap Stimulus"
-                },
-                {
-                    "region_id": "europe",
-                    "region": "EUROZONE / UK",
-                    "flag": "🇪🇺",
-                    "gdp_trillion_usd": 19.4,
-                    "growth_pmi": metrics["europe_mfg_pmi"],
-                    "growth_pmi_label": "Mfg PMI",
-                    "status": "DEEP CONTRACTION",
-                    "status_type": "PRESSURE",
-                    "flow_color": "red",
-                    "net_momentum_pct": 0.7,
-                    "key_driver": "German Auto Slump, Energy Shocks & French Fiscal Deficits"
-                },
-                {
-                    "region_id": "japan",
-                    "region": "JAPAN",
-                    "flag": "🇯🇵",
-                    "gdp_trillion_usd": 4.2,
-                    "growth_pmi": metrics["japan_composite_pmi"],
-                    "growth_pmi_label": "Composite PMI",
-                    "status": "MODEST REBOUND",
-                    "status_type": "EXPANSION",
-                    "flow_color": "cyan",
-                    "net_momentum_pct": 1.2,
-                    "key_driver": "30-Year High Wage Hikes (+5.2%) & Semicon Onshoring"
-                },
-                {
-                    "region_id": "em_india",
-                    "region": "INDIA & EM ASIA",
-                    "flag": "🇮🇳",
-                    "gdp_trillion_usd": 7.6,
-                    "growth_pmi": metrics["india_composite_pmi"],
-                    "growth_pmi_label": "Composite PMI",
-                    "status": "RAPID EXPANSION",
-                    "status_type": "EXPANSION",
-                    "flow_color": "green",
-                    "net_momentum_pct": 7.2,
-                    "key_driver": "China+1 Supply Chain Shift & Domestic Capex Execution"
-                }
-            ]
+            "regions_expansion_count": exp_count,
+            "regions_pressure_count": pres_count,
+            "core_pillars": core_pillars
         },
         "supply_demand_control_levers": {
             "headline": "HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND",
@@ -613,8 +727,8 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "id": "us",
                 "name": "United States of America",
                 "flag": "🇺🇸",
-                "economic_status": "MODERATE_EXPANSION",
-                "status_label": "TECH & FISCAL RESILIENCE",
+                "economic_status": us_eco_status,
+                "status_label": us_status_label,
                 "central_bank_rate": "4.50% - 4.75% (Fed Cutting Cycle)",
                 "inflation_rate": "3.3% Core CPI (Sticky Shelter & Insurance)",
                 "pmi_summary": f"Services {metrics['us_services_pmi']} (Booming) • Mfg {metrics['us_mfg_pmi']} (Soft)",
@@ -695,8 +809,8 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "id": "china",
                 "name": "China (People's Republic of China)",
                 "flag": "🇨🇳",
-                "economic_status": "DEFLATIONARY_PRESSURE",
-                "status_label": "STIMULUS BAZOOKA DEFENSE",
+                "economic_status": cn_eco_status,
+                "status_label": cn_status_label,
                 "central_bank_rate": "3.10% (PBOC Easing Cycle)",
                 "inflation_rate": f"0.3% CPI • {metrics['china_ppi']}% PPI (Deflation)",
                 "pmi_summary": f"Caixin Mfg {metrics['china_composite_pmi']} (Borderline) • Services 52.0",
@@ -777,8 +891,8 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "id": "europe",
                 "name": "Eurozone & United Kingdom",
                 "flag": "🇪🇺",
-                "economic_status": "SEVERE_CONTRACTION",
-                "status_label": "DE-INDUSTRIALIZATION SHOCK",
+                "economic_status": eu_eco_status,
+                "status_label": eu_status_label,
                 "central_bank_rate": "3.25% (ECB Aggressive Cuts)",
                 "inflation_rate": "2.0% HICP (Target Reached)",
                 "pmi_summary": f"Manufacturing {metrics['europe_mfg_pmi']} (Deep Slump) • Services 51.6",
@@ -823,8 +937,8 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "id": "japan",
                 "name": "Japan",
                 "flag": "🇯🇵",
-                "economic_status": "MODEST_EXPANSION",
-                "status_label": "EXITING 30-YR DEFLATION",
+                "economic_status": jp_eco_status,
+                "status_label": jp_status_label,
                 "central_bank_rate": "0.25% (Bank of Japan Hiking Cycle)",
                 "inflation_rate": "2.5% Core CPI (Sustained Above Target)",
                 "pmi_summary": f"Composite {metrics['japan_composite_pmi']} (Expansion) • Mfg 49.2",
@@ -863,8 +977,8 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "id": "em_india",
                 "name": "India & Emerging Asia",
                 "flag": "🇮🇳",
-                "economic_status": "HIGH_GROWTH_LEADER",
-                "status_label": "GLOBAL GROWTH ENGINE",
+                "economic_status": in_eco_status,
+                "status_label": in_status_label,
                 "central_bank_rate": "6.50% (RBI Neutral Stance)",
                 "inflation_rate": "6.2% Headline (Food Spike) • Core 3.5%",
                 "pmi_summary": f"Manufacturing 57.5 • Services 59.2 (Composite {metrics['india_composite_pmi']})",
@@ -981,14 +1095,14 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "name": "US 10-Year Treasury Yield",
                 "current_value": metrics["us_10y_yield"],
                 "unit": "%",
-                "stress_level": "HIGH RISK GRAVITY" if metrics["us_10y_yield"] >= 4.30 else "MODERATE",
-                "status_label": "YIELD GRAVITY DABAO",
-                "bar_ratio": round(min(1.0, max(0.2, (metrics["us_10y_yield"] - 3.2) / 2.0)), 2),
-                "flow_direction": "PRESSURE",
+                "stress_level": "RESTRICTIVE CAPITAL COST" if metrics["us_10y_yield"] >= 4.35 else ("BALANCED EQUILIBRIUM" if metrics["us_10y_yield"] >= 4.00 else "ACCOMMODATIVE YIELD"),
+                "status_label": "YIELD GRAVITY DABAO" if metrics["us_10y_yield"] >= 4.35 else ("BALANCED DISCOUNT RATE" if metrics["us_10y_yield"] >= 4.00 else "GROWTH TAILWIND"),
+                "bar_ratio": round(min(1.0, max(0.15, (metrics["us_10y_yield"] - 3.2) / 2.0)), 2),
+                "flow_direction": "PRESSURE" if metrics["us_10y_yield"] >= 4.35 else "EXPANSION",
                 "historical_range": "3.60% - 5.00%",
                 "market_impact": (
-                    f"High US long-term risk-free rates ({metrics['us_10y_yield']}%) compress global equity price-to-earnings (PE) multiples and raise "
-                    "refinancing borrowing hurdles for dollar-denominated emerging market corporate debt."
+                    f"Long-term risk-free rates ({metrics['us_10y_yield']}%) set global corporate discount rates, equity PE gravity, "
+                    "and dollar debt rollover costs for emerging market borrowers."
                 )
             },
             {
@@ -996,10 +1110,10 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "name": "Brent Crude Oil",
                 "current_value": metrics["brent_crude"],
                 "unit": "USD/bbl",
-                "stress_level": "MODERATE RELIEF" if metrics["brent_crude"] < 80.0 else "ELEVATED DEFICIT PRESSURE",
-                "status_label": "MACRO SWEET SPOT" if metrics["brent_crude"] < 78.0 else "OIL SQUEEZE ALERT",
+                "stress_level": "ACUTE INFLATION CHOKE" if metrics["brent_crude"] >= 85.0 else ("ELEVATED DEFICIT PRESSURE" if metrics["brent_crude"] >= 78.0 else "BENIGN RELIEF"),
+                "status_label": "CRITICAL CRUDE CHOKE" if metrics["brent_crude"] >= 82.0 else ("BALANCED COST FLOAT" if metrics["brent_crude"] >= 74.0 else "INPUT COST WINDFALL"),
                 "bar_ratio": round(min(1.0, max(0.15, (metrics["brent_crude"] - 55.0) / 45.0)), 2),
-                "flow_direction": "EXPANSION" if metrics["brent_crude"] < 78.0 else "PRESSURE",
+                "flow_direction": "PRESSURE" if metrics["brent_crude"] >= 78.0 else "EXPANSION",
                 "historical_range": "$68 - $92",
                 "market_impact": (
                     f"Oil trading at ${metrics['brent_crude']} is an economic stabilizer for India, keeping the Current Account Deficit (CAD) "
@@ -1011,9 +1125,9 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "name": "Sovereign Gold (XAU/USD)",
                 "current_value": metrics["gold_oz"],
                 "unit": "USD/oz",
-                "stress_level": "SAFE HAVEN DEMAND",
-                "status_label": "DE-DOLLARIZATION HEDGE",
-                "bar_ratio": round(min(1.0, max(0.3, (metrics["gold_oz"] - 1800.0) / 1100.0)), 2),
+                "stress_level": "PEAK RESERVE DIVERSIFICATION" if metrics["gold_oz"] >= 2600.0 else "STEADY SAFE HAVEN",
+                "status_label": "DE-DOLLARIZATION HEDGE" if metrics["gold_oz"] >= 2500.0 else "SOVEREIGN RESERVE BID",
+                "bar_ratio": round(min(1.0, max(0.2, (metrics["gold_oz"] - 1800.0) / 1100.0)), 2),
                 "flow_direction": "EXPANSION",
                 "historical_range": "$1,980 - $2,790",
                 "market_impact": (
@@ -1026,13 +1140,13 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "name": "Global Semiconductor Fab Utilization",
                 "current_value": metrics["semicon_utilization"],
                 "unit": "%",
-                "stress_level": "PEAK EXPANSION",
-                "status_label": "AI HARDWARE SUPERCYCLE",
-                "bar_ratio": round(min(1.0, max(0.4, metrics["semicon_utilization"] / 100.0)), 2),
-                "flow_direction": "EXPANSION",
+                "stress_level": "AI HARDWARE SUPERCYCLE" if metrics["semicon_utilization"] >= 90.0 else ("STEADY FOUNDRY RUNS" if metrics["semicon_utilization"] >= 80.0 else "CHIP DESTOCKING"),
+                "status_label": "AI COMPUTE BOOM" if metrics["semicon_utilization"] >= 90.0 else ("HEALTHY TECH CYCLE" if metrics["semicon_utilization"] >= 80.0 else "DESTOCKING DRAG"),
+                "bar_ratio": round(min(1.0, max(0.2, metrics["semicon_utilization"] / 100.0)), 2),
+                "flow_direction": "EXPANSION" if metrics["semicon_utilization"] >= 80.0 else "PRESSURE",
                 "historical_range": "72% - 96%",
                 "market_impact": (
-                    f"Near-capacity utilization ({metrics['semicon_utilization']}%) at leading-edge foundries (TSMC 3nm/5nm) verifies the massive structural demand for AI accelerators, "
+                    f"Near-capacity utilization ({metrics['semicon_utilization']}%) at leading-edge foundries (TSMC 3nm/5nm) verifies structural demand for AI accelerators, "
                     "spilling over into domestic Indian electronic manufacturing (EMS) and packaging orders."
                 )
             },
@@ -1041,10 +1155,10 @@ def build_global_radar_payload(metrics: dict) -> dict:
                 "name": "Baltic Dry Shipping Index",
                 "current_value": metrics["baltic_dry"],
                 "unit": "points",
-                "stress_level": "HEALTHY STEADY FLOW",
-                "status_label": "BALANCED BULK EXIM",
-                "bar_ratio": round(min(1.0, max(0.2, (metrics["baltic_dry"] - 800.0) / 2000.0)), 2),
-                "flow_direction": "EXPANSION",
+                "stress_level": "FREIGHT TARIFF SURGE" if metrics["baltic_dry"] >= 2500.0 else ("STEADY BULK TRADE" if metrics["baltic_dry"] >= 1200.0 else "TRADE VOLUME SLOWDOWN"),
+                "status_label": "FREIGHT FRICTION" if metrics["baltic_dry"] >= 2500.0 else ("BALANCED BULK EXIM" if metrics["baltic_dry"] >= 1200.0 else "SUBDUED SHIPPING"),
+                "bar_ratio": round(min(1.0, max(0.15, (metrics["baltic_dry"] - 800.0) / 2000.0)), 2),
+                "flow_direction": "PRESSURE" if (metrics["baltic_dry"] >= 2500.0 or metrics["baltic_dry"] < 1100.0) else "EXPANSION",
                 "historical_range": "1,100 - 2,250",
                 "market_impact": (
                     f"Baltic Dry at {metrics['baltic_dry']} points confirms steady raw material movements (iron ore, coal, grains) "

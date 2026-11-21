@@ -407,28 +407,44 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                   final id = g['id'];
                   final val = g['current_value'];
                   if (id == 'brent_crude' && val != null) brentStr = "\$$val";
-                  if (id == 'dxy_dollar' && val != null) dxyStr = "$val";
-                  if (id == 'us_10y_yield' && val != null) us10yStr = "$val%";
+                  if ((id == 'dxy' || id == 'dxy_dollar') && val != null) dxyStr = "$val";
+                  if ((id == 'us10y' || id == 'us_10y_yield') && val != null) us10yStr = "$val%";
                   if (id == 'gold_spot' && val != null) goldStr = "\$$val";
                 }
 
                 for (var sp in _superpowers) {
-                  if (sp['name'] == 'India') {
+                  final spId = sp['id'] ?? '';
+                  final spName = sp['name'] ?? '';
+                  if (spId == 'em_india' || spId == 'india' || spName.toString().contains('India')) {
                     final pmi = sp['vital_stats']?['composite_pmi'];
-                    if (pmi != null) inPmiStr = "$pmi";
+                    if (pmi != null) inPmiStr = "$pmi".split(' ').first;
                   }
                 }
+
+                final double brentNum = double.tryParse(brentStr.replaceAll(RegExp(r'[^\d.]'), '')) ?? 73.4;
+                final Color brentCol = brentNum < 78.0 ? kAccentGreen : (brentNum < 85.0 ? kAccentAmber : kAccentRed);
+
+                final Color usdInrCol = liveUsdInr < 83.5 ? kAccentGreen : (liveUsdInr < 84.5 ? kAccentAmber : kAccentRed);
+
+                final double dxyNum = double.tryParse(dxyStr.replaceAll(RegExp(r'[^\d.]'), '')) ?? 106.0;
+                final Color dxyCol = dxyNum < 103.0 ? kAccentGreen : (dxyNum < 105.5 ? kAccentAmber : kAccentRed);
+
+                final double us10yNum = double.tryParse(us10yStr.replaceAll(RegExp(r'[^\d.]'), '')) ?? 4.4;
+                final Color us10yCol = us10yNum < 4.0 ? kAccentGreen : (us10yNum < 4.35 ? kAccentAmber : kAccentRed);
+
+                final double inPmiNum = double.tryParse(inPmiStr.replaceAll(RegExp(r'[^\d.]'), '')) ?? 58.0;
+                final Color inPmiCol = inPmiNum >= 55.0 ? kAccentGreen : (inPmiNum >= 50.0 ? kAccentAmber : kAccentRed);
 
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      _buildQuickMetricChip("BRENT", brentStr, kAccentGreen),
-                      _buildQuickMetricChip("USD/INR", "₹$usdInrStr", kAccentRed),
-                      _buildQuickMetricChip("DXY", dxyStr, kAccentRed),
-                      _buildQuickMetricChip("US 10Y", us10yStr, kAccentAmber),
+                      _buildQuickMetricChip("BRENT", brentStr, brentCol),
+                      _buildQuickMetricChip("USD/INR", "₹$usdInrStr", usdInrCol),
+                      _buildQuickMetricChip("DXY", dxyStr, dxyCol),
+                      _buildQuickMetricChip("US 10Y", us10yStr, us10yCol),
                       _buildQuickMetricChip("GOLD", goldStr, kAccentGreen),
-                      _buildQuickMetricChip("IN PMI", inPmiStr, kAccentGreen),
+                      _buildQuickMetricChip("IN PMI", inPmiStr, inPmiCol),
                     ],
                   ),
                 );
@@ -642,27 +658,37 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                   ),
                 ],
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-                decoration: BoxDecoration(
-                  color: statusLabel.contains('CONTRACTION') ||
-                          statusLabel.contains('PRESSURE')
-                      ? kAccentRed.withOpacity(0.15)
-                      : kAccentCyan.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  statusLabel,
-                  style: TextStyle(
-                    color: statusLabel.contains('CONTRACTION') ||
-                            statusLabel.contains('PRESSURE')
-                        ? kAccentRed
-                        : kAccentCyan,
-                    fontSize: 8,
-                    fontWeight: FontWeight.bold,
+              Builder(builder: (context) {
+                final bool isNegativeStatus = statusLabel.contains('CONTRACTION') ||
+                    statusLabel.contains('PRESSURE') ||
+                    statusLabel.contains('SHOCK') ||
+                    statusLabel.contains('DRAG') ||
+                    statusLabel.contains('SLOWDOWN');
+                final bool isPositiveStatus = statusLabel.contains('GROWTH') ||
+                    statusLabel.contains('EXPANSION') ||
+                    statusLabel.contains('RESILIENCE') ||
+                    statusLabel.contains('REBOUND') ||
+                    statusLabel.contains('LEADER');
+                final Color statusCol = isNegativeStatus
+                    ? kAccentRed
+                    : (isPositiveStatus ? kAccentGreen : kAccentCyan);
+
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                  decoration: BoxDecoration(
+                    color: statusCol.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                ),
-              ),
+                  child: Text(
+                    statusLabel,
+                    style: TextStyle(
+                      color: statusCol,
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              }),
             ],
           ),
           const SizedBox(height: 4),
