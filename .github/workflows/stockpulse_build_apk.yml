@@ -64,9 +64,12 @@ jobs:
         run: |
           flutter analyze --no-fatal-infos --no-fatal-warnings lib/ > /tmp/analyze.log 2>&1 || true
           cat /tmp/analyze.log
-          grep -E "error •" /tmp/analyze.log | head -n 20 | while IFS= read -r line; do
-            echo "::error title=DartError::$line"
-          done
+          if grep -qE "error •" /tmp/analyze.log; then
+            grep -E "error •" /tmp/analyze.log | head -n 20 | while IFS= read -r line; do
+              echo "::error title=DartError::$line"
+            done
+            exit 1
+          fi
 
       - name: Build Release APK
         env:
