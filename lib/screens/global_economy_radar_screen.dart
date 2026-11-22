@@ -1722,7 +1722,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                       ),
                       const SizedBox(height: 3),
                       const Text(
-                        "Range batati hai ki pichle 1 saal me low aur high kitna tha. Jab US Dollar (106+) ya US Yields Red Zone me hote hain, FIIs India se paisa nikalte hain. Jab Crude ($73) Green Zone me hota hai, India ke liye positive hota hai.",
+                        "Range batati hai ki pichle 1 saal me low aur high kitna tha. Jab US Dollar (106+) ya US Yields Red Zone me hote hain, FIIs India se paisa nikalte hain. Jab Crude (USD 73) Green Zone me hota hai, India ke liye positive hota hai.",
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: 10.5,
@@ -2067,9 +2067,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
       case 'us_10y_yield':
         return "US me bina kisi risk ke 4.42% interest mil raha hai. Jab US yields high rehti hain, foreign funds risky shares me kam paisa lagate hain, jisse overall market PE valuation par gravity rehti hai.";
       case 'brent_crude':
-        return "Crude \$73.4 safe comfort zone me hai (\$70-\$78). India ke liye ye positive hai — Paint, Tyre, Aviation aur Chemical stocks ke raw material margins safe rehte hain.";
+        return "Crude USD 73.4 safe comfort zone me hai (USD 70-78). India ke liye ye positive hai — Paint, Tyre, Aviation aur Chemical stocks ke raw material margins safe rehte hain.";
       case 'gold_spot':
-        return "Sovereign Gold \$2,655 all-time high zone me hai. Iska matlab Central Banks US Dollar par depend hone ke bajaye physical Gold reserves jama kar rahe hain.";
+        return "Sovereign Gold USD 2,655 all-time high zone me hai. Iska matlab Central Banks US Dollar par depend hone ke bajaye physical Gold reserves jama kar rahe hain.";
       case 'semicon_utilization':
         return "AI Chip factories 94.5% full capacity par chal rahi hain. Iska direct fayda Indian EMS aur Electronics manufacturing stocks (Kaynes, Dixon, Syrma) ko heavy orders ke roop me milta hai.";
       case 'baltic_dry':
