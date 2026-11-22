@@ -1469,12 +1469,13 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: const Color(0xFF0F1726),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.35)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // 1. Stock Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1484,14 +1485,14 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                     sym,
                     style: GoogleFonts.robotoMono(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   const SizedBox(width: 8),
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: const Color(0xFF1E2B3E),
                       borderRadius: BorderRadius.circular(4),
@@ -1499,238 +1500,221 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                     child: Text(
                       tier,
                       style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 8.5,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.white70,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
               ),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFF2A6D).withOpacity(0.18),
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.35)),
                 ),
                 child: Text(
                   action.replaceAll('_', ' '),
                   style: const TextStyle(
                     color: Color(0xFFFF2A6D),
-                    fontSize: 8.5,
+                    fontSize: 9,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 3),
           Text(
             name,
-            style: const TextStyle(color: Colors.white54, fontSize: 10),
+            style: const TextStyle(color: Colors.white54, fontSize: 11),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
 
-          // Key metrics row
+          // 2. Direct Stats (Clean inline row, NO nested boxes!)
           Row(
             children: [
               Expanded(
-                child: _buildExitMetricBox(
-                  "DII STAKE DROP",
-                  "${drop.toStringAsFixed(1)}%",
-                  const Color(0xFFFF5252),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "DII STAKE DROP",
+                      style: TextStyle(
+                        color: Colors.white38,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      "${drop.toStringAsFixed(1)}%",
+                      style: GoogleFonts.robotoMono(
+                        color: const Color(0xFFFF5252),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 8),
               Expanded(
-                child: _buildExitMetricBox(
-                  "EST. SELLING",
-                  "₹${_currencyFormat.format(sellingCr.abs())} Cr",
-                  const Color(0xFFFF9100),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "EST. INSTITUTIONAL SELLING",
+                      style: TextStyle(
+                        color: Colors.white38,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      "₹${_currencyFormat.format(sellingCr.abs())} Cr",
+                      style: GoogleFonts.robotoMono(
+                        color: const Color(0xFFFF9100),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
-          // 📊 Retail Divergence Visualizer Dual-Bar Graph
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1B0C14),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.35)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "DII INSTITUTIONAL SLASHDOWN",
-                      style: TextStyle(
-                        color: Color(0xFFFF5252),
-                        fontSize: 8.5,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    Text(
-                      "${drop.toStringAsFixed(1)}% Dumped",
-                      style: GoogleFonts.robotoMono(
-                        color: const Color(0xFFFF5252),
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
+          // 3. Visual Divergence Bar (Flat on card, NO inner pink box!)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "DII Institutional Dump",
+                style: TextStyle(
+                  color: Color(0xFFFF5252),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
                 ),
-                const SizedBox(height: 4),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(3),
-                  child: Container(
-                    height: 6,
-                    color: const Color(0xFF0D060A),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: (drop.abs() / 60.0).clamp(0.1, 1.0),
-                        child: Container(color: const Color(0xFFFF2A6D)),
-                      ),
-                    ),
-                  ),
+              ),
+              Text(
+                "${drop.toStringAsFixed(1)}% Dumped",
+                style: GoogleFonts.robotoMono(
+                  color: const Color(0xFFFF5252),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
                 ),
-                const SizedBox(height: 8),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "RETAIL INFLOW ABSORPTION (TRAP)",
-                      style: TextStyle(
-                        color: Color(0xFFFFB703),
-                        fontSize: 8.5,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    Text(
-                      retail,
-                      style: GoogleFonts.robotoMono(
-                        color: const Color(0xFFFFB703),
-                        fontSize: 9.5,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(3),
-                  child: Container(
-                    height: 6,
-                    color: const Color(0xFF0D060A),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: 0.65,
-                        child: Container(color: const Color(0xFFFFB703)),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: const [
-                    Icon(Icons.warning_amber_rounded,
-                        color: Color(0xFFFF2A6D), size: 12),
-                    SizedBox(width: 4),
-                    Text(
-                      "ALERT: Smart money selling into retail euphoria!",
-                      style: TextStyle(
-                        color: Color(0xFFFF80AB),
-                        fontSize: 8.5,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: LinearProgressIndicator(
+              value: (drop.abs() / 60.0).clamp(0.1, 1.0),
+              minHeight: 6,
+              backgroundColor: const Color(0xFF1E2B3E),
+              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFFF2A6D)),
             ),
           ),
+          const SizedBox(height: 10),
+
+          // 4. Retail Absorption Trap Warning (Using Column / Expanded so text NEVER overflows!)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Retail Trap Flow: ",
+                style: TextStyle(
+                  color: Color(0xFFFFB703),
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  retail,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.robotoMono(
+                    color: const Color(0xFFFFB703),
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: const [
+              Icon(Icons.warning_amber_rounded,
+                  color: Color(0xFFFF2A6D), size: 13),
+              SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  "ALERT: Smart money selling into retail euphoria!",
+                  style: TextStyle(
+                    color: Color(0xFFFF80AB),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // 5. Exiting Institutions (Clean flat badges, NO heavy nested border boxes!)
           if (funds.isNotEmpty) ...[
             const SizedBox(height: 10),
             Row(
-              children: const [
-                Icon(Icons.exit_to_app_rounded, color: Color(0xFFFF2A6D), size: 13),
-                SizedBox(width: 5),
-                Text(
-                  "EXITING INSTITUTIONS (WHO SOLD):",
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 2),
+                  child: Icon(Icons.exit_to_app_rounded,
+                      color: Color(0xFFFF5252), size: 12),
+                ),
+                const SizedBox(width: 5),
+                const Text(
+                  "Sold by: ",
                   style: TextStyle(
                     color: Color(0xFFFF5252),
-                    fontSize: 9,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.4,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Expanded(
+                  child: Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: funds.map((f) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 2.5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1E2638),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          f.toString(),
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 6),
-            Wrap(
-              spacing: 6,
-              runSpacing: 5,
-              children: funds.map((f) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1F0D15),
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: const Color(0xFFFF2A6D).withOpacity(0.4)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.account_balance_rounded, color: Color(0xFFFF5252), size: 11),
-                      const SizedBox(width: 5),
-                      Text(
-                        f.toString(),
-                        style: GoogleFonts.plusJakartaSans(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
           ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildExitMetricBox(String label, String value, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFF090D16),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label,
-              style: const TextStyle(color: Colors.white38, fontSize: 8)),
-          const SizedBox(height: 2),
-          Text(
-            value,
-            style: GoogleFonts.robotoMono(
-              color: color,
-              fontSize: 11,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
         ],
       ),
     );
@@ -2000,21 +1984,15 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
           ),
           const SizedBox(height: 10),
 
-          // Flow Box
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: const Color(0xFF090D16),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+          // Flow Stats Row (Clean & Flat, No Inner Box!)
+          Row(
+            children: [
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("ESTIMATED CAPITAL DELTA",
-                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 2),
                     Text(
                       volumeCr >= 0
@@ -2024,100 +2002,86 @@ class _MfSmartMoneyScreenState extends State<MfSmartMoneyScreen>
                         color: volumeCr >= 0
                             ? const Color(0xFF00FF88)
                             : const Color(0xFFFF2A6D),
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("ACTIVE BUYERS / HOLDERS",
-                        style: TextStyle(color: Colors.white38, fontSize: 8.5)),
+                        style: TextStyle(color: Colors.white38, fontSize: 8.5, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 2),
                     Text(
                       "${funds.length} Top Funds",
                       style: GoogleFonts.robotoMono(
                         color: const Color(0xFF00E5FF),
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           if (funds.isNotEmpty) ...[
             const SizedBox(height: 10),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  action == 'SILENT_DUMPING'
-                      ? Icons.exit_to_app_rounded
-                      : Icons.shopping_bag_rounded,
-                  color: action == 'SILENT_DUMPING'
-                      ? const Color(0xFFFF2A6D)
-                      : const Color(0xFF00FF88),
-                  size: 13,
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Icon(
+                    action == 'SILENT_DUMPING'
+                        ? Icons.exit_to_app_rounded
+                        : Icons.shopping_bag_rounded,
+                    color: action == 'SILENT_DUMPING'
+                        ? const Color(0xFFFF5252)
+                        : const Color(0xFF00FF88),
+                    size: 12,
+                  ),
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  action == 'SILENT_DUMPING'
-                      ? "DUMPING / TRIMMING MFs (WHO SOLD):"
-                      : "BUYING MUTUAL FUNDS (WHO BOUGHT):",
+                  action == 'SILENT_DUMPING' ? "Sold by: " : "Bought by: ",
                   style: TextStyle(
                     color: action == 'SILENT_DUMPING'
                         ? const Color(0xFFFF80AB)
                         : const Color(0xFF00FF88),
-                    fontSize: 9,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.3,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Expanded(
+                  child: Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: funds.map((f) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 2.5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1E2638),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          f.toString(),
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
               ],
-            ),
-            const SizedBox(height: 6),
-            Wrap(
-              spacing: 6,
-              runSpacing: 4,
-              children: funds.map((f) {
-                return Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF101B2E),
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: action == 'SILENT_DUMPING'
-                          ? const Color(0xFFFF2A6D).withOpacity(0.35)
-                          : const Color(0xFF00E5FF).withOpacity(0.35),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.account_balance_rounded,
-                        color: action == 'SILENT_DUMPING'
-                            ? const Color(0xFFFF80AB)
-                            : const Color(0xFF00E5FF),
-                        size: 10,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        f.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
             ),
           ],
         ],
