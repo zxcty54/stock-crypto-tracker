@@ -576,13 +576,17 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                             const SizedBox(height: 10),
                             Row(
                               children: [
-                                _buildDeliveryMiniChip("📊 20D OHLC", const Color(0xFF00F0FF)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("📦 Delivery %", const Color(0xFF00F5A0)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("🔥 Volume Surges", const Color(0xFFFFB703)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("🏆 1W/1M Movers", const Color(0xFFFF2A6D)),
+                                Expanded(child: _buildBannerFeatureChip("📊 20-Day OHLC History", const Color(0xFF00F0FF))),
+                                const SizedBox(width: 8),
+                                Expanded(child: _buildBannerFeatureChip("🎯 Stealth Accumulation", const Color(0xFF00F5A0))),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              children: [
+                                Expanded(child: _buildBannerFeatureChip("📦 High Demat Delivery %", const Color(0xFFFFB703))),
+                                const SizedBox(width: 8),
+                                Expanded(child: _buildBannerFeatureChip("🏆 1W & 1M Top Movers", const Color(0xFFFF2A6D))),
                               ],
                             ),
                           ],
@@ -886,13 +890,17 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                             const SizedBox(height: 10),
                             Row(
                               children: [
-                                _buildDeliveryMiniChip("🏛️ FII/DII Net Flow", const Color(0xFF00FF88)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("🌡️ India VIX Meter", const Color(0xFFFFB703)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("⚡ Pledge Risk > 25%", const Color(0xFFFF2A6D)),
-                                const SizedBox(width: 6),
-                                _buildDeliveryMiniChip("📦 Bulk Deals", const Color(0xFF00E5FF)),
+                                Expanded(child: _buildBannerFeatureChip("🏛️ FII/DII Cash Flow", const Color(0xFF00FF88))),
+                                const SizedBox(width: 8),
+                                Expanded(child: _buildBannerFeatureChip("🌡️ India VIX Risk Meter", const Color(0xFFFFB703))),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              children: [
+                                Expanded(child: _buildBannerFeatureChip("⚡ Promoter Pledge Stress", const Color(0xFFFF2A6D))),
+                                const SizedBox(width: 8),
+                                Expanded(child: _buildBannerFeatureChip("📦 Bulk & Block Deals", const Color(0xFF00E5FF))),
                               ],
                             ),
                           ],
@@ -1009,23 +1017,23 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
     );
   }
 
-  Widget _buildDeliveryMiniChip(String label, Color color) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: const Color(0xFF090D16),
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: color.withOpacity(0.3)),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontSize: 9,
-            fontWeight: FontWeight.bold,
-          ),
+  Widget _buildBannerFeatureChip(String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.35)),
+      ),
+      child: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: GoogleFonts.plusJakartaSans(
+          color: color,
+          fontSize: 10.5,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
