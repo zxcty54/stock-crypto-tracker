@@ -64,8 +64,8 @@ jobs:
         run: |
           flutter analyze --no-fatal-infos --no-fatal-warnings lib/ > /tmp/analyze.log 2>&1 || true
           cat /tmp/analyze.log
-          grep -E "(error •|warning •|info •)" /tmp/analyze.log | head -n 20 | while IFS= read -r line; do
-            echo "::error title=Analyze::$line"
+          grep -E "error •" /tmp/analyze.log | head -n 20 | while IFS= read -r line; do
+            echo "::error title=DartError::$line"
           done
 
       - name: Build Release APK
@@ -78,10 +78,14 @@ jobs:
             --dart-define=SUPABASE_URL="$SUPABASE_URL" \
             --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY" \
             --verbose > /tmp/build.log 2>&1 || {
-              echo "=== BUILD FAILED ==="
-              tail -n 30 /tmp/build.log | while IFS= read -r line; do
-                echo "::error title=Gradle Error::$line"
+              echo "=== BUILD FAILED: EMITTING ANNOTATIONS ==="
+              grep -B 20 -m 1 " #0 " /tmp/build.log | while IFS= read -r line; do
+                echo "::error title=DartException::$line"
               done
+              grep -C 4 -E "(What went wrong:|FAILURE: Build failed|Execution failed for task|compileFlutterBuildRelease|Caused by:|e: |error: )" /tmp/build.log | head -n 50 | while IFS= read -r line; do
+                echo "::error title=GradleFailure::$line"
+              done
+              tail -n 80 /tmp/build.log
               exit 1
             }
 
