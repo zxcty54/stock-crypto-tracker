@@ -239,6 +239,7 @@ class _InstitutionalInternalsRadarScreenState
         (_fiiDiiFlows['fii_net_crores'] as num?)?.toDouble() ?? -2450.0;
     final double diiNet =
         (_fiiDiiFlows['dii_net_crores'] as num?)?.toDouble() ?? 3180.0;
+    final double netPulse = diiNet + fiiNet;
     final double vix =
         (_marketInternals['india_vix'] as num?)?.toDouble() ?? 12.8;
     final String regime =
@@ -247,49 +248,82 @@ class _InstitutionalInternalsRadarScreenState
         (_marketInternals['advance_decline_ratio_pct'] as num?)?.toDouble() ??
             62.4;
 
+    final bool isDiiAbsorbing = diiNet >= fiiNet.abs();
+    final bool isNetPositive = netPulse >= 0;
+    final Color verdictColor = isDiiAbsorbing ? kAccentGreen : (isNetPositive ? kAccentCyan : kAccentRed);
+
+    final String verdictHeadline = isDiiAbsorbing
+        ? "🟢 NET DOMESTIC ABSORPTION (BULLISH ACCUMULATION)"
+        : (isNetPositive
+            ? "🟢 NET INSTITUTIONAL INFLOW (POSITIVE BIAS)"
+            : "🔴 NET INSTITUTIONAL OUTFLOW (DEFENSIVE RISK)");
+
+    final String plainConclusion = isDiiAbsorbing
+        ? "Domestic Institutions (DIIs ₹${diiNet.toStringAsFixed(0)} Cr) ne Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) ko poori tarah absorb kiya hai. Market internals strong hain."
+        : (isNetPositive
+            ? "FIIs aur DIIs dono taraf se net buying active hai. Broad liquidity trend positive bana hua hai."
+            : "Foreign selling domestic buying se zyada hai. Cautious risk regime active hai.");
+
+    // Visual chart factor calculations
+    final double totalAbsoluteFlow = (diiNet.abs() + fiiNet.abs()).clamp(1.0, 50000.0);
+    final double diiSharePct = ((diiNet.abs() / totalAbsoluteFlow) * 100).clamp(10.0, 90.0);
+    final double fiiSharePct = 100.0 - diiSharePct;
+
+    // VIX position (scale 10 to 30)
+    final double vixPosition = ((vix - 10.0) / 20.0).clamp(0.0, 1.0);
+
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF131B2A), Color(0xFF0F1726)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: kBorderSubtle),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: verdictColor.withOpacity(0.4)),
+        boxShadow: [
+          BoxShadow(
+            color: verdictColor.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Header Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  const Icon(Icons.shield_rounded, color: kAccentCyan, size: 15),
-                  const SizedBox(width: 5),
+                  const Icon(Icons.insights_rounded, color: kAccentCyan, size: 16),
+                  const SizedBox(width: 6),
                   Text(
-                    "INSTITUTIONAL HUD & INTERNAL HEALTH",
+                    "EXECUTIVE VERDICT & CORE TAKEAWAY",
                     style: GoogleFonts.plusJakartaSans(
                       color: Colors.white,
-                      fontSize: 10,
+                      fontSize: 11,
                       fontWeight: FontWeight.w900,
-                      letterSpacing: 0.4,
+                      letterSpacing: 0.5,
                     ),
                   ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: kAccentCyan.withOpacity(0.15),
+                  color: verdictColor.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: verdictColor.withOpacity(0.35)),
                 ),
                 child: Text(
-                  "LIVE TEL",
+                  "LIVE VERDICT",
                   style: GoogleFonts.robotoMono(
-                    color: kAccentCyan,
-                    fontSize: 8,
+                    color: verdictColor,
+                    fontSize: 8.5,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -297,37 +331,247 @@ class _InstitutionalInternalsRadarScreenState
             ],
           ),
           const SizedBox(height: 10),
+
+          // Big Verdict Banner
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: verdictColor.withOpacity(0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  verdictHeadline,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: verdictColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      "Combined Net Flow: ",
+                      style: const TextStyle(color: Colors.white60, fontSize: 11.5),
+                    ),
+                    Text(
+                      "${netPulse >= 0 ? '+' : ''}₹${netPulse.toStringAsFixed(0)} Cr",
+                      style: GoogleFonts.robotoMono(
+                        color: netPulse >= 0 ? kAccentGreen : kAccentRed,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  plainConclusion,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 11.5,
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // 📊 VISUAL CHARTS SECTION
+          Text(
+            "VISUAL FLOWS & RISK METERS",
+            style: GoogleFonts.plusJakartaSans(
+              color: kAccentCyan,
+              fontSize: 10,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 0.6,
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // Chart 1: FII vs DII Battle Bar
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0A101D),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFF1E2B3E)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "DII Absorption: ₹${diiNet.toStringAsFixed(0)} Cr (${diiSharePct.toStringAsFixed(0)}%)",
+                      style: const TextStyle(color: kAccentGreen, fontSize: 10.5, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "FII Selling: ₹${fiiNet.abs().toStringAsFixed(0)} Cr (${fiiSharePct.toStringAsFixed(0)}%)",
+                      style: const TextStyle(color: kAccentRed, fontSize: 10.5, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: diiSharePct.toInt(),
+                        child: Container(
+                          height: 8,
+                          color: kAccentGreen,
+                        ),
+                      ),
+                      Container(width: 2, height: 8, color: Colors.white70),
+                      Expanded(
+                        flex: fiiSharePct.toInt(),
+                        child: Container(
+                          height: 8,
+                          color: kAccentRed,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // Chart 2: India VIX Volatility Spectrum Meter
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0A101D),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFF1E2B3E)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "India VIX Risk Gauge",
+                      style: const TextStyle(color: Colors.white70, fontSize: 10.5, fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                      decoration: BoxDecoration(
+                        color: (vix <= 15 ? kAccentGreen : (vix <= 22 ? kAccentAmber : kAccentRed)).withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        "VIX: ${vix.toStringAsFixed(1)} ($regime)",
+                        style: TextStyle(
+                          color: vix <= 15 ? kAccentGreen : (vix <= 22 ? kAccentAmber : kAccentRed),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 35,
+                        child: Container(
+                          height: 8,
+                          color: kAccentGreen,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      Container(width: 1, height: 8, color: Colors.black),
+                      Expanded(
+                        flex: 35,
+                        child: Container(
+                          height: 8,
+                          color: kAccentAmber,
+                        ),
+                      ),
+                      Container(width: 1, height: 8, color: Colors.black),
+                      Expanded(
+                        flex: 30,
+                        child: Container(
+                          height: 8,
+                          color: kAccentRed,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("🟢 Calm (<14)", style: TextStyle(color: kAccentGreen, fontSize: 8.5)),
+                    Text("🟡 Normal (14-19)", style: TextStyle(color: kAccentAmber, fontSize: 8.5)),
+                    Text("🔴 High Risk (>19)", style: TextStyle(color: kAccentRed, fontSize: 8.5)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // 2x2 Metric Grid (Clean and spacious, no overflow)
           Row(
             children: [
               Expanded(
-                child: _buildHeaderPill(
-                  "FII CASH",
+                child: _buildMetricGridCard(
+                  "FII Net Cash",
                   "${fiiNet >= 0 ? '+' : ''}₹${fiiNet.toStringAsFixed(0)} Cr",
+                  fiiNet >= 0 ? "Net Buying" : "Distribution",
                   fiiNet >= 0 ? kAccentGreen : kAccentRed,
+                  Icons.public_rounded,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Expanded(
-                child: _buildHeaderPill(
-                  "DII CASH",
+                child: _buildMetricGridCard(
+                  "DII Net Cash",
                   "${diiNet >= 0 ? '+' : ''}₹${diiNet.toStringAsFixed(0)} Cr",
+                  diiNet >= 0 ? "Absorption" : "Selling",
                   diiNet >= 0 ? kAccentGreen : kAccentRed,
+                  Icons.account_balance_rounded,
                 ),
               ),
-              const SizedBox(width: 6),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
               Expanded(
-                child: _buildHeaderPill(
-                  "INDIA VIX",
-                  "${vix.toStringAsFixed(1)} ($regime)",
+                child: _buildMetricGridCard(
+                  "India VIX Meter",
+                  vix.toStringAsFixed(1),
+                  regime,
                   vix <= 15 ? kAccentGreen : (vix <= 22 ? kAccentAmber : kAccentRed),
+                  Icons.speed_rounded,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Expanded(
-                child: _buildHeaderPill(
-                  "BREADTH",
+                child: _buildMetricGridCard(
+                  "Market Breadth",
                   "${breadthPct.toStringAsFixed(0)}% Adv",
-                  breadthPct >= 50 ? kAccentGreen : kAccentRed,
+                  breadthPct >= 50 ? "Broad Participation" : "Selective Churn",
+                  breadthPct >= 50 ? kAccentGreen : kAccentAmber,
+                  Icons.trending_up_rounded,
                 ),
               ),
             ],
@@ -337,35 +581,56 @@ class _InstitutionalInternalsRadarScreenState
     );
   }
 
-  Widget _buildHeaderPill(String tag, String val, Color col) {
+  Widget _buildMetricGridCard(
+      String title, String value, String subtitle, Color color, IconData icon) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: const Color(0xFF090D16),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF1E2B3E)),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Icon(icon, color: color, size: 13),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white70,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
           Text(
-            tag,
-            style: TextStyle(
-              color: col,
-              fontSize: 7.5,
+            value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.robotoMono(
+              color: color,
+              fontSize: 13,
               fontWeight: FontWeight.w900,
-              letterSpacing: 0.3,
             ),
           ),
           const SizedBox(height: 2),
           Text(
-            val,
+            subtitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.robotoMono(
-              color: Colors.white,
+            style: const TextStyle(
+              color: Colors.white38,
               fontSize: 9.5,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

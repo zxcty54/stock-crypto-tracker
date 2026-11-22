@@ -62,6 +62,32 @@ class MarketMoverItem {
   });
 }
 
+class StealthAccumulationItem {
+  final String symbol;
+  final double cmp;
+  final double dayChangePct;
+  final double deliveryPct;
+  final int volume;
+  final int deliveryQty;
+  final String date;
+  final bool isStealthAccumulation;
+  final bool isSpeculativeChurn;
+  final String verdict;
+
+  StealthAccumulationItem({
+    required this.symbol,
+    required this.cmp,
+    required this.dayChangePct,
+    required this.deliveryPct,
+    required this.volume,
+    required this.deliveryQty,
+    required this.date,
+    required this.isStealthAccumulation,
+    required this.isSpeculativeChurn,
+    required this.verdict,
+  });
+}
+
 enum DeliveryFilterMode {
   latestDate,
   highestDelivery,
@@ -108,13 +134,19 @@ class _StockDeliveryHistoryScreenState
   List<MarketMoverItem> _weeklyLosers = [];
   List<MarketMoverItem> _highDeliveryGainers = [];
 
+  // 🎯 Stealth Accumulation Collections
+  int _selectedStealthSubTab = 0; // 0: Pure Accumulation, 1: High Deliv Uptick, 2: Speculative Pump
+  List<StealthAccumulationItem> _pureAccumulationList = [];
+  List<StealthAccumulationItem> _highDelUptickList = [];
+  List<StealthAccumulationItem> _speculativeChurnList = [];
+
   @override
   void initState() {
     super.initState();
     _mainTabController = TabController(
-      length: 2,
+      length: 3,
       vsync: this,
-      initialIndex: widget.initialTabIndex.clamp(0, 1),
+      initialIndex: widget.initialTabIndex.clamp(0, 2),
     );
     _selectedSymbol = widget.initialSymbol;
     _fetchHistoryData();
@@ -175,6 +207,72 @@ class _StockDeliveryHistoryScreenState
     _weeklyLosers = weekly.where((x) => x.changePct < 0).toList().reversed.take(35).toList();
     _monthlyGainers = monthly.where((x) => x.changePct > 0).take(35).toList();
     _highDeliveryGainers = weekly.where((x) => x.deliveryPct >= 50.0 && x.changePct > 2.0).take(30).toList();
+
+    // 🎯 Stealth Accumulation Scanner Computation
+    final List<StealthAccumulationItem> pureAcc = [];
+    final List<StealthAccumulationItem> delUptick = [];
+    final List<StealthAccumulationItem> specChurn = [];
+
+    _stockDatabase.forEach((sym, records) {
+      if (records.isEmpty) return;
+      final latest = records.last;
+      final cmp = latest.close;
+      final open = latest.open;
+      final double dayChg = open > 0 ? ((cmp - open) / open) * 100 : 0.0;
+      final delPct = latest.deliveryPercent;
+      final vol = latest.tradedQty;
+      final delQty = latest.deliveryQty;
+
+      // Pure Stealth Accumulation: High Delivery >= 70%, tight price movement |DayChg| <= 1.8%
+      if (delPct >= 70.0 && dayChg.abs() <= 1.8 && vol >= 1000) {
+        pureAcc.add(StealthAccumulationItem(
+          symbol: sym,
+          cmp: cmp,
+          dayChangePct: double.parse(dayChg.toStringAsFixed(2)),
+          deliveryPct: delPct,
+          volume: vol,
+          deliveryQty: delQty,
+          date: latest.date,
+          isStealthAccumulation: true,
+          isSpeculativeChurn: false,
+          verdict: 'STEALTH DEMAT ACCUMULATION',
+        ));
+      } else if (delPct >= 65.0 && dayChg > 1.2 && dayChg <= 4.0 && vol >= 1000) {
+        delUptick.add(StealthAccumulationItem(
+          symbol: sym,
+          cmp: cmp,
+          dayChangePct: double.parse(dayChg.toStringAsFixed(2)),
+          deliveryPct: delPct,
+          volume: vol,
+          deliveryQty: delQty,
+          date: latest.date,
+          isStealthAccumulation: true,
+          isSpeculativeChurn: false,
+          verdict: 'HIGH DELIVERY WITH UPTICK',
+        ));
+      } else if (dayChg >= 4.0 && delPct < 25.0 && vol >= 5000) {
+        specChurn.add(StealthAccumulationItem(
+          symbol: sym,
+          cmp: cmp,
+          dayChangePct: double.parse(dayChg.toStringAsFixed(2)),
+          deliveryPct: delPct,
+          volume: vol,
+          deliveryQty: delQty,
+          date: latest.date,
+          isStealthAccumulation: false,
+          isSpeculativeChurn: true,
+          verdict: 'OPERATOR PUMP (LOW DELIV)',
+        ));
+      }
+    });
+
+    pureAcc.sort((a, b) => b.deliveryPct.compareTo(a.deliveryPct));
+    delUptick.sort((a, b) => b.deliveryPct.compareTo(a.deliveryPct));
+    specChurn.sort((a, b) => b.dayChangePct.compareTo(a.dayChangePct));
+
+    _pureAccumulationList = pureAcc.take(50).toList();
+    _highDelUptickList = delUptick.take(50).toList();
+    _speculativeChurnList = specChurn.take(50).toList();
   }
 
   Future<void> _fetchHistoryData() async {
@@ -494,10 +592,11 @@ class _StockDeliveryHistoryScreenState
           indicatorWeight: 3,
           labelColor: const Color(0xFF00F0FF),
           unselectedLabelColor: const Color(0xFF8896AB),
-          labelStyle: GoogleFonts.plusJakartaSans(fontSize: 11.5, fontWeight: FontWeight.bold),
+          labelStyle: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.bold),
           tabs: const [
-            Tab(icon: Icon(Icons.candlestick_chart_rounded, size: 16), text: "📊 Stock OHLC & Delivery"),
-            Tab(icon: Icon(Icons.leaderboard_rounded, size: 16), text: "🏆 Weekly & Monthly Movers"),
+            Tab(icon: Icon(Icons.candlestick_chart_rounded, size: 16), text: "📊 OHLC & Delivery"),
+            Tab(icon: Icon(Icons.radar_rounded, size: 16), text: "🎯 Stealth Accumulation"),
+            Tab(icon: Icon(Icons.leaderboard_rounded, size: 16), text: "🏆 1W & 1M Movers"),
           ],
         ),
         actions: [
@@ -553,9 +652,272 @@ class _StockDeliveryHistoryScreenState
                         Expanded(child: _buildHistoryListView()),
                       ],
                     ),
+                    _buildStealthAccumulationTab(),
                     _buildMarketMoversTab(),
                   ],
                 ),
+    );
+  }
+
+  Widget _buildStealthAccumulationTab() {
+    List<StealthAccumulationItem> activeList;
+    switch (_selectedStealthSubTab) {
+      case 0:
+        activeList = _pureAccumulationList;
+        break;
+      case 1:
+        activeList = _highDelUptickList;
+        break;
+      case 2:
+      default:
+        activeList = _speculativeChurnList;
+        break;
+    }
+
+    return Column(
+      children: [
+        // Educational Concept Card
+        Container(
+          margin: const EdgeInsets.fromLTRB(12, 10, 12, 6),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF131B2A), Color(0xFF0F1726)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFF00FF88).withOpacity(0.35)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00FF88).withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Icon(Icons.shield_rounded, color: Color(0xFF00FF88), size: 16),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "SMART MONEY STEALTH ACCUMULATION",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: const Color(0xFF00FF88),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                "Jab Delivery % bohot high ho (70% - 90%+) lekin Price Change tight range me ho (±1.5%) — iska matlab Institutional Buyers चुपचाप shares Demat account me le ja rahe hain bina price ko pump kiye (Real Accumulation). Agar price +8% bhaage par delivery sirf 15% ho, wo retail trap / speculative pump hota hai.",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 11,
+                  height: 1.35,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Sub-filter selector chips
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          color: const Color(0xFF0F1726),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildStealthSubTabChip(0, "🎯 Pure Stealth (${_pureAccumulationList.length})", const Color(0xFF00FF88)),
+                const SizedBox(width: 8),
+                _buildStealthSubTabChip(1, "⚡ High Deliv Uptick (${_highDelUptickList.length})", const Color(0xFF00F0FF)),
+                const SizedBox(width: 8),
+                _buildStealthSubTabChip(2, "⚠️ Speculative Pump (${_speculativeChurnList.length})", const Color(0xFFFFB703)),
+              ],
+            ),
+          ),
+        ),
+
+        // List of scanned stocks
+        Expanded(
+          child: activeList.isEmpty
+              ? const Center(
+                  child: Text(
+                    "No stocks matching this criteria in latest session",
+                    style: TextStyle(color: Colors.white38),
+                  ),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(12, 6, 12, 24),
+                  itemCount: activeList.length,
+                  itemBuilder: (context, idx) {
+                    final item = activeList[idx];
+                    final badgeColor = item.isSpeculativeChurn
+                        ? const Color(0xFFFFB703)
+                        : (item.deliveryPct >= 75.0 ? const Color(0xFF00FF88) : const Color(0xFF00F0FF));
+
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () {
+                        setState(() {
+                          _selectedSymbol = item.symbol;
+                        });
+                        _mainTabController.animateTo(0);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: badgeColor.withOpacity(0.35)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      item.symbol,
+                                      style: GoogleFonts.plusJakartaSans(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: badgeColor.withOpacity(0.15),
+                                        borderRadius: BorderRadius.circular(4),
+                                        border: Border.all(color: badgeColor.withOpacity(0.4)),
+                                      ),
+                                      child: Text(
+                                        item.verdict,
+                                        style: TextStyle(
+                                          color: badgeColor,
+                                          fontSize: 8.5,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "₹${item.cmp.toStringAsFixed(2)}",
+                                  style: GoogleFonts.robotoMono(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Delivery Progress Bar
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(3),
+                                    child: LinearProgressIndicator(
+                                      value: (item.deliveryPct / 100.0).clamp(0.0, 1.0),
+                                      minHeight: 6,
+                                      backgroundColor: const Color(0xFF1E2B3E),
+                                      valueColor: AlwaysStoppedAnimation<Color>(badgeColor),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  "${item.deliveryPct.toStringAsFixed(1)}% Delivery",
+                                  style: GoogleFonts.robotoMono(
+                                    color: badgeColor,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Traded: ${_formatCompact(item.volume)} • Demat: ${_formatCompact(item.deliveryQty)}",
+                                  style: const TextStyle(color: Colors.white60, fontSize: 11),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: (item.dayChangePct >= 0 ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D)).withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Text(
+                                    "${item.dayChangePct >= 0 ? '+' : ''}${item.dayChangePct.toStringAsFixed(2)}% Move",
+                                    style: TextStyle(
+                                      color: item.dayChangePct >= 0 ? const Color(0xFF00F5A0) : const Color(0xFFFF2A6D),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStealthSubTabChip(int index, String label, Color color) {
+    final isSelected = _selectedStealthSubTab == index;
+    return InkWell(
+      borderRadius: BorderRadius.circular(8),
+      onTap: () {
+        HapticFeedback.selectionClick();
+        setState(() => _selectedStealthSubTab = index);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.2) : const Color(0xFF131B2A),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected ? color : const Color(0xFF1E2B3E),
+            width: isSelected ? 1.5 : 1,
+          ),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? color : const Color(0xFF8896AB),
+            fontSize: 11,
+            fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+          ),
+        ),
+      ),
     );
   }
 
@@ -1011,6 +1373,9 @@ class _StockDeliveryHistoryScreenState
         final bullColor = const Color(0xFF00F5A0);
         final bearColor = const Color(0xFFFF2A6D);
         final themeColor = isBull ? bullColor : bearColor;
+        final double dayChgPct = row.open > 0 ? ((row.close - row.open) / row.open) * 100 : 0.0;
+        final bool isStealthAccumulation = row.deliveryPercent >= 70.0 && dayChgPct.abs() <= 1.8;
+        final bool isSpeculativePump = dayChgPct >= 4.0 && row.deliveryPercent < 25.0;
 
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
@@ -1019,9 +1384,11 @@ class _StockDeliveryHistoryScreenState
             color: const Color(0xFF131B2A),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: row.deliveryPercent >= 60.0
-                  ? const Color(0xFF00F0FF).withOpacity(0.4)
-                  : const Color(0xFF1E2B3E),
+              color: isStealthAccumulation
+                  ? const Color(0xFF00FF88).withOpacity(0.5)
+                  : (row.deliveryPercent >= 60.0
+                      ? const Color(0xFF00F0FF).withOpacity(0.4)
+                      : const Color(0xFF1E2B3E)),
             ),
           ),
           child: Column(
@@ -1047,7 +1414,43 @@ class _StockDeliveryHistoryScreenState
                           ),
                         ),
                       ),
-                      if (row.deliveryPercent >= 60.0) ...[
+                      if (isStealthAccumulation) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF00FF88).withOpacity(0.18),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xFF00FF88).withOpacity(0.4)),
+                          ),
+                          child: const Text(
+                            '🎯 STEALTH ACCUMULATION',
+                            style: TextStyle(
+                              color: Color(0xFF00FF88),
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ] else if (isSpeculativePump) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFB703).withOpacity(0.18),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xFFFFB703).withOpacity(0.4)),
+                          ),
+                          child: const Text(
+                            '⚠️ SPECULATIVE PUMP',
+                            style: TextStyle(
+                              color: Color(0xFFFFB703),
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ] else if (row.deliveryPercent >= 60.0) ...[
                         const SizedBox(width: 6),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
