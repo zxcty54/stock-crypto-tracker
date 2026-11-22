@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-11-22 01:22:28 IST",
-  "worthy_count": 11,
+  "generated_at": "2026-11-22 21:13:34 IST",
+  "worthy_count": 13,
   "skipped_count": 6,
   "content_feed": [
+    {
+      "hash": "cf0f42448e63",
+      "symbol": "JNPR",
+      "company_name": "Juniper Green Energy Limited",
+      "category": "COMMERCIAL_PRODUCTION",
+      "event_type": "COMMERCIAL_PRODUCTION",
+      "broadcast_date": "22-Nov-2026 18:29:10",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/JGEL2025_22112026182854_2026_11_22_JGEL_Reg_30_Spark_Four_Comm.pdf",
+      "headline": "Juniper Green Energy commissions 42 MWp solar capacity",
+      "content_worthy": true,
+      "worthiness_reason": "Commissioning of new renewable energy capacity.",
+      "telegram_post": "🏭 <b>#COMMERCIAL_PRODUCTION</b> | <b>Juniper Green Energy Limited (NSE: JNPR)</b>\n\n<b>Juniper Green Energy commissions 42 MWp solar capacity</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Capacity Commissioned:</b> ~42 MWp\n- <b>Project Type:</b> Wind Solar Hybrid Power Project\n- <b>Total Project Capacity:</b> 152 MWp (124 MWp now operational)\n- <b>Aggregate Operational Capacity:</b> ~2,994 MWp and ~698 MWh BESS\n\n📌 <b>What happened:</b>\n↳ Juniper Green Spark Four, a wholly owned subsidiary, has commissioned 42 MWp of solar capacity as part of its 120 MW Wind Solar Hybrid project in Gujarat. The commissioning was confirmed by state energy agencies.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/JGEL2025_22112026182854_2026_11_22_JGEL_Reg_30_Spark_Four_Comm.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-22 21:12:43 IST"
+    },
+    {
+      "hash": "0cf956265951",
+      "symbol": "TATASTEEL",
+      "company_name": "Tata Steel Limited",
+      "category": "DIVESTMENT",
+      "event_type": "MERGER",
+      "broadcast_date": "22-Nov-2026 19:08:17",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/NIDHIFADNAVIS_22112026190635_Board_Outcome_signed.pdf",
+      "headline": "Tata Steel to divest Tubes Business and Tata Steel Colors to APL Apollo for ₹28,000 crore",
+      "content_worthy": true,
+      "worthiness_reason": "Material divestment of business units and subsidiary for a total consideration of ₹28,000 crore.",
+      "telegram_post": "🔄 <b>#MERGER</b> | <b>Tata Steel Limited (NSE: TATASTEEL)</b>\n\n<b>Tata Steel to divest Tubes Business and Tata Steel Colors to APL Apollo for ₹28,000 crore</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Tubes Business Sale:</b> ₹11,700 crore (Slump sale)\n- <b>Tata Steel Colors Sale:</b> ₹16,300 crore (100% equity stake)\n- <b>Buyer:</b> APL Apollo Tubes Limited\n- <b>Status:</b> Board approved; subject to regulatory approvals\n\n📌 <b>What happened:</b>\n↳ Tata Steel will transfer its Tubes Business (Jamshedpur, Hosur, Khopoli, Sahibabad) and sell its 100% stake in subsidiary Tata Steel Colors Private Limited to APL Apollo Tubes. Upon completion, Tata Steel Colors will cease to be a subsidiary of the company.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/NIDHIFADNAVIS_22112026190635_Board_Outcome_signed.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-22 21:12:43 IST"
+    },
     {
       "hash": "239550f4f2ff",
       "symbol": "VIVIANA",
@@ -160,6 +188,20 @@
   ],
   "skipped_archive": [
     {
+      "hash": "35725817e0ce",
+      "symbol": "BESTAGRO",
+      "company_name": "Best Agrolife Limited",
+      "category": "RESULT",
+      "event_type": "OTHER",
+      "broadcast_date": "20-Nov-2026 11:58:42",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/BESTAGRO_20112026115830_BESTAGROSEoutcomeBM301026MR.pdf",
+      "headline": "General Updates",
+      "content_worthy": false,
+      "worthiness_reason": "The filing mentions the approval of financial results but fails to disclose the actual numeric Revenue and PAT figures, which is a mandatory requirement for result-related updates.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-22 21:13:34 IST"
+    },
+    {
       "hash": "2c5dcebc27bc",
       "symbol": "SKFINDIA",
       "company_name": "SKF India Limited",
@@ -228,20 +270,6 @@
       "worthiness_reason": "The filing mentions financial results are submitted, but the provided text does not contain explicit numeric values for Revenue and PAT.",
       "telegram_post": "",
       "analyzed_at": "2026-11-22 01:19:54 IST"
-    },
-    {
-      "hash": "35725817e0ce",
-      "symbol": "BESTAGRO",
-      "company_name": "Best Agrolife Limited",
-      "category": "RESULT",
-      "event_type": "OTHER",
-      "broadcast_date": "20-Nov-2026 11:58:42",
-      "pdf_link": "https://nsearchives.nseindia.in/corporate/BESTAGRO_20112026115830_BESTAGROSEoutcomeBM301026MR.pdf",
-      "headline": "General Updates",
-      "content_worthy": false,
-      "worthiness_reason": "The filing mentions the approval of financial results but does not disclose the actual numeric Revenue and PAT figures, rendering it ineligible for a results update.",
-      "telegram_post": "",
-      "analyzed_at": "2026-11-21 18:13:31 IST"
     }
   ]
 }
