@@ -1,31 +1,20 @@
-2026-11-21 17:55:44 [INFO] ipo_tracker: ======================================================================
-2026-11-21 17:55:44 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
-2026-11-21 17:55:44 [INFO] ipo_tracker: 📅 Timestamp: 21-Nov-2026 23:25:44 IST (Today: 2026-11-21)
-2026-11-21 17:55:44 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
-2026-11-21 17:55:44 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
-2026-11-21 17:55:44 [INFO] ipo_tracker: ======================================================================
-2026-11-21 17:55:44 [INFO] ipo_tracker: Loaded 10 tracked IPOs and 39 historical posted events.
-2026-11-21 17:55:44 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
-2026-11-21 17:55:44 [INFO] ipo_tracker.scrapers: Collected 0 entries from Chittorgarh Report 82
-2026-11-21 17:55:45 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
-2026-11-21 17:55:46 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from Chittorgarh Report 82
-2026-11-21 17:55:47 [INFO] ipo_tracker.scrapers: Collected 7 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Monomark Engineering', 'Bombay Coated and Special Steels', 'M.K.Sons Fine Jewels']
-2026-11-21 17:55:54 [INFO] ipo_tracker.scrapers: Collected 1 entries from official NSE India: ['Mahanadi Coalfields Limited']
-2026-11-21 17:56:04 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
-2026-11-21 17:56:04 [INFO] ipo_tracker: Aggregated 5 Mainboard IPO records from web.
-2026-11-21 17:56:04 [INFO] ipo_tracker: 🆕 Discovered new Mainboard IPO: Monomark Engineering (ID: monomark-engineering)
-2026-11-21 17:56:04 [INFO] ipo_tracker: Master state updated: 1 new, 4 refreshed.
-2026-11-21 17:56:04 [INFO] ipo_tracker.telegraph: Creating new Telegraph account: IPOCentral (IPO Central)...
-2026-11-21 17:56:04 [INFO] ipo_tracker.telegraph: Saved Telegraph access token to cache.
-2026-11-21 17:56:04 [INFO] ipo_tracker.telegraph: Publishing Telegraph review for: Monomark Engineering...
-2026-11-21 17:56:05 [INFO] ipo_tracker.telegraph: ✅ Telegraph article published successfully: https://telegra.ph/Monomark-Engineering-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-21-2
-2026-11-21 17:56:05 [INFO] ipo_tracker: 📝 Published Telegraph DRHP review for Monomark Engineering: https://telegra.ph/Monomark-Engineering-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-21-2
-2026-11-21 17:56:05 [INFO] ipo_tracker: Published 1 new Telegraph DRHP articles.
-2026-11-21 17:56:05 [INFO] ipo_tracker: Saved 11 IPO records to ipo_master.json
-2026-11-21 17:56:05 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 1
-2026-11-21 17:56:05 [INFO] ipo_tracker: 📤 Preparing alert [NEW_IPO_ANNOUNCED] for: Monomark Engineering...
-2026-11-21 17:56:06 [INFO] ipo_tracker:    ✅ Successfully broadcasted [NEW_IPO_ANNOUNCED] for Monomark Engineering
-2026-11-21 17:56:09 [INFO] ipo_tracker: Saved 11 IPO records to ipo_master.json
-2026-11-21 17:56:09 [INFO] ipo_tracker: ======================================================================
-2026-11-21 17:56:09 [INFO] ipo_tracker: 🎉 RUN COMPLETE: 1 alerts broadcasted to @ipocentral
-2026-11-21 17:56:09 [INFO] ipo_tracker: ======================================================================
+2026-11-22 10:59:24 [INFO] ipo_tracker: ======================================================================
+2026-11-22 10:59:24 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
+2026-11-22 10:59:24 [INFO] ipo_tracker: 📅 Timestamp: 22-Nov-2026 16:29:24 IST (Today: 2026-11-22)
+2026-11-22 10:59:24 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
+2026-11-22 10:59:24 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
+2026-11-22 10:59:24 [INFO] ipo_tracker: ======================================================================
+2026-11-22 10:59:24 [INFO] ipo_tracker: Loaded 11 tracked IPOs and 40 historical posted events.
+2026-11-22 10:59:24 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
+2026-11-22 10:59:25 [INFO] ipo_tracker.scrapers: Collected 0 entries from Chittorgarh Report 82
+2026-11-22 10:59:26 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
+2026-11-22 10:59:26 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from Chittorgarh Report 82
+2026-11-22 10:59:28 [INFO] ipo_tracker.scrapers: Collected 7 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Monomark Engineering', 'Bombay Coated and Special Steels', 'M.K.Sons Fine Jewels']
+2026-11-22 10:59:29 [INFO] ipo_tracker.scrapers: Collected 1 entries from official NSE India: ['Mahanadi Coalfields Limited']
+2026-11-22 10:59:35 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
+2026-11-22 10:59:35 [INFO] ipo_tracker: Aggregated 5 Mainboard IPO records from web.
+2026-11-22 10:59:35 [INFO] ipo_tracker: Master state updated: 0 new, 5 refreshed.
+2026-11-22 10:59:35 [INFO] ipo_tracker: Saved 11 IPO records to ipo_master.json
+2026-11-22 10:59:35 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
+2026-11-22 10:59:35 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 4 active IPOs...
+2026-11-22 10:59:36 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
