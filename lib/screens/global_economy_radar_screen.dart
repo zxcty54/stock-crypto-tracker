@@ -1693,6 +1693,49 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           ),
           const SizedBox(height: 10),
 
+          // Plain Guidance Card (Aasan Bhasha Me)
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF090D16),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: kAccentCyan.withOpacity(0.2)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("💡", style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "BAROMETER KO KAISE SAMJHEIN?",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: kAccentCyan,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.4,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      const Text(
+                        "Range batati hai ki pichle 1 saal me low aur high kitna tha. Jab US Dollar (106+) ya US Yields Red Zone me hote hain, FIIs India se paisa nikalte hain. Jab Crude ($73) Green Zone me hota hai, India ke liye positive hota hai.",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 10.5,
+                          height: 1.35,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           // Comparative Horizontal Bar Chart for all 6 items
           ..._stressGauges.map((g) {
             final name = g['name']?.toString().split('(').first.trim() ?? '';
@@ -1773,6 +1816,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     final Color barColor = isPressure ? kAccentRed : kAccentGreen;
     final range = g['historical_range'] ?? '';
     final String indiaImpact = _getGaugeIndiaSummary(g['id'], g['market_impact'] ?? '');
+    final String traderBottomLine = _getGaugeTraderBottomLine(g['id']);
     final List<String> assets = _getGaugeAssets(g['id']);
 
     return Container(
@@ -1937,6 +1981,52 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
             ),
           ],
 
+          // 🎯 Trader's Bottom Line (Seedhi Baat)
+          if (traderBottomLine.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              decoration: BoxDecoration(
+                color: barColor.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: barColor.withOpacity(0.3)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("🎯", style: TextStyle(fontSize: 12)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "SEEDHI BAAT (TRADER'S TAKEAWAY)",
+                          style: TextStyle(
+                            color: barColor,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.4,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          traderBottomLine,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w600,
+                            height: 1.35,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           // Impacted Asset Chips
           if (assets.isNotEmpty) ...[
             const SizedBox(height: 7),
@@ -1966,6 +2056,27 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
         ],
       ),
     );
+  }
+
+  String _getGaugeTraderBottomLine(String? id) {
+    switch (id) {
+      case 'dxy':
+      case 'dxy_dollar':
+        return "Dollar Index 106.25 (Peak Range 100-107) par hai. Jab Dollar itna strong hota hai, FIIs Indian Market se paisa nikal kar US Dollars me le jate hain. Isliye Indian Rupee par pressure aur FII selling active rehti hai.";
+      case 'us10y':
+      case 'us_10y_yield':
+        return "US me bina kisi risk ke 4.42% interest mil raha hai. Jab US yields high rehti hain, foreign funds risky shares me kam paisa lagate hain, jisse overall market PE valuation par gravity rehti hai.";
+      case 'brent_crude':
+        return "Crude \$73.4 safe comfort zone me hai (\$70-\$78). India ke liye ye positive hai — Paint, Tyre, Aviation aur Chemical stocks ke raw material margins safe rehte hain.";
+      case 'gold_spot':
+        return "Sovereign Gold \$2,655 all-time high zone me hai. Iska matlab Central Banks US Dollar par depend hone ke bajaye physical Gold reserves jama kar rahe hain.";
+      case 'semicon_utilization':
+        return "AI Chip factories 94.5% full capacity par chal rahi hain. Iska direct fayda Indian EMS aur Electronics manufacturing stocks (Kaynes, Dixon, Syrma) ko heavy orders ke roop me milta hai.";
+      case 'baltic_dry':
+        return "Shipping freight rates normal range me hain. Global raw material import/export me koi cost inflation nahi hai.";
+      default:
+        return "";
+    }
   }
 
   String _getGaugeIndiaSummary(String? id, String defaultText) {
