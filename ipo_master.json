@@ -261,7 +261,63 @@
       "total_bids": "748687060",
       "shares_offered": "493068045",
       "source": "NSE India Official Bidding Feed (issue-information)",
-      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)"
+      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+      "demand_graph": {
+        "total_issue_size": "493068045",
+        "total_bids": "311850220",
+        "cut_off_bids": "74999870",
+        "no_of_times": "0.63x",
+        "price_levels": [
+          {
+            "price": ">= 129",
+            "shares": "311850220",
+            "shares_lakh": "3118.50"
+          },
+          {
+            "price": ">= 130",
+            "shares": "309604900",
+            "shares_lakh": "3096.05"
+          },
+          {
+            "price": ">= 131",
+            "shares": "309134980",
+            "shares_lakh": "3091.35"
+          },
+          {
+            "price": ">= 132",
+            "shares": "309058420",
+            "shares_lakh": "3090.58"
+          },
+          {
+            "price": ">= 133",
+            "shares": "308978890",
+            "shares_lakh": "3089.79"
+          },
+          {
+            "price": ">= 134",
+            "shares": "308938520",
+            "shares_lakh": "3089.39"
+          },
+          {
+            "price": ">= 135",
+            "shares": "308908160",
+            "shares_lakh": "3089.08"
+          },
+          {
+            "price": ">= 136",
+            "shares": "308853930",
+            "shares_lakh": "3088.54"
+          },
+          {
+            "price": "Cut-Off",
+            "shares": "74999870",
+            "shares_lakh": "749.99"
+          }
+        ],
+        "source": "NSE India Official Demand Graph (issue-information)",
+        "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+        "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
+      }
     },
     "reservation": {
       "qib_pct": "50%",
@@ -293,7 +349,63 @@
     "last_posted_gmp": "+\u20b93.00",
     "posted_events": [
       "IPO_CLOSING_TODAY"
-    ]
+    ],
+    "demand_graph": {
+      "total_issue_size": "493068045",
+      "total_bids": "311850220",
+      "cut_off_bids": "74999870",
+      "no_of_times": "0.63x",
+      "price_levels": [
+        {
+          "price": ">= 129",
+          "shares": "311850220",
+          "shares_lakh": "3118.50"
+        },
+        {
+          "price": ">= 130",
+          "shares": "309604900",
+          "shares_lakh": "3096.05"
+        },
+        {
+          "price": ">= 131",
+          "shares": "309134980",
+          "shares_lakh": "3091.35"
+        },
+        {
+          "price": ">= 132",
+          "shares": "309058420",
+          "shares_lakh": "3090.58"
+        },
+        {
+          "price": ">= 133",
+          "shares": "308978890",
+          "shares_lakh": "3089.79"
+        },
+        {
+          "price": ">= 134",
+          "shares": "308938520",
+          "shares_lakh": "3089.39"
+        },
+        {
+          "price": ">= 135",
+          "shares": "308908160",
+          "shares_lakh": "3089.08"
+        },
+        {
+          "price": ">= 136",
+          "shares": "308853930",
+          "shares_lakh": "3088.54"
+        },
+        {
+          "price": "Cut-Off",
+          "shares": "74999870",
+          "shares_lakh": "749.99"
+        }
+      ],
+      "source": "NSE India Official Demand Graph (issue-information)",
+      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+      "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
+    }
   },
   {
     "id": "crystal-crop-protection",

@@ -859,6 +859,101 @@ class TestLifecycleEngine(unittest.TestCase):
             self.assertEqual(sub.get("shares_offered"), "493068045")
             self.assertEqual(sub.get("total_bids"), "748687060")
 
+    def test_nse_demand_graph_html_scraping(self):
+        """
+        Verify that NseIpoScraper parses the official Demand Graph tab from
+        https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        including summary cards and cumulative price bidding ladder.
+        """
+        from ipo_scrapers import NseIpoScraper
+
+        html_sample = """
+        <!DOCTYPE html>
+        <html>
+        <body>
+        <div class="demand-graph-tab">
+          <div>Total Issue Size 49,30,68,045</div>
+          <div>Total Bids Received 31,18,50,220</div>
+          <div>Total Bids Received at Cut-off price 7,49,99,870</div>
+          <div>No. of times issue is subscribed 0.63</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Price</th>
+                <th>&gt;=129</th>
+                <th>130</th>
+                <th>131</th>
+                <th>132</th>
+                <th>133</th>
+                <th>134</th>
+                <th>135</th>
+                <th>136</th>
+                <th>Cut-Off</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>No of Share(in Lakh)</td>
+                <td>31,18,50,220</td>
+                <td>30,96,04,900</td>
+                <td>30,91,34,980</td>
+                <td>30,90,58,420</td>
+                <td>30,89,78,890</td>
+                <td>30,89,38,520</td>
+                <td>30,89,08,160</td>
+                <td>30,88,53,930</td>
+                <td>7,49,99,870</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </body>
+        </html>
+        """
+        scraper = NseIpoScraper()
+        with unittest.mock.patch.object(scraper.session, "get") as mock_get:
+            mock_resp = unittest.mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.text = html_sample
+            mock_resp.json.side_effect = Exception("Not a JSON endpoint")
+            mock_get.return_value = mock_resp
+
+            details = scraper.fetch_nse_issue_details("MAHACOAL")
+            dg = details.get("demand_graph", {})
+            self.assertEqual(dg.get("total_issue_size"), "493068045")
+            self.assertEqual(dg.get("total_bids"), "311850220")
+            self.assertEqual(dg.get("cut_off_bids"), "74999870")
+            self.assertEqual(dg.get("no_of_times"), "0.63x")
+            self.assertEqual(len(dg.get("price_levels", [])), 9)
+
+            # Cap price check: >= 136 with 30,88,53,930 shares
+            cap_entry = next((item for item in dg["price_levels"] if "136" in item["price"]), None)
+            self.assertIsNotNone(cap_entry)
+            self.assertEqual(cap_entry["shares"], "308853930")
+
+            # Cut-off check: 7,49,99,870 shares
+            cutoff_entry = next((item for item in dg["price_levels"] if "cut" in item["price"].lower()), None)
+            self.assertIsNotNone(cutoff_entry)
+            self.assertEqual(cutoff_entry["shares"], "74999870")
+
+    def test_mahacoal_master_data_demand_graph(self):
+        """
+        Verify that both master JSON files contain the exact Demand Graph data
+        matching https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        for path in ["ipo_master.json", "assets/data/ipo_master.json"]:
+            with open(path, "r") as f:
+                data = json.load(f)
+            mahacoal = next((item for item in data if item.get("symbol") == "MAHACOAL" or item.get("id") == "mahanadi-coalfields"), None)
+            self.assertIsNotNone(mahacoal, f"MAHACOAL not found in {path}")
+            dg = mahacoal.get("demand_graph", {})
+
+            self.assertEqual(dg.get("total_issue_size"), "493068045")
+            self.assertEqual(dg.get("total_bids"), "311850220")
+            self.assertEqual(dg.get("cut_off_bids"), "74999870")
+            self.assertEqual(dg.get("no_of_times"), "0.63x")
+            self.assertEqual(len(dg.get("price_levels", [])), 9)
+
 
 if __name__ == "__main__":
     unittest.main()

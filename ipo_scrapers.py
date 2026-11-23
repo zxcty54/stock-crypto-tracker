@@ -1201,16 +1201,37 @@ class NseIpoScraper:
                         # Also check demandGraph if present in issue_detail
                         dg = data.get("demandGraph")
                         if isinstance(dg, dict):
+                            dg_dict = {
+                                "total_issue_size": _parse_share_count(dg.get("totalIssueSize")),
+                                "total_bids": _parse_share_count(dg.get("totalBidRecieved") or dg.get("totalBids")),
+                                "cut_off_bids": _parse_share_count(dg.get("totalBidsAtCutOff") or dg.get("totalBidsCutOff") or dg.get("bidsAtCutOff")),
+                                "no_of_times": _parse_sub_multiple(dg.get("noOfTimesIssueSubscribed") or dg.get("noOfTime")),
+                                "price_levels": [],
+                                "source": "NSE India Official Demand Graph",
+                            }
+                            price_raw_list = dg.get("priceList") or dg.get("priceWiseBids") or dg.get("dataList") or dg.get("tableData") or []
+                            if isinstance(price_raw_list, list):
+                                for pr in price_raw_list:
+                                    if isinstance(pr, dict):
+                                        p_val = str(pr.get("price") or pr.get("pricePoint") or "").strip()
+                                        s_val = _parse_share_count(pr.get("noOfShare") or pr.get("shares") or pr.get("sharesLakh"))
+                                        if p_val and s_val:
+                                            dg_dict["price_levels"].append({
+                                                "price": p_val if (p_val.startswith(">=") or "cut" in p_val.lower()) else f">= {p_val}",
+                                                "shares": s_val,
+                                            })
+                            details["demand_graph"] = dg_dict
                             sub = details.setdefault("subscription", {})
-                            if dg.get("noOfTimesIssueSubscribed"):
+                            sub["demand_graph"] = dg_dict
+                            if dg.get("noOfTimesIssueSubscribed") and not sub.get("total"):
                                 t = _parse_sub_multiple(dg["noOfTimesIssueSubscribed"])
                                 if t:
                                     sub["total"] = t
-                            if dg.get("totalBidRecieved"):
+                            if dg.get("totalBidRecieved") and not sub.get("total_bids"):
                                 b = _parse_share_count(dg["totalBidRecieved"])
                                 if b:
                                     sub["total_bids"] = b
-                            if dg.get("totalIssueSize"):
+                            if dg.get("totalIssueSize") and not sub.get("shares_offered"):
                                 o = _parse_share_count(dg["totalIssueSize"])
                                 if o:
                                     sub["shares_offered"] = o
@@ -1307,7 +1328,43 @@ class NseIpoScraper:
                             if cat_list:
                                 self._extract_category_data_list(cat_list, details)
                                 details.setdefault("subscription", {})["source"] = "NSE India Official Bidding Feed (issue-information)"
-                                break
+
+                        # Check if table is Demand Graph price bidding table
+                        elif any("PRICE" in h for h in headers) or any("CUT-OFF" in h for h in headers):
+                            price_levels = []
+                            h_raw = [c.get_text(strip=True) for c in rows[0].find_all(["th", "td"])]
+                            v_raw = [c.get_text(strip=True) for c in rows[1].find_all(["th", "td"])]
+                            for h_col, v_col in zip(h_raw[1:], v_raw[1:]):
+                                p_str = h_col.strip()
+                                v_shares = _parse_share_count(v_col)
+                                p_lbl = p_str if (p_str.startswith(">=") or "cut" in p_str.lower()) else f">= {p_str}"
+                                price_levels.append({
+                                    "price": p_lbl,
+                                    "shares": v_shares,
+                                })
+                            if price_levels:
+                                dg_dict = details.setdefault("demand_graph", {})
+                                dg_dict["price_levels"] = price_levels
+                                dg_dict["source"] = "NSE India Official Demand Graph (issue-information)"
+                                details.setdefault("subscription", {})["demand_graph"] = dg_dict
+
+                    # Check for Demand Graph summary metrics in HTML text
+                    m_size = re.search(r"Total\s+Issue\s+Size[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_bids = re.search(r"Total\s+Bids\s+Received[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_cut = re.search(r"Total\s+Bids\s+Received\s+at\s+Cut-?off\s+price[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_times = re.search(r"No\.?\s*of\s+times\s+issue\s+is\s+subscribed[:\s]*([0-9.]+)", resp.text, re.I)
+                    if m_size or m_bids or m_cut or m_times:
+                        dg_dict = details.setdefault("demand_graph", {})
+                        if m_size:
+                            dg_dict["total_issue_size"] = _parse_share_count(m_size.group(1))
+                        if m_bids:
+                            dg_dict["total_bids"] = _parse_share_count(m_bids.group(1))
+                        if m_cut:
+                            dg_dict["cut_off_bids"] = _parse_share_count(m_cut.group(1))
+                        if m_times:
+                            dg_dict["no_of_times"] = _parse_sub_multiple(m_times.group(1))
+                        dg_dict["source"] = "NSE India Official Demand Graph (issue-information)"
+                        details.setdefault("subscription", {})["demand_graph"] = dg_dict
             except Exception as e:
                 logger.debug(f"NSE issue-information HTML parse note for {symbol}: {e}")
 
