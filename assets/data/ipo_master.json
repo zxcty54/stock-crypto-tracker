@@ -13,7 +13,7 @@
     "allotment_date": "2026-12-07",
     "demat_credit_date": "2026-12-08",
     "listing_date": "2026-12-10",
-    "price_band": "\u20b90",
+    "price_band": "₹0",
     "cut_off_price": 148,
     "face_value": 5,
     "lot_size": 100,
@@ -21,10 +21,10 @@
     "issue_size_cr": 450,
     "fresh_issue_cr": 350,
     "ofs_cr": 100,
-    "gmp": "+\u20b922.00",
+    "gmp": "+₹22.00",
     "gmp_percent": 14.86,
     "gmp_unofficial": true,
-    "est_listing_price": "\u2014",
+    "est_listing_price": "—",
     "subscription": {
       "status": "Awaiting Bidding",
       "note": "NSE Bidding opens on 02-Dec-2026"
@@ -36,9 +36,9 @@
     },
     "about": "Tier-1 precision engineering and high-tolerance mechanical assembly manufacturer for Indian aerospace, naval defense vessels, subsea pipelines, and heavy industrial automation systems.",
     "drhp_objects": [
-      "Setting up a new automated CNC machining facility in Pune (\u20b9180 Cr)",
-      "Purchase of specialized 5-axis robotic milling equipment for naval defense parts (\u20b990 Cr)",
-      "Repayment of existing long-term project loans (\u20b980 Cr)"
+      "Setting up a new automated CNC machining facility in Pune (₹180 Cr)",
+      "Purchase of specialized 5-axis robotic milling equipment for naval defense parts (₹90 Cr)",
+      "Repayment of existing long-term project loans (₹80 Cr)"
     ],
     "lead_managers": [
       "Axis Capital Limited",
@@ -52,9 +52,9 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "last_updated": "2026-11-23T23:24:38.560502+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+\u20b922.00"
+    "last_posted_gmp": "+₹22.00"
   },
   {
     "id": "matangi-rubber",
@@ -66,7 +66,7 @@
     "close_date": "2026-12-03",
     "allotment_date": null,
     "listing_date": null,
-    "price_band": "\u20b9163 - \u20b9172",
+    "price_band": "₹163 - ₹172",
     "lot_size": null,
     "issue_size_cr": "",
     "fresh_issue_cr": "",
@@ -74,7 +74,7 @@
     "gmp": "",
     "gmp_percent": 12.21,
     "gmp_unofficial": true,
-    "est_listing_price": "\u20b9193(+12.21%)",
+    "est_listing_price": "₹193(+12.21%)",
     "kostak": "",
     "sub2sauda": "",
     "subscription": {
@@ -107,7 +107,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-23T23:06:30.029689+05:30"
+    "last_updated": "2026-11-23T23:24:38.560502+05:30"
   },
   {
     "id": "integris-medtech",
@@ -123,7 +123,7 @@
     "allotment_date": "2026-12-02",
     "demat_credit_date": "2026-12-04",
     "listing_date": "2026-12-05",
-    "price_band": "\u20b90",
+    "price_band": "₹0",
     "cut_off_price": 325,
     "face_value": 10,
     "lot_size": 45,
@@ -131,10 +131,10 @@
     "issue_size_cr": 820,
     "fresh_issue_cr": 520,
     "ofs_cr": 300,
-    "gmp": "+\u20b935.00",
+    "gmp": "+₹35.00",
     "gmp_percent": 10.77,
     "gmp_unofficial": true,
-    "est_listing_price": "\u2014",
+    "est_listing_price": "—",
     "subscription": {
       "status": "Awaiting Bidding",
       "note": "NSE Bidding opens on 27-Nov-2026"
@@ -146,9 +146,9 @@
     },
     "about": "Domestic developer and manufacturer of advanced diagnostic imaging systems including portable MRI, ultrasound scanners, digital radiography consoles, and AI-enabled radiology workstations.",
     "drhp_objects": [
-      "Construction of an ISO-certified Class-100 Cleanroom production unit in Bengaluru (\u20b9280 Cr)",
-      "Clinical validation trials and CE/USFDA certification for export medical devices (\u20b9140 Cr)",
-      "Prepayment of working capital credit lines (\u20b9100 Cr)"
+      "Construction of an ISO-certified Class-100 Cleanroom production unit in Bengaluru (₹280 Cr)",
+      "Clinical validation trials and CE/USFDA certification for export medical devices (₹140 Cr)",
+      "Prepayment of working capital credit lines (₹100 Cr)"
     ],
     "lead_managers": [
       "ICICI Securities Limited",
@@ -162,9 +162,9 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "last_updated": "2026-11-23T23:24:38.560502+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+\u20b935.00"
+    "last_posted_gmp": "+₹35.00"
   },
   {
     "id": "foodlink-f-b-holdings",
@@ -188,10 +188,10 @@
     "issue_size_cr": 650,
     "fresh_issue_cr": 450,
     "ofs_cr": 200,
-    "gmp": "+\u20b915.00",
+    "gmp": "+₹15.00",
     "gmp_percent": 6.28,
     "gmp_unofficial": true,
-    "est_listing_price": "\u20b9203(+6.28%)",
+    "est_listing_price": "₹203(+6.28%)",
     "subscription": {
       "status": "Awaiting Bidding",
       "note": "NSE Bidding opens on 26-Nov-2026",
@@ -229,9 +229,9 @@
     },
     "about": "Pan-India luxury wedding catering, premium corporate culinary experiences, and destination hospitality service provider operating cloud banquet kitchens across Mumbai, Delhi NCR, and Dubai.",
     "drhp_objects": [
-      "Expansion of central banquet and cloud kitchen network across Tier-1 metro corridors (\u20b9210 Cr)",
-      "Technology infrastructure for automated banquet order workflows and inventory management (\u20b960 Cr)",
-      "General corporate purposes (\u20b9180 Cr)"
+      "Expansion of central banquet and cloud kitchen network across Tier-1 metro corridors (₹210 Cr)",
+      "Technology infrastructure for automated banquet order workflows and inventory management (₹60 Cr)",
+      "General corporate purposes (₹180 Cr)"
     ],
     "lead_managers": [
       "Equirus Capital Private Limited",
@@ -245,9 +245,9 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "last_updated": "2026-11-23T23:24:38.560502+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+\u20b915.00",
+    "last_posted_gmp": "+₹15.00",
     "demand_graph": {
       "total_issue_size": "19443116",
       "total_bids": null,
@@ -292,81 +292,49 @@
     "issue_size_cr": 4200,
     "fresh_issue_cr": 0,
     "ofs_cr": 4200,
-    "gmp": "+\u20b93.00",
+    "gmp": "+₹3.00",
     "gmp_percent": 2.21,
     "gmp_unofficial": true,
-    "est_listing_price": "\u20b9136",
+    "est_listing_price": "₹136",
     "subscription": {
-      "qib": "1.61x",
-      "qib_bids": "181318390",
+      "qib": "4.95x",
+      "qib_bids": "556811640",
       "qib_offered": "112512171",
-      "nii": "0.46x",
-      "nii_bids": "38816700",
-      "nii_offered": "84384129",
-      "retail": "0.40x",
-      "retail_bids": "78758520",
+      "nii": "0.75x",
+      "nii_bids": "20993720",
+      "nii_offered": "28128043",
+      "retail": "0.46x",
+      "retail_bids": "91449380",
       "retail_offered": "196896300",
       "total": "1.52x",
-      "total_bids": "748687060",
+      "total_bids": "748687390",
       "shares_offered": "493068045",
-      "source": "NSE India Official Bidding Feed (issue-information)",
-      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+      "source": "NSE India Official Bidding Feed",
+      "updated_at": "Updated as on 23-Nov-2026 19:00:00",
       "demand_graph": {
         "total_issue_size": "493068045",
         "total_bids": "311850220",
-        "cut_off_bids": "74999870",
+        "cut_off_bids": null,
         "no_of_times": "0.63x",
         "price_levels": [
           {
-            "price": ">= 129",
-            "shares": "311850220",
-            "shares_lakh": "3118.50"
+            "price": ">= No. of Bids",
+            "shares": null
           },
           {
-            "price": ">= 130",
-            "shares": "309604900",
-            "shares_lakh": "3096.05"
+            "price": ">= NSE Confirmed Bid Quantity",
+            "shares": null
           },
           {
-            "price": ">= 131",
-            "shares": "309134980",
-            "shares_lakh": "3091.35"
-          },
-          {
-            "price": ">= 132",
-            "shares": "309058420",
-            "shares_lakh": "3090.58"
-          },
-          {
-            "price": ">= 133",
-            "shares": "308978890",
-            "shares_lakh": "3089.79"
-          },
-          {
-            "price": ">= 134",
-            "shares": "308938520",
-            "shares_lakh": "3089.39"
-          },
-          {
-            "price": ">= 135",
-            "shares": "308908160",
-            "shares_lakh": "3089.08"
-          },
-          {
-            "price": ">= 136",
-            "shares": "308853930",
-            "shares_lakh": "3088.54"
-          },
-          {
-            "price": "Cut-Off",
-            "shares": "74999870",
-            "shares_lakh": "749.99"
+            "price": ">= Cumulative Confirmed Bid Quantity",
+            "shares": null
           }
         ],
-        "source": "NSE India Official Demand Graph (issue-information)",
-        "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
-        "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
-      }
+        "source": "NSE India Official Demand Graph (issue-information)"
+      },
+      "employee": "0.22x",
+      "employee_bids": "7271330",
+      "employee_offered": "33091815"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -393,67 +361,32 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "last_updated": "2026-11-23T23:24:38.560502+05:30",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+\u20b93.00",
+    "last_posted_gmp": "+₹3.00",
     "posted_events": [
       "IPO_CLOSING_TODAY"
     ],
     "demand_graph": {
       "total_issue_size": "493068045",
       "total_bids": "311850220",
-      "cut_off_bids": "74999870",
+      "cut_off_bids": null,
       "no_of_times": "0.63x",
       "price_levels": [
         {
-          "price": ">= 129",
-          "shares": "311850220",
-          "shares_lakh": "3118.50"
+          "price": ">= No. of Bids",
+          "shares": null
         },
         {
-          "price": ">= 130",
-          "shares": "309604900",
-          "shares_lakh": "3096.05"
+          "price": ">= NSE Confirmed Bid Quantity",
+          "shares": null
         },
         {
-          "price": ">= 131",
-          "shares": "309134980",
-          "shares_lakh": "3091.35"
-        },
-        {
-          "price": ">= 132",
-          "shares": "309058420",
-          "shares_lakh": "3090.58"
-        },
-        {
-          "price": ">= 133",
-          "shares": "308978890",
-          "shares_lakh": "3089.79"
-        },
-        {
-          "price": ">= 134",
-          "shares": "308938520",
-          "shares_lakh": "3089.39"
-        },
-        {
-          "price": ">= 135",
-          "shares": "308908160",
-          "shares_lakh": "3089.08"
-        },
-        {
-          "price": ">= 136",
-          "shares": "308853930",
-          "shares_lakh": "3088.54"
-        },
-        {
-          "price": "Cut-Off",
-          "shares": "74999870",
-          "shares_lakh": "749.99"
+          "price": ">= Cumulative Confirmed Bid Quantity",
+          "shares": null
         }
       ],
-      "source": "NSE India Official Demand Graph (issue-information)",
-      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
-      "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
+      "source": "NSE India Official Demand Graph (issue-information)"
     }
   },
   {
@@ -470,7 +403,7 @@
     "allotment_date": "2026-11-23",
     "demat_credit_date": "2026-11-24",
     "listing_date": "2026-11-25",
-    "price_band": "\u20b9259 - \u20b9272",
+    "price_band": "₹259 - ₹272",
     "cut_off_price": 272,
     "face_value": 10,
     "lot_size": 55,
@@ -478,10 +411,10 @@
     "issue_size_cr": 1500,
     "fresh_issue_cr": 600,
     "ofs_cr": 900,
-    "gmp": "+\u20b918.00",
+    "gmp": "+₹18.00",
     "gmp_percent": 5.15,
     "gmp_unofficial": true,
-    "est_listing_price": "\u20b9286(+5.15%)",
+    "est_listing_price": "₹286(+5.15%)",
     "subscription": {
       "qib": "4.85x",
       "nii": "3.12x",
@@ -496,10 +429,10 @@
     },
     "about": "One of India's leading R&D-driven agrochemical companies manufacturing technical grade pesticides, crop protection formulations, seeds, and specialized farm spraying equipment across 5 plants in Gujarat, Haryana, and J&K.",
     "drhp_objects": [
-      "Funding capital expenditure for expanding technical agrochemical synthesis plant in Dahej (\u20b9150 Cr)",
-      "Prepayment and repayment of high-cost bank borrowings (\u20b9250 Cr)",
-      "Working capital requirements for upcoming Kharif & Rabi peak sales cycles (\u20b9150 Cr)",
-      "General corporate purposes & R&D formulation upgrades (\u20b950 Cr)"
+      "Funding capital expenditure for expanding technical agrochemical synthesis plant in Dahej (₹150 Cr)",
+      "Prepayment and repayment of high-cost bank borrowings (₹250 Cr)",
+      "Working capital requirements for upcoming Kharif & Rabi peak sales cycles (₹150 Cr)",
+      "General corporate purposes & R&D formulation upgrades (₹50 Cr)"
     ],
     "lead_managers": [
       "Kotak Mahindra Capital Company Limited",
@@ -514,7 +447,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-23T23:06:30.029689+05:30"
+    "last_updated": "2026-11-23T23:24:38.560502+05:30"
   },
   {
     "id": "vishal-mega-mart",
@@ -530,7 +463,7 @@
     "allotment_date": "2024-12-16",
     "demat_credit_date": "2024-12-17",
     "listing_date": "2024-12-18",
-    "price_band": "\u20b974 - \u20b978",
+    "price_band": "₹74 - ₹78",
     "cut_off_price": 78,
     "face_value": 2,
     "lot_size": 190,
@@ -538,7 +471,7 @@
     "issue_size_cr": 8000,
     "fresh_issue_cr": 0,
     "ofs_cr": 8000,
-    "listing_price": "\u20b9110.00",
+    "listing_price": "₹110.00",
     "listing_gain": "+41.02%",
     "subscription": {
       "qib": "28.40x",
@@ -580,7 +513,7 @@
     "allotment_date": "2024-11-25",
     "demat_credit_date": "2024-11-26",
     "listing_date": "2024-11-27",
-    "price_band": "\u20b9102 - \u20b9108",
+    "price_band": "₹102 - ₹108",
     "cut_off_price": 108,
     "face_value": 10,
     "lot_size": 138,
@@ -588,7 +521,7 @@
     "issue_size_cr": 10000,
     "fresh_issue_cr": 10000,
     "ofs_cr": 0,
-    "listing_price": "\u20b9111.50",
+    "listing_price": "₹111.50",
     "listing_gain": "+3.24%",
     "subscription": {
       "qib": "3.22x",
@@ -598,8 +531,8 @@
     },
     "about": "Wholly owned green energy flagship arm of Maharatna PSU NTPC Limited, developing utility-scale solar generation, onshore wind parks, battery storage, and green hydrogen hubs across India.",
     "drhp_objects": [
-      "100% Fresh Issue: \u20b97,500 Cr for investment in subsidiary NTPC Renewable Energy (NREL) for debt repayment",
-      "Balance \u20b92,500 Cr for ongoing solar & wind park execution and general corporate purposes"
+      "100% Fresh Issue: ₹7,500 Cr for investment in subsidiary NTPC Renewable Energy (NREL) for debt repayment",
+      "Balance ₹2,500 Cr for ongoing solar & wind park execution and general corporate purposes"
     ],
     "lead_managers": [
       "IDBI Capital Markets",
@@ -630,7 +563,7 @@
     "allotment_date": "2024-11-11",
     "demat_credit_date": "2024-11-12",
     "listing_date": "2024-11-13",
-    "price_band": "\u20b9371 - \u20b9390",
+    "price_band": "₹371 - ₹390",
     "cut_off_price": 390,
     "face_value": 1,
     "lot_size": 38,
@@ -638,7 +571,7 @@
     "issue_size_cr": 11327,
     "fresh_issue_cr": 4499,
     "ofs_cr": 6828,
-    "listing_price": "\u20b9412.00",
+    "listing_price": "₹412.00",
     "listing_gain": "+5.64%",
     "subscription": {
       "qib": "6.02x",
@@ -648,9 +581,9 @@
     },
     "about": "Pioneer of Indian hyperlocal food delivery and rapid 10-minute grocery delivery (Instamart), dining out reservations (Dineout), and Genie courier services across 650+ Indian cities.",
     "drhp_objects": [
-      "Investment in Instamart dark-store infrastructure expansion (\u20b91,178 Cr)",
-      "Technology & cloud engineering architecture scaling (\u20b9703 Cr)",
-      "Brand marketing & user acquisition promotions (\u20b91,115 Cr)"
+      "Investment in Instamart dark-store infrastructure expansion (₹1,178 Cr)",
+      "Technology & cloud engineering architecture scaling (₹703 Cr)",
+      "Brand marketing & user acquisition promotions (₹1,115 Cr)"
     ],
     "lead_managers": [
       "Kotak Mahindra Capital",
@@ -681,7 +614,7 @@
     "allotment_date": "2024-11-11",
     "demat_credit_date": "2024-11-12",
     "listing_date": "2024-11-13",
-    "price_band": "\u20b9275 - \u20b9289",
+    "price_band": "₹275 - ₹289",
     "cut_off_price": 289,
     "face_value": 2,
     "lot_size": 51,
@@ -689,7 +622,7 @@
     "issue_size_cr": 2900,
     "fresh_issue_cr": 2395,
     "ofs_cr": 505,
-    "listing_price": "\u20b9251.00",
+    "listing_price": "₹251.00",
     "listing_gain": "-13.15%",
     "subscription": {
       "qib": "3.10x",
@@ -699,7 +632,7 @@
     },
     "about": "One of India's pioneering private utility-scale solar and renewable power developers with operational capacity across Rajasthan, Andhra Pradesh, and Punjab.",
     "drhp_objects": [
-      "Repayment and prepayment of borrowings of subsidiaries (\u20b92,000 Cr)",
+      "Repayment and prepayment of borrowings of subsidiaries (₹2,000 Cr)",
       "General corporate purposes"
     ],
     "lead_managers": [
@@ -730,7 +663,7 @@
     "allotment_date": "2024-10-30",
     "demat_credit_date": "2024-10-31",
     "listing_date": "2024-11-04",
-    "price_band": "\u20b9440 - \u20b9463",
+    "price_band": "₹440 - ₹463",
     "cut_off_price": 463,
     "face_value": 10,
     "lot_size": 32,
@@ -738,7 +671,7 @@
     "issue_size_cr": 5430,
     "fresh_issue_cr": 1250,
     "ofs_cr": 4180,
-    "listing_price": "\u20b9430.00",
+    "listing_price": "₹430.00",
     "listing_gain": "-7.13%",
     "subscription": {
       "qib": "3.99x",
@@ -748,9 +681,9 @@
     },
     "about": "Flagship infrastructure engineering and construction arm of the Shapoorji Pallonji Group executing complex marine projects, deep metro tunnels, and specialized mountain viaducts across Asia, Africa, and the Middle East.",
     "drhp_objects": [
-      "Capital expenditure towards purchase of specialized heavy marine & tunneling construction equipment (\u20b9320 Cr)",
-      "Funding long-term working capital requirements (\u20b9500 Cr)",
-      "Repayment/prepayment of outstanding debt (\u20b9430 Cr)"
+      "Capital expenditure towards purchase of specialized heavy marine & tunneling construction equipment (₹320 Cr)",
+      "Funding long-term working capital requirements (₹500 Cr)",
+      "Repayment/prepayment of outstanding debt (₹430 Cr)"
     ],
     "lead_managers": [
       "ICICI Securities",
@@ -781,7 +714,7 @@
     "allotment_date": "2024-10-18",
     "demat_credit_date": "2024-10-21",
     "listing_date": "2024-10-22",
-    "price_band": "\u20b91865 - \u20b91960",
+    "price_band": "₹1865 - ₹1960",
     "cut_off_price": 1960,
     "face_value": 10,
     "lot_size": 7,
@@ -789,7 +722,7 @@
     "issue_size_cr": 27870,
     "fresh_issue_cr": 0,
     "ofs_cr": 27870,
-    "listing_price": "\u20b91934.00",
+    "listing_price": "₹1934.00",
     "listing_gain": "-1.33%",
     "subscription": {
       "qib": "6.97x",
