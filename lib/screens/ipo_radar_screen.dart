@@ -947,13 +947,14 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: const Color(0xFF1E293B),
                   borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: const Color(0xFF00E5FF).withAlpha(80)),
                 ),
                 child: Text(
-                  "Total: $totalFormatted",
+                  "Total: ${totalFormatted.endsWith('x') ? '$totalFormatted Multiple' : totalFormatted}",
                   style: GoogleFonts.robotoMono(
                     color: const Color(0xFF00E5FF),
                     fontWeight: FontWeight.w700,
@@ -962,6 +963,14 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            "Multiple (Guna) = Issue Quota ke mukable kitne guna shares ki demand aayi hai.",
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 8.5,
+            ),
           ),
           const SizedBox(height: 8),
 
@@ -1002,6 +1011,8 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
 
   Widget _buildCategoryBar(String label, String formattedVal, double numVal, Color barColor) {
     double progress = (numVal / 10.0).clamp(0.02, 1.0);
+    final displayMultiple = formattedVal.toLowerCase().endsWith('x') ? "$formattedVal Multiple" : formattedVal;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1016,23 +1027,31 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                 style: const TextStyle(color: Colors.white70, fontSize: 9),
               ),
             ),
-            const SizedBox(width: 6),
-            Text(
-              formattedVal,
-              style: GoogleFonts.robotoMono(
-                color: barColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 9.5,
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+              decoration: BoxDecoration(
+                color: barColor.withAlpha(25),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: barColor.withAlpha(80)),
+              ),
+              child: Text(
+                displayMultiple,
+                style: GoogleFonts.robotoMono(
+                  color: barColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 9.5,
+                ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 2),
+        const SizedBox(height: 3),
         ClipRRect(
           borderRadius: BorderRadius.circular(2),
           child: LinearProgressIndicator(
             value: progress,
-            minHeight: 4,
+            minHeight: 4.5,
             backgroundColor: const Color(0xFF1E293B),
             valueColor: AlwaysStoppedAnimation<Color>(barColor),
           ),
