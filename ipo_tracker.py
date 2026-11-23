@@ -475,6 +475,8 @@ def run_tracker(now: datetime | None = None) -> int:
             # Update live subscription from official exchange feed
             if item.get("subscription"):
                 existing.setdefault("subscription", {}).update(item["subscription"])
+            if item.get("demand_graph"):
+                existing["demand_graph"] = item["demand_graph"]
 
             # Recalculate status based on current date
             open_d = existing.get("open_date")

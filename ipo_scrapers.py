@@ -1660,6 +1660,9 @@ class IpoAggregator:
                     if nse_deep.get("subscription"):
                         target.setdefault("subscription", {}).update(nse_deep["subscription"])
                         logger.info(f"   📊 NSE Live Demand/Bids for {target['company_name']}: {target['subscription']}")
+                    if nse_deep.get("demand_graph"):
+                        target["demand_graph"] = nse_deep["demand_graph"]
+                        target.setdefault("subscription", {})["demand_graph"] = nse_deep["demand_graph"]
                 except Exception as deep_err:
                     logger.debug(f"NSE deep detail fetch note for {sym}: {deep_err}")
 
