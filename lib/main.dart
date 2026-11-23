@@ -16,6 +16,7 @@ import 'screens/mf_smart_money_screen.dart'; // 🕵️ MF Smart Money Radar
 import 'screens/economy_demand_radar_screen.dart'; // 🏭 Physical Economy Demand Radar
 import 'screens/global_economy_radar_screen.dart'; // 🌍 Global Economy Radar
 import 'screens/institutional_internals_radar_screen.dart'; // 🏛️ Institutional & Risk Radar
+import 'screens/ipo_radar_screen.dart'; // 🚀 NSE Mainboard IPO Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
 import 'services/auth_service.dart';
@@ -354,6 +355,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const MfSmartMoneyScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.rocket_launch_rounded,
+              title: 'NSE Mainboard IPO Radar',
+              subtitle: 'Series EQ Bidding • Fresh vs OFS • Live Demand',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const IpoRadarScreen(),
                   ),
                 );
               },

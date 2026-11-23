@@ -1247,47 +1247,54 @@ class IpoAggregator:
     def __init__(self, session: requests.Session | None = None):
         self.session = session or requests.Session()
         self.ipocentral_gmp = IpoCentralGmpScraper(self.session)
-        self.chittorgarh_gmp = ChittorgarhGmpScraper(self.session)
         self.ipowatch = IpoWatchGmpScraper(self.session)
-        self.chittorgarh_issues = ChittorgarhScraper(self.session)
         self.nse = NseIpoScraper(self.session)
         self.bse = BseIpoScraper(self.session)
         self.drhp_parser = DrhpDetailParser(self.session)
+        # Chittorgarh is completely disabled/excluded per regulatory requirements
 
     def collect_all_mainboard_ipos(self) -> list[dict]:
-        """Collect and cross-merge Mainboard IPO data from all available sources."""
+        """
+        Collect and cross-merge Mainboard IPO data:
+        1. Official NSE Series EQ Public Issues (Primary Source of Truth)
+        2. Official BSE Public Issues
+        3. Official NSE Deep Bidding & Category-wise Subscription
+        4. Mainboard Upcoming from IPO Watch
+        5. Unofficial GMP Sentiment from IPO Central & IPO Watch (Flagged as unofficial)
+        """
         today_str = datetime.now(IST).strftime("%Y-%m-%d")
         merged_map: dict[str, dict] = {}
 
-        # 1. Fetch Mainboard Issues from Chittorgarh (Upcoming / Current / Dashboard)
-        c_items = self.chittorgarh_issues.fetch_mainboard_ipos(today_str=today_str)
-        logger.info(f"Collected {len(c_items)} entries from Chittorgarh Report 82")
-
-        for item in c_items:
-            slug = sanitize_slug(item.get("company_name", ""))
+        # 1. Primary Source: Official NSE Public IPO Issues
+        nse_items = self.nse.fetch_nse_ipos()
+        nse_names = [ne.get("company_name") for ne in nse_items]
+        logger.info(f"Collected {len(nse_items)} entries from official NSE India: {nse_names}")
+        for ne in nse_items:
+            slug = sanitize_slug(ne.get("company_name", ""))
             if not slug:
                 continue
-
+            sym = ne.get("symbol", "")
             merged_map[slug] = {
                 "id": slug,
-                "company_name": item.get("company_name"),
-                "symbol": item.get("symbol") or "",
+                "company_name": ne.get("company_name"),
+                "symbol": sym,
                 "issue_type": "Mainboard",
                 "exchange": "NSE & BSE",
-                "open_date": item.get("open_date"),
-                "close_date": item.get("close_date"),
-                "allotment_date": item.get("allotment_date"),
-                "listing_date": item.get("listing_date"),
-                "price_band": item.get("price_band") or "",
-                "lot_size": item.get("lot_size"),
-                "issue_size_cr": item.get("issue_size_cr") or "",
-                "fresh_issue_cr": item.get("fresh_issue_cr") or "",
-                "ofs_cr": item.get("ofs_cr") or "",
+                "open_date": ne.get("open_date"),
+                "close_date": ne.get("close_date"),
+                "allotment_date": None,
+                "listing_date": None,
+                "price_band": ne.get("price_band") or "",
+                "lot_size": None,
+                "issue_size_cr": ne.get("issue_size_cr") or "",
+                "fresh_issue_cr": "",
+                "ofs_cr": "",
                 "gmp": "",
                 "gmp_percent": "",
+                "gmp_unofficial": True,
                 "est_listing_price": "",
-                "listing_price": item.get("listing_price") or "",
-                "listing_gain": item.get("listing_gain") or "",
+                "listing_price": "",
+                "listing_gain": "",
                 "kostak": "",
                 "sub2sauda": "",
                 "subscription": {},
@@ -1300,59 +1307,104 @@ class IpoAggregator:
                 "lead_managers": [],
                 "drhp_url": "",
                 "about": "",
-                "detail_url": item.get("detail_url") or "",
-                "sources": [item.get("source")],
-                "is_already_listed": item.get("is_already_listed", False),
-                "status": item.get("status", "UPCOMING"),
+                "detail_url": "",
+                "sources": ["nse_official"],
+                "is_already_listed": False,
+                "status": "UPCOMING",
             }
 
-        # 2. Enrich with Primary Live GMP from IPO Central
-        ipoc_gmp_items = self.ipocentral_gmp.fetch_live_gmp()
-        logger.info(f"Collected {len(ipoc_gmp_items)} GMP entries from IPO Central")
-        for gmp_item in ipoc_gmp_items:
-            slug = sanitize_slug(gmp_item.get("company_name", ""))
+        # 2. Enrich with Official BSE Equity Data
+        bse_items = self.bse.fetch_bse_ipos()
+        bse_names = [be.get("company_name") for be in bse_items]
+        logger.info(f"Collected {len(bse_items)} entries from official BSE India: {bse_names}")
+        for be in bse_items:
+            slug = sanitize_slug(be.get("company_name", ""))
             if not slug:
                 continue
-
             target = merged_map.get(slug)
             if not target:
-                continue
+                target = {
+                    "id": slug,
+                    "company_name": be.get("company_name"),
+                    "symbol": be.get("symbol") or "",
+                    "issue_type": "Mainboard",
+                    "exchange": "NSE & BSE",
+                    "open_date": be.get("open_date"),
+                    "close_date": be.get("close_date"),
+                    "allotment_date": None,
+                    "listing_date": None,
+                    "price_band": be.get("price_band") or "",
+                    "lot_size": None,
+                    "issue_size_cr": be.get("issue_size_cr") or "",
+                    "fresh_issue_cr": "",
+                    "ofs_cr": "",
+                    "gmp": "",
+                    "gmp_percent": "",
+                    "gmp_unofficial": True,
+                    "est_listing_price": "",
+                    "listing_price": "",
+                    "listing_gain": "",
+                    "kostak": "",
+                    "sub2sauda": "",
+                    "subscription": {},
+                    "registrar": {"name": "", "url": ""},
+                    "drhp_objects": [],
+                    "reservation": {},
+                    "financials": {},
+                    "kpis": {},
+                    "promoter_holding": {},
+                    "lead_managers": [],
+                    "drhp_url": "",
+                    "about": "",
+                    "detail_url": "",
+                    "sources": ["bse_official"],
+                    "is_already_listed": False,
+                    "status": "UPCOMING",
+                }
+                merged_map[slug] = target
+            else:
+                if not target.get("open_date") and be.get("open_date"):
+                    target["open_date"] = be["open_date"]
+                if not target.get("close_date") and be.get("close_date"):
+                    target["close_date"] = be["close_date"]
+                if not target.get("price_band") and be.get("price_band"):
+                    target["price_band"] = be["price_band"]
+                if "bse_official" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("bse_official")
 
-            if gmp_item.get("gmp"):
-                target["gmp"] = gmp_item["gmp"]
-            if gmp_item.get("gmp_percent"):
-                target["gmp_percent"] = gmp_item["gmp_percent"]
-            if gmp_item.get("kostak"):
-                target["kostak"] = gmp_item["kostak"]
-            if gmp_item.get("sub2sauda"):
-                target["sub2sauda"] = gmp_item["sub2sauda"]
+        # 3. Fetch deep NSE issue information and live cumulative bids/demand
+        for slug, target in merged_map.items():
+            sym = target.get("symbol")
+            if sym:
+                try:
+                    nse_deep = self.nse.fetch_nse_issue_details(sym)
+                    if nse_deep.get("lot_size") and not target.get("lot_size"):
+                        target["lot_size"] = nse_deep["lot_size"]
+                    if nse_deep.get("face_value") and not target.get("face_value"):
+                        target["face_value"] = nse_deep["face_value"]
+                    if nse_deep.get("tick_size") and not target.get("tick_size"):
+                        target["tick_size"] = nse_deep["tick_size"]
+                    if nse_deep.get("lead_managers") and not target.get("lead_managers"):
+                        target["lead_managers"] = nse_deep["lead_managers"]
+                    if nse_deep.get("registrar") and not target.get("registrar", {}).get("name"):
+                        reg_name = nse_deep["registrar"]
+                        target["registrar"] = {
+                            "name": reg_name,
+                            "url": get_registrar_url(reg_name),
+                        }
+                    if nse_deep.get("subscription"):
+                        target["subscription"] = nse_deep["subscription"]
+                        logger.info(f"   📊 NSE Live Demand/Bids for {target['company_name']}: {nse_deep['subscription']}")
+                except Exception as deep_err:
+                    logger.debug(f"NSE deep detail fetch note for {sym}: {deep_err}")
 
-        # 3. Enrich with Secondary Live GMP from Chittorgarh Report 82
-        c_gmp_items = self.chittorgarh_gmp.fetch_mainboard_gmp()
-        logger.info(f"Collected {len(c_gmp_items)} GMP entries from Chittorgarh Report 82")
-        for cg in c_gmp_items:
-            slug = sanitize_slug(cg.get("company_name", ""))
-            if slug in merged_map:
-                target = merged_map[slug]
-                if not target.get("gmp") and cg.get("gmp"):
-                    target["gmp"] = cg["gmp"]
-                if not target.get("gmp_percent") and cg.get("gmp_percent"):
-                    target["gmp_percent"] = cg["gmp_percent"]
-                if not target.get("est_listing_price") and cg.get("est_listing_price"):
-                    target["est_listing_price"] = cg["est_listing_price"]
-                if not target.get("detail_url") and cg.get("detail_url"):
-                    target["detail_url"] = cg["detail_url"]
-
-        # 4. Enrich with IPO Watch Live GMP & Issues
+        # 4. Enrich / Add Upcoming Mainboard Issues from IPO Watch
         ipowatch_items = self.ipowatch.fetch_live_table()
         iw_names = [iw.get("company_name") for iw in ipowatch_items]
         logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch: {iw_names}")
         for iw in ipowatch_items:
             slug = sanitize_slug(iw.get("company_name", ""))
-            if not slug:
-                continue
-            # Only add if it has confirmed bidding dates
-            if not iw.get("open_date"):
+            if not slug or not iw.get("open_date"):
                 continue
             target = merged_map.get(slug)
             if not target:
@@ -1367,12 +1419,26 @@ class IpoAggregator:
                     "allotment_date": None,
                     "listing_date": None,
                     "price_band": iw.get("price_band") or "",
+                    "lot_size": None,
                     "issue_size_cr": "",
+                    "fresh_issue_cr": "",
+                    "ofs_cr": "",
                     "gmp": iw.get("gmp") or "",
                     "gmp_percent": iw.get("gmp_percent") or "",
+                    "gmp_unofficial": True,
                     "est_listing_price": iw.get("est_listing_price") or "",
                     "kostak": "",
                     "sub2sauda": "",
+                    "subscription": {},
+                    "registrar": {"name": "", "url": ""},
+                    "drhp_objects": [],
+                    "reservation": {},
+                    "financials": {},
+                    "kpis": {},
+                    "promoter_holding": {},
+                    "lead_managers": [],
+                    "drhp_url": "",
+                    "about": "",
                     "detail_url": iw.get("detail_url") or "",
                     "sources": ["ipowatch"],
                     "is_already_listed": False,
@@ -1382,6 +1448,7 @@ class IpoAggregator:
             else:
                 if iw.get("gmp") and not target.get("gmp"):
                     target["gmp"] = iw["gmp"]
+                    target["gmp_unofficial"] = True
                 if iw.get("gmp_percent") and not target.get("gmp_percent"):
                     target["gmp_percent"] = iw["gmp_percent"]
                 if iw.get("price_band") and not target.get("price_band"):
@@ -1397,47 +1464,27 @@ class IpoAggregator:
                 if "ipowatch" not in target.get("sources", []):
                     target.setdefault("sources", []).append("ipowatch")
 
-        # 5. Enrich with Official NSE & BSE Equity Data
-        nse_items = self.nse.fetch_nse_ipos()
-        nse_names = [ne.get("company_name") for ne in nse_items]
-        logger.info(f"Collected {len(nse_items)} entries from official NSE India: {nse_names}")
-        for ne in nse_items:
-            slug = sanitize_slug(ne.get("company_name", ""))
+        # 5. Enrich with Live GMP from IPO Central (Unofficial Market Sentiment)
+        ipoc_gmp_items = self.ipocentral_gmp.fetch_live_gmp()
+        logger.info(f"Collected {len(ipoc_gmp_items)} GMP entries from IPO Central")
+        for gmp_item in ipoc_gmp_items:
+            slug = sanitize_slug(gmp_item.get("company_name", ""))
             if not slug:
                 continue
-            sym = ne.get("symbol", "")
+
             target = merged_map.get(slug)
             if not target:
-                target = {
-                    "id": slug,
-                    "company_name": ne.get("company_name"),
-                    "symbol": sym,
-                    "issue_type": "Mainboard",
-                    "exchange": "NSE & BSE",
-                    "open_date": ne.get("open_date"),
-                    "close_date": ne.get("close_date"),
-                    "allotment_date": None,
-                    "listing_date": None,
-                    "price_band": ne.get("price_band") or "",
-                    "issue_size_cr": ne.get("issue_size_cr") or "",
-                    "sources": ["nse_official"],
-                    "is_already_listed": False,
-                    "status": "UPCOMING",
-                }
-                merged_map[slug] = target
-            else:
-                if sym:
-                    target["symbol"] = sym
-                if not target.get("open_date") and ne.get("open_date"):
-                    target["open_date"] = ne["open_date"]
-                if not target.get("close_date") and ne.get("close_date"):
-                    target["close_date"] = ne["close_date"]
-                if not target.get("price_band") and ne.get("price_band"):
-                    target["price_band"] = ne["price_band"]
-                if not target.get("issue_size_cr") and ne.get("issue_size_cr"):
-                    target["issue_size_cr"] = ne["issue_size_cr"]
-                if "nse_official" not in target.get("sources", []):
-                    target.setdefault("sources", []).append("nse_official")
+                continue
+
+            if gmp_item.get("gmp"):
+                target["gmp"] = gmp_item["gmp"]
+                target["gmp_unofficial"] = True
+            if gmp_item.get("gmp_percent"):
+                target["gmp_percent"] = gmp_item["gmp_percent"]
+            if gmp_item.get("kostak"):
+                target["kostak"] = gmp_item["kostak"]
+            if gmp_item.get("sub2sauda"):
+                target["sub2sauda"] = gmp_item["sub2sauda"]
 
             # Fetch deep NSE issue information and live cumulative bids/demand
             if sym:

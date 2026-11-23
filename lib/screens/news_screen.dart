@@ -43,6 +43,9 @@ import '../widgets/community_sentiment_card.dart';
 // 🕵️ Mutual Fund Smart Money Preview Card
 import '../widgets/mf_smart_money_preview_card.dart';
 
+// 🚀 NSE Mainboard IPO Radar Screen
+import 'ipo_radar_screen.dart';
+
 // 🌍 Global Economy Radar Preview Card
 import '../widgets/global_economy_preview_card.dart';
 import 'global_economy_radar_screen.dart';
@@ -188,6 +191,103 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               // 🕵️ 2C. MUTUAL FUND SMART MONEY RADAR (Top 20 DII Infiltrations & Overlap Audit)
               const SliverToBoxAdapter(
                 child: MfSmartMoneyPreviewCard(),
+              ),
+
+              // 🚀 2D. NSE MAINBOARD IPO RADAR (Series EQ • Fresh vs OFS • Live Demand)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const IpoRadarScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFF00E5FF).withAlpha(100),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00E5FF).withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.rocket_launch_rounded,
+                                color: Color(0xFF00E5FF),
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "NSE MAINBOARD IPO RADAR",
+                                        style: GoogleFonts.robotoCondensed(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF00E5FF).withAlpha(30),
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Text(
+                                          "SERIES EQ",
+                                          style: GoogleFonts.robotoMono(
+                                            color: const Color(0xFF00E5FF),
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 9,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3),
+                                  const Text(
+                                    "Live NSE Demand • Fresh vs OFS Split • Date Timeline Stepper",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Color(0xFF00E5FF),
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               // 💎 3. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
