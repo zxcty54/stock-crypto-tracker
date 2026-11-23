@@ -1035,7 +1035,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     if (isRetailFomo) {
       verdictText = "⚠️ Retail Divergence: Retail is heavily bidding while institutional big money is waiting.";
     } else if (isQibLeading) {
-      verdictText = "🟢 Strong Institutional Demand: QIBs are aggressively bidding.";
+      verdictText = "🟢 Strong Institutional Demand: QIBs have heavily oversubscribed the quota at $qibFormatted, driving total issue to $totalFormatted.";
     } else if (totalNum < 1.0 && totalNum > 0.0) {
       verdictText = "⏳ Bidding In Progress: Current order book at $totalFormatted across official NSE Series EQ bids.";
     } else {
@@ -1120,6 +1120,91 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               fontSize: 8.5,
             ),
           ),
+
+          // Official NSE Issue Bidding Table (Matches https://www.nseindia.in/market-data/issue-information)
+          if (qibOffered != null || totalBids != null) ...[
+            const SizedBox(height: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF0C1320),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF1E293B)),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF162032),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+                    ),
+                    child: const Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            "CATEGORY",
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "OFFERED / RESERVED",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "NO OF BIDS",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            "TIMES (X)",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Color(0xFF00E5FF),
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _buildBiddingTableRow("1. Qualified Institutional (QIBs)", qibOffered, qibBids, qibFormatted, const Color(0xFF00E5FF), isBold: true),
+                  const Divider(height: 1, color: Color(0xFF1E293B)),
+                  _buildBiddingTableRow("2. Non-Institutional (NII)", niiOffered, niiBids, niiFormatted, const Color(0xFFF59E0B)),
+                  const Divider(height: 1, color: Color(0xFF1E293B)),
+                  _buildBiddingTableRow("3. Individual Investors (Retail)", retOffered, retBids, retailFormatted, const Color(0xFF10B981)),
+                  const Divider(height: 1, color: Color(0xFF1E293B)),
+                  _buildBiddingTableRow("Total Issue Book", sharesOffered, totalBids, totalFormatted, Colors.white, isTotal: true),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
 
           _buildCategoryBar("QIB (Institutional Smart Money)", qibFormatted, qibNum, const Color(0xFF00E5FF), scaleMax, bidsVal: qibBids, offeredVal: qibOffered),
@@ -1152,9 +1237,12 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                source,
-                style: const TextStyle(color: Colors.white38, fontSize: 8),
+              Expanded(
+                child: Text(
+                  source,
+                  style: const TextStyle(color: Colors.white38, fontSize: 8),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               if (updatedAt.isNotEmpty)
                 Text(
@@ -1469,6 +1557,126 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
       }
     } catch (_) {}
     return d;
+  }
+
+  Widget _buildBiddingTableRow(
+    String category,
+    dynamic offeredVal,
+    dynamic bidVal,
+    String timesFormatted,
+    Color accentColor, {
+    bool isBold = false,
+    bool isTotal = false,
+  }) {
+    final offeredStr = _formatIndianNumber(offeredVal);
+    final bidStr = _formatIndianNumber(bidVal);
+    final offeredCr = _formatShareQuantity(offeredVal);
+    final bidCr = _formatShareQuantity(bidVal);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      color: isTotal ? const Color(0xFF1E293B).withAlpha(140) : Colors.transparent,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              category,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: isTotal ? Colors.white : Colors.white70,
+                fontSize: 8.5,
+                fontWeight: (isBold || isTotal) ? FontWeight.w700 : FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  offeredStr.isNotEmpty ? offeredStr : '-',
+                  style: GoogleFonts.robotoMono(
+                    color: isTotal ? Colors.white : Colors.white70,
+                    fontSize: 8,
+                    fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500,
+                  ),
+                ),
+                if (offeredCr.isNotEmpty)
+                  Text(
+                    "($offeredCr)",
+                    style: const TextStyle(color: Colors.white38, fontSize: 7),
+                  ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  bidStr.isNotEmpty ? bidStr : '-',
+                  style: GoogleFonts.robotoMono(
+                    color: isTotal ? Colors.white : Colors.white70,
+                    fontSize: 8,
+                    fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500,
+                  ),
+                ),
+                if (bidCr.isNotEmpty)
+                  Text(
+                    "($bidCr)",
+                    style: const TextStyle(color: Colors.white38, fontSize: 7),
+                  ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                decoration: BoxDecoration(
+                  color: accentColor.withAlpha(25),
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(color: accentColor.withAlpha(80)),
+                ),
+                child: Text(
+                  timesFormatted,
+                  style: GoogleFonts.robotoMono(
+                    color: accentColor,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatIndianNumber(dynamic val) {
+    if (val == null) return '';
+    final s = val.toString().trim().replaceAll(',', '');
+    if (s.isEmpty || !RegExp(r'^[0-9]+$').hasMatch(s)) return val.toString();
+    if (s.length <= 3) return s;
+    final last3 = s.substring(s.length - 3);
+    String remaining = s.substring(0, s.length - 3);
+    final parts = <String>[];
+    while (remaining.isNotEmpty) {
+      if (remaining.length <= 2) {
+        parts.insert(0, remaining);
+        break;
+      }
+      parts.insert(0, remaining.substring(remaining.length - 2));
+      remaining = remaining.substring(0, remaining.length - 2);
+    }
+    return "${parts.join(',')},$last3";
   }
 
   String _formatSubscriptionDisplay(String val) {

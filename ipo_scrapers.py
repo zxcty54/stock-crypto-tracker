@@ -1081,8 +1081,10 @@ class NseIpoScraper:
             if not isinstance(r, dict):
                 continue
             c_name = str(r.get("category") or r.get("name") or "").strip().upper()
-            if not c_name or c_name in ("CATEGORY", "SR.NO."):
+            if not c_name or c_name in ("CATEGORY", "SR.NO.", "SR. NO."):
                 continue
+
+            c_norm = c_name.replace("-", " ").replace("_", " ")
 
             raw_t = r.get("noOfTotalMeant") or r.get("noOfTime") or r.get("noOfTimes") or r.get("subscription")
             t_str = _parse_sub_multiple(raw_t)
@@ -1090,35 +1092,35 @@ class NseIpoScraper:
             bids = _parse_share_count(r.get("noOfSharesBid") or r.get("noOfshareBid") or r.get("sharesBid"))
             offered = _parse_share_count(r.get("noOfShareOffered") or r.get("noOfShareO") or r.get("sharesOffered"))
 
-            if "TOTAL" in c_name:
+            if "TOTAL" in c_norm:
                 if t_str:
                     sub["total"] = t_str
                 if bids:
                     sub["total_bids"] = bids
                 if offered:
                     sub["shares_offered"] = offered
-            elif "QIB" in c_name or "QUALIFIED" in c_name:
+            elif "QIB" in c_norm or "QUALIFIED" in c_norm:
                 if t_str:
                     sub["qib"] = t_str
                 if bids:
                     sub["qib_bids"] = bids
                 if offered:
                     sub["qib_offered"] = offered
-            elif "NII" in c_name or "HNI" in c_name or "NON INSTITUTIONAL" in c_name:
+            elif "NII" in c_norm or "HNI" in c_norm or "NON INSTITUTIONAL" in c_norm or "NON-INSTITUTIONAL" in c_name:
                 if t_str:
                     sub["nii"] = t_str
                 if bids:
                     sub["nii_bids"] = bids
                 if offered:
                     sub["nii_offered"] = offered
-            elif "RETAIL" in c_name or "RII" in c_name or "INDIVIDUAL" in c_name:
+            elif "RETAIL" in c_norm or "RII" in c_norm or "INDIVIDUAL" in c_norm:
                 if t_str:
                     sub["retail"] = t_str
                 if bids:
                     sub["retail_bids"] = bids
                 if offered:
                     sub["retail_offered"] = offered
-            elif "EMPLOYEE" in c_name or "EMP" in c_name:
+            elif "EMPLOYEE" in c_norm or "EMP" in c_norm:
                 if t_str:
                     sub["employee"] = t_str
                 if bids:
@@ -1271,6 +1273,43 @@ class NseIpoScraper:
                             break
             except Exception as e:
                 logger.debug(f"NSE bid details API note for {symbol}: {e}")
+
+        # 3. Direct/Fallback check of official HTML issue-information page
+        urls_issue_info = [
+            f"https://www.nseindia.in/market-data/issue-information?symbol={symbol}&series=EQ&type=Active",
+            f"https://www.nseindia.com/market-data/issue-information?symbol={symbol}&series=EQ&type=Active",
+        ]
+        for url_info in urls_issue_info:
+            try:
+                resp = self.session.get(url_info, headers=NSE_HEADERS, timeout=10)
+                if resp.status_code == 200 and "<table" in resp.text:
+                    soup = BeautifulSoup(resp.text, "html.parser")
+                    for table in soup.find_all("table"):
+                        rows = table.find_all("tr")
+                        if len(rows) < 2:
+                            continue
+                        headers = [c.get_text(strip=True).upper() for c in rows[0].find_all(["th", "td"])]
+                        if any("CATEGORY" in h for h in headers) and any("TIMES" in h or "TOTAL MEANT" in h for h in headers):
+                            cat_list = []
+                            for tr in rows[1:]:
+                                tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
+                                if len(tds) >= 4:
+                                    c_name = tds[1] if len(tds) >= 5 else tds[0]
+                                    offered = tds[2] if len(tds) >= 5 else tds[1]
+                                    bid = tds[3] if len(tds) >= 5 else tds[2]
+                                    times = tds[4] if len(tds) >= 5 else tds[3]
+                                    cat_list.append({
+                                        "category": c_name,
+                                        "noOfShareOffered": offered,
+                                        "noOfSharesBid": bid,
+                                        "noOfTotalMeant": times,
+                                    })
+                            if cat_list:
+                                self._extract_category_data_list(cat_list, details)
+                                details.setdefault("subscription", {})["source"] = "NSE India Official Bidding Feed (issue-information)"
+                                break
+            except Exception as e:
+                logger.debug(f"NSE issue-information HTML parse note for {symbol}: {e}")
 
         return details
 

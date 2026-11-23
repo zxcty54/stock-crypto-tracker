@@ -748,6 +748,117 @@ class TestLifecycleEngine(unittest.TestCase):
         self.assertIn("https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19", dash_msg)
         self.assertIn("Instant View", dash_msg)
 
+    def test_nse_issue_information_html_scraping(self):
+        """
+        Verify that NseIpoScraper parses the official 5-column HTML table from
+        https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        from ipo_scrapers import NseIpoScraper
+
+        html_sample = """
+        <!DOCTYPE html>
+        <html>
+        <body>
+        <table id="ipo-bid-details-table" class="table">
+          <thead>
+            <tr>
+              <th>SR. NO.</th>
+              <th>CATEGORY</th>
+              <th>NO OF SHARES OFFERED/ RESERVED</th>
+              <th>NO OF SHARES BID FOR</th>
+              <th>NO OF TIMES OF TOTAL MEANT FOR THE CATEGORY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Qualified Institutional Buyers(QIBs)</td>
+              <td>11,25,12,171</td>
+              <td>18,13,18,390</td>
+              <td>1.61</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Non-Institutional Investors</td>
+              <td>8,43,84,129</td>
+              <td>3,88,16,700</td>
+              <td>0.46</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Individual Investors</td>
+              <td>19,68,96,300</td>
+              <td>7,87,58,520</td>
+              <td>0.40</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Total</td>
+              <td>49,30,68,045</td>
+              <td>74,86,87,060</td>
+              <td>1.52</td>
+            </tr>
+          </tbody>
+        </table>
+        </body>
+        </html>
+        """
+        scraper = NseIpoScraper()
+        with unittest.mock.patch.object(scraper.session, "get") as mock_get:
+            mock_resp = unittest.mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.text = html_sample
+            mock_resp.json.side_effect = Exception("Not a JSON endpoint")
+            mock_get.return_value = mock_resp
+
+            details = scraper.fetch_nse_issue_details("MAHACOAL")
+            sub = details.get("subscription", {})
+            self.assertEqual(sub.get("qib"), "1.61x")
+            self.assertEqual(sub.get("qib_bids"), "181318390")
+            self.assertEqual(sub.get("qib_offered"), "112512171")
+            self.assertEqual(sub.get("nii"), "0.46x")
+            self.assertEqual(sub.get("nii_bids"), "38816700")
+            self.assertEqual(sub.get("nii_offered"), "84384129")
+            self.assertEqual(sub.get("retail"), "0.40x")
+            self.assertEqual(sub.get("retail_bids"), "78758520")
+            self.assertEqual(sub.get("retail_offered"), "196896300")
+            self.assertEqual(sub.get("total"), "1.52x")
+            self.assertEqual(sub.get("total_bids"), "748687060")
+            self.assertEqual(sub.get("shares_offered"), "493068045")
+            self.assertIn("issue-information", sub.get("source", ""))
+
+    def test_mahacoal_master_data_matches_nse_issue_information(self):
+        """
+        Verify that both master JSON files contain the exact Day 3 closing numbers
+        matching https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        for path in ["ipo_master.json", "assets/data/ipo_master.json"]:
+            with open(path, "r") as f:
+                data = json.load(f)
+            mahacoal = next((item for item in data if item.get("symbol") == "MAHACOAL" or item.get("id") == "mahanadi-coalfields"), None)
+            self.assertIsNotNone(mahacoal, f"MAHACOAL not found in {path}")
+            sub = mahacoal.get("subscription", {})
+
+            # QIB row: 11,25,12,171 offered, 18,13,18,390 bids, 1.61x
+            self.assertEqual(sub.get("qib"), "1.61x")
+            self.assertEqual(sub.get("qib_offered"), "112512171")
+            self.assertEqual(sub.get("qib_bids"), "181318390")
+
+            # NII row: 8,43,84,129 offered, 3,88,16,700 bids, 0.46x
+            self.assertEqual(sub.get("nii"), "0.46x")
+            self.assertEqual(sub.get("nii_offered"), "84384129")
+            self.assertEqual(sub.get("nii_bids"), "38816700")
+
+            # Retail row: 19,68,96,300 offered, 7,87,58,520 bids, 0.40x
+            self.assertEqual(sub.get("retail"), "0.40x")
+            self.assertEqual(sub.get("retail_offered"), "196896300")
+            self.assertEqual(sub.get("retail_bids"), "78758520")
+
+            # Total row: 49,30,68,045 offered, 74,86,87,060 bids, 1.52x
+            self.assertEqual(sub.get("total"), "1.52x")
+            self.assertEqual(sub.get("shares_offered"), "493068045")
+            self.assertEqual(sub.get("total_bids"), "748687060")
+
 
 if __name__ == "__main__":
     unittest.main()
