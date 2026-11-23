@@ -15,7 +15,6 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isLoading = true;
-  String? _errorMessage;
   List<Map<String, dynamic>> _allIpos = [];
 
   final List<String> _dataUrls = [
@@ -27,7 +26,8 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    // Strictly 2 tabs: Active & Upcoming (No Listed)
+    _tabController = TabController(length: 2, vsync: this);
     _loadIpoData();
   }
 
@@ -40,7 +40,6 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
   Future<void> _loadIpoData() async {
     setState(() {
       _isLoading = true;
-      _errorMessage = null;
     });
 
     List<Map<String, dynamic>> loaded = [];
@@ -71,9 +70,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         if (decoded is List) {
           loaded = decoded.map((e) => Map<String, dynamic>.from(e)).toList();
         }
-      } catch (e) {
-        _errorMessage = "Could not load IPO data. Please check connection.";
-      }
+      } catch (_) {}
     }
 
     if (mounted) {
@@ -89,9 +86,6 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
 
   List<Map<String, dynamic>> get _upcomingIpos =>
       _allIpos.where((e) => (e['status'] ?? '').toString().toUpperCase() == 'UPCOMING').toList();
-
-  List<Map<String, dynamic>> get _listedIpos =>
-      _allIpos.where((e) => (e['status'] ?? '').toString().toUpperCase() == 'LISTED').toList();
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +117,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               ],
             ),
             Text(
-              "Series EQ • Official Exchange Demand • Behind-the-Scenes Split",
+              "Series EQ • Live Bidding Demand • Fresh vs OFS Split",
               style: TextStyle(
                 color: Colors.white.withAlpha(150),
                 fontSize: 10,
@@ -150,13 +144,12 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               unselectedLabelColor: Colors.white60,
               labelStyle: GoogleFonts.robotoCondensed(
                 fontWeight: FontWeight.w700,
-                fontSize: 12.5,
+                fontSize: 13,
                 letterSpacing: 0.4,
               ),
               tabs: [
-                Tab(text: "🔥 ACTIVE (${_openIpos.length})"),
-                Tab(text: "⏳ UPCOMING (${_upcomingIpos.length})"),
-                Tab(text: "📋 LISTED (${_listedIpos.length})"),
+                Tab(text: "🔥 ACTIVE BIDDING (${_openIpos.length})"),
+                Tab(text: "⏳ UPCOMING ISSUES (${_upcomingIpos.length})"),
               ],
             ),
           ),
@@ -174,14 +167,13 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                 // Regulatory Notice Shield (Play Store Safe)
                 _buildRegulatoryShieldBanner(),
 
-                // Tabs Content
+                // Strictly 2 Tabs View
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      _buildIpoList(_openIpos, "Koi Mainboard IPO abhi open nahi hai."),
-                      _buildIpoList(_upcomingIpos, "Koi Upcoming Mainboard issue announce nahi hua hai."),
-                      _buildIpoList(_listedIpos, "Koi recently listed Mainboard data available nahi hai."),
+                      _buildIpoList(_openIpos, "Abhi koi Mainboard IPO open nahi hai."),
+                      _buildIpoList(_upcomingIpos, "Abhi koi Upcoming Mainboard IPO announce nahi hua hai."),
                     ],
                   ),
                 ),
@@ -201,12 +193,13 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Icon(Icons.shield_outlined, color: Color(0xFF38BDF8), size: 14),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              "Official NSE Series 'EQ' issues only. Grey Market Premium (GMP) is an unofficial third-party sentiment indicator for educational awareness only.",
+              "Official NSE Series 'EQ' issues only. Grey Market Premium (GMP) is an unofficial third-party indicator tracked purely for sentiment analysis.",
               style: TextStyle(
                 color: Colors.white.withAlpha(170),
                 fontSize: 9.5,
@@ -271,10 +264,6 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     final registrar = (ipo['registrar'] as Map<String, dynamic>?) ?? {};
     final leadManagers = (ipo['lead_managers'] as List<dynamic>?) ?? [];
 
-    final isListed = status == 'LISTED';
-    final listingPrice = ipo['listing_price']?.toString() ?? '';
-    final listingGain = ipo['listing_gain']?.toString() ?? '';
-
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
@@ -295,59 +284,56 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            companyName,
-                            style: GoogleFonts.robotoCondensed(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 3),
-                          Wrap(
-                            spacing: 6,
-                            runSpacing: 4,
-                            children: [
-                              if (symbol.isNotEmpty)
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF0C1320),
-                                    borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(color: const Color(0xFF00E5FF).withAlpha(80)),
-                                  ),
-                                  child: Text(
-                                    "NSE: $symbol • Series EQ",
-                                    style: GoogleFonts.robotoMono(
-                                      color: const Color(0xFF00E5FF),
-                                      fontSize: 9.5,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF1E293B),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Text(
-                                  sector,
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 9.5,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                      child: Text(
+                        companyName,
+                        style: GoogleFonts.robotoCondensed(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          height: 1.25,
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 8),
                     _buildStatusBadge(status),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: [
+                    if (symbol.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0C1320),
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFF00E5FF).withAlpha(80)),
+                        ),
+                        child: Text(
+                          "NSE: $symbol • Series EQ",
+                          style: GoogleFonts.robotoMono(
+                            color: const Color(0xFF00E5FF),
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E293B),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        sector,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 9.5,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -356,70 +342,78 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
 
           const Divider(height: 1, color: Color(0xFF1E293B)),
 
-          // 2. KEY ISSUE PARAMETERS GRID (Price, Lot, Size)
+          // 2. KEY ISSUE PARAMETERS (2x2 Grid - Overflow Proof)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-            child: Row(
+            padding: const EdgeInsets.fromLTRB(14, 10, 14, 4),
+            child: Column(
               children: [
-                Expanded(
-                  child: _buildParamBox(
-                    "PRICE BAND",
-                    priceBand,
-                    cutOff.isNotEmpty ? "Cut-off: ₹$cutOff" : "Book Built",
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildParamBox(
+                        "PRICE BAND",
+                        priceBand,
+                        cutOff.isNotEmpty ? "Cut-off: ₹$cutOff" : "Book Built",
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: _buildParamBox(
+                        "LOT SIZE & MIN BID",
+                        "$lotSize Shares",
+                        minInvestment.isNotEmpty ? "Min ₹$minInvestment" : "Retail 1 Lot",
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _buildParamBox(
-                    "LOT / MIN BID",
-                    "$lotSize Shares",
-                    minInvestment.isNotEmpty ? "₹$minInvestment" : "Retail 1 Lot",
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _buildParamBox(
-                    "TOTAL ISSUE",
-                    issueSizeCr.isNotEmpty ? "₹$issueSizeCr Cr" : "TBA",
-                    isListed ? "Mainboard" : "NSE & BSE",
-                  ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildParamBox(
+                        "TOTAL ISSUE SIZE",
+                        issueSizeCr.isNotEmpty ? "₹$issueSizeCr Cr" : "TBA",
+                        "NSE & BSE Mainboard",
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: _buildParamBox(
+                        "ISSUE TYPE",
+                        "100% Book Built",
+                        "Series: EQ (Equity)",
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
 
-          // 3. UNOFFICIAL SENTIMENT PILL (GMP Disclaimer Safe)
-          if (!isListed && gmp.isNotEmpty) ...[
+          // 3. UNOFFICIAL SENTIMENT PILL (GMP Disclaimer Safe & Overflow Proof)
+          if (gmp.isNotEmpty) ...[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               child: _buildGmpSentimentPill(gmp, gmpPct, estListing),
             ),
           ],
 
-          // 3B. IF LISTED: LISTING PERFORMANCE BANNER
-          if (isListed && listingPrice.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-              child: _buildListedPerformanceBanner(listingPrice, listingGain),
-            ),
-          ],
-
-          // 4. INTERACTIVE DATE FLOW STEPPER
+          // 4. INTERACTIVE DATE FLOW STEPPER (Horizontal Scroll - Zero Overflow)
           Padding(
-            padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
+            padding: const EdgeInsets.fromLTRB(14, 6, 14, 8),
             child: _buildDateFlowStepper(ipo),
           ),
 
           // 5. VISUAL BAR 1: FRESH ISSUE VS OFS SPLIT (Promoter Cashout Reality)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
             child: _buildFreshVsOfsBar(freshCr, ofsCr, issueSizeCr),
           ),
 
-          // 6. VISUAL BAR 2: SMART MONEY DEMAND (QIB vs Retail)
-          if (!isListed && subscription.isNotEmpty) ...[
+          // 6. VISUAL BAR 2: SMART MONEY DEMAND (QIB vs Retail Subscription with 'x')
+          if (subscription.isNotEmpty) ...[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               child: _buildSubscriptionDemandMeter(subscription),
             ),
           ],
@@ -427,7 +421,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           // 7. CORE BUSINESS & DRHP OBJECTS
           if (about.isNotEmpty || objects.isNotEmpty) ...[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               child: _buildBusinessAndObjectsCard(about, objects),
             ),
           ],
@@ -435,7 +429,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           // 8. REGISTRAR & ALLOTMENT CHECK ACTION BAR
           if (registrar.isNotEmpty) ...[
             Padding(
-              padding: const EdgeInsets.fromLTRB(14, 6, 14, 12),
+              padding: const EdgeInsets.fromLTRB(14, 4, 14, 12),
               child: _buildRegistrarActionBar(registrar, leadManagers),
             ),
           ],
@@ -449,25 +443,14 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     Color fg;
     String label = status;
 
-    switch (status) {
-      case 'OPEN':
-        bg = const Color(0xFF064E3B);
-        fg = const Color(0xFF10B981);
-        label = "BIDDING OPEN";
-        break;
-      case 'UPCOMING':
-        bg = const Color(0xFF1E293B);
-        fg = const Color(0xFF38BDF8);
-        label = "UPCOMING";
-        break;
-      case 'LISTED':
-        bg = const Color(0xFF312E81);
-        fg = const Color(0xFF818CF8);
-        label = "LISTED";
-        break;
-      default:
-        bg = const Color(0xFF1E293B);
-        fg = Colors.white70;
+    if (status == 'OPEN') {
+      bg = const Color(0xFF064E3B);
+      fg = const Color(0xFF10B981);
+      label = "BIDDING OPEN";
+    } else {
+      bg = const Color(0xFF1E293B);
+      fg = const Color(0xFF38BDF8);
+      label = "UPCOMING";
     }
 
     return Container(
@@ -490,7 +473,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
 
   Widget _buildParamBox(String title, String val, String sub) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
         color: const Color(0xFF0F172A),
         borderRadius: BorderRadius.circular(6),
@@ -501,6 +484,8 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         children: [
           Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white54,
               fontSize: 8.5,
@@ -535,109 +520,88 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
 
   Widget _buildGmpSentimentPill(String gmp, String gmpPct, String estListing) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      width: double.infinity,
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: const Color(0xFF172033),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: const Color(0xFF2563EB).withAlpha(90)),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.show_chart_rounded, color: Color(0xFF38BDF8), size: 16),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Market Sentiment (Unofficial): ",
-                      style: GoogleFonts.robotoCondensed(
-                        color: Colors.white70,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      "$gmp ($gmpPct%)",
-                      style: GoogleFonts.robotoMono(
-                        color: const Color(0xFF10B981),
-                        fontWeight: FontWeight.w700,
-                        fontSize: 11,
-                      ),
-                    ),
-                  ],
-                ),
-                if (estListing.isNotEmpty)
-                  Text(
-                    "Est Listing Price: $estListing • Purely indicative third-party estimate",
-                    style: TextStyle(
-                      color: Colors.white.withAlpha(140),
-                      fontSize: 9,
-                    ),
+          Row(
+            children: [
+              const Icon(Icons.show_chart_rounded, color: Color(0xFF38BDF8), size: 15),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  "MARKET SENTIMENT (UNOFFICIAL GMP)",
+                  style: GoogleFonts.robotoCondensed(
+                    color: Colors.white70,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.4,
                   ),
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: _showGmpDisclaimerDialog,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
-                borderRadius: BorderRadius.circular(4),
+                ),
               ),
-              child: const Icon(Icons.info_outline_rounded, color: Colors.white70, size: 14),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildListedPerformanceBanner(String listingPrice, String listingGain) {
-    final isPos = !listingGain.startsWith('-');
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: isPos ? const Color(0xFF064E3B).withAlpha(80) : const Color(0xFF4C0519).withAlpha(80),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isPos ? const Color(0xFF10B981).withAlpha(100) : const Color(0xFFF43F5E).withAlpha(100),
-        ),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            isPos ? Icons.trending_up_rounded : Icons.trending_down_rounded,
-            color: isPos ? const Color(0xFF10B981) : const Color(0xFFF43F5E),
-            size: 16,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              "NSE Listing Day Result: Listed at $listingPrice",
-              style: GoogleFonts.robotoCondensed(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 11.5,
+              InkWell(
+                onTap: _showGmpDisclaimerDialog,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.info_outline_rounded, color: Color(0xFF38BDF8), size: 12),
+                      const SizedBox(width: 3),
+                      Text(
+                        "Disclaimer",
+                        style: GoogleFonts.robotoCondensed(
+                          color: const Color(0xFF38BDF8),
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-            decoration: BoxDecoration(
-              color: isPos ? const Color(0xFF10B981) : const Color(0xFFF43F5E),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Text(
-              listingGain,
-              style: GoogleFonts.robotoMono(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 10,
+          const SizedBox(height: 5),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(
+                "$gmp ($gmpPct%)",
+                style: GoogleFonts.robotoMono(
+                  color: const Color(0xFF10B981),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
               ),
+              if (estListing.isNotEmpty)
+                Text(
+                  "Est Listing: $estListing",
+                  style: GoogleFonts.robotoCondensed(
+                    color: Colors.white70,
+                    fontSize: 11,
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 3),
+          Text(
+            "Purely indicative forward estimate • Not published or endorsed by NSE",
+            style: TextStyle(
+              color: Colors.white.withAlpha(140),
+              fontSize: 8.5,
             ),
           ),
         ],
@@ -671,7 +635,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         content: const Text(
           "Grey Market Premium (GMP) is an unregulated, unofficial trading sentiment indicator reported by private forward contracts.\n\n"
           "• The National Stock Exchange of India (NSE) does NOT publish, endorse, or verify GMP.\n"
-          "• GMP rates can be manipulated and volatile.\n"
+          "• GMP rates can be volatile and speculative.\n"
           "• Always evaluate an IPO strictly using the official Red Herring Prospectus (RHP) filed with SEBI and fundamental company financials.",
           style: TextStyle(
             color: Colors.white70,
@@ -696,7 +660,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     );
   }
 
-  // 4. INTERACTIVE DATE FLOW STEPPER
+  // 4. INTERACTIVE DATE FLOW STEPPER (Horizontal Scroll - Zero Overflow)
   Widget _buildDateFlowStepper(Map<String, dynamic> ipo) {
     final openD = _formatShortDate(ipo['open_date']?.toString());
     final closeD = _formatShortDate(ipo['close_date']?.toString());
@@ -709,9 +673,9 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     final steps = [
       {'title': 'Open', 'date': openD, 'done': true},
       {'title': 'Close', 'date': closeD, 'done': status != 'UPCOMING'},
-      {'title': 'Allotment', 'date': allotD, 'done': status == 'LISTED'},
-      {'title': 'Demat', 'date': dematD, 'done': status == 'LISTED'},
-      {'title': 'Listing', 'date': listD, 'done': status == 'LISTED'},
+      {'title': 'Allotment', 'date': allotD, 'done': false},
+      {'title': 'Demat Credit', 'date': dematD, 'done': false},
+      {'title': 'Listing Day', 'date': listD, 'done': false},
     ];
 
     return Container(
@@ -740,76 +704,81 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
             ],
           ),
           const SizedBox(height: 10),
-          Row(
-            children: List.generate(steps.length * 2 - 1, (i) {
-              if (i.isOdd) {
-                final prevDone = steps[i ~/ 2]['done'] as bool;
-                return Expanded(
-                  child: Container(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: List.generate(steps.length * 2 - 1, (i) {
+                if (i.isOdd) {
+                  final prevDone = steps[i ~/ 2]['done'] as bool;
+                  return Container(
+                    width: 24,
                     height: 2,
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
                     color: prevDone ? const Color(0xFF10B981) : const Color(0xFF1E293B),
-                  ),
-                );
-              }
+                  );
+                }
 
-              final idx = i ~/ 2;
-              final item = steps[idx];
-              final isDone = item['done'] as bool;
-              final title = item['title'] as String;
-              final date = item['date'] as String;
+                final idx = i ~/ 2;
+                final item = steps[idx];
+                final isDone = item['done'] as bool;
+                final title = item['title'] as String;
+                final date = item['date'] as String;
 
-              return Column(
-                children: [
-                  Container(
-                    width: 18,
-                    height: 18,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isDone ? const Color(0xFF10B981) : const Color(0xFF1E293B),
-                      border: Border.all(
-                        color: isDone ? const Color(0xFF059669) : const Color(0xFF334155),
-                        width: 1.5,
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDone ? const Color(0xFF10B981) : const Color(0xFF1E293B),
+                        border: Border.all(
+                          color: isDone ? const Color(0xFF059669) : const Color(0xFF334155),
+                          width: 1.5,
+                        ),
+                      ),
+                      child: Center(
+                        child: isDone
+                            ? const Icon(Icons.check, color: Colors.white, size: 11)
+                            : Container(
+                                width: 5,
+                                height: 5,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white38,
+                                ),
+                              ),
                       ),
                     ),
-                    child: Center(
-                      child: isDone
-                          ? const Icon(Icons.check, color: Colors.white, size: 11)
-                          : Container(
-                              width: 5,
-                              height: 5,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white38,
-                              ),
-                            ),
+                    const SizedBox(height: 4),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: isDone ? Colors.white : Colors.white54,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: isDone ? Colors.white : Colors.white54,
-                      fontSize: 8.5,
-                      fontWeight: FontWeight.w600,
+                    Text(
+                      date,
+                      style: const TextStyle(
+                        color: Color(0xFF38BDF8),
+                        fontSize: 7.5,
+                      ),
                     ),
-                  ),
-                  Text(
-                    date,
-                    style: const TextStyle(
-                      color: Color(0xFF38BDF8),
-                      fontSize: 7.5,
-                    ),
-                  ),
-                ],
-              );
-            }),
+                  ],
+                );
+              }),
+            ),
           ),
         ],
       ),
     );
   }
 
-  // 5. VISUAL BAR 1: FRESH ISSUE VS OFS SPLIT
+  // 5. VISUAL BAR 1: FRESH ISSUE VS OFS SPLIT (Overflow Proof Layout)
   Widget _buildFreshVsOfsBar(String freshCr, String ofsCr, String totalCr) {
     double fresh = double.tryParse(freshCr.replaceAll(',', '')) ?? 0.0;
     double ofs = double.tryParse(ofsCr.replaceAll(',', '')) ?? 0.0;
@@ -858,7 +827,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: SizedBox(
-              height: 12,
+              height: 10,
               child: Row(
                 children: [
                   if (freshPct > 0)
@@ -879,31 +848,31 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               ),
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8),
 
-          // Breakdown labels
+          // Multi-row breakdown (Prevents horizontal overflow)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Container(width: 8, height: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF10B981))),
-                  const SizedBox(width: 5),
-                  Text(
-                    "Fresh (Company Growth): ${freshPct.toStringAsFixed(1)}% (₹${fresh.toInt()} Cr)",
-                    style: const TextStyle(color: Colors.white70, fontSize: 9.5),
-                  ),
-                ],
+              Container(width: 8, height: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF10B981))),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  "Fresh (Growth Capital): ${freshPct.toStringAsFixed(1)}% (₹${fresh.toInt()} Cr)",
+                  style: const TextStyle(color: Colors.white70, fontSize: 9.5),
+                ),
               ),
-              Row(
-                children: [
-                  Container(width: 8, height: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFF43F5E))),
-                  const SizedBox(width: 5),
-                  Text(
-                    "OFS (Promoter Pocket): ${ofsPct.toStringAsFixed(1)}% (₹${ofs.toInt()} Cr)",
-                    style: const TextStyle(color: Colors.white70, fontSize: 9.5),
-                  ),
-                ],
+            ],
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Container(width: 8, height: 8, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFF43F5E))),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  "OFS (Promoter Pocket): ${ofsPct.toStringAsFixed(1)}% (₹${ofs.toInt()} Cr)",
+                  style: const TextStyle(color: Colors.white70, fontSize: 9.5),
+                ),
               ),
             ],
           ),
@@ -919,8 +888,8 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
             ),
             child: Text(
               isHeavyOfs
-                  ? "⚠️ High Cashout Risk: Over 50% of proceeds go to promoters/PE sellers, not into company operations."
-                  : "🟢 Growth Positive: Major funds enter company balance sheet for capex & debt repayment.",
+                  ? "⚠️ High Cashout Risk: Over 50% goes to promoters/PE sellers, not into company growth."
+                  : "🟢 Growth Positive: Major funds enter company balance sheet for expansion.",
               style: TextStyle(
                 color: isHeavyOfs ? const Color(0xFFFDA4AF) : const Color(0xFFA7F3D0),
                 fontSize: 9,
@@ -933,16 +902,21 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     );
   }
 
-  // 6. VISUAL BAR 2: SMART MONEY DEMAND (QIB vs Retail)
+  // 6. VISUAL BAR 2: SMART MONEY DEMAND (With 'x' Times formatting)
   Widget _buildSubscriptionDemandMeter(Map<String, dynamic> sub) {
-    final qib = sub['qib']?.toString() ?? 'TBA';
-    final nii = sub['nii']?.toString() ?? 'TBA';
-    final retail = sub['retail']?.toString() ?? 'TBA';
-    final total = sub['total']?.toString() ?? 'TBA';
+    final qibRaw = sub['qib']?.toString() ?? '';
+    final niiRaw = sub['nii']?.toString() ?? '';
+    final retailRaw = sub['retail']?.toString() ?? '';
+    final totalRaw = sub['total']?.toString() ?? '';
 
-    double qibNum = _parseSubNumber(qib);
-    double niiNum = _parseSubNumber(nii);
-    double retNum = _parseSubNumber(retail);
+    final qibFormatted = _formatSubscriptionDisplay(qibRaw);
+    final niiFormatted = _formatSubscriptionDisplay(niiRaw);
+    final retailFormatted = _formatSubscriptionDisplay(retailRaw);
+    final totalFormatted = _formatSubscriptionDisplay(totalRaw);
+
+    double qibNum = _parseSubNumber(qibRaw);
+    double niiNum = _parseSubNumber(niiRaw);
+    double retNum = _parseSubNumber(retailRaw);
 
     bool isQibLeading = qibNum > retNum && qibNum > 1.0;
     bool isRetailFomo = retNum > (qibNum * 2.5) && retNum > 2.0;
@@ -958,22 +932,19 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.bar_chart_rounded, color: Color(0xFF00E5FF), size: 14),
-                  const SizedBox(width: 5),
-                  Text(
-                    "NSE LIVE CUMULATIVE DEMAND (SUBSCRIPTION)",
-                    style: GoogleFonts.robotoCondensed(
-                      color: Colors.white70,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.5,
-                    ),
+              const Icon(Icons.bar_chart_rounded, color: Color(0xFF00E5FF), size: 14),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  "NSE LIVE CUMULATIVE DEMAND",
+                  style: GoogleFonts.robotoCondensed(
+                    color: Colors.white70,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5,
                   ),
-                ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
@@ -982,7 +953,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  "Total: $total",
+                  "Total: $totalFormatted",
                   style: GoogleFonts.robotoMono(
                     color: const Color(0xFF00E5FF),
                     fontWeight: FontWeight.w700,
@@ -994,11 +965,11 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           ),
           const SizedBox(height: 8),
 
-          _buildCategoryBar("QIB (Institutional Smart Money)", qib, qibNum, const Color(0xFF00E5FF)),
+          _buildCategoryBar("QIB (Institutional Smart Money)", qibFormatted, qibNum, const Color(0xFF00E5FF)),
           const SizedBox(height: 5),
-          _buildCategoryBar("NII / HNI (High Net-worth)", nii, niiNum, const Color(0xFFF59E0B)),
+          _buildCategoryBar("NII / HNI (High Net-worth)", niiFormatted, niiNum, const Color(0xFFF59E0B)),
           const SizedBox(height: 5),
-          _buildCategoryBar("Retail (RII Individual Investors)", retail, retNum, const Color(0xFF10B981)),
+          _buildCategoryBar("Retail (RII Individual Investors)", retailFormatted, retNum, const Color(0xFF10B981)),
           const SizedBox(height: 7),
 
           // Smart Money Verdict
@@ -1013,10 +984,10 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
             ),
             child: Text(
               isRetailFomo
-                  ? "⚠️ Retail Divergence: Retail is heavily bidding while institutional big money is waiting or cautious."
+                  ? "⚠️ Retail Divergence: Retail is heavily bidding while institutional big money is waiting."
                   : (isQibLeading
-                      ? "🟢 Strong Institutional Conviction: QIBs are aggressively absorbing shares."
-                      : "⚖️ Balanced Cumulative Bidding: Demand is tracking standard mainboard progression."),
+                      ? "🟢 Strong Institutional Demand: QIBs are aggressively bidding."
+                      : "⚖️ Balanced Cumulative Bidding: Demand progressing per normal Mainboard cycle."),
               style: TextStyle(
                 color: isRetailFomo ? const Color(0xFFFDA4AF) : const Color(0xFFA7F3D0),
                 fontSize: 9,
@@ -1029,7 +1000,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     );
   }
 
-  Widget _buildCategoryBar(String label, String rawVal, double numVal, Color barColor) {
+  Widget _buildCategoryBar(String label, String formattedVal, double numVal, Color barColor) {
     double progress = (numVal / 10.0).clamp(0.02, 1.0);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1037,9 +1008,17 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 9)),
+            Expanded(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: Colors.white70, fontSize: 9),
+              ),
+            ),
+            const SizedBox(width: 6),
             Text(
-              rawVal,
+              formattedVal,
               style: GoogleFonts.robotoMono(
                 color: barColor,
                 fontWeight: FontWeight.w700,
@@ -1160,6 +1139,8 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               children: [
                 Text(
                   "Registrar: $name",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -1179,6 +1160,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               ],
             ),
           ),
+          const SizedBox(width: 8),
           InkWell(
             onTap: () {
               if (url.isNotEmpty) {
@@ -1187,7 +1169,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                   SnackBar(
                     backgroundColor: const Color(0xFF0F172A),
                     content: Text(
-                      "Allotment portal copied: $url",
+                      "Allotment portal link copied: $url",
                       style: const TextStyle(color: Color(0xFF00E5FF), fontSize: 11),
                     ),
                     duration: const Duration(seconds: 2),
@@ -1203,6 +1185,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
                 border: Border.all(color: const Color(0xFF00E5FF).withAlpha(80)),
               ),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.copy_rounded, color: Color(0xFF00E5FF), size: 11),
                   const SizedBox(width: 4),
@@ -1235,6 +1218,17 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
       }
     } catch (_) {}
     return d;
+  }
+
+  String _formatSubscriptionDisplay(String val) {
+    if (val.isEmpty) return '0.00x';
+    String s = val.trim();
+    if (s.toLowerCase().endsWith('x')) return s;
+    final numVal = double.tryParse(s.replaceAll(RegExp(r'[^0-9.]'), ''));
+    if (numVal != null) {
+      return "${numVal.toStringAsFixed(2)}x";
+    }
+    return s;
   }
 
   double _parseSubNumber(String val) {
