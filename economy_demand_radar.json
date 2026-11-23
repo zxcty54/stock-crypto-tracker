@@ -1,16 +1,16 @@
 {
   "title": "Indian Economy Physical Demand Radar",
   "description": "Ground-truth physical activity telemetry from DPIIT 8-Core, Major Ports, Fuel Freight, and FASTag mapped to Sector Demand and Equities.",
-  "last_updated": "2026-11-23 12:55:47 IST",
+  "last_updated": "2026-11-23 14:34:09 IST",
   "economy_headline": {
     "core_infra_growth_pct": 10.9,
     "port_cargo_growth_pct": 10.17,
     "diesel_freight_growth_pct": 12.0,
     "fastag_toll_growth_pct": 8.5,
     "verdict": "BROAD-BASED PHYSICAL EXPANSION",
-    "momentum_score": 92,
+    "momentum_score": 97,
     "momentum_label": "HIGH INDUSTRIAL PULSE",
-    "headline_summary": "India Ground Freight & Core Infra Expand at +10.5% YoY Pace"
+    "headline_summary": "India's Ground Economy Expanding at +10.6% YoY Volume Pace — Zero Industrial Slowdown"
   },
   "telemetry_modules": {
     "dpiit_eight_core": {
@@ -210,8 +210,7 @@
           "name": "Mahindra Logistics Ltd",
           "thesis": "3PL supply chain logistics and integrated cargo movement peer"
         }
-      ],
-      "macro_correlation_note": "Diesel consumption surged +12.0% YoY. FASTag highway toll collections expanded +8.5% YoY to ₹5840 Cr."
+      ]
     },
     {
       "sector": "Power Generation & Capital Goods",
@@ -253,8 +252,7 @@
           "name": "Polycab India Ltd",
           "thesis": "Industrial HT/LT power cables and transmission equipment peer"
         }
-      ],
-      "macro_correlation_note": "Electricity output accelerated +11.4% YoY. Coal production maintained high momentum at +10.7% YoY."
+      ]
     },
     {
       "sector": "Infrastructure & Cement Construction",
@@ -296,8 +294,7 @@
           "name": "G R Infraprojects Ltd",
           "thesis": "National highway EPC and road construction contractor peer"
         }
-      ],
-      "macro_correlation_note": "Cement production grew +9.8% YoY. Bitumen consumption for road capex jumped +16.5% YoY."
+      ]
     },
     {
       "sector": "Port Logistics & Maritime Trade",
@@ -339,8 +336,7 @@
           "name": "Allcargo Logistics Ltd",
           "thesis": "Global LCL container consolidation and multi-modal logistics peer"
         }
-      ],
-      "macro_correlation_note": "Major ports cargo traffic reached 566.4 MMT (+10.17% YoY). Container throughput expanded +8.51% YoY."
+      ]
     },
     {
       "sector": "Steel & Metals Fabrication",
@@ -382,8 +378,7 @@
           "name": "Steel Authority of India Ltd",
           "thesis": "Public sector long products and railway track infrastructure peer"
         }
-      ],
-      "macro_correlation_note": "Finished steel production grew +4.9% YoY, driven by sustained heavy structural demand."
+      ]
     },
     {
       "sector": "Fertilizers & Agro-Chemicals",
@@ -410,8 +405,7 @@
           "name": "Chambal Fertilisers Ltd",
           "thesis": "Urea production and domestic crop protection peer"
         }
-      ],
-      "macro_correlation_note": "Domestic nutrient uptake aligns with stable kharif preparation and inventory normalization cycles."
+      ]
     },
     {
       "sector": "Upstream Crude Oil & Gas",
@@ -443,8 +437,7 @@
           "name": "Oil India Ltd",
           "thesis": "North-east domestic oil exploration and refining subsidiary peer"
         }
-      ],
-      "macro_correlation_note": "Refinery throughput tracking strong domestic diesel and bitumen demand pulses."
+      ]
     }
   ]
 }
