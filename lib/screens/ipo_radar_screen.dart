@@ -411,10 +411,10 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           ),
 
           // 6. VISUAL BAR 2: SMART MONEY DEMAND (QIB vs Retail Subscription with 'x')
-          if (subscription.isNotEmpty) ...[
+          if (subscription.isNotEmpty || status == 'UPCOMING') ...[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              child: _buildSubscriptionDemandMeter(subscription),
+              child: _buildSubscriptionDemandMeter(subscription, ipo),
             ),
           ],
 
@@ -902,24 +902,145 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
     );
   }
 
-  // 6. VISUAL BAR 2: SMART MONEY DEMAND (With 'x' Times formatting)
-  Widget _buildSubscriptionDemandMeter(Map<String, dynamic> sub) {
+  // 6. VISUAL BAR 2: SMART MONEY DEMAND (With 'x' Times formatting & NSE Clear Bidding Data)
+  Widget _buildSubscriptionDemandMeter(Map<String, dynamic> sub, Map<String, dynamic> ipo) {
+    final status = (ipo['status'] ?? 'UPCOMING').toString().toUpperCase();
+    final openDate = ipo['open_date']?.toString() ?? '';
+    final openDateFormatted = _formatShortDate(openDate);
+    final reservation = (ipo['reservation'] as Map<String, dynamic>?) ?? {};
+
+    // For Upcoming issues, clearly show SEBI mandated category quotas before bidding opens
+    if (status == 'UPCOMING') {
+      final qibPct = reservation['qib_pct']?.toString() ?? '50%';
+      final niiPct = reservation['nii_pct']?.toString() ?? '15%';
+      final retPct = reservation['retail_pct']?.toString() ?? '35%';
+
+      return Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F172A),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: const Color(0xFF1E293B)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.how_to_reg_rounded, color: Color(0xFF38BDF8), size: 14),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    "NSE ISSUE QUOTA & ALLOCATION",
+                    style: GoogleFonts.robotoCondensed(
+                      color: Colors.white70,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: const Color(0xFF38BDF8).withAlpha(80)),
+                  ),
+                  child: Text(
+                    "Opens $openDateFormatted",
+                    style: GoogleFonts.robotoMono(
+                      color: const Color(0xFF38BDF8),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 9.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              "SEBI Mandated Mainboard Category Quotas (Series EQ)",
+              style: TextStyle(
+                color: Colors.white54,
+                fontSize: 8.5,
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            _buildQuotaBar("QIB (Institutional Quota)", qibPct, 0.50, const Color(0xFF00E5FF)),
+            const SizedBox(height: 5),
+            _buildQuotaBar("NII / HNI (High Net-worth Quota)", niiPct, 0.15, const Color(0xFFF59E0B)),
+            const SizedBox(height: 5),
+            _buildQuotaBar("Retail (RII Individual Investors)", retPct, 0.35, const Color(0xFF10B981)),
+            const SizedBox(height: 7),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Text(
+                "⏳ Bidding Window Yet To Open: Cumulative times subscribed will track live from official NSE order book once issue opens.",
+                style: TextStyle(
+                  color: Color(0xFF94A3B8),
+                  fontSize: 9,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     final qibRaw = sub['qib']?.toString() ?? '';
     final niiRaw = sub['nii']?.toString() ?? '';
     final retailRaw = sub['retail']?.toString() ?? '';
     final totalRaw = sub['total']?.toString() ?? '';
+
+    final totalBids = sub['total_bids'];
+    final sharesOffered = sub['shares_offered'];
+    final qibBids = sub['qib_bids'];
+    final qibOffered = sub['qib_offered'];
+    final niiBids = sub['nii_bids'];
+    final niiOffered = sub['nii_offered'];
+    final retBids = sub['retail_bids'];
+    final retOffered = sub['retail_offered'];
+    final source = sub['source']?.toString() ?? 'NSE India Official Bidding Feed';
+    final updatedAt = sub['updated_at']?.toString() ?? '';
 
     final qibFormatted = _formatSubscriptionDisplay(qibRaw);
     final niiFormatted = _formatSubscriptionDisplay(niiRaw);
     final retailFormatted = _formatSubscriptionDisplay(retailRaw);
     final totalFormatted = _formatSubscriptionDisplay(totalRaw);
 
+    final totalBidsStr = _formatShareQuantity(totalBids);
+    final totalOfferedStr = _formatShareQuantity(sharesOffered);
+
     double qibNum = _parseSubNumber(qibRaw);
     double niiNum = _parseSubNumber(niiRaw);
     double retNum = _parseSubNumber(retailRaw);
+    double totalNum = _parseSubNumber(totalRaw);
+
+    double maxSub = [qibNum, niiNum, retNum, totalNum, 1.0].reduce((a, b) => a > b ? a : b);
+    double scaleMax = maxSub <= 1.5 ? 1.0 : (maxSub <= 5.0 ? 5.0 : (maxSub <= 10.0 ? 10.0 : maxSub));
 
     bool isQibLeading = qibNum > retNum && qibNum > 1.0;
     bool isRetailFomo = retNum > (qibNum * 2.5) && retNum > 2.0;
+
+    String verdictText;
+    if (isRetailFomo) {
+      verdictText = "⚠️ Retail Divergence: Retail is heavily bidding while institutional big money is waiting.";
+    } else if (isQibLeading) {
+      verdictText = "🟢 Strong Institutional Demand: QIBs are aggressively bidding.";
+    } else if (totalNum < 1.0 && totalNum > 0.0) {
+      verdictText = "⏳ Bidding In Progress: Current order book at $totalFormatted across official NSE Series EQ bids.";
+    } else {
+      verdictText = "⚖️ Balanced Cumulative Bidding: Demand progressing per normal Mainboard cycle.";
+    }
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -964,6 +1085,33 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               ),
             ],
           ),
+          if (totalBidsStr.isNotEmpty && totalOfferedStr.isNotEmpty) ...[
+            const SizedBox(height: 5),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3.5),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B).withAlpha(120),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.stacked_line_chart_rounded, size: 12, color: Color(0xFF38BDF8)),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: Text(
+                      "NSE Bids: $totalBidsStr shares bid against $totalOfferedStr offered",
+                      style: const TextStyle(
+                        color: Color(0xFF38BDF8),
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 4),
           const Text(
             "Multiple (Guna) = Issue Quota ke mukable kitne guna shares ki demand aayi hai.",
@@ -974,11 +1122,11 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           ),
           const SizedBox(height: 8),
 
-          _buildCategoryBar("QIB (Institutional Smart Money)", qibFormatted, qibNum, const Color(0xFF00E5FF)),
+          _buildCategoryBar("QIB (Institutional Smart Money)", qibFormatted, qibNum, const Color(0xFF00E5FF), scaleMax, bidsVal: qibBids, offeredVal: qibOffered),
           const SizedBox(height: 5),
-          _buildCategoryBar("NII / HNI (High Net-worth)", niiFormatted, niiNum, const Color(0xFFF59E0B)),
+          _buildCategoryBar("NII / HNI (High Net-worth)", niiFormatted, niiNum, const Color(0xFFF59E0B), scaleMax, bidsVal: niiBids, offeredVal: niiOffered),
           const SizedBox(height: 5),
-          _buildCategoryBar("Retail (RII Individual Investors)", retailFormatted, retNum, const Color(0xFF10B981)),
+          _buildCategoryBar("Retail (RII Individual Investors)", retailFormatted, retNum, const Color(0xFF10B981), scaleMax, bidsVal: retBids, offeredVal: retOffered),
           const SizedBox(height: 7),
 
           // Smart Money Verdict
@@ -992,11 +1140,7 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
-              isRetailFomo
-                  ? "⚠️ Retail Divergence: Retail is heavily bidding while institutional big money is waiting."
-                  : (isQibLeading
-                      ? "🟢 Strong Institutional Demand: QIBs are aggressively bidding."
-                      : "⚖️ Balanced Cumulative Bidding: Demand progressing per normal Mainboard cycle."),
+              verdictText,
               style: TextStyle(
                 color: isRetailFomo ? const Color(0xFFFDA4AF) : const Color(0xFFA7F3D0),
                 fontSize: 9,
@@ -1004,14 +1148,41 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
               ),
             ),
           ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                source,
+                style: const TextStyle(color: Colors.white38, fontSize: 8),
+              ),
+              if (updatedAt.isNotEmpty)
+                Text(
+                  updatedAt,
+                  style: const TextStyle(color: Colors.white38, fontSize: 8),
+                ),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildCategoryBar(String label, String formattedVal, double numVal, Color barColor) {
-    double progress = (numVal / 10.0).clamp(0.02, 1.0);
+  Widget _buildCategoryBar(
+    String label,
+    String formattedVal,
+    double numVal,
+    Color barColor,
+    double scaleMax, {
+    dynamic bidsVal,
+    dynamic offeredVal,
+  }) {
+    double progress = (numVal / scaleMax).clamp(0.02, 1.0);
     final displayMultiple = formattedVal.toLowerCase().endsWith('x') ? "$formattedVal Multiple" : formattedVal;
+
+    final bidsFormatted = _formatShareQuantity(bidsVal);
+    final offeredFormatted = _formatShareQuantity(offeredVal);
+    final hasShares = bidsFormatted.isNotEmpty && offeredFormatted.isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1020,11 +1191,24 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: Colors.white70, fontSize: 9),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white70, fontSize: 9.5, fontWeight: FontWeight.w500),
+                  ),
+                  if (hasShares)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 1),
+                      child: Text(
+                        "$bidsFormatted bids / $offeredFormatted quota",
+                        style: const TextStyle(color: Colors.white38, fontSize: 8),
+                      ),
+                    ),
+                ],
               ),
             ),
             const SizedBox(width: 8),
@@ -1051,6 +1235,54 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
           borderRadius: BorderRadius.circular(2),
           child: LinearProgressIndicator(
             value: progress,
+            minHeight: 4.5,
+            backgroundColor: const Color(0xFF1E293B),
+            valueColor: AlwaysStoppedAnimation<Color>(barColor),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuotaBar(String label, String pctLabel, double ratio, Color barColor) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: Colors.white70, fontSize: 9.5, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
+              decoration: BoxDecoration(
+                color: barColor.withAlpha(25),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: barColor.withAlpha(80)),
+              ),
+              child: Text(
+                "$pctLabel Reserved",
+                style: GoogleFonts.robotoMono(
+                  color: barColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 9.5,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 3),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(2),
+          child: LinearProgressIndicator(
+            value: ratio.clamp(0.05, 1.0),
             minHeight: 4.5,
             backgroundColor: const Color(0xFF1E293B),
             valueColor: AlwaysStoppedAnimation<Color>(barColor),
@@ -1253,5 +1485,20 @@ class _IpoRadarScreenState extends State<IpoRadarScreen>
   double _parseSubNumber(String val) {
     final clean = val.replaceAll('x', '').replaceAll('Active', '').replaceAll('(', '').replaceAll(')', '').trim();
     return double.tryParse(clean) ?? 0.0;
+  }
+
+  String _formatShareQuantity(dynamic val) {
+    if (val == null) return '';
+    final s = val.toString().trim().replaceAll(',', '');
+    final num = double.tryParse(s);
+    if (num == null || num <= 0) return '';
+    if (num >= 10000000) {
+      return "${(num / 10000000).toStringAsFixed(2)} Cr";
+    } else if (num >= 100000) {
+      return "${(num / 100000).toStringAsFixed(2)} L";
+    } else if (num >= 1000) {
+      return "${(num / 1000).toStringAsFixed(1)} K";
+    }
+    return num.toStringAsFixed(0);
   }
 }

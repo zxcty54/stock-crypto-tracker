@@ -26,10 +26,8 @@
     "gmp_unofficial": true,
     "est_listing_price": "—",
     "subscription": {
-      "qib": "Awaiting Bidding",
-      "nii": "Awaiting Bidding",
-      "retail": "Awaiting Bidding",
-      "total": "Opens 02-Dec"
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 02-Dec-2026"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -79,7 +77,10 @@
     "est_listing_price": "₹172",
     "kostak": "",
     "sub2sauda": "",
-    "subscription": {},
+    "subscription": {
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 01-Dec-2026"
+    },
     "registrar": {
       "name": "",
       "url": ""
@@ -133,10 +134,8 @@
     "gmp_unofficial": true,
     "est_listing_price": "—",
     "subscription": {
-      "qib": "Awaiting Bidding",
-      "nii": "Awaiting Bidding",
-      "retail": "Awaiting Bidding",
-      "total": "Opens 27-Nov"
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 27-Nov-2026"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -192,10 +191,8 @@
     "gmp_unofficial": true,
     "est_listing_price": "₹203(+6.28%)",
     "subscription": {
-      "qib": "Awaiting Bidding",
-      "nii": "Awaiting Bidding",
-      "retail": "Awaiting Bidding",
-      "total": "Opens 26-Nov"
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 26-Nov-2026"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -251,10 +248,20 @@
     "gmp_unofficial": true,
     "est_listing_price": "₹136",
     "subscription": {
-      "qib": "6.40x",
-      "nii": "4.15x",
-      "retail": "2.85x",
-      "total": "4.80x"
+      "qib": "0.08x",
+      "qib_bids": "19722720",
+      "qib_offered": "246534022",
+      "nii": "0.14x",
+      "nii_bids": "10354428",
+      "nii_offered": "73960207",
+      "retail": "0.15x",
+      "retail_bids": "26329092",
+      "retail_offered": "172573816",
+      "total": "0.11x",
+      "total_bids": "56406240",
+      "shares_offered": "493068045",
+      "source": "NSE India Official Bidding Feed",
+      "updated_at": "23-Nov-2026 17:00 IST"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -296,7 +303,7 @@
     "exchange": "NSE & BSE",
     "series": "EQ",
     "sector": "Agrochemicals & Crop Protection",
-    "status": "OPEN",
+    "status": "CLOSED",
     "open_date": "2026-11-18",
     "close_date": "2026-11-20",
     "allotment_date": "2026-11-23",
@@ -318,7 +325,8 @@
       "qib": "4.85x",
       "nii": "3.12x",
       "retail": "2.40x",
-      "total": "3.55x"
+      "total": "3.55x",
+      "source": "NSE India Final Bidding Status"
     },
     "reservation": {
       "qib_pct": "50%",

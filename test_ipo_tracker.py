@@ -311,6 +311,99 @@ class TestOfficialExchangeScrapers(unittest.TestCase):
         self.assertEqual(deep["subscription"]["nii"], "3.10x")
         self.assertEqual(deep["subscription"]["retail"], "4.80x")
 
+    def test_nse_current_issue_with_subscription_multiples(self):
+        """Test parsing real NSE current issue payload with noOfTime, noOfsharesBid, noOfSharesOffered."""
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = [
+            {
+                "companyName": "Mahanadi Coalfields Limited",
+                "symbol": "MAHACOAL",
+                "series": "EQ",
+                "issueStartDate": "19-Nov-2026",
+                "issueEndDate": "23-Nov-2026",
+                "priceBand": "Rs.129 to Rs.136",
+                "issueSize": "493068045",
+                "status": "Active",
+                "noOfSharesOffered": "4.93068045E8",
+                "noOfsharesBid": "5.640624E7",
+                "noOfTime": "0.11439849037469058",
+            }
+        ]
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        items = scraper.fetch_nse_ipos()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["symbol"], "MAHACOAL")
+        self.assertEqual(items[0]["subscription"]["total"], "0.11x")
+        self.assertEqual(items[0]["subscription"]["total_bids"], "56406240")
+        self.assertEqual(items[0]["subscription"]["shares_offered"], "493068045")
+        self.assertEqual(items[0]["subscription"]["source"], "NSE India Official Bidding Feed")
+
+    def test_nse_active_category_datalist(self):
+        """Test parsing official NSE dataList structure with noOfTotalMeant (times) per category."""
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "symbol": "MAHACOAL",
+            "updateTime": "23-Nov-2026 17:00:00",
+            "dataList": [
+                {
+                    "category": "Category",
+                    "noOfShareOffered": "No.of shares offered/reserved",
+                    "noOfSharesBid": "No. of shares bid for",
+                    "noOfTotalMeant": "No. of times of total meant for the category",
+                },
+                {
+                    "category": "Qualified Institutional Buyers(QIBs)",
+                    "noOfShareOffered": "246534022",
+                    "noOfSharesBid": "19722720",
+                    "noOfTotalMeant": "0.08",
+                },
+                {
+                    "category": "Non Institutional Investors",
+                    "noOfShareOffered": "73960207",
+                    "noOfSharesBid": "10354428",
+                    "noOfTotalMeant": "0.14",
+                },
+                {
+                    "category": "Individual Investors",
+                    "noOfShareOffered": "172573816",
+                    "noOfSharesBid": "26329092",
+                    "noOfTotalMeant": "0.15",
+                },
+                {
+                    "category": "Total",
+                    "noOfShareOffered": "493068045",
+                    "noOfSharesBid": "56406240",
+                    "noOfTotalMeant": "0.11",
+                },
+            ],
+        }
+
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        deep = scraper.fetch_nse_issue_details("MAHACOAL")
+        sub = deep["subscription"]
+        self.assertEqual(sub["total"], "0.11x")
+        self.assertEqual(sub["qib"], "0.08x")
+        self.assertEqual(sub["qib_bids"], "19722720")
+        self.assertEqual(sub["qib_offered"], "246534022")
+        self.assertEqual(sub["nii"], "0.14x")
+        self.assertEqual(sub["nii_bids"], "10354428")
+        self.assertEqual(sub["retail"], "0.15x")
+        self.assertEqual(sub["retail_bids"], "26329092")
+        self.assertEqual(sub["total_bids"], "56406240")
+        self.assertEqual(sub["shares_offered"], "493068045")
+        self.assertEqual(sub["updated_at"], "23-Nov-2026 17:00:00")
+
 
 class TestIpoFormatters(unittest.TestCase):
     def setUp(self):
