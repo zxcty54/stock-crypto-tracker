@@ -1,36 +1,60 @@
 [
   {
     "id": "monomark-engineering",
-    "company_name": "Monomark Engineering",
-    "symbol": "",
+    "company_name": "Monomark Engineering Limited",
+    "symbol": "MONOMARK",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Defense & Precision Engineering Components",
+    "status": "UPCOMING",
     "open_date": "2026-12-02",
     "close_date": "2026-12-04",
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "₹0",
-    "issue_size_cr": "",
-    "gmp": "",
-    "gmp_percent": "",
-    "est_listing_price": "—",
-    "kostak": "",
-    "sub2sauda": "",
-    "detail_url": "/monomark-engineering-ipo-details/",
+    "allotment_date": "2026-12-07",
+    "demat_credit_date": "2026-12-08",
+    "listing_date": "2026-12-10",
+    "price_band": "\u20b90",
+    "cut_off_price": 148,
+    "face_value": 5,
+    "lot_size": 100,
+    "min_investment": 14800,
+    "issue_size_cr": 450,
+    "fresh_issue_cr": 350,
+    "ofs_cr": 100,
+    "gmp": "+\u20b922.00",
+    "gmp_percent": 14.86,
+    "gmp_unofficial": true,
+    "est_listing_price": "\u2014",
+    "subscription": {
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 02-Dec-2026"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "about": "Tier-1 precision engineering and high-tolerance mechanical assembly manufacturer for Indian aerospace, naval defense vessels, subsea pipelines, and heavy industrial automation systems.",
+    "drhp_objects": [
+      "Setting up a new automated CNC machining facility in Pune (\u20b9180 Cr)",
+      "Purchase of specialized 5-axis robotic milling equipment for naval defense parts (\u20b990 Cr)",
+      "Repayment of existing long-term project loans (\u20b980 Cr)"
+    ],
+    "lead_managers": [
+      "Axis Capital Limited",
+      "Equirus Capital Private Limited"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
     "sources": [
+      "nse_official",
       "ipowatch"
     ],
-    "is_already_listed": false,
-    "status": "UPCOMING",
-    "cut_off_price": 0,
-    "created_at": "2026-11-21T23:25:44.112417+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ],
-    "telegraph_url": "https://telegra.ph/Monomark-Engineering-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-21-2",
-    "last_posted_gmp": "",
-    "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-23T17:38:24.832899+05:30"
+    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
+    "last_posted_gmp": "+\u20b922.00"
   },
   {
     "id": "matangi-rubber",
@@ -42,13 +66,33 @@
     "close_date": "2026-12-03",
     "allotment_date": null,
     "listing_date": null,
-    "price_band": "₹163 - ₹172",
+    "price_band": "\u20b9163 - \u20b9172",
+    "lot_size": null,
     "issue_size_cr": "",
+    "fresh_issue_cr": "",
+    "ofs_cr": "",
     "gmp": "",
-    "gmp_percent": "",
-    "est_listing_price": "₹172",
+    "gmp_percent": 12.21,
+    "gmp_unofficial": true,
+    "est_listing_price": "\u20b9193(+12.21%)",
     "kostak": "",
     "sub2sauda": "",
+    "subscription": {
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 01-Dec-2026"
+    },
+    "registrar": {
+      "name": "",
+      "url": ""
+    },
+    "drhp_objects": [],
+    "reservation": {},
+    "financials": {},
+    "kpis": {},
+    "promoter_holding": {},
+    "lead_managers": [],
+    "drhp_url": "",
+    "about": "",
     "detail_url": "/matangi-rubber-ipo-details/",
     "sources": [
       "ipowatch"
@@ -56,78 +100,175 @@
     "is_already_listed": false,
     "status": "UPCOMING",
     "cut_off_price": 172,
-    "created_at": "2026-11-23T17:38:24.832899+05:30",
+    "created_at": "2026-11-23T17:04:11.889030+05:30",
     "posted_events": [
       "NEW_IPO_ANNOUNCED"
     ],
-    "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23-2",
-    "last_posted_gmp": ""
+    "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
+    "last_posted_gmp": "",
+    "demat_credit_date": "2026-12-07",
+    "last_updated": "2026-11-23T23:06:30.029689+05:30"
   },
   {
     "id": "integris-medtech",
-    "company_name": "Integris Medtech",
-    "symbol": "",
+    "company_name": "Integris Medtech Limited",
+    "symbol": "INTEGRIS",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Medical Devices & Diagnostic Radiology",
+    "status": "UPCOMING",
     "open_date": "2026-11-27",
     "close_date": "2026-12-01",
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "₹0",
-    "issue_size_cr": "",
-    "gmp": "",
-    "gmp_percent": "",
-    "est_listing_price": "—",
-    "kostak": "",
-    "sub2sauda": "",
-    "detail_url": "/integris-medtech-ipo-details/",
+    "allotment_date": "2026-12-02",
+    "demat_credit_date": "2026-12-04",
+    "listing_date": "2026-12-05",
+    "price_band": "\u20b90",
+    "cut_off_price": 325,
+    "face_value": 10,
+    "lot_size": 45,
+    "min_investment": 14625,
+    "issue_size_cr": 820,
+    "fresh_issue_cr": 520,
+    "ofs_cr": 300,
+    "gmp": "+\u20b935.00",
+    "gmp_percent": 10.77,
+    "gmp_unofficial": true,
+    "est_listing_price": "\u2014",
+    "subscription": {
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 27-Nov-2026"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "about": "Domestic developer and manufacturer of advanced diagnostic imaging systems including portable MRI, ultrasound scanners, digital radiography consoles, and AI-enabled radiology workstations.",
+    "drhp_objects": [
+      "Construction of an ISO-certified Class-100 Cleanroom production unit in Bengaluru (\u20b9280 Cr)",
+      "Clinical validation trials and CE/USFDA certification for export medical devices (\u20b9140 Cr)",
+      "Prepayment of working capital credit lines (\u20b9100 Cr)"
+    ],
+    "lead_managers": [
+      "ICICI Securities Limited",
+      "Nuvama Wealth Management"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
     "sources": [
+      "nse_official",
       "ipowatch"
     ],
-    "is_already_listed": false,
-    "status": "UPCOMING",
-    "cut_off_price": 0,
-    "created_at": "2026-11-21T03:15:12.700836+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ],
-    "telegraph_url": "https://telegra.ph/Integris-Medtech-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
-    "last_posted_gmp": "",
-    "demat_credit_date": "2026-12-03",
-    "last_updated": "2026-11-23T17:38:24.832899+05:30"
+    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
+    "last_posted_gmp": "+\u20b935.00"
   },
   {
     "id": "foodlink-f-b-holdings",
-    "company_name": "Foodlink F&B Holdings",
+    "company_name": "Foodlink F&B Holdings Limited",
     "symbol": "FOODLINK",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Luxury Hospitality & Institutional Catering",
+    "status": "UPCOMING",
     "open_date": "2026-11-26",
     "close_date": "2026-11-30",
-    "allotment_date": null,
-    "listing_date": null,
-    "price_band": "₹181 - ₹191",
-    "issue_size_cr": "",
-    "gmp": "",
+    "allotment_date": "2026-12-01",
+    "demat_credit_date": "2026-12-02",
+    "listing_date": "2026-12-03",
+    "price_band": "Rs.181 to Rs.191",
+    "cut_off_price": 225,
+    "face_value": 5,
+    "lot_size": 65,
+    "min_investment": 14625,
+    "issue_size_cr": 650,
+    "fresh_issue_cr": 450,
+    "ofs_cr": 200,
+    "gmp": "+\u20b915.00",
     "gmp_percent": 6.28,
-    "est_listing_price": "₹203(+6.28%)",
-    "kostak": "",
-    "sub2sauda": "",
-    "detail_url": "/foodlink-fb-holdings-ipo-details/",
+    "gmp_unofficial": true,
+    "est_listing_price": "\u20b9203(+6.28%)",
+    "subscription": {
+      "status": "Awaiting Bidding",
+      "note": "NSE Bidding opens on 26-Nov-2026",
+      "shares_offered": "0",
+      "source": "NSE India Official Bidding Feed",
+      "demand_graph": {
+        "total_issue_size": "19443116",
+        "total_bids": null,
+        "cut_off_bids": null,
+        "no_of_times": null,
+        "price_levels": [
+          {
+            "price": ">= No. of Bids",
+            "shares": null
+          },
+          {
+            "price": ">= NSE Confirmed Bid Quantity",
+            "shares": null
+          },
+          {
+            "price": ">= Cumulative Confirmed Bid Quantity",
+            "shares": null
+          }
+        ],
+        "source": "NSE India Official Demand Graph (issue-information)"
+      },
+      "total": "0.00x",
+      "total_bids": "0",
+      "updated_at": "Updated as on null"
+    },
+    "reservation": {
+      "qib_pct": "50%",
+      "nii_pct": "15%",
+      "retail_pct": "35%"
+    },
+    "about": "Pan-India luxury wedding catering, premium corporate culinary experiences, and destination hospitality service provider operating cloud banquet kitchens across Mumbai, Delhi NCR, and Dubai.",
+    "drhp_objects": [
+      "Expansion of central banquet and cloud kitchen network across Tier-1 metro corridors (\u20b9210 Cr)",
+      "Technology infrastructure for automated banquet order workflows and inventory management (\u20b960 Cr)",
+      "General corporate purposes (\u20b9180 Cr)"
+    ],
+    "lead_managers": [
+      "Equirus Capital Private Limited",
+      "JM Financial Limited"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
     "sources": [
+      "nse_official",
       "ipowatch"
     ],
-    "is_already_listed": false,
-    "status": "UPCOMING",
-    "cut_off_price": 0,
-    "created_at": "2026-11-20T12:26:46.690525+05:30",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED"
-    ],
-    "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-20",
-    "last_posted_gmp": "",
-    "demat_credit_date": "2026-12-02",
-    "last_updated": "2026-11-23T17:38:24.832899+05:30"
+    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
+    "last_posted_gmp": "+\u20b915.00",
+    "demand_graph": {
+      "total_issue_size": "19443116",
+      "total_bids": null,
+      "cut_off_bids": null,
+      "no_of_times": null,
+      "price_levels": [
+        {
+          "price": ">= No. of Bids",
+          "shares": null
+        },
+        {
+          "price": ">= NSE Confirmed Bid Quantity",
+          "shares": null
+        },
+        {
+          "price": ">= Cumulative Confirmed Bid Quantity",
+          "shares": null
+        }
+      ],
+      "source": "NSE India Official Demand Graph (issue-information)"
+    }
   },
   {
     "id": "mahanadi-coalfields",
@@ -135,84 +276,185 @@
     "symbol": "MAHACOAL",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
-    "sector": "Mining & Coal Resources (Coal India Subsidiary)",
+    "series": "EQ",
+    "sector": "Mining & Coal Resources (Coal India PSU)",
+    "status": "OPEN",
     "open_date": "2026-11-19",
     "close_date": "2026-11-23",
     "allotment_date": "2026-11-24",
+    "demat_credit_date": "2026-11-25",
     "listing_date": "2026-11-26",
-    "price_band": "₹129 - ₹136",
+    "price_band": "Rs.129 to Rs.136",
     "cut_off_price": 136,
-    "face_value": "10",
+    "face_value": 10,
     "lot_size": 110,
     "min_investment": 14960,
-    "issue_size_cr": "4,200",
-    "fresh_issue_cr": "0",
-    "ofs_cr": "4,200",
-    "gmp": "+₹3.00",
-    "gmp_percent": 0.74,
-    "est_listing_price": "₹136",
-    "kostak": "₹150",
-    "sub2sauda": "₹1,200",
+    "issue_size_cr": 4200,
+    "fresh_issue_cr": 0,
+    "ofs_cr": 4200,
+    "gmp": "+\u20b93.00",
+    "gmp_percent": 2.21,
+    "gmp_unofficial": true,
+    "est_listing_price": "\u20b9136",
     "subscription": {
-      "qib": "Active (Day 1)",
-      "nii": "Active (Day 1)",
-      "retail": "Active (Day 1)",
-      "total": "Active"
+      "qib": "1.61x",
+      "qib_bids": "181318390",
+      "qib_offered": "112512171",
+      "nii": "0.46x",
+      "nii_bids": "38816700",
+      "nii_offered": "84384129",
+      "retail": "0.40x",
+      "retail_bids": "78758520",
+      "retail_offered": "196896300",
+      "total": "1.52x",
+      "total_bids": "748687060",
+      "shares_offered": "493068045",
+      "source": "NSE India Official Bidding Feed (issue-information)",
+      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+      "demand_graph": {
+        "total_issue_size": "493068045",
+        "total_bids": "311850220",
+        "cut_off_bids": "74999870",
+        "no_of_times": "0.63x",
+        "price_levels": [
+          {
+            "price": ">= 129",
+            "shares": "311850220",
+            "shares_lakh": "3118.50"
+          },
+          {
+            "price": ">= 130",
+            "shares": "309604900",
+            "shares_lakh": "3096.05"
+          },
+          {
+            "price": ">= 131",
+            "shares": "309134980",
+            "shares_lakh": "3091.35"
+          },
+          {
+            "price": ">= 132",
+            "shares": "309058420",
+            "shares_lakh": "3090.58"
+          },
+          {
+            "price": ">= 133",
+            "shares": "308978890",
+            "shares_lakh": "3089.79"
+          },
+          {
+            "price": ">= 134",
+            "shares": "308938520",
+            "shares_lakh": "3089.39"
+          },
+          {
+            "price": ">= 135",
+            "shares": "308908160",
+            "shares_lakh": "3089.08"
+          },
+          {
+            "price": ">= 136",
+            "shares": "308853930",
+            "shares_lakh": "3088.54"
+          },
+          {
+            "price": "Cut-Off",
+            "shares": "74999870",
+            "shares_lakh": "749.99"
+          }
+        ],
+        "source": "NSE India Official Demand Graph (issue-information)",
+        "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+        "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
+      }
     },
     "reservation": {
       "qib_pct": "50%",
       "nii_pct": "15%",
       "retail_pct": "35%"
     },
-    "financials": {
-      "revenue": "28,450.00",
-      "pat": "8,120.00",
-      "net_worth": "19,850.00",
-      "debt": "0.00"
-    },
-    "kpis": {
-      "pe_ratio": "10.4",
-      "ronw": "40.90%",
-      "market_cap": "84,500",
-      "eps": "13.08",
-      "debt_to_equity": "0.00"
-    },
+    "about": "A Miniratna Category-I CPSE and primary coal-producing subsidiary of Coal India Limited operating 15 major open-cast and 4 underground mines across the Talcher and Ib Valley coalfields in Odisha, supplying critical baseload fuel to national thermal power utilities.",
     "drhp_objects": [
-      "Disinvestment of equity shares via Offer for Sale (OFS) by Promoter (Coal India Ltd / GoI)",
-      "Achieve the benefits of listing on NSE and BSE and ensure minimum public shareholding",
-      "Enhance corporate visibility and brand equity among public & institutional investors"
+      "100% Offer for Sale (OFS) by Promoter (Coal India Ltd / President of India) for government disinvestment",
+      "Company will NOT receive any proceeds from this issue; all proceeds go directly to selling shareholder",
+      "Achieve listing benefits on NSE & BSE and ensure compliance with SEBI minimum public shareholding norms"
     ],
-    "promoter_holding": {
-      "promoters": "Coal India Limited / President of India",
-      "pre_issue": "100.00%",
-      "post_issue": "90.00%"
-    },
     "lead_managers": [
       "SBI Capital Markets Limited",
       "ICICI Securities Limited",
-      "IDBI Capital Markets",
-      "JM Financial Limited"
+      "JM Financial Limited",
+      "IDBI Capital Markets"
     ],
     "registrar": {
       "name": "KFin Technologies Limited",
       "url": "https://kosmic.kfintech.com/ipostatus/"
     },
-    "about": "A Miniratna Category-I PSU and primary coal-producing subsidiary of Coal India Limited operating across Odisha, crucial for Indian power generation.",
     "sources": [
-      "ipowatch",
+      "nse_official",
       "ipocentral_gmp"
     ],
-    "is_already_listed": false,
-    "status": "OPEN",
+    "last_updated": "2026-11-23T23:06:30.029689+05:30",
+    "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
+    "last_posted_gmp": "+\u20b93.00",
     "posted_events": [
-      "IPO_OPENS_TODAY",
-      "NEW_IPO_ANNOUNCED",
       "IPO_CLOSING_TODAY"
     ],
-    "last_updated": "2026-11-23T17:38:24.832899+05:30",
-    "demat_credit_date": "2026-11-25",
-    "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
-    "last_posted_gmp": "+₹3.00"
+    "demand_graph": {
+      "total_issue_size": "493068045",
+      "total_bids": "311850220",
+      "cut_off_bids": "74999870",
+      "no_of_times": "0.63x",
+      "price_levels": [
+        {
+          "price": ">= 129",
+          "shares": "311850220",
+          "shares_lakh": "3118.50"
+        },
+        {
+          "price": ">= 130",
+          "shares": "309604900",
+          "shares_lakh": "3096.05"
+        },
+        {
+          "price": ">= 131",
+          "shares": "309134980",
+          "shares_lakh": "3091.35"
+        },
+        {
+          "price": ">= 132",
+          "shares": "309058420",
+          "shares_lakh": "3090.58"
+        },
+        {
+          "price": ">= 133",
+          "shares": "308978890",
+          "shares_lakh": "3089.79"
+        },
+        {
+          "price": ">= 134",
+          "shares": "308938520",
+          "shares_lakh": "3089.39"
+        },
+        {
+          "price": ">= 135",
+          "shares": "308908160",
+          "shares_lakh": "3089.08"
+        },
+        {
+          "price": ">= 136",
+          "shares": "308853930",
+          "shares_lakh": "3088.54"
+        },
+        {
+          "price": "Cut-Off",
+          "shares": "74999870",
+          "shares_lakh": "749.99"
+        }
+      ],
+      "source": "NSE India Official Demand Graph (issue-information)",
+      "updated_at": "23-Nov-2026 17:00 IST (Day 3 Close)",
+      "analysis": "99.04% of non-cut-off bids are clustered at \u20b9136 (Cap Price), confirming robust pricing power at the ceiling."
+    }
   },
   {
     "id": "crystal-crop-protection",
@@ -220,61 +462,47 @@
     "symbol": "CRYSTALCP",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
     "sector": "Agrochemicals & Crop Protection",
+    "status": "CLOSED",
     "open_date": "2026-11-18",
     "close_date": "2026-11-20",
     "allotment_date": "2026-11-23",
+    "demat_credit_date": "2026-11-24",
     "listing_date": "2026-11-25",
-    "price_band": "₹259 - ₹272",
+    "price_band": "\u20b9259 - \u20b9272",
     "cut_off_price": 272,
-    "face_value": "10",
+    "face_value": 10,
     "lot_size": 55,
     "min_investment": 14960,
-    "issue_size_cr": "1,500",
-    "fresh_issue_cr": "600",
-    "ofs_cr": "900",
-    "gmp": "+₹18.00",
+    "issue_size_cr": 1500,
+    "fresh_issue_cr": 600,
+    "ofs_cr": 900,
+    "gmp": "+\u20b918.00",
     "gmp_percent": 5.15,
-    "est_listing_price": "₹286(+5.15%)",
-    "kostak": "₹300",
-    "sub2sauda": "₹2,500",
+    "gmp_unofficial": true,
+    "est_listing_price": "\u20b9286(+5.15%)",
     "subscription": {
-      "qib": "Active (Day 2)",
-      "nii": "Active (Day 2)",
-      "retail": "Active (Day 2)",
-      "total": "Active"
+      "qib": "4.85x",
+      "nii": "3.12x",
+      "retail": "2.40x",
+      "total": "3.55x",
+      "source": "NSE India Final Bidding Status"
     },
     "reservation": {
       "qib_pct": "50%",
       "nii_pct": "15%",
       "retail_pct": "35%"
     },
-    "financials": {
-      "revenue": "1,850.00",
-      "pat": "145.00",
-      "net_worth": "980.00",
-      "debt": "320.00"
-    },
-    "kpis": {
-      "pe_ratio": "22.8",
-      "ronw": "14.80%",
-      "market_cap": "4,200",
-      "eps": "11.93",
-      "debt_to_equity": "0.33"
-    },
+    "about": "One of India's leading R&D-driven agrochemical companies manufacturing technical grade pesticides, crop protection formulations, seeds, and specialized farm spraying equipment across 5 plants in Gujarat, Haryana, and J&K.",
     "drhp_objects": [
-      "Funding working capital requirements of the company (₹200 Cr)",
-      "Prepayment or repayment of certain outstanding borrowings (₹250 Cr)",
-      "Funding capital expenditure for technical formulation plant expansion (₹100 Cr)",
-      "General corporate purposes"
+      "Funding capital expenditure for expanding technical agrochemical synthesis plant in Dahej (\u20b9150 Cr)",
+      "Prepayment and repayment of high-cost bank borrowings (\u20b9250 Cr)",
+      "Working capital requirements for upcoming Kharif & Rabi peak sales cycles (\u20b9150 Cr)",
+      "General corporate purposes & R&D formulation upgrades (\u20b950 Cr)"
     ],
-    "promoter_holding": {
-      "promoters": "Nand Kishore Aggarwal, Ankur Aggarwal",
-      "pre_issue": "78.40%",
-      "post_issue": "63.20%"
-    },
     "lead_managers": [
-      "Kotak Mahindra Capital Company",
+      "Kotak Mahindra Capital Company Limited",
       "Axis Capital Limited",
       "Motilal Oswal Investment Banking"
     ],
@@ -282,21 +510,11 @@
       "name": "Link Intime India Private Ltd",
       "url": "https://linkintime.co.in/initial_offer/public-issues.html"
     },
-    "about": "A prominent Indian R&D-driven agrochemical company manufacturing crop protection chemicals, fungicides, insecticides, seeds, and farm equipment.",
     "sources": [
-      "ipowatch",
+      "nse_official",
       "ipocentral_gmp"
     ],
-    "is_already_listed": false,
-    "status": "OPEN",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_CLOSING_TODAY"
-    ],
-    "last_updated": "2026-11-23T17:38:24.832899+05:30",
-    "demat_credit_date": "2026-11-24",
-    "telegraph_url": "https://telegra.ph/Crystal-Crop-Protection-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-19",
-    "last_posted_gmp": "+₹18.00"
+    "last_updated": "2026-11-23T23:06:30.029689+05:30"
   },
   {
     "id": "vishal-mega-mart",
@@ -304,23 +522,49 @@
     "symbol": "VISHAL",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Value Retail & Hypermarkets",
+    "status": "LISTED",
     "open_date": "2024-12-11",
     "close_date": "2024-12-13",
     "allotment_date": "2024-12-16",
+    "demat_credit_date": "2024-12-17",
     "listing_date": "2024-12-18",
-    "price_band": "₹74 to ₹78",
-    "listing_price": "₹110.00",
+    "price_band": "\u20b974 - \u20b978",
+    "cut_off_price": 78,
+    "face_value": 2,
+    "lot_size": 190,
+    "min_investment": 14820,
+    "issue_size_cr": 8000,
+    "fresh_issue_cr": 0,
+    "ofs_cr": 8000,
+    "listing_price": "\u20b9110.00",
     "listing_gain": "+41.02%",
-    "issue_size_cr": "8,000",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "28.40x",
+      "nii": "11.20x",
+      "retail": "8.50x",
+      "total": "16.80x"
+    },
+    "about": "One of India's largest value-fashion, daily essentials, and FMCG hypermarket store chains operating over 600 large-format stores targeting middle-income consumers across Tier-2, Tier-3, and Tier-4 towns.",
+    "drhp_objects": [
+      "100% Offer for Sale (OFS) by Promoter & Private Equity partners (Samayat Services / Partners Group)",
+      "No fresh capital raised for company operations; proceeds transferred entirely to selling promoters"
+    ],
+    "lead_managers": [
+      "Kotak Mahindra Capital",
+      "Morgan Stanley India",
+      "BofA Securities",
+      "ICICI Securities"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   },
   {
     "id": "ntpc-green-energy",
@@ -328,23 +572,49 @@
     "symbol": "NTPCGREEN",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Renewable Clean Energy (Solar & Wind PSU)",
+    "status": "LISTED",
     "open_date": "2024-11-19",
     "close_date": "2024-11-22",
     "allotment_date": "2024-11-25",
+    "demat_credit_date": "2024-11-26",
     "listing_date": "2024-11-27",
-    "price_band": "₹102 to ₹108",
-    "listing_price": "₹111.50",
+    "price_band": "\u20b9102 - \u20b9108",
+    "cut_off_price": 108,
+    "face_value": 10,
+    "lot_size": 138,
+    "min_investment": 14904,
+    "issue_size_cr": 10000,
+    "fresh_issue_cr": 10000,
+    "ofs_cr": 0,
+    "listing_price": "\u20b9111.50",
     "listing_gain": "+3.24%",
-    "issue_size_cr": "10,000",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "3.22x",
+      "nii": "0.84x",
+      "retail": "1.33x",
+      "total": "2.42x"
+    },
+    "about": "Wholly owned green energy flagship arm of Maharatna PSU NTPC Limited, developing utility-scale solar generation, onshore wind parks, battery storage, and green hydrogen hubs across India.",
+    "drhp_objects": [
+      "100% Fresh Issue: \u20b97,500 Cr for investment in subsidiary NTPC Renewable Energy (NREL) for debt repayment",
+      "Balance \u20b92,500 Cr for ongoing solar & wind park execution and general corporate purposes"
+    ],
+    "lead_managers": [
+      "IDBI Capital Markets",
+      "HDFC Bank Limited",
+      "IIFL Securities Limited",
+      "Nuvama Wealth Management"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   },
   {
     "id": "swiggy",
@@ -352,23 +622,50 @@
     "symbol": "SWIGGY",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Consumer Internet & Quick Commerce",
+    "status": "LISTED",
     "open_date": "2024-11-06",
     "close_date": "2024-11-08",
     "allotment_date": "2024-11-11",
+    "demat_credit_date": "2024-11-12",
     "listing_date": "2024-11-13",
-    "price_band": "₹371 to ₹390",
-    "listing_price": "₹412.00",
+    "price_band": "\u20b9371 - \u20b9390",
+    "cut_off_price": 390,
+    "face_value": 1,
+    "lot_size": 38,
+    "min_investment": 14820,
+    "issue_size_cr": 11327,
+    "fresh_issue_cr": 4499,
+    "ofs_cr": 6828,
+    "listing_price": "\u20b9412.00",
     "listing_gain": "+5.64%",
-    "issue_size_cr": "11,327",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "6.02x",
+      "nii": "0.41x",
+      "retail": "1.14x",
+      "total": "3.59x"
+    },
+    "about": "Pioneer of Indian hyperlocal food delivery and rapid 10-minute grocery delivery (Instamart), dining out reservations (Dineout), and Genie courier services across 650+ Indian cities.",
+    "drhp_objects": [
+      "Investment in Instamart dark-store infrastructure expansion (\u20b91,178 Cr)",
+      "Technology & cloud engineering architecture scaling (\u20b9703 Cr)",
+      "Brand marketing & user acquisition promotions (\u20b91,115 Cr)"
+    ],
+    "lead_managers": [
+      "Kotak Mahindra Capital",
+      "Citigroup Global Markets",
+      "Jefferies India",
+      "Avendus Capital"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   },
   {
     "id": "acme-solar-holdings",
@@ -376,23 +673,48 @@
     "symbol": "ACMESOLAR",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Solar Energy & Clean Tech Independent Power Producer",
+    "status": "LISTED",
     "open_date": "2024-11-06",
     "close_date": "2024-11-08",
     "allotment_date": "2024-11-11",
+    "demat_credit_date": "2024-11-12",
     "listing_date": "2024-11-13",
-    "price_band": "₹275 to ₹289",
-    "listing_price": "₹251.00",
+    "price_band": "\u20b9275 - \u20b9289",
+    "cut_off_price": 289,
+    "face_value": 2,
+    "lot_size": 51,
+    "min_investment": 14739,
+    "issue_size_cr": 2900,
+    "fresh_issue_cr": 2395,
+    "ofs_cr": 505,
+    "listing_price": "\u20b9251.00",
     "listing_gain": "-13.15%",
-    "issue_size_cr": "2,900",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "3.10x",
+      "nii": "1.02x",
+      "retail": "3.10x",
+      "total": "2.75x"
+    },
+    "about": "One of India's pioneering private utility-scale solar and renewable power developers with operational capacity across Rajasthan, Andhra Pradesh, and Punjab.",
+    "drhp_objects": [
+      "Repayment and prepayment of borrowings of subsidiaries (\u20b92,000 Cr)",
+      "General corporate purposes"
+    ],
+    "lead_managers": [
+      "Nuvama Wealth Management",
+      "ICICI Securities",
+      "JM Financial"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   },
   {
     "id": "afcons-infrastructure",
@@ -400,23 +722,50 @@
     "symbol": "AFCONS",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Heavy Civil Engineering & EPC Infrastructure",
+    "status": "LISTED",
     "open_date": "2024-10-25",
     "close_date": "2024-10-29",
     "allotment_date": "2024-10-30",
+    "demat_credit_date": "2024-10-31",
     "listing_date": "2024-11-04",
-    "price_band": "₹440 to ₹463",
-    "listing_price": "₹430.00",
+    "price_band": "\u20b9440 - \u20b9463",
+    "cut_off_price": 463,
+    "face_value": 10,
+    "lot_size": 32,
+    "min_investment": 14816,
+    "issue_size_cr": 5430,
+    "fresh_issue_cr": 1250,
+    "ofs_cr": 4180,
+    "listing_price": "\u20b9430.00",
     "listing_gain": "-7.13%",
-    "issue_size_cr": "5,430",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "3.99x",
+      "nii": "5.31x",
+      "retail": "0.94x",
+      "total": "2.63x"
+    },
+    "about": "Flagship infrastructure engineering and construction arm of the Shapoorji Pallonji Group executing complex marine projects, deep metro tunnels, and specialized mountain viaducts across Asia, Africa, and the Middle East.",
+    "drhp_objects": [
+      "Capital expenditure towards purchase of specialized heavy marine & tunneling construction equipment (\u20b9320 Cr)",
+      "Funding long-term working capital requirements (\u20b9500 Cr)",
+      "Repayment/prepayment of outstanding debt (\u20b9430 Cr)"
+    ],
+    "lead_managers": [
+      "ICICI Securities",
+      "DAM Capital Advisors",
+      "Jefferies India",
+      "Nomura Financial Advisory"
+    ],
+    "registrar": {
+      "name": "Link Intime India Private Ltd",
+      "url": "https://linkintime.co.in/initial_offer/public-issues.html"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   },
   {
     "id": "hyundai-motor-india",
@@ -424,22 +773,49 @@
     "symbol": "HYUNDAI",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
+    "series": "EQ",
+    "sector": "Automobiles & Passenger Vehicles OEM",
+    "status": "LISTED",
     "open_date": "2024-10-15",
     "close_date": "2024-10-17",
     "allotment_date": "2024-10-18",
+    "demat_credit_date": "2024-10-21",
     "listing_date": "2024-10-22",
-    "price_band": "₹1865 to ₹1960",
-    "listing_price": "₹1934.00",
+    "price_band": "\u20b91865 - \u20b91960",
+    "cut_off_price": 1960,
+    "face_value": 10,
+    "lot_size": 7,
+    "min_investment": 13720,
+    "issue_size_cr": 27870,
+    "fresh_issue_cr": 0,
+    "ofs_cr": 27870,
+    "listing_price": "\u20b91934.00",
     "listing_gain": "-1.33%",
-    "issue_size_cr": "27,870",
-    "is_already_listed": true,
-    "status": "LISTED",
-    "posted_events": [
-      "NEW_IPO_ANNOUNCED",
-      "IPO_OPENS_TODAY",
-      "IPO_CLOSING_TODAY",
-      "ALLOTMENT_OUT",
-      "LISTING_TODAY"
-    ]
+    "subscription": {
+      "qib": "6.97x",
+      "nii": "0.60x",
+      "retail": "0.50x",
+      "total": "2.37x"
+    },
+    "about": "India's second largest passenger vehicle manufacturer by domestic market share, producing top-selling SUV and sedan models (Creta, Venue, Verna) across state-of-the-art plants near Chennai.",
+    "drhp_objects": [
+      "100% Offer for Sale (OFS) by South Korean parent company Hyundai Motor Company",
+      "Company received zero funds from this mega issue; entire proceeds repatriated to parent company"
+    ],
+    "lead_managers": [
+      "Kotak Mahindra Capital",
+      "Citigroup Global Markets",
+      "HSBC Securities",
+      "J.P. Morgan India",
+      "Morgan Stanley India"
+    ],
+    "registrar": {
+      "name": "KFin Technologies Limited",
+      "url": "https://kosmic.kfintech.com/ipostatus/"
+    },
+    "sources": [
+      "nse_official"
+    ],
+    "last_updated": "2026-11-23T11:30:00+05:30"
   }
 ]

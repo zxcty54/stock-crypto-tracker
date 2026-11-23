@@ -319,16 +319,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
           },
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 6, bottom: 120),
-            // 2 static headers: Indices Ticker(0), Filter & Confession Shortcut(1)
-            itemCount: 2 + (posts.isEmpty ? 1 : posts.length),
+            // 1 static header: Filter & Confession Shortcut(0)
+            itemCount: 1 + (posts.isEmpty ? 1 : posts.length),
             itemBuilder: (context, index) {
-              // 1. TOP INDICES TICKER
+              // 1. 🎯 STREAMLINED FILTER ROW & CONFESSION SHORTCUT
               if (index == 0) {
-                return _buildTopIndicesTickerStrip();
-              }
-
-              // 2. 🎯 STREAMLINED FILTER ROW & CONFESSION SHORTCUT
-              if (index == 1) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                   child: Row(
@@ -405,8 +400,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 );
               }
 
-              // Feed Cards (Offset index - 2)
-              final post = posts[index - 2];
+              // Feed Cards (Offset index - 1)
+              final post = posts[index - 1];
               return TraderFeedCard(
                 key: ValueKey(post['id']),
                 post: post,

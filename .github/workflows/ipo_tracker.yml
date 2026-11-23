@@ -94,7 +94,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          for file in ipo_master.json ipo_posted_log.json ipo_run_log.txt; do
+          for file in ipo_master.json assets/data/ipo_master.json ipo_posted_log.json ipo_run_log.txt; do
             if [ -f "$file" ]; then
               git add "$file"
             fi

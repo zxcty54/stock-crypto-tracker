@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import '../screens/market_indices_heatmap_screen.dart';
 
 class IndicesHeatmapPreviewCard extends StatefulWidget {
@@ -16,6 +17,9 @@ class _IndicesHeatmapPreviewCardState extends State<IndicesHeatmapPreviewCard> {
   List<Map<String, dynamic>> _topLosers = [];
   bool _isLoaded = false;
 
+  final String _sheetApiUrl =
+      "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
+
   @override
   void initState() {
     super.initState();
@@ -23,25 +27,110 @@ class _IndicesHeatmapPreviewCardState extends State<IndicesHeatmapPreviewCard> {
   }
 
   Future<void> _loadSample() async {
+    List<Map<String, dynamic>> sectors = [];
     try {
       final jsonStr = await rootBundle.loadString('assets/data/indices_heatmap.json');
       final data = jsonDecode(jsonStr);
 
-      final List<Map<String, dynamic>> sectors =
-          List<Map<String, dynamic>>.from(data['sectoral_indices'] ?? []);
+      sectors = List<Map<String, dynamic>>.from(data['sectoral_indices'] ?? []);
 
-      sectors.sort((a, b) {
-        final ca = (a['change_pct'] as num?)?.toDouble() ?? 0.0;
-        final cb = (b['change_pct'] as num?)?.toDouble() ?? 0.0;
-        return cb.compareTo(ca);
+      _updateGainersLosers(sectors);
+    } catch (_) {}
+
+    // Immediately fetch live delta from Google Sheet
+    _fetchLiveSheet(sectors);
+  }
+
+  void _updateGainersLosers(List<Map<String, dynamic>> sectors) {
+    sectors.sort((a, b) {
+      final ca = (a['change_pct'] as num?)?.toDouble() ?? 0.0;
+      final cb = (b['change_pct'] as num?)?.toDouble() ?? 0.0;
+      return cb.compareTo(ca);
+    });
+
+    if (mounted) {
+      setState(() {
+        _topGainers = sectors.take(3).toList();
+        _topLosers = sectors.reversed.take(3).toList();
+        _isLoaded = true;
       });
+    }
+  }
 
-      if (mounted) {
-        setState(() {
-          _topGainers = sectors.take(3).toList();
-          _topLosers = sectors.reversed.take(3).toList();
-          _isLoaded = true;
-        });
+  Future<void> _fetchLiveSheet(List<Map<String, dynamic>> sectors) async {
+    try {
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final res = await http.get(
+        Uri.parse("$_sheetApiUrl&_t=$timestamp"),
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      ).timeout(const Duration(seconds: 8));
+
+      if (res.statusCode == 200 && res.body.isNotEmpty) {
+        final decoded = jsonDecode(res.body);
+        Map<String, dynamic> remote = {};
+
+        if (decoded is List) {
+          for (var r in decoded) {
+            if (r is Map) {
+              final k = r['Index'] ?? r['name'] ?? r['Symbol'] ?? r['Sector'] ?? '';
+              if (k.toString().isNotEmpty) remote[k.toString()] = r;
+            }
+          }
+        } else if (decoded is Map<String, dynamic>) {
+          if (decoded.containsKey('data') && decoded['data'] is Map<String, dynamic>) {
+            remote = Map<String, dynamic>.from(decoded['data']);
+          } else if (decoded.containsKey('data') && decoded['data'] is List) {
+            for (var r in (decoded['data'] as List)) {
+              if (r is Map) {
+                final k = r['Index'] ?? r['name'] ?? r['Symbol'] ?? r['Sector'] ?? '';
+                if (k.toString().isNotEmpty) remote[k.toString()] = r;
+              }
+            }
+          } else {
+            remote = decoded;
+          }
+        }
+
+        if (remote.isNotEmpty) {
+          final normMap = <String, dynamic>{};
+          remote.forEach((k, v) {
+            final ck = k.toString().toLowerCase().replaceAll(' ', '').replaceAll('_', '').replaceAll('-', '');
+            if (ck.isNotEmpty) normMap[ck] = v;
+          });
+
+          for (var s in sectors) {
+            final nk = (s['name'] ?? '').toString().toLowerCase().replaceAll(' ', '').replaceAll('_', '').replaceAll('-', '');
+            final sk = (s['symbol'] ?? '').toString().toLowerCase().replaceAll(' ', '').replaceAll('_', '').replaceAll('-', '');
+
+            dynamic match = normMap[nk] ?? normMap[sk];
+            if (match == null) {
+              for (var entry in normMap.entries) {
+                if (nk.contains(entry.key) || entry.key.contains(nk)) {
+                  match = entry.value;
+                  break;
+                }
+              }
+            }
+
+            if (match != null) {
+              if (match is Map) {
+                final c = match['change'] ?? match['change_pct'] ?? match['Change'] ?? match['pChange'] ?? match['chg'];
+                if (c != null) {
+                  final str = c.toString().replaceAll('%', '').replaceAll('+', '').trim();
+                  final d = double.tryParse(str);
+                  if (d != null) s['change_pct'] = d;
+                }
+              } else if (match is num) {
+                s['change_pct'] = match.toDouble();
+              }
+            }
+          }
+
+          _updateGainersLosers(sectors);
+        }
       }
     } catch (_) {}
   }

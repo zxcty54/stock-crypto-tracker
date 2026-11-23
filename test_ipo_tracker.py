@@ -311,6 +311,99 @@ class TestOfficialExchangeScrapers(unittest.TestCase):
         self.assertEqual(deep["subscription"]["nii"], "3.10x")
         self.assertEqual(deep["subscription"]["retail"], "4.80x")
 
+    def test_nse_current_issue_with_subscription_multiples(self):
+        """Test parsing real NSE current issue payload with noOfTime, noOfsharesBid, noOfSharesOffered."""
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = [
+            {
+                "companyName": "Mahanadi Coalfields Limited",
+                "symbol": "MAHACOAL",
+                "series": "EQ",
+                "issueStartDate": "19-Nov-2026",
+                "issueEndDate": "23-Nov-2026",
+                "priceBand": "Rs.129 to Rs.136",
+                "issueSize": "493068045",
+                "status": "Active",
+                "noOfSharesOffered": "4.93068045E8",
+                "noOfsharesBid": "5.640624E7",
+                "noOfTime": "0.11439849037469058",
+            }
+        ]
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        items = scraper.fetch_nse_ipos()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["symbol"], "MAHACOAL")
+        self.assertEqual(items[0]["subscription"]["total"], "0.11x")
+        self.assertEqual(items[0]["subscription"]["total_bids"], "56406240")
+        self.assertEqual(items[0]["subscription"]["shares_offered"], "493068045")
+        self.assertEqual(items[0]["subscription"]["source"], "NSE India Official Bidding Feed")
+
+    def test_nse_active_category_datalist(self):
+        """Test parsing official NSE dataList structure with noOfTotalMeant (times) per category."""
+        scraper = NseIpoScraper()
+        mock_session = MagicMock()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "symbol": "MAHACOAL",
+            "updateTime": "23-Nov-2026 17:00:00",
+            "dataList": [
+                {
+                    "category": "Category",
+                    "noOfShareOffered": "No.of shares offered/reserved",
+                    "noOfSharesBid": "No. of shares bid for",
+                    "noOfTotalMeant": "No. of times of total meant for the category",
+                },
+                {
+                    "category": "Qualified Institutional Buyers(QIBs)",
+                    "noOfShareOffered": "246534022",
+                    "noOfSharesBid": "19722720",
+                    "noOfTotalMeant": "0.08",
+                },
+                {
+                    "category": "Non Institutional Investors",
+                    "noOfShareOffered": "73960207",
+                    "noOfSharesBid": "10354428",
+                    "noOfTotalMeant": "0.14",
+                },
+                {
+                    "category": "Individual Investors",
+                    "noOfShareOffered": "172573816",
+                    "noOfSharesBid": "26329092",
+                    "noOfTotalMeant": "0.15",
+                },
+                {
+                    "category": "Total",
+                    "noOfShareOffered": "493068045",
+                    "noOfSharesBid": "56406240",
+                    "noOfTotalMeant": "0.11",
+                },
+            ],
+        }
+
+        mock_session.get.return_value = mock_resp
+        scraper.session = mock_session
+
+        deep = scraper.fetch_nse_issue_details("MAHACOAL")
+        sub = deep["subscription"]
+        self.assertEqual(sub["total"], "0.11x")
+        self.assertEqual(sub["qib"], "0.08x")
+        self.assertEqual(sub["qib_bids"], "19722720")
+        self.assertEqual(sub["qib_offered"], "246534022")
+        self.assertEqual(sub["nii"], "0.14x")
+        self.assertEqual(sub["nii_bids"], "10354428")
+        self.assertEqual(sub["retail"], "0.15x")
+        self.assertEqual(sub["retail_bids"], "26329092")
+        self.assertEqual(sub["total_bids"], "56406240")
+        self.assertEqual(sub["shares_offered"], "493068045")
+        self.assertEqual(sub["updated_at"], "23-Nov-2026 17:00:00")
+
 
 class TestIpoFormatters(unittest.TestCase):
     def setUp(self):
@@ -654,6 +747,212 @@ class TestLifecycleEngine(unittest.TestCase):
         dash_msg = format_gmp_dashboard([ipo_with_tg], as_of_date="19-Nov-2026")
         self.assertIn("https://telegra.ph/Mahanadi-Coalfields-DRHP-Review-11-19", dash_msg)
         self.assertIn("Instant View", dash_msg)
+
+    def test_nse_issue_information_html_scraping(self):
+        """
+        Verify that NseIpoScraper parses the official 5-column HTML table from
+        https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        from ipo_scrapers import NseIpoScraper
+
+        html_sample = """
+        <!DOCTYPE html>
+        <html>
+        <body>
+        <table id="ipo-bid-details-table" class="table">
+          <thead>
+            <tr>
+              <th>SR. NO.</th>
+              <th>CATEGORY</th>
+              <th>NO OF SHARES OFFERED/ RESERVED</th>
+              <th>NO OF SHARES BID FOR</th>
+              <th>NO OF TIMES OF TOTAL MEANT FOR THE CATEGORY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Qualified Institutional Buyers(QIBs)</td>
+              <td>11,25,12,171</td>
+              <td>18,13,18,390</td>
+              <td>1.61</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Non-Institutional Investors</td>
+              <td>8,43,84,129</td>
+              <td>3,88,16,700</td>
+              <td>0.46</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Individual Investors</td>
+              <td>19,68,96,300</td>
+              <td>7,87,58,520</td>
+              <td>0.40</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Total</td>
+              <td>49,30,68,045</td>
+              <td>74,86,87,060</td>
+              <td>1.52</td>
+            </tr>
+          </tbody>
+        </table>
+        </body>
+        </html>
+        """
+        scraper = NseIpoScraper()
+        with unittest.mock.patch.object(scraper.session, "get") as mock_get:
+            mock_resp = unittest.mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.text = html_sample
+            mock_resp.json.side_effect = Exception("Not a JSON endpoint")
+            mock_get.return_value = mock_resp
+
+            details = scraper.fetch_nse_issue_details("MAHACOAL")
+            sub = details.get("subscription", {})
+            self.assertEqual(sub.get("qib"), "1.61x")
+            self.assertEqual(sub.get("qib_bids"), "181318390")
+            self.assertEqual(sub.get("qib_offered"), "112512171")
+            self.assertEqual(sub.get("nii"), "0.46x")
+            self.assertEqual(sub.get("nii_bids"), "38816700")
+            self.assertEqual(sub.get("nii_offered"), "84384129")
+            self.assertEqual(sub.get("retail"), "0.40x")
+            self.assertEqual(sub.get("retail_bids"), "78758520")
+            self.assertEqual(sub.get("retail_offered"), "196896300")
+            self.assertEqual(sub.get("total"), "1.52x")
+            self.assertEqual(sub.get("total_bids"), "748687060")
+            self.assertEqual(sub.get("shares_offered"), "493068045")
+            self.assertIn("issue-information", sub.get("source", ""))
+
+    def test_mahacoal_master_data_matches_nse_issue_information(self):
+        """
+        Verify that both master JSON files contain the exact Day 3 closing numbers
+        matching https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        for path in ["ipo_master.json", "assets/data/ipo_master.json"]:
+            with open(path, "r") as f:
+                data = json.load(f)
+            mahacoal = next((item for item in data if item.get("symbol") == "MAHACOAL" or item.get("id") == "mahanadi-coalfields"), None)
+            self.assertIsNotNone(mahacoal, f"MAHACOAL not found in {path}")
+            sub = mahacoal.get("subscription", {})
+
+            # QIB row: 11,25,12,171 offered, 18,13,18,390 bids, 1.61x
+            self.assertEqual(sub.get("qib"), "1.61x")
+            self.assertEqual(sub.get("qib_offered"), "112512171")
+            self.assertEqual(sub.get("qib_bids"), "181318390")
+
+            # NII row: 8,43,84,129 offered, 3,88,16,700 bids, 0.46x
+            self.assertEqual(sub.get("nii"), "0.46x")
+            self.assertEqual(sub.get("nii_offered"), "84384129")
+            self.assertEqual(sub.get("nii_bids"), "38816700")
+
+            # Retail row: 19,68,96,300 offered, 7,87,58,520 bids, 0.40x
+            self.assertEqual(sub.get("retail"), "0.40x")
+            self.assertEqual(sub.get("retail_offered"), "196896300")
+            self.assertEqual(sub.get("retail_bids"), "78758520")
+
+            # Total row: 49,30,68,045 offered, 74,86,87,060 bids, 1.52x
+            self.assertEqual(sub.get("total"), "1.52x")
+            self.assertEqual(sub.get("shares_offered"), "493068045")
+            self.assertEqual(sub.get("total_bids"), "748687060")
+
+    def test_nse_demand_graph_html_scraping(self):
+        """
+        Verify that NseIpoScraper parses the official Demand Graph tab from
+        https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        including summary cards and cumulative price bidding ladder.
+        """
+        from ipo_scrapers import NseIpoScraper
+
+        html_sample = """
+        <!DOCTYPE html>
+        <html>
+        <body>
+        <div class="demand-graph-tab">
+          <div>Total Issue Size 49,30,68,045</div>
+          <div>Total Bids Received 31,18,50,220</div>
+          <div>Total Bids Received at Cut-off price 7,49,99,870</div>
+          <div>No. of times issue is subscribed 0.63</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Price</th>
+                <th>&gt;=129</th>
+                <th>130</th>
+                <th>131</th>
+                <th>132</th>
+                <th>133</th>
+                <th>134</th>
+                <th>135</th>
+                <th>136</th>
+                <th>Cut-Off</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>No of Share(in Lakh)</td>
+                <td>31,18,50,220</td>
+                <td>30,96,04,900</td>
+                <td>30,91,34,980</td>
+                <td>30,90,58,420</td>
+                <td>30,89,78,890</td>
+                <td>30,89,38,520</td>
+                <td>30,89,08,160</td>
+                <td>30,88,53,930</td>
+                <td>7,49,99,870</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </body>
+        </html>
+        """
+        scraper = NseIpoScraper()
+        with unittest.mock.patch.object(scraper.session, "get") as mock_get:
+            mock_resp = unittest.mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.text = html_sample
+            mock_resp.json.side_effect = Exception("Not a JSON endpoint")
+            mock_get.return_value = mock_resp
+
+            details = scraper.fetch_nse_issue_details("MAHACOAL")
+            dg = details.get("demand_graph", {})
+            self.assertEqual(dg.get("total_issue_size"), "493068045")
+            self.assertEqual(dg.get("total_bids"), "311850220")
+            self.assertEqual(dg.get("cut_off_bids"), "74999870")
+            self.assertEqual(dg.get("no_of_times"), "0.63x")
+            self.assertEqual(len(dg.get("price_levels", [])), 9)
+
+            # Cap price check: >= 136 with 30,88,53,930 shares
+            cap_entry = next((item for item in dg["price_levels"] if "136" in item["price"]), None)
+            self.assertIsNotNone(cap_entry)
+            self.assertEqual(cap_entry["shares"], "308853930")
+
+            # Cut-off check: 7,49,99,870 shares
+            cutoff_entry = next((item for item in dg["price_levels"] if "cut" in item["price"].lower()), None)
+            self.assertIsNotNone(cutoff_entry)
+            self.assertEqual(cutoff_entry["shares"], "74999870")
+
+    def test_mahacoal_master_data_demand_graph(self):
+        """
+        Verify that both master JSON files contain the exact Demand Graph data
+        matching https://www.nseindia.in/market-data/issue-information?symbol=MAHACOAL&series=EQ&type=Active
+        """
+        for path in ["ipo_master.json", "assets/data/ipo_master.json"]:
+            with open(path, "r") as f:
+                data = json.load(f)
+            mahacoal = next((item for item in data if item.get("symbol") == "MAHACOAL" or item.get("id") == "mahanadi-coalfields"), None)
+            self.assertIsNotNone(mahacoal, f"MAHACOAL not found in {path}")
+            dg = mahacoal.get("demand_graph", {})
+
+            self.assertEqual(dg.get("total_issue_size"), "493068045")
+            self.assertEqual(dg.get("total_bids"), "311850220")
+            self.assertEqual(dg.get("cut_off_bids"), "74999870")
+            self.assertEqual(dg.get("no_of_times"), "0.63x")
+            self.assertEqual(len(dg.get("price_levels", [])), 9)
 
 
 if __name__ == "__main__":

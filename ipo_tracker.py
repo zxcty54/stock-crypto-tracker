@@ -106,7 +106,7 @@ def load_master() -> dict[str, dict]:
 
 
 def save_master(master_dict: dict[str, dict]) -> None:
-    """Save tracked IPO master database."""
+    """Save tracked IPO master database and sync to Flutter asset directory."""
     try:
         # Sort by open_date or company_name
         items = list(master_dict.values())
@@ -114,6 +114,13 @@ def save_master(master_dict: dict[str, dict]) -> None:
         with open(MASTER_FILE, "w", encoding="utf-8") as f:
             json.dump(items, f, indent=2, ensure_ascii=False)
         logger.info(f"Saved {len(items)} IPO records to {MASTER_FILE}")
+
+        # Also sync to Flutter asset bundle
+        asset_master = os.path.join("assets", "data", "ipo_master.json")
+        os.makedirs(os.path.dirname(asset_master), exist_ok=True)
+        with open(asset_master, "w", encoding="utf-8") as f:
+            json.dump(items, f, indent=2, ensure_ascii=False)
+        logger.info(f"Synced {len(items)} IPO records to {asset_master}")
     except Exception as e:
         logger.error(f"Error saving {MASTER_FILE}: {e}")
 
@@ -464,6 +471,27 @@ def run_tracker(now: datetime | None = None) -> int:
                         if s_val.isdigit() and len(s_val) >= 7:
                             continue
                     existing[key] = val
+
+            # Update live subscription from official exchange feed
+            if item.get("subscription"):
+                existing.setdefault("subscription", {}).update(item["subscription"])
+            if item.get("demand_graph"):
+                existing["demand_graph"] = item["demand_graph"]
+
+            # Recalculate status based on current date
+            open_d = existing.get("open_date")
+            close_d = existing.get("close_date")
+            if existing.get("is_already_listed") or existing.get("listing_price"):
+                existing["status"] = "LISTED"
+            elif open_d and close_d:
+                if open_d <= today_str <= close_d:
+                    existing["status"] = "OPEN"
+                elif open_d > today_str:
+                    existing["status"] = "UPCOMING"
+                elif today_str > close_d:
+                    existing["status"] = "CLOSED"
+            elif open_d and open_d > today_str:
+                existing["status"] = "UPCOMING"
 
             # Always populate demat_credit_date if not set
             if not existing.get("demat_credit_date"):

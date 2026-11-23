@@ -928,13 +928,48 @@ class DrhpDetailParser:
 # 5. NSE & BSE OFFICIAL EQUITY APIS
 # ============================================================
 
+def _parse_sub_multiple(val: any) -> str | None:
+    """Parse subscription times into clean 'X.XXx' string."""
+    if val is None:
+        return None
+    s = str(val).strip()
+    if not s or s.lower() in ("--", "n/a", "nan", "null", "none", "no. of times of total meant for the category"):
+        return None
+    clean = s.rstrip("xX").strip()
+    try:
+        f = float(clean)
+        if f >= 0:
+            return f"{f:.2f}x"
+    except ValueError:
+        pass
+    return s if s.endswith("x") else f"{s}x"
+
+
+def _parse_share_count(val: any) -> str | None:
+    """Parse share quantity into clean integer string, handling scientific notation and commas."""
+    if val is None:
+        return None
+    s = str(val).strip().replace(",", "")
+    if not s or s.lower() in ("--", "n/a", "nan", "null", "none"):
+        return None
+    try:
+        f = float(s)
+        if f >= 0:
+            return str(int(f))
+    except (ValueError, TypeError):
+        pass
+    return None
+
+
 class NseIpoScraper:
     """
     Fetches official NSE public IPO issues from:
     Webpage: https://www.nseindia.com/market-data/all-upcoming-issues-ipo
     APIs:
       - https://www.nseindia.com/api/ipo-current-issue
+      - https://www.nseindia.in/api/ipo-current-issue
       - https://www.nseindia.com/api/all-upcoming-issues?category=ipo
+      - https://www.nseindia.in/api/all-upcoming-issues?category=ipo
       - https://www.nseindia.com/api/all-ipo-issues
     Filters strictly for series='EQ' (Mainboard equities), excluding SME/Emerge.
     """
@@ -943,7 +978,9 @@ class NseIpoScraper:
     UPCOMING_PAGE_URL = "https://www.nseindia.com/market-data/all-upcoming-issues-ipo"
     ENDPOINTS = [
         "https://www.nseindia.com/api/ipo-current-issue",
+        "https://www.nseindia.in/api/ipo-current-issue",
         "https://www.nseindia.com/api/all-upcoming-issues?category=ipo",
+        "https://www.nseindia.in/api/all-upcoming-issues?category=ipo",
         "https://www.nseindia.com/api/all-ipo-issues",
     ]
 
@@ -997,6 +1034,26 @@ class NseIpoScraper:
                         elif entry.get("issueAmount"):
                             size_cr = str(entry.get("issueAmount"))
 
+                        # Parse official NSE cumulative subscription times & bidding volume directly from feed
+                        sub = {}
+                        raw_times = entry.get("noOfTime") or entry.get("noOfTimes") or entry.get("subscription")
+                        times_val = _parse_sub_multiple(raw_times)
+                        if times_val:
+                            sub["total"] = times_val
+
+                        raw_bids = entry.get("noOfsharesBid") or entry.get("totalBids")
+                        bids_val = _parse_share_count(raw_bids)
+                        if bids_val:
+                            sub["total_bids"] = bids_val
+
+                        raw_offered = entry.get("noOfSharesOffered") or entry.get("sharesOffered") or raw_size
+                        offered_val = _parse_share_count(raw_offered)
+                        if offered_val:
+                            sub["shares_offered"] = offered_val
+
+                        if sub:
+                            sub["source"] = "NSE India Official Bidding Feed"
+
                         results.append({
                             "source": "nse_official",
                             "symbol": sym,
@@ -1006,6 +1063,7 @@ class NseIpoScraper:
                             "price_band": str(price_b),
                             "issue_size_cr": size_cr,
                             "issue_shares": str(raw_size),
+                            "subscription": sub,
                             "is_mainboard": True,
                         })
                 except Exception as ep_err:
@@ -1016,14 +1074,69 @@ class NseIpoScraper:
 
         return results
 
+    def _extract_category_data_list(self, cat_list: list, details: dict) -> None:
+        """Parse NSE category data list (dataList, activeCat, bidDetails) into clean times & quantities."""
+        sub = details.setdefault("subscription", {})
+        for r in cat_list:
+            if not isinstance(r, dict):
+                continue
+            c_name = str(r.get("category") or r.get("name") or "").strip().upper()
+            if not c_name or c_name in ("CATEGORY", "SR.NO.", "SR. NO."):
+                continue
+
+            c_norm = c_name.replace("-", " ").replace("_", " ")
+
+            raw_t = r.get("noOfTotalMeant") or r.get("noOfTime") or r.get("noOfTimes") or r.get("subscription")
+            t_str = _parse_sub_multiple(raw_t)
+
+            bids = _parse_share_count(r.get("noOfSharesBid") or r.get("noOfshareBid") or r.get("sharesBid"))
+            offered = _parse_share_count(r.get("noOfShareOffered") or r.get("noOfShareO") or r.get("sharesOffered"))
+
+            if "TOTAL" in c_norm:
+                if t_str:
+                    sub["total"] = t_str
+                if bids:
+                    sub["total_bids"] = bids
+                if offered:
+                    sub["shares_offered"] = offered
+            elif "QIB" in c_norm or "QUALIFIED" in c_norm:
+                if t_str:
+                    sub["qib"] = t_str
+                if bids:
+                    sub["qib_bids"] = bids
+                if offered:
+                    sub["qib_offered"] = offered
+            elif "NII" in c_norm or "HNI" in c_norm or "NON INSTITUTIONAL" in c_norm or "NON-INSTITUTIONAL" in c_name:
+                if t_str:
+                    sub["nii"] = t_str
+                if bids:
+                    sub["nii_bids"] = bids
+                if offered:
+                    sub["nii_offered"] = offered
+            elif "RETAIL" in c_norm or "RII" in c_norm or "INDIVIDUAL" in c_norm:
+                if t_str:
+                    sub["retail"] = t_str
+                if bids:
+                    sub["retail_bids"] = bids
+                if offered:
+                    sub["retail_offered"] = offered
+            elif "EMPLOYEE" in c_norm or "EMP" in c_norm:
+                if t_str:
+                    sub["employee"] = t_str
+                if bids:
+                    sub["employee_bids"] = bids
+                if offered:
+                    sub["employee_offered"] = offered
+
     def fetch_nse_issue_details(self, symbol: str) -> dict:
         """
         Fetch detailed issue info and live cumulative bid/demand data from official NSE endpoints:
-          - https://www.nseindia.com/api/ipo-detail?symbol={symbol}
-          - https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}
+          - https://www.nseindia.com/api/ipo-detail?symbol={symbol}&series=EQ
+          - https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}&series=EQ
+          - https://www.nseindia.com/api/ipo-active-category?symbol={symbol}&series=EQ
         Captures:
           - lot_size, face_value, tick_size, registrar, lead_managers
-          - subscription / demand: QIB, NII, Retail, Total times subscribed
+          - subscription / demand: QIB, NII, Retail, Total times subscribed, shares bid, shares offered
         """
         details: dict = {
             "symbol": symbol,
@@ -1038,70 +1151,222 @@ class NseIpoScraper:
             return details
 
         # 1. Fetch IPO Detail & Issue Info
-        try:
-            url_detail = f"https://www.nseindia.com/api/ipo-detail?symbol={symbol}"
-            resp = self.session.get(url_detail, headers=NSE_HEADERS, timeout=10)
-            if resp.status_code == 200:
-                data = resp.json()
-                if isinstance(data, dict):
-                    info = data.get("issueInfo") or data.get("data") or data
-                    if isinstance(info, dict):
-                        if info.get("minBidQuantity"):
-                            try:
-                                details["lot_size"] = int(info["minBidQuantity"])
-                            except (ValueError, TypeError):
-                                pass
-                        if info.get("faceValue"):
-                            details["face_value"] = str(info["faceValue"])
-                        if info.get("tickSize"):
-                            details["tick_size"] = str(info["tickSize"])
-                        if info.get("registrar"):
-                            details["registrar"] = str(info["registrar"]).strip()
-                        if info.get("leadManager"):
-                            lm_str = str(info["leadManager"])
-                            details["lead_managers"] = [m.strip() for m in re.split(r"[,;]", lm_str) if m.strip()]
-        except Exception as e:
-            logger.debug(f"NSE detail API note for {symbol}: {e}")
+        urls_detail = [
+            f"https://www.nseindia.com/api/ipo-detail?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.com/api/ipo-detail?symbol={symbol}",
+            f"https://www.nseindia.in/api/ipo-detail?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.in/api/ipo-detail?symbol={symbol}",
+        ]
+        for url_detail in urls_detail:
+            try:
+                resp = self.session.get(url_detail, headers=NSE_HEADERS, timeout=10)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if isinstance(data, dict):
+                        info = data.get("issueInfo") or data.get("data") or data
+                        if isinstance(info, dict):
+                            if isinstance(info.get("dataList"), list):
+                                for r in info["dataList"]:
+                                    if isinstance(r, dict):
+                                        t = str(r.get("title") or "").strip().lower()
+                                        v = r.get("value")
+                                        if "minimum bid" in t or "lot" in t:
+                                            try:
+                                                details["lot_size"] = int(str(v).replace(",", ""))
+                                            except (ValueError, TypeError):
+                                                pass
+                                        elif "face value" in t:
+                                            details["face_value"] = str(v)
+                                        elif "tick" in t:
+                                            details["tick_size"] = str(v)
+                                        elif "registrar" in t:
+                                            details["registrar"] = str(v).strip()
+                                        elif "lead" in t:
+                                            details["lead_managers"] = [m.strip() for m in re.split(r"[,;]", str(v)) if m.strip()]
+                            if info.get("minBidQuantity") and not details["lot_size"]:
+                                try:
+                                    details["lot_size"] = int(info["minBidQuantity"])
+                                except (ValueError, TypeError):
+                                    pass
+                            if info.get("faceValue") and not details["face_value"]:
+                                details["face_value"] = str(info["faceValue"])
+                            if info.get("tickSize") and not details["tick_size"]:
+                                details["tick_size"] = str(info["tickSize"])
+                            if info.get("registrar") and not details["registrar"]:
+                                details["registrar"] = str(info["registrar"]).strip()
+                            if info.get("leadManager") and not details["lead_managers"]:
+                                lm_str = str(info["leadManager"])
+                                details["lead_managers"] = [m.strip() for m in re.split(r"[,;]", lm_str) if m.strip()]
 
-        # 2. Fetch Live Bid / Cumulative Demand Data
-        try:
-            url_bids = f"https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}"
-            resp = self.session.get(url_bids, headers=NSE_HEADERS, timeout=10)
-            if resp.status_code == 200:
-                data = resp.json()
-                if isinstance(data, dict):
-                    sub = {}
-                    if data.get("noOfTimes"):
-                        times_val = str(data["noOfTimes"]).strip()
-                        sub["total"] = times_val if times_val.endswith("x") else f"{times_val}x"
-                    if data.get("totalBids"):
-                        sub["total_bids"] = str(data["totalBids"])
-                    if data.get("sharesOffered"):
-                        sub["shares_offered"] = str(data["sharesOffered"])
+                        # Also check demandGraph if present in issue_detail
+                        dg = data.get("demandGraph")
+                        if isinstance(dg, dict):
+                            dg_dict = {
+                                "total_issue_size": _parse_share_count(dg.get("totalIssueSize")),
+                                "total_bids": _parse_share_count(dg.get("totalBidRecieved") or dg.get("totalBids")),
+                                "cut_off_bids": _parse_share_count(dg.get("totalBidsAtCutOff") or dg.get("totalBidsCutOff") or dg.get("bidsAtCutOff")),
+                                "no_of_times": _parse_sub_multiple(dg.get("noOfTimesIssueSubscribed") or dg.get("noOfTime")),
+                                "price_levels": [],
+                                "source": "NSE India Official Demand Graph",
+                            }
+                            price_raw_list = dg.get("priceList") or dg.get("priceWiseBids") or dg.get("dataList") or dg.get("tableData") or []
+                            if isinstance(price_raw_list, list):
+                                for pr in price_raw_list:
+                                    if isinstance(pr, dict):
+                                        p_val = str(pr.get("price") or pr.get("pricePoint") or "").strip()
+                                        s_val = _parse_share_count(pr.get("noOfShare") or pr.get("shares") or pr.get("sharesLakh"))
+                                        if p_val and s_val:
+                                            dg_dict["price_levels"].append({
+                                                "price": p_val if (p_val.startswith(">=") or "cut" in p_val.lower()) else f">= {p_val}",
+                                                "shares": s_val,
+                                            })
+                            details["demand_graph"] = dg_dict
+                            sub = details.setdefault("subscription", {})
+                            sub["demand_graph"] = dg_dict
+                            if dg.get("noOfTimesIssueSubscribed") and not sub.get("total"):
+                                t = _parse_sub_multiple(dg["noOfTimesIssueSubscribed"])
+                                if t:
+                                    sub["total"] = t
+                            if dg.get("totalBidRecieved") and not sub.get("total_bids"):
+                                b = _parse_share_count(dg["totalBidRecieved"])
+                                if b:
+                                    sub["total_bids"] = b
+                            if dg.get("totalIssueSize") and not sub.get("shares_offered"):
+                                o = _parse_share_count(dg["totalIssueSize"])
+                                if o:
+                                    sub["shares_offered"] = o
 
-                    cats = data.get("categories") or data.get("categoryWise") or data.get("data") or []
-                    if isinstance(cats, list):
-                        for cat in cats:
-                            if not isinstance(cat, dict):
-                                continue
-                            c_name = str(cat.get("category") or cat.get("name") or "").upper()
-                            c_times = str(cat.get("noOfTimes") or cat.get("subscription") or "").strip()
-                            if c_times and not c_times.endswith("x"):
-                                c_times += "x"
+                        # Also check activeCat.dataList if present in issue_detail
+                        active_cat = data.get("activeCat")
+                        if isinstance(active_cat, dict) and isinstance(active_cat.get("dataList"), list):
+                            self._extract_category_data_list(active_cat["dataList"], details)
+                    break
+            except Exception as e:
+                logger.debug(f"NSE detail API note for {symbol}: {e}")
 
-                            if "QIB" in c_name:
-                                sub["qib"] = c_times
-                            elif "NII" in c_name or "HNI" in c_name:
-                                sub["nii"] = c_times
-                            elif "RETAIL" in c_name or "RII" in c_name:
-                                sub["retail"] = c_times
-                            elif "EMPLOYEE" in c_name:
-                                sub["employee"] = c_times
+        # 2. Fetch Live Bid / Cumulative Demand Data from official bidding endpoints
+        urls_bids = [
+            f"https://www.nseindia.com/api/ipo-active-category?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.com/api/ipo-active-category?symbol={symbol}",
+            f"https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.com/api/ipo-bid-details?symbol={symbol}",
+            f"https://www.nseindia.in/api/ipo-active-category?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.in/api/ipo-active-category?symbol={symbol}",
+            f"https://www.nseindia.in/api/ipo-bid-details?symbol={symbol}&series=EQ",
+            f"https://www.nseindia.in/api/ipo-bid-details?symbol={symbol}",
+        ]
+        for url_bids in urls_bids:
+            try:
+                resp = self.session.get(url_bids, headers=NSE_HEADERS, timeout=10)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if isinstance(data, dict):
+                        sub = details.setdefault("subscription", {})
+                        if data.get("noOfTimes") or data.get("noOfTime"):
+                            t = _parse_sub_multiple(data.get("noOfTimes") or data.get("noOfTime"))
+                            if t:
+                                sub["total"] = t
+                        if data.get("totalBids") or data.get("noOfsharesBid"):
+                            b = _parse_share_count(data.get("totalBids") or data.get("noOfsharesBid"))
+                            if b:
+                                sub["total_bids"] = b
+                        if data.get("sharesOffered") or data.get("noOfSharesOffered"):
+                            o = _parse_share_count(data.get("sharesOffered") or data.get("noOfSharesOffered"))
+                            if o:
+                                sub["shares_offered"] = o
+                        if data.get("updateTime"):
+                            sub["updated_at"] = str(data["updateTime"]).strip()
 
-                    if sub:
-                        details["subscription"] = sub
-        except Exception as e:
-            logger.debug(f"NSE bid details API note for {symbol}: {e}")
+                        cat_list = (
+                            data.get("dataList")
+                            or (data.get("activeCat", {}).get("dataList") if isinstance(data.get("activeCat"), dict) else None)
+                            or data.get("categories")
+                            or data.get("categoryWise")
+                            or data.get("bidDetails")
+                            or data.get("data")
+                            or []
+                        )
+                        if isinstance(cat_list, list) and cat_list:
+                            self._extract_category_data_list(cat_list, details)
+
+                        if sub:
+                            sub["source"] = "NSE India Official Bidding Feed"
+                            break
+            except Exception as e:
+                logger.debug(f"NSE bid details API note for {symbol}: {e}")
+
+        # 3. Direct/Fallback check of official HTML issue-information page
+        urls_issue_info = [
+            f"https://www.nseindia.in/market-data/issue-information?symbol={symbol}&series=EQ&type=Active",
+            f"https://www.nseindia.com/market-data/issue-information?symbol={symbol}&series=EQ&type=Active",
+        ]
+        for url_info in urls_issue_info:
+            try:
+                resp = self.session.get(url_info, headers=NSE_HEADERS, timeout=10)
+                if resp.status_code == 200 and "<table" in resp.text:
+                    soup = BeautifulSoup(resp.text, "html.parser")
+                    for table in soup.find_all("table"):
+                        rows = table.find_all("tr")
+                        if len(rows) < 2:
+                            continue
+                        headers = [c.get_text(strip=True).upper() for c in rows[0].find_all(["th", "td"])]
+                        if any("CATEGORY" in h for h in headers) and any("TIMES" in h or "TOTAL MEANT" in h for h in headers):
+                            cat_list = []
+                            for tr in rows[1:]:
+                                tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
+                                if len(tds) >= 4:
+                                    c_name = tds[1] if len(tds) >= 5 else tds[0]
+                                    offered = tds[2] if len(tds) >= 5 else tds[1]
+                                    bid = tds[3] if len(tds) >= 5 else tds[2]
+                                    times = tds[4] if len(tds) >= 5 else tds[3]
+                                    cat_list.append({
+                                        "category": c_name,
+                                        "noOfShareOffered": offered,
+                                        "noOfSharesBid": bid,
+                                        "noOfTotalMeant": times,
+                                    })
+                            if cat_list:
+                                self._extract_category_data_list(cat_list, details)
+                                details.setdefault("subscription", {})["source"] = "NSE India Official Bidding Feed (issue-information)"
+
+                        # Check if table is Demand Graph price bidding table
+                        elif any("PRICE" in h for h in headers) or any("CUT-OFF" in h for h in headers):
+                            price_levels = []
+                            h_raw = [c.get_text(strip=True) for c in rows[0].find_all(["th", "td"])]
+                            v_raw = [c.get_text(strip=True) for c in rows[1].find_all(["th", "td"])]
+                            for h_col, v_col in zip(h_raw[1:], v_raw[1:]):
+                                p_str = h_col.strip()
+                                v_shares = _parse_share_count(v_col)
+                                p_lbl = p_str if (p_str.startswith(">=") or "cut" in p_str.lower()) else f">= {p_str}"
+                                price_levels.append({
+                                    "price": p_lbl,
+                                    "shares": v_shares,
+                                })
+                            if price_levels:
+                                dg_dict = details.setdefault("demand_graph", {})
+                                dg_dict["price_levels"] = price_levels
+                                dg_dict["source"] = "NSE India Official Demand Graph (issue-information)"
+                                details.setdefault("subscription", {})["demand_graph"] = dg_dict
+
+                    # Check for Demand Graph summary metrics in HTML text
+                    m_size = re.search(r"Total\s+Issue\s+Size[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_bids = re.search(r"Total\s+Bids\s+Received[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_cut = re.search(r"Total\s+Bids\s+Received\s+at\s+Cut-?off\s+price[:\s]*([0-9,]+)", resp.text, re.I)
+                    m_times = re.search(r"No\.?\s*of\s+times\s+issue\s+is\s+subscribed[:\s]*([0-9.]+)", resp.text, re.I)
+                    if m_size or m_bids or m_cut or m_times:
+                        dg_dict = details.setdefault("demand_graph", {})
+                        if m_size:
+                            dg_dict["total_issue_size"] = _parse_share_count(m_size.group(1))
+                        if m_bids:
+                            dg_dict["total_bids"] = _parse_share_count(m_bids.group(1))
+                        if m_cut:
+                            dg_dict["cut_off_bids"] = _parse_share_count(m_cut.group(1))
+                        if m_times:
+                            dg_dict["no_of_times"] = _parse_sub_multiple(m_times.group(1))
+                        dg_dict["source"] = "NSE India Official Demand Graph (issue-information)"
+                        details.setdefault("subscription", {})["demand_graph"] = dg_dict
+            except Exception as e:
+                logger.debug(f"NSE issue-information HTML parse note for {symbol}: {e}")
 
         return details
 
@@ -1247,50 +1512,57 @@ class IpoAggregator:
     def __init__(self, session: requests.Session | None = None):
         self.session = session or requests.Session()
         self.ipocentral_gmp = IpoCentralGmpScraper(self.session)
-        self.chittorgarh_gmp = ChittorgarhGmpScraper(self.session)
         self.ipowatch = IpoWatchGmpScraper(self.session)
-        self.chittorgarh_issues = ChittorgarhScraper(self.session)
         self.nse = NseIpoScraper(self.session)
         self.bse = BseIpoScraper(self.session)
         self.drhp_parser = DrhpDetailParser(self.session)
+        # Chittorgarh is completely disabled/excluded per regulatory requirements
 
     def collect_all_mainboard_ipos(self) -> list[dict]:
-        """Collect and cross-merge Mainboard IPO data from all available sources."""
+        """
+        Collect and cross-merge Mainboard IPO data:
+        1. Official NSE Series EQ Public Issues (Primary Source of Truth)
+        2. Official BSE Public Issues
+        3. Official NSE Deep Bidding & Category-wise Subscription
+        4. Mainboard Upcoming from IPO Watch
+        5. Unofficial GMP Sentiment from IPO Central & IPO Watch (Flagged as unofficial)
+        """
         today_str = datetime.now(IST).strftime("%Y-%m-%d")
         merged_map: dict[str, dict] = {}
 
-        # 1. Fetch Mainboard Issues from Chittorgarh (Upcoming / Current / Dashboard)
-        c_items = self.chittorgarh_issues.fetch_mainboard_ipos(today_str=today_str)
-        logger.info(f"Collected {len(c_items)} entries from Chittorgarh Report 82")
-
-        for item in c_items:
-            slug = sanitize_slug(item.get("company_name", ""))
+        # 1. Primary Source: Official NSE Public IPO Issues
+        nse_items = self.nse.fetch_nse_ipos()
+        nse_names = [ne.get("company_name") for ne in nse_items]
+        logger.info(f"Collected {len(nse_items)} entries from official NSE India: {nse_names}")
+        for ne in nse_items:
+            slug = sanitize_slug(ne.get("company_name", ""))
             if not slug:
                 continue
-
+            sym = ne.get("symbol", "")
             merged_map[slug] = {
                 "id": slug,
-                "company_name": item.get("company_name"),
-                "symbol": item.get("symbol") or "",
+                "company_name": ne.get("company_name"),
+                "symbol": sym,
                 "issue_type": "Mainboard",
                 "exchange": "NSE & BSE",
-                "open_date": item.get("open_date"),
-                "close_date": item.get("close_date"),
-                "allotment_date": item.get("allotment_date"),
-                "listing_date": item.get("listing_date"),
-                "price_band": item.get("price_band") or "",
-                "lot_size": item.get("lot_size"),
-                "issue_size_cr": item.get("issue_size_cr") or "",
-                "fresh_issue_cr": item.get("fresh_issue_cr") or "",
-                "ofs_cr": item.get("ofs_cr") or "",
+                "open_date": ne.get("open_date"),
+                "close_date": ne.get("close_date"),
+                "allotment_date": None,
+                "listing_date": None,
+                "price_band": ne.get("price_band") or "",
+                "lot_size": None,
+                "issue_size_cr": ne.get("issue_size_cr") or "",
+                "fresh_issue_cr": "",
+                "ofs_cr": "",
                 "gmp": "",
                 "gmp_percent": "",
+                "gmp_unofficial": True,
                 "est_listing_price": "",
-                "listing_price": item.get("listing_price") or "",
-                "listing_gain": item.get("listing_gain") or "",
+                "listing_price": "",
+                "listing_gain": "",
                 "kostak": "",
                 "sub2sauda": "",
-                "subscription": {},
+                "subscription": ne.get("subscription") or {},
                 "registrar": {"name": "", "url": ""},
                 "drhp_objects": [],
                 "reservation": {},
@@ -1300,146 +1572,74 @@ class IpoAggregator:
                 "lead_managers": [],
                 "drhp_url": "",
                 "about": "",
-                "detail_url": item.get("detail_url") or "",
-                "sources": [item.get("source")],
-                "is_already_listed": item.get("is_already_listed", False),
-                "status": item.get("status", "UPCOMING"),
+                "detail_url": "",
+                "sources": ["nse_official"],
+                "is_already_listed": False,
+                "status": "UPCOMING",
             }
 
-        # 2. Enrich with Primary Live GMP from IPO Central
-        ipoc_gmp_items = self.ipocentral_gmp.fetch_live_gmp()
-        logger.info(f"Collected {len(ipoc_gmp_items)} GMP entries from IPO Central")
-        for gmp_item in ipoc_gmp_items:
-            slug = sanitize_slug(gmp_item.get("company_name", ""))
+        # 2. Enrich with Official BSE Equity Data
+        bse_items = self.bse.fetch_bse_ipos()
+        bse_names = [be.get("company_name") for be in bse_items]
+        logger.info(f"Collected {len(bse_items)} entries from official BSE India: {bse_names}")
+        for be in bse_items:
+            slug = sanitize_slug(be.get("company_name", ""))
             if not slug:
-                continue
-
-            target = merged_map.get(slug)
-            if not target:
-                continue
-
-            if gmp_item.get("gmp"):
-                target["gmp"] = gmp_item["gmp"]
-            if gmp_item.get("gmp_percent"):
-                target["gmp_percent"] = gmp_item["gmp_percent"]
-            if gmp_item.get("kostak"):
-                target["kostak"] = gmp_item["kostak"]
-            if gmp_item.get("sub2sauda"):
-                target["sub2sauda"] = gmp_item["sub2sauda"]
-
-        # 3. Enrich with Secondary Live GMP from Chittorgarh Report 82
-        c_gmp_items = self.chittorgarh_gmp.fetch_mainboard_gmp()
-        logger.info(f"Collected {len(c_gmp_items)} GMP entries from Chittorgarh Report 82")
-        for cg in c_gmp_items:
-            slug = sanitize_slug(cg.get("company_name", ""))
-            if slug in merged_map:
-                target = merged_map[slug]
-                if not target.get("gmp") and cg.get("gmp"):
-                    target["gmp"] = cg["gmp"]
-                if not target.get("gmp_percent") and cg.get("gmp_percent"):
-                    target["gmp_percent"] = cg["gmp_percent"]
-                if not target.get("est_listing_price") and cg.get("est_listing_price"):
-                    target["est_listing_price"] = cg["est_listing_price"]
-                if not target.get("detail_url") and cg.get("detail_url"):
-                    target["detail_url"] = cg["detail_url"]
-
-        # 4. Enrich with IPO Watch Live GMP & Issues
-        ipowatch_items = self.ipowatch.fetch_live_table()
-        iw_names = [iw.get("company_name") for iw in ipowatch_items]
-        logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch: {iw_names}")
-        for iw in ipowatch_items:
-            slug = sanitize_slug(iw.get("company_name", ""))
-            if not slug:
-                continue
-            # Only add if it has confirmed bidding dates
-            if not iw.get("open_date"):
                 continue
             target = merged_map.get(slug)
             if not target:
                 target = {
                     "id": slug,
-                    "company_name": iw.get("company_name"),
-                    "symbol": "",
+                    "company_name": be.get("company_name"),
+                    "symbol": be.get("symbol") or "",
                     "issue_type": "Mainboard",
                     "exchange": "NSE & BSE",
-                    "open_date": iw.get("open_date"),
-                    "close_date": iw.get("close_date"),
+                    "open_date": be.get("open_date"),
+                    "close_date": be.get("close_date"),
                     "allotment_date": None,
                     "listing_date": None,
-                    "price_band": iw.get("price_band") or "",
-                    "issue_size_cr": "",
-                    "gmp": iw.get("gmp") or "",
-                    "gmp_percent": iw.get("gmp_percent") or "",
-                    "est_listing_price": iw.get("est_listing_price") or "",
+                    "price_band": be.get("price_band") or "",
+                    "lot_size": None,
+                    "issue_size_cr": be.get("issue_size_cr") or "",
+                    "fresh_issue_cr": "",
+                    "ofs_cr": "",
+                    "gmp": "",
+                    "gmp_percent": "",
+                    "gmp_unofficial": True,
+                    "est_listing_price": "",
+                    "listing_price": "",
+                    "listing_gain": "",
                     "kostak": "",
                     "sub2sauda": "",
-                    "detail_url": iw.get("detail_url") or "",
-                    "sources": ["ipowatch"],
-                    "is_already_listed": False,
-                    "status": iw.get("status", "UPCOMING"),
-                }
-                merged_map[slug] = target
-            else:
-                if iw.get("gmp") and not target.get("gmp"):
-                    target["gmp"] = iw["gmp"]
-                if iw.get("gmp_percent") and not target.get("gmp_percent"):
-                    target["gmp_percent"] = iw["gmp_percent"]
-                if iw.get("price_band") and not target.get("price_band"):
-                    target["price_band"] = iw["price_band"]
-                if iw.get("open_date") and not target.get("open_date"):
-                    target["open_date"] = iw["open_date"]
-                if iw.get("close_date") and not target.get("close_date"):
-                    target["close_date"] = iw["close_date"]
-                if iw.get("est_listing_price") and not target.get("est_listing_price"):
-                    target["est_listing_price"] = iw["est_listing_price"]
-                if iw.get("detail_url") and not target.get("detail_url"):
-                    target["detail_url"] = iw["detail_url"]
-                if "ipowatch" not in target.get("sources", []):
-                    target.setdefault("sources", []).append("ipowatch")
-
-        # 5. Enrich with Official NSE & BSE Equity Data
-        nse_items = self.nse.fetch_nse_ipos()
-        nse_names = [ne.get("company_name") for ne in nse_items]
-        logger.info(f"Collected {len(nse_items)} entries from official NSE India: {nse_names}")
-        for ne in nse_items:
-            slug = sanitize_slug(ne.get("company_name", ""))
-            if not slug:
-                continue
-            sym = ne.get("symbol", "")
-            target = merged_map.get(slug)
-            if not target:
-                target = {
-                    "id": slug,
-                    "company_name": ne.get("company_name"),
-                    "symbol": sym,
-                    "issue_type": "Mainboard",
-                    "exchange": "NSE & BSE",
-                    "open_date": ne.get("open_date"),
-                    "close_date": ne.get("close_date"),
-                    "allotment_date": None,
-                    "listing_date": None,
-                    "price_band": ne.get("price_band") or "",
-                    "issue_size_cr": ne.get("issue_size_cr") or "",
-                    "sources": ["nse_official"],
+                    "subscription": {},
+                    "registrar": {"name": "", "url": ""},
+                    "drhp_objects": [],
+                    "reservation": {},
+                    "financials": {},
+                    "kpis": {},
+                    "promoter_holding": {},
+                    "lead_managers": [],
+                    "drhp_url": "",
+                    "about": "",
+                    "detail_url": "",
+                    "sources": ["bse_official"],
                     "is_already_listed": False,
                     "status": "UPCOMING",
                 }
                 merged_map[slug] = target
             else:
-                if sym:
-                    target["symbol"] = sym
-                if not target.get("open_date") and ne.get("open_date"):
-                    target["open_date"] = ne["open_date"]
-                if not target.get("close_date") and ne.get("close_date"):
-                    target["close_date"] = ne["close_date"]
-                if not target.get("price_band") and ne.get("price_band"):
-                    target["price_band"] = ne["price_band"]
-                if not target.get("issue_size_cr") and ne.get("issue_size_cr"):
-                    target["issue_size_cr"] = ne["issue_size_cr"]
-                if "nse_official" not in target.get("sources", []):
-                    target.setdefault("sources", []).append("nse_official")
+                if not target.get("open_date") and be.get("open_date"):
+                    target["open_date"] = be["open_date"]
+                if not target.get("close_date") and be.get("close_date"):
+                    target["close_date"] = be["close_date"]
+                if not target.get("price_band") and be.get("price_band"):
+                    target["price_band"] = be["price_band"]
+                if "bse_official" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("bse_official")
 
-            # Fetch deep NSE issue information and live cumulative bids/demand
+        # 3. Fetch deep NSE issue information and live cumulative bids/demand
+        for slug, target in merged_map.items():
+            sym = target.get("symbol")
             if sym:
                 try:
                     nse_deep = self.nse.fetch_nse_issue_details(sym)
@@ -1458,45 +1658,101 @@ class IpoAggregator:
                             "url": get_registrar_url(reg_name),
                         }
                     if nse_deep.get("subscription"):
-                        target["subscription"] = nse_deep["subscription"]
-                        logger.info(f"   📊 NSE Live Demand/Bids for {target['company_name']}: {nse_deep['subscription']}")
+                        target.setdefault("subscription", {}).update(nse_deep["subscription"])
+                        logger.info(f"   📊 NSE Live Demand/Bids for {target['company_name']}: {target['subscription']}")
+                    if nse_deep.get("demand_graph"):
+                        target["demand_graph"] = nse_deep["demand_graph"]
+                        target.setdefault("subscription", {})["demand_graph"] = nse_deep["demand_graph"]
                 except Exception as deep_err:
                     logger.debug(f"NSE deep detail fetch note for {sym}: {deep_err}")
 
-        bse_items = self.bse.fetch_bse_ipos()
-        bse_names = [be.get("company_name") for be in bse_items]
-        logger.info(f"Collected {len(bse_items)} entries from official BSE India: {bse_names}")
-        for be in bse_items:
-            slug = sanitize_slug(be.get("company_name", ""))
-            if not slug:
+        # 4. Enrich / Add Upcoming Mainboard Issues from IPO Watch
+        ipowatch_items = self.ipowatch.fetch_live_table()
+        iw_names = [iw.get("company_name") for iw in ipowatch_items]
+        logger.info(f"Collected {len(ipowatch_items)} entries from IPO Watch: {iw_names}")
+        for iw in ipowatch_items:
+            slug = sanitize_slug(iw.get("company_name", ""))
+            if not slug or not iw.get("open_date"):
                 continue
             target = merged_map.get(slug)
             if not target:
                 target = {
                     "id": slug,
-                    "company_name": be.get("company_name"),
+                    "company_name": iw.get("company_name"),
                     "symbol": "",
                     "issue_type": "Mainboard",
                     "exchange": "NSE & BSE",
-                    "open_date": be.get("open_date"),
-                    "close_date": be.get("close_date"),
+                    "open_date": iw.get("open_date"),
+                    "close_date": iw.get("close_date"),
                     "allotment_date": None,
                     "listing_date": None,
-                    "price_band": be.get("price_band") or "",
-                    "sources": ["bse_official"],
+                    "price_band": iw.get("price_band") or "",
+                    "lot_size": None,
+                    "issue_size_cr": "",
+                    "fresh_issue_cr": "",
+                    "ofs_cr": "",
+                    "gmp": iw.get("gmp") or "",
+                    "gmp_percent": iw.get("gmp_percent") or "",
+                    "gmp_unofficial": True,
+                    "est_listing_price": iw.get("est_listing_price") or "",
+                    "kostak": "",
+                    "sub2sauda": "",
+                    "subscription": {},
+                    "registrar": {"name": "", "url": ""},
+                    "drhp_objects": [],
+                    "reservation": {},
+                    "financials": {},
+                    "kpis": {},
+                    "promoter_holding": {},
+                    "lead_managers": [],
+                    "drhp_url": "",
+                    "about": "",
+                    "detail_url": iw.get("detail_url") or "",
+                    "sources": ["ipowatch"],
                     "is_already_listed": False,
-                    "status": "UPCOMING",
+                    "status": iw.get("status", "UPCOMING"),
                 }
                 merged_map[slug] = target
             else:
-                if not target.get("open_date") and be.get("open_date"):
-                    target["open_date"] = be["open_date"]
-                if not target.get("close_date") and be.get("close_date"):
-                    target["close_date"] = be["close_date"]
-                if not target.get("price_band") and be.get("price_band"):
-                    target["price_band"] = be["price_band"]
-                if "bse_official" not in target.get("sources", []):
-                    target.setdefault("sources", []).append("bse_official")
+                if iw.get("gmp") and not target.get("gmp"):
+                    target["gmp"] = iw["gmp"]
+                    target["gmp_unofficial"] = True
+                if iw.get("gmp_percent") and not target.get("gmp_percent"):
+                    target["gmp_percent"] = iw["gmp_percent"]
+                if iw.get("price_band") and not target.get("price_band"):
+                    target["price_band"] = iw["price_band"]
+                if iw.get("open_date") and not target.get("open_date"):
+                    target["open_date"] = iw["open_date"]
+                if iw.get("close_date") and not target.get("close_date"):
+                    target["close_date"] = iw["close_date"]
+                if iw.get("est_listing_price") and not target.get("est_listing_price"):
+                    target["est_listing_price"] = iw["est_listing_price"]
+                if iw.get("detail_url") and not target.get("detail_url"):
+                    target["detail_url"] = iw["detail_url"]
+                if "ipowatch" not in target.get("sources", []):
+                    target.setdefault("sources", []).append("ipowatch")
+
+        # 5. Enrich with Live GMP from IPO Central (Unofficial Market Sentiment)
+        ipoc_gmp_items = self.ipocentral_gmp.fetch_live_gmp()
+        logger.info(f"Collected {len(ipoc_gmp_items)} GMP entries from IPO Central")
+        for gmp_item in ipoc_gmp_items:
+            slug = sanitize_slug(gmp_item.get("company_name", ""))
+            if not slug:
+                continue
+
+            target = merged_map.get(slug)
+            if not target:
+                continue
+
+            if gmp_item.get("gmp"):
+                target["gmp"] = gmp_item["gmp"]
+                target["gmp_unofficial"] = True
+            if gmp_item.get("gmp_percent"):
+                target["gmp_percent"] = gmp_item["gmp_percent"]
+            if gmp_item.get("kostak"):
+                target["kostak"] = gmp_item["kostak"]
+            if gmp_item.get("sub2sauda"):
+                target["sub2sauda"] = gmp_item["sub2sauda"]
 
         # 6. Enrich active/upcoming issues with DRHP objects & financials
         for slug, ipo in merged_map.items():

@@ -43,6 +43,12 @@ import '../widgets/community_sentiment_card.dart';
 // 🕵️ Mutual Fund Smart Money Preview Card
 import '../widgets/mf_smart_money_preview_card.dart';
 
+// 🚀 NSE Mainboard IPO Radar Screen
+import 'ipo_radar_screen.dart';
+
+// 🗺️ NSE Sector & Indices Heatmap Screen
+import 'market_indices_heatmap_screen.dart';
+
 // 🌍 Global Economy Radar Preview Card
 import '../widgets/global_economy_preview_card.dart';
 import 'global_economy_radar_screen.dart';
@@ -62,6 +68,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
   final String _sheetApiUrl =
       "https://stock-models-api.nitesh-skyhigh.workers.dev/?type=sheet2";
 
+  Map<String, dynamic> _liveIndices = {};
   double _niftyPrice = 25548.20;
   String _niftyChangeStr = "+0.13%";
   String _marketStatus = "POST_MARKET";
@@ -75,23 +82,46 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
 
   Future<void> _fetchLiveIndices() async {
     try {
-      final response = await http
-          .get(Uri.parse(_sheetApiUrl))
-          .timeout(const Duration(seconds: 8));
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final response = await http.get(
+        Uri.parse("$_sheetApiUrl&_t=$timestamp"),
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      ).timeout(const Duration(seconds: 8));
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
         final decoded = jsonDecode(response.body);
 
         Map<String, dynamic> parsedData = {};
         String status = "POST_MARKET";
         bool allowed = true;
 
-        if (decoded is Map<String, dynamic>) {
+        if (decoded is List) {
+          for (var row in decoded) {
+            if (row is Map) {
+              final k = row['Index'] ?? row['name'] ?? row['Symbol'] ?? row['Sector'] ?? row['Name'] ?? '';
+              if (k.toString().isNotEmpty) {
+                parsedData[k.toString()] = row;
+              }
+            }
+          }
+        } else if (decoded is Map<String, dynamic>) {
           status = decoded['market_status']?.toString() ?? "POST_MARKET";
           allowed = decoded['voting_allowed'] == true;
 
           if (decoded.containsKey('data') && decoded['data'] is Map<String, dynamic>) {
             parsedData = Map<String, dynamic>.from(decoded['data']);
+          } else if (decoded.containsKey('data') && decoded['data'] is List) {
+            for (var row in (decoded['data'] as List)) {
+              if (row is Map) {
+                final k = row['Index'] ?? row['name'] ?? row['Symbol'] ?? row['Sector'] ?? row['Name'] ?? '';
+                if (k.toString().isNotEmpty) {
+                  parsedData[k.toString()] = row;
+                }
+              }
+            }
           } else {
             parsedData = decoded;
           }
@@ -103,11 +133,12 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
           final cleanKey = key.toString().toLowerCase().replaceAll(" ", "").replaceAll("_", "");
           if (cleanKey.contains("nifty50") || cleanKey == "nifty") {
             if (val is Map) {
-              if (val.containsKey('price')) {
-                extractedNifty = (val['price'] as num).toDouble();
+              if (val.containsKey('price') || val.containsKey('cmp') || val.containsKey('CMP')) {
+                final p = val['price'] ?? val['cmp'] ?? val['CMP'];
+                if (p is num) extractedNifty = p.toDouble();
               }
-              if (val.containsKey('change')) {
-                final c = val['change'];
+              if (val.containsKey('change') || val.containsKey('Change')) {
+                final c = val['change'] ?? val['Change'];
                 final d = (c is num)
                     ? c.toDouble()
                     : double.tryParse(c.toString().replaceAll('%', '').trim()) ?? 0.0;
@@ -121,6 +152,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
 
         if (mounted) {
           setState(() {
+            _liveIndices = parsedData;
             _niftyPrice = extractedNifty;
             _niftyChangeStr = extractedChange;
             _marketStatus = status;
@@ -150,6 +182,11 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
           child: CustomScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             slivers: [
+              // ⚡ 0. TOP LIVE INDICES TICKER STRIP (Google Sheet Real-Time Indices)
+              SliverToBoxAdapter(
+                child: _buildTopIndicesTickerStrip(),
+              ),
+
               // 🎯 1. 10-YEAR HISTORICAL STRATEGY REPLAY HERO CARD (Top Highlight)
               SliverToBoxAdapter(
                 child: Padding(
@@ -188,6 +225,103 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
               // 🕵️ 2C. MUTUAL FUND SMART MONEY RADAR (Top 20 DII Infiltrations & Overlap Audit)
               const SliverToBoxAdapter(
                 child: MfSmartMoneyPreviewCard(),
+              ),
+
+              // 🚀 2D. NSE MAINBOARD IPO RADAR (Series EQ • Fresh vs OFS • Live Demand)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const IpoRadarScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF131B2A),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFF00E5FF).withAlpha(100),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF00E5FF).withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.rocket_launch_rounded,
+                                color: Color(0xFF00E5FF),
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "NSE MAINBOARD IPO RADAR",
+                                        style: GoogleFonts.robotoCondensed(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF00E5FF).withAlpha(30),
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Text(
+                                          "SERIES EQ",
+                                          style: GoogleFonts.robotoMono(
+                                            color: const Color(0xFF00E5FF),
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 9,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3),
+                                  const Text(
+                                    "Live NSE Demand • Fresh vs OFS Split • Date Timeline Stepper",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Color(0xFF00E5FF),
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               // 💎 3. HIDDEN GEMS RADAR (Order Book & Sales Turnaround Desk)
@@ -1013,6 +1147,114 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTopIndicesTickerStrip() {
+    final entries = _liveIndices.isNotEmpty
+        ? _liveIndices.entries.toList()
+        : [
+            MapEntry("Nifty 50", {"price": _niftyPrice, "change": _niftyChangeStr}),
+            const MapEntry("Bank Nifty", {"price": 54220.70, "change": "+0.25%"}),
+            const MapEntry("Sensex", {"price": 72042.98, "change": "+0.19%"}),
+          ];
+
+    return Container(
+      height: 38,
+      margin: const EdgeInsets.only(top: 6, bottom: 2),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const MarketIndicesHeatmapScreen(),
+                ),
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.only(left: 14, right: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0F1726),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFF1E2B3E)),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.candlestick_chart_rounded, color: Color(0xFF00E5FF), size: 14),
+                  SizedBox(width: 4),
+                  Text("MARKETS", style: TextStyle(color: Colors.white, fontSize: 9.5, fontWeight: FontWeight.w900)),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(right: 14),
+              itemCount: entries.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              itemBuilder: (context, i) {
+                final item = entries[i];
+                final name = item.key;
+                double price = 0.0;
+                String change = "0.0%";
+
+                if (item.value is Map) {
+                  final p = item.value['price'] ?? item.value['cmp'] ?? item.value['CMP'];
+                  if (p is num) price = p.toDouble();
+                  final c = item.value['change'] ?? item.value['Change'];
+                  if (c != null) change = c.toString();
+                } else if (item.value is num) {
+                  price = (item.value as num).toDouble();
+                }
+
+                final bool isUp = !change.startsWith("-");
+
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MarketIndicesHeatmapScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0F1726),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xFF1E2B3E)),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(name, style: const TextStyle(color: Colors.white70, fontSize: 10.5, fontWeight: FontWeight.bold)),
+                        const SizedBox(width: 6),
+                        Text(
+                          price > 0 ? price.toStringAsFixed(price > 1000 ? 1 : 2) : "—",
+                          style: const TextStyle(color: Colors.white, fontSize: 10.5, fontWeight: FontWeight.w900),
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          change.startsWith("+") || change.startsWith("-") ? change : "+$change",
+                          style: TextStyle(
+                            color: isUp ? const Color(0xFF00FF88) : const Color(0xFFFF2A6D),
+                            fontSize: 9.5,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

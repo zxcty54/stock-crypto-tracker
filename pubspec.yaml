@@ -63,3 +63,4 @@ flutter:
     - assets/data/indices_heatmap.json
     - assets/data/mf_smart_money_radar.json
     - assets/data/global_economy_radar.json
+    - assets/data/ipo_master.json
