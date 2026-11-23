@@ -94,19 +94,43 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
   }
 
   Future<void> _fetchLiveRemoteData() async {
-    // 1. Fetch Sector & Broad Indices updates
+    // 1. Fetch Sector & Broad Indices updates from Google Sheet
     try {
-      final response = await http
-          .get(Uri.parse(_sheetApiUrl))
-          .timeout(const Duration(seconds: 8));
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final uri = Uri.parse("$_sheetApiUrl&_t=$timestamp");
+      final response = await http.get(
+        uri,
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+      ).timeout(const Duration(seconds: 10));
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
         final decoded = jsonDecode(response.body);
         Map<String, dynamic> remoteIndices = {};
 
-        if (decoded is Map<String, dynamic>) {
+        if (decoded is List) {
+          for (var row in decoded) {
+            if (row is Map) {
+              final k = row['Index'] ?? row['name'] ?? row['Symbol'] ?? row['Sector'] ?? row['Name'] ?? '';
+              if (k.toString().isNotEmpty) {
+                remoteIndices[k.toString()] = row;
+              }
+            }
+          }
+        } else if (decoded is Map<String, dynamic>) {
           if (decoded.containsKey('data') && decoded['data'] is Map<String, dynamic>) {
             remoteIndices = Map<String, dynamic>.from(decoded['data']);
+          } else if (decoded.containsKey('data') && decoded['data'] is List) {
+            for (var row in (decoded['data'] as List)) {
+              if (row is Map) {
+                final k = row['Index'] ?? row['name'] ?? row['Symbol'] ?? row['Sector'] ?? row['Name'] ?? '';
+                if (k.toString().isNotEmpty) {
+                  remoteIndices[k.toString()] = row;
+                }
+              }
+            }
           } else {
             remoteIndices = decoded;
           }
@@ -116,8 +140,8 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
           _mergeLiveUpdates(remoteIndices);
         }
       }
-    } catch (_) {
-      // Gracefully silent fallback to bundled high-fidelity snapshot
+    } catch (e) {
+      debugPrint("Live Google Sheet fetch error: $e");
     }
 
     // 2. Fetch live stock quotes from Sheet 1 to enrich constituent stocks
@@ -228,27 +252,101 @@ class _MarketIndicesHeatmapScreenState extends State<MarketIndicesHeatmapScreen>
   }
 
   void _mergeLiveUpdates(Map<String, dynamic> liveData) {
+    // 1. Build a normalized map of all live entries from Google Sheet
+    final Map<String, dynamic> normMap = {};
+    liveData.forEach((k, v) {
+      final cleanK = _normalizeKey(k.toString());
+      if (cleanK.isNotEmpty) {
+        normMap[cleanK] = v;
+      }
+    });
+
+    // 2. Helper to find matching entry in normMap
+    dynamic findMatchingLiveVal(String? name, String? symbol) {
+      final nameKey = _normalizeKey(name);
+      final symKey = _normalizeKey(symbol);
+
+      if (nameKey.isNotEmpty && normMap.containsKey(nameKey)) {
+        return normMap[nameKey];
+      }
+      if (symKey.isNotEmpty && normMap.containsKey(symKey)) {
+        return normMap[symKey];
+      }
+
+      // Fuzzy contains match: e.g. "niftyit" matches "it" or "niftyitsector"
+      for (var entry in normMap.entries) {
+        final k = entry.key;
+        if (nameKey.isNotEmpty && (k.contains(nameKey) || nameKey.contains(k))) {
+          return entry.value;
+        }
+        if (symKey.isNotEmpty && (k.contains(symKey) || symKey.contains(k))) {
+          return entry.value;
+        }
+      }
+      return null;
+    }
+
+    double? extractPrice(dynamic val) {
+      if (val == null) return null;
+      if (val is num) return val.toDouble();
+      if (val is Map) {
+        final p = val['price'] ??
+            val['cmp'] ??
+            val['CMP'] ??
+            val['ltp'] ??
+            val['LTP'] ??
+            val['lastPrice'] ??
+            val['Price'] ??
+            val['close'];
+        if (p is num) return p.toDouble();
+        if (p != null) return double.tryParse(p.toString().replaceAll(',', '').trim());
+      }
+      return null;
+    }
+
+    double? extractChange(dynamic val) {
+      if (val == null) return null;
+      if (val is Map) {
+        final c = val['change'] ??
+            val['change_pct'] ??
+            val['Change'] ??
+            val['pChange'] ??
+            val['chg'] ??
+            val['percentChange'];
+        return _parseChange(c);
+      }
+      if (val is num) return val.toDouble();
+      return _parseChange(val);
+    }
+
+    int matchedCount = 0;
     setState(() {
       for (var item in _sectoralList) {
-        final key = _normalizeKey(item['name']);
-        if (liveData.containsKey(key)) {
-          final val = liveData[key];
-          if (val is Map) {
-            item['price'] = (val['price'] as num?)?.toDouble() ?? item['price'];
-            item['change_pct'] = _parseChange(val['change']) ?? item['change_pct'];
-          }
+        final val = findMatchingLiveVal(item['name'], item['symbol']);
+        if (val != null) {
+          final p = extractPrice(val);
+          final c = extractChange(val);
+          if (p != null && p > 0) item['price'] = p;
+          if (c != null) item['change_pct'] = c;
+          matchedCount++;
         }
       }
 
       for (var item in _broadMarketList) {
-        final key = _normalizeKey(item['name']);
-        if (liveData.containsKey(key)) {
-          final val = liveData[key];
-          if (val is Map) {
-            item['price'] = (val['price'] as num?)?.toDouble() ?? item['price'];
-            item['change_pct'] = _parseChange(val['change']) ?? item['change_pct'];
-          }
+        final val = findMatchingLiveVal(item['name'], item['symbol']);
+        if (val != null) {
+          final p = extractPrice(val);
+          final c = extractChange(val);
+          if (p != null && p > 0) item['price'] = p;
+          if (c != null) item['change_pct'] = c;
+          matchedCount++;
         }
+      }
+
+      if (matchedCount > 0) {
+        final now = DateTime.now();
+        final timeStr = DateFormat('dd MMM, hh:mm a').format(now);
+        _lastUpdated = "Google Sheet Sync • $timeStr";
       }
     });
   }
