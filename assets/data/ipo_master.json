@@ -52,7 +52,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:25:15.532848+05:30",
+    "last_updated": "2026-11-24T07:05:17.033348+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹22.00"
   },
@@ -107,7 +107,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-23T23:25:15.532848+05:30"
+    "last_updated": "2026-11-24T07:05:17.033348+05:30"
   },
   {
     "id": "integris-medtech",
@@ -162,7 +162,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:25:15.532848+05:30",
+    "last_updated": "2026-11-24T07:05:17.033348+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹35.00"
   },
@@ -245,7 +245,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-23T23:25:15.532848+05:30",
+    "last_updated": "2026-11-24T07:05:17.033348+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
@@ -278,13 +278,13 @@
     "exchange": "NSE & BSE",
     "series": "EQ",
     "sector": "Mining & Coal Resources (Coal India PSU)",
-    "status": "OPEN",
+    "status": "CLOSED",
     "open_date": "2026-11-19",
     "close_date": "2026-11-23",
     "allotment_date": "2026-11-24",
     "demat_credit_date": "2026-11-25",
     "listing_date": "2026-11-26",
-    "price_band": "Rs.129 to Rs.136",
+    "price_band": "₹129 - ₹136",
     "cut_off_price": 136,
     "face_value": 10,
     "lot_size": 110,
@@ -361,7 +361,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-23T23:25:15.532848+05:30",
+    "last_updated": "2026-11-24T07:05:17.033348+05:30",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹3.00",
     "posted_events": [
@@ -447,7 +447,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-23T23:25:15.532848+05:30"
+    "last_updated": "2026-11-24T07:05:17.033348+05:30"
   },
   {
     "id": "vishal-mega-mart",
