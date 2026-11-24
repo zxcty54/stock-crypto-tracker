@@ -1,16 +1,16 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-24T01:04:17.661419+00:00",
+    "generated_timestamp": "2026-11-24T23:08:44.453256+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
-    "regime_headline": "Stagflationary US divergence at 4.92% 10Y yields, $80.41 Brent, and resilient 58.6 India PMI",
-    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.92%) and King Dollar (DXY 104.29) create emerging market currency friction (USD/INR \u20b993.0), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
+    "regime_headline": "Stagflationary US 10Y 4.9% vs India Composite PMI 58.6 & Brent $81.69",
+    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.9%) and King Dollar (DXY 103.82) create emerging market currency friction (USD/INR \u20b993.0), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
   },
   "executive_hud": {
-    "global_health_score": 51.7,
+    "global_health_score": 51.3,
     "global_health_label": "MODERATE FRAGMENTED EXPANSION",
-    "health_verdict": "US Services outperforming at 54.9 vs Eurozone Mfg contraction at 46.0; China PPI deflation at -2.9%",
+    "health_verdict": "US Services 54.9 resilient, Eurozone Mfg 46.0 contracting, China PPI -2.9% deflationary",
     "regions_expansion_count": 3,
     "regions_pressure_count": 2,
     "core_pillars": [
@@ -91,7 +91,7 @@
     "trade_date": "23-Nov-2026",
     "data_source": "NSE_OFFICIAL_PROVISIONAL",
     "regime_verdict": "Synchronized Dual Inflows",
-    "dxy_correlation_note": "DXY at 104.29 & US 10Y at 4.92% create FII outflow pressure, absorbed by domestic SIP liquidity."
+    "dxy_correlation_note": "DXY at 103.82 & US 10Y at 4.9% create FII outflow pressure, absorbed by domestic SIP liquidity."
   },
   "fii_dii_derivatives": {
     "fii_long_ratio": 20.1,
@@ -158,14 +158,14 @@
     }
   ],
   "market_internals": {
-    "total_stocks_screened": 1593,
-    "advances_count": 766,
-    "declines_count": 820,
-    "unchanged_count": 7,
-    "breadth_thrust_pct": 48.3,
-    "market_regime": "SELECTIVE_STOCK_PICKING",
-    "regime_label": "Bifurcated Mixed Breadth",
-    "regime_truth": "Select pockets of strength; stock-specific delivery accumulation required.",
+    "total_stocks_screened": 1597,
+    "advances_count": 472,
+    "declines_count": 1117,
+    "unchanged_count": 8,
+    "breadth_thrust_pct": 29.7,
+    "market_regime": "INDEX_CAMOUFLAGE",
+    "regime_label": "Index Camouflage Trap (Smart Money Distributing)",
+    "regime_truth": "Heavyweights holding headline index while 65%+ broader stocks are in net decline.",
     "india_vix": 17.7,
     "vix_zone": "ELEVATED_RISK",
     "vix_label": "Elevated Event Risk (15.5 - 21.0)",
@@ -196,54 +196,54 @@
         "volume": 55831
       },
       {
-        "symbol": "UNIONGOLD",
-        "change_pct": 0.98,
-        "delivery_pct": 97.54,
-        "volume": 162729
-      },
-      {
         "symbol": "EBBETF0431",
         "change_pct": 0.0,
         "delivery_pct": 96.96,
         "volume": 91296
+      },
+      {
+        "symbol": "AMNPLST",
+        "change_pct": 0.7,
+        "delivery_pct": 96.58,
+        "volume": 107852
       }
     ],
     "top_churn_distribution_traps": [
       {
-        "symbol": "KALYANKJIL",
-        "change_pct": -1.57,
-        "delivery_pct": 15.83,
-        "volume": 20145198
+        "symbol": "APLAPOLLO",
+        "change_pct": -14.58,
+        "delivery_pct": 29.79,
+        "volume": 26121107
       },
       {
-        "symbol": "PWL",
-        "change_pct": -1.87,
-        "delivery_pct": 23.3,
-        "volume": 17469643
+        "symbol": "IREDA",
+        "change_pct": -0.13,
+        "delivery_pct": 24.81,
+        "volume": 20194599
       },
       {
-        "symbol": "BLSPOLY",
-        "change_pct": -3.94,
-        "delivery_pct": 7.04,
-        "volume": 16162817
+        "symbol": "V2RETAIL",
+        "change_pct": -5.72,
+        "delivery_pct": 16.8,
+        "volume": 18377213
       },
       {
-        "symbol": "PINELABS",
-        "change_pct": -0.63,
-        "delivery_pct": 27.05,
-        "volume": 13600749
+        "symbol": "ASHOKA",
+        "change_pct": -2.03,
+        "delivery_pct": 7.21,
+        "volume": 17112893
       },
       {
-        "symbol": "CGCL",
-        "change_pct": -0.96,
-        "delivery_pct": 24.23,
-        "volume": 7435140
+        "symbol": "RVNL",
+        "change_pct": -5.08,
+        "delivery_pct": 28.36,
+        "volume": 11664878
       },
       {
-        "symbol": "MARSONS",
-        "change_pct": -3.38,
-        "delivery_pct": 26.8,
-        "volume": 6352892
+        "symbol": "SGMART",
+        "change_pct": -9.84,
+        "delivery_pct": 12.8,
+        "volume": 11609639
       }
     ]
   },
@@ -380,7 +380,7 @@
         "name": "1. The Hydrocarbon Energy Valve (OPEC+ & US Shale)",
         "icon": "\ud83d\udee2\ufe0f",
         "controller": "Saudi Arabia (OPEC+ Quotas) & US (Permian Shale 13.5M bpd)",
-        "how_they_control": "OPEC+ restricts supply by 2.2M bpd to defend a $70 floor, while US shale drillers maintain record production (13.5M bpd). Current Brent: $80.41/bbl.",
+        "how_they_control": "OPEC+ restricts supply by 2.2M bpd to defend a $70 floor, while US shale drillers maintain record production (13.5M bpd). Current Brent: $81.69/bbl.",
         "shock_scenario": "Middle East / Iran escalation or Strait of Hormuz tanker blockage shuts off 20% of maritime crude transit, causing an immediate +$15-20/bbl risk premium spike.",
         "india_transmission": "India imports >85% of crude. Every $10/bbl oil increase expands India's annual trade deficit by ~$13B, depreciates INR by 25-35 paise, and crushes margins for Paints, Tyres, and OMCs."
       },
@@ -389,7 +389,7 @@
         "name": "2. The Dollar Liquidity & Yield Tap (US Fed & Treasury)",
         "icon": "\ud83d\udcb5",
         "controller": "US Federal Reserve & US Treasury Auction Desk",
-        "how_they_control": "By maintaining higher policy rates and massive Treasury debt issuance, US 10Y yields (~4.92%) stay elevated, sucking capital out of emerging markets into US dollar assets (DXY 104.29).",
+        "how_they_control": "By maintaining higher policy rates and massive Treasury debt issuance, US 10Y yields (~4.9%) stay elevated, sucking capital out of emerging markets into US dollar assets (DXY 103.82).",
         "shock_scenario": "Sticky US services inflation delays Fed cuts, keeping King Dollar elevated and creating a persistent foreign exchange squeeze on emerging currencies.",
         "india_transmission": "FII equity outflows; RBI actively utilizes its $675.0B forex buffer to prevent disorderly Rupee depreciation past 84.50."
       },
@@ -415,7 +415,7 @@
   },
   "sector_margin_demand_matrix": {
     "headline": "SECTOR MARGIN PRESSURE vs EXPANSION RADAR",
-    "description": "Quantifies which domestic and global sectors gain operating leverage versus which face margin compression under current global macro flows (Crude $80.41, DXY 104.29, China PPI -2.9%).",
+    "description": "Quantifies which domestic and global sectors gain operating leverage versus which face margin compression under current global macro flows (Crude $81.69, DXY 103.82, China PPI -2.9%).",
     "margin_expansion_sectors": [
       {
         "sector": "Power Grid & Transformers",
@@ -467,10 +467,10 @@
       },
       {
         "sector": "Paints & Specialty Adhesives",
-        "margin_delta_bps": 38,
+        "margin_delta_bps": 20,
         "demand_score": 74,
         "trend": "RAW MATERIAL RELIEF",
-        "driver": "Brent crude at $80.41/bbl keeps titanium dioxide and solvent raw material costs contained.",
+        "driver": "Brent crude at $81.69/bbl keeps titanium dioxide and solvent raw material costs contained.",
         "key_stocks": [
           "ASIANPAINT",
           "BERGEPAINT",
@@ -517,10 +517,10 @@
       },
       {
         "sector": "IT Discretionary Software Services",
-        "margin_delta_bps": -59,
+        "margin_delta_bps": -58,
         "demand_score": 58,
         "trend": "DEAL CONVERSION SLUMP",
-        "driver": "US 10Y Yield at 4.92% forcing enterprise CIOs to divert discretionary spend strictly to generative AI.",
+        "driver": "US 10Y Yield at 4.9% forcing enterprise CIOs to divert discretionary spend strictly to generative AI.",
         "key_stocks": [
           "TCS",
           "WIPRO",
@@ -537,16 +537,16 @@
     "net_trade_impact_score": "-1.8% Drag",
     "crude_sensitivity_rule": {
       "rule_title": "The $10 Crude Oil Multiplier Rule",
-      "stat_trade_deficit": "+$23.1 Billion Annual Trade Deficit",
-      "stat_currency_impact": "-49 to -59 Paise Rupee Depreciation",
-      "stat_inflation_impact": "+84 bps Domestic Retail CPI Spike",
+      "stat_trade_deficit": "+$25.0 Billion Annual Trade Deficit",
+      "stat_currency_impact": "-53 to -63 Paise Rupee Depreciation",
+      "stat_inflation_impact": "+91 bps Domestic Retail CPI Spike",
       "stat_gdp_impact": "-30 bps Net GDP Drag"
     },
     "import_export_dynamics": [
       {
         "flow": "IMPORTS",
         "status": "DEFICIT PRESSURE",
-        "details": "High crude oil ($80.41/bbl) and electronics components create foreign currency demand; offset by cheap steel imports.",
+        "details": "High crude oil ($81.69/bbl) and electronics components create foreign currency demand; offset by cheap steel imports.",
         "vulnerable_segments": [
           "Crude Oil (85% Imported)",
           "Electronics Chips",
@@ -567,16 +567,16 @@
   },
   "dynamic_shock_transmission_engine": {
     "headline": "LIVE GEOPOLITICAL & SUPPLY SHOCK DETECTOR",
-    "status_summary": "Surveillance of Middle East crude routes ($80.41/bbl), DXY dollar spikes (104.29), and Chinese dumping.",
+    "status_summary": "Surveillance of Middle East crude routes ($81.69/bbl), DXY dollar spikes (103.82), and Chinese dumping.",
     "shocks": [
       {
         "id": "crude_shortage_shock",
         "shock_name": "Middle East Conflict & Hormuz Crude Supply Choke",
         "is_active": true,
         "severity": "RANGEBOUND COMFORT",
-        "trigger": "Brent Crude anchored at $80.41/bbl maintaining neutral energy cost inputs",
+        "trigger": "Brent Crude at $81.69/bbl within manageable $80-$85 band",
         "supply_demand_choke": "Threat of 2.0-2.5M bpd oil supply disruption; tanker war risk insurance premiums elevated.",
-        "import_export_shift": "India's annual crude import deficit impact: ~+$23.1B; emergency crude diversification to Russian and African grades.",
+        "import_export_shift": "India's annual crude import deficit impact: ~+$25.0B; emergency crude diversification to Russian and African grades.",
         "currency_impact": "USD/INR trading at \u20b993.0; RBI defending currency with foreign exchange market interventions.",
         "margin_winners": [
           "Upstream Oil & Gas (E&P)",
@@ -594,7 +594,7 @@
         "shock_name": "King Dollar & US 10Y Yield Gravity Spike",
         "is_active": true,
         "severity": "ELEVATED DOLLAR SQUEEZE",
-        "trigger": "US 10Y yields at 4.92% and DXY at 104.29 driven by resilient US growth (54.9 PMI).",
+        "trigger": "US 10Y yields at 4.9% and DXY at 103.82 driven by resilient US growth (54.9 PMI).",
         "supply_demand_choke": "Dollar liquidity contraction across emerging market banks; foreign institutional capital re-allocating to US T-Bills.",
         "import_export_shift": "Imported energy and electronics become costlier in Rupee terms; dollar export billing gains realization cushion.",
         "currency_impact": "Rupee tests \u20b993.0 band; supported by RBI's $675.0B protective warchest.",
@@ -644,7 +644,7 @@
       "vital_stats": {
         "debt_to_gdp": "124% ($35.8 Trillion)",
         "annual_interest_cost": "$1.12 Trillion (> Defense Budget)",
-        "us_10y_yield": "4.92% (Bond Vigilante Risk)",
+        "us_10y_yield": "4.9% (Bond Vigilante Risk)",
         "mortgage_30y": "6.85% (Housing Freeze)",
         "ai_hyperscaler_capex": "$250 Billion+ (Generational Ramp)",
         "oil_gas_output": "13.5M bpd (Global Record)"
@@ -661,7 +661,7 @@
           "severity": "HIGH"
         },
         {
-          "title": "US 10-Year Yield Spike (~4.92%) & Equity PE Gravity",
+          "title": "US 10-Year Yield Spike (~4.9%) & Equity PE Gravity",
           "description": "Persistent long-term Treasury yields above 4.4% raise corporate discount rates, exerting continuous multiple compression on global high-valuation equities.",
           "severity": "HIGH"
         },
@@ -900,8 +900,8 @@
       },
       "pressure_points": [
         {
-          "title": "Strong US Dollar (DXY 104.29) & FII Outflows",
-          "description": "Elevated US bond yields (4.92%) and dollar strength triggered tactical foreign portfolio rebalancing out of emerging markets into US assets.",
+          "title": "Strong US Dollar (DXY 103.82) & FII Outflows",
+          "description": "Elevated US bond yields (4.9%) and dollar strength triggered tactical foreign portfolio rebalancing out of emerging markets into US assets.",
           "severity": "HIGH"
         },
         {
@@ -952,8 +952,8 @@
         "id": "currency_debt",
         "title": "3. King Dollar Dominance vs Sovereign Gold Accumulation",
         "icon": "\ud83d\udcb5",
-        "us_offensive": "King Dollar (DXY 104.29) powered by high US yields (~4.92%) drains global liquidity and asserts US Treasury sanctions enforcement.",
-        "china_retaliation": "PBOC continuous gold reserve accumulation (Gold $3655.5/oz), reducing US Treasury holdings below $750B, and expanding CIPS / local currency bilateral settlements.",
+        "us_offensive": "King Dollar (DXY 103.82) powered by high US yields (~4.9%) drains global liquidity and asserts US Treasury sanctions enforcement.",
+        "china_retaliation": "PBOC continuous gold reserve accumulation (Gold $3555.1/oz), reducing US Treasury holdings below $750B, and expanding CIPS / local currency bilateral settlements.",
         "macro_impact": "Gold hits all-time records ($2,650+/oz), emerging market central banks diversify reserve currencies, and cross-border payment systems fragment.",
         "impact_on_india": "NEUTRAL TO POSITIVE",
         "india_takeaway": "RBI expands gold reserves to record 854+ metric tonnes while settling bilateral trade in Rupee-Dirham with Middle East and Asian partners."
@@ -976,7 +976,7 @@
         "china_retaliation": "Controlling 85%+ of global solar wafers, polysilicon refining, and EV battery cell manufacturing, turning green transition into a Chinese hardware monopoly.",
         "macro_impact": "Traditional hydrocarbon energy security centers in the Americas, while renewable hardware relies entirely on Chinese supply chains.",
         "impact_on_india": "POSITIVE ARBITRAGE",
-        "india_takeaway": "India benefits from discounted Russian/Middle East crude oil (~$80.41/bbl) while deploying cheap imported solar cells to accelerate renewable capacity."
+        "india_takeaway": "India benefits from discounted Russian/Middle East crude oil (~$81.69/bbl) while deploying cheap imported solar cells to accelerate renewable capacity."
       }
     ]
   },
@@ -984,50 +984,50 @@
     {
       "id": "dxy",
       "name": "US Dollar Index (DXY)",
-      "current_value": 104.29,
+      "current_value": 103.82,
       "unit": "points",
       "stress_level": "BALANCED FLOAT",
       "status_label": "STABLE CURRENCY FLOAT",
-      "bar_ratio": 0.52,
+      "bar_ratio": 0.48,
       "flow_direction": "EXPANSION",
       "historical_range": "100.5 - 107.0",
-      "market_impact": "A strong DXY (104.29) drains emerging market liquidity, pressures the Indian Rupee toward 93.0, and triggers foreign institutional investor (FII) reallocations back toward US money markets."
+      "market_impact": "A strong DXY (103.82) drains emerging market liquidity, pressures the Indian Rupee toward 93.0, and triggers foreign institutional investor (FII) reallocations back toward US money markets."
     },
     {
       "id": "us10y",
       "name": "US 10-Year Treasury Yield",
-      "current_value": 4.92,
+      "current_value": 4.9,
       "unit": "%",
       "stress_level": "RESTRICTIVE CAPITAL COST",
       "status_label": "YIELD GRAVITY DABAO",
-      "bar_ratio": 0.86,
+      "bar_ratio": 0.85,
       "flow_direction": "PRESSURE",
       "historical_range": "3.60% - 5.00%",
-      "market_impact": "Long-term risk-free rates (4.92%) set global corporate discount rates, equity PE gravity, and dollar debt rollover costs for emerging market borrowers."
+      "market_impact": "Long-term risk-free rates (4.9%) set global corporate discount rates, equity PE gravity, and dollar debt rollover costs for emerging market borrowers."
     },
     {
       "id": "brent_crude",
       "name": "Brent Crude Oil",
-      "current_value": 80.41,
+      "current_value": 81.69,
       "unit": "USD/bbl",
       "stress_level": "ELEVATED DEFICIT PRESSURE",
       "status_label": "BALANCED COST FLOAT",
-      "bar_ratio": 0.56,
+      "bar_ratio": 0.59,
       "flow_direction": "PRESSURE",
       "historical_range": "$68 - $92",
-      "market_impact": "Oil trading at $80.41 is an economic stabilizer for India, keeping the Current Account Deficit (CAD) manageable and protecting operating margins for paints, specialty chemicals, and transport sectors."
+      "market_impact": "Oil trading at $81.69 is an economic stabilizer for India, keeping the Current Account Deficit (CAD) manageable and protecting operating margins for paints, specialty chemicals, and transport sectors."
     },
     {
       "id": "gold_spot",
       "name": "Sovereign Gold (XAU/USD)",
-      "current_value": 3655.5,
+      "current_value": 3555.1,
       "unit": "USD/oz",
       "stress_level": "PEAK RESERVE DIVERSIFICATION",
       "status_label": "DE-DOLLARIZATION HEDGE",
       "bar_ratio": 1.0,
       "flow_direction": "EXPANSION",
       "historical_range": "$1,980 - $2,790",
-      "market_impact": "Gold trading at $3655.5/oz confirms aggressive reserve diversification by global central banks (PBOC, RBI, Middle East) seeking neutral reserves immune to US dollar sanctions."
+      "market_impact": "Gold trading at $3555.1/oz confirms aggressive reserve diversification by global central banks (PBOC, RBI, Middle East) seeking neutral reserves immune to US dollar sanctions."
     },
     {
       "id": "semicon_utilization",
@@ -1064,7 +1064,7 @@
           "US SaaS Software",
           "Tech Consulting"
         ],
-        "reason": "US BFSI and retail executives are reprioritizing discretionary software budgets strictly towards generative AI proof-of-concepts (US 10Y 4.92%), delaying large multi-year digital transformation deals."
+        "reason": "US BFSI and retail executives are reprioritizing discretionary software budgets strictly towards generative AI proof-of-concepts (US 10Y 4.9%), delaying large multi-year digital transformation deals."
       },
       {
         "title": "Universal US Import Tariff Threat (10% - 60%)",
@@ -1117,7 +1117,7 @@
           "FMCG Packaging",
           "Tyres"
         ],
-        "reason": "Crude oil remaining rangebound ($80.41/bbl) prevents gross margin contraction and keeps national current account deficits in comfortable zones."
+        "reason": "Crude oil remaining rangebound ($81.69/bbl) prevents gross margin contraction and keeps national current account deficits in comfortable zones."
       },
       {
         "title": "Global Central Bank Rate-Easing Liquidity Wave",
@@ -1143,30 +1143,30 @@
   },
   "equity_impact_matrix": [
     {
-      "theme": "Domestic Industrial Capex & Manufacturing",
+      "theme": "Domestic Economic Expansion & Infrastructure",
       "benchmark_index": "Nifty India Manufacturing",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "cost_sensitivity": "Metal input costs stable; working capital yields optimized at USD/INR 93.0",
-      "transmission_channel": "Strong domestic Composite PMI at 58.6 driving order book expansion",
+      "cost_sensitivity": "Raw material metals & polymer input costs stabilizing below peak thresholds",
+      "transmission_channel": "India Composite PMI at 58.6 drives robust domestic capex and industrial credit off-take",
       "exposed_segments": [
         "Capital Goods",
         "Industrial Machinery",
-        "Defense Electronics"
+        "Defense Manufacturing"
       ],
       "stocks": []
     },
     {
-      "theme": "Crude Derivative Consumer Goods & Aviation",
+      "theme": "Consumer Consumption & Margin Relief",
       "benchmark_index": "Nifty Consumption / FMCG",
       "impact_direction": "BENEFICIARY",
       "status": "MARGIN EXPANSION",
-      "cost_sensitivity": "Petrochemical feedstock & ATF margins benefit from $80.41/bbl Brent stability",
-      "transmission_channel": "Stable oil input pricing prevents retail inflation spikes, preserving urban demand",
+      "cost_sensitivity": "Crude derivatives (crude oil, packaging, LAB) stable at $81.69/bbl",
+      "transmission_channel": "USD/INR at 93.0 imported inflation offset by strong domestic volume growth of 6-8%",
       "exposed_segments": [
-        "Decorative Paints",
-        "Aviation Logistics",
-        "FMCG Packaging"
+        "FMCG",
+        "Retail Chains",
+        "Apparel & Footwear"
       ],
       "stocks": []
     },
@@ -1175,26 +1175,26 @@
       "benchmark_index": "Nifty IT",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
-      "cost_sensitivity": "Wage inflation offset by sluggish US manufacturing PMI at 48.5",
-      "transmission_channel": "US 10Y Treasury Yield at 4.92% compresses enterprise tech valuation multiples",
+      "cost_sensitivity": "Wage inflation & US Dollar Index (DXY) at 103.82 dampening discretionary tech spend",
+      "transmission_channel": "US 10Y Yield at 4.9% drives higher discount rates on long-duration enterprise tech cash flows",
       "exposed_segments": [
-        "BFSI IT Spend",
-        "Cloud Migration",
+        "IT Services",
+        "Global In-house Centers",
         "Digital Engineering"
       ],
       "stocks": []
     },
     {
-      "theme": "Primary Steel & Industrial Commodities",
+      "theme": "Primary Steel, Metals & Chemical Commodities",
       "benchmark_index": "Nifty Metal / Commodities",
       "impact_direction": "PRESSURE_FACING",
       "status": "MARGIN COMPRESSION",
-      "cost_sensitivity": "Directly impacted by China PPI deflation at -2.9% and Property YoY slump of -10.3%",
-      "transmission_channel": "Global steel dumping via Chinese demand contraction weighs on realisations",
+      "cost_sensitivity": "China PPI deflation at -2.9% and Property YoY down -10.3% driving cheap material dumping",
+      "transmission_channel": "Global excess industrial capacity overflows into emerging markets at depressed realisations",
       "exposed_segments": [
-        "Flat Steel",
-        "Long Steel",
-        "Non-Ferrous Smelting"
+        "Ferrous Metals",
+        "Non-Ferrous Smelters",
+        "Agrochemicals"
       ],
       "stocks": []
     }
