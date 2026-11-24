@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-24 00:29:26 IST",
+  "last_updated": "2026-11-24 22:50:37 IST",
   "total_anchors_discovered": 11,
   "prime_discount_opportunities": 4,
   "buffer_safe_entries": 1,
@@ -34,7 +34,7 @@
       "cmp": 39.63,
       "institutional_floor_price": 73.5,
       "capital_raised_cr": 0.0,
-      "market_cap_cr": 2340.87,
+      "market_cap_cr": 2346.77,
       "deal_size_pct_mcap": 0.0,
       "delta_to_floor_pct": -46.08,
       "zone": "PRIME_DISCOUNT",
@@ -43,7 +43,7 @@
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
       "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,341 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
     },
     {
       "symbol": "GUJTHEM",
@@ -51,7 +51,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 408.0,
       "capital_raised_cr": 335.0,
-      "market_cap_cr": 4486.33,
+      "market_cap_cr": 4492.84,
       "allottees": [
         {
           "name": "Special Situation India Fund",
@@ -66,11 +66,11 @@
       "filing_context": "Preferential allotment of 8,211,000 equity shares at an issue price of Rs 408.00 per share to raise up to Rs 335 crore.",
       "cmp": 344.7,
       "delta_to_floor_pct": -15.51,
-      "deal_size_pct_mcap": 7.47,
+      "deal_size_pct_mcap": 7.46,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
       "zone_label": "15.51% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.47% Dilution (MCap: ₹4,486 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.46% Dilution (MCap: ₹4,493 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
     },
     {
       "symbol": "AEGISLOG",
@@ -152,7 +152,7 @@
       "cmp": 39.63,
       "institutional_floor_price": 73.5,
       "capital_raised_cr": 0.0,
-      "market_cap_cr": 2340.87,
+      "market_cap_cr": 2346.77,
       "deal_size_pct_mcap": 0.0,
       "delta_to_floor_pct": -46.08,
       "zone": "PRIME_DISCOUNT",
@@ -161,7 +161,7 @@
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
       "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,341 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
     },
     {
       "symbol": "GUJTHEM",
@@ -169,7 +169,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 408.0,
       "capital_raised_cr": 335.0,
-      "market_cap_cr": 4486.33,
+      "market_cap_cr": 4492.84,
       "allottees": [
         {
           "name": "Special Situation India Fund",
@@ -184,11 +184,11 @@
       "filing_context": "Preferential allotment of 8,211,000 equity shares at an issue price of Rs 408.00 per share to raise up to Rs 335 crore.",
       "cmp": 344.7,
       "delta_to_floor_pct": -15.51,
-      "deal_size_pct_mcap": 7.47,
+      "deal_size_pct_mcap": 7.46,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
       "zone_label": "15.51% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.47% Dilution (MCap: ₹4,486 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.46% Dilution (MCap: ₹4,493 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
     },
     {
       "symbol": "AEGISLOG",
