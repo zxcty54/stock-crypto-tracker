@@ -1,20 +1,20 @@
-2026-11-24 01:35:17 [INFO] ipo_tracker: ======================================================================
-2026-11-24 01:35:17 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
-2026-11-24 01:35:17 [INFO] ipo_tracker: 📅 Timestamp: 24-Nov-2026 07:05:17 IST (Today: 2026-11-24)
-2026-11-24 01:35:17 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
-2026-11-24 01:35:17 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
-2026-11-24 01:35:17 [INFO] ipo_tracker: ======================================================================
-2026-11-24 01:35:17 [INFO] ipo_tracker: Loaded 12 tracked IPOs and 42 historical posted events.
-2026-11-24 01:35:17 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
-2026-11-24 01:35:19 [INFO] ipo_tracker.scrapers: Collected 1 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited']
-2026-11-24 01:35:20 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
-2026-11-24 01:35:26 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '19443116', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
-2026-11-24 01:35:27 [INFO] ipo_tracker.scrapers: Collected 8 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Matangi Rubber', 'Monomark Engineering', 'Bombay Coated and Special Steels', 'M.K.Sons Fine Jewels']
-2026-11-24 01:35:29 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
-2026-11-24 01:35:29 [INFO] ipo_tracker: Aggregated 6 Mainboard IPO records from web.
-2026-11-24 01:35:29 [INFO] ipo_tracker: Master state updated: 0 new, 6 refreshed.
-2026-11-24 01:35:29 [INFO] ipo_tracker: Saved 12 IPO records to ipo_master.json
-2026-11-24 01:35:29 [INFO] ipo_tracker: Synced 12 IPO records to assets/data/ipo_master.json
-2026-11-24 01:35:29 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
-2026-11-24 01:35:29 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 4 active IPOs...
-2026-11-24 01:35:30 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
+2026-11-24 13:29:40 [INFO] ipo_tracker: ======================================================================
+2026-11-24 13:29:40 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
+2026-11-24 13:29:40 [INFO] ipo_tracker: 📅 Timestamp: 24-Nov-2026 18:59:40 IST (Today: 2026-11-24)
+2026-11-24 13:29:40 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
+2026-11-24 13:29:40 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
+2026-11-24 13:29:40 [INFO] ipo_tracker: ======================================================================
+2026-11-24 13:29:40 [INFO] ipo_tracker: Loaded 12 tracked IPOs and 42 historical posted events.
+2026-11-24 13:29:40 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
+2026-11-24 13:29:42 [INFO] ipo_tracker.scrapers: Collected 1 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited']
+2026-11-24 13:29:43 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
+2026-11-24 13:29:49 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '19443116', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-24 13:29:50 [INFO] ipo_tracker.scrapers: Collected 6 entries from IPO Watch: ['Crystal Crop Protection', 'Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Matangi Rubber', 'Monomark Engineering']
+2026-11-24 13:29:52 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
+2026-11-24 13:29:52 [INFO] ipo_tracker: Aggregated 6 Mainboard IPO records from web.
+2026-11-24 13:29:52 [INFO] ipo_tracker: Master state updated: 0 new, 6 refreshed.
+2026-11-24 13:29:52 [INFO] ipo_tracker: Saved 12 IPO records to ipo_master.json
+2026-11-24 13:29:52 [INFO] ipo_tracker: Synced 12 IPO records to assets/data/ipo_master.json
+2026-11-24 13:29:52 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
+2026-11-24 13:29:52 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 4 active IPOs...
+2026-11-24 13:29:52 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
