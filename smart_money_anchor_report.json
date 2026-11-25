@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-11-24 22:50:37 IST",
-  "total_anchors_discovered": 11,
-  "prime_discount_opportunities": 4,
-  "buffer_safe_entries": 1,
+  "last_updated": "2026-11-25 22:03:31 IST",
+  "total_anchors_discovered": 12,
+  "prime_discount_opportunities": 5,
+  "buffer_safe_entries": 2,
   "prime_setups": [
     {
       "symbol": "ROSSELLIND",
@@ -10,7 +10,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 1166.0,
       "capital_raised_cr": 300.0,
-      "market_cap_cr": 186.23,
+      "market_cap_cr": 183.01,
       "allottees": [
         {
           "name": "SBI Mutual Fund",
@@ -19,31 +19,31 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf",
       "filing_context": "Preferential allotment of 2,572,898 equity shares at Rs 1,166 per share to SBI-managed mutual funds raising Rs 300 crore.",
-      "cmp": 48.92,
-      "delta_to_floor_pct": -95.8,
-      "deal_size_pct_mcap": 161.09,
+      "cmp": 49.2,
+      "delta_to_floor_pct": -95.78,
+      "deal_size_pct_mcap": 163.93,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "95.8% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.8% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹48.92 (-95.80% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~161.09% Dilution (MCap: ₹186 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
+      "zone_label": "95.78% Below Anchor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.78% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.20 (-95.78% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~163.93% Dilution (MCap: ₹183 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
     },
     {
       "symbol": "IMAGICAA",
       "company_name": "Imagicaaworld Entertainment Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 39.63,
+      "cmp": 38.0,
       "institutional_floor_price": 73.5,
       "capital_raised_cr": 0.0,
       "market_cap_cr": 2346.77,
       "deal_size_pct_mcap": 0.0,
-      "delta_to_floor_pct": -46.08,
+      "delta_to_floor_pct": -48.3,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "46.08% Below Anchor",
+      "zone_label": "48.3% Below Anchor",
       "tier1_backed": false,
       "allottees": [],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
       "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 48.3% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹38.00 (-48.30% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
     },
     {
       "symbol": "GUJTHEM",
@@ -51,7 +51,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 408.0,
       "capital_raised_cr": 335.0,
-      "market_cap_cr": 4492.84,
+      "market_cap_cr": 4508.45,
       "allottees": [
         {
           "name": "Special Situation India Fund",
@@ -64,26 +64,44 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf",
       "filing_context": "Preferential allotment of 8,211,000 equity shares at an issue price of Rs 408.00 per share to raise up to Rs 335 crore.",
-      "cmp": 344.7,
-      "delta_to_floor_pct": -15.51,
-      "deal_size_pct_mcap": 7.46,
+      "cmp": 346.4,
+      "delta_to_floor_pct": -15.1,
+      "deal_size_pct_mcap": 7.43,
       "tier1_backed": true,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "15.51% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.46% Dilution (MCap: ₹4,493 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
+      "zone_label": "15.1% Below Anchor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.1% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹346.40 (-15.10% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.43% Dilution (MCap: ₹4,508 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
+    },
+    {
+      "symbol": "QPOWER",
+      "company_name": "Quality Power Electrical Equipments Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 1488.8,
+      "institutional_floor_price": 1535.53,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 11529.88,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -3.04,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "3.04% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/QPOWER1234_25112026200756_IntimationofQIPfinal25112026Sign.pdf",
+      "filing_context": "General Updates Quality Power Electrical Equipments Limited has informed the Exchange about Outcome of Fund Raising Committee regarding Qualified Institutions P",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 3.04% BELOW ANCHOR\n\n📌 Quality Power Electrical Equipments Limited (NSE: QPOWER)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,535.53\n📊 Current CMP:          ₹1,488.80 (-3.04% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹11,530 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/QPOWER1234_25112026200756_IntimationofQIPfinal25112026Sign.pdf"
     },
     {
       "symbol": "AEGISLOG",
       "company_name": "Aegis Logistics Limited",
       "deal_type": "Preferential Equity Allotment",
-      "cmp": 1170.0,
+      "cmp": 1181.0,
       "institutional_floor_price": 1210.0,
       "capital_raised_cr": 3500.0,
-      "market_cap_cr": 40656.32,
-      "deal_size_pct_mcap": 8.61,
-      "delta_to_floor_pct": -3.31,
+      "market_cap_cr": 41367.09,
+      "deal_size_pct_mcap": 8.46,
+      "delta_to_floor_pct": -2.4,
       "zone": "PRIME_DISCOUNT",
-      "zone_label": "3.31% Below Anchor",
+      "zone_label": "2.4% Below Anchor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -93,7 +111,7 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf",
       "filing_context": "Allotment of Securities Aegis Logistics Limited has informed the Exchange regarding allotment of 28925619 equity shares pursuant to Qualified Institution Placem",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 3.31% BELOW ANCHOR\n\n📌 Aegis Logistics Limited (NSE: AEGISLOG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,210.00\n📊 Current CMP:          ₹1,170.00 (-3.31% vs Anchor)\n📦 Capital Infused:      ₹3,500.00 Cr\n🏢 Dilution / MCap:      ~8.61% Dilution (MCap: ₹40,656 Cr)\n\n🏦 Key Marquee Allottees:\n- Nomura (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 2.4% BELOW ANCHOR\n\n📌 Aegis Logistics Limited (NSE: AEGISLOG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,210.00\n📊 Current CMP:          ₹1,181.00 (-2.40% vs Anchor)\n📦 Capital Infused:      ₹3,500.00 Cr\n🏢 Dilution / MCap:      ~8.46% Dilution (MCap: ₹41,367 Cr)\n\n🏦 Key Marquee Allottees:\n- Nomura (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf"
     }
   ],
   "buffer_setups": [
@@ -103,7 +121,7 @@
       "deal_type": "QIP (Institutions Only)",
       "institutional_floor_price": 755.0,
       "capital_raised_cr": 1500.0,
-      "market_cap_cr": 31715.42,
+      "market_cap_cr": 31596.99,
       "allottees": [
         {
           "name": "Qualified Institutional Buyers",
@@ -112,160 +130,26 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf",
       "filing_context": "Issue and allotment of 19,867,549 equity shares at an issue price of Rs 755.00 per share aggregating to Rs 1,500 crore pursuant to QIP.",
-      "cmp": 796.0,
-      "delta_to_floor_pct": 5.43,
-      "deal_size_pct_mcap": 4.73,
+      "cmp": 785.3,
+      "delta_to_floor_pct": 4.01,
+      "deal_size_pct_mcap": 4.75,
       "tier1_backed": true,
       "zone": "ACCUMULATION_BUFFER",
-      "zone_label": "+5.43% Near Floor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +5.43% NEAR FLOOR\n\n📌 Krishna Institute of Medical Sciences Limited (NSE: KIMS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹755.00\n📊 Current CMP:          ₹796.00 (+5.43% vs Anchor)\n📦 Capital Infused:      ₹1,500.00 Cr\n🏢 Dilution / MCap:      ~4.73% Dilution (MCap: ₹31,715 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf"
-    }
-  ],
-  "all_setups": [
-    {
-      "symbol": "ROSSELLIND",
-      "company_name": "Rossell Techsys Limited",
-      "deal_type": "Preferential Equity Allotment",
-      "institutional_floor_price": 1166.0,
-      "capital_raised_cr": 300.0,
-      "market_cap_cr": 186.23,
-      "allottees": [
-        {
-          "name": "SBI Mutual Fund",
-          "tier": "Tier-1 DII / MF"
-        }
-      ],
-      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf",
-      "filing_context": "Preferential allotment of 2,572,898 equity shares at Rs 1,166 per share to SBI-managed mutual funds raising Rs 300 crore.",
-      "cmp": 48.92,
-      "delta_to_floor_pct": -95.8,
-      "deal_size_pct_mcap": 161.09,
-      "tier1_backed": true,
-      "zone": "PRIME_DISCOUNT",
-      "zone_label": "95.8% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.8% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹48.92 (-95.80% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~161.09% Dilution (MCap: ₹186 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
-    },
-    {
-      "symbol": "IMAGICAA",
-      "company_name": "Imagicaaworld Entertainment Limited",
-      "deal_type": "Preferential Equity Allotment",
-      "cmp": 39.63,
-      "institutional_floor_price": 73.5,
-      "capital_raised_cr": 0.0,
-      "market_cap_cr": 2346.77,
-      "deal_size_pct_mcap": 0.0,
-      "delta_to_floor_pct": -46.08,
-      "zone": "PRIME_DISCOUNT",
-      "zone_label": "46.08% Below Anchor",
-      "tier1_backed": false,
-      "allottees": [],
-      "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
-      "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 46.08% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹39.63 (-46.08% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
-    },
-    {
-      "symbol": "GUJTHEM",
-      "company_name": "Gujarat Themis Biosyn Limited",
-      "deal_type": "Preferential Equity Allotment",
-      "institutional_floor_price": 408.0,
-      "capital_raised_cr": 335.0,
-      "market_cap_cr": 4492.84,
-      "allottees": [
-        {
-          "name": "Special Situation India Fund",
-          "tier": "Marquee FII / Sovereign"
-        },
-        {
-          "name": "ISAF III Onshore Fund",
-          "tier": "Marquee FII / Sovereign"
-        }
-      ],
-      "filing_pdf": "https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf",
-      "filing_context": "Preferential allotment of 8,211,000 equity shares at an issue price of Rs 408.00 per share to raise up to Rs 335 crore.",
-      "cmp": 344.7,
-      "delta_to_floor_pct": -15.51,
-      "deal_size_pct_mcap": 7.46,
-      "tier1_backed": true,
-      "zone": "PRIME_DISCOUNT",
-      "zone_label": "15.51% Below Anchor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.51% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹344.70 (-15.51% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.46% Dilution (MCap: ₹4,493 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
-    },
-    {
-      "symbol": "AEGISLOG",
-      "company_name": "Aegis Logistics Limited",
-      "deal_type": "Preferential Equity Allotment",
-      "cmp": 1170.0,
-      "institutional_floor_price": 1210.0,
-      "capital_raised_cr": 3500.0,
-      "market_cap_cr": 40656.32,
-      "deal_size_pct_mcap": 8.61,
-      "delta_to_floor_pct": -3.31,
-      "zone": "PRIME_DISCOUNT",
-      "zone_label": "3.31% Below Anchor",
-      "tier1_backed": true,
-      "allottees": [
-        {
-          "name": "Nomura",
-          "tier": "Marquee FII / Sovereign"
-        }
-      ],
-      "filing_pdf": "https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf",
-      "filing_context": "Allotment of Securities Aegis Logistics Limited has informed the Exchange regarding allotment of 28925619 equity shares pursuant to Qualified Institution Placem",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | 3.31% BELOW ANCHOR\n\n📌 Aegis Logistics Limited (NSE: AEGISLOG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,210.00\n📊 Current CMP:          ₹1,170.00 (-3.31% vs Anchor)\n📦 Capital Infused:      ₹3,500.00 Cr\n🏢 Dilution / MCap:      ~8.61% Dilution (MCap: ₹40,656 Cr)\n\n🏦 Key Marquee Allottees:\n- Nomura (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf"
-    },
-    {
-      "symbol": "KIMS",
-      "company_name": "Krishna Institute of Medical Sciences Limited",
-      "deal_type": "QIP (Institutions Only)",
-      "institutional_floor_price": 755.0,
-      "capital_raised_cr": 1500.0,
-      "market_cap_cr": 31715.42,
-      "allottees": [
-        {
-          "name": "Qualified Institutional Buyers",
-          "tier": "Marquee FII / Sovereign"
-        }
-      ],
-      "filing_pdf": "https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf",
-      "filing_context": "Issue and allotment of 19,867,549 equity shares at an issue price of Rs 755.00 per share aggregating to Rs 1,500 crore pursuant to QIP.",
-      "cmp": 796.0,
-      "delta_to_floor_pct": 5.43,
-      "deal_size_pct_mcap": 4.73,
-      "tier1_backed": true,
-      "zone": "ACCUMULATION_BUFFER",
-      "zone_label": "+5.43% Near Floor",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +5.43% NEAR FLOOR\n\n📌 Krishna Institute of Medical Sciences Limited (NSE: KIMS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹755.00\n📊 Current CMP:          ₹796.00 (+5.43% vs Anchor)\n📦 Capital Infused:      ₹1,500.00 Cr\n🏢 Dilution / MCap:      ~4.73% Dilution (MCap: ₹31,715 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf"
-    },
-    {
-      "symbol": "BAJFINANCE",
-      "company_name": "Bajaj Finance Limited",
-      "deal_type": "QIP (Institutions Only)",
-      "cmp": 1095.5,
-      "institutional_floor_price": 1025.0,
-      "capital_raised_cr": 11700.0,
-      "market_cap_cr": 68124.05,
-      "deal_size_pct_mcap": 17.17,
-      "delta_to_floor_pct": 6.88,
-      "zone": "EXTENDED",
-      "zone_label": "+6.88% Extended",
-      "tier1_backed": false,
-      "allottees": [],
-      "filing_pdf": "https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf",
-      "filing_context": "General Updates Bajaj Finance Limited has informed the Exchange about the outcome of QIP 2026 - Special Committee Meeting",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +6.88% EXTENDED\n\n📌 Bajaj Finance Limited (NSE: BAJFINANCE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,025.00\n📊 Current CMP:          ₹1,095.50 (+6.88% vs Anchor)\n📦 Capital Infused:      ₹11,700.00 Cr\n🏢 Dilution / MCap:      ~17.17% Dilution (MCap: ₹68,124 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf"
+      "zone_label": "+4.01% Near Floor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +4.01% NEAR FLOOR\n\n📌 Krishna Institute of Medical Sciences Limited (NSE: KIMS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹755.00\n📊 Current CMP:          ₹785.30 (+4.01% vs Anchor)\n📦 Capital Infused:      ₹1,500.00 Cr\n🏢 Dilution / MCap:      ~4.75% Dilution (MCap: ₹31,597 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf"
     },
     {
       "symbol": "URBANCO",
       "company_name": "Urban Company Limited",
       "deal_type": "QIP (Institutions Only)",
-      "cmp": 168.0,
+      "cmp": 164.99,
       "institutional_floor_price": 156.0,
       "capital_raised_cr": 2500.0,
-      "market_cap_cr": 24940.54,
-      "deal_size_pct_mcap": 10.02,
-      "delta_to_floor_pct": 7.69,
-      "zone": "EXTENDED",
-      "zone_label": "+7.69% Extended",
+      "market_cap_cr": 27195.87,
+      "deal_size_pct_mcap": 9.19,
+      "delta_to_floor_pct": 5.76,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.76% Near Floor",
       "tier1_backed": true,
       "allottees": [
         {
@@ -311,7 +195,200 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.in/corporate/URBANCO_20112026085845_UC_QIP_Completion_Press_Release_20112026.pdf",
       "filing_context": "Press Release Urban Company Limited has informed the Exchange regarding a press release dated November 20, 2026, titled \"Urban Company raises 2,500 crore throug",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +7.69% EXTENDED\n\n📌 Urban Company Limited (NSE: URBANCO)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹156.00\n📊 Current CMP:          ₹168.00 (+7.69% vs Anchor)\n📦 Capital Infused:      ₹2,500.00 Cr\n🏢 Dilution / MCap:      ~10.02% Dilution (MCap: ₹24,941 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Nippon India (Tier-1 DII / MF)\n- Kotak Mahindra (Tier-1 DII / MF)\n- Mirae Asset (Tier-1 DII / MF)\n- Whiteoak (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Invesco (Tier-1 DII / MF)\n- Morgan Stanley (Marquee FII / Sovereign)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Norges Bank (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/URBANCO_20112026085845_UC_QIP_Completion_Press_Release_20112026.pdf"
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +5.76% NEAR FLOOR\n\n📌 Urban Company Limited (NSE: URBANCO)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹156.00\n📊 Current CMP:          ₹164.99 (+5.76% vs Anchor)\n📦 Capital Infused:      ₹2,500.00 Cr\n🏢 Dilution / MCap:      ~9.19% Dilution (MCap: ₹27,196 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Nippon India (Tier-1 DII / MF)\n- Kotak Mahindra (Tier-1 DII / MF)\n- Mirae Asset (Tier-1 DII / MF)\n- Whiteoak (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Invesco (Tier-1 DII / MF)\n- Morgan Stanley (Marquee FII / Sovereign)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Norges Bank (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/URBANCO_20112026085845_UC_QIP_Completion_Press_Release_20112026.pdf"
+    }
+  ],
+  "all_setups": [
+    {
+      "symbol": "ROSSELLIND",
+      "company_name": "Rossell Techsys Limited",
+      "deal_type": "Preferential Equity Allotment",
+      "institutional_floor_price": 1166.0,
+      "capital_raised_cr": 300.0,
+      "market_cap_cr": 183.01,
+      "allottees": [
+        {
+          "name": "SBI Mutual Fund",
+          "tier": "Tier-1 DII / MF"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf",
+      "filing_context": "Preferential allotment of 2,572,898 equity shares at Rs 1,166 per share to SBI-managed mutual funds raising Rs 300 crore.",
+      "cmp": 49.2,
+      "delta_to_floor_pct": -95.78,
+      "deal_size_pct_mcap": 163.93,
+      "tier1_backed": true,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "95.78% Below Anchor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 95.78% BELOW ANCHOR\n\n📌 Rossell Techsys Limited (NSE: ROSSELLIND)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,166.00\n📊 Current CMP:          ₹49.20 (-95.78% vs Anchor)\n📦 Capital Infused:      ₹300.00 Cr\n🏢 Dilution / MCap:      ~163.93% Dilution (MCap: ₹183 Cr)\n\n🏦 Key Marquee Allottees:\n- SBI Mutual Fund (Tier-1 DII / MF)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ROSSELL_Preferential.pdf"
+    },
+    {
+      "symbol": "IMAGICAA",
+      "company_name": "Imagicaaworld Entertainment Limited",
+      "deal_type": "Preferential Equity Allotment",
+      "cmp": 38.0,
+      "institutional_floor_price": 73.5,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 2346.77,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -48.3,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "48.3% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf",
+      "filing_context": "Preferential issue Imagicaaworld Entertainment Limited has informed the Exchange about Preferential issue of Convertible Warrants",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 48.3% BELOW ANCHOR\n\n📌 Imagicaaworld Entertainment Limited (NSE: IMAGICAA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹73.50\n📊 Current CMP:          ₹38.00 (-48.30% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹2,347 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/IMAGICAA_13112026172903_Outcome_of_Board_Meeting.pdf"
+    },
+    {
+      "symbol": "GUJTHEM",
+      "company_name": "Gujarat Themis Biosyn Limited",
+      "deal_type": "Preferential Equity Allotment",
+      "institutional_floor_price": 408.0,
+      "capital_raised_cr": 335.0,
+      "market_cap_cr": 4508.45,
+      "allottees": [
+        {
+          "name": "Special Situation India Fund",
+          "tier": "Marquee FII / Sovereign"
+        },
+        {
+          "name": "ISAF III Onshore Fund",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf",
+      "filing_context": "Preferential allotment of 8,211,000 equity shares at an issue price of Rs 408.00 per share to raise up to Rs 335 crore.",
+      "cmp": 346.4,
+      "delta_to_floor_pct": -15.1,
+      "deal_size_pct_mcap": 7.43,
+      "tier1_backed": true,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "15.1% Below Anchor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 15.1% BELOW ANCHOR\n\n📌 Gujarat Themis Biosyn Limited (NSE: GUJTHEM)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹408.00\n📊 Current CMP:          ₹346.40 (-15.10% vs Anchor)\n📦 Capital Infused:      ₹335.00 Cr\n🏢 Dilution / MCap:      ~7.43% Dilution (MCap: ₹4,508 Cr)\n\n🏦 Key Marquee Allottees:\n- Special Situation India Fund (Marquee FII / Sovereign)\n- ISAF III Onshore Fund (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/GUJTHEM_Preferential.pdf"
+    },
+    {
+      "symbol": "QPOWER",
+      "company_name": "Quality Power Electrical Equipments Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 1488.8,
+      "institutional_floor_price": 1535.53,
+      "capital_raised_cr": 0.0,
+      "market_cap_cr": 11529.88,
+      "deal_size_pct_mcap": 0.0,
+      "delta_to_floor_pct": -3.04,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "3.04% Below Anchor",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/QPOWER1234_25112026200756_IntimationofQIPfinal25112026Sign.pdf",
+      "filing_context": "General Updates Quality Power Electrical Equipments Limited has informed the Exchange about Outcome of Fund Raising Committee regarding Qualified Institutions P",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 3.04% BELOW ANCHOR\n\n📌 Quality Power Electrical Equipments Limited (NSE: QPOWER)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,535.53\n📊 Current CMP:          ₹1,488.80 (-3.04% vs Anchor)\n📦 Capital Infused:      ₹0.00 Cr\n🏢 Dilution / MCap:      MCap: ₹11,530 Cr\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/QPOWER1234_25112026200756_IntimationofQIPfinal25112026Sign.pdf"
+    },
+    {
+      "symbol": "AEGISLOG",
+      "company_name": "Aegis Logistics Limited",
+      "deal_type": "Preferential Equity Allotment",
+      "cmp": 1181.0,
+      "institutional_floor_price": 1210.0,
+      "capital_raised_cr": 3500.0,
+      "market_cap_cr": 41367.09,
+      "deal_size_pct_mcap": 8.46,
+      "delta_to_floor_pct": -2.4,
+      "zone": "PRIME_DISCOUNT",
+      "zone_label": "2.4% Below Anchor",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Nomura",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf",
+      "filing_context": "Allotment of Securities Aegis Logistics Limited has informed the Exchange regarding allotment of 28925619 equity shares pursuant to Qualified Institution Placem",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | 2.4% BELOW ANCHOR\n\n📌 Aegis Logistics Limited (NSE: AEGISLOG)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,210.00\n📊 Current CMP:          ₹1,181.00 (-2.40% vs Anchor)\n📦 Capital Infused:      ₹3,500.00 Cr\n🏢 Dilution / MCap:      ~8.46% Dilution (MCap: ₹41,367 Cr)\n\n🏦 Key Marquee Allottees:\n- Nomura (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/AEGISCHEM_16112026235212_ALL_SEintimation_Allotment_Signed.pdf"
+    },
+    {
+      "symbol": "KIMS",
+      "company_name": "Krishna Institute of Medical Sciences Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "institutional_floor_price": 755.0,
+      "capital_raised_cr": 1500.0,
+      "market_cap_cr": 31596.99,
+      "allottees": [
+        {
+          "name": "Qualified Institutional Buyers",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf",
+      "filing_context": "Issue and allotment of 19,867,549 equity shares at an issue price of Rs 755.00 per share aggregating to Rs 1,500 crore pursuant to QIP.",
+      "cmp": 785.3,
+      "delta_to_floor_pct": 4.01,
+      "deal_size_pct_mcap": 4.75,
+      "tier1_backed": true,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+4.01% Near Floor",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +4.01% NEAR FLOOR\n\n📌 Krishna Institute of Medical Sciences Limited (NSE: KIMS)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹755.00\n📊 Current CMP:          ₹785.30 (+4.01% vs Anchor)\n📦 Capital Infused:      ₹1,500.00 Cr\n🏢 Dilution / MCap:      ~4.75% Dilution (MCap: ₹31,597 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/KIMS_QIP_Allotment.pdf"
+    },
+    {
+      "symbol": "URBANCO",
+      "company_name": "Urban Company Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 164.99,
+      "institutional_floor_price": 156.0,
+      "capital_raised_cr": 2500.0,
+      "market_cap_cr": 27195.87,
+      "deal_size_pct_mcap": 9.19,
+      "delta_to_floor_pct": 5.76,
+      "zone": "ACCUMULATION_BUFFER",
+      "zone_label": "+5.76% Near Floor",
+      "tier1_backed": true,
+      "allottees": [
+        {
+          "name": "Icici Prudential",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Nippon India",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Kotak Mahindra",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Mirae Asset",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Whiteoak",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Motilal Oswal",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Invesco",
+          "tier": "Tier-1 DII / MF"
+        },
+        {
+          "name": "Morgan Stanley",
+          "tier": "Marquee FII / Sovereign"
+        },
+        {
+          "name": "Goldman Sachs",
+          "tier": "Marquee FII / Sovereign"
+        },
+        {
+          "name": "Norges Bank",
+          "tier": "Marquee FII / Sovereign"
+        }
+      ],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/URBANCO_20112026085845_UC_QIP_Completion_Press_Release_20112026.pdf",
+      "filing_context": "Press Release Urban Company Limited has informed the Exchange regarding a press release dated November 20, 2026, titled \"Urban Company raises 2,500 crore throug",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +5.76% NEAR FLOOR\n\n📌 Urban Company Limited (NSE: URBANCO)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹156.00\n📊 Current CMP:          ₹164.99 (+5.76% vs Anchor)\n📦 Capital Infused:      ₹2,500.00 Cr\n🏢 Dilution / MCap:      ~9.19% Dilution (MCap: ₹27,196 Cr)\n\n🏦 Key Marquee Allottees:\n- Icici Prudential (Tier-1 DII / MF)\n- Nippon India (Tier-1 DII / MF)\n- Kotak Mahindra (Tier-1 DII / MF)\n- Mirae Asset (Tier-1 DII / MF)\n- Whiteoak (Tier-1 DII / MF)\n- Motilal Oswal (Tier-1 DII / MF)\n- Invesco (Tier-1 DII / MF)\n- Morgan Stanley (Marquee FII / Sovereign)\n- Goldman Sachs (Marquee FII / Sovereign)\n- Norges Bank (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/URBANCO_20112026085845_UC_QIP_Completion_Press_Release_20112026.pdf"
     },
     {
       "symbol": "PERSISTENT",
@@ -319,7 +396,7 @@
       "deal_type": "QIP (Institutions Only)",
       "institutional_floor_price": 5550.0,
       "capital_raised_cr": 4264.6,
-      "market_cap_cr": 97605.86,
+      "market_cap_cr": 94830.41,
       "allottees": [
         {
           "name": "Marquee Global Institutional Investors",
@@ -328,13 +405,31 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/PERSISTENT_QIP_Closure.pdf",
       "filing_context": "Allotment of 7,683,981 equity shares to eligible qualified institutional buyers at an issue price of Rs 5,550.00 per share raising Rs 4,264.6 crore.",
-      "cmp": 6282.5,
-      "delta_to_floor_pct": 13.2,
-      "deal_size_pct_mcap": 4.37,
+      "cmp": 6120.0,
+      "delta_to_floor_pct": 10.27,
+      "deal_size_pct_mcap": 4.5,
       "tier1_backed": true,
       "zone": "EXTENDED",
-      "zone_label": "+13.2% Extended",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +13.2% EXTENDED\n\n📌 Persistent Systems Limited (NSE: PERSISTENT)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹5,550.00\n📊 Current CMP:          ₹6,282.50 (+13.20% vs Anchor)\n📦 Capital Infused:      ₹4,264.60 Cr\n🏢 Dilution / MCap:      ~4.37% Dilution (MCap: ₹97,606 Cr)\n\n🏦 Key Marquee Allottees:\n- Marquee Global Institutional Investors (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PERSISTENT_QIP_Closure.pdf"
+      "zone_label": "+10.27% Extended",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +10.27% EXTENDED\n\n📌 Persistent Systems Limited (NSE: PERSISTENT)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹5,550.00\n📊 Current CMP:          ₹6,120.00 (+10.27% vs Anchor)\n📦 Capital Infused:      ₹4,264.60 Cr\n🏢 Dilution / MCap:      ~4.5% Dilution (MCap: ₹94,830 Cr)\n\n🏦 Key Marquee Allottees:\n- Marquee Global Institutional Investors (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PERSISTENT_QIP_Closure.pdf"
+    },
+    {
+      "symbol": "BAJFINANCE",
+      "company_name": "Bajaj Finance Limited",
+      "deal_type": "QIP (Institutions Only)",
+      "cmp": 1131.35,
+      "institutional_floor_price": 1025.0,
+      "capital_raised_cr": 11700.0,
+      "market_cap_cr": 70195.76,
+      "deal_size_pct_mcap": 16.67,
+      "delta_to_floor_pct": 10.38,
+      "zone": "EXTENDED",
+      "zone_label": "+10.38% Extended",
+      "tier1_backed": false,
+      "allottees": [],
+      "filing_pdf": "https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf",
+      "filing_context": "General Updates Bajaj Finance Limited has informed the Exchange about the outcome of QIP 2026 - Special Committee Meeting",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +10.38% EXTENDED\n\n📌 Bajaj Finance Limited (NSE: BAJFINANCE)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹1,025.00\n📊 Current CMP:          ₹1,131.35 (+10.38% vs Anchor)\n📦 Capital Infused:      ₹11,700.00 Cr\n🏢 Dilution / MCap:      ~16.67% Dilution (MCap: ₹70,196 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (QIB)\n📄 Official Filing: https://nsearchives.nseindia.in/corporate/BAJFINANCE_16112026234915_BSENSE_Intimation_Issue_closing_pricing.pdf"
     },
     {
       "symbol": "PTCIL",
@@ -342,7 +437,7 @@
       "deal_type": "QIP (Institutions Only)",
       "institutional_floor_price": 21060.0,
       "capital_raised_cr": 1800.0,
-      "market_cap_cr": 38762.08,
+      "market_cap_cr": 38540.13,
       "allottees": [
         {
           "name": "Qualified Institutional Buyers",
@@ -351,13 +446,13 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/PTCIL_QIP_Closure.pdf",
       "filing_context": "Allotment of 854,700 equity shares at an issue price of Rs 21,060.00 per share aggregating to Rs 1,800 crore pursuant to QIP.",
-      "cmp": 24450.0,
-      "delta_to_floor_pct": 16.1,
-      "deal_size_pct_mcap": 4.64,
+      "cmp": 24310.0,
+      "delta_to_floor_pct": 15.43,
+      "deal_size_pct_mcap": 4.67,
       "tier1_backed": true,
       "zone": "EXTENDED",
-      "zone_label": "+16.1% Extended",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +16.1% EXTENDED\n\n📌 PTC Industries Limited (NSE: PTCIL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹21,060.00\n📊 Current CMP:          ₹24,450.00 (+16.10% vs Anchor)\n📦 Capital Infused:      ₹1,800.00 Cr\n🏢 Dilution / MCap:      ~4.64% Dilution (MCap: ₹38,762 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PTCIL_QIP_Closure.pdf"
+      "zone_label": "+15.43% Extended",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +15.43% EXTENDED\n\n📌 PTC Industries Limited (NSE: PTCIL)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹21,060.00\n📊 Current CMP:          ₹24,310.00 (+15.43% vs Anchor)\n📦 Capital Infused:      ₹1,800.00 Cr\n🏢 Dilution / MCap:      ~4.67% Dilution (MCap: ₹38,540 Cr)\n\n🏦 Key Marquee Allottees:\n- Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/PTCIL_QIP_Closure.pdf"
     },
     {
       "symbol": "SHRIRAMFIN",
@@ -365,7 +460,7 @@
       "deal_type": "Preferential Equity Allotment",
       "institutional_floor_price": 840.93,
       "capital_raised_cr": 3961.0,
-      "market_cap_cr": 186612.15,
+      "market_cap_cr": 186301.95,
       "allottees": [
         {
           "name": "MUFG Bank Ltd",
@@ -374,13 +469,13 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/SHRIRAMFIN_MUFG_Allotment.pdf",
       "filing_context": "Strategic preferential allotment of 47,11,21,055 equity shares at an issue price of Rs 840.93 per share to MUFG Bank Ltd.",
-      "cmp": 995.9,
-      "delta_to_floor_pct": 18.43,
-      "deal_size_pct_mcap": 2.12,
+      "cmp": 989.95,
+      "delta_to_floor_pct": 17.72,
+      "deal_size_pct_mcap": 2.13,
       "tier1_backed": true,
       "zone": "EXTENDED",
-      "zone_label": "+18.43% Extended",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +18.43% EXTENDED\n\n📌 Shriram Finance Limited (NSE: SHRIRAMFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹840.93\n📊 Current CMP:          ₹995.90 (+18.43% vs Anchor)\n📦 Capital Infused:      ₹3,961.00 Cr\n🏢 Dilution / MCap:      ~2.12% Dilution (MCap: ₹186,612 Cr)\n\n🏦 Key Marquee Allottees:\n- MUFG Bank Ltd (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SHRIRAMFIN_MUFG_Allotment.pdf"
+      "zone_label": "+17.72% Extended",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +17.72% EXTENDED\n\n📌 Shriram Finance Limited (NSE: SHRIRAMFIN)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹840.93\n📊 Current CMP:          ₹989.95 (+17.72% vs Anchor)\n📦 Capital Infused:      ₹3,961.00 Cr\n🏢 Dilution / MCap:      ~2.13% Dilution (MCap: ₹186,302 Cr)\n\n🏦 Key Marquee Allottees:\n- MUFG Bank Ltd (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/SHRIRAMFIN_MUFG_Allotment.pdf"
     },
     {
       "symbol": "ASAHIINDIA",
@@ -388,7 +483,7 @@
       "deal_type": "QIP (Institutions Only)",
       "institutional_floor_price": 844.79,
       "capital_raised_cr": 1000.0,
-      "market_cap_cr": 29724.51,
+      "market_cap_cr": 30484.18,
       "allottees": [
         {
           "name": "Eligible Qualified Institutional Buyers",
@@ -397,13 +492,13 @@
       ],
       "filing_pdf": "https://nsearchives.nseindia.com/corporate/ASAHI_QIP_Allotment.pdf",
       "filing_context": "Allotment of 1.18 crore equity shares at an issue price of Rs 844.79 per share to eligible QIBs pursuant to QIP.",
-      "cmp": 1166.0,
-      "delta_to_floor_pct": 38.02,
-      "deal_size_pct_mcap": 3.36,
+      "cmp": 1195.8,
+      "delta_to_floor_pct": 41.55,
+      "deal_size_pct_mcap": 3.28,
       "tier1_backed": true,
       "zone": "EXTENDED",
-      "zone_label": "+38.02% Extended",
-      "alert_card": "🚨 FRESH CAPITAL RADAR | +38.02% EXTENDED\n\n📌 Asahi India Glass Limited (NSE: ASAHIINDIA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹844.79\n📊 Current CMP:          ₹1,166.00 (+38.02% vs Anchor)\n📦 Capital Infused:      ₹1,000.00 Cr\n🏢 Dilution / MCap:      ~3.36% Dilution (MCap: ₹29,725 Cr)\n\n🏦 Key Marquee Allottees:\n- Eligible Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ASAHI_QIP_Allotment.pdf"
+      "zone_label": "+41.55% Extended",
+      "alert_card": "🚨 FRESH CAPITAL RADAR | +41.55% EXTENDED\n\n📌 Asahi India Glass Limited (NSE: ASAHIINDIA)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💰 Issue Price:         ₹844.79\n📊 Current CMP:          ₹1,195.80 (+41.55% vs Anchor)\n📦 Capital Infused:      ₹1,000.00 Cr\n🏢 Dilution / MCap:      ~3.28% Dilution (MCap: ₹30,484 Cr)\n\n🏦 Key Marquee Allottees:\n- Eligible Qualified Institutional Buyers (Marquee FII / Sovereign)\n📄 Official Filing: https://nsearchives.nseindia.com/corporate/ASAHI_QIP_Allotment.pdf"
     }
   ]
 }
