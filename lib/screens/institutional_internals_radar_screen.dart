@@ -130,41 +130,50 @@ class _InstitutionalInternalsRadarScreenState
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "INSTITUTIONAL & RISK RADAR",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+                fontSize: 13,
+                letterSpacing: 0.3,
+              ),
+            ),
+            const SizedBox(height: 1),
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  "INSTITUTIONAL & RISK RADAR",
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 13.5,
-                    letterSpacing: 0.4,
-                  ),
-                ),
-                const SizedBox(width: 6),
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                   decoration: BoxDecoration(
                     color: kAccentGreen.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(3),
                     border: Border.all(color: kAccentGreen.withOpacity(0.3)),
                   ),
                   child: const Text(
                     "DII / FII / VIX",
                     style: TextStyle(
                       color: kAccentGreen,
-                      fontSize: 8,
+                      fontSize: 7.5,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
+                const SizedBox(width: 5),
+                const Flexible(
+                  child: Text(
+                    "Participant OI • India VIX • Breadth",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: kTextMuted, fontSize: 8.5),
+                  ),
+                ),
               ],
-            ),
-            const Text(
-              "Participant OI • India VIX • Breadth • Pledge Risk • Bulk Deals",
-              style: TextStyle(color: kTextMuted, fontSize: 9.5),
             ),
           ],
         ),
@@ -258,11 +267,18 @@ class _InstitutionalInternalsRadarScreenState
             ? "🟢 NET INSTITUTIONAL INFLOW (POSITIVE BIAS)"
             : "🔴 NET INSTITUTIONAL OUTFLOW (DEFENSIVE RISK)");
 
-    final String plainConclusion = isDiiAbsorbing
-        ? "Domestic Institutions (DIIs ₹${diiNet.toStringAsFixed(0)} Cr) ne Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) ko poori tarah absorb kiya hai. Market internals strong hain."
-        : (isNetPositive
-            ? "FIIs aur DIIs dono taraf se net buying active hai. Broad liquidity trend positive bana hua hai."
-            : "Foreign selling domestic buying se zyada hai. Cautious risk regime active hai.");
+    final String plainConclusion;
+    if (fiiNet > 0 && diiNet > 0) {
+      plainConclusion = "FIIs (+₹${fiiNet.toStringAsFixed(0)} Cr) aur DIIs (+₹${diiNet.toStringAsFixed(0)} Cr) dono taraf se dual buying active hai. Broad liquidity trend strong bullish bana hua hai.";
+    } else if (fiiNet > 0 && diiNet <= 0) {
+      plainConclusion = "Foreign institutions ne ₹${fiiNet.toStringAsFixed(0)} Cr ki aggressive net buying ki hai, jo DII profit booking (-₹${diiNet.abs().toStringAsFixed(0)} Cr) se zyada hai. Institutional pulse net positive (+₹${netPulse.toStringAsFixed(0)} Cr) hai.";
+    } else if (fiiNet <= 0 && diiNet > 0) {
+      plainConclusion = isDiiAbsorbing
+          ? "Domestic Institutions (DIIs ₹${diiNet.toStringAsFixed(0)} Cr) ne Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) ko poori tarah absorb kiya hai. Market internals strong hain."
+          : "Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) domestic buying se zyada hai. Cautious risk regime active hai.";
+    } else {
+      plainConclusion = "FIIs aur DIIs dono taraf se net selling chal rahi hai. Defensive risk regime active hai.";
+    }
 
     // Visual chart factor calculations
     final double totalAbsoluteFlow = (diiNet.abs() + fiiNet.abs()).clamp(1.0, 50000.0);
@@ -675,6 +691,17 @@ class _InstitutionalInternalsRadarScreenState
     final bool isNetPositive = netPulse >= 0;
     final Color netColor = isNetPositive ? kAccentGreen : kAccentRed;
 
+    final String shortVerdict;
+    if (fiiNet > 0 && diiNet > 0) {
+      shortVerdict = "Dual Inflow";
+    } else if (fiiNet > 0 && diiNet <= 0) {
+      shortVerdict = "FII Buying";
+    } else if (fiiNet <= 0 && diiNet > 0) {
+      shortVerdict = "DII Absorption";
+    } else {
+      shortVerdict = "Dual Outflow";
+    }
+
     final double fiiFactor = (fiiNet.abs() / 5000.0).clamp(0.12, 1.0);
     final double diiFactor = (diiNet.abs() / 5000.0).clamp(0.12, 1.0);
 
@@ -689,26 +716,29 @@ class _InstitutionalInternalsRadarScreenState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const Icon(Icons.compare_arrows_rounded,
+                  color: kAccentCyan, size: 14),
+              const SizedBox(width: 5),
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.compare_arrows_rounded,
-                        color: kAccentCyan, size: 15),
-                    const SizedBox(width: 5),
-                    Text(
-                      "INSTITUTIONAL CASH (FII vs DII)",
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 0.3,
+                    Flexible(
+                      child: Text(
+                        "INSTITUTIONAL CASH (FII vs DII)",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.3,
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 4),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                       decoration: BoxDecoration(
                         color: const Color(0xFF090D16),
                         borderRadius: BorderRadius.circular(3),
@@ -718,7 +748,7 @@ class _InstitutionalInternalsRadarScreenState
                         tradeDate,
                         style: const TextStyle(
                           color: kTextMuted,
-                          fontSize: 7,
+                          fontSize: 7.5,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -726,14 +756,16 @@ class _InstitutionalInternalsRadarScreenState
                   ],
                 ),
               ),
+              const SizedBox(width: 6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: netColor.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: netColor.withOpacity(0.35)),
                 ),
                 child: Text(
-                  verdict,
+                  shortVerdict,
                   style: TextStyle(
                     color: netColor,
                     fontSize: 8,
@@ -892,27 +924,38 @@ class _InstitutionalInternalsRadarScreenState
     final bool isExtremeSqueeze = fiiLongRatio < 20.0;
     final Color badgeColor = isExtremeSqueeze ? kAccentRed : (fiiLongRatio < 40.0 ? kAccentAmber : kAccentGreen);
 
+    final String shortZoneLabel;
+    if (fiiLongRatio < 20.0) {
+      shortZoneLabel = "Short Squeeze (<20% L)";
+    } else if (fiiLongRatio < 40.0) {
+      shortZoneLabel = "Bearish Hedge (${fiiLongRatio.toStringAsFixed(0)}% L)";
+    } else if (fiiLongRatio > 60.0) {
+      shortZoneLabel = "Bullish (${fiiLongRatio.toStringAsFixed(0)}% L)";
+    } else {
+      shortZoneLabel = "Neutral (${fiiLongRatio.toStringAsFixed(0)}% L)";
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                const Icon(Icons.analytics_rounded, color: kAccentCyan, size: 14),
-                const SizedBox(width: 5),
-                Text(
-                  "NSE INDEX FUTURES OI (NIFTY & BANKNIFTY)",
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.3,
-                  ),
+            const Icon(Icons.analytics_rounded, color: kAccentCyan, size: 14),
+            const SizedBox(width: 5),
+            Expanded(
+              child: Text(
+                "NSE INDEX FUTURES OI (NIFTY & BANKNIFTY)",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.plusJakartaSans(
+                  color: Colors.white,
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.3,
                 ),
-              ],
+              ),
             ),
+            const SizedBox(width: 6),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
               decoration: BoxDecoration(
@@ -921,7 +964,8 @@ class _InstitutionalInternalsRadarScreenState
                 border: Border.all(color: badgeColor.withOpacity(0.4)),
               ),
               child: Text(
-                zoneLabel,
+                shortZoneLabel,
+                maxLines: 1,
                 style: TextStyle(
                   color: badgeColor,
                   fontSize: 7.5,
@@ -1073,23 +1117,23 @@ class _InstitutionalInternalsRadarScreenState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.insights_rounded, color: kAccentCyan, size: 15),
-                  const SizedBox(width: 5),
-                  Text(
-                    "MARKET INTERNALS & CAMOUFLAGE RADAR",
-                    style: GoogleFonts.plusJakartaSans(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.3,
-                    ),
+              const Icon(Icons.insights_rounded, color: kAccentCyan, size: 14),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  "MARKET INTERNALS & CAMOUFLAGE RADAR",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 9.5,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.3,
                   ),
-                ],
+                ),
               ),
+              const SizedBox(width: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
@@ -1115,29 +1159,30 @@ class _InstitutionalInternalsRadarScreenState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "ADVANCES: $adv (${breadthPct.toStringAsFixed(1)}%)",
+                "ADV: $adv (${breadthPct.toStringAsFixed(1)}%)",
                 style: GoogleFonts.robotoMono(
                   color: kAccentGreen,
-                  fontSize: 10,
+                  fontSize: 9.5,
                   fontWeight: FontWeight.w800,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
                   color: const Color(0xFF090D16),
                   borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: Colors.white12),
                 ),
                 child: Text(
-                  "$tot NSE STOCKS AUDITED",
-                  style: const TextStyle(color: Colors.white54, fontSize: 8, fontWeight: FontWeight.bold),
+                  "$tot Audited",
+                  style: const TextStyle(color: Colors.white60, fontSize: 8, fontWeight: FontWeight.bold),
                 ),
               ),
               Text(
-                "DECLINES: $dec (${decPct.toStringAsFixed(1)}%)",
+                "DEC: $dec (${decPct.toStringAsFixed(1)}%)",
                 style: GoogleFonts.robotoMono(
                   color: kAccentRed,
-                  fontSize: 10,
+                  fontSize: 9.5,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -1205,25 +1250,25 @@ class _InstitutionalInternalsRadarScreenState
 
           // India VIX Barometer Section
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.speed_rounded, color: kAccentAmber, size: 13),
-                  const SizedBox(width: 4),
-                  Text(
-                    "INDIA VIX: ${vix.toStringAsFixed(2)}",
-                    style: GoogleFonts.robotoMono(
-                      color: Colors.white,
-                      fontSize: 10.5,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ],
-              ),
+              const Icon(Icons.speed_rounded, color: kAccentAmber, size: 13),
+              const SizedBox(width: 4),
               Text(
-                vixLabel,
-                style: const TextStyle(color: kAccentCyan, fontSize: 8, fontWeight: FontWeight.bold),
+                "INDIA VIX: ${vix.toStringAsFixed(2)}",
+                style: GoogleFonts.robotoMono(
+                  color: Colors.white,
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const Spacer(),
+              Flexible(
+                child: Text(
+                  vixLabel,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: kAccentCyan, fontSize: 8, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -1579,23 +1624,23 @@ class _InstitutionalInternalsRadarScreenState
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.verified_user_rounded, color: kAccentCyan, size: 15),
-                  const SizedBox(width: 5),
-                  Text(
-                    "PROMOTER PLEDGE & MARQUEE BULK DEALS",
-                    style: GoogleFonts.plusJakartaSans(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.3,
-                    ),
+              const Icon(Icons.verified_user_rounded, color: kAccentCyan, size: 14),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  "PROMOTER PLEDGE & MARQUEE BULK DEALS",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 9.5,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.3,
                   ),
-                ],
+                ),
               ),
+              const SizedBox(width: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
