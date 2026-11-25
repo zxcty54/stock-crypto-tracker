@@ -445,6 +445,15 @@ def synthesize_fii_dii_flows(metrics: dict) -> dict:
     net_pulse = round(dii_net + fii_net, 1)
     absorption_ratio = round(abs(dii_net) / max(1.0, abs(fii_net)), 2) if fii_net < 0 else round(dii_net / max(1.0, fii_net), 2)
 
+    if fii_net >= 0 and dii_net >= 0:
+        regime_verdict = "Synchronized Dual Inflows"
+    elif fii_net >= 0 and dii_net < 0:
+        regime_verdict = "FII Inflow / DII Booking"
+    elif fii_net < 0 and dii_net >= 0:
+        regime_verdict = f"DII Absorption Moat ({absorption_ratio}x SIP Cushion)"
+    else:
+        regime_verdict = "Dual Outflow Pressure"
+
     return {
         "fii_net_crores": round(fii_net, 1),
         "dii_net_crores": round(dii_net, 1),
@@ -454,7 +463,7 @@ def synthesize_fii_dii_flows(metrics: dict) -> dict:
         "dii_action": "NET_BUYER" if dii_net > 0 else "NET_SELLER",
         "trade_date": trade_date,
         "data_source": source,
-        "regime_verdict": f"DII Absorption Moat ({absorption_ratio}x SIP Cushion)" if fii_net < 0 else "Synchronized Dual Inflows",
+        "regime_verdict": regime_verdict,
         "dxy_correlation_note": f"DXY at {dxy} & US 10Y at {us10y}% create FII outflow pressure, absorbed by domestic SIP liquidity."
     }
 

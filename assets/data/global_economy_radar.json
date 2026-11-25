@@ -90,8 +90,8 @@
     "dii_action": "NET_SELLER",
     "trade_date": "23-Nov-2026",
     "data_source": "NSE_OFFICIAL_PROVISIONAL",
-    "regime_verdict": "Synchronized Dual Inflows",
-    "dxy_correlation_note": "DXY at 103.82 & US 10Y at 4.9% create FII outflow pressure, absorbed by domestic SIP liquidity."
+    "regime_verdict": "FII Inflow / DII Booking",
+    "dxy_correlation_note": "FII aggressive inflows (+\u20b95673 Cr) overcome DII profit booking (-\u20b92760 Cr), keeping net pulse bullish (+\u20b92913 Cr)."
   },
   "fii_dii_derivatives": {
     "fii_long_ratio": 20.1,

@@ -779,6 +779,13 @@ def format_gmp_dashboard(ipos: list[dict], as_of_date: str | None = None) -> str
     """Curated mobile-optimized template for Daily/Weekly Mainboard IPO GMP Dashboard."""
     date_str = as_of_date or datetime.now(IST).strftime("%d %b %Y")
     today_str = datetime.now(IST).strftime("%Y-%m-%d")
+    if as_of_date:
+        for fmt in ("%d-%b-%Y", "%d %b %Y", "%Y-%m-%d"):
+            try:
+                today_str = datetime.strptime(as_of_date, fmt).strftime("%Y-%m-%d")
+                break
+            except Exception:
+                pass
 
     lines = []
     for ipo in ipos:
