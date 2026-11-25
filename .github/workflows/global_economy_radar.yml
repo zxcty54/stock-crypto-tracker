@@ -4,7 +4,11 @@ on:
   schedule:
     # 1. Post-Market Close: Mon-Fri at 13:30 UTC (7:00 PM IST) for fresh FII/DII & NSE F&O participant data
     - cron: '30 13 * * 1-5'
-    # 2. Pre-Market Monday: 3:30 AM UTC (9:00 AM IST) for weekly global macro alignment
+    # 2. Evening Confirmation: Mon-Fri at 15:00 UTC (8:30 PM IST) after full Bhavcopy/OI settlement
+    - cron: '00 15 * * 1-5'
+    # 3. Night Catchup: Mon-Fri at 17:30 UTC (11:00 PM IST) ensuring late data is never missed
+    - cron: '30 17 * * 1-5'
+    # 4. Pre-Market Monday: 3:30 AM UTC (9:00 AM IST) for weekly global macro alignment
     - cron: '30 3 * * 1'
   workflow_dispatch:
 
@@ -47,6 +51,7 @@ jobs:
             echo "ℹ️ No changes in global economy radar data."
           else
             git commit -m "🌍 Auto-Update: Global Economy Pressure & Expansion Radar [$(date +'%d-%b-%Y')]"
-            git push origin HEAD:${{ github.ref }}
-            echo "✅ Global economy radar pushed to ${{ github.ref }}!"
+            git pull --rebase origin main
+            git push origin main
+            echo "✅ Global economy radar pushed to main!"
           fi

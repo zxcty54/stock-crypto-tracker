@@ -2,8 +2,9 @@ name: Hourly NSE Scraper & AI Summarizer Pipeline
 
 on:
   schedule:
-    # 24 ghante har 30 min (17th & 47th minute offset to avoid queue drop)
-    - cron: '17,47 * * * *'
+    # Post-market: Har 2 ghante par 4:00 PM IST se agle din 8:30 AM IST tak (Market hours 9:00 AM - 4:00 PM OFF)
+    # 10:30 UTC (16:00 IST), 12:30 UTC (18:00 IST), 14:30 UTC (20:00 IST), 16:30 UTC (22:00 IST), 18:30 UTC (00:00 IST), 20:30 UTC (02:00 IST), 22:30 UTC (04:00 IST), 00:30 UTC (06:00 IST), 02:30 UTC (08:00 IST)
+    - cron: '30 0,2,10,12,14,16,18,20,22 * * *'
   workflow_dispatch:
 
 jobs:
