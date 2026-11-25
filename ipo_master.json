@@ -13,7 +13,7 @@
     "allotment_date": "2026-12-07",
     "demat_credit_date": "2026-12-08",
     "listing_date": "2026-12-10",
-    "price_band": "₹60 - ₹65",
+    "price_band": "Rs.60 to Rs.65",
     "cut_off_price": 148,
     "face_value": 5,
     "lot_size": 100,
@@ -27,7 +27,33 @@
     "est_listing_price": "—",
     "subscription": {
       "status": "Awaiting Bidding",
-      "note": "NSE Bidding opens on 02-Dec-2026"
+      "note": "NSE Bidding opens on 02-Dec-2026",
+      "shares_offered": "0",
+      "source": "NSE India Official Bidding Feed",
+      "demand_graph": {
+        "total_issue_size": "27000000",
+        "total_bids": null,
+        "cut_off_bids": null,
+        "no_of_times": null,
+        "price_levels": [
+          {
+            "price": ">= No. of Bids",
+            "shares": null
+          },
+          {
+            "price": ">= NSE Confirmed Bid Quantity",
+            "shares": null
+          },
+          {
+            "price": ">= Cumulative Confirmed Bid Quantity",
+            "shares": null
+          }
+        ],
+        "source": "NSE India Official Demand Graph (issue-information)"
+      },
+      "total": "0.00x",
+      "total_bids": "0",
+      "updated_at": "Updated as on null"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -52,9 +78,30 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T09:54:13.942947+05:30",
+    "last_updated": "2026-11-25T18:00:13.439886+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+₹22.00"
+    "last_posted_gmp": "+₹22.00",
+    "demand_graph": {
+      "total_issue_size": "27000000",
+      "total_bids": null,
+      "cut_off_bids": null,
+      "no_of_times": null,
+      "price_levels": [
+        {
+          "price": ">= No. of Bids",
+          "shares": null
+        },
+        {
+          "price": ">= NSE Confirmed Bid Quantity",
+          "shares": null
+        },
+        {
+          "price": ">= Cumulative Confirmed Bid Quantity",
+          "shares": null
+        }
+      ],
+      "source": "NSE India Official Demand Graph (issue-information)"
+    }
   },
   {
     "id": "matangi-rubber",
@@ -107,7 +154,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-25T09:54:13.942947+05:30"
+    "last_updated": "2026-11-25T18:00:13.439886+05:30"
   },
   {
     "id": "integris-medtech",
@@ -162,7 +209,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T09:54:13.942947+05:30",
+    "last_updated": "2026-11-25T18:00:13.439886+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹35.00"
   },
@@ -245,7 +292,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T09:54:13.942947+05:30",
+    "last_updated": "2026-11-25T18:00:13.439886+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
@@ -393,7 +440,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-25T09:54:13.942947+05:30",
+    "last_updated": "2026-11-25T18:00:13.439886+05:30",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹3.00",
     "posted_events": [
@@ -514,7 +561,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-25T09:54:13.942947+05:30"
+    "last_updated": "2026-11-25T18:00:13.439886+05:30"
   },
   {
     "id": "vishal-mega-mart",
