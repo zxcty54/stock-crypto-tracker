@@ -38,10 +38,10 @@ NOW = datetime.now(IST)
 CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
 
 MODEL_REGISTRY = [
-    {"name": "llama-3.3-70b-versatile", "provider": "groq"},
-    {"name": "llama-3.1-8b-instant", "provider": "groq"},
-    {"name": "gemini-1.5-flash", "provider": "google"},
-    {"name": "gemini-2.0-flash", "provider": "google"}
+    {"name": "gemini-3.5-flash-lite", "provider": "google"},
+    {"name": "gemini-3.1-flash-lite", "provider": "google"},
+    {"name": "openai/gpt-oss-120b", "provider": "groq"},
+    {"name": "openai/gpt-oss-20b", "provider": "groq"}
 ]
 
 GROQ_KEYS = [os.environ.get(k).strip() for k in ["GROQ_API_KEY", "GROQ_API_KEY2"] if os.environ.get(k)]
