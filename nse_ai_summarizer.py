@@ -38,18 +38,17 @@ NOW = datetime.now(IST)
 CUTOFF_24H_ANALYZED = NOW - timedelta(hours=24)
 
 MODEL_REGISTRY = [
-    {"name": "openai/gpt-oss-20b", "provider": "groq"},
-    {"name": "openai/gpt-oss-120b", "provider": "groq"},
-    {"name": "gemini-3.5-flash-lite", "provider": "google"},
-    {"name": "gemini-3.1-flash-lite", "provider": "google"}
+    {"name": "llama-3.3-70b-versatile", "provider": "groq"},
+    {"name": "llama-3.1-8b-instant", "provider": "groq"},
+    {"name": "gemini-1.5-flash", "provider": "google"},
+    {"name": "gemini-2.0-flash", "provider": "google"}
 ]
 
 GROQ_KEYS = [os.environ.get(k).strip() for k in ["GROQ_API_KEY", "GROQ_API_KEY2"] if os.environ.get(k)]
 GOOGLE_KEYS = [os.environ.get(k).strip() for k in ["GOOGLE_API_KEY", "GOOGLE_API_KEY2", "GEMINI_API_KEY"] if os.environ.get(k)]
 
 if not GROQ_KEYS and not GOOGLE_KEYS:
-    print("❌ FATAL: No API keys found! Exiting.")
-    exit(1)
+    print("⚠️ WARNING: No Groq or Google API keys found. Running in high-precision structured fallback mode.")
 
 groq_key_idx = 0
 google_key_idx = 0
@@ -267,6 +266,9 @@ def call_google(model_name, payload):
 
 def call_hybrid_ai(batch_prompt):
     global current_model_idx
+    if not GROQ_KEYS and not GOOGLE_KEYS:
+        return None
+
     total = len(MODEL_REGISTRY)
 
     while current_model_idx < total:
@@ -344,6 +346,110 @@ def push_to_target_repo():
             print(f"❌ Target repo push failed with status {put_res.status_code}: {put_res.text}")
     except Exception as e:
         print(f"❌ Error during target repo push: {e}")
+
+# ============================================================
+# STRUCTURED DETERMINISTIC FALLBACK EXTRACTOR
+# ============================================================
+
+def create_structured_fallback_item(itm, b_idx):
+    clean_dt = str(itm.get("broadcast_date") or "").replace(" IST", "").strip()
+    cat = itm.get("category", "GENERAL")
+    sym = itm.get("symbol", "")
+    comp = itm.get("company_name") or sym
+    subj = itm.get("subject", "")
+    summ = itm.get("summary", "")
+    pdf_text = itm.get("details", "") or ""
+    link = itm.get("pdf_link") or "https://www.nseindia.com"
+    full_text = f"{subj}\n{summ}\n{pdf_text}"
+
+    category_icons = {
+        "BUYBACK": "💰", "DIVIDEND": "💵", "BONUS": "🎁", "SPLIT": "✂️", "RESULT": "📊",
+        "ORDER": "📜", "CONTRACT": "📜", "CAPACITY_EXPANSION": "🏭", "COMMERCIAL_PRODUCTION": "🏭",
+        "ACQUISITION": "🤝", "JV": "🤝", "STRATEGIC_PARTNERSHIP": "🤝", "MERGER": "🔄",
+        "DIVESTMENT": "🔄", "FUNDRAISING": "💰", "NEW_PRODUCT": "🚀", "NEW_BUSINESS": "⚡", "GENERAL": "🏢"
+    }
+    icon = category_icons.get(cat, "⚡")
+
+    key_details = []
+
+    if cat in ("ORDER", "CONTRACT"):
+        val_m = re.search(r'(?:Rs\.?|INR)\s*([0-9.,]+)\s*(?:Crore|Cr|lakh|Lakh)', full_text, re.I)
+        if val_m:
+            key_details.append(f"- <b>Order Value:</b> {val_m.group(0).strip()}")
+        client_m = re.search(r'(?:from|awarded by|client)\s+([A-Z][A-Za-z0-9\s.,&\'\(\)]+?(?:Pvt\.?\s*Ltd|Limited|Corporation|Developers|Authority|Company))', full_text)
+        if client_m:
+            key_details.append(f"- <b>Client:</b> {client_m.group(1).strip()[:50]}")
+        period_m = re.search(r'(?:period of|tenure of|work period is|execution within)\s*(\d+\s*months|\d+\s*years|\d+\s*days)', full_text, re.I)
+        if period_m:
+            key_details.append(f"- <b>Tenure:</b> {period_m.group(1).strip()}")
+
+    elif cat == "BUYBACK":
+        price_m = re.search(r'(?:price not exceeding|buyback price of|at a price of|price of)\s*(?:INR|Rs\.?)?\s*([0-9.,]+)', full_text, re.I)
+        if price_m:
+            key_details.append(f"- <b>Buyback Price:</b> ₹{price_m.group(1).strip()}")
+        rec_m = re.search(r'record date[^\w]+([\w\s,]+?\d{4})', full_text, re.I)
+        if rec_m:
+            key_details.append(f"- <b>Record Date:</b> {rec_m.group(1).strip()[:40]}")
+
+    elif cat in ("JV", "STRATEGIC_PARTNERSHIP"):
+        partner_m = re.search(r'(?:with|JV with|partnered with)\s+([A-Z][A-Za-z0-9\s.,&\'\(\)]+?(?:Co\.?,?\s*Ltd|Limited|Systems|Corporation|Pvt|LLC|Inc))', full_text, re.I)
+        if partner_m:
+            partner_name = partner_m.group(1).strip()[:50]
+            key_details.append(f"- <b>Partner:</b> {partner_name}")
+
+    elif cat in ("SPLIT", "BONUS"):
+        ratio_m = re.search(r'(?:from|of)\s*(?:Rs\.?|INR)?\s*(\d+)[^0-9]+to\s*(?:Rs\.?|INR)?\s*(\d+)', full_text, re.I)
+        if ratio_m:
+            key_details.append(f"- <b>Ratio:</b> ₹{ratio_m.group(1)} to ₹{ratio_m.group(2)}")
+
+    elif cat == "COMMERCIAL_PRODUCTION":
+        cap_m = re.search(r'(\d+(?:\.\d+)?\s*(?:MW|GW|MT|tons|KLPD|MWp))', full_text, re.I)
+        if cap_m:
+            key_details.append(f"- <b>Capacity:</b> {cap_m.group(1).strip()}")
+        key_details.append("- <b>Status:</b> Commercial Production Commenced")
+
+    elif cat == "RESULT":
+        rev_m = re.search(r'(?:revenue|income)[^\w\d]+(?:Rs\.?|INR)?\s*([0-9.,]+)\s*(?:Cr|Crore)', full_text, re.I)
+        if rev_m:
+            key_details.append(f"- <b>Revenue:</b> ₹{rev_m.group(1)} Cr")
+        pat_m = re.search(r'(?:profit|pat|net profit)[^\w\d]+(?:Rs\.?|INR)?\s*([0-9.,]+)\s*(?:Cr|Crore)', full_text, re.I)
+        if pat_m:
+            key_details.append(f"- <b>PAT:</b> ₹{pat_m.group(1)} Cr")
+
+    key_details.append(f"- <b>Filing Subject:</b> {subj[:70]}")
+    key_details_str = "\n".join(key_details)
+
+    clean_summary = (summ or subj or "Official corporate filing submitted to NSE.").strip()
+    clean_summary = re.sub(r'^.*?has (?:informed|submitted to) the Exchange\s*(?:about|regarding)?\s*', '', clean_summary, flags=re.I).strip(' "\'')
+    clean_summary = re.sub(r'^(?:a\s+)?press release dated .*?titled\s*', '', clean_summary, flags=re.I).strip(' "\'')
+    clean_summary = re.sub(r'^(?:,\s*|about\s+|regarding\s+|that\s+)', '', clean_summary, flags=re.I).strip(' "\'')
+    if not clean_summary or len(clean_summary) < 15:
+        clean_summary = subj
+    if clean_summary:
+        clean_summary = clean_summary[0].upper() + clean_summary[1:]
+
+    formatted_post = (
+        f"{icon} <b>#{cat}</b> | <b>{comp} (NSE: {sym})</b>\n\n"
+        f"<b>{subj[:120]}</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        f"🔹 <b>Key Details:</b>\n"
+        f"{key_details_str}\n\n"
+        f"📌 <b>What happened:</b>\n"
+        f"↳ {clean_summary}\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📌 <b>Source:</b> <a href=\"{link}\">Official NSE Corporate Filing</a>"
+    )
+
+    reason = f"{sym}: {clean_summary[:120]}"
+
+    return {
+        "input_id": b_idx,
+        "content_worthy": True,
+        "worthiness_reason": reason,
+        "event_type": cat,
+        "headline": subj[:120],
+        "telegram_post": formatted_post,
+    }
 
 # ============================================================
 # MAIN ORCHESTRATOR
@@ -469,33 +575,11 @@ def process_corporate_actions_feed():
         batch_result = call_hybrid_ai(prompt_str)
 
         if not batch_result:
-            print(f"⚠️ Batch {batch_counter} AI unavailable. Using structured fallback...")
+            print(f"⚠️ Batch {batch_counter} AI unavailable. Using high-precision structured fallback...")
             batch_result = []
             for b_idx, itm in enumerate(batch, 1):
-                clean_dt = str(itm.get("broadcast_date") or "").replace(" IST", "").strip()
-                cat = itm.get("category", "GENERAL")
-                sym = itm.get("symbol", "")
-                comp = itm.get("company_name") or sym
-                subj = itm.get("subject", "")
-                summ = itm.get("summary", "")
-                link = itm.get("pdf_link") or "https://www.nseindia.com"
-
-                formatted_post = (
-                    f"🏢 <b>{comp} ({sym})</b>\n"
-                    f"🏷️ <i>Corporate Filing · {cat}</i>\n"
-                    f"📅 <i>{clean_dt}</i>\n\n"
-                    f"📄 <b>Subject:</b> {subj}\n"
-                    f"📝 <b>Summary:</b> {summ or 'Filing submitted to stock exchange.'}\n\n"
-                    f"📌 <b>Source:</b> <a href=\"{link}\">Official NSE Corporate Filing</a>"
-                )
-                batch_result.append({
-                    "input_id": b_idx,
-                    "content_worthy": True,
-                    "worthiness_reason": f"Qualified NSE {cat} announcement",
-                    "event_type": cat,
-                    "headline": subj[:120],
-                    "telegram_post": formatted_post,
-                })
+                fallback_entry = create_structured_fallback_item(itm, b_idx)
+                batch_result.append(fallback_entry)
 
         result_map = {res.get("input_id"): res for res in batch_result if isinstance(res, dict)}
 
