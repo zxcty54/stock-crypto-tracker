@@ -54,7 +54,12 @@ class CorporateAnnouncement {
   // Telegram post se clean breakdown nikalne ke helpers
   Map<String, String> get parsedKeyDetails {
     final details = <String, String>{};
-    if (telegramPost.isEmpty) return details;
+    if (telegramPost.isEmpty) {
+      if (category.isNotEmpty && category != 'GENERAL') {
+        details['Category'] = category.replaceAll('_', ' ');
+      }
+      return details;
+    }
 
     final lines = telegramPost.split('\n');
     bool inKeyDetails = false;
@@ -80,12 +85,40 @@ class CorporateAnnouncement {
         }
       }
     }
+
+    // Fallback: If no structured Key Details block was present, extract Subject & Category
+    if (details.isEmpty) {
+      for (var line in lines) {
+        final clean = line.replaceAll(RegExp(r'<[^>]*>'), '').trim();
+        if (clean.contains('Subject:')) {
+          final parts = clean.split('Subject:');
+          if (parts.length > 1 && parts[1].trim().isNotEmpty) {
+            details['Subject'] = parts[1].trim();
+            break;
+          }
+        }
+      }
+      if (category.isNotEmpty && category != 'GENERAL') {
+        details['Category'] = category.replaceAll('_', ' ');
+      }
+    }
+
     return details;
   }
 
   String get parsedWhatHappened {
-    if (telegramPost.isEmpty) return worthinessReason;
+    if (telegramPost.isEmpty) {
+      if (worthinessReason.isNotEmpty &&
+          !worthinessReason.startsWith('Qualified NSE') &&
+          !worthinessReason.toLowerCase().startsWith('dropped:')) {
+        return worthinessReason;
+      }
+      return headline.isNotEmpty ? headline : 'Corporate filing submitted to stock exchange.';
+    }
+
     final lines = telegramPost.split('\n');
+
+    // 1. Primary: Look for standard "What happened:" block
     for (int i = 0; i < lines.length; i++) {
       final clean = lines[i].replaceAll(RegExp(r'<[^>]*>'), '').trim();
       if (clean.contains('What happened:')) {
@@ -99,7 +132,30 @@ class CorporateAnnouncement {
         }
       }
     }
-    return worthinessReason;
+
+    // 2. Secondary: Look for "Summary:" line in post (structured fallback)
+    for (var line in lines) {
+      final clean = line.replaceAll(RegExp(r'<[^>]*>'), '').trim();
+      if (clean.contains('Summary:')) {
+        final parts = clean.split('Summary:');
+        if (parts.length > 1 && parts[1].trim().isNotEmpty) {
+          final text = parts[1].trim();
+          if (!text.toLowerCase().startsWith('filing submitted')) {
+            return text;
+          }
+        }
+      }
+    }
+
+    // 3. Tertiary: Check if worthinessReason has a real descriptive sentence
+    if (worthinessReason.isNotEmpty &&
+        !worthinessReason.startsWith('Qualified NSE') &&
+        !worthinessReason.toLowerCase().startsWith('dropped:')) {
+      return worthinessReason;
+    }
+
+    // 4. Default: Headline or informative fallback
+    return headline.isNotEmpty ? headline : 'Corporate filing submitted to stock exchange.';
   }
 }
 
