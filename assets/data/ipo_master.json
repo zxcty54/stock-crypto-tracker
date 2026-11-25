@@ -1,5 +1,53 @@
 [
   {
+    "id": "encube-ethicals",
+    "company_name": "Encube Ethicals",
+    "symbol": "",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2026-12-03",
+    "close_date": "2026-12-07",
+    "allotment_date": null,
+    "listing_date": null,
+    "price_band": "₹0",
+    "lot_size": null,
+    "issue_size_cr": "",
+    "fresh_issue_cr": "",
+    "ofs_cr": "",
+    "gmp": "",
+    "gmp_percent": "",
+    "gmp_unofficial": true,
+    "est_listing_price": "",
+    "kostak": "",
+    "sub2sauda": "",
+    "subscription": {},
+    "registrar": {
+      "name": "",
+      "url": ""
+    },
+    "drhp_objects": [],
+    "reservation": {},
+    "financials": {},
+    "kpis": {},
+    "promoter_holding": {},
+    "lead_managers": [],
+    "drhp_url": "",
+    "about": "",
+    "detail_url": "/encube-ethicals-ipo-details/",
+    "sources": [
+      "ipowatch"
+    ],
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "cut_off_price": 0,
+    "created_at": "2026-11-26T04:30:29.509583+05:30",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ],
+    "telegraph_url": "https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25",
+    "last_posted_gmp": ""
+  },
+  {
     "id": "monomark-engineering",
     "company_name": "Monomark Engineering Limited",
     "symbol": "MONOMARK",
@@ -78,7 +126,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T18:00:13.439886+05:30",
+    "last_updated": "2026-11-26T04:30:29.509583+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹22.00",
     "demand_graph": {
@@ -154,7 +202,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-25T18:00:13.439886+05:30"
+    "last_updated": "2026-11-26T04:30:29.509583+05:30"
   },
   {
     "id": "integris-medtech",
@@ -209,7 +257,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T18:00:13.439886+05:30",
+    "last_updated": "2026-11-26T04:30:29.509583+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹35.00"
   },
@@ -221,7 +269,7 @@
     "exchange": "NSE & BSE",
     "series": "EQ",
     "sector": "Luxury Hospitality & Institutional Catering",
-    "status": "UPCOMING",
+    "status": "OPEN",
     "open_date": "2026-11-26",
     "close_date": "2026-11-30",
     "allotment_date": "2026-12-01",
@@ -245,7 +293,7 @@
       "shares_offered": "0",
       "source": "NSE India Official Bidding Feed",
       "demand_graph": {
-        "total_issue_size": "19443116",
+        "total_issue_size": "10474048",
         "total_bids": null,
         "cut_off_bids": null,
         "no_of_times": null,
@@ -292,11 +340,11 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-25T18:00:13.439886+05:30",
+    "last_updated": "2026-11-26T04:30:29.509583+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
-      "total_issue_size": "19443116",
+      "total_issue_size": "10474048",
       "total_bids": null,
       "cut_off_bids": null,
       "no_of_times": null,
@@ -315,7 +363,10 @@
         }
       ],
       "source": "NSE India Official Demand Graph (issue-information)"
-    }
+    },
+    "posted_events": [
+      "IPO_OPENS_TODAY"
+    ]
   },
   {
     "id": "mahanadi-coalfields",
@@ -440,7 +491,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-25T18:00:13.439886+05:30",
+    "last_updated": "2026-11-26T04:30:29.509583+05:30",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹3.00",
     "posted_events": [
