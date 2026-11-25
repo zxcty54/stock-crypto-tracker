@@ -1,8 +1,50 @@
 {
-  "generated_at": "2026-11-25 18:41:38 IST",
-  "worthy_count": 33,
-  "skipped_count": 2,
+  "generated_at": "2026-11-25 23:09:43 IST",
+  "worthy_count": 36,
+  "skipped_count": 3,
   "content_feed": [
+    {
+      "hash": "5b6a0469427c",
+      "symbol": "CEWATER",
+      "company_name": "Concord Enviro Systems Limited",
+      "category": "JV",
+      "event_type": "JOINT_VENTURE",
+      "broadcast_date": "25-Nov-2026 19:29:00",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/CONCORDENVIRO_25112026192843_Intimation_for_Investment_in_REPL.pdf",
+      "headline": "Concord Enviro Systems makes further investment of Rs. 6.17 Cr in joint venture Roserve Enviro",
+      "content_worthy": true,
+      "worthiness_reason": "Material corporate investment in a joint venture via rights issue using IPO proceeds.",
+      "telegram_post": "🤝 <b>#JOINT_VENTURE</b> | <b>Concord Enviro Systems Limited (NSE: CEWATER)</b>\n\n<b>Concord Enviro Systems makes further investment of Rs. 6.17 Cr in Roserve Enviro</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Investment Amount:</b> Rs. 6,17,41,200\n- <b>Shares Subscribed:</b> 44,740 Equity Shares\n- <b>Issue Price:</b> Rs. 1,380 per share\n- <b>Target Entity:</b> Roserve Enviro Private Limited (JV)\n\n📌 <b>What happened:</b>\n↳ Concord Enviro Systems has made a further investment in its joint venture, Roserve Enviro Private Limited, by subscribing to 44,740 equity shares on a rights basis, funded through IPO proceeds.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/CONCORDENVIRO_25112026192843_Intimation_for_Investment_in_REPL.pdf\">NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-25 23:09:43 IST"
+    },
+    {
+      "hash": "aa7c7adbe3e3",
+      "symbol": "ENRIN",
+      "company_name": "Siemens Energy India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "25-Nov-2026 20:19:54",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/ENRIN_25112026201025_BoardMeetingOutcome25112026signed.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": true,
+      "worthiness_reason": "ENRIN: The financial results for the period ended September 30, 2026.",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Siemens Energy India Limited (NSE: ENRIN)</b>\n\n<b>Outcome of Board Meeting</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Filing Subject:</b> Outcome of Board Meeting\n\n📌 <b>What happened:</b>\n↳ The financial results for the period ended September 30, 2026.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/ENRIN_25112026201025_BoardMeetingOutcome25112026signed.pdf\">Official NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-25 23:09:22 IST"
+    },
+    {
+      "hash": "509983cd9618",
+      "symbol": "ACCELYA",
+      "company_name": "Accelya Solutions India Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "25-Nov-2026 21:14:47",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/ACCELYA_25112026211341_FinancialResultswithPressReleaseQ1F27.pdf",
+      "headline": "Updates",
+      "content_worthy": true,
+      "worthiness_reason": "ACCELYA: Submission of financial results in machine readable format for the quarter ended on 30 September 2026 with press release",
+      "telegram_post": "📊 <b>#RESULT</b> | <b>Accelya Solutions India Limited (NSE: ACCELYA)</b>\n\n<b>Updates</b>\n━━━━━━━━━━━━━━━━━━━━━━\n\n🔹 <b>Key Details:</b>\n- <b>Filing Subject:</b> Updates\n\n📌 <b>What happened:</b>\n↳ Submission of financial results in machine readable format for the quarter ended on 30 September 2026 with press release  '.\n━━━━━━━━━━━━━━━━━━━━━━\n📌 <b>Source:</b> <a href=\"https://nsearchives.nseindia.in/corporate/ACCELYA_25112026211341_FinancialResultswithPressReleaseQ1F27.pdf\">Official NSE Corporate Filing</a>",
+      "analyzed_at": "2026-11-25 23:09:22 IST"
+    },
     {
       "hash": "0489203914e4",
       "symbol": "HILINFRA",
@@ -467,6 +509,20 @@
     }
   ],
   "skipped_archive": [
+    {
+      "hash": "af45b18c4f48",
+      "symbol": "SIMBHALS",
+      "company_name": "Simbhaoli Sugars Limited",
+      "category": "RESULT",
+      "event_type": "RESULT",
+      "broadcast_date": "25-Nov-2026 18:44:40",
+      "pdf_link": "https://nsearchives.nseindia.in/corporate/SIMBHALS_25112026183853_Finaloutcome25Nov2026forupload.pdf",
+      "headline": "Outcome of Board Meeting",
+      "content_worthy": false,
+      "worthiness_reason": "Financial results filing lacks explicit numeric values for Revenue and PAT in the text summary provided.",
+      "telegram_post": "",
+      "analyzed_at": "2026-11-25 23:09:43 IST"
+    },
     {
       "hash": "bf7da317a267",
       "symbol": "VTMLTD",
