@@ -1,6 +1,6 @@
 {
-  "last_updated": "26-Nov-2026 18:15 IST",
-  "total_items": 12,
+  "last_updated": "26-Nov-2026 19:36 IST",
+  "total_items": 47,
   "live_feeds": [
     {
       "id": "feed_01",
@@ -10,10 +10,10 @@
       "theme_icon": "🌾",
       "source_name": "ISMA / ChiniMandi",
       "source_type": "ASSOCIATION",
-      "title": "Cane Crushing Season Commences: OMCs Issue 145 Cr Litre Ethanol Allocation",
-      "summary": "Sugar mills across Uttar Pradesh and Maharashtra initiate crushing for SS 2026-27. Government maintains minimum selling price (MSP) of sugar at ₹38.50/kg while raising procurement rates for ethanol produced from B-Heavy molasses.",
+      "title": "Cane Crushing Season Commences: OMCs Issue 145 Cr Litre Ethanol Allocation At Higher B-Heavy Tariffs",
+      "summary": "Sugar mills across Uttar Pradesh and Maharashtra initiate crushing for SS 2026-27. Government maintains minimum selling price (MSP) of sugar at ₹38.50/kg while raising procurement rates for ethanol produced from B-Heavy molasses and direct cane juice.",
       "published_at": "25 Nov 2026",
-      "kya_dekhna_hai": "Ethanol blending percentage touches 14.8%. B-heavy and direct cane juice diversion helps mills clear cane dues promptly without inventory pileup.",
+      "kya_dekhna_hai": "National ethanol blending rate (now ~14.8%) vs target of 20%. Track ex-mill sugar prices in UP/Maharashtra (benchmark ₹38.20 - ₹38.80/kg).",
       "source_url": "https://ismaindia.org/resources",
       "key_tickers": [
         "BALRAMCHIN",
@@ -24,16 +24,142 @@
     },
     {
       "id": "feed_02",
+      "sector_id": 2,
+      "sector_name": "Cotton / textiles / garments",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "CAI / Indian Textile Journal",
+      "source_type": "ORIGINAL",
+      "title": "CAI Estimates 2026-27 Cotton Crop at 325 Lakh Bales; Spinning Mill Spindle Utilization Hits 86%",
+      "summary": "Cotton Association of India (CAI) releases crop balance sheet with opening stocks of 35 lakh bales and domestic consumption pegged at 318 lakh bales. Domestic spot Shankar-6 raw cotton prices trade rangebound at ₹56,200 per candy.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Shankar-6 spot raw cotton prices vs international Cotlook A-Index. Spinning spread margin between raw cotton and 30s combed cotton yarn.",
+      "source_url": "https://caionline.in/reports/cai/monthly",
+      "key_tickers": [
+        "PAGEIND",
+        "KPRMILL",
+        "GOKEX",
+        "TRIDENT",
+        "VTL"
+      ]
+    },
+    {
+      "id": "feed_03",
+      "sector_id": 3,
+      "sector_name": "Fertilisers",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "FAI Delhi",
+      "source_type": "ASSOCIATION",
+      "title": "Nutrient-Based Subsidy (NBS) Notified for Rabi Season; Gas Pooling Eases Urea Feedstock Costs",
+      "summary": "Department of Fertilisers notifies balanced NBS subsidy rates for Nitrogen, Phosphatic, and Potassic nutrients. Gas pooling mechanism caps delivered pooled gas prices for domestic urea plants at $12.8/mmbtu, ensuring plant viability.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Cabinet NBS subsidy outlays and monthly government subsidy disbursal clearance cadence to fertilizer manufacturers.",
+      "source_url": "https://www.faidelhi.org/",
+      "key_tickers": [
+        "COROMANDEL",
+        "CHAMBLFERT",
+        "GNFC",
+        "FACT",
+        "GSFC"
+      ]
+    },
+    {
+      "id": "feed_04",
+      "sector_id": 4,
+      "sector_name": "Agrochemicals / pesticides",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "CIB&RC / Indian Chemical News",
+      "source_type": "REGULATOR",
+      "title": "CIB&RC Clears 24 New Generic Molecules; Chinese Raw Material Dumping Spread Stabilizes",
+      "summary": "Central Insecticide Board & Registration Committee approves registration applications for specialized fungicide combinations and off-patent herbicide molecules. Technical grade active ingredient pricing finds floor after months of channel destocking.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "Raw material active ingredient prices imported from China vs domestic formulation realization spreads; CIB&RC Gazette notifications on banned formulations.",
+      "source_url": "https://ppqs.gov.in/divisions/cib-rc/news-update",
+      "key_tickers": [
+        "PIIND",
+        "UPL",
+        "DHANUKA",
+        "RALLIS",
+        "ASTEC"
+      ]
+    },
+    {
+      "id": "feed_05",
+      "sector_id": 5,
+      "sector_name": "Edible oils / oilseeds",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "SEA India",
+      "source_type": "ORIGINAL",
+      "title": "SEA Reports Monthly Vegetable Oil Imports at 1.42 MT; Domestic Mustard Seed Sowing Up 6.8%",
+      "summary": "Solvent Extractors Association of India updates import telemetry: Crude Palm Oil imports total 8.2 lakh tonnes, followed by Soybean Oil (3.4 lakh tonnes) and Sunflower Oil (2.6 lakh tonnes). Port inventory stands at comfortable 28 days of national consumption.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "BMD (Bursa Malaysia Derivatives) palm oil futures vs domestic refined oil wholesale spot rates; port inventory levels at Kandla and JNPT.",
+      "source_url": "https://seaofindia.com/category/statistical-update/",
+      "key_tickers": [
+        "ADANIENT",
+        "PATANJALI",
+        "AWL",
+        "MARICO",
+        "GOKULAGRO"
+      ]
+    },
+    {
+      "id": "feed_06",
+      "sector_id": 6,
+      "sector_name": "Tea / coffee / rubber",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "Rubber Board / Tea Board",
+      "source_type": "ORIGINAL",
+      "title": "Domestic Natural Rubber Spot Rates at ₹212/kg in Kottayam; Arabica Coffee Export Premiums Firm",
+      "summary": "Rubber Board daily spot telemetry confirms RSS-4 grade natural rubber trading firm at ₹212/kg due to tapping disruptions in Southeast Asia. Tea Board Kolkata auction averages hold steady while Indian Robusta and Arabica coffee fetch premium export realizations.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Kottayam spot rubber prices vs Bangkok SICOM rubber benchmark; tyre manufacturer EBITDA gross margin sensitivities to natural rubber.",
+      "source_url": "https://rubberboard.gov.in/public",
+      "key_tickers": [
+        "APOLLOTYRE",
+        "MRF",
+        "CEATLTD",
+        "MCLEODRUSS",
+        "CCL"
+      ]
+    },
+    {
+      "id": "feed_07",
+      "sector_id": 7,
+      "sector_name": "Agri exports / seafood-shrimp",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "APEDA / MPEDA",
+      "source_type": "ORIGINAL",
+      "title": "Basmati Rice Export Realizations Firm Post-MEP Removal; Frozen Shrimp Dispatches to US Rebound",
+      "summary": "APEDA trade data indicates robust basmati shipments to Saudi Arabia, UAE, and Iran following government removal of Minimum Export Price (MEP) restrictions. Marine Products Export Development Authority (MPEDA) reports 8.4% YoY recovery in frozen vannamei shrimp container dispatches.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "DGFT trade notifications on non-basmati rice parboiled export duties; US Department of Commerce countervailing duty determination rates.",
+      "source_url": "https://apeda.gov.in/dgft-notifications",
+      "key_tickers": [
+        "KRBL",
+        "LTFOODS",
+        "AVANTIFEED",
+        "APEX",
+        "WATERBASE"
+      ]
+    },
+    {
+      "id": "feed_08",
       "sector_id": 8,
       "sector_name": "Auto: 2W / PV / CV / 3W",
       "theme_name": "Manufacturing, Metals & Materials",
       "theme_icon": "🏭",
-      "source_name": "FADA / SIAM",
+      "source_name": "SIAM / FADA",
       "source_type": "ORIGINAL",
       "title": "Post-Festive Retail Audit: Two-Wheelers Up 14.2% YoY While PV Dealer Inventory Normalizes to 48 Days",
       "summary": "FADA retail registration telemetry shows strong rural traction driving entry-level motorcycle demand. Passenger vehicle dealer inventory eases from peak 65 days down to 48 days following calibrated OEM dispatches.",
       "published_at": "25 Nov 2026",
-      "kya_dekhna_hai": "SIAM wholesale dispatches vs FADA Vahan retail registrations. Track if discounts on compact SUVs reduce dealer holding costs.",
+      "kya_dekhna_hai": "SIAM monthly factory dispatches vs FADA Vahan dealer retail registrations; dealer inventory holding days and discount levels.",
       "source_url": "https://fada.in/press-release-list.php",
       "key_tickers": [
         "MARUTI",
@@ -44,27 +170,152 @@
       ]
     },
     {
-      "id": "feed_03",
-      "sector_name": "Steel",
-      "sector_id": 10,
+      "id": "feed_09",
+      "sector_id": 9,
+      "sector_name": "Auto ancillaries",
       "theme_name": "Manufacturing, Metals & Materials",
       "theme_icon": "🏭",
-      "source_name": "BigMint / ISA",
+      "source_name": "ACMA / ETAuto",
+      "source_type": "ASSOCIATION",
+      "title": "Component Industry Turnover Surges 11.8% Driven by Premium SUV Content & EV Powertrain Capex",
+      "summary": "Automotive Component Manufacturers Association (ACMA) report highlights content per vehicle expansion across electronic braking, automatic transmissions, and lightweight aluminium castings. Export shipments to European commercial vehicle OEMs remain resilient.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "OEM production schedules and PLI scheme capital expenditure milestones for advanced automotive technology components.",
+      "source_url": "https://acma.in/press-release.php",
+      "key_tickers": [
+        "BHARATFORG",
+        "SONACOMS",
+        "MOTHERSON",
+        "ENDURANCE",
+        "CRAFTSMAN"
+      ]
+    },
+    {
+      "id": "feed_10",
+      "sector_id": 10,
+      "sector_name": "Steel",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "ISA / BigMint",
       "source_type": "NEWS_PRICING",
-      "title": "Domestic HRC Realizations Hold at ₹49,800/t as Coking Coal Softens to 98/t FOB Australia",
-      "summary": "Secondary rebar and primary flat steel prices stabilize as domestic infrastructure off-take offsets lower global demand. Chinese FOB export quotes hover at 85/t, keeping domestic mills vigilant on DGTR trade remedy petition.",
+      "title": "Domestic Finished Steel Consumption Up 11.4% YoY; HRC Realizations Consolidate at ₹49,800/t",
+      "summary": "Indian Steel Association (ISA) data confirms record domestic demand driven by railways, highway bridges, and pre-engineered buildings. Premium hard coking coal softens to $198/t FOB Australia, expanding blast furnace conversion spreads.",
       "published_at": "25 Nov 2026",
-      "kya_dekhna_hai": "Spreads between HRC realization and blast furnace raw material basket (Iron Ore pellets + Coking Coal). Steel EBITDA margins expand 140 bps.",
+      "kya_dekhna_hai": "Hot-rolled coil (HRC) ex-Mumbai spot prices vs imported parity landed price; coking coal spot index FOB Queensland.",
       "source_url": "https://www.bigmint.co/",
       "key_tickers": [
         "TATASTEEL",
         "JSWSTEEL",
         "JINDALSTEL",
-        "SAIL"
+        "SAIL",
+        "APLAPOLLO"
       ]
     },
     {
-      "id": "feed_04",
+      "id": "feed_11",
+      "sector_id": 11,
+      "sector_name": "Non-ferrous metals / mining",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "IBM / BigMint",
+      "source_type": "ORIGINAL",
+      "title": "IBM Mineral Production Index Rises 5.8%; Aluminium Smelter Margins Expand on Low Power Costs",
+      "summary": "Indian Bureau of Mines (IBM) reports higher output across bauxite, iron ore, and limestone. Domestic primary aluminium producers benefit from firm LME benchmark prices ($2,640/t) and lower captive coal linkage tariffs, expanding EBITDA per tonne past $780.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "LME spot cash settlement prices for Aluminium, Copper, Zinc; domestic captive power and alumina refining cost structures.",
+      "source_url": "https://ibm.gov.in/IBMPortal/pages/Mining___Mineral_Statistics_",
+      "key_tickers": [
+        "HINDALCO",
+        "VEDL",
+        "HINDZINC",
+        "NATIONALUM",
+        "HINDCOPPER"
+      ]
+    },
+    {
+      "id": "feed_12",
+      "sector_id": 12,
+      "sector_name": "Chemicals / petrochemicals",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "Chemicals Dept / Indian Chemical News",
+      "source_type": "ORIGINAL",
+      "title": "Chemical Department Monthly Report: Specialty Chemical Production Gains 7.2%; BIS QCOs Enforced",
+      "summary": "Department of Chemicals & Petrochemicals tracks steady production growth across organic and inorganic chemical segments. Implementation of Bureau of Indian Standards (BIS) Quality Control Orders curbs substandard chemical imports, boosting domestic plant utilization.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Crude oil & basic chemical raw material spreads (Phenol-Acetone, Nitrotoluene, Fluorine chemistry); quarterly global specialty chemical demand recovery.",
+      "source_url": "https://chemicals.gov.in/monthly-reports",
+      "key_tickers": [
+        "DEEPAKNTR",
+        "AARTIIND",
+        "SRF",
+        "NAVINFLUOR",
+        "TATACHEM"
+      ]
+    },
+    {
+      "id": "feed_13",
+      "sector_id": 13,
+      "sector_name": "Plastics / polymers / pipes",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "Polymerupdate",
+      "source_type": "NEWS_PRICING",
+      "title": "Polymer Benchmark: Domestic PVC Resin Prices Hike by ₹2.5/kg; Pipe Converters Report 74% Utilization",
+      "summary": "Major domestic polymer producers revise PVC, HDPE, and PP resin prices upward following higher Asian feedstock parity. Plastic pipe converters maintain robust order visibility supported by Jal Jeevan Mission rural water networks and real estate plumbing installations.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "PVC resin spot prices published by Reliance/IOCL vs domestic pipe converter realization spreads; anti-dumping duty final gazettes.",
+      "source_url": "https://www.polymerupdate.com/",
+      "key_tickers": [
+        "ASTRAL",
+        "FINPIPE",
+        "SUPREMEIND",
+        "PRINCEPIPE"
+      ]
+    },
+    {
+      "id": "feed_14",
+      "sector_id": 14,
+      "sector_name": "Paper / paperboard / packaging",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "IPMA / Paper Mart",
+      "source_type": "ASSOCIATION",
+      "title": "IPMA Cites ASEAN Paper Influx; Domestic Packaging Paperboard Capacity Operates at 82%",
+      "summary": "Indian Paper Manufacturers Association highlights representations on duty-free paper imports under ASEAN FTA. Virgin fiber packaging paperboard mills maintain strong order off-take driven by pharmaceutical folding cartons, FMCG, and quick-commerce corrugated box demand.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "Import volumes of paperboard from China and ASEAN countries; domestic waste paper recovery prices and pulp import parity.",
+      "source_url": "https://ipmaindia.org/news23/",
+      "key_tickers": [
+        "JKPAPER",
+        "WESTCOAST",
+        "ANDHRAPAP",
+        "TNPL"
+      ]
+    },
+    {
+      "id": "feed_15",
+      "sector_id": 15,
+      "sector_name": "Cement",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "CMA / Indian Cement Review",
+      "source_type": "ASSOCIATION",
+      "title": "Regional Cement Prices Firm by ₹12-15/Bag in East & South; Petcoke Fuel Costs Decline to $112/t",
+      "summary": "Cement Manufacturers Association reports regional price recovery as post-monsoon construction activity resumes across urban infrastructure projects. Delivered petcoke and imported South African coal costs soften, expanding operating EBITDA per tonne past ₹980.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Monthly 50kg bag prices across North, South, East, West regions; delivered petcoke fuel cost per million kcal.",
+      "source_url": "https://www.cmaindia.org/cmanews",
+      "key_tickers": [
+        "ULTRACEMCO",
+        "AMBUJACEM",
+        "SHREECEM",
+        "ACC",
+        "DALBHARAT"
+      ]
+    },
+    {
+      "id": "feed_16",
       "sector_id": 16,
       "sector_name": "Electrical equipment / cables / transformers",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -74,18 +325,61 @@
       "title": "Grid Expansion Capex: High-Voltage Transformer Order Books Reach Record 32 Months Lead Time",
       "summary": "Surging renewable transmission corridors and data center power connectivity create persistent supply tightness for 765kV power transformers and gas-insulated switchgear. CRGO electrical steel imports stabilize under BIS licensing norms.",
       "published_at": "24 Nov 2026",
-      "kya_dekhna_hai": "Multi-year fixed price escalation contracts protect operating margins against copper and cold-rolled grain-oriented (CRGO) steel volatility.",
+      "kya_dekhna_hai": "Power Grid Corporation of India (PGCIL) substation tenders; IEEMA raw material price variation index for copper, aluminium, and CRGO steel.",
       "source_url": "https://ieema.org/industry-intelligence/industry-update/",
       "key_tickers": [
         "VOLTAMP",
         "ABB",
         "SIEMENS",
         "SCHNEIDER",
-        "HITACHI"
+        "POLYCAB",
+        "KEI"
       ]
     },
     {
-      "id": "feed_05",
+      "id": "feed_17",
+      "sector_id": 17,
+      "sector_name": "Electronics / EMS / semiconductors",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "MeitY / Electronics For You",
+      "source_type": "POLICY",
+      "title": "Semiconductor Mission Clears 2 New OSAT Packaging Units; Mobile EMS Localization Touches 22%",
+      "summary": "Ministry of Electronics & IT notifies approval for commercial semiconductor testing and packaging facilities under the India Semiconductor Mission. Electronic Manufacturing Services (EMS) players expand local printed circuit board assembly (PCBA) and mechanical enclosures.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "PLI incentive disbursement gazettes by MeitY; semiconductor facility construction milestones and export run-rate numbers.",
+      "source_url": "https://www.meity.gov.in/",
+      "key_tickers": [
+        "DIXON",
+        "KAYNES",
+        "PGEL",
+        "SYRMA",
+        "AMBER"
+      ]
+    },
+    {
+      "id": "feed_18",
+      "sector_id": 18,
+      "sector_name": "Power generation / utilities",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "CEA / National Power Portal",
+      "source_type": "ORIGINAL",
+      "title": "CEA Reports National Peak Power Demand at 242 GW; Thermal Plant Coal Inventory Averages 18 Days",
+      "summary": "Central Electricity Authority daily telemetry shows total power generation up 6.8% YoY driven by industrial load and residential cooling demand. Spot electricity prices on the Indian Energy Exchange (IEX) average ₹4.85/unit, reflecting balanced grid liquidity.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Daily CEA peak demand prints vs available generation; Day-Ahead Market (DAM) clearing prices on IEX exchange.",
+      "source_url": "https://npp.gov.in/publishedReports",
+      "key_tickers": [
+        "NTPC",
+        "TATAPOWER",
+        "POWERGRID",
+        "JSWENERGY",
+        "IEX"
+      ]
+    },
+    {
+      "id": "feed_19",
       "sector_id": 19,
       "sector_name": "Solar / wind / renewable / BESS",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -95,17 +389,81 @@
       "title": "SECI Concludes 1200 MW Firm & Dispatchable Renewable Energy (FDRE) Tender at ₹4.28/kWh",
       "summary": "Leading independent power producers win allocations with 4-hour battery energy storage system (BESS) pairing. Domestic module manufacturers ramp capacity under ALMM (Approved List of Models & Manufacturers) framework.",
       "published_at": "25 Nov 2026",
-      "kya_dekhna_hai": "BESS cost deflation (10/kWh pack level) enables viability gap funding feasibility, driving 24/7 round-the-clock green power purchase agreements.",
+      "kya_dekhna_hai": "SECI bid auction tariffs and Power Sale Agreement (PSA) signing pace with discoms; ALMM approved module factory list additions.",
       "source_url": "https://www.mercomindia.com/",
       "key_tickers": [
         "TATAPOWER",
         "ADANIGREEN",
         "SWSOLAR",
-        "SUZLON"
+        "SUZLON",
+        "INOXWIND"
       ]
     },
     {
-      "id": "feed_06",
+      "id": "feed_20",
+      "sector_id": 20,
+      "sector_name": "Oil / refining / gas / CGD",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "PPAC / PNGRB",
+      "source_type": "ORIGINAL",
+      "title": "PPAC Telemetry: Domestic Diesel Demand Up 4.2% YoY; PNGRB Finalizes Unified Pipeline Tariff Structure",
+      "summary": "Petroleum Planning & Analysis Cell reports robust transport fuel consumption, with aviation turbine fuel (ATF) up 8.6% YoY. Downstream refiners maintain healthy domestic marketing margins while City Gas Distribution (CGD) entities gain higher priority gas allocations.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Gross Refining Margin (GRM) benchmarks (Singapore complex vs Indian refiners); domestic APM natural gas price revisions by MoPNG.",
+      "source_url": "https://ppac.gov.in/consumption/products-wise",
+      "key_tickers": [
+        "RELIANCE",
+        "ONGC",
+        "IOC",
+        "BPCL",
+        "GAIL",
+        "MGL",
+        "IGL"
+      ]
+    },
+    {
+      "id": "feed_21",
+      "sector_id": 21,
+      "sector_name": "Coal",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "Coal Ministry / ETEnergyworld",
+      "source_type": "ORIGINAL",
+      "title": "Coal India Monthly Dispatches Reach 68.2 MT; Commercial Mine Auction Realizations Firm",
+      "summary": "Ministry of Coal updates production metrics: Daily supplies to thermal power stations touch 1.85 MT. Non-power sector e-auction premiums average 38% above notified floor prices, reflecting solid sponge iron and cement kiln demand.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Monthly Coal India production/off-take volume numbers; e-auction premiums over notified regulated fuel supply agreement (FSA) prices.",
+      "source_url": "https://coal.gov.in/public-information/monthly-statistics-at-glance",
+      "key_tickers": [
+        "COALINDIA",
+        "GMDC",
+        "NLCINDIA"
+      ]
+    },
+    {
+      "id": "feed_22",
+      "sector_id": 22,
+      "sector_name": "Roads / highways / EPC",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "ETInfra / MoRTH",
+      "source_type": "NEWS",
+      "title": "NHAI Construction Pace Sustains at 28.4 km/Day; Daily FASTag Toll Collections Touch ₹172 Crore",
+      "summary": "Ministry of Road Transport and Highways reports steady execution across national expressways and economic corridors. Toll collections on FASTag demonstrate 11.2% YoY growth, driving strong private concessionaire cash flows.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "MoRTH highway award and construction kilometers per month; NHAI project bidding pipeline under BOT (Toll) and HAM formats.",
+      "source_url": "https://infra.economictimes.indiatimes.com/news/roads-highways",
+      "key_tickers": [
+        "L&T",
+        "IRB",
+        "KNRCON",
+        "PNCINFRA",
+        "GRINFRA"
+      ]
+    },
+    {
+      "id": "feed_23",
       "sector_id": 23,
       "sector_name": "Railways / wagons / metro",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -115,59 +473,185 @@
       "title": "Indian Railways Floats Tender for 20,000 High-Axle Freight Wagons & Kavach Track Deployment",
       "summary": "Dedicated freight corridor feeder connectivity drives fresh procurement cycle for BOXNHL and BCFCM cement wagons. Rolling stock manufacturers report order backlogs exceeding 3.5x trailing twelve-month revenues.",
       "published_at": "24 Nov 2026",
-      "kya_dekhna_hai": "Tender specifications vs awarded contracts on IREPS. Confirm delivery timelines and wheelset/axle assembly localization.",
+      "kya_dekhna_hai": "Official procurement awards on IREPS portal; wagon delivery schedules and indigenous wheelset manufacturing milestones.",
       "source_url": "https://www.ireps.gov.in/",
       "key_tickers": [
         "TITAGARH",
         "JWL",
         "TEXRAIL",
-        "BEML"
+        "BEML",
+        "RAILTEL"
       ]
     },
     {
-      "id": "feed_07",
+      "id": "feed_24",
       "sector_id": 24,
       "sector_name": "Defence",
       "theme_name": "Energy, Infrastructure & Transport",
       "theme_icon": "⚡",
       "source_name": "PIB - Ministry of Defence",
       "source_type": "ORIGINAL",
-      "title": "DAC Accord Acceptance of Necessity (AoN) for Capital Acquisitions Worth ₹84,000 Crore Under 'Make in India'",
+      "title": "DAC Accord Acceptance of Necessity (AoN) for Capital Acquisitions Worth ₹84,000 Crore Under Make-in-India",
       "summary": "Defence Acquisition Council clears procurement of next-generation electronic warfare suites, naval surveillance radars, and advanced armored vehicles. Indigenous content ratio mandated at over 65% for domestic defence primes.",
       "published_at": "23 Nov 2026",
-      "kya_dekhna_hai": "AoN is the preliminary approval stage. Final commercial contract signing typically takes 6 to 18 months before revenue recognition commences.",
+      "kya_dekhna_hai": "Conversion of Acceptance of Necessity (AoN) sanctions into signed commercial contracts; Defence Ministry capital expenditure budget utilization.",
       "source_url": "https://www.pib.gov.in/AllRelease.aspx?reg=3&lang=1",
       "key_tickers": [
         "BEL",
         "HAL",
         "MAZDOCK",
         "BDL",
-        "DATAPATTNS"
+        "DATAPATTNS",
+        "COCHINSHIP"
       ]
     },
     {
-      "id": "feed_08",
+      "id": "feed_25",
+      "sector_id": 25,
+      "sector_name": "Real estate / housing",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "ANAROCK / ETRealty",
+      "source_type": "RESEARCH",
+      "title": "ANAROCK Top-7 City Housing Sales Up 12% YoY; Unsold Inventory Overhang Dips to 14 Months",
+      "summary": "Quarterly residential telemetry confirms strong absorption across Mumbai MMR, NCR, Bengaluru, and Pune. Luxury housing segments (units >₹1.5 Cr) witness fastest sales velocity, while Grade-A developer pre-sales collections break historical records.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Quarterly developer pre-sales bookings and cash collection run-rates; home loan interest rates and residential property price appreciation per sqft.",
+      "source_url": "https://anarock.com/",
+      "key_tickers": [
+        "DLF",
+        "GODREJPROP",
+        "LODHA",
+        "OBEROIRLTY",
+        "BRIGADE",
+        "PRESTIGE"
+      ]
+    },
+    {
+      "id": "feed_26",
+      "sector_id": 26,
+      "sector_name": "Ports / shipping",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "IPA / Shipping Ministry",
+      "source_type": "ORIGINAL",
+      "title": "Major Ports Handle 68.4 MT Cargo in Monthly Audit; Container Volumes Advance 9.8% YoY",
+      "summary": "Indian Ports Association (IPA) traffic data highlights container throughput growth at JNPT, Mundra, and Chennai. Mechanized coal and fertilizer handling terminals achieve average vessel turnaround times under 48 hours.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Monthly IPA major port cargo throughput and container TEU volume growth; coastal shipping regulatory incentives.",
+      "source_url": "https://ipa.org.in/reports-statistics",
+      "key_tickers": [
+        "ADANIPORTS",
+        "JSWINFRA",
+        "SCI",
+        "GPPL"
+      ]
+    },
+    {
+      "id": "feed_27",
+      "sector_id": 27,
+      "sector_name": "Logistics / warehousing / air cargo",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "ITLN Logistics News",
+      "source_type": "NEWS",
+      "title": "Grade-A Warehousing Absorption Touches 38M Sqft; Dedicated Freight Corridors Cut Transit Times by 40%",
+      "summary": "Specialist logistics report tracks expanding demand for automated Grade-A distribution hubs driven by e-commerce, 3PL logistics, and auto component supply chains. Multimodal freight parks near industrial corridors achieve high occupancy.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "Truck freight rate index on Delhi-Mumbai-Chennai trunk routes; industrial warehousing rental yields and vacancy rates.",
+      "source_url": "https://www.itln.in/",
+      "key_tickers": [
+        "CONCOR",
+        "DELHIVERY",
+        "TCIEXP",
+        "BLUEDART",
+        "MAHLOG"
+      ]
+    },
+    {
+      "id": "feed_28",
+      "sector_id": 28,
+      "sector_name": "Airlines / airports",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "DGCA / ETInfra Aviation",
+      "source_type": "ORIGINAL",
+      "title": "DGCA Telemetry: Domestic Monthly Air Passenger Traffic Crosses 1.38 Crore; Passenger Load Factor at 88.5%",
+      "summary": "Directorate General of Civil Aviation reports steady double-digit passenger traffic expansion. Aviation Turbine Fuel (ATF) price moderation and stable ticket yields support airline operating cash flows, with on-time performance (OTP) averaging 84%.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "DGCA monthly airline passenger market share and Passenger Load Factor (PLF); state-level VAT on Aviation Turbine Fuel (ATF).",
+      "source_url": "https://www.dgca.gov.in/digigov-portal/#dataReports",
+      "key_tickers": [
+        "INDIGO",
+        "SPICEJET",
+        "GMRINFRA"
+      ]
+    },
+    {
+      "id": "feed_29",
       "sector_id": 29,
       "sector_name": "Banks / NBFC / housing finance",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "RBI Press Releases",
+      "source_name": "RBI Press Releases / ETBFSI",
       "source_type": "REGULATOR",
       "title": "Banking Sector Credit Growth Sustains at 13.8% YoY as Deposit Mobilization Narrows Gap to 11.9%",
       "summary": "RBI sectoral credit deployment data highlights robust off-take in infrastructure term loans and retail housing mortgages. Asset quality remains pristine with system-wide Gross NPA dipping to a multi-year low of 2.6%.",
       "published_at": "25 Nov 2026",
-      "kya_dekhna_hai": "Credit-Deposit (C/D) ratio across private banks. Margins (NIM) plateauing as term deposit repricing runs its course.",
+      "kya_dekhna_hai": "Credit-to-Deposit (C/D) ratio across private banks; RBI Monetary Policy Committee repo rate guidance and liquidity stance.",
       "source_url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
       "key_tickers": [
         "HDFCBANK",
         "ICICIBANK",
         "SBIN",
         "AXISBANK",
+        "KOTAKBANK",
         "BAJFINANCE"
       ]
     },
     {
-      "id": "feed_09",
+      "id": "feed_30",
+      "sector_id": 30,
+      "sector_name": "Microfinance",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "MFIN Micrometer",
+      "source_type": "ASSOCIATION",
+      "title": "MFIN Micrometer Report: Gross Loan Portfolio Touches ₹4.12 Lakh Crore; Delinquency Buckets Stabilize",
+      "summary": "Microfinance Institutions Network quarterly audit shows industry portfolio growth supported by calibrated lending. Credit bureau guardrails on maximum lending per borrower ensure disciplined rural underwriting and reduce asset quality stress.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Portfolio-at-Risk (PAR 30 and PAR 90) ratios in MFIN Micrometer; credit cost provisioning guidance in quarterly lender earnings.",
+      "source_url": "https://mfinindia.org/NewsEvent/pressreleases",
+      "key_tickers": [
+        "CREDITACC",
+        "FUSION",
+        "SPANDANA",
+        "BANDHANBNK"
+      ]
+    },
+    {
+      "id": "feed_31",
+      "sector_id": 31,
+      "sector_name": "Life / general / health insurance",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "IRDAI Monthly Figures",
+      "source_type": "ORIGINAL",
+      "title": "IRDAI Data: Private Life Insurers Retail APE Advances 14.5% YoY; Health Insurance Gross Premiums Up 18.2%",
+      "summary": "Insurance Regulatory and Development Authority of India monthly data confirms strong individual annualised premium equivalent (APE) growth in non-par savings and ULIPs. Standalone health insurers maintain high premium momentum as retail penetration rises.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Individual Annualized Premium Equivalent (APE) growth in IRDAI monthly figures; Value of New Business (VNB) margin expansion.",
+      "source_url": "https://irdai.gov.in/monthly-business-figures1",
+      "key_tickers": [
+        "HDFCLIFE",
+        "SBILIFE",
+        "ICICIPRULI",
+        "STARHEALTH",
+        "ICICIGI"
+      ]
+    },
+    {
+      "id": "feed_32",
       "sector_id": 32,
       "sector_name": "AMCs / mutual funds",
       "theme_name": "Banking & Financial Services",
@@ -177,18 +661,81 @@
       "title": "Domestic Systematic Investment Plans (SIP) Inflow Touches ₹25,320 Crore; Equity AUM Expands 26% YoY",
       "summary": "Retail SIP accounts cross 9.8 crore folios as domestic liquidity acts as structural moat against foreign institutional portfolio reallocations. Multicap and Flexicap categories witness maximum monthly net mobilization.",
       "published_at": "22 Nov 2026",
-      "kya_dekhna_hai": "Monthly SIP gross run-rate acts as permanent domestic absorption engine, cushioning Nifty against DXY-led FII selling waves.",
+      "kya_dekhna_hai": "Monthly gross SIP contribution numbers published by AMFI (8th-10th of every month); net equity mutual fund inflows vs liquid debt redemptions.",
       "source_url": "https://www.amfiindia.com/research-information/amfi-monthly",
       "key_tickers": [
         "HDFCAMC",
         "NAM-INDIA",
         "UTIAMC",
         "BSE",
-        "CDSL"
+        "CDSL",
+        "CAMS"
       ]
     },
     {
-      "id": "feed_10",
+      "id": "feed_33",
+      "sector_id": 33,
+      "sector_name": "Brokers / exchanges / depositories",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "SEBI Circulars & Statistics",
+      "source_type": "REGULATOR",
+      "title": "Active Demat Accounts Cross 17.2 Crore; Cash Market Daily Average Turnover Climbs to ₹1.15 Lakh Crore",
+      "summary": "Securities and Exchange Board of India (SEBI) data shows robust retail and institutional trading participation. Depositories (CDSL, NSDL) register 28-32 lakh incremental demat accounts every month, generating steady annual issuer and transaction charges.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Daily average cash market and derivatives turnover on NSE/BSE; incremental monthly demat additions published by CDSL/NSDL.",
+      "source_url": "https://www.sebi.gov.in/statistics/statistics.html",
+      "key_tickers": [
+        "BSE",
+        "MCX",
+        "CDSL",
+        "ANGELONE",
+        "ISEC"
+      ]
+    },
+    {
+      "id": "feed_34",
+      "sector_id": 34,
+      "sector_name": "Payments / fintech",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "NPCI UPI Telemetry",
+      "source_type": "ORIGINAL",
+      "title": "NPCI Monthly Telemetry: UPI Crosses 1,650 Crore Transactions Worth ₹23.8 Lakh Crore",
+      "summary": "National Payments Corporation of India metrics show digital payments maintaining 34% YoY volume growth. Merchant soundbox subscriptions, UPI Lite offline micro-payments, and RuPay credit card-on-UPI integrations scale rapidly.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Monthly UPI transaction count and gross value telemetry on NPCI portal (released on 1st of every month); merchant device subscription additions.",
+      "source_url": "https://www.npci.org.in/product/upi/product-statistics",
+      "key_tickers": [
+        "PAYTM",
+        "PBFINTECH",
+        "INFIBEAM"
+      ]
+    },
+    {
+      "id": "feed_35",
+      "sector_id": 35,
+      "sector_name": "IT services / BPM / technology",
+      "theme_name": "IT, Telecom & Healthcare",
+      "theme_icon": "💻",
+      "source_name": "Nasscom / TechCircle",
+      "source_type": "ASSOCIATION",
+      "title": "Nasscom Enterprise Tech Review: Global Capability Centers (GCCs) in India Expand to 1,680 Units",
+      "summary": "National Association of Software & Service Companies reports multinational corporations ramping high-value engineering, AI compute, and cybersecurity centers in Bengaluru, Hyderabad, and Pune. Tier-1 IT services firms report rising generative AI deal pipeline values.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Total Contract Value (TCV) deal wins announced by Tier-1 IT majors; US BFSI and retail sector enterprise tech budget commentaries.",
+      "source_url": "https://community.nasscom.in/report?mail=1",
+      "key_tickers": [
+        "TCS",
+        "INFY",
+        "HCLTECH",
+        "WIPRO",
+        "TECHM",
+        "LTIM"
+      ]
+    },
+    {
+      "id": "feed_36",
       "sector_id": 36,
       "sector_name": "Telecom",
       "theme_name": "IT, Telecom & Healthcare",
@@ -198,17 +745,17 @@
       "title": "TRAI Telecom Subscription Report: Industry Blended ARPU Reaches ₹198 Post Tariff Rationalization",
       "summary": "Total broadband connections cross 94.2 crore. Private telecom operators register net active wireless subscriber additions while 5G fixed wireless access (FWA) home broadband connections double quarter-on-quarter.",
       "published_at": "24 Nov 2026",
-      "kya_dekhna_hai": "VLR active subscriber percentage and 4G/5G data consumption per user (now averaging 24.2 GB/month).",
+      "kya_dekhna_hai": "Monthly TRAI wireline and wireless subscriber additions/churn; active VLR subscriber percentage across operators.",
       "source_url": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
       "key_tickers": [
         "BHARTIARTL",
         "IDEA",
         "TATACOMM",
-        "INDUSINDBK"
+        "INDUSTOWER"
       ]
     },
     {
-      "id": "feed_11",
+      "id": "feed_37",
       "sector_id": 37,
       "sector_name": "Pharma / APIs / CDMO",
       "theme_name": "IT, Telecom & Healthcare",
@@ -218,18 +765,41 @@
       "title": "USFDA Concludes Surveillance Audit at Ahmedabad Injectable Facility With Zero Form 483 Observations",
       "summary": "Domestic generic pharma players gain regulatory clearance for key complex injectables and ophthalmic abbreviated new drug applications (ANDAs). Price erosion in US base generic market stabilizes at low single digits.",
       "published_at": "24 Nov 2026",
-      "kya_dekhna_hai": "EIR (Establishment Inspection Report) issuance status vs Form 483 warning letters. High-margin CDMO contracts scaling up.",
+      "kya_dekhna_hai": "USFDA inspection outcomes (EIR issuance vs Warning Letters/Import Alerts); NPPA DPCO drug pricing ceiling revision circulars.",
       "source_url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters",
       "key_tickers": [
         "SUNPHARMA",
         "CIPLA",
         "DRREDDY",
+        "DIVISLAB",
         "ZYDUSLIFE",
-        "DIVISLAB"
+        "TORNTPHARM"
       ]
     },
     {
-      "id": "feed_12",
+      "id": "feed_38",
+      "sector_id": 38,
+      "sector_name": "Hospitals / diagnostics / devices",
+      "theme_name": "IT, Telecom & Healthcare",
+      "theme_icon": "💻",
+      "source_name": "ETHealthworld",
+      "source_type": "NEWS",
+      "title": "Hospital Networks Expand Bed Capacity: Average ARPOB Advances to ₹38,200 Per Occupied Bed",
+      "summary": "Leading private hospital chains announce brownfield bed additions across metropolitan clusters. Higher surgical volumes, oncology therapies, and international medical tourism footfalls (+18% YoY) expand hospital operating margins.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Average Revenue Per Occupied Bed (ARPOB) and operational bed capacity additions; insurance cashless claim settlement ratios under NHCX.",
+      "source_url": "https://health.economictimes.indiatimes.com/news/hospitals",
+      "key_tickers": [
+        "APOLLOHOSP",
+        "MAXHEALTH",
+        "FORTIS",
+        "MEDANTA",
+        "LALPATHLAB",
+        "METROPOLIS"
+      ]
+    },
+    {
+      "id": "feed_39",
       "sector_id": 39,
       "sector_name": "FMCG",
       "theme_name": "Consumption, Retail & Other Services",
@@ -239,14 +809,176 @@
       "title": "Rural FMCG Volume Demand Rebounds to 6.2% Growth Supported by Favorable Monsoon Harvest Disbursals",
       "summary": "NielsenIQ quarterly consumer measurement index shows rural consumption outpacing urban volume growth for second consecutive quarter. Packaged staples, soaps, and oral care categories lead the volume revival.",
       "published_at": "21 Nov 2026",
-      "kya_dekhna_hai": "Crude and Palm Oil raw material prices determine gross margin trajectory. Volume growth vs price-led revenue growth split.",
+      "kya_dekhna_hai": "Rural vs urban FMCG volume growth split; key input commodity costs (Crude derivatives, Palm oil, Wheat, Sugar).",
       "source_url": "https://retail.economictimes.indiatimes.com/news/food-entertainment",
       "key_tickers": [
         "HINDUNILVR",
         "ITC",
         "DABUR",
         "MARICO",
-        "BRITANNIA"
+        "BRITANNIA",
+        "NESTLEIND"
+      ]
+    },
+    {
+      "id": "feed_40",
+      "sector_id": 40,
+      "sector_name": "Retail / e-commerce / QSR",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "RAI / ETRetail",
+      "source_type": "ASSOCIATION",
+      "title": "RAI Retail Business Survey: Apparel & Footwear Sales Up 12.8% YoY; QSR Same-Store Sales Consolidate",
+      "summary": "Retailers Association of India (RAI) monthly survey highlights healthy footfalls in shopping centers and high-street shopping arcades. Fast-fashion retail chains lead store expansion with positive same-store sales growth (SSSG).",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Monthly Retailers Association of India (RAI) business survey index; Same-Store Sales Growth (SSSG) across apparel and QSR chains.",
+      "source_url": "https://rai.net.in/press-room.php",
+      "key_tickers": [
+        "TRENT",
+        "DMART",
+        "JUBLFOOD",
+        "DEVYANI",
+        "WESTLIFE",
+        "VBL"
+      ]
+    },
+    {
+      "id": "feed_41",
+      "sector_id": 41,
+      "sector_name": "Consumer durables / AC / appliances",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "ETRetail Durables",
+      "source_type": "NEWS",
+      "title": "Room Air Conditioner (RAC) Distributors Initiate Summer Pre-Stocking; Copper & Compressor Costs Stable",
+      "summary": "Consumer appliance manufacturers report strong channel stocking of inverter air conditioners following record sales and depleted dealer inventories. Component localization for cross-flow fans, copper connecting tubes, and PCB controllers reaches 65%.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Dealer channel inventory levels; raw material copper and aluminium price trajectories; seasonal summer weather pre-forecasts.",
+      "source_url": "https://retail.economictimes.indiatimes.com/news/consumer-durables-and-information-technology",
+      "key_tickers": [
+        "VOLTAS",
+        "HAVEELLS",
+        "BLUESTARCO",
+        "WHIRLPOOL",
+        "CROMPTON"
+      ]
+    },
+    {
+      "id": "feed_42",
+      "sector_id": 42,
+      "sector_name": "Gems / jewellery / diamonds",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "GJEPC Trade Research",
+      "source_type": "ORIGINAL",
+      "title": "GJEPC Telemetry: Gold Jewellery Retail Sales Surge Following Customs Duty Cut; LGD Exports Expand",
+      "summary": "Gem & Jewellery Export Promotion Council reports robust domestic gold jewellery off-take following the reduction in basic customs duty on gold bullion. Lab-Grown Diamond (LGD) manufacturing and export shipments advance 22.4% YoY.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "Domestic gold spot prices and import volumes published by GJEPC; retail jewellery same-store sales growth during wedding seasons.",
+      "source_url": "https://gjepc.org/statistics.php",
+      "key_tickers": [
+        "TITAN",
+        "KALYANKJIL",
+        "SENCO",
+        "RAJESHEXPO"
+      ]
+    },
+    {
+      "id": "feed_43",
+      "sector_id": 43,
+      "sector_name": "Hotels / hospitality / travel",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "HVS ANAROCK / ETTravel",
+      "source_type": "RESEARCH",
+      "title": "HVS ANAROCK Hotel Monitor: Pan-India ARR Touches ₹8,450; Corporate & Wedding Occupancy Hits 72.4%",
+      "summary": "Indian hospitality sector registers sustained revenue per available room (RevPAR) expansion. Limited supply additions over the last four years combined with booming domestic leisure, religious tourism, and corporate conventions support hotel pricing power.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Monthly Revenue Per Available Room (RevPAR) and Average Room Rates (ARR) published in HVS ANAROCK monitor.",
+      "source_url": "https://www.hvs.com/insights/search?term=HVS%20ANAROCK%20MONITOR",
+      "key_tickers": [
+        "INDHOTEL",
+        "EIHOTEL",
+        "LEMONTREE",
+        "CHALET"
+      ]
+    },
+    {
+      "id": "feed_44",
+      "sector_id": 44,
+      "sector_name": "Media / broadcasting / advertising",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "MIB / Exchange4media",
+      "source_type": "NEWS",
+      "title": "Festive AdEx Advances 11.8% YoY Led by FMCG, Auto & E-Commerce; Digital Video Spends Surpass Linear TV",
+      "summary": "Exchange4media and industry agency reports confirm double-digit advertising expenditure (AdEx) growth. OTT video streaming platforms and connected TV (CTV) advertising capture increasing shares of national consumer brand marketing budgets.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Quarterly advertising revenue growth reported by major media networks; multiplex net box office and food & beverage spend per head.",
+      "source_url": "https://www.exchange4media.com/",
+      "key_tickers": [
+        "ZEEL",
+        "SUNTV",
+        "NETWORK18",
+        "PVRINOX"
+      ]
+    },
+    {
+      "id": "feed_45",
+      "sector_id": 45,
+      "sector_name": "Staffing / HR services",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "Indian Staffing Federation",
+      "source_type": "ASSOCIATION",
+      "title": "ISF Quarterly Research: Formal Flexi-Staffing Headcount Grows 12.4% YoY Led by Manufacturing & Logistics",
+      "summary": "Indian Staffing Federation research report highlights steady formalization of industrial workforce. Demand for general flexi-staffing across manufacturing assembly plants, logistics warehouses, and retail field sales offsets muted IT lateral hiring.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "Quarterly flexi-staffing associate headcount additions reported by Indian Staffing Federation; formal EPFO monthly payroll data.",
+      "source_url": "https://indianstaffingfederation.org/research/",
+      "key_tickers": [
+        "QUESS",
+        "TEAMLEASE",
+        "SIS"
+      ]
+    },
+    {
+      "id": "feed_46",
+      "sector_id": 46,
+      "sector_name": "Alcohol / spirits / wine",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "ISWAI Spirits Updates",
+      "source_type": "ASSOCIATION",
+      "title": "ISWAI Report: Premium & Prestige IMFL Volumes Expand 14.2%; Glass Bottle Input Costs Soften",
+      "summary": "International Spirits & Wines Association of India highlights accelerating consumer premiumisation toward single malts, craft gins, and premium Indian Made Foreign Liquor (IMFL). Lower natural gas tariffs ease commercial glass bottle procurement costs.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "State excise policy revisions and retail vending auction rules; ENA (Extra Neutral Alcohol) and commercial glass packaging costs.",
+      "source_url": "https://www.iswai.in/news-and-updates/",
+      "key_tickers": [
+        "MCDOWELL-N",
+        "RADICO",
+        "SULA",
+        "TIIL"
+      ]
+    },
+    {
+      "id": "feed_47",
+      "sector_id": 47,
+      "sector_name": "Education / training services",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "ETEducation",
+      "source_type": "NEWS",
+      "title": "Vocational Skilling Grants Disbursed Under NEP Framework; Offline Test-Prep Enrollments Rebound",
+      "summary": "Specialist education report tracks offline coaching center student enrollments expanding across engineering, medical, and civil service entrance exams. Formal corporate upskilling programs in cloud, data engineering, and generative AI scale up.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Annual student enrollment growth in offline coaching and test-prep centers; government vocational education skilling outlays.",
+      "source_url": "https://education.economictimes.indiatimes.com/",
+      "key_tickers": [
+        "CLEDUCATE",
+        "APTECHT",
+        "NAVNETEDUL"
       ]
     }
   ]

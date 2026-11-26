@@ -62,6 +62,36 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
     'https://fastly.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/global_economy_radar.json',
   ];
 
+  DateTime? _parseFlexibleDate(String? dateStr) {
+    if (dateStr == null || dateStr.trim().isEmpty) return null;
+    final clean = dateStr.trim().replaceAll('-', ' ');
+    final parts = clean.split(RegExp(r'\s+'));
+    if (parts.length >= 3) {
+      final day = int.tryParse(parts[0]);
+      final year = int.tryParse(parts[2]);
+      const months = {
+        'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12
+      };
+      final mKey = parts[1].toLowerCase();
+      final month = months[mKey.length >= 3 ? mKey.substring(0, 3) : mKey];
+      if (day != null && month != null && year != null) {
+        return DateTime(year, month, day);
+      }
+    }
+    return DateTime.tryParse(dateStr);
+  }
+
+  bool _isStaleDowngrade(String? incomingDateStr, String? currentDateStr) {
+    if (incomingDateStr == null || currentDateStr == null) return false;
+    final inDate = _parseFlexibleDate(incomingDateStr);
+    final curDate = _parseFlexibleDate(currentDateStr);
+    if (inDate != null && curDate != null) {
+      return inDate.isBefore(curDate);
+    }
+    return false;
+  }
+
   double? _liveUsdInr;
 
   @override
@@ -130,20 +160,22 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
       setState(() => _isSyncing = true);
     }
 
-    try {
-      final localJson = await rootBundle
-          .loadString('assets/data/global_economy_radar.json');
-      final dynamic parsed = jsonDecode(localJson);
-      if (parsed is Map<String, dynamic> &&
-          parsed['global_superpowers'] != null) {
-        if (mounted) {
-          setState(() {
-            _populateData(parsed);
-            _isLoading = false;
-          });
+    if (!isRefresh && _superpowers.isEmpty) {
+      try {
+        final localJson = await rootBundle
+            .loadString('assets/data/global_economy_radar.json');
+        final dynamic parsed = jsonDecode(localJson);
+        if (parsed is Map<String, dynamic> &&
+            parsed['global_superpowers'] != null) {
+          if (mounted) {
+            setState(() {
+              _populateData(parsed);
+              _isLoading = false;
+            });
+          }
         }
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
 
     bool fetchedLive = false;
     for (final url in dataUrls) {
@@ -154,13 +186,22 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           headers: {
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
+            'Accept': 'application/json',
           },
-        ).timeout(const Duration(seconds: 6));
+        ).timeout(const Duration(seconds: 12));
 
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));
           if (parsed is Map<String, dynamic> &&
               parsed['global_superpowers'] != null) {
+            final incomingMeta = parsed['metadata'] as Map<String, dynamic>? ?? {};
+            final String? incomingDateStr = incomingMeta['last_updated'];
+            final String? currentDateStr = _metadata['last_updated'];
+
+            if (_isStaleDowngrade(incomingDateStr, currentDateStr)) {
+              continue;
+            }
+
             if (mounted) {
               setState(() {
                 _populateData(parsed);
@@ -589,7 +630,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                 ),
                 const SizedBox(height: 2),
                 const Text(
-                  "FII/DII Net Flow • India VIX • Breadth • Promoter Pledge",
+                  "FII/DII Futures Squeeze • Action Guide • VIX • Breadth",
                   style: TextStyle(color: kTextMuted, fontSize: 9.5),
                 ),
               ],

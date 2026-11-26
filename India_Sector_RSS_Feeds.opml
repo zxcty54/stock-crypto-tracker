@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='utf-8'?>
+<opml version="2.0">
+  <head>
+    <title>India Sector RSS - Curated Feeds</title>
+    <ownerName>Prepared on Arena.ai</ownerName>
+    <docs>https://opml.org/spec2.opml</docs>
+  </head>
+  <body>
+    <outline text="01 Sugar and Ethanol" title="01 Sugar and Ethanol">
+      <outline type="rss" text="ChiniMandi - Indian Sugar News (English)" title="ChiniMandi - Indian Sugar News (English)" xmlUrl="https://www.chinimandi.com/english-news/indian-sugar-news/feed/" htmlUrl="https://www.chinimandi.com/" description="Focused English feed, instead of the multilingual all-news feed; domestic sugar headlines and market updates." category="Sector newsroom" />
+      <outline type="rss" text="ChiniMandi - Ethanol News (English)" title="ChiniMandi - Ethanol News (English)" xmlUrl="https://www.chinimandi.com/english-news/ethanol-news/feed/" htmlUrl="https://www.chinimandi.com/" description="Indian and international ethanol stories; can overlap the sugar feed." category="Sector newsroom" />
+    </outline>
+    <outline text="02 Agriculture and Fertilisers" title="02 Agriculture and Fertilisers">
+      <outline type="rss" text="Fertiliser Association of India - Publications and Posts" title="Fertiliser Association of India - Publications and Posts" xmlUrl="https://www.faidelhi.org/feed/" htmlUrl="https://www.faidelhi.org/" description="Periodic association posts; does not establish complete coverage of every NBS notification or statistical release." category="Association" />
+      <outline type="rss" text="SEA India - Statistical Updates and Industry Posts" title="SEA India - Statistical Updates and Industry Posts" xmlUrl="https://seaofindia.com/feed/" htmlUrl="https://seaofindia.com/" description="Mixed feed: press clips, crop surveys, statistics and association posts. The narrower press-releases feed was not selected." category="Association" />
+    </outline>
+    <outline text="03 Textiles and Garments" title="03 Textiles and Garments">
+      <outline type="rss" text="Indian Textile Journal - Latest Posts" title="Indian Textile Journal - Latest Posts" xmlUrl="https://indiantextilejournal.com/feed/" htmlUrl="https://indiantextilejournal.com/" description="Textiles, garments, machinery and industry developments." category="Sector newsroom" />
+    </outline>
+    <outline text="04 Steel and Metals" title="04 Steel and Metals">
+      <outline type="rss" text="Indian Steel Association - Updates" title="Indian Steel Association - Updates" xmlUrl="https://indsteel.org/feed/" htmlUrl="https://indsteel.org/" description="Association updates, macro monitors and industry posts; not a complete real-time steel-price feed." category="Association" />
+    </outline>
+    <outline text="05 Chemicals and Petrochemicals" title="05 Chemicals and Petrochemicals">
+      <outline type="rss" text="Indian Chemical News - Latest News" title="Indian Chemical News - Latest News" xmlUrl="https://www.indianchemicalnews.com/feed" htmlUrl="https://www.indianchemicalnews.com/" description="Feed channel title is Media4Growth, but checked item titles and links belong to Indian Chemical News. Rename the subscription if necessary." category="Sector newsroom" />
+    </outline>
+    <outline text="06 Paper and Packaging" title="06 Paper and Packaging">
+      <outline type="rss" text="Paper Mart - News" title="Paper Mart - News" xmlUrl="https://papermart.in/category/news/feed/" htmlUrl="https://papermart.in/" description="Paper, pulp, paperboard, mill and packaging-related news; includes international developments." category="Sector newsroom" />
+      <outline type="rss" text="IPMA - Association Updates" title="IPMA - Association Updates" xmlUrl="https://ipmaindia.org/feed/" htmlUrl="https://ipmaindia.org/" description="Periodic association posts, representations and events; not a daily pricing feed." category="Association" />
+    </outline>
+    <outline text="07 Cement" title="07 Cement">
+      <outline type="rss" text="Indian Cement Review - Latest Posts" title="Indian Cement Review - Latest Posts" xmlUrl="https://indiancementreview.com/feed/" htmlUrl="https://indiancementreview.com/" description="Cement, construction materials, interviews and industry posts." category="Sector newsroom" />
+    </outline>
+    <outline text="08 Electronics and EMS" title="08 Electronics and EMS">
+      <outline type="rss" text="Electronics For You - Electronics News" title="Electronics For You - Electronics News" xmlUrl="https://www.electronicsforu.com/category/news/feed" htmlUrl="https://www.electronicsforu.com/" description="Technical/product and industry news; job postings may also appear. Not an EMS-order-only feed." category="Sector newsroom" />
+    </outline>
+    <outline text="09 Energy and Renewables" title="09 Energy and Renewables">
+      <outline type="rss" text="Mercom India - Energy News" title="Mercom India - Energy News" xmlUrl="https://www.mercomindia.com/feed" htmlUrl="https://www.mercomindia.com/" description="Renewables, solar, storage, tenders and policy coverage." category="Sector newsroom" />
+      <outline type="rss" text="ETEnergyworld - Oil and Gas" title="ETEnergyworld - Oil and Gas" xmlUrl="https://energy.economictimes.indiatimes.com/rss/oil-and-gas" htmlUrl="https://energy.economictimes.indiatimes.com/" description="Publisher category feed; may include international oil and gas developments." category="Sector newsroom" />
+      <outline type="rss" text="ETEnergyworld - Power" title="ETEnergyworld - Power" xmlUrl="https://energy.economictimes.indiatimes.com/rss/power" htmlUrl="https://energy.economictimes.indiatimes.com/" description="Publisher power-category feed." category="Sector newsroom" />
+      <outline type="rss" text="ETEnergyworld - Coal" title="ETEnergyworld - Coal" xmlUrl="https://energy.economictimes.indiatimes.com/rss/coal" htmlUrl="https://energy.economictimes.indiatimes.com/" description="Publisher coal-category feed; cross-sector energy/policy items can also appear." category="Sector newsroom" />
+      <outline type="rss" text="ETEnergyworld - Renewable" title="ETEnergyworld - Renewable" xmlUrl="https://energy.economictimes.indiatimes.com/rss/renewable" htmlUrl="https://energy.economictimes.indiatimes.com/" description="Renewables category; overlaps other renewable publications on some stories." category="Sector newsroom" />
+      <outline type="rss" text="Ministry of Coal - Website Updates" title="Ministry of Coal - Website Updates" xmlUrl="https://coal.gov.in/rss.xml" htmlUrl="https://coal.gov.in/" description="Mixed ministry notices and industry updates; not only monthly production data." category="Government" />
+    </outline>
+    <outline text="10 Roads EPC and Water" title="10 Roads EPC and Water">
+      <outline type="rss" text="ETInfra - Roads and Highways" title="ETInfra - Roads and Highways" xmlUrl="https://infra.economictimes.indiatimes.com/rss/roads-highways" htmlUrl="https://infra.economictimes.indiatimes.com/" description="Sector news includes policy, local projects and general road developments; not only listed-company orders." category="Sector newsroom" />
+      <outline type="rss" text="ETInfra - Construction" title="ETInfra - Construction" xmlUrl="https://infra.economictimes.indiatimes.com/rss/construction" htmlUrl="https://infra.economictimes.indiatimes.com/" description="Construction, EPC and related developments." category="Sector newsroom" />
+      <outline type="rss" text="ETInfra - Water" title="ETInfra - Water" xmlUrl="https://infra.economictimes.indiatimes.com/rss/water" htmlUrl="https://infra.economictimes.indiatimes.com/" description="Water infrastructure and local water issues; relevance filtering is needed." category="Sector newsroom" />
+    </outline>
+    <outline text="11 Railways and Metro" title="11 Railways and Metro">
+      <outline type="rss" text="Rail Analysis India - Latest Posts" title="Rail Analysis India - Latest Posts" xmlUrl="https://railanalysis.in/feed/" htmlUrl="https://railanalysis.in/" description="Rail, wagons, metro, signalling and projects. Tender or approval is not a final awarded order." category="Sector newsroom" />
+    </outline>
+    <outline text="12 Defence" title="12 Defence">
+      <outline type="rss" text="Bharat Shakti - Defence News" title="Bharat Shakti - Defence News" xmlUrl="https://bharatshakti.in/feed/" htmlUrl="https://bharatshakti.in/" description="Defence, security and geopolitics; not only procurement or listed-company contracts." category="Sector newsroom" />
+    </outline>
+    <outline text="13 Realty and Paints" title="13 Realty and Paints">
+      <outline type="rss" text="ETRealty - Recent Stories" title="ETRealty - Recent Stories" xmlUrl="https://realty.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://realty.economictimes.indiatimes.com/" description="Recent stories chosen over Top Stories for rolling news discovery; not an exhaustive archive." category="Sector newsroom" />
+      <outline type="rss" text="ETRealty - Paints" title="ETRealty - Paints" xmlUrl="https://realty.economictimes.indiatimes.com/rss/paints" htmlUrl="https://realty.economictimes.indiatimes.com/" description="Paints-category stories and company developments." category="Sector newsroom" />
+    </outline>
+    <outline text="14 Ports Shipping and Logistics" title="14 Ports Shipping and Logistics">
+      <outline type="rss" text="Maritime Gateway - News" title="Maritime Gateway - News" xmlUrl="https://www.maritimegateway.com/category/news/feed/" htmlUrl="https://www.maritimegateway.com/" description="Ports, shipping, cargo and logistics news." category="Sector newsroom" />
+      <outline type="rss" text="Indian Transport and Logistics News" title="Indian Transport and Logistics News" xmlUrl="https://www.itln.in/rss" htmlUrl="https://www.itln.in/" description="Cargo, air freight, logistics and supply-chain stories." category="Sector newsroom" />
+    </outline>
+    <outline text="15 Airlines and Airports" title="15 Airlines and Airports">
+      <outline type="rss" text="ETInfra - Aviation" title="ETInfra - Aviation" xmlUrl="https://infra.economictimes.indiatimes.com/rss/aviation" htmlUrl="https://infra.economictimes.indiatimes.com/" description="Aviation and airport developments; DGCA monthly traffic data still needs separate monitoring." category="Sector newsroom" />
+    </outline>
+    <outline text="16 Banking and Financial Regulation" title="16 Banking and Financial Regulation">
+      <outline type="rss" text="ETBFSI - Recent Stories" title="ETBFSI - Recent Stories" xmlUrl="https://bfsi.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://bfsi.economictimes.indiatimes.com/" description="Banking, insurance, NBFC and financial-services news; can include financial-market stories." category="Sector newsroom" />
+      <outline type="rss" text="RBI - Press Releases" title="RBI - Press Releases" xmlUrl="https://www.rbi.org.in/pressreleases_rss.xml" htmlUrl="https://www.rbi.org.in/" description="Official press releases. Source timestamp strings may not contain an explicit timezone; do not assume UTC." category="Regulator" />
+      <outline type="rss" text="RBI - Notifications" title="RBI - Notifications" xmlUrl="https://www.rbi.org.in/notifications_rss.xml" htmlUrl="https://www.rbi.org.in/" description="Official regulatory notifications; may overlap press-release coverage." category="Regulator" />
+      <outline type="rss" text="SEBI - Official Updates" title="SEBI - Official Updates" xmlUrl="https://www.sebi.gov.in/sebirss.xml" htmlUrl="https://www.sebi.gov.in/" description="Mixed SEBI updates, including enforcement orders; not circulars-only." category="Regulator" />
+    </outline>
+    <outline text="17 Telecom" title="17 Telecom">
+      <outline type="rss" text="ETTelecom - Recent Stories" title="ETTelecom - Recent Stories" xmlUrl="https://telecom.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://telecom.economictimes.indiatimes.com/" description="Telecom industry and regulatory news." category="Sector newsroom" />
+      <outline type="rss" text="TRAI - Website Updates (Mixed)" title="TRAI - Website Updates (Mixed)" xmlUrl="https://www.trai.gov.in/rss.xml" htmlUrl="https://www.trai.gov.in/" description="Includes events/photos and other site content. This is NOT verified as a complete feed of monthly subscription or quarterly performance reports." category="Regulator" />
+    </outline>
+    <outline text="18 Pharma and FDA" title="18 Pharma and FDA">
+      <outline type="rss" text="Pharmabiz - News Headlines" title="Pharmabiz - News Headlines" xmlUrl="https://www.pharmabiz.com/Includes/xmlInclude/Pharmabizrss.xml" htmlUrl="https://www.pharmabiz.com/" description="News headlines from Pharmabiz, including industry, trade and regulatory developments." category="Sector newsroom" />
+      <outline type="rss" text="ETPharma - Recent Stories" title="ETPharma - Recent Stories" xmlUrl="https://pharma.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://pharma.economictimes.indiatimes.com/" description="Additional dedicated pharma newsroom feed." category="Sector newsroom" />
+      <outline type="rss" text="FDA - Whats New Drugs" title="FDA - Whats New Drugs" xmlUrl="https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/drugs/rss.xml" htmlUrl="https://www.fda.gov/" description="Official drugs updates; not a dedicated Warning Letters feed and not restricted to Indian companies." category="Regulator" />
+      <outline type="rss" text="FDA - Press Releases" title="FDA - Press Releases" xmlUrl="https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml" htmlUrl="https://www.fda.gov/" description="FDA-wide press releases, including drug approvals; not restricted to Indian companies." category="Regulator" />
+      <outline type="rss" text="FDA - FOIA Electronic Reading Room" title="FDA - FOIA Electronic Reading Room" xmlUrl="https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/ora-foia-electronic-reading-room/rss.xml" htmlUrl="https://www.fda.gov/" description="Public document postings. Publication may lag the underlying inspection; this is not complete instant inspection disclosure." category="Regulator" />
+    </outline>
+    <outline text="19 Hospitals Diagnostics and Devices" title="19 Hospitals Diagnostics and Devices">
+      <outline type="rss" text="ETHealthworld - Hospitals" title="ETHealthworld - Hospitals" xmlUrl="https://health.economictimes.indiatimes.com/rss/hospitals" htmlUrl="https://health.economictimes.indiatimes.com/" description="Hospitals and healthcare-business developments." category="Sector newsroom" />
+      <outline type="rss" text="ETHealthworld - Diagnostics" title="ETHealthworld - Diagnostics" xmlUrl="https://health.economictimes.indiatimes.com/rss/diagnostics" htmlUrl="https://health.economictimes.indiatimes.com/" description="Diagnostics, research and testing news; includes non-market-moving scientific stories." category="Sector newsroom" />
+      <outline type="rss" text="ETHealthworld - Medical Devices" title="ETHealthworld - Medical Devices" xmlUrl="https://health.economictimes.indiatimes.com/rss/medical-devices" htmlUrl="https://health.economictimes.indiatimes.com/" description="Device industry and product/science developments." category="Sector newsroom" />
+    </outline>
+    <outline text="20 Retail FMCG and Durables" title="20 Retail FMCG and Durables">
+      <outline type="rss" text="ETRetail - Recent Stories" title="ETRetail - Recent Stories" xmlUrl="https://retail.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://retail.economictimes.indiatimes.com/" description="Retail, FMCG, apparel, jewellery, food services and consumer businesses; not a regulator data feed." category="Sector newsroom" />
+      <outline type="rss" text="ETRetail - Consumer Durables and IT" title="ETRetail - Consumer Durables and IT" xmlUrl="https://retail.economictimes.indiatimes.com/rss/consumer-durables-and-information-technology" htmlUrl="https://retail.economictimes.indiatimes.com/" description="Appliances, consumer electronics, ACs and related retail." category="Sector newsroom" />
+    </outline>
+    <outline text="21 Travel and Hospitality" title="21 Travel and Hospitality">
+      <outline type="rss" text="ETTravelWorld - Top Stories" title="ETTravelWorld - Top Stories" xmlUrl="https://travel.economictimes.indiatimes.com/rss/topstories" htmlUrl="https://travel.economictimes.indiatimes.com/" description="Travel-wide curated Top Stories, not all hospitality reports. The hospitality-only RSS endpoint returned no entries in this check." category="Sector newsroom" />
+    </outline>
+    <outline text="22 Education" title="22 Education">
+      <outline type="rss" text="ETEducation - Recent Stories" title="ETEducation - Recent Stories" xmlUrl="https://education.economictimes.indiatimes.com/rss/recentstories" htmlUrl="https://education.economictimes.indiatimes.com/" description="Education, policy, institutions and industry developments." category="Sector newsroom" />
+    </outline>
+    <outline text="23 Alcohol Spirits and Wine" title="23 Alcohol Spirits and Wine">
+      <outline type="rss" text="ISWAI - Industry Posts" title="ISWAI - Industry Posts" xmlUrl="https://www.iswai.in/feed/" htmlUrl="https://www.iswai.in/" description="Periodic industry reports and policy representations; not a substitute for state excise notifications." category="Association" />
+    </outline>
+    <outline text="24 Company Disclosures - Separate Layer" title="24 Company Disclosures - Separate Layer">
+      <outline type="rss" text="NSE - Corporate Announcements (All Sectors)" title="NSE - Corporate Announcements (All Sectors)" xmlUrl="https://nsearchives.nseindia.com/content/RSS/Online_announcements.xml" htmlUrl="https://nsearchives.nseindia.com/" description="High-volume company-specific feed. Filter by filing subject/content; this is separate from sector news." category="Exchange" />
+      <outline type="rss" text="NSE - PIT Disclosures (All Transaction Types)" title="NSE - PIT Disclosures (All Transaction Types)" xmlUrl="https://nsearchives.nseindia.com/content/RSS/InsiderTrading.xml" htmlUrl="https://nsearchives.nseindia.com/" description="Public ownership/PIT disclosures may include purchases, sales, pledges, transfers and other transaction types. Not every entry is an open-market buy or evidence of illegal insider trading." category="Exchange" />
+    </outline>
+  </body>
+</opml>

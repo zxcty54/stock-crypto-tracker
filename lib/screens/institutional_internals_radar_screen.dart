@@ -37,11 +37,42 @@ class _InstitutionalInternalsRadarScreenState
 
   bool _isLoading = true;
   bool _isSyncing = false;
+  bool _isGuideExpanded = false;
   Map<String, dynamic> _fiiDiiFlows = {};
   Map<String, dynamic> _fiiDiiDerivatives = {};
   Map<String, dynamic> _marketInternals = {};
   Map<String, dynamic> _promoterRadar = {};
   Map<String, dynamic> _bulkBlockDeals = {};
+
+  DateTime? _parseFlexibleDate(String? dateStr) {
+    if (dateStr == null || dateStr.trim().isEmpty) return null;
+    final clean = dateStr.trim().replaceAll('-', ' ');
+    final parts = clean.split(RegExp(r'\s+'));
+    if (parts.length >= 3) {
+      final day = int.tryParse(parts[0]);
+      final year = int.tryParse(parts[2]);
+      const months = {
+        'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12
+      };
+      final mKey = parts[1].toLowerCase();
+      final month = months[mKey.length >= 3 ? mKey.substring(0, 3) : mKey];
+      if (day != null && month != null && year != null) {
+        return DateTime(year, month, day);
+      }
+    }
+    return DateTime.tryParse(dateStr);
+  }
+
+  bool _isStaleDowngrade(String? incomingDateStr, String? currentDateStr) {
+    if (incomingDateStr == null || currentDateStr == null) return false;
+    final inDate = _parseFlexibleDate(incomingDateStr);
+    final curDate = _parseFlexibleDate(currentDateStr);
+    if (inDate != null && curDate != null) {
+      return inDate.isBefore(curDate);
+    }
+    return false;
+  }
 
   @override
   void initState() {
@@ -67,20 +98,23 @@ class _InstitutionalInternalsRadarScreenState
       setState(() => _isSyncing = true);
     }
 
-    try {
-      final localJson = await rootBundle
-          .loadString('assets/data/global_economy_radar.json');
-      final dynamic parsed = jsonDecode(localJson);
-      if (parsed is Map<String, dynamic> &&
-          (parsed['fii_dii_flows'] != null || parsed['market_internals'] != null)) {
-        if (mounted) {
-          setState(() {
-            _populateData(parsed);
-            _isLoading = false;
-          });
+    // Only load bundled asset on cold boot if memory state is empty
+    if (!isRefresh && _fiiDiiFlows.isEmpty) {
+      try {
+        final localJson = await rootBundle
+            .loadString('assets/data/global_economy_radar.json');
+        final dynamic parsed = jsonDecode(localJson);
+        if (parsed is Map<String, dynamic> &&
+            (parsed['fii_dii_flows'] != null || parsed['market_internals'] != null)) {
+          if (mounted) {
+            setState(() {
+              _populateData(parsed);
+              _isLoading = false;
+            });
+          }
         }
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
 
     for (final url in dataUrls) {
       try {
@@ -90,18 +124,42 @@ class _InstitutionalInternalsRadarScreenState
           headers: {
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
+            'Accept': 'application/json',
           },
-        ).timeout(const Duration(seconds: 6));
+        ).timeout(const Duration(seconds: 12));
 
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));
           if (parsed is Map<String, dynamic>) {
+            final incomingDeriv = parsed['fii_dii_derivatives'] as Map<String, dynamic>? ?? {};
+            final incomingFlows = parsed['fii_dii_flows'] as Map<String, dynamic>? ?? {};
+            final String? incomingDateStr = incomingDeriv['trade_date'] ?? incomingFlows['trade_date'];
+            final String? currentDateStr = _fiiDiiDerivatives['trade_date'] ?? _fiiDiiFlows['trade_date'];
+
+            // Prevent stale cache or older remote branch from downgrading newer data
+            if (_isStaleDowngrade(incomingDateStr, currentDateStr)) {
+              continue;
+            }
+
             if (mounted) {
               setState(() {
                 _populateData(parsed);
                 _isSyncing = false;
                 _isLoading = false;
               });
+
+              if (isRefresh) {
+                final date = _fiiDiiDerivatives['trade_date'] ??
+                    _fiiDiiFlows['trade_date'] ??
+                    'Latest';
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('✅ Institutional Telemetry Synced ($date)'),
+                    backgroundColor: const Color(0xFF00C853),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
             }
             return;
           }
@@ -206,6 +264,12 @@ class _InstitutionalInternalsRadarScreenState
             },
           ),
           IconButton(
+            icon: const Icon(Icons.help_outline_rounded,
+                color: Colors.white70, size: 20),
+            tooltip: "Kaise Use Karein? (Smart Money User Guide)",
+            onPressed: () => _showInstitutionalHelpModal(context),
+          ),
+          IconButton(
             icon: _isSyncing
                 ? const SizedBox(
                     width: 16,
@@ -283,15 +347,15 @@ class _InstitutionalInternalsRadarScreenState
 
     final String plainConclusion;
     if (fiiNet > 0 && diiNet > 0) {
-      plainConclusion = "FIIs (+₹${fiiNet.toStringAsFixed(0)} Cr) aur DIIs (+₹${diiNet.toStringAsFixed(0)} Cr) dono taraf se dual buying active hai. Broad liquidity trend strong bullish bana hua hai.";
+      plainConclusion = "FIIs (+₹${fiiNet.toStringAsFixed(0)} Cr) aur DIIs (+₹${diiNet.toStringAsFixed(0)} Cr) dono taraf se dual buying active hai. Broad liquidity trend strong bullish bana hua hai. 🎯 Action: Market leaders ke saath rally ride karein.";
     } else if (fiiNet > 0 && diiNet <= 0) {
-      plainConclusion = "Foreign institutions ne ₹${fiiNet.toStringAsFixed(0)} Cr ki aggressive net buying ki hai, jo DII profit booking (-₹${diiNet.abs().toStringAsFixed(0)} Cr) se zyada hai. Institutional pulse net positive (+₹${netPulse.toStringAsFixed(0)} Cr) hai.";
+      plainConclusion = "Foreign institutions ne ₹${fiiNet.toStringAsFixed(0)} Cr ki aggressive net buying ki hai, jo DII profit booking (-₹${diiNet.abs().toStringAsFixed(0)} Cr) se zyada hai. Institutional pulse net positive (+₹${netPulse.toStringAsFixed(0)} Cr) hai. 🎯 Action: Quality breakout stocks me buy on dips.";
     } else if (fiiNet <= 0 && diiNet > 0) {
       plainConclusion = isDiiAbsorbing
-          ? "Domestic Institutions (DIIs ₹${diiNet.toStringAsFixed(0)} Cr) ne Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) ko poori tarah absorb kiya hai. Market internals strong hain."
-          : "Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) domestic buying se zyada hai. Cautious risk regime active hai.";
+          ? "Domestic Institutions (DIIs ₹${diiNet.toStringAsFixed(0)} Cr) ne Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) ko poori tarah absorb kiya hai. Market internals strong hain. 🎯 Action: SIP cushion safe hai; dip par panic sell na karein, quality portfolio hold rakhein."
+          : "Foreign selling (₹${fiiNet.abs().toStringAsFixed(0)} Cr) domestic buying se zyada hai. Cautious risk regime active hai. 🎯 Action: Fresh aggressive long trades hold karein.";
     } else {
-      plainConclusion = "FIIs aur DIIs dono taraf se net selling chal rahi hai. Defensive risk regime active hai.";
+      plainConclusion = "FIIs aur DIIs dono taraf se net selling chal rahi hai. Defensive risk regime active hai. 🎯 Action: Defensive bane rahein aur cash reserve badhayein.";
     }
 
     // Visual chart factor calculations
@@ -787,6 +851,34 @@ class _InstitutionalInternalsRadarScreenState
                   ),
                 ),
               ),
+              const SizedBox(width: 5),
+              InkWell(
+                onTap: () => _showInstitutionalHelpModal(context),
+                borderRadius: BorderRadius.circular(4),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: kAccentCyan.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.help_outline_rounded, color: kAccentCyan, size: 9),
+                      SizedBox(width: 3),
+                      Text(
+                        "Kaise Samjhein?",
+                        style: TextStyle(
+                          color: kAccentCyan,
+                          fontSize: 7.5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -920,6 +1012,19 @@ class _InstitutionalInternalsRadarScreenState
             const SizedBox(height: 10),
             _buildDerivativesSentimentSection(),
           ],
+          const SizedBox(height: 12),
+          Container(height: 1, color: const Color(0xFF1E2B3E)),
+          const SizedBox(height: 10),
+          _buildActionableTakeawayBox(
+            fiiNet: fiiNet,
+            diiNet: diiNet,
+            netPulse: netPulse,
+            fiiLongRatio: (_fiiDiiDerivatives['fii_long_ratio'] as num?)?.toDouble() ?? 21.4,
+            fiiShortRatio: (_fiiDiiDerivatives['fii_short_ratio'] as num?)?.toDouble() ?? 78.6,
+            clientLongRatio: (_fiiDiiDerivatives['client_long_ratio'] as num?)?.toDouble() ?? 67.2,
+          ),
+          const SizedBox(height: 10),
+          _buildExpandableWidgetGuideSection(),
         ],
       ),
     );
@@ -1099,6 +1204,588 @@ class _InstitutionalInternalsRadarScreenState
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildActionableTakeawayBox({
+    required double fiiNet,
+    required double diiNet,
+    required double netPulse,
+    required double fiiLongRatio,
+    required double fiiShortRatio,
+    required double clientLongRatio,
+  }) {
+    final bool isSqueezeZone = fiiLongRatio < 22.0;
+    final bool isHedgeZone = fiiLongRatio >= 22.0 && fiiLongRatio < 40.0;
+    final bool isNeutralZone = fiiLongRatio >= 40.0 && fiiLongRatio <= 65.0;
+
+    final String futuresTitle;
+    final Color futuresColor;
+    final String futuresTrapWarning;
+    final String futuresActionAdvise;
+
+    if (isSqueezeZone) {
+      futuresTitle = "EXTREME SHORT SQUEEZE ZONE (${fiiLongRatio.toStringAsFixed(1)}% LONG / ${fiiShortRatio.toStringAsFixed(1)}% SHORT)";
+      futuresColor = kAccentAmber;
+      futuresTrapWarning = "Galti se bhi Put (PE) buy mat karo ya aggressive short mat karo. FIIs ke paas 78%+ short contracts hain, unki shorting limit exhaust ho chuki hai.";
+      futuresActionAdvise = "Reversal / Short-Covering pump ke liye taiyar rahein. Positive news aate hi FIIs shorts kaatenge jisse index 300-500 pt tezi se bounce ho sakti hai. Dips par buying ke mauke dhundein.";
+    } else if (isHedgeZone) {
+      futuresTitle = "BEARISH HEDGING / CAUTIOUS ZONE (${fiiLongRatio.toStringAsFixed(1)}% LONG)";
+      futuresColor = kAccentAmber;
+      futuresTrapWarning = "Breakouts chase mat karo, breakouts aksar fail honge.";
+      futuresActionAdvise = "Market choppy aur range-bound rahegi. Major support par buy aur resistance par profit book karein.";
+    } else if (isNeutralZone) {
+      futuresTitle = "BALANCED NEUTRAL ZONE (${fiiLongRatio.toStringAsFixed(1)}% LONG)";
+      futuresColor = kAccentCyan;
+      futuresTrapWarning = "Index sideways chop karega, blind index trading avoid karein.";
+      futuresActionAdvise = "Stock-specific momentum chalega. Top sectors aur breakout stocks me swing trades ride karein.";
+    } else {
+      futuresTitle = "OVERBOUGHT / TOP CAUTION ZONE (${fiiLongRatio.toStringAsFixed(1)}% LONG)";
+      futuresColor = kAccentRed;
+      futuresTrapWarning = "Greed mein aakar top par naye breakouts buy na karein.";
+      futuresActionAdvise = "FIIs heavily long hain, fresh buying room kam hai. Trailing stop-loss tight karein aur profits lock karna shuru karein.";
+    }
+
+    final bool isDiiAbsorbing = fiiNet < 0 && diiNet >= fiiNet.abs();
+    final bool isDualInflow = fiiNet > 0 && diiNet > 0;
+    final bool isDualOutflow = fiiNet < 0 && diiNet < 0;
+
+    final String cashTitle;
+    final Color cashColor;
+    final String cashAdvice;
+
+    if (isDiiAbsorbing) {
+      cashTitle = "DII SIP ABSORPTION MOAT (NET +₹${(diiNet + fiiNet).toStringAsFixed(0)} CR)";
+      cashColor = kAccentGreen;
+      cashAdvice = "FIIs ne ₹${fiiNet.abs().toStringAsFixed(0)} Cr becha, par Bharat ke DIIs ne ₹${diiNet.toStringAsFixed(0)} Cr buy karke absorb kar liya. Market crash ka koi darr nahi hai, panic selling na karein.";
+    } else if (isDualInflow) {
+      cashTitle = "DUAL INSTITUTIONAL RALLY (FII + DII BUYING)";
+      cashColor = kAccentGreen;
+      cashAdvice = "FIIs aur DIIs dono heavy buyers hain! Market me strong tailwind hai, dips par market leaders ride karein.";
+    } else if (isDualOutflow) {
+      cashTitle = "DUAL OUTFLOW RISK ALERT (DEFENSIVE STANCE)";
+      cashColor = kAccentRed;
+      cashAdvice = "Dono institutions ne cash withdraw kiya hai. Fresh buying hold karein aur defensive cash reserve badhayein.";
+    } else {
+      cashTitle = "FII OUTFLOW DABAAV (NET -₹${(fiiNet.abs() - diiNet).toStringAsFixed(0)} CR)";
+      cashColor = kAccentAmber;
+      cashAdvice = "Foreign selling domestic buying se zyada hai. Index par temporary pressure reh sakta hai, stop-loss strict rakhein.";
+    }
+
+    final bool isRetailTrap = clientLongRatio >= 60.0 && fiiLongRatio < 35.0;
+
+    return Container(
+      padding: const EdgeInsets.all(11),
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: futuresColor.withOpacity(0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: futuresColor.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Icon(Icons.tips_and_updates_rounded, color: futuresColor, size: 13),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "🎯 IS DATA SE KYA SAMJHEIN? (AAPKA ASLI FAYDA)",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: Colors.white,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 1),
+                    const Text(
+                      "Smart Money positioning se trade & investment ka live decision",
+                      style: TextStyle(color: kTextMuted, fontSize: 8),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          _buildTakeawayItem(
+            badge: "1. FII FUTURES SIGNAL",
+            title: futuresTitle,
+            color: futuresColor,
+            trapWarning: futuresTrapWarning,
+            actionAdvice: futuresActionAdvise,
+          ),
+          const SizedBox(height: 8),
+          _buildTakeawayItem(
+            badge: "2. CASH MARKET BATTLE",
+            title: cashTitle,
+            color: cashColor,
+            actionAdvice: cashAdvice,
+          ),
+          if (isRetailTrap) ...[
+            const SizedBox(height: 8),
+            _buildTakeawayItem(
+              badge: "3. RETAIL TRAP ALERT",
+              title: "CLIENTS ${clientLongRatio.toStringAsFixed(0)}% LONG vs FII ${fiiShortRatio.toStringAsFixed(0)}% SHORT",
+              color: kAccentAmber,
+              trapWarning: "Retail traders bullish (FOMO) hain jabki FIIs short baithe hain.",
+              actionAdvice: "Smart money pehle retail stop-losses hunt karti hai, uske baad market reverse hoti hai. Bhedchaal me Call chase na karein.",
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTakeawayItem({
+    required String badge,
+    required String title,
+    required Color color,
+    String? trapWarning,
+    required String actionAdvice,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D1424),
+        borderRadius: BorderRadius.circular(7),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+                child: Text(
+                  badge,
+                  style: TextStyle(color: color, fontSize: 7.5, fontWeight: FontWeight.w900),
+                ),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (trapWarning != null) ...[
+            const SizedBox(height: 5),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("🛑 ", style: TextStyle(fontSize: 9.5)),
+                Expanded(
+                  child: Text(
+                    trapWarning,
+                    style: const TextStyle(
+                      color: Color(0xFFFFB4AB),
+                      fontSize: 8.5,
+                      height: 1.3,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+          const SizedBox(height: 4),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("🎯 ", style: TextStyle(fontSize: 9.5)),
+              Expanded(
+                child: Text(
+                  actionAdvice,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 8.5,
+                    height: 1.3,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpandableWidgetGuideSection() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF090D16),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kAccentCyan.withOpacity(0.25)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                _isGuideExpanded = !_isGuideExpanded;
+              });
+            },
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.menu_book_rounded, color: kAccentCyan, size: 14),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "📘 WIDGET GUIDE: DATA SAMAJHNE KE 3 NIYAM",
+                          style: GoogleFonts.plusJakartaSans(
+                            color: kAccentCyan,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                        const SizedBox(height: 1),
+                        const Text(
+                          "Roz subah 9:00 AM par 30 seconds me market tone pakadein",
+                          style: TextStyle(color: kTextMuted, fontSize: 7.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    _isGuideExpanded
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_rounded,
+                    color: kAccentCyan,
+                    size: 18,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (_isGuideExpanded) ...[
+            Container(height: 1, color: const Color(0xFF1E2B3E)),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildRuleCard(
+                    number: "NIYAM 1",
+                    title: "FII Index Futures Long Ratio Formula",
+                    description: "FIIs Dalal Street ke smart whales hain. Unka Long % market top aur bottom batata hai:",
+                    bullets: [
+                      "🟢 < 20% Long: Extreme Short Squeeze -> FIIs 80%+ short hain. Galti se bhi PE buy mat karo, achanak 300-500 pt rocket bounce aayega.",
+                      "🟡 20% - 40% Long: Bearish Hedging -> Market choppy aur range-bound rahegi. Support par buy, resistance par sell.",
+                      "⚪ 40% - 60% Long: Neutral Zone -> Balanced market. Index chop karega, stock-specific momentum chalega.",
+                      "🔴 > 70% Long: Top Warning -> FIIs overbought hain. Breakout chase mat karo, trailing SL tight karo aur profits book karo.",
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  _buildRuleCard(
+                    number: "NIYAM 2",
+                    title: "Cash Flow Battle (FII vs DII SIP Moat)",
+                    description: "Cash market batata hai ki system me asli paisa aa raha hai ya nikal raha hai:",
+                    bullets: [
+                      "🛡️ DII Inflow > FII Outflow: Bharat ke retail SIPs (₹25k Cr/mo) selling ko absorb kar rahe hain. Market crash ka darr nahi hai, dip par panic selling mat karo.",
+                      "🚀 Dual Inflow (FII + DII Green): Heavy Bull Run. Bina dare high-beta index leaders ride karo.",
+                      "🚨 Dual Outflow (FII + DII Red): Systemic Risk Alert. Cash badhao aur naye trades se bachein.",
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  _buildRuleCard(
+                    number: "NIYAM 3",
+                    title: "Roz Subah 9:00 AM ka 30-Second Routine",
+                    description: "Market khulne se pehle bas ye 3 kadam dekhein:",
+                    bullets: [
+                      "Kadam 1: FII Futures Long % dekho (<20% hai toh Put mat lo, >70% hai toh Call mat chase karo).",
+                      "Kadam 2: DII Net Cash dekho (DII buying positive hai toh dips me support milega).",
+                      "Kadam 3: India VIX dekho (<14 market safe hai, >18 positions aadhi kar lo).",
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: kAccentCyan.withOpacity(0.4)),
+                        backgroundColor: kAccentCyan.withOpacity(0.08),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      icon: const Icon(Icons.school_rounded, color: kAccentCyan, size: 14),
+                      label: const Text(
+                        "Pura Masterclass Guide Padhein (Examples Ke Saath)",
+                        style: TextStyle(
+                          color: kAccentCyan,
+                          fontSize: 8.5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () => _showInstitutionalHelpModal(context),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRuleCard({
+    required String number,
+    required String title,
+    required String description,
+    required List<String> bullets,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0D1424),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                decoration: BoxDecoration(
+                  color: kAccentCyan.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+                child: Text(
+                  number,
+                  style: const TextStyle(
+                    color: kAccentCyan,
+                    fontSize: 7,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  title,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: Colors.white,
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            description,
+            style: const TextStyle(color: kTextMuted, fontSize: 8),
+          ),
+          const SizedBox(height: 5),
+          ...bullets.map((b) => Padding(
+                padding: const EdgeInsets.only(bottom: 3),
+                child: Text(
+                  b,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 8,
+                    height: 1.3,
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  void _showInstitutionalHelpModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0D1424),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      isScrollControlled: true,
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.85,
+        maxChildSize: 0.95,
+        minChildSize: 0.5,
+        expand: false,
+        builder: (_, scrollController) => SingleChildScrollView(
+          controller: scrollController,
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: kAccentCyan.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.account_balance_rounded,
+                        color: kAccentCyan, size: 20),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "INSTITUTIONAL RADAR GUIDE",
+                          style: GoogleFonts.plusJakartaSans(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const Text(
+                          "FII/DII Futures & Cash Data se Trading Fayda Kaise Uthayein",
+                          style: TextStyle(color: kTextMuted, fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded, color: Colors.white54),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildModalSection(
+                title: "1. FIIs Kaun Hain aur Unka Data Kyun Dekhein?",
+                content: "FIIs (Foreign Institutional Investors) Dalal Street ke sabse bade Smart Money / Whales hote hain jo hazaron karod se market ka direction tai karte hain. Jab FIIs index futures me heavy positions banate hain, toh market unke opposite nahi chal sakti.",
+              ),
+              const SizedBox(height: 12),
+              _buildModalSection(
+                title: "2. FII Index Futures Long Ratio: Master Cheat Sheet",
+                content: "Ye indicator batata hai ki FIIs Nifty aur BankNifty futures me kitne % Bullish (Long) hain aur kitne % Bearish (Short) hain:\n\n• < 20% Long (Extreme Squeeze):\nFIIs ne 80%+ short contracts khol rakhe hain. Unki shorting limit khatam hai. Galti se bhi Put (PE) buy mat karo. Thodi si positive khabar aate hi market 300-500 point rocket ki tarah bounce karegi.\n\n• 20% - 40% Long (Bearish Hedging):\nFIIs cautious hain. Market choppy aur sideways rahegi. Breakouts aksar fail hote hain. Support par buy aur resistance par book karo.\n\n• 40% - 60% Long (Neutral):\nBalanced market. Index range me rahega, par quality stocks me strong run milega.\n\n• > 70% Long (Top Warning):\nFIIs overbought hain. Top par breakout chase na karein, stop-loss tight karein aur profit book karna shuru karein.",
+              ),
+              const SizedBox(height: 12),
+              _buildModalSection(
+                title: "3. Cash Market (FII vs DII Battle)",
+                content: "Cash market liquidity ka balance dikhata hai:\n\n• Case 1: FII Selling vs DII Buying (Absorption):\nBharat ke retail SIPs (₹25,000+ Cr har mahine) DIIs ke zariye FIIs ki foreign selling ko absorb kar rahe hain. Iska matlab market crash nahi hogi, dip par panic selling na karein.\n\n• Case 2: Dual Buying (FII + DII Green):\nAggressive bull run. Market leaders (Reliance, HDFC Bank, ICICI Bank, TCS) ko bina dare ride karein.\n\n• Case 3: Dual Selling (FII + DII Red):\nSystem se liquidity nikal rahi hai. High alert! Cash hold karein aur naye trades se bachein.",
+              ),
+              const SizedBox(height: 12),
+              _buildModalSection(
+                title: "4. Retailers (Clients) vs FII Trap",
+                content: "Jab retail traders (Clients) 65-70%+ Long hote hain aur FIIs 75-80% Short hote hain, toh ye sabse bada Retail Trap hota hai. Retailers ko lagta hai market upar jayegi, par FIIs pehle retail ke stop loss trigger karte hain. Isliye jab retail heavy long ho, tab FOMO se bachein.",
+              ),
+              const SizedBox(height: 12),
+              _buildModalSection(
+                title: "5. Roz Subah 9:00 AM ka 3-Step Routine",
+                content: "1. FII Futures Long % check karo (<20% hai toh Put lene ki galti mat karo; >70% hai toh top pe Call buy mat karo).\n2. DII Net Absorption check karo (DII FII se zyada buy kar rahe hain toh portfolio safe hai).\n3. India VIX dekho (<14 calm, >18 positions half).",
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kAccentCyan,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text(
+                    "Samajh Gaya (Close)",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildModalSection({required String title, required String content}) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF131B2A),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFF1E2B3E)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.plusJakartaSans(
+              color: kAccentCyan,
+              fontSize: 11,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            content,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 10,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

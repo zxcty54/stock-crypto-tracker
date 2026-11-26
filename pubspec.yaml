@@ -66,3 +66,4 @@ flutter:
     - assets/data/ipo_master.json
     - assets/data/sector_sources_directory.json
     - assets/data/sector_live_feed.json
+    - assets/data/India_Sector_RSS_Feeds.opml
