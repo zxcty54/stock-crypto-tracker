@@ -99,7 +99,6 @@ class SectorLiveFeedItem {
   final String sourceType;
   final String title;
   final String summary;
-  final String deepAnalysis;
   final String publishedAt;
   final String kyaDekhnaHai;
   final String sourceUrl;
@@ -115,7 +114,6 @@ class SectorLiveFeedItem {
     required this.sourceType,
     required this.title,
     required this.summary,
-    required this.deepAnalysis,
     required this.publishedAt,
     required this.kyaDekhnaHai,
     required this.sourceUrl,
@@ -133,7 +131,6 @@ class SectorLiveFeedItem {
       sourceType: json['source_type'] ?? 'NEWS',
       title: json['title'] ?? '',
       summary: json['summary'] ?? '',
-      deepAnalysis: json['deep_analysis'] ?? '',
       publishedAt: json['published_at'] ?? '',
       kyaDekhnaHai: json['kya_dekhna_hai'] ?? '',
       sourceUrl: json['source_url'] ?? '',
@@ -245,7 +242,6 @@ class _SectorSourcesDirectoryScreenState
     required String title,
     required String subtitle,
     required String body,
-    String? deepAnalysis,
     required String cadence,
     required String url,
     required String authority,
@@ -261,7 +257,7 @@ class _SectorSourcesDirectoryScreenState
       backgroundColor: Colors.transparent,
       builder: (ctx) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.85,
+          height: MediaQuery.of(context).size.height * 0.75,
           decoration: const BoxDecoration(
             color: Color(0xFF0D1322),
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -343,12 +339,12 @@ class _SectorSourcesDirectoryScreenState
                         title,
                         style: GoogleFonts.plusJakartaSans(
                           color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
                           height: 1.35,
                         ),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 12),
 
                       // Authority Badge Box
                       Container(
@@ -363,7 +359,7 @@ class _SectorSourcesDirectoryScreenState
                             Icon(Icons.verified_rounded, size: 14, color: badgeColor),
                             const SizedBox(width: 6),
                             Text(
-                              "AUTHORITY LAYER: $authority",
+                              "SOURCE / AUTHORITY: $authority",
                               style: GoogleFonts.plusJakartaSans(
                                 color: Colors.white70,
                                 fontSize: 10,
@@ -373,9 +369,9 @@ class _SectorSourcesDirectoryScreenState
                           ],
                         ),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 12),
 
-                      // In-App Executive Summary Box
+                      // In-App News / Telemetry Excerpt Box
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
@@ -388,10 +384,10 @@ class _SectorSourcesDirectoryScreenState
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.article_rounded, size: 14, color: kAccentGreen),
+                                const Icon(Icons.feed_rounded, size: 14, color: kAccentGreen),
                                 const SizedBox(width: 6),
                                 Text(
-                                  "IN-APP EXECUTIVE SUMMARY",
+                                  "FEED NEWS EXCERPT",
                                   style: GoogleFonts.robotoMono(
                                     color: kAccentGreen,
                                     fontSize: 10.5,
@@ -413,49 +409,7 @@ class _SectorSourcesDirectoryScreenState
                           ],
                         ),
                       ),
-
-                      // In-App Ground Reality & Telemetry Deep Dive (Multi-paragraph rich analysis)
-                      if (deepAnalysis != null && deepAnalysis.trim().isNotEmpty) ...[
-                        const SizedBox(height: 14),
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0F172A),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: kAccentCyan.withOpacity(0.35)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Icon(Icons.analytics_rounded, size: 15, color: kAccentCyan),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    "GROUND REALITY & TELEMETRY DEEP DIVE",
-                                    style: GoogleFonts.robotoMono(
-                                      color: kAccentCyan,
-                                      fontSize: 10.5,
-                                      fontWeight: FontWeight.w900,
-                                      letterSpacing: 0.5,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                deepAnalysis,
-                                style: GoogleFonts.plusJakartaSans(
-                                  color: const Color(0xFFE2E8F0),
-                                  fontSize: 12.5,
-                                  height: 1.6,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 12),
 
                       // Kya Dekhna Hai Box
                       Container(
@@ -646,7 +600,6 @@ class _SectorSourcesDirectoryScreenState
                 title: item.title,
                 subtitle: "${item.themeIcon} ${item.sectorName}",
                 body: item.summary,
-                deepAnalysis: item.deepAnalysis,
                 cadence: item.kyaDekhnaHai,
                 url: item.sourceUrl,
                 authority: item.sourceName,
@@ -954,8 +907,7 @@ class _SectorSourcesDirectoryScreenState
                             title: sectorFeed!.title,
                             subtitle: "${theme.icon} ${sector.sectorName}",
                             body: sectorFeed.summary,
-                            deepAnalysis: sectorFeed.deepAnalysis,
-                            cadence: "${sector.cadence}\n\nWHAT TO WATCH:\n${sector.keyFocus}\n\nTELEMETRY CHECKS:\n${sectorFeed.kyaDekhnaHai}",
+                            cadence: "${sector.cadence}\n\nWHAT TO WATCH:\n${sector.keyFocus}",
                             url: sectorFeed.sourceUrl,
                             authority: sectorFeed.sourceName,
                             type: sectorFeed.sourceType,
@@ -977,7 +929,7 @@ class _SectorSourcesDirectoryScreenState
                                   const Icon(Icons.bolt_rounded, size: 13, color: kAccentAmber),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "LATEST GROUND DISPATCH",
+                                    "LATEST FEED DISPATCH",
                                     style: GoogleFonts.robotoMono(
                                       color: kAccentAmber,
                                       fontSize: 9,
@@ -1059,7 +1011,7 @@ class _SectorSourcesDirectoryScreenState
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "Tap to read full ground telemetry →",
+                                    "Tap to view in-app excerpt →",
                                     style: GoogleFonts.plusJakartaSans(
                                       color: kAccentCyan,
                                       fontSize: 9.5,
@@ -1150,7 +1102,6 @@ class _SectorSourcesDirectoryScreenState
                               title: "${sector.sectorName} • ${src.name}",
                               subtitle: "${theme.icon} ${theme.themeName}",
                               body: "${src.description}\n\nOfficial Authority: ${src.authority} [${src.type}]\nPrimary regulatory and telemetry repository for ${sector.sectorName}.",
-                              deepAnalysis: sectorFeed?.deepAnalysis ?? "",
                               cadence: "${sector.cadence}\n\nWHAT TO WATCH:\n${sector.keyFocus}",
                               url: src.url,
                               authority: src.authority,

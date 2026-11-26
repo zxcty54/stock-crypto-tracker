@@ -601,7 +601,6 @@ def fetch_rss_feed(source: dict) -> list:
                             "source_type": source["source_type"],
                             "title": title[:140],
                             "summary": summary[:320] if summary else f"Sector regulatory and market update from {source['source_name']}.",
-                            "deep_analysis": f"Live automated RSS intelligence harvested from {source['source_name']}.\n\nMonitoring Key Focus:\n{source['kya_dekhna_hai']}",
                             "published_at": pub_date[:25] if pub_date else NOW.strftime("%d %b %Y"),
                             "kya_dekhna_hai": source["kya_dekhna_hai"],
                             "source_url": link or source["url"],
@@ -648,10 +647,6 @@ def main():
     for item in live_harvested:
         sid = item.get("sector_id")
         if sid:
-            # When fresh live RSS arrives, update sector item while preserving deep_analysis if RSS summary is brief
-            old_item = sector_feeds_map.get(sid, {})
-            if "deep_analysis" in old_item and len(old_item["deep_analysis"]) > len(item.get("deep_analysis", "")):
-                item["deep_analysis"] = old_item["deep_analysis"]
             sector_feeds_map[sid] = item
 
     all_ordered_feeds = []
