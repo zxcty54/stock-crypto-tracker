@@ -64,3 +64,5 @@ flutter:
     - assets/data/mf_smart_money_radar.json
     - assets/data/global_economy_radar.json
     - assets/data/ipo_master.json
+    - assets/data/sector_sources_directory.json
+    - assets/data/sector_live_feed.json

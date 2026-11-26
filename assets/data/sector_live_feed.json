@@ -1,0 +1,253 @@
+{
+  "last_updated": "26-Nov-2026 18:15 IST",
+  "total_items": 12,
+  "live_feeds": [
+    {
+      "id": "feed_01",
+      "sector_id": 1,
+      "sector_name": "Sugar / ethanol",
+      "theme_name": "Agriculture, Sugar & Inputs",
+      "theme_icon": "🌾",
+      "source_name": "ISMA / ChiniMandi",
+      "source_type": "ASSOCIATION",
+      "title": "Cane Crushing Season Commences: OMCs Issue 145 Cr Litre Ethanol Allocation",
+      "summary": "Sugar mills across Uttar Pradesh and Maharashtra initiate crushing for SS 2026-27. Government maintains minimum selling price (MSP) of sugar at ₹38.50/kg while raising procurement rates for ethanol produced from B-Heavy molasses.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Ethanol blending percentage touches 14.8%. B-heavy and direct cane juice diversion helps mills clear cane dues promptly without inventory pileup.",
+      "source_url": "https://ismaindia.org/resources",
+      "key_tickers": [
+        "BALRAMCHIN",
+        "EIDPARRY",
+        "SHREERAMA",
+        "PRAJMAC"
+      ]
+    },
+    {
+      "id": "feed_02",
+      "sector_id": 8,
+      "sector_name": "Auto: 2W / PV / CV / 3W",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "FADA / SIAM",
+      "source_type": "ORIGINAL",
+      "title": "Post-Festive Retail Audit: Two-Wheelers Up 14.2% YoY While PV Dealer Inventory Normalizes to 48 Days",
+      "summary": "FADA retail registration telemetry shows strong rural traction driving entry-level motorcycle demand. Passenger vehicle dealer inventory eases from peak 65 days down to 48 days following calibrated OEM dispatches.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "SIAM wholesale dispatches vs FADA Vahan retail registrations. Track if discounts on compact SUVs reduce dealer holding costs.",
+      "source_url": "https://fada.in/press-release-list.php",
+      "key_tickers": [
+        "MARUTI",
+        "TATAMOTORS",
+        "M&M",
+        "BAJAJ-AUTO",
+        "HEROMOTOCO"
+      ]
+    },
+    {
+      "id": "feed_03",
+      "sector_name": "Steel",
+      "sector_id": 10,
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "BigMint / ISA",
+      "source_type": "NEWS_PRICING",
+      "title": "Domestic HRC Realizations Hold at ₹49,800/t as Coking Coal Softens to 98/t FOB Australia",
+      "summary": "Secondary rebar and primary flat steel prices stabilize as domestic infrastructure off-take offsets lower global demand. Chinese FOB export quotes hover at 85/t, keeping domestic mills vigilant on DGTR trade remedy petition.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Spreads between HRC realization and blast furnace raw material basket (Iron Ore pellets + Coking Coal). Steel EBITDA margins expand 140 bps.",
+      "source_url": "https://www.bigmint.co/",
+      "key_tickers": [
+        "TATASTEEL",
+        "JSWSTEEL",
+        "JINDALSTEL",
+        "SAIL"
+      ]
+    },
+    {
+      "id": "feed_04",
+      "sector_id": 16,
+      "sector_name": "Electrical equipment / cables / transformers",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "theme_icon": "🏭",
+      "source_name": "IEEMA",
+      "source_type": "ASSOCIATION",
+      "title": "Grid Expansion Capex: High-Voltage Transformer Order Books Reach Record 32 Months Lead Time",
+      "summary": "Surging renewable transmission corridors and data center power connectivity create persistent supply tightness for 765kV power transformers and gas-insulated switchgear. CRGO electrical steel imports stabilize under BIS licensing norms.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Multi-year fixed price escalation contracts protect operating margins against copper and cold-rolled grain-oriented (CRGO) steel volatility.",
+      "source_url": "https://ieema.org/industry-intelligence/industry-update/",
+      "key_tickers": [
+        "VOLTAMP",
+        "ABB",
+        "SIEMENS",
+        "SCHNEIDER",
+        "HITACHI"
+      ]
+    },
+    {
+      "id": "feed_05",
+      "sector_id": 19,
+      "sector_name": "Solar / wind / renewable / BESS",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "SECI / Mercom India",
+      "source_type": "ORIGINAL",
+      "title": "SECI Concludes 1200 MW Firm & Dispatchable Renewable Energy (FDRE) Tender at ₹4.28/kWh",
+      "summary": "Leading independent power producers win allocations with 4-hour battery energy storage system (BESS) pairing. Domestic module manufacturers ramp capacity under ALMM (Approved List of Models & Manufacturers) framework.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "BESS cost deflation (10/kWh pack level) enables viability gap funding feasibility, driving 24/7 round-the-clock green power purchase agreements.",
+      "source_url": "https://www.mercomindia.com/",
+      "key_tickers": [
+        "TATAPOWER",
+        "ADANIGREEN",
+        "SWSOLAR",
+        "SUZLON"
+      ]
+    },
+    {
+      "id": "feed_06",
+      "sector_id": 23,
+      "sector_name": "Railways / wagons / metro",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "IREPS / Rail Analysis",
+      "source_type": "PROCUREMENT",
+      "title": "Indian Railways Floats Tender for 20,000 High-Axle Freight Wagons & Kavach Track Deployment",
+      "summary": "Dedicated freight corridor feeder connectivity drives fresh procurement cycle for BOXNHL and BCFCM cement wagons. Rolling stock manufacturers report order backlogs exceeding 3.5x trailing twelve-month revenues.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "Tender specifications vs awarded contracts on IREPS. Confirm delivery timelines and wheelset/axle assembly localization.",
+      "source_url": "https://www.ireps.gov.in/",
+      "key_tickers": [
+        "TITAGARH",
+        "JWL",
+        "TEXRAIL",
+        "BEML"
+      ]
+    },
+    {
+      "id": "feed_07",
+      "sector_id": 24,
+      "sector_name": "Defence",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "theme_icon": "⚡",
+      "source_name": "PIB - Ministry of Defence",
+      "source_type": "ORIGINAL",
+      "title": "DAC Accord Acceptance of Necessity (AoN) for Capital Acquisitions Worth ₹84,000 Crore Under 'Make in India'",
+      "summary": "Defence Acquisition Council clears procurement of next-generation electronic warfare suites, naval surveillance radars, and advanced armored vehicles. Indigenous content ratio mandated at over 65% for domestic defence primes.",
+      "published_at": "23 Nov 2026",
+      "kya_dekhna_hai": "AoN is the preliminary approval stage. Final commercial contract signing typically takes 6 to 18 months before revenue recognition commences.",
+      "source_url": "https://www.pib.gov.in/AllRelease.aspx?reg=3&lang=1",
+      "key_tickers": [
+        "BEL",
+        "HAL",
+        "MAZDOCK",
+        "BDL",
+        "DATAPATTNS"
+      ]
+    },
+    {
+      "id": "feed_08",
+      "sector_id": 29,
+      "sector_name": "Banks / NBFC / housing finance",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "RBI Press Releases",
+      "source_type": "REGULATOR",
+      "title": "Banking Sector Credit Growth Sustains at 13.8% YoY as Deposit Mobilization Narrows Gap to 11.9%",
+      "summary": "RBI sectoral credit deployment data highlights robust off-take in infrastructure term loans and retail housing mortgages. Asset quality remains pristine with system-wide Gross NPA dipping to a multi-year low of 2.6%.",
+      "published_at": "25 Nov 2026",
+      "kya_dekhna_hai": "Credit-Deposit (C/D) ratio across private banks. Margins (NIM) plateauing as term deposit repricing runs its course.",
+      "source_url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+      "key_tickers": [
+        "HDFCBANK",
+        "ICICIBANK",
+        "SBIN",
+        "AXISBANK",
+        "BAJFINANCE"
+      ]
+    },
+    {
+      "id": "feed_09",
+      "sector_id": 32,
+      "sector_name": "AMCs / mutual funds",
+      "theme_name": "Banking & Financial Services",
+      "theme_icon": "🏦",
+      "source_name": "AMFI Monthly Data",
+      "source_type": "ORIGINAL",
+      "title": "Domestic Systematic Investment Plans (SIP) Inflow Touches ₹25,320 Crore; Equity AUM Expands 26% YoY",
+      "summary": "Retail SIP accounts cross 9.8 crore folios as domestic liquidity acts as structural moat against foreign institutional portfolio reallocations. Multicap and Flexicap categories witness maximum monthly net mobilization.",
+      "published_at": "22 Nov 2026",
+      "kya_dekhna_hai": "Monthly SIP gross run-rate acts as permanent domestic absorption engine, cushioning Nifty against DXY-led FII selling waves.",
+      "source_url": "https://www.amfiindia.com/research-information/amfi-monthly",
+      "key_tickers": [
+        "HDFCAMC",
+        "NAM-INDIA",
+        "UTIAMC",
+        "BSE",
+        "CDSL"
+      ]
+    },
+    {
+      "id": "feed_10",
+      "sector_id": 36,
+      "sector_name": "Telecom",
+      "theme_name": "IT, Telecom & Healthcare",
+      "theme_icon": "💻",
+      "source_name": "TRAI Reports",
+      "source_type": "ORIGINAL",
+      "title": "TRAI Telecom Subscription Report: Industry Blended ARPU Reaches ₹198 Post Tariff Rationalization",
+      "summary": "Total broadband connections cross 94.2 crore. Private telecom operators register net active wireless subscriber additions while 5G fixed wireless access (FWA) home broadband connections double quarter-on-quarter.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "VLR active subscriber percentage and 4G/5G data consumption per user (now averaging 24.2 GB/month).",
+      "source_url": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
+      "key_tickers": [
+        "BHARTIARTL",
+        "IDEA",
+        "TATACOMM",
+        "INDUSINDBK"
+      ]
+    },
+    {
+      "id": "feed_11",
+      "sector_id": 37,
+      "sector_name": "Pharma / APIs / CDMO",
+      "theme_name": "IT, Telecom & Healthcare",
+      "theme_icon": "💻",
+      "source_name": "USFDA / Pharmabiz",
+      "source_type": "REGULATOR",
+      "title": "USFDA Concludes Surveillance Audit at Ahmedabad Injectable Facility With Zero Form 483 Observations",
+      "summary": "Domestic generic pharma players gain regulatory clearance for key complex injectables and ophthalmic abbreviated new drug applications (ANDAs). Price erosion in US base generic market stabilizes at low single digits.",
+      "published_at": "24 Nov 2026",
+      "kya_dekhna_hai": "EIR (Establishment Inspection Report) issuance status vs Form 483 warning letters. High-margin CDMO contracts scaling up.",
+      "source_url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters",
+      "key_tickers": [
+        "SUNPHARMA",
+        "CIPLA",
+        "DRREDDY",
+        "ZYDUSLIFE",
+        "DIVISLAB"
+      ]
+    },
+    {
+      "id": "feed_12",
+      "sector_id": 39,
+      "sector_name": "FMCG",
+      "theme_name": "Consumption, Retail & Other Services",
+      "theme_icon": "🛒",
+      "source_name": "NIQ / ETRetail",
+      "source_type": "RESEARCH",
+      "title": "Rural FMCG Volume Demand Rebounds to 6.2% Growth Supported by Favorable Monsoon Harvest Disbursals",
+      "summary": "NielsenIQ quarterly consumer measurement index shows rural consumption outpacing urban volume growth for second consecutive quarter. Packaged staples, soaps, and oral care categories lead the volume revival.",
+      "published_at": "21 Nov 2026",
+      "kya_dekhna_hai": "Crude and Palm Oil raw material prices determine gross margin trajectory. Volume growth vs price-led revenue growth split.",
+      "source_url": "https://retail.economictimes.indiatimes.com/news/food-entertainment",
+      "key_tickers": [
+        "HINDUNILVR",
+        "ITC",
+        "DABUR",
+        "MARICO",
+        "BRITANNIA"
+      ]
+    }
+  ]
+}
