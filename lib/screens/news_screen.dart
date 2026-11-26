@@ -1005,7 +1005,7 @@ class _NewsScreenState extends State<NewsScreen> with AutomaticKeepAliveClientMi
                                       ),
                                       const SizedBox(height: 3),
                                       const Text(
-                                        "Participant Derivatives Squeeze • India VIX • Breadth • Promoter Pledge",
+                                        "Participant Futures Squeeze • Action Guide • DII Absorption • India VIX",
                                         style: TextStyle(
                                           color: Colors.white70,
                                           fontSize: 11.5,

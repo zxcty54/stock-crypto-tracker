@@ -592,7 +592,7 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
                 ),
                 const SizedBox(height: 2),
                 const Text(
-                  "FII/DII Net Flow • India VIX • Breadth • Promoter Pledge",
+                  "FII/DII Futures Squeeze • Action Guide • VIX • Breadth",
                   style: TextStyle(color: kTextMuted, fontSize: 9.5),
                 ),
               ],
