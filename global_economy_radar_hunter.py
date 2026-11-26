@@ -505,32 +505,66 @@ def fetch_live_nse_participant_oi(now: datetime) -> dict:
     """
     Attempts to download official Participant-wise Open Interest CSV from NSE Archives.
     Checks today and up to 4 previous trading days to find latest published F&O ledger.
+    Employs curl_cffi with chrome124 impersonation to clear exchange bot protection.
     """
     from datetime import timedelta
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "*/*"
-    }
 
     for days_back in range(0, 5):
         target_date = now - timedelta(days=days_back)
         if target_date.weekday() in (5, 6):
             continue
         date_str = target_date.strftime("%d%m%Y")
-        url = f"https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_{date_str}.csv"
+        urls = [
+            f"https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_{date_str}.csv",
+            f"https://www.nseindia.com/content/nsccl/fao_participant_oi_{date_str}.csv"
+        ]
+
+        # 1. Attempt with curl_cffi (best for Akamai/NSE)
         try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=6) as resp:
-                if resp.status == 200:
-                    content = resp.read().decode("utf-8", errors="ignore")
-                    if "Client Type" in content and "Future Index Long" in content:
-                        parsed = parse_fao_participant_csv(content)
+            from curl_cffi import requests
+            session = requests.Session(impersonate="chrome124")
+            session.get("https://www.nseindia.com", headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
+            for url in urls:
+                try:
+                    resp = session.get(
+                        url,
+                        headers={
+                            "Referer": "https://www.nseindia.com/all-reports",
+                            "Accept": "*/*"
+                        },
+                        timeout=6
+                    )
+                    if resp.status_code == 200 and "Client Type" in resp.text and "Future Index Long" in resp.text:
+                        parsed = parse_fao_participant_csv(resp.text)
                         if parsed:
                             parsed["trade_date"] = target_date.strftime("%d %b %Y")
                             parsed["source"] = "NSE_OFFICIAL_ARCHIVES"
                             return parsed
+                except Exception:
+                    pass
         except Exception:
             pass
+
+        # 2. Fallback with requests / urllib
+        for url in urls:
+            try:
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                    "Referer": "https://www.nseindia.com/all-reports",
+                    "Accept": "*/*"
+                }
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    if resp.status == 200:
+                        content = resp.read().decode("utf-8", errors="ignore")
+                        if "Client Type" in content and "Future Index Long" in content:
+                            parsed = parse_fao_participant_csv(content)
+                            if parsed:
+                                parsed["trade_date"] = target_date.strftime("%d %b %Y")
+                                parsed["source"] = "NSE_OFFICIAL_ARCHIVES"
+                                return parsed
+            except Exception:
+                pass
     return None
 
 

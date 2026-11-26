@@ -130,20 +130,22 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
       setState(() => _isSyncing = true);
     }
 
-    try {
-      final localJson = await rootBundle
-          .loadString('assets/data/global_economy_radar.json');
-      final dynamic parsed = jsonDecode(localJson);
-      if (parsed is Map<String, dynamic> &&
-          parsed['global_superpowers'] != null) {
-        if (mounted) {
-          setState(() {
-            _populateData(parsed);
-            _isLoading = false;
-          });
+    if (!isRefresh && _superpowers.isEmpty) {
+      try {
+        final localJson = await rootBundle
+            .loadString('assets/data/global_economy_radar.json');
+        final dynamic parsed = jsonDecode(localJson);
+        if (parsed is Map<String, dynamic> &&
+            parsed['global_superpowers'] != null) {
+          if (mounted) {
+            setState(() {
+              _populateData(parsed);
+              _isLoading = false;
+            });
+          }
         }
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
 
     bool fetchedLive = false;
     for (final url in dataUrls) {
@@ -154,8 +156,9 @@ class _GlobalEconomyRadarScreenState extends State<GlobalEconomyRadarScreen>
           headers: {
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
+            'Accept': 'application/json',
           },
-        ).timeout(const Duration(seconds: 6));
+        ).timeout(const Duration(seconds: 12));
 
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));

@@ -67,20 +67,23 @@ class _InstitutionalInternalsRadarScreenState
       setState(() => _isSyncing = true);
     }
 
-    try {
-      final localJson = await rootBundle
-          .loadString('assets/data/global_economy_radar.json');
-      final dynamic parsed = jsonDecode(localJson);
-      if (parsed is Map<String, dynamic> &&
-          (parsed['fii_dii_flows'] != null || parsed['market_internals'] != null)) {
-        if (mounted) {
-          setState(() {
-            _populateData(parsed);
-            _isLoading = false;
-          });
+    // Only load bundled asset on cold boot if memory state is empty
+    if (!isRefresh && _fiiDiiFlows.isEmpty) {
+      try {
+        final localJson = await rootBundle
+            .loadString('assets/data/global_economy_radar.json');
+        final dynamic parsed = jsonDecode(localJson);
+        if (parsed is Map<String, dynamic> &&
+            (parsed['fii_dii_flows'] != null || parsed['market_internals'] != null)) {
+          if (mounted) {
+            setState(() {
+              _populateData(parsed);
+              _isLoading = false;
+            });
+          }
         }
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
 
     for (final url in dataUrls) {
       try {
@@ -90,8 +93,9 @@ class _InstitutionalInternalsRadarScreenState
           headers: {
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
+            'Accept': 'application/json',
           },
-        ).timeout(const Duration(seconds: 6));
+        ).timeout(const Duration(seconds: 12));
 
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));
@@ -102,6 +106,19 @@ class _InstitutionalInternalsRadarScreenState
                 _isSyncing = false;
                 _isLoading = false;
               });
+
+              if (isRefresh) {
+                final date = _fiiDiiDerivatives['trade_date'] ??
+                    _fiiDiiFlows['trade_date'] ??
+                    'Latest';
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('✅ Institutional Telemetry Synced ($date)'),
+                    backgroundColor: const Color(0xFF00C853),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
             }
             return;
           }

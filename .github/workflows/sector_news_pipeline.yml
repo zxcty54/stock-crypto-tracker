@@ -25,16 +25,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Ingest Live Sector News Feeds
+      - name: Ingest Live Sector News Feeds & Institutional Radar
         run: |
           python sector_news_crawler.py
+          python global_economy_radar_hunter.py || true
 
       - name: Direct Commit & Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add -A sector_live_feed.json assets/data/sector_live_feed.json
+          git add -A sector_live_feed.json assets/data/sector_live_feed.json global_economy_radar.json assets/data/global_economy_radar.json
           if git diff --staged --quiet; then
             echo "ℹ️ No new sector news items. Skipping push."
           else

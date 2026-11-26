@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-25T22:38:24.790596+00:00",
-    "last_updated": "November 2026 / Automated Telemetry Sync",
+    "generated_timestamp": "2026-11-26T14:25:07.235509+00:00",
+    "last_updated": "26 Nov 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
-    "regime_headline": "Stagflationary Global Divergence: US 10Y at 4.85%, DXY 103.71, Brent $84.15/bbl, USD/INR \u20b992.93",
-    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.85%) and King Dollar (DXY 103.71) create emerging market currency friction (USD/INR \u20b992.93), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
+    "regime_headline": "Stagflationary Global Divergence: US 10Y at 4.85%, DXY 103.71, Brent $84.15/bbl, USD/INR ₹92.93",
+    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.85%) and King Dollar (DXY 103.71) create emerging market currency friction (USD/INR ₹92.93), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
   },
   "executive_hud": {
     "global_health_score": 50.7,
@@ -17,7 +17,7 @@
       {
         "region_id": "us",
         "region": "UNITED STATES",
-        "flag": "\ud83c\uddfa\ud83c\uddf8",
+        "flag": "🇺🇸",
         "gdp_trillion_usd": 28.7,
         "growth_pmi": 54.9,
         "growth_pmi_label": "Services PMI",
@@ -30,7 +30,7 @@
       {
         "region_id": "china",
         "region": "CHINA",
-        "flag": "\ud83c\udde8\ud83c\uddf3",
+        "flag": "🇨🇳",
         "gdp_trillion_usd": 18.5,
         "growth_pmi": 50.3,
         "growth_pmi_label": "Caixin Composite",
@@ -43,7 +43,7 @@
       {
         "region_id": "europe",
         "region": "EUROZONE / UK",
-        "flag": "\ud83c\uddea\ud83c\uddfa",
+        "flag": "🇪🇺",
         "gdp_trillion_usd": 19.4,
         "growth_pmi": 46.0,
         "growth_pmi_label": "Mfg PMI",
@@ -56,7 +56,7 @@
       {
         "region_id": "japan",
         "region": "JAPAN",
-        "flag": "\ud83c\uddef\ud83c\uddf5",
+        "flag": "🇯🇵",
         "gdp_trillion_usd": 4.2,
         "growth_pmi": 51.2,
         "growth_pmi_label": "Composite PMI",
@@ -69,7 +69,7 @@
       {
         "region_id": "em_india",
         "region": "INDIA & EM ASIA",
-        "flag": "\ud83c\uddee\ud83c\uddf3",
+        "flag": "🇮🇳",
         "gdp_trillion_usd": 7.6,
         "growth_pmi": 58.6,
         "growth_pmi_label": "Composite PMI",
@@ -82,32 +82,32 @@
     ]
   },
   "fii_dii_flows": {
-    "fii_net_crores": 4479.1,
-    "dii_net_crores": 4018.7,
-    "net_pulse_crores": 8497.8,
-    "absorption_ratio": 0.9,
-    "fii_action": "NET_BUYER",
+    "fii_net_crores": -1278.4,
+    "dii_net_crores": 1845.2,
+    "net_pulse_crores": 566.8,
+    "absorption_ratio": 1.44,
+    "fii_action": "NET_SELLER",
     "dii_action": "NET_BUYER",
-    "trade_date": "25-Nov-2026",
+    "trade_date": "26-Nov-2026",
     "data_source": "NSE_OFFICIAL_PROVISIONAL",
-    "regime_verdict": "Synchronized Dual Inflows",
-    "dxy_correlation_note": "DXY at 103.71 & US 10Y at 4.85% create FII outflow pressure, absorbed by domestic SIP liquidity."
+    "regime_verdict": "DII Absorption Moat (1.44x SIP Cushion)",
+    "dxy_correlation_note": "DXY at 104.12 & US 10Y at 4.41% create calibrated FII outflow pressure, absorbed by domestic SIP liquidity."
   },
   "fii_dii_derivatives": {
-    "fii_long_ratio": 23.8,
-    "fii_short_ratio": 76.2,
-    "fii_index_long_contracts": 38700,
-    "fii_index_short_contracts": 123930,
-    "fii_net_contracts": -85230,
-    "dii_long_ratio": 57.9,
-    "client_long_ratio": 65.6,
-    "client_net_contracts": 69839,
-    "pro_long_ratio": 50.3,
+    "fii_long_ratio": 21.4,
+    "fii_short_ratio": 78.6,
+    "fii_index_long_contracts": 32400,
+    "fii_index_short_contracts": 118900,
+    "fii_net_contracts": -86500,
+    "dii_long_ratio": 54.1,
+    "client_long_ratio": 67.2,
+    "client_net_contracts": 72450,
+    "pro_long_ratio": 48.8,
     "sentiment_zone": "BEARISH_HEDGE",
     "zone_label": "Net Bearish Hedging (20-40% Long)",
-    "contrarian_signal": "BEARISH",
-    "verdict": "FIIs carrying net short index positions; domestic SIP acting as liquidity absorber.",
-    "trade_date": "25 Nov 2026",
+    "contrarian_signal": "SHORT_SQUEEZE_WATCH",
+    "verdict": "FIIs maintaining heavy index short hedge; domestic retail and DIIs absorbing supply.",
+    "trade_date": "26 Nov 2026",
     "data_source": "NSE_OFFICIAL_ARCHIVES"
   },
   "upcoming_macro_triggers": [
@@ -166,7 +166,7 @@
     "market_regime": "INDEX_CAMOUFLAGE",
     "regime_label": "Index Camouflage Trap (Smart Money Distributing)",
     "regime_truth": "Heavyweights holding headline index while 65%+ broader stocks are in net decline.",
-    "india_vix": 17.7,
+    "india_vix": 12.65,
     "vix_zone": "ELEVATED_RISK",
     "vix_label": "Elevated Event Risk (15.5 - 21.0)",
     "vix_truth": "High options volatility expansion; stop-losses must be wider.",
@@ -245,7 +245,10 @@
         "delivery_pct": 12.8,
         "volume": 11609639
       }
-    ]
+    ],
+    "trade_date": "26 Nov 2026",
+    "vix_change_pct": -1.2,
+    "advance_decline_ratio_pct": 64.2
   },
   "promoter_insider_radar": {
     "high_pledge_danger_zone": [
@@ -369,7 +372,7 @@
     ],
     "marquee_absorption_count": 4,
     "rejected_churn_count": 2,
-    "bulk_truth": "Operator Trap Filter: 90%+ daily bulk volume is day-trading churn. We net-off buy/sell to isolate real > \u20b910 Cr institutional lock-in."
+    "bulk_truth": "Operator Trap Filter: 90%+ daily bulk volume is day-trading churn. We net-off buy/sell to isolate real > ₹10 Cr institutional lock-in."
   },
   "supply_demand_control_levers": {
     "headline": "HOW SUPERPOWERS CONTROL GLOBAL SUPPLY & DEMAND",
@@ -378,7 +381,7 @@
       {
         "id": "energy_valve",
         "name": "1. The Hydrocarbon Energy Valve (OPEC+ & US Shale)",
-        "icon": "\ud83d\udee2\ufe0f",
+        "icon": "🛢️",
         "controller": "Saudi Arabia (OPEC+ Quotas) & US (Permian Shale 13.5M bpd)",
         "how_they_control": "OPEC+ restricts supply by 2.2M bpd to defend a $70 floor, while US shale drillers maintain record production (13.5M bpd). Current Brent: $84.15/bbl.",
         "shock_scenario": "Middle East / Iran escalation or Strait of Hormuz tanker blockage shuts off 20% of maritime crude transit, causing an immediate +$15-20/bbl risk premium spike.",
@@ -387,7 +390,7 @@
       {
         "id": "dollar_liquidity_tap",
         "name": "2. The Dollar Liquidity & Yield Tap (US Fed & Treasury)",
-        "icon": "\ud83d\udcb5",
+        "icon": "💵",
         "controller": "US Federal Reserve & US Treasury Auction Desk",
         "how_they_control": "By maintaining higher policy rates and massive Treasury debt issuance, US 10Y yields (~4.85%) stay elevated, sucking capital out of emerging markets into US dollar assets (DXY 103.71).",
         "shock_scenario": "Sticky US services inflation delays Fed cuts, keeping King Dollar elevated and creating a persistent foreign exchange squeeze on emerging currencies.",
@@ -396,7 +399,7 @@
       {
         "id": "china_overcapacity_tap",
         "name": "3. The Factory Overcapacity Tap (China State Mandates)",
-        "icon": "\ud83c\udfed",
+        "icon": "🏭",
         "controller": "Beijing State-Owned Banks & Municipal Planners",
         "how_they_control": "Facing domestic property collapse (-10.3%), China directs state subsidies into manufacturing 2x-3x domestic demand, dumping surplus overseas (China PPI -2.9%).",
         "shock_scenario": "25-month producer price deflation prompts predatory export dumping across Asian and Latin American markets to keep Chinese domestic factories operating.",
@@ -405,7 +408,7 @@
       {
         "id": "chokepoint_shipping_valve",
         "name": "4. Geopolitical Chokepoints & Freight Valve (Red Sea & Straits)",
-        "icon": "\ud83d\udea2",
+        "icon": "🚢",
         "controller": "Regional Militias (Houthis) & Maritime Naval Coalitions",
         "how_they_control": "Attacks on Bab-el-Mandeb / Red Sea compel cargo container ships to reroute around Africa's Cape of Good Hope, tripling container spot freight rates and adding 14 days transit time. Baltic Dry: 1680.0 pts.",
         "shock_scenario": "Coordinated chokepoint blockades in Red Sea or Malacca Strait freeze container slot availability, causing global supply chain delays.",
@@ -577,7 +580,7 @@
         "trigger": "Brent Crude at $84.15/bbl below critical $90 threshold; holding input cost pressures steady",
         "supply_demand_choke": "Threat of 2.0-2.5M bpd oil supply disruption; tanker war risk insurance premiums elevated.",
         "import_export_shift": "India's annual crude import deficit impact: ~+$28.7B; emergency crude diversification to Russian and African grades.",
-        "currency_impact": "USD/INR trading at \u20b992.93; RBI defending currency with foreign exchange market interventions.",
+        "currency_impact": "USD/INR trading at ₹92.93; RBI defending currency with foreign exchange market interventions.",
         "margin_winners": [
           "Upstream Oil & Gas (E&P)",
           "Pipeline Transmission",
@@ -597,7 +600,7 @@
         "trigger": "US 10Y yields at 4.85% and DXY at 103.71 driven by resilient US growth (54.9 PMI).",
         "supply_demand_choke": "Dollar liquidity contraction across emerging market banks; foreign institutional capital re-allocating to US T-Bills.",
         "import_export_shift": "Imported energy and electronics become costlier in Rupee terms; dollar export billing gains realization cushion.",
-        "currency_impact": "Rupee tests \u20b992.93 band; supported by RBI's $675.0B protective warchest.",
+        "currency_impact": "Rupee tests ₹92.93 band; supported by RBI's $675.0B protective warchest.",
         "margin_winners": [
           "IT Services Exporters",
           "Generic Pharma Exporters",
@@ -635,12 +638,12 @@
     {
       "id": "us",
       "name": "United States of America",
-      "flag": "\ud83c\uddfa\ud83c\uddf8",
+      "flag": "🇺🇸",
       "economic_status": "MODERATE_EXPANSION",
       "status_label": "TECH & FISCAL RESILIENCE",
       "central_bank_rate": "4.50% - 4.75% (Fed Cutting Cycle)",
       "inflation_rate": "3.3% Core CPI (Sticky Shelter & Insurance)",
-      "pmi_summary": "Services 54.9 (Booming) \u2022 Mfg 48.5 (Soft)",
+      "pmi_summary": "Services 54.9 (Booming) • Mfg 48.5 (Soft)",
       "vital_stats": {
         "debt_to_gdp": "124% ($35.8 Trillion)",
         "annual_interest_cost": "$1.12 Trillion (> Defense Budget)",
@@ -717,16 +720,16 @@
     {
       "id": "china",
       "name": "China (People's Republic of China)",
-      "flag": "\ud83c\udde8\ud83c\uddf3",
+      "flag": "🇨🇳",
       "economic_status": "DEFLATIONARY_PRESSURE",
       "status_label": "STIMULUS BAZOOKA DEFENSE",
       "central_bank_rate": "3.10% (PBOC Easing Cycle)",
-      "inflation_rate": "0.3% CPI \u2022 -2.9% PPI (Deflation)",
-      "pmi_summary": "Caixin Mfg 50.3 (Borderline) \u2022 Services 52.0",
+      "inflation_rate": "0.3% CPI • -2.9% PPI (Deflation)",
+      "pmi_summary": "Caixin Mfg 50.3 (Borderline) • Services 52.0",
       "vital_stats": {
         "real_estate_investment": "-10.3% YoY (Property Slump)",
-        "hidden_lgfv_debt": "\u00a560 Trillion ($8.3T Municipal Debt)",
-        "stimulus_swap_package": "\u00a510 Trillion Local Debt Relief",
+        "hidden_lgfv_debt": "¥60 Trillion ($8.3T Municipal Debt)",
+        "stimulus_swap_package": "¥10 Trillion Local Debt Relief",
         "producer_deflation": "-2.9% PPI (25 Straight Months)",
         "youth_unemployment": "17.1% (Ages 16-24 Urban)",
         "clean_tech_dominance": ">80% Global Solar & LFP Batteries"
@@ -743,7 +746,7 @@
           "severity": "CRITICAL"
         },
         {
-          "title": "\u00a560 Trillion Local Government (LGFV) Hidden Debt",
+          "title": "¥60 Trillion Local Government (LGFV) Hidden Debt",
           "description": "With land sales crashing, municipal authorities face massive revenue shortfalls, delaying payments to contractors, healthcare providers, and local workers.",
           "severity": "HIGH"
         },
@@ -765,8 +768,8 @@
       ],
       "expansion_engines": [
         {
-          "title": "\u00a510 Trillion Local Government Debt Swap Bazooka",
-          "description": "National People's Congress approved a \u00a510T ($1.4T) debt-swap quota over 3-5 years to replace toxic high-interest off-balance-sheet debt with low-cost sovereign bonds.",
+          "title": "¥10 Trillion Local Government Debt Swap Bazooka",
+          "description": "National People's Congress approved a ¥10T ($1.4T) debt-swap quota over 3-5 years to replace toxic high-interest off-balance-sheet debt with low-cost sovereign bonds.",
           "impact": "MUNICIPAL LIQUIDITY FLOOR"
         },
         {
@@ -775,7 +778,7 @@
           "impact": "GLOBAL INDUSTRIAL MONOPOLY"
         },
         {
-          "title": "National Big Fund III Semiconductor Sovereignty (\u00a5344B)",
+          "title": "National Big Fund III Semiconductor Sovereignty (¥344B)",
           "description": "State-funded $47.5B semiconductor war chest accelerating domestic lithography, SMIC trailing-edge 28nm dominance, and Huawei Ascend AI chip deployment.",
           "impact": "TECH INDEPENDENCE"
         },
@@ -799,12 +802,12 @@
     {
       "id": "europe",
       "name": "Eurozone & United Kingdom",
-      "flag": "\ud83c\uddea\ud83c\uddfa",
+      "flag": "🇪🇺",
       "economic_status": "SEVERE_CONTRACTION",
       "status_label": "DE-INDUSTRIALIZATION SHOCK",
       "central_bank_rate": "3.25% (ECB Aggressive Cuts)",
       "inflation_rate": "2.0% HICP (Target Reached)",
-      "pmi_summary": "Manufacturing 46.0 (Deep Slump) \u2022 Services 51.6",
+      "pmi_summary": "Manufacturing 46.0 (Deep Slump) • Services 51.6",
       "vital_stats": {
         "mfg_pmi": "46.0 (Deep Contraction)",
         "german_industrial_output": "-4.5% YoY",
@@ -837,7 +840,7 @@
         },
         {
           "title": "Historic European Defense Spending Supercycle",
-          "description": "European defense spending exceeding \u20ac350B as NATO members rapidly re-arm stockpiles and artillery systems.",
+          "description": "European defense spending exceeding €350B as NATO members rapidly re-arm stockpiles and artillery systems.",
           "impact": "DEFENSE PROCUREMENT"
         }
       ]
@@ -845,17 +848,17 @@
     {
       "id": "japan",
       "name": "Japan",
-      "flag": "\ud83c\uddef\ud83c\uddf5",
+      "flag": "🇯🇵",
       "economic_status": "MODEST_EXPANSION",
       "status_label": "EXITING 30-YR DEFLATION",
       "central_bank_rate": "0.25% (Bank of Japan Hiking Cycle)",
       "inflation_rate": "2.5% Core CPI (Sustained Above Target)",
-      "pmi_summary": "Composite 51.2 (Expansion) \u2022 Mfg 49.2",
+      "pmi_summary": "Composite 51.2 (Expansion) • Mfg 49.2",
       "vital_stats": {
         "shunto_wage_growth": "+5.2% (30-Year Record High)",
         "boj_rate": "0.25% (Normalize from Zero)",
         "usd_jpy": "154.5 (Yen Volatility Zone)",
-        "semicon_investment": "\u00a54 Trillion (Rapidus & TSMC Kumamoto)"
+        "semicon_investment": "¥4 Trillion (Rapidus & TSMC Kumamoto)"
       },
       "pressure_points": [
         {
@@ -885,16 +888,16 @@
     {
       "id": "em_india",
       "name": "India & Emerging Asia",
-      "flag": "\ud83c\uddee\ud83c\uddf3",
+      "flag": "🇮🇳",
       "economic_status": "HIGH_GROWTH_LEADER",
       "status_label": "FASTEST GROWING MAJOR ECONOMY",
       "central_bank_rate": "6.50% (RBI Neutral Stance)",
-      "inflation_rate": "6.2% Headline (Food Spike) \u2022 Core 3.5%",
-      "pmi_summary": "Manufacturing 57.5 \u2022 Services 59.2 (Composite 58.6)",
+      "inflation_rate": "6.2% Headline (Food Spike) • Core 3.5%",
+      "pmi_summary": "Manufacturing 57.5 • Services 59.2 (Composite 58.6)",
       "vital_stats": {
         "composite_pmi": "58.6 (Global Outperformer)",
         "gdp_growth": "7.0% - 7.2% Expected FY25",
-        "fastag_toll_runrate": "\u20b9192 Cr / Day (+11.8% YoY)",
+        "fastag_toll_runrate": "₹192 Cr / Day (+11.8% YoY)",
         "forex_reserves": "$675.0 Billion (Strong Warchest)",
         "electronics_exports": "+23.4% YoY (Apple/EMS Surge)"
       },
@@ -931,7 +934,7 @@
       {
         "id": "trade_tariffs",
         "title": "1. Trade War 2.0 & Tariff Escalation",
-        "icon": "\u2694\ufe0f",
+        "icon": "⚔️",
         "us_offensive": "Universal 10-20% baseline tariffs on all global imports, escalating to 60%+ on all Chinese manufacturing, revoking China's PNTR status.",
         "china_retaliation": "Weaponizing export licenses for critical minerals (Gallium, Germanium, Antimony), targeting US agricultural imports (soybeans/pork), and devaluing RMB to 7.30+ to offset tariff penalties.",
         "macro_impact": "Squeezes global trade volumes, re-accelerates US imported inflation, and accelerates supply chain flight out of mainland China into ASEAN and India.",
@@ -941,9 +944,9 @@
       {
         "id": "tech_chips",
         "title": "2. Semiconductor Blockade & AI Cold War",
-        "icon": "\ud83d\udcbb",
+        "icon": "💻",
         "us_offensive": "Strict export controls on advanced AI chips (Nvidia H100/H200/Blackwell), ASML extreme UV lithography embargoes, and scrutiny of EDA chip design software.",
-        "china_retaliation": "State-funded \u00a5344B National Big Fund III, mass-producing legacy 28nm silicon to flood global automotive markets, and developing domestic Huawei Ascend AI accelerators.",
+        "china_retaliation": "State-funded ¥344B National Big Fund III, mass-producing legacy 28nm silicon to flood global automotive markets, and developing domestic Huawei Ascend AI accelerators.",
         "macro_impact": "Bifurcated global tech standards, accelerated duplicate fab investments ($500B+ globally), and soaring GPU compute costs for Western enterprises.",
         "impact_on_india": "POSITIVE FOR INDIA EMS & DESIGN",
         "india_takeaway": "India semiconductor mission (Tata-PSMC Dholera fab, Micron OSAT, Kaynes EMS) gains strategic Western technology transfer backing."
@@ -951,7 +954,7 @@
       {
         "id": "currency_debt",
         "title": "3. King Dollar Dominance vs Sovereign Gold Accumulation",
-        "icon": "\ud83d\udcb5",
+        "icon": "💵",
         "us_offensive": "King Dollar (DXY 103.71) powered by high US yields (~4.85%) drains global liquidity and asserts US Treasury sanctions enforcement.",
         "china_retaliation": "PBOC continuous gold reserve accumulation (Gold $3617.8/oz), reducing US Treasury holdings below $750B, and expanding CIPS / local currency bilateral settlements.",
         "macro_impact": "Gold hits all-time records ($2,650+/oz), emerging market central banks diversify reserve currencies, and cross-border payment systems fragment.",
@@ -961,7 +964,7 @@
       {
         "id": "industrial_dumping",
         "title": "4. Industrial Overcapacity vs Western Reshoring (China Shock 2.0)",
-        "icon": "\ud83c\udfed",
+        "icon": "🏭",
         "us_offensive": "Subsidizing domestic clean tech via the Inflation Reduction Act (IRA) and CHIPS Act, placing 100% tariffs on Chinese EVs.",
         "china_retaliation": "Directing state-bank capital into factories to produce 2-3x domestic consumption in solar, batteries, and steel, dumping inventory overseas at below-cash-cost (-2.9% PPI).",
         "macro_impact": "Severe margin depression for international chemical and steel manufacturers; consumer disinflation in emerging markets purchasing cheap green hardware.",
@@ -971,7 +974,7 @@
       {
         "id": "energy_monopoly",
         "title": "5. Energy Sovereignty: US Shale vs Chinese Clean-Tech Monopoly",
-        "icon": "\u26a1",
+        "icon": "⚡",
         "us_offensive": "US producing world-record 13.5M bpd crude oil and dominating transatlantic LNG exports, shielding US factories from energy shocks.",
         "china_retaliation": "Controlling 85%+ of global solar wafers, polysilicon refining, and EV battery cell manufacturing, turning green transition into a Chinese hardware monopoly.",
         "macro_impact": "Traditional hydrocarbon energy security centers in the Americas, while renewable hardware relies entirely on Chinese supply chains.",
@@ -1148,7 +1151,7 @@
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
       "cost_sensitivity": "Raw material metals sensitivity at 35-40% of COGS; cushioned by robust domestic demand",
-      "transmission_channel": "India Composite PMI at 58.6 drives strong domestic capex cycle despite USD/INR at \u20b992.93",
+      "transmission_channel": "India Composite PMI at 58.6 drives strong domestic capex cycle despite USD/INR at ₹92.93",
       "exposed_segments": [
         "Heavy Engineering",
         "Defense Avionics",

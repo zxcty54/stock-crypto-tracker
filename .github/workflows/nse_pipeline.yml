@@ -43,6 +43,10 @@ jobs:
         run: |
           python nse_ai_summarizer.py
 
+      - name: Step 2.5 - Update Institutional Risk Radar & FII/DII Futures OI
+        run: |
+          python global_economy_radar_hunter.py || true
+
       - name: Step 3 - Commit and Push Master & AI Content Feed Locally
         run: |
           git config --global user.name "github-actions[bot]"
@@ -50,6 +54,7 @@ jobs:
 
           [ -f nse_corporate_master.json ] && git add nse_corporate_master.json
           [ -f nse_content_feed.json ] && git add nse_content_feed.json
+          [ -f global_economy_radar.json ] && git add global_economy_radar.json assets/data/global_economy_radar.json
 
           if git diff --staged --quiet; then
             echo "ℹ️ Koi naya update nahi mila. Skipping commit."
