@@ -196,19 +196,34 @@ def main():
         else:
             print(f"  • {src['source_name']} ({src['sector_name']}): Using calibrated baseline")
 
-    # Combine harvested and baseline (deduplicating by title)
-    seen_titles = set()
-    combined_feeds = []
-    for item in live_harvested + existing_feeds:
-        norm_title = re.sub(r'[^a-zA-Z0-9]', '', item.get("title", "").lower())
-        if norm_title and norm_title not in seen_titles:
-            seen_titles.add(norm_title)
-            combined_feeds.append(item)
+    # Group by sector_id to guarantee all 47 sectors remain populated
+    sector_feeds_map = {}
+    for item in existing_feeds:
+        sid = item.get("sector_id")
+        if sid:
+            sector_feeds_map[sid] = item
+
+    for item in live_harvested:
+        sid = item.get("sector_id")
+        if sid:
+            # Prefer fresh live harvested item
+            sector_feeds_map[sid] = item
+
+    all_ordered_feeds = []
+    # Add ordered by sector_id 1 to 47
+    for sid in range(1, 48):
+        if sid in sector_feeds_map:
+            all_ordered_feeds.append(sector_feeds_map[sid])
+
+    # If any remaining items from feeds without sector_id or extra
+    for item in existing_feeds + live_harvested:
+        if item not in all_ordered_feeds:
+            all_ordered_feeds.append(item)
 
     payload = {
         "last_updated": NOW.strftime("%d-%b-%Y %H:%M IST"),
-        "total_items": len(combined_feeds),
-        "live_feeds": combined_feeds[:30]
+        "total_items": len(all_ordered_feeds),
+        "live_feeds": all_ordered_feeds
     }
 
     for path in ["assets/data/sector_live_feed.json", "sector_live_feed.json"]:

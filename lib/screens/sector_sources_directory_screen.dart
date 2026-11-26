@@ -99,6 +99,7 @@ class SectorLiveFeedItem {
   final String sourceType;
   final String title;
   final String summary;
+  final String deepAnalysis;
   final String publishedAt;
   final String kyaDekhnaHai;
   final String sourceUrl;
@@ -114,6 +115,7 @@ class SectorLiveFeedItem {
     required this.sourceType,
     required this.title,
     required this.summary,
+    required this.deepAnalysis,
     required this.publishedAt,
     required this.kyaDekhnaHai,
     required this.sourceUrl,
@@ -131,6 +133,7 @@ class SectorLiveFeedItem {
       sourceType: json['source_type'] ?? 'NEWS',
       title: json['title'] ?? '',
       summary: json['summary'] ?? '',
+      deepAnalysis: json['deep_analysis'] ?? '',
       publishedAt: json['published_at'] ?? '',
       kyaDekhnaHai: json['kya_dekhna_hai'] ?? '',
       sourceUrl: json['source_url'] ?? '',
@@ -242,6 +245,7 @@ class _SectorSourcesDirectoryScreenState
     required String title,
     required String subtitle,
     required String body,
+    String? deepAnalysis,
     required String cadence,
     required String url,
     required String authority,
@@ -257,7 +261,7 @@ class _SectorSourcesDirectoryScreenState
       backgroundColor: Colors.transparent,
       builder: (ctx) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.82,
+          height: MediaQuery.of(context).size.height * 0.85,
           decoration: const BoxDecoration(
             color: Color(0xFF0D1322),
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -371,7 +375,7 @@ class _SectorSourcesDirectoryScreenState
                       ),
                       const SizedBox(height: 14),
 
-                      // In-App Body Text Box
+                      // In-App Executive Summary Box
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
@@ -384,10 +388,10 @@ class _SectorSourcesDirectoryScreenState
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.auto_stories_rounded, size: 14, color: kAccentGreen),
+                                const Icon(Icons.article_rounded, size: 14, color: kAccentGreen),
                                 const SizedBox(width: 6),
                                 Text(
-                                  "IN-APP INTELLIGENCE BRIEFING",
+                                  "IN-APP EXECUTIVE SUMMARY",
                                   style: GoogleFonts.robotoMono(
                                     color: kAccentGreen,
                                     fontSize: 10.5,
@@ -402,13 +406,55 @@ class _SectorSourcesDirectoryScreenState
                               body,
                               style: GoogleFonts.plusJakartaSans(
                                 color: const Color(0xFFCFD7E6),
-                                fontSize: 13,
+                                fontSize: 12.5,
                                 height: 1.55,
                               ),
                             ),
                           ],
                         ),
                       ),
+
+                      // In-App Ground Reality & Telemetry Deep Dive (Multi-paragraph rich analysis)
+                      if (deepAnalysis != null && deepAnalysis.trim().isNotEmpty) ...[
+                        const SizedBox(height: 14),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0F172A),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: kAccentCyan.withOpacity(0.35)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.analytics_rounded, size: 15, color: kAccentCyan),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    "GROUND REALITY & TELEMETRY DEEP DIVE",
+                                    style: GoogleFonts.robotoMono(
+                                      color: kAccentCyan,
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                deepAnalysis,
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xFFE2E8F0),
+                                  fontSize: 12.5,
+                                  height: 1.6,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 14),
 
                       // Kya Dekhna Hai Box
@@ -600,6 +646,7 @@ class _SectorSourcesDirectoryScreenState
                 title: item.title,
                 subtitle: "${item.themeIcon} ${item.sectorName}",
                 body: item.summary,
+                deepAnalysis: item.deepAnalysis,
                 cadence: item.kyaDekhnaHai,
                 url: item.sourceUrl,
                 authority: item.sourceName,
@@ -673,6 +720,33 @@ class _SectorSourcesDirectoryScreenState
                       height: 1.45,
                     ),
                   ),
+
+                  if (item.keyTickers.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: item.keyTickers.map((t) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                          decoration: BoxDecoration(
+                            color: kAccentCyan.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: kAccentCyan.withOpacity(0.25)),
+                          ),
+                          child: Text(
+                            t,
+                            style: GoogleFonts.robotoMono(
+                              color: kAccentCyan,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+
                   const SizedBox(height: 10),
 
                   // Bottom Action Bar: Kya Dekhna Hai preview + In-App Tap Guide
@@ -785,8 +859,16 @@ class _SectorSourcesDirectoryScreenState
 
             // Sector Cards inside this Theme
             ...matchedSectors.map((sector) {
+              SectorLiveFeedItem? sectorFeed;
+              for (final f in _liveFeeds) {
+                if (f.sectorId == sector.id) {
+                  sectorFeed = f;
+                  break;
+                }
+              }
+
               return Container(
-                margin: const EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: kCardDark,
@@ -796,7 +878,7 @@ class _SectorSourcesDirectoryScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Sector ID & Title
+                    // Sector ID, Title & Quick Feed Jump
                     Row(
                       children: [
                         Container(
@@ -820,14 +902,179 @@ class _SectorSourcesDirectoryScreenState
                             sector.sectorName,
                             style: GoogleFonts.plusJakartaSans(
                               color: Colors.white,
-                              fontSize: 12,
+                              fontSize: 12.5,
                               fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(4),
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            setState(() {
+                              _currentTabIndex = 0;
+                              _searchQuery = sector.sectorName;
+                              _searchController.text = sector.sectorName;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: kAccentCyan.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(color: kAccentCyan.withOpacity(0.3)),
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.flash_on_rounded, size: 10, color: kAccentCyan),
+                                const SizedBox(width: 2),
+                                Text(
+                                  "Feed",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    color: kAccentCyan,
+                                    fontSize: 8.5,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+
+                    // LATEST SECTOR NEWS & GROUND REALITY DISPATCH
+                    if (sectorFeed != null) ...[
+                      const SizedBox(height: 8),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () {
+                          _openInAppReaderSheet(
+                            context: context,
+                            title: sectorFeed!.title,
+                            subtitle: "${theme.icon} ${sector.sectorName}",
+                            body: sectorFeed.summary,
+                            deepAnalysis: sectorFeed.deepAnalysis,
+                            cadence: "${sector.cadence}\n\nWHAT TO WATCH:\n${sector.keyFocus}\n\nTELEMETRY CHECKS:\n${sectorFeed.kyaDekhnaHai}",
+                            url: sectorFeed.sourceUrl,
+                            authority: sectorFeed.sourceName,
+                            type: sectorFeed.sourceType,
+                            tickers: sectorFeed.keyTickers,
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0C1424),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: const Color(0xFF23354E)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.bolt_rounded, size: 13, color: kAccentAmber),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "LATEST GROUND DISPATCH",
+                                    style: GoogleFonts.robotoMono(
+                                      color: kAccentAmber,
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                    decoration: BoxDecoration(
+                                      color: _getSourceTypeColor(sectorFeed.sourceType).withOpacity(0.14),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      sectorFeed.sourceName,
+                                      style: TextStyle(
+                                        color: _getSourceTypeColor(sectorFeed.sourceType),
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    sectorFeed.publishedAt,
+                                    style: const TextStyle(color: kTextMuted, fontSize: 8.5),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                sectorFeed.title,
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Colors.white,
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.35,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                sectorFeed.summary,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xFFCAD5E5),
+                                  fontSize: 10.5,
+                                  height: 1.45,
+                                ),
+                              ),
+                              if (sectorFeed.keyTickers.isNotEmpty) ...[
+                                const SizedBox(height: 6),
+                                Wrap(
+                                  spacing: 4,
+                                  runSpacing: 4,
+                                  children: sectorFeed.keyTickers.map((t) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                      decoration: BoxDecoration(
+                                        color: kAccentCyan.withOpacity(0.10),
+                                        borderRadius: BorderRadius.circular(3),
+                                        border: Border.all(color: kAccentCyan.withOpacity(0.25)),
+                                      ),
+                                      child: Text(
+                                        t,
+                                        style: GoogleFonts.robotoMono(
+                                          color: kAccentCyan,
+                                          fontSize: 8.5,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "Tap to read full ground telemetry →",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      color: kAccentCyan,
+                                      fontSize: 9.5,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+
+                    const SizedBox(height: 8),
 
                     // Kya Dekhna Hai
                     Container(
@@ -844,7 +1091,7 @@ class _SectorSourcesDirectoryScreenState
                               const Icon(Icons.track_changes_rounded, size: 11, color: kAccentAmber),
                               const SizedBox(width: 4),
                               Text(
-                                "KYA DEKHNA HAI:",
+                                "KYA DEKHNA HAI (KEY TELEMETRY METRICS):",
                                 style: GoogleFonts.robotoMono(
                                   color: kAccentAmber,
                                   fontSize: 8.5,
@@ -858,7 +1105,7 @@ class _SectorSourcesDirectoryScreenState
                             sector.keyFocus,
                             style: GoogleFonts.plusJakartaSans(
                               color: const Color(0xFFBAC7DB),
-                              fontSize: 10.5,
+                              fontSize: 10,
                               height: 1.4,
                             ),
                           ),
@@ -878,6 +1125,17 @@ class _SectorSourcesDirectoryScreenState
                     ),
                     const SizedBox(height: 8),
 
+                    Text(
+                      "VERIFIED REPOSITORIES & SPECIALIST NEWS (${sector.sources.length}):",
+                      style: GoogleFonts.robotoMono(
+                        color: kTextMuted,
+                        fontSize: 8.5,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+
                     // Clickable Source Chips (opens In-App Reader Modal, Zero browser launch)
                     Wrap(
                       spacing: 6,
@@ -891,11 +1149,13 @@ class _SectorSourcesDirectoryScreenState
                               context: context,
                               title: "${sector.sectorName} • ${src.name}",
                               subtitle: "${theme.icon} ${theme.themeName}",
-                              body: src.description,
-                              cadence: "${sector.cadence}\n\nFOCUS:\n${sector.keyFocus}",
+                              body: "${src.description}\n\nOfficial Authority: ${src.authority} [${src.type}]\nPrimary regulatory and telemetry repository for ${sector.sectorName}.",
+                              deepAnalysis: sectorFeed?.deepAnalysis ?? "",
+                              cadence: "${sector.cadence}\n\nWHAT TO WATCH:\n${sector.keyFocus}",
                               url: src.url,
                               authority: src.authority,
                               type: src.type,
+                              tickers: sectorFeed?.keyTickers,
                             );
                           },
                           child: Container(
