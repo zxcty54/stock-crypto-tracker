@@ -45,7 +45,9 @@
       "NEW_IPO_ANNOUNCED"
     ],
     "telegraph_url": "https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25",
-    "last_posted_gmp": ""
+    "last_posted_gmp": "",
+    "demat_credit_date": "2026-12-09",
+    "last_updated": "2026-11-26T17:40:25.383294+05:30"
   },
   {
     "id": "monomark-engineering",
@@ -126,7 +128,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-26T04:30:29.509583+05:30",
+    "last_updated": "2026-11-26T17:40:25.383294+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹22.00",
     "demand_graph": {
@@ -154,14 +156,14 @@
   {
     "id": "matangi-rubber",
     "company_name": "Matangi Rubber",
-    "symbol": "",
+    "symbol": "MATANGI",
     "issue_type": "Mainboard",
     "exchange": "NSE & BSE",
     "open_date": "2026-12-01",
     "close_date": "2026-12-03",
     "allotment_date": null,
     "listing_date": null,
-    "price_band": "₹163 - ₹172",
+    "price_band": "Rs.163 to Rs.172",
     "lot_size": null,
     "issue_size_cr": "",
     "fresh_issue_cr": "",
@@ -174,7 +176,33 @@
     "sub2sauda": "",
     "subscription": {
       "status": "Awaiting Bidding",
-      "note": "NSE Bidding opens on 01-Dec-2026"
+      "note": "NSE Bidding opens on 01-Dec-2026",
+      "shares_offered": "0",
+      "source": "NSE India Official Bidding Feed",
+      "demand_graph": {
+        "total_issue_size": "7276981",
+        "total_bids": null,
+        "cut_off_bids": null,
+        "no_of_times": null,
+        "price_levels": [
+          {
+            "price": ">= No. of Bids",
+            "shares": null
+          },
+          {
+            "price": ">= NSE Confirmed Bid Quantity",
+            "shares": null
+          },
+          {
+            "price": ">= Cumulative Confirmed Bid Quantity",
+            "shares": null
+          }
+        ],
+        "source": "NSE India Official Demand Graph (issue-information)"
+      },
+      "total": "0.00x",
+      "total_bids": "0",
+      "updated_at": "Updated as on null"
     },
     "registrar": {
       "name": "",
@@ -202,7 +230,28 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-26T04:30:29.509583+05:30"
+    "last_updated": "2026-11-26T17:40:25.383294+05:30",
+    "demand_graph": {
+      "total_issue_size": "7276981",
+      "total_bids": null,
+      "cut_off_bids": null,
+      "no_of_times": null,
+      "price_levels": [
+        {
+          "price": ">= No. of Bids",
+          "shares": null
+        },
+        {
+          "price": ">= NSE Confirmed Bid Quantity",
+          "shares": null
+        },
+        {
+          "price": ">= Cumulative Confirmed Bid Quantity",
+          "shares": null
+        }
+      ],
+      "source": "NSE India Official Demand Graph (issue-information)"
+    }
   },
   {
     "id": "integris-medtech",
@@ -257,7 +306,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-26T04:30:29.509583+05:30",
+    "last_updated": "2026-11-26T17:40:25.383294+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹35.00"
   },
@@ -290,13 +339,13 @@
     "subscription": {
       "status": "Awaiting Bidding",
       "note": "NSE Bidding opens on 26-Nov-2026",
-      "shares_offered": "0",
+      "shares_offered": "10474048",
       "source": "NSE India Official Bidding Feed",
       "demand_graph": {
         "total_issue_size": "10474048",
-        "total_bids": null,
+        "total_bids": "9131070",
         "cut_off_bids": null,
-        "no_of_times": null,
+        "no_of_times": "0.87x",
         "price_levels": [
           {
             "price": ">= No. of Bids",
@@ -313,9 +362,18 @@
         ],
         "source": "NSE India Official Demand Graph (issue-information)"
       },
-      "total": "0.00x",
-      "total_bids": "0",
-      "updated_at": "Updated as on null"
+      "total": "1.08x",
+      "total_bids": "11347830",
+      "updated_at": "Updated as on 26-Nov-2026 17:00:00",
+      "qib": "1.01x",
+      "qib_bids": "5666310",
+      "qib_offered": "5613270",
+      "nii": "0.53x",
+      "nii_bids": "511134",
+      "nii_offered": "972155",
+      "retail_bids": "4524468",
+      "retail": "2.33x",
+      "retail_offered": "1944311"
     },
     "reservation": {
       "qib_pct": "50%",
@@ -340,14 +398,14 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-26T04:30:29.509583+05:30",
+    "last_updated": "2026-11-26T17:40:25.383294+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
       "total_issue_size": "10474048",
-      "total_bids": null,
+      "total_bids": "9131070",
       "cut_off_bids": null,
-      "no_of_times": null,
+      "no_of_times": "0.87x",
       "price_levels": [
         {
           "price": ">= No. of Bids",
@@ -491,7 +549,7 @@
       "nse_official",
       "ipocentral_gmp"
     ],
-    "last_updated": "2026-11-26T04:30:29.509583+05:30",
+    "last_updated": "2026-11-26T17:40:25.383294+05:30",
     "telegraph_url": "https://telegra.ph/Mahanadi-Coalfields-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹3.00",
     "posted_events": [

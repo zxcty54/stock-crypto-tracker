@@ -1,35 +1,22 @@
-2026-11-25 23:00:29 [INFO] ipo_tracker: ======================================================================
-2026-11-25 23:00:29 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
-2026-11-25 23:00:29 [INFO] ipo_tracker: 📅 Timestamp: 26-Nov-2026 04:30:29 IST (Today: 2026-11-26)
-2026-11-25 23:00:29 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
-2026-11-25 23:00:29 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
-2026-11-25 23:00:29 [INFO] ipo_tracker: ======================================================================
-2026-11-25 23:00:29 [INFO] ipo_tracker: Loaded 12 tracked IPOs and 42 historical posted events.
-2026-11-25 23:00:29 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
-2026-11-25 23:00:31 [INFO] ipo_tracker.scrapers: Collected 2 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited', 'Monomark Engineering (India) Limited']
-2026-11-25 23:00:31 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
-2026-11-25 23:00:38 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'total': '0.00x', 'total_bids': '0', 'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '10474048', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'updated_at': 'Updated as on null'}
-2026-11-25 23:00:44 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Monomark Engineering (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '27000000', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
-2026-11-25 23:00:45 [INFO] ipo_tracker.scrapers: Collected 6 entries from IPO Watch: ['Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Matangi Rubber', 'Monomark Engineering', 'Encube Ethicals']
-2026-11-25 23:00:47 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
-2026-11-25 23:00:47 [INFO] ipo_tracker: Aggregated 6 Mainboard IPO records from web.
-2026-11-25 23:00:47 [INFO] ipo_tracker: 🆕 Discovered new Mainboard IPO: Encube Ethicals (ID: encube-ethicals)
-2026-11-25 23:00:47 [INFO] ipo_tracker: Master state updated: 1 new, 5 refreshed.
-2026-11-25 23:00:47 [INFO] ipo_tracker.telegraph: Creating new Telegraph account: IPOCentral (IPO Central)...
-2026-11-25 23:00:47 [INFO] ipo_tracker.telegraph: Saved Telegraph access token to cache.
-2026-11-25 23:00:47 [INFO] ipo_tracker.telegraph: Publishing Telegraph review for: Encube Ethicals...
-2026-11-25 23:00:47 [INFO] ipo_tracker.telegraph: ✅ Telegraph article published successfully: https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25
-2026-11-25 23:00:47 [INFO] ipo_tracker: 📝 Published Telegraph DRHP review for Encube Ethicals: https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25
-2026-11-25 23:00:47 [INFO] ipo_tracker: Published 1 new Telegraph DRHP articles.
-2026-11-25 23:00:47 [INFO] ipo_tracker: Saved 13 IPO records to ipo_master.json
-2026-11-25 23:00:47 [INFO] ipo_tracker: Synced 13 IPO records to assets/data/ipo_master.json
-2026-11-25 23:00:47 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 2
-2026-11-25 23:00:47 [INFO] ipo_tracker: 📤 Preparing alert [IPO_OPENS_TODAY] for: Foodlink F&B Holdings Limited...
-2026-11-25 23:00:48 [INFO] ipo_tracker:    ✅ Successfully broadcasted [IPO_OPENS_TODAY] for Foodlink F&B Holdings Limited
-2026-11-25 23:00:51 [INFO] ipo_tracker: 📤 Preparing alert [NEW_IPO_ANNOUNCED] for: Encube Ethicals...
-2026-11-25 23:00:52 [INFO] ipo_tracker:    ✅ Successfully broadcasted [NEW_IPO_ANNOUNCED] for Encube Ethicals
-2026-11-25 23:00:55 [INFO] ipo_tracker: Saved 13 IPO records to ipo_master.json
-2026-11-25 23:00:55 [INFO] ipo_tracker: Synced 13 IPO records to assets/data/ipo_master.json
-2026-11-25 23:00:55 [INFO] ipo_tracker: ======================================================================
-2026-11-25 23:00:55 [INFO] ipo_tracker: 🎉 RUN COMPLETE: 2 alerts broadcasted to @ipocentral
-2026-11-25 23:00:55 [INFO] ipo_tracker: ======================================================================
+2026-11-26 12:10:25 [INFO] ipo_tracker: ======================================================================
+2026-11-26 12:10:25 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
+2026-11-26 12:10:25 [INFO] ipo_tracker: 📅 Timestamp: 26-Nov-2026 17:40:25 IST (Today: 2026-11-26)
+2026-11-26 12:10:25 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
+2026-11-26 12:10:25 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
+2026-11-26 12:10:25 [INFO] ipo_tracker: ======================================================================
+2026-11-26 12:10:25 [INFO] ipo_tracker: Loaded 13 tracked IPOs and 44 historical posted events.
+2026-11-26 12:10:25 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
+2026-11-26 12:10:28 [INFO] ipo_tracker.scrapers: Collected 3 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited', 'Matangi Rubber Limited', 'Monomark Engineering (India) Limited']
+2026-11-26 12:10:30 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
+2026-11-26 12:10:32 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'total': '1.08x', 'total_bids': '11347830', 'shares_offered': '10474048', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '10474048', 'total_bids': '9131070', 'cut_off_bids': None, 'no_of_times': '0.87x', 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'qib': '1.01x', 'qib_bids': '5666310', 'qib_offered': '5613270', 'nii': '0.53x', 'nii_bids': '511134', 'nii_offered': '972155', 'retail_bids': '4524468', 'retail': '2.33x', 'retail_offered': '1944311', 'updated_at': 'Updated as on 26-Nov-2026 17:00:00'}
+2026-11-26 12:10:39 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Matangi Rubber Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '7276981', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-26 12:10:41 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Monomark Engineering (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '27000000', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-26 12:10:42 [INFO] ipo_tracker.scrapers: Collected 6 entries from IPO Watch: ['Mahanadi Coalfields', 'Foodlink F&B Holdings', 'Integris Medtech', 'Matangi Rubber', 'Monomark Engineering', 'Encube Ethicals']
+2026-11-26 12:10:44 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
+2026-11-26 12:10:44 [INFO] ipo_tracker: Aggregated 6 Mainboard IPO records from web.
+2026-11-26 12:10:44 [INFO] ipo_tracker: Master state updated: 0 new, 6 refreshed.
+2026-11-26 12:10:44 [INFO] ipo_tracker: Saved 13 IPO records to ipo_master.json
+2026-11-26 12:10:44 [INFO] ipo_tracker: Synced 13 IPO records to assets/data/ipo_master.json
+2026-11-26 12:10:44 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
+2026-11-26 12:10:44 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 5 active IPOs...
+2026-11-26 12:10:44 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
