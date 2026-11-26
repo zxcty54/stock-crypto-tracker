@@ -28,10 +28,6 @@ class _InstitutionalInternalsRadarScreenState
   static const Color kTextMuted = Color(0xFF8896AB);
 
   static const List<String> dataUrls = [
-    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/4bcd1358-stock-crypto-tracker/assets/data/global_economy_radar.json',
-    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/4bcd1358-stock-crypto-tracker/global_economy_radar.json',
-    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@arena/4bcd1358-stock-crypto-tracker/assets/data/global_economy_radar.json',
-    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@arena/4bcd1358-stock-crypto-tracker/global_economy_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/assets/data/global_economy_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/global_economy_radar.json',
     'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/global_economy_radar.json',

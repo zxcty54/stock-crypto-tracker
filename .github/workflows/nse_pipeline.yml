@@ -60,5 +60,6 @@ jobs:
             echo "ℹ️ Koi naya update nahi mila. Skipping commit."
           else
             git commit -m "⚡ Auto-Update: Master & AI Content Feed [$(date +'%d-%b-%Y %H:%M IST')]"
-            git push origin HEAD:${{ github.ref }} || (git pull --rebase origin main && git push origin main)
+            git pull --rebase origin main
+            git push origin main
           fi
