@@ -1,16 +1,16 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-26T21:50:58.722942+00:00",
+    "generated_timestamp": "2026-11-26T22:28:34.039384+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
-    "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
+    "regime_headline": "Stagflationary US 10Y @ 4.85%, Brent @ $84.91, DXY @ 103.78, INR @ 92.35",
     "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.85%) and King Dollar (DXY 103.78) create emerging market currency friction (USD/INR \u20b992.35), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
   },
   "executive_hud": {
     "global_health_score": 50.5,
     "global_health_label": "MODERATE FRAGMENTED EXPANSION",
-    "health_verdict": "Global health index at 50.5/100. Resilient US Tech Capex (54.9 PMI) and Indian domestic manufacturing (58.6 PMI) offset European de-industrialization (46.0 PMI) and Chinese property deflation (-10.3% YoY).",
+    "health_verdict": "Global bifurcated: US Services resilient @ 54.9, China structurally depressed @ -2.9% PPI, Eurozone contraction @ 46.0 Mfg",
     "regions_expansion_count": 3,
     "regions_pressure_count": 2,
     "core_pillars": [
@@ -573,20 +573,20 @@
         "id": "crude_shortage_shock",
         "shock_name": "Middle East Conflict & Hormuz Crude Supply Choke",
         "is_active": true,
-        "severity": "ELEVATED MONITORING",
-        "trigger": "US-Iran military friction and maritime risk along Strait of Hormuz tanker routes. Brent trading at $84.91/bbl.",
+        "severity": "CRITICAL SHOCK ALERT",
+        "trigger": "Brent Crude prints $84.91/bbl, threatening imported inflation and widening current account deficit alongside INR @ 92.35",
         "supply_demand_choke": "Threat of 2.0-2.5M bpd oil supply disruption; tanker war risk insurance premiums elevated.",
         "import_export_shift": "India's annual crude import deficit impact: ~+$29.9B; emergency crude diversification to Russian and African grades.",
         "currency_impact": "USD/INR trading at \u20b992.35; RBI defending currency with foreign exchange market interventions.",
         "margin_winners": [
           "Upstream Oil & Gas (E&P)",
-          "Domestic Gas Producers",
-          "Refinery Exporters"
+          "Pipeline Transmission",
+          "Renewables EPC"
         ],
         "margin_losers": [
-          "Aviation Logistics",
-          "Decorative Paints",
-          "Downstream Fuel Retailers"
+          "Paints & Coatings",
+          "Commercial Airlines (ATF)",
+          "Downstream Marketing OMCs"
         ]
       },
       {
@@ -1143,101 +1143,58 @@
   },
   "equity_impact_matrix": [
     {
-      "theme": "Electronics Manufacturing (EMS) & Defence Assemblies",
+      "theme": "Domestic Capital Goods & Industrial Infrastructure",
       "benchmark_index": "Nifty India Manufacturing",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "cost_sensitivity": "15-20% component import reliance cushioned by domestic PLI schemes and value-add localization",
-      "transmission_channel": "Global China+1 relocation & high global fab utilization (94.5%) driving multi-year export order backlogs",
+      "cost_sensitivity": "Metal input costs flat to down; localized supply chain resilience offsetting US 10Y yield @ 4.85%",
+      "transmission_channel": "India Composite PMI @ 58.6 drives robust private capex cycle despite global headwinds",
       "exposed_segments": [
-        "Mobile & PCB Contract Assembly",
-        "Defence Avionics & OSAT Packaging",
-        "Consumer Electronics ODM"
-      ],
-      "representative_tickers": [
-        "DIXON",
-        "KAYNES",
-        "PGEL",
-        "BEL"
+        "Heavy Electrical Equipment",
+        "Railways & Defense Infrastructure",
+        "Industrial Automation"
       ],
       "stocks": []
     },
     {
-      "theme": "Power Transmission & Heavy Electrical Equipment",
-      "benchmark_index": "Nifty Energy & Infrastructure",
-      "impact_direction": "BENEFICIARY",
-      "status": "EXPANDING",
-      "cost_sensitivity": "Copper & CRGO electrical steel input costs offset by robust multi-year fixed escalation contracts",
-      "transmission_channel": "Global data center AI compute loads & grid modernisation creating unprecedented transformer equipment shortages",
-      "exposed_segments": [
-        "High-Voltage Power Transformers",
-        "Gas-Insulated Switchgear",
-        "Grid Substation EPC"
-      ],
-      "representative_tickers": [
-        "VOLTAMP",
-        "ABB",
-        "SIEMENS",
-        "SCHNEIDER"
-      ],
-      "stocks": []
-    },
-    {
-      "theme": "Upstream Oil & Gas Exploration (E&P)",
+      "theme": "Upstream Energy Exploration & Production",
       "benchmark_index": "Nifty Oil & Gas",
       "impact_direction": "BENEFICIARY",
-      "status": "CASH FLOW EXPANSION",
-      "cost_sensitivity": "Exploration lifting costs fixed; revenue directly proportional to international dollar oil realizations",
-      "transmission_channel": "Elevated crude ($84.91/bbl) boosts gross dollar realizations and upstream drilling operating cash flows",
+      "status": "MARGIN EXPANSION",
+      "cost_sensitivity": "Direct realization sensitivity to Brent @ $84.91/bbl supporting net asset value",
+      "transmission_channel": "High crude realization expands EBITDA margins for domestic producers offsetting weak global manufacturing",
       "exposed_segments": [
-        "Offshore Crude Drilling",
-        "Domestic Natural Gas Extraction",
-        "Cross-Country Pipeline Transmission"
-      ],
-      "representative_tickers": [
-        "ONGC",
-        "OIL",
-        "GAIL"
+        "Onshore/Offshore Drilling",
+        "Exploration & Production",
+        "Energy Infrastructure"
       ],
       "stocks": []
     },
     {
-      "theme": "Tier-1 IT & Enterprise Software Services",
+      "theme": "Tier-1 IT Services & Digital Transformation",
       "benchmark_index": "Nifty IT",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
-      "cost_sensitivity": "High revenue dependence on US & European BFSI tech budgets (50-60% of top-line revenue)",
-      "transmission_channel": "High US 10Y Treasury yield (4.85%) prompts US enterprise CFOs to freeze non-critical discretionary consulting projects",
+      "cost_sensitivity": "US wage inflation and USD/INR @ 92.35 volatility pressuring offshore operating margins by 120-150 bps",
+      "transmission_channel": "US 10Y @ 4.85% delays enterprise discretionary technology spending budgets",
       "exposed_segments": [
-        "BFSI Discretionary Consulting",
-        "Legacy Enterprise IT Maintenance",
-        "ERP Implementation Deals"
-      ],
-      "representative_tickers": [
-        "TCS",
-        "INFY",
-        "WIPRO",
-        "COFORGE"
+        "BFSI Consulting",
+        "Enterprise Cloud Migration",
+        "Legacy Application Maintenance"
       ],
       "stocks": []
     },
     {
-      "theme": "Primary Steel & Crop Protection Agrochemicals",
-      "benchmark_index": "Nifty Metal / Commodities",
+      "theme": "Paints, Specialty Chemicals & Aviation Logistics",
+      "benchmark_index": "Nifty Consumption",
       "impact_direction": "PRESSURE_FACING",
       "status": "MARGIN COMPRESSION",
-      "cost_sensitivity": "High vulnerability to distressed Chinese dumping and generic active ingredient imports",
-      "transmission_channel": "Distressed Chinese factory exports (-2.9% PPI) undercut domestic steel realization spreads and chemical export pricing",
+      "cost_sensitivity": "Crude derivative input costs (emulsions, base oils, ATF) scale linearly with Brent @ $84.91/bbl",
+      "transmission_channel": "Imported crude inflation combined with INR @ 92.35 crushes gross margins by 350-500 bps",
       "exposed_segments": [
-        "Hot-Rolled Steel Coils",
-        "Generic Agrochemical Off-Patents",
-        "Commodity Base Chemicals"
-      ],
-      "representative_tickers": [
-        "TATASTEEL",
-        "JSWSTEEL",
-        "APLAPOLLO",
-        "UPL"
+        "Decorative Paints",
+        "Commercial Aviation",
+        "Petrochemical Derivatives"
       ],
       "stocks": []
     }
