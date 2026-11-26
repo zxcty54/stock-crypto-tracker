@@ -1,0 +1,1081 @@
+{
+  "metadata": {
+    "title": "India Sector-Specific Intelligence Directory",
+    "subtitle": "47 Sector Groups · 6 Macro Themes · 92 Official Industry Sources",
+    "version": "1.0.0",
+    "total_sectors": 47,
+    "total_themes": 6,
+    "total_sources": 92,
+    "model": "ISMA + ChiniMandi Model: Official Ground-Truth Releases + Specialist Newsrooms"
+  },
+  "themes": [
+    {
+      "theme_id": "01_AGRI",
+      "theme_name": "Agriculture, Sugar, Textiles & Inputs",
+      "icon": "🌾",
+      "description": "Seasonal production, trade policy, and industry releases paired with specialist discovery newsrooms.",
+      "sectors": [
+        {
+          "id": 1,
+          "sector_name": "Sugar / ethanol",
+          "key_focus": "Production estimates, crushing, ethanol diversion, export quotas, and FRP/SAP policy developments.",
+          "cadence": "Seasonal releases + event-based news",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Apex Industry Body",
+              "name": "ISMA - Resources",
+              "url": "https://ismaindia.org/resources",
+              "description": "Indian Sugar & Bio-energy Manufacturers Association official statistics, crushing reports, and ethanol data."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Specialist Newsroom",
+              "name": "ChiniMandi",
+              "url": "https://www.chinimandi.com/",
+              "description": "Dedicated daily news portal covering domestic and global sugar prices, policy notifications, and ethanol tenders."
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "sector_name": "Cotton / textiles / garments",
+          "key_focus": "Cotton crop balance sheet, yarn and apparel demand, mill capacity utilization, and international export trade.",
+          "cadence": "Monthly + ongoing news",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Cotton Body",
+              "name": "CAI - Monthly Reports",
+              "url": "https://caionline.in/reports/cai/monthly",
+              "description": "Cotton Association of India monthly crop production estimates, domestic consumption, and export balance sheet."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Industry Publication",
+              "name": "Indian Textile Journal - Latest",
+              "url": "https://indiantextilejournal.com/latest-news/",
+              "description": "Textile manufacturing, yarn prices, garment export demand, and technology upgrades."
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "sector_name": "Fertilisers",
+          "key_focus": "Demand off-take, NBS (Nutrient Based Subsidy) policy, gas pooling, availability, and subsidy disbursals.",
+          "cadence": "Periodic + policy events",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Official Association",
+              "name": "Fertiliser Association of India (FAI)",
+              "url": "https://www.faidelhi.org/",
+              "description": "FAI Current News, Chairman commentary, production, imports, and fertilizer pricing updates."
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "sector_name": "Agrochemicals / pesticides",
+          "key_focus": "Registration Committee updates, banned chemical gazettes, monsoon demand, and raw material imports.",
+          "cadence": "Event-based regulatory releases",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Statutory Regulator",
+              "name": "CIB&RC - News / Updates",
+              "url": "https://ppqs.gov.in/divisions/cib-rc/news-update",
+              "description": "Central Insecticide Board & Registration Committee official meeting minutes, approvals, and regulatory circulars."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Publication",
+              "name": "Indian Chemical News - Latest",
+              "url": "https://www.indianchemicalnews.com/news/news_list",
+              "description": "Agrochemical plant expansions, technical grade manufacturing, and global agrochem export trends."
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "sector_name": "Edible oils / oilseeds",
+          "key_focus": "Vegetable oil imports (Palm, Soybean, Sunflower), port stocks, domestic crop arrivals, and import duty changes.",
+          "cadence": "Monthly import data + tariff events",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Industry Association",
+              "name": "SEA - Statistical Updates",
+              "url": "https://seaofindia.com/category/statistical-update/",
+              "description": "Solvent Extractors' Association monthly import/export statistics, port inventory, and oilmeal exports."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Industry Association",
+              "name": "SEA - Press Releases",
+              "url": "https://seaofindia.com/category/news-media/press-releases/",
+              "description": "Representations on import duties, MSP procurement, and domestic oilseed crop balance sheets."
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "sector_name": "Tea / coffee / rubber",
+          "key_focus": "Auction prices, export shipments, climatic impact on plantation crops, and domestic natural rubber prices.",
+          "cadence": "Rubber prices daily; Tea/Coffee periodic",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Statutory Board",
+              "name": "Tea Board - Latest News",
+              "url": "https://www.teaboard.gov.in/LATEST-NEWS",
+              "description": "Tea Board of India production data, auction averages, and trade circulars."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Statutory Board",
+              "name": "Coffee Board - Statistics",
+              "url": "https://coffeeboard.gov.in/coffee-statistics.html",
+              "description": "Coffee production estimates, Arabica/Robusta export realizations, and market statistics."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Statutory Board",
+              "name": "Rubber Board",
+              "url": "https://rubberboard.gov.in/public",
+              "description": "Daily Kottayam/Kochi spot natural rubber prices, tyre industry demand, and domestic production data."
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "sector_name": "Agri exports / seafood-shrimp",
+          "key_focus": "Basmati rice minimum export price, non-basmati export bans, US anti-dumping duties on shrimp, and EU compliance.",
+          "cadence": "Event-based DGFT circulars",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Export Council",
+              "name": "APEDA - DGFT Notifications",
+              "url": "https://apeda.gov.in/dgft-notifications",
+              "description": "Agricultural and Processed Food Products Export Development Authority trade notifications and export standards."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Export Council",
+              "name": "MPEDA - Important Circulars",
+              "url": "https://mpeda.gov.in/?page_id=1127",
+              "description": "Marine Products Export Development Authority circulars on aquaculture, shrimp exports, and testing norms."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme_id": "02_MANUFACTURING",
+      "theme_name": "Manufacturing, Metals & Materials",
+      "icon": "🏭",
+      "description": "SIAM wholesales vs FADA dealer retail registrations, steel pricing, chemicals, and capital goods.",
+      "sectors": [
+        {
+          "id": 8,
+          "sector_name": "Auto: 2W / PV / CV / 3W",
+          "key_focus": "SIAM tracks factory production & dispatches. FADA tracks Vahan dealer retail sales, inventory days, and discount commentary.",
+          "cadence": "Monthly (1st-5th) + festive reviews",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Wholesale Body",
+              "name": "SIAM - Press Releases",
+              "url": "https://www.siam.in/news-&-updates/press-releases",
+              "description": "Society of Indian Automobile Manufacturers monthly production and wholesale dispatches."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Retail Association",
+              "name": "FADA - Press Releases",
+              "url": "https://fada.in/press-release-list.php",
+              "description": "Federation of Automobile Dealers Associations monthly retail registrations and dealer inventory data."
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "sector_name": "Auto ancillaries",
+          "key_focus": "Component industry turnover, OEM supply contracts, EV transition capex, aftermarket volumes, and export performance.",
+          "cadence": "Half-yearly reviews + ongoing news",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Component Body",
+              "name": "ACMA - Press Releases",
+              "url": "https://acma.in/press-release.php",
+              "description": "Automotive Component Manufacturers Association industry turnover, import-export data, and auto parts trade reviews."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Specialist Newsroom",
+              "name": "ETAuto",
+              "url": "https://auto.economictimes.indiatimes.com/",
+              "description": "Daily coverage of OEM launches, tier-1 supplier investments, electric vehicle transition, and channel inventory."
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "sector_name": "Steel",
+          "key_focus": "Crude steel production, finished steel consumption, secondary steel scrap, iron ore coking coal costs, and import dumping.",
+          "cadence": "Monthly output + daily/weekly pricing",
+          "sources": [
+            {
+              "type": "INDUSTRY_DATA",
+              "authority": "Steel Association",
+              "name": "ISA - Steel Data",
+              "url": "https://indsteel.org/steel-data/",
+              "description": "Indian Steel Association production, consumption, export-import volumes, and capacity tracking."
+            },
+            {
+              "type": "NEWS_PRICING",
+              "authority": "Commodity Intelligence",
+              "name": "BigMint",
+              "url": "https://www.bigmint.co/",
+              "description": "Spot steel prices (HRC, Rebar), iron ore pellet auctions, scrap prices, and Chinese export spread telemetry."
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "sector_name": "Non-ferrous metals / mining",
+          "key_focus": "Aluminium, copper, zinc, lead production, bauxite mining, auction of critical mineral blocks, and LME benchmark spreads.",
+          "cadence": "Periodic statistics + daily news",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Government Bureau",
+              "name": "IBM - Mining & Mineral Statistics",
+              "url": "https://ibm.gov.in/IBMPortal/pages/Mining___Mineral_Statistics_",
+              "description": "Indian Bureau of Mines mineral production index, dispatch volumes, and domestic pithead prices."
+            },
+            {
+              "type": "NEWS_PRICING",
+              "authority": "Commodity Portal",
+              "name": "BigMint (Non-Ferrous)",
+              "url": "https://www.bigmint.co/",
+              "description": "Aluminium ingot premiums, copper cathode pricing, zinc spot trade, and mining policy."
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "sector_name": "Chemicals / petrochemicals",
+          "key_focus": "Specialty chemicals, basic chemical production, feedstock ethylene/propylene, BIS quality control orders, and capex commissioning.",
+          "cadence": "Monthly reports + ongoing news",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Central Ministry",
+              "name": "Chemicals Department - Monthly",
+              "url": "https://chemicals.gov.in/monthly-reports",
+              "description": "Department of Chemicals & Petrochemicals monthly production statistics, trade balance, and chemical policy."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Industry Portal",
+              "name": "Indian Chemical News - Latest",
+              "url": "https://www.indianchemicalnews.com/news/news_list",
+              "description": "Specialty chemical company expansions, plant turnarounds, and export demand updates."
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "sector_name": "Plastics / polymers / pipes",
+          "key_focus": "PVC, HDPE, LLDPE, PP prices, producer price hikes by Reliance/IOCL, anti-dumping on PVC imports, and infra pipe demand.",
+          "cadence": "Ongoing weekly pricing + news",
+          "sources": [
+            {
+              "type": "NEWS_PRICING",
+              "authority": "Polymer Benchmark",
+              "name": "Polymerupdate",
+              "url": "https://www.polymerupdate.com/",
+              "description": "Real-time spot polymer pricing, plant outages, producer price revisions, and global naphtha/monomer parity."
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "sector_name": "Paper / paperboard / packaging",
+          "key_focus": "Wood pulp costs, waste paper import tariffs, duplex board demand, FMCG/E-comm packaging, and ASEAN duty-free imports.",
+          "cadence": "Event-based policy + quarterly earnings",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Paper Association",
+              "name": "IPMA - News",
+              "url": "https://ipmaindia.org/news23/",
+              "description": "Indian Paper Manufacturers Association representations on raw material availability and duty protections."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Publication",
+              "name": "Paper Mart - News",
+              "url": "https://papermart.in/category/news/",
+              "description": "Paper mill modernization, virgin fiber costs, packaging grade expansions, and environmental compliance."
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "sector_name": "Cement",
+          "key_focus": "Regional cement realization prices, petcoke and imported coal fuel costs, capacity additions, and housing/infra demand.",
+          "cadence": "Ongoing news + monthly national output",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Industry Association",
+              "name": "CMA - Industry News",
+              "url": "https://www.cmaindia.org/cmanews",
+              "description": "Cement Manufacturers' Association industry representations, technology, and regional capacity data."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Portal",
+              "name": "Indian Cement Review",
+              "url": "https://indiancementreview.com/",
+              "description": "Bag prices by zone (North, South, East, West), fuel-power cost pressures, and company M&A deals."
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "sector_name": "Electrical equipment / cables / transformers",
+          "key_focus": "Power grid capex, transformer shortages, copper/aluminium CRGO steel costs, transmission substation bids, and cable demand.",
+          "cadence": "Periodic index + event-based",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Apex Electrical Body",
+              "name": "IEEMA - Industry Updates",
+              "url": "https://ieema.org/industry-intelligence/industry-update/",
+              "description": "Indian Electrical & Electronics Manufacturers' Association growth indices, export data, and order-book surveys."
+            },
+            {
+              "type": "ASSOCIATION",
+              "authority": "Apex Electrical Body",
+              "name": "IEEMA - Policy Updates",
+              "url": "https://ieema.org/policy-advocacy-updates/",
+              "description": "Policy advocacy on transmission equipment tariffs, raw material duty structures, and utility procurement."
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "sector_name": "Electronics / EMS / semiconductors",
+          "key_focus": "PLI scheme disbursements, local value addition, OSAT/ATMP semiconductor fab approvals, and mobile/PCB contract assembly.",
+          "cadence": "Event-based cabinet & tender releases",
+          "sources": [
+            {
+              "type": "POLICY",
+              "authority": "Central Ministry",
+              "name": "MeitY - Electronics Manufacturing",
+              "url": "https://www.meity.gov.in/",
+              "description": "Ministry of Electronics & Information Technology policies, semiconductor mission updates, and PLI approvals."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Specialist Portal",
+              "name": "Electronics For You - News",
+              "url": "https://www.electronicsforu.com/category/news",
+              "description": "Electronics manufacturing contracts, semiconductor fab ground-breakings, component supply chains, and design wins."
+            },
+            {
+              "type": "REGULATOR",
+              "authority": "Trade Remedy Authority",
+              "name": "DGTR - Trade Remedy Investigations",
+              "url": "https://www.dgtr.gov.in/en/anti-dumping-investigation-in-india",
+              "description": "Directorate General of Trade Remedies anti-dumping, countervailing, and safeguard duty investigations on imports."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme_id": "03_ENERGY_INFRA",
+      "theme_name": "Energy, Infrastructure & Transport",
+      "icon": "⚡",
+      "description": "Power generation, SECI renewables, oil & gas consumption, highways EPC, railways, and defence contracts.",
+      "sectors": [
+        {
+          "id": 18,
+          "sector_name": "Power generation / utilities",
+          "key_focus": "Peak power deficit, thermal PLF, merchant IEX power prices, transmission lines commissioning, and CERC tariff orders.",
+          "cadence": "Daily generation reports + regulatory orders",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Central Electricity Authority",
+              "name": "CEA / National Power Portal",
+              "url": "https://npp.gov.in/publishedReports",
+              "description": "Daily and monthly national generation reports, coal stock at thermal power stations, and outage telemetry."
+            },
+            {
+              "type": "REGULATOR",
+              "authority": "Central Electricity Regulator",
+              "name": "CERC - Regulations",
+              "url": "https://www.cercind.gov.in/Current_reg_hin.html",
+              "description": "Tariff regulations, grid code norms, open access rules, and interstate transmission charges."
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "sector_name": "Solar / wind / renewable / BESS",
+          "key_focus": "SECI auction tariffs, ALMM approved module list, BESS viability gap funding, and hybrid renewable PPA signings.",
+          "cadence": "Event-based auction and tender releases",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Renewable Implementing Agency",
+              "name": "SECI - Latest Updates",
+              "url": "https://www.seci.co.in/latest-news",
+              "description": "Solar Energy Corporation of India tender releases, bid results, amendments, and award notifications."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Clean Energy Portal",
+              "name": "Mercom India",
+              "url": "https://www.mercomindia.com/",
+              "description": "Solar module pricing, tender tracking, clean energy project commissioning, and renewable policy telemetry."
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "sector_name": "Oil / refining / gas / CGD",
+          "key_focus": "Domestic diesel/petrol demand, refining GRMs, City Gas Distribution minimum work programme, and APM gas allocations.",
+          "cadence": "Monthly consumption report + regulatory orders",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Petroleum Ministry Cell",
+              "name": "PPAC - Consumption Reports",
+              "url": "https://ppac.gov.in/consumption/products-wise",
+              "description": "Petroleum Planning & Analysis Cell official monthly oil and gas consumption, production, and import dependency figures."
+            },
+            {
+              "type": "REGULATOR",
+              "authority": "Downstream Gas Regulator",
+              "name": "PNGRB - Authorisations & Tariffs",
+              "url": "https://pngrb.gov.in/eng-web/",
+              "description": "Petroleum and Natural Gas Regulatory Board geographical area authorizations, pipeline tariffs, and dispute orders."
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "sector_name": "Coal",
+          "key_focus": "Domestic production by Coal India, commercial coal mine auctions, power plant dispatches, and non-power sector e-auctions.",
+          "cadence": "Monthly statistics + news",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Ministry of Coal",
+              "name": "Coal Ministry - Monthly Statistics",
+              "url": "https://coal.gov.in/public-information/monthly-statistics-at-glance",
+              "description": "Monthly production, pithead stocks, thermal power plant supplies, and commercial mine auction updates."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Publication",
+              "name": "ETEnergyworld - Coal",
+              "url": "https://energy.economictimes.indiatimes.com/news/coal",
+              "description": "Coal pricing, e-auction premiums, captive block mining output, and railway rake allocation developments."
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "sector_name": "Roads / highways / EPC",
+          "key_focus": "NHAI award and construction pace (km/day), HAM vs EPC project mix, toll collections on FASTag, and dispute settlements.",
+          "cadence": "Monthly construction pace + project news",
+          "sources": [
+            {
+              "type": "NEWS",
+              "authority": "Infrastructure Newsroom",
+              "name": "ETInfra - Roads & Highways",
+              "url": "https://infra.economictimes.indiatimes.com/news/roads-highways",
+              "description": "Highway project contract awards, expressway execution status, FASTag toll volumes, and NHAI borrowings."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Government Press Office",
+              "name": "PIB - Ministry of Road Transport",
+              "url": "https://www.pib.gov.in/AllRelease.aspx?reg=3&lang=1",
+              "description": "Official Cabinet project approvals, National Highway project sanctions, and MoRTH policy guidelines."
+            }
+          ]
+        },
+        {
+          "id": 23,
+          "sector_name": "Railways / wagons / metro",
+          "key_focus": "Indian Railways rolling stock tenders (Vande Bharat, freight wagons), track electrification, signalling (Kavach), and metro bids.",
+          "cadence": "Event-based procurement releases",
+          "sources": [
+            {
+              "type": "PROCUREMENT",
+              "authority": "Official E-Procurement",
+              "name": "IREPS - Railway E-Procurement",
+              "url": "https://www.ireps.gov.in/",
+              "description": "Indian Railways E-Procurement System live tenders, contracts awarded, rolling stock and track material procurement."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Industry Portal",
+              "name": "Rail Analysis India",
+              "url": "https://railanalysis.in/",
+              "description": "Metro project contracts, rolling stock orders, Kavach safety deployment, and high-speed rail developments."
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "sector_name": "Defence",
+          "key_focus": "DAC Acceptance of Necessity (AoN) approvals, signed commercial contracts, DPP positive indigenisation lists, and export approvals.",
+          "cadence": "Event-based Ministry announcements",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Ministry of Defence",
+              "name": "PIB - Ministry of Defence",
+              "url": "https://www.pib.gov.in/AllRelease.aspx?reg=3&lang=1",
+              "description": "Defence Acquisition Council procurement decisions, capital contract signings, and indigenous manufacturing orders."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Specialist Defence Portal",
+              "name": "BharatShakti",
+              "url": "https://bharatshakti.in/",
+              "description": "Armed forces procurement programs, domestic defence company contracts, aerospace platforms, and military exports."
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "sector_name": "Real estate / housing",
+          "key_focus": "Top-7 city residential sales, new project launches, unsold inventory overhang, capital values/sqft, and office leasing absorption.",
+          "cadence": "Quarterly research + ongoing news",
+          "sources": [
+            {
+              "type": "RESEARCH",
+              "authority": "Property Consultancy",
+              "name": "ANAROCK - Research & Insights",
+              "url": "https://anarock.com/",
+              "description": "Top-7 city quarterly residential market reports, commercial office leasing trends, and land deal trackers."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Publication",
+              "name": "ETRealty",
+              "url": "https://realty.economictimes.indiatimes.com/",
+              "description": "Real estate developer project launches, land acquisitions, RERA compliance rulings, and urban redevelopment deals."
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "sector_name": "Ports / shipping",
+          "key_focus": "Major port cargo handling volumes, container TEU traffic, vessel turnaround time, and coastal shipping/waterways policy.",
+          "cadence": "Monthly cargo reports + daily vessel data",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Central Ministry",
+              "name": "Shipping Ministry - Transport Research",
+              "url": "https://www.shipmin.gov.in/en/division/transport-research",
+              "description": "Ministry of Ports, Shipping and Waterways traffic statistics, coastal movement, and port capacity metrics."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Ports Association",
+              "name": "IPA - Reports & Statistics",
+              "url": "https://ipa.org.in/reports-statistics",
+              "description": "Indian Ports Association official monthly cargo throughput, container volumes, and port operational efficiency data."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Maritime Publication",
+              "name": "Maritime Gateway - News",
+              "url": "https://www.maritimegateway.com/category/news/",
+              "description": "Container freight rates, shipping line port calls, EXIM cargo policy, and port infrastructure developments."
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "sector_name": "Logistics / warehousing / air cargo",
+          "key_focus": "Freight rates on key trunk routes, Grade-A warehouse absorption, express parcel volumes, and dedicated freight corridor utilization.",
+          "cadence": "Ongoing logistics news",
+          "sources": [
+            {
+              "type": "NEWS",
+              "authority": "Specialist Logistics Portal",
+              "name": "Indian Transport & Logistics News (ITLN)",
+              "url": "https://www.itln.in/",
+              "description": "Supply chain infrastructure, cold storage, 3PL logistics contracts, air cargo tonnage, and multimodal logistics parks."
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "sector_name": "Airlines / airports",
+          "key_focus": "Monthly domestic passenger traffic, airline market share, passenger load factors (PLF), cancellation rates, and airport passenger volumes.",
+          "cadence": "Monthly (15th-20th) + ongoing news",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Civil Aviation Regulator",
+              "name": "DGCA - Data & Reports",
+              "url": "https://www.dgca.gov.in/digigov-portal/#dataReports",
+              "description": "Directorate General of Civil Aviation official monthly airline traffic, market share, on-time performance, and fleet utilization."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Aviation Newsroom",
+              "name": "ETInfra - Aviation",
+              "url": "https://infra.economictimes.indiatimes.com/news/aviation",
+              "description": "Airport concession agreements, fleet induction orders, bilateral traffic rights, and commercial airline operations."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme_id": "04_BANKING_FINANCE",
+      "theme_name": "Banking & Financial Services",
+      "icon": "🏦",
+      "description": "RBI monetary policy, credit growth, MFIN microfinance, IRDAI insurance premiums, AMFI inflows, and SEBI regulations.",
+      "sectors": [
+        {
+          "id": 29,
+          "sector_name": "Banks / NBFC / housing finance",
+          "key_focus": "RBI repo rate, CRR/SLR, risk weights on unsecured credit, deposit vs credit growth gap, and provisioning norms.",
+          "cadence": "Bi-monthly policy + periodic circulars",
+          "sources": [
+            {
+              "type": "REGULATOR",
+              "authority": "Central Bank",
+              "name": "RBI - Notifications",
+              "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+              "description": "Reserve Bank of India statutory master directions, prudential norms, risk weight revisions, and liquidity circulars."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Central Bank",
+              "name": "RBI - Press Releases",
+              "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+              "description": "Monetary Policy Committee resolutions, sectoral credit deployment data, and regulatory penalties."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Banking Newsroom",
+              "name": "ETBFSI",
+              "url": "https://bfsi.economictimes.indiatimes.com/",
+              "description": "Lending trends, net interest margin (NIM) commentary, NPA recoveries, and NBFC liquidity developments."
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "sector_name": "Microfinance",
+          "key_focus": "Gross loan portfolio (GLP), PAR 30/90 default overdues, rural collection efficiencies, and state-level credit health.",
+          "cadence": "Quarterly Micrometer report + events",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Microfinance SRO",
+              "name": "MFIN - Micrometer & Press Releases",
+              "url": "https://mfinindia.org/NewsEvent/pressreleases",
+              "description": "Microfinance Institutions Network quarterly Micrometer report tracking industry GLP, disbursements, and delinquency ratios."
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "sector_name": "Life / general / health insurance",
+          "key_focus": "First-year premium collections, new business premium (NBP) growth, health loss ratios, and expense-of-management (EoM) caps.",
+          "cadence": "Monthly (10th) + regulatory circulars",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Insurance Regulator",
+              "name": "IRDAI - Life Monthly Figures",
+              "url": "https://irdai.gov.in/monthly-business-figures1",
+              "description": "Monthly individual and group first-year premium business performance of life insurance companies."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Insurance Regulator",
+              "name": "IRDAI - Non-Life Figures",
+              "url": "https://irdai.gov.in/non-life",
+              "description": "Monthly gross direct premium underwritten by general and standalone health insurance companies."
+            },
+            {
+              "type": "REGULATOR",
+              "authority": "Insurance Regulator",
+              "name": "IRDAI - Circulars",
+              "url": "https://irdai.gov.in/circulars",
+              "description": "Statutory circulars, product approval guidelines, surrender value norms, and solvency regulations."
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "sector_name": "AMCs / mutual funds",
+          "key_focus": "Category-wise equity/debt flows, monthly SIP gross contributions, NFO collections, and total industry AUM.",
+          "cadence": "Monthly (8th-10th)",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Mutual Fund Body",
+              "name": "AMFI - Monthly Data",
+              "url": "https://www.amfiindia.com/research-information/amfi-monthly",
+              "description": "Association of Mutual Funds in India official monthly data on equity, debt, hybrid inflows, SIP accounts, and folios."
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "sector_name": "Brokers / exchanges / depositories",
+          "key_focus": "Active demat accounts, F&O contract sizing & expiry rules, index derivatives volumes, and transaction turnover charges.",
+          "cadence": "Monthly statistics + circular events",
+          "sources": [
+            {
+              "type": "REGULATOR",
+              "authority": "Securities Regulator",
+              "name": "SEBI - Circulars",
+              "url": "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0",
+              "description": "Securities and Exchange Board of India master circulars, derivatives market norms, and broker capital requirements."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Securities Regulator",
+              "name": "SEBI - Market Statistics",
+              "url": "https://www.sebi.gov.in/statistics/statistics.html",
+              "description": "Monthly turnover on NSE/BSE, demat account growth (CDSL/NSDL), mutual fund mobilization, and FPI investments."
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "sector_name": "Payments / fintech",
+          "key_focus": "UPI monthly transaction count and value, merchant discount rate (MDR) policy, fast-payment rails, and soundbox adoption.",
+          "cadence": "Monthly (1st) + technical circulars",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "National Payments Umbrella",
+              "name": "NPCI - UPI Statistics",
+              "url": "https://www.npci.org.in/product/upi/product-statistics",
+              "description": "National Payments Corporation of India monthly volume and value telemetry for UPI, IMPS, and NETC FASTag."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "National Payments Umbrella",
+              "name": "NPCI - UPI Circulars",
+              "url": "https://www.npci.org.in/circulars/upi",
+              "description": "Operating guidelines, interchange fee structure, transaction limits, and technical rule changes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme_id": "05_IT_TELECOM_HEALTH",
+      "theme_name": "IT, Telecom & Healthcare",
+      "icon": "💻",
+      "description": "Nasscom technology trends, TRAI subscriber counts, USFDA drug approvals/warning letters, and healthcare capex.",
+      "sectors": [
+        {
+          "id": 35,
+          "sector_name": "IT services / BPM / technology",
+          "key_focus": "Enterprise technology spending, BFSI discretionary spend, Global Capability Centers (GCCs) expansion, and Cloud/AI deal wins.",
+          "cadence": "Quarterly research + news",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Tech Industry Apex",
+              "name": "Nasscom - Reports",
+              "url": "https://community.nasscom.in/report?mail=1",
+              "description": "National Association of Software and Service Companies strategic reviews, tech hiring, and GCC growth reports."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Enterprise Tech Portal",
+              "name": "TechCircle",
+              "url": "https://www.techcircle.in/",
+              "description": "Enterprise IT contracts, cloud migrations, startup funding, executive movements, and digital transformation deals."
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "sector_name": "Telecom",
+          "key_focus": "Wireless subscriber additions/churn, VLR active percentage, ARPU trends, 5G monetization, and adjusted gross revenue (AGR) rulings.",
+          "cadence": "Monthly (20th) + quarterly indicators",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Telecom Regulator",
+              "name": "TRAI - Subscription Reports",
+              "url": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
+              "description": "Telecom Regulatory Authority of India monthly subscriber statistics, wireline broadband, and operator market share."
+            },
+            {
+              "type": "ORIGINAL",
+              "authority": "Telecom Regulator",
+              "name": "TRAI - Performance Indicators",
+              "url": "https://www.trai.gov.in/release-publication/reports/performance-indicators-reports",
+              "description": "Quarterly financial and operating metrics, blended ARPU, data usage per subscriber, and network quality reports."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Telecom Newsroom",
+              "name": "ETTelecom",
+              "url": "https://telecom.economictimes.indiatimes.com/",
+              "description": "Telecom spectrum auctions, tariff hike announcements, telecom equipment orders, and satellite broadband updates."
+            }
+          ]
+        },
+        {
+          "id": 37,
+          "sector_name": "Pharma / APIs / CDMO",
+          "key_focus": "USFDA plant inspections, Form 483 observations, warning letters, import alerts, ANDA drug approvals, and NPPA price ceiling orders.",
+          "cadence": "Event-based regulatory actions",
+          "sources": [
+            {
+              "type": "REGULATOR",
+              "authority": "US Health Regulator",
+              "name": "USFDA - Warning Letters",
+              "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters",
+              "description": "United States Food and Drug Administration official enforcement letters, cGMP violations, and manufacturing facility audits."
+            },
+            {
+              "type": "REGULATOR",
+              "authority": "Indian Drug Pricing Regulator",
+              "name": "NPPA - Orders / Circulars",
+              "url": "https://nppa.gov.in/en/view_more?id=4",
+              "description": "National Pharmaceutical Pricing Authority ceiling price notifications under Drugs (Prices Control) Order (DPCO)."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Specialist Pharma News",
+              "name": "Pharmabiz",
+              "url": "https://pharmabiz.com/",
+              "description": "Domestic formulation launches, API raw material trends, patent litigations, and CDMO contract awards."
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "sector_name": "Hospitals / diagnostics / devices",
+          "key_focus": "Average revenue per occupied bed (ARPOB), operational bed capacity expansion, medical tourism, and diagnostic test volumes.",
+          "cadence": "Ongoing news + quarterly reviews",
+          "sources": [
+            {
+              "type": "NEWS",
+              "authority": "Healthcare Newsroom",
+              "name": "ETHealthworld - Hospitals",
+              "url": "https://health.economictimes.indiatimes.com/news/hospitals",
+              "description": "Hospital bed additions, greenfield hospital projects, healthcare M&A, and insurance empanelment updates."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Healthcare Newsroom",
+              "name": "ETHealthworld - Diagnostics",
+              "url": "https://health.economictimes.indiatimes.com/news/diagnostics",
+              "description": "Pathology and radiology laboratory expansion, wellness package pricing, and diagnostic test volume trends."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Healthcare Newsroom",
+              "name": "ETHealthworld - Medical Devices",
+              "url": "https://health.economictimes.indiatimes.com/news/medical-devices",
+              "description": "Medical equipment manufacturing, stent/implant price regulations, and hospital technology procurement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme_id": "06_CONSUMPTION_SERVICES",
+      "theme_name": "Consumption, Retail & Other Services",
+      "icon": "🛒",
+      "description": "FMCG demand surveys, QSR/retail footfalls, consumer durables channel inventory, gold jewellery, and hospitality RevPAR.",
+      "sectors": [
+        {
+          "id": 39,
+          "sector_name": "FMCG",
+          "key_focus": "Rural vs urban volume growth, raw material input inflation (palm oil, copra, wheat), direct distribution reach, and local brand competition.",
+          "cadence": "Quarterly research + ongoing news",
+          "sources": [
+            {
+              "type": "RESEARCH",
+              "authority": "Consumer Research Benchmark",
+              "name": "NIQ - India FMCG Snapshot",
+              "url": "https://nielseniq.com/global/en/insights/report/2026/india-fmcg-quarterly-snapshot-q1-2026/",
+              "description": "NielsenIQ quarterly retail measurement index tracking FMCG volume growth, rural recovery, and category demand."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Retail & Food Newsroom",
+              "name": "ETRetail - Food & Entertainment",
+              "url": "https://retail.economictimes.indiatimes.com/news/food-entertainment",
+              "description": "Packaged food launches, personal care pricing trends, modern trade promotions, and quick-commerce channel share."
+            }
+          ]
+        },
+        {
+          "id": 40,
+          "sector_name": "Retail / e-commerce / QSR",
+          "key_focus": "Same-store sales growth (SSSG), average order value, quick-commerce expansion, store additions, and retail footfall indices.",
+          "cadence": "Monthly retail surveys + ongoing news",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Retail Association",
+              "name": "RAI - Retail Business Survey",
+              "url": "https://rai.net.in/press-room.php",
+              "description": "Retailers Association of India monthly survey tracking apparel, footwear, QSR, and department store sales growth."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Sector Publication",
+              "name": "ETRetail",
+              "url": "https://retail.economictimes.indiatimes.com/",
+              "description": "QSR dining trends, brand store openings, shopping mall leasing, and e-commerce festival sales telemetry."
+            }
+          ]
+        },
+        {
+          "id": 41,
+          "sector_name": "Consumer durables / AC / appliances",
+          "key_focus": "Room air conditioner (RAC) summer demand, channel inventory with distributors, copper/compressor raw material costs, and energy-rating norms.",
+          "cadence": "Seasonal sales telemetry + ongoing news",
+          "sources": [
+            {
+              "type": "NEWS",
+              "authority": "Specialist Newsroom",
+              "name": "ETRetail - Consumer Durables",
+              "url": "https://retail.economictimes.indiatimes.com/news/consumer-durables-and-information-technology",
+              "description": "Air conditioner, refrigerator, washing machine sales, component localization, and appliance price revisions."
+            }
+          ]
+        },
+        {
+          "id": 42,
+          "sector_name": "Gems / jewellery / diamonds",
+          "key_focus": "Domestic gold jewellery demand, custom duty revisions, polished natural diamond exports, and lab-grown diamond (LGD) manufacturing.",
+          "cadence": "Monthly trade data (15th)",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Export Promotion Council",
+              "name": "GJEPC - Statistics & Trade Research",
+              "url": "https://gjepc.org/statistics.php",
+              "description": "Gem & Jewellery Export Promotion Council monthly export-import data for gold, cut & polished diamonds, and lab-grown diamonds."
+            }
+          ]
+        },
+        {
+          "id": 43,
+          "sector_name": "Hotels / hospitality / travel",
+          "key_focus": "Revenue per available room (RevPAR), average room rates (ARR), occupancy percentages by city, and corporate/MICE tourism demand.",
+          "cadence": "Monthly monitor + news",
+          "sources": [
+            {
+              "type": "RESEARCH",
+              "authority": "Hospitality Consultancy",
+              "name": "HVS ANAROCK - Monthly Monitor",
+              "url": "https://www.hvs.com/insights/search?term=HVS%20ANAROCK%20MONITOR",
+              "description": "HVS ANAROCK monthly Indian hotel industry monitor tracking city-wise occupancy, ARR, and supply pipeline."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Travel Newsroom",
+              "name": "ETTravelWorld - Hospitality",
+              "url": "https://travel.economictimes.indiatimes.com/news/hospitality",
+              "description": "Hotel chain signings, luxury resort expansions, domestic tourism footfalls, and airline-hotel tie-ups."
+            }
+          ]
+        },
+        {
+          "id": 44,
+          "sector_name": "Media / broadcasting / advertising",
+          "key_focus": "Advertising expenditure (AdEx) growth, digital vs TV ad spends, TRAI broadcasting tariff orders, and OTT streaming viewership.",
+          "cadence": "Event-based + industry quarterly reviews",
+          "sources": [
+            {
+              "type": "ORIGINAL",
+              "authority": "Central Ministry",
+              "name": "MIB - Press Releases",
+              "url": "https://mib.gov.in/hi/documents/notification/press-releases",
+              "description": "Ministry of Information & Broadcasting policy decisions, television channel uplinking guidelines, and regulatory notices."
+            },
+            {
+              "type": "NEWS",
+              "authority": "Media Newsroom",
+              "name": "Exchange4media",
+              "url": "https://www.exchange4media.com/",
+              "description": "Advertising expenditure forecasts, television ratings, digital media deals, and agency account wins."
+            }
+          ]
+        },
+        {
+          "id": 45,
+          "sector_name": "Staffing / HR services",
+          "key_focus": "Formal flexi-staffing headcount additions, general vs IT flexi hiring, manufacturing factory demand, and quarterly employment index.",
+          "cadence": "Quarterly research reports",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Apex Staffing Federation",
+              "name": "Indian Staffing Federation - Research",
+              "url": "https://indianstaffingfederation.org/research/",
+              "description": "Indian Staffing Federation quarterly flexi-staffing growth reports, formal workforce employment indices, and wage telemetry."
+            }
+          ]
+        },
+        {
+          "id": 46,
+          "sector_name": "Alcohol / spirits / wine",
+          "key_focus": "State excise duty policies, premiumisation trends in IMFL, glass bottle raw material costs, and state retail vending rules.",
+          "cadence": "Event-based state excise notices",
+          "sources": [
+            {
+              "type": "ASSOCIATION",
+              "authority": "Spirits Association",
+              "name": "ISWAI - News & Updates",
+              "url": "https://www.iswai.in/news-and-updates/",
+              "description": "International Spirits & Wines Association of India representations, tax structures, and industry growth trends."
+            }
+          ]
+        },
+        {
+          "id": 47,
+          "sector_name": "Education / training services",
+          "key_focus": "National Education Policy (NEP) guidelines, test-prep enrollment numbers, overseas study visa trends, and skilling grants.",
+          "cadence": "Ongoing education news",
+          "sources": [
+            {
+              "type": "NEWS",
+              "authority": "Education Newsroom",
+              "name": "ETEducation",
+              "url": "https://education.economictimes.indiatimes.com/",
+              "description": "Higher education policy, edtech regulatory compliance, vocational training programs, and university expansions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

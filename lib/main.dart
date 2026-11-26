@@ -16,6 +16,7 @@ import 'screens/mf_smart_money_screen.dart'; // 🕵️ MF Smart Money Radar
 import 'screens/economy_demand_radar_screen.dart'; // 🏭 Physical Economy Demand Radar
 import 'screens/global_economy_radar_screen.dart'; // 🌍 Global Economy Radar
 import 'screens/institutional_internals_radar_screen.dart'; // 🏛️ Institutional & Risk Radar
+import 'screens/sector_sources_directory_screen.dart'; // 🏭 47 Sectors & Sources Hub
 import 'screens/ipo_radar_screen.dart'; // 🚀 NSE Mainboard IPO Radar
 import 'widgets/legal_disclaimer_dialog.dart';
 import 'widgets/create_chart_post_sheet.dart';
@@ -400,6 +401,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => const InstitutionalInternalsRadarScreen(),
+                  ),
+                );
+              },
+            ),
+            _drawerTile(
+              icon: Icons.hub_rounded,
+              title: 'Sector Intelligence & Sources Hub',
+              subtitle: '47 Sectors, 6 Macro Themes, 92 Portals (In-App)',
+              isHighlight: true,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SectorSourcesDirectoryScreen(),
                   ),
                 );
               },

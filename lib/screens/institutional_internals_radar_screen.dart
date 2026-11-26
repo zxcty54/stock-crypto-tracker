@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'company_intelligence_screen.dart';
 import 'stock_delivery_history_screen.dart';
 import 'global_economy_radar_screen.dart';
+import 'sector_sources_directory_screen.dart';
 
 class InstitutionalInternalsRadarScreen extends StatefulWidget {
   const InstitutionalInternalsRadarScreen({super.key});
@@ -178,6 +179,19 @@ class _InstitutionalInternalsRadarScreenState
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.hub_rounded,
+                color: kAccentAmber, size: 20),
+            tooltip: "47 Sector Sources & Telemetry Hub",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SectorSourcesDirectoryScreen(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.public_rounded,
                 color: kAccentCyan, size: 20),
