@@ -53,7 +53,6 @@ jobs:
             echo "ℹ️ No changes in global economy radar data."
           else
             git commit -m "🌍 Auto-Update: Global Economy Pressure & Expansion Radar [$(date +'%d-%b-%Y')]"
-            git pull --rebase origin main
-            git push origin main
-            echo "✅ Global economy radar pushed to main!"
+            git push origin HEAD:${{ github.ref }} || (git pull --rebase origin main && git push origin main)
+            echo "✅ Global economy radar pushed successfully!"
           fi

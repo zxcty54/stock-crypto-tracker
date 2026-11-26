@@ -28,6 +28,10 @@ class _InstitutionalInternalsRadarScreenState
   static const Color kTextMuted = Color(0xFF8896AB);
 
   static const List<String> dataUrls = [
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/4bcd1358-stock-crypto-tracker/assets/data/global_economy_radar.json',
+    'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/arena/4bcd1358-stock-crypto-tracker/global_economy_radar.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@arena/4bcd1358-stock-crypto-tracker/assets/data/global_economy_radar.json',
+    'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@arena/4bcd1358-stock-crypto-tracker/global_economy_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/assets/data/global_economy_radar.json',
     'https://raw.githubusercontent.com/zxcty54/stock-crypto-tracker/main/global_economy_radar.json',
     'https://cdn.jsdelivr.net/gh/zxcty54/stock-crypto-tracker@main/assets/data/global_economy_radar.json',
@@ -43,6 +47,36 @@ class _InstitutionalInternalsRadarScreenState
   Map<String, dynamic> _marketInternals = {};
   Map<String, dynamic> _promoterRadar = {};
   Map<String, dynamic> _bulkBlockDeals = {};
+
+  DateTime? _parseFlexibleDate(String? dateStr) {
+    if (dateStr == null || dateStr.trim().isEmpty) return null;
+    final clean = dateStr.trim().replaceAll('-', ' ');
+    final parts = clean.split(RegExp(r'\s+'));
+    if (parts.length >= 3) {
+      final day = int.tryParse(parts[0]);
+      final year = int.tryParse(parts[2]);
+      const months = {
+        'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12
+      };
+      final mKey = parts[1].toLowerCase();
+      final month = months[mKey.length >= 3 ? mKey.substring(0, 3) : mKey];
+      if (day != null && month != null && year != null) {
+        return DateTime(year, month, day);
+      }
+    }
+    return DateTime.tryParse(dateStr);
+  }
+
+  bool _isStaleDowngrade(String? incomingDateStr, String? currentDateStr) {
+    if (incomingDateStr == null || currentDateStr == null) return false;
+    final inDate = _parseFlexibleDate(incomingDateStr);
+    final curDate = _parseFlexibleDate(currentDateStr);
+    if (inDate != null && curDate != null) {
+      return inDate.isBefore(curDate);
+    }
+    return false;
+  }
 
   @override
   void initState() {
@@ -101,6 +135,16 @@ class _InstitutionalInternalsRadarScreenState
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           final dynamic parsed = jsonDecode(utf8.decode(response.bodyBytes));
           if (parsed is Map<String, dynamic>) {
+            final incomingDeriv = parsed['fii_dii_derivatives'] as Map<String, dynamic>? ?? {};
+            final incomingFlows = parsed['fii_dii_flows'] as Map<String, dynamic>? ?? {};
+            final String? incomingDateStr = incomingDeriv['trade_date'] ?? incomingFlows['trade_date'];
+            final String? currentDateStr = _fiiDiiDerivatives['trade_date'] ?? _fiiDiiFlows['trade_date'];
+
+            // Prevent stale cache or older remote branch from downgrading newer data
+            if (_isStaleDowngrade(incomingDateStr, currentDateStr)) {
+              continue;
+            }
+
             if (mounted) {
               setState(() {
                 _populateData(parsed);

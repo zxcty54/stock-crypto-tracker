@@ -40,7 +40,6 @@ jobs:
             echo "ℹ️ No new sector news items. Skipping push."
           else
             git commit -m "⚡ Auto-Update: Sector Intelligence Feed [$(date +'%d-%b-%Y %H:%M IST')]"
-            git pull --rebase origin main
-            git push origin main
-            echo "✅ Sector intelligence feed pushed to main!"
+            git push origin HEAD:${{ github.ref }} || (git pull --rebase origin main && git push origin main)
+            echo "✅ Sector intelligence feed pushed!"
           fi
