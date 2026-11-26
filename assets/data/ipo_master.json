@@ -47,7 +47,55 @@
     "telegraph_url": "https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-09",
-    "last_updated": "2026-11-26T17:40:25.383294+05:30"
+    "last_updated": "2026-11-27T04:24:22.883358+05:30"
+  },
+  {
+    "id": "swara-baby-products",
+    "company_name": "Swara Baby Products",
+    "symbol": "",
+    "issue_type": "Mainboard",
+    "exchange": "NSE & BSE",
+    "open_date": "2026-12-02",
+    "close_date": "2026-12-04",
+    "allotment_date": null,
+    "listing_date": null,
+    "price_band": "₹0",
+    "lot_size": null,
+    "issue_size_cr": "",
+    "fresh_issue_cr": "",
+    "ofs_cr": "",
+    "gmp": "",
+    "gmp_percent": "",
+    "gmp_unofficial": true,
+    "est_listing_price": "",
+    "kostak": "",
+    "sub2sauda": "",
+    "subscription": {},
+    "registrar": {
+      "name": "",
+      "url": ""
+    },
+    "drhp_objects": [],
+    "reservation": {},
+    "financials": {},
+    "kpis": {},
+    "promoter_holding": {},
+    "lead_managers": [],
+    "drhp_url": "",
+    "about": "",
+    "detail_url": "/swara-baby-products-ipo-details/",
+    "sources": [
+      "ipowatch"
+    ],
+    "is_already_listed": false,
+    "status": "UPCOMING",
+    "cut_off_price": 0,
+    "created_at": "2026-11-27T04:24:22.883358+05:30",
+    "posted_events": [
+      "NEW_IPO_ANNOUNCED"
+    ],
+    "telegraph_url": "https://telegra.ph/Swara-Baby-Products-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-26",
+    "last_posted_gmp": ""
   },
   {
     "id": "monomark-engineering",
@@ -128,7 +176,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-26T17:40:25.383294+05:30",
+    "last_updated": "2026-11-27T04:24:22.883358+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹22.00",
     "demand_graph": {
@@ -230,7 +278,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-26T17:40:25.383294+05:30",
+    "last_updated": "2026-11-27T04:24:22.883358+05:30",
     "demand_graph": {
       "total_issue_size": "7276981",
       "total_bids": null,
@@ -308,7 +356,10 @@
     ],
     "last_updated": "2026-11-26T17:40:25.383294+05:30",
     "telegraph_url": "https://telegra.ph/Integris-Medtech-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
-    "last_posted_gmp": "+₹35.00"
+    "last_posted_gmp": "+₹35.00",
+    "posted_events": [
+      "IPO_OPENS_TODAY"
+    ]
   },
   {
     "id": "foodlink-f-b-holdings",
@@ -398,7 +449,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-26T17:40:25.383294+05:30",
+    "last_updated": "2026-11-27T04:24:22.883358+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
