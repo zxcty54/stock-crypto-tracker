@@ -1,16 +1,16 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-27T22:11:14.248299+00:00",
+    "generated_timestamp": "2026-11-27T23:03:07.736183+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
-    "regime_headline": "Stagflationary US Yields at 4.94% with Brent at $83.08/bbl and DXY at 104.01",
+    "regime_headline": "Stagflationary US Yields at 4.94%, DXY at 104.01, Brent Crude at $83.08/bbl",
     "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.94%) and King Dollar (DXY 104.01) create emerging market currency friction (USD/INR \u20b992.52), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
   },
   "executive_hud": {
     "global_health_score": 51.0,
     "global_health_label": "MODERATE FRAGMENTED EXPANSION",
-    "health_verdict": "US Services resilient at 54.9 vs Eurozone Mfg at 46.0; Global divergence persists",
+    "health_verdict": "US Services at 54.9 offset by Eurozone Mfg at 46.0 and China Property at -10.3%",
     "regions_expansion_count": 3,
     "regions_pressure_count": 2,
     "core_pillars": [
@@ -158,11 +158,11 @@
     }
   ],
   "market_internals": {
-    "total_stocks_screened": 1604,
-    "advances_count": 761,
-    "declines_count": 839,
-    "unchanged_count": 4,
-    "breadth_thrust_pct": 47.6,
+    "total_stocks_screened": 1606,
+    "advances_count": 863,
+    "declines_count": 741,
+    "unchanged_count": 2,
+    "breadth_thrust_pct": 53.8,
     "market_regime": "SELECTIVE_STOCK_PICKING",
     "regime_label": "Bifurcated Mixed Breadth",
     "regime_truth": "Select pockets of strength; stock-specific delivery accumulation required.",
@@ -210,40 +210,40 @@
     ],
     "top_churn_distribution_traps": [
       {
-        "symbol": "V2RETAIL",
-        "change_pct": -5.79,
-        "delivery_pct": 16.39,
-        "volume": 30140432
+        "symbol": "JWL",
+        "change_pct": -2.24,
+        "delivery_pct": 7.98,
+        "volume": 25690660
       },
       {
-        "symbol": "PNB",
-        "change_pct": -0.57,
-        "delivery_pct": 27.19,
-        "volume": 14658297
+        "symbol": "HUBTOWN",
+        "change_pct": -3.36,
+        "delivery_pct": 8.42,
+        "volume": 14161302
+      },
+      {
+        "symbol": "GREAVESCOT",
+        "change_pct": -0.71,
+        "delivery_pct": 19.39,
+        "volume": 13173877
+      },
+      {
+        "symbol": "RATNAVEER",
+        "change_pct": -5.17,
+        "delivery_pct": 23.77,
+        "volume": 10448623
       },
       {
         "symbol": "THOMASCOOK",
-        "change_pct": -9.02,
-        "delivery_pct": 20.7,
-        "volume": 10980485
-      },
-      {
-        "symbol": "KALYANKJIL",
-        "change_pct": -0.19,
-        "delivery_pct": 16.21,
-        "volume": 8190353
+        "change_pct": -2.66,
+        "delivery_pct": 22.91,
+        "volume": 6263901
       },
       {
         "symbol": "CGCL",
-        "change_pct": -1.91,
-        "delivery_pct": 14.5,
-        "volume": 6629623
-      },
-      {
-        "symbol": "SHANKESH",
-        "change_pct": -0.02,
-        "delivery_pct": 21.11,
-        "volume": 4942482
+        "change_pct": -2.17,
+        "delivery_pct": 16.08,
+        "volume": 5279598
       }
     ]
   },
@@ -574,7 +574,7 @@
         "shock_name": "Middle East Conflict & Hormuz Crude Supply Choke",
         "is_active": true,
         "severity": "RANGEBOUND COMFORT",
-        "trigger": "Brent crude stable at $83.08/bbl below critical $90 threshold",
+        "trigger": "Brent Crude at $83.08/bbl remains sub-$90 threshold, mitigating severe global cost-push shocks",
         "supply_demand_choke": "Threat of 2.0-2.5M bpd oil supply disruption; tanker war risk insurance premiums elevated.",
         "import_export_shift": "India's annual crude import deficit impact: ~+$27.1B; emergency crude diversification to Russian and African grades.",
         "currency_impact": "USD/INR trading at \u20b992.52; RBI defending currency with foreign exchange market interventions.",
@@ -1143,58 +1143,58 @@
   },
   "equity_impact_matrix": [
     {
-      "theme": "Domestic Manufacturing & Capital Goods",
+      "theme": "Electronics Manufacturing (EMS) & Domestic Industrial Capex",
       "benchmark_index": "Nifty India Manufacturing",
       "impact_direction": "BENEFICIARY",
       "status": "EXPANDING",
-      "cost_sensitivity": "Raw material steel/aluminum input costs stable; India Composite PMI at 58.6",
-      "transmission_channel": "Robust domestic demand transmission via high PMI output sub-index",
+      "cost_sensitivity": "Imported component raw material costs linked to USD/INR at 92.52",
+      "transmission_channel": "India Composite PMI at 58.6 drives strong domestic capacity utilization and order books",
       "exposed_segments": [
-        "Heavy Electrical Equipment",
-        "Industrial Machinery",
+        "Contract Electronics",
+        "Heavy Capital Goods",
         "Defense Assembly"
       ],
       "stocks": []
     },
     {
-      "theme": "Crude Derivative & Petchem Consumers",
+      "theme": "Paints, Adhesives & Aviation Logistics",
       "benchmark_index": "Nifty Consumption / FMCG",
       "impact_direction": "BENEFICIARY",
       "status": "MARGIN EXPANSION",
-      "cost_sensitivity": "Crude derivative input costs steady with Brent anchored at $83.08/bbl",
-      "transmission_channel": "Input price relief expanding EBITDA margins by 120-180 bps YoY",
+      "cost_sensitivity": "Crude derivative feedstock costs stabilized at Brent $83.08/bbl",
+      "transmission_channel": "Sub-$90 oil limits petrochemical monomer inflation, protecting gross margins by 150-200 bps",
       "exposed_segments": [
         "Decorative Paints",
-        "Specialty Chemicals",
-        "Aviation Turbine Fuel (ATF) Consumers"
+        "Petrochemical Derivatives",
+        "Airline Operators"
       ],
       "stocks": []
     },
     {
-      "theme": "Tier-1 IT & Enterprise Digital Services",
+      "theme": "Tier-1 IT & Enterprise Software Services",
       "benchmark_index": "Nifty IT",
       "impact_direction": "PRESSURE_FACING",
       "status": "HEADWIND",
-      "cost_sensitivity": "Wage inflation pressure against US 10Y Yield at 4.94%",
-      "transmission_channel": "Higher US discount rates compress tech valuation multiples by 15-20%",
+      "cost_sensitivity": "USD revenue realization offset by US 10Y Treasury yield spike to 4.94% compressing client IT budgets",
+      "transmission_channel": "DXY at 104.01 supports currency translation, but high US yields delay discretionary tech spending",
       "exposed_segments": [
-        "BFSI IT Outsourcing",
-        "Cloud Infrastructure Services",
-        "Engineering R&D"
+        "BFSI IT Services",
+        "Enterprise Cloud Migration",
+        "Digital Engineering"
       ],
       "stocks": []
     },
     {
-      "theme": "Base Metals & Export Commodities",
+      "theme": "Primary Steel & Industrial Commodities",
       "benchmark_index": "Nifty Metal / Commodities",
       "impact_direction": "PRESSURE_FACING",
       "status": "MARGIN COMPRESSION",
-      "cost_sensitivity": "China Property YoY at -10.3% and PPI at -2.9% creating deflationary dumping",
-      "transmission_channel": "Global oversupply from China at -2.9% PPI depresses domestic realizations",
+      "cost_sensitivity": "Coking coal and iron ore input costs impacted by China PPI contraction at -2.9%",
+      "transmission_channel": "China Property YoY contraction at -10.3% drives aggressive structural metal dumping into export markets",
       "exposed_segments": [
-        "Flat Steel Products",
-        "Primary Aluminum",
-        "Non-Ferrous Smelters"
+        "Long & Flat Steel",
+        "Non-Ferrous Smelting",
+        "Industrial Minerals"
       ],
       "stocks": []
     }
