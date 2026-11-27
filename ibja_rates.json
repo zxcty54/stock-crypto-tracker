@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-11-27 10:48 PM IST",
+  "updated_at": "2026-11-28 02:26 AM IST",
   "source": "IBJA Official & Market Benchmark",
   "usd_inr_rate": 92.98,
   "rates_per_10g": {
-    "24k": 120322.7,
-    "22k": 110295.81,
-    "18k": 90242.02,
-    "silver_per_kg": 143830.86
+    "24k": 120631.8,
+    "22k": 110579.15,
+    "18k": 90473.85,
+    "silver_per_kg": 143699.32
   },
   "trend_1y": {
-    "rate_1y_ago_24k": 120705.3,
-    "rate_6m_ago_24k": 108290.43,
+    "rate_1y_ago_24k": 93950.0,
+    "rate_6m_ago_24k": 108568.62,
     "cpi_inflation_1y": 5.4,
-    "nifty_1y_return": -2.32
+    "nifty_1y_return": -1.26
   }
 }
