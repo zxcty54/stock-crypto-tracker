@@ -47,7 +47,7 @@
     "telegraph_url": "https://telegra.ph/Encube-Ethicals-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-25",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-09",
-    "last_updated": "2026-11-27T04:24:22.883358+05:30"
+    "last_updated": "2026-11-27T17:28:06.390504+05:30"
   },
   {
     "id": "swara-baby-products",
@@ -59,7 +59,7 @@
     "close_date": "2026-12-04",
     "allotment_date": null,
     "listing_date": null,
-    "price_band": "₹0",
+    "price_band": "₹105 - ₹111",
     "lot_size": null,
     "issue_size_cr": "",
     "fresh_issue_cr": "",
@@ -95,7 +95,9 @@
       "NEW_IPO_ANNOUNCED"
     ],
     "telegraph_url": "https://telegra.ph/Swara-Baby-Products-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-26",
-    "last_posted_gmp": ""
+    "last_posted_gmp": "",
+    "demat_credit_date": "2026-12-07",
+    "last_updated": "2026-11-27T17:28:06.390504+05:30"
   },
   {
     "id": "monomark-engineering",
@@ -176,7 +178,7 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-27T04:24:22.883358+05:30",
+    "last_updated": "2026-11-27T17:28:06.390504+05:30",
     "telegraph_url": "https://telegra.ph/Monomark-Engineering-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹22.00",
     "demand_graph": {
@@ -278,7 +280,7 @@
     "telegraph_url": "https://telegra.ph/Matangi-Rubber-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "",
     "demat_credit_date": "2026-12-07",
-    "last_updated": "2026-11-27T04:24:22.883358+05:30",
+    "last_updated": "2026-11-27T17:28:06.390504+05:30",
     "demand_graph": {
       "total_issue_size": "7276981",
       "total_bids": null,
@@ -394,9 +396,9 @@
       "source": "NSE India Official Bidding Feed",
       "demand_graph": {
         "total_issue_size": "10474048",
-        "total_bids": "9131070",
+        "total_bids": "11626056",
         "cut_off_bids": null,
-        "no_of_times": "0.87x",
+        "no_of_times": "1.11x",
         "price_levels": [
           {
             "price": ">= No. of Bids",
@@ -413,17 +415,17 @@
         ],
         "source": "NSE India Official Demand Graph (issue-information)"
       },
-      "total": "1.08x",
-      "total_bids": "11347830",
-      "updated_at": "Updated as on 26-Nov-2026 17:00:00",
+      "total": "1.47x",
+      "total_bids": "15443532",
+      "updated_at": "Updated as on 27-Nov-2026 17:03:00",
       "qib": "1.01x",
-      "qib_bids": "5666310",
+      "qib_bids": "5667402",
       "qib_offered": "5613270",
-      "nii": "0.53x",
-      "nii_bids": "511134",
+      "nii": "0.97x",
+      "nii_bids": "941226",
       "nii_offered": "972155",
-      "retail_bids": "4524468",
-      "retail": "2.33x",
+      "retail_bids": "7683546",
+      "retail": "3.95x",
       "retail_offered": "1944311"
     },
     "reservation": {
@@ -449,14 +451,14 @@
       "nse_official",
       "ipowatch"
     ],
-    "last_updated": "2026-11-27T04:24:22.883358+05:30",
+    "last_updated": "2026-11-27T17:28:06.390504+05:30",
     "telegraph_url": "https://telegra.ph/Foodlink-FB-Holdings-Limited-IPO-DRHP-Review-Live-GMP--Allotment-Dates-11-23",
     "last_posted_gmp": "+₹15.00",
     "demand_graph": {
       "total_issue_size": "10474048",
-      "total_bids": "9131070",
+      "total_bids": "11626056",
       "cut_off_bids": null,
-      "no_of_times": "0.87x",
+      "no_of_times": "1.11x",
       "price_levels": [
         {
           "price": ">= No. of Bids",
