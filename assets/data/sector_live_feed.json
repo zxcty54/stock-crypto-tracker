@@ -1,20 +1,20 @@
 {
-  "last_updated": "27-Nov-2026 16:54 IST",
+  "last_updated": "28-Nov-2026 02:17 IST",
   "total_items": 47,
   "live_feeds": [
     {
-      "id": "rss_881494",
+      "id": "rss_145070",
       "sector_id": 1,
       "sector_name": "Sugar / ethanol",
       "theme_name": "Agriculture, Sugar & Inputs",
       "theme_icon": "🌾",
       "source_name": "ChiniMandi - Ethanol News (English)",
       "source_type": "SECTOR NEWSROOM",
-      "title": "India to assess readiness before raising petrol ethanol blending to E25 or beyond: Hardeep Puri",
-      "summary": "India will undertake extensive testing and develop the necessary ecosystem before considering an increase in ethanol blending in petrol beyond the current 20% level, The Telegraph reported, citing Union Petroleum and Natural Gas Minister Hardeep Singh Puri. Speaking during an int",
-      "published_at": "Fri, 27 Nov 2026 05:45:56",
+      "title": "Brazil’s North and Northeast ethanol production jumps 37.2% despite lower cane crushing",
+      "summary": "Ethanol production in Brazil&#8217;s North and Northeast regions rose 37.2% year-on-year to 1.897 billion litres in the 2026-27 crop season through October 30, despite a 1.9% decline in sugarcane crushing, according to a survey by the Sugar, Ethanol and Bioenergy Producers Associ",
+      "published_at": "Fri, 27 Nov 2026 06:02:58",
       "kya_dekhna_hai": "Ethanol blending allocation, crushing updates, MSP & ex-mill prices.",
-      "source_url": "https://www.chinimandi.com/india-to-assess-readiness-before-raising-petrol-ethanol-blending-to-e25-or-beyond-hardeep-puri/",
+      "source_url": "https://www.chinimandi.com/brazils-north-and-northeast-ethanol-production-jumps-37-2-despite-lower-cane-crushing/",
       "key_tickers": [
         "BALRAMCHIN",
         "EIDPARRY",
@@ -23,18 +23,18 @@
       ]
     },
     {
-      "id": "rss_761343",
+      "id": "rss_707626",
       "sector_id": 2,
       "sector_name": "Cotton / textiles / garments",
       "theme_name": "Agriculture, Sugar & Inputs",
       "theme_icon": "🌾",
       "source_name": "Indian Textile Journal - Latest Posts",
       "source_type": "SECTOR NEWSROOM",
-      "title": "ROTORCRAFT AG to showcase GreenCompact® and GreenCompactYarn™ at INDIA ITME 2026",
-      "summary": "The company will showcase its product in Hall 10, Stall E16. At INDIA ITME 2026, ROTORCRAFT AG and K M Associates will showcase GreenCompact®, the proven mechanical compact spinning technology that enables mills to produce premium compact yarn without suction, without additional ",
-      "published_at": "Fri, 27 Nov 2026 05:48:09",
+      "title": "Next-gen spinning takes center stage as Marzoli brings FT6D PRO and circular tech to Greater Noida",
+      "summary": "From the advanced FT6D PRO roving frame to integrated automation, digital solutions and circular technologies, Marzoli presents innovations designed to enhance textile manufacturing. Marzoli, a global benchmark in spinning technology and part of the Camozzi Group, will participat",
+      "published_at": "Fri, 27 Nov 2026 09:59:39",
       "kya_dekhna_hai": "CAI crop estimates, Shankar-6 raw cotton spot prices, spinning mill spreads.",
-      "source_url": "https://indiantextilejournal.com/rotorcraft-ag-to-showcase-greencompact-and-greencompactyarn-at-india-itme-2026/",
+      "source_url": "https://indiantextilejournal.com/next-gen-spinning-takes-center-stage-as-marzoli-brings-ft6d-pro-and-circular-tech-to-greater-noida/",
       "key_tickers": [
         "PAGEIND",
         "KPRMILL",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "id": "rss_009513",
+      "id": "rss_583088",
       "sector_id": 3,
       "sector_name": "Fertilisers",
       "theme_name": "Agriculture, Sugar & Inputs",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "id": "rss_483080",
+      "id": "rss_935591",
       "sector_id": 4,
       "sector_name": "Agrochemicals / pesticides",
       "theme_name": "Agriculture, Sugar & Inputs",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "id": "rss_009513",
+      "id": "rss_583088",
       "sector_id": 5,
       "sector_name": "Edible oils / oilseeds",
       "theme_name": "Agriculture, Sugar & Inputs",
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "id": "rss_357922",
+      "id": "rss_693069",
       "sector_id": 6,
       "sector_name": "Tea / coffee / rubber",
       "theme_name": "Agriculture, Sugar & Inputs",
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "id": "rss_146204",
+      "id": "rss_564307",
       "sector_id": 7,
       "sector_name": "Agri exports / seafood-shrimp",
       "theme_name": "Agriculture, Sugar & Inputs",
@@ -191,7 +191,7 @@
       ]
     },
     {
-      "id": "rss_271835",
+      "id": "rss_226912",
       "sector_id": 10,
       "sector_name": "Steel",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "id": "rss_271835",
+      "id": "rss_226912",
       "sector_id": 11,
       "sector_name": "Non-ferrous metals / mining",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "id": "rss_483080",
+      "id": "rss_935591",
       "sector_id": 12,
       "sector_name": "Chemicals / petrochemicals",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -254,7 +254,7 @@
       ]
     },
     {
-      "id": "rss_182245",
+      "id": "rss_465627",
       "sector_id": 13,
       "sector_name": "Plastics / polymers / pipes",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -274,18 +274,18 @@
       ]
     },
     {
-      "id": "rss_349469",
+      "id": "rss_139810",
       "sector_id": 14,
       "sector_name": "Paper / paperboard / packaging",
       "theme_name": "Manufacturing, Metals & Materials",
       "theme_icon": "🏭",
-      "source_name": "IPMA - Association Updates",
-      "source_type": "ASSOCIATION",
-      "title": "Paper Industry a Sustainable Alternative to Single-Use Plastic: IPMA President",
-      "summary": "Sector news and market update from IPMA - Association Updates.",
-      "published_at": "Wed, 16 Sep 2026 10:49:25",
+      "source_name": "Paper Mart - News",
+      "source_type": "SECTOR NEWSROOM",
+      "title": "Clariant Confirms Discussions on Potential Acquisition of Ashland",
+      "summary": "Clariant has confirmed discussions regarding a potential acquisition of US-based specialty chemicals company Ashland Inc., in partnership with private investment firm Clayton, Dubilier &#38; Rice (CD&#38;R). Nov 23, 2026 Clariant, a Switzerland-based specialty chemicals company, ",
+      "published_at": "Fri, 27 Nov 2026 10:59:38",
       "kya_dekhna_hai": "ASEAN FTA paper imports, virgin fiber paperboard demand, waste paper recovery rates.",
-      "source_url": "https://ipmaindia.org/paper-industry-a-sustainable-alternative-to-single-use-plastic-ipma-president/",
+      "source_url": "https://papermart.in/clariant-confirms-discussions/",
       "key_tickers": [
         "JKPAPER",
         "WESTCOAST",
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "id": "rss_123913",
+      "id": "rss_292437",
       "sector_id": 15,
       "sector_name": "Cement",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -337,7 +337,7 @@
       ]
     },
     {
-      "id": "rss_999034",
+      "id": "rss_014953",
       "sector_id": 17,
       "sector_name": "Electronics / EMS / semiconductors",
       "theme_name": "Manufacturing, Metals & Materials",
@@ -358,7 +358,7 @@
       ]
     },
     {
-      "id": "rss_584747",
+      "id": "rss_740581",
       "sector_id": 18,
       "sector_name": "Power generation / utilities",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -379,7 +379,7 @@
       ]
     },
     {
-      "id": "rss_584747",
+      "id": "rss_740581",
       "sector_id": 19,
       "sector_name": "Solar / wind / renewable / BESS",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -400,7 +400,7 @@
       ]
     },
     {
-      "id": "rss_584747",
+      "id": "rss_740581",
       "sector_id": 20,
       "sector_name": "Oil / refining / gas / CGD",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -423,7 +423,7 @@
       ]
     },
     {
-      "id": "rss_584747",
+      "id": "rss_740581",
       "sector_id": 21,
       "sector_name": "Coal",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -442,18 +442,18 @@
       ]
     },
     {
-      "id": "rss_292628",
+      "id": "rss_739260",
       "sector_id": 22,
       "sector_name": "Roads / highways / EPC",
       "theme_name": "Energy, Infrastructure & Transport",
       "theme_icon": "⚡",
       "source_name": "ETInfra - Water",
       "source_type": "SECTOR NEWSROOM",
-      "title": "Cyberabad sees rampant illegal groundwater extraction amid water shortage",
-      "summary": "At several locations, groundwater was being extracted using high-powered motors, stored in underground sumps and pumped directly into private tankers stationed at the sites for commercial sale.",
-      "published_at": "Wed, 25 Nov 2026 20:03:36",
+      "title": "Missing groundwater data raises alarm over Pune’s water security",
+      "summary": "Where do tankers fill up water from? Their main source is groundwater — and experts are now saying that in the absence of concrete data on how much groundwater is available and extracted, we are digging ourselves into a very deep pit.",
+      "published_at": "Fri, 27 Nov 2026 14:07:15",
       "kya_dekhna_hai": "MoRTH construction km/day, FASTag daily toll revenue, HAM project pipeline.",
-      "source_url": "https://infra.economictimes.indiatimes.com/news/water/cyberabad-sees-rampant-illegal-groundwater-extraction-amid-water-shortage/136164807",
+      "source_url": "https://infra.economictimes.indiatimes.com/news/water/missing-groundwater-data-raises-alarm-over-punes-water-security/136214659",
       "key_tickers": [
         "L&T",
         "IRB",
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "id": "rss_204297",
+      "id": "rss_426019",
       "sector_id": 23,
       "sector_name": "Railways / wagons / metro",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -484,18 +484,18 @@
       ]
     },
     {
-      "id": "rss_696256",
+      "id": "rss_776159",
       "sector_id": 24,
       "sector_name": "Defence",
       "theme_name": "Energy, Infrastructure & Transport",
       "theme_icon": "⚡",
       "source_name": "Bharat Shakti - Defence News",
       "source_type": "SECTOR NEWSROOM",
-      "title": "Bhargavastra Counter-Drone System Nears Army Handover, Final Trials Underway at Pokhran",
-      "summary": "India&#8217;s indigenous Bhargavastra counter-swarm drone system is nearing completion, with developer Solar Defence and Aerospace Limited (SDAL) conducting its final in-house trials at the Pokhran firing ranges ahead of a planned handover to the Indian Army in January 2027. The ",
-      "published_at": "Thu, 26 Nov 2026 12:47:14",
+      "title": "India Takes Defence Export Ambitions Global, Showcases Indigenous Military Platforms to Journalists from 32 Countries",
+      "summary": "India is stepping up efforts to expand its presence in the global defence market, with the Ministry of External Affairs (MEA), in coordination with the Indian Armed Forces, hosting defence journalists from more than 30 countries and providing them access to some of the country’s ",
+      "published_at": "Fri, 27 Nov 2026 13:57:07",
       "kya_dekhna_hai": "AoN sanctions to commercial contract conversions, DPSU order book execution.",
-      "source_url": "https://bharatshakti.in/bhargavastra-counter-drone-system-nears-army-handover-final-trials-underway-at-pokhran/",
+      "source_url": "https://bharatshakti.in/india-takes-defence-export-ambitions-global-showcases-indigenous-military-platforms-to-journalists-from-32-countries/",
       "key_tickers": [
         "BEL",
         "HAL",
@@ -506,7 +506,7 @@
       ]
     },
     {
-      "id": "rss_091488",
+      "id": "rss_409998",
       "sector_id": 25,
       "sector_name": "Real estate / housing",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -528,18 +528,18 @@
       ]
     },
     {
-      "id": "rss_499992",
+      "id": "rss_122543",
       "sector_id": 26,
       "sector_name": "Ports / shipping",
       "theme_name": "Energy, Infrastructure & Transport",
       "theme_icon": "⚡",
       "source_name": "Indian Transport and Logistics News",
       "source_type": "SECTOR NEWSROOM",
-      "title": "JNPA to install shore power infrastructure at GTI terminal",
-      "summary": "Jawaharlal Nehru Port Authority (JNPA) has awarded a ₹769.2 million contract to Navi Mumbai-based Leena Powertech Engineers Private Limited for implementing a Shore Power Supply (SPS) project at Gateway Terminals India (GTI). The Letter of Award (LOA) was issued in the presence o",
-      "published_at": "Fri, 27 Nov 2026 13:45:35",
+      "title": "The real delay is the decision, not the disruption, say auto leaders",
+      "summary": "A truck carrying parts for an assembly line breaks down on the highway. The plant has not stopped yet, but the clock has started. That was the scenario six automotive leaders followed, link by link, at the Auto SCM Summit in Chennai. The session, The Connected Assembly Line: AI, ",
+      "published_at": "Fri, 27 Nov 2026 19:10:10",
       "kya_dekhna_hai": "Major port cargo throughput, container TEU volumes, turnaround times.",
-      "source_url": "https://www.itln.in/shipping/jnpa-to-install-shore-power-infrastructure-at-gti-terminal-12845481",
+      "source_url": "https://www.itln.in/latest-news/the-real-delay-is-the-decision-not-the-disruption-say-auto-leaders-12844061",
       "key_tickers": [
         "ADANIPORTS",
         "JSWINFRA",
@@ -548,18 +548,18 @@
       ]
     },
     {
-      "id": "rss_499992",
+      "id": "rss_122543",
       "sector_id": 27,
       "sector_name": "Logistics / warehousing / air cargo",
       "theme_name": "Energy, Infrastructure & Transport",
       "theme_icon": "⚡",
       "source_name": "Indian Transport and Logistics News",
       "source_type": "SECTOR NEWSROOM",
-      "title": "JNPA to install shore power infrastructure at GTI terminal",
-      "summary": "Jawaharlal Nehru Port Authority (JNPA) has awarded a ₹769.2 million contract to Navi Mumbai-based Leena Powertech Engineers Private Limited for implementing a Shore Power Supply (SPS) project at Gateway Terminals India (GTI). The Letter of Award (LOA) was issued in the presence o",
-      "published_at": "Fri, 27 Nov 2026 13:45:35",
+      "title": "The real delay is the decision, not the disruption, say auto leaders",
+      "summary": "A truck carrying parts for an assembly line breaks down on the highway. The plant has not stopped yet, but the clock has started. That was the scenario six automotive leaders followed, link by link, at the Auto SCM Summit in Chennai. The session, The Connected Assembly Line: AI, ",
+      "published_at": "Fri, 27 Nov 2026 19:10:10",
       "kya_dekhna_hai": "Grade-A warehousing absorption, express parcel shipments, DFC transit time reductions.",
-      "source_url": "https://www.itln.in/shipping/jnpa-to-install-shore-power-infrastructure-at-gti-terminal-12845481",
+      "source_url": "https://www.itln.in/latest-news/the-real-delay-is-the-decision-not-the-disruption-say-auto-leaders-12844061",
       "key_tickers": [
         "CONCOR",
         "DELHIVERY",
@@ -569,7 +569,7 @@
       ]
     },
     {
-      "id": "rss_942873",
+      "id": "rss_943415",
       "sector_id": 28,
       "sector_name": "Airlines / airports",
       "theme_name": "Energy, Infrastructure & Transport",
@@ -588,18 +588,18 @@
       ]
     },
     {
-      "id": "rss_290351",
+      "id": "rss_684193",
       "sector_id": 29,
       "sector_name": "Banks / NBFC / housing finance",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "SEBI - Official Updates",
+      "source_name": "RBI - Notifications",
       "source_type": "REGULATOR",
-      "title": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "summary": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "published_at": "26 Nov, 2026 +0530",
+      "title": "Reserve Bank of India (Urban Co-operative Banks - Know Your Customer) Second Amendment Directions, 2026",
+      "summary": "Sector news and market update from RBI - Notifications.",
+      "published_at": "Fri, 27 Nov 2026 20:45:00",
       "kya_dekhna_hai": "System credit-to-deposit ratio, Net Interest Margins, Gross NPA trajectories.",
-      "source_url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/ex-parte-interim-order-in-the-matter-of-le-lavoir-limited-and-others_105966.html",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13767&Mode=0",
       "key_tickers": [
         "HDFCBANK",
         "ICICIBANK",
@@ -610,7 +610,7 @@
       ]
     },
     {
-      "id": "rss_366656",
+      "id": "rss_947612",
       "sector_id": 30,
       "sector_name": "Microfinance",
       "theme_name": "Banking & Financial Services",
@@ -630,18 +630,18 @@
       ]
     },
     {
-      "id": "rss_290351",
+      "id": "rss_684193",
       "sector_id": 31,
       "sector_name": "Life / general / health insurance",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "SEBI - Official Updates",
+      "source_name": "RBI - Notifications",
       "source_type": "REGULATOR",
-      "title": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "summary": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "published_at": "26 Nov, 2026 +0530",
+      "title": "Reserve Bank of India (Urban Co-operative Banks - Know Your Customer) Second Amendment Directions, 2026",
+      "summary": "Sector news and market update from RBI - Notifications.",
+      "published_at": "Fri, 27 Nov 2026 20:45:00",
       "kya_dekhna_hai": "Individual Retail APE growth, VNB margins, combined ratio for general insurers.",
-      "source_url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/ex-parte-interim-order-in-the-matter-of-le-lavoir-limited-and-others_105966.html",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13767&Mode=0",
       "key_tickers": [
         "HDFCLIFE",
         "SBILIFE",
@@ -651,18 +651,18 @@
       ]
     },
     {
-      "id": "rss_290351",
+      "id": "rss_684193",
       "sector_id": 32,
       "sector_name": "AMCs / mutual funds",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "SEBI - Official Updates",
+      "source_name": "RBI - Notifications",
       "source_type": "REGULATOR",
-      "title": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "summary": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "published_at": "26 Nov, 2026 +0530",
+      "title": "Reserve Bank of India (Urban Co-operative Banks - Know Your Customer) Second Amendment Directions, 2026",
+      "summary": "Sector news and market update from RBI - Notifications.",
+      "published_at": "Fri, 27 Nov 2026 20:45:00",
       "kya_dekhna_hai": "Monthly gross SIP contribution, net equity mutual fund inflows, B-30 penetration.",
-      "source_url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/ex-parte-interim-order-in-the-matter-of-le-lavoir-limited-and-others_105966.html",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13767&Mode=0",
       "key_tickers": [
         "HDFCAMC",
         "NAM-INDIA",
@@ -673,18 +673,18 @@
       ]
     },
     {
-      "id": "rss_290351",
+      "id": "rss_684193",
       "sector_id": 33,
       "sector_name": "Brokers / exchanges / depositories",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "SEBI - Official Updates",
+      "source_name": "RBI - Notifications",
       "source_type": "REGULATOR",
-      "title": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "summary": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "published_at": "26 Nov, 2026 +0530",
+      "title": "Reserve Bank of India (Urban Co-operative Banks - Know Your Customer) Second Amendment Directions, 2026",
+      "summary": "Sector news and market update from RBI - Notifications.",
+      "published_at": "Fri, 27 Nov 2026 20:45:00",
       "kya_dekhna_hai": "Daily average cash turnover, monthly active demat additions on CDSL/NSDL.",
-      "source_url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/ex-parte-interim-order-in-the-matter-of-le-lavoir-limited-and-others_105966.html",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13767&Mode=0",
       "key_tickers": [
         "BSE",
         "MCX",
@@ -694,18 +694,18 @@
       ]
     },
     {
-      "id": "rss_290351",
+      "id": "rss_684193",
       "sector_id": 34,
       "sector_name": "Payments / fintech",
       "theme_name": "Banking & Financial Services",
       "theme_icon": "🏦",
-      "source_name": "SEBI - Official Updates",
+      "source_name": "RBI - Notifications",
       "source_type": "REGULATOR",
-      "title": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "summary": "Ex-Parte Interim Order in the matter of Le Lavoir Limited and Others",
-      "published_at": "26 Nov, 2026 +0530",
+      "title": "Reserve Bank of India (Urban Co-operative Banks - Know Your Customer) Second Amendment Directions, 2026",
+      "summary": "Sector news and market update from RBI - Notifications.",
+      "published_at": "Fri, 27 Nov 2026 20:45:00",
       "kya_dekhna_hai": "Monthly NPCI UPI transaction volume & value, merchant soundbox rentals.",
-      "source_url": "https://www.sebi.gov.in/enforcement/orders/nov-2026/ex-parte-interim-order-in-the-matter-of-le-lavoir-limited-and-others_105966.html",
+      "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13767&Mode=0",
       "key_tickers": [
         "PAYTM",
         "PBFINTECH",
@@ -713,18 +713,18 @@
       ]
     },
     {
-      "id": "rss_380902",
+      "id": "rss_095146",
       "sector_id": 35,
       "sector_name": "IT services / BPM / technology",
       "theme_name": "IT, Telecom & Healthcare",
       "theme_icon": "💻",
       "source_name": "Enterprise Tech Wire",
       "source_type": "ASSOCIATION",
-      "title": "IT Stocks Rally: TCS Share Price Leads Gains As Infosys, Wipro And HCLTech Rise On AI And Visa News - Kotak Neo",
-      "summary": "IT Stocks Rally: TCS Share Price Leads Gains As Infosys, Wipro And HCLTech Rise On AI And Visa News &nbsp;&nbsp; Kotak Neo",
-      "published_at": "Fri, 09 Oct 2026 07:00:00",
+      "title": "India’s top IT services firms by market cap - PRESS Insider",
+      "summary": "India’s top IT services firms by market cap &nbsp;&nbsp; PRESS Insider",
+      "published_at": "Thu, 28 Mar 2024 07:00:00",
       "kya_dekhna_hai": "Total Contract Value (TCV) deal wins, employee utilization, GCC expansions.",
-      "source_url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5ZdVc5VW9YYnh1enphWXNaNlR0MXUteUhmZmprNmx0Y0pqUC0zYzAydU1CVlVJdmoyT05wRkdEMzMtQVRpNC1qSmMyQngwQzE4NGdlclduWEpEbUNTNmdHUlRxd0Q?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxObnFwWmltMjNNQlhOOURESm9BTzhSM29hSWdmOVZsaS1qbEV6cDM3d0twSHNzdkVaSS1BdmRubHhJWWR6cmNuSGowYWxVUTZPWFQyWF9ZV2U3ZlRIZld5RVk4X3VCamdnOGR5ZEt1VnlIWGt4dXRybW53eUlVb29obGgyVQ?oc=5",
       "key_tickers": [
         "TCS",
         "INFY",
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "id": "rss_683867",
+      "id": "rss_411047",
       "sector_id": 36,
       "sector_name": "Telecom",
       "theme_name": "IT, Telecom & Healthcare",
@@ -755,7 +755,7 @@
       ]
     },
     {
-      "id": "rss_993774",
+      "id": "rss_935827",
       "sector_id": 37,
       "sector_name": "Pharma / APIs / CDMO",
       "theme_name": "IT, Telecom & Healthcare",
@@ -777,7 +777,7 @@
       ]
     },
     {
-      "id": "rss_112558",
+      "id": "rss_770108",
       "sector_id": 38,
       "sector_name": "Hospitals / diagnostics / devices",
       "theme_name": "IT, Telecom & Healthcare",
@@ -799,7 +799,7 @@
       ]
     },
     {
-      "id": "rss_508156",
+      "id": "rss_053862",
       "sector_id": 39,
       "sector_name": "FMCG",
       "theme_name": "Consumption, Retail & Other Services",
@@ -821,7 +821,7 @@
       ]
     },
     {
-      "id": "rss_508156",
+      "id": "rss_053862",
       "sector_id": 40,
       "sector_name": "Retail / e-commerce / QSR",
       "theme_name": "Consumption, Retail & Other Services",
@@ -843,7 +843,7 @@
       ]
     },
     {
-      "id": "rss_508156",
+      "id": "rss_053862",
       "sector_id": 41,
       "sector_name": "Consumer durables / AC / appliances",
       "theme_name": "Consumption, Retail & Other Services",
@@ -864,18 +864,18 @@
       ]
     },
     {
-      "id": "rss_726358",
+      "id": "rss_921423",
       "sector_id": 42,
       "sector_name": "Gems / jewellery / diamonds",
       "theme_name": "Consumption, Retail & Other Services",
       "theme_icon": "🛒",
       "source_name": "GJEPC Jewellery Monitor",
       "source_type": "ORIGINAL",
-      "title": "India’s Jewelry Exports Surge 34% in October - JCK",
-      "summary": "India’s Jewelry Exports Surge 34% in October &nbsp;&nbsp; JCK",
-      "published_at": "Mon, 16 Nov 2026 18:41:51",
+      "title": "Gems, jewellery exports up 3.14% at $2.30 bn in August, driven by value-added products: GJEPC - Moneycontrol.com",
+      "summary": "Gems, jewellery exports up 3.14% at $2.30 bn in August, driven by value-added products: GJEPC &nbsp;&nbsp; Moneycontrol.com",
+      "published_at": "Sat, 12 Sep 2026 07:00:00",
       "kya_dekhna_hai": "Domestic gold spot prices, customs duty cut impact, Lab-Grown Diamond exports.",
-      "source_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA2cXFhNXhmMnNvZjdPZnM4bnpSREU0VGF3NTNxT2w5RzNVb2M1MUpRTHloTEZ2VVhDV3lFWHNsaHpicEFXcEUzUXFMVlJJem05TFBrVDNJQ2hma0pZYUtDVzhCSmR5SkNNREtFQjJNcEZQT3ZNWlJPdks3VFgzQQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNcGQ1RUtuY0JiWnFBaWFYcmUwSVNmelRPNUlhMWlaaG9OV1VOYkdCOGp3cllqUURDRy1PZ0RZVEVlTF90NUNmaThadU4zdi1Sa1NYMnVVSjZUWHkzeV9sdjRNSlc1a2o0V0FiLW1SNUpFb2J1M21VTmpTZEZNdkhnM0pSQlFEUlBlWGE2bXlDS2EtbkdYcVBOWmd5MnhsZ2VWMzZfeE5wVU9HcjJwdG55YlNqSXpkRmJRVWFYMWVQWTZKYWxNRlNqcU1rTkU3aHRmVnRrT25UX3loYTUwWVHSAeMBQVVfeXFMTWFtWHFOTFVacVltNGg5SHRRN0lrV1kzNm4zVXlUajBzYV9vSC01YWVJZEFLOWd5Vks2aEItY202bGVWU0ZDQkg0Z2FwM25LOTRvUjZTS3kxZjA3SHNJOUFhLUV5ZXFmMUlQRm5GWUVLVTJlNUtzNWEySk82OHc0TXgxdjVCbURHV3BmQ0VwVjFzOTAtdEdoMTNoN3NaVGhiS3hxLWZzOXpiWkNZbU9LM0tZZmptNUVGdEV1Yl9FY2FGcF9JZUFIYWRTRExFYWszTGs2RDJtTU80b3NlZ2dtczZIVFU?oc=5",
       "key_tickers": [
         "TITAN",
         "KALYANKJIL",
@@ -884,7 +884,7 @@
       ]
     },
     {
-      "id": "rss_302158",
+      "id": "rss_391509",
       "sector_id": 43,
       "sector_name": "Hotels / hospitality / travel",
       "theme_name": "Consumption, Retail & Other Services",
@@ -904,7 +904,7 @@
       ]
     },
     {
-      "id": "rss_244538",
+      "id": "rss_196651",
       "sector_id": 44,
       "sector_name": "Media / broadcasting / advertising",
       "theme_name": "Consumption, Retail & Other Services",
@@ -924,18 +924,18 @@
       ]
     },
     {
-      "id": "rss_486680",
+      "id": "rss_125544",
       "sector_id": 45,
       "sector_name": "Staffing / HR services",
       "theme_name": "Consumption, Retail & Other Services",
       "theme_icon": "🛒",
       "source_name": "Staffing Federation Wire",
       "source_type": "ASSOCIATION",
-      "title": "Industry hired I.18 lakh flexi workers in last 12 months: Indian Staffing Federation - The Hindu",
-      "summary": "Industry hired I.18 lakh flexi workers in last 12 months: Indian Staffing Federation &nbsp;&nbsp; The Hindu",
-      "published_at": "Wed, 10 Jun 2026 07:00:00",
+      "title": "India's flexi staffing surges 2.6% in Q1 FY27: Report - ETHRWorld.com",
+      "summary": "India's flexi staffing surges 2.6% in Q1 FY27: Report &nbsp;&nbsp; ETHRWorld.com",
+      "published_at": "Thu, 08 Oct 2026 07:00:00",
       "kya_dekhna_hai": "Quarterly flexi-staffing associate headcount additions, EPFO payroll metrics.",
-      "source_url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQSVJzaURWMThrVTJwRjZJQjNRTThrU3VKdmd1TFVZMnNLZDYtaHI5eDhqY3dWVnFraVlUMzFYbDVKOU5lS1BhVjNVYlhVSXJXb2FzanFETGdaa0h6dDRDalVoRF96Mjh1MDEzSkxYOVd1djdvcXN0aG85cFFlWmxUekI3MHRuLWFXb2sxdVRld2c2SGt4bHowUFpmd09nRFVqb1JsZ0Q5em9UbENKT2k0TUJzWXpCcjBWTFVBMTRmYkFfRy1VTnVScS0yenhzNjJJY2JB0gHaAUFVX3lxTE51ZWtTS3V5TlJReFhxbFEtWTVuZDJweGNTVE5kdmFsaGNQenN0QTFOVDV5bGtkcnFtejV4ZldOSS1fM0UyR2dDeVZtX1dlc1NuWmtOTDFQcDJyRHVIcmZZOTZEcGNLRllVVW9ueXdCaXlCbTVVZjBpRUx2WXM5SUZIa05wQnRLeDdvaGxzVllXcXlQN2ZZeTBWUTF3WWRaUXJ1Ui1SaFFxVFJlNEpMU0tNRDJzVDN4M01TSk1QMWt1UUh1OFlQZjNyODF0M2F2eVM0U0pLU2ptY3Vn?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPTnZQaEpNNHRwbTNUV2FIalJZYkswb2FzNnhwdkpiYU4tdE56TzkydHY1emtneF9HOEtOMWw2RThjc3RwOEdxRHVvaFJQTXFKQ041LS10M3BmMG5uNUFqZ0JBV1pXVHdlaDM3MnR0T0dSTVg0QlBGQlhaeEl2a0tndERNMUgwN19KLWktRnplRGJRUlNDcUJZT09sTUlNVkpoZkt0eDNQSmTSAa4BQVVfeXFMTjZPenhTSlZvZXNZdS00dVBHSGtRNnB5N0xTcFJPNjlkdk5jTlBvMkZlczRQRkxaUkF3U2pNR1I0Nm1YSFVZRGktdUhoMDBFRkRyX3NHU0UwRWNlSDRJTG43cFJ0Ti1qUEJyRTBEN1BvaXVlME1aV3NxX3U0R0JDNFRuZjJXRG54QTZwbm9BZFlZSUl3ekk4aXBQVjEtZjNhaUNzWEVmcFFFMENOUzd3?oc=5",
       "key_tickers": [
         "QUESS",
         "TEAMLEASE",
@@ -963,18 +963,18 @@
       ]
     },
     {
-      "id": "rss_207735",
+      "id": "rss_830792",
       "sector_id": 47,
       "sector_name": "Education / training services",
       "theme_name": "Consumption, Retail & Other Services",
       "theme_icon": "🛒",
       "source_name": "ETEducation - Recent Stories",
       "source_type": "SECTOR NEWSROOM",
-      "title": "IIM Nagpur to offer MBA in Data Science and Management for working professionals",
-      "summary": "IIM Nagpur has launched a two-year blended MBA in Data Science and Management for working professionals. Beginning in March 2027, the programme will cover AI, analytics and business management, with applications open for the inaugural batch.",
-      "published_at": "Fri, 27 Nov 2026 16:04:08",
+      "title": "West Bengal to get 4 new medical colleges; funds already allocated, says CM",
+      "summary": "West Bengal Chief Minister Suvendu Adhikari has announced plans for four new medical colleges and hospitals, with funds allocated. The state will also open Amrit Medicine Centres to provide costly medicines for chronic illnesses, including cancer, at reduced prices.",
+      "published_at": "Fri, 27 Nov 2026 17:37:20",
       "kya_dekhna_hai": "Vocational skilling grants under NEP, offline test-prep coaching enrollments.",
-      "source_url": "https://education.economictimes.indiatimes.com/news/higher-education/iim-nagpur-to-offer-mba-in-data-science-and-management-for-working-professionals/136216727",
+      "source_url": "https://education.economictimes.indiatimes.com/news/government-policies/west-bengal-to-get-4-new-medical-colleges-funds-already-allocated-says-cm/136221485",
       "key_tickers": [
         "CLEDUCATE",
         "APTECHT",
