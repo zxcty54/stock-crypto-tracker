@@ -1,22 +1,23 @@
-2026-11-27 11:58:06 [INFO] ipo_tracker: ======================================================================
-2026-11-27 11:58:06 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
-2026-11-27 11:58:06 [INFO] ipo_tracker: 📅 Timestamp: 27-Nov-2026 17:28:06 IST (Today: 2026-11-27)
-2026-11-27 11:58:06 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
-2026-11-27 11:58:06 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
-2026-11-27 11:58:06 [INFO] ipo_tracker: ======================================================================
-2026-11-27 11:58:06 [INFO] ipo_tracker: Loaded 14 tracked IPOs and 46 historical posted events.
-2026-11-27 11:58:06 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
-2026-11-27 11:58:08 [INFO] ipo_tracker.scrapers: Collected 3 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited', 'Matangi Rubber Limited', 'Monomark Engineering (India) Limited']
-2026-11-27 11:58:08 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
-2026-11-27 11:58:10 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'total': '1.47x', 'total_bids': '15443532', 'shares_offered': '10474048', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '10474048', 'total_bids': '11626056', 'cut_off_bids': None, 'no_of_times': '1.11x', 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'qib': '1.01x', 'qib_bids': '5667402', 'qib_offered': '5613270', 'nii': '0.97x', 'nii_bids': '941226', 'nii_offered': '972155', 'retail_bids': '7683546', 'retail': '3.95x', 'retail_offered': '1944311', 'updated_at': 'Updated as on 27-Nov-2026 17:03:00'}
-2026-11-27 11:58:19 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Matangi Rubber Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '7276981', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
-2026-11-27 11:58:26 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Monomark Engineering (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '27000000', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
-2026-11-27 11:58:27 [INFO] ipo_tracker.scrapers: Collected 6 entries from IPO Watch: ['Integris Medtech', 'Foodlink F&B Holdings', 'Matangi Rubber', 'Swara Baby Products', 'Monomark Engineering', 'Encube Ethicals']
-2026-11-27 11:58:28 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
-2026-11-27 11:58:28 [INFO] ipo_tracker: Aggregated 5 Mainboard IPO records from web.
-2026-11-27 11:58:28 [INFO] ipo_tracker: Master state updated: 0 new, 5 refreshed.
-2026-11-27 11:58:28 [INFO] ipo_tracker: Saved 14 IPO records to ipo_master.json
-2026-11-27 11:58:28 [INFO] ipo_tracker: Synced 14 IPO records to assets/data/ipo_master.json
-2026-11-27 11:58:28 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
-2026-11-27 11:58:28 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 6 active IPOs...
-2026-11-27 11:58:29 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
+2026-11-27 22:36:57 [INFO] ipo_tracker: ======================================================================
+2026-11-27 22:36:57 [INFO] ipo_tracker: 🚀 MAINBOARD IPO TRACKER & TELEGRAM BROADCASTER
+2026-11-27 22:36:57 [INFO] ipo_tracker: 📅 Timestamp: 28-Nov-2026 04:06:57 IST (Today: 2026-11-28)
+2026-11-27 22:36:57 [INFO] ipo_tracker: 🎯 Target Channel: @ipocentral
+2026-11-27 22:36:57 [INFO] ipo_tracker: 🛡️ Dry Run: False | Status Only: False
+2026-11-27 22:36:57 [INFO] ipo_tracker: ======================================================================
+2026-11-27 22:36:57 [INFO] ipo_tracker: Loaded 14 tracked IPOs and 46 historical posted events.
+2026-11-27 22:36:57 [INFO] ipo_tracker: 🌐 Fetching latest Mainboard IPO data from online sources...
+2026-11-27 22:37:00 [INFO] ipo_tracker.scrapers: Collected 4 entries from official NSE India: ['Foodlink F&B Holdings (India) Limited', 'Matangi Rubber Limited', 'Monomark Engineering (India) Limited', 'Swara Baby Products Limited']
+2026-11-27 22:37:01 [INFO] ipo_tracker.scrapers: Collected 0 entries from official BSE India: []
+2026-11-27 22:37:08 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Foodlink F&B Holdings (India) Limited: {'total': '1.47x', 'total_bids': '15443532', 'shares_offered': '10474048', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '10474048', 'total_bids': '11626056', 'cut_off_bids': None, 'no_of_times': '1.11x', 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'qib': '1.01x', 'qib_bids': '5667402', 'qib_offered': '5613270', 'nii': '0.97x', 'nii_bids': '941226', 'nii_offered': '972155', 'retail_bids': '7683546', 'retail': '3.95x', 'retail_offered': '1944311', 'updated_at': 'Updated as on 27-Nov-2026 17:03:00'}
+2026-11-27 22:37:14 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Matangi Rubber Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '7276981', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-27 22:37:21 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Monomark Engineering (India) Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '27000000', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-27 22:37:27 [INFO] ipo_tracker.scrapers:    📊 NSE Live Demand/Bids for Swara Baby Products Limited: {'shares_offered': '0', 'source': 'NSE India Official Bidding Feed', 'demand_graph': {'total_issue_size': '76203006', 'total_bids': None, 'cut_off_bids': None, 'no_of_times': None, 'price_levels': [{'price': '>= No. of Bids', 'shares': None}, {'price': '>= NSE Confirmed Bid Quantity', 'shares': None}, {'price': '>= Cumulative Confirmed Bid Quantity', 'shares': None}], 'source': 'NSE India Official Demand Graph (issue-information)'}, 'total': '0.00x', 'total_bids': '0', 'updated_at': 'Updated as on null'}
+2026-11-27 22:37:28 [INFO] ipo_tracker.scrapers: Collected 6 entries from IPO Watch: ['Integris Medtech', 'Foodlink F&B Holdings', 'Matangi Rubber', 'Swara Baby Products', 'Monomark Engineering', 'Encube Ethicals']
+2026-11-27 22:37:30 [INFO] ipo_tracker.scrapers: Collected 0 GMP entries from IPO Central
+2026-11-27 22:37:30 [INFO] ipo_tracker: Aggregated 5 Mainboard IPO records from web.
+2026-11-27 22:37:30 [INFO] ipo_tracker: Master state updated: 0 new, 5 refreshed.
+2026-11-27 22:37:30 [INFO] ipo_tracker: Saved 14 IPO records to ipo_master.json
+2026-11-27 22:37:30 [INFO] ipo_tracker: Synced 14 IPO records to assets/data/ipo_master.json
+2026-11-27 22:37:30 [INFO] ipo_tracker: 🎯 Total pending lifecycle alerts to dispatch: 0
+2026-11-27 22:37:30 [INFO] ipo_tracker: ℹ️ Broadcasting live Mainboard IPO GMP Dashboard for 6 active IPOs...
+2026-11-27 22:37:32 [INFO] ipo_tracker: ✅ Mainboard IPO GMP Dashboard broadcasted to @ipocentral!
