@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "Global Macro Economy Pressure & Expansion Radar",
-    "generated_timestamp": "2026-11-28T02:55:35.692742+00:00",
+    "generated_timestamp": "2026-11-28T18:20:35.355720+00:00",
     "last_updated": "November 2026 / Automated Telemetry Sync",
     "global_regime": "BIFURCATED_LIQUIDITY_CYCLE",
     "regime_headline": "US AI Capex & Tariff 2.0 vs China Debt Deflation (PPI -2.9%) & Factory Overcapacity",
-    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.94%) and King Dollar (DXY 104.01) create emerging market currency friction (USD/INR \u20b992.98), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
+    "global_conclusion": "The world economy is bifurcated between US technological compute expansion and Chinese industrial dumping. While US 10Y yields (~4.94%) and King Dollar (DXY 104.03) create emerging market currency friction (USD/INR \u20b992.98), China's domestic deflation and cheap commodity supply chains provide major input-cost tailwinds to India."
   },
   "executive_hud": {
     "global_health_score": 51.0,
@@ -91,7 +91,7 @@
     "trade_date": "27-Nov-2026",
     "data_source": "NSE_OFFICIAL_PROVISIONAL",
     "regime_verdict": "FII Inflow / DII Booking",
-    "dxy_correlation_note": "DXY at 104.01 & US 10Y at 4.94% create FII outflow pressure, absorbed by domestic SIP liquidity."
+    "dxy_correlation_note": "DXY at 104.03 & US 10Y at 4.94% create FII outflow pressure, absorbed by domestic SIP liquidity."
   },
   "fii_dii_derivatives": {
     "fii_long_ratio": 22.1,
@@ -389,7 +389,7 @@
         "name": "2. The Dollar Liquidity & Yield Tap (US Fed & Treasury)",
         "icon": "\ud83d\udcb5",
         "controller": "US Federal Reserve & US Treasury Auction Desk",
-        "how_they_control": "By maintaining higher policy rates and massive Treasury debt issuance, US 10Y yields (~4.94%) stay elevated, sucking capital out of emerging markets into US dollar assets (DXY 104.01).",
+        "how_they_control": "By maintaining higher policy rates and massive Treasury debt issuance, US 10Y yields (~4.94%) stay elevated, sucking capital out of emerging markets into US dollar assets (DXY 104.03).",
         "shock_scenario": "Sticky US services inflation delays Fed cuts, keeping King Dollar elevated and creating a persistent foreign exchange squeeze on emerging currencies.",
         "india_transmission": "FII equity outflows; RBI actively utilizes its $675.0B forex buffer to prevent disorderly Rupee depreciation past 84.50."
       },
@@ -415,7 +415,7 @@
   },
   "sector_margin_demand_matrix": {
     "headline": "SECTOR MARGIN PRESSURE vs EXPANSION RADAR",
-    "description": "Quantifies which domestic and global sectors gain operating leverage versus which face margin compression under current global macro flows (Crude $83.08, DXY 104.01, China PPI -2.9%).",
+    "description": "Quantifies which domestic and global sectors gain operating leverage versus which face margin compression under current global macro flows (Crude $83.08, DXY 104.03, China PPI -2.9%).",
     "margin_expansion_sectors": [
       {
         "sector": "Power Grid & Transformers",
@@ -567,7 +567,7 @@
   },
   "dynamic_shock_transmission_engine": {
     "headline": "LIVE GEOPOLITICAL & SUPPLY SHOCK DETECTOR",
-    "status_summary": "Surveillance of Middle East crude routes ($83.08/bbl), DXY dollar spikes (104.01), and Chinese dumping.",
+    "status_summary": "Surveillance of Middle East crude routes ($83.08/bbl), DXY dollar spikes (104.03), and Chinese dumping.",
     "shocks": [
       {
         "id": "crude_shortage_shock",
@@ -594,7 +594,7 @@
         "shock_name": "King Dollar & US 10Y Yield Gravity Spike",
         "is_active": true,
         "severity": "ELEVATED DOLLAR SQUEEZE",
-        "trigger": "US 10Y yields at 4.94% and DXY at 104.01 driven by resilient US growth (54.9 PMI).",
+        "trigger": "US 10Y yields at 4.94% and DXY at 104.03 driven by resilient US growth (54.9 PMI).",
         "supply_demand_choke": "Dollar liquidity contraction across emerging market banks; foreign institutional capital re-allocating to US T-Bills.",
         "import_export_shift": "Imported energy and electronics become costlier in Rupee terms; dollar export billing gains realization cushion.",
         "currency_impact": "Rupee tests \u20b992.98 band; supported by RBI's $675.0B protective warchest.",
@@ -900,7 +900,7 @@
       },
       "pressure_points": [
         {
-          "title": "Strong US Dollar (DXY 104.01) & FII Outflows",
+          "title": "Strong US Dollar (DXY 104.03) & FII Outflows",
           "description": "Elevated US bond yields (4.94%) and dollar strength triggered tactical foreign portfolio rebalancing out of emerging markets into US assets.",
           "severity": "HIGH"
         },
@@ -952,7 +952,7 @@
         "id": "currency_debt",
         "title": "3. King Dollar Dominance vs Sovereign Gold Accumulation",
         "icon": "\ud83d\udcb5",
-        "us_offensive": "King Dollar (DXY 104.01) powered by high US yields (~4.94%) drains global liquidity and asserts US Treasury sanctions enforcement.",
+        "us_offensive": "King Dollar (DXY 104.03) powered by high US yields (~4.94%) drains global liquidity and asserts US Treasury sanctions enforcement.",
         "china_retaliation": "PBOC continuous gold reserve accumulation (Gold $3668.5/oz), reducing US Treasury holdings below $750B, and expanding CIPS / local currency bilateral settlements.",
         "macro_impact": "Gold hits all-time records ($2,650+/oz), emerging market central banks diversify reserve currencies, and cross-border payment systems fragment.",
         "impact_on_india": "NEUTRAL TO POSITIVE",
@@ -984,14 +984,14 @@
     {
       "id": "dxy",
       "name": "US Dollar Index (DXY)",
-      "current_value": 104.01,
+      "current_value": 104.03,
       "unit": "points",
       "stress_level": "BALANCED FLOAT",
       "status_label": "STABLE CURRENCY FLOAT",
       "bar_ratio": 0.5,
       "flow_direction": "EXPANSION",
       "historical_range": "100.5 - 107.0",
-      "market_impact": "A strong DXY (104.01) drains emerging market liquidity, pressures the Indian Rupee toward 92.98, and triggers foreign institutional investor (FII) reallocations back toward US money markets."
+      "market_impact": "A strong DXY (104.03) drains emerging market liquidity, pressures the Indian Rupee toward 92.98, and triggers foreign institutional investor (FII) reallocations back toward US money markets."
     },
     {
       "id": "us10y",
